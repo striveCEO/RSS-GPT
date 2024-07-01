@@ -261,7 +261,7 @@ def output(sec, language):
 #            if 'updated' in entry:
 #                entry.updated = parse(entry.updated).strftime('%a, %d %b %Y %H:%M:%S %z')
 #            if 'published' in entry:
-#                entry.published = parse(entry.published).strftime('%a, %d %b %Y %H:%M:%S %z')
+#                entry.published = parse(entry.published).strftime('%a, %d %b %Y %H:%M:%S %z') 修改使用的模型为通义千问
 
             cnt += 1
             if cnt > max_items:
@@ -269,16 +269,16 @@ def output(sec, language):
             elif OPENAI_API_KEY:
                 token_length = len(cleaned_article)
                 try:
-                    entry.summary = gpt_summary(cleaned_article,model="gpt-3.5-turbo", language=language)
+                    entry.summary = gpt_summary(cleaned_article,model="qwen-72b-chat", language=language)
                     with open(log_file, 'a') as f:
                         f.write(f"Token length: {token_length}\n")
-                        f.write(f"Summarized using GPT-3.5-turbo\n")
+                        f.write(f"Summarized using qwen-72b-chat\n")
                 except:
                     try:
-                        entry.summary = gpt_summary(cleaned_article,model="gpt-4-turbo-preview", language=language)
+                        entry.summary = gpt_summary(cleaned_article,model="qwen-turbo", language=language)
                         with open(log_file, 'a') as f:
                             f.write(f"Token length: {token_length}\n")
-                            f.write(f"Summarized using GPT-4-turbo-preview\n")
+                            f.write(f"Summarized using qwen-turbo\n")
                     except Exception as e:
                         entry.summary = None
                         with open(log_file, 'a') as f:
@@ -314,7 +314,8 @@ max_entries = 1000
 OPENAI_API_KEY = os.environ.get('OPENAI_API_KEY')
 U_NAME = os.environ.get('U_NAME')
 OPENAI_PROXY = os.environ.get('OPENAI_PROXY')
-OPENAI_BASE_URL = os.environ.get('OPENAI_BASE_URL', 'https://api.openai.com/v1')
+#更改为通义千问的api替代方案
+OPENAI_BASE_URL = os.environ.get('OPENAI_BASE_URL', 'https://dashscope.aliyuncs.com/compatible-mode/v1')
 deployment_url = f'https://{U_NAME}.github.io/RSS-GPT/'
 BASE =get_cfg('cfg', 'BASE')
 keyword_length = int(get_cfg('cfg', 'keyword_length'))
