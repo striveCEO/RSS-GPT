@@ -55,4 +55,5 @@
 <a href="https://www.buymeacoffee.com/yinan" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
 
 - https://eprint.iacr.org/rss/rss.xml -> https://striveCEO.github.io/RSS-GPT/iacr.xml
-- https://rsshub.app/sspai/index -> https://striveCEO.github.io/RSS-GPT/sspai.xml
+- https://crypto.stackexchange.com/feeds/tag/zero-knowledge-proofs -> https://striveCEO.github.io/RSS-GPT/crypto-stack-exchange-zk.xml
+- https://crypto.stackexchange.com/feeds/tag/blockchain -> https://striveCEO.github.io/RSS-GPT/crypto-stack-exchange-blockchain.xml
