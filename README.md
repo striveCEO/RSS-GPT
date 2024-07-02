@@ -56,5 +56,4 @@ These feeds on hosted in the [`docs/` subdirectory](https://github.com/yinan-c/R
 I will consider hosting more feeds in the future. Email me or submit an issue if there are any questions using the script or any suggestions.
 
 - https://eprint.iacr.org/rss/rss.xml -> https://striveCEO.github.io/RSS-GPT/iacr.xml
-- https://crypto.stackexchange.com/feeds/tag/zero-knowledge-proofs -> https://striveCEO.github.io/RSS-GPT/crypto-stack-exchange-zk.xml
-- https://crypto.stackexchange.com/feeds/tag/blockchain -> https://striveCEO.github.io/RSS-GPT/crypto-stack-exchange-blockchain.xml
+- https://dblp.org/feed/streams/conf/sp.rss -> https://striveCEO.github.io/RSS-GPT/IEEE S&P.xml
