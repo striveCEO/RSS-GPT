@@ -4,6 +4,163 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+<item>
+<title>Distributional Secure Merge</title>
+<link>https://eprint.iacr.org/2024/1048</link>
+<guid>https://eprint.iacr.org/2024/1048</guid>
+<content:encoded><![CDATA[
+<div> 关键词：secure merge, uniformly random lists, near linear, logarithmic overheads, implementation
+
+总结:<br>
+本文主要探讨了在处理随机列表的 secure merge 问题上，提出了一种新的协议。该协议实现了近乎线性的通信和计算复杂度，每轮运行时间为 $O(\log\log n)$，对于长度为 $2^{20}$ 的列表，运行时间和通信量比现有状态提高了一个数量级。与之前的理论工作相比，虽然在理论上的最优时间复杂度有所差距，但实证表明，新协议在实际应用中更为高效。此外，该协议还扩展到了来自任意分布的列表，尤其是当列表近似同分布时，效率接近于随机列表，从而显著提升了 PSI 和 Secure Join 等关键应用的性能。 <div>
+Secure merge refers to the problem of merging two sorted lists. The problem appears in different settings where each list is held by one of two parties, or the lists are themselves shared among two or more parties. The output of a secure merge protocol is secret shared. Each variant of the problem offers many useful applications.
+
+The difficulty in designing secure merge protocols vis-a-vis insecure merge protocols (which work in linear time with a single pass over the lists) has to do with operations having to be oblivious or data-independent. In particular, the protocol cannot leak the positions of items of each list in the final merged list. On account of this, sorting-based secure merge protocols have been a common solution to the problem. However, as they introduce (poly)logarithmic overheads, there has been active investigation into the task of building (near) linear time secure merge protocols. Most recently, Hemenway et al. put forth a protocol for secure merge that does achieve linear communication and computation and a round complexity of $O({\log\log n})$, where $n$ is the length of the lists being merged. While this shows the feasibility of a linear time secure merge, it still leaves room for the design of a concretely efficient linear time secure merge.
+
+In this work, we consider a relaxation of the problem where the lists are uniformly random. We show a secure merge protocol for uniformly random lists that achieves $O({n\log\log n})$, i.e., near linear communication and computation and a round complexity of $O({\log\log n})$, where $n$ is the length of the lists being merged. Our protocol design is general and can be instantiated in a variety of settings so long as the building blocks (basic ones such as comparisons and shuffles) can be realized in said settings. Although we do not achieve the same asymptotic guarantees as Hemenway et al., our work is concretely efficient. We implement our protocol and compare it to the state of the art sorting protocols and demonstrate an order of magnitude improvement in running times and communication for lists of size of $2^{20}$. 
+
+We also extend our protocol to work for lists sampled from arbitrary distributions. In particular, when the lists are (close to) identically distributed, we achieve the same efficiency as uniform lists. This immediately improve the performance of many crucial applications including PSI & Secure Join, thus illustrating the significance and applicability of our protocol in practice.
+]]></content:encoded>
+<pubDate>Thu, 27 Jun 2024 22:07:39 +0000</pubDate>
+<pubDate>Thu, 27 Jun 2024 22:07:39 +0000</pubDate>
+</item>
+<item>
+<title>Non-interactive VSS using Class Groups and Application to DKG</title>
+<link>https://eprint.iacr.org/2023/451</link>
+<guid>https://eprint.iacr.org/2023/451</guid>
+<content:encoded><![CDATA[
+<div> 关键词：non-interactive verifiable secret sharing (NI-VSS), class groups (cgVSS), range proof, public verifiability, non-interactive distributed key generation (NI-DKG).
+
+总结:
+本文提出了一种基于类群的非交互式可验证秘密共享方案(cgVSS)，它不依赖于范围证明，利用类群的独特结构实现高效的大整数加密。cgVSS简化了NI-VSS过程，相比现有方案有显著性能提升。文章还定义了公共可验证性，并扩展到即使所有接收者可能被攻击也能保持的强公共可验证性。通过通用转换，作者得到了一个基于类群的非交互式分布式密钥生成方案(cgDKG)，适用于阈值系统。安全分析考虑了公共可验证性对DKG的影响。总的来说，这篇论文展示了类群在构建高效、可验证的密码学协议中的潜力。 <div>
+We put forward a non-interactive verifiable secret sharing (NI-VSS) scheme using class groups – we call it cgVSS. Our construction follows the standard framework of encrypting the shares to a set of recipients and generating a non-interactive proof of correct sharing. However, as opposed to prior works, such as Groth’s [Eprint 2021], or Gentry et al.’s [Eurocrypt 2022], we do not require any range proof - this is possible due to the unique structure of class groups, that enables efficient encryption/decryption of large field elements in the exponent of an ElGamal-style encryption scheme. Importantly, this is possible without destroying the additive holomorphic structure, which is required to make the proof-of-correctness highly efficient. This approach not only substantially simplifies the NI-VSS process, but also outperforms the state-of-art schemes significantly. For example, our implementation shows that for a 150 node system cgVSS outperforms (a simplified implementation of) Groth’s protocol in overall communication complexity by 5.6x, about 9.3 − 9.7x in the dealer time and 2.4 − 2.7x in the receiver time per node.
+
+Additionally, we formalize the notion of public verifiability, which enables anyone, possibly outside the participants, to verify the correctness of the dealing. In fact, we re-interpret the notion of public verifiability and extend it to the setting when potentially all recipients may be corrupt and yet can not defy public verifiability – to distinguish from state-of-art, we call this strong public verifiability. Our formalization uses the universal composability framework.
+
+Finally, through a generic transformation, we obtain a non-interactive distributed key generation (NI-DKG) scheme for threshold systems, where the secret key is the discrete log of the public key. Our security analysis in the VSS-hybrid model uses a formalization that considers a (strong) public verifiability notion for DKG, even when more than threshold parties are corrupt. Instantiating with cgVSS we obtain a NI-DKG scheme from class groups – we call it cgDKG.
+]]></content:encoded>
+<pubDate>Tue, 28 Mar 2023 17:30:50 +0000</pubDate>
+<pubDate>Tue, 28 Mar 2023 17:30:50 +0000</pubDate>
+</item>
+<item>
+<title>Asynchronous Consensus without Trusted Setup or Public-Key Cryptography</title>
+<link>https://eprint.iacr.org/2024/677</link>
+<guid>https://eprint.iacr.org/2024/677</guid>
+<content:encoded><![CDATA[
+<div> 关键词：Byzantine共识、异步协议、可信设置、公钥加密、随机 oracle。
+
+总结:<br>
+本文研究了无需可信设置和不使用公钥加密的异步拜占庭共识协议。提出了一种基于随机 oracle 的 Asynchronous Common Subset（ACS）协议，具有$O(\kappa n^3)$总通信量和$O(1)$期望轮数。该协议仅依赖于密码哈希函数，因此对量子攻击也安全。与现有实现相比，实验表明该协议更为高效。此外，文中还介绍了新引入的异步秘密密钥共享和覆盖聚集等概念，这些可能独立具有价值。 <div>
+Byzantine consensus is a fundamental building block in distributed cryptographic problems. Despite decades of research, most existing asynchronous consensus protocols require a strong trusted setup and expensive public-key cryptography. In this paper, we study asynchronous Byzantine consensus protocols that do not rely on a trusted setup and do not use public-key cryptography such as digital signatures. We give an Asynchronous Common Subset (ACS) protocol whose security is only based on cryptographic hash functions modeled as a random oracle. Our protocol has $O(\kappa n^3)$ total communication and runs in expected $O(1)$ rounds. The fact that we use only cryptographic hash functions also means that our protocol is post-quantum secure. The minimal use of cryptography and the small number of rounds make our protocol practical. We implement our protocol and evaluate it in a geo-distributed setting with up to 128  machines. Our experimental evaluation shows that our protocol is more efficient than the only other setup-free consensus protocol that has been implemented to date. En route to our asynchronous consensus protocols, we also introduce new primitives called asynchronous secret key sharing and cover gather, which may be of independent interest.
+]]></content:encoded>
+<pubDate>Fri, 03 May 2024 13:40:00 +0000</pubDate>
+<pubDate>Fri, 03 May 2024 13:40:00 +0000</pubDate>
+</item>
+<item>
+<title>VIMz: Verifiable Image Manipulation using Folding-based zkSNARKs</title>
+<link>https://eprint.iacr.org/2024/1063</link>
+<guid>https://eprint.iacr.org/2024/1063</guid>
+<content:encoded><![CDATA[
+<div> 关键词：generative AI, zero-knowledge proofs (ZKP), folding-based zkSNARKs, VIMz, trustless smart contract system
+
+总结:
+本文探讨了随着生成式AI技术的发展，媒体真实性验证的需求增加。为确保图像来源的可信度，作者提出了一种名为VIMz的高效可验证图像操纵系统，它利用折叠式zkSNARKs技术降低证明者复杂性。与先前方法相比，VIMz在处理高清和4K图像时，实现了时间速度提升3倍，内存消耗减少96倍（从309GB降至3.2GB）。此外，文章还设计了一个无信任智能合约系统，用于自动验证媒体真实性的证明，支持版权和所有权的透明管理，符合内容可追溯性和真实性联盟（C2PA）标准。这一系统为构建去中心化的媒体市场奠定了基础，具有广泛的应用前景。 <div>
+With the rise of generative AI technology, the media's credibility as a source of truth has been significantly compromised. This highlights the need to verify the authenticity of media and its originality.
+Ensuring the integrity of media during capture using the device itself presents a straightforward solution to this challenge.
+However, raw captured media often require certain refinements or redactions before publication. Zero-knowledge proofs (ZKP) offer a solution by allowing attestation of the correctness of specific transformations applied to an authorized image. While shown to be feasible, previous approaches faced challenges in practice due to their high prover complexity.
+
+In this paper, we aim to develop a practical framework for efficiently proving the authenticity of HD and 4K images on commodity hardware. Our goal is to minimize prover complexity by utilizing the folding-based zkSNARKs technique, resulting in VIMz, the first practical verifiable image manipulation system of this kind. VIMz leverages Nova's folding scheme to achieve low complexity recursive zkSNARK proofs of authentic image manipulation. Our implementation results demonstrate a substantial reduction in prover complexity—up to a 3$\times$ speedup in time and a 96$\times$ reduction in memory (from 309 GB in [Kang et al., arXiv 2022] to only 3.2 GB). Moreover, the low memory consumption allows VIMz to prove the correctness of multiple chained transformations simultaneously, further increasing the performance (up to 3.5$\times$).
+Additionally,
+we propose a trustless smart contract system that autonomously verifies the proofs of media authenticity, achieving trustless copyright and ownership management, aligning with the standards of the Coalition for Content Provenance and Authenticity (C2PA).
+Such a system serves as a foundational infrastructure for constructing trustless media marketplaces with diverse applications.
+]]></content:encoded>
+<pubDate>Sat, 29 Jun 2024 13:05:39 +0000</pubDate>
+<pubDate>Sat, 29 Jun 2024 13:05:39 +0000</pubDate>
+</item>
+<item>
+<title>Compact Key Function Secret Sharing with Non-linear Decoder</title>
+<link>https://eprint.iacr.org/2024/1062</link>
+<guid>https://eprint.iacr.org/2024/1062</guid>
+<content:encoded><![CDATA[
+<div> 关键词：Function Secret Sharing (FSS), Distributed Point Function (DPF), Comparison Function, Interval Function, Key Size.
+
+总结:<br>
+本文主要探讨了一种针对点、比较和区间函数的变体Function Secret Sharing (FSS)方案，旨在实现更紧凑的$p$- party（$p \geq 3$）密钥大小。相比于现有构造，该方案显著减少了DPF的密钥大小，降低了$2^p$倍，同时对非线性解码器进行了一次额外的比较操作。对于分布式比较函数，作者实现了史上最小的密钥大小，减少了一个$q^{p-1}$因子，对隐私保护机器学习（PPML）中的应用有实际意义。此外，文章还展示了如何将这种改进应用于神经网络的分布式实现，如分布式ReLU激活函数，证实了新方案的有效性。 <div>
+We present a variant of Function Secret Sharing (FSS) schemes tailored for point, comparison, and interval functions, featuring compact key sizes at the expense of additional comparison. While existing FSS constructions are primarily geared towards $2$-party scenarios, exceptions such as the work by Boyle et al. (Eurocrypt 2015) and Riposte (S&amp;P 2015) have introduced FSS schemes for $p$-party scenarios ($p \geq 3$). This paper aims to achieve the most compact $p$-party FSS key size to date. We achieve a noteworthy reduction in key size, a $2^p$-factor decrease compared to state-of-the-art FSS constructions (including computationally efficient constructions using symmetric-key primitives) of distributed point function (DPF). Compared to the previous public-key-based FSS design for DPF, we also get a key size reduction equal to a $2^{n/2}$-sized row vector, where $2^n$ is the domain size of the point function. This reduction in key size comes at the cost of a required comparison operation by the decoder (hence called a non-linear decoder), a departure from prior schemes. In $p$-party scenarios, our construction outperforms existing FSS constructions in key size, remaining on par with Riposte in evaluation time and showing significant improvement over Boyle et al.
+
+In addition to constructing FSS for distributed point functions (DPF), we extend our approach to distributed comparison and interval functions, achieving the most efficient key size to date. Our distributed comparison function exhibits a key-size reduction by a factor of $q^{p-1}$, where $q$ denotes the size of the algebraic group used in the scheme's construction.
+The reduced key size of the comparison function has practical implications, particularly in applications like privacy-preserving machine learning (PPML), where thousands of comparison functions are employed in each neural network layer.
+To demonstrate the effectiveness of our improvements, we design and prototype-implement a scalable privacy-preserving framework for neural networks over distributed models. Specifically, we implement a distributed rectified linear unit (ReLU) activation function using our distributed comparison function, showcasing the efficacy of our proposed scheme.
+]]></content:encoded>
+<pubDate>Sat, 29 Jun 2024 09:03:44 +0000</pubDate>
+<pubDate>Sat, 29 Jun 2024 09:03:44 +0000</pubDate>
+</item>
+<item>
+<title>Insta-Pok3r: Real-time Poker on Blockchain</title>
+<link>https://eprint.iacr.org/2024/1061</link>
+<guid>https://eprint.iacr.org/2024/1061</guid>
+<content:encoded><![CDATA[
+<div> 关键词：分布式服务、多党计算（MPC）、身份-based加密、公开可验证、在线扑克。
+
+总结: <br>
+我们的文章介绍了一种分布式服务，用于为在线扑克玩家生成私密但可公开验证的关联随机性，如洗牌。该服务利用多党计算协议在离线阶段创建一个加密的卡片排列，确保其是卡片的唯一排列。当玩家加入时，他们仅需通过安全渠道获取身份特定的解密密钥并本地解密，简化了在线过程。文章的关键创新在于提出可缩简证明的多身份基加密（SVME），以及一种高效的小集合随机排列的秘密共享生成协议。整个系统在保证实时性和成本效益的同时，提供了信任最小化的在线扑克体验。在实验中，8个MPC参与者为64张牌生成可验证排列仅需3秒，而玩家获取牌只需0.3秒。 <div>
+We develop a distributed service for generating correlated randomness (e.g. permutations) for multiple parties, where each party’s output is private but publicly verifiable. This service provides users with a low-cost way to play online poker in real-time, without a trusted party.
+Our service is backed by a committee of compute providers, who run a multi-party computation (MPC) protocol to produce an (identity-based) encrypted permutation of a deck of cards, in an offline phase well ahead of when the players’ identities are known. When the players join, what we call the online phase, they decrypt their designated cards immediately after deriving the identity-based decryption keys, a much simpler computation. In addition, the MPC protocol also generates a publicly-verifiable proof that the output is a permutation.
+In our construction, we introduce a new notion of succinctly verifiable multi-identity based encryption (SVME), which extends the existing notion of verifiable encryption to a multi-identity-based setting, but with a constant sized proof – this may be of independent interest. We instantiate this for a permutation relation (defined over a small set) along with identity-based encryption, polynomial commitments and succinct proofs – our choices are made to enable a distributed computation when the card deck is always secret shared. Moreover, we design a new protocol to efficiently generate a secret-sharing of random permutation of a small set, which is run prior to distributed SVME.
+Running these protocols offline simplifies the online phase substantially, as parties only derive their identity-specific keys privately via secure channels with the MPC committee, and then decrypt locally to obtain their decks. We provide a rigorous UC-based formalization in a highly modularized fashion.
+Finally, we demonstrate practicality with an implementation that shows that for 8 MPC parties, gen- erating a secret publicly-verifiable permutation of 64 cards takes under 3 seconds, while accessing cards for a player takes under 0.3 seconds.
+]]></content:encoded>
+<pubDate>Sat, 29 Jun 2024 04:27:35 +0000</pubDate>
+<pubDate>Sat, 29 Jun 2024 04:27:35 +0000</pubDate>
+</item>
+<item>
+<title>CoGNN: Towards Secure and Efficient Collaborative Graph Learning</title>
+<link>https://eprint.iacr.org/2024/987</link>
+<guid>https://eprint.iacr.org/2024/987</guid>
+<content:encoded><![CDATA[
+<div> 关键词：Collaborative Graph Learning, Federated Learning, Secure Machine Learning, Graph Neural Networks, CoGNN.
+
+总结:<br>
+本文提出了一种新的框架CoGNN，它结合了联邦学习和安全机器学习在协作图学习中的优点。CoGNN通过一种新的消息传递机制和两阶段Dispatch-Collect执行方案，实现了对图神经网络（GNN）训练和推理的隐私保护、高效计算和可扩展性。实验表明，相比于最先进的安全机器学习方法，CoGNN在运行时间和通信成本上分别减少了123倍和522倍，同时保持了与全局图训练相近的模型精度，甚至在某些情况下提高了11.06%。总的来说，CoGNN为协作图学习提供了一个高效且安全的解决方案。 <div>
+Collaborative graph learning represents a learning paradigm where multiple parties jointly train a graph neural network (GNN) using their own proprietary graph data. To honor the data privacy of all parties, existing solutions for collaborative graph learning are either based on federated learning (FL) or secure machine learning (SML). Although promising in terms of efficiency and scalability due to their distributed training scheme, FL-based approaches fall short in providing provable security guarantees and achieving good model performance. Conversely, SML-based solutions, while offering provable privacy guarantees, are hindered by their high computational and communication overhead, as well as poor scalability as more parties participate.
+
+To address the above problem, we propose CoGNN, a novel framework that simultaneously reaps the benefits of both FL-based and SML-based approaches. At a high level, CoGNN is enabled by (i) a novel message passing mechanism that can obliviously and efficiently express the vertex data propagation/aggregation required in GNN training and inference and (ii) a two-stage Dispatch-Collect execution scheme to securely decompose and distribute the GNN computation workload for concurrent and scalable executions. We further instantiate the CoGNN framework, together with customized optimizations, to train Graph Convolutional Network (GCN) models. Extensive evaluations on three graph datasets demonstrate that compared with the state-of-the-art (SOTA) SML-based approach, CoGNN reduces up to $123$x running time and up to $522$x communication cost per party. Meanwhile, the GCN models trained using CoGNN have nearly identical accuracies as the plaintext global-graph training, yielding up to $11.06\%$ accuracy improvement over the GCN models trained via federated learning.
+]]></content:encoded>
+<pubDate>Wed, 19 Jun 2024 04:20:23 +0000</pubDate>
+<pubDate>Wed, 19 Jun 2024 04:20:23 +0000</pubDate>
+</item>
+<item>
+<title>Efficient Secret Sharing for Large-Scale Applications</title>
+<link>https://eprint.iacr.org/2024/1045</link>
+<guid>https://eprint.iacr.org/2024/1045</guid>
+<content:encoded><![CDATA[
+<div> 关键词：threshold secret sharing, reconstruction time, ramp secret sharing, adaptive corruptions, distributed generation
+
+总结:<br>
+该论文研究了改进的阈值秘密共享方案，特别关注减少消息重建时间。提出了一种新型的$(t,c)$-ramp秘密分享方案，对于高阈值$t$（如$2^{20}$），其重建时间比现有方法快2-7.8倍，从$t=256$开始就有明显改善。新方案基于Cramer等人的框架和Applebaum等人的工作，利用随机带状矩阵构建高效且适应适应性攻击的错误纠正代码。应用上，该技术可降低联邦学习中安全聚合协议的计算成本，同时提供更快的可验证ramp秘密分享和分布式可验证随机函数，显著提高效率。 <div>
+Threshold secret sharing enables distributing a message to $n$ parties such that no subset of fewer than $t$ parties can learn the message, whereas any subset of at least $t$ parties can recover the message. Despite being a fundamental primitive, secret sharing still suffers from one significant drawback, where its message reconstruction algorithm is computationally expensive for large privacy thresholds $t$. In this paper, we aim to address this significant drawback.
+
+We study general $(t,c)$-ramp secret sharing schemes where the number of parties c needed to reconstruct the secret may be larger than $t$. We present a ramp secret sharing scheme whose reconstruction time is 2-7.8x faster than prior constructions suitable against adversaries that adaptively corrupt parties. For $t = 2^{20}$, our new protocol has reconstruction time of 5 seconds whereas prior work requires nearly half a minute. We see improvements starting from as small as $t = 256$. Furthermore, we obtain correctness threshold as small as $c \ge 1.05t$. To obtain our construction, we first improve the secret sharing frameworks by Cramer et al. (EUROCRYPT'15) and Applebaum et al. (CRYPTO'23) from erasure codes. Our new framework obtains secret sharing schemes that may be used against adversaries with adaptive corruptions while requiring only weaker correctness guarantees from the underlying erasure code with a distributed generation property. Furthermore, our new framework also maintains the linear homomorphism of the prior works. Afterwards, we present a concretely efficient erasure code from random band matrices that satisfies the distributed generation property.
+
+We show that our secret sharing scheme can improve many real-world applications. In secure aggregation protocols for federated learning, we obtain up to 22% reductions in computational cost by replacing Shamir's scheme with our construction. We extend our protocol to obtain a verifiable ramp secret sharing scheme where each party can verify the consistency of the shares. Our new verifiable ramp secret sharing has 8.2-25.2x faster sharing and 2.7-23.2x faster reconstruction time compared to prior works. Finally, we present an improved distributed verifiable random function that may be used for decentralized randomness beacons.
+]]></content:encoded>
+<pubDate>Thu, 27 Jun 2024 17:59:50 +0000</pubDate>
+<pubDate>Thu, 27 Jun 2024 17:59:50 +0000</pubDate>
+</item>
+<item>
+<title>Attribute-Based Threshold Issuance Anonymous Counting Tokens and Its Application to Sybil-Resistant Self-Sovereign Identity</title>
+<link>https://eprint.iacr.org/2024/1024</link>
+<guid>https://eprint.iacr.org/2024/1024</guid>
+<content:encoded><![CDATA[
+<div> 关键词：self-sovereign identity (SSI), CanDID, privacy-preserving, threshold anonymous counting tokens (tACT), Sybil-resistant
+
+总结:<br>
+本文提出了一种新的匿名计数令牌方案（tACT），它在分布式信任环境中运作，旨在解决现有SSI系统中的隐私问题和交互性。tACT引入了可公开验证的属性基阈值匿名计数功能，与集中式方案不同，这为身份令牌发行增添了新的维度。基于tACT，作者构建了一个高效、Sybil攻击抵抗的SSI系统，支持多显示选择性披露、非交互性和非转移性凭证，且具有更小的凭证大小。与CanDID相比，新系统提高了效率，能容纳更多发行者，并实现了一轮并行协议，从而更好地符合用户对SSl系统无交互控制的需求。 <div>
+Self-sovereign identity (SSI) systems empower users to (anonymously) establish and verify their identity when accessing both digital and real-world resources, emerging as a promising privacy-preserving solution for user-centric identity management. Recent work by Maram et al. proposes the privacy-preserving Sybil-resistant decentralized SSI system CanDID (IEEE S&amp;P 2021). While this is an important step, notable shortcomings undermine its efficacy. The two most significant among them being the following: First, unlinkability breaks in the presence of a single malicious issuer. Second, it introduces interactiveness, as the users are required to communicate each time with issuers to collect credentials intended for use in interactions with applications. This contradicts the goal of SSI, whose aim is to give users full control over their identities. This paper first introduces the concept of publicly verifiable attribute-based threshold anonymous counting tokens (tACT). Unlike recent approaches confined to centralized settings (Benhamouda et al., ASIACRYPT 2023), tACT operates in a distributed-trust environment. Accompanied by a formal security model and a provably secure instantiation, tACT introduces a novel dimension to token issuance, which, we believe, holds independent interest. Next, the paper leverages the proposed tACT scheme to construct an efficient Sybil-resistant SSI system. This system supports various functionalities, including threshold issuance, unlinkable multi-show selective disclosure, and non-interactive, non-transferable credentials that offer constant-size credentials. Finally, our benchmark results show an efficiency improvement in our construction when compared to CanDID all while accommodating a greater number of issuers and additionally reducing to a one-round protocol that can be run in parallel with all issuers.
+]]></content:encoded>
+<pubDate>Tue, 25 Jun 2024 11:26:25 +0000</pubDate>
+<pubDate>Tue, 25 Jun 2024 11:26:25 +0000</pubDate>
+</item>
 
 <item>
 <title>A Two-Layer Blockchain Sharding Protocol Leveraging Safety and Liveness for Enhanced Performance</title>
