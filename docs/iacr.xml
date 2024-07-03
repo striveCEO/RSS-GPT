@@ -4,6 +4,285 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+<item>
+<title>Securely Training Decision Trees Efficiently</title>
+<link>https://eprint.iacr.org/2024/1077</link>
+<guid>https://eprint.iacr.org/2024/1077</guid>
+<content:encoded><![CDATA[
+<div> 关键词：Secure Multi-party Computation (MPC), Decision Tree, Communication Complexity, Protocol, MP-SPDZ Framework
+
+总结: <br>
+该研究专注于改进决策树的隐私保护训练方法，利用secure multi-party computation (MPC)技术。文章的主要贡献在于提出了一种新的协议，将通信复杂度从$\mathcal{O}(hmN\log N)$降低到$\mathcal{O}(mN\log N + hmN + hN\log N)$，相比先前工作约减少了$\mathsf{min}(h, m, \log N)$。核心创新是一个能保持元素相对顺序的高效排序和分组方法。通过在MP-SPDZ框架中的实现，新协议比现有状态-of-the-art节省了10倍的通信并快9倍。这为处理大规模、高维度数据集的隐私保护决策树训练提供了更有效的解决方案。 <div>
+Decision trees are an important class of supervised learning algorithms. When multiple entities contribute data to train a decision tree (e.g. for fraud detection in the financial sector), data privacy concerns necessitate the use of a privacy-enhancing technology such as secure multi-party computation (MPC) in order to secure the underlying training data. Prior state-of-the-art (Hamada et al.)  construct an MPC protocol for decision tree training with a communication of $\mathcal{O}(hmN\log N)$, when building a decision tree of height $h$ for a training dataset of $N$ samples, each having $m$ attributes.
+
+In this work, we significantly reduce the communication complexity of secure decision tree training. 
+We construct a protocol with communication complexity $\mathcal{O}(mN\log N + hmN + hN\log N)$, thereby achieving an improvement of $\approx \mathsf{min}(h, m, \log N)$ over Hamada et al. 
+At the core of our technique is an improved protocol to regroup sorted private elements further into additional groups (according to a flag vector) while maintaining their relative ordering. We implement our protocol in the MP-SPDZ framework and show that it requires $10\times$ lesser communication and is $9\times$ faster than the state-of-the-art.
+]]></content:encoded>
+<pubDate>Tue, 02 Jul 2024 07:55:04 +0000</pubDate>
+<pubDate>Tue, 02 Jul 2024 07:55:04 +0000</pubDate>
+</item>
+<item>
+<title>Secret Key Recovery in a Global-Scale End-to-End Encryption System</title>
+<link>https://eprint.iacr.org/2024/887</link>
+<guid>https://eprint.iacr.org/2024/887</guid>
+<content:encoded><![CDATA[
+<div> 关键词：End-to-end encryption, Messaging applications, Decryption keys, Secure Value Recovery 3 (SVR3), Heterogeneous enclaves.
+
+总结:<br>文章讨论了端到端加密消息应用中用户面临的一个挑战：如果丢失设备且无法访问解密密钥，将无法访问账户。为解决这个问题，Secure Value Recovery 3 (SVR3)被提出，它是一种秘密密钥恢复系统，通过在不同云提供商管理的不同硬件安全隔间（enclaves）之间分散信任，保护用户的解密密钥。SVR3是首个跨异构隔间部署的密钥恢复系统，降低了单一隔间成为攻击目标的风险。该系统利用回滚保护和故障 tolerance 技术适应隔间的安全性。SVR3的年度成本为0.0025美元/用户，用户恢复密钥的时间为365毫秒，这是一个罕见的操作。SVR3已在一个支持数亿真实用户的部署中实施，显示出处理大规模用户的能力。 <div>
+End-to-end encrypted messaging applications ensure that an attacker cannot read a user's message history without their decryption keys. While this provides strong privacy, it creates a usability problem: if a user loses their devices and cannot access their decryption keys, they can no longer access their account. To solve this usability problem, users should be able to back up their account information with the messaging provider. For privacy, this backup should be encrypted and the provider should not have access to users' decryption keys. To solve this problem, we present Secure Value Recovery 3 (SVR3), a secret key recovery system that distributes trust across different types of hardware enclaves run by different cloud providers in order to protect users' decryption keys. SVR3 is the first deployed secret key recovery system to split trust across heterogeneous enclaves managed by different cloud providers: this design ensures that a single type of enclave does not become a central point of attack. SVR3 protects decryption keys via rollback protection and fault tolerance techniques tailored to the enclaves' security guarantees. SVR3 costs \$0.0025/user/year and takes 365ms for a user to recover their key, which is a rare operation. A part of SVR3 has been rolled out to millions of real users in a deployment with capacity for over 500 million users, demonstrating the ability to operate at scale.
+]]></content:encoded>
+<pubDate>Mon, 03 Jun 2024 17:04:58 +0000</pubDate>
+<pubDate>Mon, 03 Jun 2024 17:04:58 +0000</pubDate>
+</item>
+<item>
+<title>Improved Multi-Party Fixed-Point Multiplication</title>
+<link>https://eprint.iacr.org/2024/1047</link>
+<guid>https://eprint.iacr.org/2024/1047</guid>
+<content:encoded><![CDATA[
+<div> 关键词：隐私保护、机器学习、多党安全计算、固定点乘法、秘密分享。
+
+总结:<br>
+本文研究了在多服务器（$N \geq 3$）环境下进行隐私保护的机器学习问题。作者设计了新的多党安全固定点乘法协议，适用于三种秘密分享形式：复制、Shamir和加性共享，针对半诚实攻击提供安全保证。对于复制共享，还提出了一种对抗恶意攻击的高效协议。这些协议提高了通信效率，用于构建支持加法和固定点乘法（带截断）的任意算术电路的多党计算（MPC）协议。所有协议均基于标准的模拟安全性定义得到证明。其中，复制和Shamir共享协议需要至少一半服务器是诚实的，而加性共享协议可以容忍多数恶意行为。 <div>
+Machine learning is widely used for a range of applications and is increasingly offered as a service by major technology companies. However, the required massive data collection raises privacy concerns during both training and inference. Privacy-preserving machine learning aims to solve this problem. In this setting, a collection of servers secret share their data and use secure multi-party computation to train and evaluate models on the joint data. All prior work focused on the scenario where the number of servers is two or three. In this work, we study the problem where there are $N \geq 3$ servers amongst whom the data is secret shared. 
+
+A key component of machine learning algorithms is to perform fixed-point multiplication with truncation of secret shared decimal values. In this work, we design new protocols for multi-party secure fixed-point multiplication where each of the $N$ parties have one share each of the two values to be multiplied and receive one share of the product at the end of the protocol. We consider three forms of secret sharing - replicated, Shamir, and additive, and design an efficient protocol secure in the presence of a semi-honest adversary for each of the forms. Our protocols are more communication efficient than all prior work on performing multi-party fixed-point multiplication. Additionally, for replicated secret sharing, we design another efficient protocol that is secure in the presence of a malicious adversary. Finally, we leverage our fixed-point multiplication protocols to design secure multi-party computation (MPC) protocols for arbitrary arithmetic circuits that have addition and fixed-point multiplication with truncation gates. All our protocols are proven secure using a standard simulation based security definition. Our protocols for replicated and Shamir sharing work in the presence of an honest majority of parties while the one for additive sharing can tolerate a dishonest majority as well.
+]]></content:encoded>
+<pubDate>Thu, 27 Jun 2024 21:16:25 +0000</pubDate>
+<pubDate>Thu, 27 Jun 2024 21:16:25 +0000</pubDate>
+</item>
+<item>
+<title>Message Latency in Waku Relay with Rate Limiting Nullifiers</title>
+<link>https://eprint.iacr.org/2024/1073</link>
+<guid>https://eprint.iacr.org/2024/1073</guid>
+<content:encoded><![CDATA[
+<div> 关键词: Waku, GossipSub, Rate Limiting Nullifiers (RLN), message propagation latency, decentralized messaging
+
+总结:
+Waku是一种注重隐私、通用和去中心化的消息传递协议。它结合了GossipSub（用于路由）和RLN（防止垃圾信息）技术。本文通过理论分析、大规模单节点模拟和多节点全球部署实验，评估了Waku的消息传播延迟。实验结果证实，中等大小（25 KB）的消息能在1秒内送达，满足像去中心化通信这样的应用场景需求。Waku在保证匿名性和可扩展性的同时，实现了满意的延迟性能。 <div>
+Waku is a privacy-preserving, generalized, and decentralized messaging protocol suite. Waku uses GossipSub for message routing and Rate Limiting Nullifiers (RLN) for spam protection. GossipSub ensures fast and reliable peer-to-peer message delivery in a permissionless environment, while RLN enforces a common publishing rate limit using zero-knowledge proofs.
+
+This paper presents a practical evaluation of message propagation latency in Waku. First, we estimate latencies analytically, building a simple mathematical model for latency under varying conditions. Second, we run a large-scale single-host simulation with 1000 nodes. Third, we set up a multi-host Waku deployment using five nodes in different locations across the world. Finally, we compare our analytical estimations to the results of the simulation and the real-world measurement.
+
+The experimental results are in line with our theoretical model. Under realistic assumptions, medium-sized messages (25 KB) are delivered within 1 second. We conclude that Waku can achieve satisfactory latency for typical use cases, such as decentralized messengers, while providing scalability and anonymity.
+]]></content:encoded>
+<pubDate>Mon, 01 Jul 2024 19:43:18 +0000</pubDate>
+<pubDate>Mon, 01 Jul 2024 19:43:18 +0000</pubDate>
+</item>
+<item>
+<title>Exploiting Internal Randomness for Privacy in Vertical Federated Learning</title>
+<link>https://eprint.iacr.org/2024/671</link>
+<guid>https://eprint.iacr.org/2024/671</guid>
+<content:encoded><![CDATA[
+<div> 关键词：Vertical Federated Learning (VFL), Differential Privacy (DP), Variational Autoencoder (VAE), Empirical Local Differential Privacy (dELDP), Privacy Attacks.
+
+总结:<br>
+本文主要探讨了在Vertical Federated Learning (VFL)中，如何利用Variational Autoencoder (VAE)的内在随机性增强隐私保护。作者提出了一种新的差分隐私估计方法，称为距离基局部差分隐私(dELDP)，用于量化模型或模型组件的隐私参数。通过实验，dELDP在VAE中的应用显示出高达ε ≈ 6.4和δ = 2^{-32}的隐私值。研究发现，包含VAE的VFL系统对特征重建攻击具有稳健性，并且在对手拥有75%特征的标签推断攻击中，相比其他隐私增强方法表现出色。这表明，利用VAE的内部随机性可以在保持一定性能的同时提供有效的隐私保护。 <div>
+Vertical Federated Learning (VFL) is becoming a standard collaborative learning paradigm with various practical applications. Randomness is essential to enhancing privacy in VFL, but introducing too much external randomness often leads to an intolerable performance loss. Instead, as it was demonstrated for other federated learning settings, leveraging internal randomness —as provided by variational autoencoders (VAEs) —can be beneficial. However, the resulting privacy has never been quantified so far, nor has the approach been investigated for VFL.
+We therefore propose a novel differential privacy (DP) estimate, denoted as distance-based empirical local differential privacy (dELDP). It allows us to empirically bound DP parameters of models or model components, quantifying the internal randomness with appropriate distance and sensitivity metrics. We apply dELDP to investigate the DP of VAEs and observe values up to ε ≈ 6.4 and δ = 2−32. Based on this, to link the dELDP parameters to the privacy of VAE-including VFL systems in practice, we conduct comprehensive experiments on the robustness against state-of-the-art privacy attacks. The results illustrate that the VAE system is robust against feature reconstruction attacks and outperforms other privacy-enhancing methods for VFL, especially when the adversary holds 75% of the features during label inference attacks.
+]]></content:encoded>
+<pubDate>Thu, 02 May 2024 11:08:22 +0000</pubDate>
+<pubDate>Thu, 02 May 2024 11:08:22 +0000</pubDate>
+</item>
+<item>
+<title>Decentralized Multi-Client Functional Encryption with Strong Security</title>
+<link>https://eprint.iacr.org/2024/764</link>
+<guid>https://eprint.iacr.org/2024/764</guid>
+<content:encoded><![CDATA[
+<div> 关键词：Decentralized Multi-Client Functional Encryption (DMCFE), Inner Products, Function-Hiding, Random Oracle Model, Security Guarantees.
+
+总结:
+本文探讨了去中心化的多客户端功能加密（DMCFE）的新构造，特别关注于内积函数的保密性。作者提出了一种新的证明方法，为这一构造提供了强大的随机 Oracle 模型下的安全保证。与之前仅在选择性攻击下证明安全性的构造不同，这个新方案允许对手进行适应性查询，包括带有重复消息标签的挑战密文和固定数量重复密钥标签的挑战密钥。这增加了对敏感函数（如机器学习模型）的保护。总的来说，研究者通过改进技术增强了多客户端功能加密在实际应用中的安全性。 <div>
+Decentralized Multi-Client Functional Encryption (DMCFE) extends the basic functional encryption to multiple clients that do not trust each other. They can independently encrypt the multiple plaintext-inputs to be given for evaluation to the function embedded in the functional decryption key, defined by multiple parameter-inputs. And they keep control on these functions as they all have to contribute to the generation of the functional decryption keys. Tags can be used in the ciphertexts and the keys to specify which inputs can be combined together. As any encryption scheme, DMCFE provides privacy of the plaintexts. But the functions associated to the functional decryption keys might be sensitive too (e.g. a model in machine learning). The function-hiding property has thus been introduced to additionally protect the function evaluated during the decryption process.
+
+  In this paper, we provide new proof techniques to analyze a new concrete construction of function-hiding DMCFE for inner products, with strong security guarantees in the random oracle model: the adversary can adaptively query multiple challenge ciphertexts and multiple challenge keys, with unbounded repetitions of the same message tags in the ciphertext-queries and a fixed polynomially-large number of repetitions of the same key tags in the key-queries, allowing static corruption of the secret encryption keys. Previous constructions were proven secure in the selective setting only.
+]]></content:encoded>
+<pubDate>Sun, 19 May 2024 17:14:22 +0000</pubDate>
+<pubDate>Sun, 19 May 2024 17:14:22 +0000</pubDate>
+</item>
+<item>
+<title>SECDSA: Mobile signing and authentication under classical ``sole control''</title>
+<link>https://eprint.iacr.org/2021/910</link>
+<guid>https://eprint.iacr.org/2021/910</guid>
+<content:encoded><![CDATA[
+<div> 关键词: 电子签名、eIDAS、智能卡、移动平台、独控制。
+
+总结:<br>该文章探讨了2014年欧洲eIDAS法规对电子签名和强电子认证的要求，特别是关于“独控制”的变化。传统的智能卡通过用户直接与依赖方交互实现独控制，但eIDAS允许将用户互动外包给中间服务，如移动应用。然而，移动设备的加密硬件有限，无法支持复杂的密钥控制（如PIN）。作者提出一种新的设计，旨在为标准移动平台提供类似智能卡的独控制，满足eIDAS的严格要求。此外，文章还提及了基于SECDSA的欧洲数字身份钱包方案，这是eIDAS更新的一部分。这种设计确保即使在使用移动设备时，也能保持用户对电子签名的独控制，增强电子交易的安全性。 <div>
+The 2014 European eIDAS regulation regulates strong electronic authentication and legally binding electronic signatures. Both require user "sole control". Historically smartcards are used based on direct interaction between user and relying party. Here sole control is provided by giving users both physical possession and control of the cryptographic key used for signing/authentication through a PIN.
+Such **classical** sole control is required in the 1999 electronic signature directive by some interpretations.
+The eIDAS regulation repeals the directive and explicitly relaxes its sole control requirements in a trade-off between security and usability.
+This allows user interaction to be outsourced to intermediary parties (authentication providers, signing services). This also allows mobile applications as user friendly alternatives for smartcards. However, current mobile platforms are only equipped with limited cryptographic hardware not supporting secure knowledge factors (PINs) controlling keys. The eIDAS relaxation raises concerns on sole control; intermediary parties should not be able to act as man-in-the-middle and impersonate users. In this paper we present a simple cryptographic design for signing and authentication on standard mobile platforms providing classical sole control. We argue that our design can meet the highest eIDAS requirements, effectively introducing a new signature category in a 2016 decision of the European Commission.
+We also sketch a SECDSA based implementation of the European Digital Identity Wallet recently proposed by the European Commission as part of the eIDAS regulation update.
+]]></content:encoded>
+<pubDate>Mon, 05 Jul 2021 18:55:07 +0000</pubDate>
+<pubDate>Mon, 05 Jul 2021 18:55:07 +0000</pubDate>
+</item>
+<item>
+<title>$\textsf{Asterisk}$: Super-fast MPC with a Friend</title>
+<link>https://eprint.iacr.org/2023/1098</link>
+<guid>https://eprint.iacr.org/2023/1098</guid>
+<content:encoded><![CDATA[
+<div> 关键词：Secure multiparty computation (MPC), Dishonest majority, Helper party (HP), Fairness, Asterisk framework.
+
+总结:<br>
+这篇文章探讨了在存在恶意多数方的多方计算(MPC)中，引入一个半诚实、非协作的辅助 party（HP）以提高效率和保障安全性的可能性。作者设计并实现了一个名为Asterisk的高效通用多党框架，它仅需少量调用HP，实现了公平性保障，适用于数百个参与者，且在预处理和在线时间上都优于现有协议，甚至能与诚实多数情况下的协议竞争。实验表明，Asterisk在预处理速度上比最佳方案快228-288倍，能支持大规模电路的快速计算，并成功应用于暗池实例，展示了其在实际应用中实现隐私保护的强大能力。 <div>
+Secure multiparty computation$~$(MPC) enables privacy-preserving collaborative computation over sensitive data held by multiple mutually distrusting parties. Unfortunately, in the most natural setting where a majority of the parties are maliciously corrupt$~$(also called the $\textit{dishonest majority}$ setting), traditional MPC protocols incur high overheads and offer weaker security guarantees than are desirable for practical applications. In this paper, we explore the possibility of circumventing these drawbacks and achieving practically efficient dishonest majority MPC protocols with strong security guarantees by assuming an additional semi-honest, non-colluding helper party $\mathrm{HP}$. We believe that this is a more realistic alternative to assuming an honest majority, since many real-world applications of MPC involving potentially large numbers of parties$~$(such as dark pools) are typically enabled by a central governing entity that can be modeled as the $\mathrm{HP}$.
+
+    In the above model, we are the first to design, implement and benchmark a practically-efficient and general multi-party framework, $\textsf{Asterisk}$. Our framework requires invoking $\mathrm{HP}$ only a constant number of times, achieves the strong security guarantee of $\textit{fairness}$ (either all parties learn the output or none do), scales to hundreds of parties, outperforms all existing dishonest majority MPC protocols, and is, in fact, competitive with state-of-the-art honest majority MPC protocols. Our experiments show that $\textsf{Asterisk}$ achieves $228-288\times$ speedup in preprocessing as compared to the best dishonest majority MPC protocol. With respect to online time, $\textsf{Asterisk}$ supports $100$-party evaluation of a circuit with $10^6$ multiplication gates in approximately $20$ seconds. We also implement and benchmark practically efficient and highly scalable dark pool instances using $\textsf{Asterisk}$. The corresponding run times showcase the effectiveness of $\textsf{Asterisk}$ in enabling efficient realizations of real-world privacy-preserving applications with strong security guarantees.
+]]></content:encoded>
+<pubDate>Fri, 14 Jul 2023 05:44:23 +0000</pubDate>
+<pubDate>Fri, 14 Jul 2023 05:44:23 +0000</pubDate>
+</item>
+<item>
+<title>Zero-Knowledge Proofs of Training for Deep Neural Networks</title>
+<link>https://eprint.iacr.org/2024/162</link>
+<guid>https://eprint.iacr.org/2024/162</guid>
+<content:encoded><![CDATA[
+<div> 关键词：零知识证明、深度神经网络（DNN）、迭代训练、GKR风格证明系统、证明大小和验证器时间。
+
+总结:<br>
+\name是一种专为深度神经网络设计的零知识证明（zkPoT），旨在保证隐私、效率和简洁性。它允许证人通过梯度下降迭代训练模型，每次迭代后生成一个证明，证明模型参数的正确性。文章的核心贡献包括：1）提出优化的GKR风格证明系统，降低证人成本；2）开发通用框架，实现多轮GKR证明的高效组合；3）实证表明，\name能处理大规模模型如VGG-11，证明大小仅1.63MB，验证器运行时间低至130毫秒，独立于迭代次数和数据集大小，显著提高效率。 <div>
+A zero-knowledge proof of training (zkPoT) enables a party to prove that they have correctly trained a committed model based on a committed dataset without revealing any additional information about the model or the dataset. An ideal zkPoT should offer provable security and privacy guarantees, succinct proof size and verifier runtime, and practical prover efficiency. In this work, we present \name, a zkPoT targeted for deep neural networks (DNNs) that achieves all these goals at once. Our construction enables a prover to iteratively train their model via (mini-batch) gradient descent, where the number of iterations need not be fixed in advance; at the end of each iteration, the prover generates a commitment to the trained model parameters attached with a succinct zkPoT, attesting to the correctness of the executed iterations. The proof size and verifier time are independent of the number of iterations.
+
+Our construction relies on two building blocks. First, we propose an optimized GKR-style (sumcheck-based) proof system for the gradient-descent algorithm with concretely efficient prover cost; this allows the prover to generate a proof for each iteration. We then show how to recursively compose these proofs across multiple iterations to attain succinctness. As of independent interest, we propose a generic framework for efficient recursive composition of GKR-style proofs, along with aggregatable polynomial commitments.
+
+Benchmarks indicate that \name\ can handle the training of complex models such as VGG-11 with 10~million parameters and batch size~$16$. The prover runtime is $15$~minutes per iteration, which is $\mathbf{24 \times}$ faster than generic recursive proofs, with prover memory overhead $\mathbf{27\times}$ lower. The proof size is $1.63$~megabytes, and the verifier runtime is only $130$~milliseconds, where both are independent of the number of iterations and the size of the dataset.
+]]></content:encoded>
+<pubDate>Sun, 04 Feb 2024 22:43:14 +0000</pubDate>
+<pubDate>Sun, 04 Feb 2024 22:43:14 +0000</pubDate>
+</item>
+<item>
+<title>Secure Vickrey Auctions with Rational Parties</title>
+<link>https://eprint.iacr.org/2024/1011</link>
+<guid>https://eprint.iacr.org/2024/1011</guid>
+<content:encoded><![CDATA[
+<div> 关键词：second price auction, Vickrey auction, privacy, rational parties, dominant strategy equilibrium
+
+总结:<br>
+本文设计了一种无需拍卖人的第二价格（Vickrey）拍卖协议（SPA），确保了在理性、计算能力有限且注重隐私的参与者之间的完全隐私。该协议保护了最高出价和第二高出价者的身份不被泄露。参与者被模型化为自我利益驱动、遵循个人优势（通过合适的效用函数衡量）的理性个体，他们不会随意偏离协议。研究证明，在这种SPA中存在一种隐私保护的主导策略均衡，每个参与者都倾向于遵守协议。
+
+该协议基于开源加密技术实现，具有高效性和低通信量。在一个拥有15名竞标者、每笔投标10位的实验中，SPA仅需1.26秒完成，总通信量为0.77MB。相比之下，类似条件下Atlas（半诚实）协议的运行时间增加了40%，通信量增加了87%。这表明作者的SPA协议在效率和隐私保护上具有显著优势。 <div>
+In this work, we construct a second price (Vickrey) auction protocol (SPA), which does not require any auctioneers and ensures total privacy in the presence of rational parties participating in auction. In particular, the confidentiality of the highest bid and the identity of the second highest bidder are protected. We model the bidders participating in the second price auction as rational, computationally bounded and privacy-sensitive parties. These are self-interested agents who care about winning the auction more than learning about the private bids of other parties. A rational party does not deviate from the protocol arbitrarily but does so only for its own individual `advantage' -- without any consideration for others. Such an advantage is modeled using suitable utility functions. 
+
+We show that for rational and computationally bounded parties participating in our second-price auctions protocol, there exists a privacy-preserving dominant strategy equilibrium in which every party prefers to follow the protocol rather than to deviate. 
+
+Our protocol is implemented using open-source cryptographic constructs. Running our SPA protocol on commodity hardware with $15$ bidders,  with bids of length $10$ bits,  completes in $1.26$sec and has total communication of $0.77$MB whereas, under similar conditions, Atlas (semi-honest) protocol takes $40\%$ more time ($2.11$ sec) and $87\%$ more communication ($6.09$MB).
+]]></content:encoded>
+<pubDate>Sat, 22 Jun 2024 04:11:28 +0000</pubDate>
+<pubDate>Sat, 22 Jun 2024 04:11:28 +0000</pubDate>
+</item>
+<item>
+<title>FSSiBNN: FSS-based Secure Binarized Neural Network Inference with Free Bitwidth Conversion</title>
+<link>https://eprint.iacr.org/2024/1010</link>
+<guid>https://eprint.iacr.org/2024/1010</guid>
+<content:encoded><![CDATA[
+<div> 关键词：Secure neural network inference, Binarized neural networks (BNNs), Secure multi-party computation (MPC), Function secret sharing (FSS), Communication overhead.
+
+总结:<br>
+本文提出了一种名为FSSiBNN的安全二值神经网络（BNN）推理框架，旨在解决在使用MPC进行BNN推理时的隐私保护和通信效率问题。FSSiBNN利用函数秘密共享（FSS）实现免费的位宽转换，设计了一种位宽减半的参数编码方案，将位宽转换无缝融入FSS安全二值激活和最大池化协议中，显著减少了通信开销。通过预计算矩阵乘法和比较操作，FSSiBNN在实验中表现出色，相比XONN有7倍的更快推理速度和577倍的通信成本降低，相较于SecureBiNN和FLEXBNN，FSSiBNN在速度和通信效率上也有显著优势。 <div>
+Neural network inference as a service enables a cloud server to provide inference services to clients. To ensure the privacy of both the cloud server's model and the client's data, secure neural network inference is essential. Binarized neural networks (BNNs), which use binary weights and activations, are often employed to accelerate inference. However, achieving secure BNN inference with secure multi-party computation (MPC) is challenging because MPC protocols cannot directly operate on values of different bitwidths and require bitwidth conversion. Existing bitwidth conversion schemes expand the bitwidths of weights and activations, leading to significant communication overhead.
+
+To address these challenges, we propose FSSiBNN, a secure BNN inference framework featuring free bitwidth conversion based on function secret sharing (FSS). By leveraging FSS, which supports arbitrary input and output bitwidths, we introduce a bitwidth-reduced parameter encoding scheme. This scheme seamlessly integrates bitwidth conversion into FSS-based secure binary activation and max pooling protocols, thereby eliminating the additional communication overhead. Additionally, we enhance communication efficiency by combining and converting multiple BNN layers into fewer matrix multiplication and comparison operations. We precompute matrix multiplication tuples for matrix multiplication and FSS keys for comparison during the offline phase, enabling constant-round online inference.
+
+In our experiments, we evaluated various datasets and models, comparing our results with state-of-the-art frameworks. Compared with the two-party framework XONN (USENIX Security '19), FSSiBNN achieves approximately 7$\times$ faster inference times and reduces communication overhead by about 577$\times$. Compared with the three-party frameworks SecureBiNN (ESORICS '22) and FLEXBNN (TIFS '23), FSSiBNN is approximately 2.5$\times$ faster in inference time and reduces communication overhead by 1.3$\times$ to 16.4$\times$.
+]]></content:encoded>
+<pubDate>Fri, 21 Jun 2024 14:45:30 +0000</pubDate>
+<pubDate>Fri, 21 Jun 2024 14:45:30 +0000</pubDate>
+</item>
+<item>
+<title>Auditable Attribute-Based Credentials Scheme and Its Application in Contact Tracing</title>
+<link>https://eprint.iacr.org/2023/1060</link>
+<guid>https://eprint.iacr.org/2023/1060</guid>
+<content:encoded><![CDATA[
+<div> 关键词：attribute-based credentials (ABC), auditable, anonymity, revocability, contact tracing
+
+总结:<br>该文章探讨了在疫情期间，隐私保护联系追踪系统的需求升级。作者将注意力转向了基于属性的凭证(ABC)方案，提出了一种可审计的ABC扩展，增加了审计能力，允许指定的审计机构撤销特定发行者的匿名性。为此，他们设计了可更新公钥的“可审计公钥”机制，并将其应用于Connolly等人的ABC构造中。此外，文章还改进了Wang等人的框架，提供了安全定义和协议构建，以及一个实现来展示设计的实用性。这个工作不仅解决了现有系统的局限，而且"可审计公钥"机制具有通用性，可能对其他加密技术有独立价值。 <div>
+During the pandemic, the limited functionality of existing privacy-preserving contact tracing systems highlights the need for new designs. Wang et al. proposed an environmental-adaptive framework (CSS '21) but failed to formalize the security. The similarity between their framework and attribute-based credentials (ABC) inspires us to reconsider contact tracing from the perspective of ABC schemes. In such schemes, users can obtain credentials on attributes from issuers and prove the credentials anonymously (i.e., hiding sensitive information of both user and issuer). This work first extends ABC schemes with auditability, which enables designated auditing authorities to revoke the anonymity of particular issuers. For this purpose, we propose an ``auditable public key (APK)'' mechanism that extends the updatable public key by Fauzi et al. (AsiaCrypt '19). We provide formal security definitions regarding auditability and build our auditable ABC scheme by adding a DDH-based APK to Connolly et al.'s ABC construction (PKC '22). Note that the APK mechanism can be used as a plug-in for other cryptographic primitives and may be of independent interest. Finally, regarding contact tracing, we refine Wang et al.'s framework and present a formal treatment that includes security definitions and protocol construction. An implementation is provided to showcase the practicality of our design.
+]]></content:encoded>
+<pubDate>Fri, 07 Jul 2023 00:04:39 +0000</pubDate>
+<pubDate>Fri, 07 Jul 2023 00:04:39 +0000</pubDate>
+</item>
+<item>
+<title>Stochastic Secret Sharing with $1$-Bit Shares and Applications to MPC</title>
+<link>https://eprint.iacr.org/2024/1053</link>
+<guid>https://eprint.iacr.org/2024/1053</guid>
+<content:encoded><![CDATA[
+<div> 关键词：secret-sharing, 1-bit shares, corruption probability, error-correcting codes, binary erasure channel
+
+总结:<br>
+这篇文章探讨了一种新的随机模型，用于设计具有单比特份额的阈值秘密共享方案，以抵抗任意常数概率$p<0.5$的攻击。作者通过建立与纠错码在二进制擦除信道上达到容量的联系，提出了创新的构造方法。这些线性且可乘的方案有助于构建高效、实时的多方计算（MPC）协议，即使门电路按顺序实时到来，也能保证低通信量，每个AND门只需单比特通信，XOR门无需通信。这对于实现实时环境下的安全计算是一个重要突破。 <div>
+The problem of minimizing the share size of threshold secret-sharing schemes is a basic research question that has been extensively studied. Ideally, one strives for schemes in which the share size equals the secret size. While this is achievable for large secrets (Shamir, CACM '79), no similar solutions are known for the case of binary, single-bit secrets. Current approaches often rely on so-called ramp secret sharing that achieves a constant share size at the expense of a slight gap between the privacy and the correctness thresholds. In the case of single-bit shares, this leads to a large gap which is typically unacceptable. The possibility of a meaningful notion of secret sharing scheme with 1-bit shares and almost optimal threshold has been left wide open. Of special interest is the case of threshold 0.5, which is motivated by information-theoretic honest-majority secure multiparty computation (MPC).
+
+In this work, we present a new stochastic model for secret-sharing where each party is corrupted by the adversary with probability $p$, independently of the other parties, and correctness and privacy are required to hold with high probability over the choice of the corrupt parties. We present new secret sharing schemes with single-bit shares that tolerate any constant corruption probability $p<0.5$. Our construction is based on a novel connection between such stochastic secret-sharing schemes and error-correcting codes that achieve capacity over the binary erasure channel.
+
+Our schemes are linear and multiplicative. We demonstrate the usefulness of the model by using our new schemes to construct MPC protocols with security against an adversary that passively corrupts an arbitrary subset of $0.499n$ of the parties, where the online communication per party consists of a single bit per AND gate and zero communication per XOR gate. Unlike competing approaches for communication-efficient MPC, our solution is applicable even in a real-time model in which the parties should compute a Boolean circuit whose gates arrive in real-time, one at a time, and are not known in advance.
+]]></content:encoded>
+<pubDate>Fri, 28 Jun 2024 06:24:00 +0000</pubDate>
+<pubDate>Fri, 28 Jun 2024 06:24:00 +0000</pubDate>
+</item>
+<item>
+<title>A New Fine Tuning Method for FHEW/TFHE Bootstrapping with IND-CPAD Security</title>
+<link>https://eprint.iacr.org/2024/1052</link>
+<guid>https://eprint.iacr.org/2024/1052</guid>
+<content:encoded><![CDATA[
+<div> 关键词：fully homomorphic encryption (FHE), FHEW, TFHE, IND-CPA-D security, key recovery attack
+
+总结:<br>
+文章讨论了全同态加密(FHE)方案，特别是FHEW和TFHE，这两种方法在处理加密数据的计算上表现出色。然而，它们的评估失败概率对参数选择敏感，导致必须选择过低的失败概率以抵抗Cheon等人的关键恢复攻击，这牺牲了运行效率。为解决这个问题，作者提出了一种新的FHEW/TFHE的提升方法，它允许精确地平衡运行时间和失败概率，同时提供易于实现的特性。新方法允许根据所需安全级别选择更合适的参数集，兼顾效率和安全性。 <div>
+Fully homomorphic encryption (FHE) schemes enable computations on encrypted data, making them a crucial component of privacy-enhancing technologies. 
+Ducas and Micciancio introduced FHEW (Eurocrypt '15), and Chillotti et al. improved it in TFHE (Asiacrypt '16), both of which provide homomorphic binary (or larger) gate evaluations with fast latency due to their small parameters. 
+However, their evaluation failure probability is highly sensitive to parameter selection, resulting in a limited set of viable parameters and a trade-off between failure probability and runtime.
+
+Recently, Cheon et al. proposed a key recovery attack against FHEW/TFHE schemes based on a new security model for FHE, called IND-CPA-D security, which was first introduced by Li and Micciancio (Eurocrypt '21). 
+To prevent this attack, it is necessary to make the failure probability negligible (e.g., $2^{-128}$). 
+However, due to limited choice parameters, it is forced to use a parameter set with unnecessarily low failure probabilities than needed, causing inefficiencies in runtime.
+
+We propose a new bootstrapping method for FHEW/TFHE, providing a precise balance between runtime and failure probability, and easy to implement.
+The proposed methods enable the selection of parameter sets that achieve negligible failure probabilities for each desired security level while optimizing runtime.
+]]></content:encoded>
+<pubDate>Fri, 28 Jun 2024 04:46:10 +0000</pubDate>
+<pubDate>Fri, 28 Jun 2024 04:46:10 +0000</pubDate>
+</item>
+<item>
+<title>Efficient Verifiable Differential Privacy with Input Authenticity in the Local and Shuffle Model</title>
+<link>https://eprint.iacr.org/2024/1042</link>
+<guid>https://eprint.iacr.org/2024/1042</guid>
+<content:encoded><![CDATA[
+<div> 关键词：Local differential privacy (LDP), malicious clients, input manipulation, output manipulation, verifiable LDP (VLDP).
+
+总结: 这篇文章探讨了如何保护Local Differential Privacy (LDP)机制免受恶意客户端的攻击。作者提出了一种高效的方法，通过设计防止输入和输出操纵的Verifiable LDP (VLDP)方案，确保了数据隐私。VLDP完全防御输出操纵，使用签名数据防止输入攻击，仅需一次客户端与服务器交互，提高了系统的安全性。文章还提供了两种在常规模型下的VLDP方案和一种在shuffle模型下的实现，且具有良好的实践性，客户端运行时间少于2秒，服务器处理时间为每客户5-7毫秒。 <div>
+Local differential privacy (LDP) is an efficient solution for providing privacy to client's sensitive data while simultaneously releasing aggregate statistics without relying on a trusted central server (aggregator) as in the central model of differential privacy. The shuffle model with LDP provides an additional layer of privacy, by disconnecting the link between clients and the aggregator, further improving the utility of LDP. However, LDP has been shown to be vulnerable to malicious clients who can perform both input and output manipulation attacks, i.e., before and after applying the LDP mechanism, to skew the aggregator's results. In this work, we show how to prevent malicious clients from compromising LDP schemes. Specifically, we give efficient constructions to prevent both input ánd output manipulation attacks from malicious clients for generic LDP algorithms. Our proposed schemes for verifiable LDP (VLDP), completely protect from output manipulation attacks, and prevent input attacks using signed data, requiring only one-time interaction between client and server, unlike existing alternatives [28, 33]. Most importantly, we are the first to provide an efficient scheme for VLDP in the shuffle model. We describe and prove secure, two schemes for VLDP in the regular model, and one in the shuffle model. We show that all schemes are highly practical, with client runtimes of < 2 seconds, and server runtimes of 5-7 milliseconds per client.
+]]></content:encoded>
+<pubDate>Thu, 27 Jun 2024 07:19:55 +0000</pubDate>
+<pubDate>Thu, 27 Jun 2024 07:19:55 +0000</pubDate>
+</item>
+<item>
+<title>Encryption Based Covert Channel for Large Language Models</title>
+<link>https://eprint.iacr.org/2024/586</link>
+<guid>https://eprint.iacr.org/2024/586</guid>
+<content:encoded><![CDATA[
+<div> 关键词：Transformer神经网络、安全性、Covert Channel攻击、Claude.ai、隐私风险。
+
+总结:<br>
+Transformer神经网络因其在大型语言模型中的出色表现而备受关注。本文聚焦于这些模型的安全隐患，特别是Covert Channel（隐蔽信道）攻击。研究者利用加密手段在Claude.ai上实施了攻击，并发现该模型会记录用户查询。值得注意的是，攻击在两天内被察觉并阻止，这引发了两个关键问题：一是大语言模型可能过度收集用户数据，对隐私构成威胁；二是频繁的阻断可能导致学术界对于此类模型安全性的研究受限，难以重复实验。 <div>
+Transformer neural networks have gained significant traction since their introduction, becoming pivotal across diverse domains. Particularly in large language models like Claude and ChatGPT, the transformer architecture has demonstrated remarkable efficacy. This paper provides a concise overview of transformer neural networks and delves into their security considerations, focusing on covert channel attacks and their implications for the safety of large language models. We present a covert channel utilizing encryption and demonstrate its efficacy in circumventing Claude.ai's security measures. Our experiment reveals that Claude.ai appears to log our queries and blocks our attack within two days of our initial successful breach.  This raises two concerns within the community: (1) The extensive logging of user inputs by large language models could pose privacy risks for users. (2) It may deter academic research on the security of such models due to the lack of experiment repeatability.
+]]></content:encoded>
+<pubDate>Tue, 16 Apr 2024 04:22:48 +0000</pubDate>
+<pubDate>Tue, 16 Apr 2024 04:22:48 +0000</pubDate>
+</item>
+<item>
+<title>SACfe: Secure Access Control in Functional Encryption with Unbounded Data</title>
+<link>https://eprint.iacr.org/2024/1031</link>
+<guid>https://eprint.iacr.org/2024/1031</guid>
+<content:encoded><![CDATA[
+<div> 关键词：隐私保护、功能加密（FE）、SACfe、安全访问控制、内积属性。<br><br>总结: 这篇文章探讨了在大规模数字应用中保护用户隐私的重要性，特别是针对云计算和机器学习服务。作者提出了一种新的属性基功能加密方案（SACfe），它提供了安全、细粒度的访问控制，同时隐藏用户属性和对数据的操作，确保数据保密性。SACfe特别支持对加密数据进行线性计算，并基于内积条件执行访问控制。文章还展示了SACfe如何用于在线生物识别，实现隐私保护的访问控制。此外，文章还介绍了一种适用于无限长度消息和函数的线性FE，其控制基于单调span程序。实验结果表明，该方案在实践中具有高效性，通过CiFEr库实现了这些协议。 <div>
+Privacy is a major concern in large-scale digital applications, such as cloud-computing, machine learning services, and access control. Users want to protect not only their plain data but also their associated attributes (e.g., age, location, etc). Functional encryption (FE) is a cryptographic tool that allows fine-grained access control over encrypted data. However, existing FE fall short as they are either inefficient and far from reality or they leak sensitive user-specific information.
+
+We propose SACfe, a novel attribute-based FE scheme that provides secure, fine-grained access control and hides both the user’s attributes and the function applied to the data, while preserving the data’s confidentiality. Moreover, it enables users to encrypt unbounded-length messages along with an arbitrary number of hidden attributes into ciphertexts. We design SACfe, a protocol for performing linear computation on encrypted data while enforcing access control based on inner product predicates. We show how SACfe can be used for online biometric authentication for privacy-preserving access control. As an additional contribution, we introduce an attribute-based linear FE for unbounded length of messages and functions where access control is realized by monotone span programs. We implement our protocols using the CiFEr cryptographic library and show its efficiency for practical settings.
+]]></content:encoded>
+<pubDate>Wed, 26 Jun 2024 07:19:42 +0000</pubDate>
+<pubDate>Wed, 26 Jun 2024 07:19:42 +0000</pubDate>
+</item>
 
 <item>
 <title>Stateless and Verifiable Execution Layer for Meta-Protocols on Bitcoin</title>
