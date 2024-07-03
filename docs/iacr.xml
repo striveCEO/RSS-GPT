@@ -4,6 +4,26 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+<item>
+<title>Privacy-Preserving Dijkstra</title>
+<link>https://eprint.iacr.org/2024/988</link>
+<guid>https://eprint.iacr.org/2024/988</guid>
+<content:encoded><![CDATA[
+<div> 关键词：secret-sharing, adjacency list, $d$-normalized, oblivious conversion, secure operations
+
+总结:
+这篇文章介绍了一种方法，将秘密共享的邻接列表图形转换为更适用于多方计算（MPC）的$d$-规范化表示。这个过程分为两步：首先，安全地将节点重命名，从任意字符串转换为1到$V$的整数，以保持排序，这需要$O(\log V)$轮和$O((V+E)\log V)$次安全操作。其次，对已排序的整数节点进行$d$-规范化，仅需$O(1)$轮和$O(V+E)$次操作。这种转换有助于设计隐私保护的Dijkstra算法，实现$(V+E) \cdot \log V$次安全操作和$V \cdot \log V \cdot \log \log\log V$轮的复杂度。这种方法适用于常数数量的服务器，并适用于任何邻接列表表示，只要节点标签和权重能适应固定内存字节数。 <div>
+Given a graph $G(V,E)$, represented as a secret-sharing of an adjacency list, we show how to obliviously convert it into an alternative, MPC-friendly secret-shared representation, so-called $d$-normalized replicated adjacency list (which we abbreviate to $d$-normalized), where the size of our new data-structure is only 4x larger -- compared to the original (secret-shared adjacency list) representation of $G$. Yet, this new data structure enables us to execute oblivious graph algorithms that simultaneously improve underlying graph algorithms' round, computation, and communication complexity. Our $d$-normalization proceeds in two steps: 
+
+First, we show how for any graph $G$, given a secret-shared adjacency list, where vertices are arbitrary alphanumeric strings that fit into a single RAM memory word, we can efficiently and securely rename vertices to integers from $1$ to $V$  that will appear in increasing order in the resulting secret-shared adjacency list. The secure renaming takes $O(\log V)$ rounds and $O((V+E)\log V)$ secure operations. Our algorithm also outputs two secret-shared arrays: a mapping from integers to alphanumeric names and its sorted inverse. Of course, if the adjacency list is already in such a format, this step could be omitted.
+
+Second, given a secret-shared adjacency list for any graph $G$, where vertices are integers from $1$ to $V$ and are sorted, we show an oblivious $d$-normalization algorithm that takes $O(1)$ rounds and $O(V+E)$ secure operations.
+
+We believe that both conversions are of independent interest. We demonstrate the power of our data structures by designing a privacy-preserving Dijkstra's single-source shortest-path algorithm that simultaneously achieves $O((V +E) \cdot \log V)$ secure operations and   $O(V \cdot \log V \cdot  \log \log\log V)$ rounds. Our secure Dijkstra algorithm works for any adjacency list representation as long as all vertex labels and weights can individually fit into a constant number of RAM memory words. Our algorithms work for two or a constant number of servers in the honest but curious setting.  The limitation of our result (to only a constant number of servers) is due to our reliance on linear work and constant-round secure shuffle.
+]]></content:encoded>
+<pubDate>Wed, 19 Jun 2024 08:02:46 +0000</pubDate>
+<pubDate>Wed, 19 Jun 2024 08:02:46 +0000</pubDate>
+</item>
 
 <item>
 <title>A $3$-Round Near-Linear Third-Party Private Set Intersection Protocol</title>
