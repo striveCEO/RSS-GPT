@@ -4,6 +4,299 @@
 <title>Ethereum Research - Latest topics</title>
 <link>https://ethresear.ch/latest</link>
 
+<item>
+<title>Gossipsub Message Propagation Latency</title>
+<link>https://ethresear.ch/t/gossipsub-message-propagation-latency/19982</link>
+<guid>https://ethresear.ch/t/gossipsub-message-propagation-latency/19982</guid>
+<content:encoded><![CDATA[
+<div> 关键词：Gossipsub、Ethereum、Message propagation latency、Hermes、Lodestar
+
+总结:
+研究团队ProbeLab通过工具Hermes对Ethereum P2P网络中的Gossipsub消息传播延迟进行了调查，以确定哪些协议组件消耗了最大的网络带宽。结果显示，98%的消息能在4秒内送达，而Lodestar客户端的接收时间相对较慢，但可能与其特定实现有关。节点位置靠近网络核心的节点通常能更快接收消息，但过度地理集中可能会加剧这种差异。尽管如此，总体上各节点的表现符合4秒内的要求，显示出网络的稳定性。 <div>
+<h1><a class="anchor" href="https://ethresear.ch#summary-and-tldr-1" name="summary-and-tldr-1"></a>Summary and TL;DR</h1>
+<p>The ProbeLab team (<a href="https://probelab.io/" rel="noopener nofollow ugc">probelab.io </a>) is carrying out a study on the performance of Gossipsub in Ethereum’s P2P network. Following from our previous post on the <a href="https://ethresear.ch/t/ethereum-node-message-propagation-bandwidth-consumption/19952">Ethereum Node Message Propagation Bandwidth Consumption</a>, in this post we investigate <strong>Gossipsub’s message propagation latency</strong>, i.e., how long it takes to have a message delivered to all nodes in the network. The target of the study is to identify the protocol components that consume the biggest share of network bandwidth. The study has been co-authored by <a class="mention" href="https://ethresear.ch/u/cortze">@cortze</a> and <a class="mention" href="https://ethresear.ch/u/yiannisbot">@yiannisbot</a>.</p>
+<p>For the purposes of this study, we have built a tool called <strong>Hermes, which acts as a GossipSub listener and tracer</strong> (<a href="https://github.com/probe-lab/hermes/" rel="noopener nofollow ugc">GitHub - probe-lab/hermes: A Gossipsub listener and tracer.</a>). Hermes subscribes to all relevant pubsub topics and traces all protocol interactions.</p>
+<p><strong>Study Description:</strong> Message propagation and arrival times are sensitive metrics for blockchain networks. We assume that the message is going to arrive to each peer “as fast as possible”, but in some cases, just because the core of the network achieved fast message delivery time, doesn’t mean that  message propagation to the entire network was done in time.</p>
+<p>In the particular case of Ethereum, with such strict message delivery deadlines, ensuring the messages arrive within a 4-second window is essential to reduce the probability of forks.</p>
+<p>In this study, we will approximate the average message propagation latency throughout the whole network.</p>
+<p><strong>TL;DR:</strong> Despite a relatively short dataset of 3 days, we could observe with high confidence that:</p>
+<ul>
+<li>98% of messages arrive prior to the 4-second mark.</li>
+<li>Lodestar seems to be the slowest client in terms of message arrival time, although this could also be related to when the arrivals are traced in the particular implementation.</li>
+<li>Nodes located in or near the core of the network (<a href="https://probelab.io/ethereum/discv5/2024-25/#geolocation" rel="noopener nofollow ugc">NA or EU</a>) do have certain advantages when it comes to receiving messages sooner. Although the traced locations do not show any worrying behaviour, it is worth pointing out that extra geographical centralization could exacerbate the differences even further.</li>
+</ul>
+<h1><a class="anchor" href="https://ethresear.ch#results-2" name="results-2"></a>Results</h1>
+<p>The results in this report have been gathered from EF’s Xatu public datasets. We’ve fetched 3 days’ worth of data from the <code>beacon_api_eth_v2_beacon_block</code> table (from the 14th to the 16th of June).</p>
+<h2><a class="anchor" href="https://ethresear.ch#arrival-cdf-times-within-the-slot-3" name="arrival-cdf-times-within-the-slot-3"></a>Arrival CDF times within the slot</h2>
+<p>The study starts by calculating the arrival time of all the blocks within the slot that they belong to. The calculation is done based on the slot number and the time since genesis, given that each slot lasts 12 seconds:</p>
+<pre><code class="lang-go">time_within_slot = arrival_time - (genesis_time + (slot * 12))
+</code></pre>
+<p>This measurement is crucial, as any block arrival beyond the 4 second mark is likely to generate a fork in some part of the network (as it can start receiving attestations of a non-proposed block).</p>
+<p>In this first graph, we observe that 98% of the blocks arrived within the 4-second mark, leaving only the remaining 2% of blocks exceeding it.</p>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/d/8/d8861bec5a5ad5613b752e126153afffcd236c23.png" title="CDF-propagation-latency"><img alt="CDF-propagation-latency" height="309" src="https://ethresear.ch/uploads/default/optimized/3X/d/8/d8861bec5a5ad5613b752e126153afffcd236c23_2_517x309.png" width="517" /></a></div><p></p>
+<p>The data was originated from the sentry nodes that are under the control of the Ethereum Foundation. These nodes include all the main client implementations in each of the locations, as shown in the following table:</p>
+<div class="md-table">
+<table>
+<thead>
+<tr>
+<th>Continent</th>
+<th>Country</th>
+<th>Client</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>EU</td>
+<td>FI</td>
+<td>lighthouse</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>lodestar</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>nimbus</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>prysm</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>teku</td>
+</tr>
+<tr>
+<td>NA</td>
+<td>US</td>
+<td>lighthouse</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>lodestar</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>nimbus</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>prysm</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>teku</td>
+</tr>
+<tr>
+<td>OC</td>
+<td>AU</td>
+<td>lighthouse</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>lodestar</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>nimbus</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>prysm</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>teku</td>
+</tr>
+</tbody>
+</table>
+</div><p>When comparing the arrival times over the different sentry nodes (figure below), we do see slight differences between them. The exception of <code>Lodestar</code> catches our attention, as it has a less uniform tail in its distribution. However, the rest of the clients follow a similar trend, with 99% of messages arriving within the first 4 seconds.</p>
+<p>Since this data has been collected from the standard <a href="https://ethereum.github.io/beacon-APIs/#/Events/eventstream" rel="noopener nofollow ugc">event streamer Beacon API</a>, it is hard to explain the differences within each of the client implementations, as not only the libp2p codebase is written in different languages, but the message arrivals could also be timestamped at different moments of the message validation logic.</p>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/6/0/60a95219771e0ec9bdc64265b87b0054bc877b83.png" title="gossipsub_arrival_times_within_slot_by_agent_on_mainnet_beacon_block"><img alt="gossipsub_arrival_times_within_slot_by_agent_on_mainnet_beacon_block" height="309" src="https://ethresear.ch/uploads/default/optimized/3X/6/0/60a95219771e0ec9bdc64265b87b0054bc877b83_2_517x309.png" width="517" /></a></div><p></p>
+<p>We were expecting to see different arrival times from different geographic locations, as the network geographical distribution seems to be concentrated within European and North American countries (<a href="https://probelab.io/ethereum/discv5/2024-24/#geolocation" rel="noopener nofollow ugc">link to the distribution</a>). The following graphs show that although there are indeed differences between countries or continents, they are minimal, with all the CDF distributions showing 98-99% of the block arrivals completing within the 4-second mark.</p>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/b/e/bec7e4974200c56b0e35fe8e118e90b97ea4b873.png" title="gossipsub_arrival_times_within_slot_on_by_country_mainnet_beacon_block"><img alt="gossipsub_arrival_times_within_slot_on_by_country_mainnet_beacon_block" height="309" src="https://ethresear.ch/uploads/default/optimized/3X/b/e/bec7e4974200c56b0e35fe8e118e90b97ea4b873_2_517x309.png" width="517" /></a></div><p></p>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/b/d/bdd5349b57b1f35d0484f1d82e09c9bea1c358fe.png" title="gossipsub_arrival_times_within_slot_on_by_continent_mainnet_beacon_block"><img alt="gossipsub_arrival_times_within_slot_on_by_continent_mainnet_beacon_block" height="309" src="https://ethresear.ch/uploads/default/optimized/3X/b/d/bdd5349b57b1f35d0484f1d82e09c9bea1c358fe_2_517x309.png" width="517" /></a></div><p></p>
+<h2><a class="anchor" href="https://ethresear.ch#arrival-times-4" name="arrival-times-4"></a>Arrival times</h2>
+<p>The previous CDFs show that almost all the block arrivals happen within the expected time range. However, the plots do not reveal outliers, as CDFs are not sensitive to sudden network perturbations.</p>
+<p>Thus, the following graphs show the <code>maximum</code>, <code>median</code>, <code>mean</code>, and <code>minimum</code> block arrival times on time windows of 4 epochs (1536 seconds).</p>
+<p>We do not find large variations in the <code>minimum</code>, <code>mean</code> and the <code>median</code> distributions over the 3 day period. However, we do see that the maximum arrival time does vary quite significantly. We can observe that arrival times vary from 4 seconds to almost 12 seconds, almost exceeding the entire slot duration.</p>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/9/2/92b9349d287acecc0903a14950d4876f1df18370.png" title="msg-arrival-overall"><img alt="msg-arrival-overall" height="309" src="https://ethresear.ch/uploads/default/optimized/3X/9/2/92b9349d287acecc0903a14950d4876f1df18370_2_517x309.png" width="517" /></a></div><p></p>
+<p>Interestingly, there are differences when comparing the mean arrival times of the different client implementations. Lodestar seems to be the latest one receiving the messages in the mesh and presents quite a high variance, while Teku seems to be the one receiving the messages first, followed by Prysm.</p>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/c/6/c65b77648c36d9692a84fa65efd21ac3043aadd9.png" title="msg-arrival-by-agent"><img alt="msg-arrival-by-agent" height="309" src="https://ethresear.ch/uploads/default/optimized/3X/c/6/c65b77648c36d9692a84fa65efd21ac3043aadd9_2_517x309.png" width="517" /></a></div><p></p>
+<p>A similar pattern is also observed for the arrival time distribution by continent. As we could anticipate, European nodes receive slightly sooner messages than the North American and the Oceania ones. Although the difference is not significant, 0.6 seconds still keeps the arrival within the safety margins. However, this still showcases that there are some latency incentives to locate nodes in regions with lower latency, or in other words, around the core of the network (which, however, will, in turn, lead to more geographic centralization).</p>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/b/f/bf6284e07ea3c5f9c4473be8b629d95b514371ed.png" title="msg-arrival-by-continent"><img alt="msg-arrival-by-continent" height="309" src="https://ethresear.ch/uploads/default/optimized/3X/b/f/bf6284e07ea3c5f9c4473be8b629d95b514371ed_2_517x309.png" width="517" /></a></div><p></p>
+<h2><a class="anchor" href="https://ethresear.ch#correlation-between-arrival-times-and-size-of-the-messages-5" name="correlation-between-arrival-times-and-size-of-the-messages-5"></a>Correlation between arrival times and size of the messages</h2>
+<p>When attempting to correlate our findings to ones described in the previous <a href="http://ethresear.ch">ethresear.ch</a> <a href="https://ethresear.ch/t/big-block-diffusion-and-organic-big-blocks-on-ethereum/17346">blog post</a> that investigated this issue in particular, we haven’t been able to see any major correlation between size and the arrival time of the blocks. Although the block size distribution achieved in three days isn’t fully representative, the following graph shows that most blocks stay within the 50KB to 150KB range with a similar arrival time of 1 to 3 seconds.</p>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/0/9/0905bc564c76545c3e9fc2c983edcbc280925d47.png" title="msg-arrival-vs-size"><img alt="msg-arrival-vs-size" height="375" src="https://ethresear.ch/uploads/default/optimized/3X/0/9/0905bc564c76545c3e9fc2c983edcbc280925d47_2_375x375.png" width="375" /></a></div><p></p>
+<h1><a class="anchor" href="https://ethresear.ch#conclusions-and-takeaways-6" name="conclusions-and-takeaways-6"></a>Conclusions and Takeaways</h1>
+<p>Despite a relatively short dataset of 3.5hrs, we could observe with high confidende that:</p>
+<ul>
+<li>98% of messages arrive prior to the 4-second mark.</li>
+<li>Lodestar seems to be the slowest client in terms of message arrival time, although this could also be related to when the arrivals are traced in the particular implementation.</li>
+<li>Nodes located in or near the core of the network (<a href="https://probelab.io/ethereum/discv5/2024-25/#geolocation" rel="noopener nofollow ugc">NA or EU</a>) do have certain advantages when it comes to receiving messages sooner. Although the traced locations do not show any worrying behaviour, it is worth pointing out that extra geographical centralization could exacerbate the differences even further.</li>
+</ul>
+<p>For more details and <strong>weekly network health reports on Ethereum’s discv5 DHT network</strong> head over to <a href="https://probelab.io/" rel="noopener nofollow ugc">probelab.io</a>.</p>
+            <p><small>1 post - 1 participant</small></p>
+            <p><a href="https://ethresear.ch/t/gossipsub-message-propagation-latency/19982">Read full topic</a></p>
+]]></content:encoded>
+<pubDate>Fri, 05 Jul 2024 14:03:33 +0000</pubDate>
+<pubDate>Fri, 05 Jul 2024 14:03:33 +0000</pubDate>
+</item>
+<item>
+<title>EVM in Motoko for Trustless Execution Environments</title>
+<link>https://ethresear.ch/t/evm-in-motoko-for-trustless-execution-environments/19981</link>
+<guid>https://ethresear.ch/t/evm-in-motoko-for-trustless-execution-environments/19981</guid>
+<content:encoded><![CDATA[
+<div> 关键词：Motoko、Internet Computer (IC)、EVM实现、教育目标、微EVMs
+
+总结:<br>
+文章介绍了作者管理的组织正在资助一个在Motoko中构建的EVM，目标是运行在Internet Computer上，未来可能扩展到AO领域。项目已通过GG19和GG20资金支持，主要目的是实现无信任执行和共识代理。目前完成了第一个里程碑——算术函数，寻求经验丰富的开发人员提供反馈和优化建议。这个项目还有助于教育，提供EVM工作原理的学习资源，并作为其他链上智能合约的微EVM基础，支持跨链交互。开发者正在GitHub上开源项目文件和测试代码，以促进改进和集成。 <div>
+<p>Hello ethResearch <img alt=":wave:" class="emoji" height="20" src="https://ethresear.ch/images/emoji/facebook_messenger/wave.png?v=12" title=":wave:" width="20" /> it has been a while since I posted. Thanks for your patience as I wade back into the eth universe.</p>
+<p>An organization that I’m running called <a href="https://icdevs.org" rel="noopener nofollow ugc">https://icdevs.org</a> is funding an evm built in Motoko that is targeted to run on the Internet Computer(and that we think will slide well into the AO universe as well). We should have started this 3 years ago, but there is no time like the present. To date this work has been funded through <span class="hashtag-raw">#GG19</span> and <span class="hashtag-raw">#GG20</span>. The eventuality of this project is trustless execution and consensus agents and the ability to monitor and relay messages between EVMs(and other chains) in a trustless manner.</p>
+<p>The bounty has reached its first milestone and we’re looking for experienced EVM implementors to tell us what we’ve missed and how to make it better. I realize this forum seems to have moved on to bigger and harder scaling challenges, but I’m hoping you all can point me in the right direction to find the right audience. It is a bit too technical for r/ethereum but may be too basic for this forum and not quite an EIP.</p>
+<p>Why we are looking to build out an EVM execution layer for the Intenet computer(from our thread at <a class="inline-onebox" href="https://forum.dfinity.org/t/open-icdevs-org-bounty-63-evm-opcodes-motoko-1-9-cketh/27592?u=skilesare" rel="noopener nofollow ugc">Open - ICDevs.org Bounty #63 - EVM OpCodes - Motoko - 1.9 ckETH - Bounties - Internet Computer Developer Forum</a> )</p>
+<ol>
+<li>The obvious - we can’t build an EVM in motoko without the op-codes. Now building an evm in motoko isn’t particularly a priority at the moment, but long term the Ethereum Foundation has made it a priority to have EVMs in as many languages as possible as a security feature. Would it make sense to have IC canisters as evm nodes for other chains? Probably depends on network config and a few other things, but I could certainly see it being of value long term. Having the op-codes defined separates the execution concerns from any future project that might want to wire up the rest of the EVM machinery. From building from the ground up you get an EVM that takes the IC’s compute pattern and restrictions into account in ways that existing EVMs written in other languages would need significant rewrites to support.</li>
+<li>General education - These opcodes are an awesome way to learn about stacks, memories, and crypto primitives. Education is the primary goal of <a href="http://icdevs.org/" rel="noopener nofollow ugc">ICDevs.org </a> and we feel like Motoko versions of these libraries would make a really interesting set of examples for people learning about how EVMs work, why they work, and what concepts mirror over into the IC(and which ones don’t).</li>
+<li>Libraries and Integrations - these libraries build on top of a number of other Bounties that we’ve funded that could use some burn-in and integration testing to improve them and make sure they are working properly. <a href="https://github.com/f0i/merkle-patricia-trie.mo" rel="noopener nofollow ugc">GitHub - f0i/merkle-patricia-trie.mo: A Merkle Patricia Trie implementation in Motoko </a> <a href="https://github.com/relaxed04/rlp-motoko" rel="noopener nofollow ugc">GitHub - relaxed04/rlp-motoko: RLP implementation on motoko</a>. In addition, some of the op codes implement core functionality that we’ll need to do cross-chain like ecrecover which would be important for a motoko canister trying to verify a signature from the evm universe.</li>
+<li>Micro EVMs - In one universe bitfinity EVMs proliferate and we end up with a garden of highly specialized evms on the IC that interact and interoperate in unique ways. These libraries would allow you to pull in the memory, storage, etc from those EVMs and run transaction simulations to check for opportunities or to automate actions against them using things like the event logs. The always-on nature of IC canisters makes them ideal for writing bots/agents that seek opportunities and execute on them by signing tecdsa messages and relaying them.</li>
+</ol>
+<p>Our bounty hunter has completed the first milestone, arithmetic functions.</p>
+<p>project file:</p><aside class="onebox allowlistedgeneric">
+  <header class="source">
+      <img class="site-icon" height="32" src="https://ethresear.ch/uploads/default/original/2X/b/bad3e5f9ad67c1ddf145107ce7032ac1d7b22563.svg" width="32" />
+
+      <a href="https://github.com/icdevsorg/evm.mo" rel="noopener nofollow ugc" target="_blank">GitHub</a>
+  </header>
+
+  <article class="onebox-body">
+    <div class="aspect-image"><img class="thumbnail" height="345" src="https://ethresear.ch/uploads/default/optimized/3X/5/4/546c435f8f13ad709696b772052a5b091237e94b_2_690x345.png" width="690" /></div>
+
+<h3><a href="https://github.com/icdevsorg/evm.mo" rel="noopener nofollow ugc" target="_blank">GitHub - icdevsorg/evm.mo: EVM Based Libraries for Motoko</a></h3>
+
+  <p>EVM Based Libraries for Motoko. Contribute to icdevsorg/evm.mo development by creating an account on GitHub.</p>
+
+
+  </article>
+
+  <div class="onebox-metadata">
+    
+    
+  </div>
+
+  <div style="clear: both;"></div>
+</aside>
+
+<p>main code file:</p><aside class="onebox githubblob">
+  <header class="source">
+
+      <a href="https://github.com/icdevsorg/evm.mo/blob/5b3870c2454caf5cb1506010c8ab6796214ff307/src/evm_mo_backend/main.mo" rel="noopener nofollow ugc" target="_blank">github.com</a>
+  </header>
+
+  <article class="onebox-body">
+    <h4><a href="https://github.com/icdevsorg/evm.mo/blob/5b3870c2454caf5cb1506010c8ab6796214ff307/src/evm_mo_backend/main.mo" rel="noopener nofollow ugc" target="_blank">icdevsorg/evm.mo/blob/5b3870c2454caf5cb1506010c8ab6796214ff307/src/evm_mo_backend/main.mo</a></h4>
+
+
+      <pre><code class="lang-mo">import Array "mo:base/Array";
+import Nat "mo:base/Nat";
+import Nat8 "mo:base/Nat8";
+import Nat64 "mo:base/Nat64";
+import Int "mo:base/Int";
+import Trie "mo:base/Trie";
+import Iter "mo:base/Iter";
+import Debug "mo:base/Debug";
+import Vec "mo:vector"; // see https://github.com/research-ag/vector
+import Map "mo:map/Map"; // see https://mops.one/map
+import EVMStack "evmStack";
+import T "types";
+
+module {
+  
+  type Result&lt;Ok, Err&gt; = { #ok: Ok; #err: Err};
+  type Engine = [(T.ExecutionContext, T.ExecutionVariables) -&gt; Result&lt;T.ExecutionVariables, Text&gt;];
+  type Vec&lt;X&gt; = Vec.Vector&lt;X&gt;;
+  type Map&lt;K, V&gt; = Map.Map&lt;K, V&gt;;
+  type Trie&lt;K, V&gt; = Trie.Trie&lt;K, V&gt;;
+</code></pre>
+
+
+
+  This file has been truncated. <a href="https://github.com/icdevsorg/evm.mo/blob/5b3870c2454caf5cb1506010c8ab6796214ff307/src/evm_mo_backend/main.mo" rel="noopener nofollow ugc" target="_blank">show original</a>
+
+  </article>
+
+  <div class="onebox-metadata">
+    
+    
+  </div>
+
+  <div style="clear: both;"></div>
+</aside>
+
+<p>tests:</p><aside class="onebox githubblob">
+  <header class="source">
+
+      <a href="https://github.com/icdevsorg/evm.mo/blob/5b3870c2454caf5cb1506010c8ab6796214ff307/test/main.test.mo" rel="noopener nofollow ugc" target="_blank">github.com</a>
+  </header>
+
+  <article class="onebox-body">
+    <h4><a href="https://github.com/icdevsorg/evm.mo/blob/5b3870c2454caf5cb1506010c8ab6796214ff307/test/main.test.mo" rel="noopener nofollow ugc" target="_blank">icdevsorg/evm.mo/blob/5b3870c2454caf5cb1506010c8ab6796214ff307/test/main.test.mo</a></h4>
+
+
+      <pre><code class="lang-mo">import { test; skip } "mo:test/async"; // see https://mops.one/test
+
+import { stateTransition } "../src/evm_mo_backend/main";
+
+import Array "mo:base/Array";
+import Nat "mo:base/Nat";
+import Nat8 "mo:base/Nat8";
+import Nat64 "mo:base/Nat64";
+import Int "mo:base/Int";
+import Trie "mo:base/Trie";
+import Debug "mo:base/Debug";
+import Vec "mo:vector";
+import Map "mo:map/Map";
+import EVMStack "../src/evm_mo_backend/evmStack";
+import T "../src/evm_mo_backend/types";
+
+let dummyTransaction: T.Transaction = {
+    caller = "\00\aa\00\aa\00\aa\00\aa\00\aa\00\aa\00\aa\00\aa\00\aa\00\aa";
+    nonce = 2;
+    gasPriceTx = 5;
+</code></pre>
+
+
+
+  This file has been truncated. <a href="https://github.com/icdevsorg/evm.mo/blob/5b3870c2454caf5cb1506010c8ab6796214ff307/test/main.test.mo" rel="noopener nofollow ugc" target="_blank">show original</a>
+
+  </article>
+
+  <div class="onebox-metadata">
+    
+    
+  </div>
+
+  <div style="clear: both;"></div>
+</aside>
+
+            <p><small>1 post - 1 participant</small></p>
+            <p><a href="https://ethresear.ch/t/evm-in-motoko-for-trustless-execution-environments/19981">Read full topic</a></p>
+]]></content:encoded>
+<pubDate>Fri, 05 Jul 2024 13:37:42 +0000</pubDate>
+<pubDate>Fri, 05 Jul 2024 13:37:42 +0000</pubDate>
+</item>
 
 <item>
 <title>Preconfirmations under the NO lens</title>
