@@ -4,6 +4,77 @@
 <title>Ethereum Research - Latest topics</title>
 <link>https://ethresear.ch/latest</link>
 
+<item>
+<title>Reputation-Centric Light Client Framework for Optimistic Rollups</title>
+<link>https://ethresear.ch/t/reputation-centric-light-client-framework-for-optimistic-rollups/19988</link>
+<guid>https://ethresear.ch/t/reputation-centric-light-client-framework-for-optimistic-rollups/19988</guid>
+<content:encoded><![CDATA[
+<div> 关键词：声誉系统、乐观rollup、Herodotus数据处理器、存储证明、快速最终性
+
+总结:<br>
+本文提出了一种基于声誉的轻客户端框架，旨在优化乐观rollup（ORU）的性能，特别是缩短最终性时间。框架核心是Herodotus数据处理器，通过计算sequencer的历史行为信誉分数，如无挑战记录和输出根的有效性，允许轻客户端信任信誉良好的sequencer的输出根，无需等待完整的争议期。系统还包括惩罚机制和备份机制，以确保安全性和可靠性。该方法有望改善用户体验并推动L2生态发展。 <div>
+<p>Authors: <a href="https://x.com/0xmarcello" rel="noopener nofollow ugc">Marcello Bardus</a> (<a href="https://x.com/HerodotusDev" rel="noopener nofollow ugc">Herodotus</a>), <a href="https://x.com/kacperkozi" rel="noopener nofollow ugc">Kacper Koziol</a> (<a href="https://x.com/HerodotusDev" rel="noopener nofollow ugc">Herodotus</a>)</p>
+<p>Thanks for early feedback: <a href="https://x.com/bonustrack87" rel="noopener nofollow ugc">bonustrack87</a> (<a href="https://x.com/SnapshotLabs" rel="noopener nofollow ugc">Snapshot Labs</a>), <a href="https://x.com/lsukernik" rel="noopener nofollow ugc">Larry Sukernik</a> (<a href="https://x.com/hi_reverie" rel="noopener nofollow ugc">Reverie</a>), <a href="https://x.com/piapark_eth" rel="noopener nofollow ugc">Pia Park</a> (<a href="https://x.com/HerodotusDev" rel="noopener nofollow ugc">Herodotus</a>), <a href="https://x.com/wojtekwtf" rel="noopener nofollow ugc">Wojtek</a> (<a href="https://www.supercast.xyz/" rel="noopener nofollow ugc">Supercast</a>),</p>
+<h1><a class="anchor" href="https://ethresear.ch#summary-1" name="summary-1"></a>Summary:</h1>
+<p>This post introduces a conceptual framework for a reputation-centric light client system designed to address critical challenges in Optimistic Rollups (ORUs), with a primary focus on enabling fast finality for accessing ORU data from Ethereum, ORUs and other Ethereum layers. At its core, the system leverages the Herodotus Data Processor to compute sequencer reputation scores based on the sequencer’s historical behavior, including their track record of submitting valid output roots and avoiding successful challenges. This allows light clients to trust output roots only from sequencers with an impeccable track record without waiting for the full dispute period. This approach significantly reduces finality time while maintaining security. The framework includes a punitive measure that resets a sequencer’s reputation upon successful challenges, ensuring system integrity. Additionally, a fallback mechanism reverts to the standard seven-day dispute period in cases of unresolved conflicts or detected irregularities.</p>
+<h3><a class="anchor" href="https://ethresear.ch#reputation-centric-light-client-framework-for-optimistic-rollups-2" name="reputation-centric-light-client-framework-for-optimistic-rollups-2"></a>Reputation-Centric Light Client Framework for Optimistic Rollups</h3>
+<p>Optimistic Rollups have seen significant adoption, however, they encounter several challenges, particularly in terms of finality time and data verification. This post introduces a conceptual framework for a reputation-centric light client system that aims to address these issues, enabling fast finality for accessing ORU data from Ethereum, and from other Ethereum layers.</p>
+<p>OP Stack and other Optimistic Rollups (ORUs) have a security model based on fraud proofs. In this model, anyone can act as a sequencer, also known as a proposer. The sequencer first proposes the rollup state to Layer 1 (L1), after which a seven-day window is opened. During this period, anyone can challenge the correctness of the proposed state.</p>
+<p>In ORU implementations such as OP Stack, proposers periodically submit output roots to L1. These output roots are a hash of certain L2 state information, including the state root, block number, and timestamp of the latest L2 block. OP Stack incorporates a specification for a fault proof system with bonding, which creates incentives for proposers to submit correct output roots.</p>
+<p>This mechanism imposes a long finality time for ORUs, which is problematic for Storage Proofs, a secure on-chain data access solution that Herodotus has previously developed for Optimism and several other ORU ecosystems. This is especially problematic following recent upgrades that introduced permissionless fraud proofs on Optimism. With these upgrades, no assumptions can be made about where a valid state root can be found.</p>
+<h2><a class="anchor" href="https://ethresear.ch#secure-data-access-and-processing-3" name="secure-data-access-and-processing-3"></a>Secure Data Access and Processing</h2>
+<p>The framework incorporates two crucial components:</p>
+<h3><a class="anchor" href="https://ethresear.ch#storage-proofs-4" name="storage-proofs-4"></a>Storage Proofs</h3>
+<p>Storage Proofs are a secure on-chain data access primitive utilized by the Herodotus Data Processor that enables the cryptographic proving of the provenance of on-chain data. They allow for the verification of any data available on Ethereum, including current and historical balances, transactions, user interactions, liquidations, and more. Storage Proofs also enable the trustless and secure reading of data from arbitrary Ethereum Layers.</p>
+<p>By utilizing Storage Proofs, the Herodotus Data Processor can ensure the integrity and authenticity of the on-chain data it processes, providing a foundation of trust for its computations.</p>
+<h3><a class="anchor" href="https://ethresear.ch#data-processing-component-5" name="data-processing-component-5"></a>Data Processing Component</h3>
+<p>This would leverage the Herodotus Data Processor (HDP) to compute sequencer reputation scores efficiently. HDP can be thought of as a zk-coprocessor, capable of performing computations on verified data. Storage Proofs guarantee the integrity of the input data to HDP. Custom computations can be defined using HDP Modules, which can later process the verified historical data and update reputation scores based on the defined criteria, such as the consistency of avoiding challenges and the validity of proposed output roots over time.</p>
+<h2><a class="anchor" href="https://ethresear.ch#reputation-based-light-client-6" name="reputation-based-light-client-6"></a>Reputation based light client</h2>
+<p>In our design, a sequencer, identified by an Ethereum address, would be assumed to be the most trustworthy based on the following criteria:</p>
+<ul>
+<li>The sequencer consistently avoids challenges, or any initiated challenges against them are unsuccessful.</li>
+<li>The validity of the sequencer’s proposed output roots over time, as proven by the lack of successful fault proofs against their outputs.</li>
+</ul>
+<p>In OP Stack implementations like Bedrock, and potentially in other ORUs, output roots represent a compact summary of the L2 state at a specific block. These output roots are not Merkle roots of the entire canonical L2 chain, but rather a hash of certain L2 state information. Bonded proposers periodically submit these output roots to L1.</p>
+<p>The output root typically includes a hash of the following information:</p>
+<ol>
+<li>The state root of the L2 block</li>
+<li>The L2 block number</li>
+<li>The timestamp of the L2 block</li>
+<li>The hash of the L2 block itself</li>
+</ol>
+<p>This structure allows for efficient verification of specific L2 state information without requiring the entire L2 chain data on L1.</p>
+<p>Once a highly reputable sequencer posts a claimed output root to L1, a Light Client contract would assume the claim is valid and treat it as final. This approach ensures that only sequencers with an impeccable track record are trusted, significantly reducing the finality time while relying on the cryptographically proven historical reliability of the sequencer rather than waiting for the full dispute period.</p>
+<p>The Light Client contract would store the full output roots proposed by reputable sequencers, not just the block hash, enabling trustless proof of claims like withdrawals against the output roots directly.</p>
+<p>The reputation of the sequencer can be periodically updated using the Herodotus Data Processor. This involves assessing historical data to ensure the sequencer continues to meet the criteria of reliability and activity. By continuously evaluating the sequencer’s performance and updating their reputation at fixed intervals, the Light Client can maintain a high level of trust and accuracy in the state roots it accepts.</p>
+<h2><a class="anchor" href="https://ethresear.ch#system-architecture-7" name="system-architecture-7"></a>System Architecture</h2>
+<h2><a class="anchor" href="https://ethresear.ch#h-326x4111935069506181uploadpmywafztk4c8h3awxejv5ig72gppng-8" name="h-326x4111935069506181uploadpmywafztk4c8h3awxejv5ig72gppng-8"></a><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/b/4/b4b3807ab51eeeb259a9c7c08890b13cd0910b23.png" title="|326x411.1935069506181"><img alt="|326x411.1935069506181" height="500" src="https://ethresear.ch/uploads/default/optimized/3X/b/4/b4b3807ab51eeeb259a9c7c08890b13cd0910b23_2_396x500.png" width="396" /></a></div></h2>
+<p>The proposed system would operate as follows:</p>
+<ol>
+<li>Proposers submit output root proposals to the appropriate ORU contracts on L1, based on the state of the ORU L2 chain.</li>
+<li>The ORU L1 contracts handle both output root proposals and challenges/fault proofs against these proposals.</li>
+<li>The Herodotus Data Processor retrieves and processes data from the ORU L1 contracts, including output root proposals and challenges/fault proofs.</li>
+<li>The reputation-based light client contract uses the processed data from the Herodotus Data Processor to track sequencer reputation scores and store trusted output roots. A custom reputation calculation formula can be implemented, allowing for flexible and adaptable assessment of sequencer reliability based on various factors and weighting systems as deemed appropriate for the specific ORU implementation.</li>
+<li>The light client interface allows other contracts to query the state root of the L2 chain based on the most reputable sequencer’s output roots.</li>
+</ol>
+<h2><a class="anchor" href="https://ethresear.ch#handling-successful-challenges-9" name="handling-successful-challenges-9"></a>Handling Successful Challenges</h2>
+<p>In the event that any challenge against a sequencer is successful, the reputation of the sequencer would immediately reset to zero in the light client. This punitive measure ensures that only sequencers with an impeccable track record maintain trusted status.</p>
+<p>With fault proof systems like those in OP Stack’s Bedrock, the Light Client contract would automatically reset a sequencer’s reputation to zero if a fault proof is successfully submitted and verified, showing an invalid output root proposed by that sequencer. This automated process ensures swift and consistent enforcement of the reputation system.</p>
+<p>The permissionless output proposal mechanism provides an objective way to track sequencer reputation over time and identify potentially malicious outputs. Simultaneously, the output roots proposed by sequencers enable the verification of Storage Proofs against these proposed L2 state roots when using the Light Client. Ultimately, this approach creates a self-regulating system that not only incentivizes honest behavior but also ensures quick penalization of any attempts at fraud, thereby maintaining the overall reliability and security of the network.</p>
+<h3><a class="anchor" href="https://ethresear.ch#fallback-mechanism-10" name="fallback-mechanism-10"></a>Fallback Mechanism</h3>
+<p>In cases of unresolved conflicts or when the system detects any irregularities, it would automatically fall back to the conservative seven-day dispute period. This would ensure that the system remains secure and trustworthy, even in the face of unexpected challenges or disagreements among reputable sequencers.</p>
+<h2><a class="anchor" href="https://ethresear.ch#potential-impact-and-future-directions-11" name="potential-impact-and-future-directions-11"></a>Potential Impact and Future Directions</h2>
+<p>We believe that this reputation-based light client framework has the potential to significantly decrease duration to finality for ORUs. By reducing finality times while maintaining security, it could substantially improve the user experience and enable new use cases in L2 ecosystems.</p>
+<p>As we continue to explore and refine this concept, we welcome input from the community. The next steps would involve further theoretical analysis, simulations, and potentially, prototype implementations.</p>
+<h1><a class="anchor" href="https://ethresear.ch#references-12" name="references-12"></a>References</h1>
+<p>Optimism Bedrock Documentation: <a class="inline-onebox" href="https://community.optimism.io/docs/developers/bedrock" rel="noopener nofollow ugc">Bedrock Explainer | Optimism Docs</a></p>
+<p>L2 Output Root Proposals Specification: <a class="inline-onebox" href="https://github.com/ethereum-optimism/optimism/blob/65ec61dde94ffa93342728d324fecf474d228e1f/specs/proposals.md" rel="noopener nofollow ugc">optimism/specs/proposals.md at 65ec61dde94ffa93342728d324fecf474d228e1f · ethereum-optimism/optimism · GitHub</a></p>
+            <p><small>1 post - 1 participant</small></p>
+            <p><a href="https://ethresear.ch/t/reputation-centric-light-client-framework-for-optimistic-rollups/19988">Read full topic</a></p>
+]]></content:encoded>
+<pubDate>Fri, 05 Jul 2024 22:01:41 +0000</pubDate>
+<pubDate>Fri, 05 Jul 2024 22:01:41 +0000</pubDate>
+</item>
 
 <item>
 <title>Protocol Asset: canonical tokenized asset with the most social consensus preference of protocol</title>
