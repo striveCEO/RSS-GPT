@@ -4,6 +4,126 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+<item>
+<title>MatcHEd: Privacy-Preserving Set Similarity based on MinHash</title>
+<link>https://eprint.iacr.org/2024/1091</link>
+<guid>https://eprint.iacr.org/2024/1091</guid>
+<content:encoded><![CDATA[
+<div> 关键词：fully homomorphic encryption (FHE), MinHash, Carter-Wegman (CW) hash function, bitwise operations, encrypted set similarity
+
+总结:<br>
+文章提出了一种利用MinHash算法和CGGI FHE方案改进的加密集相似性计算方法。传统的FHE比较操作昂贵，尤其是对大量数据。通过引入高效的位级FHE友好的摘要函数(FFD)，替代Carter-Wegman哈希中的模运算，减少了在FHE环境中的复杂性和低效性。这种方法显著减少与直接计算Jaccard相似度所需的比较次数，并且天然支持多CPU和GPU并行处理，适用于隐私保护的文档抄袭检测等场景。总的来说，新方法提高了加密计算效率，降低了计算成本。 <div>
+Fully homomorphic encryption (FHE) enables arbitrary computation on encrypted data, but certain applications remain prohibitively expensive in the encrypted domain. As a case in point, comparing two encrypted sets of data is extremely computationally expensive due to the large number of comparison operators required. In this work, we propose a novel methodology for encrypted set similarity inspired by the MinHash algorithm and the CGGI FHE scheme. Doing comparisons in FHE requires comparators and multiplexers or an expensive approximation, which further increases the latency, especially when the goal is to compare two sets of data. The MinHash algorithm can significantly reduce the number of comparisons required by employing a special Carter-Wegman (CW) hash function as a key building block. However, the modulus operation in the CW hash becomes another key bottleneck because the encrypted sub-circuits required to perform the modular reduction are very large and inefficient in an FHE setting. Towards that end, we introduce an efficient bitwise FHE-friendly digest function (FFD) to employ as the cornerstone of our proposed encrypted set-similarity. In a Boolean FHE scheme like CGGI, the bitwise operations can be implemented efficiently with Boolean gates, which allows for faster evaluation times relative to standard Carter-Wegman constructions. Overall, our approach drastically reduces the number of comparisons required relative to the baseline approach of directly computing the Jaccard similarity coefficients, and is inherently parallelizable, allowing for efficient encrypted computation on multi-CPU and GPU-based cloud servers. We validate our approach by performing a privacy-preserving plagiarism detection across encrypted documents.
+]]></content:encoded>
+<pubDate>Thu, 04 Jul 2024 02:33:02 +0000</pubDate>
+<pubDate>Thu, 04 Jul 2024 02:33:02 +0000</pubDate>
+</item>
+<item>
+<title>PolyFHEmus: Rethinking Multiplication in Fully Homomorphic Encryption</title>
+<link>https://eprint.iacr.org/2024/1090</link>
+<guid>https://eprint.iacr.org/2024/1090</guid>
+<content:encoded><![CDATA[
+<div> 关键词：Homomorphic encryption, Cloud computing, Latency, Polynomial multiplication, Accelerated computing.
+
+总结:
+这篇文章关注的是同态加密技术在云计算中的应用，这种技术允许在加密数据上进行计算以保护隐私。然而，它面临的主要挑战是高延迟问题，尤其是由于多项式乘法运算效率低下。文章的核心内容是识别了这一瓶颈，并探讨了寻找更高效算法的可能性，以期加速加密计算，从而推动同态加密在实际场景中的广泛应用。通过优化多项式运算，有望降低云计算中隐私保护操作的时间成本，促进该技术的普及和发展。 <div>
+Homomorphic encryption is a powerful technology that solves key privacy concerns in cloud computing by enabling computation on encrypted data. However, it has not seen widespread adoption due to prohibitively high latencies. In this article, we identify polynomial multiplication as a bottleneck and investigate alternative algorithms to accelerate encrypted computing.
+]]></content:encoded>
+<pubDate>Thu, 04 Jul 2024 01:56:46 +0000</pubDate>
+<pubDate>Thu, 04 Jul 2024 01:56:46 +0000</pubDate>
+</item>
+<item>
+<title>HElix: Genome Similarity Detection in the Encrypted Domain</title>
+<link>https://eprint.iacr.org/2024/1088</link>
+<guid>https://eprint.iacr.org/2024/1088</guid>
+<content:encoded><![CDATA[
+<div> 关键词：genomics, genome analysis, fully homomorphic encryption, MinHash, bloom filter.
+
+总结:<br>这篇文章探讨了随着基因组学研究的发展，保护用户隐私和数据安全的挑战。作者提出两种基于全同态加密的方法，以在不泄露DNA序列的情况下进行比较。第一种方法是利用MinHash算法检测数据库中是否存在相似序列，另一种则是定制的布隆过滤器用于精确匹配。实验验证了这些方法在不同数据库规模下，无论使用GPU还是CPU云服务器，都能有效实现隐私保护下的基因组分析。 <div>
+As the field of genomics continues to expand and more sequencing data is gathered, genome analysis becomes increasingly relevant for many users. For example, a common scenario entails users trying to determine if their DNA samples are similar to DNA sequences hosted in a larger remote repository. Nevertheless, end users may be reluctant to upload their DNA sequences, while the owners of remote genomics repositories are unwilling to openly share their database. To address this challenge, we propose two distinct approaches based on fully homomorphic encryption to preserve the privacy of the genomic data and enable queries directly on ciphertexts. The first is based on the ubiquitous MinHash algorithm and can determine if similar matches exist in the database, while the second involves a bespoke bloom filter construction for determining exact matches. We validate both approaches across various database sizes using both GPU and CPU-based cloud servers.
+]]></content:encoded>
+<pubDate>Thu, 04 Jul 2024 00:21:09 +0000</pubDate>
+<pubDate>Thu, 04 Jul 2024 00:21:09 +0000</pubDate>
+</item>
+<item>
+<title>Randomized Distributed Function Computation with Semantic Communications: Applications to Privacy</title>
+<link>https://eprint.iacr.org/2024/1085</link>
+<guid>https://eprint.iacr.org/2024/1085</guid>
+<content:encoded><![CDATA[
+<div> 关键词：randomized distributed function computation, semantic communications, privacy, Wyner's common information, common randomness.
+
+总结: <br>
+本文研究了随机分布式函数计算中语义通信的应用，特别是在保证隐私的前提下减少通信负载。主要关注两点：<br>
+1. 通过利用语义通信框架，结合远程源编码方法，可以在满足安全和隐私约束时，实现输入序列的随机化模拟，同时保证每个输入序列的地方差分隐私。
+2. 文章提供了Wyner共同信息（WCI）的下界，这是协调-随机性速率区域的两个角点之一，该区域定义了随机分布式函数计算的极限。WCI对应于没有共享随机性的场景。
+3. 对于连续随机变量，提出了数值方法来计算另一个角点，即无限共享随机性的情况。
+4. 实例分析表明，即使在有限共享随机性情况下，语义通信也能显著降低通信需求，优于无失真压缩方法。
+5. 结论指出，进一步研究有限共享随机性场景对于优化随机分布式函数计算具有重要意义。 <div>
+Randomized distributed function computation refers to remote function computation where transmitters send data to receivers which compute function outputs that are randomized functions of the inputs. We study the applications of semantic communications in randomized distributed function computation to illustrate significant reductions in the communication load, with a particular focus on privacy. The semantic communication framework leverages generalized remote source coding methods, where the remote source is a randomized version of the observed data. Since satisfying security and privacy constraints generally require a randomization step, semantic communication methods can be applied to such function computation problems, where the goal is to remotely simulate a sequence at the receiver such that the transmitter and receiver sequences follow a target probability distribution. Our performance metrics guarantee (local differential) privacy for each input sequence, used in two different distributed function computation problems, which is possible by using strong coordination methods. 
+
+This work provides lower bounds on Wyner's common information (WCI), which is one of the two corner points of the coordination-randomness rate region characterizing the ultimate limits of randomized distributed function computation. The WCI corresponds to the case when there is no common randomness shared by the transmitter and receiver. Moreover, numerical methods are proposed to compute the other corner point for continuous-valued random variables, for which an unlimited amount of common randomness is available. Results for two problems of practical interest illustrate that leveraging common randomness can decrease the communication load as compared to the WCI corner point significantly. We also illustrate that semantic communication gains over lossless compression methods are achieved also without common randomness, motivating further research on limited common randomness scenarios.
+]]></content:encoded>
+<pubDate>Wed, 03 Jul 2024 10:52:51 +0000</pubDate>
+<pubDate>Wed, 03 Jul 2024 10:52:51 +0000</pubDate>
+</item>
+<item>
+<title>Enabling Complete Atomicity for Cross-chain Applications Through Layered State Commitments</title>
+<link>https://eprint.iacr.org/2024/1084</link>
+<guid>https://eprint.iacr.org/2024/1084</guid>
+<content:encoded><![CDATA[
+<div> 关键词：Cross-chain dApps, Complete atomicity, Avalon, State synchronization, Cosmos ecosystem.
+
+总结:<br>Avalon是一个创新的跨链去中心化应用（dApp）交易执行框架，它首次实现了完整的原子性。通过在原生状态之上引入多层状态缓存，Avalon有效地管理状态转换，确保复杂任务的正确执行。对于并发的跨链交易，Avalon不仅解决了链内的冲突，还通过一种新颖的状态同步协议处理不同区块链之间的潜在不一致，实现串行化的跨链执行。Avalon使用Cosmos生态系统的智能合约进行实现，并在实验中展示了其承诺性能，即使在冲突情况下，也具有可接受的延迟和gas消耗。 <div>
+Cross-chain Decentralized Applications (dApps) are increasingly popular for their ability to handle complex tasks across various blockchains, extending beyond simple asset transfers or swaps. However, ensuring all dependent transactions execute correctly together, known as complete atomicity, remains a challenge. Existing works provide financial atomicity, protecting against monetary loss, but lack the ability to ensure correctness for complex tasks. In this paper, we introduce Avalon, a transaction execution framework for cross-chain dApps that guarantees complete atomicity for the first time. Avalon achieves this by introducing multiple state layers above the native one to cache state transitions, allowing for efficient management of these state transitions. Most notably, for concurrent cross-chain transactions, Avalon resolves not only intra-chain conflicts but also addresses potential inconsistencies between blockchains via a novel state synchronization protocol, enabling serializable cross-chain execution. We implement Avalon using smart contracts in Cosmos ecosystem and evaluate its commitment performance, demonstrating acceptable latency and gas consumption even under conflict cases.
+]]></content:encoded>
+<pubDate>Wed, 03 Jul 2024 07:13:00 +0000</pubDate>
+<pubDate>Wed, 03 Jul 2024 07:13:00 +0000</pubDate>
+</item>
+<item>
+<title>Practical Non-interactive Multi-signatures, and a Multi- to Aggregate Signatures Compiler</title>
+<link>https://eprint.iacr.org/2024/1081</link>
+<guid>https://eprint.iacr.org/2024/1081</guid>
+<content:encoded><![CDATA[
+<div> 关键词：fNIM, fNIA, $\mathsf{dms}$, multi-to-aggregate compiler, verification time
+
+总结:
+本文提出了一种新的高效非交互式多签名方案($\mathsf{dms}$)，解决了现有fNIM的两个关键问题。首先，$\mathsf{dms}$通过添加Schnorr PoPs简化了Boldyreva的对称配对基础fNIM，同时提供了更好的性能和在小群体中的快速验证。其在AGM模型下的安全性证明是主要技术贡献，具有大约128位的DL安全保证。其次，文章介绍了一个简单的编译器$\mathcal{M}to\mathcal{A}$，将任何fNIM转换为适合聚合具有公共前缀消息的fNIA，如Diem中应用$\mathsf{dms}$后的例子，验证速度显著提升。总的来说，$\mathsf{dms}$和$\mathcal{M}to\mathcal{A}$优化了签名效率和安全性，适用于大规模共识协议。 <div>
+In a fully non-interactive multi- , resp. aggregate-, signature scheme (fNIM, resp. fNIA), signatures issued by many signers on the same message, resp. on different messages, can be succinctly ``combined'', resp. ``aggregated''.
+fNIMs are used in the Ethereum consensus protocol, to produce the certificates of validity of blocks which are to be verified by billions of clients. fNIAs are used in some PBFT-like consensus protocols, such as the production version of Diem by Aptos, to replace the forwarding of many signatures by a new leader. In this work we address three complexity bottlenecks.
+(i) fNIAs have larger cost than fNIMs, e.g., we observe that the fNIA of BGLS (Eurocrypt'03) over 3000 signatures, takes 100x longer verification time than a batch verification of 3000 Schnorr signatures.
+(ii) fNIMs impose that each verifier processes the setup published by the group of potential signers. This processing consists either in verifying proofs of possession (PoPs), such as in Pixel (Usenix'20) and in the IETF'22 draft inherited from Ristenpart-Yilek (Eurocrypt'07), which costs a product of pairings over all published keys. Or, it consists in re-randomizing the keys, such as in SMSKR (FC'24).
+(iii) Existing proven security bounds on efficient fNIMs do not give any guarantee in practical curves with 256bits-large groups, such as BLS12-381 (used in Ethereum) or BLS12-377 (used in Zexe). Thus, computing in much larger curves is required to have provable guarantees.
+
+Our first contribution is a new fNIM called $\mathsf{dms}$, it addresses both (ii) and (iii).
+It is as simple as adding Schnorr PoPs to the schoolbook pairing-based fNIM of Boldyreva (PKC'03).
+(ii) For a group of 1000 signers, processing these PoPs is $5+$ times faster than for the previous pairing-based PoPs, and $3+$ times faster than the processing of SMSKR, which had furthermore to be done for every new group member. 
+(iii) In the algebraic group model (AGM), and given the current estimation of roughly 128 bits of security for the discrete logarithm (DL) in both the curves BLS12-381 and BLS12-377, then we prove a probability of forgery of $\mathsf{dms}$ no higher than about $2^{-93}$ for a time $2^{80}$ adversary.
+This proof of security is our main technical contribution. The only related proof before was for an interactive Schnorr-based multi-signature scheme, using Schnorr PoPs. We observe a gap in its proof, which is that the adversary has not access to a signing oracle before publishing its PoPs, although it should have. On the one hand, the gap can easily be fixed in their context. But in our context of pairing-based multi-signatures, the signing oracle produces a correlated random string which significantly complicates our extraction of the keys of the adversary.
+We finally provide another application of $\mathsf{dms}$, which is that it can be plugged in recent threshold signatures without setup (presented by Das et al at CCS'23, and Garg et al at SP'24), since these schemes implicitly build on any arbitrary BLS-based fNIM.
+
+Our second contribution addresses (i), it is a very simple compiler: $\mathcal{M}to\mathcal{A}$ (multi-to-aggregate). It turns any fNIM into an fNIA, suitable for aggregation of signatures on messages with a prefix in common, with the restriction that a signer must not sign twice using the same prefix. The obtained fNIA is post-quantum as soon as the fNIM is, such as Chipmunk (CCS'23). We demonstrate the relevance for Diem by applying $\mathcal{M}to\mathcal{A}$ to $\mathsf{dms}$: the resulting fNIA enables to verify 39x faster an aggregate of 129 signatures, over messages with $7$ bits-long variable parts, than BGLS.
+]]></content:encoded>
+<pubDate>Wed, 03 Jul 2024 02:59:14 +0000</pubDate>
+<pubDate>Wed, 03 Jul 2024 02:59:14 +0000</pubDate>
+</item>
+<item>
+<title>GAuV: A Graph-Based Automated Verification Framework for Perfect Semi-Honest Security of Multiparty Computation Protocols</title>
+<link>https://eprint.iacr.org/2024/1078</link>
+<guid>https://eprint.iacr.org/2024/1078</guid>
+<content:encoded><![CDATA[
+<div> 关键词：Multiparty Computation (MPC), Security proof, Simulator, Automated framework, Perfect soundness.
+
+总结:<br>
+该研究提出了一种通用的自动化框架，用于验证多方计算(MPC)协议在面对半诚实攻击时的完美安全性。该框架具有完美完备性，能证明BGW协议等实例在给定的攻击者设置下的安全性，且能在多项式时间内完成。与仅关注黑盒隐私的传统方法不同，该框架适用于任意MPC协议的验证。通过实现原型，研究展示了其有效性和效率，能在合理时间内自动证明BGW和B2A转换协议的半诚实安全。这种方法简化了MPC协议的安全证明过程，提高了实践中的检测能力。 <div>
+Proving the security of a Multiparty Computation (MPC) protocol is a difficult task. Under the current simulation-based definition of MPC, a security proof consists of a simulator, which is usually specific to the concrete protocol and requires to be manually constructed, together with a theoretical analysis of the output distribution of the simulator and corrupted parties' views in the real world. This presents an obstacle in verifying the security of a given MPC protocol. Moreover, an instance of a secure MPC protocol can easily lose its security guarantee due to careless implementation, and such a security issue is hard to detect in practice. 
+
+In this work, we propose a general automated framework to verify the perfect security of instances of MPC protocols against the semi-honest adversary. Our framework has perfect soundness: any protocol that is proven secure under our framework is also secure under the simulation-based definition of MPC. We demonstrate the completeness of our framework by showing that for any instance of the well-known BGW protocol, our framework can prove its security for every corrupted party set with polynomial time. Unlike prior work that only focuses on black-box privacy which requires the outputs of corrupted parties to contain no information about the inputs of the honest parties, our framework may potentially be used to prove the security of arbitrary MPC protocols.
+
+We implement our framework as a prototype. The evaluation shows that our prototype automatically proves the perfect semi-honest security of BGW protocols and B2A (binary to arithmetic) conversion protocols in reasonable durations.
+]]></content:encoded>
+<pubDate>Tue, 02 Jul 2024 16:39:44 +0000</pubDate>
+<pubDate>Tue, 02 Jul 2024 16:39:44 +0000</pubDate>
+</item>
 
 <item>
 <title>Anonymous, Timed and Revocable Proxy Signatures</title>
