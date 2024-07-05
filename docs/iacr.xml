@@ -5,17 +5,35 @@
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
 <item>
+<title>Faster Lookup Table Evaluation with Application to  Secure LLM Inference</title>
+<link>https://eprint.iacr.org/2024/1093</link>
+<guid>https://eprint.iacr.org/2024/1093</guid>
+<content:encoded><![CDATA[
+<div> 关键词：secure two-party computation, lookup tables (LUTs), $\mathsf{ROTL}$, FLUTE, secure LLM inference.
+
+总结:
+本文主要关注在大型语言模型的隐私保护下，如何通过安全的两方计算进行模型推理。研究者提出了$\mathsf{ROTL}$，一种针对查找表（LUT）评估的高效安全协议，相比现有最先进方法FLUTE，$\mathsf{ROTL}$在性能上分别有11.6倍和155倍的提升。特别地，$\mathsf{ROTL}$支持算术共享，而FLUTE仅限于布尔共享。文章还优化了FLUTE以支持布尔共享，显著减少了在线性能的带宽需求。这些改进对于保障用户隐私的同时提高大型语言模型的推理效率具有重要意义。 <div>
+As large language models (LLMs) continue to gain popularity, concerns about user privacy are amplified, given that the data submitted by users for inference may contain sensitive information. Therefore, running LLMs through secure two-party computation (a.k.a. secure LLM inference) has emerged as a prominent topic. However, many operations in LLMs, such as Softmax and GELU, cannot be computed using conventional gates in secure computation; instead, lookup tables (LUTs) have to be utilized, which makes LUT to be an essential primitive in secure LLM inference.
+
+In this paper, we propose $\mathsf{ROTL}$, a secure two-party protocol for LUT evaluations. Compared with FLUTE (the state-of-the-art LUT presented at  Oakland '23), it achieves upto  11.6$\times$ speedup in terms of overall performance and 155$\times$ speedup in terms of online performance. Furthermore, $\mathsf{ROTL}$ can support arithmetic shares (which is required by secure LLM inference), whereas FLUTE can only support boolean shares. At the heart of $\mathsf{ROTL}$ is a novel protocol for secret-shared rotation, which allows two parties to generate additive shares of the rotated table without revealing the rotation offset. We believe this protocol is of independent interest. Based on $\mathsf{ROTL}$, we design a novel secure comparison protocol; compared with the state-of-the-art, it achieves a 2.4$\times$ bandwidth reduction in terms of online performance. 
+
+To support boolean shares, we further provide an optimization for FLUTE, by reducing its computational complexity from $O(l\cdot n^2)$ to $O(n\log n+l\cdot n)$ and shifting $O(n\log n)$ computation to the preprocessing phase. As a result, compared with FLUTE, it achieves upto 10.8$\times$ speedup in terms of overall performance and 962$\times$ speedup in terms of online performance.
+]]></content:encoded>
+<pubDate>Thu, 04 Jul 2024 16:43:48 +0000</pubDate>
+<pubDate>Thu, 04 Jul 2024 16:43:48 +0000</pubDate>
+</item>
+
+<item>
 <title>MatcHEd: Privacy-Preserving Set Similarity based on MinHash</title>
 <link>https://eprint.iacr.org/2024/1091</link>
 <guid>https://eprint.iacr.org/2024/1091</guid>
 <content:encoded><![CDATA[
 <div> 关键词：fully homomorphic encryption (FHE), MinHash, Carter-Wegman (CW) hash function, bitwise operations, encrypted set similarity
 
-总结:<br>
+总结:<br />
 文章提出了一种利用MinHash算法和CGGI FHE方案改进的加密集相似性计算方法。传统的FHE比较操作昂贵，尤其是对大量数据。通过引入高效的位级FHE友好的摘要函数(FFD)，替代Carter-Wegman哈希中的模运算，减少了在FHE环境中的复杂性和低效性。这种方法显著减少与直接计算Jaccard相似度所需的比较次数，并且天然支持多CPU和GPU并行处理，适用于隐私保护的文档抄袭检测等场景。总的来说，新方法提高了加密计算效率，降低了计算成本。 <div>
 Fully homomorphic encryption (FHE) enables arbitrary computation on encrypted data, but certain applications remain prohibitively expensive in the encrypted domain. As a case in point, comparing two encrypted sets of data is extremely computationally expensive due to the large number of comparison operators required. In this work, we propose a novel methodology for encrypted set similarity inspired by the MinHash algorithm and the CGGI FHE scheme. Doing comparisons in FHE requires comparators and multiplexers or an expensive approximation, which further increases the latency, especially when the goal is to compare two sets of data. The MinHash algorithm can significantly reduce the number of comparisons required by employing a special Carter-Wegman (CW) hash function as a key building block. However, the modulus operation in the CW hash becomes another key bottleneck because the encrypted sub-circuits required to perform the modular reduction are very large and inefficient in an FHE setting. Towards that end, we introduce an efficient bitwise FHE-friendly digest function (FFD) to employ as the cornerstone of our proposed encrypted set-similarity. In a Boolean FHE scheme like CGGI, the bitwise operations can be implemented efficiently with Boolean gates, which allows for faster evaluation times relative to standard Carter-Wegman constructions. Overall, our approach drastically reduces the number of comparisons required relative to the baseline approach of directly computing the Jaccard similarity coefficients, and is inherently parallelizable, allowing for efficient encrypted computation on multi-CPU and GPU-based cloud servers. We validate our approach by performing a privacy-preserving plagiarism detection across encrypted documents.
 ]]></content:encoded>
-<pubDate>Thu, 04 Jul 2024 02:33:02 +0000</pubDate>
 <pubDate>Thu, 04 Jul 2024 02:33:02 +0000</pubDate>
 </item>
 <item>
@@ -30,7 +48,6 @@ Fully homomorphic encryption (FHE) enables arbitrary computation on encrypted da
 Homomorphic encryption is a powerful technology that solves key privacy concerns in cloud computing by enabling computation on encrypted data. However, it has not seen widespread adoption due to prohibitively high latencies. In this article, we identify polynomial multiplication as a bottleneck and investigate alternative algorithms to accelerate encrypted computing.
 ]]></content:encoded>
 <pubDate>Thu, 04 Jul 2024 01:56:46 +0000</pubDate>
-<pubDate>Thu, 04 Jul 2024 01:56:46 +0000</pubDate>
 </item>
 <item>
 <title>HElix: Genome Similarity Detection in the Encrypted Domain</title>
@@ -39,10 +56,9 @@ Homomorphic encryption is a powerful technology that solves key privacy concerns
 <content:encoded><![CDATA[
 <div> 关键词：genomics, genome analysis, fully homomorphic encryption, MinHash, bloom filter.
 
-总结:<br>这篇文章探讨了随着基因组学研究的发展，保护用户隐私和数据安全的挑战。作者提出两种基于全同态加密的方法，以在不泄露DNA序列的情况下进行比较。第一种方法是利用MinHash算法检测数据库中是否存在相似序列，另一种则是定制的布隆过滤器用于精确匹配。实验验证了这些方法在不同数据库规模下，无论使用GPU还是CPU云服务器，都能有效实现隐私保护下的基因组分析。 <div>
+总结:<br />这篇文章探讨了随着基因组学研究的发展，保护用户隐私和数据安全的挑战。作者提出两种基于全同态加密的方法，以在不泄露DNA序列的情况下进行比较。第一种方法是利用MinHash算法检测数据库中是否存在相似序列，另一种则是定制的布隆过滤器用于精确匹配。实验验证了这些方法在不同数据库规模下，无论使用GPU还是CPU云服务器，都能有效实现隐私保护下的基因组分析。 <div>
 As the field of genomics continues to expand and more sequencing data is gathered, genome analysis becomes increasingly relevant for many users. For example, a common scenario entails users trying to determine if their DNA samples are similar to DNA sequences hosted in a larger remote repository. Nevertheless, end users may be reluctant to upload their DNA sequences, while the owners of remote genomics repositories are unwilling to openly share their database. To address this challenge, we propose two distinct approaches based on fully homomorphic encryption to preserve the privacy of the genomic data and enable queries directly on ciphertexts. The first is based on the ubiquitous MinHash algorithm and can determine if similar matches exist in the database, while the second involves a bespoke bloom filter construction for determining exact matches. We validate both approaches across various database sizes using both GPU and CPU-based cloud servers.
 ]]></content:encoded>
-<pubDate>Thu, 04 Jul 2024 00:21:09 +0000</pubDate>
 <pubDate>Thu, 04 Jul 2024 00:21:09 +0000</pubDate>
 </item>
 <item>
@@ -52,8 +68,8 @@ As the field of genomics continues to expand and more sequencing data is gathere
 <content:encoded><![CDATA[
 <div> 关键词：randomized distributed function computation, semantic communications, privacy, Wyner's common information, common randomness.
 
-总结: <br>
-本文研究了随机分布式函数计算中语义通信的应用，特别是在保证隐私的前提下减少通信负载。主要关注两点：<br>
+总结: <br />
+本文研究了随机分布式函数计算中语义通信的应用，特别是在保证隐私的前提下减少通信负载。主要关注两点：<br />
 1. 通过利用语义通信框架，结合远程源编码方法，可以在满足安全和隐私约束时，实现输入序列的随机化模拟，同时保证每个输入序列的地方差分隐私。
 2. 文章提供了Wyner共同信息（WCI）的下界，这是协调-随机性速率区域的两个角点之一，该区域定义了随机分布式函数计算的极限。WCI对应于没有共享随机性的场景。
 3. 对于连续随机变量，提出了数值方法来计算另一个角点，即无限共享随机性的情况。
@@ -64,7 +80,6 @@ Randomized distributed function computation refers to remote function computatio
 This work provides lower bounds on Wyner's common information (WCI), which is one of the two corner points of the coordination-randomness rate region characterizing the ultimate limits of randomized distributed function computation. The WCI corresponds to the case when there is no common randomness shared by the transmitter and receiver. Moreover, numerical methods are proposed to compute the other corner point for continuous-valued random variables, for which an unlimited amount of common randomness is available. Results for two problems of practical interest illustrate that leveraging common randomness can decrease the communication load as compared to the WCI corner point significantly. We also illustrate that semantic communication gains over lossless compression methods are achieved also without common randomness, motivating further research on limited common randomness scenarios.
 ]]></content:encoded>
 <pubDate>Wed, 03 Jul 2024 10:52:51 +0000</pubDate>
-<pubDate>Wed, 03 Jul 2024 10:52:51 +0000</pubDate>
 </item>
 <item>
 <title>Enabling Complete Atomicity for Cross-chain Applications Through Layered State Commitments</title>
@@ -73,10 +88,9 @@ This work provides lower bounds on Wyner's common information (WCI), which is on
 <content:encoded><![CDATA[
 <div> 关键词：Cross-chain dApps, Complete atomicity, Avalon, State synchronization, Cosmos ecosystem.
 
-总结:<br>Avalon是一个创新的跨链去中心化应用（dApp）交易执行框架，它首次实现了完整的原子性。通过在原生状态之上引入多层状态缓存，Avalon有效地管理状态转换，确保复杂任务的正确执行。对于并发的跨链交易，Avalon不仅解决了链内的冲突，还通过一种新颖的状态同步协议处理不同区块链之间的潜在不一致，实现串行化的跨链执行。Avalon使用Cosmos生态系统的智能合约进行实现，并在实验中展示了其承诺性能，即使在冲突情况下，也具有可接受的延迟和gas消耗。 <div>
+总结:<br />Avalon是一个创新的跨链去中心化应用（dApp）交易执行框架，它首次实现了完整的原子性。通过在原生状态之上引入多层状态缓存，Avalon有效地管理状态转换，确保复杂任务的正确执行。对于并发的跨链交易，Avalon不仅解决了链内的冲突，还通过一种新颖的状态同步协议处理不同区块链之间的潜在不一致，实现串行化的跨链执行。Avalon使用Cosmos生态系统的智能合约进行实现，并在实验中展示了其承诺性能，即使在冲突情况下，也具有可接受的延迟和gas消耗。 <div>
 Cross-chain Decentralized Applications (dApps) are increasingly popular for their ability to handle complex tasks across various blockchains, extending beyond simple asset transfers or swaps. However, ensuring all dependent transactions execute correctly together, known as complete atomicity, remains a challenge. Existing works provide financial atomicity, protecting against monetary loss, but lack the ability to ensure correctness for complex tasks. In this paper, we introduce Avalon, a transaction execution framework for cross-chain dApps that guarantees complete atomicity for the first time. Avalon achieves this by introducing multiple state layers above the native one to cache state transitions, allowing for efficient management of these state transitions. Most notably, for concurrent cross-chain transactions, Avalon resolves not only intra-chain conflicts but also addresses potential inconsistencies between blockchains via a novel state synchronization protocol, enabling serializable cross-chain execution. We implement Avalon using smart contracts in Cosmos ecosystem and evaluate its commitment performance, demonstrating acceptable latency and gas consumption even under conflict cases.
 ]]></content:encoded>
-<pubDate>Wed, 03 Jul 2024 07:13:00 +0000</pubDate>
 <pubDate>Wed, 03 Jul 2024 07:13:00 +0000</pubDate>
 </item>
 <item>
@@ -104,7 +118,6 @@ We finally provide another application of $\mathsf{dms}$, which is that it can b
 Our second contribution addresses (i), it is a very simple compiler: $\mathcal{M}to\mathcal{A}$ (multi-to-aggregate). It turns any fNIM into an fNIA, suitable for aggregation of signatures on messages with a prefix in common, with the restriction that a signer must not sign twice using the same prefix. The obtained fNIA is post-quantum as soon as the fNIM is, such as Chipmunk (CCS'23). We demonstrate the relevance for Diem by applying $\mathcal{M}to\mathcal{A}$ to $\mathsf{dms}$: the resulting fNIA enables to verify 39x faster an aggregate of 129 signatures, over messages with $7$ bits-long variable parts, than BGLS.
 ]]></content:encoded>
 <pubDate>Wed, 03 Jul 2024 02:59:14 +0000</pubDate>
-<pubDate>Wed, 03 Jul 2024 02:59:14 +0000</pubDate>
 </item>
 <item>
 <title>GAuV: A Graph-Based Automated Verification Framework for Perfect Semi-Honest Security of Multiparty Computation Protocols</title>
@@ -113,7 +126,7 @@ Our second contribution addresses (i), it is a very simple compiler: $\mathcal{M
 <content:encoded><![CDATA[
 <div> 关键词：Multiparty Computation (MPC), Security proof, Simulator, Automated framework, Perfect soundness.
 
-总结:<br>
+总结:<br />
 该研究提出了一种通用的自动化框架，用于验证多方计算(MPC)协议在面对半诚实攻击时的完美安全性。该框架具有完美完备性，能证明BGW协议等实例在给定的攻击者设置下的安全性，且能在多项式时间内完成。与仅关注黑盒隐私的传统方法不同，该框架适用于任意MPC协议的验证。通过实现原型，研究展示了其有效性和效率，能在合理时间内自动证明BGW和B2A转换协议的半诚实安全。这种方法简化了MPC协议的安全证明过程，提高了实践中的检测能力。 <div>
 Proving the security of a Multiparty Computation (MPC) protocol is a difficult task. Under the current simulation-based definition of MPC, a security proof consists of a simulator, which is usually specific to the concrete protocol and requires to be manually constructed, together with a theoretical analysis of the output distribution of the simulator and corrupted parties' views in the real world. This presents an obstacle in verifying the security of a given MPC protocol. Moreover, an instance of a secure MPC protocol can easily lose its security guarantee due to careless implementation, and such a security issue is hard to detect in practice. 
 
@@ -122,9 +135,7 @@ In this work, we propose a general automated framework to verify the perfect sec
 We implement our framework as a prototype. The evaluation shows that our prototype automatically proves the perfect semi-honest security of BGW protocols and B2A (binary to arithmetic) conversion protocols in reasonable durations.
 ]]></content:encoded>
 <pubDate>Tue, 02 Jul 2024 16:39:44 +0000</pubDate>
-<pubDate>Tue, 02 Jul 2024 16:39:44 +0000</pubDate>
 </item>
-
 <item>
 <title>Anonymous, Timed and Revocable Proxy Signatures</title>
 <link>https://eprint.iacr.org/2023/833</link>
