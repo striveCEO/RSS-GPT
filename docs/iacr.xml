@@ -4,6 +4,46 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+<item>
+<title>Faster Asynchronous Blockchain Consensus and MVBA</title>
+<link>https://eprint.iacr.org/2024/1108</link>
+<guid>https://eprint.iacr.org/2024/1108</guid>
+<content:encoded><![CDATA[
+<div> 关键词：Blockchain consensus, 2-chain VABA, sMVBA, 2PAC, Super Fast Pipelined Blocks
+
+总结:
+本文介绍了一种新的区块链共识协议设计，包括2PAC（两阶段异步共识）和超级快速管道块。2PAC分为两个变体，2PAC$^\text{lean}$具有简洁链路和$9.5\delta$预期延迟，通过减少消息复杂度达到更高的吞吐量；而2PAC$^\text{BIG}$则是最快的异步协议，具有立方级消息复杂度，能在无消息乱序的情况下实现单次决策仅需$4\delta$。超级快速管道块改进了管道块的决策速度，即使在故障节点存在时也能保证低延迟，同时保持一致性。结合这些技术，如s2PAC$^\text{lean}$、s2PAC$^\text{BIG}$和sGradedDAG等协议分别实现了更快的决策时间。 <div>
+Blockchain consensus, a.k.a. BFT SMR, are protocols enabling $n$ processes to decide on an ever-growing chain. The fastest known asynchronous one is called 2-chain VABA (PODC'21 and FC'22), and is used as fallback chain in Abraxas* (CCS'23). It has a claimed $9.5\delta$ expected latency when used for a single shot instance, a.k.a. an MVBA.
+We exhibit attacks breaking it. Hence, the title of the fastest asynchronous MVBA with quadratic messages complexity goes to sMVBA (CCS'22), with $10\delta$ expected latency.
+Our positive contributions are two new and complementary designs.
+
+$\bullet$  2PAC (2-phase asynchronous consensus). It has a simpler and lighter chaining than in previous approaches. Instantiated with either quadratic or cubic phases of voting, it yields:
+
+   2PAC$^\text{lean}$: $+90\%$ throughput and $9.5\delta$ expected latency, with quadratic ($O(n^2)$) messages complexity. In both 2-chain VABA and sMVBA (as if chained, with pipelining), the quorum-certified transactions which were produced in the worst-case 1/3 of views with a slow leader were dumped, so the work was lost. The simpler design of 2PAC inserts such blocks in straight-line in the chain.
+Thus, contrary to naive uncle-referencing, this comes with no computational overhead, yielding a net $+50\%$ throughput gain over chained sMVBA. Both the remaining throughput and latency ($-0.5\delta$) gains, come from the lighter interactive construction of proofs of consistency appended to proposed blocks, compared to sMVBA.
+
+   2PAC$^\text{BIG}$: the fastest asynchronous blockchain consensus with cubic ($O(n^3)$) messages complexity. Fault-free single shot MVBA runs decide in just $4\delta$, as soon as no message is delivered more than twice faster than others: GradedDAG (SRDS'23) required furthermore no messages reordering.
+
+$\bullet$  Super Fast Pipelined Blocks. This is an upgrade of previous approaches for pipelining: in 2-chain VABA, Cordial Miners (DISC'23) and GradedDAG, a block pipelined by a leader in the middle of the view had almost twice larger latency than the non-pipelined block. Our design provides a fast path deciding the pipelined block with even smaller latency than the non-pipelined block. The fast delay is guaranteed in all executions with a fair scheduler, but remarkably, whatever the behaviors of faulty processes. Consistency is preserved by a lightweight mechanism, of one threshold signature appended per proposal.
+Instantiated with the previous protocols, it yields: s2PAC$^\text{lean}$, with fast decision of pipelined blocks in $4\delta$; s2PAC$^\text{BIG}$, in $3\delta$; and sGradedDAG, in $3\delta$.
+]]></content:encoded>
+<pubDate>Mon, 08 Jul 2024 00:46:12 +0000</pubDate>
+<pubDate>Mon, 08 Jul 2024 00:46:12 +0000</pubDate>
+</item>
+<item>
+<title>FHE-MENNs: Opportunities and Pitfalls for Accelerating Fully Homomorphic Private Inference with Multi-Exit Neural Networks</title>
+<link>https://eprint.iacr.org/2024/1099</link>
+<guid>https://eprint.iacr.org/2024/1099</guid>
+<content:encoded><![CDATA[
+<div> 关键词：fully homomorphic encryption (FHE), multi-exit neural networks (MENNs), latency, side-channel attack, cost-benefit analysis.
+
+总结:<br>
+本文探讨了在数据隐私日益重要的背景下，利用可完全同态加密（FHE）进行机器学习服务的潜在解决方案。研究者提出了使用多出口神经网络（MENNs）来加速FHE推理，以降低计算成本和时间。文章分析了FHE-MENN推理的延迟、通信、准确性和资源消耗，并介绍了名为TorMENNt的攻击，该攻击能利用用户提前终止计算来实施侧信道攻击，预测图像分类结果。文章还讨论了可能的防御措施及其有效性，并结合成本效益分析，为FHE-MENN的实际应用提供了一条实用路径。 <div>
+With concerns about data privacy growing in a connected world, cryptography researchers have focused on fully homomorphic encryption (FHE) for promising machine learning as a service solutions. Recent advancements have lowered the computational cost by several orders of magnitude, but the latency of fully homomorphic neural networks remains a barrier to adoption. This work proposes using multi-exit neural networks (MENNs) to accelerate the FHE inference. MENNs are network architectures that provide several exit points along the depth of the network. This approach allows users to employ results from any exit and terminate the computation early, saving both time and power. First, this work weighs the latency, communication, accuracy, and computational resource benefits of running FHE-based MENN inference. Then, we present the TorMENNt attack that can exploit the user's early termination decision to launch a concrete side-channel on MENNs. We demonstrate that the TorMENNt attack can predict the private image classification output of an image set for both FHE and plaintext threat models. We discuss possible countermeasures to mitigate the attack and examine their effectiveness. Finally, we tie the privacy risks with a cost-benefit analysis to obtain a practical roadmap for FHE-based MENN adoption.
+]]></content:encoded>
+<pubDate>Fri, 05 Jul 2024 15:56:11 +0000</pubDate>
+<pubDate>Fri, 05 Jul 2024 15:56:11 +0000</pubDate>
+</item>
 
 <item>
 <title>BOLT: Privacy-Preserving, Accurate and Efficient Inference for Transformers</title>
