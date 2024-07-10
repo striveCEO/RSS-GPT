@@ -4,6 +4,28 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+<item>
+<title>DeCAF: Decentralizable Continuous Group Key Agreement with Fast Healing</title>
+<link>https://eprint.iacr.org/2022/559</link>
+<guid>https://eprint.iacr.org/2022/559</guid>
+<content:encoded><![CDATA[
+<div> 关键词：Continuous Group Key Agreement (CGKA), TreeKEM, Concurrent CGKA, CoCoA, DeCAF.
+
+总结:
+本文主要关注连续群密钥协议（Continuous Group Key Agreement, CGKA）的并发解决方案。文章提到现有的TreeKEM（RFC 9420）在处理并发请求时存在局限，而CoCoA虽然并发且通信复杂度低，但用户更新可能需要多次请求。为解决这些问题，作者提出了DeCAF（Decentralized Concurrency-Aware Fast Healing），一种适用于中心服务器和去中心化设置的高效协议。
+
+DeCAF特别适合去中心化的组消息系统，如区块链环境，它能在最多$\log(t)$轮请求内修复被攻击情况，相比CoCoA的$\log(n)$轮更快速。尽管在中心服务器场景中，CoCoA在下载通信方面更优，但在去中心化情况下，DeCAF在修复速度和每轮用户通信成本上具有显著优势。 <div>
+Continuous group key agreement (CGKA) allows a group of users to maintain a continuously updated shared key in an asynchronous setting where parties only come online sporadically and their messages are relayed by an untrusted server. CGKA captures the basic primitive underlying group messaging schemes.
+
+Current solutions including TreeKEM ("Messaging Layer Security'' (MLS) IETF RFC 9420) cannot handle concurrent requests while retaining low communication complexity. The exception being CoCoA, which is concurrent while having extremely low communication complexity (in groups of size $n$ and for $m$ concurrent updates the communication per user is $\log(n)$, i.e., independent of $m$). The main downside of CoCoA is that in groups of size $n$, users might have to do up to $\log(n)$ update requests to the server to ensure their (potentially corrupted) key material has been refreshed.
+
+In this work we present a "fast healing'' concurrent CGKA protocol, named DeCAF, where users will heal after at most $\log(t)$ requests, with $t$ being the number of corrupted users. While also suitable for the standard central-server setting, our protocol is particularly interesting for realizing decentralized group messaging, where protocol messages (add, remove, update) are being posted on some append-only data structure rather than sent to a server. In this setting, concurrency is crucial once the rate of requests exceeds, say, the rate at which new blocks are added to a blockchain.
+
+In the central-server setting, CoCoA (the only alternative with  concurrency, sub-linear communication and basic post-compromise security)  enjoys much lower download communication. However, in the decentralized setting - where there is no server which can craft specific messages for different users to reduce their download communication - our protocol  significantly outperforms CoCoA. DeCAF heals in fewer rounds ($\log(t)$ vs. $\log(n)$) while incurring a similar per round per user communication cost.
+]]></content:encoded>
+<pubDate>Tue, 10 May 2022 08:20:37 +0000</pubDate>
+<pubDate>Tue, 10 May 2022 08:20:37 +0000</pubDate>
+</item>
 
 <item>
 <title>Shared-Custodial Password-Authenticated Deterministic Wallets</title>
