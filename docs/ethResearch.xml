@@ -4,6 +4,43 @@
 <title>Ethereum Research - Latest topics</title>
 <link>https://ethresear.ch/latest</link>
 
+<item>
+<title>L2 Asset Interoperability via Two-way Canonical Bridges</title>
+<link>https://ethresear.ch/t/l2-asset-interoperability-via-two-way-canonical-bridges/20039</link>
+<guid>https://ethresear.ch/t/l2-asset-interoperability-via-two-way-canonical-bridges/20039</guid>
+<content:encoded><![CDATA[
+<div> 关键词：L2资产、两向桥接、ERC-1155接口、L2结算合同、跨链流动性
+
+总结:<br>
+文章讨论了L2资产桥接问题，强调了现有的L2解决方案如L2之间共享结算层的局限性，导致生态系统碎片化。为解决这一问题，提出了一种两向桥接的概念，即资产能在L2和L1之间双向流动。L2结算合同作为记录，采用ERC-1155接口，用户通过发送资产到系统地址实现转移。返回L2时，使用特殊函数进行销毁并存入。这种设计确保资产安全，用户自行承担风险。同时，用户可利用快速流动性桥，而跨链流动性提供者则用于资产重平衡。该机制还可扩展至L3。总的来说，两向桥接旨在打破链间壁垒，促进资产流动性与互操作性。 <div>
+<h2><a class="anchor" href="https://ethresear.ch#motivation-1" name="motivation-1"></a>Motivation</h2>
+<p>One key problem with the L2 scaling solutions is that assets natively minted on L2s can only be used on the L2 of issuance but it cannot be bridged back to L1 or other L2s, without utilizing external bridges. This creates fragmentation. At the time of writing, there is already half as much natively-minted assets ($12b) on Eth L2s compared to canonical bridged assets ($24b), according to L2Beat.</p>
+<p>Shared settlement layers only solve this problem for L2s using the same shared settlement layer. The ecosystem remain fragmented once more shared settlement layer show up.</p>
+<p>We propose <strong>two-way canonical bridges</strong> as a solution, where L2-minted assets can be <strong>reverse-canonically bridged</strong> to L1. It is simply an ERC-1155-like interface that an L2 settlement contracts adopt, plus additional precompiles added to the L2 execution environment.</p>
+<h2><a class="anchor" href="https://ethresear.ch#two-way-canonical-bridges-2" name="two-way-canonical-bridges-2"></a>Two-way Canonical Bridges</h2>
+<p>Below is a highlevel description of two-way canonical bridging.</p>
+<ul>
+<li>The L2 settlement contract becomes the ledger of record for all native assets issued on it (that have been reverse-canonically-bridged). The settlement contract (on L1) shall implement the ERC-1155 interface, where the asset id field denotes the L2 asset address.</li>
+<li>To send an L2-native asset to an L1 address, the L2 users simply send the asset to a prespecified system address, which shall results in the L2 settlement contract on L1 issuing ERC-1155 tokens to itself. Next, L2-&gt;L1 call mechanisms can be utilized to move the newly-issued asset to any desired destination. This is done within the same L2 transaction.</li>
+<li>To send a reverse-canonically-wrapped asset back to its L2 of origin, a special <code>burnAndDeposit</code> function on the L2 settlement contract can be called.</li>
+<li>Since the L2 settlement contract is an ERC-1155 contract, L1 EOAs and other L2s can simply hold assets or wrap them as normal. This requires the L2 canonical bridge to support wrapping of ERC-1155 assets.</li>
+<li>In normal usage, it is expected that the only holders of the ERC-1155 tokens issued by an L2 settlement contract are other L2 settlement contracts. This means that the state overhead on L1 is small.</li>
+</ul>
+<p>Additional consideration:</p>
+<ul>
+<li>The safety of an asset is maintained without additional trust assumptions because the L2 settlement contract acts as the ledger of record for all outstanding assets (those owned by other L1 addresses).</li>
+<li>It is assumed that any assets that is reverse-canonically-bridged to L1 addresses is done at the risk of the user initiating the bridging.</li>
+<li>In practice, end-users can utilize fast liquidity bridges while crosschain liquidity providers utilize the two-way canonical bridges to rebalance.</li>
+<li>This mechanism can extend to L3s on L2s. An asset issued on an L3 can be reverse canonically-bridged to L2 and then reverse canonically-bridged back to L1. We’d need the 1155 ids on the settlement contract to be able to represent the 1155 asset id on L2 alongside with the asset address–this can be done via hashing for example.</li>
+</ul>
+<h3><a class="anchor" href="https://ethresear.ch#acknowledgements-3" name="acknowledgements-3"></a>Acknowledgements</h3>
+<p>Thanks to Shumo Chu for review and comments.</p>
+            <p><small>1 post - 1 participant</small></p>
+            <p><a href="https://ethresear.ch/t/l2-asset-interoperability-via-two-way-canonical-bridges/20039">Read full topic</a></p>
+]]></content:encoded>
+<pubDate>Wed, 10 Jul 2024 22:20:35 +0000</pubDate>
+<pubDate>Wed, 10 Jul 2024 22:20:35 +0000</pubDate>
+</item>
 
 <item>
 <title>MEV resistant dynamic pricing auction of execution proposal rights</title>
