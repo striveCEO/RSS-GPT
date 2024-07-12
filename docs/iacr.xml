@@ -4,6 +4,73 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+<item>
+<title>Distributed Verifiable Random Function With Compact Proof</title>
+<link>https://eprint.iacr.org/2024/1130</link>
+<guid>https://eprint.iacr.org/2024/1130</guid>
+<content:encoded><![CDATA[
+<div> 关键词：Verifiable Random Functions (VRFs), Distributed VRFs (DVRFs), DVRFwCP, constant-size proofs, efficient verification.
+
+总结:<br>
+本文提出了一种新型的分布式可验证随机函数系统(DVRFwCP)，它在解决现有DVRFs的问题上取得了显著进步。DVRFwCP的特点在于其拥有常数大小的证明，这意味着证明的大小不会随着参与者数量增加而变化，这相较于早期系统是一个重大改进。此外，DVRFwCP通过移除对计算密集型的双线性配对的需求，实现了更高效的验证过程。与DDH-DVRF和GLOW-DVRF等知名实现相比，DVRFwCP在安全性与可扩展性方面具有明显优势，尤其是在估计的燃气成本上。这一创新为去中心化环境中生成可验证随机数提供了更为可靠和高效的解决方案。 <div>
+Verifiable Random Functions (VRFs) are cryptographic primitives that generate unpredictable randomness along with proofs that are verifiable, a critical requirement for blockchain applications in decentralized finance, online gaming, and more. Existing VRF constructions often rely on centralized entities, creating security vulnerabilities. Distributed VRFs (DVRFs) offer a decentralized alternative but face challenges like large proof sizes or dependence on computationally expensive bilinear pairings. 
+In this research, a unique distributed VRF (DVRF) system called DVRFwCP with considerable improvements is proposed. DVRFwCP has constant-size proofs, which means that the size of the proof does not change based on the number of participants. This overcomes a significant drawback of earlier DVRF systems, which saw proof size increase with participant count. Furthermore, DVRFwCP produces more efficient verification than previous systems by eliminating the requirement for bilinear pairings throughout the verification process. These innovations contribute to a more secure and scalable solution for generating verifiable randomness in decentralized environments.
+We compare our construction to well-established DVRF instantiations such as DDH-DVRF and GLOW-DVRF while also pointing out the major improvement in the estimated gas cost of these algorithms.
+]]></content:encoded>
+<pubDate>Thu, 11 Jul 2024 13:33:43 +0000</pubDate>
+<pubDate>Thu, 11 Jul 2024 13:33:43 +0000</pubDate>
+</item>
+<item>
+<title>Cryptiny: Compacting Cryptography for Space-Restricted Channels and its Use-case for IoT-E2EE</title>
+<link>https://eprint.iacr.org/2024/1128</link>
+<guid>https://eprint.iacr.org/2024/1128</guid>
+<content:encoded><![CDATA[
+<div> 关键词：cryptiny、IoT、security goals、CCA-secrecy、SDHIES
+
+总结:<br>
+Cryptiny是一种新型加密范式，它使用单一加密值实现多重安全目标，适用于带宽受限的物联网环境。文章以BLE广播信标与远程配对的主人之间的实时通信为例，该场景中，信标通过BLE-IP网关设备和云服务器发送信息。要求保障高安全性和隐私性，如双向安全和观察者的前向后向安全性。为了实现这些，文章提出了一种名为SDHIES的新加密方案，其特点是使用公钥的函数进行加密，而非直接使用公钥。通过cryptiny，作者证明了协议能提供信标和观察者消息的CCA保密性，以及观察者的双向安全和双方的互私性。 <div>
+We present a novel cryptographic paradigm denoted  ``cryptiny:'' Employing a single cryptographic value for several security goals, thus ``compacting'' the communication sent over a space-restricted (narrow) channel, while still proving security. Cryptiny is contrary to the classical cryptographic convention of using a separate cryptographic element for each security goal. 
+
+Demonstrating  the importance of cryptiny, we employ it for securing a critical IoT configuration in which a broadcasting ``thing'' (called beacon) operates within stringent bandwidth constraints. In this setting, a compact BLE-broadcasting beacon lacking Internet connectivity efficiently directs brief (non fragmented) messages to its remotely pre-paired owner in real-time. Communication transpires through BLE-to-IP gateway devices denoted observers, (typically smartphones in the beacon's vicinity), and subsequently via a cloud app server. The gateway device as well, piggybacks on the transmission a secure and private message to the owner. This configuration is a generic setting for the current and future IoT real-time ecosystems, where billion of owners, beacons, and observers operate. 
+
+The configuration instances (analogous to TLS instances over the Internet) imposes high security and privacy demands. We prove that our cryptiny-based protocol for securing the above configuration achieves CCA-secrecy for the beacon's and the observer's messages with backward and forward security for the observer's message, as well simultaneously achieving  mutual privacy for beacons and for observers. Achieving backward and forward security is important since beacon devices may be far from their owners for a long duration and may be passively tampered with. In addition, for the backward security proof we develop a new encryption scheme we call ``shifted-DHIES'' (``SDHIES'' for short), which generalizes DHIES. An interesting feature of SDHIES is that encryption is performed with a function of the public key rather than the public key itself.
+]]></content:encoded>
+<pubDate>Thu, 11 Jul 2024 10:02:44 +0000</pubDate>
+<pubDate>Thu, 11 Jul 2024 10:02:44 +0000</pubDate>
+</item>
+<item>
+<title>Curl: Private LLMs through Wavelet-Encoded Look-Up Tables</title>
+<link>https://eprint.iacr.org/2024/1127</link>
+<guid>https://eprint.iacr.org/2024/1127</guid>
+<content:encoded><![CDATA[
+<div> 关键词：transformers, secure multiparty computation (MPC), CrypTen, non-linear functions, discrete wavelet transformations
+
+总结:
+Curl是一个新的安全多方计算（MPC）框架，专注于提升非线性函数的处理效率。它通过使用离散小波变换来减小查找表大小，从而减少 rounds 和通信量，相比于CrypTen有高达19倍的改进。Curl提供了类似于CrypTen的编程模型和并行化能力，适用于大型语言模型（LLMs），如BERT、GPT-2和GPT Neo。此外，文章还解决了关于常用概率截断协议安全性的争议，证明其在独立模型中的安全性，这对依赖这类技术的其他研究具有重要意义。总的来说，Curl通过优化和增强MPC在处理复杂机器学习任务中的隐私保护性能，推动了该领域的进步。 <div>
+Recent advancements in transformers have revolutionized machine learning, forming the core of Large language models (LLMs). However, integrating these systems into everyday applications raises privacy concerns as client queries are exposed to model owners. Secure multiparty computation (MPC) allows parties to evaluate machine learning applications while keeping sensitive user inputs and proprietary models private. Due to inherent MPC costs, recent works introduce model-specific optimizations that hinder widespread adoption by machine learning researchers. CrypTen (NeurIPS'21) aimed to solve this problem by exposing MPC primitives via common machine learning abstractions such as tensors and modular neural networks. Unfortunately, CrypTen and many other MPC frameworks rely on polynomial approximations of the non-linear functions, resulting in high errors and communication complexity.
+
+This paper introduces Curl, an easy-to-use MPC framework that evaluates non-linear functions as lookup tables, resulting in better approximations and significant round and communication reduction. Curl exposes a similar programming model as CrypTen and is highly parallelizable through tensors. At its core, Curl relies on discrete wavelet transformations to reduce the lookup table size without sacrificing accuracy, which results in up to $19\times$ round and communication reduction compared to CrypTen for non-linear functions such as logarithms and reciprocals. We evaluate Curl on a diverse set of LLMs, including BERT, GPT-2, and GPT Neo, and compare against state-of-the-art related works such as Iron (NeurIPS'22) and Bolt (S&amp;P'24) achieving at least $1.9\times$ less communication and latency.
+
+Finally, we resolve a long-standing debate regarding the security of widely used probabilistic truncation protocols by proving their security in the stand-alone model. This is of independent interest as many related works rely on this truncation style.
+]]></content:encoded>
+<pubDate>Wed, 10 Jul 2024 22:22:00 +0000</pubDate>
+<pubDate>Wed, 10 Jul 2024 22:22:00 +0000</pubDate>
+</item>
+<item>
+<title>OPPID: Single Sign-On with Oblivious Pairwise Pseudonyms</title>
+<link>https://eprint.iacr.org/2024/1124</link>
+<guid>https://eprint.iacr.org/2024/1124</guid>
+<content:encoded><![CDATA[
+<div> 关键词：Single Sign-On (SSO), Pseudonym, Identity Provider (IdP), Relying Parties (RPs), Security.
+
+总结:<br>文章探讨了现有的单点登录（SSO）系统中用户隐私问题，尤其是当IdP知道用户访问哪个RP时。为了解决这一问题，作者提出了一种新的、无观察、强安全且便利的SSO系统，允许IdP在不暴露RP身份的情况下生成对RP特定的伪匿名标识。该模型强调了RP的身份验证需求，即IdP需要验证令牌和伪匿名是否发给注册的RP。作者构建了一个结合签名、知识证明和盲但可验证的哈希版Diffie-Hellman PRF的方案，并证明其安全性。实验表明，该方案在运行时间上高效，每方耗时2-20ms。 <div>
+Single Sign-On (SSO) allows users to conveniently authenticate to many Relying Parties (RPs) through a central Identity Provider (IdP). SSO supports unlinkable authentication towards the RPs via pairwise pseudonyms, where the IdP assigns the user an RP-specific pseudonym. This feature has been rolled out prominently within Apple's SSO service. While establishing unlinkable identities provides privacy towards RPs, it actually emphasizes the main privacy problem of SSO: with every authentication request, the IdP learns the RP that the user wants to access. Solutions to overcome this limitation exist, but either assume users to behave honestly or require them to manage long-term cryptographic keys.
+
+In this work, we propose the first SSO system that can provide such pseudonymous authentication in an unobservable yet strongly secure and convenient manner. That is, the IdP blindly derives the user's pairwise pseudonym for the targeted RP without learning the RP's identity and without requiring key material handled by the user. We formally define the desired security and privacy properties for such unlinkable, unobservable, and strongly secure SSO. In particular, our model includes the often neglected RP authentication: the IdP typically wants to limit its services to registered RPs only and thus must be able to (blindly) verify that it issues the token and pseudonym to such a registered RP. We propose a simple construction that combines signatures with efficient proofs-of-knowledge with a blind, yet verifiable, evaluation of the Hashed-Diffie-Hellman PRF. We prove the security of our construction and demonstrate its efficiency through a prototypical implementation, which requires a running time of 2-20ms per involved party.
+]]></content:encoded>
+<pubDate>Wed, 10 Jul 2024 13:36:26 +0000</pubDate>
+<pubDate>Wed, 10 Jul 2024 13:36:26 +0000</pubDate>
+</item>
 
 <item>
 <title>PARScoin: A Privacy-preserving, Auditable, and Regulation-friendly Stablecoin</title>
