@@ -5,6 +5,188 @@
 <link>https://ethresear.ch/latest</link>
 
 <item>
+<title>Sealed execution auction</title>
+<link>https://ethresear.ch/t/sealed-execution-auction/20060</link>
+<guid>https://ethresear.ch/t/sealed-execution-auction/20060</guid>
+<content:encoded><![CDATA[
+<div> 关键词：密封拍卖、执行提案人、密封投标、公开竞标、MEV问题。
+
+总结:<br>
+本文提出了一种名为密封执行拍卖（SEA）的新机制，旨在分离执行提案权和验证者角色，避免MEV问题。该机制包括两个阶段：第一阶段，建设者匿名提交密封投标；第二阶段，建设者公开投标，最高投标者支付第二高投标作为费用。通过这种方式，可以防止建设者与提案者之间的勾结，确保拍卖的公正性。文章还讨论了可能的合谋情况及应对策略，如对提案者错过区块的惩罚和后续拍卖流程设计。总的来说，SEA为区块链执行权拍卖提供了一个潜在的解决方案，以实现更有效的分离和减少激励冲突。 <div>
+<h1><a class="anchor" href="https://ethresear.ch#sealed-execution-auction-1" name="sealed-execution-auction-1"></a>Sealed execution auction</h1>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/3/e/3e0cf08f2021a1cbbe0156d52c8482dba0a00ba6.jpeg" title="Sealed execution auction"><img alt="Sealed execution auction" height="394" src="https://ethresear.ch/uploads/default/optimized/3X/3/e/3e0cf08f2021a1cbbe0156d52c8482dba0a00ba6_2_690x394.jpeg" width="690" /></a></div><p></p>
+<p>By <a href="https://x.com/weboftrees">Anders</a>.</p>
+<p><em>While working on the <a href="https://ethresear.ch/t/mev-resistant-dynamic-pricing-auction-of-execution-proposal-rights/20024">dynamic pricing auction</a> I though of another way to hold the auction that also seems interesting. Posting a rough sketch here, although I am not yet certain of its viability. Thanks to <a href="https://x.com/drakefjustin">Justin</a>, <a href="https://x.com/barnabemonnot">Barnabé</a> and <a href="https://x.com/terencechain">Terence</a>.</em></p>
+<h2><a class="anchor" href="https://ethresear.ch#introduction-2" name="introduction-2"></a>Introduction</h2>
+<p>In the process of enshrining proposer–builder separation (<a href="https://github.com/ethereum/EIPs/pull/8711">ePBS</a>), it has been <a href="https://mirror.xyz/barnabe.eth/LJUb_TpANS0VWi3TOwGx_fgomBvqPaQ39anVj3mnCOg">suggested</a> that attesting and execution proposing should be more fully separated. Proposals such as <a href="https://ethresear.ch/t/execution-tickets/17944">execution tickets</a> (ETs) and <a href="https://mirror.xyz/barnabe.eth/QJ6W0mmyOwjec-2zuH6lZb0iEI2aYFB9gE-LHWIMzjQ">execution auctions</a> (EAs) strive to allocate the right to propose execution blocks to entities other than the validators. This also facilitates <a href="https://ethresear.ch/t/mev-burn-a-simple-design/15590">MEV burn</a>. There have been concerns (<a href="https://ethresear.ch/t/mev-burn-a-simple-design/15590/4">1</a>, <a href="https://ethresear.ch/t/mev-burn-a-simple-design/15590/23">2</a>, <a href="https://ethresear.ch/t/dr-changestuff-or-how-i-learned-to-stop-worrying-and-love-mev-burn/17384/3">3</a>) around insufficient early bidding in the MEV pricing auctions with a base fee floor used in EA. By <a href="https://ethresear.ch/t/burn-incentives-in-mev-pricing-auctions/19856">considering the staking metagame</a>, this issue is potentially resolved, but the resulting attester–builder integration can then by itself be <a href="https://ethresear.ch/t/burn-incentives-in-mev-pricing-auctions/19856#risks-associated-with-attester-builder-integration-14">problematic</a>. There is also a general concern that the decided-upon auction design will <a href="https://mirror.xyz/barnabe.eth/QJ6W0mmyOwjec-2zuH6lZb0iEI2aYFB9gE-LHWIMzjQ">induce MEV</a>, and no definite specification among <a href="https://ethresear.ch/t/on-block-space-distribution-mechanisms/19764#preliminaries-12">several alternatives</a> for the auction design in ET. For this reason, it seems fruitful to explore an auction that facilitates true separation and does not induce MEV. One such mechanism recently proposed is the <a href="https://ethresear.ch/t/mev-resistant-dynamic-pricing-auction-of-execution-proposal-rights/20024">MEV resistant dynamic pricing auction</a>. In the context of Vickrey auctions of execution rights, <a href="https://forum.arbitrum.foundation/t/constitutional-aip-proposal-to-adopt-timeboost-a-new-transaction-ordering-policy/25167">Timeboost</a> under consideration by Arbitrum can also be mentioned.</p>
+<p>This post proposes a <a href="https://en.wikipedia.org/wiki/Vickrey_auction">Vickrey</a> slot auction in two rounds to select a forthcoming execution proposer (akin to EA), referred to as a sealed execution auction (SEA). Staked builders make sealed bids for the right to propose an execution block. Bids are observed by attesters and then collated by the beacon proposer. In subsequent steps, builders reveal their bids, attesters observe the revealed bids, and the proposer once again collates them. The right to propose a forthcoming execution block is awarded to the highest bidder, paying according to the second-highest bid, with the payment burned.</p>
+<h2><a class="anchor" href="https://ethresear.ch#auction-3" name="auction-3"></a>Auction</h2>
+<h3><a class="anchor" href="https://ethresear.ch#staked-builders-4" name="staked-builders-4"></a>Staked builders</h3>
+<p>Builders are staked at a level sufficient for the protocol to penalize them if they fail to reveal committed bids. The stake can also serve as a deposit account to pay for winning bids, or this account can be managed separately.</p>
+<h3><a class="anchor" href="https://ethresear.ch#sealed-bids-5" name="sealed-bids-5"></a>Sealed bids</h3>
+<p>Figure 1 gives an overview of the auction. In the first round, each builder has the opportunity to make one sealed bid over a public P2P layer. There might be a small fee for making a bid, as a further anti-Sybil measure. Attesters observe the sealed bids that have come in at time <span class="math">T_1</span>. Around two seconds later, at <span class="math">T_2</span>, the beacon proposer collates sealed bids (including any bids it finds after <span class="math">T_1</span>), and broadcasts them in a structure. This structure may be a beacon block if the auction proceeds over two slots (see <a href="https://ethresear.ch/t/sealed-execution-auction/20060#timeline-15">Timeline</a>). At <span class="math">T_3</span>, attesters observe the structure and make sure that all previously observed bids at <span class="math">T_1</span> have been included. If the bids were included in a beacon block, they will attest to the block contingent on correct and timely collation. If not included in a beacon block and the proposer equivocates on the structure, the subsequent block must be rejected.</p>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/e/9/e9efaf529cceda171c770e9160ed477ff7093303.png" title="Figure 1"><img alt="Figure 1" height="347" src="https://ethresear.ch/uploads/default/optimized/3X/e/9/e9efaf529cceda171c770e9160ed477ff7093303_2_690x347.png" width="690" /></a></div><p></p>
+<p><strong>Figure 1.</strong> Sealed execution auction. Staked builders submit sealed bids before <span class="math">T_1</span> and the proposer collates them at <span class="math">T_2</span>. At <span class="math">T_3</span> attesters ensure that all bids they observed at <span class="math">T_1</span> are part of the collated structure. Builders unseal the bids after <span class="math">T_3</span> and attesters observe them at <span class="math">T_4</span>. The proposer then collates bids in a beacon block at <span class="math">T_5</span> and attesters attests to the block at <span class="math">T_6</span> contingent on correct collation. The highest unsealed bid wins, paying a fee corresponding to the second highest bid. The fee is burned. Builders that did not unseal their bids are penalized.</p>
+<h3><a class="anchor" href="https://ethresear.ch#revealed-bids-6" name="revealed-bids-6"></a>Revealed bids</h3>
+<p>In the second round, after the <span class="math">T_3</span> deadline, builders unseal their bids. They should not release before <span class="math">T_3</span>, because then the proposer can collude with other builders to release a bid structure with some bids placed after other bids were revealed. However, they do not need to observe the proposer’s structure before release, and can proceed right after the <span class="math">T_3</span> mark.</p>
+<p>Attesters observe unsealed bids at <span class="math">T_4</span>. The proposer collates all unsealed bids it can find, including them in the beacon block at around <span class="math">T_5</span>. It may also include bids that were never unsealed, so that the associated builder can be penalized (this is a strict requirement in the single-slot design, because then the sealed bids have not been included in a previous beacon block). The highest bid is selected as the forthcoming execution proposer, and the second highest bid value is deducted from the winner’s balance and burned. At <span class="math">T_6</span>, attesters attest to the beacon block, contingent on a correct collation by the beacon proposer.</p>
+<h2><a class="anchor" href="https://ethresear.ch#rationale-7" name="rationale-7"></a>Rationale</h2>
+<p>Collusion between builders and proposers to reduce the burn as in the MEV burn design is arguably resolved; without stakers actively burning each others’ MEV revenue.</p>
+<ul>
+<li>There is no longer a stable equilibrium to rely on for colluding parties, such as late bidding.</li>
+<li>The proposer no longer has leverage to punish early bidders by electing another builder.</li>
+<li>Chiseling at a cartel is trivial, simply by truthful bidding.</li>
+<li>Every bid fulfills a real purpose, as opposed to early bids in MEV pricing auctions.</li>
+<li>There is no avenue for discouragement attacks, since there is no substantial proposer revenue to remove.</li>
+</ul>
+<h2><a class="anchor" href="https://ethresear.ch#penalization-8" name="penalization-8"></a>Penalization</h2>
+<p>Several actions must be penalized. If the proposer omits an observed sealed bid in the first round or an observed revealed bid in the second round, the proposer’s block must be rejected by attesters. If the proposer fails to release the structure of the sealed bids in the first round or the revealed bids in the second round in a timely manner (reaching attesters before <span class="math">T_3</span> and <span class="math">T_6</span> respectively), the proposer’s block must also be rejected by attesters.</p>
+<p>It is possible that a builder made a mistake and will be unable to pay for its bid, if the bid is higher than its staked amount. This will be penalized by burning some proportion of the stake, for example corresponding to the amount of the actual winning bid, some fixed amount of ETH, or its entire stake. In any case, if its unbacked bid is the highest, the builder will not win the auction. The second highest bid will instead be selected as the execution proposer, paying the third highest bid, etc. If the bid underpinning the fee (normally the second highest bid) lacks funds, the bid below it will be set to underpin the fee.</p>
+<h2><a class="anchor" href="https://ethresear.ch#builder-proposer-collusion-and-possible-remedies-9" name="builder-proposer-collusion-and-possible-remedies-9"></a>Builder–proposer collusion and possible remedies</h2>
+<p>A potential cause for concern is the following scenario: a builder determines that it would not like to unseal its bid (potentially after observing other builders’ unsealed bids). It does not want to subject itself to a penalty, so it colludes with the proposer to have it miss the slot. Is this a cause for concern? This ultimately depends on if the builder benefits more by <em>not</em> revealing its bid than the proposer loses from a missed proposal. This could be the case when bidding for the right to propose the current or next slot, and the expected MEV falls drastically between bid commit and reveal (i.e., a <a href="https://mirror.xyz/barnabe.eth/QJ6W0mmyOwjec-2zuH6lZb0iEI2aYFB9gE-LHWIMzjQ">value-in-flight</a> problem). Another potential cause for concern is if the value instead increases drastically. The proposer might then pose an ultimatum to the winning builder: “send me some part of expected profits, or I will fail to propose”. A failed proposal would leave the builder without rights for the slot. An <a href="https://en.wikipedia.org/wiki/Ultimatum_game">ultimatum game</a> emerges. The other builders might also be inclined to pay the proposer, in order to starve off competition, and the winning builder would then also need to pay the proposer to ensure it proposes.</p>
+<p>While the outlined collusion scenarios may be a bit speculative, it can still be interesting to explore possible remedies. A few directions then spring to mind:</p>
+<h4><a class="anchor" href="https://ethresear.ch#h-1-penalize-beacon-proposers-for-missed-beacon-blocks-10" name="h-1-penalize-beacon-proposers-for-missed-beacon-blocks-10"></a>1. Penalize beacon proposers for missed beacon blocks</h4>
+<p>Proposers already lose out on revenue if they miss their block. However, this loss might not be a sufficient deterrent. It would therefore be beneficial to also penalize proposers if they miss their blocks. Otherwise, if the penalty applied to a builder is substantially higher than the loss from missed proposals for the proposer, that builder penalty will be less meaningful. Builders could seek to collude to let the proposer take the fall. In essence, if the value to the builder, its competitors, or the proposer, of having the builder not win the auction, is higher than the loss to the proposer of not proposing, then collusion or an ultimatum game may emerge.</p>
+<h4><a class="anchor" href="https://ethresear.ch#h-2-require-subsequent-beacon-proposers-to-conclude-the-auction-11" name="h-2-require-subsequent-beacon-proposers-to-conclude-the-auction-11"></a>2. Require subsequent beacon proposers to conclude the auction</h4>
+<p>Is it possible to have the next beacon proposer conclude the auction? This depends to some extent on the <a href="https://ethresear.ch/t/sealed-execution-auction/20060#timeline-15">Timeline</a> of the auction.</p>
+<ul>
+<li><strong>Single-slot design:</strong> In the single-slot design, attesters do not signal if they rejected a block because of an incorrect initial structure, a late structure, or an incorrect or missing beacon block. A way to deal with this is that the next proposer presents the correct outcome of the auction, in its own view, and that the attesters of <span class="math">n+2</span> either reject or confirm the new block based on the proposed outcome. But this means that these attesters must also have tracked events in the previous slot as they unfolded, and any split views (e.g., from a rather late sealed builder bid) may persist for several blocks in a row.</li>
+<li><strong>Two-slot design:</strong> If the auction commences over two slots, there will be an agreed-upon set of committed sealed bids, or the first beacon block will have been rejected. The second step of the auction can then be concluded in a subsequent slot without requiring attesters to have observed the commit-phase. The requirement is to still have attesters make an observation of unsealed bids sometime before the proposer deadline. But that point need not necessarily be taken from the earlier slot. A benefit is that this might starve off split views.</li>
+</ul>
+<p>One thing to note is that if a builder finds it worthwhile to pay the first proposer to not propose, in order to avoid revealing a bid without being penalized, it might be willing to pay also a second proposer for not proposing. However, the price will go up, and the number of potential collusion partners scheduled to propose in a row may not be too large. It should also be noted that when auctioning off rights for slot <span class="math">n+i</span>, there is a requirement that the delay until the conclusion of the auction does not surpass <span class="math">i</span>. In other words, it will only be possible to repeat a failed auction around <span class="math">i</span> times. Note that this requirement is also due to the fact that the order in which auctioned off execution rights are provided cannot be altered ex post, since the expected MEV for slots may vary.</p>
+<h4><a class="anchor" href="https://ethresear.ch#h-3-skip-the-beacon-proposal-reveal-12" name="h-3-skip-the-beacon-proposal-reveal-12"></a>3. Skip the beacon proposal reveal</h4>
+<p>Is it possible to skip the beacon proposal reveal? If all bids are unsealed, the outcome will be evident to every participant. The mechanism can then be designed such that the winning builder safely can propose its block at the assigned slot, even if a proposer has not collated the outcome and presented a winner. The previous option 2 is focused on concluding the auction via a beacon proposal in time before the execution proposal, but the point here is that the auction does not need to be concluded by the proposer as long as the outcome is evident to the builder and can be verified by attesters when the builder proposes its block. The sealed bids must then have been included in a beacon block, as in the two-slot design.</p>
+<p><a href="https://en.wikipedia.org/wiki/Threshold_cryptosystem">Threshold decryption</a> via a committee of attesters (h/t Barnabé) is one option here. The bids are decrypted by a committee, and the winner made evident to the builders/forthcoming proposer and attesters. There would still be liveness concerns, but collusion would be more difficult. It can be noted that as long as all builders unseal their bids in a timely manner (even without threshold decryption), the winning builder can proceed with the proposal. Always penalizing builders that do not unseal their bids before <span class="math">T_4</span> could then seem sufficient, but the issue is that split views would emerge in potential designs. In any case, the outcome would also at some point need to be included in a block, to process payment and penalties.</p>
+<h4><a class="anchor" href="https://ethresear.ch#h-4-auction-of-a-future-slot-to-reduce-value-in-flight-13" name="h-4-auction-of-a-future-slot-to-reduce-value-in-flight-13"></a>4. Auction of a future slot to reduce value-in-flight</h4>
+<p>The Vickrey auction is truthful, allowing builders to bid their true value at the commit deadline. Since value-in-flight is the most likely cause for collusion, auctioning off a slot further removed from the present will temper the issue.</p>
+<h4><a class="anchor" href="https://ethresear.ch#auctioning-off-multiple-slots-14" name="auctioning-off-multiple-slots-14"></a>Auctioning off multiple slots</h4>
+<p>Note that to avoid having a failed beacon proposal result in a missing execution proposal, there is also the option to sell the right to two execution proposals in the subsequent slot (with builders bidding their <a href="https://en.wikipedia.org/wiki/Vickrey_auction">inverse demand curve</a> and paying according to the second and third highest bids).</p>
+<h2><a class="anchor" href="https://ethresear.ch#timeline-15" name="timeline-15"></a>Timeline</h2>
+<p>This section presents two hypothetical timelines for the auction, either when only including unsealed bids in the beacon block (single-slot auction) or when including both sealed and unsealed bids in separate beacon blocks (two-slot auction).</p>
+<h3><a class="anchor" href="https://ethresear.ch#single-slot-auction-16" name="single-slot-auction-16"></a>Single-slot auction</h3>
+<p>Example of a slot auction with a tight schedule enacted mostly during a single slot <span class="math">n</span>, auctioning off execution proposal rights for a later slot <span class="math">n+i</span>.</p>
+<div class="md-table">
+<table>
+<thead>
+<tr>
+<th><span class="math">T_x</span></th>
+<th>Time</th>
+<th>Overview</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="math">T_1</span></td>
+<td>4s</td>
+<td><strong>Sealed bid deadline</strong></td>
+<td>Attesters of slot <span class="math">n+1</span> observe all sealed bids. Builders must have broadcast them some time before this point to ensure eligibility.</td>
+</tr>
+<tr>
+<td><span class="math">T_2</span></td>
+<td>6s</td>
+<td><strong>Proposer collates bids</strong></td>
+<td>The proposer of slot <span class="math">n+1</span> releases a structure containing all sealed bids it can find.</td>
+</tr>
+<tr>
+<td><span class="math">T_3</span></td>
+<td>8s</td>
+<td><strong>Attesters observe collation</strong></td>
+<td>Attesters of slot <span class="math">n+1</span> observe the proposer’s structure to ensure it contains all bids they had seen at <span class="math">T_1</span> and that the release of this structure is timely.</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><span class="math">T_4</span></td>
+<td>10s</td>
+<td><strong>Revealed bid deadline</strong></td>
+<td>Attesters of slot <span class="math">n+1</span> observe unsealed bids. Builders must have broadcast them some time before this point (but after <span class="math">T_3</span>) to ensure eligibility.</td>
+</tr>
+<tr>
+<td><span class="math">T_5</span></td>
+<td>0s (12s)</td>
+<td><strong>Proposer collates in beacon block</strong></td>
+<td>The proposer of slot <span class="math">n+1</span> includes every unsealed bid it can find in the  block, also indicating sealed bids that were never unsealed. A winner is declared.</td>
+</tr>
+<tr>
+<td><span class="math">T_6</span></td>
+<td>4s (12+4s)</td>
+<td><strong>Attesters confirm collation</strong></td>
+<td>Attesters of slot <span class="math">n+1</span> confirm that the proposer fulfilled its role and collated bids in a timely manner by attesting to the block.</td>
+</tr>
+</tbody>
+</table>
+</div><p>Note that builders can unseal their bids directly after <span class="math">T_3</span>. This should allow attesters of slot <span class="math">n+1</span> to observe revealed bids at 10s. However, if needed, the entire schedule could be pushed back slightly.</p>
+<h3><a class="anchor" href="https://ethresear.ch#two-slot-auction-17" name="two-slot-auction-17"></a>Two-slot auction</h3>
+<p>Here is an example of a schedule for the two-slot auction:</p>
+<div class="md-table">
+<table>
+<thead>
+<tr>
+<th><span class="math">T_x</span></th>
+<th>Time</th>
+<th>Overview</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="math">T_1</span></td>
+<td>10s</td>
+<td><strong>Sealed bid deadline</strong></td>
+<td>Attesters of slot <span class="math">n+1</span> observe all sealed bids. Builders must have broadcast them some time before this point to ensure eligibility.</td>
+</tr>
+<tr>
+<td><span class="math">T_2</span></td>
+<td>0s (12s)</td>
+<td><strong>Proposer collates bids</strong></td>
+<td>The proposer of slot <span class="math">n+1</span> includes all sealed bids it can find in its beacon block.</td>
+</tr>
+<tr>
+<td><span class="math">T_3</span></td>
+<td>4s (12+4s)</td>
+<td><strong>Attesters confirm collation</strong></td>
+<td>Attesters of slot <span class="math">n+1</span> confirm that the proposer fulfilled its role and collated bids in a timely manner by attesting to the block.</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><span class="math">T_4</span></td>
+<td>8s (12+8s)</td>
+<td><strong>Revealed bid deadline</strong></td>
+<td>Attesters of slot <span class="math">n+2</span> observe unsealed bids. Builders must have broadcast them some time before this point (but after <span class="math">T_3</span>) to ensure eligibility.</td>
+</tr>
+<tr>
+<td><span class="math">T_5</span></td>
+<td>0s (12+12s)</td>
+<td><strong>Proposer collates in beacon block</strong></td>
+<td>The proposer of slot <span class="math">n+2</span> includes every unsealed bid it can find in the  block, potentially indicating sealed bids that were never unsealed. A winner is declared.</td>
+</tr>
+<tr>
+<td><span class="math">T_6</span></td>
+<td>4s (12+12+4s)</td>
+<td><strong>Attesters confirm collation</strong></td>
+<td>Attesters of slot <span class="math">n+2</span> confirm that the proposer collated all unsealed bids by attesting to the block.</td>
+</tr>
+</tbody>
+</table>
+</div>
+            <p><small>1 post - 1 participant</small></p>
+            <p><a href="https://ethresear.ch/t/sealed-execution-auction/20060">Read full topic</a></p>
+]]></content:encoded>
+<pubDate>Sat, 13 Jul 2024 16:30:07 +0000</pubDate>
+<pubDate>Sat, 13 Jul 2024 16:30:07 +0000</pubDate>
+</item>
+
+<item>
 <title>Staking Rights Auctions</title>
 <link>https://ethresear.ch/t/staking-rights-auctions/20059</link>
 <guid>https://ethresear.ch/t/staking-rights-auctions/20059</guid>
@@ -141,9 +323,7 @@ Its not 100% applicable to this specific auction, but a classical proof from Gam
             <p><a href="https://ethresear.ch/t/staking-rights-auctions/20059">Read full topic</a></p>
 ]]></content:encoded>
 <pubDate>Sat, 13 Jul 2024 14:53:13 +0000</pubDate>
-<pubDate>Sat, 13 Jul 2024 14:53:13 +0000</pubDate>
 </item>
-
 <item>
 <title>Bitfinity: A new sharded blockchain</title>
 <link>https://ethresear.ch/t/bitfinity-a-new-sharded-blockchain/20054</link>
