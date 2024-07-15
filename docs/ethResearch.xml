@@ -4,6 +4,364 @@
 <title>Ethereum Research - Latest topics</title>
 <link>https://ethresear.ch/latest</link>
 
+<item>
+<title>A Note On Securely Finding Minimum Mean Cycle</title>
+<link>https://ethresear.ch/t/a-note-on-securely-finding-minimum-mean-cycle/20073</link>
+<guid>https://ethresear.ch/t/a-note-on-securely-finding-minimum-mean-cycle/20073</guid>
+<content:encoded><![CDATA[
+<div> 关键词：隐私保护、Minimum Mean Cycle (MMC)、Multi-Party Computation (MPC)、Karp算法、Chaturvedi-McConnell方法
+
+总结:
+本文研究了在执行图优化算法，如Minimum Mean Cycle (MMC)，同时保护用户和公司之间敏感信息的问题。先前的工作中，Aly等人的方法基于Karp算法，但存在周期检测问题。作者提出了一种改进的协议，解决了这个问题并提高了效率。新协议使用MP-SPDZ实现，时间复杂度从O(|V|^5)降低到O(|V|^3)，空间复杂度从O(|V|^4)减小到O(|V|^2)。研究着重于在保证隐私的同时，提高MM <div>
+<p>This study is supported by an Ethereum Foundation R&amp;D grant and is a collaborative work with Enrico ( <a class="mention" href="https://ethresear.ch/u/enricobottazzi">@enricobottazzi</a> ), Masato ( <a class="mention" href="https://ethresear.ch/u/0xvon">@0xvon</a> ) and Nam ( <a class="inline-onebox" href="https://github.com/namnc" rel="noopener nofollow ugc">namnc (Nam Ngo) · GitHub</a> ) from Ethereum Foundation.</p>
+<p><strong>Abstract</strong></p>
+<p>Executing graph optimization algorithms such as the Minimum Mean Cycle (MMC) while preserving privacy has significant potential for handling sensitive information between users and companies. For example, it enables multilateral netting to solve the Minimum Cost Flow (MCF) problem without disclosing mutual debts, making it highly relevant for processes like netting among multinational corporations. Aly et. al. [2] proposed an algorithm using Multi-Party Computation (MPC) to execute the MMC problem. However, this approach is based on Karp’s algorithm [1], which was found by Chaturvedi et al. [3] to occasionally fail to detect cycles. In this study, we propose a revised protocol that corrects this issue and enhances its efficiency. We implemented our protocol using MP-SPDZ and confirmed that it correctly identifies the MMC, similar to traditional protocols. Our findings indicate that our proposed protocol operates correctly and more efficiently than Aly’s protocol, which reduces the time/round complexity from <span class="math">O(|V|^5)</span> to <span class="math">O(|V|^3)</span> and the space complexity from <span class="math">O(|V|^4)</span> to <span class="math">O(|V|^2)</span>. Furthermore, we discuss potential improvements for even more efficient algorithms.</p>
+<h1><a class="anchor" href="https://ethresear.ch#h-1-introduction-1" name="h-1-introduction-1"></a>1. Introduction</h1>
+<h3><a class="anchor" href="https://ethresear.ch#h-1-1-importance-of-graph-theory-optimization-2" name="h-1-1-importance-of-graph-theory-optimization-2"></a>1-1. Importance of Graph Theory Optimization</h3>
+<p>Graph theory optimization problems play a crucial role in various domains, from computer science and engineering to economics and finance. These problems involve finding the most efficient way to navigate, connect, or utilize network structures, and solutions to these problems have far-reaching implications for improving systems and processes.</p>
+<p>One of the representative problems in graph theory optimization is the Minimum Cost Flow (MCF) problem, which aims to find the least costly way to send a certain amount of flow through a network. The MCF problem is foundational in numerous applications, providing critical insights and optimizations.</p>
+<p>In the financial sector, particularly in Netting, the Minimum Cost Flow (MCF) problem is often addressed to optimize the settlement of transactions and reduce systemic risk. Netting involves aggregating multiple financial obligations to streamline transactions, minimize risk, and enhance efficiency. However, one of the critical challenges in this context is maintaining the privacy and confidentiality of sensitive financial data. Traditional methods for solving the MCF problem may require exposing transaction details, leading to significant privacy concerns and potential security risks.</p>
+<p>Beyond netting, the MMC problem and its solutions have a wide array of applications across various fields:</p>
+<ul>
+<li><strong>Network Security:</strong> Enhancing security measures by optimizing the flow of information and resources while minimizing potential points of vulnerability.</li>
+<li><strong>Supply Chain Management</strong>: Streamlining logistics and distribution networks to reduce costs and improve delivery times.</li>
+<li><strong>Urban Planning</strong>: Developing efficient transportation systems by optimizing traffic flow and reducing congestion.</li>
+</ul>
+<p>The Minimum Mean Cycle (MMC) problem is a crucial component in solving the MCF problem. The MMC problem focuses on identifying cycles in directed graphs with the minimum average weight, which is essential for detecting inefficient paths and optimizing network performance. By incorporating the MMC problem into the solution of the MCF problem, we can achieve more accurate and efficient outcomes.</p>
+<p>To address the privacy concerns inherent in solving the MCF problem, we explore the use of Multi-Party Computation (MPC) to securely solve the MMC problem. MPC is a cryptographic approach that allows multiple parties to collaboratively compute a function over their inputs while keeping those inputs private. By applying MPC techniques, we can solve the MMC problem without exposing sensitive data, thus preserving the privacy of financial transactions and other confidential information.</p>
+<h3><a class="anchor" href="https://ethresear.ch#h-1-2-previous-work-3" name="h-1-2-previous-work-3"></a>1-2. Previous Work</h3>
+<p>Aly et al. [2] proposed a method to solve Karp’s MMC algorithm [1] using Multi-Party Computation. However, this approach has some problems and suffers from significant computational complexity and time consumption. Additionally, the Karp’s algorithm [1] was found by Chaturvedi et al . [3] to occasionally fail to detect cycles.</p>
+<h3><a class="anchor" href="https://ethresear.ch#h-1-3-our-contribution-4" name="h-1-3-our-contribution-4"></a>1-3. Our Contribution</h3>
+<p>in this study, we propose a novel approach that not only addresses these shortcomings but also offers a more efficient and practical solution for securely solving the MMC problem using MPC. Our proposed protocol aims to reduce computational and time complexities, enhance cycle detection accuracy, and ensure robust privacy protection. Our experimental results demonstrate a significant improvement in efficiency, with a reduction in time complexity from <span class="math">O(|V|^5)</span> to <span class="math">O(|V|^3)</span> and space complexity from <span class="math">O(|V|^4)</span> to <span class="math">O(|V|^2)</span>.</p>
+<h1><a class="anchor" href="https://ethresear.ch#h-2-minimum-mean-cycle-problem-5" name="h-2-minimum-mean-cycle-problem-5"></a>2. Minimum Mean Cycle Problem</h1>
+<p>Minimum Mean Cycle Problem and its solution is defined by Karp in 1978 [1].</p>
+<h3><a class="anchor" href="https://ethresear.ch#h-2-1-problem-definition-6" name="h-2-1-problem-definition-6"></a>2-1. Problem Definition</h3>
+<p>Given a connected graph <span class="math">G(V,E)</span> where <span class="math">V</span> is a set of nodes and <span class="math">E</span> is a set of edges, with defining these parameters:</p>
+<ul>
+<li><span class="math">c_{i,j} \in C</span> denotes the <strong>cost</strong> on the edge <span class="math">(i,j)</span>.</li>
+<li><span class="math">d^k(i)</span> denotes the minimum cost from node <span class="math">s</span> to <span class="math">i</span> that contains exactly <span class="math">k</span> edges.</li>
+</ul>
+<p>First of all, for any cycle <span class="math">X</span>, the mean cycle is defined by:</p>
+<div class="math">
+\begin{equation}
+\mu (X) = \frac{\sum_{uv \in X} c_{uv}}{|X|}
+\end{equation}
+</div>
+<p>Thus, the minimum mean cycle is:</p>
+<div class="math">
+\begin{equation}
+\mu ^* = \min_{cycle X} \mu (X)
+\end{equation}
+</div>
+<p>Minimum Mean Cycle (MMC) Problem is the problem to find this <span class="math">\mu ^*</span>.</p>
+<h3><a class="anchor" href="https://ethresear.ch#h-2-2-efficient-mmc-7" name="h-2-2-efficient-mmc-7"></a>2-2. Efficient MMC</h3>
+<p>The MMC problem is known as NP-hard, and Karp introduces an efficient algorithm for solving it. The solution is followed by 2 steps.</p>
+<p>The first step, we call it as <strong>Walk</strong>, is to calculates <span class="math">d^k(i)</span>, which denotes minimum cost from node <span class="math">s</span> to <span class="math">i</span> that contains exactly <span class="math">k</span> edges. Walk can be computed via the recurrence:</p>
+<div class="math">
+\begin{equation}
+d^k(j) = \min_{(i,j) \in E} d^{k-1}(i)+c_{ij}
+\end{equation}
+</div>
+<p>Initially, <span class="math">d^0(j)=\infty</span>, except for the source node <span class="math">d^0(s)=0</span></p>
+<p>The second step is to calculate the minimum mean cycle by:</p>
+<div class="math">
+\begin{equation}
+\mu^* = \min_{j \in V} \max_{0 \leq k \leq |V|-1} \left[ \frac{d^V(j) - d^k(j)}{|V| - k} \right]
+\end{equation}
+</div>
+<p>See Karp’s paper [1] for a proof of equation (4). Overall algorithmic complexity is <span class="math">O(|V| \cdot |E|)</span>, and the first step has a significant impact on the entire algorithm.</p>
+<h1><a class="anchor" href="https://ethresear.ch#h-3-alys-secure-mmc-protocol-8" name="h-3-alys-secure-mmc-protocol-8"></a>3. Aly’s Secure MMC Protocol</h1>
+<p><strong>Notation</strong></p>
+<ul>
+<li><span class="math">[a]</span> denotes secret shared or encrypted values of <span class="math">a</span></li>
+<li><span class="math">[z] = _{[c]} [x]:[y]</span> denotes the assignment that if <span class="math">[c]</span> is one, <span class="math">[x]</span> is assigned to <span class="math">[z]</span> or <span class="math">[y]</span> otherwise.</li>
+</ul>
+<h3><a class="anchor" href="https://ethresear.ch#h-3-1-protocol-9" name="h-3-1-protocol-9"></a>3-1. Protocol</h3>
+<p>Aly et. al. [2] provide algorithmic solutions to MMC problem in a secure multi-party and distributed setting. This protocol is constructed by 2 sub-protocols:</p>
+<ol>
+<li><span class="math">walk([C],[b]) \rightarrow [A],[walks]</span></li>
+<li><span class="math">mmc([A],[walks]) \rightarrow [\text{min-cost}], [\text{min-cycle}]</span></li>
+</ol>
+<p>This corresponds to Steps 1 and 2 of Karp’s Algorithm in section 2.</p>
+<p>In first sub-protocol, we have two inputs. The cost matrix <span class="math">[C]_{ij}</span> denotes the cost of edge <span class="math">(i,j)</span>. It represents <span class="math">[\infty]</span> for non-existing edges. The viable matrix <span class="math">[b]_{ij}</span> denotes 1 if edge <span class="math">(i,j)</span> doesn’t exist, and 0 otherwise.</p>
+<p>From these inputs, we outputs two values. One is the 2-dimensional walk cost matrix <span class="math">[A]</span> which <span class="math">[A]_{jk}</span> records <span class="math">d^k(j)</span>. The other is 4-dimensional walk path matrix <span class="math">[walks]</span> which <span class="math">[walks]_{ijkl}</span> records the number of times the edge <span class="math">(i,j)</span> is traversed by the shortest walk of length <span class="math">k</span> from <span class="math">s</span> to <span class="math">l</span>. The algorithm is detailed as Protocol 3-1.</p>
+<hr />
+<p><strong>Protocol 3-1. Aly’s Walk Protocol</strong></p>
+<hr />
+<p><strong>Input</strong>: A matrix of shared costs <span class="math">[C]_{ij}</span> for <span class="math">i,j \in \{1,2,...,|V|\}</span>, a binary matrix on viable adges <span class="math">[b]_{ij}</span> for <span class="math">i,j \in \{1,2,...,|V|\}</span>.</p>
+<p><strong>Output</strong>: A matrix of walk costs <span class="math">[A]_{ik}</span> for <span class="math">i \in \{1,2,...,|V|\}</span> and <span class="math">k \in \{0,1,...,|V|\}</span>, a wak matrix <span class="math">[walks]_{ijkl}</span> for <span class="math">i,j,k,l \in \{1,2,...,|V|\}</span> encoding these walks.</p>
+<ol>
+<li><span class="math">[A] \leftarrow [\infty], [A]_{00} \leftarrow [0], [C] \leftarrow [C] + [\infty](1-[b])</span></li>
+<li><strong>for</strong> <span class="math">k \leftarrow 1</span> to <span class="math">|V|+1</span> do
+<ol>
+<li><strong>for</strong> <span class="math">j \leftarrow 1</span> to <span class="math">|V|</span> do
+<ol>
+<li><strong>for</strong> <span class="math">i \leftarrow 1</span> to <span class="math">|V|</span> do
+<ol>
+<li><span class="math">[c] \leftarrow [A]_{ik-1} + [C]_{ij} &lt; [A]_{jk}</span></li>
+<li><span class="math">[A]_{jk} \leftarrow _{[c]} [A]_{ik-1} + [C]_{ij} : [A]_{jk}</span></li>
+<li><span class="math">[walks]_{..kj} \leftarrow _{[c]} [walks]_{..k-1i} : [walks]_{..kj}</span></li>
+<li><span class="math">[walks]_{ijkj} \leftarrow _{[c]} [walks]_{ijkj} + 1 : [walks]_{ijkj}</span></li>
+</ol>
+</li>
+<li><strong>end</strong></li>
+</ol>
+</li>
+<li><strong>end</strong></li>
+</ol>
+</li>
+<li><strong>end</strong></li>
+</ol>
+<hr />
+<p>In second sub-protocol, we have two outputs. <span class="math">[\text{min-cost}]</span> is the minimum mean cost. <span class="math">[\text{min-cycle}]</span> denotes the 2-dimensional cycle matrix which <span class="math">[\text{min-cycle}]_{jk}</span> is 1 if edge <span class="math">(j,k)</span> is included in the cycle achieving <span class="math">\mu ^*</span> and 0 otherwise. Here, <span class="math">\text{min-cycle}</span> is s-j path with <span class="math">|V|</span> edges whose cost is <span class="math">d^{|V|}(j)</span>, minus the s-j path with k edges whose cost is <span class="math">d^{k}(j)</span>. The details are provided as protocol 3-2. We note that we use the theorem that <span class="math">\frac{a}{b}&gt;\frac{c}{d} \iff ad&gt;bc</span> to make a comparison of <span class="math">\frac{d^V(j) - d^k(j)}{|V| - k}</span> without calculating the inverse.</p>
+<hr />
+<p><strong>Protocol 3-2. Aly’s MMC Protocol</strong></p>
+<hr />
+<p><strong>Input:</strong> A matrix of walk costs <span class="math">[A]_{ik}</span> for <span class="math">i \in \{1,2,...,|V|\}</span> and <span class="math">k \in \{0,2,...,|V|\}</span>, a walk matrix <span class="math">[walks]_{ijkl}</span> for <span class="math">i,j,k,l \in \{1,2,...,|V|\}</span> encoding these walks.</p>
+<p><strong>Output</strong>: The cost of the minimum mean cycle <span class="math">[\text{min-cost}]</span>, a matrix with the minimum mean cycle <span class="math">[\text{min-cycle}]_{ij}</span> for <span class="math">i,j \in \{1,2,...,|V|\}</span></p>
+<ol>
+<li>
+<p><strong>for</strong> <span class="math">j \leftarrow 1</span> to <span class="math">|V|</span> do</p>
+<ol>
+<li><span class="math">[\text{max-cycle}],[\text{max-cost}] \leftarrow \phi</span></li>
+<li><strong>for</strong> <span class="math">k \leftarrow |V|</span> to <span class="math">1</span> do
+<ol>
+<li><span class="math">[\text{a-num}] \leftarrow [A]_{j(|V|+1)} - [A]_{jk}</span></li>
+<li><span class="math">[\text{a-den}] \leftarrow |V|-k</span></li>
+<li><span class="math">[c] \leftarrow [\text{k-num}] \cdot [\text{a-den}] &lt; [\text{a-num}] \cdot [\text{k-den}]</span></li>
+<li><span class="math">[\text{k-num}] \leftarrow _{[c]} [\text{a-num}]  : [\text{k-num}]</span></li>
+<li><span class="math">[\text{k-den}] \leftarrow _{[c]} [\text{a-den}]  : [\text{k-den}]</span></li>
+<li><span class="math">[\text{max-cycle}] \leftarrow _{[c]} [walks]_{..|V|j} - [walks]_{..kj} : [\text{max-cycle}]</span></li>
+<li><span class="math">[\text{max-cost}] \leftarrow _{[c]} [A]_{jk} : [\text{max-cost}]</span></li>
+</ol>
+</li>
+<li><strong>end</strong></li>
+<li><span class="math">[c] \leftarrow [\text{j-num}] \cdot [\text{k-den}] &lt; [\text{k-num}] \cdot [\text{j-den}]</span></li>
+<li><span class="math">[\text{j-num}] \leftarrow _{[c]} [\text{k-num}]  : [\text{j-num}]</span></li>
+<li><span class="math">[\text{j-den}] \leftarrow _{[c]} [\text{k-den}]  : [\text{j-den}]</span></li>
+<li><span class="math">[\text{min-cycle}] \leftarrow _{[c]} [\text{max-cycle}] : [\text{min-cycle}]</span></li>
+<li><span class="math">[\text{min-cost}] \leftarrow _{[c]} [\text{max-cost}] : [\text{min-cost}]</span></li>
+</ol>
+</li>
+<li>
+<p><strong>end</strong></p>
+</li>
+</ol>
+<hr />
+<p><strong>Complexity</strong></p>
+<p>This method requires <span class="math">O(|V|^5)</span> time/round complexity, from the conditional assignments to <span class="math">|V| \times |V|</span> elements in <span class="math">[walks]</span> matrix for <span class="math">|V|^3</span> loops (line i-3~4 of Protocol 1). And this method requires <span class="math">O(|V|^4)</span> space complexity, due to 4-dimensional <span class="math">[walks]</span> matrix.</p>
+<h3><a class="anchor" href="https://ethresear.ch#h-3-2-problem-in-alys-protocol-10" name="h-3-2-problem-in-alys-protocol-10"></a>3-2. Problem in Aly’s Protocol</h3>
+<p>Aly’s protocol implements Karp algorithm [1] in the secure manner. In karp’s alrogithm, we determine <span class="math">\text{min-cycle}</span> like s-j path with <span class="math">|V|</span> edges whose cost is <span class="math">d^{|V|}(j)</span>, minus the s-j path with k edges whose cost is <span class="math">d^{k}(j)</span>. However, Chaturvedi and McConnell [3] provides an counterexample which the cycle couldn’t detected with this method. Furthermore, they prove the following lemma.</p>
+<p><strong>Lemma 1</strong><br />
+Let <span class="math">j</span> be a vertex such that there exists <span class="math">k</span>, where <span class="math">j</span> and <span class="math">k</span> are a minimizing pair. Every cycle on the length <span class="math">|V|</span> edge progression from <span class="math">s</span> to <span class="math">j</span> of cost <span class="math">d^{|V|}(j)</span> is a cycle of minimum mean cost. (See the proof on their paper [3].)</p>
+<p>This lemma means that the cycle can be detected by traversing the edge progression from the last edge and marking the vertices visited by the walk until a previous marked vertex is encountered, from s-j path with <span class="math">|V|</span> edges whose cost is <span class="math">d^{|V|}(j)</span>.</p>
+<h1><a class="anchor" href="https://ethresear.ch#h-4-cm-based-secure-mmc-protocol-11" name="h-4-cm-based-secure-mmc-protocol-11"></a>4. CM-based Secure MMC Protocol</h1>
+<p><strong>Notation</strong></p>
+<ul>
+<li><span class="math">[a]</span> denotes secret shared or encrypted values of <span class="math">a</span></li>
+<li><span class="math">[z] = _{[c]} [x]:[y]</span> denotes the assignment that if <span class="math">[c]</span> is one, <span class="math">[x]</span> is assigned to <span class="math">[z]</span> or <span class="math">[y]</span> otherwise.</li>
+</ul>
+<h3><a class="anchor" href="https://ethresear.ch#h-4-1-protocol-12" name="h-4-1-protocol-12"></a>4-1. Protocol</h3>
+<p>We propose a protocol that converts the minimum mean cycle detection from Aly’s protocol to one with Lemma1. In addition, a few changes have been made to the data structure. We name it “<strong>CM-based Securely MMC Protocol</strong>”, taking the initials of Chaturvedi and McConnell, who proposed Lemma 1.</p>
+<p>CM-based protocol is constructed by 3 sub-protocols:</p>
+<ol>
+<li><span class="math">walk([C],[b]) \rightarrow [A],[ep]</span></li>
+<li><span class="math">mmc</span>
+<ol>
+<li><span class="math">mmcn([A],[ep]) \rightarrow [\text{min-cost}],[\text{minimizing-node}]</span></li>
+<li><span class="math">extract\text{-}cycle([\text{minimizing-node}],[ep]) \rightarrow [\text{min-cycle}]</span></li>
+</ol>
+</li>
+</ol>
+<p>Here, Aly’s second sub-protocol is divided into CM-based second and third sub-protocols.</p>
+<p>In fist sub-protocol, For the most part, it is the same as Protocol 3-1, with one difference: Instead of <span class="math">[walks]</span>, we record the edge progression in a 2-dimensional matrix called <span class="math">[ep]</span>, which <span class="math">[ep]_{jk}</span> means the edge that passes before one of <span class="math">j</span> in the shortest s-j path with k edges. This change eliminates the need for extra <span class="math">|V|^2</span> loops to update <span class="math">[walks]_{..kj}</span>. The algorithm is detailed as Protocol 4-1.</p>
+<hr />
+<p><strong>Protocol 4-1. CM-based Walk Protocol</strong></p>
+<hr />
+<p><strong>Input</strong>: A matrix of shared costs <span class="math">[C]_{ij}</span> for <span class="math">i,j \in \{1,2,...,|V|\}</span>, a binary matrix on viable adges <span class="math">[b]_{ij}</span> for <span class="math">i,j \in \{1,2,...,|V|\}</span>.</p>
+<p><strong>Output</strong>: A matrix of walk costs <span class="math">[A]_{ik}</span> for <span class="math">i \in \{1,2,...,|V|\}</span> and <span class="math">k \in \{0,1,...,|V|\}</span>, a matrix of walk edge progressions <span class="math">[ep]_{ij}</span> for <span class="math">i,j \in \{1,2,...,|V|\}</span>.</p>
+<ol>
+<li><span class="math">[A] \leftarrow [\infty], [A]_{00} \leftarrow [0], [C] \leftarrow [C] + [\infty](1-[b])</span></li>
+<li><strong>for</strong> <span class="math">k \leftarrow 1</span> to <span class="math">|V|+1</span> do
+<ol>
+<li><strong>for</strong> <span class="math">j \leftarrow 1</span> to <span class="math">|V|</span> do
+<ol>
+<li><strong>for</strong> <span class="math">i \leftarrow 1</span> to <span class="math">|V|</span> do
+<ol>
+<li><span class="math">[c] \leftarrow [A]_{ik-1} + [C]_{ij} &lt; [A]_{jk}</span></li>
+<li><span class="math">[A]_{jk} \leftarrow _{[c]} [A]_{ik-1} + [C]_{ij} : [A]_{jk}</span></li>
+<li><span class="math">[ep]_{jk} \leftarrow _{[c]} i : [ep]_{jk}</span></li>
+</ol>
+</li>
+<li><strong>end</strong></li>
+</ol>
+</li>
+<li><strong>end</strong></li>
+</ol>
+</li>
+<li><strong>end</strong></li>
+</ol>
+<hr />
+<p>In (a) of the 2nd sub-protocol, instead of computing <span class="math">[\text{min-cycle}]</span>, we detect the node <span class="math">j</span> that achieves mmc. We call it minimizing node.</p>
+<p>The algorithm is detailed as Protocol 4-2-a.</p>
+<hr />
+<p><strong>Protocol 4-2-a. CM-based MMCN Protocol</strong></p>
+<hr />
+<p><strong>Input:</strong> A matrix of walk costs <span class="math">[A]_{ik}</span> for <span class="math">i \in \{1,2,...,|V|\}</span> and <span class="math">k \in \{0,2,...,|V|\}</span>, a matrix of walk progressions <span class="math">[ep]_{ij}</span> for <span class="math">i,j \in \{1,2,...,|V|\}</span>.</p>
+<p><strong>Output</strong>: The cost of the minimum mean cycle <span class="math">[\text{min-cost}]</span>, the node achieving the minimum mean cycle <span class="math">[\text{minimizing-node}]</span>.</p>
+<ol>
+<li>
+<p><strong>for</strong> <span class="math">j \leftarrow 1</span> to <span class="math">|V|</span> do</p>
+<ol>
+<li>
+<p><span class="math">[\text{max-cost}] \leftarrow \phi</span></p>
+</li>
+<li>
+<p><strong>for</strong> <span class="math">k \leftarrow |V|</span> to <span class="math">1</span> do</p>
+<ol>
+<li><span class="math">[\text{a-num}] \leftarrow [A]_{j(|V|+1)} - [A]_{jk}</span></li>
+<li><span class="math">[\text{a-den}] \leftarrow |V|-k</span></li>
+<li><span class="math">[c] \leftarrow [\text{k-num}] \cdot [\text{a-den}] &lt; [\text{a-num}] \cdot [\text{k-den}]</span></li>
+<li><span class="math">[\text{k-num}] \leftarrow _{[c]} [\text{a-num}]  : [\text{k-num}]</span></li>
+<li><span class="math">[\text{k-den}] \leftarrow _{[c]} [\text{a-den}]  : [\text{k-den}]</span></li>
+<li><span class="math">[\text{max-cost}] \leftarrow _{[c]} [A]_{jk} : [\text{max-cost}]</span></li>
+</ol>
+</li>
+<li>
+<p><strong>end</strong></p>
+</li>
+<li>
+<p><span class="math">[c] \leftarrow [\text{j-num}] \cdot [\text{k-den}] &lt; [\text{k-num}] \cdot [\text{j-den}]</span></p>
+</li>
+<li>
+<p><span class="math">[\text{j-num}] \leftarrow _{[c]} [\text{k-num}]  : [\text{j-num}]</span></p>
+</li>
+<li>
+<p><span class="math">[\text{j-den}] \leftarrow _{[c]} [\text{k-den}]  : [\text{j-den}]</span></p>
+</li>
+<li>
+<p><span class="math">[\text{minimizing-node}] \leftarrow _{[c]} j : [\text{minimizing-node}]</span></p>
+</li>
+<li>
+<p><span class="math">[\text{min-cost}] \leftarrow _{[c]} [\text{max-cost}] : [\text{min-cost}]</span></p>
+</li>
+</ol>
+</li>
+<li>
+<p><strong>end</strong></p>
+</li>
+</ol>
+<hr />
+<p>In (b) of the 2nd sub-protocol, from <span class="math">[\text{minimizing-node}]</span>, we construct a back pointer which indicates s-j path with <span class="math">|V|</span> edges whose cost is <span class="math">d^{|V|}(j)</span> and extract a cycle from the back pointer. Compared to Protocol 3-2, instead of expanding <span class="math">[\text{min-cycle}]</span> directly from <span class="math">[walks]</span>, the additional protocol is required. We follow Lemma 1 and consider any cycle included in the back pointer as a minimum mean cycle. The algorithm is detailed as Protocol 4-2-b.</p>
+<hr />
+<p><strong>Protocol 4-2-b. CM-based Extract-Cycle Protocol</strong></p>
+<hr />
+<p><strong>Input:</strong> A minmizing node <span class="math">[\text{minimizing-node}]</span>, a matrix of walk progressions <span class="math">[ep]_{ij}</span> for <span class="math">i,j \in \{1,2,...,|V|\}</span>.</p>
+<p><strong>Output</strong>: A matrix with the minimum mean cycle <span class="math">[\text{min-cycle}]_{ij}</span> for <span class="math">i,j \in \{1,2,...,|V|\}</span></p>
+<ol>
+<li><span class="math">[\text{backpointers}]_{0} \leftarrow [\text{minimizing-node}]</span>, <span class="math">[\text{next-index}] \leftarrow [\text{minimizing-node}]</span></li>
+<li><strong>for</strong> <span class="math">k \leftarrow |V|</span> to <span class="math">1</span> do
+<ol>
+<li><span class="math">[\text{val}] \leftarrow [0]</span></li>
+<li><strong>for</strong> <span class="math">j \leftarrow 0</span> to <span class="math">|V|-1</span> do
+<ol>
+<li><span class="math">[match] = j == [\text{next-index}]</span></li>
+<li><span class="math">[\text{val}] = _{[\text{match}]} [ep]_{jk}:[\text{val}]</span></li>
+<li><span class="math">[\text{match-index-matrix}]_{jk} = [match]</span></li>
+</ol>
+</li>
+<li><strong>end</strong></li>
+<li><span class="math">[\text{next-index}] = [\text{val}]</span></li>
+<li><span class="math">[\text{backpointers}].append([\text{val}])</span></li>
+</ol>
+</li>
+<li><strong>end</strong></li>
+<li><strong>for</strong> <span class="math">i \leftarrow 0</span> to <span class="math">|V|-1</span> do
+<ol>
+<li><span class="math">[\text{counter}] \leftarrow [0]</span></li>
+<li><strong>for</strong> <span class="math">k \leftarrow 0</span> to <span class="math">|V|</span> do
+<ol>
+<li><span class="math">[\text{counter}] = [\text{counter}] + [\text{match-index-matrix}]_{ik}</span></li>
+</ol>
+</li>
+<li><span class="math">[c] = [\text{counter}] &gt;= 2</span></li>
+<li><span class="math">[\text{cycle-node}] = _{[c]} i : [\text{cycle-node}]</span></li>
+</ol>
+</li>
+<li><strong>end</strong></li>
+<li><span class="math">[\text{min-cycle}] \leftarrow [0],[\text{counter}] \leftarrow [0]</span></li>
+<li><strong>for</strong> <span class="math">k \leftarrow |V|</span> to <span class="math">1</span> do
+<ol>
+<li><span class="math">[\text{edge-from}] \leftarrow [\text{backpointers}]_k</span></li>
+<li><span class="math">[c] = [\text{edge-from}] [\text{cycle-node}]</span></li>
+<li><span class="math">[\text{counter}] = [\text{counter}] + [c]</span></li>
+<li><span class="math">[c_0] = [\text{counter}] + 1</span></li>
+<li><strong>for</strong> <span class="math">j \leftarrow 0</span> to <span class="math">|V|-1</span> do
+<ol>
+<li><span class="math">[c_1] = [\text{match-index-matrix}]_{jn-k}</span></li>
+<li><span class="math">[c_2] = [c_0]*[c_1]</span></li>
+<li><strong>for</strong> <span class="math">i \leftarrow 0</span> to <span class="math">|V|-1</span> do
+<ol>
+<li><span class="math">[c_3] = [\text{match-index-matrix}]_{jn-k+1}</span></li>
+<li><span class="math">[\text{min-cycle}]_{ji} = [\text{min-cycle}]_{ji} + ([c_2] * [c_3])</span></li>
+</ol>
+</li>
+<li><strong>end</strong></li>
+</ol>
+</li>
+<li><strong>end</strong></li>
+</ol>
+</li>
+<li><strong>end</strong></li>
+</ol>
+<hr />
+<p><strong>Complexity</strong><br />
+This ****method requires <span class="math">O(|V|^3)</span> multiplications or communication rounds, from the conditional assignments of <span class="math">[A],[ep],[\text{min-cycle}]</span> for <span class="math">|V|^3</span> loops (line i-2~3 of Protocol 4-1 and like iii-3 of Protocol 4-2-b). And this method requires <span class="math">O(|V|^2)</span> space complexity, largely due to 2-dimensional matrixes. A table comparing the Complexity of each protocol is shown in Table 4-1 below.</p>
+<p><strong>Table 4-1. Complexity Analysis of Secure MMC Protocols</strong></p>
+<div class="md-table">
+<table>
+<thead>
+<tr>
+<th></th>
+<th>multiplications/communication rounds complexity</th>
+<th>space complexity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Aly’s</td>
+<td><span class="math">O(|V|^5)</span></td>
+<td><span class="math">O(|V|^4)</span></td>
+</tr>
+<tr>
+<td>CM-based</td>
+<td><span class="math">O(|V|^3)</span></td>
+<td><span class="math">O(|V|^2)</span></td>
+</tr>
+</tbody>
+</table>
+</div><h3><a class="anchor" href="https://ethresear.ch#h-4-2-implementation-13" name="h-4-2-implementation-13"></a>4-2. Implementation</h3>
+<p>We have implemented CM-based Securely MMC protocol in naive secret sharing scheme using Python MP-SPDZ. And we confirmed that the minimum mean cycle was found reliably in a number of random edges, including the counterexamples shown by Chaturvedi et al [3].</p>
+<h1><a class="anchor" href="https://ethresear.ch#h-5-conclusion-14" name="h-5-conclusion-14"></a>5. Conclusion</h1>
+<p>In this study, we have proposed a more efficient protocol for solving the Minimum Mean Cycle (MMC) problem using Multi-Party Computation (MPC). Our CM-based approach not only addresses but also significantly improves upon the issues identified in Aly’s protocol. Specifically, our protocol reduces the time/round complexity from <span class="math">O(|V|^5)</span> to <span class="math">O(|V|^3)</span> and the space complexity from <span class="math">O(|V|^4)</span> to <span class="math">O(|V|^2)</span> compared to Aly’s protocol.</p>
+<p>Despite these advancements, the complexity remains super-quadratic in terms of the number of nodes, which can pose practical challenges for very large graphs. To mitigate this limitation, we propose the following strategies:</p>
+<ul>
+<li>By exposing the graph’s topography, we can optimize the edge search to include only the minimum necessary edges, thereby reducing the time/round complexity to <span class="math">O(|V|^2 \cdot |E|)</span>. This approach, however, requires a trade-off with some degree of privacy.</li>
+<li>Implementing simpler algorithms that provide approximate or sub-optimal solutions, such as Greedy Algorithms and Distributed Algorithms, can further enhance practicality. These algorithms can significantly reduce computational overhead while delivering sufficiently accurate results for many applications.</li>
+</ul>
+<p>In summary, our protocol offers a substantial improvement over existing methods, paving the way for more efficient and practical solutions to the MMC problem in secure computation settings. Future work will focus on refining these strategies to further balance the trade-offs between efficiency, accuracy, and privacy.</p>
+<h1><a class="anchor" href="https://ethresear.ch#reference-15" name="reference-15"></a>Reference</h1>
+<ol>
+<li>Richard M. Karp, “A characterization of the minimum cycle mean in a digraph”, Discrete Mathematics, Volume 23, Issue 3, 1978, Pages 309-311, ISSN 0012-365X, <a href="https://doi.org/10.1016/0012-365X(78)90011-0" rel="noopener nofollow ugc">https://doi.org/10.1016/0012-365X(78)90011-0</a>.</li>
+<li>Aly, A., Van Vyve, M. (2015). Securely Solving Classical Network Flow Problems. In: Lee, J., Kim, J. (eds) Information Security and Cryptology - ICISC 2014. ICISC 2014. Lecture Notes in Computer Science(), vol 8949. Springer, Cham. <a class="inline-onebox" href="https://doi.org/10.1007/978-3-319-15943-0_13" rel="noopener nofollow ugc">Securely Solving Classical Network Flow Problems | SpringerLink</a></li>
+<li>Mmanu Chaturvedi, Ross M. McConnell, “A note on finding minimum mean cycle”, Information Processing Letters, Volume 127, 2017, Pages 21-22, ISSN 0020-0190, <a class="inline-onebox" href="https://doi.org/10.1016/j.ipl.2017.06.007" rel="noopener nofollow ugc">Redirecting</a>.</li>
+</ol>
+            <p><small>1 post - 1 participant</small></p>
+            <p><a href="https://ethresear.ch/t/a-note-on-securely-finding-minimum-mean-cycle/20073">Read full topic</a></p>
+]]></content:encoded>
+<pubDate>Mon, 15 Jul 2024 07:09:02 +0000</pubDate>
+<pubDate>Mon, 15 Jul 2024 07:09:02 +0000</pubDate>
+</item>
 
 <item>
 <title>Sealed execution auction</title>
