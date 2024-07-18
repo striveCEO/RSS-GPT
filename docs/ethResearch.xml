@@ -4,6 +4,184 @@
 <title>Ethereum Research - Latest topics</title>
 <link>https://ethresear.ch/latest</link>
 
+<item>
+<title>Based Preconfirmations with Multi-round MEV-Boost</title>
+<link>https://ethresear.ch/t/based-preconfirmations-with-multi-round-mev-boost/20091</link>
+<guid>https://ethresear.ch/t/based-preconfirmations-with-multi-round-mev-boost/20091</guid>
+<content:encoded><![CDATA[
+<div> 关键词：基于预确认、多轮MEV-Boost、L1 PBS管道、外部性、区块链安全
+
+总结:
+本文探讨了基于预确认的 rollup 模型存在的问题，尤其是其12秒的区块时间所导致的负面效应。作者提出了多轮MEV-Boost（MR-MEV-Boost）的概念，通过在一个槽位内运行多次MEV-Boost拍卖来实现快速预确认，从而保持了基于预确认rollup的优点如同步兼容性和L1抗审查性，同时减轻了预确认带来的负面影响。文章分析了MR-MEV-Boost的优势和挑战，如减少了延迟竞赛、缓解拥堵、改进定价机制，并讨论了用户和协议设计中的公平交换问题。尽管存在一些限制，如较慢的预确认速度和对-relayer负担的增加，但该方案为解决基于预确认的rollup问题提供了新的思路。 <div>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/f/b/fb1798cc79775d7958124717d6ba5cc97c1aa008.jpeg" title="image"><img alt="image" height="394" src="https://ethresear.ch/uploads/default/original/3X/f/b/fb1798cc79775d7958124717d6ba5cc97c1aa008.jpeg" width="690" /></a></div><p></p>
+<p>By <a href="https://twitter.com/linoscope" rel="noopener nofollow ugc">Lin Oshitani</a> (<a href="https://switchboard.nethermind.io/" rel="noopener nofollow ugc">Nethermind Switchboard</a>, <a href="https://www.nethermind.io/nethermind-research" rel="noopener nofollow ugc">Nethermind Research</a>). Many thanks to <a href="https://twitter.com/ConorMcMenamin9" rel="noopener nofollow ugc">Conor</a> for the detailed back-and-forth on crafting this document and to <a href="https://www.linkedin.com/in/aikaterini-panagiota-stouka/" rel="noopener nofollow ugc">Aikaterini</a>, <a href="https://x.com/ElenaPetreska0x" rel="noopener nofollow ugc">Elena</a>, <a href="https://twitter.com/smartprogrammer" rel="noopener nofollow ugc">Ahmad</a>, <a href="https://twitter.com/aj_jalan" rel="noopener nofollow ugc">Anshu</a>, <a href="https://twitter.com/swp0x0" rel="noopener nofollow ugc">Swapnil</a>, <a href="https://twitter.com/tkstanczak" rel="noopener nofollow ugc">Tomasz</a>, <a href="https://twitter.com/totorovirus" rel="noopener nofollow ugc">Jinsuk</a>, <a href="https://twitter.com/0xQuintus" rel="noopener nofollow ugc">Quintus</a>, <a href="https://x.com/ceciliaz030" rel="noopener nofollow ugc">Ceciliaz</a>, and <a href="https://twitter.com/Brechtpd" rel="noopener nofollow ugc">Brecht</a> for the helpful comments and/or review. This work was partly funded by Taiko. The views expressed are my own and do not necessarily reflect those of the reviewers or Taiko.</p>
+<h1><a class="anchor" href="https://ethresear.ch#tldr-1" name="tldr-1"></a>TL;DR</h1>
+<p>As we outlined in our previous post <a href="https://ethresear.ch/t/strawmanning-based-preconfirmations/19695">Strawmanning Based Preconfirmations</a>, naive implementations of based preconfirmations introduce many negative externalities that require thoughtful consideration.</p>
+<p>In this post, we will expand on the negative externalities of based preconfirmations by examining them through the lens of the L1 PBS pipeline. Then, we propose <em>multi-round MEV-Boost</em>, a modification of MEV-Boost that enables based preconfirmations by running multiple rounds of MEV-Boost auctions within a single slot. This approach inherits the L1 PBS pipeline and mitigates the negative externalities of based preconfirmations as a result.</p>
+<h1><a class="anchor" href="https://ethresear.ch#motivation-2" name="motivation-2"></a>Motivation</h1>
+<p>As Justin Drake <a href="https://ethresear.ch/t/based-rollups-superpowers-from-l1-sequencing/15016#:~:text=a%20based%20rollup%20is%20one%20where%20the%20next%20L1%20proposer%20may%2C%20in%20collaboration%20with%20L1%20searchers%20and%20builders%2C%20permissionlessly%20include%20the%20next%20rollup%20block%20as%20part%20of%20the%20next%20L1%20block">defines</a> in the original post, based rollups are rollups “where the next L1 proposer may, in collaboration with L1 searchers and builders, permissionlessly include the next rollup block as part of the next L1 block”. Using the <a href="https://flashbots.mirror.xyz/bqCakwfQZkMsq63b50vib-nibo5eKai0QuK7m-Dsxpo" rel="noopener nofollow ugc">MEV supply chain</a> diagram, based rollups can be illustrated below:<br />
+</p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/a/c/ac29f931cf332c1b1b38334158920d6807f499f1.png" title="Based Rollups (5) (1)"><img alt="Based Rollups (5) (1)" height="346" src="https://ethresear.ch/uploads/default/optimized/3X/a/c/ac29f931cf332c1b1b38334158920d6807f499f1_2_690x346.png" width="690" /></a></div><p></p>
+<p>Notice that the L2 transactions, represented as the red line, go through the same process as the L1 transactions, represented as the black line. By effectively “piggybacking” the L1 PBS pipeline, based rollups provide two key benefits:</p>
+<ul>
+<li><strong>Benefit 1</strong>: Since no additional actors (and thus no additional choke points) are introduced for L2 sequencing, based rollups fully inherit L1 censorship resistance, liveness, and credible neutrality.</li>
+<li><strong>Benefit 2</strong>: Since the L1 and L2 transactions are sequenced by the same entity (the builder), based rollups enable not only synchronous L2-L2 composability but also synchronous L1-L2 composability.</li>
+</ul>
+<p>Based rollups are great. They solve L2 fragmentation and sequencer decentralization while enabling L1 composability and inheriting L1’s censorship resistance, liveness, and credible neutrality. They are the only rollups that can have these properties simultaneously.</p>
+<p>However, they have one large drawback: they also inherit the 12-second L1 block time. To address the slow confirmation time, Justin introduced <a href="https://ethresear.ch/t/based-preconfirmations/17353">base preconfirmations</a>. In this approach, L1 proposers can opt into providing preconfirmations for based rollup L2 transactions, as shown below:<br />
+</p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/6/e/6e65221a830715cead4428b2724688ce66d7520c.png" title="Based Preconf (2) (1)"><img alt="Based Preconf (2) (1)" height="346" src="https://ethresear.ch/uploads/default/optimized/3X/6/e/6e65221a830715cead4428b2724688ce66d7520c_2_690x346.png" width="690" /></a></div><p></p>
+<p>Since providing preconfirmations requires technical sophistication, most based preconfirmation designs include a delegation mechanism that allows validators to outsource the preconfirmation duty to a designated preconfer, as illustrated below:<br />
+</p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/f/9/f9346fd068da5aa3ae0e57fceccc6c2af223b958.png" title="Based Preconf with delegation (2)"><img alt="Based Preconf with delegation (2)" height="346" src="https://ethresear.ch/uploads/default/optimized/3X/f/9/f9346fd068da5aa3ae0e57fceccc6c2af223b958_2_690x346.png" width="690" /></a></div><p></p>
+<p>Notice that L2 and L1 transactions no longer share the block-building pipeline. As such, the benefits of based rollups are diminished:</p>
+<ul>
+<li>On benefit 1: We introduced an additional choke point to the system, the preconfer, which can censor L2 transactions or degrade L2 liveness by going down. As a result, the inheritance of L1 censorship resistance and liveness are degraded.</li>
+<li>On benefit 2: We now have two parallel block-building entities: one for L1 (the builder) and another for L2 (the preconfer). Consequently, L1-L2 composability now requires coordination between the builder and the preconfer. This adds complexity and can lead to <em>builder-preconfer integration</em>, where the proposer delegates not only their preconfirmation right but also the whole block-building right to the preconfer ahead of their slot.</li>
+</ul>
+<p>In summary, by introducing preconfirmations, we lost the below structure:<br />
+</p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/a/c/ac29f931cf332c1b1b38334158920d6807f499f1.png" title="Based Rollups (5) (1)"><img alt="Based Rollups (5) (1)" height="346" src="https://ethresear.ch/uploads/default/optimized/3X/a/c/ac29f931cf332c1b1b38334158920d6807f499f1_2_690x346.png" width="690" /></a></div><p></p>
+<p>As a result, many of the benefits of based rollups are diminished.</p>
+<p>So, what if we keep this pipeline but run it multiple times within a slot to achieve fast preconfirmations? This brings us to the main contribution of this document: <em>Multi-round MEV-Boost</em>.</p>
+<h1><a class="anchor" href="https://ethresear.ch#multi-round-mev-boost-3" name="multi-round-mev-boost-3"></a>Multi-round MEV-Boost</h1>
+<p>At a high level, Multi-round MEV-Boost, or <em>MR-MEV-Boost</em> (pronounced “<em>mister-mev-boost</em>”, h/t <a href="https://twitter.com/ConorMcMenamin9" rel="noopener nofollow ugc">Conor</a> for the idea on the pronounciation :)) for short, works as follows:</p>
+<ul>
+<li>Split each slot into a fixed number of <em>rounds, e</em>.g., 4 rounds with 3 seconds each.</li>
+<li>Within each round, run a single MEV-Boost auction. As a result of the auction, a single <em>partial block</em> (a.k.a <em>partial payload</em>) will be signed and published, i.e., the partial block will be <em>preconfirmed</em>.</li>
+<li>The full block is created and published at the end of the slot. The full block should contain the partial blocks in the exact order they were preconfirmed without inserting any transactions before or in between.</li>
+</ul>
+<h2><a class="anchor" href="https://ethresear.ch#refresher-mev-boost-4" name="refresher-mev-boost-4"></a>Refresher: MEV-Boost</h2>
+<p>Before diving deeper into the proposed protocol, let’s quickly review today’s <a href="https://docs.flashbots.net/flashbots-mev-boost/introduction" rel="noopener nofollow ugc">MEV-Boost</a> PBS pipeline used in L1 Ethereum.<br />
+</p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/f/e/fe199d4c844c9230a675292724deb29c9e03a3df.png" title="MEV-Boost"><img alt="MEV-Boost" height="500" src="https://ethresear.ch/uploads/default/original/3X/f/e/fe199d4c844c9230a675292724deb29c9e03a3df.png" width="609" /></a></div><p></p>
+<ol>
+<li>Builders send the <code>header</code>, <code>payload</code>, and <code>bid</code> to the relayer.</li>
+<li>The relayer checks the validity (the <code>bid</code> is correct, the <code>payload</code> does not contain invalid transactions, etc), stores the <code>payload</code>, and then sends the <code>header</code> and <code>bid</code> to the proposer.</li>
+<li>The proposer selects the header with the highest bid, signs it, and then sends the signed header to the relayer.</li>
+<li>The relayer propagates the signed header and corresponding payload to the network.</li>
+</ol>
+<h2><a class="anchor" href="https://ethresear.ch#protocol-description-5" name="protocol-description-5"></a>Protocol Description</h2>
+<p>In this section, we describe the MR-MEV-Boost protocol.</p>
+<h3><a class="anchor" href="https://ethresear.ch#protocol-flow-overview-6" name="protocol-flow-overview-6"></a>Protocol Flow Overview</h3>
+<p>To incentivize proposers to provide preconfirmations, we introduce a <em>preconf transaction</em>, where the payment of a <em>preconf tip</em> is conditioned on being preconfirmed. It will include the following information on top of the transaction payload itself:</p>
+<ul>
+<li><code>tip</code>: The preconfirmation tip paid for being preconfirmed.</li>
+<li><code>target_slot</code>: The latest slot in which the preconf transaction can be included.</li>
+<li><code>target_round</code>: The latest round within the <code>target_slot</code> in which the preconf transaction can be included.</li>
+</ul>
+<p>The <a href="https://ethresear.ch#preconf-transaction">Preconf Transaction</a> section will discuss the encoding and enforcement of these conditions.</p>
+<p>Using this new transaction type, MR-MEV-Boost works as follows:<br />
+</p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/7/a/7a4dc3f4c38b4184016390e2e48dc44e5630da74.png" title="MR-MEV-Boost"><img alt="MR-MEV-Boost" height="500" src="https://ethresear.ch/uploads/default/optimized/3X/7/a/7a4dc3f4c38b4184016390e2e48dc44e5630da74_2_252x500.png" width="252" /></a></div><p></p>
+<ol>
+<li>Users submit preconf transactions to the builders. The submission can be through any order flow pipeline used in current L1, such as:
+<ul>
+<li>Public mempool.</li>
+<li>Private order flow.</li>
+<li>Order flow auctions on <a href="https://mevblocker.io/" rel="noopener nofollow ugc">MEVBlocker</a>, <a href="https://docs.flashbots.net/flashbots-protect/mev-share" rel="noopener nofollow ugc">MEV-Share</a>, <a href="https://writings.flashbots.net/the-future-of-mev-is-suave" rel="noopener nofollow ugc">SUAVE</a>, etc.</li>
+</ul>
+</li>
+<li>The builders build <code>partial_payload</code>s. The partial payload built by the builders should only include preconf transactions with <code>target_slot</code> and <code>target_round</code> at or after the current block/round. To commit to this, the builder signs the <code>merkle_root</code> (denoted as <code>sig_b</code> ) and becomes subject to builder slashing condition 1, described in the <a href="https://ethresear.ch#slashing-conditions">slashing condition section</a>.</li>
+<li>The relayer checks the validity (e.g., the <code>bid</code> is correct, the <code>partial_payload</code> does not contain invalid transactions, etc.), stores the <code>partial_payload</code>, and then sends the <code>merkle_root</code> and <code>bid</code> to the proposer.</li>
+<li>Proposer signs (denoted as <code>sig_p</code>) and returns the selected <code>merkle_root</code> together with the current <code>round</code>.</li>
+<li>The relay publishes the selected <code>partial_payload</code> and the associated round and signatures to the preconf network. Note that the preconf network is different from the existing L1 p2p network. Only entities interested in the preconfirmed state (partial block builders, relays, full-node providers, etc.) must subscribe to the preconf network.</li>
+<li>End users—or, more precisely, the L2/L1 full nodes to which they are connected—verify that the <code>merkle_root</code> is signed by the proposer and is associated with the current <code>round</code>. Upon confirmation, they accept the <code>partial_payload</code> as preconfirmed and execute it to update to the latest preconfirmed state.</li>
+<li>
+<ol>
+<li>to 6. is repeated multiple rounds within the slot. The number of rounds within each slot will be fixed. The final round will run concurrently with the full block MEV-Boost auction at 8.-11.</li>
+</ol>
+</li>
+<li>to 11. The MEV-Boost auction is conducted for the full block. An important difference with the usual L1 MEV-Boost auction is that the <code>merkle_proofs</code> are propagated from the builder to the proposer. These proofs prove that the <code>partial_payload</code>s are included in the full block in the order they were preconfirmed without any other transaction being inserted before or between them. By validating these proofs, the proposer can ensure that the proposer slashing condition 2, described in the <a href="https://ethresear.ch#slashing-conditions">slashing conditions section</a>, is not violated without needing to trust the relayer (h/t to <a href="https://twitter.com/Brechtpd" rel="noopener nofollow ugc">Brecht</a> for the idea of using Merkle proofs here).</li>
+</ol>
+<h3><a class="anchor" href="https://ethresear.ch#preconf-transaction-7" name="preconf-transaction-7"></a>Preconf Transaction</h3>
+<p>Let’s consider the encoding of the preconf transactions. For L2s, the additional fields can be introduced as custom encodings of the transactions. For L1, they can be implemented through an <a href="https://eips.ethereum.org/EIPS/eip-4337" rel="noopener nofollow ugc">ERC-4337</a>-style entry point contract that wraps the contract calls with additional information.</p>
+<p>To enforce the expiration, the L2 execution layer (or <a href="https://github.com/ethereum-optimism/specs/blob/b1c9b7985b65bd2d065a414f5ad0552f36e48540/specs/protocol/derivation.md#deriving-the-transaction-list" rel="noopener nofollow ugc">derivation layer</a>) and L1 entry point contract will filter out preconf transactions with expired <code>target_slot</code>. On the other hand, since the L1 is unaware of the concept of rounds, expiration based on <code>target_round</code> will be enforced via builder slashing condition 1, explained in the next section.</p>
+<h3><a class="anchor" href="https://ethresear.ch#slashing-conditions-8" name="slashing-conditions-8"></a>Slashing Conditions</h3>
+<p>To ensure that the full block matches with the preconfed partial blocks, the proposer will be subject to:</p>
+<ul>
+<li><strong>Proposer slashing condition 1</strong>: The proposer must not sign two conflicting <code>merkle_root</code>s within the same round.</li>
+<li><strong>Proposer slashing condition 2</strong>: The final <code>full_payload</code> should contain all the <code>partial_payload</code>s in the order they are signed and published without any other transaction being inserted before or in between.</li>
+</ul>
+<p>Furthermore, to crypto-economically enforce the expiration of preconf transactions, the builder will be subject to:</p>
+<ul>
+<li><strong>Builder slashing condition 1:</strong> Each <code>partial_payload</code> must only include preconf transactions with <code>target_slot</code> and <code>target_round</code> at or after the current slot/round.</li>
+</ul>
+<p>We impose this condition on the builder rather than the proposer because the proposer does not see the partial payload when signing. An alternative approach would be to make this a proposer slashing condition and require the relayer to ensure the condition is not violated. However, this would necessitate the proposer trusting the relayer to avoid being slashed rather than only relying on the relayer to avoid missing a slot, as is currently done in L1 MEV-Boost.</p>
+<h3><a class="anchor" href="https://ethresear.ch#user-actions-9" name="user-actions-9"></a>User Actions</h3>
+<p>To mitigate the <a href="https://ethresear.ch/t/strawmanning-based-preconfirmations/19695#problem-4-fair-exchange-7">fair exchange problem</a>, wallets or full nodes to which end users are connected should take the actions below:</p>
+<ul>
+<li><strong>User action 1</strong>: Stop submitting preconf transactions if preconfirmed <code>partial_payload</code>s are not published in a timely manner. For example, if we have 4 rounds in a slot, then stop submitting preconf transactions if a <code>partial_payload</code> is not published every 3 seconds.</li>
+<li><strong>User action 2</strong>: Set <code>target_slot</code> and <code>target_round</code> to a reasonably close block and round (e.g., one or two rounds ahead). By doing so, builders are required to respond in a timely manner to preconfirmation transactions to avoid the preconfirmation transactions being invalidated.</li>
+</ul>
+<p>More on how the fair exchange is addressed is described in the <a href="https://ethresear.ch#analysis">analysis section</a>.</p>
+<h3><a class="anchor" href="https://ethresear.ch#l1-l2-composability-10" name="l1-l2-composability-10"></a>L1-L2 Composability</h3>
+<p>Since the partial payloads can contain both L1 and L2 transactions, builders can ensure L1-L2 composability by including L1-L2 transaction bundles in the partial payloads.</p>
+<h3><a class="anchor" href="https://ethresear.ch#non-opted-in-slots-11" name="non-opted-in-slots-11"></a>Non-opted-in Slots</h3>
+<p>When the current L1 slot’s proposer has not opted in as a preconfer, L1 transactions will be proposed by the current proposer, while L2 transactions will be proposed by the next opted-in preconfer in the lookahead (we follow Justin’s <a href="https://ethresear.ch/t/based-preconfirmations/17353#:~:text=proposer%20lookahead%E2%80%94higher%20precedence%20for%20smaller%20slot%20numbers">original based preconfirmation design</a> here). This results in two simultaneous MEV-Boost auctions: the usual L1 MEV-Boost auction signed by the current L1 proposer and the MR-MEV-Boost auction signed by the next preconfer. As a result, L1-L2 composability and L1 preconfirmation will be lost during these non-opted-in slots. Note that this limitation applies to all off-protocol preconfirmation designs.</p>
+<h1><a class="anchor" href="https://ethresear.ch#analysis-12" name="analysis-12"></a>Analysis</h1>
+<p>In this section, we will perform an initial analysis of the proposed protocol and identify its drawbacks.</p>
+<h3><a class="anchor" href="https://ethresear.ch#have-we-solved-the-problems-13" name="have-we-solved-the-problems-13"></a>Have we solved the problems?</h3>
+<p>Let’s revisit the problems raised in the <a href="https://ethresear.ch/t/strawmanning-based-preconfirmations/19695">Strawmanning Based Preconfirmations</a> post and see if and how MR-MEV-Boost addresses them.</p>
+<p><strong>Problem 1: Latency race</strong></p>
+<p>Latency races are when searchers fight to be the first to access the preconfer, leading to colocation or vertical integration. With MR-MEV-Boost, this issue is largely mitigated by preconfirming batches and conducting auctions within the batch, as it promotes competition based on price rather than speed. It is generally acknowledged that batch auctions help reduce latency wars compared to continuous first-come, first-served ordering, as described in <a href="https://academic.oup.com/qje/article/130/4/1547/1916146" rel="noopener nofollow ugc">this paper</a> and <a href="https://ethresear.ch/t/latency-arms-race-concerns-in-blockspace-markets/14957">this post</a>.</p>
+<p><strong>Problem 2: Congestion</strong></p>
+<p>Congestion issues arise when searchers flood the rollup with probabilistic arbitrage attempts. With MR-MEV-Boost, this issue is mitigated as searchers are incentivized to participate in auctions rather than resort to spam.</p>
+<p><strong>Problem 3: Tip pricing</strong></p>
+<p>The MEV-Boost auction will handle the tip pricing of the preconfirmation. Furthermore, by introducing batching and auctions within the batch, proposers can price the preconfirmation tips more effectively (hence capturing revenue) than by providing a continuous stream of per-transaction preconfirmations.</p>
+<p><strong>Problem 4: Fair exchange</strong></p>
+<p>Let’s see how MR-MEV-Boost addresses the <a href="https://ethresear.ch/t/strawmanning-based-preconfirmations/19695#problem-3-tip-pricing-6">fair exchange problem</a>, where the proposer withholds publishing preconfirmations to the user. Note that preconfers are incentivized to withhold preconf promises as much as possible to maximize their opportunity to reorder and insert transactions, thereby increasing their MEV.</p>
+<p>There are two cases to consider:</p>
+<ul>
+<li>If the proposer withholds preconfirming partial payload (i.e., stops signing <code>merkle_root</code>s of <code>partial_payload</code>s), users will stop sending preconfirmation requests (user action 1), reducing the proposer’s order flow and, consequently, revenue.</li>
+<li>If the proposer intentionally publishes empty partial payloads, pending preconf transactions will expire after a few rounds (user action 2 and builder slashing condition 1), reducing the proposer’s order flow and, consequently, revenue.</li>
+</ul>
+<p>In summary, end users monitor and enforce proposers’ honest behavior by linking the proposers’ revenue to the timely preconfirmation of partial payloads.</p>
+<p>A potential alternative would be to introduce a committee to monitor and attest to the timely releases of partial payloads. However, this would require additional trust assumption to an external committee unless we enshrine the protocol into the L1. More on enshrinement in the <a href="https://ethresear.ch#future-direction">future direction section</a>.</p>
+<p><strong>Problem 5: Liveness</strong></p>
+<p>With existing based preconfirmation designs where preconfirmation duties are delegated ahead of the slot, liveness relies on this single external entity for the duration of the preconfer’s slot(s). On the other hand, with MR-MEV-Boost, liveness concerns are reduced as we do not introduce such “lock-in” to a specific entity before the slot. If some builders or relayers are unavailable, others can step in to maintain functionality. Moreover, even if the entire multi-round MEV-Boost pipeline fails, proposers still have the option to construct their own partial blocks and preconfirm them independently.</p>
+<p><strong>Problem 6: Early auctions</strong></p>
+<p>Early auctions are not introduced as preconfirmations are provided through the MEV-Boost JIT auctions.</p>
+<h2><a class="anchor" href="https://ethresear.ch#round-interval-14" name="round-interval-14"></a>Round Interval</h2>
+<p>How short can each round in MR-MEV-Boost be? If it is too long, it will degrade the user experience; if it is too short, it will impose excessive network and hardware requirements on builders and relays, thus hurting decentralization.</p>
+<p>In each round, the relayer has two tasks:</p>
+<ul>
+<li>(A) Run the partial block auction.</li>
+<li>(B) Propagate the partial block.</li>
+</ul>
+<p>Task (A) consists of the time it takes the builder to construct the block, the time it takes the relay to validate the block, and two network round-trips: one between the builder and the relay and another between the relay and the proposer. Assuming that <a href="https://x.com/SheaKetsdever/status/1808509437700665543" rel="noopener nofollow ugc">block construction</a>, validation, and network round-trips take 500 milliseconds each, we get a ballpark estimate of 2 seconds.</p>
+<p>For task (B), considering L1 allocates 4 seconds for block propagation and 8 seconds for consensus, and no consensus is needed for partial blocks, a good upper bound for propagation time is 4 seconds. In practice, it should be much shorter because only block builders, relays, and full-node providers need to receive these partial blocks, and they have better network bandwidth and lower latency than average validators. Let’s assume 1-2 seconds for this analysis.</p>
+<p>Combining 2 seconds for (A) and 1-2 seconds for (B) gives us 3-4 seconds per round.</p>
+<p>These estimates are highly approximate, and further research and analysis are needed. Additionally, making the interval too short will intensify latency races toward the end of the batch duration, as described <a href="https://ethresear.ch/t/latency-arms-race-concerns-in-blockspace-markets/14957#auction-designs-for-transaction-ordering-2">here</a>, and should be considered.</p>
+<h2><a class="anchor" href="https://ethresear.ch#drawbacks-15" name="drawbacks-15"></a>Drawbacks</h2>
+<p>Next, we will outline the drawbacks of this protocol when compared to existing based preconfirmation designs, such as the one described in the <a href="https://ethresear.ch/t/based-preconfirmations/17353">original post</a>. An analysis of more general drawbacks of preconfirmations will be reserved for future work.</p>
+<h3><a class="anchor" href="https://ethresear.ch#no-speed-of-light-continuous-preconfirmations-16" name="no-speed-of-light-continuous-preconfirmations-16"></a>No Speed-of-light Continuous Preconfirmations</h3>
+<p>MR-MEV-Boost does not provide speed-of-light preconfirmations with hundreds of milliseconds latency, like <a href="https://docs.arbitrum.io/how-arbitrum-works/sequencer" rel="noopener nofollow ugc">Arbitrum’s first-come-first-serve sequencer</a>. Instead, it offers preconfirmations in batches with a few seconds of latency between them, similar to <a href="https://docs.optimism.io/connect/resources/glossary#time-slot" rel="noopener nofollow ugc">Optimism’s approach</a>.</p>
+<p><a href="https://solana.com/" rel="noopener nofollow ugc">Solana</a> and <a href="https://www.jito.wtf/" rel="noopener nofollow ugc">Jito</a> provide an interesting case study on continuous versus batched preconfirmations. In Solana’s “continuous block building,” the leader streams (i.e., preconfirms) processed transactions continuously. Combined with Solana’s fixed low fee, continuous block building led to network spamming and latency races, causing validators to <a href="https://www.jito.network/blog/solving-the-mev-problem-on-solana-a-guide-for-stakers/" rel="noopener nofollow ugc">waste 58% of their time processing failed arbitrages</a>. Jito addressed this by introducing a 200ms “speed bump” (batches) and a mev-geth style bundle auction for batches, achieving an 80% share with their Jito validator client. This example indicates that that continuous preconfirmations are likely unsustainable due to spam and that batching and some auction for each batch are required. For more details, watch this informative talk by Zano Sherwani, co-founder of Jito, <a href="https://www.youtube.com/watch?v=c-O_JZI2QAA" rel="noopener nofollow ugc">here</a>.</p>
+<h3><a class="anchor" href="https://ethresear.ch#relay-burden-17" name="relay-burden-17"></a>Relay Burden</h3>
+<p>MR-MEV-Boost introduces additional burdens to the relays without incentives. Instead of managing a single round of MEV-Boost auctions, relayers must handle multiple rounds within a single slot, each within a limited timeframe. If the cost of operating a relayer increases too much, it may lead to further relayer centralization and <a href="https://collective.flashbots.net/t/builderelay/2688/1" rel="noopener nofollow ugc">builder-relay integration</a>, or alternatively, no relayer may opt to support MR-MEV-Boost. Relayer incentives are a <a href="https://www.gate.io/learn/articles/the-pursuit-of-relay-incentivization/1257" rel="noopener nofollow ugc">long-lasting problem</a> in L1, and MR-MEV-Boost likely worsen this situation.</p>
+<p>One way to mitigate the issue is to incorporate <a href="https://frontier.tech/optimistic-relays-and-where-to-find-them" rel="noopener nofollow ugc">optimistic relay</a> schemes to reduce the relayer’s operational costs. With this approach, relayers optimistically assume the honesty of the block-builder and skip the validation work for payloads sent from the builder. If the builder is later found to deviate from honest behavior, their collateral will be used to refund the proposer. Optimistic relaying would be especially helpful as it allows relayers to bypass the need to validate the based rollup transactions when verifying partial blocks.</p>
+<p>Another potential solution is for the proposers to share the preconfirmation tip revenue with the relay to compensate for the additional workload.</p>
+<h3><a class="anchor" href="https://ethresear.ch#blob-efficiency-18" name="blob-efficiency-18"></a>Blob Efficiency</h3>
+<p>So far, we have blurred the line between L1 and L2 preconfirmations. This is somewhat intentional, as L2 transactions are included within L1 transactions. However, there are cases where the difference becomes important.</p>
+<p>Consider a scenario where the L2 transactions within a round cannot fill an entire blob. If we only support preconfirmations for L2 transactions by preconfirming the L1 transactions that contain them, we face a problem. Proposers would either have to preconfirm partially filled blob transactions at the end of the round or wait for another round to collect enough transactions to fill the blob.</p>
+<p>One solution is to allow proposers to commit to a batch of L2 transactions without linking them to a specific L1 transaction. This would let the builder of the final full block aggregate the L2 transactions into one or more L1 blobs at the end of the slot.</p>
+<h3><a class="anchor" href="https://ethresear.ch#issues-with-mev-boost-19" name="issues-with-mev-boost-19"></a>Issues with MEV-Boost</h3>
+<p>MR-MEV-Boost inherits the existing L1 MEV-Boost pipeline, which also means that we inherit many of MEV-Boost’s downsides, such as <a href="https://arxiv.org/pdf/2305.19037" rel="noopener nofollow ugc">reliance on a handful of relays and builders</a>. However, based rollups aim to inherit the security of L1, not to exceed it. Therefore, being “as bad as” L1 is the best we can do as a based solution.</p>
+<h1><a class="anchor" href="https://ethresear.ch#future-direction-20" name="future-direction-20"></a>Future Direction</h1>
+<p>MR-MEV-Boost can be generalized as <em>partial-block preconfirmations</em>, where the proposer incrementally builds the block by committing to and publishing partial blocks during their slot.</p>
+<p>One future direction would be to enshrine partial-block preconfirmations into the L1 protocol to achieve faster block times. This aligns with Vitalik’s <a href="https://vitalik.eth.limo/general/2024/06/30/epochslot.html" rel="noopener nofollow ugc">recent post</a> and offers several benefits over off-protocol designs like MR-MEV-Boost:</p>
+<ul>
+<li>Removes “non-opted-in” proposers, enabling L1 preconfirmations and L1-L2 composability for all slots.</li>
+<li>Fully utilizes Ethereum’s validator set, potentially introducing lightweight <a href="https://ethresear.ch/t/payload-timeliness-committee-ptc-an-epbs-design/16054">PTC</a>-like attestations for timely partial payload releases.</li>
+<li>Opens doors to increase the block times without degrading UX, which may help enable <a href="https://ethereum.org/en/roadmap/single-slot-finality/" rel="noopener nofollow ugc">single-slot finality</a>.</li>
+</ul>
+<h1><a class="anchor" href="https://ethresear.ch#related-work-21" name="related-work-21"></a>Related Work</h1>
+<p>In his <a href="https://dba.xyz/were-all-building-the-same-thing/" rel="noopener nofollow ugc">latest post</a>, Jon Charbonneau explains in great detail how based rollups/preconfirmations work and the centralization risk of based preconfirmations.</p>
+<p>Furthermore, partial-block preconfirmations are closely related to <a href="https://ethresear.ch/t/how-much-can-we-constrain-builders-without-bringing-back-heavy-burdens-to-proposers/13808">inclusion list</a> research, as both can be viewed under the broader concept of “partial-block building,” where different parts of a block are constructed at different times by different entities. For example, the <a href="https://research.eigenlayer.xyz/t/mev-boost-liveness-first-relay-design/15" rel="noopener nofollow ugc">MEV-Boost++ proposal</a> from Kyodo (EigenLayer) resembles MR-MEV-Boost, as both enable early commitment to partial blocks by imposing additional slashing conditions on the proposer.</p>
+<h1><a class="anchor" href="https://ethresear.ch#conclusion-22" name="conclusion-22"></a>Conclusion</h1>
+<p>We introduce MR-MEV-Boost, a design that enables based preconfirmations by running multiple rounds of MEV-Boost auctions within a single slot. By inheriting the L1 PBS pipeline, MR-MEV-Boost mitigates many of the negative externalities of based preconfirmations while retaining the benefits of based rollups.</p>
+<p>At <a href="https://switchboard.nethermind.io/" rel="noopener nofollow ugc">Nethermind Switchboard</a>, we actively research and tackle the open challenges of based preconfirmations. We are also collaborating closely with Taiko to develop <a href="https://github.com/NethermindEth/Taiko-Preconf-AVS/blob/6b21d85d329986a2a9725048e56be3a45d463dcc/Docs/design-doc.md" rel="noopener nofollow ugc">a PoC for based preconfirmations</a> compatible with L2 PBS, including MR-MEV-Boost. Stay tuned for more updates!</p>
+            <p><small>1 post - 1 participant</small></p>
+            <p><a href="https://ethresear.ch/t/based-preconfirmations-with-multi-round-mev-boost/20091">Read full topic</a></p>
+]]></content:encoded>
+<pubDate>Thu, 18 Jul 2024 06:47:13 +0000</pubDate>
+<pubDate>Thu, 18 Jul 2024 06:47:13 +0000</pubDate>
+</item>
 
 <item>
 <title>A Note On Securely Finding Minimum Mean Cycle</title>
