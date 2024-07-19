@@ -4,6 +4,7 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+
 <item>
 <title>Respire: High-Rate PIR for Databases with Small Records</title>
 <link>https://eprint.iacr.org/2024/1165</link>
@@ -11,10 +12,9 @@
 <content:encoded><![CDATA[
 <div> 关键词：Private Information Retrieval（PIR）、Communication Overhead、Database、Small Records、Lattice-Based Scheme。
 
-总结:<br>本文介绍了一种名为Respire的新型基于 lattice 的隐私信息检索（PIR）方案，特别针对小记录数据库设计。与现有最高效方案相比，Respire在下载单个记录时的在线通信量减少了5.9倍，仅需6.1KB。此外，Respire支持批量查询，相比先前高效通信的批处理PIR方案，它在总通信上降低了3.4-7.1倍，同时保持了相近的吞吐量（200-400MB/s）。其设计创新之处在于运用了新的查询压缩和响应打包技术，这些技术基于同态加密中的环切换。 <div>
+总结:<br />本文介绍了一种名为Respire的新型基于 lattice 的隐私信息检索（PIR）方案，特别针对小记录数据库设计。与现有最高效方案相比，Respire在下载单个记录时的在线通信量减少了5.9倍，仅需6.1KB。此外，Respire支持批量查询，相比先前高效通信的批处理PIR方案，它在总通信上降低了3.4-7.1倍，同时保持了相近的吞吐量（200-400MB/s）。其设计创新之处在于运用了新的查询压缩和响应打包技术，这些技术基于同态加密中的环切换。 <div>
 Private information retrieval (PIR) is a key building block in many privacy-preserving systems, and recent works have made significant progress on reducing the concrete computational costs of single-server PIR. However, existing constructions have high communication overhead, especially for databases with small records. In this work, we introduce Respire, a lattice-based PIR scheme tailored for databases of small records. To retrieve a single record from a database with over a million 256-byte records, the Respire protocol requires just 6.1 KB of online communication; this is a 5.9x reduction compared to the best previous lattice-based scheme. Moreover, Respire naturally extends to support batch queries. Compared to previous communication-efficient batch PIR schemes, Respire achieves a 3.4-7.1x reduction in total communication while maintaining comparable throughput (200-400 MB/s). The design of Respire relies on new query compression and response packing techniques based on ring switching in homomorphic encryption.
 ]]></content:encoded>
-<pubDate>Thu, 18 Jul 2024 17:26:24 +0000</pubDate>
 <pubDate>Thu, 18 Jul 2024 17:26:24 +0000</pubDate>
 </item>
 <item>
@@ -24,10 +24,9 @@ Private information retrieval (PIR) is a key building block in many privacy-pres
 <content:encoded><![CDATA[
 <div> 关键词：Auditing, Organizations, Ledgers, Security, Scalability
 
-总结:<br>本文主要探讨了审计在财政年度对交易活跃组织的重要性，以及当前审计过程中存在的挑战。为解决大量组织数据核查的计算问题，作者提出CLOSC和CLOLC两种协议，旨在确保不同账本之间的交易一致性，同时保护交易金额、组织与审计者之间的匿名性和交易组织间的隐私。这两种协议基于两层账本架构和加密工具，实现了高效安全的审计。文章通过性能评估显示，即使处理百万级交易，计算和验证时间也能保持在秒级别，而单个审计周期的链上存储成本也非常合理。 <div>
+总结:<br />本文主要探讨了审计在财政年度对交易活跃组织的重要性，以及当前审计过程中存在的挑战。为解决大量组织数据核查的计算问题，作者提出CLOSC和CLOLC两种协议，旨在确保不同账本之间的交易一致性，同时保护交易金额、组织与审计者之间的匿名性和交易组织间的隐私。这两种协议基于两层账本架构和加密工具，实现了高效安全的审计。文章通过性能评估显示，即使处理百万级交易，计算和验证时间也能保持在秒级别，而单个审计周期的链上存储成本也非常合理。 <div>
 Auditing throughout a fiscal year is integral to organizations with transactional activity. Organizations transact with each other and record the details for all their economical activities so that a regulatory committee can verify the lawfulness and legitimacy of their activity. However, it is computationally infeasible for the committee to perform all necessary checks for each organization. To overcome this, auditors assist in this process: organizations give access to all their internal data to their auditors, who then produce reports regarding the consistency of the organization's data, alerting the committee to any inconsistencies. Despite this, numerous issues that result in fines annually revolve around such inconsistencies in bookkeeping across organizations. Notably, committees wishing to verify the correctness of auditor-provided reports need to redo all their calculations; a process which is computationally proportional to the number of organizations. In fact, it becomes prohibitive when considering real-world settings with thousands of organizations. In this work, we propose two protocols, CLOSC and CLOLC, whose goals are to enable auditors and a committee to verify the consistency of transactions across different ledgers. Both protocols ensure that for every transaction recorded in an organization's ledger, there exists a dual one in the ledger of another organization while safeguarding against other potential attacks. Importantly, we minimize the information leakage to auditors and other organizations and guarantee three crucial security and privacy properties that we propose: (i) transaction amount privacy, (ii) organization-auditor unlinkability, and (iii) transacting organizations unlinkability. At the core of our protocols lies a two-tier ledger architecture alongside a suite of cryptographic tools. To demonstrate the practicality and scalability of our designs, we provide extensive performance evaluation for both CLOSC and CLOLC. Our numbers are promising, i.e., all computation and verification times lie in the range of seconds, even for millions of transactions, while the on-chain storage costs for an auditing epoch are encouraging i.e. in the range of GB for millions of transactions and thousands of organizations.
 ]]></content:encoded>
-<pubDate>Tue, 16 Jul 2024 12:41:36 +0000</pubDate>
 <pubDate>Tue, 16 Jul 2024 12:41:36 +0000</pubDate>
 </item>
 <item>
@@ -47,7 +46,6 @@ Reconciling these three properties is seemingly paradoxical given that the domin
 In this work, we set out to address this problem by putting forward blockchain space tokenization (BST), namely a new capability of a blockchain system to tokenize its capacity for transactions and allocate it to interested users who are willing to pay ahead of time for the ability to post transactions regularly for a period of time. We analyze our system in the face of  worst-case transaction-processing attacks by introducing a security game played between the mempool mechanism and an adversary.  Leveraging this framework, we prove that BST offers predictable and asymptotically optimal delays, predictable fees, and is incentive compatible, thus answering the question posed in the affirmative.
 ]]></content:encoded>
 <pubDate>Tue, 16 Jul 2024 11:26:44 +0000</pubDate>
-<pubDate>Tue, 16 Jul 2024 11:26:44 +0000</pubDate>
 </item>
 <item>
 <title>Privacy-Preserving Data Deduplication for Enhancing Federated Learning of Language Models</title>
@@ -56,14 +54,12 @@ In this work, we set out to address this problem by putting forward blockchain s
 <content:encoded><![CDATA[
 <div> 关键词：Federated Learning, Deduplication, Privacy-Preserving, Efficient Privacy-MPD, Performance Improvement.
 
-总结: <br>
+总结: <br />
 文章探讨了在联邦学习中进行数据去重（deduplication）的重要性和挑战。为解决这一问题，作者提出了一种创新协议：高效隐私保护多方去重（EP-MPD）。EP-MPD通过两个新型的私密集合交集协议模块构建，实现了在保护数据隐私的同时，从多个客户端数据集中高效去除重复项。实验结果表明，去重显著提高了大型语言模型的联邦学习性能，如降低 perplexity 达19.61%，并减少运行时间高达27.95%。EP-MPD在联邦学习中兼顾了隐私和效率，为大规模应用提供了有价值解决方案。 <div>
 Deduplication is a vital preprocessing step that enhances machine learning model performance and saves training time and energy. However, enhancing federated learning through deduplication poses challenges, especially regarding scalability and potential privacy violations if deduplication involves sharing all clients’ data. In this paper, we address the problem of deduplication in a federated setup by introducing a pioneering protocol, Efficient Privacy-Preserving Multi-Party Deduplication (EP-MPD). It efficiently removes duplicates from multiple clients’ datasets without compromising data privacy. EP-MPD is constructed in a modular fashion, utilizing two novel variants of the Private Set Intersection protocol. Our extensive experiments demonstrate the significant benefits of deduplication in federated learning of large language models. For instance, we observe up to 19.61% improvement in perplexity and up to 27.95% reduction in running time. EP-MPD effectively balances privacy and performance in federated learning, making it a valuable solution for large-scale applications.
 ]]></content:encoded>
 <pubDate>Mon, 15 Jul 2024 20:53:24 +0000</pubDate>
-<pubDate>Mon, 15 Jul 2024 20:53:24 +0000</pubDate>
 </item>
-
 <item>
 <title>Faster Private Decision Tree Evaluation for Batched Input from Homomorphic Encryption</title>
 <link>https://eprint.iacr.org/2024/662</link>

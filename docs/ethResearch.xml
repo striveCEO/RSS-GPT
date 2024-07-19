@@ -4,6 +4,87 @@
 <title>Ethereum Research - Latest topics</title>
 <link>https://ethresear.ch/latest</link>
 
+<item>
+<title>What is "RealTPS" in Blockchain</title>
+<link>https://ethresear.ch/t/what-is-realtps-in-blockchain/20098</link>
+<guid>https://ethresear.ch/t/what-is-realtps-in-blockchain/20098</guid>
+<content:encoded><![CDATA[
+<div> 关键词：区块链、TPS、透明度、交易定义、测量工具
+
+总结:<br>这篇文章讨论了区块链中TPS（交易每秒）指标的不透明性问题。传统上，TPS被模糊地定义和测量，与区块链的透明性原则相冲突。文章指出，应以确认交易（ConfirmedTransactions）为基础来计算TPS，质疑现有的高TPS宣称可能未经详细说明。文章提到Hyperledger的Caliper和Quorum推荐的测量工具存在局限，如只考虑单节点性能，未充分反映分布式网络特性。作者团队开发了新的工具AnTPS，旨在提供透明的多节点、多账户测量，支持不同场景和环境，以改进对区块链TPS的准确评估。 <div>
+<p>Authors: <a href="https://x.com/Kyungmin7984" rel="noopener nofollow ugc">@Kyungmin</a> <a href="https://github.com/bicoCrypto" rel="noopener nofollow ugc">@bicoCrypto</a> <a href="https://github.com/solmingming" rel="noopener nofollow ugc">@solmingming</a></p>
+<h2><a class="anchor" href="https://ethresear.ch#tldr-1" name="tldr-1"></a>TL;DR</h2>
+<p>The current concept of TPS (Transactions Per Second) in blockchain is being disclosed in an ambiguous and opaque manner, conflicting with blockchain’s core value of transparency. This article reconsiders the definition of transactions in blockchain, compares theoretical figures with actual measurements, evaluates existing measurement tools, introduces our self-developed tool, and proposes a more accurate and transparent TPS measurement method.</p>
+<h2><a class="anchor" href="https://ethresear.ch#problem-2" name="problem-2"></a>Problem</h2>
+<p>The biggest change in the transition from Web2 to Web3 is decentralization. This has led to improved system accessibility and increased information transparency. However, there is still opaque information in the blockchain ecosystem, with TPS being a prime example.</p>
+<p>In transaction processing systems, especially financial systems, TPS is a crucial performance indicator. However, the TPS information currently provided in blockchain is limited to simple figures, with detailed information about measurement methods and processes remaining opaque.</p>
+<p>While blockchain smart contracts are operated transparently through verification and auditing, we still rely on the foundation’s system for the blockchain nodes themselves, lacking verification procedures similar to smart contracts.</p>
+<h2><a class="anchor" href="https://ethresear.ch#tps-in-traditional-web2-3" name="tps-in-traditional-web2-3"></a>TPS in traditional Web2</h2>
+<p>When discussing blockchain TPS, VISA’s processing capability is often mentioned as a comparison. <a href="https://www.reddit.com/r/nanocurrency/comments/82438o/visa_is_capable_of_performing_24000_transactions/" rel="noopener nofollow ugc">VISA officially announced a processing capability of 24,000 TPS</a>, but <a href="https://news.bitcoin.com/no-visa-doesnt-handle-24000-tps-and-neither-does-your-pet-blockchain/" rel="noopener nofollow ugc">this has been questioned</a>:</p>
+<p>In centralized Web2 systems, it’s difficult to verify such issues. However, blockchain (Web3) systems are decentralized and their code is managed as open source, making it possible to verify TPS.</p>
+<h2><a class="anchor" href="https://ethresear.ch#tps-in-web3-4" name="tps-in-web3-4"></a>TPS in Web3</h2>
+<p>In blockchain systems with public nodes and permissionless nodes, anyone can participate in the network, operate nodes, and access the system. Even without connecting to the mainnet or testnet, the source code is publicly available, allowing independent network construction or modification after forking.</p>
+<p>Ethereum and most EVM-compatible blockchains publish high TPS figures. For example, Avalanche C-Chain is introduced as capable of achieving 4,500 TPS. However, information on how this figure was measured is not provided.</p>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/7/4/748ee3c646e8c2964dd294eefe5aa1491ce65b45.jpeg" title="Image"><img alt="Image" height="378" src="https://ethresear.ch/uploads/default/optimized/3X/7/4/748ee3c646e8c2964dd294eefe5aa1491ce65b45_2_690x378.jpeg" width="690" /></a></div><p></p>
+<h2><a class="anchor" href="https://ethresear.ch#time-to-define-transaction-5" name="time-to-define-transaction-5"></a>Time to Define Transaction</h2>
+<p>In EVM blockchains, the term “Transaction” is used in various contexts:</p>
+<ul>
+<li>SendTransaction: Simply refers to the act of sending a transaction, without guaranteeing the final state or completeness of the transaction.</li>
+<li>PendingTransaction: The state where a transaction is waiting in the node’s memory pool (Mempool).</li>
+<li>QueuedTransaction: Similar to Pending, waiting in the node’s memory pool, but distinguished in the serialization process through Nonce.</li>
+<li>ConfirmedTransaction: The state where a transaction receipt has been issued, indicating the transaction has succeeded or failed.</li>
+</ul>
+<p>We believe that TPS should be calculated based on ConfirmedTransactions when measuring. Based on this, we propose the following formula for calculating TPS:<br />
+TPS = BlockGasLimit / (TxGasUsed * BlockCreationTime)</p>
+<p>Currently, Avalanche C-Chain’s BlockGasLimit is 15,000,000<br />
+</p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/c/9/c909ced7994a754fc7875e8dd1730093faedad3e.png" title="Tx Gaslimit"><img alt="Tx Gaslimit" height="225" src="https://ethresear.ch/uploads/default/optimized/3X/c/9/c909ced7994a754fc7875e8dd1730093faedad3e_2_690x225.png" width="690" /></a></div><p></p>
+<p>Even assuming the simplest transaction (TxGasUsed = 21,000) and the shortest block creation time (BlockCreationTime = 1 second), the theoretical maximum TPS is 715. This shows a significant difference from the officially announced 4,500 TPS. (The actual measured value would naturally be even lower)</p>
+<p>We speculate that this difference may occur due to:</p>
+<ul>
+<li>The transaction standard used in TPS calculation may not be ConfirmedTransaction</li>
+<li>The Avalanche version that achieved 4,500 TPS may differ from the version currently used in public nodes</li>
+<li>Differences in TPS measurement methods and methodologies</li>
+</ul>
+<p>Such opaque information raises questions about the reliability and accuracy of TPS figures.<br />
+Monad has published a critical analysis of these limitations of blockchain TPS: <a href="https://www.monad.xyz/wtf-is-tps" rel="noopener nofollow ugc">WTF is TPS?</a></p>
+<h2><a class="anchor" href="https://ethresear.ch#tps-benchmark-tools-6" name="tps-benchmark-tools-6"></a>TPS Benchmark Tools</h2>
+<p>There are currently two main blockchain TPS benchmark tools in use:</p>
+<ol>
+<li><a href="https://github.com/hyperledger/caliper" rel="noopener nofollow ugc">Hyperledger Caliper</a>: Developed by the Hyperledger Foundation</li>
+<li><a href="https://github.com/drandreaskrueger/chainhammer" rel="noopener nofollow ugc">ChainHammer</a>: Recommended by Quorum (a private blockchain developed by ConsenSys)<br />
+Note: ChainHammer’s most recent commit was 2 years ago, making it essentially outdated.</li>
+</ol>
+<p>Caliper is written in JavaScript and is a highly complete project. However, there are doubts about whether it is optimized for measuring “blockchain” TPS:</p>
+<ol>
+<li>TPS measurement on a single node:<br />
+<div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/6/7/67bd0b50a563472ac93dafc3fa2e17effa0919e8.png" title="Figure2"><img alt="Figure2" height="389" src="https://ethresear.ch/uploads/default/optimized/3X/6/7/67bd0b50a563472ac93dafc3fa2e17effa0919e8_2_690x389.png" width="690" /></a></div></li>
+</ol>
+<p>The core of blockchain is distributed storage of data through consensus. However, Caliper only conducts TPS measurements on a single node, which can measure the TPS of individual nodes but does not accurately reflect the TPS of the entire blockchain network. (The transaction propagation process is not considered)</p>
+<ol>
+<li>Limitation of measurement from a single account:<br />
+In EVM, EOA (Externally Owned Account) has a Nonce value, causing transactions to be processed sequentially.<br />
+While 2024 was predicted to be the era of parallel EVM, current parallel processing technology still proceeds in an optimistic manner, requiring re-execution in case of conflicts. (Cases requiring re-execution can hardly be considered true parallel execution.)<br />
+Therefore, execution from a single account versus multiple accounts can have a significant impact on TPS.</li>
+</ol>
+<h2><a class="anchor" href="https://ethresear.ch#antpsan-ti-tps-7" name="antpsan-ti-tps-7"></a>AnTPS(An-ti TPS)</h2>
+<p>To improve these limitations, we have developed our own blockchain benchmark tool, AnTPS, using Golang: <a href="https://github.com/decipherhub/AnTPS" rel="noopener nofollow ugc">Github</a><br />
+Features include:<br />
+</p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/f/0/f0cff11ba6f328b500e85b78f194763580ca940c.png" title="image"><img alt="image" height="283" src="https://ethresear.ch/uploads/default/optimized/3X/f/0/f0cff11ba6f328b500e85b78f194763580ca940c_2_690x283.png" width="690" /></a></div><p></p>
+<ul>
+<li>Transparently providing measurement environment/results.</li>
+<li>Conducting measurements on at least two or more nodes.</li>
+<li>Supporting measurement cases for both single and multiple accounts.</li>
+<li>Supporting various scenarios during measurement (ERC20/721/1155/NativeToken).</li>
+<li>Supporting not only local environment measurements but also Cloud environments through IaC.</li>
+</ul>
+<p>Our goal is to overcome the limitations of existing tools while providing information transparently.<br />
+We welcome your opinions and feedback. Thank you.</p>
+            <p><small>1 post - 1 participant</small></p>
+            <p><a href="https://ethresear.ch/t/what-is-realtps-in-blockchain/20098">Read full topic</a></p>
+]]></content:encoded>
+<pubDate>Fri, 19 Jul 2024 03:52:11 +0000</pubDate>
+<pubDate>Fri, 19 Jul 2024 03:52:11 +0000</pubDate>
+</item>
 
 <item>
 <title>Based Preconfirmations with Multi-round MEV-Boost</title>
