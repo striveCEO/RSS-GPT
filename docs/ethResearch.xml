@@ -4,6 +4,302 @@
 <title>Ethereum Research - Latest topics</title>
 <link>https://ethresear.ch/latest</link>
 
+<item>
+<title>Diseconomies of Scale: Anti-Correlation Penalties (EIP-7716)</title>
+<link>https://ethresear.ch/t/diseconomies-of-scale-anti-correlation-penalties-eip-7716/20114</link>
+<guid>https://ethresear.ch/t/diseconomies-of-scale-anti-correlation-penalties-eip-7716/20114</guid>
+<content:encoded><![CDATA[
+<div> 关键词：Diseconomies of Scale、Anti-Correlation Penalties、EIP-7716、Proposer Timing Games、Centralization
+
+总结:
+这篇文章讨论了以太坊共识机制中的中心化问题，尤其是经济规模效应导致的不平衡和集中风险。EIP-7716提案旨在通过实施反相关惩罚来抵消这些影响，通过调整奖励和罚款，鼓励小型和分散的参与者，同时抑制大型运营商可能滥用的优势。反相关惩罚会根据验证者之间行为的相关性动态调整，例如对源投票错误的惩罚会根据网络中未参与或错误投票的总余额来调整。文章还提到，虽然惩罚可能会对单个验证者造成短期影响，但长期来看，它有利于提高网络的抗风险能力并促进去中心化。 <div>
+<h1><a class="anchor" href="https://ethresear.ch#diseconomies-of-scale-anti-correlation-penalties-eip-7716-1" name="diseconomies-of-scale-anti-correlation-penalties-eip-7716-1"></a>Diseconomies of Scale: Anti-Correlation Penalties (EIP-7716)</h1>
+<blockquote>
+<p>Special thanks to <a href="https://x.com/dapplion">DappLion</a> and <a href="https://x.com/VitalikButerin">Vitalik</a> for their collaborative effort on the overall concept, and <a href="https://x.com/weboftrees">Anders</a> and <a href="https://x.com/_julianma">Julian</a> for their valuable feedback on this post!</p>
+</blockquote>
+<p>Ethereum relies on a decentralized set of validators to ensure properties like credible neutrality and censorship resistance. Validators <a href="https://ethereum.org/en/staking/">stake</a> a certain amount of ETH to participate in Ethereum’s consensus and secure the network. In return, validators receive rewards directly from the protocol (<a href="https://ethresear.ch/t/faq-ethereum-issuance-reduction/19675">#issuance</a>) as well as execution layer rewards when proposing a block, which include transaction fees and <a href="https://ethereum.org/en/developers/docs/mev/">MEV</a> from the blocks they propose (<a href="https://boost.flashbots.net/">#mevboost</a>). As of today, thousands, if not tens of thousands, of small-sized entities run validators from their homes despite several disadvantages. These include the risk and responsibility of operating and maintaining a node, the technical burden associated with setup and upkeep, potential downtime, and the lack of a liquid staking token that would otherwise provide flexibility and liquidity.</p>
+<p>With the ongoing maturation of Ethereum’s PoS, we’ve encountered various <strong>centralizing forces</strong> inherent to the current protocol:</p>
+<ul>
+<li><strong>EL Reward Variance</strong>: While attestation rewards are distributed fairly evenly, the rewards for proposing a block can vary significantly. This variation arises because <a href="https://ethereum.org/en/developers/docs/mev/">MEV</a> is extremely spiky, resulting in a few outlier blocks with proposer profits exceeding 10 ETH. Large operators running many validators have better chances of capturing these “juicy” blocks. Although over many years the earnings of individual validators should average out, the future remains uncertain. Assuming 1 million validators and 2,628,000 slots per year, the probability of being selected as a proposer is ~0.0001%. On average, a validator can expect to propose <span class="math">\frac{1,000,000}{365.25 \times 7200} = 2.628</span> blocks per year (there are 7200 slots per day). From April 2023 to April 2024, the percentage of blocks with more than 10 ETH was 0.004041%. Statistically, a single validator will eventually propose a block with more than 10 ETH of MEV, but it’s unknown whether this will happen this year or in ten years, and by then, MEV issues might be resolved. While solo stakers literally participate in a lottery, large operators can average their profits and plan for the future with greater certainty.<br />
+Over 1 year, the probability of a random validator getting at least one block with &gt;10 ETH profits is 0.1%:</li>
+</ul>
+<div class="math">
+P(\text{at least one 10} \, \text{ETH} \, \text{block}) = 1 - (1 - 0.0004041)^n = 1 - (1 - 0.0004041)^{2.628}
+</div>
+<p>If you control 1% of all validators (~10k validators), the probability of getting at least one block with more than 10 ETH of MEV climbs to approximately 99.99% over one year.</p>
+<p>The following chart shows the <strong>cumulative sum of MEV-Boost payments</strong> on the y-axis and the <strong>cumulative number of MEV-Boost payments</strong> on the x-axis. We can see that 90% of all blocks distribute around 44% of the total value, leaving 56% to be distributed to the lucky 10% of proposers.</p>
+<div align="center">
+<p>
+  </p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/a/e/aed0a28f0f91206549c0993488907698504ef2dc.png" title="Bk31ssG_R.png"><img height="428" src="https://ethresear.ch/uploads/default/optimized/3X/a/e/aed0a28f0f91206549c0993488907698504ef2dc_2_600x428.png" width="600" /></a></div>
+<p></p>
+</div>
+<ul>
+<li>
+<p><strong>Reorgs</strong>: “<em><a href="https://ethresear.ch/t/change-fork-choice-rule-to-mitigate-balancing-and-reorging-attacks/11127">Honest reorgs</a></em>” occur when the proposer of slot <span class="math">n_{1}</span> orphans the block of the proposer of slot <span class="math">n_{0}</span> because that block hasn’t received at least 40% of the slot’s committee members’ votes. By using <a href="https://notes.ethereum.org/@casparschwa/H1T0k7b85">proposer boost</a>, these “<em>weak</em>” blocks (those with less than 40% attestations) can be reorged by the next proposer to penalize the previous proposer for poor performance, such as being late and therefore rugging some attesters for their correct head votes. Reorgs can have centralizing forces and the more stake an entity holds, the more strategically it can decide whether to reorg a particular block. Large-scale operators have more safety because they can ensure their own validators never vote to reorg their own blocks. Essentially, all nodes of an entity can coordinate to always vote for the current slot’s block rather than its parent if the current block comes from that entity. This coordination potentially allows large entities to risk broadcasting their block later in the slot while still having a high probability of the block becoming canonical. <a href="https://ethresear.ch/t/deep-diving-attestations-a-quantitative-analysis/20020">Analysis has shown</a> that <strong>by second 4</strong> of the slot, <strong>40% of all attestations</strong> for that slot <strong>have been seen</strong>. A large operator, who controls many validators and knows that these validators will never vote to reorganize its blocks, can slightly delay block propagation without significantly increasing its risk. The same principle applies when a single entity owns consecutive slots. In theory, this entity could wait until the end of the slot (or even longer) before publishing its block. Then, it could use the next slot to solidify that weak block into the chain by leveraging proposer boost.</p>
+</li>
+<li>
+<p><strong>Proposer Timing Games</strong>: <a href="https://timing.pics/">Proposer timing games</a> (also see <a href="https://eprint.iacr.org/2023/760">[1]</a>, <a href="https://arxiv.org/abs/2305.09032">[2]</a>) is a term that summarizes a strategy applied by some block proposers in which they delay their proposal to give the builder more time for extracting MEV. This leads to increased profits for the proposer but <a href="https://ethresear.ch/t/deep-diving-attestations-a-quantitative-analysis/20020">evidently</a> comes with a negative impact on other proposers and especially attesters. Proposer timing games are risky because late blocks have an increased chance of being reorged. In general, large-size operators face lower risks when playing timing games than small-size entities. This stems from the fact that larger operators are on average more sophisticated and have better connectivity in the P2P network: What might be a late block for an Australian validator (go <a href="https://x.com/sassal0x">sassal</a> <img alt=":crown:" class="emoji" height="20" src="https://ethresear.ch/images/emoji/facebook_messenger/crown.png?v=12" title=":crown:" width="20" />) might be just in time for a US-based Coinbase validator. Thus, the lower the latency, the more a validator can risk delaying.</p>
+</li>
+</ul>
+<div class="math">
+\textbf{The above symptoms are all exacerbated by one thing, namely...}
+</div>
+<div class="math">
+\underline{\mathbf{economies\ of\ scale.}}
+</div>
+<p><a href="https://en.wikipedia.org/wiki/Economies_of_scale">Economies of scale</a> are nothing new and the crypto landscape isn’t immune either. Looking at Wikipedia, it is defined as “<em>the cost advantages that enterprises obtain due to their scale of operation […]</em>”, and the same applies to Ethereum staking:</p>
+<div align="center">
+  <div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/e/5/e548616102366792be17847ac823b351c9f94170.png" title="ryZMFz-_R.png"><img height="359" src="https://ethresear.ch/uploads/default/optimized/3X/e/5/e548616102366792be17847ac823b351c9f94170_2_400x359.png" width="400" /></a></div>
+</div>
+<p>Large operators like Coinbase, Kraken, or Kiln can leverage economies of scale to make staking even more profitable. This allows them to offer rewards competitive with those of solo stakers, even after taking their cut. To illustrate this, consider a simple example (the exact numbers are not important here):</p>
+<div class="md-table">
+<table>
+<thead>
+<tr>
+<th>Entity</th>
+<th>Validators on one Node</th>
+<th>Hardware Costs</th>
+<th>Other Costs</th>
+<th>Total Cost ($)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Solo Staker</td>
+<td>1 validator</td>
+<td>1 Intel NUC ($ 1,200)</td>
+<td>$ 5,000</td>
+<td>$ 6,200</td>
+</tr>
+<tr>
+<td>Coinbase</td>
+<td>1,000 validators</td>
+<td>1 Intel NUC ($ 1,200)</td>
+<td>$ 50,000</td>
+<td>$ 51,200</td>
+</tr>
+</tbody>
+</table>
+</div><blockquote>
+<p>For more realistic numbers, refer to the latest EthStaker survey published <a href="https://paragraph.xyz/@ethstaker/staking-survey-2024">here</a>. By allocating 10x as much in <em>Other Costs</em> for large operators, we account for the increased complexity of setting up multiple validators on one machine. This is realistic enough for the point we’re making here.</p>
+</blockquote>
+<p>We can see the effects of economies of scale: the machine used by Coinbase will generate 1,000 times the profits compared to solo stakers, while the costs are only eight times higher. As a result, the ROI for large-scale operators is significantly better.</p>
+<p>Using one hardware device for multiple validators is just one piece of the puzzle. Others include:</p>
+<ul>
+<li>Cloud service provider</li>
+<li>ISPs</li>
+<li>Geographical locations</li>
+<li>Maintenance responsibilities</li>
+<li>Client software</li>
+<li>And many more…</li>
+</ul>
+<p>In all these categories, the goal is maximum diversity to minimize the risk of external factors degrading or damaging the network. Despite this goal, economically rational players might prefer a one-stop-shop solution, such as running a Lighthouse + Geth node on a Google/AWS/Hetzner instance located in central Europe, maintained by a dedicated team of specialists. While this setup may perform well in terms of efficiency, Ethereum should not create incentives that further exacerbate centralization.</p>
+<div align="center">
+<p>
+  <img height="392" src="https://ethresear.ch/uploads/default/original/3X/b/a/bac447c3b4a914807987ea637a010bceb40febef.png" width="400" />
+</p>
+</div>
+<p><strong>But who is large-scale and whose not?</strong></p>
+<p>The protocol itself does not know which validator is operated by which entity. From the protocol’s perspective, a Coinbase validator looks the same as a solo staker. Therefore, to prevent correlations from emerging, we cannot simply scale rewards and penalties based on the market share of the entity behind a validator. For more on this topic, I recommend Barnabé’s post, <em><a href="https://barnabe.substack.com/p/seeing-like-a-protocol">“Seeing Like a Protocol”</a></em>.</p>
+<p>Fortunately, <strong>economies of scale inherently come with correlations</strong>, which is something the protocol can be made aware of. Leveraging economies of scale may linearly scale with correlations, thus we can implement rules to dynamically scale economic incentives and steer the validator set toward diversification.</p>
+<div align="center">
+<p>
+  </p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/6/9/697934a0c70e654fbc603e570f422269f8116551.png" title="BJbZ1XWuR.png"><img height="358" src="https://ethresear.ch/uploads/default/optimized/3X/6/9/697934a0c70e654fbc603e570f422269f8116551_2_400x358.png" width="400" /></a></div>
+<p></p>
+</div>
+<p>Penalizing correlated faults isn’t something new to Ethereum. In the current <a href="https://eth2book.info/capella/part2/incentives/slashing/">slashing</a> mechanism, a “malicious” validator is initially penalized by a reduction of 1/32 of their effective balance when they are slashed. After being halfway through the withdrawal period, they are subject to an additional penalty (the <em><a href="https://eth2book.info/capella/part2/incentives/slashing/">correlation penalty</a></em>) that scales with the number of validators (specifically their stake) who were slashed around the same time (+/- 18 days). Therefore, a solo staker accidentally voting for two different head blocks, which is a slashable offense, would lose significantly less than a party with a 20% market share (assuming all 20% collectively fail).</p>
+<p>In the end, the goal must be to incentivize validators to diversify their setup. As shown in the following example, we want validators to reduce their correlation with other validators, making the whole network more robust against external influences.</p>
+<div align="center">
+<p>
+  </p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/6/7/678299142da4a042b47e07270b8ccfc7c644e393.png" title="ry5bkuMO0.png"><img height="229" src="https://ethresear.ch/uploads/default/optimized/3X/6/7/678299142da4a042b47e07270b8ccfc7c644e393_2_690x229.png" width="690" /></a></div>
+<p></p>
+</div>
+<h2><a class="anchor" href="https://ethresear.ch#eip-7716-2" name="eip-7716-2"></a>EIP-7716</h2>
+<p>The goal of “<a href="https://eips.ethereum.org/EIPS/eip-7716">EIP-7716: Anti-Correlation Attestation Penalties</a>” is to get us closer to diseconomies of scale. The more homogeneous an entity’s staking setup, the more it should be penalized while non-correlated setups profit from the proposed changes.</p>
+<p>With anti-correlation penalties, the previous “<em>economies of scale vs number of validators</em>” might be more like the following:</p>
+<div align="center">
+<p>
+  </p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/e/0/e0a2bcab530fcb98384c27b1765434ef0121fdd3.png" title="S179FsfOA.png"><img height="359" src="https://ethresear.ch/uploads/default/optimized/3X/e/0/e0a2bcab530fcb98384c27b1765434ef0121fdd3_2_400x359.png" width="400" /></a></div>
+<p></p>
+</div>
+<p>Anti-correlation penalties were first described by Vitalik in an <a href="https://ethresear.ch/t/supporting-decentralized-staking-through-more-anti-correlation-incentives/19116">ethresearch post</a>. After some <a href="https://ethresear.ch/t/analysis-on-correlated-attestation-penalties/19244">initial analyses</a> and a more <a href="https://ethresear.ch/t/a-concrete-proposal-for-correlated-attester-penalties/19341">concrete proposal</a> available, the <a href="https://eips.ethereum.org/EIPS/eip-7716">EIP</a> is now at the point where everyone is invited to look into the inner workings of correlated penalties and leave feedback.</p>
+<p>In short, the EIP proposes to multiply the missed (source) vote penalty by a penalty factor that ranges from 0 to 4 but equals 1 on average <em>(notably, this is important to not touch the issuance policy)</em>.</p>
+<h4><a class="anchor" href="https://ethresear.ch#how-does-7716-work-3" name="how-does-7716-work-3"></a>How does 7716 work?</h4>
+<div class="md-table">
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Symbol</th>
+<th>Description</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>penalty_factor</code></td>
+<td><span class="math">p</span></td>
+<td>Penalty scaling factor</td>
+<td>dynamic</td>
+</tr>
+<tr>
+<td><code>net_excess_penalties</code></td>
+<td><span class="math">p_{exc}</span></td>
+<td>Net excess penalties</td>
+<td>dynamic</td>
+</tr>
+<tr>
+<td><code>non_participating_balance</code></td>
+<td><span class="math">balance_{non\_attesting}</span></td>
+<td>Sum balance of not/wrong attesting validators</td>
+<td>dynamic</td>
+</tr>
+<tr>
+<td><code>PENALTY_ADJUSTMENT_FACTOR</code></td>
+<td><span class="math">p_{adjustment}</span></td>
+<td>Penalty adjustment factor</td>
+<td>2**12</td>
+</tr>
+<tr>
+<td><code>MAX_PENALTY_FACTOR</code></td>
+<td><span class="math">p_{max}</span></td>
+<td>Maximum penalty factor</td>
+<td>4</td>
+</tr>
+<tr>
+<td><code>EXCESS_PENALTY_RECOVERY_RATE</code></td>
+<td><span class="math">p_{recovery}</span></td>
+<td>Rate by which the excess penalty decreases</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+</div><blockquote>
+<p>The final values for the constants are still to be decided.</p>
+</blockquote>
+<p>The penalty factor <span class="math">p</span> scales the slot penalties to a maximum of <code>MAX_PENALTY_FACTOR</code>, or down. It’s determined the following:</p>
+<div class="math">
+p = \min\left(\frac{balance_{non\_attesting}\ \times\ p_{adjustment}}{\max(p_{excess},\ 0.5)\times\ balance_{total}\ +\ 1},\ p_{max} \right)
+</div>
+<p>and from the <a href="https://github.com/ethereum/consensus-specs/blob/816d338bd09ffc8e83097c4db1764ba834f3adca/specs/_features/correlated_penalties/beacon_chain.md">pyspec implementation</a>; h/t <a href="https://x.com/dapplion">dapplion</a>:</p>
+<pre><code class="lang-python">penalty_factor = min(
+    ((total_balance - participating_balance) * PENALTY_ADJUSTMENT_FACTOR) // 
+    (max(self.net_excess_penalties, 0.5) * total_balance + 1),
+    MAX_PENALTY_FACTOR
+)
+</code></pre>
+<p>The formula calculates the penalty factor as a ratio of the “penalty weight” of non-attesting validators to the net excess penalty scaled by the balance of all validators. A higher penalty adjustment factor increases the sensitivity of the penalty factor. Conversely, a higher net excess penalty leads to a lower penalty factor.</p>
+<p>Finally, this is how the <code>penalty_factor</code> variable would be used:</p>
+<pre><code class="lang-auto">def get_flag_index_deltas(state: BeaconState, flag_index: int) -&gt; Tuple[Sequence[Gwei], Sequence[Gwei]]:
+    """
+    Return the deltas for a given ``flag_index`` by scanning through the participation flags.
+    """
+    ...
+    for index in get_eligible_validator_indices(state):
+        base_reward = get_base_reward(state, index)
+        if index in unslashed_participating_indices:
+            if not is_in_inactivity_leak(state):
+                reward_numerator = base_reward * weight * unslashed_participating_increments
+                rewards[index] += Gwei(reward_numerator // (active_increments * WEIGHT_DENOMINATOR))
+        elif flag_index != TIMELY_SOURCE_FLAG_INDEX:
+            # [New in correlated_penalties]
+            slot = committee_slot_of_validator(state, index, previous_epoch)
+            penalty_factor = compute_penalty_factor(state, slot) 
+            penalties[index] += Gwei(penalty_factor * base_reward * weight // WEIGHT_DENOMINATOR)
+    return rewards, penalties
+</code></pre>
+<p>We check if we are dealing with source votes (line 12), derive the slot in which the validator was supposed to vote (line 14), compute the penalty factor (line 15), and multiply it by the base reward (line 16).</p>
+<blockquote>
+<p>Although source votes might be a good starting point, the concept can be equally appied to head and target votes.</p>
+</blockquote>
+<p>The <span class="math">p_{exc}</span> is updated at the end of each slot using:</p>
+<div class="math">
+p_{exc} = \max(p_{recovery},\ p_{exc} + p) - p_{recovery}
+</div>
+<p>Which equals to:</p>
+<pre><code class="lang-python">net_excess_penalties = max(
+        EXCESS_PENALTY_RECOVERY_RATE, 
+        net_excess_penalties + penalty_factor
+    ) - EXCESS_PENALTY_RECOVERY_RATE
+</code></pre>
+<p>We can observe the following dynamics:</p>
+<ul>
+<li>If the balance of non-attesting validators increases, the penalty factor also increases.</li>
+<li>If the balance of non-attesting validators remains the same, the penalty factor approaches 1.</li>
+<li>If the balance of non-attesting validators decreases, the penalty factor can go below 1 for a while and then approach 1 afterward.</li>
+</ul>
+<p>When the <code>non_participating_balance</code> continuously increases for several rounds, the <code>penalty_factor</code> and the <code>net_excess_penalties</code> also increase. This continues until the <code>non_participating_balance</code> stops increasing. Then, the <code>net_excess_penalties</code> and the <code>penalty_factor</code> start decreasing together.</p>
+<p>With the <code>net_excess_penalties</code> keeping track of the excess penalties of past epochs, the formula can self-regulate what constitutes a “large” number of misses and what does not.</p>
+<p>This mechanism ensures that the sum of penalties doesn’t change with this EIP—only the distribution does.</p>
+<h2><a class="anchor" href="https://ethresear.ch#some-faqs-4" name="some-faqs-4"></a>Some FAQs</h2>
+<h3><a class="anchor" href="https://ethresear.ch#h-1-wouldnt-that-be-even-worse-for-solo-stakers-5" name="h-1-wouldnt-that-be-even-worse-for-solo-stakers-5"></a>1. Wouldn’t that be even worse for solo stakers?</h3>
+<p>No. Solo stakers, commonly referred to as small-scale operators or individuals running 1-10 validators from home, are expected to behave in a very uncorrelated manner compared to larger operators. Although factors like geographical location and client software can impact correlations, solo stakers are likely to be offline at different times than large-scale operators such as Coinbase or Kraken. As a result, the penalties solo stakers receive are smaller than those in the current system. In contrast, if a large-scale operator’s staking setup has a bug causing all their validators to fail to attest, the correlation is clear and the penalties are higher.</p>
+<p>This expectation was first confirmed in an <a href="https://ethresear.ch/t/analysis-on-correlated-attestation-penalties/19244">initial analysis</a> on anti-correlation penalties, which showed that solo stakers and Rocketpool operators would have been better off, while large-scale operators would have received higher penalties on average.</p>
+<h3><a class="anchor" href="https://ethresear.ch#h-2-wouldnt-that-discourage-people-from-using-minority-clients-6" name="h-2-wouldnt-that-discourage-people-from-using-minority-clients-6"></a>2. Wouldn’t that discourage people from using minority clients?</h3>
+<p>No. The opposite is the case, as using the majority client leads to even greater correlations. For example, if the Lighthouse client has a bug that causes attesters to vote for the wrong source, then the correlation is super high, and so is the penalty. On the other hand, all Lodestar attesters failing is regarded as a much smaller collective fault. In the case of minority clients being expected to have more bugs, then this would also balance out better because if it’s only a small minority, then the correlation penalty is more forgiving than if it had been some majority client.</p>
+<p>No. In fact, it encourages using minority clients. Using the majority clients leads to higher correlations. For example, if the Lighthouse client has a bug causing attesters to vote for the wrong source, the correlation is high and the penalty increases. Conversely, if all Lodestar attesters fail, it is considered a much smaller collective fault. The correlation penalty is more forgiving to a small minority than to a majority client. So, even if minority clients are expected to have more bugs, correlation penalties can steer validators toward using them.</p>
+<h3><a class="anchor" href="https://ethresear.ch#h-3-why-would-it-benefit-decentralization-7" name="h-3-why-would-it-benefit-decentralization-7"></a>3. Why would it benefit decentralization?</h3>
+<p>Anti-correlation penalties effectively differentiate between small and large operators without relying on validators that have consolidated their stake or other out-of-protocol solutions. By introducing economic incentives for diversified behavior, we benefit small players who are already “anti-correlated” while encouraging large players to reduce the impact of external factors such as one-node setups, or cloud providers on their staking operations.</p>
+<h3><a class="anchor" href="https://ethresear.ch#h-4-wouldnt-that-just-lead-to-big-parties-investing-in-increased-fault-tolerance-while-even-increasing-the-correlations-8" name="h-4-wouldnt-that-just-lead-to-big-parties-investing-in-increased-fault-tolerance-while-even-increasing-the-correlations-8"></a>4. Wouldn’t that just lead to big parties investing in increased fault tolerance while even increasing the correlations?</h3>
+<p>If big parties invest in increased fault tolerance, it’s still beneficial. Enhancing fault tolerance is difficult and expensive. At some point, it becomes cheaper to invest in anti-correlation than in further fault tolerance improvements. While large operators might have to move validators from popular cloud platforms to different environments, solo stakers running their nodes from home can continue as they are. Anything that costs large operators money but is free for solo stakers (=diseconomies of scale) fosters decentralization.</p>
+<div align="center">
+<p>
+  </p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/2/5/25f018bc53924b32c0a7c1deb29b0a0f3075daf1.jpeg" title="HyW84oMdA.jpg"><img height="216" src="https://ethresear.ch/uploads/default/optimized/3X/2/5/25f018bc53924b32c0a7c1deb29b0a0f3075daf1_2_690x216.jpeg" width="690" /></a></div>
+<p></p>
+</div>
+<p>The main argument is, that no matter how big operators react, either going for anti-correlation or, doing the opposite, putting all validators on a single extremely robust node, both cost money and reduce their APY. As fault tolerance has its limits, there is no escape from harsher penalties other than diversifying.</p>
+<div align="center">
+<p>
+  </p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/7/2/72c96a75749cc73c7789fac6f4fd97834924d1d5.png" title="BJL374W_0.png"><img height="500" src="https://ethresear.ch/uploads/default/optimized/3X/7/2/72c96a75749cc73c7789fac6f4fd97834924d1d5_2_328x500.png" width="328" /></a></div>
+<p></p>
+</div>
+<h3><a class="anchor" href="https://ethresear.ch#h-5-this-sounds-super-dangerous-as-i-could-be-penalized-for-32-eth-just-by-missing-a-single-source-vote-9" name="h-5-this-sounds-super-dangerous-as-i-could-be-penalized-for-32-eth-just-by-missing-a-single-source-vote-9"></a>5. This sounds super dangerous, as I could be penalized for 32 ETH just by missing a single source vote.</h3>
+<p>This is incorrect since the penalty_factor variable is capped at 4 (to be analyzed). Capping ensures that the correlation penalties never get out of hand.</p>
+<h3><a class="anchor" href="https://ethresear.ch#h-6-why-only-focus-on-source-votes-and-not-do-the-same-for-head-and-target-votes-10" name="h-6-why-only-focus-on-source-votes-and-not-do-the-same-for-head-and-target-votes-10"></a>6. Why only focus on source votes and not do the same for head and target votes?</h3>
+<p>This is a good question and since research on that topic is still at the very beginning this isn’t decided yet. An argument against head and target votes is the fact that they depend on external factors: as shown in <a href="https://ethresear.ch/t/analysis-on-correlated-attestation-penalties/19244">previous analysis</a>, head votes are sensitive to proposer timing games. So, if those timing games become more and more the standard, less well-connected validators (oftentimes solo stakers) could potentially be worse off. However, <a href="https://ethresear.ch/t/analysis-on-correlated-attestation-penalties/19244">this</a> analysis showed that it would be the opposite and in the long run, small-size stakers would profit from anti-correlation penalties. The same applies to target votes that are harder to get right in the first slot of an epoch compared to every other slot. Nevertheless, in the long run, this should smooth out across validators, allowing us to do anti-correlation penalties for all parts of an attestation, source-, target-, and head votes.</p>
+<h2><a class="anchor" href="https://ethresear.ch#useful-links-11" name="useful-links-11"></a>Useful links:</h2>
+<div class="md-table">
+<table>
+<thead>
+<tr>
+<th>Url</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a class="inline-onebox" href="https://eips.ethereum.org/EIPS/eip-7716">EIP-7716: Anti-correlation attestation penalties</a></td>
+<td>EIP-7716 (draft)</td>
+</tr>
+<tr>
+<td><a class="inline-onebox" href="https://ethresear.ch/t/a-concrete-proposal-for-correlated-attester-penalties/19341">A concrete proposal for correlated attester penalties</a></td>
+<td>Original Proposal</td>
+</tr>
+<tr>
+<td><a class="inline-onebox" href="https://ethereum-magicians.org/t/eip-7716-anti-correlation-attestation-penalties/20137">EIP-7716: Anti-correlation attestation penalties - EIPs - Fellowship of Ethereum Magicians</a></td>
+<td>EthMagicians Post</td>
+</tr>
+<tr>
+<td><a class="inline-onebox" href="https://github.com/dapplion/anti-correlation-penalties-faq">GitHub - dapplion/anti-correlation-penalties-faq: Anti correlation penalties FAQ</a></td>
+<td>EthBerlin Project</td>
+</tr>
+<tr>
+<td><a class="inline-onebox" href="https://github.com/igorline/lighthouse/pull/1">Impement anti-correlation attestation penalties eip by igorline · Pull Request #1 · igorline/lighthouse · GitHub</a></td>
+<td>Lighthouse Implementation</td>
+</tr>
+<tr>
+<td><a class="inline-onebox" href="https://ethresear.ch/t/analysis-on-correlated-attestation-penalties/19244">Analysis on ''Correlated Attestation Penalties''</a></td>
+<td>Quantitative Analysis</td>
+</tr>
+</tbody>
+</table>
+</div>
+            <p><small>1 post - 1 participant</small></p>
+            <p><a href="https://ethresear.ch/t/diseconomies-of-scale-anti-correlation-penalties-eip-7716/20114">Read full topic</a></p>
+]]></content:encoded>
+<pubDate>Sat, 20 Jul 2024 08:56:40 +0000</pubDate>
+<pubDate>Sat, 20 Jul 2024 08:56:40 +0000</pubDate>
+</item>
 
 <item>
 <title>EIP 648 for Parallel Rollup</title>
