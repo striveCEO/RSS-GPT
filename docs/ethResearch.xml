@@ -4,6 +4,34 @@
 <title>Ethereum Research - Latest topics</title>
 <link>https://ethresear.ch/latest</link>
 
+<item>
+<title>EIP 648 for Parallel Rollup</title>
+<link>https://ethresear.ch/t/eip-648-for-parallel-rollup/20103</link>
+<guid>https://ethresear.ch/t/eip-648-for-parallel-rollup/20103</guid>
+<content:encoded><![CDATA[
+<div> 关键词：EIP 648, 交易类型, 并行处理, 范围限制, 兼容性问题
+
+总结:<br>
+EIP 648是一项2017年的提议，旨在通过引入新的交易类型来提升以太坊网络中交易的并发处理。该提案允许用户指定读写范围，非重叠范围的交易可并行执行。然而，它存在一些问题。首先，用户可能难以预知交易将访问的具体账户，这称为合同预知识问题。其次，它采用悲观并发控制，以账户为单位，可能导致粗粒度的同步，限制了实际的并行性。因此，虽然EIP 648有其优点，但在实际应用到如Rollup等技术时，需要解决这些兼容性和性能优化的问题。 <div>
+<h3><a class="anchor" href="https://ethresear.ch#what-is-eip-648-1" name="what-is-eip-648-1"></a>What is EIP 648?</h3>
+<p>EIP 648 was proposed back in 2017. The proposal introduces a new transaction type to facilitate parallel transaction processing.</p>
+<p>The new type allows users to specify both the read and write ranges of accounts that the transaction will access. Transactions with no overlapping ranges will be executed in parallel. If the ranges overlap, transactions will conflict unless they are all read-only.</p>
+<h3><a class="anchor" href="https://ethresear.ch#issues-2" name="issues-2"></a>Issues</h3>
+<p>While the proposal is favorable for its simplicity in some cases, it also has some issues that make it difficult to use directly in rollups.</p>
+<ol>
+<li>
+<p><strong>Contract Pre-knowledge:</strong> It is not always straightforward for users to know exactly which accounts their transactions will access beforehand.</p>
+</li>
+<li>
+<p><strong>Account-level:</strong> The approach uses pessimistic concurrency control at the account level. The statements of the ranges act as synchronization primitives, but this has very coarse concurrency granularity (account-level), which can seriously reduce parallelism in many cases.</p>
+</li>
+</ol>
+            <p><small>1 post - 1 participant</small></p>
+            <p><a href="https://ethresear.ch/t/eip-648-for-parallel-rollup/20103">Read full topic</a></p>
+]]></content:encoded>
+<pubDate>Fri, 19 Jul 2024 07:14:22 +0000</pubDate>
+<pubDate>Fri, 19 Jul 2024 07:14:22 +0000</pubDate>
+</item>
 
 <item>
 <title>Commit-Boost: Proposer Platform to Safely Make Commitments</title>
