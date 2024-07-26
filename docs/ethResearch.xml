@@ -4,6 +4,196 @@
 <title>Ethereum Research - Latest topics</title>
 <link>https://ethresear.ch/latest</link>
 
+<item>
+<title>Notes on the LVR of FM-AMM</title>
+<link>https://ethresear.ch/t/notes-on-the-lvr-of-fm-amm/20151</link>
+<guid>https://ethresear.ch/t/notes-on-the-lvr-of-fm-amm/20151</guid>
+<content:encoded><![CDATA[
+<div> 关键词：FM-AMM、LVR、CEX-DEX、交易成本、流动性池大小
+
+总结:
+本文详细介绍了改进后的自动做市商（FM-AMM）的额外特性，通过找到纯粹策略纳什均衡来解决CEX-DEX套利商之间的博弈问题。文中计算了理论设置下的FM-AMM的渐近LVR，并将其性能与Uniswap V2风格的固定费率CPMM进行了对比。观察结果表明，FM-AMM的性能受到价格波动、交易成本和流动性池规模的影响，在特定条件下，它对套利商的损失较小。
+
+文章首先回顾了LVR在自动做市商领域的重要性及其在减少LVR方面的努力。接着，作者详细阐述了FM-AMM的设计，并通过修改原始设计解决了更广泛情况下的批量交易执行问题。随后，通过建立模型分析了具有固定交易成本和零售订单流不存在条件下的FM-AMM性能，发现其纳什均衡存在并具有对称性，且LVR随参与者数量成反比衰减。进一步地，文章考虑了交易成本由参与者决定的情况，指出FM-AMM的优势取决于跳动大小、频率和成本，而数值模拟显示FM-AMM与基于rollup的解决方案相匹配。
+
+最后，通过对比FM-AMM和CPMM的LVR，文章指出FM-AMM在高波动率、低交易成本和较大流动性池的情况下表现出色。同时，文章讨论了在不同参数下的性能比较，发现FM-AMM在L2环境中以及低交易成本的L1环境中具有优势，这解释了之前研究结果的混杂性。此外，文章还提出了未来研究应考虑更宽松条件以提供更全面评估的建议。
+
+总的来说，本文提供了对FM-AMM在不同市场条件下的性能分析，强调了其在特定场景下的优越性，同时也指出了现有模型的局限性和未来研究方向。 <div>
+<h1><a class="anchor" href="https://ethresear.ch#h-0-tldr-1" name="h-0-tldr-1"></a>0. TL;DR</h1>
+<p>We introduced and detailed the additional features of FM-AMM, as presented in [CF23]. We modeled the game between CEX-DEX arbitrageurs for arbitrage profit on FM-AMM and then solved it by finding the pure strategy Nash equilibrium. Lastly, we calculated the asymptotic LVR of FM-AMM in theoretical settings and compared its performance against the Uniswap V2-style fixed-rate fee CPMM through numerical simulations. Our observations indicated that the performance is heavily influenced by price volatility, transaction costs, and the size of the liquidity pool, with FM-AMM showing a reduced loss to arbitrageurs under specific conditions.</p>
+<h1><a class="anchor" href="https://ethresear.ch#h-1-introduction-2" name="h-1-introduction-2"></a>1. Introduction</h1>
+<p>Since LVR was introduced in [MMRZ22] and [MMR23], it has quickly become the standard for measuring the performance of AMMs. Numerous attempts have been made to reduce LVR through dynamic fee policies, and this research continues actively. However, batch trade execution has not received much attention, except in [CF23] and [GGMR22]. In [CF23], the authors proposed a function-maximizing automated market maker (FM-AMM), asserting it effectively eliminates LVR, and provided numerical simulations comparing its performance with various Uniswap V3 pools. They later <a href="https://forum.cow.fi/t/4-months-of-cow-amm-what-we-have-learned-and-the-next-steps/2432" rel="noopener nofollow ugc">claimed</a> that CoW-AMM (their implementation of FM-AMM) performed well in live settings too, which led to <a href="https://x.com/0x94305/status/1813690004331438306" rel="noopener nofollow ugc">debate</a> on Twitter regarding the legitimacy of their measurement methods. Although the debate focused more on whether markout is a useful metric for measuring performance, the existence of retail order flow and fluctuating transaction costs are also obstacles to precisely comparing their performance. In this article, we analyze the performance of FM-AMM and compare it to CPMM under fixed transaction costs and in the absence of retail order flow conditions like those in [N22] and [E24].</p>
+<p>In detail, we slightly modified their design and found a Nash equilibrium in a game where arbitrageurs strategically submit orders to the (slightly modified) FM-AMM to maximize their returns. The game is similar to the liquidity provision game introduced in [MC24], which is a special form of the generalized Tullock contest. The resulting equilibrium has many favorable properties: the solution always uniquely exists, and it is symmetric. Moreover, LVR decays inversely proportionally to the number of participants. This model assumes that the number of arbitrageurs, <span class="math">N</span>, is pre-determined and transaction cost, <span class="math">c</span>, is zero. We proceed to a model where the number of participants is determined endogenously according to <span class="math">c</span>. In this setting, FM-AMM is not always superior; the result now depends on jump size, frequency, and cost. We provide numerical simulation results and suggest that FM-AMM fits well with rollup-based solutions.</p>
+<h1><a class="anchor" href="https://ethresear.ch#h-2-fm-amm-3" name="h-2-fm-amm-3"></a>2. FM-AMM</h1>
+<p>In this section we fill the omitted details of FM-AMM introduced in [CF23] to handle the more general case. The underlying AMM curve introduced in [CF23] is:</p>
+<div class="math">
+y_\text{out} = \frac{x_\text{in}}{X + 2x_\text{in}}Y,
+</div>
+<p>where <span class="math">x_\text{in}</span> is the amount of token <span class="math">X</span> the trader is willing to sell, and <span class="math">y_\text{in}</span> is the amount of token <span class="math">Y</span> that she will receive. However, this is the simplest case where only a single side of order is submitted in batch. Authors of original paper handled the case such that both side of orders exist in the same batch by assuming users only specify the amount of token X to buy or sell. Unfortunately, this is hard to implement in fully on-chain manner since whether the trader has enough capital to buy specified amount of token X is not guaranteed before the batch is settled (Selling is not problematic; we can pull the token from trader and keep it by settlement). We generalize the formula to handle broader range of cases. Let <span class="math">X, Y</span> be reserves of pool, <span class="math">T</span> be total supply of LP tokens before batch settlement, <span class="math">x_\text{in}, y_\text{in}</span> be aggregate amount of each token that traders are willing to sell, and <span class="math">x_\text{mint}, y_\text{mint}</span> be aggregate amount of each token provided from LPs. The fundamental equation we will start with is:</p>
+<div class="math">
+\begin{align}\begin{bmatrix}x_{\text{mint}} \\y_{\text{mint}}\end{bmatrix}&amp;=x_{\text{mint}} \begin{bmatrix}1 \\p\end{bmatrix}+\begin{bmatrix}0 \\2\alpha\end{bmatrix}\\\begin{bmatrix}x_{\text{in}} \\y_{\text{in}}\end{bmatrix}&amp;=x_{\text{in}} \begin{bmatrix}1 \\p\end{bmatrix}+\begin{bmatrix}0 \\\beta\end{bmatrix}\\\begin{bmatrix}x_1 \\y_1\end{bmatrix}&amp;=\begin{bmatrix}x_0 \cdot \frac{y_0 + \alpha + \beta}{y_0 + 2(\alpha + \beta)} \\y_0 + \alpha + \beta\end{bmatrix}\end{align}
+</div>
+<p>Here, the <span class="math">p</span> is the clearing price, and <span class="math">\alpha, \beta</span> are the net swap amount for swapping and minting, respectively. In short, among the submitted orders, we swap only part of them, <span class="math">\alpha</span> and <span class="math">\beta</span>, then exchange the rest via p2p without changing the spot price. The fact that</p>
+<div class="math">
+\begin{bmatrix}x_{\text{mint}} \\y_{\text{mint}} - 2\alpha\end{bmatrix}, \begin{bmatrix}x_{\text{in}} \\y_{\text{in}} - \beta\end{bmatrix}, \begin{bmatrix}x_1 \\y_1\end{bmatrix}
+</div>
+<p>are all parallel gives us following matrix equation:</p>
+<div class="math">
+\begin{equation}\begin{bmatrix}2x_0 + 2x_{\text{mint}} &amp; 2x_{\text{mint}} \\2x_{\text{in}} &amp; 2x_{\text{in}} + x_0\end{bmatrix}\begin{bmatrix}\alpha \\\beta\end{bmatrix}=\begin{bmatrix}x_0 y_{\text{mint}} - x_{\text{mint}} y_0 \\x_0 y_{\text{in}} - x_{\text{in}} y_0\end{bmatrix}\end{equation}
+</div>
+<p>Note that the determinant of matrix in LHS is always strictly positive so above equation is not singular. <span class="math">\alpha, \beta</span>  are:</p>
+<div class="math">
+\begin{align} (\alpha, \beta) = \left( \frac{\frac{x_{0} y_{mint}}{2} + x_{in} y_{mint} - \frac{x_{mint} y_{0}}{2} - x_{mint} y_{in}}{x_{0} + 2 x_{in} + x_{mint}}, \  \frac{x_{0} y_{in} - x_{in} y_{0} - x_{in} y_{mint} + x_{mint} y_{in}}{x_{0} + 2 x_{in} + x_{mint}}\right) \end{align}
+</div>
+<p>The clearing price, <span class="math">p_c</span>, is:</p>
+<div class="math">
+\begin{align} 
+p_c = \frac{y_{0} + 2 y_{in} + y_{mint}}{x_{0} + 2 x_{in} + x_{mint}}
+\end{align}
+</div>
+<p><span class="math">x_\text{out}, y_\text{out}</span> are:</p>
+<div class="math">
+\begin{align}
+(x_\text{out}, y_\text{out}) &amp;= 
+\left( \frac{y_{in} \left(x_{0} + 2 x_{in} + x_{mint}\right)}{y_{0} + 2 y_{in} + y_{mint}}, \  \frac{x_{in} \left(y_{0} + 2 y_{in} + y_{mint}\right)}{x_{0} + 2 x_{in} + x_{mint}}\right) \\
+&amp;= \left(\frac{y_\text{in}}{p_c}, p_c x_\text{in} \right) \\
+\end{align} 
+</div>
+<p>It is straight forward to find <span class="math">x_2, y_2</span>, the reserves after minting LP tokens, and <span class="math">t</span>, the newly issued LP token amount, so we would skip on them here.</p>
+<p>Above construction charges no fee. To keep price same even after charging fee, we will take <span class="math">1/(1 + \gamma)</span> portion of input and <span class="math">\gamma</span> portion of output as fee. So the effective fee rate will be   <span class="math">\frac{2 \gamma}{1+ \gamma}</span>, which is approximately <span class="math">2 \gamma</span>. Considering arbitrageurs it may better to take fee fully on input, though.</p>
+<h1><a class="anchor" href="https://ethresear.ch#h-3-model-4" name="h-3-model-4"></a>3. Model</h1>
+<p>In this section, we describe the model upon which our analysis is based. We model a normal form game involving strategic arbitrageurs. This means that each player is unaware of the bids of others, and all bids are submitted simultaneously. Additionally, each player’s bid is never censored. Although this assumption does not perfectly reflect the current state of blockchains, ongoing cryptographic developments and improved market designs, such as inclusion lists, will help bridge the gap between theory and reality. This formulation is almost the same as that of [CM24]; the only difference is that players now “take” mispriced liquidity instead of providing it to the AMM.</p>
+<h2><a class="anchor" href="https://ethresear.ch#h-31-automated-market-maker-5" name="h-31-automated-market-maker-5"></a>3.1. Automated Market Maker</h2>
+<p>For the AMM, we will use the FM-AMM introduced in Section 2. Note that the AMM itself is not a player; we assume that the LPs of the AMM are passive investors who will not take any action in the short term.</p>
+<h2><a class="anchor" href="https://ethresear.ch#h-32-arbitrageurs-6" name="h-32-arbitrageurs-6"></a>3.2. Arbitrageurs</h2>
+<p>We assume that all players are homogeneous. They are risk-neutral and can execute trades of any size and in any direction on CEX without any slippage. Their sole goal is to maximize profit.</p>
+<h2><a class="anchor" href="https://ethresear.ch#h-33-strategic-game-of-liquidity-taking-7" name="h-33-strategic-game-of-liquidity-taking-7"></a>3.3. Strategic Game of Liquidity Taking</h2>
+<p>First, we solve the game with <span class="math">N</span> players where <span class="math">N</span> is given exogenously, without considering transaction costs. Then, we introduce a strictly positive transaction cost <span class="math">c</span> and derive <span class="math">N</span> from the equilibrium condition. We will restrict our interest to conditions with positive trading fees, which guarantees the uniqueness of the equilibrium. Players observe the pool reserves <span class="math">X</span>, <span class="math">Y</span>, and the external true price <span class="math">P</span>. Then, they submit bids <span class="math">(x_i, y_i)</span>, which are the amounts of tokens to sell to the pool. The clearing price will be:</p>
+<div class="math">
+\begin{align}
+P_c = \frac{Y + 2\sum^N_{i=1} y_i }{X + 2\sum^N_{i=1} x_i} \tag{1} \\
+\end{align}
+</div>
+<p>The utility function is the arbitrage profit after charging the swap fee (and transaction cost, if applicable). The utility of player <span class="math">i</span>, <span class="math">U_i</span>, is:</p>
+<div class="math">
+\begin{align}
+R_i = -(1 + \gamma)(P x_i + y_i) + (1 - \gamma)\left(\frac{P}{P_c}y_i + P_c x_i\right) \tag{2}
+\end{align}
+</div>
+<p>Now, we are ready to find the equilibrium.</p>
+<h1><a class="anchor" href="https://ethresear.ch#h-4-equilibrium-analysis-8" name="h-4-equilibrium-analysis-8"></a>4. Equilibrium Analysis</h1>
+<h2><a class="anchor" href="https://ethresear.ch#h-41-n-is-determined-exogenously-and-transaction-cost-c-is-zero-9" name="h-41-n-is-determined-exogenously-and-transaction-cost-c-is-zero-9"></a>4.1. <span class="math">N</span> is Determined Exogenously, and Transaction Cost <span class="math">c</span> is Zero</h2>
+<p>We first introduce the following lemma:</p>
+<div class="math">
+\text{Lemma. The player } i\text{'s best response is submitting a bid with at least one 0 component, that is, either } (x_i, 0) \text{ or } (0, y_i).
+</div>
+<p>The proof is straightforward. Assume <span class="math">(x_i, y_i)</span> and <span class="math">(x'_i, y'_i)</span> result in the same clearing price. Then <span class="math">x_i \leq x'_i</span> if and only if <span class="math">y_i \leq y'_i</span>. Combining these and subtracting the utility of one from the other yields the desired result.</p>
+<p>Meanwhile, the first order condition and the profitability condition give us that the best response is, when <span class="math">P_{-i}</span> is defined as <span class="math">P_{-i} = \frac{Y + 2\sum^N_{j \neq i} y_j }{X + 2\sum^N_{j \neq i} x_j}</span>, submitting <span class="math">x_i</span> or <span class="math">y_i</span> such that the following holds:</p>
+<div class="math">
+\begin{align}
+P_c = 
+\begin{cases} 
+\sqrt{\frac{1 - \gamma}{1 + \gamma} P P_{-i}} &amp; \text{if } \frac{1 - \gamma}{1 + \gamma} P \geq P_{-i} \\
+\sqrt{\frac{1 + \gamma}{1 - \gamma} P P_{-i}} &amp; \text{if } \frac{1 + \gamma}{1 - \gamma} P \leq P_{-i}
+\end{cases}. \tag{3}
+\end{align}
+</div>
+<p>Otherwise, it is better not to submit any order (i.e., bid). One can think of <span class="math">\frac{1+\gamma}{1-\gamma}P_{-i}</span> and <span class="math">\frac{1-\gamma}{1+ \gamma}P_{-i}</span> as the threshold prices such that arbitrage becomes profitable. Note that this holds for every <span class="math">i</span>, so <span class="math">P_{-i} = P_{-j}</span> for every <span class="math">i</span> and <span class="math">j</span>, which tells us the equilibrium is symmetric and always exists.</p>
+<p>From now on, we only consider the external price to be sufficiently higher than the pool’s spot price, <span class="math">Y/X</span>. The opposite case can be solved in a similar manner. It is clear that <span class="math">x_\text{eq} = 0</span> for the case we are dealing with. Then, <span class="math">(3)</span> is equivalent to:</p>
+<div class="math">
+\begin{align}
+\frac{Y + 2Ny_\text{eq}}{X} = \sqrt{\frac{1-\gamma}{1+\gamma}P\cdot \frac{Y + 2 (N-1) y_\text{eq}}{X}} \tag{4}
+\end{align}
+</div>
+<p>Solving <span class="math">(4)</span> yields that</p>
+<div class="math">
+\begin{align}
+y_\text{eq} = \frac{1}{4N^2}\left[ (N - 1) \cdot \frac{1-\gamma}{1+\gamma} \cdot PX -2NY +  \sqrt{(N-1)^2 + 4N \cdot \frac{Y}{X} \cdot \frac{1+\gamma}{1-\gamma} \cdot \frac{1}{P}} \cdot \frac{1-\gamma}{1+\gamma}\cdot PX \right] \tag{5}
+\end{align}
+</div>
+<p>From now on, we will proceed with radical approximations due to its complexity. Although we do not provide any rigorous proof for the validity of such approximations, we will see it works well in the simulations later. Let <span class="math">P_0 = \frac{Y}{X}</span> and <span class="math">\varepsilon = \frac{1-\gamma}{1+\gamma} \cdot \frac{P}{P_0} - 1</span>, that is, the price difference between the threshold price and the external price. Approximating <span class="math">y_\text{eq}</span> with <span class="math">\varepsilon</span> through a Taylor series gives us a simpler form:</p>
+<div class="math">
+\begin{align}
+y_\text{eq} &amp;=  \frac{Y}{4N^2}\left[ (N-1) \cdot (1+ \varepsilon) - 2N +(1+\varepsilon)\sqrt{(N-1)^2 +\frac{4N}{1+\varepsilon}}\right] \tag{6} \\
+&amp;\approx \frac{Y}{2(N+1)} \varepsilon + o(\varepsilon^2) \tag{7}
+\end{align}
+</div>
+<p>Using <span class="math">(7)</span>, one can compute the profit of individual arbitrageurs and the total loss of the AMM against arbitrageurs:</p>
+<div class="math">
+\begin{align}
+ARB &amp;\approx L\sqrt{P_0}\cdot\left(\frac{1+\gamma}{2(N+1)^2}\right)\cdot\varepsilon^2 \tag{8} \\
+LVR &amp;\approx (1+\gamma)\cdot L\sqrt{P_0}\cdot\left(\frac{N}{2(N+1)^2}\right)\cdot\varepsilon^2 \tag{9}
+\end{align}
+</div>
+<p>Thus, assuming the transaction cost is <span class="math">0</span>, for any <span class="math">N</span>, every <span class="math">N</span> arbitrageur will submit identical bids and they will share the profit equally, while each individual arbitrageur’s profit will decay by <span class="math">O(N^{-2})</span>. Moreover, as <span class="math">N </span> goes to infinity the clearing price <span class="math">P_c</span> converges to threshold price, and therefore the stationary distribution of price discrepancy will be as same as that of fixed fee rate CPMM in [MMR23].</p>
+<h2><a class="anchor" href="https://ethresear.ch#h-42-transaction-cost-is-not-free-and-the-number-of-arbitrageurs-is-determined-endogenously-10" name="h-42-transaction-cost-is-not-free-and-the-number-of-arbitrageurs-is-determined-endogenously-10"></a>4.2. Transaction Cost is Not Free, and the Number of Arbitrageurs is Determined Endogenously</h2>
+<p>Now we extend the model in 4.1 to a more realistic one by adopting a nonzero transaction cost <span class="math">c</span>. The utility function remains the same as in <span class="math">(2)</span>, except we have an additional term <span class="math">-c</span>. Since this term disappears when we take the derivative, the best response remains the same as long as it is profitable. Thus, the solution is not much different from <span class="math">(7)</span>, except <span class="math">N</span> is replaced with <span class="math">N^{*}</span>, where <span class="math">N^{*}</span> is the largest integer that satisfies <span class="math">L\sqrt{P_0}\cdot\left(\frac{1+\gamma}{2(N^{*}+1)^2}\right)\cdot\varepsilon^2 \geq c</span>. Then, the LVR will be:</p>
+<div class="math">
+\begin{align}
+LVR &amp;\approx (1+\gamma) \cdot  L \sqrt{P_0} \cdot\varepsilon^2 \cdot \frac{N^{*}}{2(N^{*}+1)^2} \tag{10} \\
+&amp;\approx cN^{*} \tag{11} \\
+&amp;\approx c \left \lfloor \varepsilon\sqrt{\frac{1+\gamma}{2c} \cdot L \sqrt{P_0}}- 1 \right\rfloor \tag{12} \\
+&amp;\leq \varepsilon\sqrt{(1+\gamma)2c \cdot L \sqrt{P_0}} \tag{13}
+\end{align}
+</div>
+<h2><a class="anchor" href="https://ethresear.ch#h-43-comparison-with-cpmm-11" name="h-43-comparison-with-cpmm-11"></a>4.3. Comparison with CPMM</h2>
+<p>The derivation of the LVR for CPMM has already been studied extensively, so we will simply present the result:</p>
+<div class="math">
+\begin{align}
+LVR_\text{CPMM} \approx \frac{1}{1-\gamma} \cdot L \sqrt{P_0} \cdot \frac{\varepsilon^2}{4}, \tag{14}
+\end{align}
+</div>
+<p>where <span class="math">\gamma</span> is the fee rate taken from the input and <span class="math">\varepsilon</span> is again the price difference between the external price and the threshold price, in this case, <span class="math">\frac{P_0}{1-\gamma}</span>. In short, the LVR of CPMM grows faster than that of FM-AMM as <span class="math">\varepsilon</span> (the price difference) and <span class="math">L\sqrt{P_0}</span> (the initial pool size) grow. From this, we can predict that the performance of FM-AMM will be better in larger pools compared to CPMM.</p>
+<p>FM-AMM performance is affected by the transaction cost <span class="math">c</span>, while CPMM is not affected as long as the arbitrageur’s profit is greater than <span class="math">c</span>. This implies that FM-AMM suits well with rollup settings that have longer block times (resulting in higher volatility between blocks) and low transaction costs.</p>
+<h1><a class="anchor" href="https://ethresear.ch#h-5-simulations-12" name="h-5-simulations-12"></a>5. Simulations</h1>
+<p>Due to the nonzero transaction cost, finding an analytic solution for instantaneous LVR or the stationary distribution of price discrepancy is no longer straightforward. Therefore, we proceed with numerical simulations. You can check the code used <a href="https://github.com/kosunghun317/FMAMM_LVR/tree/main/notebooks" rel="noopener nofollow ugc">here</a>. This code is largely copy-pasted with minor tweaks from <a href="https://github.com/alexnezlobin/simulations/tree/main" rel="noopener nofollow ugc">this source</a>. Swap fees are fixed at 0.3% across all simulations (i.e., <span class="math">\gamma_\text{FMAMM} = 0.0015</span>, <span class="math">\gamma_\text{CPMM} = 0.003</span>).</p>
+<h2><a class="anchor" href="https://ethresear.ch#h-51-distribution-of-lvr-13" name="h-51-distribution-of-lvr-13"></a>5.1. Distribution of LVR</h2>
+<p>In this section, we observe the distribution of LVR under several cases without iterating over many parameters. Note that the variance is always greater in FM-AMM; this is because the price is not corrected perfectly under the nonzero transaction cost condition.</p>
+<p>The conditions of the first case are L1 (12-second block time), $10 transaction cost, with 5% daily volatility and $100M pool size.<br />
+<img alt="image" height="450" src="https://ethresear.ch/uploads/default/original/3X/1/0/101edc5f8de31543cda7c084f2d7e98e3e522ebf.png" width="604" /></p>
+<p>The second is L1, $10 transaction cost, with 10% volatility and $100M pool size.<br />
+<img alt="image" height="450" src="https://ethresear.ch/uploads/default/original/3X/a/4/a49fb0096777435725991cf46954abd43c9a26a8.png" width="597" /><br />
+As predicted, FM-AMM outperforms CPMM as volatility increases.</p>
+<p>Next one is L1 with congestion; transaction cost went up to $30.<br />
+<img alt="image" height="450" src="https://ethresear.ch/uploads/default/original/3X/f/3/f3a2fc79c45044e5ef9c61b01a5ae50b913299d7.png" width="597" /><br />
+This fits to our prediction well, too. As tx cost increases FM-AMM loses more than CPMM.</p>
+<p>The last result is L1 with congestion, but with smaller liquidity ($10M).<br />
+<img alt="image" height="450" src="https://ethresear.ch/uploads/default/original/3X/f/8/f82923769edf0a3f8df22d9c2327ee0473eae369.png" width="597" /><br />
+This result is a bit contradictory to our initial guess: usually, smaller liquidity conditions are more favorable to CPMM, as LVR per pool value of FM-AMM increases as the pool value gets smaller. To clarify this, we will run simulations over various parameters and compare the performances.</p>
+<h2><a class="anchor" href="https://ethresear.ch#h-52-performance-comparisons-14" name="h-52-performance-comparisons-14"></a>5.2. Performance Comparisons</h2>
+<p>Below are the numerical simulations of LVR for CPMM and FM-AMM under various parameters. Swap fees are set at 0.3% for both of them. Blue regions indicate where CPMM performs better, while grey regions indicate where FM-AMM performs better. Note that the results in the low volatility and high-cost regions are not as reliable due to the very few trades occurring in these conditions.</p>
+<p>First is the cases for L1:<br />
+</p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/3/f/3f4b7c4f8afa28b742eb494cce687ca245b9ded3.png" title="image"><img alt="image" height="196" src="https://ethresear.ch/uploads/default/optimized/3X/3/f/3f4b7c4f8afa28b742eb494cce687ca245b9ded3_2_690x196.png" width="690" /></a></div><br />
+<div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/2/c/2c339052835747c3057c1c6d6b4456033db13814.png" title="image"><img alt="image" height="196" src="https://ethresear.ch/uploads/default/optimized/3X/2/c/2c339052835747c3057c1c6d6b4456033db13814_2_690x196.png" width="690" /></a></div><br />
+<div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/2/1/21678b78eb6b694ff0938209d8de97d84a713df9.png" title="image"><img alt="image" height="196" src="https://ethresear.ch/uploads/default/optimized/3X/2/1/21678b78eb6b694ff0938209d8de97d84a713df9_2_690x196.png" width="690" /></a></div><br />
+<div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/7/b/7b8453c6492353e30665d40174ad349c53cc73da.png" title="image"><img alt="image" height="196" src="https://ethresear.ch/uploads/default/optimized/3X/7/b/7b8453c6492353e30665d40174ad349c53cc73da_2_690x196.png" width="690" /></a></div><br />
+<div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/b/a/ba04ccc1440d5207217bb4056c6d9cc2e2d03291.png" title="image"><img alt="image" height="196" src="https://ethresear.ch/uploads/default/optimized/3X/b/a/ba04ccc1440d5207217bb4056c6d9cc2e2d03291_2_690x196.png" width="690" /></a></div><br />
+<div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/c/f/cf2266ce32541a90a009ee96c05f24714ebf7da6.png" title="image"><img alt="image" height="196" src="https://ethresear.ch/uploads/default/optimized/3X/c/f/cf2266ce32541a90a009ee96c05f24714ebf7da6_2_690x196.png" width="690" /></a></div><br />
+<div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/d/a/daec56f47b5ff0e9cfe26e087f4588f0ce99ebe5.png" title="image"><img alt="image" height="196" src="https://ethresear.ch/uploads/default/optimized/3X/d/a/daec56f47b5ff0e9cfe26e087f4588f0ce99ebe5_2_690x196.png" width="690" /></a></div><br />
+<div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/8/f/8f7211259a315e71a052cac3a52055de1eabbda8.png" title="image"><img alt="image" height="196" src="https://ethresear.ch/uploads/default/optimized/3X/8/f/8f7211259a315e71a052cac3a52055de1eabbda8_2_690x196.png" width="690" /></a></div><br />
+<div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/c/c/cc23d7506e2cc23e5b29ae96faee7ed609588d70.png" title="image"><img alt="image" height="196" src="https://ethresear.ch/uploads/default/optimized/3X/c/c/cc23d7506e2cc23e5b29ae96faee7ed609588d70_2_690x196.png" width="690" /></a></div><br />
+<div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/a/2/a2153b4ce8fb4ee42360ccff33df0b311aa457e4.png" title="image"><img alt="image" height="196" src="https://ethresear.ch/uploads/default/optimized/3X/a/2/a2153b4ce8fb4ee42360ccff33df0b311aa457e4_2_690x196.png" width="690" /></a></div><p></p>
+<p>Following are the special cases for based rollup (tx cost = $0.05, block time = 12 sec) and typical L2s (tx cost = 0.01, block time = 2 sec), respectively:<br />
+</p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/e/4/e463cf577f86a2492c5fb4e0f15d30284212bf6d.png" title="image"><img alt="image" height="196" src="https://ethresear.ch/uploads/default/optimized/3X/e/4/e463cf577f86a2492c5fb4e0f15d30284212bf6d_2_690x196.png" width="690" /></a></div><br />
+<div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/5/5/55c066b2d8b4c15d67d1eb5eb9ad1008d4840ecd.png" title="image"><img alt="image" height="196" src="https://ethresear.ch/uploads/default/optimized/3X/5/5/55c066b2d8b4c15d67d1eb5eb9ad1008d4840ecd_2_690x196.png" width="690" /></a></div><p></p>
+<h2><a class="anchor" href="https://ethresear.ch#h-53-discussion-15" name="h-53-discussion-15"></a>5.3. Discussion</h2>
+<p>It is clear that FM-AMM performs better under certain conditions, including L2s and L1 with low transaction costs, and this partially explains why the results in [CF23] was rather mixed and defer by each pair. Due to its nature of forcing competition over price between arbitrageurs, it performs well even in high volatility conditions. Notably, this is achieved without raising the swap fee, which typically results in losing retail order flow. Thus, FM-AMM can lose less to arbitrageurs while not sacrificing retail order flow.</p>
+<h1><a class="anchor" href="https://ethresear.ch#h-6-conclusion-16" name="h-6-conclusion-16"></a>6. Conclusion</h1>
+<p>As the authors of [CF23] claimed, FM-AMM indeed achieves superior performance under certain conditions, even without raising swap fees. It suits L2s particularly well. However, our analysis is based on several non-realistic assumptions, especially the (short-term) censorship resistance assumption and simultaneous bid submission. Future research will focus on more relaxed conditions to provide a more comprehensive evaluation.</p>
+<h1><a class="anchor" href="https://ethresear.ch#h-7-references-17" name="h-7-references-17"></a>7. References</h1>
+<p>[MMRZ22] J. Milionis, C. C. Moallemi, T. Roughgarden, and A. L. Zhang. Automated Market Making and Loss-Versus-Rebalancing, <em>arXiv preprint <a href="https://arxiv.org/abs/2208.06046" rel="noopener nofollow ugc">arXiv:2208.06046</a></em>, 2022.<br />
+[MMR23] J. Milionis, C. C. Moallemi, and T. Roughgarden. Automated Market Making and Arbitrage Profits in the Presence of Fees, <em>arXiv preprint <a href="https://arxiv.org/abs/2305.14604" rel="noopener nofollow ugc">arXiv:2305.14604</a></em>, 2023.<br />
+[GGMR22] G. Ramseyer, M. Goyal, A. Goel, and D. Mazières. Augmenting Batch Exchanges with Constant Function Market Makers, <em>arXiv preprint <a href="https://arxiv.org/abs/2210.04929" rel="noopener nofollow ugc">arXiv:2210.04929</a></em>, 2022.<br />
+[CF23] A. Canidio and A. Fritsch. Arbitrageurs’ profits, LVR, and sandwich attacks: batch trading as an AMM design response, <em>arXiv preprint <a href="https://arxiv.org/abs/2307.02074" rel="noopener nofollow ugc">arXiv:2307.02074</a></em>, 2023.<br />
+[CM24] D. Crapis and J. Ma. The Cost of Permissionless Liquidity Provision in Automated Market Makers, <em>arXiv preprint <a href="https://arxiv.org/abs/2402.18256" rel="noopener nofollow ugc">arXiv:2402.18256</a></em>, 2024.<br />
+[N22] A. Nezlobin. Ethereum Block Times, MEV, and LP returns, <em>Medium article <a href="https://medium.com/@alexnezlobin/ethereum-block-times-mev-and-lp-returns-5c13dc99e80" rel="noopener nofollow ugc">Ethereum Block Times, MEV, and LP returns</a></em>, 2022<br />
+[E24] A. Elsts. CEX/DEX arbitrage, transaction fees, block times, and LP profits, <em>Ethresearch Forum article <a href="https://ethresear.ch/t/cex-dex-arbitrage-transaction-fees-block-times-and-lp-profits/19444">CEX/DEX arbitrage, transaction fees, block times, and LP profits</a></em>, 2024</p>
+            <p><small>1 post - 1 participant</small></p>
+            <p><a href="https://ethresear.ch/t/notes-on-the-lvr-of-fm-amm/20151">Read full topic</a></p>
+]]></content:encoded>
+<pubDate>Fri, 26 Jul 2024 06:21:02 +0000</pubDate>
+<pubDate>Fri, 26 Jul 2024 06:21:02 +0000</pubDate>
+</item>
 
 <item>
 <title>A design for APS-burn in the context of a Decentralized L2</title>
