@@ -5,6 +5,55 @@
 <link>https://ethresear.ch/latest</link>
 
 <item>
+<title>ePBS Metagame: SSP peacekeeping and alternative public service</title>
+<link>https://ethresear.ch/t/epbs-metagame-ssp-peacekeeping-and-alternative-public-service/20162</link>
+<guid>https://ethresear.ch/t/epbs-metagame-ssp-peacekeeping-and-alternative-public-service/20162</guid>
+<content:encoded><![CDATA[
+<div> 关键词：MEV-Burn、公共利益建设者(PGB)、有机建设者、SSP、社会层
+
+总结:文章深入探讨了MEV-Burn背景下公共利益建设者(PGB)的策略和影响。首先，介绍了五种潜在的MEV-Burn参与者类型，其中重点分析了公共利益建设者与有机建设者的角色及其动机。公共利益建设者通过高燃烧率或排除有害行为为网络做出贡献，而有机建设者则侧重于维护网络的纯净与实用价值。文章还提出了一种可能的提名机制，即验证者在考虑其声誉和社会信誉的同时选择PGB进行区块构建。
+
+其次，文章通过案例研究探讨了SSP如何通过竞标和恶意攻击来维持其市场地位，以及PGB如何通过减少燃烧率和包括所有MEV（包括有害的）来实现盈利并促进网络改进。这表明PGB可以通过牺牲部分利润来增加其被选中构建区块的机会，从而提高其效率并提升社会信誉。
+
+最后，文章强调了MEV-Burn的社会影响，包括可能形成的利益集团和网络中的动态变化。尽管存在潜在的负面影响，但文章认为有道德的建设者和验证者将找到方法来抵消不法行为，并保持网络的平衡与健康。文章呼吁继续对这一领域进行深入研究，以全面理解MEV-Burn带来的复杂社会影响。 <div>
+<h3><a class="anchor" href="https://ethresear.ch#introduction-1" name="introduction-1"></a><strong>Introduction</strong></h3>
+<p>Alongside Enshrined Proposer-Builder Separation, MEV-Burn is expected to produce a major shift in many on-chain economic and social dynamics. From reducing rugpool incentives to making ReOrg’s even less profitable, this rollout is sure to provide some tangible improvements to the Ethereum protocol, but what seems to get all too frequently overlooked is the on-chain behavioral impact.</p>
+<p>If you haven’t already, I would <em>strongly</em> recommend taking a peek at both <a href="https://ethresear.ch/t/dr-changestuff-or-how-i-learned-to-stop-worrying-and-love-mev-burn/17384">how i learned to stop worrying and love mev-burn</a> by <a href="https://ethresear.ch/u/mikeneuder">Mike Neuder</a>, and <a href="https://ethresear.ch/t/burn-incentives-in-mev-pricing-auctions/19856">Burn incentives in MEV pricing auctions</a> by <a href="https://ethresear.ch/u/aelowsson">aelowsson</a> as they both inspired me to write this piece and may help decipher some of the more technical details.</p>
+<p>As stated in <a href="https://ethresear.ch/u/aelowsson">aelowsson</a>’s <a href="https://ethresear.ch/t/burn-incentives-in-mev-pricing-auctions/19856">Burn incentives in MEV pricing auctions</a> there are five types of potential MEV-Burners within pricing auctions:</p>
+<aside class="quote no-group">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt="" class="avatar" height="24" src="https://ethresear.ch/user_avatar/ethresear.ch/aelowsson/48/7611_2.png" width="24" /><a href="https://ethresear.ch/t/burn-incentives-in-mev-pricing-auctions/19856/1">Burn incentives in MEV pricing auctions</a></div>
+<blockquote>
+<p>(A) Public good builder, (B) For-profit public good builder, (C) Extortion racket, (D) Staker-initiated griefing, (E) Staker-initiated griefing cartel.</p>
+</blockquote>
+</aside>
+<h3><a class="anchor" href="https://ethresear.ch#pgb-overview-2" name="pgb-overview-2"></a><strong>PGB Overview</strong></h3>
+<p>Narrowing in on the Public Goods division, there are several ways to be considered a Public Goods Builder; one being burn rates. Simply put, the more profits a builder dedicates to burning, the more ‘ultrasound’ Ethereum gets, the more deflationary Ether is, and ultimately, the more service is done to the public. This could be a strategy chosen over a For-Profit Builder if the operator determines that the potential social credit outweighs the mere profit a For-Profit Builder would contribute. Once again this motivation would apply to another type of Public Good Builder, an ‘Organic’ Builder. Instead of contributing high burn rates, this builder would rather exclude toxic MEV such as Sandwitching or even swear off censorship, creating a stronger Ethereum protocol rather than just making Ether more economically plausible. Both would be critical to maintaining the integrity and utility of Ethereum, and both can be used in harmony or to different degrees.</p>
+<p>In order for a PGB to be nominated to build a block, both a validator would need to value its reputation/social credit over its slot profit and a builder would go through the trouble to construct a public service block. Due to the random nature of POS, even if a validator were to choose a PGB for its block construction it would <em>not</em> experience a epoch-over-epoch profit increase, but a builder may. This is touched on later, but the social credit a PGB acquires could bring in more <em>business</em> while the randomness of validation ensures that a validator would not.</p>
+<p>Some of these public service examples have already been theorized, and many tend to restrict public good opportunities to <em>just</em> these examples. If you take anything away from this article, know that this ePBS social layer may be more dynamic than many predict it to be.</p>
+<h3><a class="anchor" href="https://ethresear.ch#case-study-3" name="case-study-3"></a><strong>Case Study</strong></h3>
+<p>When choosing a block builder, validators have a choice; a choice of image; a choice of profit; and ultimately a choice that will contribute to the ePBS social layer. Once again, public service can be attractive to many builders still establishing their image. Potential for this public service can be found even in the ePBS vulnerability of Staker-initiated griefing. (theorized by <a href="https://ethresear.ch/u/aelowsson">aelowsson</a>) Simply put, SSPs will do anything to remain the most profitable staking model, even if they need to sabotage or grief competing validators. By outbidding other builders, SSP-sponsored builders can achieve the slot held by an opposing validator and tank opposing SSP rewards. This then reduces the average user rewards for competing SSPs and drives users (and fees) to their own platform. One example of alternative public service resides within SSP peacekeeping. By reducing burn rates and including all MEV (including toxic) a for-profit model can be derived. Using liquidity developed via this method can then be used to outbid suspected SSP griefers or even direct bidding aggression at any SSP-sponsored builder, further enforcing ePBS and preventing large validators and builders from being run together again. However, looking past technical difficulties such as identifying SSP builders, this method also proves to be inefficient, as it offers minimal public credit, due to the fact it leverages harmful building practices to enforce SSP unity.</p>
+<h3><a class="anchor" href="https://ethresear.ch#pgb-efficiency-4" name="pgb-efficiency-4"></a><strong>PGB Efficiency</strong></h3>
+<p>The efficiency of a public goods builder or PGB is multidimensional, to say the least. Two sections I’ll touch on are popularity efficiency and network improvement-based efficiency.</p>
+<p>PBE or Population-Based Efficiency is the simpler of the two and can be represented by the following equation:</p>
+<div class="math">
+E = \frac{pq}{ra}
+</div>
+<p>This equation combines a popularity index (<span class="math">\frac{q}{a}</span>) and a profit margin (<span class="math">\frac{p}{r}</span>); where <span class="math">E</span> is relative efficiency, <span class="math">p</span> is average slot profits, <span class="math">q</span> is average builder pick rate, <span class="math">r</span> is average slot revenue and a is average builder pick rate.</p>
+<p>This equation represents the efficiency of a PGB’s ‘social marketing’. By sacrificing some slot profit a PGB can increase its pick rates and potentially increase its epoch-over-epoch profit or even just control more of the builder market. <em>Of course, all the while serving the Ethereum public.</em></p>
+<p>Another form of efficiency modeling is NIBE or Network Improvement Based Efficiency. This model bases the efficiency of a PGB on its actual public service. However, the idea is harder to put an equation behind, as each public service action contributes varying improvements to the network and each have their own relative values.</p>
+<h3><a class="anchor" href="https://ethresear.ch#the-social-layer-5" name="the-social-layer-5"></a><strong>The Social Layer</strong></h3>
+<p>As ePBS rolls out and additional features like MEV burn hit the network, it’s clear that countless social impacts will arise. From SSP sabotage to even the PGB social dynamic, there are many opportunities for cliques, groups, and cartels to form. However, no matter what social problems may arise, any reputable builder will find a way to negate any nefarious builder patterns, and any reputable validators will find a way to support any honest builders. Ultimately, the idea of social credibility and the value of PGB’s may balance the many Immiscible groups that are predicted to form after the introduction of ePBS and MEV burn.</p>
+<p>Concluding this paper I would like to, once again, thank both <a href="https://ethresear.ch/u/aelowsson">aelowsson</a> and <a href="https://ethresear.ch/u/mikeneuder">Mike Neuder</a> for their wonderful research on MEV burn and pricing auctions respectively. Between PGB dynamics and ePBS metagame, there’s so much more to uncover in this field, so I would like to end by wrapping up this research on PGB dynamics and the resulting social layer by reminding everyone that there is still a world of research to be done.</p>
+            <p><small>1 post - 1 participant</small></p>
+            <p><a href="https://ethresear.ch/t/epbs-metagame-ssp-peacekeeping-and-alternative-public-service/20162">Read full topic</a></p>
+]]></content:encoded>
+<pubDate>Sat, 27 Jul 2024 18:47:18 +0000</pubDate>
+<pubDate>Sat, 27 Jul 2024 18:47:18 +0000</pubDate>
+</item>
+
+<item>
 <title>Rollup-Centric Considerations of Based Preconfimations</title>
 <link>https://ethresear.ch/t/rollup-centric-considerations-of-based-preconfimations/20160</link>
 <guid>https://ethresear.ch/t/rollup-centric-considerations-of-based-preconfimations/20160</guid>
@@ -110,9 +159,7 @@ This article presents <a href="https://x.com/gwyneth_taiko" rel="noopener nofoll
             <p><a href="https://ethresear.ch/t/rollup-centric-considerations-of-based-preconfimations/20160">Read full topic</a></p>
 ]]></content:encoded>
 <pubDate>Sat, 27 Jul 2024 14:41:46 +0000</pubDate>
-<pubDate>Sat, 27 Jul 2024 14:41:46 +0000</pubDate>
 </item>
-
 <item>
 <title>Notes on the LVR of FM-AMM</title>
 <link>https://ethresear.ch/t/notes-on-the-lvr-of-fm-amm/20151</link>
