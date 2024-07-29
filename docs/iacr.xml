@@ -4,6 +4,71 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+<item>
+<title>Collaborative CP-NIZKs: Modular, Composable Proofs for Distributed Secrets</title>
+<link>https://eprint.iacr.org/2024/1209</link>
+<guid>https://eprint.iacr.org/2024/1209</guid>
+<content:encoded><![CDATA[
+<div> 关键词：非交互式零知识证明、协作证明、可组合性、承诺与证明设计、分布式协议
+
+总结:
+
+本文探讨了在非交互式零知识证明（NIZK）中引入可组合性的概念，特别是针对多验证者场景。研究的核心是构建一种名为协作承诺与证明（CP-NIZK）的框架，该框架允许用户结合不同特化的NIZK（如算术电路、布尔电路和范围证明），以期减少证明生成时间，并为多个应用场景提供了可能性，包括互斥的验证者组、结合单方证明和多方计算（MPC）验证者组以及高效实现公开可审计的MPC（PA-MPC）。
+
+通过提出一个通用定义并构建分布式协议来实现CP-NIZK证明的知识，作者实施了这两种常见NIZK（Groth16和Bulletproofs）的原型，并在各种计算环境中进行了实践评估。实验结果表明，尽管可组合性增加了少量开销，但尤其是在大型电路中，这一开销非常小。在应用案例中，与先前的工作相比，该协议将延迟降低了18至55倍，同时只使用了通信量的0.2%。
+
+此研究不仅扩展了NIZK在隐私保护应用中的潜力，还展示了如何通过创新设计和实现代价控制来优化协作证明的性能和效率，从而为安全、隐私敏感的计算环境提供了更强大的工具。 <div>
+Non-interactive zero-knowledge (NIZK) proofs of knowledge have proven to be highly relevant for securely realizing a wide array of applications that rely on both privacy and correctness. They enable a prover to convince any party of the correctness of a public statement for a secret witness. However, most NIZKs do not natively support proving knowledge of a secret witness that is distributed over multiple provers. Previously, collaborative proofs [51] have been proposed to overcome this limitation. We investigate the notion of composability in this setting, following the Commit-and-Prove design of LegoSNARK [17]. Composability allows users to combine different, specialized NIZKs (e.g., one arithmetic circuit, one boolean circuit, and one for range proofs) with the aim of reducing the prove generation time. Moreover, it opens the door to efficient realizations of many applications in the collaborative setting such as mutually exclusive prover groups, combining collaborative and single-party proofs and efficiently implementing publicly auditable MPC (PA-MPC).
+
+We present the first, general definition for collaborative commit-and-prove NIZK (CP-NIZK) proofs of knowledge and construct distributed protocols to enable their realization. We implement our protocols for two commonly used NIZKs, Groth16 and Bulletproofs, and evaluate their practicality in a variety of computational settings. Our findings indicate that composability adds only minor overhead, especially for large circuits. We experimented with our construction in an application setting, and when compared to prior works, our protocols reduce latency by 18–55× while requiring only a fraction (0.2%) of the communication.
+]]></content:encoded>
+<pubDate>Sat, 27 Jul 2024 08:22:28 +0000</pubDate>
+<pubDate>Sat, 27 Jul 2024 08:22:28 +0000</pubDate>
+</item>
+<item>
+<title>Hᴇᴋᴀᴛᴏɴ: Horizontally-Scalable zkSNARKs via Proof Aggregation</title>
+<link>https://eprint.iacr.org/2024/1208</link>
+<guid>https://eprint.iacr.org/2024/1208</guid>
+<content:encoded><![CDATA[
+<div> 关键词：Hᴇᴋᴀᴛᴏɴ、zkSNARKs、分布式证明、大数据处理、实际应用
+
+总结:
+
+本文介绍了一种名为Hᴇᴋᴀᴛᴏɴ的新型零知识简洁非交互式知识论证（zkSNARKs），它克服了现有zkSNARKs在大规模计算中无法扩展的问题。Hᴇᴋᴀᴛᴏɴ通过一种新的“分解与聚合”框架工作，将大型计算任务分割成小块，并在分布式系统中并行验证这些块，最终将结果块证明聚合为单个简洁证明。该框架背后的技术用于高效处理跨块共享的数据，具有独立的兴趣价值。
+
+为了实现Hᴇᴋᴀᴛᴏɴ，作者构建了一个分布式证明者，并在计算集群上对其性能进行了评估。实验结果显示，Hᴇᴋᴀᴛᴏɴ在节点数量增加时实现了强大的水平扩展性（证明时间线性减少），并且能够快速证明大规模计算：它可以证明大小为$2^{35}$门的计算在不到一小时内完成，远快于先前的工作。
+
+此外，Hᴇᴋᴀᴛᴏɴ被应用于两个具有实际意义的应用场景：批处理插入证明的可验证键目录和证明RAM计算的正确性。在这些情况下，Hᴇᴋᴀᴛᴏɴ都能有效地处理现实负载，相比以往的工作效率更高。 <div>
+Zero-knowledge Succinct Non-interactive ARguments of Knowledge (zkSNARKs) allow a prover to convince a verifier of the correct execution of a large computation in private and easily-verifiable manner.  These properties make zkSNARKs a powerful tool for adding accountability, scalability, and privacy to numerous systems such as blockchains and verifiable key directories. Unfortunately, existing zkSNARKs are unable to scale to large computations due to time and space complexity requirements for the prover algorithm. As a result, they cannot handle real-world instances of the aforementioned applications.
+  
+In this work, we introduce Hᴇᴋᴀᴛᴏɴ, a zkSNARK that overcomes these barriers and can efficiently handle arbitrarily large computations. We construct Hᴇᴋᴀᴛᴏɴ via a new "distribute-and-aggregate" framework that breaks up large computations into small chunks, proves these chunks in parallel in a distributed system, and then aggregates the resulting chunk proofs into a single succinct proof. Underlying this framework is a new technique for efficiently handling data that is shared between chunks that we believe could be of independent interest.
+  
+We implement a distributed prover for Hᴇᴋᴀᴛᴏɴ, and evaluate its performance on a compute cluster. Our experiments show that Hᴇᴋᴀᴛᴏɴ achieves strong horizontal scalability (proving time decreases linearly as we increase the number of nodes in the cluster), and is able to prove large computations quickly: it can prove computations of size $2^{35}$ gates in under an hour, which is much faster than prior work.
+
+Finally, we also apply Hᴇᴋᴀᴛᴏɴ to two applications of real-world interest: proofs of batched insertion for a verifiable key directory and proving correctness of RAM computations. In both cases, Hᴇᴋᴀᴛᴏɴ is able to scale to handle realistic workloads with better efficiency than prior work.
+]]></content:encoded>
+<pubDate>Fri, 26 Jul 2024 21:00:30 +0000</pubDate>
+<pubDate>Fri, 26 Jul 2024 21:00:30 +0000</pubDate>
+</item>
+<item>
+<title>What Have SNARGs Ever Done for FHE?</title>
+<link>https://eprint.iacr.org/2024/1207</link>
+<guid>https://eprint.iacr.org/2024/1207</guid>
+<content:encoded><![CDATA[
+<div> 关键词：FHE、SNARGs、输入隐私、安全模型、IND-CCA1
+
+总结:
+
+本文主要探讨了在功能加密(FHE)与结构化非交互式论证(SNARGs)结合使用时，对于客户端输入隐私的影响及其安全性。文章指出，虽然近几年来，研究者们主要致力于提高这种组合方案的效率，但关于其对输入隐私保护的确切安全模型的研究仍然不足。最近，Manulis和Nguyen在Eurocrypt'24上发表的研究表明，这种组合并不提供IND-CCA1级别的安全性。
+
+为了深入理解SNARG是否为输入隐私提供了有意义的安全性，本文提出了一个能够准确描述FHE加SNARG构造安全性的新定义。这一安全定义旨在清晰地界定该组合方案在实际应用中可能面临的风险和挑战，从而为后续研究提供理论基础。
+
+简而言之，本文通过提出一个新的安全模型，试图解决FHE与SNARG组合使用时输入隐私保护的问题，揭示了现有组合方式在安全性方面的局限性，并为未来研究指明了方向。 <div>
+In recent years, there have been several constructions combining FHE with SNARGs to add integrity guarantees to FHE schemes. Most of these works focused on improving efficiency, while the precise security model with regards to client side input privacy has remained understudied. Only recently it was shown by Manulis and Nguyen (Eurocrypt'24) that this combination does not yield IND-CCA1 security. So an interesting open question is: does the SNARG actually add any meaningful security to input privacy? We address this question in this note and give a security definition that meaningfully captures the security of the FHE plus SNARG construction.
+]]></content:encoded>
+<pubDate>Fri, 26 Jul 2024 09:06:12 +0000</pubDate>
+<pubDate>Fri, 26 Jul 2024 09:06:12 +0000</pubDate>
+</item>
 
 <item>
 <title>MUSES: Efficient Multi-User Searchable Encrypted Database</title>
