@@ -4,6 +4,354 @@
 <title>Ethereum Research - Latest topics</title>
 <link>https://ethresear.ch/latest</link>
 
+<item>
+<title>Cross-rollup Synchronous Atomic Execution</title>
+<link>https://ethresear.ch/t/cross-rollup-synchronous-atomic-execution/20193</link>
+<guid>https://ethresear.ch/t/cross-rollup-synchronous-atomic-execution/20193</guid>
+<content:encoded><![CDATA[
+<div> 关键词：Radius、同步原子执行、共享分发器、数据可用性层、验证层
+
+总结:
+这篇文章详细阐述了Radius设计的跨rollup组合体同步原子执行解决方案。该方案旨在提升跨rollup交易的协同性和用户体验，通过引入共享分发器，允许不同rollup之间创建共享的序列层，为用户提供便捷服务。共享分发器负责协调和确保多个交易同时原子性执行，提高执行效率并减少延迟。
+
+关键点包括：
+1. **同步原子执行**：允许多个交易并发执行，以降低总延迟时间，提供即时的交易体验。
+2. **安全与便捷**：通过快速执行组合交易并确保其原子性，用户可以更高效地规划后续操作，同时减少对网络关键参与者（如共享分发器和执行者）的信任需求。
+3. **架构设计**：提出了一种基于共享分发器、数据可用性层和验证层的架构，确保交易的安全性和执行效率。
+4. **角色与责任**：明确定义了各实体（如用户、共享分发器、执行者等）的角色和职责，确保系统稳定运行。
+5. **实施与验证**：通过具体场景展示如何实现和验证同步原子执行过程，包括交易流程、智能合约功能、协调机制以及验证逻辑。
+
+此解决方案通过优化跨rollup交易的执行流程，增强了区块链网络的整体性能和用户体验，同时确保了交易的安全性和可信度。 <div>
+<ul>
+<li><em>by Hankyung Ko(<a href="https://ethresear.ch/u/hankyungko">@HankyungKo</a>) and Chanyang Ju(<a href="https://ethresear.ch/u/wooju">@wooju</a>), Researcher at <a href="https://twitter.com/radius_xyz" rel="noopener nofollow ugc">Radius</a> . Thanks to</em> <a href="https://twitter.com/Hyunxukee" rel="noopener nofollow ugc"><em>Tariz</em></a> <em>and</em> <a href="https://twitter.com/ZeroKnight_eth" rel="noopener nofollow ugc"><em>AJ</em></a> <em>for reviewing this post.</em></li>
+<li><em>Your feedback and opinions are highly valued.</em></li>
+</ul>
+<p><em>Radius has designed a synchronous atomic execution solution for cross-rollup composability. This development is driven by our commitment to support rollups seeking improved composability and enhanced user experience. We will enable rollups to create their own shared sequencing layer, offering this as a service to make it widely accessible. By doing so, we ensure that atomic execution of bundled transactions is coordinated effectively across participating rollups.</em></p>
+<h1><a class="anchor" href="https://ethresear.ch#h-1-introduction-1" name="h-1-introduction-1"></a>1. Introduction</h1>
+<hr />
+<p>Synchronous atomic execution allows multiple transactions from different rollups to be executed simultaneously and atomically in an all-or-nothing manner, significantly reducing latency compared to sequential execution. A naive approach to executing multiple cross-rollup transactions require each transaction to be finalized sequentially on L1. For <span class="math">n</span> transactions, the total latency would be <span class="math">n</span> times the L1 finalization period. In contrast, <strong><code>synchronous atomic execution</code></strong> enables all transactions to be executed at the same time, significantly reducing latency.</p>
+<p>While executing transactions simultaneously can reduce latency, it may raise concerns about security. For example, in a bundled transaction involving minting-and-burning across different rollups, there’s a risk that the burn could fail while the mint succeeds. To address this, we’ve designed our system to verify the atomicity of bundled transactions faster than the time it takes for block finalization. This approach ensures that security is maintained even with simultaneous execution. Our innovation improves composability across multiple rollups, providing a seamless, efficient, and secure user experience with real-time, all-or-nothing execution of cross-rollup transactions without delays.</p>
+<p>To implement this convenient and secure solution, Radius introduces a shared sequencer for rollups to guarantee the atomic execution of bundled transactions. Users create bundled transactions that depend on transactions across multiple rollups, and the shared sequencer manages the sequencing of bundled transactions for successful execution.</p>
+<blockquote>
+<p><img alt=":point_right:" class="emoji" height="20" src="https://ethresear.ch/images/emoji/facebook_messenger/point_right.png?v=12" title=":point_right:" width="20" /> It’s important to note that this shared sequencer is not a single entity controlled by Radius, but rather a set formed by aggregating existing sequencers from each rollup. A leader is selected from this set through a predefined process (<a href="https://docs.theradius.xyz/testnets/loggia-testnet-with-radius-avs/decentralized-sequencing" rel="noopener nofollow ugc">reference</a>) to manage sequencing.</p>
+<p>To prevent potential power abuse by the shared sequencer, Radius employs decentralized sequencing techniques, including encrypted mempool (<a href="https://ethresear.ch/t/mev-resistant-zk-rollups-with-practical-vde-pvde/12677">PVDE</a> and <a href="https://ethresear.ch/t/radius-skde-enhancing-rollup-composability-with-trustless-sequencing/19185">SKDE</a>). The shared sequencer has two main functions: determining transaction order and enforcing transaction reverts to maintain bundle atomicity.</p>
+<p>This article details on how our architecture addresses the second function, ensuring atomicity. Preventing potential abuse of the first function, transaction ordering, is also crucial. Radius addresses this concern through the encrypted mempool, ensuring that the shared sequencer cannot abuse its power regarding transaction ordering.</p>
+</blockquote>
+<h2><a class="anchor" href="https://ethresear.ch#h-1-requirements-of-the-synchronous-atomicity-solution-2" name="h-1-requirements-of-the-synchronous-atomicity-solution-2"></a>1) Requirements of the synchronous atomicity solution</h2>
+<ul>
+<li><strong><code>Convenience</code>:</strong> Users can achieve greater benefits by utilizing atomic execution of cross-rollup bundled transactions, without compromising security.
+<ul>
+<li><strong>Bundle transactions</strong>: Users can bundle and execute multiple transactions across different rollups as one.</li>
+<li><strong>Atomic execution:</strong> The bundle transaction is guaranteed to execute simultaneously without failures. If a failure occurs, it is guaranteed to fail simultaneously.</li>
+<li><strong>Fast execution for bundle while maintaining security</strong>: Transactions are guaranteed to be executed faster than sequential execution (where each transaction waits for the previous one to finish). This allows users to strategize their next transactions more quickly. Additionally, atomic execution is cryptographically verified before finalization, ensuring that the security of the transactions is maintained even though they are executed more quickly.</li>
+</ul>
+</li>
+<li><strong><code>Security</code></strong>
+<ul>
+<li><strong>Minimized trust level</strong>: Aims to minimize the amount of trust users must place in key network participants like the shared sequencer and executors by:
+<ul>
+<li>Minimizing the number of parties that need to be trusted.</li>
+<li>Minimizing the duration for which trust is necessary.</li>
+<li>Ensuring early detection and verification of any malicious behavior by the shared sequencer and executors before blockchain finalization.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2><a class="anchor" href="https://ethresear.ch#h-2-main-idea-3" name="h-2-main-idea-3"></a>2) Main Idea</h2>
+<p>We propose an architecture for synchronous atomic execution using the <code>shared sequencer</code>, <code>data availability (DA)</code>, and a <code>verification layer</code>.</p>
+<h3><a class="anchor" href="https://ethresear.ch#why-shared-sequencer-4" name="why-shared-sequencer-4"></a>Why shared sequencer?</h3>
+<ul>
+<li>To satisfy the desired properties of convenience and security, it is necessary to handle bundled transactions across multiple rollups. Therefore, we propose a new entity called the shared sequencer, which is responsible for confirming the blocks of multiple rollups.</li>
+<li>The shared sequencer receives a cross-chain bundle and determines the block order for atomic execution.</li>
+<li>The shared sequencer is responsible to ensure the atomic execution of bundled transactions before confirming the block.</li>
+</ul>
+<h3><a class="anchor" href="https://ethresear.ch#new-responsibility-of-the-executor-5" name="new-responsibility-of-the-executor-5"></a>New responsibility of the executor</h3>
+<ul>
+<li><strong>The executor, in agreement with the shared sequencer, has an added constraint:</strong> it must execute the transaction list committed by the shared sequencer.</li>
+</ul>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/5/5/553162b8f7a0148ceedbd7bddbf19ce91d944f58.png" title="SAE_figure1"><img alt="SAE_figure1" height="130" src="https://ethresear.ch/uploads/default/optimized/3X/5/5/553162b8f7a0148ceedbd7bddbf19ce91d944f58_2_690x130.png" width="690" /></a></div><br />
+[Figure 1] The definition of roles and responsibilities of shared sequencer and executors<p></p>
+<h3><a class="anchor" href="https://ethresear.ch#conditions-for-synchronous-atomicity-6" name="conditions-for-synchronous-atomicity-6"></a>Conditions for synchronous atomicity</h3>
+<ul>
+<li>Synchronous atomicity for bundle transaction is achieved if the following two conditions are independently verified:
+<ol>
+<li>All bundled transaction in the block committed by the shared sequencer should be atomic.</li>
+<li>The executor executes the same block as committed by the shared sequencer.</li>
+</ol>
+</li>
+</ul>
+<h2><a class="anchor" href="https://ethresear.ch#h-3-our-contributions-7" name="h-3-our-contributions-7"></a>3) Our Contributions</h2>
+<ul>
+<li><strong>Designed a synchronous atomic execution solution</strong>:
+<ul>
+<li><strong>Security requirements definition</strong>: We have defined the security requirements for each entity involved in synchronous atomic execution, ensuring that all components operate securely and reliably.</li>
+<li><strong>Architecture design</strong>: We have designed a robust architecture that ensures security and efficiency. This architecture includes:
+<ul>
+<li><strong>User’s bundle transaction</strong>: We defined the structure and format of bundle transactions that users can create. These bundled transactions enable users to execute multiple transactions across different rollups simultaneously, ensuring atomic execution.</li>
+<li><strong>The bundler contract</strong>: We designed and implemented the bundler contract, which is responsible for handling and processing bundled transactions. This contract is called by the shared sequencer, and performs several critical functions:
+<ul>
+<li>Acts as a gateway smart contract for users to call the actual contracts they intend to execute.</li>
+<li>Allows the shared sequencer to enforce transaction reverts to guarantee the atomicity of the bundle transactions.</li>
+<li>Verifies the legitimacy of transactions initially created by the user.</li>
+<li>Charges transaction fees to users.</li>
+</ul>
+</li>
+<li><strong>Coordination process for the shared sequencer</strong>:  We developed a coordination process for the shared sequencer, which includes interaction with the full nodes (simulators) of each rollup. This process ensures that the shared sequencer can effectively manage and sequence transaction across multiple rollups, guaranteeing atomic execution.</li>
+<li><strong>Verification logic</strong>: We defined the verification logic to ensure that all transactions within a bundle meet the defined security requirements before finalization.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Demonstrated the feasibility of the architecture:</strong>
+<ul>
+<li><strong>Implementation</strong>: We have implemented the entire architecture, demonstrating its feasibility and effectiveness. Our implementation includes all components of the synchronous atomic execution solution, from the user’s bundle transaction creation to the coordination process for the shared sequencer.
+<ul>
+<li>The user’s bundled transaction is signed using MetaMask.</li>
+<li>Implemented on two Polygon CDKs:
+<ul>
+<li>Each Polygon CDK has an API that responds to the shared sequencer’s simulation requests.</li>
+<li>Each Polygon CDK has a deployed Bundler contract.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Demo</strong>: The demo scenario involves transferring tokens from Rollup A to Rollup B. In this scenario, the bundled transaction consists of two operations: burning the wrapped token on Rollup A and mint it on Rollup B. This demonstrates the practical application of our solution. (<a href="https://x.com/radius_xyz/status/1809120936270123468" rel="noopener nofollow ugc">Check out our Demo here!</a>)</li>
+</ul>
+</li>
+</ul>
+<h1><a class="anchor" href="https://ethresear.ch#h-2-definition-8" name="h-2-definition-8"></a>2. Definition</h1>
+<hr />
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/0/b/0bec5c1463e929939d860e125c34e05cbc6b4c34.jpeg" title="SAE_figure2"><img alt="SAE_figure2" height="243" src="https://ethresear.ch/uploads/default/optimized/3X/0/b/0bec5c1463e929939d860e125c34e05cbc6b4c34_2_690x243.jpeg" width="690" /></a></div><br />
+[Figure 2] Overview of transaction flow<p></p>
+<blockquote>
+<p><img alt=":pushpin:" class="emoji" height="20" src="https://ethresear.ch/images/emoji/facebook_messenger/pushpin.png?v=12" title=":pushpin:" width="20" /> <strong>The proposed architecture is based on the following assumptions.</strong></p>
+<ul>
+<li><strong>Scenario</strong>
+<ul>
+<li>Each Bundle Tx consists of two transactions: a <strong>Burn</strong> transaction and a <strong>Mint</strong> transaction of ERC20 contract (rToken), occurring on different chains (inspired by Hyperlane bridge scenario).</li>
+</ul>
+</li>
+<li><strong>Rollups</strong>
+<ul>
+<li>Each rollup has a simulation API implemented.</li>
+<li>The <code>Radius’ Bundler contract</code> is deployed on each rollup.</li>
+<li>The ERC20 rToken contract is also implemented on each rollup.</li>
+<li>The execute function of the Radius’ Bundler contract is accessible only by whitelisted <code>shared sequencers</code>.</li>
+<li>The ERC20 contract (rToken) grants burn and mint access rights to the Radius’ Bundler contract.</li>
+</ul>
+</li>
+<li><strong>Incentives and Penalties</strong> (Future work)
+<ul>
+<li>There are sufficient incentives for correct behavior and penalties for incorrect behavior for the <code>shared sequencer</code> and <code>Executor</code>.</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h2><a class="anchor" href="https://ethresear.ch#h-1-operational-roles-and-security-requirements-of-entities-9" name="h-1-operational-roles-and-security-requirements-of-entities-9"></a>1) Operational Roles and Security Requirements of Entities</h2>
+<p>In this section, we define the correct behavior and adversarial behavior of each entity in the architecture. The adversarial behaviors defined here will be analyzed in Section 4.</p>
+<ul>
+<li><strong><code>User</code>:</strong> The entity that generates cross-rollup bundled transactions and sends them to the shared sequencer for atomic execution.
+<ul>
+<li><strong>Adversarial behaviors</strong>
+<ul>
+<li>Creates invalid Bundle Tx:
+<ul>
+<li>The value of the BURN Tx and the MINT Tx do not match.</li>
+<li>Insufficient account balance for the tokens intended to be burned.</li>
+<li>Lacks the ability to pay the gas fee required for executing the transaction on at least one chain.</li>
+<li>Incorrectly signs the Bundle Tx.</li>
+</ul>
+</li>
+<li>Calls the MINT function without the shared sequencer’s assistance:
+<ul>
+<li>Attempts to execute the MINT Tx without creating a Bundle Tx.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>Shared sequencer</code>:</strong> The entity responsible for receiving bundled transactions from users, creating and submitting blocks for multiple rollups, and ensuring the atomic execution of bundled transactions.
+<ul>
+<li><strong>Adversarial behaviors</strong>
+<ul>
+<li>Calls bundler contract without user’s consent.</li>
+<li>Fails to verify whether the Bundle Tx is executed atomically across all rollups.</li>
+<li>Forces the valid Bundle Tx to revert unnecessarily.</li>
+<li>Sends a different transaction list to the executor than the one committed to the DA after confirming the block.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>Executor</code>:</strong> The entity specific to each rollup that executes the transaction list determined by the shared sequencer and uploads the resulting blocks to the Data Availability layer.
+<ul>
+<li><strong>Adversarial behaviors</strong>
+<ul>
+<li>Does not execute the transaction list as confirmed and provided by the shared sequencer.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>Shared Prover</code>:</strong> The entity that generates zero-knowledge proofs to validate the atomic execution of bundled transactions across different chains based on data from the Data Availability layer.</li>
+</ul>
+<h2><a class="anchor" href="https://ethresear.ch#h-2-additional-components-10" name="h-2-additional-components-10"></a>2) Additional Components</h2>
+<ul>
+<li><strong><code>Simulator</code>:</strong> The simulator refers to the full node of each rollup that the shared sequencer communicates with to validate the atomicity of bundled transactions before committing the block. This entity could be the same as the executor mentioned above.</li>
+<li><strong><code>Data Availability Layer (DA)</code>:</strong> The DA is a layer for storing data committed by the shared sequencer and executor to prove their honesty. The shared prover uses this information to verify the honesty of both entities.
+<ul>
+<li>Given a reliable <code>DA</code>, if the shared sequencer and executor each commit the minimum necessary information for the verification of synchronous atomicity to the DA, it can be quickly <code>verified</code> based on that information.</li>
+</ul>
+</li>
+<li><strong><code>Verification layer</code>:</strong> The verification layer is responsible for verifying the proofs generated by the shared prover and assisting with the appropriate actions if verification fails. This layer can either be part of the settlement layer or a dedicated layer focused solely on verification.</li>
+</ul>
+<h1><a class="anchor" href="https://ethresear.ch#h-3-synchronous-atomic-execution-architecture-11" name="h-3-synchronous-atomic-execution-architecture-11"></a>3. Synchronous atomic execution architecture</h1>
+<hr />
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/e/a/ea8cbd6739d8f45ec741d82a13f6f55f94907b38.jpeg" title="SAE_figure3"><img alt="SAE_figure3" height="349" src="https://ethresear.ch/uploads/default/optimized/3X/e/a/ea8cbd6739d8f45ec741d82a13f6f55f94907b38_2_690x349.jpeg" width="690" /></a></div><br />
+[Figure 3] The process of synchronous atomic execution architecture<p></p>
+<p>The architecture of Radius’s synchronous atomic execution ensures that bundled transactions are executed in an all-or-nothing manner within the same cycle, coordinated by the shared sequencer. Initially, the shared sequencer’s coordination is trusted optimistically, allowing each transaction to be executed independently on its respective rollup. Subsequently, the atomicity of these transactions is verified before the rollup blocks are finalized on L1.</p>
+<p>It can be divided into three main components: <strong>the bundler contract</strong>, <strong>the coordination process</strong>, and <strong>the verification process</strong>. This section will describe each of these components in detail.</p>
+<h2><a class="anchor" href="https://ethresear.ch#h-1-smart-contract-for-bundle-transaction-radiuss-bundler-contract-12" name="h-1-smart-contract-for-bundle-transaction-radiuss-bundler-contract-12"></a>1) Smart <strong>Contract for Bundle Transaction (Radius’s Bundler contract)</strong></h2>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/0/b/0bec5c1463e929939d860e125c34e05cbc6b4c34.jpeg" title="SAE_figure2"><img alt="SAE_figure2" height="243" src="https://ethresear.ch/uploads/default/optimized/3X/0/b/0bec5c1463e929939d860e125c34e05cbc6b4c34_2_690x243.jpeg" width="690" /></a></div><br />
+[Figure 4] Overview of transaction flow<p></p>
+<p>We introduce a new smart contract called <code>Radius’s bundler contract</code>, designed to handle and process the users’ bundled transactions. It acts as a gateway to execute the users’ intended contracts.</p>
+<p>For example, as shown in the figure, suppose a user creates a bundled transaction that includes calling the Burn function of the rToken contract on Rollup A and the Mint function of the rToken contract on Rollup B. The shared sequencer receives this bundle and wraps it into a transaction that calls the Radius’s bundler contract. Each rollup then processes the transaction through a series of verification via the Radius contract, ultimately executing the user’s intended contract calls.</p>
+<h3><a class="anchor" href="https://ethresear.ch#key-features-of-the-bundler-contract-13" name="key-features-of-the-bundler-contract-13"></a>Key features of the Bundler contract</h3>
+<ul>
+<li>Acts as a gateway smart contract for users to call the actual contracts they intend to execute.</li>
+<li>Allows the shared sequencer to enforce transaction reverts to guarantee the atomicity of the bundle transactions.</li>
+<li>Verifies the legitimacy of transactions initially created by the user.</li>
+<li>Charges transaction fees to users.</li>
+</ul>
+<h3><a class="anchor" href="https://ethresear.ch#how-is-the-bundler-contract-implemented-14" name="how-is-the-bundler-contract-implemented-14"></a>How is the Bundler contract implemented?</h3>
+<p>The Bundler contract includes the following functions:</p>
+<ul>
+<li><code>execute</code>: Called by the shared sequencer, this function executes the user’s transaction after a series of verifications.</li>
+<li><code>deposit</code>: Allows users to deposit transaction fees in advance.</li>
+<li><code>withdraw</code>: Allows users to withdraw their deposited funds.</li>
+<li><code>addWhitelist</code>: Adds a sequencer to the whitelist.</li>
+<li><code>removeWhitelist</code>: Removes a specific sequencer from the whitelist</li>
+</ul>
+<h3><a class="anchor" href="https://ethresear.ch#how-is-the-execute-function-implemented-15" name="how-is-the-execute-function-implemented-15"></a>How is the <code>execute</code> function implemented?</h3>
+<blockquote>
+<p><img alt=":pushpin:" class="emoji" height="20" src="https://ethresear.ch/images/emoji/facebook_messenger/pushpin.png?v=12" title=":pushpin:" width="20" /> The input parameters for the execute function are as follows:</p>
+<ul>
+<li><code>from</code>: User address</li>
+<li><code>bundle_tx_list</code>: Information of all transactions within the Bundle Tx</li>
+<li><code>index</code>: Current transaction’s index within the <code>bundle_tx_list</code></li>
+<li><code>bundle_tx_signature</code>: User’s signature for the Bundle Tx</li>
+<li><code>revert_flag</code>: Flag for enforcing revert
+<ul>
+<li>The sequencer includes a <strong>“revert_flag”</strong> in the data, which is set by the sequencer to forcibly revert the user’s transaction. If this value is set to true, the Bundler contract will revert the user’s transaction. This mechanism is designed to ensure the atomicity of the transactions defined in the bundle, preventing the execution of the remaining transactions if even one included in the bundle fails to execute.</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<ol>
+<li>Access control:
+<ul>
+<li>Verify that the call is made by a shared sequencer listed in the whitelist.</li>
+</ul>
+</li>
+<li>Check <code>revert_flag</code>:
+<ul>
+<li>If <code>revert_flag</code> == true, forcibly reverts the transaction.</li>
+</ul>
+</li>
+<li>Verify user’s transaction:
+<ul>
+<li>Decode the transaction’s data field.</li>
+<li>Ensure the user’s deposit is greater than the transaction fee.</li>
+<li>Verify the user’s bundled transaction signature.</li>
+<li>Check the Bundle Transaction validity
+<ul>
+<li>(In this scenario) Verify that the values to be minted and burned are identical.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Deduct transaction fee from user’s deposit (Exception handling required for early reverts):
+<ul>
+<li>Transfer the transaction fee to the shared sequencer from the contract’s deposited assets.</li>
+<li>Deduct the transaction fee from the user’s deposit.</li>
+</ul>
+</li>
+<li>Execute user’s intended contract:
+<ul>
+<li>Call the contract that the user intended to execute.</li>
+</ul>
+</li>
+</ol>
+<h2><a class="anchor" href="https://ethresear.ch#h-2-coordination-process-for-the-shared-sequencer-16" name="h-2-coordination-process-for-the-shared-sequencer-16"></a>2) Coordination process for the shared sequencer</h2>
+<p>Radius’s shared sequencing technique separates the roles of sequencing and execution. The shared sequencer is responsible for deciding the block that atomically executes the user’s bundle transactions, while the block is built by each rollup’s executor. Therefore, if it can be ensured that the shared sequencer has coordinated the atomic execution of the bundle transactions and the executor has executed the block as determined by the shared sequencer, synchronous atomic execution is achieved.</p>
+<p>Coordination involves requesting simulations to the full nodes of each rollup for the respective transaction lists, collecting the simulated results, and, if some transactions within the bundle need to be reverted to maintain atomicity, forcibly reverting the remaining transactions to produce a transaction list that will be executed atomically. In other words, if the simulation results of the two transaction defined in the bundle are not the same (i.e., one is a revert and the other is a success), the transaction that yields a successful result is modified by setting its <code>revert_flag</code> to 1 to forcibly revert it. The transaction list is then updated with the modified transaction.</p>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/4/d/4d77403de3cd9cacd9e96500481eda982fd6f53f.jpeg" title="SAE_figure5"><img alt="SAE_figure5" height="493" src="https://ethresear.ch/uploads/default/optimized/3X/4/d/4d77403de3cd9cacd9e96500481eda982fd6f53f_2_690x493.jpeg" width="690" /></a></div><br />
+[Figure 5] Example of a Simulation Process<p></p>
+<p>After finalizing the block, the shared sequencer commits to it. Later, the block information committed by the shared sequencer can be compared with the block executed by the executor to verify that the executor executed the block as agreed. The atomicity of the bundle transactions can be verified by examining the receipt committed by the executor after building the block, which shows the success status of each transaction and ensures that the shared sequencer did not forcibly revert all transactions. These two processes can be verified off-chain using ZKP systems such as RiscZero or SP1. This process is detailed in section 3.3.</p>
+<h2><a class="anchor" href="https://ethresear.ch#h-3-verification-process-for-the-shared-prover-17" name="h-3-verification-process-for-the-shared-prover-17"></a>3) Verification process for the shared prover</h2>
+<p>We design a zk prover called  “Shared Prover” which allows us to verify that the shared sequencer and executor acted in accordance with the protocol’s intentions. The shared prover generates proof for the <strong>atomicity of the bundle transactions</strong> and their <strong>valid execution result</strong> according to the commitment.</p>
+<p>We leverage the DA layer to facilitate the sharing of the sequencer’s commitments and execution data across different chains. Utilizing the DA layer for data storage offers enhanced transparency and accessibility. Based on the DA (Data Availability) data, it can be confirmed that the user’s bundle transactions were executed atomically, and the validity of the execution result on different chains can be verified.</p>
+<p>The shared sequencer communicates with simulators to finalize the the list of transactions to be performed while ensuring atomicity, and the executor processes this list and then it uploads the resulting data to the DA layer.</p>
+<h3><a class="anchor" href="https://ethresear.ch#information-stored-in-the-da-18" name="information-stored-in-the-da-18"></a>Information stored in the DA</h3>
+<ul>
+<li>
+<p><strong>Shared sequencer’s transactions list commitment</strong></p>
+<p>To settle transaction list, shared sequencer commits the following data with signature to the DA:</p>
+<ul>
+<li><code>chain ID</code></li>
+<li><code>block height</code></li>
+<li><code>transaction MPT root</code></li>
+<li><code>bundle transaction list</code></li>
+</ul>
+</li>
+<li>
+<p><strong>Executed Block data</strong></p>
+<p>After a block is executed on each chain, the entity who executed the block uploads the results to the DA.</p>
+</li>
+</ul>
+<h3><a class="anchor" href="https://ethresear.ch#atomicity-proofs-shared-sequencers-honesty-19" name="atomicity-proofs-shared-sequencers-honesty-19"></a>Atomicity proofs (Shared sequencer’s honesty)</h3>
+<p>The shared prover retrieves the block execution results stored in the DA by the executor. In the atomicity proof, the following aspects are verified using zero-knowledge proofs:</p>
+<ul>
+<li>
+<p><strong>All-or-Nothing execution</strong></p>
+<ul>
+<li>
+<p>The receipt status for the bundle transactions must have the same value.</p>
+<p><span class="math">assert! (\text{receipt}(\text{tx}_A).\text{status} = \text{receipt}(\text{tx}_B).\text{status})</span></p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Prevention of arbitrary manipulation of the shared sequencer’s revert flag</strong></p>
+<ul>
+<li>
+<p>There is a potential attack where a valid bundled transaction is reverted entirely, collecting fees from the user without executing the transaction. To prevent this, the atomicity proof checks that not all revert flags for the transactions are set to 1.</p>
+</li>
+<li>
+<p>Therefore, revert flags cannot be set to 1 simultaneously.</p>
+<p><span class="math">\text{assert!}~(\text{tx}_A.\text{revert_flag} \times \text{tx}_B.\text{revert_flag} = 0)</span></p>
+</li>
+</ul>
+</li>
+</ul>
+<h3><a class="anchor" href="https://ethresear.ch#proof-of-rollup-executors-honesty-20" name="proof-of-rollup-executors-honesty-20"></a>Proof of Rollup executor’s honesty</h3>
+<p>To verify that the executor has honestly executed the block according to the transaction list committed be the shared sequencer, the shared prover also includes the relationship between the values committed by the shared sequencer and the MPT root of the transactions uploaded by the executor.</p>
+<h1><a class="anchor" href="https://ethresear.ch#h-4-security-analysis-21" name="h-4-security-analysis-21"></a>4. Security analysis</h1>
+<hr />
+<ul>
+<li><strong>Individual Transaction Validity</strong>: The validity of individual transactions (e.g., insufficient user’s balance) is verified by the Bundler Contract, and transactions will fail if they do not pass this check.</li>
+<li><strong>Bundle Transaction Validity</strong>: The validity of the bundled transaction (e.g., discrepancy between mint and burn amounts) is also verified by the Bundler Contract, and the bundle will fail if it does not pass this check.</li>
+<li><strong>Atomicity of Successful Bundle Transactions</strong>: The shared sequencer is responsible for ensuring the atomicity of successfully executed bundled transactions. The honesty of the shared sequencer is verified by the shared prover and the verification layer.</li>
+<li><strong>Honesty of the Executor</strong>: If the shared sequencer has legitimately determined and committed the blocks for each rollup, the honesty of the executor is verified by the shared prover and the verification layer.</li>
+<li><strong>Prevention of Manipulation</strong>: Additionally, neither the shared prover nor the rollup executor can manipulate the user’s bundle transaction. The user’s signature prevents such tampering.</li>
+<li><strong>Integrity of Proofs and Verification</strong>: The shared prover and the verification layer perform proofs and verification based on authenticated data available in the Data Availability (DA) layer. As a result, they cannot alter the proof content. The worst they can do is to withhold performance.</li>
+</ul>
+            <p><small>1 post - 1 participant</small></p>
+            <p><a href="https://ethresear.ch/t/cross-rollup-synchronous-atomic-execution/20193">Read full topic</a></p>
+]]></content:encoded>
+<pubDate>Thu, 01 Aug 2024 08:57:29 +0000</pubDate>
+<pubDate>Thu, 01 Aug 2024 08:57:29 +0000</pubDate>
+</item>
 
 <item>
 <title>Preconfirmation Bidding Increased Block Values on Holesky</title>
