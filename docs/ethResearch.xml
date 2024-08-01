@@ -4,6 +4,67 @@
 <title>Ethereum Research - Latest topics</title>
 <link>https://ethresear.ch/latest</link>
 
+<item>
+<title>Preconfirmation Bidding Increased Block Values on Holesky</title>
+<link>https://ethresear.ch/t/preconfirmation-bidding-increased-block-values-on-holesky/20190</link>
+<guid>https://ethresear.ch/t/preconfirmation-bidding-increased-block-values-on-holesky/20190</guid>
+<content:encoded><![CDATA[
+<div> 关键词：Mev-commit、Holesky、预确认、竞标行为、区块价值
+
+总结:
+文章主要探讨了自7月10日以来，Mev-commit 0.4.3版本在Holesky tesnet上启用预确认功能的情况。在这段时间里，预确认功能参与度逐渐增加，目前有1个转接器、3个提供者、9个竞标者参与其中。从7月10日至7月29日期间，提供者共发布了807次预确认，涉及415个Holesky区块。预确认交易数量较少（815次），但价值相对较高，平均每个预确认交易的价值为0.0049 ETH，而平均优先费用仅为0.0045 ETH。这表明预确认交易对整体区块价值的贡献显著。
+
+此外，文章还指出，预确认交易平均为区块贡献的价值（0.0093 ETH）远高于常规区块（0.0044 ETH）。这表明预确认机制可以有效提升区块价值，从而增加验证者的奖励。同时，文章也提到，由于Holesky作为测试网与主网存在差异，其预确认功能的使用情况可能与主网有所不同。为了进一步研究和优化预确认机制，计划进行更多在模拟主网环境下的测试，并邀请更多的参与者加入到Mev-commit生态系统中。 <div>
+<h1><a class="anchor" href="https://ethresear.ch#tldr-1" name="tldr-1"></a>TLDR</h1>
+<ul>
+<li>Since July 10, mev-commit 0.4.3 has enabled over 800 execution preconfirmations on Holesky, with increasing network participation.</li>
+<li>Providers issued 807 preconfirmations across 415 blocks. Bidders sent 4.24 ETH worth of bids.</li>
+<li>Average mev-commit block value was 0.0093 ETH compared to 0.0044 ETH for a vanilla block.</li>
+<li>Average preconfirmation bid was 0.0049 ETH, slightly higher than the average priority fee of 0.0045 ETH.</li>
+<li>Data shows that preconf bids contribute significantly to overall block value, despite limited participation for the nascent network.</li>
+</ul>
+<h1><a class="anchor" href="https://ethresear.ch#overview-2" name="overview-2"></a>Overview</h1>
+<p>Since July 10, mev-commit 0.4.3 has been facilitating execution preconfirmations on Holesky tesnet. There has been an upwards trend of participation with currently 1 relay, 3 providers, 9 bidders, and <a href="https://validators.mev-commit.xyz/" rel="noopener nofollow ugc">27,000 validators</a> participating. From July 10 to July 29 (Holesky block range 1902173 to 2027932), providers have issued 807 preconfirmations across 415 Holesky blocks. Some examples of preconfirmation blocks:</p>
+<ul>
+<li><a href="https://holesky.etherscan.io/block/1943039" rel="noopener nofollow ugc">1943039</a> with 21 preconfs and .016 ETH worth of bids</li>
+<li><a href="https://holesky.etherscan.io/block/1986732" rel="noopener nofollow ugc">1986732</a> with 7 preconfs and .04 ETH worth of bids</li>
+<li><a href="https://holesky.etherscan.io/block/1986963" rel="noopener nofollow ugc">1986963</a> with 5 preconfs and .022 ETH worth of bids</li>
+</ul>
+<p>There are two caveats to these initial results. The first is that network participation is still growing. As more actors onboard or opt in to the network, the flow of preconfs is likely to increase. The second caveat is that Holesky does not have the same competitive use cases for preconfs as mainnet, and does not mirror mainnet Ethereum transacting behavior as closely as desired.</p>
+<p>The notebook used for analytics <a href="https://github.com/Evan-Kim2028/preconf_analytics/blob/e6fdb9886c600315d531b59cb13e6efccc7d56bd/notebooks/preconfs.ipynb" rel="noopener nofollow ugc">can be found here</a>. The data for these results can be replicated using the <a href="https://github.com/primev/mev_commit_sdk_py" rel="noopener nofollow ugc">mev-commit-sdk-py</a> repository to collect mev-commit events powered by Hypersync indexer. There is also <a href="http://explorer.testnet.mev-commit.xyz/app/discover" rel="noopener nofollow ugc">an explorer</a>, which is currently in development.</p>
+<h1><a class="anchor" href="https://ethresear.ch#bidding-behavior-3" name="bidding-behavior-3"></a>Bidding Behavior</h1>
+<p>We observe 815 preconfirmation transactions, indicating a niche but valuable market segment compared to 4 million regular transactions. This significant difference suggests preconfs are currently used by a smaller subset of users who are testing preconfirmations.</p>
+<p>A total of 9 bidders participated, sending 4.24 ETH in bids compared to 0.13 ETH in priority fees, with an average preconfirmation bid of 0.005 ETH versus 0.00016 ETH for priority fees on the same transaction, indicating a heavier bidding preference for preconfirmations over priority fees.<br />
+</p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/0/4/04d6296e99153e73f2e018b8c21b727582d0c89e.png" title="image"><img alt="image" height="500" src="https://ethresear.ch/uploads/default/optimized/3X/0/4/04d6296e99153e73f2e018b8c21b727582d0c89e_2_563x500.png" width="563" /></a></div><p></p>
+<p>Overall, priority fees totaled 544 ETH with the average preconfirmation bid being 0.0049 ETH, slightly higher than the average priority fee of 0.0045 ETH.</p>
+<h1><a class="anchor" href="https://ethresear.ch#block-value-4" name="block-value-4"></a>Block Value</h1>
+<p>We hypothesized that preconfs would add an increase in block value, resulting in higher validator rewards per mev-commit block. On average, we observe 1.95 preconfirmation transactions per block compared to 42.3 total transactions. Average mev-commit block value was 0.0093 ETH compared to 0.0044 ETH for a vanilla block.</p>
+<p><img alt="image" height="474" src="https://ethresear.ch/uploads/default/original/3X/d/9/d97a557eefe85c83cef80122c55b8695d60307b1.png" width="542" /></p>
+<p>One limitation in comparing mev-commit blocks to vanilla Holesky blocks is that there are only ~400 mev-commit blocks compared to ~50,000 Holesky blocks. This is primarily due to the nascent mev-commit network participation rates. Additionally the average bid amount at 0.005 ETH seems on the higher side for Holesky blocks and may not accurately reflect mainnet amounts. However accurately pricing preconfirmations is a difficult task and has to be balanced with the presence of mev spikes on mainnet that can greatly skew results. We are actively researching how to price preconfirmations more effectively.</p>
+<p>We illustrate the block revenue breakdown over several days in the chart below for mev-commit blocks, showing the breakdown between preconfirmation bids and priority fees:</p>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/c/0/c04ec97bff2be44d3e1f79915157487def6eb685.png" title="image"><img alt="image" height="409" src="https://ethresear.ch/uploads/default/optimized/3X/c/0/c04ec97bff2be44d3e1f79915157487def6eb685_2_690x409.png" width="690" /></a></div><p></p>
+<p>Preconfirmation bids significantly contributed to increasing block value. On days such as July 11th, 18th, and 24th, preconfirmation bids markedly boosted total block value, highlighting their substantial impact.</p>
+<p>The charts below illustrate an outsized impact that preconfirmation bids on block value:</p>
+<ul>
+<li><strong>Preconf Bids per Block</strong>: Despite a smaller number of transactions, preconfirmation bids are consistently higher, often reaching up to 0.02 ETH.</li>
+<li><strong>Priority Fees per Block</strong>: While more frequent, priority fees are generally lower, seldom exceeding 0.01 ETH.</li>
+</ul>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/4/3/43fe06dfdd10788ec3344bc9e8592e3773cf34a6.png" title="image"><img alt="image" height="312" src="https://ethresear.ch/uploads/default/optimized/3X/4/3/43fe06dfdd10788ec3344bc9e8592e3773cf34a6_2_690x312.png" width="690" /></a></div><p></p>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/1/0/1078d70fc113dfd6d3a0d5a291ef56a81a12f361.png" title="image"><img alt="image" height="317" src="https://ethresear.ch/uploads/default/optimized/3X/1/0/1078d70fc113dfd6d3a0d5a291ef56a81a12f361_2_690x317.png" width="690" /></a></div><p></p>
+<p>A notable example is block <a href="https://holesky.etherscan.io/block/1943039" rel="noopener nofollow ugc">1943039</a>, which had the highest number of preconfs with 21 out of 48 transactions. In this block, preconf bid revenue was 0.008 ETH, vastly outpacing the 0.0009 ETH from priority fees.</p>
+<p>These observations demonstrate that even a few preconfirmation transactions can substantially enhance block value due to their higher bid amounts.</p>
+<h1><a class="anchor" href="https://ethresear.ch#limitations-5" name="limitations-5"></a>Limitations</h1>
+<p>As mentioned earlier, the caveats to our initial findings is that Holesky is a testnet and does not have the same types of competitive opportunities as Mainnet. Users tend to have less urgency on Holesky and this is reflected in smaller block sizes and lower priority fees.</p>
+<p>As a result, the preconf bids may not have the same relationship to priority fees on mainnet compared to testnet and may not accurately reflect the user’s true bidding preferences since testnet tokens are being used.</p>
+<h1><a class="anchor" href="https://ethresear.ch#closing-remarks-6" name="closing-remarks-6"></a>Closing Remarks</h1>
+<p>This report initially touches on some preconfirmation bidding behavior observed through early mev-commit usage and offers insights into how preconf bids can increase validator rewards. We plan to follow up with a more detailed report on mev-commit protocol details such as the decay mechanism, rewards and slashing, settlement process, and revenue.</p>
+<p>We plan to onboard more bidders, providers and validators into the mev-commit ecosystem and conduct more tests in an environment that mimics mainnet more closely. We invite you to participate starting at <a class="inline-onebox" href="https://docs.primev.xyz/get-started/welcome-to-primev" rel="noopener nofollow ugc">Welcome to Primev - Documentation</a></p>
+            <p><small>1 post - 1 participant</small></p>
+            <p><a href="https://ethresear.ch/t/preconfirmation-bidding-increased-block-values-on-holesky/20190">Read full topic</a></p>
+]]></content:encoded>
+<pubDate>Thu, 01 Aug 2024 02:58:46 +0000</pubDate>
+<pubDate>Thu, 01 Aug 2024 02:58:46 +0000</pubDate>
+</item>
 
 <item>
 <title>Affiliated AMMs and permissionless solving for uniform price batch auctions</title>
