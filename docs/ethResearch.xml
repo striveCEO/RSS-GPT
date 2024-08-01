@@ -4,6 +4,152 @@
 <title>Ethereum Research - Latest topics</title>
 <link>https://ethresear.ch/latest</link>
 
+<item>
+<title>Inclusion List Timing Constraints</title>
+<link>https://ethresear.ch/t/inclusion-list-timing-constraints/20198</link>
+<guid>https://ethresear.ch/t/inclusion-list-timing-constraints/20198</guid>
+<content:encoded><![CDATA[
+<div> 关键词：包括 "包括"、"时间限制"、"安全考虑"、"可行性"、"不同设计比较"
+
+总结：
+
+本文深入探讨了在以太坊中实现包括列表（ILs）所涉及的各种权衡，重点关注时间、安全性和可实施性方面的限制。ILs允许块构建者承诺在特定区块中包含交易，但其实现需要考虑到多种因素：
+
+1. **时间限制**：每个以太坊“槽”固定为12秒，块构建者需在此时间窗口内准备区块。IL的创建和传播需要严格的时间控制，确保不会影响链的活性。
+
+2. **安全性**：IL的存在要求诚实验证者能够识别并拒绝不符合要求的区块。这涉及到如何平衡验证器的责任和效率，避免DoS攻击的可能性。
+
+3. **可行性**：IL的实现可能涉及多个参与方，包括构建者、验证者和执行者。需要定义明确的依赖关系，确保所有参与者都能履行其角色，同时考虑到网络的传播时间和节点验证时间。
+
+4. **不同设计比较**：文章讨论了几种IL设计，如EIP-7547和FOCIL，每种设计都有其优势和局限性，特别是在时间、安全性和可实施性方面的权衡。
+
+5. **内容争端**：IL可能与其他机制（如较短的槽时间、更高的gas限制、分布式验证技术或活跃验证服务）产生冲突，需要权衡以优化整个系统的性能和稳定性。
+
+总的来说，实现有效的IL系统需要细致地规划和协调，确保所有关键组件在有限的时间框架内高效协同工作，同时保持系统的安全性和可靠性。 <div>
+<p>Special thanks to <a class="mention" href="https://ethresear.ch/u/julian">@Julian</a>, <a class="mention" href="https://ethresear.ch/u/barnabe">@barnabe</a> and <a class="mention" href="https://ethresear.ch/u/manav2401">@manav2401</a> for the reviews</p>
+<h2><a class="anchor" href="https://ethresear.ch#background-1" name="background-1"></a>Background</h2>
+<p>Inclusion list have been an active topic since the <a href="https://notes.ethereum.org/@vbuterin/pbs_censorship_resistance" rel="noopener nofollow ugc">early</a> <a href="https://ethresear.ch/t/how-much-can-we-constrain-builders-without-bringing-back-heavy-burdens-to-proposers/13808">days</a>. <a href="https://notes.ethereum.org/@fradamt/forward-inclusion-lists" rel="noopener nofollow ugc">Various</a> <a href="https://notes.ethereum.org/@fradamt/H1TsYRfJc" rel="noopener nofollow ugc">designs</a> have emerged over time, each with inevitable trade-offs concerning <strong>What can be constrained within a single Ethereum slot?</strong>.<br />
+This post explores these trade-offs from the perspectives of <strong>different actors</strong> involved in ILs and defines the dependencies required for each actor to fulfill their role in integrating ILs into the protocol. We will compare and contrast multiple designs, focusing on the limitations related to <strong>timing, security, and feasibility</strong>.</p>
+<p>First, we will outline some definitions.</p>
+<h2><a class="anchor" href="https://ethresear.ch#il-definitions-2" name="il-definitions-2"></a>IL Definitions</h2>
+<p><strong>Slot Time</strong>: In the context of Ethereum, a slot refers to a fixed interval currently set at 12 seconds. During each slot, the proposer/builder proposes a block, attesters vote on the block, and an aggregator aggregates the votes. The proposer of subsequent slot includes aggregated votes in their block, and the cycle repeats. Today out-of-protocol builders have an ~8-second window to prepare for the next slot’s block. All actions are synchronized with these validator duty intervals, and <strong>IL should not extend the current slot time</strong>.</p>
+<p><strong>Inclusion List:</strong> An inclusion list (IL) is a list of transactions that a block proposer commits to including in a block. Depends on the conditional vs unconditional constraint, if these transactions are not included in the block, then the block cannot be considered canonical, assuming honest attesters who will vote against the block. The IL consists of the following options and requirements.</p>
+<ol>
+<li><strong>Satisfactory Requirement</strong>:
+<ul>
+<li><strong>Conditional</strong>: The IL does not need to be satisfied if the target block is full.
+<ul>
+<li><strong>Forward-Looking</strong>: If the IL cannot be satisfied in the current target block, does it still apply to subsequent blocks? <a href="https://ethresear.ch/t/cumulative-non-expiring-inclusion-lists/16520">More in this post</a></li>
+</ul>
+</li>
+<li><strong>Unconditional</strong>: The IL needs to be satisfied. This typically means the IL has its own gas limit.</li>
+</ul>
+</li>
+<li><strong>Satisfactory Time</strong>:
+<ul>
+<li><strong>Same Slot IL</strong>: The IL is satisfied within the same slot, similar to users sending a transactions wanting to be included on chain. With sufficient base fee and tip, we can expect the transaction to be included the slot of. For example, an IL transaction for slot <code>n+1</code> is satisfied in slot <code>n+1</code>.</li>
+<li><strong>Next Slot IL</strong>: The IL is satisfied in the subsequent slot with one slot delay. For example, an IL transaction for slot <code>n+1</code> is satisfied in slot <code>n+2</code>.</li>
+</ul>
+</li>
+<li><strong>IL constructor</strong>: The actor responsible for preparing and broadcasting the IL to the network. This role can be fulfilled by a single entity (like a proposer) or by a committee where the protocol reaches consensus on individual ILs from its members. The consensus of IL may be reached by IL aggregate which represents IL committee’s vote.</li>
+<li><strong>IL Gas Limit</strong>: IL gas limit has an implication on the size of IL which dirrectly affects the network propagation time and node’s verification time.</li>
+<li><strong>IL Ordering In Block</strong>: When the IL becomes part of the block, the transactions may be required to be placed in a specific order. This order could be:
+<ul>
+<li><strong>Top of the Block</strong>: Transactions are placed at the beginning of the block.</li>
+<li><strong>Anywhere in the Block</strong>: Transactions are placed anywhere within the block.</li>
+<li><strong>Bottom of the Block</strong>: Transactions are placed at the end of the block.</li>
+</ul>
+</li>
+<li><strong>Liveness Guarantee</strong> The IL must be made available to the block builder to avoid stalling the chain’s liveness. The delivery method of the IL to the builder varies based on the trust model. If a single person constructs the IL, stricter requirements may be necessary, such as additional attester validation along with the block.</li>
+<li><strong>No Free DA</strong> An IL that has not been satisfied in execution cannot be part of the consensus, as it would grant free DA. Free DA has to be tightly coupled with consensus and should not be mistaken for free bandwidth or temporary data storage. While nodes can use a small amount of bandwidth or store temporary data with anti-dos measures in place, this should not be conflated with free DA.</li>
+</ol>
+<p><strong>Block Builder</strong>: The actor tasked with fulfilling the IL and broadcasting the resulting product (ie. a block that fulfills the IL) over the network. In the case of a solo validator, the block proposer serves as the block builder, and the product is the execution payload of the block. For a MEV-boost validator, the block builder handles the fulfillment, which returns the signed header to proposer, and the relay broadcasts the final block to the network. It is often the case that the block proposer cannot verify the satisfactory fulfillment of the IL when signing the header request. Relays have to verify the payload satisfies IL ahead of time or assume optimistic.</p>
+<p><strong>IL Transaction Invalidation</strong>: Transactions in an IL may become <strong>not includable</strong> at the time of inclusion due to invalidations, such as an incorrect nonce or insufficient balance. This situation can arise under different conditions. For example, when multiple parties are involved in constructing their version of ILs, the transactions from each party might render each other not includable. Similarly, if one party constructs the IL while another party broadcasts the block at the same moment, there can also be invalidations, leading to mutual exclusion of the IL transactions and block transactions.</p>
+<p><strong>Head Block</strong>: Often referred to as the parent block, the IL should be constructed on top of the chain’s head from the perspective of the node. The builder, responsible for constructing the block and satisfying the IL, should also build on top of the head block in order to make sure that block and inclusion list are aligned.<br />
+<strong>Constraint</strong>: If an IL is built on head <code>a</code>, then to satisfy the IL, the builder’s block must also be built on top of head <code>a</code>.</p>
+<h2><a class="anchor" href="https://ethresear.ch#il-timings-3" name="il-timings-3"></a>IL Timings</h2>
+<p><strong>IL Preparation Time</strong>: This is the time required for a party to prepare the IL, which is constructed on top of the head block. The larger the IL may require longer time to prepare.</p>
+<p><strong>IL Propagation Time</strong>: This is the time required for the IL to propagate across the network to other nodes. Factors influencing this time include the size of the IL, the number of ILs (committee size), and the network’s gossip rules.</p>
+<p><strong>IL Verification Time</strong>: This is the time required to verify the IL. The IL must be valid, otherwise builders can get grieved. In some scenarios, attesters must verify the IL before considering the current slot block as the head (. In other cases, the proposer must verify the IL before proposing the next slot block. The point is that some parties must verify the IL beforehand, and it’s crucial to consider who is bearing this cost.</p>
+<p><strong>Block Preparation Time</strong>: This is the time required to build an execution block. The block can be constructed either by the proposer or the builder. The IL’s satisfactory requirements must be met in the block. This means the block builder must verify the IL, parent block and ensure that the block satisfies IL requirements.</p>
+<p><strong>Block Propagation Time</strong>: This is the time taken for a block to be transmitted across the network and received by all participants. It’s crucial that the block is received and verified by attesters promptly, as delays can lead to the block not being considered as the head of the chain, increasing the risk of reorg.</p>
+<p><strong>Block Verification Time</strong>: This is the time taken for a node to verify the block and IL. The focus here is on execution verification time, as consensus verification is typically fast. A block must be verified as execution valid and meet the IL requirements before it can be considered the head of the chain.</p>
+<p>Based on the timing definition provided, we can outline the following dependencies:</p>
+<ul>
+<li>The parent head block <code>n</code> must be released before attestation cut off. The difference is between start of the slot. Head release time = <span class="math">T_{HR}</span></li>
+<li>The head block must be propagated to peers on time. Head propagation time = <span class="math">T_{HP}</span></li>
+</ul>
+<ul>
+<li>The IL constructor must see and validate the parent head block before creating the IL. Head validator time = <span class="math">T_{HV}</span></li>
+<li>The IL must be constructed and released using for example a local mem pool. IL construction time = <span class="math">T_{ILC}</span></li>
+<li>The IL must propagate through the network to reach the builders. IL propagation time = <span class="math">T_{ILP}</span></li>
+<li>The block builder needs to verify the IL before submitting a bid.  IL verification time = <span class="math">T_{ILV}</span>
+<ul>
+<li>This requirement may change in the context of slot auctions.</li>
+</ul>
+</li>
+<li>The proposer must see the bids before submitting a block. Bid propagation time = <span class="math">T_{BP}</span></li>
+<li>The attester must verify the block <code>n+1</code> before considering it as the head. We can reuse head verification time above.</li>
+</ul>
+<p>In short, we could summarize: A single Ethereum slot should not exceed the following durations, ensuring that the end-to-end IL is applied, and the block remains canonical on the chain: <span class="math">SLOT &gt;= T_{HR}+T_{HP}+2 * T_{HV}+T_{ILC}+T_{ILP}+T_{ILV}+T_{BP}</span></p>
+<h1><a class="anchor" href="https://ethresear.ch#different-versions-of-il-4" name="different-versions-of-il-4"></a>Different versions of IL</h1>
+<p>Different versions of IL have varying constraint trade-offs. Some examples taken from <a href="https://eips.ethereum.org/EIPS/eip-7547" rel="noopener nofollow ugc">EIP-7547</a> and <a href="https://ethresear.ch/t/fork-choice-enforced-inclusion-lists-focil-a-simple-committee-based-inclusion-list-proposal/19870">FOCIL</a>.</p>
+<h4><a class="anchor" href="https://ethresear.ch#eip-7547-in-mev-boost-5" name="eip-7547-in-mev-boost-5"></a>EIP-7547 in MEV-Boost</h4>
+<ul>
+<li>The block builders for slot <code>n</code> constructs a block for slot <code>n</code> after verifying the block for slot <code>n-1</code>.</li>
+<li>The block proposer of slot <code>n</code> constructs an IL for slot <code>n+1</code> after verifying the block for slot <code>n-1</code>.</li>
+<li>The IL for slot <code>n+1</code> and the block for slot <code>n</code> may invalidate each other if they are sent by different parties.</li>
+<li>The block proposer/builder of slot <code>n+1</code> requires the IL and the block for slot <code>n</code> to build a block.</li>
+<li>The block proposer of slot <code>n+1</code> needs the IL and the block for slot <code>n</code> to build an IL.</li>
+<li>Attesters for slot <code>n+1</code> need the IL and the block for slot <code>n</code> to attest to the block. The block for slot <code>n+1</code> must link to a valid IL <code>n+1</code>, or it cannot be canonical.</li>
+</ul>
+<h4><a class="anchor" href="https://ethresear.ch#eip-7547-in-epbs-eip-7732-6" name="eip-7547-in-epbs-eip-7732-6"></a>EIP-7547 in ePBS (EIP-7732)</h4>
+<ul>
+<li>The block proposer of slot <code>n</code> selects the builder’s bid of slot <code>n</code> after verifying the execution block for slot <code>n-1</code>.</li>
+<li>The block proposer of slot <code>n</code> constructs an IL for slot <code>n+1</code> after verifying the execution block for slot <code>n-1</code>.</li>
+<li>Since the bid commits to the transactions, the IL for slot <code>n+1</code> and the bid for slot <code>n</code> may conflict. This is different in slot auction.</li>
+<li>The builder reveals the execution block at slot <code>n</code>’s 6-seconds mark.</li>
+<li>Subsequent block builders require the execution block at slot <code>n</code> and the IL for slot <code>n+1</code> to place bids for slot <code>n+1</code>. This is different in slot auction.</li>
+<li>Attesters for slot <code>n+2</code> verify that the execution block for slot <code>n+1</code> satisfies the IL and is valid. We gain an extra slot time for validation due to <a href="https://ethresear.ch/t/advantage-of-pipelining-consensus-and-execution-delayed-execution/19668">delayed execution property</a>.</li>
+</ul>
+<h4><a class="anchor" href="https://ethresear.ch#focil-in-mev-boost-ignoring-il-aggregation-step-7" name="focil-in-mev-boost-ignoring-il-aggregation-step-7"></a>FOCIL in MEV-Boost (Ignoring IL Aggregation Step)</h4>
+<ul>
+<li>The block builder of slot <code>n</code> constructs a block for slot <code>n</code> after verifying the block for slot <code>n-1</code>.</li>
+<li>The IL committee builds the IL for slot <code>n</code> after verifying the block for slot <code>n-1</code>.</li>
+<li>The IL committee for slot <code>n</code> releases the IL during slot <code>n-1</code>.</li>
+<li>Attesters for slot <code>n</code> lock their view on the ILs.</li>
+<li>The builder of slot <code>n</code> includes the IL transactions into the block for slot <code>n</code></li>
+<li>At the start of slot <code>n</code>, the proposer requests the builder’s head, signs it, and broadcasts it.</li>
+<li>Attesters for slot <code>n</code> verify that the block satisfies the IL committee’s requirements according to their locked view in slot <code>n-1</code>.</li>
+</ul>
+<h4><a class="anchor" href="https://ethresear.ch#focil-in-epbs-same-slot-version-8" name="focil-in-epbs-same-slot-version-8"></a>FOCIL in ePBS (Same Slot Version)</h4>
+<ul>
+<li>The block proposer of slot <code>n</code> selects the builder’s bid for slot <code>n</code> after verifying the execution block for slot <code>n-1</code>.</li>
+<li>The IL committee for slot <code>n+1</code> constructs the IL for slot <code>n+1</code> after the builder reveals the execution block for slot <code>n</code>.</li>
+<li>Builders for slot <code>n+1</code> verify the IL and make bids for slot <code>n+1</code>.</li>
+<li>The block proposer of slot <code>n+1</code> selects the builder’s bid for slot <code>n+1</code>.</li>
+<li>Attesters for slot <code>n+2</code> verify that the execution block for slot <code>n+1</code> satisfies the IL and is valid, providing close to an extra slot time due to delayed execution.</li>
+</ul>
+<h4><a class="anchor" href="https://ethresear.ch#focil-in-epbs-next-slot-version-9" name="focil-in-epbs-next-slot-version-9"></a>FOCIL in ePBS (Next Slot Version)</h4>
+<ul>
+<li>The block proposer of slot <code>n</code> selects the builder’s bid for slot <code>n</code> after verifying the execution block for slot <code>n-1</code>.</li>
+<li>The IL committee for slot constructs the IL for slot <code>n+2</code> after the builder reveals the execution block for slot <code>n</code>.</li>
+<li>Builders for slot <code>n+2</code> verify the IL and make bids for slot <code>n+2</code>.</li>
+<li>The block proposer of slot <code>n+2</code> selects the builder’s bid for slot `n+2.</li>
+<li>Attesters for slot <code>n+3</code> verify that the execution block for slot <code>n+2</code> satisfies the IL and is valid, providing close to an extra slot time due to delayed execution.</li>
+</ul>
+<h2><a class="anchor" href="https://ethresear.ch#il-contentions-10" name="il-contentions-10"></a>IL Contentions</h2>
+<p>ILs may compete with initiatives as the following:</p>
+<p><strong>Shorter Slot Time Contentions with IL</strong>: With shorter slot times, ILs may not be constructed and fulfilled on time. A proposer that cannot fulfill an IL results in a liveness fault. One way to address this is to extend the IL satisfactory rule to the next slot or to multiple subsequent slots, but this approach introduces risks of denial-of-service (DoS) attacks and more transaction invalidation concerns. There is a trade-off here.</p>
+<p><strong>Higher Gas Limit Contentions with IL</strong>: With a higher block gas limit, it takes longer to verify the block, which reduces the time available to construct the IL after verifying the block. Additionally, with a higher IL gas limit, it takes longer to propagate and verify the IL, reducing the time available to fulfill the IL by building the block.</p>
+<p><strong>DVT Contentions with IL</strong>: Distributed Validator Technology (DVT) requires more exchanges between validators before signing. This process includes beacon chain duties such as attesting, proposing, and submitting ILs. These additional exchanges require time, and there is a need to ensure that the IL, especially in more complex forms, does not make DVT operations impractical.</p>
+<p><strong>AVS Contentions with IL</strong>: Active Validator Service (AVS) also require more actions from validators. The specific details depend on the AVS implementation, but generally, requiring more time from validators to perform certain tasks can create contention with fulfilling IL obligations.</p>
+            <p><small>1 post - 1 participant</small></p>
+            <p><a href="https://ethresear.ch/t/inclusion-list-timing-constraints/20198">Read full topic</a></p>
+]]></content:encoded>
+<pubDate>Thu, 01 Aug 2024 16:02:42 +0000</pubDate>
+<pubDate>Thu, 01 Aug 2024 16:02:42 +0000</pubDate>
+</item>
 
 <item>
 <title>Cross-rollup Synchronous Atomic Execution</title>
