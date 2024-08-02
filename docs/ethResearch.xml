@@ -4,6 +4,194 @@
 <title>Ethereum Research - Latest topics</title>
 <link>https://ethresear.ch/latest</link>
 
+<item>
+<title>Aligning DAO contributions with objectives</title>
+<link>https://ethresear.ch/t/aligning-dao-contributions-with-objectives/20204</link>
+<guid>https://ethresear.ch/t/aligning-dao-contributions-with-objectives/20204</guid>
+<content:encoded><![CDATA[
+<div> 关键词：DAO、Objective Alignment Engine（OAE）、Jury、Dispute Resolution、Rewards Distribution
+
+文章主要探讨了如何通过建立Objective Alignment Engine（OAE）来优化DAO（去中心化自治组织）中贡献者的激励机制，以确保贡献与DAO的既定目标保持一致。以下是文章的主要内容总结：
+
+1. **动机**：当前的DAO激励机制往往基于规则，如按投票数排名支付固定金额，这可能导致资源分配不合理，无法保证贡献的质量与目标的一致性。引入OAE机制旨在通过客观评估贡献与目标的关联度来改进激励机制。
+
+2. **背景**：在区块链协议中，通常缺乏有效手段将贡献者的激励与网络目标对齐。OAE机制尝试将这一过程纳入协议设计范畴，以实现“利益相关”和“未来决策”等类似解决方案的目标。
+
+3. **假设与基础**：文章假定DAO已经明确定义了其目标，例如以太坊聚焦于安全性，而Optimism则关注可扩展性。基于此明确的目标，可以设计依赖于信息收集而非仅依赖个人偏好的激励机制。
+
+4. **核心组件**：OAE机制的核心包括组建一个能够评估贡献与目标一致性程度的“陪审团”。陪审团成员需要投入代币作为抵押，以获得奖励，并通过机制如SchellingCoin或元市场等确保其报告的真实性。
+
+5. **问题与挑战**：尽管OAE机制提供了一种潜在的解决方案，但仍面临几个挑战，包括明确目标定义的难度、陪审团可能的共谋行为、以及防止操纵预测市场或同伴预测的风险。
+
+总结：
+文章提出了Objective Alignment Engine（OAE）的概念，旨在通过构建一个能够评估贡献与DAO目标一致性程度的机制，优化DAO中的激励分配。该机制的核心是组建一个陪审团，负责对贡献进行评价，并通过机制设计确保陪审团的公正性和激励的有效性。然而，实施此类机制仍需解决目标定义的清晰度、陪审团的诚实性和抵抗操纵等问题。通过引入明确的目标定义和有效的激励机制，OAE有望在一定程度上解决DAO治理中的激励对齐问题，促进资源的合理分配和目标的高效实现。 <div>
+<h1><a class="anchor" href="https://ethresear.ch#aligning-dao-contributions-with-objectives-1" name="aligning-dao-contributions-with-objectives-1"></a>Aligning DAO contributions with objectives</h1>
+<p>In this post, we’re approaching how to align DAO contributions in a setting where a clear goal is already defined.</p>
+<p>We will define an Objective Alignment Engine (OAE) as a class of mechanisms that fulfill this objective. We aim to define the contour of such mechanisms so that they optimize resource allocation and provide economic guarantees on the efficacy of incentives.</p>
+<p><em>A more complete description along with more concrete examples is available at <a href="https://www.notion.so/r-ag-oae-Objective-Alignment-Engine-6984df3b33cc468e85264a9b975437eb?pvs=21" rel="noopener nofollow ugc">[r.ag.oae] Objective Alignment Engine</a>.</em></p>
+<h2><a class="anchor" href="https://ethresear.ch#motivation-2" name="motivation-2"></a>Motivation</h2>
+<p>Suppose a DAO where governance contributors are compensated based on a simple rule, like “the top 10 delegates by total votes delegates are paid $10k / month”. As protocol designers, this sounds suboptimal as we have no guarantees that the treasury is spent on the delegates who produce the most useful contributions to governance (e.g. produce the most complete proposals, or vote most consistently). Also, any such rules-based process inevitably becomes gameable under <a href="https://en.wikipedia.org/wiki/Goodhart%27s_law" rel="noopener nofollow ugc">Goodhart’s law</a>.</p>
+<p>We’d prefer that contributions were picked individually and reward contributors based on how aligned these contributions are with the overarching goals of the network (e.g., how much are such contributions participating in growth? or decentralization?).</p>
+<p>Importantly, we’d also prefer that there is an objective notion of alignment, enabling a mechanism that relies not only on individual preferences but as much as possible on eliciting information (as suggested in <a href="https://ethresear.ch/t/governance-mixing-auctions-and-futarchy/10772">this post on mixing auctions and futarchy</a>).</p>
+<h2><a class="anchor" href="https://ethresear.ch#background-3" name="background-3"></a>Background</h2>
+<p>On-chain protocols often struggle to align contributor incentives with network goals. While blockchains are designed to optimize resource spending for security, producing alignment with agreed-upon goals is typically left to external governance systems. OAE mechanisms bring contributions and incentives within the purview of the protocol designer.</p>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/c/c/cc4f46fea1dfde8237a19aac23844864e00fd24f.jpeg" title="image"><img alt="image" height="389" src="https://ethresear.ch/uploads/default/optimized/3X/c/c/cc4f46fea1dfde8237a19aac23844864e00fd24f_2_690x389.jpeg" width="690" /></a></div><p></p>
+<p>This approach aligns with the “skin in the game” and futarchy-like solutions suggested in <a class="inline-onebox" href="https://vitalik.eth.limo/general/2021/08/16/voting3.html" rel="noopener nofollow ugc">Moving beyond coin voting governance</a>. We’ll rely on the notion that there is a jury that is incentivized to produce a good judgment of whether contributions are aligned and scale this with additional mechanisms.</p>
+<h2><a class="anchor" href="https://ethresear.ch#assumptions-objective-definition-4" name="assumptions-objective-definition-4"></a>Assumptions: objective definition</h2>
+<p>A central assumption that we take is that the DAO has a clearly defined objective. While this is theoretically difficult to achieve in a decentralized setting, most protocol values and visions are set initially by the core team and steered by a Foundation.</p>
+<p>For example, Ethereum focuses today on <a href="https://ethereum.org/en/roadmap/vision/" rel="noopener nofollow ugc">Scalability, Security, and Sustainability</a>, whereas Optimism has the <a href="https://optimism.io/vision" rel="noopener nofollow ugc">Superchain vision</a>.</p>
+<p>In the rest of this post, we assume an existing process produces a clear definition of an objective <span class="math">o</span> (hence, the <em>Objective</em> part of the Alignment Engine).</p>
+<p>The existence of such an objective enables designing mechanisms that rely only on eliciting information from participants, namely whether a contribution is aligned or not with the objective.</p>
+<h2><a class="anchor" href="https://ethresear.ch#alignment-engine-5" name="alignment-engine-5"></a>Alignment engine</h2>
+<h3><a class="anchor" href="https://ethresear.ch#jury-6" name="jury-6"></a>Jury</h3>
+<p>Once an objective is defined, we want to set up a jury that can review any contribution and evaluate how aligned it is with the objective. This is the central part of this design.</p>
+<p>The main function of the jury is to produce ratings “aligned” / “misaligned” on contributions that are produced on the protocol.</p>
+<p>To produce alignment within the jury itself, we rely on mechanisms that incentivize truthful reporting but don’t rely on verifiable outcomes (like, BTC/USD quote). Possible such mechanisms are SchellingCoin or <a href="https://arxiv.org/abs/2306.04305" rel="noopener nofollow ugc">self-resolving prediction markets for unverifiable outcomes</a> (Srinivasan et al, 2023).</p>
+<p>To enable incentivization and notably negative rewards, we expect jurors to stake tokens ($ALIGN) and receive token emissions as rewards.</p>
+<h3><a class="anchor" href="https://ethresear.ch#dispute-resolution-7" name="dispute-resolution-7"></a>Dispute resolution</h3>
+<p>Here we assume that most contributions can be unequivocally qualified as “aligned” or “misaligned” (ie there is a <em>clear</em> way to rate most contributions, as long as <span class="math">o</span> is well defined).</p>
+<p>But equivocal cases will inevitably appear. When a contestable result is produced, a dispute resolution mechanism needs to be enforced (either an external one like a Kleros court or an Augur-style ALIGN token fork).</p>
+<h3><a class="anchor" href="https://ethresear.ch#calibration-8" name="calibration-8"></a>Calibration</h3>
+<p>In general, a juror can be an agent making use of any tools available, including AI and prediction markets, to produce the best evaluations. But this leaves open the question of how to incentivize jurors to get better at their jobs so the jury doesn’t degenerate into a static committee.</p>
+<p>If part of the contributions have a ground truth to which their ratings can be compared (e.g. growth contributions that aim at increasing a key metric like TVL for a DeFi protocol or fees for an L2), jurors can be rewarded accordingly. This way, the mechanism can still leverage objective outcomes to improve its accuracy (or <em>be <a href="https://www.overcomingbias.com/p/meta-jury-markets" rel="noopener nofollow ugc">calibrated</a></em>).</p>
+<h3><a class="anchor" href="https://ethresear.ch#scaling-9" name="scaling-9"></a>Scaling</h3>
+<p>Armed with such a jury, DAO contributions can theoretically be evaluated. To handle large numbers of contributions, two scaling options are available:</p>
+<ul>
+<li>Prediction markets: bettors predict jury decisions, creating “Aligned” and “Misaligned” tokens.</li>
+<li>Peer prediction: raters evaluate contributions, with a small percentage reviewed by the jury.</li>
+</ul>
+<p>Spam protection through staked curation or auctions ensures only valuable contributions are evaluated.</p>
+<h2><a class="anchor" href="https://ethresear.ch#rewards-distribution-10" name="rewards-distribution-10"></a>Rewards distribution</h2>
+<p>With contribution evaluation in place, the last bit is to distribute contribution rewards to incentivize the most aligned contributions to be produced in the future.</p>
+<p>Aligned contributions receive rewards from treasury or token emissions, proportional to their alignment rating. Highly aligned contributions may be automatically implemented in proposal-like scenarios</p>
+<p>This produces a positive feedback loop where:</p>
+<ol>
+<li>Better-aligned contributions receive more rewards</li>
+<li>This incentivizes more aligned contributions in the future</li>
+<li>The protocol becomes more resistant to misaligned or captured governance over time.</li>
+</ol>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/7/e/7e67510d59620761b9c2941d8a4067b859bc6ebb.jpeg" title="image"><img alt="image" height="500" src="https://ethresear.ch/uploads/default/optimized/3X/7/e/7e67510d59620761b9c2941d8a4067b859bc6ebb_2_543x500.jpeg" width="543" /></a></div><p></p>
+<h2><a class="anchor" href="https://ethresear.ch#attacks-11" name="attacks-11"></a>Attacks</h2>
+<p>Some potential limitations and related attacks include:</p>
+<ol>
+<li><strong>Equivocal objective definition.</strong> Attackers may exploit ambiguous objectives to reward misaligned contributions. This can be mitigated by updating the objective when the DAO observes that equivocation happens.</li>
+<li><strong>Jurors collusion and bribing.</strong> This can be countered with staking mechanisms, reputation systems, random juror selection, or shielded voting.</li>
+<li><strong>Peer prediction and prediction markets manipulation.</strong> Usual caveats and mitigations apply.</li>
+</ol>
+<h2><a class="anchor" href="https://ethresear.ch#questions-12" name="questions-12"></a>Questions</h2>
+<p>Such OAE mechanisms rely on the existence of an objective <span class="math">o</span>. We haven’t answered how such an objective can be defined in a general setting. There is an argument that leaving it to regular token-voting just pushes the problem around and the overall mechanism inherits some of the issues of both sub-mechanisms. However, it appears that splitting the problem in two has benefits, as, once an objective is defined, more deterministic outcomes can be achieved through mechanism design.</p>
+<p>Also, other kinds of mechanisms can be devised that rely on subjective evaluations. Including subjective evaluations might render objective definition superfluous. But relying on a jury whose jurors input their own preferences leaves the question open of how the jury achieves legitimacy. A solution would be to rely on a measure of juror reputation, as pioneered by Backfeed.</p>
+            <p><small>1 post - 1 participant</small></p>
+            <p><a href="https://ethresear.ch/t/aligning-dao-contributions-with-objectives/20204">Read full topic</a></p>
+]]></content:encoded>
+<pubDate>Thu, 01 Aug 2024 23:46:47 +0000</pubDate>
+<pubDate>Thu, 01 Aug 2024 23:46:47 +0000</pubDate>
+</item>
+<item>
+<title>ShardDAG: Ordering and Exploitation in Sharded Blockchains</title>
+<link>https://ethresear.ch/t/sharddag-ordering-and-exploitation-in-sharded-blockchains/20203</link>
+<guid>https://ethresear.ch/t/sharddag-ordering-and-exploitation-in-sharded-blockchains/20203</guid>
+<content:encoded><![CDATA[
+<div> 关键词：Ethereum、shardDAG、cross-shard transactions、data availability、transaction ordering
+
+总结:
+文章探讨了在状态分片区块链中如何通过shardDAG（状态分片有向无环图）架构来解决跨分片交易数据可用性和交易顺序问题。shardDAG架构旨在通过将不同分片链连接成一个有向无环图，为跨分片交易提供可执行的处理顺序，从而限制操纵、利用和审查行为。关键点如下：
+
+1. **数据可用性**：为了确保跨分片交易数据的可用性，shardDAG架构引入了一种机制，要求验证者参与同步链，该链聚合并最终确定来自不同分片的更新状态。这确保了数据能够在分片间流动。
+
+2. **交易和跨分片交易的顺序**：shardDAG通过链接分片块来定义分片块之间的部分顺序，这为跨分片交易提供了可执行的处理顺序。这种顺序防止了跨分片交易被恶意插入以进行利用或审查。
+
+3. **验证数据接收**：为了确保分片接收和处理所需的数据，shardDAG提出了“父条件”和“同步父条件”，这些条件要求分片块的子图包含来自多个分片的数据，从而确保数据接收。
+
+4. **经济激励**：shardDAG设计考虑了经济激励，通过“子条件”确保分片块能在同步链中最终确定，以此来鼓励分片分发其交易数据。
+
+5. **处理限制与优先级**：在处理容量受限的情况下，shardDAG允许通过优先级费用和最大效率价值（MEV）来选择要包含在分片块中的交易和跨分片交易，同时保证未处理的交易和跨分片交易在后续块中得到处理。
+
+综上所述，shardDAG架构通过确保数据可用性和合理的交易顺序，为状态分片区块链提供了一种有效的方式来减少审查和利用风险，同时通过经济激励机制促进数据共享和分发，从而增强系统的整体安全性和公平性。 <div>
+<h2><a class="anchor" href="https://ethresear.ch#tldr-1" name="tldr-1"></a>tl;dr</h2>
+<p>Ethereum’s design has moved away from state sharding; however, L2 architectures like zkSharding provide a unified protocol in which L2 dApps are composable yet scalable via state sharding, avoiding the need for state fragmentation emerging across distinct L2s. However, sharded systems are not without challenges. In particular, state sharding amplifies MEV exploitation and censorship problems that exist in non-sharded blockchains.</p>
+<p>We propose a shardDAG architecture for state sharded blockchains or multi-chain systems, combining protocol rules, rewards and penalties that constrain transaction exploitation [<a class="inline-onebox" href="https://arxiv.org/abs/1904.05234" rel="noopener nofollow ugc">[1904.05234] Flash Boys 2.0: Frontrunning, Transaction Reordering, and Consensus Instability in Decentralized Exchanges</a>] and external influences like regulatory censorship  [<a href="https://www.mevwatch.info/" rel="noopener nofollow ugc">https://www.mevwatch.info/</a>, <a class="inline-onebox" href="https://home.treasury.gov/news/press-releases/jy0916" rel="noopener nofollow ugc">U.S. Treasury Sanctions Notorious Virtual Currency Mixer Tornado Cash | U.S. Department of the Treasury</a>]. Constraints on exploitation and censorship are achieved using a DAG architecture that links shard blocks to each other. The DAG provides an enforceable order in which cross-shard transactions must be processed by each shard, thereby constraining manipulation of transaction processing order.</p>
+<h2><a class="anchor" href="https://ethresear.ch#motivation-2" name="motivation-2"></a>Motivation</h2>
+<p>State sharded blockchains inherit magnified MEV exploitation and censorship problems that exist in non-sharded blockchains because transaction completion can require block proposers in many distinct shards, and each block proposer could exploit or censor transactions. Further, more severe transaction exploits are possible via inserting other exploitative transactions in intermediate blocks that occur between starting and finishing transaction processing.</p>
+<p>To understand this, the example below demonstrates a simple exploit scenario.</p>
+<p><em><strong>Exploit Example</strong></em></p>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/d/b/db208f14e2f3355a7d1d888bbc8b90e969102b97.jpeg" title="BasicExploit"><img alt="BasicExploit" height="445" src="https://ethresear.ch/uploads/default/optimized/3X/d/b/db208f14e2f3355a7d1d888bbc8b90e969102b97_2_690x445.jpeg" width="690" /></a></div><br />
+Figure 1: Two shard chains. Blocks 0 and 1 of shard <em>A</em> each contain cross-shard transactions <em>t</em> and <em>u</em>  respectively, whose destinations are shard <em>B</em>. Suppose <em>t</em> can be exploited if in shard <em>B</em> <em>u</em> is processed earlier than <em>t</em>. Then the system is dangerous for <em>t</em>’s user without enforceable ordering rules that ensure <em>t</em> must be processed before <em>u</em> in shard <em>B</em>.<p></p>
+<h2><a class="anchor" href="https://ethresear.ch#why-cross-shard-transaction-data-availability-matters-3" name="why-cross-shard-transaction-data-availability-matters-3"></a>Why Cross-Shard Transaction Data Availability Matters</h2>
+<p>Punishment for censoring a cross-shard transaction (CST), or processing in an incorrect, exploitative order can only be enforced provided that</p>
+<p>i) It can be established that all the required data was available to the shard, and</p>
+<p>ii) The shard subsequently failed to process the data correctly.</p>
+<p>Therefore, a mechanism is required for establishing <em>verifiable</em> cross-shard (or cross-chain, or cross-rollup) transaction data availability. The broad steps in achieving this are illustrated in Fig. 2. Preventing exploitation requires enforceable rules for ordering the processing of transactions and CSTs; however, enforcing processing order requires that each shard receives the CSTs that it is required to process. To be able to receive CSTs, that CST data must be available. Thus, constraining exploitation rests upon ensuring CST data availability.</p>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/7/b/7bee56e632f92d068ac45ccb5bf63a201b085725.jpeg" title="ShardDAG StrategySteps"><img alt="ShardDAG StrategySteps" height="154" src="https://ethresear.ch/uploads/default/optimized/3X/7/b/7bee56e632f92d068ac45ccb5bf63a201b085725_2_690x154.jpeg" width="690" /></a></div><br />
+Figure 2: Goal: ShardDAG ordering aims to constrain manipulation, exploitation and censorship of transactions and cross-shard transactions. Step 3: These constraints require enforceable protocol rules for ordering the processing of transactions and cross-shard transactions. Step 2: Fairly enforcing ordering rules requires on-chain acknowledgement of receipt of cross-shard transactions. Step 1: Receipt of cross-shard transactions requires cross-shard transaction data availability.<p></p>
+<h2><a class="anchor" href="https://ethresear.ch#step-3-a-preview-how-dags-provide-order-4" name="step-3-a-preview-how-dags-provide-order-4"></a>Step 3. A Preview: How DAGs Provide Order</h2>
+<p>Our solution to the transaction and cross-shard transaction ordering problem involves linking shard chains into a shard directed acyclic graph or shardDAG, and then ordering processing according to the partial order specified within shard block subgraphs.</p>
+<p>ShardDAG ordering is previewed in Fig. 3. The distinct shard chains are connected to form a shardDAG, providing an enforceable ordering of cross-shard transactions amongst the shard chains. Unlike in Fig. 1, in Fig. 3’s shardDAG, an exploitative CST in a later block cannot be processed before a CST in an earlier block.</p>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/4/8/48bb4910acfa00365d8e0b97b45be64b0e32e732.jpeg" title="ShardDAG NonOverloaded Ordering"><img alt="ShardDAG NonOverloaded Ordering" height="500" src="https://ethresear.ch/uploads/default/optimized/3X/4/8/48bb4910acfa00365d8e0b97b45be64b0e32e732_2_193x500.jpeg" width="193" /></a></div><br />
+Figure 3: Unlike the distinct shard chains in Fig. 1, the shardDAG (top) depicted here defines a partial ordering of shard blocks that fall under any particular block (here shard B block 2) and the cross-shard transactions that the blocks contain. (Middle) A Hasse diagram can be constructed to visualise a partial ordering of the shard blocks (for clarity lines connecting blocks have not been included). The shardDAG is topologically sorted (bottom) to produce a block containing an ordered set of transactions and CSTs. In general many topological sorts are possible, the block builder selects one, likely based on MEV.<p></p>
+<h2><a class="anchor" href="https://ethresear.ch#a-sharddag-for-data-availability-5" name="a-sharddag-for-data-availability-5"></a>A ShardDAG for Data Availability</h2>
+<p>To establish cross-shard transaction data availability, the simple set of shard chains in Fig. 1 is extended to become a shardDAG that is crafted to incentivize data sharing. In this system all validators participate in a synchronization chain which aggregates and finalises state updates from shards that are each operated by distinct subsets of the total validator set. Transaction and CST processing is performed within shards only, hence the synchronization chain is not a processing bottleneck. Here the details of the synchronization chain are restricted to its involvement in the shardDAG—the broader function of the synchronization chain in the sharded system is beyond the scope of this post.</p>
+<p>To form a shardDAG, shard blocks include links to other shard blocks in the form of:</p>
+<ul>
+<li><strong>a hash to the previous shard block in the same shard, as in a typical blockchain,</strong></li>
+<li><strong>a set of hashes to other shards blocks in other shards,</strong></li>
+<li><strong>a hash to a (valid) synchronization block, equal to or later than the most recent synchronization block already used by prior shard blocks that are included in the subgraph.</strong></li>
+</ul>
+<p>The formation of a shardDAG is illustrated in Fig. 4, where for clarity only edges in the subgraph of the white block are shown. The thick arrows are the white block’s hashes to other blocks.</p>
+<p>The following is a central concept in the function of the shardDAG.</p>
+<p><strong>When a shard <span class="math">A</span> creates a shard block that includes the hash <span class="math">h</span> of another shard block or synchronization block, this inclusion acts as an acknowledgement that shard <span class="math">A</span> has received the block headers and outboxes of cross-shard transactions for <span class="math">h</span> and <span class="math">h</span><em>’s</em> entire subgraph in the shardDAG.</strong></p>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/b/2/b2ba419c59a01907d08a616eb2b464634114c1d3.jpeg" title="SubGraphLowDetail"><img alt="SubGraphLowDetail" height="469" src="https://ethresear.ch/uploads/default/optimized/3X/b/2/b2ba419c59a01907d08a616eb2b464634114c1d3_2_690x469.jpeg" width="690" /></a></div><br />
+Figure 4: Illustration of the white block’s subgraph in the shard DAG. The white block’s header contains a list of hashes to other shard blocks (thick white arrows), and well as a single hash to a synchronization block (thick grey arrow). Thin grey edges trace the subgraph of the white block, beyond the blocks explicitly included in its header.<p></p>
+<h2><a class="anchor" href="https://ethresear.ch#step-2-enforcing-cst-receipt-6" name="step-2-enforcing-cst-receipt-6"></a>Step 2. Enforcing CST Receipt</h2>
+<h3><a class="anchor" href="https://ethresear.ch#enforcing-cst-receipt-via-shard-chains-7" name="enforcing-cst-receipt-via-shard-chains-7"></a>Enforcing CST Receipt via Shard Chains</h3>
+<p>To enforce shards to continually acknowledge receipt of new shard block data, the protocol specifies conditions on block validity. Suppose we have a shard block <span class="math">b_i</span> and <span class="math">b_i</span><em>’s</em> prior shard block <span class="math">b_{i-1}</span> in the same shard as <span class="math">b_i</span>.</p>
+<ul>
+<li><strong>[PARENT CONDITION]: For <span class="math">b_i</span> to be a valid shard block, the graph difference of <span class="math">b_i</span><em>’s</em> subgraph minus <span class="math">b_{i-1}</span><em>’s</em> subgraph must contain shard blocks created by more than <span class="math">F&gt;1</span> shards, where <span class="math">F</span> is a system parameter controlling the branching of the DAG.</strong></li>
+</ul>
+<p><em>Example:</em></p>
+<p><em>In Fig. 4, the subgraph of the white shard A block only contains two blocks that are not in the subgraph of the previous shard A block, i.e. the white block itself, and the middle shard B block. If in this example F=1, then the white block is valid; however, if F&gt;1 then the white block is invalid.</em></p>
+<h3><a class="anchor" href="https://ethresear.ch#enforcing-cst-receipt-via-the-synchronization-chain-8" name="enforcing-cst-receipt-via-the-synchronization-chain-8"></a>Enforcing CST Receipt Via the Synchronization Chain</h3>
+<p>The parent condition enforces receipt of CSTs, but does not guarantee that each CST reaches its destination so that transactions complete. Without additional rules it is possible (though unlikely) for sets of shards to create shard blocks whose subgraphs do not span all shards and therefore do not acknowledge receipt of CSTs from all shards, as illustrated in Fig. 6.</p>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/c/9/c95bce910ccff1c8dbd9ffbaa913b546c5db043d.jpeg" title="consensusParentCondition"><img alt="consensusParentCondition" height="444" src="https://ethresear.ch/uploads/default/optimized/3X/c/9/c95bce910ccff1c8dbd9ffbaa913b546c5db043d_2_690x444.jpeg" width="690" /></a></div><br />
+Figure 6: Despite the parent condition for valid shard blocks, it is possible (though unlikely) for shard subgraphs to not acknowledge receipt of CSTs from some other shards via shard block edges, indicated by the vertical dashed line. However, the synchronization parent condition eventually forces all shards to acknowledge all CSTs via synchronization block edges. Here the synchronization parent condition forces shard 4 to acknowledge receipt of the red CST (via the red edges) and therefore process it, because the dashed blue edge exceeds the limit (here <em>S</em>=2) of consecutive synchronization block hashes. For clarity only the subset of synchronization blocks edges that are relevant to illustrating the above point are shown.<p></p>
+<p>This is unlikely to occur in the shardDAG; however, the synchronization chain is used to ensure that it <em>cannot</em> occur via a further block validity condition:</p>
+<ul>
+<li><strong>[SYNCHRONIZATION PARENT CONDITION]: A valid shard block <em>b</em> cannot have more than <span class="math">S</span> prior blocks from the same shard using the same synchronization block hash.</strong></li>
+</ul>
+<p>The value of <span class="math">S</span> should be chosen depending on the ratio of rates of synchronization block to shard block creation. It is expected that synchronization blocks will be produced at a slower rate compared to shard blocks.</p>
+<p>A malicious shard can only produce <span class="math">S</span> shard blocks before being forced to acknowledge receipt of new shard blocks via the synchronization chain. In Fig. 5, the red CST shard block will eventually be included in a synchronization block, in a worst case scenario waiting until a shard 1 validator becomes the synchronization block proposer. Thus, eventually all shards will acknowledge receiving the red CST, including the red CST’s destination shard, as indicated by the red arrows. The dashed blue arrow indicates that shard 4 block 3 would be invalid if it used this hash because more than <span class="math">S</span> (here 2) consecutive shard blocks would hash to the same synchronization block.</p>
+<p>In this way, economically motivated validators (and especially synchronization block proposers) are motivated to share data so that finality can be reached and economic rewards can be distributed.</p>
+<h2><a class="anchor" href="https://ethresear.ch#step-1-enforcing-cst-data-availability-via-dag-edges-between-shards-9" name="step-1-enforcing-cst-data-availability-via-dag-edges-between-shards-9"></a>Step 1. Enforcing CST Data Availability Via DAG Edges Between Shards</h2>
+<p>While the parent, and synchronization parent conditions force shards to acknowledge receipt of data, these rules do not force shards to <em>distribute</em> shard block data and establish data availability. Thus, the protocol specifies a rule on shard block finality to align data availability with economic incentives.</p>
+<ul>
+<li><strong>[CHILD CONDITION]: For a shard block <span class="math">b</span> to be finalised within the synchronization chain, within the subgraph of any synchronization block, <span class="math">b</span> must have child shard blocks created by more than <span class="math">F</span> shards.</strong></li>
+</ul>
+<p>When a block satisfies the child condition its CSTs have been acknowledged as received by more than <em>F</em> other shards and the shard has therefore distributed its CST data.</p>
+<p>The child condition is illustrated in Fig. 5. For a shard block to acquire child shard blocks, other (honest) shards must first receive its subgraph data. Thus, shards are economically incentivised to possess and distribute data in their subgraphs.</p>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/1/b/1b0c569adc1421ca246f774a9b776cda2aaa6465.jpeg" title="ChildConditionEthREsearch"><img alt="ChildConditionEthREsearch" height="500" src="https://ethresear.ch/uploads/default/optimized/3X/1/b/1b0c569adc1421ca246f774a9b776cda2aaa6465_2_688x500.jpeg" width="688" /></a></div><br />
+Figure 5: Illustration of the child condition for the subgraph of the upper left synchronization block. In this example <em>F</em>=2. The white block in finalised because it has child shard blocks from three shards, indicated by thick white arrows. In contrast, the bottom right shard block is not finalised because it only has one child shard block indicated by the thick grey arrow.<p></p>
+<h2><a class="anchor" href="https://ethresear.ch#step-3-an-enforceable-dag-partial-order-of-transaction-and-cst-processing-10" name="step-3-an-enforceable-dag-partial-order-of-transaction-and-cst-processing-10"></a>Step 3. An Enforceable DAG Partial Order of Transaction and CST Processing</h2>
+<p>The shardDAG provides a verifiable, enforceable ordering of transactions and CSTs, which constrains exploits and guarantees (eventual) transaction processing. Transactions and cross-shard transactions must be processed in an order consistent with the partial order of the shard blocks that they are each created in.</p>
+<p>Suppose that shard <em>B</em> creates a new shard block <em>b</em>. As illustrated in Fig.3, the the steps involved in ordering the processing of CSTs and transactions are:</p>
+<ol>
+<li>First <span class="math">b</span><em>’s</em> hashes (DAG edges) to other shard blocks and a synchronization block are chosen. Hashes are only chosen if corresponding subgraph CST data is available, otherwise correct ordering cannot be known and penalties may ensue.</li>
+<li>The protocol rules described earlier require that the validator creating and proposing <span class="math">b</span> has all the CST data from <span class="math">b</span><em>’s</em> subgraph, call these <span class="math">T</span>. The set of pending CSTs <span class="math">P</span> whose destination is shard <span class="math">B</span>, and which have not already been processed in an existing shard <span class="math">B</span> block are extracted from <span class="math">T</span> and any new transactions are added to <span class="math">P</span>.</li>
+<li>The set of pending transactions and CSTs, <span class="math">P</span> are (partially) ordered according to the shardDAG ordering of the shard blocks that they were created in, retaining the order of multiple CSTs created within a single block. <span class="math">P</span> is topologically sorted to create a totally ordered set of transactions and CSTs.</li>
+<li>Block size limits may constrain the number of transactions and cross-shard transactions included in a shard block. If this occurs, it is optional to introduce priority of transactions and CSTs as illustrated in Fig. 7, whereby block proposers select transactions and CSTs to include based on priority fees, and MEV. However, this comes at the cost of potentially allowing exploitative transaction insertion. Pending transactions and CSTs must be processed if allowed by block size limits; any unused block space must be too small to contain any unprocessed transaction or CST.</li>
+<li>New transactions that do not fit into block processing can be included in a shard block’s outbox of CSTs. Such transactions enter the shardDAG for ordering and will therefore be processed in a later block along with other pending transactions and CSTs not included in <span class="math">b</span>.</li>
+</ol>
+<p>Validators should only sign a proposed block once they have verified that the block proposer has followed this protocol ordering. If an invalid ordering is used then the block is invalid and/or the signing validators are subjected to penalties. We reiterate that because ordering rules involve only on-chain data, data availability of CSTs and block headers enables any validator or node to verify correctness of ordering.</p>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/0/9/09afd7f7cf81fd6dacfe88bcc2f4b6c7eab46c0f.jpeg" title="ShardDAG Overloaded Ordering Only"><img alt="ShardDAG Overloaded Ordering Only" height="407" src="https://ethresear.ch/uploads/default/optimized/3X/0/9/09afd7f7cf81fd6dacfe88bcc2f4b6c7eab46c0f_2_690x407.jpeg" width="690" /></a></div><br />
+Figure 7: An extension of Fig.3 when shard B is overloaded and unprocessed transactions and CSTs exceed maximum block size (left). The block builder selects transactions and CSTs to remove from the topological sort for the new block (middle), so that the remaining transactions and CSTs do not exceed block size limits (right). Removed CSTs will be processed in later blocks. This removal of transactions and CSTs is expected to be based on priority fees and MEV. Unprocessed new transactions (b2’) may be included in an outbox as data so that they enter shardDAG ordering for processing in a later block, like b0 and b1 in earlier blocks, but these outboxed transactions are not processed in the current block.<p></p>
+<h2><a class="anchor" href="https://ethresear.ch#summary-11" name="summary-11"></a>Summary</h2>
+<p>In state-sharded blockchains, censorship and insertion of exploitative transactions part-way through transaction processing can be constrained by shardDAG transaction and CST ordering. These shardDAG constraints are derived from ordering, which enforces processing of earlier transactions and CSTs before later ones. ShardDAG ordering rests upon economic incentives that motivate validators to suitably participate in the shardDAG to receive block rewards and avoid penalties.</p>
+<p>DAGs are a natural tool to be used in ordered systems. The shardDAG broadens the use of DAGs in blockchain, beyond their more common application in consensus mechanisms. The shardDAG has been presented here in a unified state sharded system, but the ideas can be applied to sets of distinct rollups or blockchains.</p>
+            <p><small>1 post - 1 participant</small></p>
+            <p><a href="https://ethresear.ch/t/sharddag-ordering-and-exploitation-in-sharded-blockchains/20203">Read full topic</a></p>
+]]></content:encoded>
+<pubDate>Thu, 01 Aug 2024 23:12:07 +0000</pubDate>
+<pubDate>Thu, 01 Aug 2024 23:12:07 +0000</pubDate>
+</item>
 
 <item>
 <title>Inclusion List Timing Constraints</title>
