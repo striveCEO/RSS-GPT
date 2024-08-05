@@ -4,6 +4,39 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+<item>
+<title>Route Discovery in Private Payment Channel Networks</title>
+<link>https://eprint.iacr.org/2021/1539</link>
+<guid>https://eprint.iacr.org/2021/1539</guid>
+<content:encoded><![CDATA[
+<div> 关键词：私有信道网络、路由发现、隐私保护、多党计算、效率
+
+总结:
+
+本文研究了私有信道网络中的路由发现问题。首先，文章定义了在此环境下理想的隐私标准，并指出通过多党计算实现这一标准的协议存在，但其效率低下，因为整个网络都参与路径发现过程。
+
+接着，文章提出了一种具有较弱隐私保证但更高效性的路由协议。这些协议允许路由发现主要由网络中一小部分节点完成，同时泄露了一些关于拓扑结构和平衡的信息，而这些信息超出交易执行所需。
+
+核心理念是，发送者和接收者同时广播消息，这些消息逐渐在整个网络中传播。一旦网络中的任何节点接收到两个消息，路径就被找到。第一种协议总是将消息发送给所有相邻节点，延迟与边费用成正比。第二种协议仅随机选择一个邻居发送消息，概率与其度数成正比。尽管第一种协议总能找到最便宜的路径，但第二种可能无法做到这一点，但涉及的网络节点数量较少。
+
+此外，文章讨论了使用双线性映射来重新随机化广播消息的扩展，以提高隐私性。还提出了进一步改进隐私性的方法，如使用双线性映射。
+
+通过模拟研究，文章发现第一种协议通常涉及约12%的6376个节点，而第二种则仅触及约18个节点（不到0.3%），找到的路径成本大约是最佳路径成本的两倍。 <div>
+In this work, we are the first to explore route discovery in private channel networks.
+We first determine what ``ideal" privacy for a routing protocol means in this setting.  We observe that protocols achieving this strong privacy definition exist by leveraging (topology hiding) Multi-Party Computation but they are (inherently) inefficient as route discovery must involve the entire network.
+
+We then present protocols with weaker privacy guarantees but much better efficiency. In particular, route discovery typically only involves small fraction of the nodes but some information on the topology and balances -- beyond what is necessary for performing the transaction -- is leaked.
+
+The core idea is that both  sender and receiver gossip a message which then slowly propagates through the network, and the moment any node in the network receives both messages, a path is found. In our first protocol the message is always sent to all neighbouring nodes with a delay proportional to the fees of that edge. In our second protocol the message is only sent to one neighbour chosen randomly with a probability proportional to its degree. While the first instantiation always finds the cheapest path, the second might not, but it involves a smaller fraction of the network.
+
+% We discuss some extensions like employing bilinear maps so the gossiped messages can be re-randomized, making them unlikeable and thus improving privacy.
+We also discuss some extensions to further improve privacy by employing bilinear maps.
+
+Simulations of our protocols on the Lightning network topology (for random transactions and uniform fees) show that our first protocol (which finds the cheapest path) typically involves around 12\%  of the 6376 nodes, while the second only touches  around 18 nodes $(<0.3\%)$,  and the cost of the path that is found  is around twice the cost of  the optimal one.
+]]></content:encoded>
+<pubDate>Mon, 22 Nov 2021 11:36:25 +0000</pubDate>
+<pubDate>Mon, 22 Nov 2021 11:36:25 +0000</pubDate>
+</item>
 
 <item>
 <title>Efficient and Privacy-Preserving Collective Remote Attestation for NFV</title>
