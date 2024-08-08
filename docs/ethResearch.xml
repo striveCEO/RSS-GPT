@@ -4,6 +4,148 @@
 <title>Ethereum Research - Latest topics</title>
 <link>https://ethresear.ch/latest</link>
 
+<item>
+<title>Efficient Data Distribution with Reed-Solomon Codes for Sharded Storage</title>
+<link>https://ethresear.ch/t/efficient-data-distribution-with-reed-solomon-codes-for-sharded-storage/20232</link>
+<guid>https://ethresear.ch/t/efficient-data-distribution-with-reed-solomon-codes-for-sharded-storage/20232</guid>
+<content:encoded><![CDATA[
+<div> 关键词：Reed-Solomon编码、区块链存储、数据分布、O(N log n)解码复杂度、M31域
+
+总结：
+
+本文介绍了一种利用Reed-Solomon（RS）编码高效分配N个数据元素至n个节点的方法，旨在解决区块链存储的扩展问题。与简单地将数据放大至bN倍的直觉方法不同，本文提出的方法通过将数据表示为表格并创建数据碎片，实现了O(N log n)的解码复杂度。
+
+首先，对于2-adicity域的情况，我们以BabyBear域为例进行说明。假设有一个长度为N的向量{a_i}，目标是将其在n个服务器间分布，确保任何k个服务器都能恢复原始数据。通过使用RS编码，我们将向量表示为大小为m×k的表格，并构建了一个双变量多项式f(x,y)，其中f(x,y) = ∑_{ij} a_{ij} L_i(x) λ_j(y)。通过快速傅里叶变换（FFT）对表格的每一行进行操作，我们得到了多项式的特定形式，从而可以为每个节点分配唯一的线性组合的列。为了验证数据碎片的有效性，我们引入了替换y=x^m的技巧，这有效地将所有列连接起来，便于进行多项式承诺计算。
+
+对于M31域的情况，我们采用类似的方法，但使用了环傅里叶变换（CFFT）。在环表示中，多项式f(x,y)被定义为f(x,y)=f_0(x)+yf_1(x)，其中f_0(x)和f_1(x)的次数分别为N/2-1。通过对表格的每一行执行CFFT，我们得到了大小为n的m个向量。然后，我们定义f(x,y,u,v) = ∑_{ij} a_{ij} L_i(x,y) Λ_j(u)，其中Λ_j(u)是围绕圆的偶数拉格朗日基函数。通过替换u=x^{m/2}，我们能够将所有一维组件合并为单个多项式，同时保持结构f_0(x)+yf_1(x)，从而实现数据碎片化。
+
+此方法适用于数据恢复、存储以及零知识证明（zk）应用。在数据恢复过程中，任何k个碎片都足够恢复原始数据。在存储方面，这种方法允许直接存储多项式承诺，而不仅仅是中间表示形式的数据。此外，算法描述部分详细介绍了如何生成碎片及其承诺，并将数据分布到集群中的节点上。通过这种方法，即使客户端的带宽有限，也能有效处理大数据文件的分布。
+
+总之，本文通过引入RS编码和FFT/CFFT技术，提供了一种优化的数据分布式存储方案，特别适用于需要整体节点失败保护的区块链系统。尽管多项式承诺的计算复杂度保持不变，但这种方法在数据处理流程中提供了显著的优化，使其成为区块链存储扩展的有力解决方案。 <div>
+<h2><a class="anchor" href="https://ethresear.ch#introduction-1" name="introduction-1"></a>Introduction</h2>
+<p>This writeup presents an efficient method for distributing N data elements across n nodes using Reed-Solomon (RS) encoding, specifically designed for blockchain <a href="https://ethresear.ch/t/blockchain-sharded-storage-web2-costs-and-web3-security-with-shamir-secret-sharing/18881">sharded storage</a> solutions. We address the challenge of scaling blockchain storage by introducing techniques that achieve O(N log n) decoding complexity, where N is the total amount of data and n is the number of nodes.</p>
+<p>A naive approach would be to simply blow up the data from N to bN, where b is the blowup factor. However, this would result in O(N log N) decoding complexity. Our method, by representing data as a table and creating data shards, achieves O(N log n) decoding complexity, which is significantly faster.</p>
+<p>It’s crucial to note that we don’t need to apply RS codes to all data together. This is because a node can only go offline as a whole - there can’t be a situation where two nodes lose half of their data each, requiring RS codes to recover the data. A node either loses all its data or provides it entirely.</p>
+<p>While our method doesn’t significantly improve the speed of calculating polynomial commitments (which remains O(N log N) for FRI), it greatly optimizes the data encoding-decoding procedure.</p>
+<h3><a class="anchor" href="https://ethresear.ch#naive-approach-2" name="naive-approach-2"></a>Naive approach</h3>
+<p><img alt="" height="150" src="https://ethresear.ch/uploads/default/original/3X/6/9/691031aaa0990298d3f1755f55e1cc286cb49197.svg" width="600" /></p>
+<h3><a class="anchor" href="https://ethresear.ch#our-approach-3" name="our-approach-3"></a>Our approach</h3>
+<p><img alt="" height="240" src="https://ethresear.ch/uploads/default/original/3X/6/a/6a6eea46c44a4be6f7311ec8edbab96cf8f81cd0.svg" width="600" /></p>
+<h2><a class="anchor" href="https://ethresear.ch#notation-and-definitions-4" name="notation-and-definitions-4"></a>Notation and Definitions</h2>
+<p>Before proceeding with the detailed description of our method, let’s define the key terms and symbols used throughout this writeup:</p>
+<ul>
+<li>N: Total amount of data elements</li>
+<li>n: Number of nodes in the network</li>
+<li>k: Minimum number of nodes required to recover the original data</li>
+<li>b: Blowup factor, defined as b = n/k</li>
+<li>m: Number of rows in the data table representation</li>
+</ul>
+<h2><a class="anchor" href="https://ethresear.ch#h-2-adicity-fields-case-5" name="h-2-adicity-fields-case-5"></a>2-Adicity Fields Case</h2>
+<p>We consider a 2-adic prime field, specifically the BabyBear field with prime p = 15 * 2^27 + 1.</p>
+<p>Let’s consider we have a vector <span class="math">{a_i}</span> of N elements of field <span class="math">F_p</span>. We want to distribute this vector among n servers, such that any k servers can recover the original vector. We use Reed-Solomon codes to achieve this.</p>
+<p>We represent the vector <span class="math">{a_i}</span> as a table <span class="math">{a_{ij}}</span> of size <span class="math">m \times k</span> with <span class="math">m</span> rows and <span class="math">k</span> columns.</p>
+<p>We define a bivariate polynomial <span class="math">f(x,y)</span> to represent our data:</p>
+<p><span class="math">f(x,y) = \sum\limits_{ij} a_{ij} L_i(x) \lambda_j(y)</span></p>
+<p>where <span class="math">L_i(x)</span> is a Lagrange polynomial of degree <span class="math">m-1</span> and <span class="math">\lambda_j(y)</span> is a Lagrange polynomial of degree <span class="math">k-1</span>.</p>
+<p>After performing FFT over each row of the table, <span class="math">f(x,y)</span> takes the following form:</p>
+<p><span class="math">f(x,y) = \sum\limits_{ij} b_{ij} L_i(x) y^j = \sum\limits_{j} f_j(x) y^j</span></p>
+<p>where <span class="math">f_j(x)=\sum\limits_{i} b_{ij} L_i(x)</span> is a polynomial of degree <span class="math">m-1</span>.</p>
+<p>Each node should receive a unique linear combination of the columns of the table. Then we can recover the original vector by solving a system of linear equations. Let’s represent the data shard as <span class="math">f(x,y_0)</span>, where <span class="math">y_0</span> is a fixed value for each shard.</p>
+<p><span class="math">f(x,y) - f(x,y_0) = \sum\limits_{j} (y^j - y_0^j) f_j(x) = (y-y_0) q(x,y)</span></p>
+<p>where <span class="math">q(x,y)</span> is a quotient polynomial.</p>
+<p>We make the substitution <span class="math">y=x^m</span> without loss of any inner polynomial structure. This substitution effectively concatenates all columns of the table, one after another, which is convenient for creating a polynomial commitment.</p>
+<p>After the substitution, we get the following polynomial equation to check that the shard is a valid part of the original data:</p>
+<p><span class="math"> f(x,x^m) - f(x, y_0) = (x^m - y_0) q(x,x^m) </span></p>
+<h2><a class="anchor" href="https://ethresear.ch#circle-fields-case-6" name="circle-fields-case-6"></a>Circle Fields Case</h2>
+<p>We now consider the M31 field with p = 2^32 - 1. [HLP24] proposed a method called CFFT (Circular Fast Fourier Transform), which is analogous to FFT but works with polynomials defined on a complex circle.</p>
+<p>In the circle representation, the polynomial takes the form <span class="math">f(x,y)=\Re(f(z))</span>, where <span class="math">|z|=1</span>.</p>
+<p>Due to the circle constraint <span class="math">|z|^2 = x^2 + y^2 = 1</span>, the polynomial can be represented as:</p>
+<p><span class="math">f(x,y) = f_0(x) + y f_1(x)</span></p>
+<p>where <span class="math">f_0(x)</span> and <span class="math">f_1(x)</span> are polynomials of degree <span class="math">N/2-1</span>. Note that we have two polynomials of this degree, providing sufficient degrees of freedom.</p>
+<p>Let’s represent the data vector <span class="math">{a_i}</span> as a table <span class="math">{a_{ij}}</span> of size <span class="math">m \times k</span> with <span class="math">m</span> rows and <span class="math">k</span> columns. We perform circle FFT (CFFT) on each row of the table, resulting in <span class="math">m</span> vectors of size <span class="math">n</span>.</p>
+<p><span class="math">f(x,y,u,v) = \sum\limits_{ij} a_{ij} L_i(x,y) \lambda_j(u,v)</span></p>
+<p>It’s important to note that the function <span class="math">f(x,y,u,v)</span> is defined on a torus: <span class="math">x^2+y^2=1</span>, <span class="math">u^2+v^2=1</span>.</p>
+<p>Let’s consider <span class="math">f(x,y,u,v)</span> as <span class="math">v</span>-even function. This approach is not useful directly for SNARKs, because then we have even constraint on function values and next row could be dependent on the previous one. However, it’s useful for data distribution.</p>
+<p>Then</p>
+<p><span class="math">f(x,y,u,v) = f(x,y,u) = \sum\limits_{ij} a_{ij} L_i(x,y) \Lambda_j(u) </span>,<br />
+where <span class="math">\Lambda_j(u)</span> is even Lagrange basis on the circle.</p>
+<p>After applying CFFT over each row, we get:</p>
+<p><span class="math">f(x,y,u) = \sum\limits_{ij} b_{ij} L_i(x,y) u^j = \sum\limits_{j} f_j(x,y) u^j</span></p>
+<p>where <span class="math">f_j(x,y)=\sum\limits_{i} b_{i} L_i(x,y)=f_{j,0}(x) + y f_{j,1}(x)</span> and each polynomial is <span class="math">(m/2-1)</span>-ordered.</p>
+<p>Let’s consider <span class="math">f(x,y,u_0)</span> as a data shard, where <span class="math">u_0</span> is a fixed value for each shard.</p>
+<p><span class="math">f(x,y,u) - f(x,y,u_0) = \sum\limits_{j} (u^j - u_0^j) f_j(x,y) = (u-u_0) q(x,y,u)</span></p>
+<p>where <span class="math">q(x,y,u)</span> is a quotient polynomial.</p>
+<p>We make the substitution <span class="math">u=x^{m/2}</span> in <span class="math">f(x,y,u)</span>. This substitution does not result in information loss because <span class="math">f_j(x,y)=f_{j,0}(x) + y f_{j,1}(x)</span>, where the degrees of <span class="math">f_{j,0}(x)</span> and <span class="math">f_{j,1}(x)</span> are <span class="math">m/2-1</span>. The resulting polynomial <span class="math">f(x,y,x^{m/2})</span> maintains the structure <span class="math">f_0(x) + y f_1(x)</span> and remains defined on a circle, albeit with each one-dimensional component now of degree <span class="math">N/2-1</span>. This substitution effectively concatenates all columns of the table, similar to the 2-adicity case.</p>
+<p>After the substitution, we get the following polynomial equation to check that the shard is a valid part of the original data:</p>
+<p><span class="math">f(x,y,x^{m/2}) - f(x,y,u_0) = (x^{m/2}-u_0)q(x,y,x^{m/2})</span></p>
+<h2><a class="anchor" href="https://ethresear.ch#applications-7" name="applications-7"></a>Applications</h2>
+<h3><a class="anchor" href="https://ethresear.ch#recovering-the-source-data-8" name="recovering-the-source-data-8"></a>Recovering the source data</h3>
+<p>Any <span class="math">k</span> shards are enough to recover the original data.</p>
+<p><span class="math">f(x,y,u) = \sum\limits_{j} c_{ij} L_i(x,y) \mu(u),</span></p>
+<p>where <span class="math">\{\mu_i(u)\}</span> is a Lagrange polynomial basis on the evaluation domain <span class="math">H=\{u_i\}</span>, and <span class="math">u_i</span> are fixed values for each shard.</p>
+<p><span class="math"> \mu_i(u) = d_i Z_{H}(u)/(u-u_i),</span><br />
+where <span class="math">Z_{H}(u)</span> is a polynomial that is zero at all points of <span class="math">H</span>, <span class="math">d_i</span> is a normalization factor, so</p>
+<p><span class="math"> \mu_i(u) = \begin{cases}
+1, &amp; u = u_i \\
+0 &amp; u \neq u_i
+\end{cases}
+</span></p>
+<p>The source values could be computed as<br />
+<span class="math">a_{ij} = f(g^i.x, g^i.y, g^j.x)</span></p>
+<h3><a class="anchor" href="https://ethresear.ch#polynomial-storing-9" name="polynomial-storing-9"></a>Polynomial storing</h3>
+<p>In some cases, we want to store something directly related to the polynomial commitment of <span class="math">f</span> instead of <span class="math">a_{ij}</span>. This is important for zk applications, like rollups.</p>
+<p>Due to the inner structure of coefficient representation, we can represent <span class="math">g(x,y)</span> as <span class="math">f(x,y,x^{m/2})</span>. That means that we can store rollup block data as a set of shards, keeping the source polynomial structure, keeping the source commitment. Then <span class="math">a_{ij}</span> will be some kind of intermediate representation of the committed data.</p>
+<h2><a class="anchor" href="https://ethresear.ch#algorithm-description-10" name="algorithm-description-10"></a>Algorithm description</h2>
+<pre><code class="lang-python">
+def get_shards_and_commitments(data: List[M31], m:int, n:int, k:int, cd:Domain, rd:Domain, xrd:Domain)
+    # data is a list of N elements
+    # m is the number of rows in the table
+    # n is the number of nodes
+    # k is the number of nodes required to recover the original data
+    # cd is the evaluation domain for the columns
+    # rd is the evaluation domain for the rows
+    # xrd is evaluation domain for the shards (blown up rows)
+    # Returns polynomial commitments and prover data for all the data and shards
+    
+    # create a table of size m x k, fulfilled row by row
+    table = create_table(data, m, k)
+    
+    # perform cfft on each row of the table
+    for row in table:
+        row[:] = cfft(row, rd)
+    
+    # create shards
+    shards = [icfft(fit_to_domain_with_zeros(row, rd, xrd), xrd) for row in table]
+    
+    # convert to col-ordered table
+    shards = to_col_ordered(shards)
+
+    # convert table to col_ordered
+    table = to_col_ordered(table)
+
+    # compute monomial representation of $f(x,y,x^{m/2})$
+    f = concat([cfft(col, cd) for col in table])
+
+    return pcs_monomial_repr(f), [pcs(shard) for shard in shards]
+
+</code></pre>
+<h2><a class="anchor" href="https://ethresear.ch#distributing-the-data-over-a-cluster-of-nodes-11" name="distributing-the-data-over-a-cluster-of-nodes-11"></a>Distributing the data over a cluster of nodes</h2>
+<p>In practice, the client should deliver the data to <span class="math">n</span> nodes, and the total amount of data is <span class="math">bN</span>. However, for big files, it could be inefficient due to the client’s limited bandwidth.</p>
+<p>Instead of this client-centralized approach, <span class="math">b</span> nodes could deliver <span class="math">N \cdot (1-1/k)</span> total data to <span class="math">k-1</span> nodes. There is no bottleneck at the client side (the client sends just <span class="math">N</span> data to one node), but total network data bandwidth is <span class="math">b N \cdot (2-1/k) \approx 2bN</span>.</p>
+<p><img alt="" height="493" src="https://ethresear.ch/uploads/default/original/3X/3/b/3be891968cd29eb75294d6219b0d063ddb3bb8f2.svg" width="195" /></p>
+<p>There is no valuable computational overhead to compute the shards vectors because with fft or cfft each node can perform a unique coset shift instead of blowup (and the sum of all shifted evaluation domains is the evaluation domain for the blowup).</p>
+<p><img alt="" height="250" src="https://ethresear.ch/uploads/default/original/3X/2/0/2015d84ea59b9b3aea04f0aa12ff6cc33087367f.svg" width="340" /></p>
+<h2><a class="anchor" href="https://ethresear.ch#conclusion-12" name="conclusion-12"></a>Conclusion</h2>
+<p>We have extended our method of data representation to the M31 field, providing a robust framework for efficient data distribution in blockchain storage. By representing data as a table and using FFT/CFFT techniques, we achieve O(N log n) decoding complexity, significantly optimizing the data encoding-decoding procedure. This approach is particularly valuable in blockchain systems where nodes can only fail as a whole, and efficient data recovery is crucial.</p>
+<p>While the complexity of polynomial commitment calculations remains O(N log N) for FRI, our method provides substantial benefits in the overall data handling process, making it a promising solution for scalable blockchain storage.</p>
+<h2><a class="anchor" href="https://ethresear.ch#references-13" name="references-13"></a>References</h2>
+<p><a href="https://eprint.iacr.org/2024/278" rel="noopener nofollow ugc">HLP24</a></p>
+            <p><small>1 post - 1 participant</small></p>
+            <p><a href="https://ethresear.ch/t/efficient-data-distribution-with-reed-solomon-codes-for-sharded-storage/20232">Read full topic</a></p>
+]]></content:encoded>
+<pubDate>Wed, 07 Aug 2024 22:32:41 +0000</pubDate>
+<pubDate>Wed, 07 Aug 2024 22:32:41 +0000</pubDate>
+</item>
 
 <item>
 <title>Aligning DAO contributions with objectives</title>
