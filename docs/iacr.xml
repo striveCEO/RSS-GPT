@@ -4,6 +4,72 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+<item>
+<title>zk-Promises: Making Zero-Knowledge Objects Accept the Call for Banning and Reputation</title>
+<link>https://eprint.iacr.org/2024/1260</link>
+<guid>https://eprint.iacr.org/2024/1260</guid>
+<content:encoded><![CDATA[
+<div> 关键词：隐私保护、匿名性、可问责性、异步交互、状态机
+
+总结:
+
+本文提出了一种名为zk-promises的框架，旨在解决隐私保护系统中匿名客户端与多方互动时的状态完整性问题，同时支持异步更新。该框架的核心是将客户端状态存储在一个零知识证明（zk）对象中，通过加密承诺和零知识证明技术来确保状态的保密性、完整性和原子性。
+
+zk-promises允许创建复杂的、带有任意异步回调的Turing完备状态机，使得客户端能够修改并证明其状态，同时还能将回调给第三方，从而实现对违规行为的追踪和惩罚。通过精心设计的协议，确保了那些更新其状态的客户端必须接收由第三方调用的回调。
+
+基于此框架，构建了一个具有先进性能和功能的匿名声誉系统，包括异步声誉更新、封禁以及基于声誉的速率限制，以更有效地抵御Sybil攻击。该系统不仅保证了匿名性，还实现了对违规行为的可问责性，同时提高了系统的效率和用户体验。 <div>
+Privacy preserving systems often need to allow anonymity while requiring accountability.  For anonymous clients, depending on application, this may mean banning/revoking their accounts, docking their reputation, or updating their state in some complex access control scheme. Frequently, these operations happen asynchronously when some violation, e.g., a forum post, is found well after the offending action occurred. Malicious clients, naturally, wish to evade this asynchronous negative feedback. Considering privacy-preserving analogues of modern access control and reputation schemes raises a more fundamental technical challenge with far broader applications: how do we allow multiple parties to interact with private state stored by an anonymous client while ensuring state integrity and supporting oblivious updates?
+
+We propose zk-promises, a framework which supports Turing-complete state machines with arbitrary asynchronous callbacks. In zk-promises, client state is stored in a zk-object. Updates to the zk-object, represented as a cryptographic commitment to the new, modified object, require a zkSNARK that ensures integrity and atomicity while providing confidentiality.  Clients can modify and prove their state by calling valid methods (e.g, to show they are authorized to post) and can give callbacks to third parties (e.g., to later hold them accountable). Through careful protocol design, we ensure clients who advance their state-machine are forced to ingest callbacks that are called by a third party.
+
+zk-promises allows us to build a privacy-preserving account model. State that would normally be stored on a trusted server can be privately outsourced to the client while preserving the server's ability to update the account. To demonstrate the feasibility of our approach, we build an anonymous reputation system with better than state-of-the-art performance and features, supporting asynchronous reputation updates, banning, and reputation-dependent rate limiting to better protect against Sybil attacks.
+]]></content:encoded>
+<pubDate>Thu, 08 Aug 2024 21:20:57 +0000</pubDate>
+<pubDate>Thu, 08 Aug 2024 21:20:57 +0000</pubDate>
+</item>
+<item>
+<title>Efficient (Non-)Membership Tree from Multicollision-Resistance with Applications to Zero-Knowledge Proofs</title>
+<link>https://eprint.iacr.org/2024/1259</link>
+<guid>https://eprint.iacr.org/2024/1259</guid>
+<content:encoded><![CDATA[
+<div> 关键词：积聚器、认证字典、Merkle树、零知识证明、非对抗性攻击
+
+文章主要讨论了在各种应用中使用的积聚器和认证字典，如证书透明度、区块链、隐私保护的去中心化电子货币等。文中提出了一个新型的（非）成员身份证明，具有更小的树深度，同时保持相同的安全性水平。此外，还引入了适用于特定场景的版本，深度最多可减少6倍。这些构造不需要动态树深度，简化了常规模块零知识证明电路，并确保了更小的深度上限。
+
+在对抗性上下文中，该工作旨在实现高效且无需信任树管理者的构建，例如在区块链中，允许非受信任方执行操作并由任何人验证。文中考虑了特殊实例，特别是序列号（即nullifiers）的表示，并强调了构造的通用性，它们不仅适用于区块链和零知识证明，还能在非对抗性环境中使用，包括哈希表、数据库和其他数据结构。
+
+总结:
+本文提出了一种改进的积聚器和认证字典构造，旨在提高效率和安全性。通过减少树深度，新构造能够提供与传统方法相同的安全保障，同时支持更复杂的零知识证明应用。在非对抗性环境下，这些构造可以增强区块链系统的隐私性和可扩展性，同时确保非受信任方能够验证交易的有效性。此外，这些技术还可应用于其他数据存储系统，提高其性能和安全性。通过减少对动态深度的需求，该工作为构建常规模块零知识证明电路提供了基础，使得在实际应用中实现更高效的验证过程成为可能。 <div>
+Many applications rely on accumulators and authenticated dictionaries, from timestamping certificate transparency and memory checking to blockchains and privacy-preserving decentralized electronic money, while Merkle tree and its variants are efficient for arbitrary element membership proofs, non-membership proofs, i.e., universal accumulators, and key-based membership proofs may require trees up to 256 levels for 128 bits of security, assuming binary tree, which makes it inefficient in practice, particularly in the context of zero-knowledge proofs. 
+
+Building on the hardness of multi-collision we introduce a novel (non-)membership, optionally key-value, accumulator with up to 2x smaller tree depth while preserving the same security level, as well as multiple application-specific versions with even shallower trees, up to 6x smaller depth, that rely on the low-entropy source.
+Moreover, solving for special case of adversarial attacks we introduce key index variants which might be a stepping stone for an entropy-free accumulator.
+
+Notably, unlike other constructions, this work, although may, doesn't depend on the dynamic depth of the tree which is simpler and more suitable for constant-size ZKP circuits, while ensuring a substantially smaller upper bound on depth.
+
+Efficient in practice construction in the adversarial context, e.g. blockchain, where the tree manager doesn't need to be trusted, i.e., operations can be carried out by an untrusted party and verified by anyone, is the primary goal.
+Example instantiations are considered, where special treatment is given to the application of representing serial numbers, aka nullifiers. 
+Nevertheless, the constructions are self-sufficient and can be used in other contexts, without blockchain and/or zero-knowledge proofs, including non-adversarial contexts.
+
+Furthermore, our findings might be of independent interest for other use cases, such as hash tables, databases and other data structures.
+]]></content:encoded>
+<pubDate>Thu, 08 Aug 2024 19:38:08 +0000</pubDate>
+<pubDate>Thu, 08 Aug 2024 19:38:08 +0000</pubDate>
+</item>
+<item>
+<title>Compass: Encrypted Semantic Search with High Accuracy</title>
+<link>https://eprint.iacr.org/2024/1255</link>
+<guid>https://eprint.iacr.org/2024/1255</guid>
+<content:encoded><![CDATA[
+<div> 关键词：Compass、加密数据、高准确性、隐私保护、Hierarchical Navigable Small Worlds（HNSW）
+
+总结:
+Compass 是一种在加密数据上实现的语义搜索系统，其准确度与传统明文搜索算法相当，同时能确保数据、查询和检索结果不被服务器完全攻击的威胁所泄露。此外，Compass 支持隐私保护的 RAG（关系图检索）场景，使得数据库和查询都能得到保护。为了实现这些功能，Compass 引入了一种新颖的方法，即使用 Oblivious RAM（ oblivious RAM）来在 Hierarchical Navigable Small Worlds（HNSW）这种高性能向量最近邻搜索中遍历搜索图。通过定向邻居过滤、推测贪婪搜索和针对 HNSW 的路径 ORAM 技术，Compass 能够实现用户感知的几秒级延迟，并且比基于加密嵌入的搜索基准快几个数量级。这些技术的结合不仅保证了搜索效率，还极大地增强了数据的安全性和隐私性。 <div>
+We introduce Compass, a semantic search system over encrypted data that offers high accuracy, comparable to state-of-the-art plaintext search algorithms while protecting data, queries and search results from a fully compromised server. Compass also enables privacy-preserving RAG where both the RAG database and the query are protected. Compass's search index contributes a novel way to traverse the search graph in  Hierarchical Navigable Small Worlds (HNSW), a top performing vector nearest neighbor search, using Oblivious RAM, a cryptographic primitive with strong security guarantees. Our techniques, Directional Neighbor Filtering, Speculative Greedy Search and HNSW-tailored Path ORAM ensure that Compass achieves user-perceived latencies of few seconds and is orders of magnitude faster than a baseline for encrypted embeddings search.
+]]></content:encoded>
+<pubDate>Thu, 08 Aug 2024 04:29:55 +0000</pubDate>
+<pubDate>Thu, 08 Aug 2024 04:29:55 +0000</pubDate>
+</item>
 
 <item>
 <title>Complete Knowledge: Preventing Encumbrance of Cryptographic Secrets</title>
