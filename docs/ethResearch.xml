@@ -4,6 +4,214 @@
 <title>Ethereum Research - Latest topics</title>
 <link>https://ethresear.ch/latest</link>
 
+<item>
+<title>Proof of Service Integrity (PoSI): Trustless measurement of service integrity</title>
+<link>https://ethresear.ch/t/proof-of-service-integrity-posi-trustless-measurement-of-service-integrity/20255</link>
+<guid>https://ethresear.ch/t/proof-of-service-integrity-posi-trustless-measurement-of-service-integrity/20255</guid>
+<content:encoded><![CDATA[
+<div> 关键词：PoSI、服务完整性、去中心化验证、可信计算、智能合约
+
+总结：
+
+本文主要介绍了Proof of Service Integrity（PoSI）协议，一种用于验证离链服务完整性的去中心化验证机制。PoSI协议旨在解决现代区块链架构中增长的服务量、规模和复杂性与传统信任部署模式之间的不兼容问题。其核心目标是确保离链服务的正确性、完整性和可验证性。
+
+1. **服务完整性定义**：PoSI协议关注于测量离链服务的完整性，包括正确部署了授权和验证的软件版本以及未进行未经授权的更改。这与互联网系统中的服务完整性不同，后者通常由服务的所有者或管理者负责，而PoSI允许任何人均可无权限验证服务的完整性。
+
+2. **去中心化验证的重要性**：在区块链系统中，通过精心设计的激励机制和共识算法，确保了链上逻辑的安全性。然而，离链服务由于其在信任环境中运行，且无法在链上归因，因此存在多种风险，如内部威胁、未经授权的修改、审查风险和数据/资金安全风险。
+
+3. **PoSI协议概述**：PoSI协议通过实现认证部署、持续完整性监控和完整性证明来验证服务的完整性。它确保只有经过验证的代码被部署，并定期监控服务以检测未经授权的修改或篡改。用户可以通过无权限接口请求服务完整性证明。
+
+4. **架构工作流程**：PoSI协议涉及三个关键工作流程，包括服务开发者的工作流、运营商的工作流和验证工作流。服务开发者注册服务图像、设置预期指标并触发部署；运营商注册并执行任务，如托管服务图像或执行测量；应用程序或链外链请求服务完整性证明。
+
+5. **多层安全模型**：PoSI协议采用多层次安全模型，结合共识机制、可信计算和经济激励，提供全面的安全保障。该模型要求参与的服务具有开源代码、公开可验证的服务映像、可复现的构建过程和容器化部署。
+
+通过以上五个关键词的总结，我们可以看到PoSI协议在解决离链服务完整性验证方面的重要性和创新性，它通过去中心化的方法，结合多种技术手段，为构建更加安全、可靠和透明的区块链生态系统提供了新的思路和实践路径。 <div>
+<h1><a class="anchor" href="https://ethresear.ch#p-49574-proof-of-service-integrity-posi-trustless-measurement-of-service-integrity-1" name="p-49574-proof-of-service-integrity-posi-trustless-measurement-of-service-integrity-1"></a>Proof of Service integrity (PoSI) : Trustless measurement of service integrity</h1>
+<h2><a class="anchor" href="https://ethresear.ch#p-49574-tldr-2" name="p-49574-tldr-2"></a>TL;Dr</h2>
+<p><strong>Proof of Service Integrity (PoSI)</strong> is a byzantine fault tolerant verification protocol for offchain activities.</p>
+<p>It performs three main tasks in a decentralised fashion - <em>deployment</em> of approved service images, <em>measurements</em> of deployed services, and <em>attestation</em> of the integrity of these services in production.</p>
+<p>The problem PoSI solves is that offchain services are growing in volume, size and complexity in modern chain architectures, but they are largely centralised and run in trusted environments while handling millions of dollars of transaction flows. This is incompatible with the goals of crypto systems. Permissionless verification of offchain services using PoSI protocol provides a real-time integrated security view for emerging hybrid crypto protocols that have a mix of on-chain and off-chain activities.</p>
+<p>Offchain services that are verified by PoSI protocol are called <strong>Integrity Verified services</strong> (IVS).</p>
+<h2><a class="anchor" href="https://ethresear.ch#p-49574-preface-3" name="p-49574-preface-3"></a>Preface</h2>
+<p>This post builds on the earlier proposal on integrity proofs (<a class="inline-onebox" href="https://ethresear.ch/t/integrity-proofs-to-improve-rollup-security/19437">Integrity proofs to improve rollup security</a>) with the following main differences:</p>
+<ol>
+<li>Focus on measuring integrity of any off-chain service, rather than just rollup services</li>
+<li>Earlier design was TEE-based, current protocol is primarily BFT-based but uses TEEs as a <em>defense-in-depth</em> mechanism.</li>
+<li>Changes to the architecture</li>
+</ol>
+<h2><a class="anchor" href="https://ethresear.ch#p-49574-prelude-4" name="p-49574-prelude-4"></a>Prelude</h2>
+<p>Traditional distributed systems monitoring/observability involves collecting and analyzing data in order to gain insights into the functioning, performance, security and health of software systems and applications. It involves systematically observing and tracking various metrics, events, logs and distributed traces to construct a visual representation of a system’s hardware and software performance and health. While there are multiple types of distributed systems monitoring data, one  dimension in particular that is not measured in traditional web2 distributed systems is service integrity.</p>
+<p>For this post, let’s define <em>service integrity</em> as the following:</p>
+<ol>
+<li>The correct (authorised and verified) software version has been deployed</li>
+<li>No unauthorised changes have been made to the deployed software in production.</li>
+<li>Anyone can permissionlessly verify proof of <span class="hashtag-raw">#1</span> and <span class="hashtag-raw">#2</span> for any given service either through data provided over a user interface or API, or through verification of a zero-knowledge proof.</li>
+</ol>
+<p>In internet/online systems (web2), <em>services integrity</em> (particularly <span class="hashtag-raw">#1</span> and <span class="hashtag-raw">#2</span>) is the responsibility of the organisation or entity that centrally owns and manages the distributed service, <em>aka trusted deployments</em>. As a consequence, <span class="hashtag-raw">#3</span> is simply not possible.</p>
+<p>When we talk about web3 systems, <em>service integrity</em> becomes paramount. Services are deployed in <em>untrusted environments</em> managed by operators that we do not know or have legal contracts with.</p>
+<p>The way this problem has been solved in blockchain-based systems (Proof-of-stake in particular) is through a carefully designed set of incentives to encourage external operators to run the distributed software with desired behaviours, coupled with a clever mechanism for the distributed network to reach a consensus such that if an operator that is part of the consensus set is detected to perform any malicious action, they can be financially penalised (through onchain mechanisms or social governance).</p>
+<p>This worked reasonably in the early days of evolution of onchain systems where all the logic for onchain protocols were on smart contracts on a single chain, which was invoked from offchain clients. Censorship resistance was largely handled by allowing anyone to run the Json-RPC nodes (which are the user transaction entry points) that communicate with the other distributed network nodes over P2P protocols. This ensured eventual censorship-resistance.</p>
+<h2><a class="anchor" href="https://ethresear.ch#p-49574-evolution-of-crypto-protocol-architectures-5" name="p-49574-evolution-of-crypto-protocol-architectures-5"></a>Evolution of crypto protocol architectures</h2>
+<p>Recent developments in blockchain systems have seen an explosion in the number of layer-1 and layer-2 chains, and the rise of modular architectures with innovations in application protocols, core infrastructure, scaling and interop solutions, developer &amp; user tools. These innovations are aimed at solving problems with scaling throughput, reducing latency, lowering transaction costs, offering greater sovereignty to builders over design choices, solving for both synchronous and async interoperability, unifying liquidity, mev optimisation, and improving user experience in crypto.</p>
+<p>These developments have resulted in increased complexity and sophistication of onchain protocols involving a mix of smart-contract logic and offchain logic. Emerging use cases such as cross-chain swaps involve a mix of smart contract and offchain logic on both the source and destination chains.</p>
+<p>Let’s look at a few of the hybrid onchain-offchain architectures in popular crypto protocols.</p>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/4/9/491a30b1c361107e65615618ea2b29c226245e4d.jpeg" title="Fig 1: Hybrid onchain-offchain design in crypto protocols"><img alt="Fig 1: Hybrid onchain-offchain design in crypto protocols" height="474" src="https://ethresear.ch/uploads/default/optimized/3X/4/9/491a30b1c361107e65615618ea2b29c226245e4d_2_690x474.jpeg" width="690" /></a></div><p></p>
+<p>Fig A shows onchain logic on a single chain encoded as smart contracts. The onchain logic is accessed from a regular web or mobile client application through RPC calls.</p>
+<p>Fig B shows an example of crypto protocol containing a mix of onchain smart contract logic on a single chain and offchain component attached to it. The offchain component typically either supplies data from an online system (eg price feeds through oracle) or performs compute-heavy operations on behalf of the smart contract (eg co-processor). The offchain component can also be a regular web backend of the dapp, if the app developer chooses to keep a portion of the business logic offchain (which is not uncommon in most modern dapps).</p>
+<p>Fig C shows an example of a cross-chain transaction that involves two chains - source and destination chain (e.g., cross-chain swaps or bridging). Here, smart contract logic is present on both the chains, and there are corresponding offchain components.</p>
+<blockquote>
+<p>The main challenge that is being addressed in this post is that a big proportion of the off-chain components that are part of these hybrid onchain-offchain crypto protocols are run in trusted environments. This is incompatible with the main goals of crypto protocols which are trustlessness, censorship resistance and permission-less participation and verifiability.</p>
+</blockquote>
+<p>While the onchain components (aka smart contracts) are secured by consensus, economic incentives and permissionless verification, the same cannot be said about offchain services whose actions cannot be attributed onchain.  These services are, in most cases, centralised,  owned and run by trusted entities, but play critical role in the overall transaction workflows. They are vulnerable to censorship, tampering and other kinds of attacks. Note that only the on-chain logic of the crypto protocols is secured by the blockchain consensus, not the supporting off-chain infrastructure and services which have varying levels of trust assumptions. In some cases, it is not even possible to detect malicious actions performed by such offchain components <em>(non-attributable faults)</em>.</p>
+<p>Figure 2 shows a non-exhaustive list of popular categories of offchain services that are an integral part of many crypto protocols.</p>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/4/b/4b764f4c7ce39d7b0d4769c441ff37392c08d505.png" title="Fig 2: Common categories of off-chain services"><img alt="Fig 2: Common categories of off-chain services" height="350" src="https://ethresear.ch/uploads/default/optimized/3X/4/b/4b764f4c7ce39d7b0d4769c441ff37392c08d505_2_690x350.png" width="690" /></a></div><p></p>
+<p>What are the types of risks to crypto protocols with such centralised offchain services?</p>
+<p><em>Insider Threats</em>: Employees or contractors within the service development team or the cloud platform provider may misuse their privileged access.<br />
+<em>Unauthorized Modifications</em>: Malicious actors might attempt to alter the service code logic or configuration without detection, leading to unintended consequences inconsistent with the protocol goals.<br />
+<em>Censorship Risks</em>: In case of offchain services, bad actors might attempt to censor certain transactions or user interactions.<br />
+<em>Data and Fund Security</em>: There’s a risk of unauthorized access to sensitive data or funds managed by the service. e.g. a dapp backend managing an embedded wallet may view/steal user wallet keys.</p>
+<h2><a class="anchor" href="https://ethresear.ch#p-49574-we-need-a-decentralised-verification-protocol-6" name="p-49574-we-need-a-decentralised-verification-protocol-6"></a>We need a decentralised verification protocol</h2>
+<p>Hence, a critical requirement for the success of these modular hybrid onchain-offchain architectures is the ability to prove offchain service integrity at scale in a decentralised trustless manner, i.e. a <em>Byzantine fault tolerant service integrity verification system</em>.</p>
+<p>In this post, we present <em>Proof of Service Integrity</em> (<strong>PoSI</strong>), a verification protocol that performs three main tasks - <em>deployment of publicly-identifiable code images</em>, <em>measurement of the correctness  of code deployed periodically</em>, and  <em>attestation of service integrity</em> in the production environment. These correspond respectively to the properties of <em>correctness</em>, <em>integrity</em> and <em>verifiability</em> for the monitored services. Figure 3 shows the key desired properties and relationships between the PoSI nodes that are part of the verification network, and the monitored services.</p>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/1/3/135c0d620ec8bd53705bf83f07fd11c3aff47d42.jpeg" title="Fig 3: Verification layer for off-chain services"><img alt="Fig 3: Verification layer for off-chain services" height="163" src="https://ethresear.ch/uploads/default/optimized/3X/1/3/135c0d620ec8bd53705bf83f07fd11c3aff47d42_2_690x163.jpeg" width="690" /></a></div><p></p>
+<p>The PoSI nodes that implement the verification protocol itself satisfy the following  properties: 1) <em>Trustless:</em> Service integrity measurements are secure against byzantine attacks by collaborations among the monitoring services and the monitored services. 2) <em>Tamper-proof</em>: The service monitoring service while verifying the tamper-resistance of the monitored services, is itself tamper-resistant  3) <em>Open</em>: The protocol allows anyone to register and provide measurement data , by using cryptographic primitives to ensure that a subset of actors cannot maliciously modify results in their favour.</p>
+<p>A formal security model allows us to establish guarantees of accurate service measurements in the presence of malicious actors. The security guarantees of the PoSI protocol are composable with the onchain state commitments on blockchain ledgers to provide a comprehensive view of protocol security which is not possible by just focusing on smart-contract &amp; consensus-based security.</p>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/f/2/f2a8e22a3c90dfb18ded2bfa3c371ef147452247.png" title="Fig 4: Integrated view of security of crypto protocols with PoSI"><img alt="Fig 4: Integrated view of security of crypto protocols with PoSI" height="201" src="https://ethresear.ch/uploads/default/optimized/3X/f/2/f2a8e22a3c90dfb18ded2bfa3c371ef147452247_2_690x201.png" width="690" /></a></div><p></p>
+<h2><a class="anchor" href="https://ethresear.ch#p-49574-proof-of-service-integrity-posi-protocol-overview-7" name="p-49574-proof-of-service-integrity-posi-protocol-overview-7"></a>Proof of Service Integrity (PoSI) protocol overview</h2>
+<p>PoSI enables verifiable service integrity through the following:</p>
+<p><em>Authenticated Deployment</em>: PoSI ensures that only authorized and verified code is deployed to the production environment. This prevents the introduction of malicious or unauthorized code during the deployment process.</p>
+<p><em>Continuous Integrity Monitoring</em>: Once deployed, PoSI nodes continuously monitor the service to detect any unauthorized modifications or tampering. Any discrepancies between the running service and its expected state are immediately detected and reported.</p>
+<p><em>Integrity Attestation</em>: Users or dApps can request integrity proofs for any PoSI-enabled service through a permissionless, public interface. Two types of integrity checks can be done on a given service - <em>measurements-based</em> and <em>proof-based</em>. <em>Measurements-based</em> checks involve deriving service integrity from the onchain measurements for the service. <em>Proof-based</em> checks can be done by requesting a SNARK proof of integrity  for the service, which can then be verified either on-chain (SNARK verification) or off-chain (in a web or mobile app).</p>
+<p>Services that are verified by PoSI protocol are called <em>Integrity-verified services</em> (IVS).</p>
+<h2><a class="anchor" href="https://ethresear.ch#p-49574-architecture-workflows-8" name="p-49574-architecture-workflows-8"></a>Architecture workflows</h2>
+<p>PoSI protocol involves the following three workflows:</p>
+<ol>
+<li>Service developer workflow</li>
+<li>Operator workflow</li>
+<li>Verification workflow</li>
+</ol>
+<p>Figure 5 shows an overview of the key actors and actions in the protocol.</p>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/9/2/929487f88493ab7c774f428b5bed736328ff9f72.jpeg" title="Fig 5: Overview of PoSI protocol"><img alt="Fig 5: Overview of PoSI protocol" height="268" src="https://ethresear.ch/uploads/default/optimized/3X/9/2/929487f88493ab7c774f428b5bed736328ff9f72_2_690x268.jpeg" width="690" /></a></div><p></p>
+<p>The architecture of PoSI involves the following components and actors:</p>
+<p><strong>1. Human/Organisational actors:</strong></p>
+<p><em>Service developer</em>: This refers to the developer and owner of the distributed software service. The service developer is the main ‘customer’ for the integrity-verified service, and is the person or entity that is ready to pay a fee to have their service integrity-verified.</p>
+<p><em>Operator:</em> This refers to the provider of the computational infrastructure. The service developer can themselves choose to be the operator by deploying the IVS on a cloud account controlled by them or they can choose to deploy their service on an external operator’s VM through a DePIN service.</p>
+<p><strong>2. PoSI Platform:</strong></p>
+<p><em>PoSI platform onchain:</em> This contains the core smart contracts of the  protocol.</p>
+<p><em>PoSI Offchain</em>: This comprises core offchain services that are part of the protocol.</p>
+<p><strong>3. Applications/ Other chains:</strong></p>
+<p><em>Application</em>:  A web or mobile application that verifies the proof for an IVS.</p>
+<p><em>Other chain:</em> Any other chain can verify the zk proofs generated by the PoSI protocol.</p>
+<h3><a class="anchor" href="https://ethresear.ch#p-49574-service-developer-workflow-9" name="p-49574-service-developer-workflow-9"></a>Service developer workflow</h3>
+<ol>
+<li>Service developer builds the service and registers the service image in a public repository.</li>
+<li>Service developer registers the service image along with other service metadata with the PoSI onchain smart contracts. They also deposit rewards amount, along with service level expectations (e.g. frequency of measurements).</li>
+<li>Service developer can trigger the PoSI smart contract to trigger the service deployment either on their self-hosted VM, their cloud VM or on a DePIN VM.</li>
+<li>The PoSI protocol pays out the rewards to the operators based on the tasks performed by them, from the service developer’s account.</li>
+</ol>
+<h3><a class="anchor" href="https://ethresear.ch#p-49574-operator-workflow-10" name="p-49574-operator-workflow-10"></a>Operator workflow</h3>
+<ol>
+<li>Operator registers their VM with the PoSI registration service. The operator can choose to perform two kinds of tasks - host <em>service images</em>, or host the <em>PoSI host program</em> that performs measurements on other services. For the former, any regular VM of the configuration required by service developers would be accepted. For the latter, TEE-based VMs will be required.</li>
+<li>Note that service developer can choose to deploy their service on their own VM, in which case they need to register it like other external operators. For TEE-based VMs, the quote has to be generated by the operator and submitted to the registration service along with in-enclave generated public key.</li>
+<li>Operator stakes the minimum specified tokens as part of registration. If the service developer hosts the service on their own VM, this step is not required.</li>
+<li>The PoSI registration service verifies the registered VM and registers it with the PoSI onchain contract. The PoSi registration service itself runs within a TEE enclave.</li>
+<li>When the service developer triggers deployment of a service, the PoSI host program retrieves the registered service image from public repository and deploys the service on the service developer (or external operator’s VM based on the configuration).</li>
+<li>If an operator has registered to host the PoSI protocol, the PoSI master  deploys the PoSI host program on the operator’s VM. This enables the operator to then perform service measurements on other services.</li>
+<li>Based on the specification of the service developer, the operator set is established for verifying that service, which runs the consensus mechanism to determine the final service measurements. The votes of all  operators in the operator set are aggregated and recorded onchain, along with the measurements.</li>
+<li>At periodic intervals, measurements of the performance of the verious operators are taken by the PoSI measurement service, and rewards are computed for the operators. Any incorrect measurements attributable to any of the operators in operator set is penalized through slashing of their stake, in a manner defined in the PoSI protocol.</li>
+</ol>
+<h3><a class="anchor" href="https://ethresear.ch#p-49574-verification-workflow-11" name="p-49574-verification-workflow-11"></a>Verification workflow</h3>
+<ol>
+<li>Any web or mobile application can ask the PoSI protocol servers for attestation of any particular service. The PoSI protocol returns the proof to the web/mobile application.</li>
+<li>Two kinds of proofs can be requested from the PoSI protocol for a service: <em>state proofs</em> and <em>SNARK-proofs</em>. <em>State proofs</em> simple return the onchain state of a service computed from the measurements submitted by operators. SNARK proofs that are returned by the PoSI protocol can be verified either off-chain within the web/mobile application, or submitted to another on-chain smart contract for verification.</li>
+</ol>
+<p>An integrated view of the various workflows for the PoSI protocol is shown in figure.</p>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/3/2/32045a0a10edcc50ab33324a649080621d79a8ac.jpeg" title="Fig 6: Integrated view of PoSI workflows"><img alt="Fig 6: Integrated view of PoSI workflows" height="309" src="https://ethresear.ch/uploads/default/optimized/3X/3/2/32045a0a10edcc50ab33324a649080621d79a8ac_2_690x309.jpeg" width="690" /></a></div><p></p>
+<p>Note: Figure 6 shows only a single host program taking the service measurements (for reducing clutter in diagram), but it can be visualised as a set of nodes that participate and arrive at a consensus before posting the measurements on-chain.</p>
+<h2><a class="anchor" href="https://ethresear.ch#p-49574-conclusion-12" name="p-49574-conclusion-12"></a>Conclusion</h2>
+<p>Trustfree measurement of offchain service integrity is an unsolved problem in decentralised networks. <strong>Proof of Service Integrity (PoSI)</strong> addresses this core requirement by providing a secure, byzantine resistant verification layer for offchain services while allowing open participation for operators and service developers to benefit from the protocol. All components of the protocol can be operated by community-run protocol nodes controlled by the onchain protocol smart contracts. PoSI incorporates a layered security model that includes <em>consensus-based</em>, <em>hardware-based</em> and <em>crypto-economic security</em>. PoSI requires the participating offchain services to have open source code, a publicly verifiable service image, reproducible build process and dockerized deployment.</p>
+<h2><a class="anchor" href="https://ethresear.ch#p-49574-faq-13" name="p-49574-faq-13"></a>FAQ</h2>
+<h3><a class="anchor" href="https://ethresear.ch#p-49574-what-kind-of-services-can-benefit-from-the-posi-protocol-14" name="p-49574-what-kind-of-services-can-benefit-from-the-posi-protocol-14"></a>What kind of services can benefit from the PoSI protocol?</h3>
+<p>Any in-protocol or out-of-protocol offchain service can benefit from PoSI protocol. A non-exhaustive list of offchain services was mentioned earlier in the post, and is reproduced here:</p>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/4/b/4b764f4c7ce39d7b0d4769c441ff37392c08d505.png" title="Fig 7: Popular categories of off-chain services"><img alt="Fig 7: Popular categories of off-chain services" height="350" src="https://ethresear.ch/uploads/default/optimized/3X/4/b/4b764f4c7ce39d7b0d4769c441ff37392c08d505_2_690x350.png" width="690" /></a></div><p></p>
+<h3><a class="anchor" href="https://ethresear.ch#p-49574-what-are-the-alternative-architectures-available-to-secure-offchain-services-15" name="p-49574-what-are-the-alternative-architectures-available-to-secure-offchain-services-15"></a>What are the alternative architectures available to secure offchain services?</h3>
+<p>For offchain services to transition from <em>trusted</em> to <em>trust-minimised</em> / <em>trustless</em> architectures, here is a comparison of the various design approaches.</p>
+<div class="md-table">
+<table>
+<thead>
+<tr>
+<th>Design approach</th>
+<th>Description</th>
+<th>Pros</th>
+<th>Cons</th>
+<th>Security model</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Consensus-based</td>
+<td>Build a BFT-consensus with own operator set</td>
+<td>Trustless</td>
+<td>It is expensive and cumbersome for a service developer</td>
+<td>Depends on size of the operator set</td>
+</tr>
+<tr>
+<td>ZK-based</td>
+<td>Build a custom zk circuit or a program that can be proven in a general purpose zkVM</td>
+<td>Trustless</td>
+<td>Involves rewrite of the service using zk DSLs or using Rust. Expensive to generate zk-proofs</td>
+<td>Restricted to what can be proven in zk circuits</td>
+</tr>
+<tr>
+<td>EigenLayer AVS-based</td>
+<td>Convert the service into Eigenlayer AVS</td>
+<td>Inherit Ethereum security without bootstrapping an operator set</td>
+<td>Requires rewrite of the code to comply with AVS protocol. Also AVS can only detect and penalise operator faults if they are observable on-chain.</td>
+<td>Economic security</td>
+</tr>
+<tr>
+<td>PoSI IVS-based</td>
+<td>Deploy existing code in docker containers with no code rewrite.</td>
+<td>Ability to detect non-attributable faults (those that are not normally visible on-chain such as censorship, or unauthorized upgrades of service algorithms). Small, configurable cost.</td>
+<td>Services should meet pre-requisites: open-source code, a publicly verifiable service image, a reproducible build process and dockerized deployment</td>
+<td>Multi-layered security model incorporating <em>consensus-based</em>, <em>TEE</em>, and <em>crypto-economic security</em> constructs.</td>
+</tr>
+</tbody>
+</table>
+</div><h2><a class="anchor" href="https://ethresear.ch#p-49574-credits-16" name="p-49574-credits-16"></a>Credits</h2>
+<p>The concept and design for PoSI protocol and Integrity-verified services was initially developed as a collaboration between <a class="mention" href="https://ethresear.ch/u/peshwar9">@peshwar9</a> and <a class="mention" href="https://ethresear.ch/u/mohsinriaz17">@mohsinriaz17</a> with contribution from several others to refine and enhance it.</p>
+            <p><small>1 post - 1 participant</small></p>
+            <p><a href="https://ethresear.ch/t/proof-of-service-integrity-posi-trustless-measurement-of-service-integrity/20255">Read full topic</a></p>
+]]></content:encoded>
+<pubDate>Sun, 11 Aug 2024 17:44:55 +0000</pubDate>
+<pubDate>Sun, 11 Aug 2024 17:44:55 +0000</pubDate>
+</item>
+<item>
+<title>Pls ignore. New post available</title>
+<link>https://ethresear.ch/t/pls-ignore-new-post-available/20251</link>
+<guid>https://ethresear.ch/t/pls-ignore-new-post-available/20251</guid>
+<content:encoded><![CDATA[
+<div> 关键词：文章、提取、5个、中文、总结
+
+---
+
+总结: 这篇文章要求从一段文本中提取出五个关键点，并用中文进行总结。首先，需要识别出文本中的核心信息或主题，这通常包括最重要的事实、观点或论点。然后，将这五个关键点归纳出来，确保它们覆盖了文本的主要内容和重点。
+
+具体操作步骤如下：
+
+1. **阅读与理解**：仔细阅读原文，确保理解其主要论点和细节。
+2. **识别关键点**：找出文本中最重要、最能代表其主旨的部分，这些可能是论据、结论、主要事件或人物等。
+3. **提炼概括**：将这些关键点以简洁的语言表述出来，确保每个关键点都能独立反映原文的一部分核心信息。
+4. **整合总结**：将提炼出的五个关键点整合成一个连贯的段落，确保整体结构清晰，逻辑性强，能够全面地反映原文的主要内容。
+
+通过以上步骤，可以有效地完成从原文到精炼中文总结的过程，确保信息的准确性和完整性。 <div>
+<p>(topic deleted by author)</p>
+            <p><small>1 post - 1 participant</small></p>
+            <p><a href="https://ethresear.ch/t/pls-ignore-new-post-available/20251">Read full topic</a></p>
+]]></content:encoded>
+<pubDate>Sun, 11 Aug 2024 08:56:36 +0000</pubDate>
+<pubDate>Sun, 11 Aug 2024 08:56:36 +0000</pubDate>
+</item>
 
 <item>
 <title>Proof of Service integrity</title>
