@@ -4,6 +4,72 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+<item>
+<title>Information-Theoretic Topology-Hiding Broadcast: Wheels, Stars, Friendship, and Beyond</title>
+<link>https://eprint.iacr.org/2024/1266</link>
+<guid>https://eprint.iacr.org/2024/1266</guid>
+<content:encoded><![CDATA[
+<div> 关键词：拓扑隐藏广播、信息论安全、轮图、子图、友谊图
+
+总结:
+
+本文研究了信息论安全（IT）条件下的拓扑隐藏广播（THB），特别关注于轮图及其子图类。主要发现如下：
+
+1. **轮图及其子图的IT-THB可行性**：文章通过分析具有嵌入星结构的轮图子图，揭示了其IT-THB可行性与对应图的更精细度结构相关，而不仅仅是简单的连通性。
+
+2. **新图类的完美IT-THB实现**：文章提供了一些新的正向结果，实现了对未知节点数的图类的完美IT-THB，这是之前未解决的问题。
+
+3. **多故障情况下的IT-THB**：首次证明了在具有t>1个故障的非退化图类中实现IT-THB的可能性，具体为友谊图类，这标志着在多故障场景下实现信息论安全THB的一个重要进展。
+
+4. **理论框架的扩展**：通过研究轮图及其子图，文章扩展了之前关于IT-THB可行性的理论框架，为理解不同图类下的THB提供了新的视角和工具。
+
+5. **技术贡献**：这项工作不仅提供了理论上的见解，还可能启发新的安全通信协议设计，特别是在网络拓扑保护方面，对于构建更加安全和私密的分布式系统具有重要意义。 <div>
+Topology-hiding broadcast (THB) enables parties communicating over an incomplete network to broadcast messages while hiding the network topology from within a given class of graphs. Although broadcast is a privacy-free task, it is known that THB for certain graph classes necessitates computational assumptions, even against "honest but curious" adversaries, and even given a single corrupted party. Recent works have tried to understand when THB can be obtained with information-theoretic (IT) security (without cryptography or setup assumptions) as a function of properties of the corresponding graph class.
+
+We revisit this question through a case study of the class of wheel graphs and their subgraphs. The $n$'th wheel graph is established by connecting $n$ nodes who form a cycle with another "center" node, thus providing a natural extension that captures and enriches previously studied graph classes in the setting of IT-THB.
+
+We present a series of new findings in this line.
+We fully characterize feasibility of IT-THB for any class of subgraphs of the wheel, each possessing an embedded star (i.e., a well-defined center connected to all other nodes). Our characterization provides evidence that IT-THB feasibility may correlate with a more fine-grained degree structure---as opposed to pure connectivity---of the corresponding graphs.
+We provide positive results achieving perfect IT-THB for new graph classes, including ones where the number of nodes is unknown. Further, we provide the first feasibility of IT-THB on non-degenerate graph-classes with $t>1$ corruptions, for the class of friendship graphs (Erdos, Renyi, Sos '66).
+]]></content:encoded>
+<pubDate>Fri, 09 Aug 2024 13:05:02 +0000</pubDate>
+<pubDate>Fri, 09 Aug 2024 13:05:02 +0000</pubDate>
+</item>
+<item>
+<title>Succinct Non-Subsequence Arguments</title>
+<link>https://eprint.iacr.org/2024/1264</link>
+<guid>https://eprint.iacr.org/2024/1264</guid>
+<content:encoded><![CDATA[
+<div> 关键词：非子序列论证、多变量多项式承诺方案、证明时间、验证时间、批处理子序列论证
+
+总结:本文提出了首个简洁的非子序列论证方案。该方案利用求和检查协议，可与任何多变量多项式承诺方案结合使用。我们的解决方案在证明者运行时间上实现了线性增长，与序列s、t及其各自字母表Σ的大小成正比。证明的大小为O(log₂|s| + log₂|t| + log₂|Σ|)，验证时间则为O(√|s| + √|t| + √|Σ|)。基于Sona多项式承诺方案（EUROCRYPT'24），我们能够实现高效的证明机制。此外，通过扩展技术，我们还能够构建批处理子序列论证，用于同时验证多个交错子序列和非子序列论证，而无需证明大小出现线性增长。这项工作对DNA序列分析、物联网、区块链、自然语言处理、语音识别等领域具有潜在的重要应用价值。 <div>
+Lookup arguments have recently attracted a lot of developments due to their applications in the constructions of succinct non-interactive arguments of knowledge (SNARKs). A closely related topic is subsequence arguments in which one can prove that string $\mathbf{s}$ is a subsequence of another string $\mathbf{t}$, i.e., deleting some characters in $\mathbf{t}$ can achieve $\mathbf{s}$. A dual notion, namely, non-subsequence arguments, is to prove that $\mathbf{s}$ is not a subsequence of $\mathbf{t}$. 
+These problems have a lot of important applications in DNA sequence analysis, internet of things, blockchains, natural language processing, speech recognition, etc. However, despite their applications, they are not well-studied in cryptography, especially succinct arguments for non-subsequences with efficient proving time and sublinear verification time.
+
+In this work, we propose the first succinct non-subsequence argument. Our solution applies the sumcheck protocol and is instantiable by any multivariate polynomial commitment schemes (PCSs). We achieve an efficient prover whose running time is linear in the size of sequences $\mathbf{s}$, $\mathbf{t}$ and their respective alphabet $\Sigma$. Our proof is succinct and the verifier time is sublinear assuming the employed PCS has succinct commitments and sublinear verification time. When instantiating with Sona PCS (EUROCRYPT'24), we achieve proof size $\mathcal{O}(\log_2|\mathbf{s}| + \log_2|\mathbf{t}|+\log_2|\Sigma|)$, prover time $\mathcal{O}(|\mathbf{s}|+|\mathbf{t}|+|\Sigma|)$  and verifier time $\mathcal{O}(\sqrt{|\mathbf{s}|}+\sqrt{|\mathbf{t}|}+\sqrt{|\Sigma|})$.
+
+Extending our technique, we can achieve a batch subsequence argument for proving in batch $k$ interleaving subsequence and non-subsequence arguments without proof size suffering a linear blow-up in $k$.
+]]></content:encoded>
+<pubDate>Fri, 09 Aug 2024 06:52:34 +0000</pubDate>
+<pubDate>Fri, 09 Aug 2024 06:52:34 +0000</pubDate>
+</item>
+<item>
+<title>Dilithium-Based Verifiable Timed Signature Scheme</title>
+<link>https://eprint.iacr.org/2024/1262</link>
+<guid>https://eprint.iacr.org/2024/1262</guid>
+<content:encoded><![CDATA[
+<div> 关键词：Verifiable Timed Signatures（VTS）、BLS签名、Schnorr签名、ECDSA、CRYSTALS-Dilithium
+
+文章总结：
+
+Verifiable Timed Signatures（VTS）是一种用于在未来特定时间获取签名并证明其合法性的加密构建。它们在支付通道网络、多方签名操作或多方计算等区块链应用中具有重要价值。目前，VTS方案主要基于BLS签名、Schnorr签名和ECDSA等签名算法。然而，这些算法在量子攻击下被认为是不安全的，因为Shor算法对离散对数问题的影响。为了解决这个问题，本文提出了一种基于NIST选定的量子抗性数字签名标准CRYSTALS-Dilithium的VT-Dilithium新VTS方案。该方案克服了Dilithium集成到VTS方案中的复杂性问题，包括多项式乘法、舍入操作等复杂的数学运算以及大模参数如多项式、多项式向量和矩阵。
+
+综上所述，VT-Dilithium方案通过采用量子安全的CRYSTALS-Dilithium算法，提供了一种增强安全性和适应未来量子计算威胁的VTS解决方案。这不仅提高了系统在传统攻击下的安全性，而且确保了在量子计算时代下系统的持续安全性。此外，针对Dilithium特有的数学挑战，VT-Dilithium方案还引入了优化策略，以高效地处理其复杂度高的运算，从而实现更有效的VTS生成与验证过程。 <div>
+Verifiable Timed Signatures (VTS)  are cryptographic constructs that enable obtaining a signature at a specific time in the future and provide evidence that the signature is legitimate. This framework particularly finds utility in applications such as payment channel networks, multiparty signing operations, or multiparty computation, especially within blockchain architectures. Currently, VTS schemes are based on signature algorithms such as BLS signature, Schnorr signature, and ECDSA. These signature algorithms are considered insecure against quantum attacks due to the effect of Shor's Algorithm on the discrete logarithm problem. We present a new VTS scheme called VT-Dilithium based on CRYSTALS-Dilithium Digital Signature Algorithm that has been selected as NIST's quantum-resistant digital signature standard and is considered secure against both classical and quantum attacks. Integrating Dilithium into the VTS scheme is more challenging problem due to its complex mathematical operations (i.e. polynomial multiplications, rounding operations) and large module parameters such as polynomials, polynomial vectors, and matrices. This work aims to provide a comprehensive exposition of the VT-Dilithium scheme.
+]]></content:encoded>
+<pubDate>Fri, 09 Aug 2024 06:03:14 +0000</pubDate>
+<pubDate>Fri, 09 Aug 2024 06:03:14 +0000</pubDate>
+</item>
 
 <item>
 <title>zk-Promises: Making Zero-Knowledge Objects Accept the Call for Banning and Reputation</title>
