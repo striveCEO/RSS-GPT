@@ -4,6 +4,124 @@
 <title>Ethereum Research - Latest topics</title>
 <link>https://ethresear.ch/latest</link>
 
+<item>
+<title>DoS on block proposers in PoS and block builders in PBS</title>
+<link>https://ethresear.ch/t/dos-on-block-proposers-in-pos-and-block-builders-in-pbs/20262</link>
+<guid>https://ethresear.ch/t/dos-on-block-proposers-in-pos-and-block-builders-in-pbs/20262</guid>
+<content:encoded><![CDATA[
+<div> 关键词：Ethereum 2.0、PoS、DoS攻击、区块提议者、保护机制
+
+总结:
+
+在以太坊2.0的权益证明（PoS）系统中，区块提议者在创建下一个区块前约12秒就已知，这为攻击者提供了机会，可能通过拒绝服务（DoS）攻击来阻止提议者创建新块并失去奖励。类似地，这种担忧也出现在Algorand的基于VRF的领导者选举机制中，该机制通过避免此类攻击来解决这一问题。
+
+在以太坊2.0的分片（PBS）系统中，构建者首先揭示密封块投标（承诺），然后稍后揭示块内容。如果未按时揭示内容，构建者将受到惩罚。这意味着攻击者可以通过DoS攻击受害者，导致其因未能及时揭示块而遭受严重处罚，并可能被重复利用。
+
+为了保护免受这类攻击，以太坊2.0采取了多种措施。首先，通过引入信标链和分片技术，网络设计了复杂的共识算法，旨在确保安全性和去中心化。其次，针对区块提议者的DoS攻击，以太坊2.0采用了多重验证和备份机制，确保即使某个提议者遭到攻击或离线，系统也能正常运行并选择其他提议者继续进行区块生成。此外，通过实施惩罚机制，如罚款和出块延迟，以太坊激励节点保持在线和积极参与网络活动，从而减少DoS攻击的有效性。最后，以太坊的网络设计还包括了自我修复能力，能够在检测到攻击行为时自动调整和恢复系统的稳定性和安全性。这些综合措施共同构成了以太坊2.0对DoS攻击的防御策略，确保网络的健壮性和可靠性。 <div>
+<ol>
+<li>
+<p>In Ethereum 2.0 PoS, the block proposer of the next block is known a certain time (~12s) before she creates the block. It might create an opportunity for attackers to DoS the next proposer who will therefore not create the new block and lose the reward. This might be systematically repeated again. We know that something similar was of concern for Algorand PoS and its VRF-based leader election that avoided this kind of attack.</p>
+</li>
+<li>
+<p>In PBS, the builder reveals the sealed block bid (commitment), and then later reveals the block contents. If the contents are not revealed, the builder will be penalized. So, the attacker already knowing the network address of victim can DoS her and cause severe penalties for not revealing the block on time. This might be systematically repeated again.</p>
+</li>
+</ol>
+<p>My question or point to discuss is how Ethereum protects against this kind of attack?</p>
+            <p><small>1 post - 1 participant</small></p>
+            <p><a href="https://ethresear.ch/t/dos-on-block-proposers-in-pos-and-block-builders-in-pbs/20262">Read full topic</a></p>
+]]></content:encoded>
+<pubDate>Tue, 13 Aug 2024 10:28:43 +0000</pubDate>
+<pubDate>Tue, 13 Aug 2024 10:28:43 +0000</pubDate>
+</item>
+<item>
+<title>A trustless on-chain anti-MEV solution for Layer2/3</title>
+<link>https://ethresear.ch/t/a-trustless-on-chain-anti-mev-solution-for-layer2-3/20260</link>
+<guid>https://ethresear.ch/t/a-trustless-on-chain-anti-mev-solution-for-layer2-3/20260</guid>
+<content:encoded><![CDATA[
+<div> 关键词：MEVless协议、L2链、Tx-Order-commitment、DA-layers、隐私保护
+
+总结:
+
+本文提出了一种解决Layer2矿工提取价值（MEV）问题的方案，称为MEVless协议。该协议的主要创新在于：
+
+1. **用户发送txHash而非完整交易内容**：用户仅需向L2链发送交易哈希值和预付费用以防止分布式拒绝服务（DOS）攻击。
+
+2. **基于提示排序txHash**：链接收这些txHash并根据提供的提示金额进行排序，生成Tx-Order-commitment并广播给其他节点，同时允许用户订阅此承诺。
+
+3. **确保交易执行顺序**：当用户看到订单承诺后，可发送交易内容至L2链。链会接受这些内容并根据先前的承诺顺序打包交易。如果交易内容与先前的哈希不符，则将其置于已承诺交易之后。
+
+4. **去中心化和数据可用性层（DA-layers）**：通过去中心化链节点和使用DA-layers来确保交易安全，防止单个节点不接受交易的情况发生。
+
+5. **隐私保护**：MEVless协议设计使得交易内容在打包前无法被观察，因此用户无需依赖隐私节点或MEVA来保护交易免受攻击，确保了交易的私密性和安全性。
+
+该方案旨在提供一种信任无界的解决方案，消除对特定机构的信任需求，同时通过去中心化和透明的交易流程，增强交易的安全性和隐私保护。 <div>
+<p>We have a solution to resolve the Layer2 MEV onchain trustlessly.<br />
+Here is the arch:<br />
+</p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/a/e/aeec6e16bbf3b6864d66ae84ecf5b663f9c55ce5.jpeg" title="image"><img alt="image" height="500" src="https://ethresear.ch/uploads/default/optimized/3X/a/e/aeec6e16bbf3b6864d66ae84ecf5b663f9c55ce5_2_336x500.jpeg" width="336" /></a></div><p></p>
+<ol>
+<li>Users only send their txHash to the L2 chain with some advance charge (to prevent DOS attack)</li>
+<li>The chain accepts these txHashes, sort them based on the amount of tips, and then make a Tx-Order-commitment and broadcast it to the other chain nodes.  Also, user can subscribe this commitment.</li>
+<li>When users see the order-commitments, they will send their tx-content to the L2 chain and the DA-layers.</li>
+<li>Chain accepts the tx-content from users, and also fetch txs from DA-layers ,  pack them according to the previously promised order. If the tx-content does not match the previously tx-hash, chain will put them behind the txs which made order-commitment.<br />
+<strong>All promised txs will be sorted before the unpromised txs.</strong><br />
+NOTICE: In this way, the chain may deduct tx-content and pretend not to receive it.  To prevent this situation. We have to:<br />
+i. Decentralise chain node.<br />
+ii. Use DA to complete the txs if one node does not accept the txs.</li>
+</ol>
+<p>In this case, we call it MEVless protocol,   it means you don’t have to trust any group and institution.  You do not have to depend on a privacy node, not through MEVA, to protect your transactions from MEV attack.  Because all the attackers(besides miners themselves) cannot see your tx-content when it orders.   Once the tx-content is packed and executed, it must be packed by the previously commitment, attackers cannot front-run and sandwich attack you.</p>
+<p>We have developed some of it and you can see the running effect:</p><aside class="onebox githubfolder">
+  <header class="source">
+      <img class="site-icon" height="32" src="https://ethresear.ch/uploads/default/original/2X/b/bad3e5f9ad67c1ddf145107ce7032ac1d7b22563.svg" width="32" />
+
+      <a href="https://github.com/yu-org/nine-tripods/tree/main/MEVless" rel="noopener nofollow ugc" target="_blank">github.com</a>
+  </header>
+
+  <article class="onebox-body">
+    <h3><a href="https://github.com/yu-org/nine-tripods/tree/main/MEVless" rel="noopener nofollow ugc" target="_blank">nine-tripods/MEVless at main · yu-org/nine-tripods</a></h3>
+
+
+  <p><span class="label1">Contribute to yu-org/nine-tripods development by creating an account on GitHub.</span></p>
+
+  </article>
+
+  <div class="onebox-metadata">
+    
+    
+  </div>
+
+  <div style="clear: both;"></div>
+</aside>
+<aside class="onebox githubfolder">
+  <header class="source">
+      <img class="site-icon" height="32" src="https://ethresear.ch/uploads/default/original/2X/b/bad3e5f9ad67c1ddf145107ce7032ac1d7b22563.svg" width="32" />
+
+      <a href="https://github.com/VersechainLabs/versechain/tree/mevless" rel="noopener nofollow ugc" target="_blank">github.com</a>
+  </header>
+
+  <article class="onebox-body">
+    <h3><a href="https://github.com/VersechainLabs/versechain/tree/mevless" rel="noopener nofollow ugc" target="_blank">GitHub - VersechainLabs/versechain at mevless</a></h3>
+
+  <p><a href="https://github.com/VersechainLabs/versechain/tree/mevless" rel="noopener nofollow ugc" target="_blank">mevless</a></p>
+
+  <p><span class="label1">A high performance decentralized modular sequencer for Starknet</span></p>
+
+  </article>
+
+  <div class="onebox-metadata">
+    
+    
+  </div>
+
+  <div style="clear: both;"></div>
+</aside>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/b/f/bfa58e407bea18228ba10bbc90f904aca2c776aa.jpeg" title="image"><img alt="image" height="500" src="https://ethresear.ch/uploads/default/optimized/3X/b/f/bfa58e407bea18228ba10bbc90f904aca2c776aa_2_607x500.jpeg" width="607" /></a></div><p></p>
+<p>You can see the txHash order-commitment in the above red box and you can try MEV-attacking these txs when they are completed by tx-contents later, then you will find you cannot insert your tx into their order at all.</p>
+            <p><small>9 posts - 3 participants</small></p>
+            <p><a href="https://ethresear.ch/t/a-trustless-on-chain-anti-mev-solution-for-layer2-3/20260">Read full topic</a></p>
+]]></content:encoded>
+<pubDate>Tue, 13 Aug 2024 04:02:59 +0000</pubDate>
+<pubDate>Tue, 13 Aug 2024 04:02:59 +0000</pubDate>
+</item>
 
 <item>
 <title>Enabling truly encrypted DeFi in FHE rollups</title>
