@@ -4,6 +4,95 @@
 <title>Ethereum Research - Latest topics</title>
 <link>https://ethresear.ch/latest</link>
 
+<item>
+<title>A Node-Based Solution to Execution Sharding: The KRNL Protocol</title>
+<link>https://ethresear.ch/t/a-node-based-solution-to-execution-sharding-the-krnl-protocol/20268</link>
+<guid>https://ethresear.ch/t/a-node-based-solution-to-execution-sharding-the-krnl-protocol/20268</guid>
+<content:encoded><![CDATA[
+<div> 关键词：Web3、KRNL协议、执行碎片化、证明来源（PoP）、去中心化注册表
+
+总结：
+
+本文探讨了Web3生态系统所面临的挑战，包括网络碎片化、可扩展性限制、跨链集成复杂性和安全漏洞。为解决这些问题，文章提出了一种名为KRNL协议的解决方案，它是一个集成引擎，能够无缝地在以太坊交易生命周期中整合无许可和可组合功能，跨越多个区块链网络。KRNL通过将功能转换为称为“内核”的执行碎片来优化资源使用、增强模块化并加速部署，从而改进去中心化应用程序的响应速度并缩短其上市时间。
+
+文章进一步介绍了执行碎片的概念，即通过将智能合约的执行分散到多个区块链网络中，以提高区块链系统的可扩展性和效率。KRNL协议作为这一概念的一部分，旨在成为Web3框架中的关键工具，通过引入社区构建、无许可、可货币化和可组合的执行碎片，实现跨链应用的开发。
+
+此外，文章提出了“内核”作为执行碎片的代表，它们具有状态无状态、轻量级设计、韧性和独立部署能力等特征，旨在提供一个去中心化的云环境，允许用户在分布式环境中运行应用程序。KRNL协议还包括证明来源（PoP）机制，确保内核成功执行后才能执行交易，以及去中心化注册表，用于激活和货币化由社区构建的内核。
+
+最后，文章概述了DeFaaS系统，这是一个利用区块链技术和去中心化API管理的新型去中心化FaaS系统，旨在提供比传统FaaS解决方案更好的可扩展性、灵活性、安全性和可靠性。同时，文章还提出了一个基于以太坊区块链特性的模型，用于执行不同服务并根据服务质量差异性地交付可靠性，以应对多服务网络中的成本降低需求。文章还讨论了去中心化数字身份的实现，提出了一个统一的钱包解决方案，以管理区块链和自主权两种类型的去中心化身份，并通过实际案例进行了验证。 <div>
+<p>By <a href="https://x.com/asim_eth" rel="noopener nofollow ugc">Asim Ahmad</a> and <a href="https://x.com/Tahir_Mahmood" rel="noopener nofollow ugc">Tahir Mahmood</a> on behalf of <a href="https://krnl.xyz" rel="noopener nofollow ugc">KRNL</a>.</p>
+<p><strong>1. Abstract</strong></p>
+<p>The evolution of the Web3 ecosystem confronts pivotal challenges such as network fragmentation, scalability constraints, cross-chain integration complexities, and security vulnerabilities. To address these issues, we introduce the KRNL Protocol—an orchestration and verification engine that seamlessly integrates permissionless and composable functions across multiple blockchain networks within the Ethereum transaction lifecycle. By transforming both on-chain and off-chain functions into execution shards called “kernels,” KRNL offers a distributed runtime environment that optimizes resource utilization, enhances modularity, and accelerates deployment. This approach not only improves the responsiveness of decentralized applications (dApps) but also reduces their time-to-market. Our proposal positions KRNL as part of the fabric of the Web3 framework.</p>
+<p><strong>2. Motivation</strong></p>
+<p>The Web3 ecosystem faces several significant challenges, including fragmentation, scalability limitations, cross-chain friction, and security concerns.</p>
+<p><strong>Fragmentation</strong>: The emergence of numerous Layer 1 and Layer 2 solutions has led to the creation of isolated silos. This fragmentation impedes seamless interaction between applications and smart contracts across different environments, undermining the foundational principle of composability in decentralized systems.</p>
+<p><strong>Scalability Constraints</strong>: Ethereum grapples with network congestion and high gas fees. These scalability issues deter the widespread adoption of dApps and erode user experience.</p>
+<p><strong>Cross-Chain Friction</strong>: Facilitating interoperability between Ethereum and other blockchains often demands intricate integrations. The absence of standardized cross-chain communication protocols exacerbates development complexities, stifling innovation and efficiency.</p>
+<p><strong>Security Vulnerabilities</strong>: Ensuring transaction integrity, provenance, and security in a decentralized manner remains a challenge. The proliferation of bridges and interoperability solutions introduces novel attack vectors, heightening security risks.</p>
+<p>To address these challenges, we reimagine the execution paradigm by introducing the concept of kernels - community-built, permissionless, monetizable, and composable execution shards across Web3. We also introduce the KRNL protocol, an orchestration and verification engine that enables smart contracts to integrate execution shards, enriching the logic and state of traditional smart contract operations without the creation of custom infrastructure. With this proposal, we aim to become an essential tool for the development of cross-chain applications.</p>
+<p><strong>3. TL;DR</strong></p>
+<p>Execution Sharding refers to the approach of dividing and distributing the execution of smart contracts across multiple blockchain networks, or “shards”, to enhance scalability and efficiency in blockchain systems. Instead of executing every transaction on a single chain, execution sharding allows transactions and smart contract states to be distributed across multiple chains, each handling a portion of the overall workload.</p>
+<p>Execution sharding is critical for Ethereum’s scalability. The KRNL Protocol integrates permissionless and composable kernels (execution shards) across multiple networks, seamlessly into the native Ethereum transaction lifecycle.</p>
+<p>KRNL manages resources to provide a secure and optimal execution environment for smart contracts. This enables a distributed runtime environment that determines transaction outcome based on selected kernels, operating across different environments. KRNL’s open framework enhances modularity, optimizes resources, ensures stable operations, and accelerates deployment, ultimately improving responsiveness and reducing time to market for applications.</p>
+<p><strong>4. Introducing Kernels</strong></p>
+<p>Within the KRNL Protocol framework, kernels represent execution shards. These kernels transform both on-chain and off-chain functions into modular units characterized by the following attributes:</p>
+<ul>
+<li><strong>Statelessness</strong>: Kernels maintain no intrinsic state, ensuring flexibility and facilitating seamless migration across environments.</li>
+<li><strong>Lightweight Design</strong>: To minimize computational overhead, kernels promote efficient execution.</li>
+<li><strong>Resilience</strong>: Engineered to withstand operational failures, ensuring reliable performance.</li>
+<li><strong>Independent Deployability</strong>: Allowing for deployment across various environments.</li>
+</ul>
+<p>The defining features of kernels include:</p>
+<ul>
+<li><strong>Infrastructure Agnosticism</strong>: Kernels are not tethered to specific infrastructures; they possess the agility to migrate across environments as necessitated.</li>
+<li><strong>Enhanced Modularity and Composability</strong>: By deconstructing applications into discrete kernels, modularity is enhanced, enabling permissionless sharing across multiple applications.</li>
+<li><strong>Accelerated Deployment</strong>: Simplifying the deployment process improves responsiveness and reduces time-to-market for applications.</li>
+</ul>
+<p><strong>5. Vision</strong></p>
+<p><strong>The Pre-Cloud Paradigm</strong></p>
+<p>Before cloud computing, developers bore the burden of constructing, operating, and maintaining all requisite programs and services. This paradigm engendered prohibitive costs, scalability constraints, accessibility challenges, and resource limitations. Cloud computing revolutionized this landscape, introducing managed services where back-end infrastructures are handled by cloud providers.</p>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/5/f/5fe5cbe3446592ada1eea874797faf006e20d182.png" title="Before and After Cloud Computing"><img alt="Before and After Cloud Computing" height="315" src="https://ethresear.ch/uploads/default/optimized/3X/5/f/5fe5cbe3446592ada1eea874797faf006e20d182_2_690x315.png" width="690" /></a></div><p></p>
+<p><strong>KRNL’s Transformative Potential</strong></p>
+<p>KRNL seeks to catalyze a comparable paradigm shift within the Web3 domain—a permissionless Web3 cloud environment built by the community through contributions of monetizable kernels. This vision aligns with the Function as a Service (FaaS) model, reimagined to suit the decentralized and heterogeneous fabric of blockchain ecosystems.</p>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/0/3/03a9e2f49a0d71e30f39b7ce9368173d25a7b5a6.jpeg" title="Before and After KRNL"><img alt="Before and After KRNL" height="301" src="https://ethresear.ch/uploads/default/optimized/3X/0/3/03a9e2f49a0d71e30f39b7ce9368173d25a7b5a6_2_690x301.jpeg" width="690" /></a></div><p></p>
+<p><strong>Functions as a Service (FaaS) in the Web3 Context</strong></p>
+<p>FaaS is a category of cloud computing services that provide a platform enabling customers to develop, run and manage applications without the complexity of building and maintaining the infrastructure associated with developing and launching an app. Examples of a traditional FaaS include AWS Lambda, Google Cloud Functions, Microsoft Azure Functions, etc.</p>
+<p>The conventional FaaS model does not fit well in distributed and heterogeneous blockchain environments, where each blockchain is a silo and not efficient in the context of the whole Web3 ecosystem. To adapt this concept to Web3, it is essential to ensure decentralized registry, management, and execution of kernels.</p>
+<p><strong>6. Core Concepts</strong></p>
+<p><strong>The Computing Engine</strong></p>
+<p>KRNL enhances an Ethereum Remote Procedure Call (RPC) node with a verification and orchestration-enabled computing engine. This engine abstracts the intricacies associated with integrating smart contract interdependencies.</p>
+<p>The computing engine creates an application and technology agnostic framework that offers a runtime environment to user applications in a distributed manner. It sits between a transaction initiated on any chain and its propagation into a block, determining a transaction’s outcome based on the kernels selected. This approach allows for flexible, efficient scaling and optimization of distributed applications.</p>
+<p><strong>Proof of Provenance (PoP)</strong></p>
+<p>PoP validates that prescribed kernels have run successfully before a transaction is executed, ensuring reliability and security of the KRNL Protocol.</p>
+<p>The KRNL Protocol achieves this by utilizing various schemes including a decentralized token authority that issues a signature token, ERC-1271, cryptography and proof systems. The implementation requires the application developer to implement a Software Development Kit (SDK) as well as the token authority. PoP works with existing standards within the Ethereum ecosystem, combining multiple schemes to ensure an anti-fragile system.</p>
+<p><strong>Decentralized Registry</strong></p>
+<p>An Ethereum based registry for activating and monetizing community built kernels. This registry serves as the definitive repository, maintaining critical information about registered kernels, including their pathways, monetization schemes, and other customizable parameters. Core to the design of KRNL is the concept of a two-sided marketplace where kernels are built and monetized, while being utilized by applications across Web3.</p>
+<p><strong>7. Architecture</strong></p>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/d/2/d2b12fc5edd69ae351e74dda8a31b3f6e57a5311.png" title="Architecture Overview of the KRNL Protocol"><img alt="Architecture Overview of the KRNL Protocol" height="388" src="https://ethresear.ch/uploads/default/optimized/3X/d/2/d2b12fc5edd69ae351e74dda8a31b3f6e57a5311_2_690x388.png" width="690" /></a></div><p></p>
+<p><strong>Use Case Scenario</strong></p>
+<p>In a hypothetical scenario, a DeFi protocol on Ethereum would like to allow users to trade RWA assets if they are an approved user on Company 1’s RWA platform (and if not, to reject the transaction from this wallet). Say Company 1 has built an RWA platform on Blockchain 2, with dynamic off-chain metadata corresponding to approved users. Additionally, these users need to have an identity score of X as determined by a on-chain DID smart contract on Blockchain 3. In the past, implementing these solutions across various chains would have required multiple complex integrations and in many cases require direct communication with vendors. However, with KRNL, builders now only need to perform a single, one-time permissionless integration.</p>
+<p>There is not currently any application layer that facilitates the conditional logic before state changes are executed, and this is generally built ground-up by builders. Ideally, this would be done in a plug-and-play, permissionless manner that would be reproducible by protocols that want to utilize the RWA platform and identifiers from the DID system.<br />
+</p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/8/6/869c6dc2fe0c134bfb17f32f1b481fadcd6e2704.png" title="Limitations of Existing Solutions"><img alt="Limitations of Existing Solutions" height="323" src="https://ethresear.ch/uploads/default/optimized/3X/8/6/869c6dc2fe0c134bfb17f32f1b481fadcd6e2704_2_690x323.png" width="690" /></a></div><p></p>
+<p><strong>8. Decentralization and Security Considerations</strong></p>
+<p><strong>Upholding Decentralization</strong></p>
+<p>KRNL leverages the intrinsic decentralization of existing native blockchains. By integrating with a standard Ethereum RPC node, any Ethereum RPC node can function as a KRNL node without interfering with consensus mechanisms of the underlying network. Node operators are incentivized through the accrual of a proportion of fees generated from kernels, fostering a decentralized and participatory ecosystem.</p>
+<p><strong>Mitigating Malicious Activities</strong></p>
+<p>To preempt and mitigate potential malicious activities, such as replicating KRNL node code to fabricate counterfeit signatures, KRNL employs multiple cryptographic schemes that ensure security by design. The security architecture is flexible, customizable, and predominantly under the control of the dApp developer. This approach ensures that the KRNL Protocol remains permissionless, resilient, and secure.</p>
+<p><strong>Explore more in our <a href="https://github.com/KRNL-Labs/krnl-node-sandbox-public" rel="noopener nofollow ugc">KRNL Developer Sandbox</a></strong></p>
+<p><strong>Learn more about <a href="https://docs.krnl.xyz/" rel="noopener nofollow ugc">KRNL</a></strong></p>
+<p><strong>Supporting Research Papers</strong></p>
+<p><a href="https://arxiv.org/html/2404.08151v1" rel="noopener nofollow ugc">Decentralized FaaS over Multi-Clouds with Blockchain based Management for Supporting Emerging Applications</a></p>
+<p>DeFaaS is a novel decentralized Function-as-a-Service (FaaS) system proposed to address the limitations of centralized FaaS solutions. This system leverages blockchain technology and decentralized API management to create a distributed FaaS platform that offers improved scalability, flexibility, security, and reliability. DeFaaS is designed to support various distributed computing scenarios beyond FaaS, including decentralized applications (dApps), volunteer computing, and multi-cloud service mesh. The proposed system aims to mitigate issues associated with centralized FaaS, such as vendor lock-in and single points of failure.</p>
+<p><a href="https://www.sciencedirect.com/science/article/pii/S0306457321000340?ref=pdf_download&amp;fr=RR-2&amp;rr=89e00464f80d773d" rel="noopener nofollow ugc">Multi-Service Model for Blockchain Networks</a></p>
+<p>Multi-service networks aim to efficiently supply distinct goods within the same infrastructure by relying on a (typically centralized) authority to manage and coordinate their differential delivery at specific prices. In turn, final customers constantly seek to lower costs whilst maximizing quality and reliability. This paper proposes a decentralized business model for multi-service networks using Ethereum blockchain features – gas, transactions, and smart contracts – to execute multiple services at different prices. By employing Ether, to quantify the quality of service and reliability of distinct private Ethereum networks, their model concurrently processes streams of services at different gas prices while differentially delivering reliability and service quality.</p>
+<p><a href="https://www.researchgate.net/publication/372662346_Orchestrating_Digital_Wallets_for_On-_and_Off-chain_Decentralized_Identity_Management" rel="noopener nofollow ugc">Qualified Digital Certificates within Blockchain Networks</a></p>
+<p>This paper examines decentralized digital identities, which use asymmetric cryptography without centralized oversight, focusing on both on-chain (blockchain) and off-chain (self-sovereign) types. Currently, no single wallet manages both types of decentralized identities. To address this, the paper proposes an orchestration solution for a universal wallet that combines both types and validates it using a real-life use case.</p>
+            <p><small>1 post - 1 participant</small></p>
+            <p><a href="https://ethresear.ch/t/a-node-based-solution-to-execution-sharding-the-krnl-protocol/20268">Read full topic</a></p>
+]]></content:encoded>
+<pubDate>Wed, 14 Aug 2024 11:56:25 +0000</pubDate>
+<pubDate>Wed, 14 Aug 2024 11:56:25 +0000</pubDate>
+</item>
 
 <item>
 <title>DoS on block proposers in PoS and block builders in PBS</title>
