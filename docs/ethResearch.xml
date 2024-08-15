@@ -5,6 +5,260 @@
 <link>https://ethresear.ch/latest</link>
 
 <item>
+<title>A Threshold Network for “Human Keys” to solve privacy and custody issues</title>
+<link>https://ethresear.ch/t/a-threshold-network-for-human-keys-to-solve-privacy-and-custody-issues/20276</link>
+<guid>https://ethresear.ch/t/a-threshold-network-for-human-keys-to-solve-privacy-and-custody-issues/20276</guid>
+<content:encoded><![CDATA[
+<div> 关键词：Mishti网络、阈值网络设计、零知识证明、身份验证、合规性
+
+总结:
+
+本文探讨了在区块链和公钥基础设施（PKI）中，为何不直接将个人映射到密钥，而是通过一种称为Mishti网络的创新阈值网络设计来实现这一目标。Mishti网络的核心理念在于，它允许将个人的知识和属性与高熵伪随机数建立一种碰撞抵抗的映射关系，从而生成密钥。这种设计解决了ZK身份验证、合规性和用户注册过程中的一些关键问题。
+
+首先，Mishti网络通过基于阈值验证的模糊随机函数（tVOPRF）在私有数据上构建了一种解决方案，使得密钥能够从个人的身份信息中生成。这不仅包括生物识别信息，也包括密码、安全问题等人类可记忆的数据，从而避免了仅使用随机数生成密钥可能带来的安全风险。
+
+其次，Mishti网络为解决以太坊面临的用户注册复杂性和隐私保护问题提供了新思路。它通过提供自托管密钥管理方式，确保用户对密钥的唯一控制权，同时支持密钥恢复机制，增强了用户体验。此外，Mishti网络还展示了如何利用其基础加密技术解决ZK身份应用中需要从用户身份生成不可追踪nullifiers的问题，从而保护用户的隐私。
+
+最后，Mishti网络还提出了将同态加密和零知识证明结合，以满足合规需求的方法。通过构造基于阈值椭圆曲线乘法的同态加密方案，Mishti网络允许在ZK证明中包含加密数据，并实现灵活的数据访问控制，这为解决ZK身份验证中的合规性挑战提供了新的可能性。
+
+综上所述，Mishti网络通过创新的阈值网络设计和零知识证明技术，不仅解决了区块链和PKI领域中的身份验证和隐私保护问题，还为合规性管理提供了新的解决方案，展示了其在数字身份管理和合规性控制方面的潜力。 <div>
+<h1><a class="anchor" href="https://ethresear.ch#p-49627-introduction-1" name="p-49627-introduction-1"></a>Introduction</h1>
+<p>In blockchain and PKI more generally, people are represented by keys. A somewhat strange question to ask might be “why don’t keys represent people?” I will argue this is actually an important question and the crux of major privacy and onboarding challenges. We present a a threshold network design dubbed Mishti Network to derive keys from people rather than arbitrary randomness. This network solves a number of problems in ZK identity, compliance, and onboarding.</p>
+<p>What does it mean for a key to be a representation of a person? There are two conditions that should be met:</p>
+<ul>
+<li>A person’s knowledge and/or attributes can always map to the private key</li>
+<li>This person is the sole controller of the key</li>
+</ul>
+<p>In other words, it is a collision-resistant map of personal data and attributes to a high-entropy pseudorandom number. Without collision resistance, multiple people could have the same key. Without high entropy, the key is not secure. Keys can be both standard private keys or also a nullifier that’s useful for secure ZK credentials.</p>
+<p>Human keys are not solely biometrics. They could be from human-friendly data such as security questions, passwords, or any unique knowledge belonging to an individual rather than arbitrary randomness.</p>
+<h1><a class="anchor" href="https://ethresear.ch#p-49627-solution-oblivious-pseudorandom-function-2" name="p-49627-solution-oblivious-pseudorandom-function-2"></a>Solution: Oblivious Pseudorandom Function</h1>
+<p>This solution is based on a threshold verifiable oblivious pseudorandom function (tVOPRF) on private data. An oblivious pseudorandom function (OPRF) takes a private input and computes a pseudorandom function (PRF). PRFs take low-entropy input and create high-entropy output. Adding verifiability via a ZKP makes it into a VOPRF. Verifying individual node contributions is important to decentralizing the network.</p>
+<h1><a class="anchor" href="https://ethresear.ch#p-49627-why-it-is-helpful-to-ethereum-pki-3" name="p-49627-why-it-is-helpful-to-ethereum-pki-3"></a>Why it is helpful to Ethereum + PKI</h1>
+<p>Some of the outstanding issues in Ethereum are onboarding and privacy. Onboarding requires not just simplicity but also self-custody, and recovery. Current onboarding solutions such as social logins and passkeys do not have self-custody (as they can be recovered by web2 accounts), while self-custodial solutions can’t have recovery without extra onboarding step like electing gaurdians.</p>
+<p>A similar need is for ZK identity applications that need to derive nullifiers from their users’ identities, in a way nobody can trace back to the user. This is a common need in proof-of-personhood solutions to ensure that each person only has one corresponding nullifier without a central database or key that links users to their nullifiers.</p>
+<p>Furthermore, the underlying cryptography and network can be repurposed to tackle another pressing challenge: that of satisfying compliance rules with ZK identity. The same underlying elliptic curve multiplication primitive that underlies this design can be used to construct threshold ElGamal decryption over ZK-friendly curves, which can allow ZK proofs to contain encrypted data with flexible access control.</p>
+<h1><a class="anchor" href="https://ethresear.ch#p-49627-oblivious-pseudorandom-function-4" name="p-49627-oblivious-pseudorandom-function-4"></a>Oblivious Pseudorandom Function</h1>
+<p>To generate keys from identities, an oblivious pseudorandom function (OPRF) can be constructed with distributed EC scalar multiplication. This allows private user data such as security questions, biometrics, passwords, or social security numbers, etc. to deterministically generate secret keys. The resulting pseudorandom value is computationally impractical to reverse despite it being from low-entropy input. One can thereby create wallet or nullifier from any (or a combination) of these low-entropy “human” factors. In the 2HashDH OPRF [1], a server or network’s secret is used to give randomness to the client’s input. The oblivious property prevents any server or set of nodes from seeing see this input.</p>
+<p>2HashDH is the following algorithm between a user with a private input <span class="math">x</span> and a server (or network) with a private key <span class="math">s</span>. For a subgroup <span class="math">G</span> of an elliptic curve there are two hash functions:</p>
+<p><span class="math">hashToCurve: \{0,1\}^* \rightarrow G</span><br />
+<span class="math">hashToScalar: G \rightarrow F_q</span>.</p>
+<p>The 2HashDH OPRF proceeds as follows</p>
+<ol>
+<li>User samples a random mask <span class="math">r</span> and sends <span class="math">M = r * hashToCurve(x)</span></li>
+<li>Server multiplies by its secret, returning <span class="math">s * M</span></li>
+<li>User computes the output by unmasking the server’s response and hashing it: <span class="math">o = HashToScalar(r^{-1} * s * M)</span></li>
+</ol>
+<p><span class="math">o</span> is uniformly pseudorandom in <span class="math">F_q</span>, and the server is information-theoretically blinded from the user’s input.</p>
+<h2><a class="anchor" href="https://ethresear.ch#p-49627-decentralizing-the-server-5" name="p-49627-decentralizing-the-server-5"></a>Decentralizing the server</h2>
+<p>To decentralize the OPRF server, only the step with a server must be decentralized:</p>
+<blockquote>
+<ol start="2">
+<li>Server multiplies by its secret, returning <span class="math">s * M</span></li>
+</ol>
+</blockquote>
+<p>For threshold elliptic curve multiplication, first a linear secret sharing, such as Shamir’s scheme, must be used. The secret key is generated through distributed key generation (DKG) such that each node with index <span class="math">i</span> receives share <span class="math">f(i)</span> for some secret polynomial <span class="math">f</span> known to nobody. There is no node at the <span class="math">0</span> index and <span class="math">f(0)</span> is the secret key of the network. The secret key <span class="math">f(0)</span> can be computed by a set <span class="math">Q</span> of <span class="math">t</span> nodes where <span class="math">t</span> is one more than the degree of <span class="math">f</span>.</p>
+<p><span class="math">f(0) = \sum_{i \in Q}{L_{0, Q}(i)*f(i)}</span></p>
+<p>where <span class="math">L_{0,Q}(i)</span> is the Lagrange basis for index <span class="math">i</span> in set <span class="math">Q</span> evaluated at zero.</p>
+<p>Instead of reconstructing <span class="math">f(0)</span>, the nodes can collaborate to construct <span class="math">f(0) * M</span></p>
+<p><span class="math">f(0) * M = \sum_{i \in Q}{L_{0, Q}(i)*f(i) * M}</span></p>
+<p>This is sufficient for step</p>
+<blockquote>
+<ol start="2">
+<li>Server multiplies by its secret, returning <span class="math">s * M</span></li>
+</ol>
+</blockquote>
+<p>if the nodes are honest. But if one lies, the result will be wrong and there will be no way of knowing who lied. Thus, each node should prove their individual multiplication using a lightweight zero-knowledge DLEQ proof.</p>
+<h1><a class="anchor" href="https://ethresear.ch#p-49627-other-interesting-use-case-provable-encryption-with-programmable-privacy-6" name="p-49627-other-interesting-use-case-provable-encryption-with-programmable-privacy-6"></a>Other interesting use case: Provable encryption with programmable privacy</h1>
+<p>The same decentralized EC scalar primitive can be used not just for VOPRF but also for ElGamal decryption over ZK-friendly curves. This is helpful when identities must be revealed in certain conditions.</p>
+<p>For example, many private DeFi protocols are interested in ensuring that bad actors do not get the benefits of anonymity, while the average user typically does. Governments are not satisfied with solely ZK because they need access to user data, but currently the only alternative is honeypots where all user data is stored to be turned over to authorities if needed.</p>
+<p>Another use of revealing provably encrypted identities under certain conditions is undercollateralized lending – what if you want an identity or private key to be revealed if a DeFi loan is defaulted on? In this case, you need to prove the proper data is encrypted correctly, then have a smart contract control decryption rights.</p>
+<p>To modify this threshold EC point multiplication to such use cases, little is needed.</p>
+<h3><a class="anchor" href="https://ethresear.ch#p-49627-encryption-7" name="p-49627-encryption-7"></a>Encryption</h3>
+<p>ElGamal encryption is client-side:</p>
+<ol>
+<li>Create an ephemeral keypair <span class="math">(a, A = aG)</span></li>
+<li>Encode the message as an EC point <span class="math">P</span></li>
+<li>Compute Diffie-Hellman shared secret with network public key: <span class="math">aB</span></li>
+<li>Compute the ciphertext <span class="math">(A, aB+P)</span></li>
+</ol>
+<h3><a class="anchor" href="https://ethresear.ch#p-49627-decryption-8" name="p-49627-decryption-8"></a>Decryption</h3>
+<p>Unlike encryption, decryption requires a server or decentralized network.</p>
+<ol>
+<li>Server/network multiply ephemeral public key <span class="math">A</span> by its secret key <span class="math">b</span> to get <span class="math">bA</span> = <span class="math">aB</span></li>
+<li>Decryptor subtracts this value from <span class="math">aB+P</span> to get <span class="math">P</span></li>
+</ol>
+<p>The server/network’s step can be handled by the same threshold multiplication protocol as before!</p>
+<h1><a class="anchor" href="https://ethresear.ch#p-49627-network-setup-and-collusion-protection-9" name="p-49627-network-setup-and-collusion-protection-9"></a>Network Setup and Collusion Protection</h1>
+<p>The team at Holonym has implemented this as as an AVS on Eigenlayer called Mishti Network. High reputation is common among Eigenlayer operators despite the permissionless nature, so it is ideal for threshold networks where collusion is a concern. To further mitigate collusion risk, there is the idea of parallel networks:</p>
+<p>The asynchronous and homomorphic nature of the computations means users can permissionlessly add nodes outside of Mishti Network that they trust to not collude with Mishti Network. E.g. instead of splitting a secret between Mishti Network, half of the secret is between the Mishti Network and the other half in a semi-trusted node elected by the user. Since the whole network just does an EC multiplication, exactly what its individual does do, nodes and networks can be treated the same. A 2/2 scheme could be done between a semi-trusted node and Mishti network, simply by</p>
+<ul>
+<li>Adding their public keys to get the joint public key</li>
+<li>Adding their responses to get a joint response to the computation</li>
+</ul>
+<p>Note this requires no consent from the network and is not limited to 2/2 schemes; it can be done with any combination of semi-trusted nodes and/or independent networks via threshold schemes.</p>
+<h1><a class="anchor" href="https://ethresear.ch#p-49627-references-10" name="p-49627-references-10"></a>References</h1>
+<p>[1] S. Jarecki, A. Kiayias, and H. Krawczyk, “Round-optimal<br />
+password-protected secret sharing and T-PAKE in the password only model,” in International Conference on the Theory and Application of Cryptology and Information Security. Springer, 2014 pp. 233–253</p>
+<h1><a class="anchor" href="https://ethresear.ch#p-49627-concluding-notes-11" name="p-49627-concluding-notes-11"></a>Concluding Notes</h1>
+<p>If you have any ideas on how to improve or elaborate on this network design for either ZK identity, self-custody, or any other relevant use cases, please reply or reach out.</p>
+            <p><small>1 post - 1 participant</small></p>
+            <p><a href="https://ethresear.ch/t/a-threshold-network-for-human-keys-to-solve-privacy-and-custody-issues/20276">Read full topic</a></p>
+]]></content:encoded>
+<pubDate>Wed, 14 Aug 2024 23:38:38 +0000</pubDate>
+<pubDate>Wed, 14 Aug 2024 23:38:38 +0000</pubDate>
+</item>
+<item>
+<title>On Attestations, Block Propagation, and Timing Games</title>
+<link>https://ethresear.ch/t/on-attestations-block-propagation-and-timing-games/20272</link>
+<guid>https://ethresear.ch/t/on-attestations-block-propagation-and-timing-games/20272</guid>
+<content:encoded><![CDATA[
+<div> 关键词：Attestations, Block Propagation, Timing Games, Node Operators, Ethereum Consensus
+
+总结：
+
+文章主要探讨了在以太坊网络中验证者的行为变化、区块传播机制及其对共识的影响。文章通过具体案例研究了节点运营商Lido、Coinbase和Kiln在区块提议时间上的策略与行为，并分析了这些策略如何影响网络共识。
+
+1. **区块构建市场的演变**：文章指出，目前大部分区块构建工作外包给特定的区块构建者，其中两个主要构建者负责生成大约三分之二的区块。Kiln等实体则通过延迟区块提议时间来最大化其策略空间，将其提议时间精确到每槽的3-3.5秒。
+
+2. **区块传播与控制权转移**：虽然提案者仍然负责从转发器接收并传播区块，但实际传播速度往往由转发器决定，因为它们通常拥有更好的网络连接。然而，提案者仍能通过延迟操作来参与时间游戏，影响区块的传播速度。
+
+3. **验证行为的分析**：文章详细分析了不同节点运营商在面对来自不同提案者的区块时的验证行为。例如，Kiln验证者显示出一种独特的“U”型分布，这可能是由于不同的地理位置或客户端软件导致。此外，文章还讨论了验证者如何处理自己的区块，即“本地区块”，以避免区块重组。
+
+4. **协调行为的讨论**：文章探讨了节点运营商之间可能存在的协调行为，以及这种协调行为如何影响网络共识。例如，Kiln验证者被发现试图通过投票支持自己的区块来避免区块重组，这在以太坊社区中被视为不适当的行为。
+
+5. **解决方案与未来方向**：文章提出了通过增加对关联验证者惩罚的措施来对抗复杂协调行为的可能性，以维护网络的公平性和安全性。同时，文章鼓励研究者和开发者继续探索如何平衡提高效率与保护网络免受恶意协调行为的影响。 <div>
+<h1><a class="anchor" href="https://ethresear.ch#p-49615-on-attestations-block-propagation-and-timing-games-1" name="p-49615-on-attestations-block-propagation-and-timing-games-1"></a>On Attestations, Block Propagation, and Timing Games</h1>
+<p>By now, <a href="https://timing.pics/">proposer timing games</a> are no longer a new phenomenon and have been analyzed, <a href="https://eprint.iacr.org/2023/760">here</a>, <a href="https://arxiv.org/abs/2305.09032">here</a> and <a href="https://ethresear.ch/t/deep-diving-attestations-a-quantitative-analysis/20020">here</a>.</p>
+<p>In the following research piece, I want to show the <strong>evolution of <a href="https://timing.pics/">proposer timing games</a></strong> and analyze their impact on attesters. Through a case study of the node operators of Lido, Coinbase, and Kiln, we dive deep into block proposal timing and its impact on Ethereum’s consensus.</p>
+<p><img alt="kilnmeme" height="413" src="https://ethresear.ch/uploads/default/original/3X/1/5/152baa9c8da23d4524a4e75101c4a1c0967ebf83.png" width="456" /></p>
+<p>As of August 2024, the <strong>block building market is largely outsourced</strong>, with <a href="https://mevboost.pics/">~90%</a> handled by <a href="https://github.com/flashbots/mev-boost">mevboost</a> block builders. In practice, two builders, <a href="https://www.titanbuilder.xyz/">Titan Builder</a> and <a href="https://beaverbuild.org/">Beaverbuild</a>, produce approximately <a href="https://mevboost.pics/">80%</a> of all blocks that make it on-chain.</p>
+<p><strong>Kiln is among the entities pushing timing games the furthest</strong>, delaying block proposals to the <strong>3-3.5 second</strong> mark within the slot.</p>
+<blockquote>
+<p>In today’s environment with mevboost, <strong>block propagation is primarily handled by relays.</strong> Although proposers still propagate the block after receiving it from the relay, relays typically have better network connectivity and can therefore do it faster. <strong>However, the timing remains under the control of proposers</strong>, who can delay their <code>getHeader</code> calls to engage in timing games.</p>
+</blockquote>
+<p>This chart shows the <strong>evolution of timing games</strong>. We can see that blocks from Kiln validators appear later and later over time.</p>
+<p><img alt="proposer_timing_games" class="animated" height="383" src="https://ethresear.ch/uploads/default/original/3X/8/2/82cad8533f90505055f8eced73ae89d774a96111.gif" width="690" /></p>
+<p><strong>This comes with an impact on the network: for blocks proposed by Kiln proposers, the missed/wrong head vote rate is significantly higher:</strong><br />
+</p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/8/d/8d3a31d4dd9d8856d2baaf1b7ad1528312b72923.png" title="missed_head_votes_over_proposers"><img alt="missed_head_votes_over_proposers" height="316" src="https://ethresear.ch/uploads/default/optimized/3X/8/d/8d3a31d4dd9d8856d2baaf1b7ad1528312b72923_2_690x316.png" width="690" /></a></div><p></p>
+<p><a href="https://ethresear.ch/t/deep-diving-attestations-a-quantitative-analysis/20020">Previous analysis</a> showed that <strong>the longer one waits, the higher the expected number of missed head votes</strong> (<em>“80% of attestations seen by the second 5 in the slot”</em>). Kiln proposes blocks very late, causing some attesters to miss them and instead vote for the parent block. <strong>Given that there are approximately 32,000 validators assigned to each slot, this results in about 10% of them voting for the wrong block.</strong></p>
+<p>Let’s examine the attesting behavior of three large node operators and compare how they respond to <strong>blocks proposed at different times within a slot.</strong> The chart below illustrates the distribution of correct and timely head votes across the seconds within a slot.<br />
+<img alt="attestations_seen_late" class="animated" height="383" src="https://ethresear.ch/uploads/default/original/3X/5/e/5eb241fefdf5cecb08a41d95fbf6d0263dbb573d.gif" width="690" /><br />
+For early blocks, we observe that both <strong>Lido and Coinbase display a characteristic “U”-shape</strong> in their voting patterns that might be caused by different geo locations or client software. In contrast, <strong>Kiln shows a single prominent peak</strong> that slightly lags behind the first peaks of Coinbase and Lido. <strong>However, for late blocks, Kiln attesters also show the “U”-shape pattern.</strong></p>
+<p><strong>When blocks are first seen at the 4-second mark in the p2p network during a slot, most Lido attesters attest up to 2 seconds earlier than most of the Kiln or Coinbase attesters.</strong> This pattern doesn’t necessarily suggest that Kiln is executing “individual strategies.” Instead, it could be attributed to running different clients or using different geographical locations.</p>
+<h3><a class="anchor" href="https://ethresear.ch#p-49615-but-who-affects-whom-2" name="p-49615-but-who-affects-whom-2"></a><em><strong>But who affects whom?</strong></em></h3>
+<p>In the following chart, we compare a node operator’s performance over different proposers. A bar above y=1, for example, the green bar at Lido, indicates that Lido attesters miss more head votes for blocks from Kiln proposers. At the same time, Lido attesters do better for Lido blocks. The dashed line at 1 indicates the average share in missed head votes over all entities as proposers. A bar below 1 means the specific entity misses fewer head votes in conjunction with the respective proposer compared to the average.</p>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/7/8/786e634d534692c6bcef1859d4baf99b6490a363.png" title="missed_head_votes_over_proposers_percentage"><img alt="missed_head_votes_over_proposers_percentage" height="316" src="https://ethresear.ch/uploads/default/optimized/3X/7/8/786e634d534692c6bcef1859d4baf99b6490a363_2_690x316.png" width="690" /></a></div><p></p>
+<blockquote>
+<p>Importantly, it is expected that each node operator does best with its local blocks. This is expected even without a coordination oracle, simply by co-locating nodes.</p>
+</blockquote>
+<p>To quickly summarize what we see:</p>
+<ul>
+<li>Most node operators are rather stable across different proposers.</li>
+<li><strong>Figment performs significantly worse for Kiln proposers.</strong> The same applies to Lido, Kraken, and EtherFi attesters.</li>
+<li><strong>Kiln and Binance are the only entities performing better for Kiln blocks</strong> (which are, as a reminder, very late).</li>
+</ul>
+<p><strong>Kiln attesters generally do well.</strong> <a href="https://ethresear.ch/t/deep-diving-attestations-a-quantitative-analysis/20020">Earlier analysis</a> showes that Kiln does a more than good job when it comes to running high-performing validators. Refer to <a href="https://ethresear.ch/t/deep-diving-attestations-a-quantitative-analysis/20020">this analysis</a> for further details of Kiln’s attestation performance.</p>
+<p><strong>Kiln causes stress.</strong> Now, we know that Kiln blocks cause stress to other attesters but not necessarily to Kiln’s attesters.</p>
+<p><strong>Explaining how.</strong> The “<em>how</em>?” is difficult to respond to at this point. A possible explanation might be that Kiln’s validators are heavily co-located, with many validators running on the same machine, or have very dense peering. Another reason might be coordinated behavior across multiple nodes, either through custom peering/private mesh networks or through another additional communication layer connecting their validators. The latter is regarded as more centralizing as it leverages economies of scale even more.</p>
+<p>A similar pattern can be observed when examining the (correct &amp; timely) attestation timing of Lido and Coinbase for the blocks proposed by each respective entity (26.07.2024-03.08.2024).<br />
+<img alt="attestations_seen_late_by_proposer_misses" class="animated" height="383" src="https://ethresear.ch/uploads/default/original/3X/5/a/5acb3eda53b7f342972637ae3d881d9e7cb44983.gif" width="690" /></p>
+<p>Interestingly, Kiln develops a “U”-shape distribution ranging from <span class="math">3.8 \Rightarrow
+ 6.1</span> for their own late blocks, Lido a peak at 4.2s, and Coinbase a plateau starting at second 4 with a small peak at second 6 in the slot.</p>
+<h2><a class="anchor" href="https://ethresear.ch#p-49615-prevent-reorgs-of-my-own-proposed-blocks-3" name="p-49615-prevent-reorgs-of-my-own-proposed-blocks-3"></a>“Prevent reorgs of my own proposed blocks”</h2>
+<p>Let’s shift our focus to reorged blocks. One strategy from the perspective of a node operator might be to <strong>never</strong> vote for reorging out one’s own block. Simply speaking, “<em>never vote for the parent block as the head if the proposer is me</em>”.</p>
+<p>Instead of calling it <em>an entity’s own block</em>, I will use <em>local block</em> in the following.</p>
+<p>The following chart shows the percentage of attesters voting for the reorged block vs voting for the parent block. The red part displays the % of all attesters from that entity that voted for a reorged block built by that entity.<br />
+</p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/f/5/f580dddb61ad6a3e4f577516f312475182d980d7.png" title="votes_for_local_reorged_block"><img alt="votes_for_local_reorged_block" height="316" src="https://ethresear.ch/uploads/default/optimized/3X/f/5/f580dddb61ad6a3e4f577516f312475182d980d7_2_690x316.png" width="690" /></a></div><p></p>
+<p>Kiln shows outlier behavior. While most node operators’ attesters correctly vote for the parent block rather than the local block, Kiln’s attesters appear to disregard this norm. <strong>Over 10% of Kiln attesters attempt to keep the local block on-chain by voting for it.</strong> If such strategies are adopted, they might justify the losses from incorrect head votes if they prevent the local block from being reorged. However, these tactics are generally frowned upon within the Ethereum community: “<em>don’t play with consensus</em>”.</p>
+<blockquote>
+<p>The chart uses 365 days of data. Thus, if some sophisticated strategy was implemented during the last year, the red portion would be proportionately smaller.</p>
+</blockquote>
+<h2><a class="anchor" href="https://ethresear.ch#p-49615-but-how-do-we-feel-about-any-additional-level-of-coordination-4" name="p-49615-but-how-do-we-feel-about-any-additional-level-of-coordination-4"></a>But how do we feel about any additional level of coordination?</h2>
+<p>Regarding coordinated attesting, we, as community, seem to accept that validators run on the same node vote for the same checkpoints.</p>
+<p>We probably don’t want any additional efforts that cross the boundaries of physical machines to improve coordination across validators. It’s something that everyone can build that goes beyond <a href="https://github.com/ethereum/consensus-specs/blob/b2f2102dad0cd8b28a657244e645e0df1c0d246a/specs/phase0/validator.md#attesting">what the specs describe</a>. Such coordination could have different forms:</p>
+<ul>
+<li><strong>Level 1 - Fall-backs &amp; Static Peering</strong>: Have a central fall-back/back-up node for multiple physical machines. This can also be a circuit breaker, some particularly fault-tolerant machine acting as a private relayer for information. Setups with improved peering, private mesh networks, or similar might also fall into this category.</li>
+<li><strong>Level 2 - If-else rules</strong>: Have hard-coded rules waiting longer in certain slots. Those would be installed on multiple physical machines, allowing them to “coordinate” based on predefined rules.</li>
+<li><strong>Level 3 - Botnet</strong>: Have a centralized oracle that communicates with all validators and delivers the checkpoints to vote for and the timestamp when they should be published.</li>
+</ul>
+<p>In my opinion, crossing the line into the latter form of coordination (<em>level 2 and 3</em>) is problematic, and node operators should be held accountable. Finally, there may be a <strong>gray area</strong> for strategies involving <strong>static peering</strong> and <strong>private mesh networks</strong>.</p>
+<p><strong>Such setups could be used to run (malicious) strategies such as:</strong></p>
+<ul>
+<li>ensuring to never vote for different checkpoints across multiple physical machines.</li>
+<li>ensuring to never vote for reorging out a block from one’s own proposer.</li>
+<li>coordinating based on the consecutive proposer (<a href="https://github.com/ethereum/consensus-specs/pull/3034">honest reorg client</a> (y/n)).</li>
+<li>censoring attestations of a certain party.</li>
+<li>not voting for the blocks of a certain party.</li>
+<li>etc.</li>
+</ul>
+<p><strong>When discussing <em>coordination</em>, it’s important to distinguish between two types:</strong></p>
+<ol>
+<li>Coordinated behavior that occurs when validators are <strong>run from the same physical machine</strong>.</li>
+<li>Coordinated behavior that arises from running the same <strong>modified client software</strong> or relying on the same <strong>centralized oracle</strong>.</li>
+</ol>
+<p>A potential solution to counter sophisticated coordinated validator behavior is <a href="https://ethereum-magicians.org/t/eip-7716-anti-correlation-attestation-penalties/20137">EIP-7716: Anti-Correlation Penalties"</a>, which proposes to scale penalties with the correlation among validators.</p>
+<p><em><strong>Find the code for this analysis <a href="https://github.com/nerolation/timing-games-and-economies-of-scale">here</a>.</strong></em></p>
+<h1><a class="anchor" href="https://ethresear.ch#p-49615-more-on-that-topics-5" name="p-49615-more-on-that-topics-5"></a>More on that topics</h1>
+<div class="md-table">
+<table>
+<thead>
+<tr>
+<th>Title</th>
+<th>Author</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://timing.pics">Timing.pics</a></td>
+<td>DotPics Website</td>
+</tr>
+<tr>
+<td><a href="https://ethresear.ch/t/timing-games-implications-and-possible-mitigations/17612">Timing Games: Implications and Possible Mitigations</a></td>
+<td>Caspar &amp; Mike</td>
+</tr>
+<tr>
+<td><a href="https://ethresear.ch/t/deep-diving-attestations-a-quantitative-analysis/20020">Deep Diving Attestations - A quantitative analysis</a></td>
+<td>Toni</td>
+</tr>
+<tr>
+<td><a href="https://www.paradigm.xyz/2023/04/mev-boost-ethereum-consensus">Time, slots, and the ordering of events in Ethereum Proof-of-Stake</a></td>
+<td>Georgios &amp; Mike</td>
+</tr>
+<tr>
+<td><a href="https://arxiv.org/abs/2305.09032">Time is Money: Strategic Timing Games in Proof-of-Stake Protocols</a></td>
+<td>Caspar et al.</td>
+</tr>
+<tr>
+<td><a href="https://eprint.iacr.org/2023/760">Time to Bribe: Measuring Block Construction Market</a></td>
+<td>Toni et al.</td>
+</tr>
+<tr>
+<td><a href="https://ethresear.ch/t/the-cost-of-artificial-latency-in-the-pbs-context/17847">The cost of artificial latency in the PBS context</a></td>
+<td>Chorus One</td>
+</tr>
+<tr>
+<td><a href="https://ethresear.ch/t/empirical-analysis-of-the-impact-of-block-delays-on-the-consensus-layer/17888">Empirical analysis of the impact of block delays on the consensus layer</a></td>
+<td>Kiln</td>
+</tr>
+<tr>
+<td><a href="https://youtu.be/J_N13erDWKw?t=1061">P2P Presentation on Timing Games (Youtube)</a></td>
+<td>P2P_org</td>
+</tr>
+<tr>
+<td><a href="https://www.youtube.com/watch?v=gsFU-inKRQ8">Time is Money (Youtube)</a></td>
+<td>Caspar</td>
+</tr>
+</tbody>
+</table>
+</div>
+            <p><small>6 posts - 3 participants</small></p>
+            <p><a href="https://ethresear.ch/t/on-attestations-block-propagation-and-timing-games/20272">Read full topic</a></p>
+]]></content:encoded>
+<pubDate>Wed, 14 Aug 2024 13:04:48 +0000</pubDate>
+<pubDate>Wed, 14 Aug 2024 13:04:48 +0000</pubDate>
+</item>
+
+<item>
 <title>A Node-Based Solution to Execution Sharding: The KRNL Protocol</title>
 <link>https://ethresear.ch/t/a-node-based-solution-to-execution-sharding-the-krnl-protocol/20268</link>
 <guid>https://ethresear.ch/t/a-node-based-solution-to-execution-sharding-the-krnl-protocol/20268</guid>
@@ -91,9 +345,7 @@
             <p><a href="https://ethresear.ch/t/a-node-based-solution-to-execution-sharding-the-krnl-protocol/20268">Read full topic</a></p>
 ]]></content:encoded>
 <pubDate>Wed, 14 Aug 2024 11:56:25 +0000</pubDate>
-<pubDate>Wed, 14 Aug 2024 11:56:25 +0000</pubDate>
 </item>
-
 <item>
 <title>DoS on block proposers in PoS and block builders in PBS</title>
 <link>https://ethresear.ch/t/dos-on-block-proposers-in-pos-and-block-builders-in-pbs/20262</link>
