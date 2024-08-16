@@ -5,6 +5,51 @@
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
 <item>
+<title>Elastic MSM: A Fast, Elastic and Modular Preprocessing Technique for Multi-Scalar Multiplication Algorithm on GPUs</title>
+<link>https://eprint.iacr.org/2024/057</link>
+<guid>https://eprint.iacr.org/2024/057</guid>
+<content:encoded><![CDATA[
+<div> 关键词：零知识证明、GPU、多尺度乘法、预处理技术、Pippenger算法
+
+总结:
+本文主要关注在GPU上优化多尺度乘法（MSM）算法的运行时间和存储空间需求。提出了一种名为“弹性MSM”的新颖、模块化和自适应参数配置技术，允许用户根据自己的需求调整MSM的规模，通过相应的预处理操作。该技术能够充分利用各种高效的并行MSM算法潜力。研究者在GPU上实现了并测试了弹性MSM，针对三种主流的Pippenger并行算法进行了优化。
+
+弹性MSM不仅被视为Pippenger算法的一种预处理技术，而且具有模块性，可以加速几乎所有最先进的GPU上的Pippenger并行算法。此外，它提供了在不同存储空间限制下GPU上的Pippenger算法运行时间与额外存储空间需求之间的可调折衷方案。这是首次在不同的存储空间限制下保留预处理带来的改进MSM计算的技术。
+
+研究结果显示，针对三种并行Pippenger算法，弹性MSM分别实现了约1.90×、1.08×和1.36×（2.58×、1.39×和1.91×）的加速效果。同时，对于两种最先进的预处理Pippenger算法，弹性MSM分别实现了约192×和223×（159×和174×）的加速效果。这些结果表明，弹性MSM显著提高了零知识证明中的多尺度乘法运算效率，为GPU上的大规模加密计算提供了有力支持。 <div>
+Zero-knowledge proof (ZKP) is a cryptographic primitive that enables a prover to convince a verifier that a statement is true, without revealing any other information beyond the correctness of the statement itself. Due to its powerful capabilities, its most practical type, called zero-knowledge Succinct Non-interactive ARgument of Knowledge (zkSNARK), has been widely deployed in various privacy preserving applications such as cryptocurrencies and verifiable computation. Although state-of-the-art zkSNARKs are highly efficient for the verifier, the computational overhead for the prover is still orders of magnitude too high to warrant use in many applications. This overhead arises from several time-consuming operations, including large-scale matrix-vector multiplication (MUL), number-theoretic transform (NTT), and especially the multi-scalar multiplication (MSM) which constitutes the largest proportion. Therefore, further efficiency improvements are needed.
+
+  In this paper, we focus on comprehensive optimization of running time and storage space required by the MSM algorithm on GPUs. Specifically, we propose a novel, modular and adaptive parameter configuration technique—elastic MSM to enable us to adjust the scale of MSM according to our own wishes by performing a corresponding amount of preprocessing. This technique enables us to fully unleash the potential of various efficient parallel MSM algorithms. We have implemented and tested elastic MSM over three prevailing parallel Pippenger algorithms on GPUs. Across various preprocessing space limitations (across various MSM scales), our constructions achieve up to about 1.90×, 1.08× and 1.36× (2.58×, 1.39× and 1.91×) speedup versus three state-of-the-art parallel Pippenger algorithms on GPUs, respectively.
+
+  From another perspective, elastic MSM could also be regarded as a preprocessing technique over the well-known Pippenger algorithm, which is modular and could be used to accelerate almost all the most advanced parallel Pippenger algorithms on GPUs. Meanwhile, elastic MSM provides an adaptive trade-off between the running time and the extra storage space needed by parallel Pippenger algorithms on GPUs. This is the first preprocessing technique to retain the improved MSM computation brought by preprocessing under varying storage space limitations. Specifically, across various preprocessing space limitations (across various MSM scales), our constructions achieve up to about 192× and 223× (159× and 174×) speedup versus two state-of-the-art preprocessing parallel Pippenger algorithms on GPUs, respectively.
+]]></content:encoded>
+<pubDate>Mon, 15 Jan 2024 07:19:29 +0000</pubDate>
+<pubDate>Mon, 15 Jan 2024 07:19:29 +0000</pubDate>
+</item>
+<item>
+<title>Stackproofs: Private proofs of stack and contract execution using Protogalaxy</title>
+<link>https://eprint.iacr.org/2024/1281</link>
+<guid>https://eprint.iacr.org/2024/1281</guid>
+<content:encoded><![CDATA[
+<div> 关键词：zk-SNARK、Aztec协议、增量可验证计算、重复计算与全局状态、证明系统
+
+总结:
+
+本文探讨了一种简化版的zk-SNARK构造方法，该方法被应用于Aztec协议中。该方法受增量可验证计算(IVC)启发，提出了“重复计算与全局状态”(RCG)的概念。与IVC不同，RCG假定计算在证明开始前结束，并允许一些全局一致性检查，同时要求证明者空间效率接近于无需证明全局一致性的IVC证明者。
+
+在设计私有智能合约系统如Aztec时，RCG证明系统显得尤为有用。通过利用RCG，Aztec能够确保计算过程的隐私性，同时保证全局状态的一致性，这在构建安全、高效且私密的区块链应用时至关重要。这种证明系统的应用不仅提高了计算的隐私保护能力，还优化了证明者处理数据和执行一致性检查的方式，从而实现了更高的性能和更低的空间复杂度。
+
+通过将RCG融入Aztec协议中，可以构建出一个既能满足高隐私需求又能保证系统稳定性和效率的智能合约环境。这不仅为区块链技术在实际应用中的隐私保护提供了新的思路，也为未来的智能合约设计提供了可能的方向。 <div>
+The goal of this note is to describe and analyze a simplified variant of the zk-SNARK construction used in the Aztec protocol.
+Taking inspiration from the popular notion of Incrementally Verifiable Computation[Val09] (IVC)
+we define a related notion of $\textrm{Repeated Computation with Global state}$ (RCG). As opposed to IVC, in RCG we assume the computation terminates before proving starts, and in addition to the local transitions some global consistency checks of the whole computation are allowed. However, we require the space efficiency of the prover to be close to that of an IVC prover not required to prove this global consistency.
+We show how RCG is useful for designing a proof system for a private smart contract system like Aztec.
+]]></content:encoded>
+<pubDate>Wed, 14 Aug 2024 00:50:12 +0000</pubDate>
+<pubDate>Wed, 14 Aug 2024 00:50:12 +0000</pubDate>
+</item>
+
+<item>
 <title>OPTIKS: An Optimized Key Transparency System</title>
 <link>https://eprint.iacr.org/2023/1515</link>
 <guid>https://eprint.iacr.org/2023/1515</guid>
@@ -31,7 +76,6 @@ Key Transparency (KT) refers to a public key distribution system with transparen
 In this paper, we present OPTIKS, a full featured and optimized KT system that focuses on scalability. Our system is simpler and more performant than prior work, supporting smaller storage overhead while still meeting strong notions of security and privacy. Our design also incorporates a crash-tolerant and scalable server architecture, which we demonstrate by presenting extensive benchmarks. Finally, we address several real-world problems in deploying KT systems that have received limited attention in prior work, including account decommissioning and user-to-device mapping.
 ]]></content:encoded>
 <pubDate>Wed, 04 Oct 2023 19:49:16 +0000</pubDate>
-<pubDate>Wed, 04 Oct 2023 19:49:16 +0000</pubDate>
 </item>
 <item>
 <title>Cryptographic Analysis of the Bluetooth Secure Connection Protocol Suite</title>
@@ -55,9 +99,7 @@ We therefore aim at the best we can hope for and show that the protocol still ma
 Investigating the cryptographic strength of the Bluetooth protocol, we also look into the privacy mechanism of address randomization in Bluetooth (which is only available in the Low Energy version). We show that the cryptography indeed provides a decent level of address privacy, although this does not rule out identification of devices via other means, such as physical characteristics.
 ]]></content:encoded>
 <pubDate>Thu, 09 Dec 2021 03:10:30 +0000</pubDate>
-<pubDate>Thu, 09 Dec 2021 03:10:30 +0000</pubDate>
 </item>
-
 <item>
 <title>Analyzing and Benchmarking ZK-Rollups</title>
 <link>https://eprint.iacr.org/2024/889</link>
