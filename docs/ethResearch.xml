@@ -4,6 +4,171 @@
 <title>Ethereum Research - Latest topics</title>
 <link>https://ethresear.ch/latest</link>
 
+<item>
+<title>Ethereum discv5 DHT Network Health Weekly Reports</title>
+<link>https://ethresear.ch/t/ethereum-discv5-dht-network-health-weekly-reports/20282</link>
+<guid>https://ethresear.ch/t/ethereum-discv5-dht-network-health-weekly-reports/20282</guid>
+<content:encoded><![CDATA[
+<div> 关键词：ProbeLab团队、Nebula爬虫、discv5 DHT网络、健康报告、每周更新
+
+总结:
+
+本文概述了ProbeLab团队为监控Ethereum CL discv5 DHT网络的关键指标而开发并部署的基础设施。团队通过将Nebula爬虫适配为兼容discv5基于的网络，并收集反映P2P网络DHT层面健康状况的结果。
+
+- **监控与报告**：每周一发布上一周的最新报告，涵盖了网络结构、规模和客户端采用率的概览，以及地理分布、版本更新趋势、基础设施设置（数据中心或非数据中心）、特定网络层协议支持情况等。
+  
+- **数据分析**：提供关于网络结构和设置变化的实时洞察，易于识别关键结构变化，帮助理解网络的稳健性和多样性，以及特定地区的趋势和优势。
+
+- **贡献与参与**：鼓励社区成员提出他们认为应包含在每周报告中的重要指标，并通过评论或直接与团队联系进行反馈。
+
+- **透明度与公开性**：报告可在线访问，详细展示了数据收集方法、过滤策略、节点分类差异及其与市场中其他工具的比较。
+
+- **可复用资源**：提供的爬虫工具不仅用于生成报告，也便于社区成员根据自身需求进行调整和利用。
+
+本文强调了ProbeLab团队通过持续监控和分析Ethereum CL discv5 DHT网络的关键指标，为维护网络健康和促进社区发展做出的贡献。通过定期更新的报告，不仅提供了当前网络状态的详细视图，也为改进策略和决策提供了数据基础。鼓励社区参与和反馈机制体现了对开放合作和持续优化的承诺。 <div>
+<blockquote>
+<p><em>Work presented here has been carried out by the <a href="https://probelab.network" rel="noopener nofollow ugc">ProbeLab</a> team and in particular <a class="mention" href="https://ethresear.ch/u/guillaumemichel">@guillaumemichel</a> <a class="mention" href="https://ethresear.ch/u/cortze">@cortze</a> <a class="mention" href="https://ethresear.ch/u/dennis-tra">@dennis-tra</a> and Steph.</em></p>
+</blockquote>
+<h2><a class="anchor" href="https://ethresear.ch#p-49640-high-level-description-1" name="p-49640-high-level-description-1"></a>High Level Description</h2>
+<p>The ProbeLab team has developed and deployed infrastructure to monitor several critical metrics for Ethereum’s CL discv5 DHT network. In particular, we have adapted the Nebula crawler (<a class="inline-onebox" href="https://github.com/dennis-tra/nebula/" rel="noopener nofollow ugc">GitHub - dennis-tra/nebula: 🌌 A network agnostic DHT crawler, monitor, and measurement tool that exposes timely information about DHT networks.</a>) to be compatible with discv5-based networks and are gathering results that reflect the health of the P2P network at the DHT level.</p>
+<p>In this post we’re presenting a summary of what is included in the reports, but for a more complete picture of what’s there, head to: <a href="https://probelab.io/ethereum/discv5/2024-29/" rel="noopener nofollow ugc">https://probelab.io/ethereum/discv5/2024-29/</a> for the latest report.</p>
+<ul>
+<li>
+<p>Reports are produced every Monday for the preceding week.</p>
+</li>
+<li>
+<p>The methodology we follow for DHT Crawling, Data Filtering, Node Classification as well as the differences of our tool to alternatives in the space is given in the Methodology section: <a href="https://probelab.io/ethereum/discv5/methodology/" rel="noopener nofollow ugc">https://probelab.io/ethereum/discv5/methodology/</a>.</p>
+</li>
+<li>
+<p>The crawler used to produce the reports can be found (and can be reused) here: <a class="inline-onebox" href="https://github.com/dennis-tra/nebula/" rel="noopener nofollow ugc">GitHub - dennis-tra/nebula: 🌌 A network agnostic DHT crawler, monitor, and measurement tool that exposes timely information about DHT networks.</a>.</p>
+</li>
+</ul>
+<h2><a class="anchor" href="https://ethresear.ch#p-49640-why-you-should-care-2" name="p-49640-why-you-should-care-2"></a>Why you should care</h2>
+<p>The metrics included in the reports:</p>
+<ul>
+<li>
+<p>give an overview of the network structure, size and client adoption breakdown. This helps in understanding the robustness and diversity of the network,</p>
+</li>
+<li>
+<p>provide accurate geographic distribution of nodes in the network per client implementation over time, which can highlight regional trends and potential vulnerabilities or strengths in specific areas,</p>
+</li>
+<li>
+<p>make it easy to spot drastic changes in the structure and setup of the network,</p>
+</li>
+<li>
+<p>allow for monitoring of new protocol version uptake/adoption, and provide insights on whether there are adoption barriers,</p>
+</li>
+<li>
+<p>reveal the infrastructure setup (e.g., data center-hosted vs non-data center-hosted) and cloud provider distribution per client implementation,</p>
+</li>
+<li>
+<p>show the breakdown of nodes supporting particular network-layer protocols,</p>
+</li>
+<li>
+<p>depict the percentage of reachable vs unreachable node records in the DHT network.</p>
+</li>
+</ul>
+<h2><a class="anchor" href="https://ethresear.ch#p-49640-overview-of-results-3" name="p-49640-overview-of-results-3"></a>Overview of Results</h2>
+<p>We’re presenting a small fraction of the results given at <a href="https://probelab.io" rel="noopener nofollow ugc">https://probelab.io</a> to give an idea of the metrics listed. Please head there for the complete reports from Week 11 (mid-March), 2024.</p>
+<p><strong>Client Diversity</strong></p>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/4/3/433c4aecd269c5dfd9291dc03bbf58624414061c.png" title="discv5-agents-overall"><img alt="discv5-agents-overall" height="375" src="https://ethresear.ch/uploads/default/optimized/3X/4/3/433c4aecd269c5dfd9291dc03bbf58624414061c_2_489x375.png" width="489" /></a></div><p></p>
+<p><strong>Client Diversity Over Time</strong></p>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/2/6/2664514f07b9b5aa0f4dea5319bc82fe047fa27b.png" title="discv5-agents-overall-stacked"><img alt="discv5-agents-overall-stacked" height="375" src="https://ethresear.ch/uploads/default/optimized/3X/2/6/2664514f07b9b5aa0f4dea5319bc82fe047fa27b_2_489x375.png" width="489" /></a></div><p></p>
+<p><strong>Agent version adoption over time - Example: Lighthouse</strong></p>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/a/0/a081c5b9376d2f17792caaa6b6d91b9f2e4353a0.png" title="discv5-versions-distribution"><img alt="discv5-versions-distribution" height="375" src="https://ethresear.ch/uploads/default/optimized/3X/a/0/a081c5b9376d2f17792caaa6b6d91b9f2e4353a0_2_489x375.png" width="489" /></a></div><p></p>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/6/1/61739999c2d736e11817cf8f417008e2c88869dc.png" title="discv5-agents-versions"><img alt="discv5-agents-versions" height="375" src="https://ethresear.ch/uploads/default/optimized/3X/6/1/61739999c2d736e11817cf8f417008e2c88869dc_2_489x375.png" width="489" /></a></div><p></p>
+<p><strong>Country distribution of all nodes</strong></p>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/3/4/34aa9fb69b64bdf785073d62f018a4c78cbad033.png" title="discv5-geo-agent-all-bars"><img alt="discv5-geo-agent-all-bars" height="375" src="https://ethresear.ch/uploads/default/optimized/3X/3/4/34aa9fb69b64bdf785073d62f018a4c78cbad033_2_489x375.png" width="489" /></a></div><p></p>
+<p><strong>Client-specific country distribution - Example: Prysm</strong></p>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/c/9/c92579370dcf03c6358536d0a358da2d79aeaa51.png" title="discv5-geo-agents-lines-prysm"><img alt="discv5-geo-agents-lines-prysm" height="375" src="https://ethresear.ch/uploads/default/optimized/3X/c/9/c92579370dcf03c6358536d0a358da2d79aeaa51_2_489x375.png" width="489" /></a></div><p></p>
+<p><strong>Cloud provider distribution of all nodes</strong></p>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/5/5/55ffef8626b07b1f21845591817184f663c7c88f.png" title="discv5-cloud-agent-all-bars"><img alt="discv5-cloud-agent-all-bars" height="375" src="https://ethresear.ch/uploads/default/optimized/3X/5/5/55ffef8626b07b1f21845591817184f663c7c88f_2_489x375.png" width="489" /></a></div><p></p>
+<p><strong>Cloud vs non-cloud distribution of nodes over time</strong></p>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/4/7/47638e6a177376cd847949f006ddd6ad91a73368.png" title="discv5-cloud-rate-agent-all-lines"><img alt="discv5-cloud-rate-agent-all-lines" height="375" src="https://ethresear.ch/uploads/default/optimized/3X/4/7/47638e6a177376cd847949f006ddd6ad91a73368_2_489x375.png" width="489" /></a></div><p></p>
+<p><strong>Stale Peer Records over time</strong></p>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/d/9/d941c8d07f12784b4d26214ce100dcfbb8f1e99e.png" title="discv5-stale-records-mainnet-stacked"><img alt="discv5-stale-records-mainnet-stacked" height="375" src="https://ethresear.ch/uploads/default/optimized/3X/d/9/d941c8d07f12784b4d26214ce100dcfbb8f1e99e_2_489x375.png" width="489" /></a></div><p></p>
+<h2><a class="anchor" href="https://ethresear.ch#p-49640-how-to-contribute-4" name="p-49640-how-to-contribute-4"></a>How to contribute</h2>
+<p>Overall, we believe this set of results give an accurate view of the structure and health of the discv5 DHT network. We hope you’ll find the reports useful.</p>
+<p>If there are important metrics that you believe should be part of these weekly reports, comment below, or get in touch with the team: <a href="https://www.probelab.network/contact" rel="noopener nofollow ugc">probelab.network/contact</a>.</p>
+            <p><small>1 post - 1 participant</small></p>
+            <p><a href="https://ethresear.ch/t/ethereum-discv5-dht-network-health-weekly-reports/20282">Read full topic</a></p>
+]]></content:encoded>
+<pubDate>Thu, 15 Aug 2024 16:10:39 +0000</pubDate>
+<pubDate>Thu, 15 Aug 2024 16:10:39 +0000</pubDate>
+</item>
+<item>
+<title>Autonomous Competence Identification Protocol</title>
+<link>https://ethresear.ch/t/autonomous-competence-identification-protocol/20281</link>
+<guid>https://ethresear.ch/t/autonomous-competence-identification-protocol/20281</guid>
+<content:encoded><![CDATA[
+<div> 关键词：协议、主观决策、共识、DAO、协作工具
+
+总结:
+本文探讨了一种旨在优化DAO（去中心化自治组织）和研究与开发过程中的主观决策制定的协议。该协议通过建立一套评分系统来解决常见的治理问题，促进更高效、合作的环境。其核心功能包括：
+1. **量化提案者评分**：参与者对决策情境进行定义，进行多轮讨论，提供反馈，直至最终阶段匿名投票，以避免身份相关的偏见。
+2. **减少沟通复杂性**：简化讨论流程，自动分配决策执行者，为后续投票系统创建议程，有效应对信息过载和决策延迟问题。
+3. **激励参与与客观评价**：通过将个人贡献与组织目标直接关联，确保所有成员的活动都能推动组织向前发展，同时采用非集中化决策机制，避免内部政治影响。
+4. **抵抗操纵与中央集权**：设计机制防止影响力累积和Sybil攻击，确保财务贡献与治理权力相匹配，促进组织的自我进化与分散化。
+5. **适应性与扩展性**：满足不同背景和兴趣的参与者需求，即使在AI代理和自动化基础设施的背景下，也能保持高效运行。
+
+此协议旨在革新传统组织结构，通过引入现代技术手段，增强组织决策效率和透明度，同时保护组织免受中心化倾向和外部攻击的影响，从而实现其潜力的最大化。 <div>
+<p>I’m excited to share my ongoing research on a protocol designed to streamline communication and decision-making around subjective matters, particularly within DAOs and R&amp;D processes. This protocol establishes a ranking system that counters common governance issues, fostering a more collaborative and effective environment.</p>
+<p>I’m posting this in the meta-innovation category because it has implications both for DAO/Consensus research and for potential collaboration tools within the Ethereum community.</p>
+<p><em>Link to paper in progress: <a class="inline-onebox" href="https://github.com/peersky/papers/blob/main/acid/whitepaper.pdf" rel="noopener nofollow ugc">papers/acid/whitepaper.pdf at main · peersky/papers · GitHub</a></em></p>
+<h2><a class="anchor" href="https://ethresear.ch#p-49639-tldr-1" name="p-49639-tldr-1"></a>TL’DR</h2>
+<p>The protocol enables subjective decision-making and quantifies proposer ratings. Participants define a context and engage in rounds of discussion, providing and receiving feedback without revealing identities until the round concludes. This mitigates biases like the <a href="https://en.wikipedia.org/wiki/Halo_effect" rel="noopener nofollow ugc">Halo effect</a>, and collusion (sybil attack) risks.</p>
+<p>Protocol streamlines discussions and enables autonomously assign competent decision makers as well as create pre-arranged agenda for any follow up voting systems (hence addresses <a href="https://www.sciencedirect.com/science/article/abs/pii/0022053176900405" rel="noopener nofollow ugc">Agenda Manipulation</a>,  ( casually explained in <a href="https://www.youtube.com/watch?v=goQ4ii-zBMw" rel="noopener nofollow ugc">this youtube video</a> ) problem</p>
+<h2><a class="anchor" href="https://ethresear.ch#p-49639-motivation-2" name="p-49639-motivation-2"></a>Motivation</h2>
+<h3><a class="anchor" href="https://ethresear.ch#p-49639-communication-complexities-hinder-decision-making-3" name="p-49639-communication-complexities-hinder-decision-making-3"></a>Communication Complexities Hinder Decision-Making</h3>
+<p>Effective decision-making is hindered by communication complexities.</p>
+<ul>
+<li>Traditional methods (meetings, chats): don’t scale, leading to information overload and delays.</li>
+<li>More stakeholders exponentially increase communication complexity, leaving less time for effective decisions.</li>
+<li>Individual contributions can get lost, leading to under-appreciation and high turnover.</li>
+</ul>
+<h3><a class="anchor" href="https://ethresear.ch#p-49639-traditional-organizations-are-sub-optimally-managed-4" name="p-49639-traditional-organizations-are-sub-optimally-managed-4"></a>Traditional Organizations are Sub-optimally Managed</h3>
+<p>Despite modern networking and project management technologies, the primary, basis of hierarchical communication hasn’t changed much over centuries. Decisions still require large centralization force, which will step in and cut opinions to shape performance capable decision.</p>
+<ul>
+<li>Centralized decision-making prioritizes efficiency over diverse input, fostering internal politics and biased decisions.</li>
+<li>This breeds internal politics, leading to biased decisions that may harm the organization.</li>
+<li>Current methods lack objective ways to measure and reward valuable contributions, limiting organizational potential.</li>
+<li>Does not let organizations reach their full potential</li>
+</ul>
+<p>This touches every organization, including Ethereum R&amp;D.</p>
+<h3><a class="anchor" href="https://ethresear.ch#p-49639-icos-do-not-work-well-for-daos-5" name="p-49639-icos-do-not-work-well-for-daos-5"></a>ICOs do not work well for DAOs</h3>
+<p>Research shows that many DAOs are highly centralized, with low participation rates and vulnerability to governance attacks. The incentive structures in Proof of Stake (PoS) and Proof of Work (PoW) systems can lead to centralization.</p>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/1/e/1edd6c487afe9524d47e660bb04cf7872abb6008.jpeg" title="img"><img alt="img" height="274" src="https://ethresear.ch/uploads/default/optimized/3X/1/e/1edd6c487afe9524d47e660bb04cf7872abb6008_2_690x274.jpeg" width="690" /></a></div><br />
+<div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/4/e/4e7ea5b4ee785ee33c7f3664e698a915d71867f8.jpeg" title="img2"><img alt="img2" height="374" src="https://ethresear.ch/uploads/default/optimized/3X/4/e/4e7ea5b4ee785ee33c7f3664e698a915d71867f8_2_690x374.jpeg" width="690" /></a></div><p></p>
+<h3><a class="anchor" href="https://ethresear.ch#p-49639-cyber-physical-social-systems-6" name="p-49639-cyber-physical-social-systems-6"></a>Cyber-Physical-Social-Systems</h3>
+<p>There’s a growing need for DAOs to bridge traditional management with AI agents and automated infrastructure, as highlighted by research in Cyber-Physical-Social Systems (CPSS).</p>
+<h2><a class="anchor" href="https://ethresear.ch#p-49639-approach-7" name="p-49639-approach-7"></a>Approach</h2>
+<p>The protocol aims to incentivize participation without enabling influence compounding. It builds on a real-world game where participants propose and vote on ideas (like music tracks) without revealing identities until the round ends.</p>
+<h3><a class="anchor" href="https://ethresear.ch#p-49639-key-requirements-for-the-protocol-8" name="p-49639-key-requirements-for-the-protocol-8"></a>Key requirements for the protocol:</h3>
+<ul>
+<li><strong>Mission aligned:</strong> Participant activity directly impacts organizational goals.</li>
+<li><strong>Highly performant</strong>: Organizations using the protocol should outperform traditional structures.</li>
+<li><strong>Centralization resilient</strong>: Financial contributions shouldn’t lead to disproportionate influence.</li>
+<li><strong>Multidimensional</strong>: Support diverse participant interests.</li>
+<li><strong>Rational</strong>: Function even when agents act in their self-interest.</li>
+</ul>
+<h3><a class="anchor" href="https://ethresear.ch#p-49639-key-features-9" name="p-49639-key-features-9"></a>Key features:</h3>
+<ul>
+<li><strong>Competence-based participation</strong>: Participants earn governance rights through demonstrated competence, not just financial contributions.</li>
+<li><strong>Sybil attack resistance</strong>: A tournament ladder structure imposes costs and time requirements, making manipulation difficult.</li>
+<li><strong>Progressive decentralization</strong>: Organizations can evolve by adding governance layers, increasing overall governance surface area.</li>
+</ul>
+<h2><a class="anchor" href="https://ethresear.ch#p-49639-current-state-10" name="p-49639-current-state-10"></a>Current State</h2>
+<ul>
+<li><strong>Research paper in progress</strong>: Seeking feedback and potential co-authors.</li>
+<li><strong>Basic prototype and testing</strong>: Exploring use cases beyond music, such as manage-less code writing.</li>
+<li><strong>Website with Telegram group</strong>: <a href="https://rankify.it" rel="noopener nofollow ugc">https://rankify.it</a></li>
+</ul>
+            <p><small>1 post - 1 participant</small></p>
+            <p><a href="https://ethresear.ch/t/autonomous-competence-identification-protocol/20281">Read full topic</a></p>
+]]></content:encoded>
+<pubDate>Thu, 15 Aug 2024 12:41:30 +0000</pubDate>
+<pubDate>Thu, 15 Aug 2024 12:41:30 +0000</pubDate>
+</item>
 
 <item>
 <title>A Threshold Network for “Human Keys” to solve privacy and custody issues</title>
