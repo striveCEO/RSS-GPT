@@ -4,6 +4,147 @@
 <title>Ethereum Research - Latest topics</title>
 <link>https://ethresear.ch/latest</link>
 
+<item>
+<title>On Proposer Timing Games and Economies of Scale</title>
+<link>https://ethresear.ch/t/on-proposer-timing-games-and-economies-of-scale/20309</link>
+<guid>https://ethresear.ch/t/on-proposer-timing-games-and-economies-of-scale/20309</guid>
+<content:encoded><![CDATA[
+<div> 关键词：提案者时机游戏、经济规模、验证器市场份额、累积投票、网络影响
+
+总结：
+
+文章主要探讨了在以太坊等区块链系统中，验证器如何通过“提案者时机游戏”来影响区块构建过程，以及经济规模对这类游戏的影响。关键发现如下：
+
+1. **累积投票与时机选择**：在任何给定时刻，累积投票百分比代表了网络上已确认的投票比例。提案者需要确保在他们决定提交区块时，累积投票百分比至少达到40%，以避免区块被后续提案者重新组织。
+
+2. **经济规模影响**：拥有更高验证器市场份额的提案者可以更长时间地推迟区块提交，因为他们的投票量足够大，可以在最后阶段补充足够的支持，而不会面临被重新组织的风险。具体而言，每增加1%的验证器市场份额，提案者可以额外延迟大约0.03秒。
+
+3. **市场占有率与延时关系**：一个拥有30%市场占有率的提案者理论上可以比5%市场占有率的提案者多延迟约0.8秒，同时仍能保持安全的区块提交时间，避免被重新组织。
+
+4. **策略与风险**：高市场份额的节点可以通过更晚提交区块来最大化自己的利益，这要求节点间有协调机制，确保在提交区块前，未投票的验证器将支持该区块，而不是其父区块。这体现了经济规模带来的优势和相应的风险管理策略。
+
+5. **网络影响与限制**：过度依赖提案者时机游戏可能会对网络稳定性产生负面影响，包括导致验证器间的不协调或竞争，以及潜在的系统效率下降。因此，研究和实践应侧重于减少此类游戏的负面影响，鼓励公平和稳定的网络运作。
+
+通过上述分析，文章强调了经济规模在区块链网络中的作用，以及在设计和优化网络机制时需要考虑的复杂因素，以平衡效率、公平性和安全性。 <div>
+<h1><a class="anchor" href="https://ethresear.ch#p-49689-on-proposer-timing-games-and-economies-of-scale-1" name="p-49689-on-proposer-timing-games-and-economies-of-scale-1"></a>On Proposer Timing Games and Economies of Scale</h1>
+<p><a href="https://timing.pics">Timing games</a> are a known phenomenon (<a href="https://eprint.iacr.org/2023/760">[1]</a>, <a href="https://arxiv.org/abs/2305.09032">[2]</a> and <a href="https://ethresear.ch/t/deep-diving-attestations-a-quantitative-analysis/20020">[3]</a>). The concern is that proposer timing games come with a negative impact on the network.</p>
+<p>In the following, I want to show how the success of playing proposer timing games is also a function of economies of scale.</p>
+<p><strong>The main finding is:</strong><br />
+<em><strong> → An entity with 30% market share can delay 0.8s longer than a 5% entity.</strong></em><br />
+<em><strong> → For every 1% increase in validator market share, the delay in block proposals can increase by 0.03 seconds without facing additional reorg risk.</strong></em></p>
+<p><img alt="tgeos" height="318" src="https://ethresear.ch/uploads/default/original/3X/c/5/c58fec82d848d1fb7ae0352e8c50c4e8071253c5.png" width="456" /></p>
+<p><em>Special thanks to <a href="https://x.com/weboftrees">Anders</a>, <a href="https://x.com/mikeneuder">Mike</a> and <a href="https://x.com/casparschwa">Caspar</a> for feedback!</em></p>
+<h2><a class="anchor" href="https://ethresear.ch#p-49689-introduction-2" name="p-49689-introduction-2"></a>Introduction</h2>
+<p>A proposer must gather at least 40% of these votes to ensure their block is accepted and not reorged by the following proposer. It’s 40% because that’s the proposer boost threshold. Blocks with less than 40% attestations can be reorged by the next proposer leveraging proposer boost. The challenge for a timing-gamer lies in determining the optimal time to propose (or call getHeader). An economically rational validator would want to wait as long as possible (providing the builder with the longest possible time window) without risking a reorg.</p>
+<p>First, let’s revisit the following chart from <a href="https://ethresear.ch/t/deep-diving-attestations-a-quantitative-analysis/20020">this analysis</a>:<br />
+</p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/4/2/42fe46361f7b2a22bd61c0195f719a57df04d64d.png" title="42fe46361f7b2a22bd61c0195f719a57df04d64d"><img alt="42fe46361f7b2a22bd61c0195f719a57df04d64d" height="304" src="https://ethresear.ch/uploads/default/optimized/3X/4/2/42fe46361f7b2a22bd61c0195f719a57df04d64d_2_690x304.png" width="690" /></a></div><p></p>
+<p><strong>~80% of all attestations are seen until second 5 in the slot</strong>. The <strong>40% threshold is reached somewhere around second 3.8</strong>. Thus, assuming zero latency, a block published at second 3.8 should still be able to receive 60% of attestations.</p>
+<p><strong>In the following, we refer to this curve as <span class="math">C(t)</span>.</strong></p>
+<h2><a class="anchor" href="https://ethresear.ch#p-49689-initial-setup-3" name="p-49689-initial-setup-3"></a>Initial Setup</h2>
+<p>The core idea is to determine how the cumulative votes cast by validators evolve over a slot and how a proposer’s control over a portion of these validators may influence the optimal timing of their block proposal.</p>
+<p>Given that <span class="math">C(t)</span> represents the cumulative percentage of votes cast by time <span class="math">t</span>, the proposer controls <span class="math">x\%</span> of validators, and needs to ensure that they can still reach at least 40% by the time they propose, we start with the following condition:</p>
+<div class="math">
+x + (1 - C(t)) \times (1 - x) \geq 0.4
+</div>
+<p>In this equation:</p>
+<ul>
+<li><strong><span class="math">(1 - C(t)) \times (1 - x)</span>:</strong> The remaining uncast votes from validators not controlled by the proposer, which could support the proposer’s block.</li>
+</ul>
+<blockquote>
+<p>Note that <strong><span class="math">x \times C(t)</span></strong> would be the portion of votes from the proposer’s validators already included in <span class="math">C(t).</span></p>
+</blockquote>
+<p>Two assumptions are important to stress:</p>
+<ul>
+<li><strong>Coordination</strong>: It is assumed that validators coordinate when attesting, e.g. using a central oracle that provides the commands.</li>
+<li><strong>Honest Validators</strong>: All validators who have not yet voted at the time of the block proposal will vote for the proposed block (and not the parent block). See <a href="https://github.com/ethereum/consensus-specs/blob/b2f2102dad0cd8b28a657244e645e0df1c0d246a/specs/phase0/validator.md#phase-0----honest-validator">honest validator specs</a>.</li>
+</ul>
+<h3><a class="anchor" href="https://ethresear.ch#p-49689-simplifying-the-equation-4" name="p-49689-simplifying-the-equation-4"></a>Simplifying the Equation</h3>
+<p>We rearrange the initial equation to find the threshold for <span class="math">C(t)</span>, the cumulative percentage of votes that can be cast before the proposer must act:</p>
+<div class="math">
+x + (1 - C(t)) \times (1 - x) \geq 0.4
+</div>
+<p>Expanding and simplifying:</p>
+<div class="math">
+(1−C(t))×(1−x) = 1 - x - C(t) + C(t) \times x 
+</div>
+<div class="math">
+1 - C(t) + C(t) \times x \geq 0.4
+</div>
+<p>Finally, solving for <span class="math">C(t)</span>:</p>
+<div class="math">
+C(t) \leq \frac{0.6}{1 - x}
+</div>
+<p>Find the complete derivation <a href="https://hackmd.io/L0A6zeBZSzGew2Ni0AzFVQ">here</a>.</p>
+<h3><a class="anchor" href="https://ethresear.ch#p-49689-interpretation-5" name="p-49689-interpretation-5"></a>Interpretation</h3>
+<p>This simplified equation <span class="math">C(t) \leq \frac{0.6}{1 - x}</span> means that the proposer can safely propose as long as the cumulative attestations <span class="math">C(t)</span> remain below the threshold defined by <span class="math">\frac{0.6}{1 - x}</span>.</p>
+<ul>
+<li><strong><span class="math">C(t)</span>:</strong> The cumulative percentage of votes cast by time <span class="math">t</span>.</li>
+<li><strong><span class="math">x \%</span>:</strong> The percentage of total validators controlled by the proposer.</li>
+<li><strong><span class="math">0.4</span>:</strong> The 40% threshold needed to secure a majority (<span class="math">1-0.4=0.6)</span>.</li>
+</ul>
+<p>The equation ensures that the proposer, with their share of validators, can still influence the outcome favorably by proposing before the cumulative attestations exceed this threshold.</p>
+<p>A node operator with many validators can risk a few seconds more than a small-size operator, knowing that their own validators will never vote against them.</p>
+<p><strong>The following chart shows the effects of economies of scale and answers the question of <em>how long a node operator with <em>x%</em> market share can maximally wait until the point it won’t be able to receive at least 40% of all attestations anymore</em>.</strong></p>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/e/2/e24d2c92d6d6e9a6965edcac0b21f454c6404795.png" title="timing_games_proposer_share"><img alt="timing_games_proposer_share" height="383" src="https://ethresear.ch/uploads/default/optimized/3X/e/2/e24d2c92d6d6e9a6965edcac0b21f454c6404795_2_690x383.png" width="690" /></a></div><p></p>
+<p>The “<em>seconds in slot</em>” values on the y-axis are <code>attestation_seen</code> timestamps that are not corrected by the time required for block propagation and verification. Since those numbers are just constants impacting the absolute values on the y-axis, this doesn’t matter in making the relative impact of market share on the limits of timing games visible.</p>
+<p><strong>We can see that a node operator with 30% of the market share can potentially wait 0.8 seconds longer than a node operator with 5% market share while risking the same.</strong></p>
+<h2><a class="anchor" href="https://ethresear.ch#p-49689-in-python-6" name="p-49689-in-python-6"></a>In Python</h2>
+<p>Using Python, we can calculate the latest “safe” proposal time for different percentages of validator control. Here’s the key part of the implementation:</p>
+<pre><code class="lang-python">import numpy as np
+from scipy.interpolate import interp1d
+
+# Provided cumulative attestation data (seconds, % of casted attestations)
+data = [
+     (0.791, 0.0005390835579514825),
+     # (additional data points omitted for brevity)
+     (2.228, 0.05444743935309973),
+     (2.464, 0.10835579514824797),
+     (2.639, 0.16226415094339622),
+     (2.777, 0.21617250673854446),
+     (2.932, 0.27008086253369273),
+     (3.104, 0.323989218328841),
+     (3.308, 0.3778975741239892),
+     (3.627, 0.43180592991913747),
+     (4.069, 0.4857142857142857),
+     (4.25, 0.539622641509434),
+     (4.407, 0.5935309973045823),
+     (4.576, 0.6474393530997304),
+     (4.723, 0.7013477088948787),
+     (4.898, 0.7552560646900269),
+     (5.039, 0.8091644204851752),
+     (5.245, 0.8630727762803234),
+     (5.521, 0.9169811320754717),
+     (6.187, 0.9708894878706199)
+]
+
+# Extracting the times and cumulative attestation percentages
+times = np.array([point[0] for point in data])
+cumulative_attestations = np.array([point[1] for point in data])
+
+# Interpolating the cumulative attestation function
+cumulative_attestation_func = interp1d(times, cumulative_attestations, kind='linear', fill_value="extrapolate")
+
+# Function to calculate the latest time a proposer with x% control can safely propose a block
+def calculate_latest_proposal_time(x):
+    threshold = 0.5 / (1 - x)
+    
+    for t in np.linspace(times[0], times[-1], 1000):
+        if cumulative_attestation_func(t) &gt; threshold:
+            return t
+    return None
+
+</code></pre>
+<h1><a class="anchor" href="https://ethresear.ch#p-49689-conclusion-7" name="p-49689-conclusion-7"></a>Conclusion</h1>
+<p>By understanding and calculating the relationship between validator market share and cumulative attestations, proposers can optimize their proposal timing to minimize the likelihood of reorgs while maximizing profits.</p>
+<p>Such strategies could be improved by checking which CL client the subsequent validator runs, or, even simpler, the slot index in an epoch. Based on that information one can better estimate the chances of getting reorged (e.g. if it’s Teku, Nimbus, Lodestar, or the last slot in an epoch, then the reorg probability is significantly lower because no honest reorg strategy is implemented).</p>
+<p>Pushing proposer timing games to their limits has a <a href="https://ethresear.ch/t/on-attestations-block-propagation-and-timing-games/20272">negative impact on attesters</a> and can have cascading effects: If validators realize they miss out on profits because they vote for the wrong block too often, they might start delaying their attestation.</p>
+<p><strong>Ultimately, pushing timing games to their limits can have a detrimental impact on the network. Furthermore, validator coordination that goes beyond running multiple validators from a single node shouldn’t be tolerated/supported. Now, it is important to follow/contribute to block construction research and find ways to <a href="https://eips.ethereum.org/EIPS/eip-7716">reduce the profitability of timing games</a> or prevent them entirely.</strong></p>
+            <p><small>1 post - 1 participant</small></p>
+            <p><a href="https://ethresear.ch/t/on-proposer-timing-games-and-economies-of-scale/20309">Read full topic</a></p>
+]]></content:encoded>
+<pubDate>Tue, 20 Aug 2024 05:48:59 +0000</pubDate>
+<pubDate>Tue, 20 Aug 2024 05:48:59 +0000</pubDate>
+</item>
 
 <item>
 <title>Decentralized and Verifiable Cloud Service on Ethereum</title>
