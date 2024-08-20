@@ -4,6 +4,59 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+<item>
+<title>Permissionless Verifiable Information Dispersal (Data Availability for Bitcoin Rollups)</title>
+<link>https://eprint.iacr.org/2024/1299</link>
+<guid>https://eprint.iacr.org/2024/1299</guid>
+<content:encoded><![CDATA[
+<div> 关键词：Rollups、比特币、数据可用性、Verifiable Information Dispersal（VID）、状态机复制（SMR）
+
+总结:
+
+文章主要探讨了如何在比特币网络中引入数据可用性问题的解决方案，以提高其作为分布式账本的效率。Rollups作为一种特殊应用，通过在主区块链之外的辅助机器上执行交易，来解决交易吞吐量和成本问题。然而，当计算瓶颈被移除后，通信成为新的瓶颈。
+
+Verifiable Information Dispersal（VID）系统被提出作为解决数据可用性问题的关键技术，它能以比线性更小的通信开销确保数据的可获取性。该系统适用于比特币的无许可模型，需要一个额外的假设：参与者之间存在可靠的通信机制。VID系统与比特币的状态机复制（SMR）协议结合，实现了对数据可用性的保障，同时保持了与比特币的兼容性。
+
+作者通过在比特币核心的回归测试网络（regtest）上实现VID系统，证明了其在减少通信成本和降低延迟方面有显著效果，通信成本降低了超过1000倍，延迟降低了超过10倍。这一改进对于提升比特币网络的效率和扩展性具有重要意义。 <div>
+Rollups are special applications on distributed state machines (aka blockchains) for which the underlying state machine only logs, but does not execute transactions. Rollups have become a popular way to scale applications on Ethereum and there is now growing interest in running rollups on Bitcoin. Rollups scale throughput and reduce transaction costs by using auxiliary machines that have higher throughput and lower cost of executing transactions than the underlying blockchain. State updates are periodically posted to the underlying blockchain and either verified directly through succinct cryptographic proofs (zk rollups) or can be challenged for a defined period of time in a verifiable way by third parties (optimistic rollups). 
+   
+However, once computation is removed as a bottleneck, communication quickly becomes the new bottleneck. The critical service the underlying blockchain provides in addition to verification is data availability: that necessary data can always be recovered upon request. While broadcasting transaction data is one way to ensure this, it requires communication blowup linear in the number of participating nodes. Verifiable information dispersal (VID) systems achieve sublinear blowup in the same participation model and the same security assumptions as Ethereum, where all nodes have a strong public-key identity. It was not known how to do so in the same permissionless model as Bitcoin, where participants are unauthenticated and participation is dynamic. 
+    
+We construct a VID system that is secure under the same model as Bitcoin, with one minimal additional requirement on the existence of reliable participants.  Our system uses a state machine replication (SMR) protocol (e.g., Bitcoin) as a black box, and is therefore backward compatible. We implemented the system on top of Bitcoin core with the Regression Test Network (regtest), and our analysis shows that it reduces communication costs by more than 1,000x and latency by more than 10x.
+]]></content:encoded>
+<pubDate>Tue, 20 Aug 2024 00:20:03 +0000</pubDate>
+<pubDate>Tue, 20 Aug 2024 00:20:03 +0000</pubDate>
+</item>
+<item>
+<title>SoK: Computational and Distributed Differential Privacy for MPC</title>
+<link>https://eprint.iacr.org/2024/1290</link>
+<guid>https://eprint.iacr.org/2024/1290</guid>
+<content:encoded><![CDATA[
+<div> 关键词：差分隐私、多方计算、计算性定义、分布式版本、多分布模型
+
+总结:
+
+本文系统化了过去十五年中，差分隐私与多方计算等加密领域融合产生的各种定义。这些定义结合了实用性和理论性，针对不同应用场景和现有加密工具进行了定制，形成了计算性和分布式版本的差分隐私。文章按照分布模型和计算视角对定义进行排序，并提出识别通用概念的视角。排序揭示了定义之间的清晰层级关系，允许用户权衡准确性与更强隐私保护或更少信任假设之间的取舍。
+
+文章还探讨了定义之间的理论结果，并扩展了一些结果。它还讨论了知名开放问题的状态并提出了新的研究方向。最后，文章考虑了不同概念的实际应用方面，为未来的研究提供了指导。通过分析各种定义的特性，该工作有助于理解和选择最适合特定场景的差分隐私定义，从而促进安全、隐私保护的数据处理技术的发展。 <div>
+In the last fifteen years, there has been a steady stream of works combining differential privacy with various other cryptographic disciplines, particularly that of multi-party computation, yielding both practical and theoretical unification. As a part of that unification, due to the rich definitional nature of both fields, there have been many proposed definitions of differential privacy adapted to the given use cases and cryptographic tools at hand, resulting in computational and/or distributed versions of differential privacy. In this work, we offer a systemization of such definitions, with a focus on definitions that are both computational and tailored for a multi-party setting. We order the definitions according to the distribution model and computational perspective and propose a viewpoint on when given definitions should be seen as instantiations of the same generalised notion. The ordering highlights a clear, and sometimes strict, hierarchy between the definitions, where utility (accuracy) can be traded for stronger privacy guarantees or lesser trust assumptions. Further, we survey theoretical results relating the definitions to each other and extend some such results. We also discuss the state of well-known open questions and suggest new open problems to study. Finally, we consider aspects of the practical use of the different notions, hopefully giving guidance also to future applied work.
+]]></content:encoded>
+<pubDate>Fri, 16 Aug 2024 13:39:14 +0000</pubDate>
+<pubDate>Fri, 16 Aug 2024 13:39:14 +0000</pubDate>
+</item>
+<item>
+<title>Improved Lattice Blind Signatures from Recycled Entropy</title>
+<link>https://eprint.iacr.org/2024/1289</link>
+<guid>https://eprint.iacr.org/2024/1289</guid>
+<content:encoded><![CDATA[
+<div> 关键词：盲签名、后量子计算、拉格矩阵、零知识证明、隐私保护
+
+总结:本文提出了一种新的设计，旨在缓解盲签名过程中“显示”阶段的复杂性问题。通过在“发行”阶段注入过量随机性，并利用显示阶段回收熵余量来简化零知识证明的复杂度。这一设计不仅使得盲签名方案具有较小的大小和较低的计算复杂度，而且仍基于广为人知的拉格矩阵假设，从而实现了隐私保护的同时提高了效率和安全性。与现有基于拉格矩阵的盲签名构造相比，该方案在保持或增强某些关键特性（如安全性、效率）的同时，解决了其他方面的问题，例如签名尺寸和执行效率。这标志着在后量子计算背景下，对于盲签名技术研究的一个重要进展。 <div>
+Blind signatures represent a class of cryptographic primitives enabling privacy-preserving authentication with several applications such as e-cash or e-voting. It is still a very active area of research, in particular in the post-quantum setting where the history of blind signatures has been hectic. Although it started to shift very recently with the introduction of a few lattice-based constructions, all of the latter give up an important characteristic of blind signatures (size, efficiency, or security under well-known assumptions) to achieve the others. In this paper, we propose another design which revisits the link between the two main procedures of blind signatures, namely issuance and showing, demonstrating that we can significantly alleviate the second one by adapting the former. Concretely, we show that we can harmlessly inject excess randomness in the issuance phase, and then recycle the entropy surplus during showing to decrease the complexity of the zero-knowledge proof which constitutes the main component of the signature. This leads to a blind signature scheme with small sizes, low complexity, and that still relies on well-known lattice assumptions.
+]]></content:encoded>
+<pubDate>Fri, 16 Aug 2024 11:59:01 +0000</pubDate>
+<pubDate>Fri, 16 Aug 2024 11:59:01 +0000</pubDate>
+</item>
 
 <item>
 <title>REACTIVE: Rethinking Effective Approaches Concerning Trustees in Verifiable Elections</title>
