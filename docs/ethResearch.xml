@@ -5,6 +5,52 @@
 <link>https://ethresear.ch/latest</link>
 
 <item>
+<title>L2 sequencer proving on weak hardware; parallelization and decentralization</title>
+<link>https://ethresear.ch/t/l2-sequencer-proving-on-weak-hardware-parallelization-and-decentralization/20313</link>
+<guid>https://ethresear.ch/t/l2-sequencer-proving-on-weak-hardware-parallelization-and-decentralization/20313</guid>
+<content:encoded><![CDATA[
+<div> 关键词：Linea、Risc0、zkVM、p2p网络、证明时间
+
+总结:
+文章主要探讨了如何通过使用Risc0和zkVM技术来减少区块链验证时间，并同时实现去中心化。首先，作者指出大部分L2（Layer 2）序列器采用闭源方式运行，这需要强大的集中式计算能力。为了实现去中心化，需要接受去中心化网络固有的延迟和噪音。
+
+文章进一步解释了Risc0与zkVM结合使用的方法。zkVM限制了一次能证明的最大计算周期数，大约为16.78百万周期。通过递归将大型程序分割成多个子程序（称为Risc0中的“段”），并分别证明这些子程序，最后聚合证明以模拟整个程序的一次性证明。例如，要证明一个1百万周期的程序，理论上需要分割成大约60个段。
+
+文章提出了分段、并行证明和去中心化策略。通过适当的节点配置，即使在较弱的硬件上，也可以快速证明大型程序。假设有一个去中心化的验证计算网络，可以实现至少840个节点来处理证明工作，并且考虑到冗余因素，这个网络可以处理相当于10个类似于Linea的L2区块链的证明任务。
+
+结论：
+通过上述方法，理论上可以显著减少证明时间，并同时提供去中心化的解决方案。然而，为了验证这一设想的有效性，需要实际测试这种设置。如果成功，10,000个较弱节点组成的去中心化网络可以处理多达10个类似Linea的L2区块链的验证任务。 <div>
+<p><a href="https://ethresear.ch/t/vortex-building-a-prover-for-the-zk-evm/14427">Linea’s sequencer</a> proves a 30m gassed block of transactions in 5 minutes. Here’s its setup:</p>
+<blockquote>
+<ul>
+<li>On a 96 cores machine with 384 GB of RAM (hpc6a.48xlarge on AWS)</li>
+<li>In 5 minutes (only including the inner-proof)</li>
+</ul>
+</blockquote>
+<p>So is it possible to reduce the proving time and, at the same time, obtain decentralization guarantees? We have an idea.</p>
+<h3><a class="anchor" href="https://ethresear.ch#p-49694-overview-1" name="p-49694-overview-1"></a>Overview</h3>
+<p>Almost all of the L2 sequencers are closed-source, intellectual property, and thus protected behind centralized setups. To cram that much power into an entity requires a great deal of justification today. To decentralize the flow, on the other hand, one has to accept certain amounts of delay and noise usually found in decentralized compute networks.</p>
+<h4><a class="anchor" href="https://ethresear.ch#p-49694-zkvms-recursion-and-risc0s-approach-2" name="p-49694-zkvms-recursion-and-risc0s-approach-2"></a>zkVMs, recursion, and Risc0’s approach</h4>
+<p>Any zkVM toolset puts a certain upper bound on the maximum number of cycles(roughly speaking 1 cycle equals 1 operation) it can prove in one go. This is usually done for efficiency reasons. For <a href="https://github.com/risc0" rel="noopener nofollow ugc">Risc0</a>, a RISC-V general zkVM, it is 2^24 ~ 16.78m cycles. With recursion, proving infinitely sized programs are made possible. So the solution is to divide a large program into individual sub-programs(called segment in Risc0 jargon) and have them proved one by one and aggregate the proofs into a final proof as if the whole program was proved in one go. For example, consider proving a 1b cycles program. With 16.78M maximum segment size limit, one ends up proving 60 segments. The upper bound for segment size limit is not the end of story however and one can customize it into a well-known range of [2^13 - 2^24]. Each segment limit size needs specific memory requirements shown on Table 1:<br />
+</p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/b/7/b790b7f5fb18cec94d0e621383844425862ba9fb.png" title="Screenshot from 2024-07-18 14-37-34"><img alt="Screenshot from 2024-07-18 14-37-34" height="387" src="https://ethresear.ch/uploads/default/optimized/3X/b/7/b790b7f5fb18cec94d0e621383844425862ba9fb_2_690x387.png" width="690" /></a></div><br />
+Extrapolating Table 1’s values, we get 50m cycles for a program that needs 384gb of memory, in order to be proved in Risc0. Recall that Linea’s prover uses 384gb of memory to generate proofs. This is a naive 1-1 translation, but we can treat it as baseline for further testing. So, with this assumption, should one write Linea’s sequencer logic in Risc0, she would end up with a program that is 50m cycles long. Doubling cycles to ~90m, to account for aggregation won’t hurt here.<p></p>
+<h4><a class="anchor" href="https://ethresear.ch#p-49694-segmentation-parallel-proving-and-decentralization-3" name="p-49694-segmentation-parallel-proving-and-decentralization-3"></a>Segmentation, parallel proving, and decentralization</h4>
+<p>Recursion is a powerful idea in zkVM proving. With recursion once can get to prove seemingly large programs very quickly assuming she has a prove-ready network of machines. Table 2 shows a segmented prove session for a 90m cycles program on a pretty weak machine(8+ years old, Intel core i7 5500U(2C 4T), 16gb memory):<br />
+</p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/0/9/091af39f1eb4b3465f1de18222eed6c4d1051edb.png" title="Screenshot from 2024-07-18 14-47-06"><img alt="Screenshot from 2024-07-18 14-47-06" height="235" src="https://ethresear.ch/uploads/default/optimized/3X/0/9/091af39f1eb4b3465f1de18222eed6c4d1051edb_2_690x235.png" width="690" /></a></div><p></p>
+<p>As you can see, different segment size limits result in varied proving regimes. In Table 2, two columns are colored in green, 2^18 and 2^19. Consulting Table 1, we would get 2gb and 4gb of required memory to prove them respectively. These columns are sweet spots for any zkVM proving network whose nodes are presumably weak. Focusing on the 2^19 segment size limit, to prove a 90m cycles program, one would need at least 168 nodes in order to prove the program in 4 minutes and 9 seconds. But 168 nodes is a faulty assumption. In reality, if a p2p network is to undertake the proving job, it needs to have redundancy values of 1:4 and above. The redundancy accounts for noise that is a feature of any p2p network. With 1:4 redundant nodes, 1 in every 5 nodes is assumed to be honest and the rest are time wasters. So, a 1:4 redundant p2p network needs at least of 840 nodes to get the job done.<br />
+Assuming that the proving network is p2p, one can expect to obtain decentralized guarantees en route.</p>
+<h3><a class="anchor" href="https://ethresear.ch#p-49694-conclusion-4" name="p-49694-conclusion-4"></a>Conclusion</h3>
+<p>Here we introduced an imaginary setup to decentralize and improve L2 sequencer proving times. If the claim turns out to be legit, we would expect to improve the overall proving time for any zkVM application area. In addition, the setup provides decentralization guarantees as a side effect. While everything looks nice, we, at <a href="https://github.com/WholesumNet" rel="noopener nofollow ugc">Wholesum network</a> would like to put this setup to test and see if it works in action. If successful, a p2p verifiable compute network of 10,000 weak nodes can handle up to 10 Linea like L2s.</p>
+<p>A somewhat more expanded version of this post is also available <a href="https://github.com/WholesumNet/docs/blob/779942cf6f650d24fcedf2d8da5a6dd2033a9fee/parallelization/parallelized-proving/report.pdf" rel="noopener nofollow ugc">here</a>.</p>
+<p>We appreciate your feedback.</p>
+            <p><small>1 post - 1 participant</small></p>
+            <p><a href="https://ethresear.ch/t/l2-sequencer-proving-on-weak-hardware-parallelization-and-decentralization/20313">Read full topic</a></p>
+]]></content:encoded>
+<pubDate>Tue, 20 Aug 2024 15:18:35 +0000</pubDate>
+<pubDate>Tue, 20 Aug 2024 15:18:35 +0000</pubDate>
+</item>
+
+<item>
 <title>On Proposer Timing Games and Economies of Scale</title>
 <link>https://ethresear.ch/t/on-proposer-timing-games-and-economies-of-scale/20309</link>
 <guid>https://ethresear.ch/t/on-proposer-timing-games-and-economies-of-scale/20309</guid>
@@ -143,9 +189,7 @@ def calculate_latest_proposal_time(x):
             <p><a href="https://ethresear.ch/t/on-proposer-timing-games-and-economies-of-scale/20309">Read full topic</a></p>
 ]]></content:encoded>
 <pubDate>Tue, 20 Aug 2024 05:48:59 +0000</pubDate>
-<pubDate>Tue, 20 Aug 2024 05:48:59 +0000</pubDate>
 </item>
-
 <item>
 <title>Decentralized and Verifiable Cloud Service on Ethereum</title>
 <link>https://ethresear.ch/t/decentralized-and-verifiable-cloud-service-on-ethereum/20292</link>
