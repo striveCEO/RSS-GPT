@@ -4,6 +4,372 @@
 <title>GitHub All Languages Weekly Trending</title>
 <link>http://mshibanami.github.io/GitHubTrendingRSS</link>
 
+<item>
+<title>astral-sh/uv</title>
+<link>https://github.com/astral-sh/uv</link>
+<guid>https://github.com/astral-sh/uv</guid>
+<content:encoded><![CDATA[
+<div> 关键词：uv、Python、Rust、项目管理、工具管理
+
+uv 是一个由 Astral 团队开发的 Python 包和项目管理工具，采用 Rust 语言编写。它旨在提供比 pip 更快的性能，并支持多种 Python 版本和应用。uv 具有以下核心功能：
+
+1. **项目管理**：uv 可以管理项目依赖关系和环境，类似于 rye 或 poetry，支持锁定文件和工作空间等特性。
+2. **工具管理**：uv 提供了一种执行和安装命令行工具的方式，类似于 pipx，允许用户在瞬时环境中运行工具。
+3. **Python 管理**：uv 支持安装和快速切换 Python 版本，允许用户安装多个版本并使用特定版本执行任务。
+4. **单文件脚本支持**：uv 可以管理单文件脚本的依赖关系和环境。
+5. **pip 兼容性**：uv 提供了与 pip、pip-tools 和 virtualenv 命令相兼容的接口，但增加了高级特性，如依赖版本覆盖、平台独立的解决方案等。
+
+总结：
+uv 是一个全面的 Python 工具链，集成了项目管理、工具管理、Python 版本控制以及单文件脚本支持等功能。通过采用 Rust 编写，uv 在性能上优于传统的 Python 工具，如 pip。它提供了一个统一的界面来处理依赖、环境设置和工具执行，简化了开发流程。uv 的核心优势在于其速度提升（相比 pip 快10到100倍）、多版本 Python 支持、灵活的项目和工具管理能力，以及与现有 Python 工具链的兼容性，使得开发者能够无缝迁移到这个高效且功能丰富的工具中。 <div>
+<p>An extremely fast Python package and project manager, written in Rust.</p><hr /><h1>uv</h1> 
+<p><a href="https://github.com/astral-sh/uv"><img alt="uv" src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/uv/main/assets/badge/v0.json" /></a> <a href="https://pypi.python.org/pypi/uv"><img alt="image" src="https://img.shields.io/pypi/v/uv.svg?sanitize=true" /></a> <a href="https://pypi.python.org/pypi/uv"><img alt="image" src="https://img.shields.io/pypi/l/uv.svg?sanitize=true" /></a> <a href="https://pypi.python.org/pypi/uv"><img alt="image" src="https://img.shields.io/pypi/pyversions/uv.svg?sanitize=true" /></a> <a href="https://github.com/astral-sh/uv/actions"><img alt="Actions status" src="https://github.com/astral-sh/uv/actions/workflows/ci.yml/badge.svg?sanitize=true" /></a> <a href="https://discord.gg/astral-sh"><img alt="Discord" src="https://img.shields.io/badge/Discord-%235865F2.svg?logo=discord&amp;logoColor=white" /></a></p> 
+<p>An extremely fast Python package and project manager, written in Rust.</p> 
+<p align="center"> 
+  
+  <source media="(prefers-color-scheme: dark)" /> 
+  <source media="(prefers-color-scheme: light)" /> 
+  <img alt="Shows a bar chart with benchmark results." src="https://github.com/astral-sh/uv/assets/1309177/629e59c0-9c6e-4013-9ad4-adb2bcf5080d" /> 
+  </p> 
+<p align="center"> <i>Installing <a href="https://trio.readthedocs.io/">Trio</a>'s dependencies with a warm cache.</i> </p> 
+<h2>Highlights</h2> 
+<ul> 
+ <li>🚀 A single tool to replace <code>pip</code>, <code>pip-tools</code>, <code>pipx</code>, <code>poetry</code>, <code>pyenv</code>, <code>virtualenv</code>, and more.</li> 
+ <li>⚡️ <a href="https://github.com/astral-sh/uv/raw/main/BENCHMARKS.md">10-100x faster</a> than <code>pip</code>.</li> 
+ <li>🐍 <a href="https://raw.githubusercontent.com/astral-sh/uv/main/#python-management">Installs and manages</a> Python versions.</li> 
+ <li>🛠️ <a href="https://raw.githubusercontent.com/astral-sh/uv/main/#tool-management">Runs and installs</a> Python applications.</li> 
+ <li>❇️ <a href="https://raw.githubusercontent.com/astral-sh/uv/main/#script-support">Runs single-file scripts</a>, with support for <a href="https://docs.astral.sh/uv/guides/scripts#declaring-script-dependencies">inline dependency metadata</a>.</li> 
+ <li>🗂️ Provides <a href="https://raw.githubusercontent.com/astral-sh/uv/main/#project-management">comprehensive project management</a>, with a <a href="https://docs.astral.sh/uv/concepts/projects#lockfile">universal lockfile</a>.</li> 
+ <li>🔩 Includes a <a href="https://raw.githubusercontent.com/astral-sh/uv/main/#the-pip-interface">pip-compatible interface</a> for a performance boost with a familiar CLI.</li> 
+ <li>🏢 Supports Cargo-style <a href="https://docs.astral.sh/uv/concepts/workspaces">workspaces</a> for scalable projects.</li> 
+ <li>💾 Disk-space efficient, with a <a href="https://docs.astral.sh/uv/concepts/cache">global cache</a> for dependency deduplication.</li> 
+ <li>⏬ Installable without Rust or Python via <code>curl</code> or <code>pip</code>.</li> 
+ <li>🖥️ Supports macOS, Linux, and Windows.</li> 
+</ul> 
+<p>uv is backed by <a href="https://astral.sh">Astral</a>, the creators of <a href="https://github.com/astral-sh/ruff">Ruff</a>.</p> 
+<h2>Installation</h2> 
+<p>Install uv with our standalone installers, or from <a href="https://pypi.org/project/uv/">PyPI</a>:</p> 
+<pre><code class="language-console"># On macOS and Linux.
+$ curl -LsSf https://astral.sh/uv/install.sh | sh
+
+# On Windows.
+$ powershell -c "irm https://astral.sh/uv/install.ps1 | iex"
+
+# With pip.
+$ pip install uv
+</code></pre> 
+<p>See the <a href="https://docs.astral.sh/uv/getting-started/installation/">installation documentation</a> for details and alternative installation methods.</p> 
+<h2>Documentation</h2> 
+<p>uv's documentation is available at <a href="https://docs.astral.sh/uv">docs.astral.sh/uv</a>.</p> 
+<p>Additionally, the command line reference documentation can be viewed with <code>uv help</code>.</p> 
+<h2>Features</h2> 
+<h3>Project management</h3> 
+<p>uv manages project dependencies and environments, with support for lockfiles, workspaces, and more, similar to <code>rye</code> or <code>poetry</code>:</p> 
+<pre><code class="language-console">$ uv init example
+Initialized project `example` at `/home/user/example`
+
+$ cd example
+
+$ uv add ruff
+Creating virtualenv at: .venv
+Resolved 2 packages in 170ms
+   Built example @ file:///home/user/example
+Prepared 2 packages in 627ms
+Installed 2 packages in 1ms
+ + example==0.1.0 (from file:///home/user/example)
+ + ruff==0.5.4
+
+$ uv run ruff check
+All checks passed!
+</code></pre> 
+<p>See the <a href="https://docs.astral.sh/uv/guides/projects/">project documentation</a> to get started.</p> 
+<h3>Tool management</h3> 
+<p>uv executes and installs command-line tools provided by Python packages, similar to <code>pipx</code>.</p> 
+<p>Run a tool in an ephemeral environment using <code>uvx</code> (an alias for <code>uv tool run</code>):</p> 
+<pre><code class="language-console">$ uvx pycowsay 'hello world!'
+Resolved 1 package in 167ms
+Installed 1 package in 9ms
+ + pycowsay==0.0.0.2
+  """
+
+  ------------
+&lt; hello world! &gt;
+  ------------
+   \   ^__^
+    \  (oo)\_______
+       (__)\       )\/\
+           ||----w |
+           ||     ||
+</code></pre> 
+<p>Install a tool with <code>uv tool install</code>:</p> 
+<pre><code class="language-console">$ uv tool install ruff
+Resolved 1 package in 6ms
+Installed 1 package in 2ms
+ + ruff==0.5.4
+Installed 1 executable: ruff
+
+$ ruff --version
+ruff 0.5.4
+</code></pre> 
+<p>See the <a href="https://docs.astral.sh/uv/guides/tools/">tools documentation</a> to get started.</p> 
+<h3>Python management</h3> 
+<p>uv installs Python and allows quickly switching between versions.</p> 
+<p>Install multiple Python versions:</p> 
+<pre><code class="language-console">$ uv python install 3.10 3.11 3.12
+Searching for Python versions matching: Python 3.10
+Searching for Python versions matching: Python 3.11
+Searching for Python versions matching: Python 3.12
+Installed 3 versions in 3.42s
+ + cpython-3.10.14-macos-aarch64-none
+ + cpython-3.11.9-macos-aarch64-none
+ + cpython-3.12.4-macos-aarch64-none
+</code></pre> 
+<p>Download Python versions as needed:</p> 
+<pre><code class="language-console">$ uv venv --python 3.12.0
+Using Python 3.12.0
+Creating virtualenv at: .venv
+Activate with: source .venv/bin/activate
+
+$ uv run --python pypy@3.8 -- python --version
+Python 3.8.16 (a9dbdca6fc3286b0addd2240f11d97d8e8de187a, Dec 29 2022, 11:45:30)
+[PyPy 7.3.11 with GCC Apple LLVM 13.1.6 (clang-1316.0.21.2.5)] on darwin
+Type "help", "copyright", "credits" or "license" for more information.
+&gt;&gt;&gt;&gt;
+</code></pre> 
+<p>Use a specific Python version in the current directory:</p> 
+<pre><code>$ uv python pin pypy@3.11
+Pinned `.python-version` to `pypy@3.11`
+</code></pre> 
+<p>See the <a href="https://docs.astral.sh/uv/guides/install-python/">Python installation documentation</a> to get started.</p> 
+<h3>Script support</h3> 
+<p>uv manages dependencies and environments for single-file scripts.</p> 
+<p>Create a new script and add inline metadata declaring its dependencies:</p> 
+<pre><code class="language-console">$ echo 'import requests; print(requests.get("https://astral.sh"))' &gt; example.py
+
+$ uv add --script example.py requests
+Updated `example.py`
+</code></pre> 
+<p>Then, run the script in an isolated virtual environment:</p> 
+<pre><code>$ uv run example.py
+Reading inline script metadata from: example.py
+Installed 5 packages in 12ms
+&lt;Response [200]&gt;
+</code></pre> 
+<p>See the <a href="https://docs.astral.sh/uv/guides/scripts/">scripts documentation</a> to get started.</p> 
+<h3>A pip-compatible interface</h3> 
+<p>uv provides a drop-in replacement for common <code>pip</code>, <code>pip-tools</code>, and <code>virtualenv</code> commands.</p> 
+<p>uv extends their interfaces with advanced features, such as dependency version overrides, platform-independent resolutions, reproducible resolutions, alternative resolution strategies, and more.</p> 
+<p>Migrate to uv without changing your existing workflows — and experience a 10-100x speedup — with the <code>uv pip</code> interface.</p> 
+<p>Compile requirements into a platform-independent requirements file:</p> 
+<pre><code class="language-console">$ uv pip compile docs/requirements.in \
+   --universal \
+   --output-file docs/requirements.txt
+Resolved 43 packages in 12ms
+</code></pre> 
+<p>Create a virtual environment:</p> 
+<pre><code class="language-console">$ uv venv
+Using Python 3.12.3
+Creating virtualenv at: .venv
+Activate with: source .venv/bin/activate
+</code></pre> 
+<p>Install the locked requirements:</p> 
+<pre><code class="language-console">$ uv pip sync docs/requirements.txt
+Resolved 43 packages in 11ms
+Installed 43 packages in 208ms
+ + babel==2.15.0
+ + black==24.4.2
+ + certifi==2024.7.4
+ ...
+</code></pre> 
+<p>See the <a href="https://docs.astral.sh/uv/pip/index/">pip interface documentation</a> to get started.</p> 
+<h2>Platform support</h2> 
+<p>See uv's <a href="https://docs.astral.sh/uv/reference/platforms/">platform support</a> document.</p> 
+<h2>Versioning policy</h2> 
+<p>See uv's <a href="https://docs.astral.sh/uv/reference/versioning/">versioning policy</a> document.</p> 
+<h2>Contributing</h2> 
+<p>We are passionate about supporting contributors of all levels of experience and would love to see you get involved in the project. See the <a href="https://github.com/astral-sh/uv/raw/main/CONTRIBUTING.md">contributing guide</a> to get started.</p> 
+<h2>Acknowledgements</h2> 
+<p>uv's dependency resolver uses <a href="https://github.com/pubgrub-rs/pubgrub">PubGrub</a> under the hood. We're grateful to the PubGrub maintainers, especially <a href="https://github.com/Eh2406">Jacob Finkelman</a>, for their support.</p> 
+<p>uv's Git implementation is based on <a href="https://github.com/rust-lang/cargo">Cargo</a>.</p> 
+<p>Some of uv's optimizations are inspired by the great work we've seen in <a href="https://pnpm.io/">pnpm</a>, <a href="https://github.com/orogene/orogene">Orogene</a>, and <a href="https://github.com/oven-sh/bun">Bun</a>. We've also learned a lot from Nathaniel J. Smith's <a href="https://github.com/njsmith/posy">Posy</a> and adapted its <a href="https://github.com/njsmith/posy/tree/main/src/trampolines/windows-trampolines/posy-trampoline">trampoline</a> for Windows support.</p> 
+<h2>License</h2> 
+<p>uv is licensed under either of</p> 
+<ul> 
+ <li>Apache License, Version 2.0, (<a href="https://raw.githubusercontent.com/astral-sh/uv/main/LICENSE-APACHE">LICENSE-APACHE</a> or <a href="https://www.apache.org/licenses/LICENSE-2.0">https://www.apache.org/licenses/LICENSE-2.0</a>)</li> 
+ <li>MIT license (<a href="https://raw.githubusercontent.com/astral-sh/uv/main/LICENSE-MIT">LICENSE-MIT</a> or <a href="https://opensource.org/licenses/MIT">https://opensource.org/licenses/MIT</a>)</li> 
+</ul> 
+<p>at your option.</p> 
+<p>Unless you explicitly state otherwise, any contribution intentionally submitted for inclusion in uv by you, as defined in the Apache-2.0 license, shall be dually licensed as above, without any additional terms or conditions.</p> 
+<div align="center"> 
+ <a href="https://astral.sh" style="background: none;" target="_blank"> <img alt="Made by Astral" src="https://raw.githubusercontent.com/astral-sh/uv/main/assets/svg/Astral.svg?sanitize=true" /> </a> 
+</div>
+]]></content:encoded>
+
+
+</item>
+<item>
+<title>openai/whisper</title>
+<link>https://github.com/openai/whisper</link>
+<guid>https://github.com/openai/whisper</guid>
+<content:encoded><![CDATA[
+<div> 关键词：Whisper、Transformer模型、语音识别、多语言支持、多任务学习
+
+总结：
+
+Whisper是一种通用的语音识别模型，它在大规模数据集上进行了训练，可以进行多语言的语音识别、语音翻译和语言识别。该模型采用了一个Transformer序列到序列的架构，能够处理多个语音处理任务，如多语言语音识别、语音翻译、口语语种识别和语音活动检测。通过将这些任务联合表示为需要预测的序列中的令牌，模型可以取代传统语音处理管道中的多个阶段。在训练过程中，使用了一组特殊令牌作为任务指定器或分类目标，实现了多任务学习。
+
+Whisper提供了五个不同大小的模型，包括四个仅限英语的版本，每个模型都有不同的参数量、内存需求和推理速度。这些模型在性能和准确度之间提供了权衡，适用于不同的应用场景。在安装时，需要确保系统中安装了ffmpeg工具，并可能需要配置PATH环境变量以支持Rust开发环境的安装。
+
+Whisper提供了命令行和Python接口供用户使用。通过命令行，用户可以直接输入音频文件并使用选定的模型进行转录。在Python环境中，用户可以加载模型并使用其方法进行转录和语言检测等操作。此外，Whisper还提供了一个帮助文档，详细介绍了所有可用的选项和命令。
+
+最后，Whisper的代码和模型权重遵循MIT许可证发布，用户可以在GitHub仓库中找到详细的许可信息。 <div>
+<p>Robust Speech Recognition via Large-Scale Weak Supervision</p><hr /><h1>Whisper</h1> 
+<p><a href="https://openai.com/blog/whisper">[Blog]</a> <a href="https://arxiv.org/abs/2212.04356">[Paper]</a> <a href="https://github.com/openai/whisper/raw/main/model-card.md">[Model card]</a> <a href="https://colab.research.google.com/github/openai/whisper/blob/master/notebooks/LibriSpeech.ipynb">[Colab example]</a></p> 
+<p>Whisper is a general-purpose speech recognition model. It is trained on a large dataset of diverse audio and is also a multitasking model that can perform multilingual speech recognition, speech translation, and language identification.</p> 
+<h2>Approach</h2> 
+<p><img alt="Approach" src="https://raw.githubusercontent.com/openai/whisper/main/approach.png" /></p> 
+<p>A Transformer sequence-to-sequence model is trained on various speech processing tasks, including multilingual speech recognition, speech translation, spoken language identification, and voice activity detection. These tasks are jointly represented as a sequence of tokens to be predicted by the decoder, allowing a single model to replace many stages of a traditional speech-processing pipeline. The multitask training format uses a set of special tokens that serve as task specifiers or classification targets.</p> 
+<h2>Setup</h2> 
+<p>We used Python 3.9.9 and <a href="https://pytorch.org/">PyTorch</a> 1.10.1 to train and test our models, but the codebase is expected to be compatible with Python 3.8-3.11 and recent PyTorch versions. The codebase also depends on a few Python packages, most notably <a href="https://github.com/openai/tiktoken">OpenAI's tiktoken</a> for their fast tokenizer implementation. You can download and install (or update to) the latest release of Whisper with the following command:</p> 
+<pre><code>pip install -U openai-whisper
+</code></pre> 
+<p>Alternatively, the following command will pull and install the latest commit from this repository, along with its Python dependencies:</p> 
+<pre><code>pip install git+https://github.com/openai/whisper.git 
+</code></pre> 
+<p>To update the package to the latest version of this repository, please run:</p> 
+<pre><code>pip install --upgrade --no-deps --force-reinstall git+https://github.com/openai/whisper.git
+</code></pre> 
+<p>It also requires the command-line tool <a href="https://ffmpeg.org/"><code>ffmpeg</code></a> to be installed on your system, which is available from most package managers:</p> 
+<pre><code class="language-bash"># on Ubuntu or Debian
+sudo apt update &amp;&amp; sudo apt install ffmpeg
+
+# on Arch Linux
+sudo pacman -S ffmpeg
+
+# on MacOS using Homebrew (https://brew.sh/)
+brew install ffmpeg
+
+# on Windows using Chocolatey (https://chocolatey.org/)
+choco install ffmpeg
+
+# on Windows using Scoop (https://scoop.sh/)
+scoop install ffmpeg
+</code></pre> 
+<p>You may need <a href="http://rust-lang.org"><code>rust</code></a> installed as well, in case <a href="https://github.com/openai/tiktoken">tiktoken</a> does not provide a pre-built wheel for your platform. If you see installation errors during the <code>pip install</code> command above, please follow the <a href="https://www.rust-lang.org/learn/get-started">Getting started page</a> to install Rust development environment. Additionally, you may need to configure the <code>PATH</code> environment variable, e.g. <code>export PATH="$HOME/.cargo/bin:$PATH"</code>. If the installation fails with <code>No module named 'setuptools_rust'</code>, you need to install <code>setuptools_rust</code>, e.g. by running:</p> 
+<pre><code class="language-bash">pip install setuptools-rust
+</code></pre> 
+<h2>Available models and languages</h2> 
+<p>There are five model sizes, four with English-only versions, offering speed and accuracy tradeoffs. Below are the names of the available models and their approximate memory requirements and inference speed relative to the large model; actual speed may vary depending on many factors including the available hardware.</p> 
+<table> 
+ <thead> 
+  <tr> 
+   <th align="center">Size</th> 
+   <th align="center">Parameters</th> 
+   <th align="center">English-only model</th> 
+   <th align="center">Multilingual model</th> 
+   <th align="center">Required VRAM</th> 
+   <th align="center">Relative speed</th> 
+  </tr> 
+ </thead> 
+ <tbody> 
+  <tr> 
+   <td align="center">tiny</td> 
+   <td align="center">39 M</td> 
+   <td align="center"><code>tiny.en</code></td> 
+   <td align="center"><code>tiny</code></td> 
+   <td align="center">~1 GB</td> 
+   <td align="center">~32x</td> 
+  </tr> 
+  <tr> 
+   <td align="center">base</td> 
+   <td align="center">74 M</td> 
+   <td align="center"><code>base.en</code></td> 
+   <td align="center"><code>base</code></td> 
+   <td align="center">~1 GB</td> 
+   <td align="center">~16x</td> 
+  </tr> 
+  <tr> 
+   <td align="center">small</td> 
+   <td align="center">244 M</td> 
+   <td align="center"><code>small.en</code></td> 
+   <td align="center"><code>small</code></td> 
+   <td align="center">~2 GB</td> 
+   <td align="center">~6x</td> 
+  </tr> 
+  <tr> 
+   <td align="center">medium</td> 
+   <td align="center">769 M</td> 
+   <td align="center"><code>medium.en</code></td> 
+   <td align="center"><code>medium</code></td> 
+   <td align="center">~5 GB</td> 
+   <td align="center">~2x</td> 
+  </tr> 
+  <tr> 
+   <td align="center">large</td> 
+   <td align="center">1550 M</td> 
+   <td align="center">N/A</td> 
+   <td align="center"><code>large</code></td> 
+   <td align="center">~10 GB</td> 
+   <td align="center">1x</td> 
+  </tr> 
+ </tbody> 
+</table> 
+<p>The <code>.en</code> models for English-only applications tend to perform better, especially for the <code>tiny.en</code> and <code>base.en</code> models. We observed that the difference becomes less significant for the <code>small.en</code> and <code>medium.en</code> models.</p> 
+<p>Whisper's performance varies widely depending on the language. The figure below shows a performance breakdown of <code>large-v3</code> and <code>large-v2</code> models by language, using WERs (word error rates) or CER (character error rates, shown in <em>Italic</em>) evaluated on the Common Voice 15 and Fleurs datasets. Additional WER/CER metrics corresponding to the other models and datasets can be found in Appendix D.1, D.2, and D.4 of <a href="https://arxiv.org/abs/2212.04356">the paper</a>, as well as the BLEU (Bilingual Evaluation Understudy) scores for translation in Appendix D.3.</p> 
+<p><img alt="WER breakdown by language" src="https://github.com/openai/whisper/assets/266841/f4619d66-1058-4005-8f67-a9d811b77c62" /></p> 
+<h2>Command-line usage</h2> 
+<p>The following command will transcribe speech in audio files, using the <code>medium</code> model:</p> 
+<pre><code>whisper audio.flac audio.mp3 audio.wav --model medium
+</code></pre> 
+<p>The default setting (which selects the <code>small</code> model) works well for transcribing English. To transcribe an audio file containing non-English speech, you can specify the language using the <code>--language</code> option:</p> 
+<pre><code>whisper japanese.wav --language Japanese
+</code></pre> 
+<p>Adding <code>--task translate</code> will translate the speech into English:</p> 
+<pre><code>whisper japanese.wav --language Japanese --task translate
+</code></pre> 
+<p>Run the following to view all available options:</p> 
+<pre><code>whisper --help
+</code></pre> 
+<p>See <a href="https://github.com/openai/whisper/raw/main/whisper/tokenizer.py">tokenizer.py</a> for the list of all available languages.</p> 
+<h2>Python usage</h2> 
+<p>Transcription can also be performed within Python:</p> 
+<pre><code class="language-python">import whisper
+
+model = whisper.load_model("base")
+result = model.transcribe("audio.mp3")
+print(result["text"])
+</code></pre> 
+<p>Internally, the <code>transcribe()</code> method reads the entire file and processes the audio with a sliding 30-second window, performing autoregressive sequence-to-sequence predictions on each window.</p> 
+<p>Below is an example usage of <code>whisper.detect_language()</code> and <code>whisper.decode()</code> which provide lower-level access to the model.</p> 
+<pre><code class="language-python">import whisper
+
+model = whisper.load_model("base")
+
+# load audio and pad/trim it to fit 30 seconds
+audio = whisper.load_audio("audio.mp3")
+audio = whisper.pad_or_trim(audio)
+
+# make log-Mel spectrogram and move to the same device as the model
+mel = whisper.log_mel_spectrogram(audio).to(model.device)
+
+# detect the spoken language
+_, probs = model.detect_language(mel)
+print(f"Detected language: {max(probs, key=probs.get)}")
+
+# decode the audio
+options = whisper.DecodingOptions()
+result = whisper.decode(model, mel, options)
+
+# print the recognized text
+print(result.text)
+</code></pre> 
+<h2>More examples</h2> 
+<p>Please use the <a href="https://github.com/openai/whisper/discussions/categories/show-and-tell">🙌 Show and tell</a> category in Discussions for sharing more example usages of Whisper and third-party extensions such as web demos, integrations with other tools, ports for different platforms, etc.</p> 
+<h2>License</h2> 
+<p>Whisper's code and model weights are released under the MIT License. See <a href="https://github.com/openai/whisper/raw/main/LICENSE">LICENSE</a> for further details.</p>
+]]></content:encoded>
+
+
+</item>
 
 <item>
 <title>thuml/Time-Series-Library</title>
