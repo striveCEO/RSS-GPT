@@ -4,6 +4,114 @@
 <title>Ethereum Research - Latest topics</title>
 <link>https://ethresear.ch/latest</link>
 
+<item>
+<title>An Automatic Technique to Detect Storage Collisions and Vulnerabilities within Solidity Smart Contract</title>
+<link>https://ethresear.ch/t/an-automatic-technique-to-detect-storage-collisions-and-vulnerabilities-within-solidity-smart-contract/20328</link>
+<guid>https://ethresear.ch/t/an-automatic-technique-to-detect-storage-collisions-and-vulnerabilities-within-solidity-smart-contract/20328</guid>
+<content:encoded><![CDATA[
+<div> 关键词：存储碰撞、漏洞检测、Solidity智能合约、静态分析、Ethereum网络
+
+总结:
+
+本文提出了一种改进的、全面的技术，旨在检测Ethereum Solidity智能合约中的存储漏洞和碰撞。该技术基于高级静态分析方法，目标是识别部署在以太坊网络上的智能合约中的存储碰撞问题，尤其是复杂的代理合约，如ERC-2535（钻石/多面体代理）、ERC-1822、升级代理模式等。相比于现有技术仅通过合约字节码检测存储碰撞，本文方法利用源代码进行准确分析，同时考虑动态数组、映射变量及复杂嵌套结构的存储布局。
+
+文中通过示例展示了存储碰撞可能导致的问题，即在合同升级后，原本不同数据类型的变量由于存储槽位重叠而发生数据错乱。为解决此问题，作者计划开发一套自动化工具，自动检测智能合约中的所有状态变量并计算其存储槽位布局。此外，工具将扩展功能，精确分析复杂变量及其元素的存储槽位，以及映射变量的键值预测，以提高检测精度和覆盖范围。最终，将实现一个碰撞检测器，能识别任何类型的状态变量及其关联变量或值的潜在碰撞或冲突。
+
+通过此解决方案，开发者可以在部署前确保智能合约无存储碰撞风险，同时帮助检测已部署合约中深层存储的碰撞问题，保护价值数百万美元的资产免受攻击。 <div>
+<p>Storage collisions and vulnerabilities within Ethereum smart contracts can lead to unexpected issues like freezing funds, escalating privileges, and financial asset theft. A storage collision occurs when two different storage structs unintentionally use same storage slot(s), or the slot layout is changed during the upgrade of implementation contract. These collision vulnerabilities have been detected in large numbers (worth millions of dollars) in a <a href="https://www.ndss-symposium.org/ndss-paper/not-your-type-detecting-storage-collision-vulnerabilities-in-ethereum-smart-contracts/" rel="noopener nofollow ugc">recent study</a> within smart contracts deployed on the Ethereum network.</p>
+<p>In this topic, we propose a more accurate and complete technique to detect storage vulnerabilities and collisions in Solidity smart contracts. And encourage the Ethereum community to <strong>provide feedback on the proposed technique</strong>.</p>
+<h3><a class="anchor" href="https://ethresear.ch#p-49742-introduction-1" name="p-49742-introduction-1"></a>Introduction</h3>
+<p>We are working on a solution based on advanced static analysis techniques that can identify vulnerabilities within the deep storage of Ethereum Solidity smart contracts. We aim to detect storage collisions in proxy contracts deployed on the Ethereum network like ERC-2535 (Diamond/Multi-Facet Proxy), ERC-1822, upgrade proxy pattern, etc., as complex proxy contracts are more likely to experience a storage collision, like during the upgrade of implementation or facet contracts.</p>
+<p><a href="https://www.ndss-symposium.org/ndss-paper/not-your-type-detecting-storage-collision-vulnerabilities-in-ethereum-smart-contracts/" rel="noopener nofollow ugc">N. Ruaro et al.</a> analyzed Ethereum contracts using contract bytecode to detect storage collisions and reported 14,891 vulnerable contracts. Their technique was able to identify storage slot types correctly with an accuracy of 87.3%. Whereas, we aim to build a solution that will use source code to accurately analyze the storage layout and slot types of the contract. Furthermore, we will also analyze dynamic arrays, mapping variables, and complex nested structs in our analysis.</p>
+<p>Suppose a collision occurs on the state variables’ base slots, our approach will allow us to identify the impact of the collision on dynamic arrays and mapping variables declared consecutively, and arrays data type or mappings key types are same which is a common practice in large contracts like gaming contracts.</p>
+<p>As shown in the below example code, the slot layout was changed during the contract upgrade, and since <code>token_uris</code> and <code>token_version</code> have same key types and data types, both variables will return each other’s data after the upgrade due to collision.</p>
+<pre><code class="lang-auto">library ImplementationStorage1 {
+    struct AddressSlot {
+        address owner; // slot n+0
+        mapping(uint256 =&gt; string) token_uris; // slot n+1
+        mapping(uint256 =&gt; string) token_versions; // slot n+2
+    }
+
+    function getAddressSlot(bytes32 slot) internal pure returns (AddressSlot storage r) {
+        assembly {
+            r.slot := slot
+        }
+    }
+}
+
+// updated code
+library ImplementationStorage2 {
+    struct AddressSlot {
+        address owner; //slot n+0
+        mapping(uint256 =&gt; string) token_versions; // slot n+1 (shld be token_uris)
+        mapping(uint256 =&gt; string) token_uris; // slot n+2 (shld be token_versions)
+    }
+
+    function getAddressSlot(bytes32 slot) internal pure returns (AddressSlot storage r) {
+        assembly {
+            r.slot := slot
+        }
+    }
+}
+</code></pre>
+<p><code>token_uris</code> accessing <code>token_versions</code> and vice-versa after the upgrade.</p>
+<pre><code class="lang-auto">       (before upgrade)                        (after upgrade)   
+      _________________                      _________________
+     |     Proxy       |                     |     Proxy       |
+     |_________________|                     |_________________|
+     | * IMPLEMENT_SLOT| --&gt; NFTManager1     | * IMPLEMENT_SLOT| --&gt; NFTManager2
+     | * ADMIN_SLOT    |                     | * ADMIN_SLOT    |
+     |_________________|                     |_________________|
+     | + upgradeTo()   |                     | + upgradeTo()   |
+     | + changeAdmin() |                     | + changeAdmin() |
+     |_________________|                     |_________________|
+              |                                       |
+              v                                       v
+      _________________                       _________________
+     |   NFTManager1   |                     |   NFTManager2   |
+     |_________________|                     |_________________|
+     | - owner         |                     | - owner         |
+     | - token_uris    | **** collision **** | - token_versions|
+     | - token_versions| **** collision **** | - token_uris    |
+     |_________________|                     |_________________|
+
+</code></pre>
+<p>We plan to build a technology that will automatically detect all storage collisions within a Solidity smart contract.</p>
+<h4><a class="anchor" href="https://ethresear.ch#p-49742-methodology-2" name="p-49742-methodology-2"></a>Methodology</h4>
+<p>We have structured our development plan into three distinct phases, outlined as follows:</p>
+<ul>
+<li><strong><strong>Automatic State Variable Detector and Slot Layout Calculator</strong></strong></li>
+</ul>
+<p>In this phase, we focus on developing an automatic state variable detector and slot layout calculator. This component will facilitate the identification of state variables within smart contracts and determine their corresponding slot layout. By automating this process, we aim to streamline the initial analysis procedures.</p>
+<p>Sample output of Slot Calculator</p>
+<pre><code class="lang-auto">slot 0 - mapping ds.selectorToFacetAndPosition[bytes4] = FacetAddressAndPosition;
+slot 1 - mapping ds.facetFunctionSelectors[address] = FacetFunctionSelectors;
+slot 2 - address [] ds.facetAddresses;
+slot 3 - mapping ds.supportedInterfaces[bytes4] = bool;
+slot 4 - address ds.contractOwner;
+slot 5 - mapping ds.tempSelectorsNested[uint256] = FacetAddressAndPosition;
+slot 6 - FacetAddressAndPosition [] ds.FacetAddressAndPositionArray;
+slot 7 - mapping ds.tempMapping[uint256] = uint256;
+slot 8 - mapping ds.tempMapping2[address] = uint256;
+</code></pre>
+<ul>
+<li><strong><strong>Mapping Keys Analyzer and Slot Calculator of Complex Variables</strong></strong></li>
+</ul>
+<p>Building upon the foundation established in phase 1, in this phase we will first extend the slot calculator capability to calculate the slots of complex variables and their entries (for all data types) i.e. slots of mapping keys, dynamic array, complex struct, mappings with complex struct as value.</p>
+<p>This component will also include the approximation of all keys used in mapping variables for saving data using advanced static analysis techniques. By accurately approximating keys and calculating entries, we seek to enhance the precision and breadth of storage slot calculation methodology, which will help detect storage collision within deep storage data of a smart contract.</p>
+<ul>
+<li><strong><strong>Collision Detector for State Variables and Complex Variables All Entries Slots</strong></strong></li>
+</ul>
+<p>The final phase of our methodology focuses on implementing a collision detector for both state variables and complex variable slots. This critical component will identify any potential collisions or conflicts within any type of state variables and their associated variable(s)/value(s) slots. By detecting and addressing collisions, we aim to ensure the integrity and reliability of smart contracts.</p>
+<p>We aim to develop a robust and comprehensive methodology for smart contract storage collision detectors, by systematically progressing through above discussed three development phases.</p>
+<h4><a class="anchor" href="https://ethresear.ch#p-49742-conclusion-3" name="p-49742-conclusion-3"></a>Conclusion</h4>
+<p>The development of our solution will allow developers to ensure that their contract has no potential storage collisions before deployment. It will also be able to detect storage collisions within deep storage of deployed smart contracts and can help in securing contracts worth millions of dollars.</p>
+            <p><small>1 post - 1 participant</small></p>
+            <p><a href="https://ethresear.ch/t/an-automatic-technique-to-detect-storage-collisions-and-vulnerabilities-within-solidity-smart-contract/20328">Read full topic</a></p>
+]]></content:encoded>
+<pubDate>Fri, 23 Aug 2024 09:35:11 +0000</pubDate>
+<pubDate>Fri, 23 Aug 2024 09:35:11 +0000</pubDate>
+</item>
 
 <item>
 <title>A Note on Equivocation in Slot Auction ePBS</title>
