@@ -5,6 +5,74 @@
 <link>https://ethresear.ch/latest</link>
 
 <item>
+<title>Accessible Encryption for Ethereum Rollups with Fairomon</title>
+<link>https://ethresear.ch/t/accessible-encryption-for-ethereum-rollups-with-fairomon/20349</link>
+<guid>https://ethresear.ch/t/accessible-encryption-for-ethereum-rollups-with-fairomon/20349</guid>
+<content:encoded><![CDATA[
+<div> 关键词：Fairomon、Monomer、Fairblock、FairyRing、MPC加密
+
+总结:
+
+本文介绍了Fairomon，一种结合了Fairblock和Monomer技术的特别精灵型宝可梦。Fairomon旨在通过Fairblock提供的阈值多点计算（MPC）加密功能，为Monomer构建的以太坊卷积提供内置加密解决方案。以下是Fairomon的主要工作原理和可能的应用：
+
+1. **FairyRing与密钥生成**：FairyRing使用去中心化的密钥生成方式，为每个周期（每100个区块）生成主秘密密钥（MSK）。从MSK中派生出主公钥（MPK），并将其传输至Monomer链用于加密请求的交易。同时，MSK被分割成参与网络的FairyRing验证者的等份。
+
+2. **阈值身份基加密（IBE）**：Fairomon支持阈值IBE，允许用户或开发人员根据特定条件（如区块高度、资产价格、智能合约调用、ZK证明验证或治理投票结束）编程解密交易。这种解密可以通过“ID”触发，这些“ID”可以是链上条件、链上/下链标识符或属性，某些钱包可以证明其所有权。
+
+3. **安全应用可能性**：MPC加密使许多以前无法在卷积中实现的应用成为可能，包括加密内存池、抗审查排序、以及DeFi和游戏应用中的加密订单、无领袖NFT拍卖、身份受限内容和最高手赢的纸牌游戏（如黑杰克）。
+
+4. **交易流程**：用户将加密交易和解密条件提交给应用程序，链接收加密交易并在内存池中处理。交易按照目标高度排序，并在x/pep模块内部对区块内的顺序进行承诺。当达到目标高度或解密条件时，应用程序链接收来自Fairyring链的解密密钥，然后对加密交易进行解密并执行。
+
+5. **架构集成**：Fairomon通过与Monomer链的集成展示了其工作流程，确保了加密交易的安全性和功能性，同时利用了Monomer的OP堆栈和ABCI接口优势。
+
+Fairomon和Fairblock的结合为以太坊生态系统提供了强大的加密功能，使得敏感数据处理更加安全可靠，同时为开发者打开了创新应用的大门。 <div>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/5/f/5fa5f78d2b4b44708e03133cf29d1de097113e36.jpeg" title="690x435"><img alt="690x435" height="435" src="https://ethresear.ch/uploads/default/optimized/3X/5/f/5fa5f78d2b4b44708e03133cf29d1de097113e36_2_690x435.jpeg" width="690" /></a></div><p></p>
+<p>Co-authored by <a class="mention" href="https://ethresear.ch/u/pememoni">@pememoni</a> and <a class="mention" href="https://ethresear.ch/u/shakeshack">@shakeshack</a>. With special thanks to the rest of the Fairblock team!</p>
+<p>Fairomon is a special fairy type pokemon that combines the work of Fairblock and Monomer - a framework that enables builders to create Ethereum rollups with built-in encryption with minimal lift.</p>
+<h1><a class="anchor" href="https://ethresear.ch#p-49798-background-1" name="p-49798-background-1"></a>Background</h1>
+<p>Monomer is a rollup framework that enables Cosmos SDK app chains to be deployed as rollups on Ethereum. Internally, Monomer is built on top of the OP stack relying on it for chain derivation and settlement while supporting an ABCI interface for a Cosmos SDK app chain to be deployed on top. Fairblock provides threshold MPC encryption that can be utilized in Monomer rollups through a module built for Cosmos SDK chains.</p>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/2/3/2311821ac2a3b134e2df081bbf12f2d71f2c31cc.png" title="451x500"><img alt="451x500" height="500" src="https://ethresear.ch/uploads/default/optimized/3X/2/3/2311821ac2a3b134e2df081bbf12f2d71f2c31cc_2_451x500.png" width="451" /></a></div><p></p>
+<p>Fairblock enables blockchain developers to integrate pre-execution encryption. This pre-execution encryption is made possible through their threshold MPC network that delivers identity-based encryption (IBE), and soon custom encryption schemes, to partner chains. Fairblock’s MPC network, called Fairyring, generates threshold encryption and decryption keys for each supported Monomer rollup, while the rollups themselves receive and process encrypted transactions natively.</p>
+<h1><a class="anchor" href="https://ethresear.ch#p-49798-how-it-works-2" name="p-49798-how-it-works-2"></a>How it Works</h1>
+<p>FairyRing uses decentralized key generation to issue a master secret key (MSK) for each epoch (every 100 blocks). From each MSK, a master public key (MPK) can be derived. Once the MPK is derived, it is relayed to a Monomer chain where it will be used to encrypt each requested transaction. In parallel, the MSK is split into equal shares for the amount of FairyRing validators participating in the network. For each request for decryption, FairyRing validators use their share of the MSK to collectively derive the associated private keys.</p>
+<p>In threshold IBE, users or developers can program the decryption conditions for transactions. Onchain conditions that could trigger decryption could be a block height, the price of an asset, a smart contract call, verification of a ZK proof, or the end of a governance poll, for example. Identity-based encryption allows for the programmability of decryption and allows for decryption to be triggered by “IDs,” which can be either onchain conditions or on/offchain identifiers or attributes that certain wallets prove ownership of.</p>
+<h1><a class="anchor" href="https://ethresear.ch#p-49798-whats-possible-with-fairomon-3" name="p-49798-whats-possible-with-fairomon-3"></a>What’s Possible with Fairomon</h1>
+<p>MPC encryption can make a number of previously inaccessible applications possible within rollups, most notably encrypted mempools, censorship-resistant sequencing, and DeFi and gaming apps such as encrypted orders, leaderless NFT auctions, ID-gated content, and highest-hand-wins card games like blackjack.</p>
+<p>The transaction flow for an application is as follows:</p>
+<ul>
+<li>User submits an encrypted tx and decryption condition (e.g. target height) to an app</li>
+<li>Chain receives encrypted txs in mempool</li>
+<li>Encrypted txs are sorted by target heights and ordering within a block is committed to inside of the integrated x/pep module</li>
+<li>When target height or decryption condition is reached, the app chain receives decryption key from the Fairyring chain</li>
+<li>Encrypted txs are decrypted and executed inside the BeginBlock method of the x/pep module</li>
+</ul>
+<p>See the architecture diagram below for a detailed description of how Fairyring integrates with a Monomer appchain.</p>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/7/2/723cc342b05947059263449d26d5e63a0010c14a.png" title="690x147"><img alt="690x147" height="147" src="https://ethresear.ch/uploads/default/optimized/3X/7/2/723cc342b05947059263449d26d5e63a0010c14a_2_690x147.png" width="690" /></a></div><p></p>
+<p>Monomer links:</p>
+<ul>
+<li><a href="https://github.com/polymerdao/monomer" rel="noopener nofollow ugc">Github</a></li>
+<li><a href="https://github.com/polymerdao/monomer/tree/main/doc" rel="noopener nofollow ugc">Docs</a></li>
+</ul>
+<p>Fairblock links:</p>
+<ul>
+<li>
+<p><a href="https://www.fairblock.network/" rel="noopener nofollow ugc">Website</a></p>
+</li>
+<li>
+<p><a href="https://github.com/Fairblock" rel="noopener nofollow ugc">Github</a></p>
+</li>
+<li>
+<p><a href="https://docs.fairblock.network/docs/basics/overview" rel="noopener nofollow ugc">Docs</a></p>
+</li>
+</ul>
+            <p><small>1 post - 1 participant</small></p>
+            <p><a href="https://ethresear.ch/t/accessible-encryption-for-ethereum-rollups-with-fairomon/20349">Read full topic</a></p>
+]]></content:encoded>
+<pubDate>Wed, 28 Aug 2024 15:45:36 +0000</pubDate>
+<pubDate>Wed, 28 Aug 2024 15:45:36 +0000</pubDate>
+</item>
+
+<item>
 <title>Outdated encryption stored on blockchain</title>
 <link>https://ethresear.ch/t/outdated-encryption-stored-on-blockchain/20346</link>
 <guid>https://ethresear.ch/t/outdated-encryption-stored-on-blockchain/20346</guid>
@@ -38,7 +106,6 @@
             <p><small>1 post - 1 participant</small></p>
             <p><a href="https://ethresear.ch/t/outdated-encryption-stored-on-blockchain/20346">Read full topic</a></p>
 ]]></content:encoded>
-<pubDate>Wed, 28 Aug 2024 12:21:08 +0000</pubDate>
 <pubDate>Wed, 28 Aug 2024 12:21:08 +0000</pubDate>
 </item>
 <item>
@@ -136,9 +203,7 @@
             <p><a href="https://ethresear.ch/t/does-multi-block-mev-exist-analysis-of-2-years-of-mev-data/20345">Read full topic</a></p>
 ]]></content:encoded>
 <pubDate>Wed, 28 Aug 2024 10:31:36 +0000</pubDate>
-<pubDate>Wed, 28 Aug 2024 10:31:36 +0000</pubDate>
 </item>
-
 <item>
 <title>An Automatic Technique to Detect Storage Collisions and Vulnerabilities within Solidity Smart Contract</title>
 <link>https://ethresear.ch/t/an-automatic-technique-to-detect-storage-collisions-and-vulnerabilities-within-solidity-smart-contract/20328</link>
