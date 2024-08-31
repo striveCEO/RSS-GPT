@@ -4,6 +4,192 @@
 <title>Ethereum Research - Latest topics</title>
 <link>https://ethresear.ch/latest</link>
 
+<item>
+<title>Exploring Verifiable Continuous Sequencing with Delay Functions</title>
+<link>https://ethresear.ch/t/exploring-verifiable-continuous-sequencing-with-delay-functions/20362</link>
+<guid>https://ethresear.ch/t/exploring-verifiable-continuous-sequencing-with-delay-functions/20362</guid>
+<content:encoded><![CDATA[
+<div> 关键词：Ethereum、Verifiable Delay Functions（VDF）、Transaction Deadlines、Ethereum作为全球时钟、Sequencer
+
+总结：
+
+文章探讨了在去中心化的设置中，如何解决时间同步的问题，特别是在不可信的第二层（L2）序列器环境中。在这样的环境下，墙上的时钟可能在不同机器间漂移，代理可能会谎报本地时间，而且很难区分恶意行为与不一致的时钟或网络延迟。以太坊被视为一个每约12秒跳动一次的全球时钟，其共识协议软性强制规定，过早或过晚生成的区块和验证不会被认为是有效的。
+
+文章提出了一种机制，用于在去中心化汇总中实现对序列器的及时性、安全性和非剥削性排序的强制执行，而无需额外的共识协议、诚实多数假设或利他主义。这种机制包括三个关键原语：
+
+1. 客户端优先级交易顺序，
+2. 以太坊作为具有12秒周期的全球时钟，
+3. 可验证延迟函数（VDF）。
+
+通过引入交易截止日期、利用以太坊作为时间基准以及使用VDF，文章提供了一种方法来确保序列器遵守时间规定，同时防止提取用户价值的行为（如夹击攻击），并在分布式环境中保持系统的可靠性和安全性。文章还展示了MR-MEV-Boost案例研究，这是一种对MEV-Boost的修改，允许基于多个轮次的预确认交易，同时应用了上述构建来减少提案者的时机游戏行为。 <div>
+<p><em>Thanks to Conor, Lin and Swapnil from the Switchboard team, Cecilia and Brecht from the Taiko team, Alex Obadia, Justin Drake, Artem Kotelskiy and the Chainbound team for review.</em></p>
+<h2><a class="anchor" href="https://ethresear.ch#p-49826-abstract-1" name="p-49826-abstract-1"></a>Abstract</h2>
+<p>Agreeing on time in a decentralized setting can be challenging: wall clocks may drift between machines, agents can lie about their local times, and it is generally hard to distinguish between malicious intent and just unsynchronized clocks or network latencies.</p>
+<p>Ethereum can be thought of as a global clock that ticks at a rate of 1 tick per ~12 seconds. This tick rate is soft-enforced by the consensus protocol: blocks and attestations produced too early or too late will not be considered valid. But what should we do in order to achieve a granularity lower than 12 seconds? Do we always require a consensus protocol to keep track of time?</p>
+<p>We want to explore these questions in the context of untrusted L2 sequencers, who don’t have any incentive to follow the L2 block schedule that is currently maintained by trusted L2 sequencers, and will likely play various forms of timing games in order to maximize their revenue.</p>
+<p>In this article, we introduce mechanisms to enforce the timeliness, safety and non-extractive ordering of sequencers in a decentralized rollup featuring a <strong>rotating leader mechanism</strong>, without relying on additional consensus, honest majority assumptions or altruism. To do so, we use three key primitives:</p>
+<ol>
+<li>Client-side ordering preferences,</li>
+<li>Ethereum as a global 12s-tick clock,</li>
+<li>Verifiable Delay Functions.</li>
+</ol>
+<p>Lastly, we show the case study of MR-MEV-Boost, a modification of MEV-Boost that enables a variation of based preconfirmations, where the same construction explored can be applied to reduce the timing games of the proposer.</p>
+<h2><a class="anchor" href="https://ethresear.ch#p-49826-rationale-2" name="p-49826-rationale-2"></a>Rationale</h2>
+<p>Rollup sequencers are entities responsible for ordering (and in most cases, executing) L2 transactions and occasionally updating the L2 state root on the L1. Currently, centralized sequencers benefit from the reputational collateral of the teams building them to maintain five properties:</p>
+<ul>
+<li><strong>Responsiveness</strong>: responding to user transactions with soft commitments / preconfirmations in a <em>timely</em> manner. We want to highlight that this definition includes the timely broadcast of unsafe heads on the rollup peer-to-peer network.</li>
+<li><strong>Non-equivocation (safety)</strong>: adhering to preconfirmation promises when submitting the ordered batch on the L1, which is what will ultimately determine the total ordering of transactions.</li>
+<li><strong>Non-extractive ordering</strong>: not extracting MEV from users by front-running or sandwiching, or by accepting bribes for front-running privileges.</li>
+<li><strong>Liveness</strong>: posting batches to L1 and updating the canonical rollup state regularly.</li>
+<li><strong>Censorship-resistance:</strong> ensuring that no valid transactions are deliberately excluded by the sequencer regardless of the sender, content, or any external factors.</li>
+</ul>
+<p>In this piece we are concerned with how the first four properties can be maintained in a permissionless, untrusted setting. Note that censorship-resistance is ensured by construction: by introducing multiple organizationally distinct sequencers in different geographies and jurisdictions we have a strong guarantee that any transaction will be accepted eventually.</p>
+<p>Consider a decentralized sequencer set <span class="math">S := \{S_1,\dots,S_n\}</span>  with a predictable leader rotation mechanism and a sequencing window corresponding to a known amount of L1 slots. For simplicity, let’s assume <span class="math">S_{i}</span> is the current leader and <span class="math">S_{i+1}</span> is the next one. At any point in time, only one sequencer is active and has a lock over the rollup state.</p>
+<p>Here are two strategies that sequencer <span class="math">S_i</span> can explore to maximize its expected value:</p>
+<p><strong>1. Delaying the inclusion of transactions</strong></p>
+<p>Suppose a user sends a transaction to <span class="math">S_i</span> at a certain L2 slot. Then, the sequencer could wait some time before inserting the transaction into a block in order to extract more MEV with sandwich attacks in collaboration with searchers or by directly front-running the user. In particular, <a href="https://www.youtube.com/watch?v=01dnINiLhAk&amp;t=287s" rel="noopener nofollow ugc">since MEV grows superlinearly with time</a>, it’s not in the sequencer’s best interest to commit early to a transaction. The worst case scenario would be the sequencer delaying inclusion until the sequencer rotation <span class="math">^1</span>.</p>
+<p><strong>2. Not publishing unsafe heads in the rollup peer-to-peer network</strong></p>
+<p>In this setting the sequencer has low incentives to publish the unsafe heads in the rollup network: since L2 blocks are signed by the sequencer (e.g. in <a href="https://docs.optimism.io/builders/node-operators/configuration/consensus-config#p2psequencerkey" rel="noopener nofollow ugc">Optimism</a>), they act as a binding commitment which can be used by users to slash it in case of equivocations.</p>
+<p>This has a major downstream consequence on the UX of the rollup: both the next sequencer and users need to wait until a batch is included to see the latest transactions. For users it means they won’t know the status of their transactions in a timely manner, while the next sequencers risks building blocks on invalid state.</p>
+<p>We will now explore mechanisms to mitigate these behaviours and introduce slashing conditions for sequencers.</p>
+<h2><a class="anchor" href="https://ethresear.ch#p-49826-primitive-1-transaction-deadlines-3" name="p-49826-primitive-1-transaction-deadlines-3"></a>Primitive 1: Transaction Deadlines</h2>
+<p>We introduce a new EIP-2718 transaction type with an additional field:</p>
+<ul>
+<li><code>deadline</code> - <code>uint256</code> indicating the last L2 block number for which the transaction is considered valid.</li>
+</ul>
+<p>This idea is not entirely new. For instance, the <a href="https://limechain.tech/" rel="noopener nofollow ugc">LimeChain</a> team has explored this in their <a href="https://github.com/LimeChain/based-preconfirmations-research/blob/cfc3830c685965fad5e5843533c5586dcb92e873/docs/preconfirmations-for-vanilla-based-rollups.md#preconfirmation-deadline" rel="noopener nofollow ugc">Vanilla Based Sequencing</a> article. However, in our variant the <code>deadline</code> field is signed as part of the transaction payload and it is not expressed in L1 slots.</p>
+<p>The reasoning behind it is that the sequencer cannot tamper with either the <code>deadline</code> field or <code>block.number</code> (because it is a monotonically increasing counter), and therefore it is easy to modify the L2 derivation pipeline to attribute a fault in case the sequencer inserts the user transaction in a block where <code>block.number &gt; deadline</code>.</p>
+<p>This approach mitigates problem <span class="hashtag-raw">#1</span>. However, it does not in any way solve the <em>responsiveness</em> issue, since sequencers can still delay proposing the block in order to extract more MEV.</p>
+<h2><a class="anchor" href="https://ethresear.ch#p-49826-primitive-2-ethereum-as-a-global-clock-4" name="p-49826-primitive-2-ethereum-as-a-global-clock-4"></a>Primitive 2: Ethereum as a Global Clock</h2>
+<p>A simple rotating sequencer design would be one where <span class="math">S_i</span> loses the power to settle batches after the end of its sequencing window <span class="math">W_i</span>, which is dictated by an L1 smart contract. However, the sequencer still needs some time to post the batch with the latest L2 blocks. We therefore introduce an <em>inclusion window</em> that is shifted <span class="math">n \geq 1</span> slots ahead of <span class="math">W_i</span>, where <span class="math">S_i</span> still has time to land rollup batches on L1 with the last L2 blocks, even if the responsibility of sequencing has shifted to <span class="math">S_{i+1}</span>.</p>
+<p>In case of any safety fault, the sequencer should be slashed. If the sequencer has not managed to post all their assigned L2 blocks by the end of its inclusion window, it will forego all associated rewards. Optionally, there could also be penalties for liveness faults. This also helps with the problem of collaboration with the next sequencer, by ensuring that the latest blocks will be known to it within <span class="math">n\cdot12</span> seconds. Ideally, we’d like to keep <span class="math">n</span> as small as possible with a value of <span class="math">1</span>.</p>
+<p>There are still some potential issues here: getting a transaction included on Ethereum is probabilistic, meaning that you can’t be sure that a transaction you send will actually be included in time. In this context it means that the last batch sent by an honest leader may not be included in the L1 by the end of its inclusion window. This can be helped with two approaches:</p>
+<ul>
+<li>A “based” setup, where the sequencer is also the L1 block proposer and can include any transactions right up to the point they have to propose, or</li>
+<li>Using proposer commitments with a protocol like <a href="https://boltprotocol.xyz" rel="noopener nofollow ugc">Bolt</a>. We expand more on this in the <em>”Further work”</em> section below.</li>
+</ul>
+<p>Note that we assume there is a registry smart contract that can be consulted for the currently active sequencer, i.e. it implements some leader election mechanism and takes care of sequencer bonds along with rewards and penalties. It is up to the rollup governance to decide whether the registry can be fully permissionless or if it should use an allowlist. In case of any misbehaviour, governance would be used to temporarily or permanently remove the sequencer from the allowlist.</p>
+<h2><a class="anchor" href="https://ethresear.ch#p-49826-primitive-3-verifiable-delay-functions-5" name="p-49826-primitive-3-verifiable-delay-functions-5"></a>Primitive 3: Verifiable Delay Functions</h2>
+<p><a href="https://medium.com/iovlabs-innovation-stories/verifiable-delay-functions-8eb6390c5f4" rel="noopener nofollow ugc">Verifiable Delay Functions</a> (VDFs henceforth) are a cryptographic primitive that allows a prover to show a verifier that a certain amount of time was spent running a function, and do it in a way that the verifier can check the result quickly.</p>
+<p>For instance, consider a cryptographic hash function <span class="math">h</span> and define the application</p>
+<div class="math">
+H(n,s) := (h \circ \underset{n\ times}\dots \circ h)(s),
+</div>
+<p>where <span class="math">s</span> is a byte array an <span class="math">n</span> is a natural number.</p>
+<p>Composing (or chaining) hash functions like SHA-256 cannot be trivially sped up using parallel computations, but the solution lacks efficient verification <span class="math">^2</span> as the only way to verify the result is to recompute the composition of functions. This solution appeared as a naïve VDF in <a href="https://eprint.iacr.org/2018/601.pdf" rel="noopener nofollow ugc">Boneh’s paper</a>, and for this reason it is referred to as <em>weak</em>.</p>
+<p>Another example of VDF is <a href="https://people.csail.mit.edu/rivest/pubs/RSW96.pdf" rel="noopener nofollow ugc">iterated squaring over a group of hidden order</a>, with which it is possible to construct time-lock puzzles. We’ll explore the usage of the latter in the next sections.</p>
+<h3><a class="anchor" href="https://ethresear.ch#p-49826-why-vdfs-tho-6" name="p-49826-why-vdfs-tho-6"></a>Why VDFs tho?</h3>
+<p>VDFs are very useful in the context of sequencing because they can act as a <em>proof of elapsed time</em> for the duration of the block (specifically <code>block_time</code> / <code>max_adversary_speedup</code>, see <em>“Security Considerations”</em>). Consider the following algorithm for the block production pipeline:</p>
+<ol>
+<li>At the beginning of L2 block <span class="math">N</span>, the sequencer starts computing a VDF that takes an L2 block time (or slightly less) to compute for honest players, using the previous block hash as its input.</li>
+<li>After the end of the L2 slot the sequencer builds a block <span class="math">B_N</span> where the header contains the result of the VDF, denoted <span class="math">V_N</span>. We call this <em>sealing</em> a block. This means the block hash digest contains <span class="math">V_N</span>.</li>
+</ol>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/6/8/6802ae3a20554489b1de7ccb7a9ecda502a79c39.png" title=""><img alt="" height="317" src="https://ethresear.ch/uploads/default/optimized/3X/6/8/6802ae3a20554489b1de7ccb7a9ecda502a79c39_2_690x317.png" width="690" /></a></div><p></p>
+<p>This algorithm has the nice property of creating a chain of VDF computations, in some sense analogous to <a href="https://solana.com/news/proof-of-history" rel="noopener nofollow ugc">Solana’s Proof of History</a> from which we inherit the security guarantees. What does this give us in the sequencer context? If we remember that a sequencer has a certain deadline by which it has to post batches set by the L1 slot schedule, we can have the L1 enforce that <em>at least</em> some number of L2 blocks need to be settled. This has two downstream results:</p>
+<ul>
+<li>The sequencer <em>must</em> start producing and sealing blocks as soon as their sequencing window starts. Pairing this with the transaction deadline property results in an upper bound of time for when a transaction can be confirmed. If they don’t follow the block schedule set by the VDF and the L1, they risk not being able to post <em>any</em> batch.</li>
+<li>We mitigate problem <span class="hashtag-raw">#2</span> by taking away the incentive to withhold data (not considering pure griefing attacks): this is because the sequencer cannot tamper with an existing VDF chain, which would require recomputing all the subsequent VDFs and result in an invalid batch.</li>
+</ul>
+<p>In general, for the sake of this post we will consider a generic VDF, provided as a “black box” while keeping the hash chain example in mind which currently has stronger guarantees against ad-hoc hardware such ASICs. See <em>“Security Considerations”</em> below for more insights.</p>
+<h3><a class="anchor" href="https://ethresear.ch#p-49826-proving-correct-vdfs-7" name="p-49826-proving-correct-vdfs-7"></a>Proving correct VDFs</h3>
+<p>If a sequencer provides an invalid VDF in an L2 block header it should be slashed, and ideally we’d like to ensure this at settlement time. However, recalculating a long hash chain on the EVM is simply unfeasible due to gas costs.</p>
+<p>How to show then that the number of iterations of the VDF is invalid? One way could be to enforce it optimistically (or at settlement, in case of ZK-rollups) by requiring a valid VDF chain output in the derivation pipeline of the rollup. In case of equivocation in an optimistic rollup the sequencer can be challenged using fraud proofs.</p>
+<h3><a class="anchor" href="https://ethresear.ch#p-49826-hardware-requirements-8" name="p-49826-hardware-requirements-8"></a>Hardware requirements</h3>
+<p>Since by definition VDFs cannot be sped up using parallelism, it follows that computing a VDF can be done by only using a single core of a CPU, and so it does in our block production algorithm.</p>
+<p>This makes it different and way more lightweight compared to most Proof-of-Work consensus algorithms such as Bitcoin’s which requires scanning for a value such that, when hashed with SHA-256, the hash begins with a certain number of zero bits.</p>
+<p>It’s also worth to note that modern CPUs are optimized to compute the SHA-256 hash function. Since 2016 Intel, starting with the <em>Goldmount</em> family of chips, is offering <a href="https://www.intel.com/content/www/us/en/developer/articles/technical/intel-sha-extensions.html" rel="noopener nofollow ugc">SHA Extensions</a> in the <em>Core</em> and <em>Xeon</em> line-ups on selected models which introduces three new instructions specialized in computing different steps of the hash function algorithm more efficiently.</p>
+<p>Lastly, <a href="https://www.man.com/single-core-stagnation-and-the-cloud" rel="noopener nofollow ugc">single-core performance has stagnated over the years</a> indicating that there is a minor benefit in investing in the latest generation of CPUs, thus lowering down the requirements of the system.</p>
+<h2><a class="anchor" href="https://ethresear.ch#p-49826-case-study-mr-mev-boost-9" name="p-49826-case-study-mr-mev-boost-9"></a>Case Study: MR-MEV-Boost</h2>
+<p><a href="https://ethresear.ch/t/based-preconfirmations-with-multi-round-mev-boost/20091">Multi-Round-MEV-Boost</a>, is a modification of MEV-Boost that enables based preconfirmations by running multiple rounds of MEV-Boost auctions within a single L1 slot. The usage of this primitive is to output after each round a based rollup block built by L2 block builders. As shown in the article, this approach inherits the L1 PBS pipeline and mitigates some of the negative externalities of based preconfirmations as a result.</p>
+<p>Like MEV-Boost, this fork relies on the opted-in proposer to be an auctioneer which ends the sealed auction by calling the <code>getHeader</code> (<a class="inline-onebox" href="https://ethereum.github.io/builder-specs/#/Builder/getHeader" rel="noopener nofollow ugc">Builder-API</a>) endpoint of the relays. After having signed the sealed bid, the <code>getPayload</code> (<a class="inline-onebox" href="https://ethereum.github.io/builder-specs/#/Builder/submitBlindedBlock" rel="noopener nofollow ugc">Builder-API</a>) is called by the proposer to receive the actual content of the winning bid and to publish the block in the based rollup network.</p>
+<p>In the original protocol, the end of the auction usually coincides with the end of the L1 slot (more precisely, <a href="https://mevboost.pics/" rel="noopener nofollow ugc">near one second after it</a>); delaying it results in a high risk of not being able to broadcast the block in time to gather all the needed attestation and forgo all its associated rewards. As such, a block time is proposed every twelve seconds with consistency, enforced by Ethereum consensus.</p>
+<p>In contrast, given it consists of multiple rounds happening <em>during</em> the slot, in MR-MEV-Boost an <em>untrusted proposer is incentivized to end the auction seconds later or earlier <span class="math">^{3}</span> according to the incoming bids,</em> in order to extract more more MEV. In the worst case, MR-MEV-Boost will reflect L1 block times. Another consequence of this is an inconsistent slot time for the based rollup. This can be seen as a much more serious form of timing games.</p>
+<p>In the article, the discussed possible solutions to this problem are the following:</p>
+<ol>
+<li>Introduce user incentives: if users determine that a proposer is misbehaving, they stop sending transactions to said proposer.</li>
+<li>Introduce a committee (consensus) to attest to timeliness and maintain slot durations.</li>
+</ol>
+<p>We now argue that a trustless solution that strongly limits the proposer without requiring actions from the user does exist, and it leverages the same construction we used for the VDF-powered block production algorithm in the context of decentralized sequencing.</p>
+<p>The construction is fairly simple and consists of computing a VDF that lasts <span class="math">x := 12/r</span> seconds, where <span class="math">r</span> is the number of rounds in an L1 slot (the L2 block time). The proposer must calculate this VDF using the previous based rollup block hash as public input and, at the end of the round, sending it along with the body of a modified <code>getPayload</code> call. The output of the VDF is then stored in the rollup block header and if invalid can result in slashing the proposer after a successful fraud proof.</p>
+<p>With this approach the amount of time a proposer can delay the end of a round is limited: for instance if the first auction ended one second later then during the last round it won’t be able to provide three seconds of computation for the VDF but two, resulting in an invalid block and consequent slashing <span class="math">^4</span>. This is because in order to start computing a valid VDF, it requires the previous block hash as its input, implying a sealed block.</p>
+<h2><a class="anchor" href="https://ethresear.ch#p-49826-security-considerations-10" name="p-49826-security-considerations-10"></a>Security Considerations</h2>
+<p><strong>Are VDFs really safe for this purpose?</strong><br />
+Suppose an adversary owns hardware which is capable of computing the VDF faster compared to the baseline of honest players <em>without getting noticed</em> (otherwise the number of iterations for the VDF is adjusted by the protocol). Then, the faster the attacker (<code>max_adversary_speedup</code>), the less our construction would constrain the space of its possible actions. In particular, the sequencer would be able to commit a bit later to blocks and be able to re-organize some of them for extracting more value.</p>
+<p>However, given we don’t need the “fast proving” property, hash-chains have proven to be robust with Solana’s Proof of History and will continue to be at least in the short-term. Also, our security requirements will not be as strict as something that <a href="https://ethresear.ch/t/statement-regarding-the-public-report-on-the-analysis-of-minroot/16670">needs to be enshrined in Ethereum</a> forever.</p>
+<p>Some solutions and directions to get stronger safety guarantees can be found in the <em>”Further work”</em> section below.</p>
+<h2><a class="anchor" href="https://ethresear.ch#p-49826-current-limitations-11" name="p-49826-current-limitations-11"></a>Current limitations</h2>
+<p><strong>Sequencer credibility</strong></p>
+<p>As with many new services which leverage (re)staking, the credibility of the sequencer has an upper bound which is the amount it has staked: if a MEV opportunity exceeds that, then a rational untrusted actor would prefer to get slashed and take the MEV reward.</p>
+<p><strong>Leader rotation can be a critical moment</strong></p>
+<p>As discussed in the batcher and registry smart contract section, the inclusion window is shifted of one slot forward at minimum compared to the sequencing window. This is needed because of the time required to settle the last batch before rotating leader, but leaves an additional slot time of at least 12 seconds in which the sequencer has room to re-organize the last L2 blocks before publishing them on the rollup peer-to-peer network. As a consequence, liveness is harmed temporarily because <span class="math">S_{i+1}</span> might be building blocks on invalid state if it starts to sequence immediately.</p>
+<p>Lastly, one additional slot might not be enough to settle a batch according to recent data on <a href="https://ethresear.ch/t/slot-inclusion-rates-and-blob-market-combinatorics/19817">slot inclusion rates for blobs</a>. This can be mitigated by leveraging new inclusion preconfirmation protocols, as explained below.</p>
+<p><strong>Sequencer last-look</strong></p>
+<p>Our construction makes very difficult for a sequencer to reorg a block after it has been committed to, however it doesn’t solve front-running in its entirety. In particular, the sequencer may extract value from users transactions while building the block with associated <code>deadline</code> field. A possible solution along with its limitations is explored in the section below.</p>
+<h2><a class="anchor" href="https://ethresear.ch#p-49826-conclusion-12" name="p-49826-conclusion-12"></a>Conclusion</h2>
+<p>In this article, we explored mechanisms to enforce the timeliness, safety, and non-extractive ordering of untrusted L2 sequencers in a decentralized rollup environment.<br />
+The primitives discussed ensure that sequencers can act more predictably and fairly, mitigating issues such as transaction delays and data withholding. Moreover, these techniques can reduce trust assumptions for existing single-sequencer rollups, aligning with the concept of rollups functioning as <a href="https://vitalik.eth.limo/general/2024/06/30/epochslot.html#what-should-l2s-do" rel="noopener nofollow ugc">“servers with blockchain scaffolding”</a>. These findings provide a robust framework for the future development of decentralized, secure rollup architectures.</p>
+<h2><a class="anchor" href="https://ethresear.ch#p-49826-further-work-13" name="p-49826-further-work-13"></a>Further work</h2>
+<p><strong>Trusted Execution Environments (TEEs) to ensure the sequencer is not running an ASIC</strong></p>
+<p>A <a href="https://en.wikipedia.org/wiki/Trusted_execution_environment" rel="noopener nofollow ugc">Trusted Execution Environment</a> is a secure area of a CPU, often called <em>enclave</em>, that helps the code and data loaded inside it be protected with respect to confidentiality and integrity.<br />
+Its usage in blockchain protocols is an active area of research, with the main concerns being trusting the hardware manufacturer and the <a href="https://en.wikipedia.org/wiki/Software_Guard_Extensions" rel="noopener nofollow ugc">various vulnerabilities found in the past</a> of some implementations (here’s the <a href="https://x.com/_markel___/status/1828112469010596347" rel="noopener nofollow ugc">latest</a>).<br />
+Depending on the use case these trust assumptions and vulnerabilities might be a deal-breaker. However, in our setting we just need a guarantee that the sequencer is not using specialized hardware for computing the VDF, without caring about possible leakage of confidential data from the enclave or manipulation of the wall clock / monotonic clock.</p>
+<p><strong>Adapt existing anti-ASICs Proof-of-Work algorithms</strong></p>
+<p>The <a href="https://www.getmonero.org/resources/about/" rel="noopener nofollow ugc">Monero</a> blockchain, launched in 2014 as a privacy and untraceable-focused alternative to Bitcoin, uses an ASIC-resistant Proof-of-Work algorithm called <a href="https://github.com/tevador/RandomX" rel="noopener nofollow ugc">RandomX</a>. Quoting their <code>README</code>:</p>
+<blockquote>
+<p>RandomX is a proof-of-work (PoW) algorithm that is optimized for general-purpose CPUs. RandomX uses random code execution (hence the name) together with several memory-hard techniques to minimize the efficiency advantage of specialized hardware.</p>
+</blockquote>
+<p>The algorithm however leverages <a href="https://github.com/tevador/RandomX/blob/102f8acf90a7649ada410de5499a7ec62e49e1da/README.md#cpu-performance" rel="noopener nofollow ugc">some degree of parallelism</a>; it is an interesting research direction whether it can adapted into a single-core version, leading to a new weak-VDF.<br />
+This approach, while orthogonal to using a TEE, can potentially achieve the same result which is having a guarantee that the sequencer is not using sophisticated hardware.</p>
+<p><strong>Time-lock puzzles to prevent front-running</strong></p>
+<p>As mentioned in the <em>“Current limitations”</em> section, our construction doesn’t limit the problem of sequencer front-running the users. Luckily, this can be solved by requiring users to encrypt sensitive transactions using <a href="https://people.csail.mit.edu/rivest/pubs/RSW96.pdf" rel="noopener nofollow ugc">time-lock puzzles</a>, as we will show in more detail in a separate piece. However, this solution doesn’t come free: encrypted transactions or encrypted mempools can incentive spamming and statistical arbitrage, <a href="https://collective.flashbots.net/t/it-s-time-to-talk-about-l2-mev/3593" rel="noopener nofollow ugc">especially when the protocol fees are not very high</a>.</p>
+<p><strong>Inclusion Preconfirmations and Data Availability layers</strong></p>
+<p>Batch submissions to an L1 contract could be made more efficient by leveraging some of the new preconfirmations protocol like <a href="https://boltprotocol.xyz" rel="noopener nofollow ugc">Bolt</a> by Chainbound or <a href="https://docs.primev.xyz/concepts/what-is-mev-commit" rel="noopener nofollow ugc">MEV-Commit</a> by Primev to have guaranteed inclusion in the same slot. In particular, sequencing windows should end precisely in the slot before one where the proposer is running the aforementioned protocols in order to leverage inclusion commitments.</p>
+<p>Additionally, the batch could be posted into an efficient and lightweight Data Availability layer run by proposers to enforce a deadline of a configurable amount of seconds in the beginning of the slot, otherwise the sequencer would be slashed.</p>
+<p><img alt="" height="190" src="https://ethresear.ch/uploads/default/original/3X/b/e/bed5956f14947f6e30a081e3064cd2a196897c95.png" width="328" /></p>
+<hr />
+<h2><a class="anchor" href="https://ethresear.ch#p-49826-footnotes-14" name="p-49826-footnotes-14"></a>Footnotes</h2>
+<ol>
+<li>More precisely, if an operator controls multiple subsequent sequencers it could delay inclusion until the last sequencer rotation.</li>
+<li>In Solana, the verification of a SHA-256 chain is actually parallelised but requires dividing a block associated to a ~400ms computation into 32 shreds which are forwarded to the rest of the validators as soon as they’re computed. As such, verification is sped up by computing the intermediate steps of the hash chain in parallel.</li>
+<li>In general, the proposer will end some rounds earlier as a side effect of delaying other rounds. For example, it could force a longer last round to leverage possible L1 &lt;&gt; L2 arbitrage opportunities.</li>
+<li>There is an edge case where the proposer might not be able to compute all the VDFs even if honest, and it is due to the rotation mechanism: since the public input of the VDF must be the previous rollup block hash, during rotation the next leader will need some time before hearing the block from the rollup network, potentially more than 1s. This could lead the next proposer to be late in computing the VDFs.<br />
+To reduce this risk, the next proposer could rely on various parties to receive this information such as streaming services and/or trusted relays.</li>
+</ol>
+            <p><small>1 post - 1 participant</small></p>
+            <p><a href="https://ethresear.ch/t/exploring-verifiable-continuous-sequencing-with-delay-functions/20362">Read full topic</a></p>
+]]></content:encoded>
+<pubDate>Fri, 30 Aug 2024 14:29:49 +0000</pubDate>
+<pubDate>Fri, 30 Aug 2024 14:29:49 +0000</pubDate>
+</item>
+<item>
+<title>PeerDas Documentation</title>
+<link>https://ethresear.ch/t/peerdas-documentation/20361</link>
+<guid>https://ethresear.ch/t/peerdas-documentation/20361</guid>
+<content:encoded><![CDATA[
+<div> 关键词：PeerDAS、数据可用性、协议整合、安全保证、加密社区
+
+总结:
+
+这篇文章的主要内容围绕着PeerDAS——即将被集成到以太坊共识层中的数据可用性解决方案。其核心目标是向加密社区清晰地阐述PeerDAS所使用的加密技术，以此激发新的创新与改进，同时明确阐述PeerDAS的安全和效率保证。
+
+文章首先强调了理解PeerDAS安全性的重要性，特别是随着它即将成为以太坊共识层的一部分。为了实现这一目标，文章提供了一个易于加密社区理解的PeerDAS加密技术描述，旨在为未来可能的改进奠定基础。
+
+接下来，文章提出了一个关键的定理（定理1），即在可接受的加密假设下，PeerDAS被认为是一个在代数群模型中符合特定定义的数据可用性采样方案。这个定理是文章关于PeerDAS安全性的主要声明，表明了其在理论上是安全可靠的。
+
+最后，文章邀请加密社区对文档提出反馈，以便进一步优化和改进，体现了作者对社区合作和持续发展的重视。这表明PeerDAS的发展不仅基于当前的技术理解，还考虑到了未来的适应性和改进空间。 <div>
+<p>Joint work with <a class="mention" href="https://ethresear.ch/u/b-wagn">@b-wagn</a>, <a href="https://eprint.iacr.org/2024/1362.pdf" rel="noopener nofollow ugc">A Documentation of Ethereum’s PeerDAS</a></p>
+<p>The long-term vision of the Ethereum community includes a comprehensive data availability protocol using polynomial commitments and tensor codes. As the next step towards this vision, an intermediate solution called PeerDAS is about to integrated, to bridge the way to the full protocol. With PeerDAS soon becoming an integral part of Ethereum’s consensus layer, understanding its security guarantees is essential.</p>
+<p>The linked document aims to describe the cryptography used in PeerDAS in a manner accessible to the cryptographic community, encouraging innovation and improvements, and to explicitly state the security guarantees of PeerDAS. We focus on PeerDAS as described in Ethereum’s consensus specifications [<a href="https://github.com/ethereum/consensus-specs/commit/54093964c95fbd2e48be5de672e3baae8531a964" rel="noopener nofollow ugc">Eth24a</a>, <a href="https://github.com/ethereum/consensus-specs/tree/dev/specs/_features/eip7594" rel="noopener nofollow ugc">Eth24b</a>].</p>
+<p>Our intention is two-fold: first, we aim to provide a description of the cryptography used in PeerDAS that is accessible to the cryptographic community, potentially leading to new ideas and<br />
+improvements that can be incorporated in the future. Second, we want to explicitly state the security and efficiency guarantees of PeerDAS. In terms of security, this document justifies the following claim:<br />
+<strong>Theorem 1</strong> (Main Theorem, Informal): <em>Assuming plausible cryptographic hardness assumptions, PeerDAS is a secure data availability sampling scheme in the algebraic group model, according to the definition in [<a href="https://eprint.iacr.org/2023/1079" rel="noopener nofollow ugc">HASW23</a>].</em></p>
+<p>We hope to receive feedback from the community to make further improvements to this document</p>
+            <p><small>1 post - 1 participant</small></p>
+            <p><a href="https://ethresear.ch/t/peerdas-documentation/20361">Read full topic</a></p>
+]]></content:encoded>
+<pubDate>Fri, 30 Aug 2024 12:56:35 +0000</pubDate>
+<pubDate>Fri, 30 Aug 2024 12:56:35 +0000</pubDate>
+</item>
 
 <item>
 <title>Accessible Encryption for Ethereum Rollups with Fairomon</title>
