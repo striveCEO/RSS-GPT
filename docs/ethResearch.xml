@@ -4,6 +4,29 @@
 <title>Ethereum Research - Latest topics</title>
 <link>https://ethresear.ch/latest</link>
 
+<item>
+<title>Interpreting MPT branch node values</title>
+<link>https://ethresear.ch/t/interpreting-mpt-branch-node-values/20368</link>
+<guid>https://ethresear.ch/t/interpreting-mpt-branch-node-values/20368</guid>
+<content:encoded><![CDATA[
+<div> 关键词：MPT、分支节点、NULL、空字符串、终结节点
+
+总结:
+
+本文探讨了在默克尔树（MPT）中区分两种不同类型的分支节点情况。第一种情况是分支节点被视为非“终结”节点，其第17项列表应为空（NULL），表示该节点继续指向其他子节点。而第二种情况则是当分支节点作为终结节点使用时，第17项列表实际上包含了数据值，即使这个值恰好是空字符串。
+
+为了区分这两种不同的节点类型，关键在于理解它们在列表中的预期内容。非终结节点的列表应该在该位置上留有空位或NULL表示后续数据的存在，而终结节点则会填充实际的数据值。尽管在随后的RLP编码过程中，NULL会被表示为空字符串，但原始列表中NULL和非NULL（即使是空字符串）的区别是本质的。因此，识别节点类型的关键在于查看列表本身的结构而非其编码后的形式。 <div>
+<p>Consider a branch node for an MPT.<br />
+Suppose the 17’th item in the branch node list is supposed to be NULL, because the branch node is not a “terminator” node. Ethereum documentation says NULL is encoded as the empty string.<br />
+Suppose the 17’th item in the list is supposed to be a value because the branch node is a terminator node. Suppose this value happens to be the empty string.<br />
+How to distinguish these two cases?<br />
+Note this question should be independent of RLP encoding, which only concerns how we encode the list. I’m asking what’s in the list itself, before considering how the list is subsequently encoded.</p>
+            <p><small>1 post - 1 participant</small></p>
+            <p><a href="https://ethresear.ch/t/interpreting-mpt-branch-node-values/20368">Read full topic</a></p>
+]]></content:encoded>
+<pubDate>Sat, 31 Aug 2024 14:57:04 +0000</pubDate>
+<pubDate>Sat, 31 Aug 2024 14:57:04 +0000</pubDate>
+</item>
 
 <item>
 <title>Exploring Verifiable Continuous Sequencing with Delay Functions</title>
