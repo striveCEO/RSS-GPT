@@ -4,6 +4,353 @@
 <title>GitHub All Languages Weekly Trending</title>
 <link>http://mshibanami.github.io/GitHubTrendingRSS</link>
 
+<item>
+<title>signalapp/libsignal</title>
+<link>https://github.com/signalapp/libsignal</link>
+<guid>https://github.com/signalapp/libsignal</guid>
+<content:encoded><![CDATA[
+<div> 关键词：Signal Protocol、libsignal、Rust、Java/Swift/TypeScript、Android/Native Libraries
+
+总结:
+
+这篇文章详细介绍了Signal的内部技术栈和构建流程。核心在于libsignal库，它包含用于官方Signal客户端和服务器的平台中立API，提供Java、Swift、TypeScript等语言的封装。libsignal底层使用Rust实现，包含了Signal协议、加密算法、设备间传输功能、零知识证明、安全值恢复系统、用户名管理等模块。
+
+对于Android开发，需要额外安装JDK、Android NDK/SDK，以及设置Rust编译目标。构建流程包括使用cargo编译并测试基本协议库。对于Java/Android应用，需要构建Java/Android jar和aar文件，并通过Gradle或Docker进行构建。Maven Central提供了Signal客户端和服务器的Java包，包含针对不同平台的本地库。Swift和Node的构建流程也有详细的指导文档。NPM提供了一个用于Node的特定包，包括Windows、macOS和Linux的本地库。
+
+对于外部贡献者，Signal接受贡献，但需遵守特定的流程和标准，包括开立问题讨论、确保贡献与项目目标一致、签署开源许可协议等。此外，该软件涉及加密功能，其出口可能受到国家法律限制，需谨慎使用。最后，所有内容均遵循GNU AGPLv3许可证条款。 <div>
+<p>Home to the Signal Protocol as well as other cryptographic primitives which make Signal possible.</p><hr /><h1>Overview</h1> 
+<p>libsignal contains platform-agnostic APIs used by the official Signal clients and servers, exposed as a Java, Swift, or TypeScript library. The underlying implementations are written in Rust:</p> 
+<ul> 
+ <li>libsignal-protocol: Implements the Signal protocol, including the <a href="https://signal.org/docs/">Double Ratchet algorithm</a>. A replacement for <a href="https://github.com/signalapp/libsignal-protocol-java">libsignal-protocol-java</a> and <a href="https://github.com/signalapp/libsignal-metadata-java">libsignal-metadata-java</a>.</li> 
+ <li>signal-crypto: Cryptographic primitives such as AES-GCM. We use <a href="https://github.com/RustCrypto">RustCrypto</a>'s where we can but sometimes have differing needs.</li> 
+ <li>device-transfer: Support logic for Signal's device-to-device transfer feature.</li> 
+ <li>attest: Functionality for remote attestation of <a href="https://www.intel.com/content/www/us/en/architecture-and-technology/software-guard-extensions.html">SGX enclaves</a> and server-side <a href="https://en.wikipedia.org/wiki/Hardware_security_module">HSMs</a>.</li> 
+ <li>zkgroup: Functionality for <a href="https://signal.org/blog/signal-private-group-system/">zero-knowledge groups</a> and related features available in Signal.</li> 
+ <li>zkcredential: An abstraction for the sort of zero-knowledge credentials used by zkgroup, based on the paper "<a href="https://eprint.iacr.org/2019/1416.pdf">The Signal Private Group System</a>" by Chase, Perrin, and Zaverucha.</li> 
+ <li>poksho: Utilities for implementing zero-knowledge proofs (such as those used by zkgroup); stands for "proof-of-knowledge, stateful-hash-object".</li> 
+ <li>pin: Functionality for consistently using <a href="https://signal.org/blog/signal-pins/">PINs</a> as passwords in Signal's Secure Value Recovery system.</li> 
+ <li>usernames: Functionality for username generation, hashing, and proofs.</li> 
+ <li>media: Utilities for manipulating media.</li> 
+</ul> 
+<p>This repository is used by the Signal client apps (<a href="https://github.com/signalapp/Signal-Android">Android</a>, <a href="https://github.com/signalapp/Signal-iOS">iOS</a>, and <a href="https://github.com/signalapp/Signal-Desktop">Desktop</a>) as well as server-side. Use outside of Signal is unsupported. In particular, the products of this repository are the Java, Swift, and TypeScript libraries that wrap the underlying Rust implementations. All APIs and implementations are subject to change without notice, as are the JNI, C, and Node add-on "bridge" layers. However, backwards-incompatible changes to the Java, Swift, TypeScript, and non-bridge Rust APIs will be reflected in the version number on a best-effort basis, including increases to the minimum supported tools versions.</p> 
+<h1>Building</h1> 
+<p>To build anything in this repository you must have <a href="https://rust-lang.org">Rust</a> installed, as well as Clang, libclang, <a href="https://cmake.org">CMake</a>, Make, protoc, and git. On a Debian-like system, you can get these extra dependencies through <code>apt</code>:</p> 
+<pre><code class="language-shell">$ apt-get install clang libclang-dev cmake make protobuf-compiler git
+</code></pre> 
+<p>Additionally, some of the tests in this repository rely on submodules being checked out:</p> 
+<pre><code class="language-shell">$ git submodule update --init
+</code></pre> 
+<p>The build currently uses a specific version of the Rust nightly compiler, which will be downloaded automatically by cargo. To build and test the basic protocol libraries:</p> 
+<pre><code class="language-shell">$ cargo build
+...
+$ cargo test
+...
+</code></pre> 
+<h2>Java/Android</h2> 
+<p>To build for Android you must install several additional packages including a JDK, the Android NDK/SDK, and add the Android targets to the Rust compiler, using</p> 
+<p><code>rustup target add armv7-linux-androideabi aarch64-linux-android i686-linux-android x86_64-linux-android</code></p> 
+<p>To build the Java/Android <code>jar</code> and <code>aar</code>, and run the tests:</p> 
+<pre><code class="language-shell">$ cd java
+$ ./gradlew test
+$ ./gradlew build # if you need AAR outputs
+</code></pre> 
+<p>You can pass <code>-P debugLevelLogs</code> to Gradle to build without filtering out debug- and verbose-level logs from Rust.</p> 
+<p>Alternately, a build system using Docker is available:</p> 
+<pre><code class="language-shell">$ cd java
+$ make
+</code></pre> 
+<p>When exposing new APIs to Java, you will need to run <code>rust/bridge/jni/bin/gen_java_decl.py</code> in addition to rebuilding.</p> 
+<h3>Maven Central</h3> 
+<p>Signal publishes Java packages on <a href="https://central.sonatype.org">Maven Central</a> for its own use, under the names org.signal:libsignal-server, org.signal:libsignal-client, and org.signal:libsignal-android. libsignal-client and libsignal-server contain native libraries for Debian-flavored x86_64 Linux as well as Windows (x86_64) and macOS (x86_64 and arm64). libsignal-android contains native libraries for armeabi-v7a, arm64-v8a, x86, and x86_64 Android.</p> 
+<p>When building for Android you need <em>both</em> libsignal-android and libsignal-client, but the Windows and macOS libraries in libsignal-client won't automatically be excluded from your final app. You can explicitly exclude them using <code>packagingOptions</code>:</p> 
+<pre><code>android {
+  // ...
+  packagingOptions {
+    resources {
+      excludes += setOf("libsignal_jni*.dylib", "signal_jni*.dll")
+    }
+  }
+  // ...
+}
+</code></pre> 
+<p>You can additionally exclude <code>libsignal_jni_testing.so</code> if you do not plan to use any of the APIs intended for client testing.</p> 
+<h2>Swift</h2> 
+<p>To learn about the Swift build process see <a href="https://raw.githubusercontent.com/signalapp/libsignal/main/swift/"><code>swift/README.md</code></a></p> 
+<h2>Node</h2> 
+<p>You'll need Node installed to build. If you have <a href="https://github.com/nvm-sh/nvm">nvm</a>, you can run <code>nvm use</code> to select an appropriate version automatically.</p> 
+<p>We use <a href="https://classic.yarnpkg.com/"><code>yarn</code></a> as our package manager, and <code>node-gyp</code> to control building the Rust library.</p> 
+<pre><code class="language-shell">$ cd node
+$ nvm use
+$ yarn install
+$ yarn node-gyp rebuild  # clean-&gt;configure-&gt;build
+$ yarn tsc
+$ yarn test
+</code></pre> 
+<p>When testing changes locally, you can use <code>yarn build</code> to do an incremental rebuild of the Rust library. Alternately, <code>yarn build-with-debug-level-logs</code> will rebuild without filtering out debug- and verbose-level logs.</p> 
+<p>When exposing new APIs to Node, you will need to run <code>rust/bridge/node/bin/gen_ts_decl.py</code> in addition to rebuilding.</p> 
+<h3>NPM</h3> 
+<p>Signal publishes the NPM package <code>@signalapp/libsignal-client</code> for its own use, including native libraries for Windows, macOS, and Debian-flavored Linux. Both x64 and arm64 builds are included for all three platforms, but the arm64 builds for Windows and Linux are considered experimental, since there are no official builds of Signal for those architectures.</p> 
+<h1>Contributions</h1> 
+<p>Signal does accept external contributions to this project. However unless the change is simple and easily understood, for example fixing a bug or portability issue, adding a new test, or improving performance, first open an issue to discuss your intended change as not all changes can be accepted.</p> 
+<p>Contributions that will not be used directly by one of Signal's official client apps may still be considered, but only if they do not pose an undue maintenance burden or conflict with the goals of the project.</p> 
+<p>Signing a <a href="https://signal.org/cla/">CLA (Contributor License Agreement)</a> is required for all contributions.</p> 
+<h1>Legal things</h1> 
+<h2>Cryptography Notice</h2> 
+<p>This distribution includes cryptographic software. The country in which you currently reside may have restrictions on the import, possession, use, and/or re-export to another country, of encryption software. BEFORE using any encryption software, please check your country's laws, regulations and policies concerning the import, possession, or use, and re-export of encryption software, to see if this is permitted. See <a href="http://www.wassenaar.org/">http://www.wassenaar.org/</a> for more information.</p> 
+<p>The U.S. Government Department of Commerce, Bureau of Industry and Security (BIS), has classified this software as Export Commodity Control Number (ECCN) 5D002.C.1, which includes information security software using or performing cryptographic functions with asymmetric algorithms. The form and manner of this distribution makes it eligible for export under the License Exception ENC Technology Software Unrestricted (TSU) exception (see the BIS Export Administration Regulations, Section 740.13) for both object code and source code.</p> 
+<h2>License</h2> 
+<p>Copyright 2020-2024 Signal Messenger, LLC</p> 
+<p>Licensed under the GNU AGPLv3: <a href="https://www.gnu.org/licenses/agpl-3.0.html">https://www.gnu.org/licenses/agpl-3.0.html</a></p>
+]]></content:encoded>
+
+
+</item>
+<item>
+<title>TheAlgorithms/Java</title>
+<link>https://github.com/TheAlgorithms/Java</link>
+<guid>https://github.com/TheAlgorithms/Java</guid>
+<content:encoded><![CDATA[
+<div> 关键词：Java、算法、Gitpod.io、学习、贡献
+
+总结:
+本文主要介绍了一个在线平台，允许用户通过单击操作在Gitpod.io上运行、编辑和贡献各种算法的Java实现。这些算法都用Java语言编写，旨在帮助学习者理解并实践算法逻辑。值得注意的是，虽然这些实现可能在效率上不如Java标准库提供的解决方案，但它们对于教育目的非常有帮助。平台鼓励贡献，要求潜在贡献者先阅读特定的指南以了解如何参与。
+
+通过这个平台，学习者能够直接与算法交互，通过实际操作加深对算法的理解。同时，它也为那些希望改进或添加新算法的开发者提供了机会，通过贡献代码，共同丰富这个资源库。整体而言，这是一个结合了在线编程环境、教育价值和社区合作的项目，为Java算法学习和实践提供了一种创新的方式。 <div>
+<p>All Algorithms implemented in Java</p><hr /><h1>The Algorithms - Java</h1> 
+<p><a href="https://github.com/TheAlgorithms/Java/actions/workflows/build.yml"><img alt="Build" src="https://github.com/TheAlgorithms/Java/actions/workflows/build.yml/badge.svg?branch=master" /></a> <a href="https://codecov.io/gh/TheAlgorithms/Java"><img alt="codecov" src="https://codecov.io/gh/TheAlgorithms/Java/graph/badge.svg?token=XAdPyqTIqR" /></a> <a href="https://discord.gg/c7MnfGFGa6"><img alt="Discord chat" src="https://img.shields.io/discord/808045925556682782.svg?logo=discord&amp;colorB=7289DA&amp;style=flat-square" /></a> <a href="https://gitpod.io/#https://github.com/TheAlgorithms/Java"><img alt="Gitpod ready-to-code" src="https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod" /></a></p> 
+<p>You can run and edit the algorithms, or contribute to them using Gitpod.io (a free online development environment) with a single click.</p> 
+<p><a href="https://gitpod.io/#https://github.com/TheAlgorithms/Java"><img alt="Open in Gitpod" src="https://gitpod.io/button/open-in-gitpod.svg?sanitize=true" /></a></p> 
+<h3>All algorithms are implemented in Java (for educational purposes)</h3> 
+<p>These implementations are intended for learning purposes. As such, they may be less efficient than the Java standard library.</p> 
+<h2>Contribution Guidelines</h2> 
+<p>Please read our <a href="https://raw.githubusercontent.com/TheAlgorithms/Java/master/CONTRIBUTING.md">Contribution Guidelines</a> before you contribute to this project.</p> 
+<h2>Algorithms</h2> 
+<p>Our <a href="https://raw.githubusercontent.com/TheAlgorithms/Java/master/DIRECTORY.md">directory</a> has the full list of applications.</p>
+]]></content:encoded>
+
+
+</item>
+<item>
+<title>Lightning-AI/LitServe</title>
+<link>https://github.com/Lightning-AI/LitServe</link>
+<guid>https://github.com/Lightning-AI/LitServe</guid>
+<content:encoded><![CDATA[
+<div> 关键词：LitServe、FastAPI、AI模型服务、GPU自动缩放、企业级规模
+
+总结:
+
+LitServe 是一款基于 FastAPI 的高性能 AI 模型服务引擎，专为加速 AI 应用设计。它提供了多种增强功能，如批量处理、流式传输和 GPU 自动缩放，以简化模型部署过程，无需每次构建新的 FastAPI 服务器。相较于标准的 FastAPI 服务，LitServe 至少能提供两倍以上的性能提升，特别适用于 AI 相关的多模型复合系统。
+
+LitServe 可以轻松定义并启动服务，支持自定义模型和多种框架（如 PyTorch、JAX、TensorFlow 等），并通过其灵活的架构支持 AI 复合系统的构建。例如，可以同时使用两个模型进行计算，实现复杂逻辑处理。LitServe 还提供了一键自托管和完全管理的云部署选项，满足不同开发者的需求。
+
+此外，LitServe 支持各种 AI 模型服务，从自然语言处理（NLP）、生成式 AI 到多模态系统、音频和视觉应用等，提供了一站式的 AI 服务解决方案。它还支持 GPU 自动缩放、批量处理和流式传输等高级特性，确保了高并发场景下的高效运行。通过 LitServe，用户可以构建和部署高度复杂的 AI 系统，同时享受到企业级的服务支持，包括负载均衡、自动扩展、零部署能力以及与 AWS 和 GCP 等云平台的兼容性。社区参与也是 LitServe 发展的关键，鼓励开发者共同构建更强大的 AI 推理引擎。 <div>
+<p>Lightning-fast serving engine for AI models. Flexible. Easy. Enterprise-scale.</p><hr /><div align="center"> 
+ <h1>Easily serve AI models Lightning fast ⚡</h1> 
+ <img alt="Lightning" src="https://pl-bolts-doc-images.s3.us-east-2.amazonaws.com/app-2/ls_banner2.png" width="800px" /> 
+ <p>&nbsp;</p> 
+ <p><strong>Lightning-fast serving engine for AI models.</strong><br /> Easy. Flexible. Enterprise-scale.</p> 
+</div> 
+<hr /> 
+<p><strong>LitServe</strong> is an easy-to-use, flexible serving engine for AI models built on FastAPI. Features like batching, streaming, and GPU autoscaling eliminate the need to rebuild a FastAPI server per model.</p> 
+<p>LitServe is at least <a href="https://raw.githubusercontent.com/Lightning-AI/LitServe/main/#performance">2x faster</a> than plain FastAPI due to AI-specific multi-worker handling.</p> 
+<div align="center"> 
+ <pre>
+✅ (2x)+ faster serving  ✅ Easy to use          ✅ LLMs, non LLMs and more
+✅ Bring your own model  ✅ PyTorch/JAX/TF/...   ✅ Built on FastAPI       
+✅ GPU autoscaling       ✅ Batching, Streaming  ✅ Self-host or ⚡️ managed 
+</pre> 
+ <div align="center"> 
+  <p><a href="https://discord.gg/VptPCZkGNa"><img alt="Discord" src="https://img.shields.io/discord/1077906959069626439?label=Get%20help%20on%20Discord" /></a> <img alt="cpu-tests" src="https://github.com/Lightning-AI/litserve/actions/workflows/ci-testing.yml/badge.svg?sanitize=true" /> <a href="https://codecov.io/gh/Lightning-AI/litserve"><img alt="codecov" src="https://codecov.io/gh/Lightning-AI/litserve/graph/badge.svg?token=SmzX8mnKlA" /></a> <a href="https://github.com/Lightning-AI/litserve/raw/main/LICENSE"><img alt="license" src="https://img.shields.io/badge/License-Apache%202.0-blue.svg?sanitize=true" /></a></p> 
+ </div> 
+</div> 
+<div align="center"> 
+ <div style="text-align: center;"> 
+  <a href="https://raw.githubusercontent.com/Lightning-AI/LitServe/main/#quick-start" style="margin: 0 10px;" target="_blank">Quick start</a> • 
+  <a href="https://raw.githubusercontent.com/Lightning-AI/LitServe/main/#featured-examples" style="margin: 0 10px;" target="_blank">Examples</a> • 
+  <a href="https://raw.githubusercontent.com/Lightning-AI/LitServe/main/#features" style="margin: 0 10px;" target="_blank">Features</a> • 
+  <a href="https://raw.githubusercontent.com/Lightning-AI/LitServe/main/#performance" style="margin: 0 10px;" target="_blank">Performance</a> • 
+  <a href="https://raw.githubusercontent.com/Lightning-AI/LitServe/main/#hosting-options" style="margin: 0 10px;" target="_blank">Hosting</a> • 
+  <a href="https://lightning.ai/docs/litserve" style="margin: 0 10px;" target="_blank">Docs</a> 
+ </div> 
+</div> 
+<p>&nbsp;</p> 
+<div align="center"> 
+ <a href="https://lightning.ai/docs/litserve/home/get-started" target="_blank"> <img alt="Get started" height="36px" src="https://pl-bolts-doc-images.s3.us-east-2.amazonaws.com/app-2/get-started-badge.svg?sanitize=true" /> </a> 
+</div> 
+<p>&nbsp;</p> 
+<h1>Quick start</h1> 
+<p>Install LitServe via pip (<a href="https://lightning.ai/docs/litserve/home/install">more options</a>):</p> 
+<pre><code class="language-bash">pip install litserve
+</code></pre> 
+<h3>Define a server</h3> 
+<p>This toy example with 2 models (AI compound system) shows LitServe's flexibility (<a href="https://raw.githubusercontent.com/Lightning-AI/LitServe/main/#examples">see real examples</a>):</p> 
+<pre><code class="language-python"># server.py
+import litserve as ls
+
+# (STEP 1) - DEFINE THE API (compound AI system)
+class SimpleLitAPI(ls.LitAPI):
+    def setup(self, device):
+        # setup is called once at startup. Build a compound AI system (1+ models), connect DBs, load data, etc...
+        self.model1 = lambda x: x**2
+        self.model2 = lambda x: x**3
+
+    def decode_request(self, request):
+        # Convert the request payload to model input.
+        return request["input"] 
+
+    def predict(self, x):
+        # Easily build compound systems. Run inference and return the output.
+        squared = self.model1(x)
+        cubed = self.model2(x)
+        output = squared + cubed
+        return {"output": output}
+
+    def encode_response(self, output):
+        # Convert the model output to a response payload.
+        return {"output": output} 
+
+# (STEP 2) - START THE SERVER
+if __name__ == "__main__":
+    # scale with advanced features (batching, GPUs, etc...)
+    server = ls.LitServer(SimpleLitAPI(), accelerator="auto", max_batch_size=1)
+    server.run(port=8000)
+</code></pre> 
+<p>Now run the server via the command-line</p> 
+<pre><code class="language-bash">python server.py
+</code></pre> 
+<h3>Test the server</h3> 
+<p>Run the auto-generated test client:</p> 
+<pre><code class="language-bash">python client.py    
+</code></pre> 
+<p>Or use this terminal command:</p> 
+<pre><code class="language-bash">curl -X POST http://127.0.0.1:8000/predict -H "Content-Type: application/json" -d '{"input": 4.0}'
+</code></pre> 
+<h3>LLM serving</h3> 
+<p>LitServe isn’t <em>just</em> for LLMs like vLLM or Ollama; it serves any AI model with full control over internals (<a href="https://lightning.ai/docs/litserve/features/serve-llms">learn more</a>).<br /> For easy LLM serving, use <a href="https://github.com/Lightning-AI/litgpt?tab=readme-ov-file#deploy-an-llm">LitGPT</a> (built on LitServe).</p> 
+<pre><code>litgpt serve microsoft/phi-2
+</code></pre> 
+<h3>Summary</h3> 
+<ul> 
+ <li>LitAPI lets you easily build complex AI systems with one or more models (<a href="https://lightning.ai/docs/litserve/api-reference/litapi">docs</a>).</li> 
+ <li>Use the setup method for one-time tasks like connecting models, DBs, and loading data (<a href="https://lightning.ai/docs/litserve/api-reference/litapi#setup">docs</a>).</li> 
+ <li>LitServer handles optimizations like batching, GPU autoscaling, streaming, etc... (<a href="https://lightning.ai/docs/litserve/api-reference/litserver">docs</a>).</li> 
+ <li>Self host on your own machines or use Lightning Studios for a fully managed deployment (<a href="https://raw.githubusercontent.com/Lightning-AI/LitServe/main/#hosting-options">learn more</a>).</li> 
+</ul> 
+<p><a href="https://lightning.ai/docs/litserve/home/speed-up-serving-by-200x">Learn how to make this server 200x faster</a>.</p> 
+<p>&nbsp;</p> 
+<h1>Featured examples</h1> 
+<p>Use LitServe to deploy any model or AI service: (Gen AI, classical ML, embedding servers, LLMs, vision, audio, multi-modal systems, etc...)</p> 
+<div align="center"> 
+ <div width="200px"> 
+  <video controls="controls" src="https://github.com/user-attachments/assets/5e73549a-bc0f-47a9-9d9c-5b54389be5de" width="200px"></video> 
+ </div> 
+</div> 
+<h2>Examples</h2> 
+<pre>
+<strong>Toy model:</strong>      <a href="https://raw.githubusercontent.com/Lightning-AI/LitServe/main/#define-a-server" target="_blank">Hello world</a>
+<strong>LLMs:</strong>           <a href="https://lightning.ai/lightning-ai/studios/deploy-a-private-llama-3-8b-api" target="_blank">Llama 3 (8B)</a>, <a href="https://lightning.ai/lightning-ai/studios/openai-fault-tolerant-proxy-server" target="_blank">LLM Proxy server</a>, <a href="https://lightning.ai/lightning-ai/studios/deploy-ai-agent-with-tool-use" target="_blank">Agent with tool use</a>
+<strong>RAG:</strong>            <a href="https://lightning.ai/lightning-ai/studios/deploy-a-private-llama-3-1-rag-api" target="_blank">RAG API (LlamaIndex)</a>
+<strong>NLP:</strong>            <a href="https://lightning.ai/lightning-ai/studios/deploy-any-hugging-face-model-instantly" target="_blank">Hugging face</a>, <a href="https://lightning.ai/lightning-ai/studios/deploy-a-hugging-face-bert-model" target="_blank">BERT</a>, <a href="https://lightning.ai/lightning-ai/studios/deploy-text-embedding-api-with-litserve" target="_blank">Text embedding API</a>
+<strong>Multimodal:</strong>     <a href="https://lightning.ai/lightning-ai/studios/deploy-open-ai-clip-with-litserve" target="_blank">OpenAI Clip</a>, <a href="https://lightning.ai/lightning-ai/studios/deploy-a-multi-modal-llm-with-minicpm" target="_blank">MiniCPM</a>, <a href="https://lightning.ai/lightning-ai/studios/deploy-phi3-5-vision-api-with-litserve" target="_blank">Phi-3.5 Vision Instruct</a>, <a href="https://lightning.ai/bhimrajyadav/studios/deploy-and-chat-with-qwen2-vl-using-litserve" target="_blank">Qwen2-VL</a>
+<strong>Audio:</strong>          <a href="https://lightning.ai/lightning-ai/studios/deploy-open-ai-s-whisper-model" target="_blank">Whisper</a>, <a href="https://lightning.ai/lightning-ai/studios/deploy-an-music-generation-api-with-meta-s-audio-craft" target="_blank">AudioCraft</a>, <a href="https://lightning.ai/lightning-ai/studios/deploy-an-audio-generation-api" target="_blank">StableAudio</a>, <a href="https://lightning.ai/lightning-ai/studios/deploy-a-noise-cancellation-api-with-deepfilternet" target="_blank">Noise cancellation (DeepFilterNet)</a>
+<strong>Vision:</strong>         <a href="https://lightning.ai/lightning-ai/studios/deploy-a-private-api-for-stable-diffusion-2" target="_blank">Stable diffusion 2</a>, <a href="https://lightning.ai/lightning-ai/studios/deploy-an-image-generation-api-with-auraflow" target="_blank">AuraFlow</a>, <a href="https://lightning.ai/lightning-ai/studios/deploy-an-image-generation-api-with-flux" target="_blank">Flux</a>, <a href="https://lightning.ai/lightning-ai/studios/deploy-a-super-resolution-image-api-with-aura-sr" target="_blank">Image Super Resolution (Aura SR)</a>,
+                <a href="https://lightning.ai/bhimrajyadav/studios/deploy-background-removal-api-with-litserve" target="_blank">Background Removal</a>, <a href="https://lightning.ai/lightning-ai/studios/deploy-a-controlled-image-generation-api-controlnet" target="_blank">Control Stable Diffusion (ControlNet)</a>
+<strong>Speech:</strong>         <a href="https://lightning.ai/lightning-ai/studios/deploy-a-voice-clone-api-coqui-xtts-v2-model" target="_blank">Text-speech (XTTS V2)</a>
+<strong>Classical ML:</strong>   <a href="https://lightning.ai/lightning-ai/studios/deploy-random-forest-with-litserve" target="_blank">Random forest</a>, <a href="https://lightning.ai/lightning-ai/studios/deploy-xgboost-with-litserve" target="_blank">XGBoost</a>
+<strong>Miscellaneous:</strong>  <a href="https://lightning.ai/lightning-ai/studios/deploy-an-media-conversion-api-with-ffmpeg" target="_blank">Media conversion API (ffmpeg)</a>, <a href="https://lightning.ai/lightning-ai/studios/deploy-both-pytorch-and-tensorflow-in-a-single-api" target="_blank">PyTorch + TensorFlow in one API</a>
+</pre>  
+<p><a href="https://lightning.ai/studios?section=serving">Browse 100+ community-built templates</a></p> 
+<p>&nbsp;</p> 
+<h1>Features</h1> 
+<p>State-of-the-art features:</p> 
+<p>✅ <a href="https://raw.githubusercontent.com/Lightning-AI/LitServe/main/#performance">(2x)+ faster than plain FastAPI</a><br /> ✅ <a href="https://lightning.ai/docs/litserve/features/full-control">Bring your own model</a><br /> ✅ <a href="https://lightning.ai/docs/litserve/features/compound-ai-systems">Build compound systems (1+ models)</a><br /> ✅ <a href="https://lightning.ai/docs/litserve/features/gpu-inference">GPU autoscaling</a><br /> ✅ <a href="https://lightning.ai/docs/litserve/features/batching">Batching</a><br /> ✅ <a href="https://lightning.ai/docs/litserve/features/streaming">Streaming</a><br /> ✅ <a href="https://lightning.ai/docs/litserve/features/autoscaling">Worker autoscaling</a><br /> ✅ <a href="https://lightning.ai/docs/litserve/features/hosting-methods#host-on-your-own">Self-host on your machines</a><br /> ✅ <a href="https://lightning.ai/docs/litserve/features/hosting-methods#host-on-lightning-studios">Host fully managed on Lightning AI</a><br /> ✅ <a href="https://lightning.ai/docs/litserve/examples">Serve all models: (LLMs, vision, etc.)</a><br /> ✅ <a href="https://lightning.ai/docs/litserve/features/streaming">Scale to zero (serverless)</a><br /> ✅ <a href="https://lightning.ai/docs/litserve/features/full-control">Supports PyTorch, JAX, TF, etc...</a><br /> ✅ <a href="https://www.openapis.org/">OpenAPI compliant</a><br /> ✅ <a href="https://lightning.ai/docs/litserve/features/open-ai-spec">Open AI compatibility</a><br /> ✅ <a href="https://lightning.ai/docs/litserve/features/authentication">Authentication</a></p> 
+<p><a href="https://lightning.ai/docs/litserve/features">10+ features...</a></p> 
+<p><strong>Note:</strong> We prioritize scalable, enterprise-level features over hype.</p> 
+<p>&nbsp;</p> 
+<h1>Performance</h1> 
+<p>LitServe is designed for AI workloads. Specialized multi-worker handling delivers a minimum <strong>2x speedup over FastAPI</strong>.</p> 
+<p>Additional features like batching and GPU autoscaling can drive performance well beyond 2x, scaling efficiently to handle more simultaneous requests than FastAPI and TorchServe.</p> 
+<p>Reproduce the full benchmarks <a href="https://lightning.ai/docs/litserve/home/benchmarks">here</a> (higher is better).</p> 
+<div align="center"> 
+ <img alt="LitServe" src="https://pl-bolts-doc-images.s3.us-east-2.amazonaws.com/app-2/ls_charts_v6.png" width="1000px" /> 
+</div> 
+<p>These results are for image and text classification ML tasks. The performance relationships hold for other ML tasks (embedding, LLM serving, audio, segmentation, object detection, summarization etc...).</p> 
+<p><em><strong>💡 Note on LLM serving:</strong></em> For high-performance LLM serving (like Ollama/VLLM), use <a href="https://github.com/Lightning-AI/litgpt?tab=readme-ov-file#deploy-an-llm">LitGPT</a> or build your custom VLLM-like server with LitServe. Optimizations like kv-caching, which can be done with LitServe, are needed to maximize LLM performance.</p> 
+<p>&nbsp;</p> 
+<h1>Hosting options</h1> 
+<p>LitServe can be hosted independently on your own machines or fully managed via Lightning Studios.</p> 
+<p>Self-hosting is ideal for hackers, students, and DIY developers, while fully managed hosting is ideal for enterprise developers needing easy autoscaling, security, release management, and 99.995% uptime and observability.</p> 
+<p>&nbsp;</p> 
+<div align="center"> 
+ <a href="https://lightning.ai/lightning-ai/studios/litserve-hello-world" target="_blank"> <img alt="Host on Lightning" src="https://pl-bolts-doc-images.s3.us-east-2.amazonaws.com/app-2/host-on-lightning.svg?sanitize=true" /> </a> 
+</div> 
+<p>&nbsp;</p> 
+<div align="center"> 
+ <table> 
+  <thead> 
+   <tr> 
+    <th>Feature</th> 
+    <th>Self Managed</th> 
+    <th>Fully Managed on Studios</th> 
+   </tr> 
+  </thead> 
+  <tbody> 
+   <tr> 
+    <td>Deployment</td> 
+    <td>✅ Do it yourself deployment</td> 
+    <td>✅ One-button cloud deploy</td> 
+   </tr> 
+   <tr> 
+    <td>Load balancing</td> 
+    <td>❌</td> 
+    <td>✅</td> 
+   </tr> 
+   <tr> 
+    <td>Autoscaling</td> 
+    <td>❌</td> 
+    <td>✅</td> 
+   </tr> 
+   <tr> 
+    <td>Scale to zero</td> 
+    <td>❌</td> 
+    <td>✅</td> 
+   </tr> 
+   <tr> 
+    <td>Multi-machine inference</td> 
+    <td>❌</td> 
+    <td>✅</td> 
+   </tr> 
+   <tr> 
+    <td>Authentication</td> 
+    <td>❌</td> 
+    <td>✅</td> 
+   </tr> 
+   <tr> 
+    <td>Own VPC</td> 
+    <td>❌</td> 
+    <td>✅</td> 
+   </tr> 
+   <tr> 
+    <td>AWS, GCP</td> 
+    <td>❌</td> 
+    <td>✅</td> 
+   </tr> 
+   <tr> 
+    <td>Use your own cloud commits</td> 
+    <td>❌</td> 
+    <td>✅</td> 
+   </tr> 
+  </tbody> 
+ </table> 
+</div> 
+<p>&nbsp;</p> 
+<h1>Community</h1> 
+<p>LitServe is a <a href="https://lightning.ai/docs/litserve/community">community project accepting contributions</a> - Let's make the world's most advanced AI inference engine.</p> 
+<p>💬 <a href="https://discord.com/invite/XncpTy7DSt">Get help on Discord</a><br /> 📋 <a href="https://github.com/Lightning-AI/litserve/raw/main/LICENSE">License: Apache 2.0</a></p>
+]]></content:encoded>
+
+
+</item>
 
 <item>
 <title>sickcodes/Docker-OSX</title>
