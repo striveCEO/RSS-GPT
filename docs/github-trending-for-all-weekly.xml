@@ -4,6 +4,845 @@
 <title>GitHub All Languages Weekly Trending</title>
 <link>http://mshibanami.github.io/GitHubTrendingRSS</link>
 
+<item>
+<title>Cinnamon/kotaemon</title>
+<link>https://github.com/Cinnamon/kotaemon</link>
+<guid>https://github.com/Cinnamon/kotaemon</guid>
+<content:encoded><![CDATA[
+<div> 关键词：kotaemon、RAG、QA、文档聊天、开放源码
+
+总结：
+
+kotaemon是一个基于RAG（Read, Annotate, Generate）技术的开源工具，旨在为用户提供一个简洁明了的界面来对文档进行质询和验证。它支持多种LLM API供应商（如OpenAI、AzureOpenAI、Cohere等）以及本地LLM（通过ollama和llama-cpp-python实现），提供一键安装脚本，使得用户能够轻松地在其应用中集成文档聊天功能。
+
+对于开发者而言，kotaemon提供了一个构建自定义RAG文档质询流程的框架，允许他们利用预设的UI来展示和测试自己的RAG管道。此外，该框架还支持多用户登录、文档分类、协作共享等功能，并提供了丰富的配置选项，包括模型选择、提示调整等。
+
+在安装方面，kotaemon提供了两种方式：通过Docker快速启动或在无Docker环境下的本地安装。为了充分利用应用功能，用户需要在.env文件中设置必要的API密钥、端点等信息，并可能需要下载并解压PDF预览所需的资源。
+
+对于希望定制应用体验的用户，kotaemon提供了灵活的数据存储目录，并允许通过修改.flowsettings.py和.env文件来自定义应用行为，包括文档存储、向量检索、推理策略等。开发者还可以扩展应用功能，例如添加自定义推理或索引策略，以满足特定需求。
+
+通过kotaemon，无论是普通用户还是开发者都能便捷地将文档聊天功能集成到其应用中，提升内容质量和用户体验。 <div>
+<p>An open-source RAG-based tool for chatting with your documents.</p><hr /><h1>kotaemon</h1> 
+<p>An open-source clean &amp; customizable RAG UI for chatting with your documents. Built with both end users and developers in mind.</p> 
+<p><img alt="Preview" src="https://raw.githubusercontent.com/Cinnamon/kotaemon/main/docs/images/preview-graph.png" /></p> 
+<p><a href="https://huggingface.co/spaces/cin-model/kotaemon-demo">Live Demo</a> | <a href="https://github.com/Cinnamon/kotaemon">Source Code</a></p> 
+<p><a href="https://cinnamon.github.io/kotaemon/">User Guide</a> | <a href="https://cinnamon.github.io/kotaemon/development/">Developer Guide</a> | <a href="https://github.com/Cinnamon/kotaemon/issues">Feedback</a></p> 
+<p><a href="https://www.python.org/downloads/release/python-31013/"><img alt="Python 3.10+" src="https://img.shields.io/badge/python-3.10+-blue.svg?sanitize=true" /></a> <a href="https://github.com/psf/black"><img alt="Code style: black" src="https://img.shields.io/badge/code%20style-black-000000.svg?sanitize=true" /></a> <a href="https://hub.docker.com/r/taprosoft/kotaemon" target="_blank"> <img alt="docker pull taprosoft/kotaemon:v1.0" src="https://img.shields.io/badge/docker_pull-kotaemon:v1.0-brightgreen" /></a> <a href="https://codeium.com"><img alt="built with Codeium" src="https://codeium.com/badges/main" /></a> <a href="https://huggingface.co/spaces/cin-model/kotaemon-demo"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Spaces-blue" /></a></p> 
+<h2>Introduction</h2> 
+<p>This project serves as a functional RAG UI for both end users who want to do QA on their documents and developers who want to build their own RAG pipeline.</p> 
+<ul> 
+ <li>For end users: 
+  <ul> 
+   <li>A clean &amp; minimalistic UI for RAG-based QA.</li> 
+   <li>Supports LLM API providers (OpenAI, AzureOpenAI, Cohere, etc) and local LLMs (via <code>ollama</code> and <code>llama-cpp-python</code>).</li> 
+   <li>Easy installation scripts.</li> 
+  </ul> </li> 
+ <li>For developers: 
+  <ul> 
+   <li>A framework for building your own RAG-based document QA pipeline.</li> 
+   <li>Customize and see your RAG pipeline in action with the provided UI (built with <a href="https://github.com/gradio-app/gradio">Gradio <img src="https://img.shields.io/github/stars/gradio-app/gradio" /></a>).</li> 
+  </ul> </li> 
+</ul> 
+<pre><code class="language-yml">+----------------------------------------------------------------------------+
+| End users: Those who use apps built with `kotaemon`.                       |
+| (You use an app like the one in the demo above)                            |
+|     +----------------------------------------------------------------+     |
+|     | Developers: Those who built with `kotaemon`.                   |     |
+|     | (You have `import kotaemon` somewhere in your project)         |     |
+|     |     +----------------------------------------------------+     |     |
+|     |     | Contributors: Those who make `kotaemon` better.    |     |     |
+|     |     | (You make PR to this repo)                         |     |     |
+|     |     +----------------------------------------------------+     |     |
+|     +----------------------------------------------------------------+     |
++----------------------------------------------------------------------------+
+</code></pre> 
+<p>This repository is under active development. Feedback, issues, and PRs are highly appreciated.</p> 
+<h2>Key Features</h2> 
+<ul> 
+ <li> <p><strong>Host your own document QA (RAG) web-UI</strong>. Support multi-user login, organize your files in private / public collections, collaborate and share your favorite chat with others.</p> </li> 
+ <li> <p><strong>Organize your LLM &amp; Embedding models</strong>. Support both local LLMs &amp; popular API providers (OpenAI, Azure, Ollama, Groq).</p> </li> 
+ <li> <p><strong>Hybrid RAG pipeline</strong>. Sane default RAG pipeline with hybrid (full-text &amp; vector) retriever + re-ranking to ensure best retrieval quality.</p> </li> 
+ <li> <p><strong>Multi-modal QA support</strong>. Perform Question Answering on multiple documents with figures &amp; tables support. Support multi-modal document parsing (selectable options on UI).</p> </li> 
+ <li> <p><strong>Advance citations with document preview</strong>. By default the system will provide detailed citations to ensure the correctness of LLM answers. View your citations (incl. relevant score) directly in the <em>in-browser PDF viewer</em> with highlights. Warning when retrieval pipeline return low relevant articles.</p> </li> 
+ <li> <p><strong>Support complex reasoning methods</strong>. Use question decomposition to answer your complex / multi-hop question. Support agent-based reasoning with ReAct, ReWOO and other agents.</p> </li> 
+ <li> <p><strong>Configurable settings UI</strong>. You can adjust most important aspects of retrieval &amp; generation process on the UI (incl. prompts).</p> </li> 
+ <li> <p><strong>Extensible</strong>. Being built on Gradio, you are free to customize / add any UI elements as you like. Also, we aim to support multiple strategies for document indexing &amp; retrieval. <code>GraphRAG</code> indexing pipeline is provided as an example.</p> </li> 
+</ul> 
+<p><img alt="Preview" src="https://raw.githubusercontent.com/Cinnamon/kotaemon/main/docs/images/preview.png" /></p> 
+<h2>Installation</h2> 
+<h3>For end users</h3> 
+<p>This document is intended for developers. If you just want to install and use the app as it is, please follow the non-technical <a href="https://cinnamon.github.io/kotaemon/">User Guide</a> (WIP).</p> 
+<h3>For developers</h3> 
+<h4>With Docker (recommended)</h4> 
+<ul> 
+ <li>Use this command to launch the server</li> 
+</ul> 
+<pre><code>docker run \
+-e GRADIO_SERVER_NAME=0.0.0.0 \
+-e GRADIO_SERVER_PORT=7860 \
+-p 7860:7860 -it --rm \
+taprosoft/kotaemon:v1.0
+</code></pre> 
+<p>Navigate to <code>http://localhost:7860/</code> to access the web UI.</p> 
+<h4>Without Docker</h4> 
+<ul> 
+ <li>Clone and install required packages on a fresh python environment.</li> 
+</ul> 
+<pre><code class="language-shell"># optional (setup env)
+conda create -n kotaemon python=3.10
+conda activate kotaemon
+
+# clone this repo
+git clone https://github.com/Cinnamon/kotaemon
+cd kotaemon
+
+pip install -e "libs/kotaemon[all]"
+pip install -e "libs/ktem"
+</code></pre> 
+<ul> 
+ <li> <p>View and edit your environment variables (API keys, end-points) in <code>.env</code>.</p> </li> 
+ <li> <p>(Optional) To enable in-browser PDF_JS viewer, download <a href="https://github.com/mozilla/pdf.js/releases/download/v4.0.379/pdfjs-4.0.379-dist.zip">PDF_JS_DIST</a> and extract it to <code>libs/ktem/ktem/assets/prebuilt</code></p> </li> 
+</ul> 
+<img alt="pdf-setup" src="https://raw.githubusercontent.com/Cinnamon/kotaemon/main/docs/images/pdf-viewer-setup.png" width="300" /> 
+<ul> 
+ <li>Start the web server:</li> 
+</ul> 
+<pre><code class="language-shell">python app.py
+</code></pre> 
+<p>The app will be automatically launched in your browser.</p> 
+<p>Default username / password are: <code>admin</code> / <code>admin</code>. You can setup additional users directly on the UI.</p> 
+<p><img alt="Chat tab" src="https://raw.githubusercontent.com/Cinnamon/kotaemon/main/docs/images/chat-tab.png" /></p> 
+<h2>Setup local models (for local / private RAG)</h2> 
+<p>See <a href="https://raw.githubusercontent.com/Cinnamon/kotaemon/main/docs/local_model.md">Local model setup</a>.</p> 
+<h2>Customize your application</h2> 
+<p>By default, all application data are stored in <code>./ktem_app_data</code> folder. You can backup or copy this folder to move your installation to a new machine.</p> 
+<p>For advance users or specific use-cases, you can customize those files:</p> 
+<ul> 
+ <li><code>flowsettings.py</code></li> 
+ <li><code>.env</code></li> 
+</ul> 
+<h3><code>flowsettings.py</code></h3> 
+<p>This file contains the configuration of your application. You can use the example <a href="https://raw.githubusercontent.com/Cinnamon/kotaemon/main/flowsettings.py">here</a> as the starting point.</p> 
+<details> 
+ Notable settings 
+ <pre><code># setup your preferred document store (with full-text search capabilities)
+KH_DOCSTORE=(Elasticsearch | LanceDB | SimpleFileDocumentStore)
+
+# setup your preferred vectorstore (for vector-based search)
+KH_VECTORSTORE=(ChromaDB | LanceDB | InMemory)
+
+# Enable / disable multimodal QA
+KH_REASONINGS_USE_MULTIMODAL=True
+
+# Setup your new reasoning pipeline or modify existing one.
+KH_REASONINGS = [
+    "ktem.reasoning.simple.FullQAPipeline",
+    "ktem.reasoning.simple.FullDecomposeQAPipeline",
+    "ktem.reasoning.react.ReactAgentPipeline",
+    "ktem.reasoning.rewoo.RewooAgentPipeline",
+]
+)
+</code></pre> 
+</details> 
+<h3><code>.env</code></h3> 
+<p>This file provides another way to configure your models and credentials.</p> 
+<details> 
+ Configure model via the .env file 
+ <p>Alternatively, you can configure the models via the <code>.env</code> file with the information needed to connect to the LLMs. This file is located in the folder of the application. If you don't see it, you can create one.</p> 
+ <p>Currently, the following providers are supported:</p> 
+ <h4>OpenAI</h4> 
+ <p>In the <code>.env</code> file, set the <code>OPENAI_API_KEY</code> variable with your OpenAI API key in order to enable access to OpenAI's models. There are other variables that can be modified, please feel free to edit them to fit your case. Otherwise, the default parameter should work for most people.</p> 
+ <pre><code class="language-shell">OPENAI_API_BASE=https://api.openai.com/v1
+OPENAI_API_KEY=&lt;your OpenAI API key here&gt;
+OPENAI_CHAT_MODEL=gpt-3.5-turbo
+OPENAI_EMBEDDINGS_MODEL=text-embedding-ada-002
+</code></pre> 
+ <h4>Azure OpenAI</h4> 
+ <p>For OpenAI models via Azure platform, you need to provide your Azure endpoint and API key. Your might also need to provide your developments' name for the chat model and the embedding model depending on how you set up Azure development.</p> 
+ <pre><code class="language-shell">AZURE_OPENAI_ENDPOINT=
+AZURE_OPENAI_API_KEY=
+OPENAI_API_VERSION=2024-02-15-preview
+AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-35-turbo
+AZURE_OPENAI_EMBEDDINGS_DEPLOYMENT=text-embedding-ada-002
+</code></pre> 
+ <h4>Local models</h4> 
+ <h5>Using ollama OpenAI compatible server</h5> 
+ <p>Install <a href="https://github.com/ollama/ollama">ollama</a> and start the application.</p> 
+ <p>Pull your model (e.g):</p> 
+ <pre><code>ollama pull llama3.1:8b
+ollama pull nomic-embed-text
+</code></pre> 
+ <p>Set the model names on web UI and make it as default.</p> 
+ <p><img alt="Models" src="https://raw.githubusercontent.com/Cinnamon/kotaemon/main/docs/images/models.png" /></p> 
+ <h5>Using GGUF with llama-cpp-python</h5> 
+ <p>You can search and download a LLM to be ran locally from the <a href="https://huggingface.co/models">Hugging Face Hub</a>. Currently, these model formats are supported:</p> 
+ <ul> 
+  <li>GGUF</li> 
+ </ul> 
+ <p>You should choose a model whose size is less than your device's memory and should leave about 2 GB. For example, if you have 16 GB of RAM in total, of which 12 GB is available, then you should choose a model that takes up at most 10 GB of RAM. Bigger models tend to give better generation but also take more processing time.</p> 
+ <p>Here are some recommendations and their size in memory:</p> 
+ <ul> 
+  <li><a href="https://huggingface.co/Qwen/Qwen1.5-1.8B-Chat-GGUF/resolve/main/qwen1_5-1_8b-chat-q8_0.gguf?download=true">Qwen1.5-1.8B-Chat-GGUF</a>: around 2 GB</li> 
+ </ul> 
+ <p>Add a new LlamaCpp model with the provided model name on the web uI.</p> 
+</details> 
+<h2>Adding your own RAG pipeline</h2> 
+<h4>Custom reasoning pipeline</h4> 
+<p>First, check the default pipeline implementation in <a href="https://raw.githubusercontent.com/Cinnamon/kotaemon/main/libs/ktem/ktem/reasoning/simple.py">here</a>. You can make quick adjustment to how the default QA pipeline work.</p> 
+<p>Next, if you feel comfortable adding new pipeline, add new <code>.py</code> implementation in <code>libs/ktem/ktem/reasoning/</code> and later include it in <code>flowssettings</code> to enable it on the UI.</p> 
+<h4>Custom indexing pipeline</h4> 
+<p>Check sample implementation in <code>libs/ktem/ktem/index/file/graph</code></p> 
+<p>(more instruction WIP).</p> 
+<h2>Developer guide</h2> 
+<p>Please refer to the <a href="https://cinnamon.github.io/kotaemon/development/">Developer Guide</a> for more details.</p> 
+<h2>Star History</h2> 
+<a href="https://star-history.com/#Cinnamon/kotaemon&amp;Date"> 
+  
+  <source media="(prefers-color-scheme: dark)" /> 
+  <source media="(prefers-color-scheme: light)" /> 
+  <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=Cinnamon/kotaemon&amp;type=Date" /> 
+  </a>
+]]></content:encoded>
+
+
+</item>
+<item>
+<title>dokku/dokku</title>
+<link>https://github.com/dokku/dokku</link>
+<guid>https://github.com/dokku/dokku</guid>
+<content:encoded><![CDATA[
+<div> 关键词：Dokku、PaaS、Docker、Heroku、安装
+
+文章总结：
+
+Dokku 是一款基于 Docker 的 PaaS（平台即服务）工具，它旨在帮助开发者构建和管理应用程序的整个生命周期。Dokku 被比喻为“迷你版 Heroku”，提供了最小的 PaaS 实现。为了支持其持续运营和发展，Dokku 接受赞助和月度捐赠。它支持多种操作系统，如 Ubuntu 20.04/22.04、Debian 10 及以上版本和 Arch Linux（实验性）。安装 Dokku 需要用户具备 sudo 权限，并通过特定命令下载并执行安装脚本。
+
+为了升级到最新版本，用户可以遵循特定的升级指南。Dokku 提供了详细的在线文档，包括进阶安装指南，以及用于获取支持的论坛、FAQ 和 Discord 社区。社区鼓励贡献者通过 Fork 项目并提交 Pull Requests 来参与改进，即使这些贡献可能需要进一步的调整以适应更广泛的用户需求。Dokku 的使用许可归 Jeff Lindsay 所有。
+
+总之，Dokku 是一个轻量级的 Docker 基于的 PaaS 解决方案，适合开发者构建、部署和管理应用。它通过社区支持、文档和贡献机制维持其发展。 <div>
+<p>A docker-powered PaaS that helps you build and manage the lifecycle of applications</p><hr /><h1>Dokku</h1> 
+<p><a href="https://github.com/dokku/dokku/actions?query=branch%3Amaster"><img alt="Build Status" src="https://github.com/dokku/dokku/actions/workflows/ci.yml/badge.svg?branch=master" /></a> <a href="https://packagecloud.io/dokku/dokku"><img alt="Ubuntu Package" src="https://img.shields.io/badge/package-ubuntu-brightgreen.svg?style=flat-square" title="Ubuntu Package" /></a> <a href="https://aur.archlinux.org/packages/dokku/"><img alt="Arch Package" src="https://img.shields.io/badge/package-arch-brightgreen.svg?style=flat-square" title="Arch Package" /></a> <a href="https://slack.dokku.com/"><img alt="Slack Group" src="https://img.shields.io/badge/irc-slack-blue.svg?style=flat-square" title="Slack Group" /></a> <a href="https://dokku.com/docs/getting-started/installation/"><img alt="Documentation" src="https://img.shields.io/badge/docs-site-blue.svg?style=flat-square" title="Site" /></a> <a href="https://raw.githubusercontent.com/dokku/dokku/master/#sponsors"><img alt="OpenCollective" src="https://opencollective.com/dokku/sponsors/badge.svg?style=flat-square" /></a> <a href="https://raw.githubusercontent.com/dokku/dokku/master/#backers"><img alt="OpenCollective" src="https://opencollective.com/dokku/backers/badge.svg?style=flat-square" /></a> <a href="https://www.patreon.com/dokku/"><img alt="Patreon" src="https://img.shields.io/badge/patreon-donate-green.svg?style=flat-square" /></a></p> 
+<p>Docker powered mini-Heroku. The smallest PaaS implementation you've ever seen.</p> 
+<h2>Sponsors</h2> 
+<p>Become a sponsor and get your logo on our README on GitHub with a link to your site. [<a href="https://opencollective.com/dokku#sponsor">Become a sponsor</a>]</p> 
+<p><a href="https://opencollective.com/dokku/sponsor/0/website"><img alt="OpenCollective Sponsor 0" src="https://opencollective.com/dokku/sponsor/0/avatar.svg?sanitize=true" /></a> <a href="https://opencollective.com/dokku/sponsor/1/website"><img alt="OpenCollective Sponsor 1" src="https://opencollective.com/dokku/sponsor/1/avatar.svg?sanitize=true" /></a> <a href="https://opencollective.com/dokku/sponsor/2/website"><img alt="OpenCollective Sponsor 2" src="https://opencollective.com/dokku/sponsor/2/avatar.svg?sanitize=true" /></a> <a href="https://opencollective.com/dokku/sponsor/3/website"><img alt="OpenCollective Sponsor 3" src="https://opencollective.com/dokku/sponsor/3/avatar.svg?sanitize=true" /></a> <a href="https://opencollective.com/dokku/sponsor/4/website"><img alt="OpenCollective Sponsor 4" src="https://opencollective.com/dokku/sponsor/4/avatar.svg?sanitize=true" /></a> <a href="https://opencollective.com/dokku/sponsor/5/website"><img alt="OpenCollective Sponsor 5" src="https://opencollective.com/dokku/sponsor/5/avatar.svg?sanitize=true" /></a> <a href="https://opencollective.com/dokku/sponsor/6/website"><img alt="OpenCollective Sponsor 6" src="https://opencollective.com/dokku/sponsor/6/avatar.svg?sanitize=true" /></a> <a href="https://opencollective.com/dokku/sponsor/7/website"><img alt="OpenCollective Sponsor 7" src="https://opencollective.com/dokku/sponsor/7/avatar.svg?sanitize=true" /></a> <a href="https://opencollective.com/dokku/sponsor/8/website"><img alt="OpenCollective Sponsor 8" src="https://opencollective.com/dokku/sponsor/8/avatar.svg?sanitize=true" /></a> <a href="https://opencollective.com/dokku/sponsor/9/website"><img alt="OpenCollective Sponsor 9" src="https://opencollective.com/dokku/sponsor/9/avatar.svg?sanitize=true" /></a> <a href="https://opencollective.com/dokku/sponsor/10/website"><img alt="OpenCollective Sponsor 10" src="https://opencollective.com/dokku/sponsor/10/avatar.svg?sanitize=true" /></a> <a href="https://opencollective.com/dokku/sponsor/11/website"><img alt="OpenCollective Sponsor 11" src="https://opencollective.com/dokku/sponsor/11/avatar.svg?sanitize=true" /></a> <a href="https://opencollective.com/dokku/sponsor/12/website"><img alt="OpenCollective Sponsor 12" src="https://opencollective.com/dokku/sponsor/12/avatar.svg?sanitize=true" /></a> <a href="https://opencollective.com/dokku/sponsor/13/website"><img alt="OpenCollective Sponsor 13" src="https://opencollective.com/dokku/sponsor/13/avatar.svg?sanitize=true" /></a> <a href="https://opencollective.com/dokku/sponsor/14/website"><img alt="OpenCollective Sponsor 14" src="https://opencollective.com/dokku/sponsor/14/avatar.svg?sanitize=true" /></a> <a href="https://opencollective.com/dokku/sponsor/5/website"><img alt="OpenCollective Sponsor 15" src="https://opencollective.com/dokku/sponsor/15/avatar.svg?sanitize=true" /></a> <a href="https://opencollective.com/dokku/sponsor/16/website"><img alt="OpenCollective Sponsor 6" src="https://opencollective.com/dokku/sponsor/16/avatar.svg?sanitize=true" /></a> <a href="https://opencollective.com/dokku/sponsor/17/website"><img alt="OpenCollective Sponsor 17" src="https://opencollective.com/dokku/sponsor/17/avatar.svg?sanitize=true" /></a> <a href="https://opencollective.com/dokku/sponsor/18/website"><img alt="OpenCollective Sponsor 18" src="https://opencollective.com/dokku/sponsor/18/avatar.svg?sanitize=true" /></a></p> 
+<h2>Backers</h2> 
+<p>Support us with a monthly donation and help us continue our activities. [<a href="https://opencollective.com/dokku#backer">Become a backer</a>]</p> 
+<p><a href="https://opencollective.com/dokku/backer/0/website"><img alt="OpenCollective Backer 0" src="https://opencollective.com/dokku/backer/0/avatar.svg?sanitize=true" /></a> <a href="https://opencollective.com/dokku/backer/1/website"><img alt="OpenCollective Backer 1" src="https://opencollective.com/dokku/backer/1/avatar.svg?sanitize=true" /></a> <a href="https://opencollective.com/dokku/backer/2/website"><img alt="OpenCollective Backer 2" src="https://opencollective.com/dokku/backer/2/avatar.svg?sanitize=true" /></a> <a href="https://opencollective.com/dokku/backer/3/website"><img alt="OpenCollective Backer 3" src="https://opencollective.com/dokku/backer/3/avatar.svg?sanitize=true" /></a> <a href="https://opencollective.com/dokku/backer/4/website"><img alt="OpenCollective Backer 4" src="https://opencollective.com/dokku/backer/4/avatar.svg?sanitize=true" /></a> <a href="https://opencollective.com/dokku/backer/5/website"><img alt="OpenCollective Backer 5" src="https://opencollective.com/dokku/backer/5/avatar.svg?sanitize=true" /></a> <a href="https://opencollective.com/dokku/backer/6/website"><img alt="OpenCollective Backer 6" src="https://opencollective.com/dokku/backer/6/avatar.svg?sanitize=true" /></a> <a href="https://opencollective.com/dokku/backer/7/website"><img alt="OpenCollective Backer 7" src="https://opencollective.com/dokku/backer/7/avatar.svg?sanitize=true" /></a> <a href="https://opencollective.com/dokku/backer/8/website"><img alt="OpenCollective Backer 8" src="https://opencollective.com/dokku/backer/8/avatar.svg?sanitize=true" /></a> <a href="https://opencollective.com/dokku/backer/9/website"><img alt="OpenCollective Backer 9" src="https://opencollective.com/dokku/backer/9/avatar.svg?sanitize=true" /></a> <a href="https://opencollective.com/dokku/backer/10/website"><img alt="OpenCollective Backer 10" src="https://opencollective.com/dokku/backer/10/avatar.svg?sanitize=true" /></a> <a href="https://opencollective.com/dokku/backer/11/website"><img alt="OpenCollective Backer 11" src="https://opencollective.com/dokku/backer/11/avatar.svg?sanitize=true" /></a> <a href="https://opencollective.com/dokku/backer/12/website"><img alt="OpenCollective Backer 12" src="https://opencollective.com/dokku/backer/12/avatar.svg?sanitize=true" /></a> <a href="https://opencollective.com/dokku/backer/13/website"><img alt="OpenCollective Backer 13" src="https://opencollective.com/dokku/backer/13/avatar.svg?sanitize=true" /></a> <a href="https://opencollective.com/dokku/backer/14/website"><img alt="OpenCollective Backer 14" src="https://opencollective.com/dokku/backer/14/avatar.svg?sanitize=true" /></a> <a href="https://opencollective.com/dokku/backer/15/website"><img alt="OpenCollective Backer 15" src="https://opencollective.com/dokku/backer/15/avatar.svg?sanitize=true" /></a> <a href="https://opencollective.com/dokku/backer/16/website"><img alt="OpenCollective Backer 16" src="https://opencollective.com/dokku/backer/16/avatar.svg?sanitize=true" /></a> <a href="https://opencollective.com/dokku/backer/17/website"><img alt="OpenCollective Backer 17" src="https://opencollective.com/dokku/backer/17/avatar.svg?sanitize=true" /></a> <a href="https://opencollective.com/dokku/backer/18/website"><img alt="OpenCollective Backer 18" src="https://opencollective.com/dokku/backer/18/avatar.svg?sanitize=true" /></a> <a href="https://opencollective.com/dokku/backer/19/website"><img alt="OpenCollective Backer 19" src="https://opencollective.com/dokku/backer/19/avatar.svg?sanitize=true" /></a> <a href="https://opencollective.com/dokku/backer/20/website"><img alt="OpenCollective Backer 20" src="https://opencollective.com/dokku/backer/20/avatar.svg?sanitize=true" /></a> <a href="https://opencollective.com/dokku/backer/21/website"><img alt="OpenCollective Backer 21" src="https://opencollective.com/dokku/backer/21/avatar.svg?sanitize=true" /></a> <a href="https://opencollective.com/dokku/backer/22/website"><img alt="OpenCollective Backer 22" src="https://opencollective.com/dokku/backer/22/avatar.svg?sanitize=true" /></a> <a href="https://opencollective.com/dokku/backer/23/website"><img alt="OpenCollective Backer 23" src="https://opencollective.com/dokku/backer/23/avatar.svg?sanitize=true" /></a> <a href="https://opencollective.com/dokku/backer/24/website"><img alt="OpenCollective Backer 24" src="https://opencollective.com/dokku/backer/24/avatar.svg?sanitize=true" /></a> <a href="https://opencollective.com/dokku/backer/25/website"><img alt="OpenCollective Backer 25" src="https://opencollective.com/dokku/backer/25/avatar.svg?sanitize=true" /></a> <a href="https://opencollective.com/dokku/backer/26/website"><img alt="OpenCollective Backer 26" src="https://opencollective.com/dokku/backer/26/avatar.svg?sanitize=true" /></a> <a href="https://opencollective.com/dokku/backer/27/website"><img alt="OpenCollective Backer 27" src="https://opencollective.com/dokku/backer/27/avatar.svg?sanitize=true" /></a> <a href="https://opencollective.com/dokku/backer/28/website"><img alt="OpenCollective Backer 28" src="https://opencollective.com/dokku/backer/28/avatar.svg?sanitize=true" /></a> <a href="https://opencollective.com/dokku/backer/29/website"><img alt="OpenCollective Backer 29" src="https://opencollective.com/dokku/backer/29/avatar.svg?sanitize=true" /></a></p> 
+<h2>Requirements</h2> 
+<p>A fresh VM running any of the following operating systems:</p> 
+<ul> 
+ <li>Ubuntu 20.04 / 22.04 x64 - Any currently supported release</li> 
+ <li>Debian 10+ x64</li> 
+ <li>Arch Linux x64 <em>(experimental)</em></li> 
+</ul> 
+<p>An SSH keypair that can be used for application deployment. If this exists before installation, it will be automatically imported into dokku. Otherwise, you will need to import the keypair manually after installation using <code>dokku ssh-keys:add</code>.</p> 
+<h2>Installation</h2> 
+<p>To install the latest stable release, run the following commands as a user who has access to <code>sudo</code>:</p> 
+<pre><code class="language-shell">wget -NP . https://dokku.com/install/v0.34.9/bootstrap.sh
+sudo DOKKU_TAG=v0.34.9 bash bootstrap.sh
+</code></pre> 
+<p>You can then proceed to configure your server domain (via <code>dokku domains:set-global</code>) and user access (via <code>dokku ssh-keys:add</code>) to complete the installation.</p> 
+<p>If you wish for a more unattended installation method, see <a href="https://dokku.com/docs/getting-started/install/debian/#unattended-installation">these</a> docs.</p> 
+<h3>Upgrade</h3> 
+<p><a href="https://dokku.com/docs/getting-started/upgrading/">View the docs</a> for upgrading from an older version of Dokku.</p> 
+<h2>Documentation</h2> 
+<p>Full documentation - including advanced installation docs - are available online at <a href="https://dokku.com/docs/getting-started/installation/">https://dokku.com/docs/getting-started/installation/</a>.</p> 
+<h2>Support</h2> 
+<p>You can use <a href="https://github.com/dokku/dokku/issues">GitHub Issues</a>, check <a href="https://dokku.com/docs/getting-started/troubleshooting/">Troubleshooting</a> in the documentation, or join us on <a href="https://slack.dokku.com/">Gliderlabs Slack in the #dokku channel</a>.</p> 
+<h2>Contribution</h2> 
+<p>After checking <a href="https://github.com/dokku/dokku/issues">GitHub Issues</a>, the <a href="https://dokku.com/docs/getting-started/troubleshooting/">Troubleshooting Guide</a> or having a chat with us on <a href="https://slack.dokku.com/">Gliderlabs Slack in the #dokku channel</a>, feel free to fork and create a Pull Request.</p> 
+<p>While we may not merge your PR as is, they serve to start conversations and improve the general Dokku experience for all users.</p> 
+<h2>License</h2> 
+<p><a href="https://github.com/dokku/dokku/raw/master/LICENSE">MIT License</a> © Jeff Lindsay</p>
+]]></content:encoded>
+
+
+</item>
+<item>
+<title>ComposioHQ/composio</title>
+<link>https://github.com/ComposioHQ/composio</link>
+<guid>https://github.com/ComposioHQ/composio</guid>
+<content:encoded><![CDATA[
+<div> 关键词：Composio、AI 剂、工具集、集成、Python
+
+总结:
+
+Composio 是一款专为 AI 剂提供高质工具与集成的平台。它支持超过100种不同类别的工具，包括软件操作（如GitHub、Notion、Linear、Gmail、Slack、Hubspot、Salesforce等）、操作系统功能（点击、输入、复制粘贴）、浏览器扩展（智能搜索、截图、多窗口操作、下载、上传等）、搜索引擎（Google搜索、Perplexity搜索、Tavily、Exa等）以及软件工程（Ngrok、数据库、Redis、Vercel、Git等）。此外，Composio 提供了 Agentic RAG 功能，能够即时处理任何类型的数据。
+
+Composio 的核心功能包括：
+1. **集成工具**：提供100多种高质量工具的集成，无需考虑认证、准确性和可靠性问题。
+2. **AI框架支持**：与OpenAI、Claude、LlamaIndex、Langchain、CrewAI、Autogen、Gemini、Julep、Lyzr等AI框架兼容。
+3. **授权管理**：支持六种不同的认证协议，包括访问令牌、刷新令牌、OAuth、API密钥、JWT等，以便用户专注于构建AI剂而非处理技术细节。
+4. **准确性优化**：通过优化工具设计，使AI剂的准确性提高40%。
+5. **可定制性**：易于扩展额外的工具、框架和认证协议，以及在后端应用中嵌入白标集成，以维护一致的用户体验。
+
+为了开始使用，开发者可以选择使用Python或JavaScript。在Python中，可以通过安装`composio-core`和`composio-openai`包来快速集成并创建AI剂，执行特定任务，如在GitHub上星标仓库。在JavaScript中，需要先安装`composio-core`，然后设置OpenAI客户端和工具集，接着执行AI剂以完成指定任务，例如在GitHub上创建问题。 <div>
+<p>Composio equip's your AI agents & LLMs with 100+ high-quality integrations via function calling</p><hr /><p align="center"> <a href="https://x.com/GanatraSoham/?utm_campaign=github-readme" target="_blank"> <img alt="Follow me" src="https://raw.githubusercontent.com/ComposioHQ/composio/master/python/docs/imgs/follow_x.png" width="100%" /> </a> <br /> <br /> </p> 
+<p align="center"> <a href="https://app.composio.dev/?utm_campaign=github-readme" target="_blank"> <img alt="Sign up" src="https://raw.githubusercontent.com/ComposioHQ/composio/master/python/docs/imgs/try_hosted.png" width="100%" /> </a> </p>
+<p><br /> <br /></p> 
+<p></p> 
+<p> <a href="https://github.com/composiohq/composio/raw/master/README.md">EN</a> | <a href="https://github.com/composiohq/composio/raw/master/README-CN.md">CN</a> | <a href="https://github.com/composiohq/composio/raw/master/README-JP.md">JP</a> </p> 
+<p align="center"> <a href="https://composio.dev//#gh-dark-mode-only"> <img alt="Composio logo" src="https://raw.githubusercontent.com/ComposioHQ/composio/master/python/docs/imgs/composio_white_font.svg?sanitize=true" width="318px" /> </a> <a href="https://composio.dev//#gh-light-mode-only"> <img alt="Composio Logo" src="https://raw.githubusercontent.com/ComposioHQ/composio/master/python/docs/imgs/composio_black_font.svg?sanitize=true" width="318px" /> </a> </p> 
+<p align="center"> <a href="https://github.com/composiodev/composio/actions/workflows/common.yml"> <img alt="Tests" src="https://img.shields.io/github/actions/workflow/status/composiodev/composio/common.yml?label=Tests&amp;style=plastic&amp;logo=github&amp;color=blue&amp;cacheSeconds=60" /> </a> <a href="https://pypi.org/project/composio-core/"> <img alt="PyPI" src="https://img.shields.io/pypi/v/composio_core?label=Latest&amp;style=plastic&amp;logo=pypi&amp;color=blue&amp;cacheSeconds=60&amp;logoColor=white" /> </a> <a href="https://www.npmjs.com/package/composio-core"> <img alt="NPM" src="https://img.shields.io/npm/v/composio-core?style=plastic&amp;logo=npm&amp;logoColor=white&amp;label=latest&amp;color=blue&amp;cacheSeconds=60" /> </a> <a href="https://pypi.org/project/composio-core/"> <img alt="Downloads" src="https://img.shields.io/pypi/dm/composio-core?label=Downloads&amp;style=plastic&amp;logo=github&amp;color=blue&amp;cacheSeconds=60" /> </a> </p> 
+<h2 align="center"><i> Production Ready Toolset for AI Agents </i></h2> 
+<h4 align="center">Equip your agent with high-quality tools &amp; integrations without worrying about authentication, accuracy, and reliability in a single line of code! </h4> 
+<div align="center"> 
+ <p> <a href="https://docs.composio.dev" rel="dofollow"><strong>Explore the Docs »</strong></a> </p> 
+ <p> <a href="https://app.composio.dev">Try on Dashboard</a> <b>|</b> <a href="https://www.composio.dev">Homepage</a> <b>|</b> 
+  <!-- <a href="https://docs.composio.dev/guides/examples">Examples</a> |
+<a href="https://docs.composio.dev/chat-with-docs">Chat with Docs</a> | --> <a href="https://docs.composio.dev/sdk">SDK</a> <b>|</b> <a href="https://docs.composio.dev/api-reference/">APIs</a> </p> 
+</div> 
+<hr /> 
+<div align="center"> 
+ <p> <b>✨ Socials &gt;&gt;</b> <a href="https://dub.composio.dev/JoinHQ">Discord</a> <b>|</b> <a href="https://www.youtube.com/@Composio">Youtube</a> <b>|</b> <a href="https://twitter.com/composiohq">Twitter</a> <b>|</b> <a href="https://www.linkedin.com/company/composio-dev"> Linkedin </a> </p> 
+ <p align="center"> <b>⛏️ Contribute &gt;&gt;</b> <a href="https://github.com/composiodev/composio/issues/new?assignees=&amp;labels=type%3A+bug&amp;template=bug_report.yml&amp;title=%F0%9F%90%9B+Bug+Report%3A+">Report Bugs</a> <b>|</b> <a href="https://github.com/composiodev/composio/issues/new?assignees=&amp;labels=feature&amp;template=feature_request.yml&amp;title=%F0%9F%9A%80+Feature%3A+">Request Feature</a> <b>|</b> <a href="https://github.com/composiodev/composio/raw/master/CONTRIBUTING.md">Contribute</a> </p> 
+</div> 
+<h2>📋 Table of contents</h2> 
+<ul> 
+ <li><a href="https://raw.githubusercontent.com/ComposioHQ/composio/master/#-table-of-contents">📋 Table of contents</a></li> 
+ <li><a href="https://raw.githubusercontent.com/ComposioHQ/composio/master/#-why-composio">🤔 Why Composio?</a></li> 
+ <li><a href="https://raw.githubusercontent.com/ComposioHQ/composio/master/#-key-features">🔥 Key Features</a></li> 
+ <li><a href="https://raw.githubusercontent.com/ComposioHQ/composio/master/#-getting-started-with-python">🚀 Getting Started with Python</a> 
+  <ul> 
+   <li><a href="https://raw.githubusercontent.com/ComposioHQ/composio/master/#1-installation">1. Installation</a></li> 
+   <li><a href="https://raw.githubusercontent.com/ComposioHQ/composio/master/#2-testing-composio-in-action">2. Testing Composio in Action</a></li> 
+  </ul> </li> 
+ <li><a href="https://raw.githubusercontent.com/ComposioHQ/composio/master/#-getting-started-with-javascript">🚀 Getting Started with Javascript</a> 
+  <ul> 
+   <li><a href="https://raw.githubusercontent.com/ComposioHQ/composio/master/#1-install-the-composio-sdk">1. <strong>Install the Composio SDK</strong>:</a></li> 
+   <li><a href="https://raw.githubusercontent.com/ComposioHQ/composio/master/#2-setup-the-openai-and-composio-tool-set">2. <strong>Setup the OpenAI and Composio Tool Set</strong>:</a></li> 
+   <li><a href="https://raw.githubusercontent.com/ComposioHQ/composio/master/#3-run-your-script">3. <strong>Run your script</strong>:</a></li> 
+  </ul> </li> 
+ <li><a href="https://raw.githubusercontent.com/ComposioHQ/composio/master/#-examples">💡 Examples</a> 
+  <ul> 
+   <li><a href="https://raw.githubusercontent.com/ComposioHQ/composio/master/#python-examples">Python Examples</a></li> 
+   <li><a href="https://raw.githubusercontent.com/ComposioHQ/composio/master/#javascript-examples">Javascript Examples</a></li> 
+  </ul> </li> 
+ <li><a href="https://raw.githubusercontent.com/ComposioHQ/composio/master/#star-history">Star History</a></li> 
+ <li><a href="https://raw.githubusercontent.com/ComposioHQ/composio/master/#-read-our-code-of-conduct">📋 Read Our Code Of Conduct</a></li> 
+ <li><a href="https://raw.githubusercontent.com/ComposioHQ/composio/master/#-contributions">🤗 Contributions</a></li> 
+ <li><a href="https://raw.githubusercontent.com/ComposioHQ/composio/master/#-links">🔗 Links</a></li> 
+ <li><a href="https://raw.githubusercontent.com/ComposioHQ/composio/master/#%EF%B8%8F-license">🛡️ License</a></li> 
+ <li><a href="https://raw.githubusercontent.com/ComposioHQ/composio/master/#-thanks-to-all-contributors">💪 Thanks To All Contributors</a></li> 
+</ul> 
+<h2>🤔 Why Composio?</h2> 
+<p>We believe AI Based Agents/Workflows are the future. Composio is the best toolset to integrate AI Agents to best Agentic Tools and use them to accomplish tasks.</p> 
+<img alt="Illustration" src="https://raw.githubusercontent.com/ComposioHQ/composio/master/docs/imgs/banner.gif" style="border-radius: 5px;" /> 
+<h2>🔥 Key Features</h2> 
+<ul> 
+ <li> <p><strong>100+ Tools</strong>: Support for a range of different categories</p> 
+  <ul> 
+   <li><strong>Software</strong>: Do anything on GitHub, Notion, Linear, Gmail, Slack, Hubspot, Salesforce, &amp; 90 more.</li> 
+   <li><strong>OS</strong>: Click anywhere, Type anything, Copy to Clipboard, &amp; more.</li> 
+   <li><strong>Browser</strong>: Smart Search, Take a screenshot, MultiOn, Download, Upload, &amp; more.</li> 
+   <li><strong>Search</strong>: Google Search, Perplexity Search, Tavily, Exa &amp; more.</li> 
+   <li><strong>SWE</strong>: Ngrok, Database, Redis, Vercel, Git, etc.</li> 
+   <li><strong>RAG</strong>: Agentic RAG for any type of data on the fly!</li> 
+  </ul> </li> 
+ <li> <p><strong>Frameworks</strong>: Use tools with agent frameworks like <strong>OpenAI, Claude, LlamaIndex, Langchain, CrewAI, Autogen, Gemini, Julep, Lyzr</strong>, and more in a single line of code.</p> </li> 
+ <li> <p><strong>Managed Authorisation</strong>: Supports six different auth protocols. <em>Access Token, Refresh token, OAuth, API Keys, JWT, and more</em> abstracted out so you can focus on the building agents.</p> </li> 
+ <li> <p><strong>Accuracy</strong>: Get <em>up to 40% better agentic accuracy</em> in your tool calls due to better tool designs.</p> </li> 
+ <li> <p><strong>Embeddable</strong>: Whitelabel in the backend of your applications managing Auth &amp; Integrations for all your users &amp; agents and maintain a consistent experience.</p> </li> 
+ <li> <p><strong>Pluggable</strong>: Designed to be extended with additional Tools, Frameworks and Authorisation Protocols very easily.</p> </li> 
+</ul> 
+<h2>🚀 Getting Started with Python</h2> 
+<h3>1. Installation</h3> 
+<p>To get started, type the following command in your Terminal.</p> 
+<pre><code class="language-bash">pip install composio-core
+</code></pre> 
+<p>If you want to install the 'composio' package along with its openai plugin: <code>pip install composio-openai</code>.</p> 
+<h3>2. Testing Composio in Action</h3> 
+<p>Let's use Composio to create an AI Agent that can star a Github Repo.</p> 
+<pre><code class="language-bash">composio add github # Connect your Github - Run this in terminal
+</code></pre> 
+<pre><code class="language-python">
+from openai import OpenAI
+from composio_openai import ComposioToolSet, App, Action
+
+openai_client = OpenAI(
+    api_key="{{OPENAIKEY}}"
+)
+
+# Initialise the Composio Tool Set
+
+composio_tool_set = ComposioToolSet()
+
+# Get GitHub tools that are pre-configured
+actions = composio_tool_set.get_actions(
+    actions=[Action.GITHUB_STAR_A_REPOSITORY_FOR_THE_AUTHENTICATED_USER]
+)
+
+my_task = "Star a repo composiodev/composio on GitHub"
+
+# Setup openai assistant
+assistant_instruction = "You are a super intelligent personal assistant"
+
+assistant = openai_client.beta.assistants.create(
+    name="Personal Assistant",
+    instructions=assistant_instruction,
+    model="gpt-4-turbo",
+    tools=actions,
+)
+
+# create a thread
+thread = openai_client.beta.threads.create()
+
+message = openai_client.beta.threads.messages.create(
+    thread_id=thread.id,
+    role="user",
+    content=my_task
+)
+
+# Execute Agent with integrations
+run = openai_client.beta.threads.runs.create(
+    thread_id=thread.id,
+    assistant_id=assistant.id
+)
+
+
+# Execute Function calls
+response_after_tool_calls = composio_tool_set.wait_and_handle_assistant_tool_calls(
+    client=openai_client,
+    run=run,
+    thread=thread,
+)
+
+print(response_after_tool_calls)
+</code></pre> 
+<h2>🚀 Getting Started with Javascript</h2> 
+<p>To get started with the Composio SDK in Javascript, follow these steps:</p> 
+<h3>1. <strong>Install the Composio SDK</strong>:</h3> 
+<pre><code class="language-bash">npm install composio-core
+</code></pre> 
+<h3>2. <strong>Setup the OpenAI and Composio Tool Set</strong>:</h3> 
+<pre><code class="language-javascript">import { OpenAI } from "openai";
+import { OpenAIToolSet } from "composio-core";
+
+const toolset = new OpenAIToolSet({
+    apiKey: process.env.COMPOSIO_API_KEY,
+});
+
+async function setupUserConnectionIfNotExists(entityId) {
+    const entity = await toolset.client.getEntity(entityId);
+    const connection = await entity.getConnection('github');
+
+    if (!connection) {
+        // If this entity/user hasn't already connected the account
+        const connection = await entity.initiateConnection(appName);
+        console.log("Log in via: ", connection.redirectUrl);
+        return connection.waitUntilActive(60);
+    }
+
+    return connection;
+}
+
+async function executeAgent(entityName) {
+    const entity = await toolset.client.getEntity(entityName)
+    await setupUserConnectionIfNotExists(entity.id);
+
+    const tools = await toolset.get_actions({ actions: ["github_issues_create"] }, entity.id);
+    const instruction = "Make an issue with sample title in the repo - himanshu-dixit/custom-repo-breaking"
+
+    const client = new OpenAI({ apiKey: process.env.OPEN_AI_API_KEY })
+    const response = await client.chat.completions.create({
+        model: "gpt-4-turbo",
+        messages: [{
+            role: "user",
+            content: instruction,
+        }],
+        tools: tools,
+        tool_choice: "auto",
+    })
+
+    console.log(response.choices[0].message.tool_calls);
+    await toolset.handle_tool_call(response, entity.id);
+}
+
+executeAgent("your-entity-name");
+</code></pre> 
+<h3>3. <strong>Run your script</strong>:</h3> 
+<pre><code class="language-bash">node your_script.js
+</code></pre> 
+<p>This will set up the Composio SDK and execute an agent that creates a GitHub issue using the provided instructions.</p> 
+<p>For more details, refer to the <a href="https://docs.composio.dev/">Composio SDK Documentation</a>.</p> 
+<h2>💡 Examples</h2> 
+<h3><a href="https://docs.composio.dev/guides/python/">Python Examples</a></h3> 
+<h3><a href="https://docs.composio.dev/guides/javascript/">Javascript Examples</a></h3> 
+<h2>Star History</h2> 
+<p><a href="https://star-history.com/#composiohq/composio&amp;Date"><img alt="Star History Chart" src="https://api.star-history.com/svg?repos=composiohq/composio&amp;type=Date" /></a></p> 
+<h2>📋 Read Our Code Of Conduct</h2> 
+<p>As part of our open-source community, we hold ourselves and other contributors to a high standard of communication. As a participant and contributor to this project, you agree to abide by our <a href="https://github.com/composiodev/composio/raw/master/CODE_OF_CONDUCT.md">Code of Conduct</a>.</p> 
+<h2>🤗 Contributions</h2> 
+<p>Composio is open-source and we welcome contributions. Please fork the repository, create a new branch for your feature, add your feature or improvement, and send a pull request.</p> 
+<p>Also go through our <a href="https://github.com/composiodev/composio/raw/master/CONTRIBUTING.md">Contribution Guidelines</a> and <a href="https://github.com/composiodev/composio/raw/master/CODE_OF_CONDUCT.md">Code of Conduct</a> before you start.</p> 
+<h2>🔗 Links</h2> 
+<ul> 
+ <li><a href="https://composio.dev?utm_campaign=github-readme">Home page</a></li> 
+ <li><a href="https://github.com/composiodev/composio/raw/master/CONTRIBUTING.md">Contribution Guidelines</a></li> 
+ <li><a href="https://docs.composio.dev/?utm_campaign=github-readme">Docs</a></li> 
+</ul> 
+<h2>🛡️ License</h2> 
+<p>Composio is licensed under the Elastic License - see the <a href="https://github.com/composiodev/composio/raw/master/LICENSE">LICENSE</a> file for details.</p> 
+<h2>💪 Thanks To All Contributors</h2> 
+<a href="https://github.com/composiohq/composio/graphs/contributors"> <img alt="List of Contributors" src="https://contributors-img.web.app/image?repo=composiodev/composio" /> </a>
+]]></content:encoded>
+
+
+</item>
+<item>
+<title>facebook/folly</title>
+<link>https://github.com/facebook/folly</link>
+<guid>https://github.com/facebook/folly</guid>
+<content:encoded><![CDATA[
+<div> 关键词：Folly、GitHub、C++、Facebook、Open-source
+
+总结：
+
+Folly 是 Facebook 开源的一个 C++17 组件库，旨在提供高效和实用的功能。它包含了 Facebook 内部广泛使用的各种核心库组件，同时也与 Boost 和 C++ 标准库等其他库相补充而非竞争。Folly 的设计围绕着性能这一主题，有时导致一些非标准的设计决策以实现高性能。
+
+Folly 的结构相对扁平，其目录与命名空间结构一致，不设复杂的目录层次。它分为标准库组件和实验性组件两部分，后者可能因 API 可能频繁变化而不适合外部使用。Folly 使用类似于 Boost 的“重复”方案组织文件和头文件。
+
+Folly 通过 GitHub 发布，并支持多种编译器和操作系统。为了确保依赖库的兼容性和版本一致性，推荐使用 getdeps.py 脚本下载并构建所有依赖库。这脚本支持 Python 3.6 或更高版本，可以在多个平台上运行。用户可以自定义安装路径和构建选项，但考虑到 Folly 的不兼容性保证，通常建议将库安装到临时目录，并通过环境变量配置项目构建时查找此目录。
+
+Folly 需要依赖于 Boost、gtest 等库，这些库可以通过 getdeps.py 自动管理。对于 Linux 或 macOS 用户，可以使用预构建的系统依赖包来加速构建过程。Folly 提供了自动化构建脚本（如 build.sh 和 build.bat）以及与 CMake 集成的选项，允许用户根据需求进行定制化构建。此外，Folly 还提供了测试功能，确保库的正确性和稳定性。 <div>
+<p>An open-source C++ library developed and used at Facebook.</p><hr /><h1>Folly: Facebook Open-source Library</h1> 
+<a href="https://opensource.facebook.com/support-ukraine"> <img alt="Support Ukraine - Help Provide Humanitarian Aid to Ukraine." src="https://img.shields.io/badge/Support-Ukraine-FFD500?style=flat&amp;labelColor=005BBB" /> </a> 
+<h1>What is <code>folly</code>?</h1> 
+<img align="right" alt="Logo Folly" src="https://raw.githubusercontent.com/facebook/folly/main/static/logo.svg?sanitize=true" width="15%" /> 
+<p>Folly (acronymed loosely after Facebook Open Source Library) is a library of C++17 components designed with practicality and efficiency in mind. <strong>Folly contains a variety of core library components used extensively at Facebook</strong>. In particular, it's often a dependency of Facebook's other open source C++ efforts and place where those projects can share code.</p> 
+<p>It complements (as opposed to competing against) offerings such as Boost and of course <code>std</code>. In fact, we embark on defining our own component only when something we need is either not available, or does not meet the needed performance profile. We endeavor to remove things from folly if or when <code>std</code> or Boost obsoletes them.</p> 
+<p>Performance concerns permeate much of Folly, sometimes leading to designs that are more idiosyncratic than they would otherwise be (see e.g. <code>PackedSyncPtr.h</code>, <code>SmallLocks.h</code>). Good performance at large scale is a unifying theme in all of Folly.</p> 
+<h2>Check it out in the intro video</h2> 
+<p><a href="https://www.youtube.com/watch?v=Wr_IfOICYSs"><img alt="Explain Like I’m 5: Folly" src="https://img.youtube.com/vi/Wr_IfOICYSs/0.jpg" /></a></p> 
+<h1>Logical Design</h1> 
+<p>Folly is a collection of relatively independent components, some as simple as a few symbols. There is no restriction on internal dependencies, meaning that a given folly module may use any other folly components.</p> 
+<p>All symbols are defined in the top-level namespace <code>folly</code>, except of course macros. Macro names are ALL_UPPERCASE and should be prefixed with <code>FOLLY_</code>. Namespace <code>folly</code> defines other internal namespaces such as <code>internal</code> or <code>detail</code>. User code should not depend on symbols in those namespaces.</p> 
+<p>Folly has an <code>experimental</code> directory as well. This designation connotes primarily that we feel the API may change heavily over time. This code, typically, is still in heavy use and is well tested.</p> 
+<h1>Physical Design</h1> 
+<p>At the top level Folly uses the classic "stuttering" scheme <code>folly/folly</code> used by Boost and others. The first directory serves as an installation root of the library (with possible versioning a la <code>folly-1.0/</code>), and the second is to distinguish the library when including files, e.g. <code>#include &lt;folly/FBString.h&gt;</code>.</p> 
+<p>The directory structure is flat (mimicking the namespace structure), i.e. we don't have an elaborate directory hierarchy (it is possible this will change in future versions). The subdirectory <code>experimental</code> contains files that are used inside folly and possibly at Facebook but not considered stable enough for client use. Your code should not use files in <code>folly/experimental</code> lest it may break when you update Folly.</p> 
+<p>The <code>folly/folly/test</code> subdirectory includes the unittests for all components, usually named <code>ComponentXyzTest.cpp</code> for each <code>ComponentXyz.*</code>. The <code>folly/folly/docs</code> directory contains documentation.</p> 
+<h1>What's in it?</h1> 
+<p>Because of folly's fairly flat structure, the best way to see what's in it is to look at the headers in <a href="https://github.com/facebook/folly/tree/main/folly">top level <code>folly/</code> directory</a>. You can also check the <a href="https://raw.githubusercontent.com/facebook/folly/main/folly/docs"><code>docs</code> folder</a> for documentation, starting with the <a href="https://raw.githubusercontent.com/facebook/folly/main/folly/docs/Overview.md">overview</a>.</p> 
+<p>Folly is published on GitHub at <a href="https://github.com/facebook/folly">https://github.com/facebook/folly</a>.</p> 
+<h1>Build Notes</h1> 
+<p>Because folly does not provide any ABI compatibility guarantees from commit to commit, we generally recommend building folly as a static library.</p> 
+<p>folly supports gcc (5.1+), clang, or MSVC. It should run on Linux (x86-32, x86-64, and ARM), iOS, macOS, and Windows (x86-64). The CMake build is only tested on some of these platforms; at a minimum, we aim to support macOS and Linux (on the latest Ubuntu LTS release or newer.)</p> 
+<h2><code>getdeps.py</code></h2> 
+<p>This script is used by many of Meta's OSS tools. It will download and build all of the necessary dependencies first, and will then invoke cmake etc to build folly. This will help ensure that you build with relevant versions of all of the dependent libraries, taking into account what versions are installed locally on your system.</p> 
+<p>It's written in python so you'll need python3.6 or later on your PATH. It works on Linux, macOS and Windows.</p> 
+<p>The settings for folly's cmake build are held in its getdeps manifest <code>build/fbcode_builder/manifests/folly</code>, which you can edit locally if desired.</p> 
+<h3>Dependencies</h3> 
+<p>If on Linux or MacOS (with homebrew installed) you can install system dependencies to save building them:</p> 
+<pre><code># Clone the repo
+git clone https://github.com/facebook/folly
+# Install dependencies
+cd folly
+sudo ./build/fbcode_builder/getdeps.py install-system-deps --recursive
+</code></pre> 
+<p>If you'd like to see the packages before installing them:</p> 
+<pre><code>./build/fbcode_builder/getdeps.py install-system-deps --dry-run --recursive
+</code></pre> 
+<p>On other platforms or if on Linux and without system dependencies <code>getdeps.py</code> will mostly download and build them for you during the build step.</p> 
+<p>Some of the dependencies <code>getdeps.py</code> uses and installs are:</p> 
+<ul> 
+ <li>a version of boost compiled with C++14 support.</li> 
+ <li>googletest is required to build and run folly's tests.</li> 
+</ul> 
+<h3>Build</h3> 
+<p>This script will download and build all of the necessary dependencies first, and will then invoke cmake etc to build folly. This will help ensure that you build with relevant versions of all of the dependent libraries, taking into account what versions are installed locally on your system.</p> 
+<p><code>getdeps.py</code> currently requires python 3.6+ to be on your path.</p> 
+<p><code>getdeps.py</code> will invoke cmake etc.</p> 
+<pre><code># Clone the repo
+git clone https://github.com/facebook/folly
+cd folly
+# Build, using system dependencies if available
+python3 ./build/fbcode_builder/getdeps.py --allow-system-packages build
+</code></pre> 
+<p>It puts output in its scratch area:</p> 
+<ul> 
+ <li><code>installed/folly/lib/libfolly.a</code>: Library</li> 
+</ul> 
+<p>You can also specify a <code>--scratch-path</code> argument to control the location of the scratch directory used for the build. You can find the default scratch install location from logs or with <code>python3 ./build/fbcode_builder/getdeps.py show-inst-dir</code>.</p> 
+<p>There are also <code>--install-dir</code> and <code>--install-prefix</code> arguments to provide some more fine-grained control of the installation directories. However, given that folly provides no compatibility guarantees between commits we generally recommend building and installing the libraries to a temporary location, and then pointing your project's build at this temporary location, rather than installing folly in the traditional system installation directories. e.g., if you are building with CMake you can use the <code>CMAKE_PREFIX_PATH</code> variable to allow CMake to find folly in this temporary installation directory when building your project.</p> 
+<p>If you want to invoke <code>cmake</code> again to iterate, there is a helpful <code>run_cmake.py</code> script output in the scratch build directory. You can find the scratch build directory from logs or with <code>python3 ./build/fbcode_builder/getdeps.py show-build-dir</code>.</p> 
+<h3>Run tests</h3> 
+<p>By default <code>getdeps.py</code> will build the tests for folly. To run them:</p> 
+<pre><code>cd folly
+python3 ./build/fbcode_builder/getdeps.py --allow-system-packages test
+</code></pre> 
+<h3><code>build.sh</code>/<code>build.bat</code> wrapper</h3> 
+<p><code>build.sh</code> can be used on Linux and MacOS, on Windows use the <code>build.bat</code> script instead. Its a wrapper around <code>getdeps.py</code>.</p> 
+<h2>Build with cmake directly</h2> 
+<p>If you don't want to let getdeps invoke cmake for you then by default, building the tests is disabled as part of the CMake <code>all</code> target. To build the tests, specify <code>-DBUILD_TESTS=ON</code> to CMake at configure time.</p> 
+<p>NB if you want to invoke <code>cmake</code> again to iterate on a <code>getdeps.py</code> build, there is a helpful <code>run_cmake.py</code> script output in the scratch-path build directory. You can find the scratch build directory from logs or with <code>python3 ./build/fbcode_builder/getdeps.py show-build-dir</code>.</p> 
+<p>Running tests with ctests also works if you cd to the build dir, e.g. <code>(cd $(python3 ./build/fbcode_builder/getdeps.py show-build-dir) &amp;&amp; ctest)</code></p> 
+<h3>Finding dependencies in non-default locations</h3> 
+<p>If you have boost, gtest, or other dependencies installed in a non-default location, you can use the <code>CMAKE_INCLUDE_PATH</code> and <code>CMAKE_LIBRARY_PATH</code> variables to make CMAKE look also look for header files and libraries in non-standard locations. For example, to also search the directories <code>/alt/include/path1</code> and <code>/alt/include/path2</code> for header files and the directories <code>/alt/lib/path1</code> and <code>/alt/lib/path2</code> for libraries, you can invoke <code>cmake</code> as follows:</p> 
+<pre><code>cmake \
+  -DCMAKE_INCLUDE_PATH=/alt/include/path1:/alt/include/path2 \
+  -DCMAKE_LIBRARY_PATH=/alt/lib/path1:/alt/lib/path2 ...
+</code></pre> 
+<h2>Ubuntu LTS, CentOS Stream, Fedora</h2> 
+<p>Use the <code>getdeps.py</code> approach above. We test in CI on Ubuntu LTS, and occasionally on other distros.</p> 
+<p>If you find the set of system packages is not quite right for your chosen distro, you can specify distro version specific overrides in the dependency manifests (e.g. <a href="https://github.com/facebook/folly/raw/main/build/fbcode_builder/manifests/boost">https://github.com/facebook/folly/blob/main/build/fbcode_builder/manifests/boost</a> ). You could probably make it work on most recent Ubuntu/Debian or Fedora/Redhat derived distributions.</p> 
+<p>At time of writing (Dec 2021) there is a build break on GCC 11.x based systems in lang_badge_test. If you don't need badge functionality you can work around by commenting it out from CMakeLists.txt (unfortunately fbthrift does need it)</p> 
+<h2>Windows (Vcpkg)</h2> 
+<p>Note that many tests are disabled for folly Windows builds, you can see them in the log from the cmake configure step, or by looking for WINDOWS_DISABLED in <code>CMakeLists.txt</code></p> 
+<p>That said, <code>getdeps.py</code> builds work on Windows and are tested in CI.</p> 
+<p>If you prefer, you can try Vcpkg. folly is available in <a href="https://github.com/Microsoft/vcpkg#vcpkg">Vcpkg</a> and releases may be built via <code>vcpkg install folly:x64-windows</code>.</p> 
+<p>You may also use <code>vcpkg install folly:x64-windows --head</code> to build against <code>main</code>.</p> 
+<h2>macOS</h2> 
+<p><code>getdeps.py</code> builds work on macOS and are tested in CI, however if you prefer, you can try one of the macOS package managers</p> 
+<h3>Homebrew</h3> 
+<p>folly is available as a Formula and releases may be built via <code>brew install folly</code>.</p> 
+<p>You may also use <code>folly/build/bootstrap-osx-homebrew.sh</code> to build against <code>main</code>:</p> 
+<pre><code>  ./folly/build/bootstrap-osx-homebrew.sh
+</code></pre> 
+<p>This will create a build directory <code>_build</code> in the top-level.</p> 
+<h3>MacPorts</h3> 
+<p>Install the required packages from MacPorts:</p> 
+<pre><code>  sudo port install \
+    boost \
+    cmake \
+    gflags \
+    git \
+    google-glog \
+    libevent \
+    libtool \
+    lz4 \
+    lzma \
+    openssl \
+    snappy \
+    xz \
+    zlib
+</code></pre> 
+<p>Download and install double-conversion:</p> 
+<pre><code>  git clone https://github.com/google/double-conversion.git
+  cd double-conversion
+  cmake -DBUILD_SHARED_LIBS=ON .
+  make
+  sudo make install
+</code></pre> 
+<p>Download and install folly with the parameters listed below:</p> 
+<pre><code>  git clone https://github.com/facebook/folly.git
+  cd folly
+  mkdir _build
+  cd _build
+  cmake ..
+  make
+  sudo make install
+</code></pre>
+]]></content:encoded>
+
+
+</item>
+<item>
+<title>EbookFoundation/free-programming-books</title>
+<link>https://github.com/EbookFoundation/free-programming-books</link>
+<guid>https://github.com/EbookFoundation/free-programming-books</guid>
+<content:encoded><![CDATA[
+<div> 关键词：免费资源、编程书籍、GitHub、协作更新、Free Ebook Foundation
+
+总结：
+本文是一篇关于免费编程学习资源的综述。主要关键词包括“免费资源”、“编程书籍”、“GitHub”、“协作更新”和“Free Ebook Foundation”。文章指出，该列表最初源自其他资源，通过GitHub进行共享和维护，成为了一个广泛收集编程相关书籍和其他学习资料的集合。GitHub平台允许用户通过阅读贡献指南进行协作更新，而Free Ebook Foundation是一个非营利组织，致力于推广免费电子书的创造、分发、存档和可持续发展，其捐赠在美国可以免税。此外，文章还强调了如何通过各种方式贡献，如翻译文档或创建内容，以及提供了如何分享这些资源的指导。最后，提到项目中包含多种类型的学习资源，如书籍、在线课程、编程工具等，旨在帮助编程爱好者和学习者获取所需的知识和技能。 <div>
+<p>📚 Freely available programming books</p><hr /><h1>List of Free Learning Resources In Many Languages</h1> 
+<div align="center"> 
+ <p><a href="https://github.com/sindresorhus/awesome"><img alt="Awesome" src="https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg?sanitize=true" /></a>&nbsp; <a href="https://creativecommons.org/licenses/by/4.0/"><img alt="License: CC BY 4.0" src="https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg?sanitize=true" /></a>&nbsp; <a href="https://github.com/EbookFoundation/free-programming-books/pulls?q=is%3Apr+is%3Amerged+created%3A2023-10-01..2023-10-31"><img alt="Hacktoberfest 2023 stats" src="https://img.shields.io/github/hacktoberfest/2023/EbookFoundation/free-programming-books?label=Hacktoberfest+2023" /></a></p> 
+</div> 
+<p>Search the list at <a href="https://ebookfoundation.github.io/free-programming-books-search/">https://ebookfoundation.github.io/free-programming-books-search/</a> <a href="https://ebookfoundation.github.io/free-programming-books-search/"><img alt="https://ebookfoundation.github.io/free-programming-books-search/" src="https://img.shields.io/website?style=flat&amp;logo=www&amp;logoColor=whitesmoke&amp;label=Dynamic%20search%20site&amp;down_color=red&amp;down_message=down&amp;up_color=green&amp;up_message=up&amp;url=https%3A%2F%2Febookfoundation.github.io%2Ffree-programming-books-search%2F" /></a>.</p> 
+<p>This page is available as an easy-to-read website. Access it by clicking on <a href="https://ebookfoundation.github.io/free-programming-books/"><img alt="https://ebookfoundation.github.io/free-programming-books/" src="https://img.shields.io/website?style=flat&amp;logo=www&amp;logoColor=whitesmoke&amp;label=Static%20site&amp;down_color=red&amp;down_message=down&amp;up_color=green&amp;up_message=up&amp;url=https%3A%2F%2Febookfoundation.github.io%2Ffree-programming-books%2F" /></a>.</p> 
+<div align="center"> 
+ <form action="https://ebookfoundation.github.io/free-programming-books-search"> 
+  <input id="fpbSearch" name="search" required="required" type="text" /> 
+  <label for="submit"> </label> 
+  <input id="submit" name="submit" type="submit" value="Search" /> 
+ </form> 
+</div> 
+<h2>Intro</h2> 
+<p>This list was originally a clone of <a href="https://web.archive.org/web/20140606191453/http://stackoverflow.com/questions/194812/list-of-freely-available-programming-books/392926">StackOverflow - List of Freely Available Programming Books</a> with contributions from Karan Bhangui and George Stocker.</p> 
+<p>The list was moved to GitHub by Victor Felder for collaborative updating and maintenance. It has grown to become one of <a href="https://octoverse.github.com/">GitHub's most popular repositories</a>.</p> 
+<div align="center"> 
+ <p><a href="https://github.com/EbookFoundation/free-programming-books/network"><img alt="GitHub repo forks" src="https://img.shields.io/github/forks/EbookFoundation/free-programming-books?style=flat&amp;logo=github&amp;logoColor=whitesmoke&amp;label=Forks" /></a>&nbsp; <a href="https://github.com/EbookFoundation/free-programming-books/stargazers"><img alt="GitHub repo stars" src="https://img.shields.io/github/stars/EbookFoundation/free-programming-books?style=flat&amp;logo=github&amp;logoColor=whitesmoke&amp;label=Stars" /></a>&nbsp; <a href="https://github.com/EbookFoundation/free-programming-books/graphs/contributors"><img alt="GitHub repo contributors" src="https://img.shields.io/github/contributors-anon/EbookFoundation/free-programming-books?style=flat&amp;logo=github&amp;logoColor=whitesmoke&amp;label=Contributors" /></a><br /> <a href="https://github.com/sponsors/EbookFoundation"><img alt="GitHub org sponsors" src="https://img.shields.io/github/sponsors/EbookFoundation?style=flat&amp;logo=github&amp;logoColor=whitesmoke&amp;label=Sponsors" /></a>&nbsp; <a href="https://github.com/EbookFoundation/free-programming-books/watchers"><img alt="GitHub repo watchers" src="https://img.shields.io/github/watchers/EbookFoundation/free-programming-books?style=flat&amp;logo=github&amp;logoColor=whitesmoke&amp;label=Watchers" /></a>&nbsp; <a href="https://github.com/EbookFoundation/free-programming-books/archive/refs/heads/main.zip"><img alt="GitHub repo size" src="https://img.shields.io/github/repo-size/EbookFoundation/free-programming-books?style=flat&amp;logo=github&amp;logoColor=whitesmoke&amp;label=Repo%20Size" /></a></p> 
+</div> 
+<p>The <a href="https://ebookfoundation.org">Free Ebook Foundation</a> now administers the repo, a not-for-profit organization devoted to promoting the creation, distribution, archiving, and sustainability of free ebooks. <a href="https://ebookfoundation.org/contributions.html">Donations</a> to the Free Ebook Foundation are tax-deductible in the US.</p> 
+<h2>How To Contribute</h2> 
+<p>Please read <a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/docs/CONTRIBUTING.md">CONTRIBUTING</a>. If you're new to GitHub, <a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/docs/HOWTO.md">welcome</a>! Remember to abide by our adapted from <img alt="Contributor Covenant 1.3" src="https://img.shields.io/badge/Contributor%20Covenant-1.3-4baaaa.svg?sanitize=true" /> <a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/docs/CODE_OF_CONDUCT.md">Code of Conduct</a> too (<a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/#translations">translations</a> also available).</p> 
+<p>Click on these badges to see how you might be able to help:</p> 
+<div align="center"> 
+ <p><a href="https://github.com/EbookFoundation/free-programming-books/issues"><img alt="GitHub repo Issues" src="https://img.shields.io/github/issues/EbookFoundation/free-programming-books?style=flat&amp;logo=github&amp;logoColor=red&amp;label=Issues" /></a>&nbsp; <a href="https://github.com/EbookFoundation/free-programming-books/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22"><img alt="GitHub repo Good Issues for newbies" src="https://img.shields.io/github/issues/EbookFoundation/free-programming-books/good%20first%20issue?style=flat&amp;logo=github&amp;logoColor=green&amp;label=Good%20First%20issues" /></a>&nbsp; <a href="https://github.com/EbookFoundation/free-programming-books/issues?q=is%3Aopen+is%3Aissue+label%3A%22help+wanted%22"><img alt="GitHub Help Wanted issues" src="https://img.shields.io/github/issues/EbookFoundation/free-programming-books/help%20wanted?style=flat&amp;logo=github&amp;logoColor=b545d1&amp;label=%22Help%20Wanted%22%20issues" /></a><br /> <a href="https://github.com/EbookFoundation/free-programming-books/pulls"><img alt="GitHub repo PRs" src="https://img.shields.io/github/issues-pr/EbookFoundation/free-programming-books?style=flat&amp;logo=github&amp;logoColor=orange&amp;label=PRs" /></a>&nbsp; <a href="https://github.com/EbookFoundation/free-programming-books/pulls?q=is%3Apr+is%3Amerged"><img alt="GitHub repo Merged PRs" src="https://img.shields.io/github/issues-search/EbookFoundation/free-programming-books?style=flat&amp;logo=github&amp;logoColor=green&amp;label=Merged%20PRs&amp;query=is%3Amerged" /></a>&nbsp; <a href="https://github.com/EbookFoundation/free-programming-books/pulls?q=is%3Aopen+is%3Aissue+label%3A%22help+wanted%22"><img alt="GitHub Help Wanted PRs" src="https://img.shields.io/github/issues-pr/EbookFoundation/free-programming-books/help%20wanted?style=flat&amp;logo=github&amp;logoColor=b545d1&amp;label=%22Help%20Wanted%22%20PRs" /></a></p> 
+</div> 
+<h2>How To Share</h2> 
+<div align="left"> 
+ <a href="https://www.facebook.com/share.php?u=https%253A%252F%252Fgithub.com%252FEbookFoundation%252Ffree-programming-books&amp;p%5Bimages%5D%5B0%5D=&amp;p%5Btitle%5D=Free%2520Programming%2520Books&amp;p%5Bsummary%5D=">Share on Facebook</a>
+ <br /> 
+ <a href="http://www.linkedin.com/shareArticle?mini=true&amp;url=https://github.com/EbookFoundation/free-programming-books&amp;title=Free%20Programming%20Books&amp;summary=&amp;source=">Share on LinkedIn</a>
+ <br /> 
+ <a href="https://toot.kytta.dev/?mini=true&amp;url=https://github.com/EbookFoundation/free-programming-books&amp;title=Free%20Programming%20Books&amp;summary=&amp;source=">Share on Mastodon/Fediverse</a>
+ <br /> 
+ <a href="https://t.me/share/url?url=https://github.com/EbookFoundation/free-programming-books">Share on Telegram</a>
+ <br /> 
+ <a href="https://twitter.com/intent/tweet?text=https://github.com/EbookFoundation/free-programming-books%0AFree%20Programming%20Books">Share on 𝕏 (Twitter)</a>
+ <br /> 
+</div> 
+<h2>Resources</h2> 
+<p>This project lists books and other resources grouped by genres:</p> 
+<h3>Books</h3> 
+<p><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/books/free-programming-books-langs.md">English, By Programming Language</a></p> 
+<p><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/books/free-programming-books-subjects.md">English, By Subject</a></p> 
+<h4>Other Languages</h4> 
+<ul> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/books/free-programming-books-ar.md">Arabic / al arabiya / العربية</a></li> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/books/free-programming-books-hy.md">Armenian / Հայերեն</a></li> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/books/free-programming-books-az.md">Azerbaijani / Азәрбајҹан дили / آذربايجانجا ديلي</a></li> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/books/free-programming-books-bn.md">Bengali / বাংলা</a></li> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/books/free-programming-books-bg.md">Bulgarian / български</a></li> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/books/free-programming-books-my.md">Burmese / မြန်မာဘာသာ</a></li> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/books/free-programming-books-zh.md">Chinese / 中文</a></li> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/books/free-programming-books-cs.md">Czech / čeština / český jazyk</a></li> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/books/free-programming-books-ca.md">Catalan / catalan/ català</a></li> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/books/free-programming-books-da.md">Danish / dansk</a></li> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/books/free-programming-books-nl.md">Dutch / Nederlands</a></li> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/books/free-programming-books-et.md">Estonian / eesti keel</a></li> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/books/free-programming-books-fi.md">Finnish / suomi / suomen kieli</a></li> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/books/free-programming-books-fr.md">French / français</a></li> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/books/free-programming-books-de.md">German / Deutsch</a></li> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/books/free-programming-books-el.md">Greek / ελληνικά</a></li> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/books/free-programming-books-he.md">Hebrew / עברית</a></li> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/books/free-programming-books-hi.md">Hindi / हिन्दी</a></li> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/books/free-programming-books-hu.md">Hungarian / magyar / magyar nyelv</a></li> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/books/free-programming-books-id.md">Indonesian / Bahasa Indonesia</a></li> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/books/free-programming-books-it.md">Italian / italiano</a></li> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/books/free-programming-books-ja.md">Japanese / 日本語</a></li> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/books/free-programming-books-ko.md">Korean / 한국어</a></li> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/books/free-programming-books-lv.md">Latvian / Latviešu</a></li> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/books/free-programming-books-ml.md">Malayalam / മലയാളം</a></li> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/books/free-programming-books-no.md">Norwegian / Norsk</a></li> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/books/free-programming-books-fa_IR.md">Persian / Farsi (Iran) / فارسى</a></li> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/books/free-programming-books-pl.md">Polish / polski / język polski / polszczyzna</a></li> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/books/free-programming-books-pt_BR.md">Portuguese (Brazil)</a></li> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/books/free-programming-books-pt_PT.md">Portuguese (Portugal)</a></li> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/books/free-programming-books-ro.md">Romanian (Romania) / limba română / român</a></li> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/books/free-programming-books-ru.md">Russian / Русский язык</a></li> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/books/free-programming-books-sr.md">Serbian / српски језик / srpski jezik</a></li> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/books/free-programming-books-sk.md">Slovak / slovenčina</a></li> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/books/free-programming-books-es.md">Spanish / español / castellano</a></li> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/books/free-programming-books-sv.md">Swedish / Svenska</a></li> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/books/free-programming-books-ta.md">Tamil / தமிழ்</a></li> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/books/free-programming-books-te.md">Telugu / తెలుగు</a></li> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/books/free-programming-books-th.md">Thai / ไทย</a></li> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/books/free-programming-books-tr.md">Turkish / Türkçe</a></li> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/books/free-programming-books-uk.md">Ukrainian / Українська</a></li> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/books/free-programming-books-vi.md">Vietnamese / Tiếng Việt</a></li> 
+</ul> 
+<h3>Cheat Sheets</h3> 
+<ul> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/more/free-programming-cheatsheets.md">All Languages</a></li> 
+</ul> 
+<h3>Free Online Courses</h3> 
+<ul> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/courses/free-courses-ar.md">Arabic / al arabiya / العربية</a></li> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/courses/free-courses-bn.md">Bengali / বাংলা</a></li> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/courses/free-courses-bg.md">Bulgarian / български</a></li> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/courses/free-courses-my.md">Burmese / မြန်မာဘာသာ</a></li> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/courses/free-courses-zh.md">Chinese / 中文</a></li> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/courses/free-courses-en.md">English</a></li> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/courses/free-courses-fi.md">Finnish / suomi / suomen kieli</a></li> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/courses/free-courses-fr.md">French / français</a></li> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/courses/free-courses-de.md">German / Deutsch</a></li> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/courses/free-courses-el.md">Greek / ελληνικά</a></li> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/courses/free-courses-he.md">Hebrew / עברית</a></li> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/courses/free-courses-hi.md">Hindi / हिंदी</a></li> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/courses/free-courses-id.md">Indonesian / Bahasa Indonesia</a></li> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/courses/free-courses-it.md">Italian / italiano</a></li> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/courses/free-courses-ja.md">Japanese / 日本語</a></li> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/courses/free-courses-kn.md">Kannada/ಕನ್ನಡ</a></li> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/courses/free-courses-kk.md">Kazakh / қазақша</a></li> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/courses/free-courses-km.md">Khmer / ភាសាខ្មែរ</a></li> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/courses/free-courses-ko.md">Korean / 한국어</a></li> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/courses/free-courses-ml.md">Malayalam / മലയാളം</a></li> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/courses/free-courses-mr.md">Marathi / मराठी</a></li> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/courses/free-courses-ne.md">Nepali / नेपाली</a></li> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/courses/free-courses-no.md">Norwegian / Norsk</a></li> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/courses/free-courses-fa_IR.md">Persian / Farsi (Iran) / فارسى</a></li> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/courses/free-courses-pl.md">Polish / polski / język polski / polszczyzna</a></li> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/courses/free-courses-pt_BR.md">Portuguese (Brazil)</a></li> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/courses/free-courses-pt_PT.md">Portuguese (Portugal)</a></li> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/courses/free-courses-ru.md">Russian / Русский язык</a></li> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/courses/free-courses-si.md">Sinhala / සිංහල</a></li> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/courses/free-courses-es.md">Spanish / español / castellano</a></li> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/courses/free-courses-sv.md">Swedish / svenska</a></li> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/courses/free-courses-ta.md">Tamil / தமிழ்</a></li> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/courses/free-courses-te.md">Telugu / తెలుగు</a></li> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/courses/free-courses-th.md">Thai / ภาษาไทย</a></li> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/courses/free-courses-tr.md">Turkish / Türkçe</a></li> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/courses/free-courses-uk.md">Ukrainian / Українська</a></li> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/courses/free-courses-ur.md">Urdu / اردو</a></li> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/courses/free-courses-vi.md">Vietnamese / Tiếng Việt</a></li> 
+</ul> 
+<h3>Interactive Programming Resources</h3> 
+<ul> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/more/free-programming-interactive-tutorials-zh.md">Chinese / 中文</a></li> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/more/free-programming-interactive-tutorials-en.md">English</a></li> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/more/free-programming-interactive-tutorials-de.md">German / Deutsch</a></li> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/more/free-programming-interactive-tutorials-ja.md">Japanese / 日本語</a></li> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/more/free-programming-interactive-tutorials-ru.md">Russian / Русский язык</a></li> 
+</ul> 
+<h3>Problem Sets and Competitive Programming</h3> 
+<ul> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/more/problem-sets-competitive-programming.md">Problem Sets</a></li> 
+</ul> 
+<h3>Podcast - Screencast</h3> 
+<p>Free Podcasts and Screencasts:</p> 
+<ul> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/casts/free-podcasts-screencasts-ar.md">Arabic / al Arabiya / العربية</a></li> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/casts/free-podcasts-screencasts-my.md">Burmese / မြန်မာဘာသာ</a></li> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/casts/free-podcasts-screencasts-zh.md">Chinese / 中文</a></li> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/casts/free-podcasts-screencasts-cs.md">Czech / čeština / český jazyk</a></li> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/casts/free-podcasts-screencasts-nl.md">Dutch / Nederlands</a></li> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/casts/free-podcasts-screencasts-en.md">English</a></li> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/casts/free-podcasts-screencasts-fi.md">Finnish / Suomi</a></li> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/casts/free-podcasts-screencasts-fr.md">French / français</a></li> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/casts/free-podcasts-screencasts-de.md">German / Deutsch</a></li> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/casts/free-podcasts-screencasts-he.md">Hebrew / עברית</a></li> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/casts/free-podcasts-screencasts-id.md">Indonesian / Bahasa Indonesia</a></li> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/casts/free-podcasts-screencasts-fa_IR.md">Persian / Farsi (Iran) / فارسى</a></li> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/casts/free-podcasts-screencasts-pl.md">Polish / polski / język polski / polszczyzna</a></li> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/casts/free-podcasts-screencasts-pt_BR.md">Portuguese (Brazil)</a></li> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/casts/free-podcasts-screencasts-pt_PT.md">Portuguese (Portugal)</a></li> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/casts/free-podcasts-screencasts-ru.md">Russian / Русский язык</a></li> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/casts/free-podcasts-screencasts-si.md">Sinhala / සිංහල</a></li> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/casts/free-podcasts-screencasts-es.md">Spanish / español / castellano</a></li> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/casts/free-podcasts-screencasts-sv.md">Swedish / Svenska</a></li> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/casts/free-podcasts-screencasts-tr.md">Turkish / Türkçe</a></li> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/casts/free-podcasts-screencasts-uk.md">Ukrainian / Українська</a></li> 
+</ul> 
+<h3>Programming Playgrounds</h3> 
+<p>Write, compile, and run your code within a browser. Try it out!</p> 
+<ul> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/more/free-programming-playgrounds-zh.md">Chinese / 中文</a></li> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/more/free-programming-playgrounds.md">English</a></li> 
+ <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/more/free-programming-playgrounds-de.md">German / Deutsch</a></li> 
+</ul> 
+<h2>Translations</h2> 
+<p>Volunteers have translated many of our Contributing, How-to, and Code of Conduct documents into languages covered by our lists.</p> 
+<ul> 
+ <li>English 
+  <ul> 
+   <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/docs/CODE_OF_CONDUCT.md">Code of Conduct</a></li> 
+   <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/docs/CONTRIBUTING.md">Contributing</a></li> 
+   <li><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/docs/HOWTO.md">How-to</a></li> 
+  </ul> </li> 
+ <li>... <em><a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/docs/README.md#translations">More languages</a></em> ...</li> 
+</ul> 
+<p>You might notice that there are <a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/docs/README.md#translations">some missing translations here</a> - perhaps you would like to help out by <a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/docs/CONTRIBUTING.md#help-out-by-contributing-a-translation">contributing a translation</a>?</p> 
+<h2>License</h2> 
+<p>Each file included in this repository is licensed under the <a href="https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/LICENSE">CC BY License</a>.</p>
+]]></content:encoded>
+
+
+</item>
 
 <item>
 <title>signalapp/libsignal</title>
