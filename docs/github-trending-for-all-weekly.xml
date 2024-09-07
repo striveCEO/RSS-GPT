@@ -5,6 +5,1399 @@
 <link>http://mshibanami.github.io/GitHubTrendingRSS</link>
 
 <item>
+<title>alan2207/bulletproof-react</title>
+<link>https://github.com/alan2207/bulletproof-react</link>
+<guid>https://github.com/alan2207/bulletproof-react</guid>
+<content:encoded><![CDATA[
+<div> 关键词：生产级、React、架构、安全性、性能
+
+总结：
+
+本文介绍了一种构建生产级React应用的简单、可扩展且强大的架构。其核心目标是在遵循一系列基本原则的前提下，提供一个易于上手、易于理解和维护的项目结构。这种架构强调使用最适合任务的工具，确保代码边界清晰，团队成员在执行流程上保持一致性，并且重视安全、性能和可扩展性。
+
+1. **易用性**：设计简洁，便于开发者快速启动并理解项目。
+2. **工具选择**：基于当前生态系统中的最佳实践和工具，确保功能覆盖全面。
+3. **代码组织**：通过合理的代码划分和边界设定，实现模块化，提高代码复用性和可维护性。
+4. **团队协作**：确保团队成员在开发过程中遵循统一的标准和流程，提高协作效率。
+5. **关注关键特性**：着重于安全性、性能优化和可扩展性，以适应不同规模的项目需求。
+
+本文鼓励开发者根据自身项目需求灵活调整技术栈，但应始终围绕上述原则进行决策，以构建出高质量的React应用。 <div>
+<p>🛡️ ⚛️ A simple, scalable, and powerful architecture for building production ready React applications.</p><hr /><h1>Bulletproof React 🛡️ ⚛️</h1> 
+<p><a href="https://github.com/alan2207/bulletproof-react/raw/master/LICENSE"><img alt="MIT License" src="https://img.shields.io/github/license/alan2207/bulletproof-react" /></a> <a href="https://github.com/alan2207/bulletproof-react/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/alan2207/bulletproof-react/actions/workflows/ci.yml/badge.svg?sanitize=true" /></a></p> 
+<p>A simple, scalable, and powerful architecture for building production ready React applications.</p> 
+<h2>Introduction</h2> 
+<p>React is an excellent tool for building front-end applications. It has a diverse ecosystem with hundreds of great libraries for literally anything you might need. However, being forced to make so many choices can be overwhelming. It is also very flexible, you can write React applications in any way you like, but that flexibility comes with a cost. Since there is no pre-defined architecture that developers can follow, it often leads to a messy, inconsistent, and over-complicated codebase.</p> 
+<p>This repo attempts to present a way of creating React applications using some of the best tools in the ecosystem with a good project structure that scales very well. Based on my experience working with a lot of different codebases, this architecture turns out to be the most effective.</p> 
+<p>The goal here is to serve as a collection of resources and best practices when developing React applications. It is supposed to showcase solving most of the real-world problems of an application in a practical way and help developers write better applications.</p> 
+<p>Feel free to explore the sample app codebase to get the most value out of the repo.</p> 
+<h2>What makes a React application "bulletproof"?</h2> 
+<p>This repo doesn't aim to be a silver bullet for all React applications as there are many different use cases, but it tries to provide a solid foundation for building applications based on the following principles:</p> 
+<ul> 
+ <li>Easy to get started with</li> 
+ <li>Simple to understand and maintain</li> 
+ <li>Uses the right tools for the job</li> 
+ <li>Clean boundaries between different parts of the application</li> 
+ <li>Everyone on the team is on the same page when it comes to how things are done</li> 
+ <li>Secure</li> 
+ <li>Performant</li> 
+ <li>Scalable in terms of codebase and team size</li> 
+ <li>Issues detectable as early as possible</li> 
+</ul> 
+<h4>Disclaimer:</h4> 
+<p>This is not supposed to be a template, boilerplate or a framework. It is an opinionated guide that shows how to do some things in a certain way. You are not forced to do everything exactly as it is shown here, decide what works best for you and your team and stay consistent with your style.</p> 
+<p>To get most out of it, do not get limited by the technologies used in this sample app, but rather focus on the principles and the concepts that are being presented here. The tools and libraries used here are just a suggestion, you can always replace them with something that fits your needs better. Sometimes, your project might require a slightly different approach, and that's totally fine.</p> 
+<h2>Table Of Contents:</h2> 
+<ul> 
+ <li><a href="https://raw.githubusercontent.com/alan2207/bulletproof-react/master/docs/application-overview.md">💻 Application Overview</a></li> 
+ <li><a href="https://raw.githubusercontent.com/alan2207/bulletproof-react/master/docs/project-standards.md">⚙️ Project Standards</a></li> 
+ <li><a href="https://raw.githubusercontent.com/alan2207/bulletproof-react/master/docs/project-structure.md">🗄️ Project Structure</a></li> 
+ <li><a href="https://raw.githubusercontent.com/alan2207/bulletproof-react/master/docs/components-and-styling.md">🧱 Components And Styling</a></li> 
+ <li><a href="https://raw.githubusercontent.com/alan2207/bulletproof-react/master/docs/api-layer.md">📡 API Layer</a></li> 
+ <li><a href="https://raw.githubusercontent.com/alan2207/bulletproof-react/master/docs/state-management.md">🗃️ State Management</a></li> 
+ <li><a href="https://raw.githubusercontent.com/alan2207/bulletproof-react/master/docs/testing.md">🧪 Testing</a></li> 
+ <li><a href="https://raw.githubusercontent.com/alan2207/bulletproof-react/master/docs/error-handling.md">⚠️ Error Handling</a></li> 
+ <li><a href="https://raw.githubusercontent.com/alan2207/bulletproof-react/master/docs/security.md">🔐 Security</a></li> 
+ <li><a href="https://raw.githubusercontent.com/alan2207/bulletproof-react/master/docs/performance.md">🚄 Performance</a></li> 
+ <li><a href="https://raw.githubusercontent.com/alan2207/bulletproof-react/master/docs/deployment.md">🌐 Deployment</a></li> 
+ <li><a href="https://raw.githubusercontent.com/alan2207/bulletproof-react/master/docs/additional-resources.md">📚 Additional Resources</a></li> 
+</ul> 
+<h2>Contributing</h2> 
+<p>Contributions are always welcome! If you have any ideas, suggestions, fixes, feel free to contribute. You can do that by going through the following steps:</p> 
+<ol> 
+ <li>Clone this repo</li> 
+ <li>Create a branch: <code>git checkout -b your-feature</code></li> 
+ <li>Execute the <code>yarn prepare</code> script.</li> 
+ <li>Make some changes</li> 
+ <li>Test your changes</li> 
+ <li>Push your branch and open a Pull Request</li> 
+</ol> 
+<h2>License</h2> 
+<p><a href="https://raw.githubusercontent.com/alan2207/bulletproof-react/master/LICENSE">MIT</a></p>
+]]></content:encoded>
+
+
+</item>
+<item>
+<title>ChrisTitusTech/linutil</title>
+<link>https://github.com/ChrisTitusTech/linutil</link>
+<guid>https://github.com/ChrisTitusTech/linutil</guid>
+<content:encoded><![CDATA[
+<div> 关键词：Chris Titus Tech、Linutil、Rust、Distro-agnostic、Toolbox
+
+总结:
+
+Chris Titus Tech的Linutil是一个跨发行版的工具箱，旨在简化Linux日常任务。它由活跃开发的Rust语言编写，确保了高性能和可靠性。用户可以通过选择不同的分支并在终端中运行特定命令来开始使用Linutil。
+
+对于稳定版本，推荐使用curl命令获取脚本并执行：
+```bash
+curl -fsSL https://christitus.com/linux | sh
+```
+
+对于开发者版本，可以使用以下命令：
+```bash
+curl -fsSL https://christitus.com/linuxdev | sh
+```
+
+如果用户觉得Linutil有用，可以给予支持，例如通过给项目打星标。为了更好地了解如何使用Linutil，用户可以访问其官方文档。
+
+项目鼓励社区成员贡献，但在开始前需要阅读贡献指南，以确保贡献的有效性和效率。
+
+最后，感谢所有为Linutil发展做出贡献的人们。他们的努力使得这个工具能够不断改进，服务于更多用户。
+
+Linutil是由一位开发者使用Rust语言构建的跨发行版Linux工具集，旨在简化日常操作。用户可以选择稳定的或开发者版本进行安装，项目持续接受社区的反馈与贡献。通过给予项目支持和访问官方文档，用户可以更深入地了解如何利用Linutil提高Linux系统的使用体验。 <div>
+<p>Chris Titus Tech's Linux Toolbox - Linutil is a distro-agnostic toolbox designed to simplify everyday Linux tasks.</p><hr /><h1>Chris Titus Tech's Linux Utility</h1> 
+<p><a href="https://github.com/ChrisTitusTech/linutil/releases/latest"><img alt="Version" src="https://img.shields.io/github/v/release/ChrisTitusTech/linutil?color=%230567ff&amp;label=Latest%20Release&amp;style=for-the-badge" /></a> <img alt="GitHub Downloads (specific asset, all releases)" src="https://img.shields.io/github/downloads/ChrisTitusTech/linutil/linutil?label=Total%20Downloads&amp;style=for-the-badge" /></p> 
+<p><img alt="Preview" src="https://raw.githubusercontent.com/ChrisTitusTech/linutil/main/docs/assets/preview.png" /></p> 
+<p><strong>Linutil</strong> is a distro-agnostic toolbox designed to simplify everyday Linux tasks. It helps you set up applications and optimize your system for specific use cases. The utility is actively developed in Rust 🦀, providing performance and reliability.</p> 
+<blockquote> 
+ <p>[!NOTE] Since the project is still in active development, you may encounter some issues. Please consider <a href="https://github.com/ChrisTitusTech/linutil/issues">submitting feedback</a> if you do.</p> 
+</blockquote> 
+<h2>💡 Usage</h2> 
+<p>To get started, pick which branch you would like to use, then run the command in your terminal:</p> 
+<h3>Stable Branch (Recommended)</h3> 
+<pre><code class="language-bash">curl -fsSL https://christitus.com/linux | sh
+</code></pre> 
+<h3>Dev branch</h3> 
+<pre><code class="language-bash">curl -fsSL https://christitus.com/linuxdev | sh
+</code></pre> 
+<h2>💖 Support</h2> 
+<p>If you find Linutil helpful, please consider giving it a ⭐️ to show your support!</p> 
+<h2>🎓 Documentation</h2> 
+<p>For comprehensive information on how to use Linutil, visit the <a href="https://christitustech.github.io/linutil/">Linutil Official Documentation</a>.</p> 
+<h2>🛠 Contributing</h2> 
+<p>We welcome contributions from the community! Before you start, please review our <a href="https://raw.githubusercontent.com/ChrisTitusTech/linutil/main/CONTRIBUTING.md">Contributing Guidelines</a> to understand how to make the most effective and efficient contributions.</p> 
+<h2>🏅 Thanks to All Contributors</h2> 
+<p>Thank you to everyone who has contributed to the development of Linutil. Your efforts are greatly appreciated, and you’re helping make this tool better for everyone!</p> 
+<p><a href="https://github.com/ChrisTitusTech/linutil/graphs/contributors"><img alt="Contributors" src="https://contrib.rocks/image?repo=ChrisTitusTech/linutil" /></a></p> 
+<h2>📜 Credits</h2> 
+<p>Linutil’s Rust shell was developed by <a href="https://github.com/JustLinuxUser">@JustLinuxUser</a>.</p>
+]]></content:encoded>
+
+
+</item>
+<item>
+<title>grafana/mimir</title>
+<link>https://github.com/grafana/mimir</link>
+<guid>https://github.com/grafana/mimir</guid>
+<content:encoded><![CDATA[
+<div> 关键词：Grafana Mimir、Prometheus、长时存储、大规模可扩展性、多租户支持
+
+总结:
+Grafana Mimir 是一个针对 Prometheus 提供的开源软件项目，它为 Prometheus 提供了水平可扩展、高可用、多租户和长期存储解决方案。其核心优势包括：
+1. **易安装与维护**：Grafana Mimir 提供详细的文档、教程和部署工具，使其快速上手。使用其单体模式，只需一个二进制文件即可启动，无需额外依赖。预装的监控面板、警报和运行指南简化了系统的健康监控。
+2. **大规模扩展能力**：Grafana Mimir 的分布式架构允许在多台机器上水平扩展，处理比单个 Prometheus 实例多得多的时间序列数据。内部测试显示它能够处理高达1亿条活跃时间序列。
+3. **全局指标视图**：通过聚合来自多个 Prometheus 实例的数据，Grafana Mimir 提供了系统级的指标视图。其查询引擎高度并行化执行查询，即使是最复杂的查询也能以惊人的速度完成。
+4. **经济实惠的持久存储**：利用对象存储进行长期数据存储，Grafana Mimir 能够利用这种通用、成本效益高、耐用性高的技术。它兼容多种对象存储实现，包括AWS S3、Google Cloud Storage、Azure Blob Storage、OpenStack Swift以及任何S3兼容的对象存储。
+5. **高可用性**：Grafana Mimir 通过复制入站指标来防止数据丢失，即使在机器故障的情况下也能确保数据安全。其分布式架构还允许零中断地重启、升级或降级系统，不影响指标收集或查询。
+6. **多租户支持**：Grafana Mimir 的多租户架构允许隔离不同团队或业务部门的数据和查询，使得这些组能够共享同一集群。高级限制和服务质量控制确保容量公平分配给租户。
+
+通过上述特性，Grafana Mimir 成为了一种强大的工具，用于管理和分析大规模时间序列数据，同时提供了高可用性和多租户功能，适用于各种规模的生产环境。 <div>
+<p>Grafana Mimir provides horizontally scalable, highly available, multi-tenant, long-term storage for Prometheus.</p><hr /><h1>Grafana Mimir</h1> 
+<p align="center"><img alt="Grafana Mimir logo" src="https://raw.githubusercontent.com/grafana/mimir/main/images/logo.png" width="400" /></p> 
+<p>Grafana Mimir is an open source software project that provides a scalable long-term storage for <a href="https://prometheus.io">Prometheus</a>. Some of the core strengths of Grafana Mimir include:</p> 
+<ul> 
+ <li><strong>Easy to install and maintain:</strong> Grafana Mimir’s extensive documentation, tutorials, and deployment tooling make it quick to get started. Using its monolithic mode, you can get Grafana Mimir up and running with just one binary and no additional dependencies. Once deployed, the best-practice dashboards, alerts, and runbooks packaged with Grafana Mimir make it easy to monitor the health of the system.</li> 
+ <li><strong>Massive scalability:</strong> You can run Grafana Mimir's horizontally-scalable architecture across multiple machines, resulting in the ability to process orders of magnitude more time series than a single Prometheus instance. Internal testing shows that Grafana Mimir handles up to 1 billion active time series.</li> 
+ <li><strong>Global view of metrics:</strong> Grafana Mimir enables you to run queries that aggregate series from multiple Prometheus instances, giving you a global view of your systems. Its query engine extensively parallelizes query execution, so that even the highest-cardinality queries complete with blazing speed.</li> 
+ <li><strong>Cheap, durable metric storage:</strong> Grafana Mimir uses object storage for long-term data storage, allowing it to take advantage of this ubiquitous, cost-effective, high-durability technology. It is compatible with multiple object store implementations, including AWS S3, Google Cloud Storage, Azure Blob Storage, OpenStack Swift, as well as any S3-compatible object storage.</li> 
+ <li><strong>High availability:</strong> Grafana Mimir replicates incoming metrics, ensuring that no data is lost in the event of machine failure. Its horizontally scalable architecture also means that it can be restarted, upgraded, or downgraded with zero downtime, which means no interruptions to metrics ingestion or querying.</li> 
+ <li><strong>Natively multi-tenant:</strong> Grafana Mimir’s multi-tenant architecture enables you to isolate data and queries from independent teams or business units, making it possible for these groups to share the same cluster. Advanced limits and quality-of-service controls ensure that capacity is shared fairly among tenants.</li> 
+</ul> 
+<h2>Migrating to Grafana Mimir</h2> 
+<p>If you're migrating to Grafana Mimir, refer to the following documents:</p> 
+<ul> 
+ <li><a href="https://grafana.com/docs/mimir/latest/set-up/migrate/migrate-from-thanos-or-prometheus/">Migrating from Thanos or Prometheus to Grafana Mimir</a>.</li> 
+ <li><a href="https://grafana.com/docs/mimir/latest/set-up/migrate/migrate-from-cortex/">Migrating from Cortex to Grafana Mimir</a></li> 
+</ul> 
+<h2>Deploying Grafana Mimir</h2> 
+<p>For information about how to deploy Grafana Mimir, refer to <a href="https://grafana.com/docs/mimir/latest/operators-guide/deploy-grafana-mimir/">Deploy Grafana Mimir</a>.</p> 
+<h2>Getting started</h2> 
+<p>If you’re new to Grafana Mimir, read the <a href="https://grafana.com/docs/mimir/latest/get-started/">Get started guide</a>.</p> 
+<p>Before deploying Grafana Mimir in a production environment, read:</p> 
+<ol> 
+ <li><a href="https://grafana.com/docs/mimir/latest/operators-guide/architecture/">An overview of Grafana Mimir’s architecture</a></li> 
+ <li><a href="https://grafana.com/docs/mimir/latest/operators-guide/configure/">Configure Grafana Mimir</a></li> 
+ <li><a href="https://grafana.com/docs/mimir/latest/operators-guide/run-production-environment/">Run Grafana Mimir in production</a></li> 
+</ol> 
+<h2>Documentation</h2> 
+<p>Refer to the following links to access Grafana Mimir documentation:</p> 
+<ul> 
+ <li><a href="https://grafana.com/docs/mimir/latest/">Latest release</a></li> 
+ <li><a href="https://grafana.com/docs/mimir/next/">Upcoming release</a>, at the tip of the <code>main</code> branch</li> 
+</ul> 
+<h2>Contributing</h2> 
+<p>To contribute to Grafana Mimir, refer to <a href="https://github.com/grafana/mimir/tree/main/docs/internal/contributing">Contributing to Grafana Mimir</a>.</p> 
+<h2>Join the Grafana Mimir discussion</h2> 
+<p>If you have any questions or feedback regarding Grafana Mimir, join the <a href="https://github.com/grafana/mimir/discussions">Grafana Mimir Discussion</a>. Alternatively, consider joining the monthly <a href="https://docs.google.com/document/d/1E4jJcGicvLTyMEY6cUFFZUg_I8ytrBuW8r5yt1LyMv4">Grafana Mimir Community Call</a>.</p> 
+<p>Your feedback is always welcome, and you can also share it via the <a href="https://slack.grafana.com/"><code>#mimir</code> Slack channel</a>.</p> 
+<h2>License</h2> 
+<p>Grafana Mimir is distributed under <a href="https://raw.githubusercontent.com/grafana/mimir/main/LICENSE">AGPL-3.0-only</a>.</p>
+]]></content:encoded>
+
+
+</item>
+<item>
+<title>ruanyf/weekly</title>
+<link>https://github.com/ruanyf/weekly</link>
+<guid>https://github.com/ruanyf/weekly</guid>
+<content:encoded><![CDATA[
+<div> 关键词: 科技爱好者周刊、每周五发布、内容分享、投稿邀请、免费程序员招聘帖
+
+总结:
+
+科技爱好者周刊是一份定期于每周五发布的科技内容汇总刊物。它旨在记录并分享一周内值得关注的科技新闻、创新软件、资源等。这份刊物鼓励读者投稿或自荐文章、软件或资源，以丰富其内容。同时，还提供了一个免费的程序员招聘平台，帮助程序员找到工作或实习机会。
+
+这份周刊通过多种方式供用户进行内容搜索，包括GitHub网页搜索、特定搜索引擎和本地仓库搜索。用户可以根据需要回顾往期内容，从第288期到2024年九月的第316期，涵盖了一年的科技动态。
+
+通过订阅和参与，科技爱好者不仅能够获取最新的科技资讯，还能成为内容贡献者，与社区共享知识和经验。免费的程序员招聘帖为用户提供了一个直接寻找就业机会的渠道，强化了社区的实用性和互动性。 <div>
+<p>科技爱好者周刊，每周五发布</p><hr /><h1>科技爱好者周刊</h1> 
+<p>记录每周值得分享的科技内容，周五发布。</p> 
+<p>欢迎投稿，推荐或自荐文章/软件/资源，请<a href="https://github.com/ruanyf/weekly/issues">提交 issue</a> 。</p> 
+<blockquote> 
+ <p>P.S. 讨论区的<a href="https://github.com/ruanyf/weekly/issues/5090">《谁在招人》</a>，是一个免费的程序员招聘帖，提供大量就业信息，欢迎访问或发布工作/实习岗位。</p> 
+</blockquote> 
+<h2>如何搜索</h2> 
+<p>周刊已经沉淀了大量内容，可以使用下面的几种方法进行搜索。</p> 
+<p>1、使用 GitHub 自带的网页搜索。</p> 
+<p>2、使用 <a href="https://sourcegraph.com/github.com/ruanyf/weekly">Sourcegraph.com</a> 进行搜索。</p> 
+<p>3、将这个仓库克隆到本地，然后在仓库目录使用下面的命令。</p> 
+<pre><code class="language-bash">$ grep -nri [搜索词] docs | cat --number
+</code></pre> 
+<p>比如，搜索 CSS 相关内容。</p> 
+<pre><code class="language-bash">$ grep -nri css docs | cat --number
+</code></pre> 
+<h2>2024</h2> 
+<p><strong>九月</strong></p> 
+<ul> 
+ <li>第 316 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-316.md">你一生的故事</a></li> 
+</ul> 
+<p><strong>八月</strong></p> 
+<ul> 
+ <li>第 315 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-315.md">一份谷歌离职报告</a></li> 
+ <li>第 314 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-314.md">《黑神话：悟空》可以产业化吗？</a></li> 
+ <li>第 313 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-313.md">如果新加坡没有空调</a></li> 
+ <li>第 312 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-312.md">从英特尔看“美国制造”</a></li> 
+ <li>第 311 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-311.md">低利率与长期项目</a></li> 
+</ul> 
+<p><strong>七月</strong></p> 
+<ul> 
+ <li>第 310 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-310.md">内容农场的 AI 赚钱术</a></li> 
+ <li>第 309 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-309.md">无人驾驶出租车的双面刃</a></li> 
+ <li>第 308 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-308.md">工作找不到，博士能读吗？</a></li> 
+ <li>第 307 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-307.md">不要看重 Product Hunt</a></li> 
+</ul> 
+<p><strong>六月</strong></p> 
+<ul> 
+ <li>第 306 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-306.md">信息就像糖一样上瘾</a></li> 
+ <li>第 305 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-305.md">随机数，这是一个问题</a></li> 
+ <li>第 304 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-304.md">最受欢迎的颜色</a></li> 
+ <li>第 303 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-303.md">技术封建主义</a></li> 
+</ul> 
+<p><strong>五月</strong></p> 
+<ul> 
+ <li>第 302 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-302.md">创业虽然好，不敢推荐了</a></li> 
+ <li>第 301 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-301.md">OpenAI 的图书馆工位</a></li> 
+ <li>第 300 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-300.md">三十年，解决人生三大问题</a></li> 
+ <li>第 299 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-299.md">AI 的关键是语料</a></li> 
+</ul> 
+<p><strong>四月</strong></p> 
+<ul> 
+ <li>第 298 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-298.md">轮到硬件工程师吃香了</a></li> 
+ <li>第 297 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-297.md">饮水鸟玩具</a></li> 
+ <li>第 296 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-296.md">xz 后门的作者 Jia Tan 是谁？</a></li> 
+</ul> 
+<p><strong>三月</strong></p> 
+<ul> 
+ <li>第 295 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-295.md">巧妙的灯泡钟</a></li> 
+ <li>第 294 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-294.md">崖门海战的感想</a></li> 
+ <li>第 293 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-293.md">一周是一年的2%</a></li> 
+ <li>第 292 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-292.md">所有代码都是技术债</a></li> 
+ <li>第 291 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-291.md">AI 没有护城河</a></li> 
+</ul> 
+<p><strong>二月</strong></p> 
+<ul> 
+ <li>第 290 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-290.md">苹果头盔的最大问题</a></li> 
+ <li>第 289 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-289.md">宽容从何而来</a></li> 
+</ul> 
+<p><strong>一月</strong></p> 
+<ul> 
+ <li>第 288 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-288.md">技术写作的首要诀窍</a></li> 
+ <li>第 287 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-287.md">禄丰恐龙谷记行</a></li> 
+ <li>第 286 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-286.md">蓝色指示灯的解决方案</a></li> 
+ <li>第 285 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-285.md">为什么 PPT 不如备忘录</a></li> 
+</ul> 
+<h2>2023</h2> 
+<p><strong>十二月</strong></p> 
+<ul> 
+ <li>第 284 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-284.md">YouTube 有多少个视频？</a></li> 
+ <li>第 283 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-283.md">[年终感想] 没有目的地，向前走</a></li> 
+ <li>第 282 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-282.md">电动皮卡 Cybertruck 的 48V 供电</a></li> 
+ <li>第 281 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-281.md">新基建的政策选择</a></li> 
+ <li>第 280 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-280.md">机器点餐与宅文化</a></li> 
+</ul> 
+<p><strong>十一月</strong></p> 
+<ul> 
+ <li>第 279 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-279.md">网络社区的悲剧</a></li> 
+ <li>第 278 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-278.md">棘手的 AI 版权</a></li> 
+ <li>第 277 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-277.md">工作台副屏的最佳选择</a></li> 
+ <li>第 276 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-276.md">内容行业的衰落</a></li> 
+</ul> 
+<p><strong>十月</strong></p> 
+<ul> 
+ <li>第 275 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-275.md">彼得·蒂尔的实验</a></li> 
+ <li>第 274 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-274.md">加密通信的最后一块拼图</a></li> 
+ <li>第 273 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-273.md">任正非的三篇最新谈话</a></li> 
+</ul> 
+<p><strong>九月</strong></p> 
+<ul> 
+ <li>第 272 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-272.md">Unity 的安装费，游戏业的缩影</a></li> 
+ <li>第 271 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-271.md">非线性的世界，线性的你</a></li> 
+ <li>第 270 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-270.md">“精益开发”的精益是什么？</a></li> 
+ <li>第 269 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-269.md">为什么英雄不使用炸药</a></li> 
+</ul> 
+<p><strong>八月</strong></p> 
+<ul> 
+ <li>第 268 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-268.md">生产力是形容机器，不是形容人</a></li> 
+ <li>第 267 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-267.md">5G 的春天要来了</a></li> 
+ <li>第 266 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-266.md">自己做双语 EPUB 电子书</a></li> 
+ <li>第 265 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-265.md">WiFi 的后面是 LiFi</a></li> 
+</ul> 
+<p><strong>七月</strong></p> 
+<ul> 
+ <li>第 264 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-264.md">Elasticsearch 的启示</a></li> 
+ <li>第 263 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-263.md">开源软件如何赚钱？</a></li> 
+ <li>第 262 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-262.md">告别密码</a></li> 
+ <li>第 261 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-261.md">黑客马拉松的正确方式</a></li> 
+</ul> 
+<p><strong>六月</strong></p> 
+<ul> 
+ <li>第 260 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-260.md">你的旅程不会停在 Day 1</a></li> 
+ <li>第 259 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-259.md">如何免费使用 ChatGPT</a></li> 
+ <li>第 258 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-258.md">卡马克的猫</a></li> 
+ <li>第 257 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-257.md">黄仁勋的 Nvidia 故事</a></li> 
+</ul> 
+<p><strong>五月</strong></p> 
+<ul> 
+ <li>第 256 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-256.md">最酷的乐高作品</a></li> 
+ <li>第 255 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-255.md">对待 AI 的正确态度</a></li> 
+ <li>第 254 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-254.md">人生是一个长板问题</a></li> 
+ <li>第 253 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-253.md">训练材料用完之日</a></li> 
+</ul> 
+<p><strong>四月</strong></p> 
+<ul> 
+ <li>第 252 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-252.md">互联网创业变难了</a></li> 
+ <li>第 251 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-251.md">国产单板机值得推荐</a></li> 
+ <li>第 250 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-250.md">新技术的最大风险</a></li> 
+ <li>第 249 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-249.md">最成功的软件企业家</a></li> 
+</ul> 
+<p><strong>三月</strong></p> 
+<ul> 
+ <li>第 248 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-248.md">不要夸大 ChatGPT</a></li> 
+ <li>第 247 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-247.md">扎克伯克的裁员信</a></li> 
+ <li>第 246 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-246.md">永不丢失的网络身份</a></li> 
+ <li>第 245 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-245.md">摩天大楼是反人类的</a></li> 
+ <li>第 244 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-244.md">大数据已死</a></li> 
+</ul> 
+<p><strong>二月</strong></p> 
+<ul> 
+ <li>第 243 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-243.md">与孔子 AI 聊天</a></li> 
+ <li>第 242 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-242.md">一次尴尬的服务器被黑</a></li> 
+ <li>第 241 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-241.md">中国的增长动力在内陆</a></li> 
+ <li>第 240 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-240.md">教育年限可以缩短吗？</a></li> 
+</ul> 
+<p><strong>一月</strong></p> 
+<ul> 
+ <li>第 239 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-239.md">未来两种人会增加</a></li> 
+ <li>第 238 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-238.md">停止寻找的最佳时间</a></li> 
+</ul> 
+<h2>2022</h2> 
+<p><strong>十二月</strong></p> 
+<ul> 
+ <li>第 237 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-237.md">真实方位是如何暴露的？</a></li> 
+ <li>第 236 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-236.md">中国的阳光地带</a></li> 
+ <li>第 235 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-235.md">青年失业率与选择创业</a></li> 
+ <li>第 234 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-234.md">AI 聊天有多强</a></li> 
+ <li>第 233 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-233.md">生活就像一个鱼缸</a></li> 
+</ul> 
+<p><strong>十一月</strong></p> 
+<ul> 
+ <li>第 232 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-232.md">好用的平面设计软件</a></li> 
+ <li>第 231 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-231.md">互联网公司需要多少员工？</a></li> 
+ <li>第 230 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-230.md">电子产品的用电量</a></li> 
+ <li>第 229 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-229.md">手机充电问题的解决</a></li> 
+</ul> 
+<p><strong>十月</strong></p> 
+<ul> 
+ <li>第 228 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-228.md">人类和人生的意义</a></li> 
+ <li>第 227 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-227.md">脸书的公司入职教育</a></li> 
+ <li>第 226 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-226.md">谷歌出了什么问题？</a></li> 
+</ul> 
+<p><strong>九月</strong></p> 
+<ul> 
+ <li>第 225 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-225.md">游戏 NPC 也是一种职业</a></li> 
+ <li>第 224 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-224.md">Figma 为什么赢了 Sketch</a></li> 
+ <li>第 223 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-223.md">程序员需要担心裁员吗？</a></li> 
+ <li>第 222 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-222.md">四十年编程感想</a></li> 
+ <li>第 221 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-221.md">全世界最繁荣的行业</a></li> 
+</ul> 
+<p><strong>八月</strong></p> 
+<ul> 
+ <li>第 220 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-220.md">人工智能的机会在哪里</a></li> 
+ <li>第 219 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-219.md">如何防止帐号被黑</a></li> 
+ <li>第 218 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-218.md">葡萄酒，樱花，全球变暖</a></li> 
+ <li>第 217 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-217.md">沙特的新未来城</a></li> 
+</ul> 
+<p><strong>七月</strong></p> 
+<ul> 
+ <li>第 216 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-216.md">极简主义的胜利</a></li> 
+ <li>第 215 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-215.md">互联网最喜欢的行为模式</a></li> 
+ <li>第 214 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-214.md">你的地图是错的</a></li> 
+ <li>第 213 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-213.md">知识孤岛，知识软件</a></li> 
+ <li>第 212 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-212.md">人生不短</a></li> 
+</ul> 
+<p><strong>六月</strong></p> 
+<ul> 
+ <li>第 211 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-211.md">虚拟商品可以拉动 GDP</a></li> 
+ <li>第 210 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-210.md">为什么软件变得复杂</a></li> 
+ <li>第 209 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-209.md">程序员是怎样的人</a></li> 
+</ul> 
+<p><strong>五月</strong></p> 
+<ul> 
+ <li>第 208 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-208.md">晋升制度的问题</a></li> 
+ <li>第 207 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-207.md">汽车行业的顶峰可能过去了</a></li> 
+ <li>第 206 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-206.md">如何走出失望和怀疑</a></li> 
+ <li>第 205 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-205.md">互联网风口过去了吗？</a></li> 
+</ul> 
+<p><strong>四月</strong></p> 
+<ul> 
+ <li>第 204 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-204.md">如何度过疫情、裁员、还有战争</a></li> 
+ <li>第 203 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-203.md">英国的名校签证，伯克利的计算机教育</a></li> 
+ <li>第 202 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-202.md">三个有启发的学习方法</a></li> 
+ <li>第 201 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-201.md">中国需要成立半导体部</a></li> 
+</ul> 
+<p><strong>三月</strong></p> 
+<ul> 
+ <li>第 200 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-200.md">低期望，多尝试</a></li> 
+ <li>第 199 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-199.md">俄罗斯的 HTTPS 证书问题</a></li> 
+ <li>第 198 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-198.md">美国制造是否可能</a></li> 
+ <li>第 197 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-197.md">如果这个世界有快乐机</a></li> 
+</ul> 
+<p><strong>二月</strong></p> 
+<ul> 
+ <li>第 196 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-196.md">掌机的未来</a></li> 
+ <li>第 195 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-195.md">你做过不在乎结果的项目吗？</a></li> 
+ <li>第 194 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-194.md">悲观者正确，乐观者成功</a></li> 
+</ul> 
+<p><strong>一月</strong></p> 
+<ul> 
+ <li>第 193 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-193.md">前端与后端，谁更难？</a></li> 
+ <li>第 192 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-192.md">最大的机会来自新技术</a></li> 
+ <li>第 191 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-191.md">一个程序员的财务独立之路</a></li> 
+</ul> 
+<h2>2021</h2> 
+<p><strong>十二月</strong></p> 
+<ul> 
+ <li>第 190 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-190.md">产品化思维</a></li> 
+ <li>第 189 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-189.md">下一个内卷的行业</a></li> 
+ <li>第 188 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-188.md">音乐是反社交</a></li> 
+ <li>第 187 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-187.md">元宇宙会成功吗</a></li> 
+ <li>第 186 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-186.md">低纬度，高海拔，气候优势</a></li> 
+</ul> 
+<p><strong>十一月</strong></p> 
+<ul> 
+ <li>第 185 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-185.md">美国宪法拍卖，一个区块链案例</a></li> 
+ <li>第 184 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-184.md">政府的存储需求有多大？</a></li> 
+ <li>第 183 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-183.md">腾讯的员工退休福利</a></li> 
+ <li>第 182 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-182.md">新人优惠的风险</a></li> 
+</ul> 
+<p><strong>十月</strong></p> 
+<ul> 
+ <li>第 181 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-181.md">移动支付应该怎么设计？</a></li> 
+ <li>第 180 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-180.md">你想住在中国哪里？</a></li> 
+ <li>第 179 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-179.md">AR 技术的打开方式</a></li> 
+ <li>第 178 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-178.md">家庭太阳能发电的春天</a></li> 
+</ul> 
+<p><strong>九月</strong></p> 
+<ul> 
+ <li>第 177 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-177.md">iPad 的真正用途</a></li> 
+ <li>第 176 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-176.md">中国法院承认 GPL 吗？</a></li> 
+ <li>第 175 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-175.md">知识广度 vs 知识深度</a></li> 
+ <li>第 174 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-174.md">全能程序员 vs 特长程序员</a></li> 
+</ul> 
+<p><strong>八月</strong></p> 
+<ul> 
+ <li>第 173 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-173.md">网络收音机的设计</a></li> 
+ <li>第 172 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-172.md">我们会死于气候灾难吗？</a></li> 
+ <li>第 171 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-171.md">云服务流量有多贵？</a></li> 
+ <li>第 170 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-170.md">软件订阅制的胜利</a></li> 
+</ul> 
+<p><strong>七月</strong></p> 
+<ul> 
+ <li>第 169 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-169.md">五菱汽车的产品设计</a></li> 
+ <li>第 168 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-168.md">游戏《底特律：变人》</a></li> 
+ <li>第 167 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-167.md">广告拦截器太过分了</a></li> 
+ <li>第 166 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-166.md">视频学习胜过读书吗？</a></li> 
+ <li>第 165 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-165.md">全端 App 的时代</a></li> 
+</ul> 
+<p><strong>六月</strong></p> 
+<ul> 
+ <li>第 164 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-164.md">培训班 vs 大学，求职成功率比较</a></li> 
+ <li>第 163 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-163.md">你的城市有多少张病床？</a></li> 
+ <li>第 162 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-162.md">生活就像《吃豆人》游戏</a></li> 
+ <li>第 161 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-161.md">再见了，学术硕士</a></li> 
+</ul> 
+<p><strong>五月</strong></p> 
+<ul> 
+ <li>第 160 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-160.md">中年码农的危机</a></li> 
+ <li>第 159 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-159.md">游戏开发者的年薪</a></li> 
+ <li>第 158 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-158.md">内容渠道的贬值</a></li> 
+ <li>第 157 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-157.md">KK 给年轻人的建议</a></li> 
+</ul> 
+<p><strong>四月</strong></p> 
+<ul> 
+ <li>第 156 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-156.md">显卡缺货与异业竞争</a></li> 
+ <li>第 155 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-155.md">数字货币是打破美元霸权的武器吗？</a></li> 
+ <li>第 154 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-154.md">1982年的信息社会预言</a></li> 
+ <li>第 153 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-153.md">机器翻译是对译者的侮辱吗？</a></li> 
+ <li>第 152 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-152.md">从北大到技校</a></li> 
+</ul> 
+<p><strong>三月</strong></p> 
+<ul> 
+ <li>第 151 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-151.md">NFT 是什么，听说能赚钱</a></li> 
+ <li>第 150 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-150.md">当音乐还是稀缺的时候</a></li> 
+ <li>第 149 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-149.md">新能源汽车，谁会是赢家？</a></li> 
+ <li>第 148 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-148.md">微增长时代</a></li> 
+</ul> 
+<p><strong>二月</strong></p> 
+<ul> 
+ <li>第 147 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-147.md">寻找你愿意忍受的痛苦</a></li> 
+ <li>第 146 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-146.md">网课应该怎么上？</a></li> 
+ <li>第 145 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-145.md">大家不出门，经济怎么办？</a></li> 
+</ul> 
+<p><strong>一月</strong></p> 
+<ul> 
+ <li>第 144 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-144.md">提高收入的根本途径</a></li> 
+ <li>第 143 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-143.md">世界尽头与冷酷仙境</a></li> 
+ <li>第 142 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-142.md">2020年才是21世纪元年</a></li> 
+ <li>第 141 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-141.md">封闭系统的胜利</a></li> 
+</ul> 
+<h2>2020</h2> 
+<p><strong>十二月</strong></p> 
+<ul> 
+ <li>第 140 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-140.md">印度人的工资是多少？</a></li> 
+ <li>第 139 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-139.md">生物学的可怕进展</a></li> 
+ <li>第 138 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-138.md">失业难以避免，重构人生规划</a></li> 
+ <li>第 137 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-137.md">Slack 被收购，以及企业的技术选型</a></li> 
+ <li>第 136 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-136.md">利特伍德奇迹定律</a></li> 
+</ul> 
+<p><strong>十一月</strong></p> 
+<ul> 
+ <li>第 135 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-135.md">什么行业适合创业？</a></li> 
+ <li>第 134 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-134.md">未来的游戏业比现在大100倍</a></li> 
+ <li>第 133 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-133.md">贵州变瑞士，有没有可能？</a></li> 
+ <li>第 132 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-132.md">快能力和慢能力</a></li> 
+</ul> 
+<p><strong>十月</strong></p> 
+<ul> 
+ <li>第 131 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-131.md">你的头脑是二值逻辑，还是三值逻辑？</a></li> 
+ <li>第 130 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-130.md">低龄化的互联网</a></li> 
+ <li>第 129 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-129.md">创业的凸函数与凹函数</a></li> 
+ <li>第 128 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-128.md">这个社会是否正在变成“赛博朋克”？</a></li> 
+</ul> 
+<p><strong>九月</strong></p> 
+<ul> 
+ <li>第 127 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-127.md">未来人人开发软件，几乎没人编码</a></li> 
+ <li>第 126 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-126.md">内卷化是什么？</a></li> 
+ <li>第 125 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-125.md">数字人民币要取代谁</a></li> 
+ <li>第 124 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-124.md">华为如何考核员工</a></li> 
+ <li>第 123 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-123.md">互联网公司与湘军的军制</a></li> 
+</ul> 
+<p><strong>八月</strong></p> 
+<ul> 
+ <li>第 122 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-122.md">谈谈互联网公司的高估值</a></li> 
+ <li>第 121 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-121.md">为什么人类没有越来越闲？</a></li> 
+ <li>第 120 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-120.md">只有开放才能打败封锁</a></li> 
+ <li>第 119 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-119.md">降雨量和保险博弈</a></li> 
+</ul> 
+<p><strong>七月</strong></p> 
+<ul> 
+ <li>第 118 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-118.md">高考志愿怎么填</a></li> 
+ <li>第 117 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-117.md">我不想让你记住我的脸</a></li> 
+ <li>第 116 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-116.md">世界的未来就是一个火药桶</a></li> 
+ <li>第 115 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-115.md">保护你的 DNA，不要泄漏</a></li> 
+ <li>第 114 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-114.md">U 盘化生存和 Uber-job</a></li> 
+</ul> 
+<p><strong>六月</strong></p> 
+<ul> 
+ <li>第 113 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-113.md">暴力犯罪为什么越来越少？</a></li> 
+ <li>第 112 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-112.md">如何培养领导力</a></li> 
+ <li>第 111 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-111.md">智能电视的误区</a></li> 
+ <li>第 110 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-110.md">如果不能去美国上市</a></li> 
+</ul> 
+<p><strong>五月</strong></p> 
+<ul> 
+ <li>第 109 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-109.md">播客的价值</a></li> 
+ <li>第 108 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-108.md">阵地战与奇袭战</a></li> 
+ <li>第 107 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-107.md">致富与杠杆</a></li> 
+ <li>第 106 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-106.md">数字游民</a></li> 
+</ul> 
+<p><strong>四月</strong></p> 
+<ul> 
+ <li>第 105 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-105.md">线上行业会赢</a></li> 
+ <li>第 104 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-104.md">语音合成的用途</a></li> 
+ <li>第 103 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-103.md">信息的半衰期</a></li> 
+ <li>第 102 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-102.md">工作热情从何而来？</a></li> 
+ <li>第 101 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-101.md">互联网不再稀缺</a></li> 
+</ul> 
+<p><strong>三月</strong></p> 
+<ul> 
+ <li>第 100 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-100.md">零利率时代</a></li> 
+ <li>第 99 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-99.md">疫情导致的研究生扩招</a></li> 
+ <li>第 98 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-98.md">怎样清晰地表达自己的观点？</a></li> 
+ <li>第 97 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-97.md">那些为了考试拼搏的年轻人</a></li> 
+</ul> 
+<p><strong>二月</strong></p> 
+<ul> 
+ <li>第 96 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-96.md">在线教育不等于录制视频</a></li> 
+ <li>第 95 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-95.md">远程办公暴露冗余岗位</a></li> 
+ <li>第 94 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-94.md">既懂得制造，又懂得销售</a></li> 
+ <li>第 93 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-93.md">漫游类的游戏，将会越来越多</a></li> 
+</ul> 
+<p><strong>一月</strong></p> 
+<ul> 
+ <li>第 92 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-92.md">听觉暂留</a></li> 
+ <li>第 91 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-91.md">印度孟买的房价，为什么跟北京一样高？</a></li> 
+ <li>第 90 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-90.md">管人和技术是两种不同的能力</a></li> 
+ <li>第 89 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-89.md">不下雨的地方，不要去卖伞</a></li> 
+</ul> 
+<h2>2019</h2> 
+<p><strong>十二月</strong></p> 
+<ul> 
+ <li>第 88 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-88.md">如果你遇到一条蛇</a></li> 
+ <li>第 87 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-87.md">新人要为团队写文档</a></li> 
+ <li>第 86 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-86.md">千万不要当完美主义者</a></li> 
+ <li>第 85 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-85.md">美国为什么不是乱哄哄？</a></li> 
+</ul> 
+<p><strong>十一月</strong></p> 
+<ul> 
+ <li>第 84 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-84.md">一次性工作招聘，用完你就丢</a></li> 
+ <li>第 83 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-83.md">技术解决不了人类的对立</a></li> 
+ <li>第 82 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-82.md">就业要选发展最快的行业</a></li> 
+ <li>第 81 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-81.md">子辈能大幅超越父辈吗？</a></li> 
+ <li>第 80 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-80.md">企业软件创业，为什么在中国不容易成功？</a></li> 
+</ul> 
+<p><strong>十月</strong></p> 
+<ul> 
+ <li>第 79 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-79.md">我们的生活越来越依赖机器</a></li> 
+ <li>第 78 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-78.md">下一个风口是什么行业？</a></li> 
+ <li>第 77 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-77.md">韩剧《阿尔布拉罕宫的回忆》</a></li> 
+ <li>第 76 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-76.md">任何爱好都能变成职业，只要你会拍视频</a></li> 
+</ul> 
+<p><strong>九月</strong></p> 
+<ul> 
+ <li>第 75 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-75.md">电子取代机械，对就业有何影响？</a></li> 
+ <li>第 74 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-74.md">信息的商业模式为什么不是收费</a></li> 
+ <li>第 73 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-73.md">数据统计的威力</a></li> 
+ <li>第 72 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-72.md">当代人不再有手稿</a></li> 
+</ul> 
+<p><strong>八月</strong></p> 
+<ul> 
+ <li>第 71 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-71.md">名校毕业，不容易创业</a></li> 
+ <li>第 70 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-70.md">世界进入负利率时代，这意味什么</a></li> 
+ <li>第 69 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-69.md">做得好 vs 做得快</a></li> 
+ <li>第 68 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-68.md">关注能力的成长，胜于关注待遇</a></li> 
+ <li>第 67 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-67.md">复杂系统无法维护，侏罗纪公园必定失败</a></li> 
+</ul> 
+<p><strong>七月</strong></p> 
+<ul> 
+ <li>第 66 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-66.md">创业不是零和游戏</a></li> 
+ <li>第 65 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-65.md">周刊开设“谁在招人”的招聘服务</a></li> 
+ <li>第 64 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-64.md">新人如何进入互联网行业？</a></li> 
+ <li>第 63 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-63.md">互联网市场的集中化趋势</a></li> 
+</ul> 
+<p><strong>六月</strong></p> 
+<ul> 
+ <li>第 62 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-62.md">日本电影《编舟记》</a></li> 
+ <li>第 61 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-61.md">转行前端越来越难</a></li> 
+ <li>第 60 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-60.md">一本介绍人类起源的学术自传</a></li> 
+ <li>第 59 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-59.md">互联网时代很难交朋友</a></li> 
+</ul> 
+<p><strong>五月</strong></p> 
+<ul> 
+ <li>第 58 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-58.md">软件推广可以像化妆品那样吗？</a></li> 
+ <li>第 57 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-57.md">分享知识是否违反人性？</a></li> 
+ <li>第 56 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-56.md">文科生为什么不容易就业？</a></li> 
+ <li>第 55 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-55.md">不是反对 996，而要提倡远程办公</a></li> 
+ <li>第 54 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-54.md">可扩展性最好的活动</a></li> 
+</ul> 
+<p><strong>四月</strong></p> 
+<ul> 
+ <li>第 53 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-53.md">DNA 相亲会</a></li> 
+ <li>第 52 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-52.md">人脸识别与课堂监控</a></li> 
+ <li>第 51 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-51.md">为什么过去10年，笔记本硬件发展缓慢？</a></li> 
+ <li>第 50 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-50.md">"时间换收入"是一个陷阱</a></li> 
+</ul> 
+<p><strong>三月</strong></p> 
+<ul> 
+ <li>第 49 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-49.md">学会有所不为</a></li> 
+ <li>第 48 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-48.md">著名程序员 Bill Joy 的人生启示</a></li> 
+ <li>第 47 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-47.md">吃播算不算正式工作？</a></li> 
+ <li>第 46 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-46.md">推荐算法的副作用</a></li> 
+ <li>第 45 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-45.md">阿西莫夫回忆录《人生舞台》</a></li> 
+</ul> 
+<p><strong>二月</strong></p> 
+<ul> 
+ <li>第 44 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-44.md">高校“唯论文”导向的后果</a></li> 
+ <li>第 43 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-43.md">一篇好玩的论文</a></li> 
+ <li>第 42 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-42.md">什么领域，你可以做到出类拔萃？</a></li> 
+</ul> 
+<p><strong>一月</strong></p> 
+<ul> 
+ <li>第 41 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-41.md">如何看待互联网公司裁员？</a></li> 
+ <li>第 40 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-40.md">手动咖啡不属于电子时代</a></li> 
+ <li>第 39 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-39.md">苹果公司的两封公开信</a></li> 
+ <li>第 38 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-38.md">使用越方便，技术实现越复杂</a></li> 
+</ul> 
+<h2>2018</h2> 
+<p><strong>十二月</strong></p> 
+<ul> 
+ <li>第 37 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-37.md">小说家的时代，永远地过去了</a></li> 
+ <li>第 36 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-36.md">程序员将来会不会过剩？</a></li> 
+ <li>第 35 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-35.md">“一人份”的服务越来越多</a></li> 
+ <li>第 34 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-34.md">身份证的最终解决方案：人体植入芯片</a></li> 
+</ul> 
+<p><strong>十一月</strong></p> 
+<ul> 
+ <li>第 33 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-33.md">现场投票不如网络投票</a></li> 
+ <li>第 32 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-32.md">砌砖头的三种角度</a></li> 
+ <li>第 31 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-31.md">程序员的退休信号</a></li> 
+ <li>第 30 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-30.md">为什么谷歌做不好社交软件？</a></li> 
+ <li>第 29 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-29.md">公司的组织架构，决定了软件的复杂性</a></li> 
+</ul> 
+<p><strong>十月</strong></p> 
+<ul> 
+ <li>第 28 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-28.md">软件开发是真正的知识吗？</a></li> 
+ <li>第 27 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-27.md">乔布斯的“热情假设”对不对？</a></li> 
+ <li>第 26 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-26.md">DHH 的新书《工作何必疯狂》</a></li> 
+ <li>第 25 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-25.md">安卓手机十周年的感想</a></li> 
+</ul> 
+<p><strong>九月</strong></p> 
+<ul> 
+ <li>第 24 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-24.md">新人进入软件行业的建议</a></li> 
+ <li>第 23 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-23.md">统计学上的人生最大决定因素</a></li> 
+ <li>第 22 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-22.md">猴子自拍，版权归谁</a></li> 
+ <li>第 21 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-21.md">人生的水平运动和垂直运动</a></li> 
+</ul> 
+<p><strong>八月</strong></p> 
+<ul> 
+ <li>第 20 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-20.md">不读大学的替代方案</a></li> 
+ <li>第 19 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-19.md">电影《头号玩家》描绘未来的虚拟世界</a></li> 
+ <li>第 18 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-18.md">无人机攻击，难以防范</a></li> 
+ <li>第 17 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-17.md">全球变暖，在劫难逃</a></li> 
+ <li>第 16 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-16.md">科技改变死亡的模式</a></li> 
+</ul> 
+<p><strong>七月</strong></p> 
+<ul> 
+ <li>第 15 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-15.md">周刊的内容从何而来？</a></li> 
+ <li>第 14 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-14.md">马斯克的人生才是梦想家的人生</a></li> 
+ <li>第 13 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-13.md">周刊为什么只谈技术？</a></li> 
+ <li>第 12 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-12.md">人口老龄化，养老金不够</a></li> 
+</ul> 
+<p><strong>六月</strong></p> 
+<ul> 
+ <li>第 11 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-11.md">编程语言越发复杂</a></li> 
+ <li>第 10 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-10.md">30岁以后谨慎转行前端</a></li> 
+ <li>第 9 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-9.md">身份证可以植入人体</a></li> 
+ <li>第 8 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-8.md">实验室会生产人吗？</a></li> 
+ <li>第 7 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-7.md">垃圾填埋不是解决办法</a></li> 
+</ul> 
+<p><strong>五月</strong></p> 
+<ul> 
+ <li>第 6 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-6.md">未来还需要苦学外语吗？</a></li> 
+ <li>第 5 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-5.md">互联网时代，做一个好人是划算的</a></li> 
+ <li>第 4 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-4.md">马克思研究的问题</a></li> 
+ <li>第 3 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-3.md">周刊的风格</a></li> 
+</ul> 
+<p><strong>四月</strong></p> 
+<ul> 
+ <li>第 2 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-2.md">为什么写周刊？</a></li> 
+ <li>第 1 期：<a href="https://raw.githubusercontent.com/ruanyf/weekly/master/docs/issue-1.md">创刊号</a></li> 
+</ul>
+]]></content:encoded>
+
+
+</item>
+<item>
+<title>lobehub/lobe-chat</title>
+<link>https://github.com/lobehub/lobe-chat</link>
+<guid>https://github.com/lobehub/lobe-chat</guid>
+<content:encoded><![CDATA[
+<div> 关键词：LobeChat、开源、现代设计、AI聊天框架、一键免费部署
+
+总结：
+
+LobeChat 是一款开源的现代设计 AI 聊天框架，支持多 AI 提供商（包括 OpenAI、Claude、Gemini、Ollama、Azure、DeepSeek 等）、知识库（文件上传、知识管理、RAG）、多模态（视觉/TTS）和插件系统。用户无需安装或注册，即可通过访问官方网站体验其功能。此外，LobeChat 提供了一个社区平台，用户可以在此交流并参与产品的迭代优化。它还支持多种模型服务提供商，以满足不同用户的需求。LobeChat 还具备文件上传与知识管理功能、支持多语言环境、提供主题模式选择、以及 PWA 技术以实现跨平台的无缝体验。用户可以通过 Vercel 或 Docker 快速部署自己的聊天机器人服务。同时，LobeChat 支持自定义域名绑定，确保用户数据的安全性和隐私性。最后，LobeChat 的生态系统包括 UI 组件库、AI 模型品牌 SVG 图标集合、高质量的语音合成与识别组件、以及用于配置 ESLint、Stylelint、Commitlint、Prettier、Remark 和 Semantic Release 的工具集。 <div>
+<p>🤯 Lobe Chat - an open-source, modern-design AI chat framework. Supports Multi AI Providers( OpenAI / Claude 3 / Gemini / Ollama / Azure / DeepSeek), Knowledge Base (file upload / knowledge management / RAG ), Multi-Modals (Vision/TTS) and plugin system. One-click FREE deployment of your private ChatGPT/ Claude application.</p><hr /><div align="center">
+ <a name="readme-top"></a> 
+ <p><a href="https://chat-preview.lobehub.com"><img alt="" src="https://github.com/lobehub/lobe-chat/assets/28616219/9f155dff-4737-429f-9cad-a70a1a860c5f" /></a></p> 
+ <h1>Lobe Chat</h1> 
+ <p>An open-source, modern-design ChatGPT/LLMs UI/Framework.<br /> Supports speech-synthesis, multi-modal, and extensible (<a href="https://lobehub.com/blog/openai-function-call">function call</a>) plugin system.<br /> One-click <strong>FREE</strong> deployment of your private OpenAI ChatGPT/Claude/Gemini/Groq/Ollama chat application.</p> 
+ <p><strong>English</strong> · <a href="https://raw.githubusercontent.com/lobehub/lobe-chat/main/README.zh-CN.md">简体中文</a> · <a href="https://raw.githubusercontent.com/lobehub/lobe-chat/main/README.ja-JP.md">日本語</a> · <a href="https://lobehub.com">Official Site</a> · <a href="https://raw.githubusercontent.com/lobehub/lobe-chat/main/CHANGELOG.md">Changelog</a> · <a href="https://lobehub.com/docs/usage/start">Documents</a> · <a href="https://lobehub.com/blog">Blog</a> · <a href="https://github.com/lobehub/lobe-chat/issues">Feedback</a></p> 
+ <!-- SHIELD GROUP --> 
+ <p><a href="https://github.com/lobehub/lobe-chat/releases"><img alt="" src="https://img.shields.io/github/v/release/lobehub/lobe-chat?color=369eff&amp;labelColor=black&amp;logo=github&amp;style=flat-square" /></a> <a href="https://hub.docker.com/r/lobehub/lobe-chat"><img alt="" src="https://img.shields.io/docker/v/lobehub/lobe-chat?color=369eff&amp;label=docker&amp;labelColor=black&amp;logo=docker&amp;logoColor=white&amp;style=flat-square" /></a> <a href="https://chat-preview.lobehub.com"><img alt="" src="https://img.shields.io/badge/vercel-online-55b467?labelColor=black&amp;logo=vercel&amp;style=flat-square" /></a> <a href="https://discord.gg/AYFPHvv2jT"><img alt="" src="https://img.shields.io/discord/1127171173982154893?color=5865F2&amp;label=discord&amp;labelColor=black&amp;logo=discord&amp;logoColor=white&amp;style=flat-square" /></a><br /> <a href="https://codecov.io/gh/lobehub/lobe-chat"><img alt="" src="https://img.shields.io/codecov/c/github/lobehub/lobe-chat?labelColor=black&amp;style=flat-square&amp;logo=codecov&amp;logoColor=white" /></a> <a href="https://github.com/actions/workflows/lobehub/lobe-chat/test.yml"><img alt="" src="https://img.shields.io/github/actions/workflow/status/lobehub/lobe-chat/test.yml?label=test&amp;labelColor=black&amp;logo=githubactions&amp;logoColor=white&amp;style=flat-square" /></a> <a href="https://github.com/actions/workflows/lobehub/lobe-chat/release.yml"><img alt="" src="https://img.shields.io/github/actions/workflow/status/lobehub/lobe-chat/release.yml?label=release&amp;labelColor=black&amp;logo=githubactions&amp;logoColor=white&amp;style=flat-square" /></a> <a href="https://github.com/lobehub/lobe-chat/releases"><img alt="" src="https://img.shields.io/github/release-date/lobehub/lobe-chat?labelColor=black&amp;style=flat-square" /></a><br /> <a href="https://github.com/lobehub/lobe-chat/graphs/contributors"><img alt="" src="https://img.shields.io/github/contributors/lobehub/lobe-chat?color=c4f042&amp;labelColor=black&amp;style=flat-square" /></a> <a href="https://github.com/lobehub/lobe-chat/network/members"><img alt="" src="https://img.shields.io/github/forks/lobehub/lobe-chat?color=8ae8ff&amp;labelColor=black&amp;style=flat-square" /></a> <a href="https://github.com/lobehub/lobe-chat/network/stargazers"><img alt="" src="https://img.shields.io/github/stars/lobehub/lobe-chat?color=ffcb47&amp;labelColor=black&amp;style=flat-square" /></a> <a href="https://github.com/lobehub/lobe-chat/issues"><img alt="" src="https://img.shields.io/github/issues/lobehub/lobe-chat?color=ff80eb&amp;labelColor=black&amp;style=flat-square" /></a> <a href="https://github.com/lobehub/lobe-chat/raw/main/LICENSE"><img alt="" src="https://img.shields.io/badge/license-apache%202.0-white?labelColor=black&amp;style=flat-square" /></a><br /> <a href="https://opencollective.com/lobehub" title="Become ❤️ LobeHub Sponsor"><img alt="" src="https://img.shields.io/badge/-Sponsor%20LobeHub-f04f88?logo=opencollective&amp;logoColor=white&amp;style=flat-square" /></a></p> 
+ <p><strong>Share LobeChat Repository</strong></p> 
+ <p><a href="https://x.com/intent/tweet?hashtags=chatbot%2CchatGPT%2CopenAI&amp;text=Check%20this%20GitHub%20repository%20out%20%F0%9F%A4%AF%20LobeChat%20-%20An%20open-source%2C%20extensible%20%28Function%20Calling%29%2C%20high-performance%20chatbot%20framework.%20It%20supports%20one-click%20free%20deployment%20of%20your%20private%20ChatGPT%2FLLM%20web%20application.&amp;url=https%3A%2F%2Fgithub.com%2Flobehub%2Flobe-chat"><img alt="" src="https://img.shields.io/badge/-share%20on%20x-black?labelColor=black&amp;logo=x&amp;logoColor=white&amp;style=flat-square" /></a> <a href="https://t.me/share/url%22?text=Check%20this%20GitHub%20repository%20out%20%F0%9F%A4%AF%20LobeChat%20-%20An%20open-source%2C%20extensible%20%28Function%20Calling%29%2C%20high-performance%20chatbot%20framework.%20It%20supports%20one-click%20free%20deployment%20of%20your%20private%20ChatGPT%2FLLM%20web%20application.%20%23chatbot%20%23chatGPT%20%23openAI&amp;url=https%3A%2F%2Fgithub.com%2Flobehub%2Flobe-chat"><img alt="" src="https://img.shields.io/badge/-share%20on%20telegram-black?labelColor=black&amp;logo=telegram&amp;logoColor=white&amp;style=flat-square" /></a> <a href="https://api.whatsapp.com/send?text=Check%20this%20GitHub%20repository%20out%20%F0%9F%A4%AF%20LobeChat%20-%20An%20open-source%2C%20extensible%20%28Function%20Calling%29%2C%20high-performance%20chatbot%20framework.%20It%20supports%20one-click%20free%20deployment%20of%20your%20private%20ChatGPT%2FLLM%20web%20application.%20https%3A%2F%2Fgithub.com%2Flobehub%2Flobe-chat%20%23chatbot%20%23chatGPT%20%23openAI"><img alt="" src="https://img.shields.io/badge/-share%20on%20whatsapp-black?labelColor=black&amp;logo=whatsapp&amp;logoColor=white&amp;style=flat-square" /></a> <a href="https://www.reddit.com/submit?title=Check%20this%20GitHub%20repository%20out%20%F0%9F%A4%AF%20LobeChat%20-%20An%20open-source%2C%20extensible%20%28Function%20Calling%29%2C%20high-performance%20chatbot%20framework.%20It%20supports%20one-click%20free%20deployment%20of%20your%20private%20ChatGPT%2FLLM%20web%20application.%20%23chatbot%20%23chatGPT%20%23openAI&amp;url=https%3A%2F%2Fgithub.com%2Flobehub%2Flobe-chat"><img alt="" src="https://img.shields.io/badge/-share%20on%20reddit-black?labelColor=black&amp;logo=reddit&amp;logoColor=white&amp;style=flat-square" /></a> <a href="http://service.weibo.com/share/share.php?sharesource=weibo&amp;title=Check%20this%20GitHub%20repository%20out%20%F0%9F%A4%AF%20LobeChat%20-%20An%20open-source%2C%20extensible%20%28Function%20Calling%29%2C%20high-performance%20chatbot%20framework.%20It%20supports%20one-click%20free%20deployment%20of%20your%20private%20ChatGPT%2FLLM%20web%20application.%20%23chatbot%20%23chatGPT%20%23openAI&amp;url=https%3A%2F%2Fgithub.com%2Flobehub%2Flobe-chat"><img alt="" src="https://img.shields.io/badge/-share%20on%20weibo-black?labelColor=black&amp;logo=sinaweibo&amp;logoColor=white&amp;style=flat-square" /></a> <a href="https://mastodon.social/share?text=Check%20this%20GitHub%20repository%20out%20%F0%9F%A4%AF%20LobeChat%20-%20An%20open-source,%20extensible%20(Function%20Calling),%20high-performance%20chatbot%20framework.%20It%20supports%20one-click%20free%20deployment%20of%20your%20private%20ChatGPT/LLM%20web%20application.%20https://github.com/lobehub/lobe-chat%20#chatbot%2520%23chatGPT%2520%23openAI"><img alt="" src="https://img.shields.io/badge/-share%20on%20mastodon-black?labelColor=black&amp;logo=mastodon&amp;logoColor=white&amp;style=flat-square" /></a> <a href="https://linkedin.com/feed"><img alt="" src="https://img.shields.io/badge/-share%20on%20linkedin-black?labelColor=black&amp;logo=linkedin&amp;logoColor=white&amp;style=flat-square" /></a></p> 
+ <p><sup>Pioneering the new age of thinking and creating. Built for you, the Super Individual.</sup></p> 
+ <p><a href="https://trendshift.io/repositories/2256"><img alt="" src="https://trendshift.io/api/badge/repositories/2256" /></a></p> 
+ <p><a href="https://chat-preview.lobehub.com"><img alt="" src="https://github.com/lobehub/lobe-chat/assets/17870709/56b95d48-f573-41cd-8b38-387bf88bc4bf" /></a></p> 
+</div> 
+<details> 
+ <kbd>Table of contents</kbd> 
+ <h4>TOC</h4> 
+ <ul> 
+  <li><a href="https://raw.githubusercontent.com/lobehub/lobe-chat/main/#-getting-started--join-our-community">👋🏻 Getting Started &amp; Join Our Community</a></li> 
+  <li><a href="https://raw.githubusercontent.com/lobehub/lobe-chat/main/#-features">✨ Features</a> 
+   <ul> 
+    <li><a href="https://raw.githubusercontent.com/lobehub/lobe-chat/main/#1-file-uploadknowledge-base"><code>1</code> File Upload/Knowledge Base</a></li> 
+    <li><a href="https://raw.githubusercontent.com/lobehub/lobe-chat/main/#2-multi-model-service-provider-support"><code>2</code> Multi-Model Service Provider Support</a></li> 
+    <li><a href="https://raw.githubusercontent.com/lobehub/lobe-chat/main/#3-local-large-language-model-llm-support"><code>3</code> Local Large Language Model (LLM) Support</a></li> 
+    <li><a href="https://raw.githubusercontent.com/lobehub/lobe-chat/main/#4-model-visual-recognition"><code>4</code> Model Visual Recognition</a></li> 
+    <li><a href="https://raw.githubusercontent.com/lobehub/lobe-chat/main/#5-tts--stt-voice-conversation"><code>5</code> TTS &amp; STT Voice Conversation</a></li> 
+    <li><a href="https://raw.githubusercontent.com/lobehub/lobe-chat/main/#6-text-to-image-generation"><code>6</code> Text to Image Generation</a></li> 
+    <li><a href="https://raw.githubusercontent.com/lobehub/lobe-chat/main/#7-plugin-system-function-calling"><code>7</code> Plugin System (Function Calling)</a></li> 
+    <li><a href="https://raw.githubusercontent.com/lobehub/lobe-chat/main/#8-agent-market-gpts"><code>8</code> Agent Market (GPTs)</a></li> 
+    <li><a href="https://raw.githubusercontent.com/lobehub/lobe-chat/main/#9-support-local--remote-database"><code>9</code> Support Local / Remote Database</a></li> 
+    <li><a href="https://raw.githubusercontent.com/lobehub/lobe-chat/main/#10-support-multi-user-management"><code>10</code> Support Multi-User Management</a></li> 
+    <li><a href="https://raw.githubusercontent.com/lobehub/lobe-chat/main/#11-progressive-web-app-pwa"><code>11</code> Progressive Web App (PWA)</a></li> 
+    <li><a href="https://raw.githubusercontent.com/lobehub/lobe-chat/main/#12-mobile-device-adaptation"><code>12</code> Mobile Device Adaptation</a></li> 
+    <li><a href="https://raw.githubusercontent.com/lobehub/lobe-chat/main/#13-custom-themes"><code>13</code> Custom Themes</a></li> 
+    <li><a href="https://raw.githubusercontent.com/lobehub/lobe-chat/main/#-whats-more"><code>*</code> What's more</a></li> 
+   </ul> </li> 
+  <li><a href="https://raw.githubusercontent.com/lobehub/lobe-chat/main/#%EF%B8%8F-performance">⚡️ Performance</a></li> 
+  <li><a href="https://raw.githubusercontent.com/lobehub/lobe-chat/main/#-self-hosting">🛳 Self Hosting</a> 
+   <ul> 
+    <li><a href="https://raw.githubusercontent.com/lobehub/lobe-chat/main/#a-deploying-with-vercel-zeabur-or-sealos"><code>A</code> Deploying with Vercel, Zeabur or Sealos</a></li> 
+    <li><a href="https://raw.githubusercontent.com/lobehub/lobe-chat/main/#b-deploying-with-docker"><code>B</code> Deploying with Docker</a></li> 
+    <li><a href="https://raw.githubusercontent.com/lobehub/lobe-chat/main/#environment-variable">Environment Variable</a></li> 
+   </ul> </li> 
+  <li><a href="https://raw.githubusercontent.com/lobehub/lobe-chat/main/#-ecosystem">📦 Ecosystem</a></li> 
+  <li><a href="https://raw.githubusercontent.com/lobehub/lobe-chat/main/#-plugins">🧩 Plugins</a></li> 
+  <li><a href="https://raw.githubusercontent.com/lobehub/lobe-chat/main/#%EF%B8%8F-local-development">⌨️ Local Development</a></li> 
+  <li><a href="https://raw.githubusercontent.com/lobehub/lobe-chat/main/#-contributing">🤝 Contributing</a></li> 
+  <li><a href="https://raw.githubusercontent.com/lobehub/lobe-chat/main/#%EF%B8%8F-sponsor">❤️ Sponsor</a></li> 
+  <li><a href="https://raw.githubusercontent.com/lobehub/lobe-chat/main/#-more-products">🔗 More Products</a></li> 
+ </ul> 
+ <h4></h4> 
+ <br /> 
+</details> 
+<h2>👋🏻 Getting Started &amp; Join Our Community</h2> 
+<p>We are a group of e/acc design-engineers, hoping to provide modern design components and tools for AIGC. By adopting the Bootstrapping approach, we aim to provide developers and users with a more open, transparent, and user-friendly product ecosystem.</p> 
+<p>Whether for users or professional developers, LobeHub will be your AI Agent playground. Please be aware that LobeChat is currently under active development, and feedback is welcome for any <a href="https://img.shields.io/github/issues/lobehub/lobe-chat.svg?style=flat">issues</a> encountered.</p> 
+<table> 
+ <thead> 
+  <tr> 
+   <th align="left"><a href="https://chat-preview.lobehub.com"><img alt="" src="https://img.shields.io/badge/TRY%20LOBECHAT-ONLINE-55b467?labelColor=black&amp;logo=vercel&amp;style=for-the-badge" /></a></th> 
+   <th align="left">No installation or registration necessary! Visit our website to experience it firsthand.</th> 
+  </tr> 
+ </thead> 
+ <tbody> 
+  <tr> 
+   <td align="left"><a href="https://discord.gg/AYFPHvv2jT"><img alt="" src="https://img.shields.io/discord/1127171173982154893?color=5865F2&amp;label=discord&amp;labelColor=black&amp;logo=discord&amp;logoColor=white&amp;style=for-the-badge" /></a></td> 
+   <td align="left">Join our Discord community! This is where you can connect with developers and other enthusiastic users of LobeHub.</td> 
+  </tr> 
+ </tbody> 
+</table> 
+<blockquote> 
+ <p>[!IMPORTANT]</p> 
+ <p><strong>Star Us</strong>, You will receive all release notifications from GitHub without any delay ~ ⭐️</p> 
+</blockquote> 
+<p><a href="https://github.com/lobehub/lobe-chat/network/stargazers"><img alt="" src="https://github.com/lobehub/lobe-chat/assets/17870709/cb06b748-513f-47c2-8740-d876858d7855" /></a></p> 
+<details> 
+ <kbd>Star History</kbd> 
+  
+  <source media="(prefers-color-scheme: dark)" /> 
+  <img src="https://api.star-history.com/svg?repos=lobehub%2Flobe-chat&amp;type=Date" width="100%" /> 
+  
+</details> 
+<h2>✨ Features</h2> 
+<p><a href="https://lobehub.com/blog/knowledge-base"><img alt="" src="https://github.com/user-attachments/assets/77e58e1c-c82f-4341-b159-f4eeede9967f" /></a></p> 
+<h3><code>1</code> <a href="https://lobehub.com/blog/knowledge-base">File Upload/Knowledge Base</a></h3> 
+<p>LobeChat supports file upload and knowledge base functionality. You can upload various types of files including documents, images, audio, and video, as well as create knowledge bases, making it convenient for users to manage and search for files. Additionally, you can utilize files and knowledge base features during conversations, enabling a richer dialogue experience.</p> 
+<p><a href="https://github.com/user-attachments/assets/faa8cf67-e743-4590-8bf6-ebf6ccc34175">https://github.com/user-attachments/assets/faa8cf67-e743-4590-8bf6-ebf6ccc34175</a></p> 
+<blockquote> 
+ <p>[!TIP]</p> 
+ <p>Learn more on <a href="https://lobehub.com/blog/knowledge-base">📘 LobeChat Knowledge Base Launch — From Now On, Every Step Counts</a></p> 
+</blockquote> 
+<div align="right"> 
+ <p><a href="https://raw.githubusercontent.com/lobehub/lobe-chat/main/#readme-top"><img alt="" src="https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square" /></a></p> 
+</div> 
+<p><a href="https://lobehub.com/docs/usage/features/multi-ai-providers"><img alt="" src="https://github.com/lobehub/lobe-chat/assets/28616219/b164bc54-8ba2-4c1e-b2f2-f4d7f7e7a551" /></a></p> 
+<h3><code>2</code> <a href="https://lobehub.com/docs/usage/features/multi-ai-providers">Multi-Model Service Provider Support</a></h3> 
+<p>In the continuous development of LobeChat, we deeply understand the importance of diversity in model service providers for meeting the needs of the community when providing AI conversation services. Therefore, we have expanded our support to multiple model service providers, rather than being limited to a single one, in order to offer users a more diverse and rich selection of conversations.</p> 
+<p>In this way, LobeChat can more flexibly adapt to the needs of different users, while also providing developers with a wider range of choices.</p> 
+<h4>Supported Model Service Providers</h4> 
+<p>We have implemented support for the following model service providers:</p> 
+<ul> 
+ <li><strong>AWS Bedrock</strong>: Integrated with AWS Bedrock service, supporting models such as <strong>Claude / LLama2</strong>, providing powerful natural language processing capabilities. <a href="https://aws.amazon.com/cn/bedrock">Learn more</a></li> 
+ <li><strong>Anthropic (Claude)</strong>: Accessed Anthropic's <strong>Claude</strong> series models, including Claude 3 and Claude 2, with breakthroughs in multi-modal capabilities and extended context, setting a new industry benchmark. <a href="https://www.anthropic.com/claude">Learn more</a></li> 
+ <li><strong>Google AI (Gemini Pro, Gemini Vision)</strong>: Access to Google's <strong>Gemini</strong> series models, including Gemini and Gemini Pro, to support advanced language understanding and generation. <a href="https://deepmind.google/technologies/gemini/">Learn more</a></li> 
+ <li><strong>Groq</strong>: Accessed Groq's AI models, efficiently processing message sequences and generating responses, capable of multi-turn dialogues and single-interaction tasks. <a href="https://groq.com/">Learn more</a></li> 
+ <li><strong>OpenRouter</strong>: Supports routing of models including <strong>Claude 3</strong>, <strong>Gemma</strong>, <strong>Mistral</strong>, <strong>Llama2</strong> and <strong>Cohere</strong>, with intelligent routing optimization to improve usage efficiency, open and flexible. <a href="https://openrouter.ai/">Learn more</a></li> 
+ <li><strong>01.AI (Yi Model)</strong>: Integrated the 01.AI models, with series of APIs featuring fast inference speed, which not only shortened the processing time, but also maintained excellent model performance. <a href="https://01.ai/">Learn more</a></li> 
+ <li><strong>Together.ai</strong>: Over 100 leading open-source Chat, Language, Image, Code, and Embedding models are available through the Together Inference API. For these models you pay just for what you use. <a href="https://www.together.ai/">Learn more</a></li> 
+ <li><strong>ChatGLM</strong>: Added the <strong>ChatGLM</strong> series models from Zhipuai (GLM-4/GLM-4-vision/GLM-3-turbo), providing users with another efficient conversation model choice. <a href="https://www.zhipuai.cn/">Learn more</a></li> 
+ <li><strong>Moonshot AI (Dark Side of the Moon)</strong>: Integrated with the Moonshot series models, an innovative AI startup from China, aiming to provide deeper conversation understanding. <a href="https://www.moonshot.cn/">Learn more</a></li> 
+ <li><strong>Minimax</strong>: Integrated the Minimax models, including the MoE model <strong>abab6</strong>, offers a broader range of choices. <a href="https://www.minimaxi.com/">Learn more</a></li> 
+ <li><strong>DeepSeek</strong>: Integrated with the DeepSeek series models, an innovative AI startup from China, The product has been designed to provide a model that balances performance with price. <a href="https://www.deepseek.com/">Learn more</a></li> 
+ <li><strong>Qwen</strong>: Integrated the Qwen series models, including the latest <strong>qwen-turbo</strong>, <strong>qwen-plus</strong> and <strong>qwen-max</strong>. <a href="https://help.aliyun.com/zh/dashscope/developer-reference/model-introduction">Lean more</a></li> 
+ <li><strong>Novita AI</strong>: Access <strong>Llama</strong>, <strong>Mistral</strong>, and other leading open-source models at cheapest prices. Engage in uncensored role-play, spark creative discussions, and foster unrestricted innovation. <strong>Pay For What You Use.</strong> <a href="https://novita.ai/llm-api?utm_source=lobechat&amp;utm_medium=ch&amp;utm_campaign=api">Learn more</a></li> 
+</ul> 
+<p>At the same time, we are also planning to support more model service providers, such as Replicate and Perplexity, to further enrich our service provider library. If you would like LobeChat to support your favorite service provider, feel free to join our <a href="https://github.com/lobehub/lobe-chat/discussions/1284">community discussion</a>.</p> 
+<div align="right"> 
+ <p><a href="https://raw.githubusercontent.com/lobehub/lobe-chat/main/#readme-top"><img alt="" src="https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square" /></a></p> 
+</div> 
+<p><a href="https://lobehub.com/docs/usage/features/local-llm"><img alt="" src="https://github.com/lobehub/lobe-chat/assets/28616219/ca9a21bc-ea6c-4c90-bf4a-fa53b4fb2b5c" /></a></p> 
+<h3><code>3</code> <a href="https://lobehub.com/docs/usage/features/local-llm">Local Large Language Model (LLM) Support</a></h3> 
+<p>To meet the specific needs of users, LobeChat also supports the use of local models based on <a href="https://ollama.ai">Ollama</a>, allowing users to flexibly use their own or third-party models.</p> 
+<blockquote> 
+ <p>[!TIP]</p> 
+ <p>Learn more about <a href="https://lobehub.com/docs/usage/providers/ollama">📘 Using Ollama in LobeChat</a> by checking it out.</p> 
+</blockquote> 
+<div align="right"> 
+ <p><a href="https://raw.githubusercontent.com/lobehub/lobe-chat/main/#readme-top"><img alt="" src="https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square" /></a></p> 
+</div> 
+<p><a href="https://lobehub.com/docs/usage/features/vision"><img alt="" src="https://github-production-user-asset-6210df.s3.amazonaws.com/17870709/284072129-382bdf30-e3d6-4411-b5a0-249710b8ba08.png" /></a></p> 
+<h3><code>4</code> <a href="https://lobehub.com/docs/usage/features/vision">Model Visual Recognition</a></h3> 
+<p>LobeChat now supports OpenAI's latest <a href="https://platform.openai.com/docs/guides/vision"><code>gpt-4-vision</code></a> model with visual recognition capabilities, a multimodal intelligence that can perceive visuals. Users can easily upload or drag and drop images into the dialogue box, and the agent will be able to recognize the content of the images and engage in intelligent conversation based on this, creating smarter and more diversified chat scenarios.</p> 
+<p>This feature opens up new interactive methods, allowing communication to transcend text and include a wealth of visual elements. Whether it's sharing images in daily use or interpreting images within specific industries, the agent provides an outstanding conversational experience.</p> 
+<div align="right"> 
+ <p><a href="https://raw.githubusercontent.com/lobehub/lobe-chat/main/#readme-top"><img alt="" src="https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square" /></a></p> 
+</div> 
+<p><a href="https://lobehub.com/docs/usage/features/tts"><img alt="" src="https://github-production-user-asset-6210df.s3.amazonaws.com/17870709/284072124-c9853d8d-f1b5-44a8-a305-45ebc0f6d19a.png" /></a></p> 
+<h3><code>5</code> <a href="https://lobehub.com/docs/usage/features/tts">TTS &amp; STT Voice Conversation</a></h3> 
+<p>LobeChat supports Text-to-Speech (TTS) and Speech-to-Text (STT) technologies, enabling our application to convert text messages into clear voice outputs, allowing users to interact with our conversational agent as if they were talking to a real person. Users can choose from a variety of voices to pair with the agent.</p> 
+<p>Moreover, TTS offers an excellent solution for those who prefer auditory learning or desire to receive information while busy. In LobeChat, we have meticulously selected a range of high-quality voice options (OpenAI Audio, Microsoft Edge Speech) to meet the needs of users from different regions and cultural backgrounds. Users can choose the voice that suits their personal preferences or specific scenarios, resulting in a personalized communication experience.</p> 
+<div align="right"> 
+ <p><a href="https://raw.githubusercontent.com/lobehub/lobe-chat/main/#readme-top"><img alt="" src="https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square" /></a></p> 
+</div> 
+<p><a href="https://lobehub.com/docs/usage/features/text-to-image"><img alt="" src="https://github-production-user-asset-6210df.s3.amazonaws.com/17870709/297746445-0ff762b9-aa08-4337-afb7-12f932b6efbb.png" /></a></p> 
+<h3><code>6</code> <a href="https://lobehub.com/docs/usage/features/text-to-image">Text to Image Generation</a></h3> 
+<p>With support for the latest text-to-image generation technology, LobeChat now allows users to invoke image creation tools directly within conversations with the agent. By leveraging the capabilities of AI tools such as <a href="https://openai.com/dall-e-3"><code>DALL-E 3</code></a>, <a href="https://www.midjourney.com/"><code>MidJourney</code></a>, and <a href="https://pollinations.ai/"><code>Pollinations</code></a>, the agents are now equipped to transform your ideas into images.</p> 
+<p>This enables a more private and immersive creative process, allowing for the seamless integration of visual storytelling into your personal dialogue with the agent.</p> 
+<div align="right"> 
+ <p><a href="https://raw.githubusercontent.com/lobehub/lobe-chat/main/#readme-top"><img alt="" src="https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square" /></a></p> 
+</div> 
+<p><a href="https://lobehub.com/docs/usage/features/plugin-system"><img alt="" src="https://github-production-user-asset-6210df.s3.amazonaws.com/17870709/268670883-33c43a5c-a512-467e-855c-fa299548cce5.png" /></a></p> 
+<h3><code>7</code> <a href="https://lobehub.com/docs/usage/features/plugin-system">Plugin System (Function Calling)</a></h3> 
+<p>The plugin ecosystem of LobeChat is an important extension of its core functionality, greatly enhancing the practicality and flexibility of the LobeChat assistant.</p> 
+<p>
+ <video controls="controls" src="https://github.com/lobehub/lobe-chat/assets/28616219/f29475a3-f346-4196-a435-41a6373ab9e2"></video></p> 
+<p>By utilizing plugins, LobeChat assistants can obtain and process real-time information, such as searching for web information and providing users with instant and relevant news.</p> 
+<p>In addition, these plugins are not limited to news aggregation, but can also extend to other practical functions, such as quickly searching documents, generating images, obtaining data from various platforms like Bilibili, Steam, and interacting with various third-party services.</p> 
+<blockquote> 
+ <p>[!TIP]</p> 
+ <p>Learn more about <a href="https://lobehub.com/docs/usage/plugins/basic">📘 Plugin Usage</a> by checking it out.</p> 
+</blockquote> 
+<!-- PLUGIN LIST --> 
+<table> 
+ <thead> 
+  <tr> 
+   <th>Recent Submits</th> 
+   <th>Description</th> 
+  </tr> 
+ </thead> 
+ <tbody> 
+  <tr> 
+   <td><a href="https://chat-preview.lobehub.com/settings/agent">Tongyi wanxiang Image Generator</a><br /><sup>By <strong>YoungTx</strong> on <strong>2024-08-09</strong></sup></td> 
+   <td>This plugin uses Alibaba's Tongyi Wanxiang model to generate images based on text prompts.<br /><code>image</code> <code>tongyi</code> <code>wanxiang</code></td> 
+  </tr> 
+  <tr> 
+   <td><a href="https://chat-preview.lobehub.com/settings/agent">Shopping tools</a><br /><sup>By <strong>shoppingtools</strong> on <strong>2024-07-19</strong></sup></td> 
+   <td>Search for products on eBay &amp; AliExpress, find eBay events &amp; coupons. Get prompt examples.<br /><code>shopping</code> <code>e-bay</code> <code>ali-express</code> <code>coupons</code></td> 
+  </tr> 
+  <tr> 
+   <td><a href="https://chat-preview.lobehub.com/settings/agent">Savvy Trader AI</a><br /><sup>By <strong>savvytrader</strong> on <strong>2024-06-27</strong></sup></td> 
+   <td>Realtime stock, crypto and other investment data.<br /><code>stock</code> <code>analyze</code></td> 
+  </tr> 
+  <tr> 
+   <td><a href="https://chat-preview.lobehub.com/settings/agent">Social Search</a><br /><sup>By <strong>say-apps</strong> on <strong>2024-06-02</strong></sup></td> 
+   <td>The Social Search provides access to tweets, users, followers, images, media and more.<br /><code>social</code> <code>twitter</code> <code>x</code> <code>search</code></td> 
+  </tr> 
+ </tbody> 
+</table> 
+<blockquote> 
+ <p>📊 Total plugins: <a href="https://github.com/lobehub/lobe-chat-plugins"><kbd><strong>51</strong></kbd></a></p> 
+</blockquote> 
+<!-- PLUGIN LIST --> 
+<div align="right"> 
+ <p><a href="https://raw.githubusercontent.com/lobehub/lobe-chat/main/#readme-top"><img alt="" src="https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square" /></a></p> 
+</div> 
+<p><a href="https://lobehub.com/docs/usage/features/agent-market"><img alt="" src="https://github-production-user-asset-6210df.s3.amazonaws.com/17870709/268670869-f1ffbf66-42b6-42cf-a937-9ce1f8328514.png" /></a></p> 
+<h3><code>8</code> <a href="https://lobehub.com/docs/usage/features/agent-market">Agent Market (GPTs)</a></h3> 
+<p>In LobeChat Agent Marketplace, creators can discover a vibrant and innovative community that brings together a multitude of well-designed agents, which not only play an important role in work scenarios but also offer great convenience in learning processes. Our marketplace is not just a showcase platform but also a collaborative space. Here, everyone can contribute their wisdom and share the agents they have developed.</p> 
+<blockquote> 
+ <p>[!TIP]</p> 
+ <p>By <a href="https://github.com/lobehub/lobe-chat-agents">🤖/🏪 Submit Agents</a>, you can easily submit your agent creations to our platform. Importantly, LobeChat has established a sophisticated automated internationalization (i18n) workflow, capable of seamlessly translating your agent into multiple language versions. This means that no matter what language your users speak, they can experience your agent without barriers.</p> 
+</blockquote> 
+<blockquote> 
+ <p>[!IMPORTANT]</p> 
+ <p>We welcome all users to join this growing ecosystem and participate in the iteration and optimization of agents. Together, we can create more interesting, practical, and innovative agents, further enriching the diversity and practicality of the agent offerings.</p> 
+</blockquote> 
+<!-- AGENT LIST --> 
+<table> 
+ <thead> 
+  <tr> 
+   <th>Recent Submits</th> 
+   <th>Description</th> 
+  </tr> 
+ </thead> 
+ <tbody> 
+  <tr> 
+   <td><a href="https://chat-preview.lobehub.com/market?agent=nuxt-vue-developer">Nuxt 3/Vue.js Master Developer</a><br /><sup>By <strong><a href="https://github.com/Kadreev">Kadreev</a></strong> on <strong>2024-09-03</strong></sup></td> 
+   <td>Specialized in full-stack development with Nuxt 3 expertise.<br /><code>nuxt-3</code> <code>vue-js</code> <code>full-stack-development</code> <code>java-script</code> <code>web-applications</code></td> 
+  </tr> 
+  <tr> 
+   <td><a href="https://chat-preview.lobehub.com/market?agent=letrista-internacional">International Lyricist</a><br /><sup>By <strong><a href="https://github.com/mnector">mnector</a></strong> on <strong>2024-08-29</strong></sup></td> 
+   <td>Specialized in writing lyrics for songs in Spanish, English, and French, with a focus on storytelling and the emotions of the provided content.<br /><code>lyricism</code> <code>translation</code> <code>music</code></td> 
+  </tr> 
+  <tr> 
+   <td><a href="https://chat-preview.lobehub.com/market?agent=step-back-expert">Backtracking Question Expert</a><br /><sup>By <strong><a href="https://github.com/tiny656">tiny656</a></strong> on <strong>2024-08-27</strong></sup></td> 
+   <td>Hello! I am an expert in world knowledge, skilled in using backtracking questioning strategies to help you gain a deeper understanding and analysis of issues. Please enter a question, and I will respond to it according to the following process:</td> 
+  </tr> 
+ </tbody> 
+</table> 
+<ol> 
+ <li>Provide at least 3 optional backtracking questions that align with the strategy.</li> 
+ <li>Answer each of these backtracking questions.</li> 
+ <li>Use the above answers as evidence to logically and coherently provide a final answer to your question, assisted by visual charts.</li> 
+</ol> 
+<p>Please tell me what issue you would like to explore?<br /><code>backtracking-questions</code> <code>thinking-strategies</code> <code>problem-analysis</code> | | <a href="https://chat-preview.lobehub.com/market?agent=unreal-engine-master">Unreal Engine Master</a><br /><sup>By <strong><a href="https://github.com/thedivergentai">thedivergentai</a></strong> on <strong>2024-08-27</strong></sup> | Unreal Game Development Companion<br /><code>game-development</code> <code>unreal-engine</code> <code>software-engineering</code> |</p> 
+<blockquote> 
+ <p>📊 Total agents: <a href="https://github.com/lobehub/lobe-chat-agents"><kbd><strong>322</strong></kbd> </a></p> 
+</blockquote> 
+<!-- AGENT LIST --> 
+<div align="right"> 
+ <p><a href="https://raw.githubusercontent.com/lobehub/lobe-chat/main/#readme-top"><img alt="" src="https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square" /></a></p> 
+</div> 
+<p><a href="https://lobehub.com/docs/usage/features/database"><img alt="" src="https://github.com/lobehub/lobe-chat/assets/17870709/c27a0234-a4e9-40e5-8bcb-42d5ce7e40f9" /></a></p> 
+<h3><code>9</code> <a href="https://lobehub.com/docs/usage/features/database">Support Local / Remote Database</a></h3> 
+<p>LobeChat supports the use of both server-side and local databases. Depending on your needs, you can choose the appropriate deployment solution:</p> 
+<ul> 
+ <li><strong>Local database</strong>: suitable for users who want more control over their data and privacy protection. LobeChat uses CRDT (Conflict-Free Replicated Data Type) technology to achieve multi-device synchronization. This is an experimental feature aimed at providing a seamless data synchronization experience.</li> 
+ <li><strong>Server-side database</strong>: suitable for users who want a more convenient user experience. LobeChat supports PostgreSQL as a server-side database. For detailed documentation on how to configure the server-side database, please visit <a href="https://lobehub.com/docs/self-hosting/advanced/server-database">Configure Server-side Database</a>.</li> 
+</ul> 
+<p>Regardless of which database you choose, LobeChat can provide you with an excellent user experience.</p> 
+<div align="right"> 
+ <p><a href="https://raw.githubusercontent.com/lobehub/lobe-chat/main/#readme-top"><img alt="" src="https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square" /></a></p> 
+</div> 
+<p><a href="https://lobehub.com/docs/usage/features/auth"><img alt="" src="https://github.com/lobehub/lobe-chat/assets/17870709/8ce70e15-40df-451e-b700-66090fe5b8c2" /></a></p> 
+<h3><code>10</code> <a href="https://lobehub.com/docs/usage/features/auth">Support Multi-User Management</a></h3> 
+<p>LobeChat supports multi-user management and provides two main user authentication and management solutions to meet different needs:</p> 
+<ul> 
+ <li> <p><strong>next-auth</strong>: LobeChat integrates <code>next-auth</code>, a flexible and powerful identity verification library that supports multiple authentication methods, including OAuth, email login, credential login, etc. With <code>next-auth</code>, you can easily implement user registration, login, session management, social login, and other functions to ensure the security and privacy of user data.</p> </li> 
+ <li> <p><a href="https://go.clerk.com/exgqLG0"><strong>Clerk</strong></a>: For users who need more advanced user management features, LobeChat also supports <code>Clerk</code>, a modern user management platform. <code>Clerk</code> provides richer functions, such as multi-factor authentication (MFA), user profile management, login activity monitoring, etc. With <code>Clerk</code>, you can get higher security and flexibility, and easily cope with complex user management needs.</p> </li> 
+</ul> 
+<p>Regardless of which user management solution you choose, LobeChat can provide you with an excellent user experience and powerful functional support.</p> 
+<div align="right"> 
+ <p><a href="https://raw.githubusercontent.com/lobehub/lobe-chat/main/#readme-top"><img alt="" src="https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square" /></a></p> 
+</div> 
+<p><a href="https://lobehub.com/docs/usage/features/pwa"><img alt="" src="https://gw.alipayobjects.com/zos/kitchen/69x6bllkX3/pwa.webp" /></a></p> 
+<h3><code>11</code> <a href="https://lobehub.com/docs/usage/features/pwa">Progressive Web App (PWA)</a></h3> 
+<p>We deeply understand the importance of providing a seamless experience for users in today's multi-device environment. Therefore, we have adopted Progressive Web Application (<a href="https://support.google.com/chrome/answer/9658361">PWA</a>) technology, a modern web technology that elevates web applications to an experience close to that of native apps.</p> 
+<p>Through PWA, LobeChat can offer a highly optimized user experience on both desktop and mobile devices while maintaining its lightweight and high-performance characteristics. Visually and in terms of feel, we have also meticulously designed the interface to ensure it is indistinguishable from native apps, providing smooth animations, responsive layouts, and adapting to different device screen resolutions.</p> 
+<blockquote> 
+ <p>[!NOTE]</p> 
+ <p>If you are unfamiliar with the installation process of PWA, you can add LobeChat as your desktop application (also applicable to mobile devices) by following these steps:</p> 
+ <ul> 
+  <li>Launch the Chrome or Edge browser on your computer.</li> 
+  <li>Visit the LobeChat webpage.</li> 
+  <li>In the upper right corner of the address bar, click on the <kbd>Install</kbd> icon.</li> 
+  <li>Follow the instructions on the screen to complete the PWA Installation.</li> 
+ </ul> 
+</blockquote> 
+<div align="right"> 
+ <p><a href="https://raw.githubusercontent.com/lobehub/lobe-chat/main/#readme-top"><img alt="" src="https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square" /></a></p> 
+</div> 
+<p><a href="https://lobehub.com/docs/usage/features/mobile"><img alt="" src="https://gw.alipayobjects.com/zos/kitchen/R441AuFS4W/mobile.webp" /></a></p> 
+<h3><code>12</code> <a href="https://lobehub.com/docs/usage/features/mobile">Mobile Device Adaptation</a></h3> 
+<p>We have carried out a series of optimization designs for mobile devices to enhance the user's mobile experience. Currently, we are iterating on the mobile user experience to achieve smoother and more intuitive interactions. If you have any suggestions or ideas, we welcome you to provide feedback through GitHub Issues or Pull Requests.</p> 
+<div align="right"> 
+ <p><a href="https://raw.githubusercontent.com/lobehub/lobe-chat/main/#readme-top"><img alt="" src="https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square" /></a></p> 
+</div> 
+<p><a href="https://lobehub.com/docs/usage/features/theme"><img alt="" src="https://gw.alipayobjects.com/zos/kitchen/pvus1lo%26Z7/darkmode.webp" /></a></p> 
+<h3><code>13</code> <a href="https://lobehub.com/docs/usage/features/theme">Custom Themes</a></h3> 
+<p>As a design-engineering-oriented application, LobeChat places great emphasis on users' personalized experiences, hence introducing flexible and diverse theme modes, including a light mode for daytime and a dark mode for nighttime. Beyond switching theme modes, a range of color customization options allow users to adjust the application's theme colors according to their preferences. Whether it's a desire for a sober dark blue, a lively peach pink, or a professional gray-white, users can find their style of color choices in LobeChat.</p> 
+<blockquote> 
+ <p>[!TIP]</p> 
+ <p>The default configuration can intelligently recognize the user's system color mode and automatically switch themes to ensure a consistent visual experience with the operating system. For users who like to manually control details, LobeChat also offers intuitive setting options and a choice between chat bubble mode and document mode for conversation scenarios.</p> 
+</blockquote> 
+<div align="right"> 
+ <p><a href="https://raw.githubusercontent.com/lobehub/lobe-chat/main/#readme-top"><img alt="" src="https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square" /></a></p> 
+</div> 
+<h3><code>*</code> What's more</h3> 
+<p>Beside these features, LobeChat also have much better basic technique underground:</p> 
+<ul> 
+ <li><input checked="checked" disabled="disabled" type="checkbox" /> 💨 <strong>Quick Deployment</strong>: Using the Vercel platform or docker image, you can deploy with just one click and complete the process within 1 minute without any complex configuration.</li> 
+ <li><input checked="checked" disabled="disabled" type="checkbox" /> 🌐 <strong>Custom Domain</strong>: If users have their own domain, they can bind it to the platform for quick access to the dialogue agent from anywhere.</li> 
+ <li><input checked="checked" disabled="disabled" type="checkbox" /> 🔒 <strong>Privacy Protection</strong>: All data is stored locally in the user's browser, ensuring user privacy.</li> 
+ <li><input checked="checked" disabled="disabled" type="checkbox" /> 💎 <strong>Exquisite UI Design</strong>: With a carefully designed interface, it offers an elegant appearance and smooth interaction. It supports light and dark themes and is mobile-friendly. PWA support provides a more native-like experience.</li> 
+ <li><input checked="checked" disabled="disabled" type="checkbox" /> 🗣️ <strong>Smooth Conversation Experience</strong>: Fluid responses ensure a smooth conversation experience. It fully supports Markdown rendering, including code highlighting, LaTex formulas, Mermaid flowcharts, and more.</li> 
+</ul> 
+<blockquote> 
+ <p>✨ more features will be added when LobeChat evolve.</p> 
+</blockquote> 
+<hr /> 
+<blockquote> 
+ <p>[!NOTE]</p> 
+ <p>You can find our upcoming <a href="https://github.com/lobehub/lobe-chat/projects">Roadmap</a> plans in the Projects section.</p> 
+</blockquote> 
+<div align="right"> 
+ <p><a href="https://raw.githubusercontent.com/lobehub/lobe-chat/main/#readme-top"><img alt="" src="https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square" /></a></p> 
+</div> 
+<h2>⚡️ Performance</h2> 
+<blockquote> 
+ <p>[!NOTE]</p> 
+ <p>The complete list of reports can be found in the <a href="https://github.com/lobehub/lobe-chat/wiki/Lighthouse">📘 Lighthouse Reports</a></p> 
+</blockquote> 
+<table> 
+ <thead> 
+  <tr> 
+   <th align="center">Desktop</th> 
+   <th align="center">Mobile</th> 
+  </tr> 
+ </thead> 
+ <tbody> 
+  <tr> 
+   <td align="center"><img alt="" src="https://raw.githubusercontent.com/lobehub/lobe-chat/lighthouse/lighthouse/chat/desktop/pagespeed.svg?sanitize=true" /></td> 
+   <td align="center"><img alt="" src="https://raw.githubusercontent.com/lobehub/lobe-chat/lighthouse/lighthouse/chat/mobile/pagespeed.svg?sanitize=true" /></td> 
+  </tr> 
+  <tr> 
+   <td align="center"><a href="https://lobehub.github.io/lobe-chat/lighthouse/chat/desktop/chat_preview_lobehub_com_chat.html">📑 Lighthouse Report</a></td> 
+   <td align="center"><a href="https://lobehub.github.io/lobe-chat/lighthouse/chat/mobile/chat_preview_lobehub_com_chat.html">📑 Lighthouse Report</a></td> 
+  </tr> 
+ </tbody> 
+</table> 
+<div align="right"> 
+ <p><a href="https://raw.githubusercontent.com/lobehub/lobe-chat/main/#readme-top"><img alt="" src="https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square" /></a></p> 
+</div> 
+<h2>🛳 Self Hosting</h2> 
+<p>LobeChat provides Self-Hosted Version with Vercel and <a href="https://hub.docker.com/r/lobehub/lobe-chat">Docker Image</a>. This allows you to deploy your own chatbot within a few minutes without any prior knowledge.</p> 
+<blockquote> 
+ <p>[!TIP]</p> 
+ <p>Learn more about <a href="https://lobehub.com/docs/self-hosting/start">📘 Build your own LobeChat</a> by checking it out.</p> 
+</blockquote> 
+<h3><code>A</code> Deploying with Vercel, Zeabur or Sealos</h3> 
+<p>If you want to deploy this service yourself on either Vercel or Zeabur, you can follow these steps:</p> 
+<ul> 
+ <li>Prepare your <a href="https://platform.openai.com/account/api-keys">OpenAI API Key</a>.</li> 
+ <li>Click the button below to start deployment: Log in directly with your GitHub account, and remember to fill in the <code>OPENAI_API_KEY</code>(required) and <code>ACCESS_CODE</code> (recommended) on the environment variable section.</li> 
+ <li>After deployment, you can start using it.</li> 
+ <li>Bind a custom domain (optional): The DNS of the domain assigned by Vercel is polluted in some areas; binding a custom domain can connect directly.</li> 
+</ul> 
+<div align="center"> 
+ <table> 
+  <thead> 
+   <tr> 
+    <th align="center">Deploy with Vercel</th> 
+    <th align="center">Deploy with Zeabur</th> 
+    <th align="center">Deploy with Sealos</th> 
+    <th align="center">Deploy with RepoCloud</th> 
+   </tr> 
+  </thead> 
+  <tbody> 
+   <tr> 
+    <td align="center"><a href="https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Flobehub%2Flobe-chat&amp;env=OPENAI_API_KEY,ACCESS_CODE&amp;envDescription=Find%20your%20OpenAI%20API%20Key%20by%20click%20the%20right%20Learn%20More%20button.%20%7C%20Access%20Code%20can%20protect%20your%20website&amp;envLink=https%3A%2F%2Fplatform.openai.com%2Faccount%2Fapi-keys&amp;project-name=lobe-chat&amp;repository-name=lobe-chat"><img alt="" src="https://vercel.com/button" /></a></td> 
+    <td align="center"><a href="https://zeabur.com/templates/VZGGTI"><img alt="" src="https://zeabur.com/button.svg?sanitize=true" /></a></td> 
+    <td align="center"><a href="https://cloud.sealos.io/?openapp=system-template%3FtemplateName%3Dlobe-chat"><img alt="" src="https://raw.githubusercontent.com/labring-actions/templates/main/Deploy-on-Sealos.svg?sanitize=true" /></a></td> 
+    <td align="center"><a href="https://repocloud.io/details/?app_id=248"><img alt="" src="https://d16t0pc4846x52.cloudfront.net/deploylobe.svg?sanitize=true" /></a></td> 
+   </tr> 
+  </tbody> 
+ </table> 
+</div> 
+<h4>After Fork</h4> 
+<p>After fork, only retain the upstream sync action and disable other actions in your repository on GitHub.</p> 
+<h4>Keep Updated</h4> 
+<p>If you have deployed your own project following the one-click deployment steps in the README, you might encounter constant prompts indicating "updates available." This is because Vercel defaults to creating a new project instead of forking this one, resulting in an inability to detect updates accurately.</p> 
+<blockquote> 
+ <p>[!TIP]</p> 
+ <p>We suggest you redeploy using the following steps, <a href="https://lobehub.com/docs/self-hosting/advanced/upstream-sync">📘 Auto Sync With Latest</a></p> 
+</blockquote> 
+<br /> 
+<h3><code>B</code> Deploying with Docker</h3> 
+<p><a href="https://hub.docker.com/r/lobehub/lobe-chat"><img alt="" src="https://img.shields.io/docker/v/lobehub/lobe-chat?color=369eff&amp;label=docker&amp;labelColor=black&amp;logo=docker&amp;logoColor=white&amp;style=flat-square" /></a> <a href="https://hub.docker.com/r/lobehub/lobe-chat"><img alt="" src="https://img.shields.io/docker/image-size/lobehub/lobe-chat?color=369eff&amp;labelColor=black&amp;style=flat-square" /></a> <a href="https://hub.docker.com/r/lobehub/lobe-chat"><img alt="" src="https://img.shields.io/docker/pulls/lobehub/lobe-chat?color=45cc11&amp;labelColor=black&amp;style=flat-square" /></a></p> 
+<p>We provide a Docker image for deploying the LobeChat service on your own private device. Use the following command to start the LobeChat service:</p> 
+<pre><code class="language-fish">$ docker run -d -p 3210:3210 \
+  -e OPENAI_API_KEY=sk-xxxx \
+  -e ACCESS_CODE=lobe66 \
+  --name lobe-chat \
+  lobehub/lobe-chat
+</code></pre> 
+<blockquote> 
+ <p>[!TIP]</p> 
+ <p>If you need to use the OpenAI service through a proxy, you can configure the proxy address using the <code>OPENAI_PROXY_URL</code> environment variable:</p> 
+</blockquote> 
+<pre><code class="language-fish">$ docker run -d -p 3210:3210 \
+  -e OPENAI_API_KEY=sk-xxxx \
+  -e OPENAI_PROXY_URL=https://api-proxy.com/v1 \
+  -e ACCESS_CODE=lobe66 \
+  --name lobe-chat \
+  lobehub/lobe-chat
+</code></pre> 
+<blockquote> 
+ <p>[!NOTE]</p> 
+ <p>For detailed instructions on deploying with Docker, please refer to the <a href="https://lobehub.com/docs/self-hosting/platform/docker">📘 Docker Deployment Guide</a></p> 
+</blockquote> 
+<br /> 
+<h3>Environment Variable</h3> 
+<p>This project provides some additional configuration items set with environment variables:</p> 
+<table> 
+ <thead> 
+  <tr> 
+   <th>Environment Variable</th> 
+   <th>Required</th> 
+   <th>Description</th> 
+   <th>Example</th> 
+  </tr> 
+ </thead> 
+ <tbody> 
+  <tr> 
+   <td><code>OPENAI_API_KEY</code></td> 
+   <td>Yes</td> 
+   <td>This is the API key you apply on the OpenAI account page</td> 
+   <td><code>sk-xxxxxx...xxxxxx</code></td> 
+  </tr> 
+  <tr> 
+   <td><code>OPENAI_PROXY_URL</code></td> 
+   <td>No</td> 
+   <td>If you manually configure the OpenAI interface proxy, you can use this configuration item to override the default OpenAI API request base URL</td> 
+   <td><code>https://api.chatanywhere.cn</code> or <code>https://aihubmix.com/v1</code> <br />The default value is<br /><code>https://api.openai.com/v1</code></td> 
+  </tr> 
+  <tr> 
+   <td><code>ACCESS_CODE</code></td> 
+   <td>No</td> 
+   <td>Add a password to access this service; you can set a long password to avoid leaking. If this value contains a comma, it is a password array.</td> 
+   <td><code>awCTe)re_r74</code> or <code>rtrt_ewee3@09!</code> or <code>code1,code2,code3</code></td> 
+  </tr> 
+  <tr> 
+   <td><code>OPENAI_MODEL_LIST</code></td> 
+   <td>No</td> 
+   <td>Used to control the model list. Use <code>+</code> to add a model, <code>-</code> to hide a model, and <code>model_name=display_name</code> to customize the display name of a model, separated by commas.</td> 
+   <td><code>qwen-7b-chat,+glm-6b,-gpt-3.5-turbo</code></td> 
+  </tr> 
+ </tbody> 
+</table> 
+<blockquote> 
+ <p>[!NOTE]</p> 
+ <p>The complete list of environment variables can be found in the <a href="https://lobehub.com/docs/self-hosting/environment-variables">📘 Environment Variables</a></p> 
+</blockquote> 
+<div align="right"> 
+ <p><a href="https://raw.githubusercontent.com/lobehub/lobe-chat/main/#readme-top"><img alt="" src="https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square" /></a></p> 
+</div> 
+<h2>📦 Ecosystem</h2> 
+<table> 
+ <thead> 
+  <tr> 
+   <th>NPM</th> 
+   <th>Repository</th> 
+   <th>Description</th> 
+   <th>Version</th> 
+  </tr> 
+ </thead> 
+ <tbody> 
+  <tr> 
+   <td><a href="https://www.npmjs.com/package/@lobehub/ui">@lobehub/ui</a></td> 
+   <td><a href="https://github.com/lobehub/lobe-ui">lobehub/lobe-ui</a></td> 
+   <td>Open-source UI component library dedicated to building AIGC web applications.</td> 
+   <td><a href="https://www.npmjs.com/package/@lobehub/ui"><img alt="" src="https://img.shields.io/npm/v/@lobehub/ui?color=369eff&amp;labelColor=black&amp;logo=npm&amp;logoColor=white&amp;style=flat-square" /></a></td> 
+  </tr> 
+  <tr> 
+   <td><a href="https://www.npmjs.com/package/@lobehub/icons">@lobehub/icons</a></td> 
+   <td><a href="https://github.com/lobehub/lobe-icons">lobehub/lobe-icons</a></td> 
+   <td>Popular AI / LLM Model Brand SVG Logo and Icon Collection.</td> 
+   <td><a href="https://www.npmjs.com/package/@lobehub/icons"><img alt="" src="https://img.shields.io/npm/v/@lobehub/icons?color=369eff&amp;labelColor=black&amp;logo=npm&amp;logoColor=white&amp;style=flat-square" /></a></td> 
+  </tr> 
+  <tr> 
+   <td><a href="https://www.npmjs.com/package/@lobehub/tts">@lobehub/tts</a></td> 
+   <td><a href="https://github.com/lobehub/lobe-tts">lobehub/lobe-tts</a></td> 
+   <td>High-quality &amp; reliable TTS/STT React Hooks library</td> 
+   <td><a href="https://www.npmjs.com/package/@lobehub/tts"><img alt="" src="https://img.shields.io/npm/v/@lobehub/tts?color=369eff&amp;labelColor=black&amp;logo=npm&amp;logoColor=white&amp;style=flat-square" /></a></td> 
+  </tr> 
+  <tr> 
+   <td><a href="https://www.npmjs.com/package/@lobehub/lint">@lobehub/lint</a></td> 
+   <td><a href="https://github.com/lobehub/lobe-lint">lobehub/lobe-lint</a></td> 
+   <td>Configurations for ESlint, Stylelint, Commitlint, Prettier, Remark, and Semantic Release for LobeHub.</td> 
+   <td><a href="https://www.npmjs.com/package/@lobehub/lint"><img alt="" src="https://img.shields.io/npm/v/@lobehub/lint?color=369eff&amp;labelColor=black&amp;logo=npm&amp;logoColor=white&amp;style=flat-square" /></a></td> 
+  </tr> 
+ </tbody> 
+</table> 
+<div align="right"> 
+ <p><a href="https://raw.githubusercontent.com/lobehub/lobe-chat/main/#readme-top"><img alt="" src="https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square" /></a></p> 
+</div> 
+<h2>🧩 Plugins</h2> 
+<p>Plugins provide a means to extend the <a href="https://lobehub.com/blog/openai-function-call">Function Calling</a> capabilities of LobeChat. They can be used to introduce new function calls and even new ways to render message results. If you are interested in plugin development, please refer to our <a href="https://lobehub.com/docs/usage/plugins/development">📘 Plugin Development Guide</a> in the Wiki.</p> 
+<ul> 
+ <li><a href="https://github.com/lobehub/lobe-chat-plugins">lobe-chat-plugins</a>: This is the plugin index for LobeChat. It accesses index.json from this repository to display a list of available plugins for LobeChat to the user.</li> 
+ <li><a href="https://github.com/lobehub/chat-plugin-template">chat-plugin-template</a>: This is the plugin template for LobeChat plugin development.</li> 
+ <li><a href="https://github.com/lobehub/chat-plugin-sdk">@lobehub/chat-plugin-sdk</a>: The LobeChat Plugin SDK assists you in creating exceptional chat plugins for Lobe Chat.</li> 
+ <li><a href="https://github.com/lobehub/chat-plugins-gateway">@lobehub/chat-plugins-gateway</a>: The LobeChat Plugins Gateway is a backend service that provides a gateway for LobeChat plugins. We deploy this service using Vercel. The primary API POST /api/v1/runner is deployed as an Edge Function.</li> 
+</ul> 
+<blockquote> 
+ <p>[!NOTE]</p> 
+ <p>The plugin system is currently undergoing major development. You can learn more in the following issues:</p> 
+ <ul> 
+  <li>[x] <a href="https://github.com/lobehub/lobe-chat/issues/73"><strong>Plugin Phase 1</strong></a>: Implement separation of the plugin from the main body, split the plugin into an independent repository for maintenance, and realize dynamic loading of the plugin.</li> 
+  <li>[x] <a href="https://github.com/lobehub/lobe-chat/issues/97"><strong>Plugin Phase 2</strong></a>: The security and stability of the plugin's use, more accurately presenting abnormal states, the maintainability of the plugin architecture, and developer-friendly.</li> 
+  <li>[x] <a href="https://github.com/lobehub/lobe-chat/issues/149"><strong>Plugin Phase 3</strong></a>: Higher-level and more comprehensive customization capabilities, support for plugin authentication, and examples.</li> 
+ </ul> 
+</blockquote> 
+<div align="right"> 
+ <p><a href="https://raw.githubusercontent.com/lobehub/lobe-chat/main/#readme-top"><img alt="" src="https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square" /></a></p> 
+</div> 
+<h2>⌨️ Local Development</h2> 
+<p>You can use GitHub Codespaces for online development:</p> 
+<p><a href="https://codespaces.new/lobehub/lobe-chat"><img alt="" src="https://github.com/codespaces/badge.svg?sanitize=true" /></a></p> 
+<p>Or clone it for local development:</p> 
+<pre><code class="language-fish">$ git clone https://github.com/lobehub/lobe-chat.git
+$ cd lobe-chat
+$ pnpm install
+$ pnpm dev
+</code></pre> 
+<p>If you would like to learn more details, please feel free to look at our <a href="https://github.com/lobehub/lobe-chat/wiki/index">📘 Development Guide</a>.</p> 
+<div align="right"> 
+ <p><a href="https://raw.githubusercontent.com/lobehub/lobe-chat/main/#readme-top"><img alt="" src="https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square" /></a></p> 
+</div> 
+<h2>🤝 Contributing</h2> 
+<p>Contributions of all types are more than welcome; if you are interested in contributing code, feel free to check out our GitHub <a href="https://github.com/lobehub/lobe-chat/issues">Issues</a> and <a href="https://github.com/lobehub/lobe-chat/projects">Projects</a> to get stuck in to show us what you’re made of.</p> 
+<blockquote> 
+ <p>[!TIP]</p> 
+ <p>We are creating a technology-driven forum, fostering knowledge interaction and the exchange of ideas that may culminate in mutual inspiration and collaborative innovation.</p> 
+ <p>Help us make LobeChat better. Welcome to provide product design feedback, user experience discussions directly to us.</p> 
+ <p><strong>Principal Maintainers:</strong> <a href="https://github.com/arvinxx">@arvinxx</a> <a href="https://github.com/canisminor1990">@canisminor1990</a></p> 
+</blockquote> 
+<p><a href="https://github.com/lobehub/lobe-chat/pulls"><img alt="" src="https://img.shields.io/badge/%F0%9F%A4%AF_pr_welcome-%E2%86%92-ffcb47?labelColor=black&amp;style=for-the-badge" /></a> <a href="https://github.com/lobehub/lobe-chat-agents"><img alt="" src="https://img.shields.io/badge/%F0%9F%A4%96/%F0%9F%8F%AA_submit_agent-%E2%86%92-c4f042?labelColor=black&amp;style=for-the-badge" /></a> <a href="https://github.com/lobehub/lobe-chat-plugins"><img alt="" src="https://img.shields.io/badge/%F0%9F%A7%A9/%F0%9F%8F%AA_submit_plugin-%E2%86%92-95f3d9?labelColor=black&amp;style=for-the-badge" /></a></p> 
+<a href="https://github.com/lobehub/lobe-chat/graphs/contributors" target="_blank"> 
+ <table> 
+  <tbody>
+   <tr> 
+    <th colspan="2"> <br /><img src="https://contrib.rocks/image?repo=lobehub/lobe-chat" /><br /><br /> </th> 
+   </tr> 
+   <tr> 
+    <td> 
+      
+      <source media="(prefers-color-scheme: dark)" /> 
+      <img src="https://next.ossinsight.io/widgets/official/compose-org-active-contributors/thumbnail.png?activity=active&amp;period=past_28_days&amp;owner_id=131470832&amp;repo_ids=643445235&amp;image_size=2x3&amp;color_scheme=light" /> 
+      </td> 
+    <td rowspan="2"> 
+      
+      <source media="(prefers-color-scheme: dark)" /> 
+      <img src="https://next.ossinsight.io/widgets/official/compose-org-participants-growth/thumbnail.png?activity=active&amp;period=past_28_days&amp;owner_id=131470832&amp;repo_ids=643445235&amp;image_size=4x7&amp;color_scheme=light" /> 
+      </td> 
+   </tr> 
+   <tr> 
+    <td> 
+      
+      <source media="(prefers-color-scheme: dark)" /> 
+      <img src="https://next.ossinsight.io/widgets/official/compose-org-active-contributors/thumbnail.png?activity=new&amp;period=past_28_days&amp;owner_id=131470832&amp;repo_ids=643445235&amp;image_size=2x3&amp;color_scheme=light" /> 
+      </td> 
+   </tr> 
+  </tbody>
+ </table> </a> 
+<div align="right"> 
+ <p><a href="https://raw.githubusercontent.com/lobehub/lobe-chat/main/#readme-top"><img alt="" src="https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square" /></a></p> 
+</div> 
+<h2>❤️ Sponsor</h2> 
+<p>Every bit counts and your one-time donation sparkles in our galaxy of support! You're a shooting star, making a swift and bright impact on our journey. Thank you for believing in us – your generosity guides us toward our mission, one brilliant flash at a time.</p> 
+<a href="https://opencollective.com/lobehub" target="_blank"> 
+  
+  <source media="(prefers-color-scheme: dark)" /> 
+  <img src="https://github.com/lobehub/.github/raw/main/static/sponsor-light.png?raw=true" /> 
+  </a> 
+<div align="right"> 
+ <p><a href="https://raw.githubusercontent.com/lobehub/lobe-chat/main/#readme-top"><img alt="" src="https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square" /></a></p> 
+</div> 
+<h2>🔗 More Products</h2> 
+<ul> 
+ <li><strong><a href="https://github.com/lobehub/sd-webui-lobe-theme">🅰️ Lobe SD Theme</a>:</strong> Modern theme for Stable Diffusion WebUI, exquisite interface design, highly customizable UI, and efficiency-boosting features.</li> 
+ <li><strong><a href="https://github.com/lobehub/lobe-midjourney-webui">⛵️ Lobe Midjourney WebUI</a>:</strong> WebUI for Midjourney, leverages AI to quickly generate a wide array of rich and diverse images from text prompts, sparking creativity and enhancing conversations.</li> 
+ <li><strong><a href="https://github.com/lobehub/lobe-commit/tree/master/packages/lobe-i18n">🌏 Lobe i18n</a> :</strong> Lobe i18n is an automation tool for the i18n (internationalization) translation process, powered by ChatGPT. It supports features such as automatic splitting of large files, incremental updates, and customization options for the OpenAI model, API proxy, and temperature.</li> 
+ <li><strong><a href="https://github.com/lobehub/lobe-commit/tree/master/packages/lobe-commit">💌 Lobe Commit</a>:</strong> Lobe Commit is a CLI tool that leverages Langchain/ChatGPT to generate Gitmoji-based commit messages.</li> 
+</ul> 
+<div align="right"> 
+ <p><a href="https://raw.githubusercontent.com/lobehub/lobe-chat/main/#readme-top"><img alt="" src="https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square" /></a></p> 
+</div> 
+<hr /> 
+<details>
+ <h4>📝 License</h4> 
+ <p><a href="https://app.fossa.com/projects/git%2Bgithub.com%2Flobehub%2Flobe-chat"><img alt="" src="https://app.fossa.com/api/projects/git%2Bgithub.com%2Flobehub%2Flobe-chat.svg?type=large" /></a></p> 
+</details> 
+<p>Copyright © 2024 <a href="https://github.com/lobehub">LobeHub</a>. <br /> This project is <a href="https://raw.githubusercontent.com/lobehub/lobe-chat/main/LICENSE">Apache 2.0</a> licensed.</p> 
+<!-- LINK GROUP -->
+]]></content:encoded>
+
+
+</item>
+
+<item>
 <title>anthropics/anthropic-cookbook</title>
 <link>https://github.com/anthropics/anthropic-cookbook</link>
 <guid>https://github.com/anthropics/anthropic-cookbook</guid>
@@ -90,8 +1483,7 @@
  <li><a href="https://github.com/aws-samples/">AWS Samples</a>: A collection of code samples from AWS which can be adapted for use with Claude. Note that some samples may require modification to work optimally with Claude.</li> 
 </ul>
 ]]></content:encoded>
-
-
+<pubDate></pubDate>
 </item>
 <item>
 <title>deepfakes/faceswap</title>
@@ -275,10 +1667,8 @@ FaceSwap是一个基于深度学习的工具，用于在图片和视频中识别
 <p>Here's a slightly more in depth video that tries to explain the basic functioning of a neural network: <a href="https://www.youtube.com/watch?v=aircAruvnKk"><img alt="How Machines Learn" src="https://img.youtube.com/vi/aircAruvnKk/0.jpg" /></a></p> 
 <p>tl;dr: training data + trial and error</p>
 ]]></content:encoded>
-
-
+<pubDate></pubDate>
 </item>
-
 <item>
 <title>Cinnamon/kotaemon</title>
 <link>https://github.com/Cinnamon/kotaemon</link>
