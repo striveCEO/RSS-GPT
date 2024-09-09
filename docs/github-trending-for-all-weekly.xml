@@ -4,6 +4,444 @@
 <title>GitHub All Languages Weekly Trending</title>
 <link>http://mshibanami.github.io/GitHubTrendingRSS</link>
 
+<item>
+<title>graviraja/MLOps-Basics</title>
+<link>https://github.com/graviraja/MLOps-Basics</link>
+<guid>https://github.com/graviraja/MLOps-Basics</guid>
+<content:encoded><![CDATA[
+<div> 关键词：MLOps、模型监控、配置管理、数据版本控制、模型打包
+
+总结:
+
+本文详细介绍了MLOps的基础概念和实践流程，旨在帮助读者构建完整的机器学习操作流程。首先，通过项目设置阶段，了解了获取数据、数据预处理、数据加载、模型定义、模型训练以及模型推理的基本步骤，使用了特定技术栈进行操作。
+
+接着，进入模型监控阶段，利用Weights & Biases工具对实验进行跟踪，包括调整超参数、测试不同模型性能以及分析模型与输入数据之间的关系，以优化模型。
+
+配置管理部分引入了Hydra框架，用于解决复杂软件系统中配置管理的问题，通过配置文件的组织和参数的覆盖机制，实现灵活且高效的配置管理。
+
+数据版本控制则是通过DVC（Data Version Control）实现，它解决了传统代码版本控制系统在处理大型文件时的局限性，确保模型历史版本的可追溯性和复用性。
+
+最后，模型打包环节采用了ONNX和Docker技术，ONNX格式化模型便于跨框架部署，而Docker容器化技术则实现了应用的便携性和跨平台运行能力，简化了模型部署过程中的环境配置问题。
+
+整体而言，MLOps通过整合数据处理、模型训练、监控、配置管理和打包等关键步骤，为机器学习项目的全生命周期提供了高效、自动化和可重复的操作流程，旨在提高模型开发和部署的效率与质量。 <div>
+<p></p><hr /><h1>MLOps-Basics</h1> 
+<blockquote> 
+ <p>There is nothing magic about magic. The magician merely understands something simple which doesn’t appear to be simple or natural to the untrained audience. Once you learn how to hold a card while making your hand look empty, you only need practice before you, too, can “do magic.” – Jeffrey Friedl in the book Mastering Regular Expressions</p> 
+</blockquote> 
+<p><strong>Note: Please raise an issue for any suggestions, corrections, and feedback.</strong></p> 
+<p>The goal of the series is to understand the basics of MLOps like model building, monitoring, configurations, testing, packaging, deployment, cicd, etc.</p> 
+<p><img alt="pl" src="https://raw.githubusercontent.com/graviraja/MLOps-Basics/main/images/summary.png" /></p> 
+<h2>Week 0: Project Setup</h2> 
+<img src="https://img.shields.io/static/v1.svg?style=for-the-badge&amp;label=difficulty&amp;message=easy&amp;color=green" /> 
+<p>Refer to the <a href="https://www.ravirajag.dev/blog/mlops-project-setup-part1">Blog Post here</a></p> 
+<p>The project I have implemented is a simple classification problem. The scope of this week is to understand the following topics:</p> 
+<ul> 
+ <li><code>How to get the data?</code></li> 
+ <li><code>How to process the data?</code></li> 
+ <li><code>How to define dataloaders?</code></li> 
+ <li><code>How to declare the model?</code></li> 
+ <li><code>How to train the model?</code></li> 
+ <li><code>How to do the inference?</code></li> 
+</ul> 
+<p><img alt="pl" src="https://raw.githubusercontent.com/graviraja/MLOps-Basics/main/images/pl.jpeg" /></p> 
+<p>Following tech stack is used:</p> 
+<ul> 
+ <li><a href="https://github.com/huggingface/datasets">Huggingface Datasets</a></li> 
+ <li><a href="https://github.com/huggingface/transformers">Huggingface Transformers</a></li> 
+ <li><a href="https://pytorch-lightning.readthedocs.io/">Pytorch Lightning</a></li> 
+</ul> 
+<h2>Week 1: Model monitoring - Weights and Biases</h2> 
+<img src="https://img.shields.io/static/v1.svg?style=for-the-badge&amp;label=difficulty&amp;message=easy&amp;color=green" /> 
+<p>Refer to the <a href="https://www.ravirajag.dev/blog/mlops-wandb-integration">Blog Post here</a></p> 
+<p>Tracking all the experiments like tweaking hyper-parameters, trying different models to test their performance and seeing the connection between model and the input data will help in developing a better model.</p> 
+<p>The scope of this week is to understand the following topics:</p> 
+<ul> 
+ <li><code>How to configure basic logging with W&amp;B?</code></li> 
+ <li><code>How to compute metrics and log them in W&amp;B?</code></li> 
+ <li><code>How to add plots in W&amp;B?</code></li> 
+ <li><code>How to add data samples to W&amp;B?</code></li> 
+</ul> 
+<p><img alt="wannb" src="https://raw.githubusercontent.com/graviraja/MLOps-Basics/main/images/wandb.png" /></p> 
+<p>Following tech stack is used:</p> 
+<ul> 
+ <li><a href="https://wandb.ai/site">Weights and Biases</a></li> 
+ <li><a href="https://torchmetrics.readthedocs.io/">torchmetrics</a></li> 
+</ul> 
+<p>References:</p> 
+<ul> 
+ <li> <p><a href="https://www.youtube.com/watch?v=hUXQm46TAKc">Tutorial on Pytorch Lightning + Weights &amp; Bias</a></p> </li> 
+ <li> <p><a href="https://docs.wandb.ai/">WandB Documentation</a></p> </li> 
+</ul> 
+<h2>Week 2: Configurations - Hydra</h2> 
+<img src="https://img.shields.io/static/v1.svg?style=for-the-badge&amp;label=difficulty&amp;message=easy&amp;color=green" /> 
+<p>Refer to the <a href="https://www.ravirajag.dev/blog/mlops-hydra-config">Blog Post here</a></p> 
+<p>Configuration management is a necessary for managing complex software systems. Lack of configuration management can cause serious problems with reliability, uptime, and the ability to scale a system.</p> 
+<p>The scope of this week is to understand the following topics:</p> 
+<ul> 
+ <li><code>Basics of Hydra</code></li> 
+ <li><code>Overridding configurations</code></li> 
+ <li><code>Splitting configuration across multiple files</code></li> 
+ <li><code>Variable Interpolation</code></li> 
+ <li><code>How to run model with different parameter combinations?</code></li> 
+</ul> 
+<p><img alt="hydra" src="https://raw.githubusercontent.com/graviraja/MLOps-Basics/main/images/hydra.png" /></p> 
+<p>Following tech stack is used:</p> 
+<ul> 
+ <li><a href="https://hydra.cc/">Hydra</a></li> 
+</ul> 
+<p>References</p> 
+<ul> 
+ <li> <p><a href="https://hydra.cc/docs/intro">Hydra Documentation</a></p> </li> 
+ <li> <p><a href="https://www.sscardapane.it/tutorials/hydra-tutorial/#executing-multiple-runs">Simone Tutorial on Hydra</a></p> </li> 
+</ul> 
+<h2>Week 3: Data Version Control - DVC</h2> 
+<img src="https://img.shields.io/static/v1.svg?style=for-the-badge&amp;label=difficulty&amp;message=easy&amp;color=green" /> 
+<p>Refer to the <a href="https://www.ravirajag.dev/blog/mlops-dvc">Blog Post here</a></p> 
+<p>Classical code version control systems are not designed to handle large files, which make cloning and storing the history impractical. Which are very common in Machine Learning.</p> 
+<p>The scope of this week is to understand the following topics:</p> 
+<ul> 
+ <li><code>Basics of DVC</code></li> 
+ <li><code>Initialising DVC</code></li> 
+ <li><code>Configuring Remote Storage</code></li> 
+ <li><code>Saving Model to the Remote Storage</code></li> 
+ <li><code>Versioning the models</code></li> 
+</ul> 
+<p><img alt="dvc" src="https://raw.githubusercontent.com/graviraja/MLOps-Basics/main/images/dvc.png" /></p> 
+<p>Following tech stack is used:</p> 
+<ul> 
+ <li><a href="https://dvc.org/">DVC</a></li> 
+</ul> 
+<p>References</p> 
+<ul> 
+ <li> <p><a href="https://dvc.org/doc">DVC Documentation</a></p> </li> 
+ <li> <p><a href="https://www.youtube.com/watch?v=kLKBcPonMYw">DVC Tutorial on Versioning data</a></p> </li> 
+</ul> 
+<h2>Week 4: Model Packaging - ONNX</h2> 
+<img src="https://img.shields.io/static/v1.svg?style=for-the-badge&amp;label=difficulty&amp;message=medium&amp;color=orange" /> 
+<p>Refer to the <a href="https://www.ravirajag.dev/blog/mlops-onnx">Blog Post here</a></p> 
+<p>Why do we need model packaging? Models can be built using any machine learning framework available out there (sklearn, tensorflow, pytorch, etc.). We might want to deploy models in different environments like (mobile, web, raspberry pi) or want to run in a different framework (trained in pytorch, inference in tensorflow). A common file format to enable AI developers to use models with a variety of frameworks, tools, runtimes, and compilers will help a lot.</p> 
+<p>This is acheived by a community project <code>ONNX</code>.</p> 
+<p>The scope of this week is to understand the following topics:</p> 
+<ul> 
+ <li> <p><code>What is ONNX?</code></p> </li> 
+ <li> <p><code>How to convert a trained model to ONNX format?</code></p> </li> 
+ <li> <p><code>What is ONNX Runtime?</code></p> </li> 
+ <li> <p><code>How to run ONNX converted model in ONNX Runtime?</code></p> </li> 
+ <li> <p><code>Comparisions</code></p> </li> 
+</ul> 
+<p><img alt="ONNX" src="https://raw.githubusercontent.com/graviraja/MLOps-Basics/main/images/onnx.jpeg" /></p> 
+<p>Following tech stack is used:</p> 
+<ul> 
+ <li><a href="https://onnx.ai/">ONNX</a></li> 
+ <li><a href="https://www.onnxruntime.ai/">ONNXRuntime</a></li> 
+</ul> 
+<p>References</p> 
+<ul> 
+ <li><a href="https://www.youtube.com/watch?v=7nutT3Aacyw">Abhishek Thakur tutorial on onnx model conversion</a></li> 
+ <li><a href="https://pytorch-lightning.readthedocs.io/en/stable/common/production_inference.html">Pytorch Lightning documentation on onnx conversion</a></li> 
+ <li><a href="https://medium.com/microsoftazure/accelerate-your-nlp-pipelines-using-hugging-face-transformers-and-onnx-runtime-2443578f4333">Huggingface Blog on ONNXRuntime</a></li> 
+ <li><a href="https://tugot17.github.io/data-science-blog/onnx/tutorial/2020/09/21/Exporting-lightning-model-to-onnx.html">Piotr Blog on onnx conversion</a></li> 
+</ul> 
+<h2>Week 5: Model Packaging - Docker</h2> 
+<img src="https://img.shields.io/static/v1.svg?style=for-the-badge&amp;label=difficulty&amp;message=easy&amp;color=green" /> 
+<p>Refer to the <a href="https://www.ravirajag.dev/blog/mlops-docker">Blog Post here</a></p> 
+<p>Why do we need packaging? We might have to share our application with others, and when they try to run the application most of the time it doesn’t run due to dependencies issues / OS related issues and for that, we say (famous quote across engineers) that <code>It works on my laptop/system</code>.</p> 
+<p>So for others to run the applications they have to set up the same environment as it was run on the host side which means a lot of manual configuration and installation of components.</p> 
+<p>The solution to these limitations is a technology called Containers.</p> 
+<p>By containerizing/packaging the application, we can run the application on any cloud platform to get advantages of managed services and autoscaling and reliability, and many more.</p> 
+<p>The most prominent tool to do the packaging of application is Docker 🛳</p> 
+<p>The scope of this week is to understand the following topics:</p> 
+<ul> 
+ <li><code>FastAPI wrapper</code></li> 
+ <li><code>Basics of Docker</code></li> 
+ <li><code>Building Docker Container</code></li> 
+ <li><code>Docker Compose</code></li> 
+</ul> 
+<p><img alt="Docker" src="https://raw.githubusercontent.com/graviraja/MLOps-Basics/main/images/docker_flow.png" /></p> 
+<p>References</p> 
+<ul> 
+ <li><a href="https://www.analyticsvidhya.com/blog/2021/06/a-hands-on-guide-to-containerized-your-machine-learning-workflow-with-docker/">Analytics vidhya blog</a></li> 
+</ul> 
+<h2>Week 6: CI/CD - GitHub Actions</h2> 
+<img src="https://img.shields.io/static/v1.svg?style=for-the-badge&amp;label=difficulty&amp;message=medium&amp;color=orange" /> 
+<p>Refer to the <a href="https://www.ravirajag.dev/blog/mlops-github-actions">Blog Post here</a></p> 
+<p>CI/CD is a coding philosophy and set of practices with which you can continuously build, test, and deploy iterative code changes.</p> 
+<p>This iterative process helps reduce the chance that you develop new code based on a buggy or failed previous versions. With this method, you strive to have less human intervention or even no intervention at all, from the development of new code until its deployment.</p> 
+<p>In this post, I will be going through the following topics:</p> 
+<ul> 
+ <li>Basics of GitHub Actions</li> 
+ <li>First GitHub Action</li> 
+ <li>Creating Google Service Account</li> 
+ <li>Giving access to Service account</li> 
+ <li>Configuring DVC to use Google Service account</li> 
+ <li>Configuring Github Action</li> 
+</ul> 
+<p><img alt="Docker" src="https://raw.githubusercontent.com/graviraja/MLOps-Basics/main/images/basic_flow.png" /></p> 
+<p>References</p> 
+<ul> 
+ <li> <p><a href="https://dvc.org/doc/user-guide/setup-google-drive-remote">Configuring service account</a></p> </li> 
+ <li> <p><a href="https://docs.github.com/en/actions/quickstart">Github actions</a></p> </li> 
+</ul> 
+<h2>Week 7: Container Registry - AWS ECR</h2> 
+<img src="https://img.shields.io/static/v1.svg?style=for-the-badge&amp;label=difficulty&amp;message=medium&amp;color=orange" /> 
+<p>Refer to the <a href="https://www.ravirajag.dev/blog/mlops-container-registry">Blog Post here</a></p> 
+<p>A container registry is a place to store container images. A container image is a file comprised of multiple layers which can execute applications in a single instance. Hosting all the images in one stored location allows users to commit, identify and pull images when needed.</p> 
+<p>Amazon Simple Storage Service (S3) is a storage for the internet. It is designed for large-capacity, low-cost storage provision across multiple geographical regions.</p> 
+<p>In this week, I will be going through the following topics:</p> 
+<ul> 
+ <li> <p><code>Basics of S3</code></p> </li> 
+ <li> <p><code>Programmatic access to S3</code></p> </li> 
+ <li> <p><code>Configuring AWS S3 as remote storage in DVC</code></p> </li> 
+ <li> <p><code>Basics of ECR</code></p> </li> 
+ <li> <p><code>Configuring GitHub Actions to use S3, ECR</code></p> </li> 
+</ul> 
+<p><img alt="Docker" src="https://raw.githubusercontent.com/graviraja/MLOps-Basics/main/images/ecr_flow.png" /></p> 
+<h2>Week 8: Serverless Deployment - AWS Lambda</h2> 
+<img src="https://img.shields.io/static/v1.svg?style=for-the-badge&amp;label=difficulty&amp;message=medium&amp;color=orange" /> 
+<p>Refer to the <a href="https://www.ravirajag.dev/blog/mlops-serverless">Blog Post here</a></p> 
+<p>A serverless architecture is a way to build and run applications and services without having to manage infrastructure. The application still runs on servers, but all the server management is done by third party service (AWS). We no longer have to provision, scale, and maintain servers to run the applications. By using a serverless architecture, developers can focus on their core product instead of worrying about managing and operating servers or runtimes, either in the cloud or on-premises.</p> 
+<p>In this week, I will be going through the following topics:</p> 
+<ul> 
+ <li> <p><code>Basics of Serverless</code></p> </li> 
+ <li> <p><code>Basics of AWS Lambda</code></p> </li> 
+ <li> <p><code>Triggering Lambda with API Gateway</code></p> </li> 
+ <li> <p><code>Deploying Container using Lambda</code></p> </li> 
+ <li> <p><code>Automating deployment to Lambda using Github Actions</code></p> </li> 
+</ul> 
+<p><img alt="Docker" src="https://raw.githubusercontent.com/graviraja/MLOps-Basics/main/images/lambda_flow.png" /></p> 
+<h2>Week 9: Prediction Monitoring - Kibana</h2> 
+<img src="https://img.shields.io/static/v1.svg?style=for-the-badge&amp;label=difficulty&amp;message=medium&amp;color=orange" /> 
+<p>Refer to the <a href="https://www.ravirajag.dev/blog/mlops-monitoring">Blog Post here</a></p> 
+<p>Monitoring systems can help give us confidence that our systems are running smoothly and, in the event of a system failure, can quickly provide appropriate context when diagnosing the root cause.</p> 
+<p>Things we want to monitor during and training and inference are different. During training we are concered about whether the loss is decreasing or not, whether the model is overfitting, etc.</p> 
+<p>But, during inference, We like to have confidence that our model is making correct predictions.</p> 
+<p>There are many reasons why a model can fail to make useful predictions:</p> 
+<ul> 
+ <li> <p>The underlying data distribution has shifted over time and the model has gone stale. i.e inference data characteristics is different from the data characteristics used to train the model.</p> </li> 
+ <li> <p>The inference data stream contains edge cases (not seen during model training). In this scenarios model might perform poorly or can lead to errors.</p> </li> 
+ <li> <p>The model was misconfigured in its production deployment. (Configuration issues are common)</p> </li> 
+</ul> 
+<p>In all of these scenarios, the model could still make a <code>successful</code> prediction from a service perspective, but the predictions will likely not be useful. Monitoring machine learning models can help us detect such scenarios and intervene (e.g. trigger a model retraining/deployment pipeline).</p> 
+<p>In this week, I will be going through the following topics:</p> 
+<ul> 
+ <li> <p><code>Basics of Cloudwatch Logs</code></p> </li> 
+ <li> <p><code>Creating Elastic Search Cluster</code></p> </li> 
+ <li> <p><code>Configuring Cloudwatch Logs with Elastic Search</code></p> </li> 
+ <li> <p><code>Creating Index Patterns in Kibana</code></p> </li> 
+ <li> <p><code>Creating Kibana Visualisations</code></p> </li> 
+ <li> <p><code>Creating Kibana Dashboard</code></p> </li> 
+</ul> 
+<p><img alt="Docker" src="https://raw.githubusercontent.com/graviraja/MLOps-Basics/main/images/kibana_flow.png" /></p>
+]]></content:encoded>
+
+
+</item>
+<item>
+<title>getcursor/cursor</title>
+<link>https://github.com/getcursor/cursor</link>
+<guid>https://github.com/getcursor/cursor</guid>
+<content:encoded><![CDATA[
+<div> 关键词：AI Code EditorCursor、bug报告、功能请求、反馈、下载尝试
+
+总结:
+本文为Cursor代码编辑器的问题报告库，旨在收集用户关于软件的bug报告和功能需求。鼓励用户根据自身使用体验对优先级进行排序，以帮助开发团队更好地优化Cursor。Cursor提供了一个智能代码编辑环境，支持多种编程语言，具有强大的代码补全、实时语法检查等功能。为了开始使用，用户需访问指定链接下载并尝试Cursor编辑器。用户的反馈对于提升Cursor的性能至关重要，因此，提出问题或建议时应详细描述遇到的具体情况或期望的功能实现方式，以便开发团队能够准确理解并及时解决。 <div>
+<p>The AI Code Editor</p><hr /><h1>Cursor</h1> 
+<p>This is an issues-only repo for <a href="https://cursor.com">Cursor</a>.</p> 
+<p>Creating new tickets for bugs or feature requests is much appreciated 🙂 Feel free to react to the ones you'd like us to prioritize. Our goal is to make Cursor work great for you, and your feedback is super helpful.</p> 
+<h2>Getting Started</h2> 
+<p>Head over to <a href="https://cursor.com/">our website</a> to download and try out the editor.</p> 
+<h2>Features</h2> 
+<p><a href="https://cursor.com/features">See here</a> for more info on Cursor's features.</p>
+]]></content:encoded>
+
+
+</item>
+<item>
+<title>librespot-org/librespot</title>
+<link>https://github.com/librespot-org/librespot</link>
+<guid>https://github.com/librespot-org/librespot</guid>
+<content:encoded><![CDATA[
+<div> 关键词：librespot、open source、Spotify client、audio playback、development
+
+总结:
+
+librespot 是一款开源的 Spotify 客户端库，允许应用程序通过多种后端控制和播放音乐，同时作为 Spotify Connect 接收器。它提供了官方封闭源代码的 libspotify 所不具备的额外功能。需要注意的是，librespot 只适用于 Spotify 高级版用户，不支持免费账户的有限功能，如有限次数的跳过和广告。
+
+安装 librespot 非常简单，只需运行 `cargo install librespot` 命令即可。使用命令行界面（CLI）创建一个名为“Librespot Speaker”并以 160 kbps 的音频流播放的扬声器是一个示例。
+
+此仓库是由原项目维护者不再活跃维护后建立的，旨在为未来提供维护和升级途径。librespot 的文档正在不断完善中，欢迎贡献。开发者可以通过阅读代码或在 Gitter 上提问来了解更多关于 librespot 的工作原理。
+
+在遇到问题时，请首先检查现有问题，避免重复提交。报告崩溃时，提供 librespot 生成的堆栈跟踪和复现问题所需的信息非常重要。librespot 提供了构建过程的概述，并且支持多种音频后端，包括但不限于 Rodio、ALSA、GStreamer 等。
+
+librespot 通过官方包系统在多个操作系统上可用，例如 Linux、FreeBSD 和 NetBSD。为了构建 librespot，需要安装相应的依赖项，具体取决于操作系统。librespot 还提供了实现无头 Spotify Connect 接收器的示例程序。 <div>
+<p>Open Source Spotify client library</p><hr /><p><a href="https://github.com/librespot-org/librespot/actions"><img alt="Build Status" src="https://github.com/librespot-org/librespot/workflows/test/badge.svg?sanitize=true" /></a> <a href="https://gitter.im/librespot-org/spotify-connect-resources"><img alt="Gitter chat" src="https://badges.gitter.im/librespot-org/librespot.png" /></a> <a href="https://crates.io/crates/librespot"><img alt="Crates.io" src="https://img.shields.io/crates/v/librespot.svg?sanitize=true" /></a></p> 
+<p>Current maintainers are <a href="https://github.com/orgs/librespot-org/people">listed on GitHub</a>.</p> 
+<h1>librespot</h1> 
+<p><em>librespot</em> is an open source client library for Spotify. It enables applications to use Spotify's service to control and play music via various backends, and to act as a Spotify Connect receiver. It is an alternative to the official and <a href="https://pyspotify.mopidy.com/en/latest/#libspotify-s-deprecation">now deprecated</a> closed-source <code>libspotify</code>. Additionally, it will provide extra features which are not available in the official library.</p> 
+<p><em>Note: librespot only works with Spotify Premium. This will remain the case. We will not support any features to make librespot compatible with free accounts, such as limited skips and adverts.</em></p> 
+<h2>Quick start</h2> 
+<p>We're available on <a href="https://crates.io/crates/librespot">crates.io</a> as the <em>librespot</em> package. Simply run <code>cargo install librespot</code> to install librespot on your system. Check the wiki for more info and possible <a href="https://github.com/librespot-org/librespot/wiki/Options">usage options</a>.</p> 
+<p>After installation, you can run librespot from the CLI using a command such as <code>librespot -n "Librespot Speaker" -b 160</code> to create a speaker called <em>Librespot Speaker</em> serving 160 kbps audio.</p> 
+<h2>This fork</h2> 
+<p>As the origin by <a href="https://github.com/plietar/">plietar</a> is no longer actively maintained, this organisation and repository have been set up so that the project may be maintained and upgraded in the future.</p> 
+<h1>Documentation</h1> 
+<p>Documentation is currently a work in progress, contributions are welcome!</p> 
+<p>There is some brief documentation on how the protocol works in the <a href="https://github.com/librespot-org/librespot/tree/master/docs">docs</a> folder.</p> 
+<p><a href="https://github.com/librespot-org/librespot/raw/master/COMPILING.md">COMPILING.md</a> contains detailed instructions on setting up a development environment, and compiling librespot. More general usage and compilation information is available on the <a href="https://github.com/librespot-org/librespot/wiki">wiki</a>. <a href="https://github.com/librespot-org/librespot/raw/master/CONTRIBUTING.md">CONTRIBUTING.md</a> also contains our contributing guidelines.</p> 
+<p>If you wish to learn more about how librespot works overall, the best way is to simply read the code, and ask any questions you have in our <a href="https://gitter.im/librespot-org/spotify-connect-resources">Gitter Room</a>.</p> 
+<h1>Issues &amp; Discussions</h1> 
+<p><strong>We have recently started using Github discussions for general questions and feature requests, as they are a more natural medium for such cases, and allow for upvoting to prioritize feature development. Check them out <a href="https://github.com/librespot-org/librespot/discussions">here</a>. Bugs and issues with the underlying library should still be reported as issues.</strong></p> 
+<p>If you run into a bug when using librespot, please search the existing issues before opening a new one. Chances are, we've encountered it before, and have provided a resolution. If not, please open a new one, and where possible, include the backtrace librespot generates on crashing, along with anything we can use to reproduce the issue, e.g. the Spotify URI of the song that caused the crash.</p> 
+<h1>Building</h1> 
+<p>A quick walkthrough of the build process is outlined below, while a detailed compilation guide can be found <a href="https://github.com/librespot-org/librespot/raw/master/COMPILING.md">here</a>.</p> 
+<h2>Additional Dependencies</h2> 
+<p>We recently switched to using <a href="https://github.com/tomaka/rodio">Rodio</a> for audio playback by default, hence for macOS and Windows, you should just be able to clone and build librespot (with the command below). For Linux, you will need to run the additional commands below, depending on your distro.</p> 
+<p>On Debian/Ubuntu, the following command will install these dependencies:</p> 
+<pre><code class="language-shell">sudo apt-get install build-essential libasound2-dev
+</code></pre> 
+<p>On Fedora systems, the following command will install these dependencies:</p> 
+<pre><code class="language-shell">sudo dnf install alsa-lib-devel make gcc
+</code></pre> 
+<p>librespot currently offers the following selection of <a href="https://github.com/librespot-org/librespot/wiki/Audio-Backends">audio backends</a>:</p> 
+<pre><code>Rodio (default)
+ALSA
+GStreamer
+PortAudio
+PulseAudio
+JACK
+JACK over Rodio
+SDL
+Pipe
+Subprocess
+</code></pre> 
+<p>Please check the corresponding <a href="https://github.com/librespot-org/librespot/wiki/Compiling#general-dependencies">Compiling</a> entry on the wiki for backend specific dependencies.</p> 
+<p>Once you've installed the dependencies and cloned this repository you can build <em>librespot</em> with the default backend using Cargo.</p> 
+<pre><code class="language-shell">cargo build --release
+</code></pre> 
+<h1>Packages</h1> 
+<p>librespot is also available via official package system on various operating systems such as Linux, FreeBSD, NetBSD. <a href="https://repology.org/project/librespot/versions">Repology</a> offers a good overview.</p> 
+<p><a href="https://repology.org/project/librespot/versions"><img alt="Packaging status" src="https://repology.org/badge/vertical-allrepos/librespot.svg?sanitize=true" /></a></p> 
+<h2>Usage</h2> 
+<p>A sample program implementing a headless Spotify Connect receiver is provided. Once you've built <em>librespot</em>, run it using :</p> 
+<pre><code class="language-shell">target/release/librespot --name DEVICENAME
+</code></pre> 
+<p>The above is a minimal example. Here is a more fully fledged one:</p> 
+<pre><code class="language-shell">target/release/librespot -n "Librespot" -b 320 -c ./cache --enable-volume-normalisation --initial-volume 75 --device-type avr
+</code></pre> 
+<p>The above command will create a receiver named <code>Librespot</code>, with bitrate set to 320 kbps, initial volume at 75%, with volume normalisation enabled, and the device displayed in the app as an Audio/Video Receiver. A folder named <code>cache</code> will be created/used in the current directory, and be used to cache audio data and credentials.</p> 
+<p>A full list of runtime options is available <a href="https://github.com/librespot-org/librespot/wiki/Options">here</a>.</p> 
+<p><em>Please Note: When using the cache feature, an authentication blob is stored for your account in the cache directory. For security purposes, we recommend that you set directory permissions on the cache directory to <code>700</code>.</em></p> 
+<h2>Contact</h2> 
+<p>Come and hang out on gitter if you need help or want to offer some: <a href="https://gitter.im/librespot-org/spotify-connect-resources">https://gitter.im/librespot-org/spotify-connect-resources</a></p> 
+<h2>Disclaimer</h2> 
+<p>Using this code to connect to Spotify's API is probably forbidden by them. Use at your own risk.</p> 
+<h2>License</h2> 
+<p>Everything in this repository is licensed under the MIT license.</p> 
+<h2>Related Projects</h2> 
+<p>This is a non exhaustive list of projects that either use or have modified librespot. If you'd like to include yours, submit a PR.</p> 
+<ul> 
+ <li><a href="https://github.com/librespot-org/librespot-golang">librespot-golang</a> - A golang port of librespot.</li> 
+ <li><a href="https://github.com/marcelveldt/plugin.audio.spotify">plugin.audio.spotify</a> - A Kodi plugin for Spotify.</li> 
+ <li><a href="https://github.com/dtcooper/raspotify">raspotify</a> - A Spotify Connect client that mostly Just Works™</li> 
+ <li><a href="https://github.com/Spotifyd/spotifyd">Spotifyd</a> - A stripped down librespot UNIX daemon.</li> 
+ <li><a href="https://github.com/nicokaiser/rpi-audio-receiver">rpi-audio-receiver</a> - easy Raspbian install scripts for Spotifyd, Bluetooth, Shairport and other audio receivers</li> 
+ <li><a href="https://github.com/badfortrains/spotcontrol">Spotcontrol</a> - A golang implementation of a Spotify Connect controller. No playback functionality.</li> 
+ <li><a href="https://github.com/devgianlu/librespot-java">librespot-java</a> - A Java port of librespot.</li> 
+ <li><a href="https://github.com/hrkfdn/ncspot">ncspot</a> - Cross-platform ncurses Spotify client.</li> 
+ <li><a href="https://github.com/xMordax/ansible-role-librespot/tree/master">ansible-role-librespot</a> - Ansible role that will build, install and configure Librespot.</li> 
+ <li><a href="https://github.com/xou816/spot">Spot</a> - Gtk/Rust native Spotify client for the GNOME desktop.</li> 
+ <li><a href="https://github.com/badaix/snapcast">Snapcast</a> - synchronised multi-room audio player that uses librespot as its source for Spotify content</li> 
+</ul>
+]]></content:encoded>
+
+
+</item>
+<item>
+<title>gitroomhq/postiz-app</title>
+<link>https://github.com/gitroomhq/postiz-app</link>
+<guid>https://github.com/gitroomhq/postiz-app</guid>
+<content:encoded><![CDATA[
+<div> 关键词：AI、社交媒体管理、Postiz、团队协作、自动化
+
+文章总结：
+
+Postiz是一款专为社交媒体管理设计的AI工具，它提供了全面的功能来帮助用户规划、发布、分析和优化社交媒体内容。与Buffer.com、Hypefury、Twitter Hunter等竞品相比，Postiz通过AI技术增强了内容创建和发布的效率。
+
+该平台允许用户自动化地安排多平台的社交媒体帖子，同时提供详尽的分析报告，帮助用户了解哪些内容最吸引受众，从而优化未来的发布策略。此外，Postiz支持团队协作功能，允许用户邀请同事加入项目，共同讨论、评论并调度内容。这不仅促进了团队内的沟通，还提高了内容生产的效率和质量。
+
+Postiz采用现代技术栈开发，包括NX（Monorepo）、NextJS（React）和NestJS等，确保了高性能和可扩展性。它还集成了Prisma（默认使用PostgreSQL）、Redis（BullMQ）和Resend（邮件通知）等服务，以增强数据管理和通信功能。
+
+总之，Postiz是一个全面的解决方案，旨在通过AI驱动的自动化功能、深入的数据分析和高效的团队协作，帮助用户更有效地管理他们的社交媒体存在，实现业务增长。 <div>
+<p>📨 Schedule social media posts, measure them, exchange with other members and get a lot of help from AI 🚀</p><hr /><p align="center"> <a href="https://x.com/intent/follow?screen_name=nevodavid" target="_blank"> <img alt="Follow me" src="https://github.com/user-attachments/assets/1562c93f-95c6-4307-8a85-e62003e26348" /> </a> <br /><br /> </p> 
+<p align="center"> <a href="https://postiz.com" target="_blank"> 
+   
+   <source media="(prefers-color-scheme: dark)" /> 
+   <img alt="Novu Logo" src="https://github.com/user-attachments/assets/f0d30d70-dddb-4142-8876-e9aa6ed1cb99" width="280" /> 
+   </a> </p> 
+<p align="center"> <a href="https://opensource.org/licenses/Apache-2.0"> <img alt="License" src="https://img.shields.io/badge/License-Apache%202.0-blue.svg?sanitize=true" /> </a> </p> 
+<div align="center"> 
+ <strong> <h2>Your ultimate AI social media scheduling tool</h2><br /> <a href="https://postiz.com">Postiz</a>: An alternative to: Buffer.com, Hypefury, Twitter Hunter, Etc...<br /><br /> </strong> Postiz offers everything you need to manage your social media posts,
+ <br />build an audience, capture leads, and grow your business. 
+</div> 
+<div align="center" class="flex"> 
+ <br /> 
+ <img alt="Instagram" src="https://postiz.com/svgs/socials/Instagram.svg?sanitize=true" width="32" /> 
+ <img alt="Youtube" src="https://postiz.com/svgs/socials/Youtube.svg?sanitize=true" width="32" /> 
+ <img alt="Dribbble" src="https://postiz.com/svgs/socials/Dribbble.svg?sanitize=true" width="32" /> 
+ <img alt="Linkedin" src="https://postiz.com/svgs/socials/Linkedin.svg?sanitize=true" width="32" /> 
+ <img alt="Reddit" src="https://postiz.com/svgs/socials/Reddit.svg?sanitize=true" width="32" /> 
+ <img alt="TikTok" src="https://postiz.com/svgs/socials/TikTok.svg?sanitize=true" width="32" /> 
+ <img alt="Facebook" src="https://postiz.com/svgs/socials/Facebook.svg?sanitize=true" width="32" /> 
+ <img alt="Pinterest" src="https://postiz.com/svgs/socials/Pinterest.svg?sanitize=true" width="32" /> 
+ <img alt="Threads" src="https://postiz.com/svgs/socials/Threads.svg?sanitize=true" width="32" /> 
+</div> 
+<p align="center"> <br /> <a href="https://docs.postiz.com" rel="dofollow"><strong>Explore the docs »</strong></a> <br /> <br /> <a href="https://platform.postiz.com">Register</a> · <a href="https://discord.postiz.com">Join Our Discord</a> · <a href="https://twitter.com/nevodavid">X</a> · <a href="https://gitroom.com">Gitroom</a> </p> 
+<br /> 
+<p align="center"> 
+ <video src="https://github.com/user-attachments/assets/05436a01-19c8-4827-b57f-05a5e7637a67" width="100%"></video> </p> 
+<h2>✨ Features</h2> 
+<table> 
+ <thead> 
+  <tr> 
+   <th><img alt="Image 1" src="https://github.com/user-attachments/assets/a27ee220-beb7-4c7e-8c1b-2c44301f82ef" /></th> 
+   <th><img alt="Image 2" src="https://github.com/user-attachments/assets/eb5f5f15-ed90-47fc-811c-03ccba6fa8a2" /></th> 
+  </tr> 
+ </thead> 
+ <tbody> 
+  <tr> 
+   <td><img alt="Image 3" src="https://github.com/user-attachments/assets/d51786ee-ddd8-4ef8-8138-5192e9cfe7c3" /></td> 
+   <td><img alt="Image 4" src="https://github.com/user-attachments/assets/91f83c89-22f6-43d6-b7aa-d2d3378289fb" /></td> 
+  </tr> 
+ </tbody> 
+</table> 
+<h1>Intro</h1> 
+<ul> 
+ <li>Schedule all your social media posts (many AI features)</li> 
+ <li>Measure your work with analytics.</li> 
+ <li>Collaborate with other team members to exchange or buy posts.</li> 
+ <li>Invite your team members to collaborate, comment, and schedule posts.</li> 
+ <li>At the moment there is no difference between the hosted version to the self-hosted version</li> 
+</ul> 
+<h2>Tech Stack</h2> 
+<ul> 
+ <li>NX (Monorepo)</li> 
+ <li>NextJS (React)</li> 
+ <li>NestJS</li> 
+ <li>Prisma (Default to PostgreSQL)</li> 
+ <li>Redis (BullMQ)</li> 
+ <li>Resend (email notifications)</li> 
+</ul> 
+<h2>Quick Start</h2> 
+<p>To have the project up and running, please follow the <a href="https://docs.postiz.com/quickstart">Quick Start Guide</a></p> 
+<h2></h2> 
+<h1>License</h1> 
+<p>This repository's source code is available under the <a href="https://raw.githubusercontent.com/gitroomhq/postiz-app/main/LICENSE">Apache 2.0 License</a>.</p> 
+<p><br /><br /><br /></p> 
+<p align="center"> <a href="https://www.g2.com/products/postiz/take_survey" target="blank"><img alt="g2" src="https://github.com/user-attachments/assets/892cb74c-0b49-4589-b2f5-fbdbf7a98f66" /></a> </p>
+]]></content:encoded>
+
+
+</item>
 
 <item>
 <title>continuedev/continue</title>
