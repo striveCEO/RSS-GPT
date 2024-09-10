@@ -4,6 +4,407 @@
 <title>Ethereum Research - Latest topics</title>
 <link>https://ethresear.ch/latest</link>
 
+<item>
+<title>Introducing CCTP Express: a faster and cheaper way to use CCTP</title>
+<link>https://ethresear.ch/t/introducing-cctp-express-a-faster-and-cheaper-way-to-use-cctp/20396</link>
+<guid>https://ethresear.ch/t/introducing-cctp-express-a-faster-and-cheaper-way-to-use-cctp/20396</guid>
+<content:encoded><![CDATA[
+<div> 关键词：CCTP Express、USDC、Cross-Chain Transfer Protocol（CCTP）、off-chain attestation、trustless design
+
+总结：
+CCTP Express 是一种旨在增强 CCTP（Cross-Chain Transfer Protocol）并提供更快、更低成本体验的跨链桥接系统。它基于意图进行桥接，通过采用“填空支付优先”机制加速交易过程。CCTP Express 设计为信任无碍的系统，允许任何人都可以作为填空者或数据守护人参与其中，无需许可。为了降低填空者面临的风险，CCTP Express 引入了保险费，该费用根据用户定义的发起截止时间变化。通过优化交易成本和数据传输，CCTP Express 降低了用户和填空者的交易费用，同时通过将偿还和重新平衡交易打包来节约成本，并利用哈希形式传输跨链消息以减少数据大小。
+
+CCTP Express 采用中心化与分散化的架构，由请求报价机制、填空网络以及结算层组成，确保用户、填空者和 CCTP 的共赢。其设计遵循 ERC-7683 标准，强调行业标准的一致性，促进不同跨链意图系统之间的互操作性和资源共享。通过这种设计，CCTP Express 增强了用户体验，提高了服务效率，并促进了市场的竞争性。 <div>
+<p>By <a href="https://twitter.com/wels_eth" rel="noopener nofollow ugc">Wel</a> and <a href="https://twitter.com/alau1218" rel="noopener nofollow ugc">Alan</a> on behalf of CCTP Express<br />
+<em>For most recent information about CCTP Express, please visit <a href="https://twitter.com/cctpexpress" rel="noopener nofollow ugc">our X</a>.</em></p>
+<h1><a class="anchor" href="https://ethresear.ch#p-49895-motivation-1" name="p-49895-motivation-1"></a>Motivation</h1>
+<p>We recognize the vital role stablecoins play in the Web3 ecosystem, especially within DeFi. Among them, USDC stands out for its high transparency and regulatory compliance. Circle, the issuer of USDC, introduced the Cross-Chain Transfer Protocol (CCTP) to securely transfer USDC across chains using a native burn-and-mint mechanism.</p>
+<p>CCTP is a game-changing tool that drives USDC adoption in the multichain world, allowing developers to create applications that offer secure, 1:1 USDC transfers across blockchains. This eliminates the added risks of using bridges.</p>
+<p>However, CCTP has a key limitation: wait time. Its off-chain attestation service requires block confirmations on the source chain to ensure finality before minting USDC on the destination chain. This process can take anywhere from 20 seconds to 13 minutes, which is not ideal for users needing instant transfers. To address this, CCTP Express was designed to provide instant USDC bridging while leveraging CCTP. We position CCTP Express as a booster tool of CCTP, enabling users to benefit from faster and cheaper transactions.</p>
+<p>We believe CCTP Express is an essential tool to achieve chain abstraction by providing an instant USDC bridging experience.</p>
+<h1><a class="anchor" href="https://ethresear.ch#p-49895-tldr-2" name="p-49895-tldr-2"></a>TL;DR</h1>
+<ul>
+<li>CCTP Express is positioned as a booster tool to use CCTP, where users enjoys a faster and cheaper experience;</li>
+<li>It is an intent-base bridging system built upon CCTP, instant USDC bridging is enabled by the “Filler-Pay-First” mechanism;</li>
+<li>CCTP Express is a trustless design, allowing anyone to participate as a filler or datadaemon without permission;</li>
+<li>To mitigate the reorg risk exposed to the fillers, CCTP Express introduces an insurance fee that varies based on the user-defined initiateDeadline.;</li>
+<li>In order to lower the transaction costs, repayment and rebalancing transactions are bundled, cross-chain messages are transmitted as hashes to reduce data size.</li>
+</ul>
+<h1><a class="anchor" href="https://ethresear.ch#p-49895-primary-principles-3" name="p-49895-primary-principles-3"></a>Primary principles</h1>
+<p><strong>1. CCTP Dependency</strong><br />
+CCTP Express is specifically designed to enhance CCTP. All fund rebalancing must be done exclusively through CCTP to avoid exposure to potential risks associated with other bridges.</p>
+<p><strong>2. Decentralization</strong><br />
+The system must be trustless to ensure maximum protection for everyone’s assets. Players in the system, including Fillers and Datamaemon, are permissionless.</p>
+<p><strong>3. Win-Win-Win</strong><br />
+The design should benefit all stakeholders — users, fillers, and CCTP. Users gain a faster and more cost-effective experience, fillers receive satisfactory rewards while their funds are safeguarded, and CCTP grows stronger through the support of CCTP Express.</p>
+<h1><a class="anchor" href="https://ethresear.ch#p-49895-key-concepts-4" name="p-49895-key-concepts-4"></a>Key concepts</h1>
+<p>CCTP Express is an intent based cross-chain bridging system built upon CCTP. The key to speed up the transaction is the adoption of the “Filler-pay-first” mechanism.</p>
+<p>When a user submits a bridging intent, fillers initiate an order on the origin chain, then immediately call a fillOrder on the destination chain and transfer funds to the user accordingly.</p>
+<p>The system periodically validates the payments and repays to fillers in batches. Rebalancing across domains is done across CCTP if needed. This settlement process is out of the scene of the users, the repayments and rebalancing are bundled to save costs.</p>
+<h1><a class="anchor" href="https://ethresear.ch#p-49895-dive-deeper-5" name="p-49895-dive-deeper-5"></a>Dive Deeper</h1>
+<p>CCTP Express adopts a Hub-and-Spoke architecture, it can be broken down into a 3-layered system: a request for quote mechanism to obtain users’ bridging intent, enabling a filler network to claim and fill those orders, and lastly a settlement layer periodically repay fillers through CCTP and utilizing attestation service from Iris (Circle’s off-chain attestation service).</p>
+<p>Our design adheres to ERC-7683, emphasizing the importance of aligning with industry standards. This ensures that cross-chain intent systems can interoperate and share infrastructure like order dissemination services and filler networks. By fostering this interoperability, we enhance the end-user experience by increasing competition for fulfilling user intents. Below is a diagram of the architecture of CCTP Express:</p>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/0/3/037c645827e04b44e5ed2f79fedaddff4f92eab3.jpeg" title="Architecture of CCTP Express"><img alt="Architecture of CCTP Express" height="451" src="https://ethresear.ch/uploads/default/optimized/3X/0/3/037c645827e04b44e5ed2f79fedaddff4f92eab3_2_690x451.jpeg" width="690" /></a></div><p></p>
+<p><strong>Order initiation</strong></p>
+<ol>
+<li>User signs an off-chain message defining the parameters of an order:</li>
+</ol>
+<pre><code class="lang-auto"> function deposit(
+        bytes32 recipient,
+        bytes32 inputToken,
+        bytes32 outputToken,
+        uint256 inputAmount,
+        uint256 outputAmount,
+        uint32 destinationDomainId,        
+        bytes32 exclusiveFiller,
+        uint32 exclusivityDeadline,
+        uint32 initiateDeadline,
+        uint32 fillDeadline,
+        bytes calldata message
+    ) external;
+</code></pre>
+<ol start="2">
+<li>The order is disseminated to Fillers. The Filler calls <code>initiate</code> on the origin chain SpokePool. A <code>CrossChainOrder</code> will be created and the user’s funds are transferred to the SpokePool for escrow.</li>
+<li>The SpokePool on origin chain submits a <code>Deposit</code> message to Circle’s off-chain attestation service, Iris, for attestation and subsequently a <code>DepositAttestation</code> will be generated.</li>
+</ol>
+<p><strong>Filler Network Fills Order</strong></p>
+<ol start="4">
+<li>
+<p>Fillers call <code>fillOrder</code> on the destination SpokePool with their own assets which are then transferred to the user from the SpokePool.</p>
+</li>
+<li>
+<p>The SpokePool on destination chain submits a <code>Fill</code> message to Iris and a <code>FillAttestation</code> will be generated.</p>
+</li>
+</ol>
+<p><strong>Settlement</strong></p>
+<ol start="6">
+<li>
+<p>A permissionless Datadaemon retrieves the <code>DepositAttestation</code> and <code>FillAttestation</code> and relays to the Hub Pool on the Settlement Chain.</p>
+</li>
+<li>
+<p>Periodically, the Datadaemon calls <code>repayFunds</code> and <code>rebalanceFunds</code> at the Hub Pool, which would collect all the attestations and perform the following steps:</p>
+</li>
+</ol>
+<ul>
+<li>
+<p>Iterate through a list of attestations, a valid filled order is supported by both <code>Deposit</code> and <code>Fill</code> attestation.</p>
+</li>
+<li>
+<p>Determine the aggregate settlement sum from all valid fills for each filler.</p>
+</li>
+<li>
+<p>If there is sufficient funds on SpokePool to repay filler, a <code>repayFunds</code> message in the form of merkle root hash is sent to Iris.</p>
+</li>
+<li>
+<p>For the remaining outstanding payment, the Hub Pool will send a <code>rebalanceFunds</code> message in the form of merkle root hash to Iris, which indicates how much a SpokePool with surplus funds would send to another pool in deficit to fulfill the need for repayment.</p>
+</li>
+</ul>
+<ol start="8">
+<li>
+<p>Once the <code>repayFunds</code> and <code>rebalanceFunds</code> messages get attested by Iris, they are sent to respective SpokePools. Datamaemon will call <code>repayFunds</code> and <code>rebalanceFunds</code> on SpokePools with merkle root hash and their respective transaction details. Accordingly, funds would be repaid to fillers and sent to other SpokePools to ensure sufficient funds for handling repayments.</p>
+</li>
+<li>
+<p>Repay funds to fillers from the SpokePool on destination chain, and rebalance funds across SpokePools on different chains via CCTP.</p>
+</li>
+</ol>
+<p><strong>Cctp Fill Settlement</strong></p>
+<ol start="10">
+<li>
+<p>In case of an order initiated by Fillers not being filled, anyone can call <code>cctpFill</code> and mark the order status on destination chain SpokePool to <code>RequestCctpFill</code> and block any filler from filling it. At the same time, the SpokePool will emit a <code>CctpFill</code> message to Iris for attestation.</p>
+</li>
+<li>
+<p>The <code>CctpFillAttestation</code> will be used to replace the <code>FillAttestation</code> mentioned in 5. and allow the user fund to be transferred via the CCTP route.</p>
+</li>
+</ol>
+<h1><a class="anchor" href="https://ethresear.ch#p-49895-risk-and-solutions-6" name="p-49895-risk-and-solutions-6"></a>Risk and solutions</h1>
+<p><strong>Reorg risk</strong><br />
+The reorg risk is uniquely borne by fillers. If the filler fills the intent too fast without waiting for the finality on the source chain, the source chain may reorg and cause a loss to the filler since the intent has been filled on the destination chain and the filler would end up in empty hand.</p>
+<p>The reorg risk is effectively mitigated by the <strong>Insurance Fee</strong>, which varies based on the <code>initiateDeadline</code> specified by the user. If the <code>initiateDeadline</code> is sufficiently long, the filler can reinitiate the <code>CrossChainOrder</code> on the origin chain in the event of a reorg, ensuring the user’s funds are transferred again. The insurance fee is calculated using below formula:</p>
+<p><img alt="Formula of Insurance Fee" height="96" src="https://ethresear.ch/uploads/default/original/3X/8/f/8f2626d45b13f0ec864c696fa581f0af9f7491b6.png" width="244" /></p>
+<p>Where:<br />
+<em>f(t)</em> is the insurance fee which is a function varies with <em>t</em><br />
+<em>V</em> is the trading volume, representing the maximum insurance fee<br />
+<em>e</em> is the base of the natural logarithm<br />
+<em>k</em> is a constant that control the descending rate of the fee<br />
+<em>t</em> is the time between order creation time and the initiateDeadline<br />
+<em>T</em> is the time required for finality on the origin chain</p>
+<p>The insurance fee varies with the <code>initiateDeadline</code>- it decreases with the increment of time between the order creation time and the <code>initiateDeadline</code>:</p>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/1/6/1626648dc74ed8b71e5d3e7f66c0b1d9731baba1.png" title=""><img alt="" height="250" src="https://ethresear.ch/uploads/default/optimized/3X/1/6/1626648dc74ed8b71e5d3e7f66c0b1d9731baba1_2_321x250.png" width="321" /></a></div><p></p>
+<p>Since the insurance fee decreases significantly when the <code>initiateDeadline</code> is long (it drops to nearly zero if it is 2x of the time needed for finality on the origin chain), a normal user is likely to set a long initiateDeadline to avoid paying the fee, minimizing the reorg risk for the filler.</p>
+<p><strong>High system costs</strong><br />
+The complexity of the design apparently implies higher costs compared to bridging directly using CCTP. To align with our goal of providing a faster and cheaper way to use CCTP, we mitigate costs through two key strategies: <em><strong>transaction bundling</strong></em> and <em><strong>data compression</strong></em>.</p>
+<p>Transactions bundling-</p>
+<p>Datadaemon works periodically to call repayment and rebalancing on the hub pool. This interval is adjustable to make sure a sufficient number of transactions are processed in each batch.</p>
+<p>In this architecture design, gas costs are primarily incurred in rebalancing via CCTP and fund transfers. By processing rebalancing in batches and handling repayments in aggregate sums to the fillers, these costs are distributed across multiple transactions, reducing the costs on any single transaction.</p>
+<p>Data Compression-</p>
+<p>Cross-chain messages are transmitted between spoke pools and the hub pool via Iris, Circle’s off-chain attestation service. To minimize data size and reduce gas costs, these messages are sent in the form of a hash.</p>
+<p>For a detailed comparison of gas consumption between CCTP and CCTP Express, check out <a href="https://medium.com/@cctpexpress/cctp-express-is-cheaper-than-cctp-2c527e0afa62" rel="noopener nofollow ugc">this article</a>.</p>
+<h1><a class="anchor" href="https://ethresear.ch#p-49895-faq-7" name="p-49895-faq-7"></a>FAQ</h1>
+<p><strong>1. What does it mean to the end user?</strong><br />
+When using CCTP Express’s front end or applications integrated with CCTP Express, users benefit from a significantly faster and cheaper way to bridge USDC across chains. By leveraging CCTP as the underlying asset bridge, the system enhances user experience while maintaining robust security.</p>
+<p><strong>2. What are the possible use cases?</strong><br />
+We believe CCTP Express is essential to achieve chain abstraction by providing an instant USDC bridging experience. Possible use cases included-</p>
+<p><em>USDC-denominated dApps</em><br />
+USDC is widely adopted in various dApps, e.g. dYdX and Polymarket. dApps can integrate CCTP Express SDK to offer their users instant transfer in and out from all CCTP supported chains without the usual waiting time.</p>
+<p><em>Payment Network</em><br />
+CCTP Express can offer instant settled transaction experience for users across chains, enabling them to pay their USDC for a coffee from any CCTP supported chain.</p>
+<p><em>Money Lego</em><br />
+Arbitragers and Solvers can utilize CCTP Express to be the backbone of their cross chain actions. It’s highly undesirable for arbitragers or solvers to wait for long in the high speed crypto world, CCTP Express can offer them superior speed without worrying about security as CCTP Express is using CCTP as the underlying bridge.</p>
+<p><strong>3. With a similar idea of providing cross chain bridging powered by off chain agents, how is CCTP Express different from other intent-based bridges, say Across?</strong></p>
+<p>The primary distinction between CCTP Express and Across are: positioning and settlement mechanism.</p>
+<p><em>Positioning -</em></p>
+<p>While both protocols are intent-based bridges powered by fillers/relayers, CCTP Express is positioned to be a booster tool to use CCTP.</p>
+<p>Given this focus, CCTP Express is closely integrated with CCTP and evolves in tandem with it. For instance, if CCTP supports EURC, CCTP Express will promptly support it as well.</p>
+<p>And this alignment also applies to the choice of picking which chain CCTP Express supports. CCTP Express aims to cover all EVM and non-EVM chains CCTP operates. And like<a href="https://developers.circle.com/stablecoins/docs/message-format#message-header" rel="noopener nofollow ugc"> CCTP</a>, CCTP Express adopts the bytes32 address format, instead of the 20 byte address used in EVM, to handle 32 byte addresses in many non-EVM chains.</p>
+<p>In contrast, Across is limited to EVM chains only, as it has a<a href="https://docs.across.to/resources/new-chain-requests" rel="noopener nofollow ugc"> hard requirement</a> to support EVM- chains only.</p>
+<p><em>Settlement mechanism -</em></p>
+<p>In CCTP Express, the Hub Pool smart contract utilizes the Iris attestation service used in CCTP to relay and verify messages. Deposit and Filled messages from various Spoke Pools are sent to Iris for attestation and then collected in the Hub Pool, which processes repayments on-chain.</p>
+<p>In contrast, Across uses canonical bridges to relay messages and utilizes<a href="https://docs.across.to/use-cases/settle-cross-chain-intents" rel="noopener nofollow ugc"> UMA</a> to optimistically verify fill events off-chain. Since UMA works off-chain, an interval is needed as a dispute window.</p>
+<h1><a class="anchor" href="https://ethresear.ch#p-49895-discuss-with-us-8" name="p-49895-discuss-with-us-8"></a>Discuss with Us</h1>
+<p>To shape a better product, we are keen to discuss with fillers and teams who need instant USDC bridging. If anyone is interested in CCTP Express, we have a public telegram group here to discuss about it: <a href="https://t.me/cctpexpress" rel="noopener nofollow ugc">Join Group Chat</a></p>
+            <p><small>1 post - 1 participant</small></p>
+            <p><a href="https://ethresear.ch/t/introducing-cctp-express-a-faster-and-cheaper-way-to-use-cctp/20396">Read full topic</a></p>
+]]></content:encoded>
+<pubDate>Tue, 10 Sep 2024 00:14:12 +0000</pubDate>
+<pubDate>Tue, 10 Sep 2024 00:14:12 +0000</pubDate>
+</item>
+<item>
+<title>Fake GLV: You don't need an efficient endomorphism to implement GLV-like scalar multiplication in SNARK circuits</title>
+<link>https://ethresear.ch/t/fake-glv-you-dont-need-an-efficient-endomorphism-to-implement-glv-like-scalar-multiplication-in-snark-circuits/20394</link>
+<guid>https://ethresear.ch/t/fake-glv-you-dont-need-an-efficient-endomorphism-to-implement-glv-like-scalar-multiplication-in-snark-circuits/20394</guid>
+<content:encoded><![CDATA[
+<div> 关键词：GLV算法、非标准椭圆曲线、SNARK电路、P-256曲线、ECDSA验证优化
+
+总结:
+
+本文探讨了在没有有效共轭的情况下，如何在SNARK电路中实现类似GLV的标量乘法技术。GLV算法通常用于具有有效共轭的椭圆曲线，以加速标量乘法操作。然而，对于像P-256这样的曲线，由于缺乏有效共轭，传统的GLV方法不可用。文章提出了一种“假GLV”技巧，通过引入辅助参数u和v来实现优化。
+
+1. **传统标量乘法**: 文章首先介绍了标准的标量乘法算法，如双倍加算法，以及在SNARK电路中的实现挑战，特别是对于条件分支的处理。
+
+2. **GLV算法介绍**: 接着，文章解释了GLV算法的工作原理，特别强调了当椭圆曲线具有有效共轭时，如何利用该特性加速标量乘法计算。
+
+3. **假GLV技巧**: 为了克服P-256等曲线缺乏有效共轭的问题，文章提出了“假GLV”技巧，通过引入辅助参数u和v，使得即使在没有有效共轭的情况下，也能实现类似的加速效果。
+
+4. **实施与性能比较**: 通过在gnark库中的实现，文章展示了该技术在P-256和其他曲线上的性能提升，特别是在ECDSA验证过程中的应用，相比于传统方法，性能显著提高。
+
+5. **案例研究与应用**: 最后，文章引用了实际应用案例，如基于zk-SNARKs的WebAuthn和P-256签名验证，展示了该技术的实际效益，特别是在减少证明大小和验证时间方面的优势。
+
+通过上述技巧和实施，文章提供了一种在缺乏有效共轭的椭圆曲线上进行高效标量乘法的新途径，这对于依赖于P-256或其他类似曲线的系统具有重要意义，特别是在需要在SNARK电路中执行ECDSA验证的场景中。 <div>
+<pre><code class="lang-auto"> _____     _           ____ _ __     __
+|  ___|_ _| | _____   / ___| |\ \   / /
+| |_ / _` | |/ / _ \ | |  _| | \ \ / /  
+|  _| (_| |   &lt;  __/ | |_| | |__\ V /   
+|_|  \__,_|_|\_\___|  \____|_____\_/   
+</code></pre>
+<h1><a class="anchor" href="https://ethresear.ch#p-49892-you-dont-need-an-efficient-endomorphism-to-implement-glv-like-scalar-multiplication-in-snark-circuits-1" name="p-49892-you-dont-need-an-efficient-endomorphism-to-implement-glv-like-scalar-multiplication-in-snark-circuits-1"></a>You don’t need an efficient endomorphism to implement GLV-like scalar multiplication in SNARK circuits</h1>
+<ul>
+<li><a href="https://ethresear.ch#Introduction">Introduction</a>
+<ul>
+<li><a href="https://ethresear.ch#Other-applications">Other applications</a></li>
+</ul>
+</li>
+<li><a href="https://ethresear.ch#Background">Background</a></li>
+<li><a href="https://ethresear.ch#The-fake-GLV-trick6">The fake GLV trick</a>
+<ul>
+<li><a href="https://ethresear.ch#Implementation7">Implementation</a>
+<ul>
+<li><a href="https://ethresear.ch#Benchmark">Benchmark</a></li>
+<li><a href="https://ethresear.ch#Comparison">Comparison</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2><a class="anchor" href="https://ethresear.ch#p-49892-introduction-2" name="p-49892-introduction-2"></a>Introduction</h2>
+<p>P-256, also known as secp256r1 and prime256v1, is a 256-bit prime field Weierstrass curve standardized by the NIST. It is widely adopted in internet systems, which explains its myriad use cases in platforms such as TLS, DNSSEC, Apple’s Secure Enclave, Passkeys, Android Keystore, and Yubikey. The key operation in elliptic curves based cryptography is the scalar multiplication. When the curve is equipped with an efficient endomorphism it is possible to speed up this operation through the well-known <a href="https://www.iacr.org/archive/crypto2001/21390189.pdf" rel="noopener nofollow ugc">GLV</a> algorithm. P-256 does unfortunately not have an efficient endomorphism (see <a href="https://neuromancer.sk/std/nist/P-256#" rel="noopener nofollow ugc">parameters</a>) to enjoy this speedup.</p>
+<p>Verifying ECDSA signatures on Ethereum through precompiled contracts, i.e. smart contracts built into the Ethereum protocol (there are only 9) is only possible with the <em>secp256k1</em> curve and not the P-256.<br />
+Verifying ECDSA signatures on P-256 requires computing scalar multiplications in Solidity and is especially useful for smart-contract wallets, enabling hardware-based signing keys and safer, easier self-custody. Different solutions can bring P-256 signatures on-chain. There are primarily three interesting approaches: (zk)-SNARK based verifiers, smart contract verifiers (e.g. <a href="https://eprint.iacr.org/2023/939.pdf" rel="noopener nofollow ugc">[Dubois23]</a>, <a>Ledger/FCL</a> (deprecated), <a href="https://github.com/get-smooth/crypto-lib" rel="noopener nofollow ugc">smoo.th/SCL</a> and <a href="https://daimo.com/blog/p256verifier" rel="noopener nofollow ugc">daimo/p256verifier</a>), and native protocol precompiles (<a href="https://github.com/ethereum/RIPs/blob/196f28d2164f30333b503481e7da954d4bf32ea3/RIPS/rip-7212.md" rel="noopener nofollow ugc">EIP/RIP 7212</a>).</p>
+<p>Using SNARK (succinctness) properties, provides a great way to reduce gas cost for computation on Ethereum (e.g. ~232k gas for <a href="https://eprint.iacr.org/2016/260.pdf" rel="noopener nofollow ugc">Groth16</a>, ~285k gas for <a href="https://eprint.iacr.org/2019/953.pdf" rel="noopener nofollow ugc">PLONK</a> and ~185k gas for <a href="https://eprint.iacr.org/2021/1167" rel="noopener nofollow ugc">FFLONK</a>). This is very competitive with (and sometimes better that) the currently gas-optimal smart contract verifier. Moreover one can batch many ECDSA verifications in a single proof, amortizing thus the gas cost. However verifying P-256 signatures in a SNARK circuit can be very expensive i.e. long proving time. This is because the field where the points on the P-256 curve lie is different than the field where the SNARK computation is usually expressed. To be able to verify the proof onchain through the procompile the SNARK field needs to be the <a href="https://hackmd.io/@jpw/bn254" rel="noopener nofollow ugc">BN254</a> scalar field. Different teams tried to implement the ECDSA verification on P-256 in a BN254 SNARK circuit efficiently. Among these: <a href="https://github.com/zkwebauthn/webauthn-halo2" rel="noopener nofollow ugc">zkwebauthn/webauthn-halo2</a>, <a href="https://github.com/zkwebauthn/webauthn-circom" rel="noopener nofollow ugc">https://github.com/zkwebauthn/webauthn-circom</a> and <a href="https://github.com/privacy-scaling-explorations/circom-ecdsa-p256" rel="noopener nofollow ugc">PSE/circom-ecdsa-p256</a>.</p>
+<p><em>If P-256 had an efficient endomorphism we could have optimized the proving time a great deal!</em></p>
+<p>In this note we show a way to implement a GLV-like scalar multiplications in-circuit without having an efficient endomorphism.</p>
+<h3><a class="anchor" href="https://ethresear.ch#p-49892-other-applications-3" name="p-49892-other-applications-3"></a>Other applications</h3>
+<ul>
+<li>This technique can be applied to any elliptic curve without an efficient endomorphism (e.g. <a href="https://en.wikipedia.org/wiki/Curve25519" rel="noopener nofollow ugc">Curve25519</a>, <a href="https://en.wikipedia.org/wiki/P-384" rel="noopener nofollow ugc">P-384</a>, MNT-753 (<a href="https://coinlist.co/build/coda/pages/MNT4753" rel="noopener nofollow ugc">k=4</a>, <a href="https://coinlist.co/build/coda/pages/MNT6753" rel="noopener nofollow ugc">k=6</a>), <a href="https://docs.starknet.io/architecture-and-concepts/cryptography/stark-curve/" rel="noopener nofollow ugc">STARK curve</a>, <a href="https://eprint.iacr.org/2024/869" rel="noopener nofollow ugc"><span class="math">\mathcal{B}</span> of “cycle5”</a>, …). See this <a href="https://neuromancer.sk/std/" rel="noopener nofollow ugc">database</a> for other curves.</li>
+<li>This would question the choice of <a href="https://eprint.iacr.org/2021/1152" rel="noopener nofollow ugc">Bandersnatch</a> (<em>an embedded endomorphism-equipped curve over BLS12-381</em>) over <a href="https://github.com/zkcrypto/jubjub" rel="noopener nofollow ugc">Jubjub</a> (<em>an embedded curve over BLS12-381 without endomorphism</em>) for <a href="https://verkle.info/" rel="noopener nofollow ugc">Ethereum Verkle trees</a>.</li>
+<li>This can speedup ECDSA verification in <a href="https://docs.cairo-lang.org/hello_starknet/signature_verification.html" rel="noopener nofollow ugc">Starknet</a> and <a href="https://www.cairo-lang.org/" rel="noopener nofollow ugc">Cairo</a> (through the <a href="https://docs.starknet.io/architecture-and-concepts/cryptography/stark-curve/" rel="noopener nofollow ugc">STARK curve</a>).</li>
+<li>This can speedup natively the folding step (à la Nova) of Ed25519 signatures through the 2-cycles proposed <a href="https://moderncrypto.org/mail-archive/curves/2024/001050.html" rel="noopener nofollow ugc">here</a> by Aurore Guillevic.</li>
+</ul>
+<h2><a class="anchor" href="https://ethresear.ch#p-49892-background-4" name="p-49892-background-4"></a>Background</h2>
+<h3><a class="anchor" href="https://ethresear.ch#p-49892-standard-scalar-multiplication-5" name="p-49892-standard-scalar-multiplication-5"></a>Standard scalar multiplication</h3>
+<p>Let <span class="math">E</span> be an elliptic curve defined over the prime field <span class="math">\mathbb{F}_p</span> and let <span class="math">r</span> be a prime divisor of the curve order <span class="math">\#E(\mathbb{F}_p)</span> (i.e. the number of points).<br />
+Let <span class="math">s \in \mathbb{F}_r</span> and <span class="math">P(x,y) \in E(\mathbb{F}_p)</span>, we are interested in proving scalar multiplication <span class="math">s\cdot P</span> over the <span class="math">r</span>-torsion subgroup of <span class="math">E</span>, denoted <span class="math">E[r]</span> (i.e. the subset of points of order <span class="math">r</span>).</p>
+<p>The simplest algorithm is the standard left-to-right <em>double-and-add</em>:</p>
+<pre><code class="lang-auto">INPUT: s = (s_{t−1},..., s_1, s_0), P ∈ E(Fp).
+OUTPUT: sP.
+1. Q ← ∞.
+2. For i from t−1 downto 0 do
+    2.1 Q ← 2Q.
+    2.2 If s_i = 1 then Q ← Q + P.
+3. Return(Q).
+</code></pre>
+<p>If/else branching is not possible in SNARK circuits so this is replaced by constant window table lookups inside the circuit. This can be achieved using polynomials which vanish at the constants that aren’t being selected, i.e. a 1-bit table lookup <code>Q ← s_i * Q + (1 - s_i) * (Q+P)</code>. Hence this double-and-add algorithm requires <span class="math">t</span> doublings, <span class="math">t</span> additions and <span class="math">t</span> 1-bit table lookup.<br />
+This can be extended to <em>windowed</em> double-and-add, i.e. scanning more than a bit per iteration using larger window tables, but the multiplicative depth of the evaluation increases exponentially. We use affine coordinates for doubling/adding points because inverses cost as much as multiplications, i.e. instead of checking that <span class="math">1/x</span> is <span class="math">y</span> we provide <span class="math">y</span> out-circuit and check in-circuit that <span class="math">x\cdot y = 1</span>. However since we start with <span class="math">Q ← ∞</span> it is infeasible to avoid conditional branching since affine formulas are incomplete. Instead, we scan the bits right-to-left and assume that the first bit <code>s_0</code> is 1 (so that we start at <code>Q ← P</code>), we double the input point <code>P</code> instead of the accumulator <code>Q</code> in this algorithm and finally conditionally subtract (using the 1-bit lookup) <code>P</code> if <code>s_0</code> was 0.</p>
+<pre><code class="lang-auto">INPUT: s = (s_{t−1},..., s_1, s_0), P ∈ E(Fp).
+OUTPUT: sP.
+1. Q ← P.
+2. For i from 1 to t−1 do
+    2.1 If s_i = 1 then Q ← Q + P.
+    2.2 P ← 2P.
+3. if s_0 = 0 then Q ← Q - P
+4. Return(Q).
+</code></pre>
+<h3><a class="anchor" href="https://ethresear.ch#p-49892-glv-scalar-multiplication-6" name="p-49892-glv-scalar-multiplication-6"></a>GLV scalar multiplication</h3>
+<p>However it is well known that if the curve is equipped with an efficient endomorphism then there exists a faster algorithm known as <a href="https://www.iacr.org/archive/crypto2001/21390189.pdf" rel="noopener nofollow ugc">[GLV]</a>.</p>
+<p><strong>Example 1 :</strong> suppose that <span class="math">E</span> has Complex Multiplication (CM) with discrimant <span class="math">-D=-3</span>, i.e. <span class="math">E</span> is of the form <span class="math">y^2=x^3+b</span>, with <span class="math">b \in \mathbb{F}_p</span>. This is the case of <code>BN254</code>, <code>BLS12-381</code> and <code>secp256k1</code> elliptic curves used in Ethereum. There is an efficient endomorphism <span class="math">\phi: E \rightarrow E</span> defined by <span class="math">(x,y)\mapsto (\omega x,y)</span> (and <span class="math">\mathcal{O} \mapsto \mathcal{O}</span>) that acts on <span class="math">P \in E[r]</span> as <span class="math">\phi(P)=\lambda \cdot P</span>. Both <span class="math">\omega</span> and <span class="math">\lambda</span> are cube roots of unity in <span class="math">\mathbb{F}_p</span> and <span class="math">\mathbb{F}_r</span> respectively, i.e. <span class="math">\omega^2+\omega+1 \equiv 0 \pmod p</span> and <span class="math">\lambda^2+\lambda+1 \equiv 0 \pmod r</span>.</p>
+<p><strong>Example 2 :</strong> suppose that <span class="math">E</span> has Complex Multiplication (CM) with discrimant <span class="math">-D=-8</span>, meaning that the endomorphism ring is <span class="math">\mathbf{Z}[\sqrt{−2}]</span>. This is the case of the <code>Bandersnatch</code> elliptic curves specified in Ethereum Verkle trie. There is an efficient endomorphism <span class="math">\phi: E \rightarrow E</span> whose kernel is generated by a 2-torsion point. The map can be found by looking at 2-isogeneous curves and applying Vélu’s formulas. For Bandersnatch it is defined by <span class="math">(x,y)\mapsto (u^2\cdot \frac{x^2+wx+t}{x+w},u^3\cdot y\cdot \frac{x^2+2wx+v}{(x+w)^2})</span> for some constants <span class="math">u,v,w,t</span> (and <span class="math">\mathcal{O} \mapsto \mathcal{O}</span>) that acts on <span class="math">P \in E[r]</span> as <span class="math">\phi(P)=\lambda \cdot P</span> where <span class="math">\lambda^2+2 \equiv 0 \pmod r</span>.</p>
+<p>The GLV algorithm starts by decomposing <span class="math">s</span> as <span class="math">s = s_0 + \lambda s_1</span> and then replacing the scalar multiplication <span class="math">s \cdot P</span> by <span class="math">s_0 \cdot P + s_1 \cdot \phi(P)</span>. Because <span class="math">s_0</span> and <span class="math">s_1</span> are guaranteed to be <span class="math">\leq \sqrt{r}</span> (see Sec.4 of <a href="https://www.iacr.org/archive/crypto2001/21390189.pdf" rel="noopener nofollow ugc">[GLV]</a> and Sec.4 of <a href="https://eprint.iacr.org/2015/565.pdf" rel="noopener nofollow ugc">[FourQ]</a> for an optimization trick), we can halve the size of the for loop in the double-and-add algorithm. We can then scan simultaenously the bits of <span class="math">s_0</span> and <span class="math">s_1</span> and apply the <a href="https://crypto.stackexchange.com/questions/99975/strauss-shamir-trick-on-ec-multiplication-by-scalar" rel="noopener nofollow ugc">Strauss-Shamir trick</a>. This results in a significant speed up but only when an endomorphism is available. For example the left-to-right double-and-add would become:</p>
+<pre><code class="lang-auto">INPUT: s and P ∈ E(Fp).
+OUTPUT: sP.
+1. Find s1 and s2 s.t. s = s1 + 𝜆 * s2 mod r 
+    1.1 let s1 = (s1_{t−1},..., s1_1, s1_0) 
+    1.2 and s2 = = (s2_{t−1},..., s2_1, s2_0)
+2. P1 ← P, P2 ← 𝜙(P) and Q ← ∞.
+3. For i from t−1 downto 0 do
+    3.1 Q ← 2Q.
+    3.2 If s1_i = 0 and s2_i = 0 then Q ← Q.
+    3.3 If s1_i = 1 and s2_i = 0 then Q ← Q + P1.
+    3.4 If s1_i = 0 and s2_i = 1 then Q ← Q + P2.
+    3.5 If s1_i = 1 and s2_i = 1 then Q ← Q + P1 + P2.
+4. Return(Q).
+</code></pre>
+<p>Using the efficient endomorphism in-circuit is also possible (see <a href="https://eprint.iacr.org/2019/1021.pdf" rel="noopener nofollow ugc">[Halo, Sec. 6.2 and Appendix C]</a> or <a href="https://github.com/Consensys/gnark/blob/ea53f373f45d2f9ad9cc1639c34359a35f771191/std/algebra/emulated/sw_emulated/point.go#L530" rel="noopener nofollow ugc">[gnark implementation]</a> for short Weierstrass curves and <a href="https://github.com/zhenfeizhang/bandersnatch-glv" rel="noopener nofollow ugc">[arkworks]</a> and <a href="https://github.com/Consensys/gnark/blob/dc04a1d3b221dbe7571b5a8394b55d02c2872700/std/algebra/native/twistededwards/scalarmul_glv.go" rel="noopener nofollow ugc">[gnark]</a> implementations for twisted Edwards). But one should be careful about some extra checks of the decomposition <span class="math">s = s_0 + \lambda s_1 \mod r</span> (not the SNARK modulus). The integers <span class="math">s_0, s_1</span> can possibly be negative in which case they will be reduced in-circuit modulo the SNARK field and not <span class="math">r</span>.</p>
+<h2><a class="anchor" href="https://ethresear.ch#p-49892-the-fake-glv-trick-7" name="p-49892-the-fake-glv-trick-7"></a>The fake GLV trick</h2>
+<p>Remember that we are proving that <span class="math">s\cdot P = Q</span> and not computing it. We can “hint” the result <span class="math">Q</span> and check in-circuit that <span class="math">s\cdot P - Q = \mathcal{O}</span>. Now, if we can find <span class="math">u,v \leq \sqrt{r}</span> such that <span class="math">v\cdot s = u \pmod r</span> then we can check instead that</p>
+<p><span class="math">(v\cdot s)\cdot P - v\cdot Q = \mathcal{O}</span></p>
+<p>which is equivalent to</p>
+<p><span class="math"> u\cdot P - v\cdot Q = \mathcal{O}</span></p>
+<p>The thing now is that <span class="math">u</span> and <span class="math">v</span> are “small” and we can, similarly to the GLV algorithm, halve the size of the double-and-add loop and apply the Strauss-Shamir trick.</p>
+<p><strong>Solution</strong>: running the half-GCD algorithm (i.e. running GCD half-way) is sufficient to find <span class="math">u</span> and <span class="math">v</span>. We can apply the exact same trick for finding the lattice basis as in the GLV paper (Sec. 4). For completeness we recall the algorithm hereafter.<br />
+We apply the extended Euclidean algorithm to find the greatest common divisor of <span class="math">r</span> and <span class="math">s</span> (This gcd is 1 since <span class="math">r</span> is prime.) The algorithm produces a sequence of equations</p>
+<p><span class="math">w_i \cdot r + v_i \cdot s = u_i</span></p>
+<p>for <span class="math">i = 0, 1, 2, \dots</span>  where <span class="math">w_0 = 1, v_0 = 0, u_0 = r, w_1 = 0, v_1 = 1, u_1 = s</span>, and <span class="math">u_i \geq 0</span> for all <span class="math">i</span>. We stop at the index <span class="math">m</span> for which <span class="math">u_m \geq \sqrt{r}</span> and take <span class="math">u = u_{m+1}</span> and <span class="math">v = -v_{m+1}</span>.<br />
+<em>Note:</em> By construction <span class="math">u</span> is guaranteed to be a positive integer but <span class="math">v</span> can be negative, in which case it would be reduced in-circuit modulo the SNARK modulus and not <span class="math">r</span>. To circumvent this we return in the hint <span class="math">u</span>, <span class="math">v</span> and a <span class="math">\texttt{b}=1</span> if <span class="math">v</span> is negative and <span class="math">\texttt{b}=0</span> otherwise. In-circuit we negate <span class="math">Q</span> instead when <span class="math">\texttt{b}=1</span>.</p>
+<h3><a class="anchor" href="https://ethresear.ch#p-49892-implementation-8" name="p-49892-implementation-8"></a>Implementation</h3>
+<p>A generic implementation in the gnark library is available at <a href="https://github.com/Consensys/gnark/feat/fake-GLV" rel="noopener nofollow ugc">gnark.io (feat/fake-GLV branch)</a>. For Short Weierstrass (e.g. P256) look at the <code>scalarMulFakeGLV</code> <a href="https://github.com/Consensys/gnark/blob/62c89cb10cff1413e9d68cce054c7e711d04c726/std/algebra/emulated/sw_emulated/point.go#L1263" rel="noopener nofollow ugc">method</a> in the emulated package and for twisted Edwards (e.g. Bandersnatch/Jubjub) look at the <code>scalarMulFakeGLV</code> <a href="https://github.com/Consensys/gnark/blob/62c89cb10cff1413e9d68cce054c7e711d04c726/std/algebra/native/twistededwards/point.go#L261" rel="noopener nofollow ugc">method</a> in the native package.</p>
+<h4><a class="anchor" href="https://ethresear.ch#p-49892-benchmark-9" name="p-49892-benchmark-9"></a>Benchmark</h4>
+<p>The best algorithm to implement scalar multiplication in a non-native circuit (i.e. circuit field ≠ curve field) when an efficient endomorphism is <em>not</em> available is an adaptation of <a href="https://www.iacr.org/archive/ches2007/47270135/47270135.pdf" rel="noopener nofollow ugc">[Joye07]</a> (implemented in <a href="https://github.com/Consensys/gnark/blob/fdb2b0de422b1c4fc5c6d08e81e788095ac818a6/std/algebra/emulated/sw_emulated/point.go#L748" rel="noopener nofollow ugc">gnark here</a>).<br />
+Next we compare this scalar multiplication with our fake GLV in a PLONKish vanilla (i.e. no custom gates) circuit (scs) over the BN254 curve (Ethereum compatible). We also give benchmarks in R1CS.</p>
+<div class="md-table">
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">P-256</th>
+<th style="text-align: center;">Old (Joye07)</th>
+<th style="text-align: right;">New (fake GLV)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><span class="math">[s]P</span></td>
+<td style="text-align: center;">738,031 scs <br /> 186,466 r1cs</td>
+<td style="text-align: right;">385,412 scs <br /> 100,914 r1cs</td>
+</tr>
+<tr>
+<td style="text-align: left;">ECDSA verification</td>
+<td style="text-align: center;">1,135,876 scs <br /> 293,814 r1cs</td>
+<td style="text-align: right;">742,541 scs <br /> 195,266 r1cs</td>
+</tr>
+</tbody>
+</table>
+</div><blockquote>
+<p>Note here that the old ECDSA verification uses Strauss-Shamir trick for computing <span class="math">[s]P+[t]Q</span> while the new version is merely two fake GLV multiplications and an addition.</p>
+</blockquote>
+<h4><a class="anchor" href="https://ethresear.ch#p-49892-comparison-10" name="p-49892-comparison-10"></a>Comparison</h4>
+<p><a href="https://www.p256wallet.org/" rel="noopener nofollow ugc">p256wallet.org</a> is an ERC-4337 smart contract wallet that leverages zk-SNARKs for WebAuthn and P-256 signature verification. It uses <a href="https://github.com/privacy-scaling-explorations/circom-ecdsa-p256" rel="noopener nofollow ugc">PSE/circom-ecdsa-p256</a> to generate the webAuthn proof, and underneath <a href="https://github.com/privacy-scaling-explorations/circom-ecdsa-p256" rel="noopener nofollow ugc">PSE/circom-ecdsa-p256</a> to generate the ECDSA proof on P-256 curve. The github README reports <code>1,972,905 R1CS</code>. Compiling our circuit in R1CS results in <strong><code>195,266 R1CS</code></strong>. This is more than a <strong>10x</strong> reduction, which is not only due to the fake GLV algorithm but also to optimized non-native field arithmetic in gnark.</p>
+<h4><a class="anchor" href="https://ethresear.ch#p-49892-other-curves-11" name="p-49892-other-curves-11"></a>Other curves</h4>
+<p>Similar results are noticed for other curves in short Weirstrass, e.g. P-384 and STARK curve:</p>
+<div class="md-table">
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">P-384</th>
+<th style="text-align: center;">Old (Joye07)</th>
+<th style="text-align: right;">New (fake GLV)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><span class="math">[s]P</span></td>
+<td style="text-align: center;">1,438,071 scs</td>
+<td style="text-align: right;">782,674 scs</td>
+</tr>
+<tr>
+<td style="text-align: left;">ECDSA verification</td>
+<td style="text-align: center;">2,174,027 scs</td>
+<td style="text-align: right;">1,419,929 scs</td>
+</tr>
+</tbody>
+</table>
+</div><div class="md-table">
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">STARK curve</th>
+<th style="text-align: center;">Old (Joye07)</th>
+<th style="text-align: right;">New (fake GLV)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><span class="math">[s]P</span></td>
+<td style="text-align: center;">727,033 scs</td>
+<td style="text-align: right;">380,210 scs</td>
+</tr>
+<tr>
+<td style="text-align: left;">ECDSA verification</td>
+<td style="text-align: center;">1,137,459 scs</td>
+<td style="text-align: right;">732,131 scs</td>
+</tr>
+</tbody>
+</table>
+</div><p>and also in twisted Edwards e.g. Jubjub vs. Bandersnatch:</p>
+<div class="md-table">
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Jubjub</th>
+<th style="text-align: center;">Old (2-bit double-and-add)</th>
+<th style="text-align: right;">New (fake GLV)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><span class="math">[s]P</span></td>
+<td style="text-align: center;">5,863 scs <br /> 3,314 r1cs</td>
+<td style="text-align: right;">4,549  scs <br /> 2,401 r1cs</td>
+</tr>
+</tbody>
+</table>
+</div><div class="md-table">
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Bandersnatch</th>
+<th style="text-align: center;">Old (GLV)</th>
+<th style="text-align: right;">New (fake GLV)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><span class="math">[s]P</span></td>
+<td style="text-align: center;">4,781 scs <br />  2,455 r1cs</td>
+<td style="text-align: right;">4,712 scs <br /> 2,420 r1cs</td>
+</tr>
+</tbody>
+</table>
+</div><h2><a class="anchor" href="https://ethresear.ch#p-49892-acknowledgement-12" name="p-49892-acknowledgement-12"></a>Acknowledgement</h2>
+<p>I would like to thank Arnau Cube, Aard Vark, Holden Mui, Olivier Bégassat and Thomas Piellard for fruitful discussions.</p>
+            <p><small>2 posts - 2 participants</small></p>
+            <p><a href="https://ethresear.ch/t/fake-glv-you-dont-need-an-efficient-endomorphism-to-implement-glv-like-scalar-multiplication-in-snark-circuits/20394">Read full topic</a></p>
+]]></content:encoded>
+<pubDate>Mon, 09 Sep 2024 19:48:29 +0000</pubDate>
+<pubDate>Mon, 09 Sep 2024 19:48:29 +0000</pubDate>
+</item>
 
 <item>
 <title>Embedded fee markets and ERC-4337 (part 2)</title>
