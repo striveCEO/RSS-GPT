@@ -4,6 +4,292 @@
 <title>cs updates on arXiv.org</title>
 <link>http://rss.arxiv.org/rss/cs</link>
 
+<item>
+<title>Detecting Buggy Contracts via Smart Testing</title>
+<link>https://arxiv.org/abs/2409.04597</link>
+<guid>https://arxiv.org/abs/2409.04597</guid>
+<content:encoded><![CDATA[
+<div> 关键词：Smart合同、动态分析、基础模型、性能瓶颈、智能系统
+
+总结:
+文章主要探讨了针对Smart合同的脆弱性检测问题。作者指出，目前流行的混合动态分析方法，如基于约束的执行辅助模糊测试和基于基础模型的辅助模糊测试，在实际基准测试中显示出了初步的潜力，但仍然面临低可扩展性的问题，尤其是对于复杂代码模式中的深层bug。研究发现，现有动态分析的性能瓶颈和基础模型的幻觉是限制这种混合方法扩展性的两个主要因素。
+
+为了克服这些挑战，作者设计了一种交互式、自我决定的基础模型支持系统——SmartSys，以支持Smart合同的混合动态分析。SmartSys通过教授基础模型不同动态分析技术的性能瓶颈，使其能够预测最适合的技术并生成有效的模糊目标，这些目标能够触及到深层、隐藏的bug。此外，系统利用动态分析期间的编译反馈和运行时反馈来过滤掉错误的模糊目标。
+
+研究结果表明，SmartSys成功地发现了逃过11个工具和多次审计超过一年的Smart合同协议漏洞，并在真实世界基准测试中将覆盖率提高了14.3%相比基线。这证明了SmartSys在提高Smart合同安全性方面的有效性和潜力。 <div>
+arXiv:2409.04597v1 Announce Type: new 
+Abstract: Smart contracts are susceptible to critical vulnerabilities. Hybrid dynamic analyses, such as concolic execution assisted fuzzing and foundation model assisted fuzzing, have emerged as highly effective testing techniques for smart contract bug detection recently. This hybrid approach has shown initial promise in real-world benchmarks, but it still suffers from low scalability to find deep bugs buried in complex code patterns. We observe that performance bottlenecks of existing dynamic analyses and model hallucination are two main factors limiting the scalability of this hybrid approach in finding deep bugs.
+  To overcome the challenges, we design an interactive, self-deciding foundation model based system, called SmartSys, to support hybrid smart contract dynamic analyses. The key idea is to teach foundation models about performance bottlenecks of different dynamic analysis techniques, making it possible to forecast the right technique and generates effective fuzz targets that can reach deep, hidden bugs. To prune hallucinated, incorrect fuzz targets, SmartSys feeds foundation models with feedback from dynamic analysis during compilation and at runtime.
+  The interesting results of SmartSys include: i) discovering a smart contract protocol vulnerability that has escaped eleven tools and survived multiple audits for over a year; ii) improving coverage by up to 14.3\% on real-world benchmarks compared to the baselines.
+]]></content:encoded>
+<pubDate>Tue, 10 Sep 2024 00:00:00 -0400</pubDate>
+<pubDate>Tue, 10 Sep 2024 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Decentralized Learning in General-sum Markov Games</title>
+<link>https://arxiv.org/abs/2409.04613</link>
+<guid>https://arxiv.org/abs/2409.04613</guid>
+<content:encoded><![CDATA[
+<div> 关键词：Markov游戏、近势函数、演员-评论家算法、分布式学习、纳什均衡
+
+<br><br>
+总结:
+
+本文研究了一种用于设计一般和动态社会系统中具有异质效用的代理之间的分布式学习算法的新框架。主要贡献包括：
+
+1. **提出Markov近势函数（MNPF）**：为了解决设计能够收敛到精确纳什均衡的分布式算法的困难，作者引入了MNPF这一概念。MNPF在确保算法收敛至近似纳什均衡方面扮演着核心角色。
+
+2. **利用双时间尺度方法**：通过快速更新Q函数估计并慢速更新策略，该方法加速了算法的收敛过程。这种方法确保了系统的长期稳定性和收敛性。
+
+3. **证明收敛性**：文章证明了基于演员-评论家架构的分布式学习算法在长期运行中会收敛到MNPF定义的近似纳什均衡集合。如果纳什均衡集有限，则此收敛性更加强大。
+
+4. **理论与实际应用结合**：研究不仅提供了理论分析，还为多代理系统中的分布式学习算法的设计与实现提供了新的视角，有助于解决现实世界中的复杂交互问题。
+
+5. **扩展游戏类型**：该工作特别关注于一般和混合性的马尔科夫游戏，这比传统的零和或潜力游戏更具挑战性，因为它们既不是完全竞争也不是完全合作的。
+
+通过这些创新，本文为分布式学习算法在多代理系统中的应用提供了坚实的理论基础和实用策略。 <div>
+arXiv:2409.04613v1 Announce Type: new 
+Abstract: The Markov game framework is widely used to model interactions among agents with heterogeneous utilities in dynamic and uncertain societal-scale systems. In these systems, agents typically operate in a decentralized manner due to privacy and scalability concerns, often acting without any information about other agents. The design and analysis of decentralized learning algorithms that provably converge to rational outcomes remain elusive, especially beyond Markov zero-sum games and Markov potential games, which do not adequately capture the nature of many real-world interactions that is neither fully competitive nor fully cooperative. This paper investigates the design of decentralized learning algorithms for general-sum Markov games, aiming to provide provable guarantees of convergence to approximate Nash equilibria in the long run. Our approach builds on constructing a Markov Near-Potential Function (MNPF) to address the intractability of designing algorithms that converge to exact Nash equilibria. We demonstrate that MNPFs play a central role in ensuring the convergence of an actor-critic-based decentralized learning algorithm to approximate Nash equilibria. By leveraging a two-timescale approach, where Q-function estimates are updated faster than policy updates, we show that the system converges to a level set of the MNPF over the set of approximate Nash equilibria. This convergence result is further strengthened if the set of Nash equilibria is assumed to be finite. Our findings provide a new perspective on the analysis and design of decentralized learning algorithms in multi-agent systems.
+]]></content:encoded>
+<pubDate>Tue, 10 Sep 2024 00:00:00 -0400</pubDate>
+<pubDate>Tue, 10 Sep 2024 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Learning Optimal Stable Matches in Decentralized Markets with Unknown Preferences</title>
+<link>https://arxiv.org/abs/2409.04669</link>
+<guid>https://arxiv.org/abs/2409.04669</guid>
+<content:encoded><![CDATA[
+<div> 关键词：匹配算法、分散式系统、有限信息、在线学习、稳定匹配
+
+总结:
+
+本文探讨了在缺乏中心协调和大量信息的情况下，设计分散式、有限信息匹配算法的可能性。主要关注的是两个独立集合（提案者和接受者）之间的双侧市场匹配问题，每个集合的成员都试图与市场对面的最理想伙伴进行匹配。然而，提案者并不了解自己的偏好，因此需要在形成匹配的同时学习其偏好。
+
+研究中提出了一个简单的在线学习规则，该规则能够保证以概率方式收敛到游戏的福利最大化均衡点，即提案者最优稳定的匹配。这是首次报道的完全解耦、无通信算法，能够在不考虑市场结构的情况下保证概率收敛到最优稳定匹配。此工作为在有限信息条件下实现高效、分散式的匹配系统提供了理论基础和实用策略。 <div>
+arXiv:2409.04669v1 Announce Type: new 
+Abstract: Matching algorithms have demonstrated great success in several practical applications, but they often require centralized coordination and plentiful information. In many modern online marketplaces, agents must independently seek out and match with another using little to no information. For these kinds of settings, can we design decentralized, limited-information matching algorithms that preserve the desirable properties of standard centralized techniques? In this work, we constructively answer this question in the affirmative. We model a two-sided matching market as a game consisting of two disjoint sets of agents, referred to as proposers and acceptors, each of whom seeks to match with their most preferable partner on the opposite side of the market. However, each proposer has no knowledge of their own preferences, so they must learn their preferences while forming matches in the market. We present a simple online learning rule that guarantees a strong notion of probabilistic convergence to the welfare-maximizing equilibrium of the game, referred to as the proposer-optimal stable match. To the best of our knowledge, this represents the first completely decoupled, communication-free algorithm that guarantees probabilistic convergence to an optimal stable match, irrespective of the structure of the matching market.
+]]></content:encoded>
+<pubDate>Tue, 10 Sep 2024 00:00:00 -0400</pubDate>
+<pubDate>Tue, 10 Sep 2024 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Optimal decentralized wavelength control in light sources for lithography</title>
+<link>https://arxiv.org/abs/2409.04721</link>
+<guid>https://arxiv.org/abs/2409.04721</guid>
+<content:encoded><![CDATA[
+<div> 关键词：脉冲光源、细光束波长控制、多光学模块、分散式线性二次高斯问题、时间延迟补偿
+
+<br><br>
+总结:
+本文探讨了在存在时间延迟的情况下，如何通过分散式线性二次高斯（LQG）方法实现最优的波长控制，这对于现代光刻中的精细光束波长控制至关重要。研究中将用于生成所需波长的多光学模块（包括光学元件和执行器）视为在有向无环图（DAG）上协作交互的系统。研究结果表明，任何测量和其它连续时间延迟都能被精确补偿，进而实现了在个体光学级别上的最佳控制器实施，这显著优于现有的波长控制技术。这一创新方法为提高光刻工艺的精度和效率提供了新的途径，对半导体制造领域具有重要意义。 <div>
+arXiv:2409.04721v1 Announce Type: new 
+Abstract: Pulsed light sources are a critical component of modern lithography, with fine light beam wavelength control paramount for wafer etching accuracy. We study optimal wavelength control by casting it as a decentralized linear quadratic Gaussian (LQG) problem in presence of time-delays. In particular, we consider the multi-optics module (optics and actuators) used for generating the requisite wavelength in light sources as cooperatively interacting systems defined over a directed acyclic graph (DAG). We show that any measurement and other continuous time-delays can be exactly compensated, and the resulting optimal controller implementation at the individual optics-level outperforms any existing wavelength control techniques.
+]]></content:encoded>
+<pubDate>Tue, 10 Sep 2024 00:00:00 -0400</pubDate>
+<pubDate>Tue, 10 Sep 2024 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Noise-Based Authentication: Is It Secure?</title>
+<link>https://arxiv.org/abs/2409.04931</link>
+<guid>https://arxiv.org/abs/2409.04931</guid>
+<content:encoded><![CDATA[
+<div> 关键词：区块链、生物识别、热噪声、去中心化身份网络、安全认证
+
+总结:
+
+本文提出了一种基于区块链的去中心化身份网络中的三点生物特征认证系统。该系统利用现有生物识别技术，展示了每个个体独有的生物特性指纹及其生物特征信息泄露的可能性。通过探索每个用户生成的独特热噪声振幅，作者提出了一个全新的认证概念。这一方法旨在实现无条件安全的认证过程，其安全性基于热噪声的不可预测性和唯一性。文章还讨论了该认证系统在实际应用中可能遇到的挑战和需要解决的问题，特别是在确保其稳定性和可靠性方面。此研究为未来在区块链环境下构建更安全、隐私保护更强的身份验证机制提供了新的思路。 <div>
+arXiv:2409.04931v1 Announce Type: new 
+Abstract: This paper introduces a three-point biometric authentication system for a blockchain-based decentralized identity network. We use existing biometric authentication systems to demonstrate the unique noise fingerprints that belong to each individual human and the respective information leak from the biological characteristics. We then propose the concept of using unique thermal noise amplitudes generated by each user and explore the open questions regarding the robustness of unconditionally secure authentication.
+]]></content:encoded>
+<pubDate>Tue, 10 Sep 2024 00:00:00 -0400</pubDate>
+<pubDate>Tue, 10 Sep 2024 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>CONNECTOR: Enhancing the Traceability of Decentralized Bridge Applications via Automatic Cross-chain Transaction Association</title>
+<link>https://arxiv.org/abs/2409.04937</link>
+<guid>https://arxiv.org/abs/2409.04937</guid>
+<content:encoded><![CDATA[
+<div> 关键词：Decentralized bridge、Cross-chain transaction、Bridge smart contract、Automated association、DeFi ecosystem
+
+<br><br>
+总结:
+
+本文主要探讨了跨链交易关联在去中心化金融（DeFi）生态系统中的重要性。在多链环境下运行的DeFi生态系统中，去中心化桥应用扮演着连接不同区块链和促进跨链资产转移的关键角色。然而，现有方法完全依赖于不可见的内部账本或API，这与区块链开放和去中心化的特性相违背。针对这一问题，本文提出了基于桥接智能合约的自动化跨链交易关联分析方法——CONNECTOR。
+
+CONNECTOR首先通过从桥接合约的交易轨迹中提取独特的和通用的特征来识别存款交易。利用准确的存款交易，CONNECTOR进一步挖掘桥接合约的执行日志以实现提款交易匹配。通过在不同类型的桥梁上进行实际世界实验，证明了CONNECTOR的有效性。实验结果表明，CONNECTOR成功识别了100%的存款交易，关联了95.81%的提款交易，并在传统金融（CeFi）桥梁方法中表现出超越。基于关联结果，文章揭示了DeFi桥应用中的跨链交易行为，并分析了CONNECTOR的追踪能力，为DeFi桥应用提供辅助。 <div>
+arXiv:2409.04937v1 Announce Type: new 
+Abstract: Decentralized bridge applications are important software that connects various blockchains and facilitates cross-chain asset transfer in the decentralized finance (DeFi) ecosystem which currently operates in a multi-chain environment. Cross-chain transaction association identifies and matches unique transactions executed by bridge DApps, which is important research to enhance the traceability of cross-chain bridge DApps. However, existing methods rely entirely on unobservable internal ledgers or APIs, violating the open and decentralized properties of blockchain. In this paper, we analyze the challenges of this issue and then present CONNECTOR, an automated cross-chain transaction association analysis method based on bridge smart contracts. Specifically, CONNECTOR first identifies deposit transactions by extracting distinctive and generic features from the transaction traces of bridge contracts. With the accurate deposit transactions, CONNECTOR mines the execution logs of bridge contracts to achieve withdrawal transaction matching. We conduct real-world experiments on different types of bridges to demonstrate the effectiveness of CONNECTOR. The experiment demonstrates that CONNECTOR successfully identifies 100% deposit transactions, associates 95.81% withdrawal transactions, and surpasses methods for CeFi bridges. Based on the association results, we obtain interesting findings about cross-chain transaction behaviors in DeFi bridges and analyze the tracing abilities of CONNECTOR to assist the DeFi bridge apps.
+]]></content:encoded>
+<pubDate>Tue, 10 Sep 2024 00:00:00 -0400</pubDate>
+<pubDate>Tue, 10 Sep 2024 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Balancing Security and Accuracy: A Novel Federated Learning Approach for Cyberattack Detection in Blockchain Networks</title>
+<link>https://arxiv.org/abs/2409.04972</link>
+<guid>https://arxiv.org/abs/2409.04972</guid>
+<content:encoded><![CDATA[
+<div> 关键词：区块链、数据共享、差分隐私、协作式网络攻击检测、模型融合
+
+总结:
+本文提出了一种创新的协作式网络攻击检测（CCD）系统，旨在通过解决联邦学习模型中噪声添加的复杂挑战，增强基于区块链的数据共享网络的安全性。该系统利用差分隐私的理论基础，通过在训练子模型后添加噪声，再通过传输重建全局模型的方式，实现了对网络攻击的高效检测。研究分析了不同类型的噪声（高斯、拉普拉斯和动量会计）对关键性能指标的影响，包括攻击检测准确性、深度学习模型收敛时间以及全球模型生成的整体运行时间。
+
+研究发现，在确保数据隐私与维持系统性能之间存在微妙的权衡关系。通过深入的模拟实验，文章提供了优化这些参数以适应不同CCD环境的实用建议，旨在实现数据保护与系统效率之间的最佳平衡，为构建安全可靠的区块链网络做出贡献。 <div>
+arXiv:2409.04972v1 Announce Type: new 
+Abstract: This paper presents a novel Collaborative Cyberattack Detection (CCD) system aimed at enhancing the security of blockchain-based data-sharing networks by addressing the complex challenges associated with noise addition in federated learning models. Leveraging the theoretical principles of differential privacy, our approach strategically integrates noise into trained sub-models before reconstructing the global model through transmission. We systematically explore the effects of various noise types, i.e., Gaussian, Laplace, and Moment Accountant, on key performance metrics, including attack detection accuracy, deep learning model convergence time, and the overall runtime of global model generation. Our findings reveal the intricate trade-offs between ensuring data privacy and maintaining system performance, offering valuable insights into optimizing these parameters for diverse CCD environments. Through extensive simulations, we provide actionable recommendations for achieving an optimal balance between data protection and system efficiency, contributing to the advancement of secure and reliable blockchain networks.
+]]></content:encoded>
+<pubDate>Tue, 10 Sep 2024 00:00:00 -0400</pubDate>
+<pubDate>Tue, 10 Sep 2024 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Towards Practical Overlay Networks for Decentralized Federated Learning</title>
+<link>https://arxiv.org/abs/2409.05331</link>
+<guid>https://arxiv.org/abs/2409.05331</guid>
+<content:encoded><![CDATA[
+<div> 关键词：Decentralized federated learning、Overlay network、FedLay、Fast training、Low communication
+
+总结:
+
+本文探讨了分布式设备上机器学习任务中分散式联邦学习(DFL)的关键网络挑战。DFL通过去中心化的通信方式避免了集中式联邦学习中的单点故障问题，被认为是具有吸引力的解决方案。然而，现有的研究主要集中在DFL的拓扑结构上，而缺乏实现去中心化构建和维护网络的协议。
+
+为解决这一问题，作者提出了一种名为FedLay的去中心化网络解决方案。FedLay旨在提供快速训练和低通信成本，以实现实际应用中的高效DFL。其独特之处在于能够以去中心化的方式构建接近随机规则的拓扑结构，并在节点加入和失败的情况下维持拓扑。
+
+实验结果表明，基于原型实现和模拟的测试显示，FedLay在真实数据集上的模型收敛速度最快，准确度最高，同时通信成本较低，并具备对节点加入和失败的鲁棒性。这一成果填补了现有DFL拓扑结构在构建和维护协议方面的空白，为DFL的实用性和效率提供了重要支持。 <div>
+arXiv:2409.05331v1 Announce Type: new 
+Abstract: Decentralized federated learning (DFL) uses peer-to-peer communication to avoid the single point of failure problem in federated learning and has been considered an attractive solution for machine learning tasks on distributed devices. We provide the first solution to a fundamental network problem of DFL: what overlay network should DFL use to achieve fast training of highly accurate models, low communication, and decentralized construction and maintenance? Overlay topologies of DFL have been investigated, but no existing DFL topology includes decentralized protocols for network construction and topology maintenance. Without these protocols, DFL cannot run in practice. This work presents an overlay network, called FedLay, which provides fast training and low communication cost for practical DFL. FedLay is the first solution for constructing near-random regular topologies in a decentralized manner and maintaining the topologies under node joins and failures. Experiments based on prototype implementation and simulations show that FedLay achieves the fastest model convergence and highest accuracy on real datasets compared to existing DFL solutions while incurring small communication costs and being resilient to node joins and failures.
+]]></content:encoded>
+<pubDate>Tue, 10 Sep 2024 00:00:00 -0400</pubDate>
+<pubDate>Tue, 10 Sep 2024 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>pFedGPA: Diffusion-based Generative Parameter Aggregation for Personalized Federated Learning</title>
+<link>https://arxiv.org/abs/2409.05701</link>
+<guid>https://arxiv.org/abs/2409.05701</guid>
+<content:encoded><![CDATA[
+<div> 关键词：Federated Learning、FedAvg、Personalized FL、Diffusion Model、pFedGPA
+
+总结:
+
+本文提出了一种名为pFedGPA的个性化联邦学习框架，旨在解决联邦学习中参数聚合问题。传统的联邦学习方法如FedAvg通常通过线性聚合参数，这在处理异构数据分布时可能会忽略参数空间的复杂性和高维性，从而影响模型性能。而个人化联邦学习虽然能在一定程度上缓解这一问题，但线性聚合的问题仍未得到解决。
+
+pFedGPA利用生成模型的思路，通过在服务器端部署扩散模型来整合各客户端的参数分布，并引入了一个参数反转方法。该方法将上传的参数转换为潜在代码，然后通过去噪采样进行聚合，生成最终的个性化参数。通过使用具有高容量的扩散模型编码客户端模型参数对特定数据分布的依赖性，pFedGPA能够有效地分解所有客户端模型参数分布的整体复杂性与每个个体客户端参数分布的复杂性。
+
+实验结果表明，pFedGPA在多个数据集上的表现均优于基线方法，证明了其在提升联邦学习性能方面的有效性和潜力。 <div>
+arXiv:2409.05701v1 Announce Type: new 
+Abstract: Federated Learning (FL) offers a decentralized approach to model training, where data remains local and only model parameters are shared between the clients and the central server. Traditional methods, such as Federated Averaging (FedAvg), linearly aggregate these parameters which are usually trained on heterogeneous data distributions, potentially overlooking the complex, high-dimensional nature of the parameter space. This can result in degraded performance of the aggregated model. While personalized FL approaches can mitigate the heterogeneous data issue to some extent, the limitation of linear aggregation remains unresolved. To alleviate this issue, we investigate the generative approach of diffusion model and propose a novel generative parameter aggregation framework for personalized FL, \texttt{pFedGPA}. In this framework, we deploy a diffusion model on the server to integrate the diverse parameter distributions and propose a parameter inversion method to efficiently generate a set of personalized parameters for each client. This inversion method transforms the uploaded parameters into a latent code, which is then aggregated through denoising sampling to produce the final personalized parameters. By encoding the dependence of a client's model parameters on the specific data distribution using the high-capacity diffusion model, \texttt{pFedGPA} can effectively decouple the complexity of the overall distribution of all clients' model parameters from the complexity of each individual client's parameter distribution. Our experimental results consistently demonstrate the superior performance of the proposed method across multiple datasets, surpassing baseline approaches.
+]]></content:encoded>
+<pubDate>Tue, 10 Sep 2024 00:00:00 -0400</pubDate>
+<pubDate>Tue, 10 Sep 2024 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Cooperative Decision-Making for CAVs at Unsignalized Intersections: A MARL Approach with Attention and Hierarchical Game Priors</title>
+<link>https://arxiv.org/abs/2409.05712</link>
+<guid>https://arxiv.org/abs/2409.05712</guid>
+<content:encoded><![CDATA[
+<div> 关键词：自主驾驶车辆、复杂场景决策、多智能体强化学习、注意力机制、安全监督模块
+
+总结:
+
+本文针对复杂人类与机器混合交通场景中的决策问题，特别是无信号交叉口的自主驾驶车辆（CAV）决策，提出了一种创新方法——Multi-Agent Game-prior Attention Deep Deterministic Policy Gradient（MA-GA-DDPG）。该方法将CAV的决策问题视为分布式多智能体强化学习问题，并引入注意力机制来捕捉CAV与其他代理之间的互动依赖性。通过计算CAV与其他代理之间的注意力权重，筛选互动对象并构建先验层次游戏关系，设计了安全监督模块以提升交通安全。研究通过仿真和硬件在环实验验证了该方法在驾驶安全性、效率和舒适性方面的优越性，相较于其他基准方法表现出显著优势。 <div>
+arXiv:2409.05712v1 Announce Type: new 
+Abstract: The development of autonomous vehicles has shown great potential to enhance the efficiency and safety of transportation systems. However, the decision-making issue in complex human-machine mixed traffic scenarios, such as unsignalized intersections, remains a challenge for autonomous vehicles. While reinforcement learning (RL) has been used to solve complex decision-making problems, existing RL methods still have limitations in dealing with cooperative decision-making of multiple connected autonomous vehicles (CAVs), ensuring safety during exploration, and simulating realistic human driver behaviors. In this paper, a novel and efficient algorithm, Multi-Agent Game-prior Attention Deep Deterministic Policy Gradient (MA-GA-DDPG), is proposed to address these limitations. Our proposed algorithm formulates the decision-making problem of CAVs at unsignalized intersections as a decentralized multi-agent reinforcement learning problem and incorporates an attention mechanism to capture interaction dependencies between ego CAV and other agents. The attention weights between the ego vehicle and other agents are then used to screen interaction objects and obtain prior hierarchical game relations, based on which a safety inspector module is designed to improve the traffic safety. Furthermore, both simulation and hardware-in-the-loop experiments were conducted, demonstrating that our method outperforms other baseline approaches in terms of driving safety, efficiency, and comfort.
+]]></content:encoded>
+<pubDate>Tue, 10 Sep 2024 00:00:00 -0400</pubDate>
+<pubDate>Tue, 10 Sep 2024 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>A Double Tracking Method for Optimization with Decentralized Generalized Orthogonality Constraints</title>
+<link>https://arxiv.org/abs/2409.04998</link>
+<guid>https://arxiv.org/abs/2409.04998</guid>
+<content:encoded><![CDATA[
+<div> 关键词：分布式优化、泛化正交约束、约束消解操作、无约束惩罚模型、全局收敛性
+
+<br>
+<br>
+总结:
+本文研究了具有广义正交约束的分布式优化问题。这类问题在实际应用中普遍存在，但在存在分布约束的情况下，现有的算法无法解决。为了解决这一难题，作者将原始问题转化为一个无约束惩罚模型，通过引入最近提出的约束消解操作。然而，这种转换破坏了惩罚函数的分离性质，使得现有的算法无法应用。为此，作者提出了一种新颖的算法，该算法同时跟踪目标函数的梯度和约束映射的雅可比矩阵，确保了全局收敛性，并给出了迭代复杂性的证明。为了验证所提算法的有效性和效率，作者使用合成数据集和真实世界数据集进行了数值结果分析，充分展示了算法的性能优势。 <div>
+arXiv:2409.04998v1 Announce Type: cross 
+Abstract: In this paper, we consider the decentralized optimization problems with generalized orthogonality constraints, where both the objective function and the constraint exhibit a distributed structure. Such optimization problems, albeit ubiquitous in practical applications, remain unsolvable by existing algorithms in the presence of distributed constraints. To address this issue, we convert the original problem into an unconstrained penalty model by resorting to the recently proposed constraint-dissolving operator. However, this transformation compromises the essential property of separability in the resulting penalty function, rendering it impossible to employ existing algorithms to solve. We overcome this difficulty by introducing a novel algorithm that tracks the gradient of the objective function and the Jacobian of the constraint mapping simultaneously. The global convergence guarantee is rigorously established with an iteration complexity. To substantiate the effectiveness and efficiency of our proposed algorithm, we present numerical results on both synthetic and real-world datasets.
+]]></content:encoded>
+<pubDate>Tue, 10 Sep 2024 00:00:00 -0400</pubDate>
+<pubDate>Tue, 10 Sep 2024 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Summarizing and Analyzing the Privacy-Preserving Techniques in Bitcoin and other Cryptocurrencies</title>
+<link>https://arxiv.org/abs/2109.07634</link>
+<guid>https://arxiv.org/abs/2109.07634</guid>
+<content:encoded><![CDATA[
+<div> 关键词：比特币、隐私保护算法、匿名性、攻击技术、法律与伦理
+
+总结:
+本文探讨了比特币和类似加密货币在隐私保护方面的挑战及其解决方案。首先，文章概述了比特币以及其它加密货币如何通过分散化和伪匿名性特征来实现去中心化的交易记录。然而，尽管比特币声称提供了伪匿名用户身份，但多次成功地将用户匿名性破解的攻击表明，实际隐私保护存在漏洞。
+
+接着，文章分析了几种已知的攻击技术，这些技术利用特定策略和数据挖掘方法来揭示用户的实际身份。同时，文章也探讨了隐私保护算法，这些算法旨在解决协议中存在的隐私问题，如增强用户数据的加密、混淆交易路径等。通过这些技术，可以显著提高加密货币系统的隐私性，使得追踪和识别用户变得困难。
+
+最后，文章触及了隐私保护算法的伦理、社会影响、法律框架以及它们在市场上的接受度。讨论了在实施这些算法时需要平衡的多方面因素，包括对个人隐私的保护、对金融系统透明度的需求以及可能引发的法律问题。
+
+综上所述，比特币和加密货币在隐私保护方面面临着复杂挑战，通过采用先进的隐私保护技术和深入理解其伦理、法律和社会影响，可以促进更安全、更私密的数字交易环境。 <div>
+arXiv:2109.07634v3 Announce Type: replace 
+Abstract: Bitcoin and many other similar Cryptocurrencies have been in existence for over a decade, prominently focusing on decentralized, pseudo-anonymous ledger-based transactions. Many protocol improvements and changes have resulted in new variants of Cryptocurrencies that are known for their peculiar characteristics. For instance, Storjcoin is a Proof-of-Storage-based Cryptocurrency that incentivizes its peers based on the amount of storage owned by them. Cryptocurrencies like Monero strive for user privacy by using privacy-centric cryptographic algorithms. While Cryptocurrencies strive to maintain peer transparency by making the transactions and the entire ledger public, user privacy is compromised at times. Monero and many other privacy-centric Cryptocurrencies have significantly improved from the original Bitcoin protocol after several problems were found in the protocol. Most of these deficiencies were related to the privacy of users. Even though Bitcoin claims to have pseudo-anonymous user identities, many attacks have managed to successfully de-anonymize users. In this paper, we present some well-known attacks and analysis techniques that have compromised the privacy of Bitcoin and many other similar Cryptocurrencies. We also analyze and study different privacy-preserving algorithms and the problems these algorithms manage to solve. Lastly, we touch upon the ethics, impact, legality, and acceptance of imposing these privacy algorithms.
+]]></content:encoded>
+<pubDate>Tue, 10 Sep 2024 00:00:00 -0400</pubDate>
+<pubDate>Tue, 10 Sep 2024 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Game of Coding: Beyond Honest-Majority Assumptions</title>
+<link>https://arxiv.org/abs/2401.16643</link>
+<guid>https://arxiv.org/abs/2401.16643</guid>
+<content:encoded><![CDATA[
+<div> 关键词：编码理论、游戏论、区块链、数据恢复、激励设计
+
+<br>
+<br>
+总结:本文提出了一种新颖的游戏理论框架——“编码游戏”，用于探索在分布式系统中，特别是在区块链相关应用中，编码技术如何在信任不足的情况下，通过博弈论的方法优化编码策略以实现更高效的数据保护与恢复。文章首先指出了传统编码理论对节点数量的假设在现实世界中的局限性，尤其是在区块链等去中心化平台中，这种假设往往不成立。接着，文章引入了编码游戏中敌手和数据收集者（解码器）之间的互动，其中敌手在数据可恢复给数据收集者时受益，并且偏好于提高数据恢复的错误率，以此来最大化自己的收益。
+
+文章的主要贡献在于，对于重复编码（repetition code）和特定类别的效用函数，研究并确定了编码游戏的均衡状态。这为理解在敌手和数据收集者之间的博弈关系下，如何设计有效的编码策略提供了一个基础模型。该模型不仅考虑了数据完整性和恢复效率，还考虑了参与方的激励机制，旨在找到最优策略以平衡数据安全与效率。此外，这一研究为未来在分布式系统中进一步发展更为复杂的编码策略提供了理论基础，有望在区块链等领域实现更安全、更高效的数字资产管理和数据存储解决方案。 <div>
+arXiv:2401.16643v5 Announce Type: replace 
+Abstract: Coding theory revolves around the incorporation of redundancy into transmitted symbols, computation tasks, and stored data to guard against adversarial manipulation. However, error correction in coding theory is contingent upon a strict trust assumption. In the context of computation and storage, it is required that honest nodes outnumber adversarial ones by a certain margin. However, in several emerging real-world cases, particularly, in decentralized blockchain-oriented applications, such assumptions are often unrealistic. Consequently, despite the important role of coding in addressing significant challenges within decentralized systems, its applications become constrained. Still, in decentralized platforms, a distinctive characteristic emerges, offering new avenues for secure coding beyond the constraints of conventional methods. In these scenarios, the adversary benefits when the legitimate decoder recovers the data, and preferably with a high estimation error. This incentive motivates them to act rationally, trying to maximize their gains. In this paper, we propose a game theoretic formulation for coding, called the game of coding, that captures this unique dynamic where each of the adversaries and the data collector (decoder) have respective utility functions to optimize. The utility functions reflect the fact that both the data collector and the adversary are interested in increasing the chance of data being recoverable by the data collector. Moreover, the utility functions express the interest of the data collector to estimate the input with lower estimation error, but the opposite interest of the adversary. As a first, still highly non-trivial step, we characterize the equilibrium of the game for the repetition code with a repetition factor of 2 for a wide class of utility functions with minimal assumptions.
+]]></content:encoded>
+<pubDate>Tue, 10 Sep 2024 00:00:00 -0400</pubDate>
+<pubDate>Tue, 10 Sep 2024 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Resilient Fleet Management for Energy-Aware Intra-Factory Logistics</title>
+<link>https://arxiv.org/abs/2403.11034</link>
+<guid>https://arxiv.org/abs/2403.11034</guid>
+<content:encoded><![CDATA[
+<div> 关键词：电池供电机器人、工厂物流、中央管理策略、蒙特卡洛树搜索、实时更新
+
+<br>
+总结:本文提出了一种针对电池供电机器人队列的创新管理策略，这些机器人负责自主制造设施内的内部物流任务。面对诸如道路堵塞和设备故障等实际不确定性，该策略通过中央管理方式增强系统的韧性，实现任务分配的即时调整。为解决计算成本问题，作者提出了两步法，首先使用蒙特卡洛树搜索算法预先解决理想状态下的任务分配问题，生成一个预先搜索树。当发生中断时，该预先搜索树能够快速更新以反映新问题的成本，并同时产生可行解决方案。通过计算实验，证明了所提算法在各种场景下的实时能力，并与未使用预先搜索树和不尝试重新分配任务的分散式方法进行了比较。这种方法不仅提高了系统响应中断的灵活性，还优化了资源利用效率，展现出在复杂动态环境中的适应性和有效性。 <div>
+arXiv:2403.11034v2 Announce Type: replace 
+Abstract: This paper presents a novel fleet management strategy for battery-powered robot fleets tasked with intra-factory logistics in an autonomous manufacturing facility. In this environment, repetitive material handling operations are subject to real-world uncertainties such as blocked passages, and equipment or robot malfunctions. In such cases, centralized approaches enhance resilience by immediately adjusting the task allocation between the robots. To overcome the computational expense, a two-step methodology is proposed where the nominal problem is solved a priori using a Monte Carlo Tree Search algorithm for task allocation, resulting in a nominal search tree. When a disruption occurs, the nominal search tree is rapidly updated a posteriori with costs to the new problem while simultaneously generating feasible solutions. Computational experiments prove the real-time capability of the proposed algorithm for various scenarios and compare it with the case where the search tree is not used and the decentralized approach that does not attempt task reassignment.
+]]></content:encoded>
+<pubDate>Tue, 10 Sep 2024 00:00:00 -0400</pubDate>
+<pubDate>Tue, 10 Sep 2024 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Decentralization of Ethereum's Builder Market</title>
+<link>https://arxiv.org/abs/2405.01329</link>
+<guid>https://arxiv.org/abs/2405.01329</guid>
+<content:encoded><![CDATA[
+<div> 关键词：区块链、分散性、以太坊、区块构建市场、验证者集中化
+
+总结:
+
+本文通过实证研究了以太坊区块链中分散性最低的部分——区块构建市场。区块构建市场旨在公平分配最大可提取价值（MEV）并避免验证者集中化。然而，当前数据显示，仅有三个构建者主导了大部分区块生成，集中度超过80%，这一现象引发了对集中化的担忧。尽管社区认为这种集中不会导致验证者集中化，但研究挑战了这一观点。
+
+主要发现表明，区块构建者的集中导致了验证者的利益损失，并可能进一步促进验证者的集中化。此外，旨在缓解MEV问题的即将实施解决方案也会受到影响，因为它们依赖于区块构建市场作为MEV的参考，而市场因集中化而失真。
+
+研究揭示了区块构建者集中化的两个主要原因，并提出了一种对现有MEV供应链的结构改变和基于新结构的解决方案。然而，长期可持续性分析仍是一个开放课题，需要未来的研究来探讨新供应链结构是否能持续稳定。 <div>
+arXiv:2405.01329v3 Announce Type: replace 
+Abstract: Blockchains protect an ecosystem worth more than $500bn with strong security properties derived from the principle of decentralization. Is today's blockchain decentralized? In this paper, we empirically studied one of the least decentralized parts of Ethereum, its builder market.
+  The builder market was introduced to fairly distribute Maximal Extractable Values (MEV) among validators and avoid validator centralization. As of the time of writing, three builders produced the vast majority (more than 80%) of blocks in Ethereum, creating a concerning centralization factor. However, the community believes that such centralization is okay, arguing that builder centralization will not lead to validator centralization. In this empirical study, we interrogate the causes and implications of builder centralization and challenge this belief that it is acceptable.
+  Our main finding is that builder centralization has led to a significant loss by validators and, if left uncontrolled, could lead to validator centralization. Moreover, MEV mitigation solutions slated for adoption are affected too because they rely on the builder market as an MEV oracle, which is made inaccurate by centralization.
+  Our investigation revealed two reasons behind builder centralization. We propose a structural change to the existing MEV supply chain and a solution based on the new supply chain structure. However, future work is required to analyze if the new supply chain structure is sustainable in the long term, which we leave open.
+]]></content:encoded>
+<pubDate>Tue, 10 Sep 2024 00:00:00 -0400</pubDate>
+<pubDate>Tue, 10 Sep 2024 00:00:00 -0400</pubDate>
+</item>
 
 <item>
 <title>Towards a Socially Acceptable Competitive Equilibrium in Energy Markets</title>
