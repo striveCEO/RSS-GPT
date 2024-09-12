@@ -5,6 +5,30 @@
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
 <item>
+<title>Kronos: A Secure and Generic Sharding Blockchain Consensus with Optimized Overhead</title>
+<link>https://eprint.iacr.org/2024/206</link>
+<guid>https://eprint.iacr.org/2024/206</guid>
+<content:encoded><![CDATA[
+<div> 关键词：Kronos、安全、低延迟、高吞吐量、通用框架
+
+总结:
+
+本文提出了一种名为Kronos的安全分片区块链共识机制，旨在优化分片网络的效率与安全性。Kronos的核心创新在于引入了一个由分片成员联合管理的缓冲区，用于传输有效交易并拒绝无效交易。这种设计确保了在恶意客户端存在的情况下，系统仍能实现原子性，并保持最优的分片内开销。
+
+Kronos特别关注跨分片交易带来的挑战，通过高效拒绝机制，即使在快乐路径中也不需要执行拜占庭容错(BFT)协议，而在不快乐路径中的成本也仅相当于两阶段提交。此外，文章还提出了安全的跨分片认证方法，证明了处理b个交易时，Kronos的跨分片通信开销为O(n b λ)，其中n代表分片大小，λ为安全参数。这一特性使得Kronos成为增强现有BFT协议性能和可扩展性的通用框架。
+
+Kronos支持异步网络等通用模型，并展示了在实际部署中显著提升的吞吐量（可达320 ktx/sec，延迟2.0秒），在处理跨分片交易工作负载时，相较于过去解决方案，Kronos表现出高达12倍的吞吐量提升和50%的延迟减少。 <div>
+Sharding enhances blockchain scalability by dividing the network into shards, each managing specific unspent transaction outputs or accounts. As an introduced new transaction type, cross-shard transactions pose a critical challenge to the security and efficiency of sharding blockchains. Currently, there is a lack of a generic sharding blockchain consensus pattern that achieves both security and low overhead.
+
+In this paper, we present Kronos, a secure sharding blockchain consensus achieving optimized overhead. In particular, we propose a new secure sharding blockchain consensus pattern, based on a buffer managed jointly by shard members. Valid transactions are transferred to the payee via the buffer, while invalid ones are rejected through happy or unhappy paths. Kronos is proved to achieve security with atomicity under malicious clients while maintaining optimal intra-shard overhead. Efficient rejection even requires no Byzantine fault tolerance (BFT) protocol execution in happy paths, and the cost in unhappy paths is still not higher than a two-phase commit. Besides, we propose secure cross-shard certification methods. Handling b transactions, Kronos is proved to achieve cross-shard communication with low cross-shard overhead O(n b \lambda) (n for the shard size and \lambda for the security parameter). Notably, Kronos imposes no restrictions on BFT and does not rely on timing assumptions, offering optional constructions in various modules. Kronos could serve as a universal framework for enhancing the performance and scalability of existing BFT protocols. Kronos supports generic models, including asynchronous networks, and can increase the throughput by several orders of magnitude.
+
+We implement Kronos using two prominent BFT protocols: asynchronous Speeding Dumbo (NDSS'22) and partially synchronous Hotstuff (PODC'19). Extensive experiments (over up to 1000 AWS EC2 nodes across 4 AWS regions) demonstrate Kronos scales the consensus nodes to thousands, achieving a substantial throughput of 320 ktx/sec with 2.0 sec latency. Compared with the past solutions, Kronos outperforms, achieving up to a 12$\times$ improvement in throughput and a 50% reduction in latency when cross-shard transactions dominate the workload.
+]]></content:encoded>
+<pubDate>Sat, 10 Feb 2024 12:30:47 +0000</pubDate>
+<pubDate>Sat, 10 Feb 2024 12:30:47 +0000</pubDate>
+</item>
+
+<item>
 <title>Blind Multisignatures for Anonymous Tokens with Decentralized Issuance</title>
 <link>https://eprint.iacr.org/2024/1406</link>
 <guid>https://eprint.iacr.org/2024/1406</guid>
@@ -23,7 +47,6 @@ We then present two BMS constructions, one based on BLS signatures and a second 
 
 We also provide a proof-of-concept implementation and show that it has low-cost verification, which is the most critical operation in blockchain applications.
 ]]></content:encoded>
-<pubDate>Mon, 09 Sep 2024 09:11:55 +0000</pubDate>
 <pubDate>Mon, 09 Sep 2024 09:11:55 +0000</pubDate>
 </item>
 <item>
@@ -51,7 +74,6 @@ We describe how straightline knowledge soundness is achieved by SNARKs in severa
 As a notable application, our work offers an idealized model that provides new, albeit heuristic, insights for the concrete security of \emph{recursive STARKs} used in blockchain systems. Our work could be viewed as partial evidence justifying the parameter choices for recursive STARKs made by practitioners.
 ]]></content:encoded>
 <pubDate>Tue, 24 Oct 2023 11:06:22 +0000</pubDate>
-<pubDate>Tue, 24 Oct 2023 11:06:22 +0000</pubDate>
 </item>
 <item>
 <title>Blockchain-based decentralized identity system: Design and security analysis</title>
@@ -63,7 +85,6 @@ As a notable application, our work offers an idealized model that provides new, 
 总结: 这篇论文提出了一种新型的基于区块链的去中心化身份系统（DID），专为增强物联网（IoT）和设备对设备（D2D）网络中的数字身份管理设计。该系统具有层次结构，巧妙地将分布式账本与移动D2D网络融合，确保了强大的安全性同时简化了通信流程。系统的核心在于网关节点，它们作为中介，通过智能合约和分布式存储系统实现DID注册和设备认证。全面的安全分析证明了该系统的抗常见网络攻击能力，并遵循了最终性与活生生原则等关键准则。 <div>
 This paper presents a novel blockchain-based decentralized identity system (DID), tailored for enhanced digital identity management in Internet of Things (IoT) and device-to-device (D2D) networks. The proposed system features a hierarchical structure that effectively merges a distributed ledger with a mobile D2D network, ensuring robust security while streamlining communication. Central to this design are the gateway nodes, which serve as intermediaries, facilitating DID registration and device authentication through smart contracts and distributed storage systems. A thorough security analysis underscores the system’s resilience to common cyber threats and adherence to critical principles like finality and liveness.
 ]]></content:encoded>
-<pubDate>Wed, 17 Apr 2024 08:51:29 +0000</pubDate>
 <pubDate>Wed, 17 Apr 2024 08:51:29 +0000</pubDate>
 </item>
 <item>
@@ -82,7 +103,6 @@ This paper presents a novel blockchain-based decentralized identity system (DID)
 最后，文章引入了一个名为聚合模型的新SPV基轻客户端概念，通过详细分析证明了它相较于现有的轻客户端实现方式能提供更优的隐私性能。这一模型通过创新的设计，成功地在不显著增加通信开销的情况下，实现了对用户地址状态更新的更严格隐私保护，为提升比特币网络整体隐私性提供了新的思路和实践路径。 <div>
 Light clients implement a simple solution for Bitcoin's scalability problem, as they do not store the entire blockchain but only the state of particular addresses of interest. To be able to keep track of the updated state of their addresses, light clients rely on full nodes to provide them with the required information. To do so, they must reveal information about the addresses they are interested in. This paper studies the two most common light client implementations, SPV and Neutrino with regards to their privacy. We define privacy metrics for comparing the privacy of the different implementations. We evaluate and compare the privacy of the implementations over time on real Bitcoin data and discuss the inherent privacy-communication tradeoff. In addition, we propose general techniques to enhance light client privacy in the existing implementations. Finally, we propose a new SPV-based light client model, the aggregation model, evaluate it, and show it can achieve enhanced privacy than in the existing light client implementations.
 ]]></content:encoded>
-<pubDate>Tue, 10 Sep 2024 19:17:19 +0000</pubDate>
 <pubDate>Tue, 10 Sep 2024 19:17:19 +0000</pubDate>
 </item>
 <item>
@@ -104,7 +124,6 @@ Zero-Knowledge (ZK) protocols allow a prover to demonstrate the truth of a state
 This work proposes new code-based ZK protocols from VOLEitH paradigm for various relations and designs several code-based privacy-preserving systems that considerably advance the state-of-the-art in code-based cryptography. Our first contribution is a new ZK protocol for proving the correctness of a regular (non-linear) encoding process, which is utilized in many advanced privacy-preserving systems. Our second contribution are new ZK protocols for concrete code-based relations.   In particular, we provide a ZK of accumulated values  with optimal witness size for the accumulator (Nguyen et al.,  Asiacrypt 2019).  Our protocols thus open the door for constructing more efficient  privacy-preserving systems. Moreover, our ZK protocols have the advantage of being simpler, faster, and smaller compared to Stern-like protocols.  To illustrate the effectiveness of our new ZK protocols, we develop ring signature (RS) scheme, group signature (GS) scheme, fully dynamic attribute-based signature scheme from our new ZK. The signature sizes of the resulting schemes are two to three orders of magnitude smaller than those based on Stern-like protocols in various parameter settings. Finally, our first ZK protocol yields a standard signature scheme, achieving ``signature size + public key size'' as small as $3.05$ KB, which is slightly smaller than the state-of-the-art signature scheme (Cui et al., PKC 2024) based on the regular syndrome decoding problems.
 ]]></content:encoded>
 <pubDate>Tue, 10 Sep 2024 12:12:36 +0000</pubDate>
-<pubDate>Tue, 10 Sep 2024 12:12:36 +0000</pubDate>
 </item>
 <item>
 <title>Cryptobazaar: Private Sealed-bid Auctions at Scale</title>
@@ -113,11 +132,10 @@ This work proposes new code-based ZK protocols from VOLEitH paradigm for various
 <content:encoded><![CDATA[
 <div> 关键词：Cryptobazaar、隐私保护、去中心化、密封投标拍卖、单个不可信协调者
 
-<br><br>
+<br /><br />
 总结:本文引入了一种名为Cryptobazaar的创新性、可扩展、私密且去中心化的密封投标拍卖协议。该协议通过确保投标人的隐私不被泄露，同时保证拍卖结果的公开验证和仅依赖单一不可信的协调者来执行任务，实现了在安全与效率之间的平衡。其核心在于结合了高效分布式协议以计算一串二元编码投标的逻辑或运算，以及多种新颖的零知识简洁论证知识。此外，文章还介绍了Cryptobazaar协议的不同变体，用于实现包括第一价、第二价以及更广泛的(p+1)价和顺序第一价拍卖在内的多种拍卖类型。通过性能评估，证明了该实现的高度实用性，例如，在有128位竞标者和1024个价格范围的情况下，一次拍卖只需不到0.5秒即可完成，每位竞标者发送和接收的数据量约为32KB。 <div>
 This work introduces Cryptobazaar, a novel scalable, private, and decentralized sealed-bid auction protocol. In particular, our protocol protects the privacy of losing bidders by preserving the confidentiality of their bids while ensuring public verifiability of the outcome and relying only on a single untrusted auctioneer for coordination. At its core, Cryptobazaar combines an efficient distributed protocol to compute the logical-OR for a list of unary-encoded bids with various novel zero-knowledge succinct arguments of knowledge that may be of independent interest. We further present variants of our protocol that can be used for efficient first-, second-, and more generally $(p+1)$st-price as well as sequential first-price auctions. Finally, the performance evaluation of our Cryptobazaar implementation shows that it is highly practical. For example, a single run of an auction with $128$ bidders and a price range of $1024$ values terminates in less than $0.5$ sec and requires each bidder to send and receive only about $32$ KB of data.
 ]]></content:encoded>
-<pubDate>Tue, 10 Sep 2024 07:55:13 +0000</pubDate>
 <pubDate>Tue, 10 Sep 2024 07:55:13 +0000</pubDate>
 </item>
 <item>
@@ -130,7 +148,6 @@ This work introduces Cryptobazaar, a novel scalable, private, and decentralized 
 总结: 文章探讨了当前End-to-End Encryption（E2EE）解决方案所面临的问题，如低可用性、小用户基础、依赖中心服务提供商以及易受后门攻击等。同时，文章指出美国和欧盟正提出新的监控法规，要求聊天监控，这引发了对合法后门设置的担忧。为解决这些问题，文章提出了一个新的E2EE解决方案——Encrypted MultiChannel Communication（EMC2），基于n-out-of-n秘密共享机制。EMC2将消息分割成多个秘密共享，并通过独立通道发送，提供无单一信任点、无需设置且易于公众理解的E2EE方式。该方案旨在通过展示合法后门无效性来加强反对其设置的论据，并与现有工具相补充，从而增强E2EE的安全性和隐私保护能力。 <div>
 Nowadays, the problem of point-to-point encryption is solved by the wide adaptation of protocols like TLS. However, challenges persist for End-to-End Encryption (E2EE). Current E2EE solutions, such as PGP and secure messengers like Signal, suffer from issues like 1) low usability, 2) small user base, 3) dependence on central service providers, and 4) susceptibility to backdoors. Concerns over legally mandated backdoors are rising as the US and EU are proposing new surveillance regulations requiring chat monitoring. We present a new E2EE solution called Encrypted MultiChannel Communication, based on n-out-of-n secret sharing. EMC2 splits messages into multiple secret shares and sends them through independent channels. We show that multiple independent channels exist between users and EMC2 provides E2EE with no single point of trust, no setup, and is understandable by the general public. Our solution complements existing tools and aims to strengthen the argument against legally enforced backdoors by demonstrating their ineffectiveness.
 ]]></content:encoded>
-<pubDate>Mon, 09 Sep 2024 09:33:15 +0000</pubDate>
 <pubDate>Mon, 09 Sep 2024 09:33:15 +0000</pubDate>
 </item>
 <item>
@@ -176,7 +193,6 @@ remarkable efficiency. The slightly longer prover time of 1.413s
 off for this performance gain.
 ]]></content:encoded>
 <pubDate>Mon, 09 Sep 2024 07:44:03 +0000</pubDate>
-<pubDate>Mon, 09 Sep 2024 07:44:03 +0000</pubDate>
 </item>
 <item>
 <title>A Recursive zk-based State Update System</title>
@@ -188,7 +204,6 @@ off for this performance gain.
 总结: 这篇论文提出了一种基于零知识证明（ZKP）的区块更新系统，其中每个区块包含一个由用户生成的zkVM证明聚合而成的SNARK证明。该系统允许用户在其本地机器上生成状态更新证明，从而促进了一个安全、分散的验证过程。论文的主要贡献是递归证明系统，它通过将用户证明进行层级化树结构验证并最终形成根证明来解决可扩展性问题，该根证明作为区块证明用于验证。该解决方案改进了当前区块链范式，通过ZKP提供高效递归验证，增强了安全性并减少了计算负载。 <div>
 This paper introduces a ZKP (zero-knowledge proof) based state update system, where each block contains a SNARK proof aggregated from the user generated zkVM (zero knowledge virtual machine) proofs. It enables users to generate state update proofs in their local machines, contributing to a secure, decentralized verification process. Our main contribution in this paper, the recursive proofs system, addresses scalability by recursively verifying user proofs and aggregating them in a hierarchical tree structure up to a root proof, serving as a block proof. The proposed solution advances current blockchain paradigms by offering efficient recursive verification through ZKP, enhancing security and reducing computational load.
 ]]></content:encoded>
-<pubDate>Sat, 07 Sep 2024 17:04:51 +0000</pubDate>
 <pubDate>Sat, 07 Sep 2024 17:04:51 +0000</pubDate>
 </item>
 <item>
@@ -208,7 +223,6 @@ Multiparty computation (MPC) is an important field of cryptography that deals wi
 Our schemes SLAMP-FSS and SLAMPR-FSS are more efficient in the evaluation phase than other previously proposed multi-point FSS schemes while being also more flexible and being similar in other efficiency parameters.
 ]]></content:encoded>
 <pubDate>Thu, 05 Sep 2024 08:38:24 +0000</pubDate>
-<pubDate>Thu, 05 Sep 2024 08:38:24 +0000</pubDate>
 </item>
 <item>
 <title>Survivable Payment Channel Networks</title>
@@ -217,17 +231,15 @@ Our schemes SLAMP-FSS and SLAMPR-FSS are more efficient in the evaluation phase 
 <content:encoded><![CDATA[
 <div> 关键词：支付通道网络、交易吞吐量、多跳路径、保护方案、容量分配优化
 
-<br>
-<br>
+<br />
+<br />
 总结: 文章主要探讨了支付通道网络（PCN）在加密货币中作为提高交易吞吐量的主要方法。PCN允许两个参与者通过锁定一定资金的链上交易来建立双向支付通道，进行多次互付而不需提交到区块链。然而，打开或维护通道需要较长时间和资源，限制了其数量。为了解决这个问题，用户可以利用多跳路径绕过为每个新目的地开设和维护通道的需求。
 
 文章还分析了支付通道的停止时间（即通道耗尽的时间），并研究了网络中一组通道的平均停止时间和特定拓扑结构下通道的停止时间。为了提高网络的最小停止时间，提出了优化通道容量分布的方案。实验结果验证了模型的准确性和优化方案的有效性。总体而言，文章旨在通过优化支付通道网络中的容量分配策略，提升系统整体的稳定性和效率，减少由于通道耗尽导致的支付失败情况。 <div>
 Payment channel networks (PCNs) are a leading method to scale the transaction throughput in cryptocurrencies. Two participants can use a bidirectional payment channel for making multiple mutual payments without committing them to the blockchain. Opening a payment channel is a slow operation that involves an on-chain transaction locking a certain amount of funds. These aspects limit the number of channels that can be opened or maintained. Users may route payments through a multi-hop path and thus avoid opening and maintaining a channel for each new destination. Unlike regular networks, in PCNs capacity depends on the usage patterns and, moreover, channels may become unidirectional. Since payments often fail due to channel depletion, a protection scheme to overcome failures is of interest. We define the stopping time of a payment channel as the time at which the channel becomes depleted. We analyze the mean stopping time of a channel as well as that of a network with a set of channels and examine the stopping time of channels in particular topologies. We then propose a scheme for optimizing the capacity distribution among the channels in order to increase the minimal stopping time in the network. We conduct experiments and demonstrate the accuracy of our model and the efficiency of the proposed optimization scheme.
 ]]></content:encoded>
 <pubDate>Thu, 05 Sep 2024 08:32:20 +0000</pubDate>
-<pubDate>Thu, 05 Sep 2024 08:32:20 +0000</pubDate>
 </item>
-
 <item>
 <title>Haze and Daze: Compliant Privacy Mixers</title>
 <link>https://eprint.iacr.org/2023/1152</link>
