@@ -4,6 +4,92 @@
 <title>Ethereum Research - Latest topics</title>
 <link>https://ethresear.ch/latest</link>
 
+<item>
+<title>Resolving the Dichotomy: DeFi Compliance under Zero Knowledge</title>
+<link>https://ethresear.ch/t/resolving-the-dichotomy-defi-compliance-under-zero-knowledge/20413</link>
+<guid>https://ethresear.ch/t/resolving-the-dichotomy-defi-compliance-under-zero-knowledge/20413</guid>
+<content:encoded><![CDATA[
+<div> 关键词：DeFi、合规挑战、区块链、零知识证明、智能合约
+
+总结:
+这篇文章探讨了去中心化金融(DeFi)协议面临的合规挑战，尤其是由于交易资产的特性及其分散的治理方式。为了解决这一问题，文章提出利用区块链原生的合规机制，特别是智能合约和基于链上的可验证零知识证明，以确保合规性、风险管理和必要的交易报告，同时保护用户隐私。该框架通过将与合规相关的辅助信息(CRAI)附加到链上交易，实现了实时的合规监控/验证，并使用零知识证明以隐私保护的方式进行。框架还规定了合规安全的DeFi交互模式，包括使用智能合约钱包、合规智能合约、合规智能合约系统以及零知识证明来执行由合规智能合约系统定义的合规规则。
+
+文章提出了几个关键的研究问题：
+1. 实施此框架在现有DeFi协议中可能遇到的挑战和限制。
+2. 如何增强框架的隐私功能，以适应复杂合规场景中的多个合规断言，例如使用证明聚合和证明递归。
+3. 如何扩展框架以支持更广泛的合规要求，超越KYC/AML，例如集成DAO和代理权。
+4. 管理和更新框架内的合规政策时可能出现的治理挑战。
+5. 如何利用框架的透明度和问责制特性进一步增强DeFi，如自定义钩子。
+6. 如何根据不同的监管环境和司法管辖区调整框架。
+7. 实施此框架对DeFi用户和协议的经济影响。
+
+文章旨在激发关于该框架及其建议的研究问题的进一步讨论，期待来自以太坊研究社区的反馈。 <div>
+<p>This is a summary and enumeration of relevant research questions based on the recent <a href="https://entethalliance.org/2024-08-20-resolving-the-dichotomy-defi-compliance-under-zero-knowledge/" rel="noopener nofollow ugc">EEA Article by the same title as this post</a>.</p>
+<p><strong>Bulleted Summary</strong></p>
+<ul>
+<li>DeFi protocols face a compliance challenge due to the type of assets traded and their often decentralized governance.</li>
+<li>A solution is leveraging blockchain-native compliance mechanisms, specifically smart contracts, and onchain verifiable zero-knowledge proofs.</li>
+<li>This approach ensures regulatory compliance, weighted risk management, and required transaction reporting while preserving user privacy.</li>
+<li>The framework attaches Compliance-Relevant Auxiliary Information (CRAI) to onchain transactions, enabling real-time compliance monitoring/verification, in a privacy-preserving way using zero-knowledge proofs.</li>
+<li>The framework also specifies compliance-safe DeFi interaction patterns involving using smart contract wallets, DeFi compliance contracts, a compliance smart contract system, and zero-knowledge proofs to enforce compliance rules specified in the compliance smart contract system that defines compliance policies, attestation providers, and compliant assets.</li>
+<li>The framework offers benefits like regulatory compliance, risk management, privacy protection, security, versatility, transparency, and accountability.</li>
+<li>By adopting such a framework, DeFi protocols could navigate the regulatory landscape while maintaining their core principles.</li>
+<li>Some of this solution already exists (compliance smart contract system, compliant assets, etc.) and need to be further expanded (smart contract wallets, compliance wrapper contracts, DeFi-specific custom hooks, etc.)</li>
+</ul>
+<p>Below is a list of open research questions in no particular order:</p>
+<ul>
+<li>What are the potential challenges and limitations of implementing this framework in existing DeFi protocols?</li>
+<li>How can the framework’s privacy features be further enhanced to accommodate complex compliance scenarios with many compliance assertions as zkps e.g. using proof aggregation and proof recursion?</li>
+<li>How can the framework be extended to support a broader range of compliance requirements beyond KYC/AML e.g. incorporated DAOs, Power-of-Attorney?</li>
+<li>What are the potential governance challenges associated with managing and updating compliance policies within the framework?</li>
+<li>How can the framework’s transparency and accountability features be leveraged to further enhance DeFi e.g. custom hooks?</li>
+<li>How can the framework be adapted to different regulatory environments and jurisdictions?</li>
+<li>What are the economic implications of implementing this framework for DeFi users and protocols?</li>
+</ul>
+<p>Given that part of the framework already exists, this post is to stimulate further discussion on the framework itself, and its suggested open research questions.</p>
+<p>Looking forward to the feedback from the Ethereum research community.</p>
+            <p><small>1 post - 1 participant</small></p>
+            <p><a href="https://ethresear.ch/t/resolving-the-dichotomy-defi-compliance-under-zero-knowledge/20413">Read full topic</a></p>
+]]></content:encoded>
+<pubDate>Wed, 11 Sep 2024 21:51:53 +0000</pubDate>
+<pubDate>Wed, 11 Sep 2024 21:51:53 +0000</pubDate>
+</item>
+<item>
+<title>Lookup argument and its tweaks</title>
+<link>https://ethresear.ch/t/lookup-argument-and-its-tweaks/20409</link>
+<guid>https://ethresear.ch/t/lookup-argument-and-its-tweaks/20409</guid>
+<content:encoded><![CDATA[
+<div> 关键词：Placeholder Proof系统、Aztec研究、Plookup技术、Join-and-Split算法、Selector列
+
+总结:
+本文讨论了构建名为Placeholder的证明系统的过程，该系统用于验证等式是否为nil。系统的核心在于一种基于查找的论证方法，其灵感来源于Aztec研究人员的工作。该方法通过将原始表格与输入列和查找表列进行连接和分割来实现，允许验证者证明特定约束是否满足。连接和分割算法是Plookup技术的基础，它通过重新排列原始列与输入列和查找表列来创建一个大矢量，然后将此矢量分割回原始大小的部分。
+
+为了适应更复杂的电路设计需求，作者对Plookup技术进行了改进，包括支持多个查找表和任意行/列约束。他们修改了连接和分割算法以支持多个输入列，这使得能够高效地处理大量查找表，即使这些表的大小超过原始行的数量。此外，引入了选择器列的概念，允许设计者精确控制哪些行受约束以及哪些行用于存储查找表。
+
+文章还指出，Plookup论文中描述的方法限制了查找表的总数不能超过原始行的数量总和。作者通过结合查找表标识符的使用与他们的选择器列构造方法，克服了这一限制，使得查找表可以更灵活地存储和使用，而无需受到论证方法的约束。这一改进使得查找论证成为一种通用且灵活的工具。
+
+为了详细阐述这些修改的具体内容，读者可以访问相关页面获取更多信息。 <div>
+<p>In building the Placeholder proof system for =nil; Foundation, we use a lookup argument based on the <a href="https://eprint.iacr.org/2020/315.pdf" rel="noopener nofollow ugc">Plookup paper</a> by Aztec researchers. We took Plookup technique as a starting point and then made some practical improvements for writing large PLONK circuits with a complex logic.</p>
+<p>Lookup argument allows prover to prove that some table over prime field (hereafter assignment table) satisfies specific constraints: some cells computed from assignment table (lookup input) belong to list of values that is also computed from the assignment table (lookup table).</p>
+<h2><a class="anchor" href="https://ethresear.ch#p-49919-join-and-split-algorithm-1" name="p-49919-join-and-split-algorithm-1"></a>Join-and-split algorithm</h2>
+<p>The core of Plookup techinque is a sorting algorithm. We call it <strong>join-and-split</strong> because it includes two steps:</p>
+<ul>
+<li><strong>join</strong> — lookup table columns are joined together with input columns into single large vector using special reordering algorithm.</li>
+<li><strong>split</strong> — constructed vector is split again into original size parts.</li>
+</ul>
+<p>The case with the single lookup table and single input column is described in the Plookup paper in detail. But it wasn’t enough for our use-cases. We needed lots of efficiently packed lookup tables and lookup constraints applied to arbitrary rows and columns, and we didn’t want to repeat lookup argument for each <code>(input, table)</code> pair.</p>
+<p>So, we modified join-and-split algorithm to be able to join more than two columns. It allows us to use multiple lookup constraints even if they are applied on same rows and use a large lookup table, even if its size is greater than the whole assignment table rows amount by appending columns to assignment table instead of rows. Balance between assignment table rows and columns amounts helps to find a perfect balance for the best prover performance and verification cost.</p>
+<h2><a class="anchor" href="https://ethresear.ch#p-49919-selector-columns-2" name="p-49919-selector-columns-2"></a>Selector columns</h2>
+<p>Original article contains technique to lookup tuples of values that are placed in the same or neighboring rows. It constructs linear combinations of columns with a random factor. Combining this approach with polynomial expressions usage for lookup tables and input columns both we achieved selector columns full support. Circuit designer now can manage which rows exactly are constrained and what rows are reserved for lookup tables storing.</p>
+<p>Plookup paper also describes technique for multiple lookup tables support. They propose to associate each lookup table with its unique identifier and fill tag column to mark what rows contains lookup tables with which identifier. Tag column for input helps to mark what constraints are applied to marked row. Tag columns should be a part of the random linear combination constructed for the lookup table and input columns respectively. This approach is obviously limited. Sum of lookup tables sizes should be less than the whole table rows amount.</p>
+<p>We combined lookup table identifier usage with our selector columns construction and algorithms for large lookup tables. These modifications allow lookup tables to be stored and used without regard to lookup argument restrictions, but according to the best circuit design. It made our lookup argument into a universal and flexible tool.</p>
+<p>Detailed description of our modifications can be found on our <a href="https://hackmd.io/@nil-research/rkjJFAtiC" rel="noopener nofollow ugc">HackMD</a> page. Feel free to share your comments!</p>
+            <p><small>1 post - 1 participant</small></p>
+            <p><a href="https://ethresear.ch/t/lookup-argument-and-its-tweaks/20409">Read full topic</a></p>
+]]></content:encoded>
+<pubDate>Wed, 11 Sep 2024 15:14:26 +0000</pubDate>
+<pubDate>Wed, 11 Sep 2024 15:14:26 +0000</pubDate>
+</item>
 
 <item>
 <title>The Shape of Issuance Curves to Come</title>
