@@ -5,6 +5,53 @@
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
 <item>
+<title>New Secret Keys for Enhanced Performance in (T)FHE</title>
+<link>https://eprint.iacr.org/2023/979</link>
+<guid>https://eprint.iacr.org/2023/979</guid>
+<content:encoded><![CDATA[
+<div> 关键词：全同态加密、GLWE、改进、安全性、性能提升
+
+总结:本文提出了一种改进全同态加密（FHE）技术的方法，主要针对GLWE（Gaussian Learning With Errors）基方案。文章识别了两种FHE技术的局限性：一是无法精确控制GLWE密钥大小；二是由于安全原因，无法使用低于特定值的噪声方差，导致在某些情况下无法灵活调整安全级别，造成不必要的高安全设置。为解决这些问题，作者引入了两种新的GLWE密钥类型，这些新密钥既保证了与传统密钥同等的安全性，又带来了性能上的显著提升。
+
+具体来说，新密钥系统使得在保持相同安全性和失败概率的前提下，计算速度可以提升1.3到2.4倍。同时，关键转换和启动密钥的大小也分别减少了1.5到2.7倍。这些改进不仅提高了加密系统的效率，而且扩展了其应用范围，特别是在处理敏感信息保护方面具有重要意义。通过对比现有TFHE技术与传统密钥方法，研究证明了新密钥系统的优越性，为全同态加密技术的进一步发展提供了有力支持。 <div>
+Fully Homomorphic Encryption has known impressive improvements in the last 15 years, going from a technology long thought to be impossible to an existing family of encryption schemes able to solve a plethora of practical use cases related to the privacy of sensitive information. 
+Recent results mainly focus on improving techniques within the traditionally defined framework of GLWE-based schemes, but the recent CPU implementation improvements are mainly incremental.
+To keep improving this technology, one solution is to modify the aforementioned framework, by using slightly different hardness assumptions.
+In this paper, we identify two limitations with (T)FHE:
+(i) there is no fine-grained control over the size of a GLWE secret key, which is traditionally composed of $k$ polynomials with $N=2^\alpha>1$ coefficients;
+(ii) for security reasons one cannot use a noise variance smaller than a certain $\sigma_{\min}$ so, for all ciphertext modulus $q\in \mathbb{N}$, there exists an integer 
+$n_{\mathsf{plateau}}$ such that, with any secret key of size  $k\cdot N \ge n_{\mathsf{plateau}}$, one cannot control their level of security, resulting in unnecessary big security levels.
+To overcome the aforementioned limitations, we introduce two new types of secret keys for GLWE-based cryptosystems, that can be used separately or together.
+We explain why these new secret keys are as secure as the traditional ones and we detail all the improvements that they bring to existing FHE algorithms alongside new algorithms especially efficient with these new keys.
+We provide many comparisons with state-of-the-art TFHE techniques with traditional secret keys, and some benchmarks showing computational speed-ups between $1.3$ and $2.4$ while keeping the same level of security and failure probability (correctness).
+Furthermore, the size of the key switching and bootstrapping keys is also reduced with this contribution by factors ranging from $1.5$ to $2.7$.
+]]></content:encoded>
+<pubDate>Fri, 23 Jun 2023 08:44:49 +0000</pubDate>
+<pubDate>Fri, 23 Jun 2023 08:44:49 +0000</pubDate>
+</item>
+<item>
+<title>SmartZKCP: Towards Practical Data Exchange Marketplace Against Active Attacks</title>
+<link>https://eprint.iacr.org/2024/941</link>
+<guid>https://eprint.iacr.org/2024/941</guid>
+<content:encoded><![CDATA[
+<div> 关键词：区块链、数据市场、零知识证明、智能合约、安全优化
+
+总结:
+
+本文探讨了将基于区块链的零知识条件支付（ZKCP）协议应用于公共数据市场的可能性及其潜在挑战。ZKCP协议通过区块链技术和零知识证明为数字商品提供无信任的公平交换，但在实际数据市场中应用时存在多种安全风险。
+
+针对这些问题，文章提出了一种改进方案——SmartZKCP，旨在增强安全性并优化性能。SmartZKCP不仅确保了协议的正式化实现以维护公平性，还针对可能的攻击进行了强化防御。同时，该协议还实现了效率提升和通信成本的降低。
+
+通过评估结果，SmartZKCP被证明既实用又高效，符合数据交换市场的应用需求。这一改进方案克服了ZKCP在实际部署中遇到的障碍，提供了更加安全和高效的交易环境，为数据市场的发展提供了有力支持。 <div>
+The trading of data is becoming increasingly important as it holds substantial value. A blockchain-based data marketplace can provide a secure and transparent platform for data exchange. To facilitate this, developing a fair data exchange protocol for digital goods has garnered considerable attention in recent decades. The Zero Knowledge Contingent Payment (ZKCP) protocol enables trustless fair exchanges with the aid of blockchain and zero-knowledge proofs. However, applying this protocol in a practical data marketplace is not trivial.
+
+In this paper, several potential attacks are identified when applying the ZKCP protocol in a practical public data marketplace. To address these issues, we propose SmartZKCP, an enhanced solution that offers improved security measures and increased performance. The protocol is formalized to ensure fairness and secure against potential attacks. Moreover, SmartZKCP offers efficiency optimizations and minimized communication costs. Evaluation results show that SmartZKCP is both practical and efficient, making it applicable in a data exchange marketplace.
+]]></content:encoded>
+<pubDate>Wed, 12 Jun 2024 07:23:45 +0000</pubDate>
+<pubDate>Wed, 12 Jun 2024 07:23:45 +0000</pubDate>
+</item>
+
+<item>
 <title>Kronos: A Secure and Generic Sharding Blockchain Consensus with Optimized Overhead</title>
 <link>https://eprint.iacr.org/2024/206</link>
 <guid>https://eprint.iacr.org/2024/206</guid>
@@ -25,9 +72,7 @@ In this paper, we present Kronos, a secure sharding blockchain consensus achievi
 We implement Kronos using two prominent BFT protocols: asynchronous Speeding Dumbo (NDSS'22) and partially synchronous Hotstuff (PODC'19). Extensive experiments (over up to 1000 AWS EC2 nodes across 4 AWS regions) demonstrate Kronos scales the consensus nodes to thousands, achieving a substantial throughput of 320 ktx/sec with 2.0 sec latency. Compared with the past solutions, Kronos outperforms, achieving up to a 12$\times$ improvement in throughput and a 50% reduction in latency when cross-shard transactions dominate the workload.
 ]]></content:encoded>
 <pubDate>Sat, 10 Feb 2024 12:30:47 +0000</pubDate>
-<pubDate>Sat, 10 Feb 2024 12:30:47 +0000</pubDate>
 </item>
-
 <item>
 <title>Blind Multisignatures for Anonymous Tokens with Decentralized Issuance</title>
 <link>https://eprint.iacr.org/2024/1406</link>
