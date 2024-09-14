@@ -4,6 +4,166 @@
 <title>Ethereum Research - Latest topics</title>
 <link>https://ethresear.ch/latest</link>
 
+<item>
+<title>Decentralized Anti-MEV sequencer based on Order-Fairness Byzantine Fault-Tolerant (BFT) consensus</title>
+<link>https://ethresear.ch/t/decentralized-anti-mev-sequencer-based-on-order-fairness-byzantine-fault-tolerant-bft-consensus/20427</link>
+<guid>https://ethresear.ch/t/decentralized-anti-mev-sequencer-based-on-order-fairness-byzantine-fault-tolerant-bft-consensus/20427</guid>
+<content:encoded><![CDATA[
+<div> 关键词：Decentralized Anti-MEV Sequencer、Order-Fairness BFT Consensus、Transaction Fairness、Decentralization、Byzantine Fault Tolerance
+
+总结:
+本文提出了一种基于秩序公平拜占庭容错(BFT)共识的去中心化反矿工提取价值(MEV)序列器。该机制旨在对抗MEV并确保交易公平性。其关键特性如下：
+
+1. **去中心化**：通过构建由多个节点共同参与交易排序和打包的网络，实现交易处理的分散化。
+
+2. **秩序公平**：遵循规则，如果节点接收的交易tx早于tx′，那么tx的排序不应晚于tx′，以此保障交易的公平性。
+
+3. **拜占庭容错**：即使部分参与者行为恶意，共识协议也能确保系统正常运行，维护其可靠性与稳定性。
+
+4. **工作流程**：用户提交交易至序列器网络后，通过秩序公平BFT共识确定交易顺序。达成共识后，序列器将交易打包并提交给以太坊上的Rollup智能合约执行。
+
+5. **系统实施细节**：对于秩序公平BFT共识的具体实现，请参考文章末尾引用的文献。
+
+此解决方案旨在通过引入去中心化和秩序公平的机制，以及提供拜占庭容错保障，有效对抗MEV，确保区块链交易的公平性和安全性。 <div>
+<p><em>by <a href="https://x.com/0x_1cc" rel="noopener nofollow ugc">KD.Conway</a></em></p>
+<h2><a class="anchor" href="https://ethresear.ch#p-49955-tldr-1" name="p-49955-tldr-1"></a>TL;DR</h2>
+<ul>
+<li>This post introduces a <strong>Decentralized Anti-MEV Sequencer</strong> based on <strong>Order-Fairness Byzantine Fault-Tolerant (BFT) Consensus,</strong> a mechanism designed to counteract MEV and ensure transaction fairness.</li>
+</ul>
+<h2><a class="anchor" href="https://ethresear.ch#p-49955-order-fairness-2" name="p-49955-order-fairness-2"></a>Order Fairness</h2>
+<p><strong>Received-Order-Fairness</strong>[1]: with parameter 1/2 &lt; 𝛾 ≤ 1 dictates that if 𝛾 fraction of honest nodes receive a transaction tx before tx′, then tx should be ordered no later than tx’.</p>
+<h2><a class="anchor" href="https://ethresear.ch#p-49955-introducing-the-anti-mev-sequencer-3" name="p-49955-introducing-the-anti-mev-sequencer-3"></a>Introducing the Anti-MEV Sequencer</h2>
+<p>Our proposed solution is a <strong>Decentralized Anti-MEV Sequencer</strong> that leverages an <strong>Order-Fairness Byzantine Fault-Tolerant (BFT) consensus</strong> mechanism. This system provides:</p>
+<ol>
+<li>
+<p><strong>Decentralization</strong>: Instead of a centralized sequencer, we will build a sequencer network with multiple nodes contributing to transaction ordering and batching.</p>
+</li>
+<li>
+<p><strong>Order-Fairness</strong>: Transactions are processed based on the time they were received by the nodes in the sequencer network, ensuring no one participant can manipulate transaction ordering.</p>
+</li>
+<li>
+<p><strong>Byzantine Fault Tolerance</strong>: The consensus protocol ensures the system remains operational even if some of the participants behave maliciously.</p>
+</li>
+</ol>
+<h2><a class="anchor" href="https://ethresear.ch#p-49955-workflow-4" name="p-49955-workflow-4"></a>Workflow</h2>
+<ol>
+<li>
+<p>When a user wants to send a transaction on a layer 2 blockchain, they submit the transaction to the sequencer network.</p>
+</li>
+<li>
+<p>The Order-Fairness BFT consensus is employed to determine the correct order of transactions. This guarantees that, even if a minority of nodes act maliciously, the system can still reach consensus on a fair transaction order.</p>
+</li>
+<li>
+<p>After reaching consensus, the sequencer batches the transactions and submits them to the Rollup smart contract on Ethereum, where they are executed in the agreed-upon order.</p>
+</li>
+</ol>
+<p>For details on the system implementation of the Order-Fairness BFT consensus, please refer to the corresponding references at the end of this post.</p>
+<h2><a class="anchor" href="https://ethresear.ch#p-49955-references-5" name="p-49955-references-5"></a>References</h2>
+<p>[1] Kelkar, Mahimna, et al. “Order-fairness for byzantine consensus.” <em>Advances in Cryptology–CRYPTO 2020: 40th Annual International Cryptology Conference, CRYPTO 2020, Santa Barbara, CA, USA, August 17–21, 2020, Proceedings, Part III 40</em>. Springer International Publishing, 2020.</p>
+<p>[2] Kelkar, Mahimna, et al. “Themis: Fast, strong order-fairness in byzantine consensus.” <em>Proceedings of the 2023 ACM SIGSAC Conference on Computer and Communications Security</em>. 2023.</p>
+            <p><small>1 post - 1 participant</small></p>
+            <p><a href="https://ethresear.ch/t/decentralized-anti-mev-sequencer-based-on-order-fairness-byzantine-fault-tolerant-bft-consensus/20427">Read full topic</a></p>
+]]></content:encoded>
+<pubDate>Fri, 13 Sep 2024 15:27:10 +0000</pubDate>
+<pubDate>Fri, 13 Sep 2024 15:27:10 +0000</pubDate>
+</item>
+<item>
+<title>PANDAS: A Practical Approach for Next-Generation Data Availability Sampling</title>
+<link>https://ethresear.ch/t/pandas-a-practical-approach-for-next-generation-data-availability-sampling/20426</link>
+<guid>https://ethresear.ch/t/pandas-a-practical-approach-for-next-generation-data-availability-sampling/20426</guid>
+<content:encoded><![CDATA[
+<div> 关键词：PANDAS、网络层协议、数据可用性采样、资源丰富的构建者、点对点通信
+
+总结:
+
+文章介绍了一种名为PANDAS的网络层协议，旨在支持高达32MB的大型数据块进行随机采样。PANDAS的核心目标是在4秒内完成采样过程，通过一种假设机制实现这一目标，即资源丰富的构建者负责初始数据分布。该协议分为两个阶段：播种阶段和行/列合并与采样阶段。
+
+播种阶段中，构建者直接将数据块的行/列子集分发给验证节点（VN），而合并与采样阶段则允许节点同时进行随机采样和数据恢复，以提高数据的可用性。
+
+PANDAS采用了一种直接通信策略，这与基于分发的多跳通信或分布式哈希表（DHT）方法形成对比。在设计PANDAS时，考虑了几个关键假设，包括资源丰富的构建者、激励机制、验证节点的独立操作、恶意多数的系统假设以及节点间不完全一致的视图。
+
+为了确保验证节点在投票前完成随机采样，PANDAS引入了连续的节点发现机制，以便在协议执行期间保持节点视图的更新。此外，PANDAS协议包含两个不协调的阶段，即播种和行/列合并与采样，每个阶段都重复执行，以完成整个过程。
+
+在播种阶段，构建者使用哈希空间将节点动态分配给特定的行/列区域，以实现本地和确定性的映射。构建者随后尝试通过直接通信方式将数据块的子集分发给相应的节点。在合并与采样阶段，节点需要在四秒内完成采样，同时获取其被分配的完整行和列以提升数据可用性。
+
+最后，PANDAS还在持续实验中，探索不同的数据分布策略，特别是在存在恶意验证节点的情况下，以优化成本和数据可用性之间的平衡。 <div>
+<p><strong>PANDAS: A Practical Approach for Next-Generation Data Availability Sampling</strong></p>
+<p>Authors: Onur Ascigil<sup>1</sup>, Michał Król<sup>2</sup>, Matthieu Pigaglio<sup>3</sup>, Sergi Reñé<sup>4</sup>, Etienne Rivière<sup>3</sup>, Ramin Sadre<sup>3</sup></p>
+<p><strong>TL;DR</strong></p>
+<ul>
+<li>PANDAS is a network layer protocol that supports <a href="https://www.google.com/url?q=https://a16zcrypto.com/posts/article/an-overview-of-danksharding-and-a-proposal-for-improvement-of-das/&amp;sa=D&amp;source=editors&amp;ust=1726244230013129&amp;usg=AOvVaw1uA0yFlQiomkk9RvjmwyCi" rel="noopener nofollow ugc">Danksharding</a> with 32 MB blobs and beyond.</li>
+<li>PANDAS aims to achieve a 4-second deadline for random sampling (under the <a href="https://www.google.com/url?q=https://ethresear.ch/t/das-fork-choice/19578&amp;sa=D&amp;source=editors&amp;ust=1726244230013705&amp;usg=AOvVaw3doAIsKjvcjcIC7S-PusJW" rel="noopener nofollow ugc">tight fork choice model</a>).</li>
+<li>Following the <a href="https://www.google.com/url?q=https://ethereum.org/en/roadmap/pbs/&amp;sa=D&amp;source=editors&amp;ust=1726244230013999&amp;usg=AOvVaw2dMSikl29D4bH315qZQzBC" rel="noopener nofollow ugc">Proposer-Builder Separation (PBS)</a>, resourceful builders perform the initial distribution (i.e., seeding) of samples to the nodes.</li>
+<li>PANDAS proceeds in two phases during each slot: 1) <em>Seeding Phase,</em> where the chosen builder of a slot distributes <em>subsets of rows and columns</em> of a 2-D encoded blob to the validator nodes, and 2) Row/Column <em>Consolidation and</em> <em>Sampling phase,</em> where nodes sample random cells and at the same time retrieve and reconstruct assigned rows/columns to boost the data availability of cells.</li>
+<li>PANDAS uses a <em>direct communication</em> approach, which means 1-hop, i.e., point-to-point communications, for both seeding and sampling phases rather than a gossip-based, multi-hop approach or a DHT.</li>
+</ul>
+<p>We make the following assumptions when designing PANDAS:</p>
+<p><strong>Assumption 1) Resourceful Builders:</strong> Following the <a href="https://www.google.com/url?q=https://ethereum.org/en/roadmap/pbs/&amp;sa=D&amp;source=editors&amp;ust=1726244230016209&amp;usg=AOvVaw2u6aLVhX_45QF4JizRPRrL" rel="noopener nofollow ugc">Proposer-Builder Separation (PBS)</a> scheme, in PANDAS, a set of resourceful builders — e.g., cloud instances with sufficiently high upload bandwidth such as 500 Mbps or more — undertake the distribution of seed samples to the network.</p>
+<p><strong>Assumption 2) Builder Incentives:</strong> The builders have an incentive for the blob data to be available since the block will be accepted only if DAS succeeds. However, different builders can have different amounts of resources. The interest of rational builders is to guarantee that data will be considered available while spending a minimal amount of resources.</p>
+<p><strong>Assumption 3) Validator Nodes (VNs) are the primary entities of DAS protocol:</strong> A single Validator Node (VN) performs only a single sampling operation (as one entity), independent of the number of validators it hosts.</p>
+<p><strong>Assumption 4) Dishonest Majority:</strong> A majority (or even supermajority) of VNs and builders can be malicious and, therefore, may not follow the protocol correctly.</p>
+<p><strong>Assumption 5) Sybil-resistance</strong> <strong>VNs</strong>: An honest VN can use a <a href="https://www.google.com/url?q=https://ethresear.ch/t/proof-of-validator-a-simple-anonymous-credential-scheme-for-ethereums-dht/16454&amp;sa=D&amp;source=editors&amp;ust=1726244230018106&amp;usg=AOvVaw2S4QQ8d0c8zadKQKbVBQ6W" rel="noopener nofollow ugc">Proof-of-Validator</a> scheme to prove that it hosts at least one validator. If multiple nodes attempt to re-use the same proof, they can be blocklisted by other honest nodes and builders.</p>
+<p>Below are the objectives of PANDAS:</p>
+<p><strong>Objective 1)</strong> <strong>Tight fork choice:</strong> <em>Honest validator nodes (VNs) complete</em> <em>random sampling</em> <em>before voting for a block, even when the</em> <em>majority of VNs are malicious</em>*.* Therefore, we target the <a href="https://www.google.com/url?q=https://ethresear.ch/t/das-fork-choice/19578&amp;sa=D&amp;source=editors&amp;ust=1726244230019035&amp;usg=AOvVaw0jtQl6ICcsg9iqBiQh4Mst" rel="noopener nofollow ugc">tight fork choice model</a>, which means that honest VNs in a slot’s committee must complete random sampling before voting <em>within four seconds</em> into that slot.</p>
+<p><strong>Objective 2)</strong> <strong>Flexible builder seeding strategies:</strong> Given that different builders can have different resources, our design allows the block builder the flexibility to implement different blob distribution strategies, each with a different trade-off between security and resource usage. For higher security, the builder can send more copies of the blob’s cells to validator nodes, ensuring higher availability. Conversely, to minimise resource usage, the builder can distribute a single copy of each cell at most, reducing bandwidth usage at the expense of lower security. This flexible approach allows the builder to navigate the trade-off between ensuring data availability and optimising bandwidth while under the incentive for the block to be deemed available by validator nodes to be accepted.</p>
+<p><strong>Objective 3) Allowing Inconsistent Node Views:</strong> Our objective is to ensure that the VNs and the builders are not required to reach a consensus on the list of VNs. While we aim for the VNs and builders to generally agree on the set of VNs in the system, it is not necessary for the VNs to maintain strictly consistent views or for the builders’ and VNs’ views to be fully synchronised.</p>
+<p><strong>PANDAS Design</strong></p>
+<p><strong>Continuous Peer Discovery:</strong> To achieve Objective 3, the nodes in the system perform continuous peer discovery in parallel to the protocol phases below to maintain an up-to-date “view” containing other peers. <em>The builder</em> and the VNs aim to discover all the VNs with a valid <a href="https://www.google.com/url?q=https://ethresear.ch/t/proof-of-validator-a-simple-anonymous-credential-scheme-for-ethereums-dht/16454&amp;sa=D&amp;source=editors&amp;ust=1726244230020521&amp;usg=AOvVaw1-IdEEIXKyEqrBkmFcpdG1" rel="noopener nofollow ugc">Proof-of-Validator</a>. We expect both the builder and VNs to have a close but not perfect view of all the VNs in the system.</p>
+<p>A membership service running the peer discovery protocol inserts new (verified) VNs to the view and eventually converges to a complete set of VNs. Peer discovery messages are piggybacked to sample request messages to reduce discovery overhead.</p>
+<p>PANDAS protocol has two (uncoordinated) phases, which repeat during each slot:</p>
+<p><strong>Phase 1</strong>) Seeding,</p>
+<p><strong>Phase 2)</strong> Row/Column Consolidation and Sampling</p>
+<p>In the seeding phase, the builder pushes subsets of row/columns directly to the VNs where row/column assignment is based on a deterministic function. Once a VN receives its samples from the builder, it consolidates the entire row/column it is assigned to (by requesting missing cells from other VNs assigned to the corresponding row/column) and simultaneously performs random sampling.</p>
+<p>VNs do not coordinate to start consolidating and sampling. Therefore, a node finishing phase 1 can begin phase 2 immediately without coordinating with other nodes. The VNs who are the committee members of a slot must complete seeding and random sampling within 4 seconds into the slot.</p>
+<p>Below, we explain the two phases of our protocol in detail.</p>
+<p><strong>Phase 1- Seeding</strong>: The builder assigns VNs to individual rows/columns using a deterministic function that uses a hashspace as we explain below. This mapping of VNs to individual rows/columns is dynamic and changes in each slot. The mapping allows nodes to locally and deterministically map nodes to rows/columns without requiring the number or full list of nodes to be known.</p>
+<p>The Builder prepares and distributes seed samples to the VNs as follows:</p>
+<p><strong>1.a) <em>Mapping Rows/Columns to static regions in the hashspace:</em></strong> The individual rows and columns are assigned static regions in the hashspace as shown in the upper portion of Figure 1.</p>
+<p><strong>1.b)</strong> <em><strong>Mapping VNs to a hashspace</strong></em> <em>:</em> The builder uses a sortition function F<sub>NODE</sub>(NodeID, epoch, slot, R) to assign each VN to a key in the hashspace. The function takes parameters such as NodeID, which is the identifier of the node (i.e., peer ID), epoch and slot numbers, and a random value R derived from the header of the block header from the previous slot.</p>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/4/8/48bcaeee1eef51ab1128caf78e0d29d6d54dbe7e.png" title="image3"><img alt="image3" height="352" src="https://ethresear.ch/uploads/default/optimized/3X/4/8/48bcaeee1eef51ab1128caf78e0d29d6d54dbe7e_2_690x352.png" width="690" /></a></div><br />
+<strong>Figure 1:</strong> Assignment of Row samples to VNs. The Column samples are mapped similarly.<p></p>
+<p>A VN assigned to a row’s region will receive a subset of the cells belonging to that row from the builder. As the VNs are re-mapped to the hashspace during each slot using F<sub>NODE</sub>, their row/column assignments can also change.</p>
+<p><strong>NOTE:</strong> A dynamic, per-slot assignment of rows and columns to VNs is impossible in a gossip-based seeding approach where per-row and per-column gossip channels must remain relatively stable over time.</p>
+<p><strong>1.c)</strong> <strong>Row/Column <em>Sample Distribution:</em></strong> For each row and column, the builder applies a best-effort distribution strategy to push subsets of each row/column to the VNs mapped to the corresponding row/column’s region. The builder uses a direct communication approach, particularly a UDP-based protocol, to distribute the cells for each row/column directly to the VNs.</p>
+<p><em>Rationale for direct communication</em>*:* We aim to complete the seeding phase as quickly as possible to give time for committee members to complete random sampling before voting (Objective 1).</p>
+<p>Row/Column Distribution Strategies: We allow the builders to choose distribution strategies based on resource availability in line with Objective 2. A trade-off between resource usage and data availability exists for different distribution strategies. Consider the example in Figure 2 for distributing two rows. In one extreme case (on the left), the builder distributes the entire row 1 to each VN in the row’s region for improved data availability at the expense of higher resource usage. In another extreme case, the builder sends non-overlapping row pieces of row 6 to each VN in that row’s region, which requires fewer resources but results in less availability of individual cells.</p>
+<p>We are currently evaluating different distribution strategies, including ones that can deterministically map individual cells of rows/columns to individual VNs in the row/column’s region.</p>
+<p><strong>NOTE</strong>: The builder is only involved in the Seeding phase.</p>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/2/d/2d447780eca05e1064f2f780b7a1dcaad92a386e.png" title="image1"><img alt="image1" height="374" src="https://ethresear.ch/uploads/default/optimized/3X/2/d/2d447780eca05e1064f2f780b7a1dcaad92a386e_2_690x374.png" width="690" /></a></div><br />
+<strong>Figure 2:</strong> Two (extreme) strategies to distribute row samples to the VNs in the corresponding row’s region.<p></p>
+<p><strong>Phase 2- Row/Column Consolidation and Sampling</strong>: VNs that are part of the current slot’s committee aim to complete random sampling within the slot’s first four seconds (i.e., voting deadline). To boost the availability of cells, particularly for the committee members of the slot who must perform (random) sampling within four seconds, the VNs also consolidate, i.e., retrieve the full row and column they are assigned to based on the F<sub>NODE</sub> mapping as part of row/column sampling.</p>
+<p><strong>2.a) VN Random Sampling:</strong> The VNs in the current slot’s committee attempt to retrieve <a href="https://www.google.com/url?q=https://ethresear.ch/t/peerdas-a-simpler-das-approach-using-battle-tested-p2p-components/16541/5?u%3Doascigil&amp;sa=D&amp;source=editors&amp;ust=1726244230027394&amp;usg=AOvVaw3dcjIB9khL3JRIj_je8GsM" rel="noopener nofollow ugc">73 randomly chosen cells</a> as soon as they receive their seed samples from the builder.</p>
+<p>Using the deterministic assignment F<sub>NODE</sub>, VNs can locally determine the nodes expected to eventually custody a given row or column.</p>
+<p><em>Sampling Algorithm:</em> Some of these nodes may be offline or otherwise unresponsive. Sequentially sending requests for cells risks missing the 4-second deadline for the committee members.</p>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/b/3/b315051e7742d17e0aabd822c6d282c69402eead.png" title="image2"><img alt="image2" height="276" src="https://ethresear.ch/uploads/default/optimized/3X/b/3/b315051e7742d17e0aabd822c6d282c69402eead_2_690x276.png" width="690" /></a></div><br />
+<strong>Figure 3:</strong> Sample Fetching Example: The rows and columns assigned to each VN are shown on the top of the corresponding VN. VN14 knows to send a request to VN78 to retrieve cell one based on the knowledge of the mapping F<sub>NODE</sub>.<p></p>
+<p>At the same time, sending requests to all peers holding copies will lead to an explosion of messages in the network and bear the risk of congestion. Fetching must, therefore, seek a tradeoff between the use of parallel and redundant requests on the one hand and latency constraints on the other hand. Our approach employs an adaptive cell-fetching strategy using direct communication between nodes through a UDP-based (connectionless) protocol. The fetching algorithm can tolerate losses and offline nodes.</p>
+<p><strong>2.b) VN Row/Column Consolidation:</strong> If a VN receives less than half of the cells of its assigned row or column from the builder (as a consequence of the builder’s chosen distribution strategy), it requests the missing cells from other VNs. A VN requests cells from only the VNs assigned to the same row/column’s region during row/column consolidation. When a VN has half of the cells of a row or column, it can locally reconstruct the entire row or column.</p>
+<p><em>The Rationale for Consolidating Row/Column:</em></p>
+<ul>
+<li><em>Reconstructing missing cells</em>: while performing row/column sampling, VNs reconstruct missing cells.</li>
+<li><em>To boost the availability of cells</em>: Given the deterministic mapping (F<sub>NODE</sub>), the builder can choose any distribution strategy to send subsets of rows and columns to the VNs. Row/Column consolidation aims to improve the availability of samples so that random sampling can be completed on time.</li>
+</ul>
+<p>Ideally, the builder should select a seed sample distribution strategy that enables VNs to consolidate rows and columns efficiently. To facilitate this, the builder can push each VN a map (together with the seed samples) that details how individual cells of a row/column are assigned to VNs within that row/column’s region as part of the builder’s distribution strategy. With this map, VNs can quickly identify and retrieve missing cells to reconstruct a complete row, thereby improving the availability of the data.</p>
+<p><strong>NOTE:</strong> In some DAS approaches, the term ‘row/column sampling’ refers to nodes retrieving multiple rows and columns before voting on the availability of the blob. In our approach, nodes retrieve rows and columns to enhance data availability, supporting validators who must perform random sampling before they vote.</p>
+<p>We refer to this as ‘row/column consolidation’ instead of ‘row/column sampling’ because in PANDAS, committee members vote based on random sampling, and they do not directly sample entire rows or columns.</p>
+<p><strong>What about Regular Nodes (RNs)?</strong></p>
+<p>Unlike VNs, RNs do not obtain seed row/column samples from the builder. The builder sends initial seed samples to a Sybil-resistant group of VNs that use the <a href="https://www.google.com/url?q=https://ethresear.ch/t/proof-of-validator-a-simple-anonymous-credential-scheme-for-ethereums-dht/16454&amp;sa=D&amp;source=editors&amp;ust=1726244230030492&amp;usg=AOvVaw3FE6AN3DjFuibklaNwyDPO" rel="noopener nofollow ugc">Proof-of-Validator</a> scheme. There is currently no mechanism for RNs to prove that they are not Sybils; therefore, the initial distribution of samples from the builder only uses VNs.</p>
+<p>Using the public deterministic function F<sub>NODE</sub>, RNs can be similarly mapped to individual row/column regions. Once mapped to a region, RNs can (optionally) perform row/column consolidation to retrieve entire rows and columns and respond to queries for cells within their assigned region.</p>
+<p>Like other nodes, RNs must perform peer discovery. In general, RNs aim to discover all the VNs and can also seek to discover other RNs. Given the knowledge of other peers through peer discovery, RNs can perform random sampling through direct communication. Unlike VNs, RNs are not under strict time constraints to complete sampling — they can start sampling after the VNs, for instance, after receiving the block header for the current slot.</p>
+<p><strong>Discussion &amp; On-going Work</strong></p>
+<p>We assume rational builders to have an incentive to cut costs (and under provision) but, at the same time, aim to make blocks available (to be rewarded). This implies that the builders will aim for the row/column consolidation to be as efficient as possible, i.e., with efficient consolidation, which boosts the availability of cells, the builder can send less copies of each cell during the seeding phase to cut costs.</p>
+<p>We are currently experimenting with different distribution strategies with malicious VNs withholding samples and attempting to disrupt peer discovery. Our DAS simulation code is available on <a href="https://www.google.com/url?q=https://github.com/datahop/kademlia-simulator/&amp;sa=D&amp;source=editors&amp;ust=1726244230032037&amp;usg=AOvVaw1UC1uGBj8kO1dTX4Q01QRY" rel="noopener nofollow ugc">DataHop GitHub repository</a>.</p>
+<p><sup>1</sup> Lancaster University, UK</p>
+<p><sup>2</sup> City, University London, UK</p>
+<p><sup>3</sup> Université Catholique de Louvain (UCLouvain)</p>
+<p><sup>4</sup> DataHop Labs</p>
+            <p><small>1 post - 1 participant</small></p>
+            <p><a href="https://ethresear.ch/t/pandas-a-practical-approach-for-next-generation-data-availability-sampling/20426">Read full topic</a></p>
+]]></content:encoded>
+<pubDate>Fri, 13 Sep 2024 15:23:19 +0000</pubDate>
+<pubDate>Fri, 13 Sep 2024 15:23:19 +0000</pubDate>
+</item>
 
 <item>
 <title>AUCIL: An Auction-Based Inclusion List Design for Enhanced Censorship Resistance on Ethereum</title>
