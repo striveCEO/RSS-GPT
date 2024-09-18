@@ -4,6 +4,1078 @@
 <title>GitHub All Languages Weekly Trending</title>
 <link>http://mshibanami.github.io/GitHubTrendingRSS</link>
 
+<item>
+<title>expressjs/express</title>
+<link>https://github.com/expressjs/express</link>
+<guid>https://github.com/expressjs/express</guid>
+<content:encoded><![CDATA[
+<div> 关键词：Express、Node.js、web框架、快速、无偏见
+
+文章总结：
+
+Express 是一个针对 Node.js 的快速、无偏见和极简风格的 Web 框架。其设计哲学强调高性能与简洁性，旨在为 HTTP 服务器提供强大而灵活的工具。Express 提供了丰富的功能集，包括但不限于强大的路由系统、高测试覆盖率、HTTP 帮助工具（如重定向、缓存等）、支持多种模板引擎的视图系统、内容协商以及生成应用程序的实用工具。
+
+Express 的灵活性体现在它不强制用户使用特定的 ORM 或模板引擎，而是通过广泛支持多种模板引擎插件，允许开发者根据自己的需求选择最合适的工具。此外，Express 提供了一个命令行工具（express-generator），帮助开发者快速启动新项目，简化了创建应用程序的过程。
+
+在社区方面，Express 拥有活跃的开发者社区，提供了丰富的文档资源、IRC 频道、官方中间件和模块列表，以及专门的讨论区，为用户提供技术支持和交流平台。为了确保项目的持续发展，Express 接受各种贡献形式，包括代码提交、文档改进、增加测试等，并设有详细的指南说明如何参与贡献。
+
+安全性是 Express 的重要考量之一，发现安全漏洞时，应遵循特定的流程报告。此外，Express 的测试套件可以通过安装依赖并运行 `npm test` 来执行，确保框架的稳定性和可靠性。
+
+最后，Express 的开发团队由核心成员和技术委员会组成，负责框架的设计决策和技术指导。社区中还有众多贡献者，包括开发者、文档撰写者、问题解决者等，共同推动 Express 的发展。
+
+总的来说，Express 是一个功能丰富、高度可定制且社区活跃的 Node.js Web 框架，适用于构建单页应用、网站、API 等各种项目，提供了一种高效、灵活的开发方式。 <div>
+<p>Fast, unopinionated, minimalist web framework for node.</p><hr /><p><a href="http://expressjs.com/"><img alt="Express Logo" src="https://i.cloudup.com/zfY6lL7eFa-3000x3000.png" /></a></p> 
+<p><strong>Fast, unopinionated, minimalist web framework for <a href="http://nodejs.org">Node.js</a>.</strong></p> 
+<p><strong>This project has a <a href="https://github.com/expressjs/express/raw/master/Code-Of-Conduct.md">Code of Conduct</a>.</strong></p> 
+<h2>Table of contents</h2> 
+<ul> 
+ <li><a href="https://raw.githubusercontent.com/expressjs/express/master/#Installation">Installation</a></li> 
+ <li><a href="https://raw.githubusercontent.com/expressjs/express/master/#Features">Features</a></li> 
+ <li><a href="https://raw.githubusercontent.com/expressjs/express/master/#docs--community">Docs &amp; Community</a></li> 
+ <li><a href="https://raw.githubusercontent.com/expressjs/express/master/#Quick-Start">Quick Start</a></li> 
+ <li><a href="https://raw.githubusercontent.com/expressjs/express/master/#Running-Tests">Running Tests</a></li> 
+ <li><a href="https://raw.githubusercontent.com/expressjs/express/master/#Philosophy">Philosophy</a></li> 
+ <li><a href="https://raw.githubusercontent.com/expressjs/express/master/#Examples">Examples</a></li> 
+ <li><a href="https://raw.githubusercontent.com/expressjs/express/master/#Contributing">Contributing to Express</a></li> 
+ <li><a href="https://raw.githubusercontent.com/expressjs/express/master/#tc-technical-committee">TC (Technical Committee)</a></li> 
+ <li><a href="https://raw.githubusercontent.com/expressjs/express/master/#triagers">Triagers</a></li> 
+ <li><a href="https://raw.githubusercontent.com/expressjs/express/master/#license">License</a></li> 
+</ul> 
+<p><a href="https://npmjs.org/package/express"><img alt="NPM Version" src="https://badgen.net/npm/v/express" /></a> <a href="https://packagephobia.com/result?p=express"><img alt="NPM Install Size" src="https://badgen.net/packagephobia/install/express" /></a> <a href="https://npmcharts.com/compare/express?minimal=true"><img alt="NPM Downloads" src="https://badgen.net/npm/dm/express" /></a> <a href="https://ossf.github.io/scorecard-visualizer/#/projects/github.com/expressjs/express"><img alt="OpenSSF Scorecard Badge" src="https://api.scorecard.dev/projects/github.com/expressjs/express/badge" /></a></p> 
+<pre><code class="language-js">const express = require('express')
+const app = express()
+
+app.get('/', function (req, res) {
+  res.send('Hello World')
+})
+
+app.listen(3000)
+</code></pre> 
+<h2>Installation</h2> 
+<p>This is a <a href="https://nodejs.org/en/">Node.js</a> module available through the <a href="https://www.npmjs.com/">npm registry</a>.</p> 
+<p>Before installing, <a href="https://nodejs.org/en/download/">download and install Node.js</a>. Node.js 0.10 or higher is required.</p> 
+<p>If this is a brand new project, make sure to create a <code>package.json</code> first with the <a href="https://docs.npmjs.com/creating-a-package-json-file"><code>npm init</code> command</a>.</p> 
+<p>Installation is done using the <a href="https://docs.npmjs.com/getting-started/installing-npm-packages-locally"><code>npm install</code> command</a>:</p> 
+<pre><code class="language-console">$ npm install express
+</code></pre> 
+<p>Follow <a href="http://expressjs.com/en/starter/installing.html">our installing guide</a> for more information.</p> 
+<h2>Features</h2> 
+<ul> 
+ <li>Robust routing</li> 
+ <li>Focus on high performance</li> 
+ <li>Super-high test coverage</li> 
+ <li>HTTP helpers (redirection, caching, etc)</li> 
+ <li>View system supporting 14+ template engines</li> 
+ <li>Content negotiation</li> 
+ <li>Executable for generating applications quickly</li> 
+</ul> 
+<h2>Docs &amp; Community</h2> 
+<ul> 
+ <li><a href="http://expressjs.com/">Website and Documentation</a> - [<a href="https://github.com/expressjs/expressjs.com">website repo</a>]</li> 
+ <li><a href="https://web.libera.chat/#express">#express</a> on <a href="https://libera.chat">Libera Chat</a> IRC</li> 
+ <li><a href="https://github.com/expressjs">GitHub Organization</a> for Official Middleware &amp; Modules</li> 
+ <li>Visit the <a href="https://github.com/expressjs/express/wiki">Wiki</a></li> 
+ <li><a href="https://groups.google.com/group/express-js">Google Group</a> for discussion</li> 
+ <li><a href="https://gitter.im/expressjs/express">Gitter</a> for support and discussion</li> 
+</ul> 
+<p><strong>PROTIP</strong> Be sure to read <a href="https://github.com/expressjs/express/wiki/Migrating-from-3.x-to-4.x">Migrating from 3.x to 4.x</a> as well as <a href="https://github.com/expressjs/express/wiki/New-features-in-4.x">New features in 4.x</a>.</p> 
+<h2>Quick Start</h2> 
+<p>The quickest way to get started with express is to utilize the executable <a href="https://github.com/expressjs/generator"><code>express(1)</code></a> to generate an application as shown below:</p> 
+<p>Install the executable. The executable's major version will match Express's:</p> 
+<pre><code class="language-console">$ npm install -g express-generator@4
+</code></pre> 
+<p>Create the app:</p> 
+<pre><code class="language-console">$ express /tmp/foo &amp;&amp; cd /tmp/foo
+</code></pre> 
+<p>Install dependencies:</p> 
+<pre><code class="language-console">$ npm install
+</code></pre> 
+<p>Start the server:</p> 
+<pre><code class="language-console">$ npm start
+</code></pre> 
+<p>View the website at: <a href="http://localhost:3000">http://localhost:3000</a></p> 
+<h2>Philosophy</h2> 
+<p>The Express philosophy is to provide small, robust tooling for HTTP servers, making it a great solution for single page applications, websites, hybrids, or public HTTP APIs.</p> 
+<p>Express does not force you to use any specific ORM or template engine. With support for over 14 template engines via <a href="https://github.com/tj/consolidate.js">Consolidate.js</a>, you can quickly craft your perfect framework.</p> 
+<h2>Examples</h2> 
+<p>To view the examples, clone the Express repo and install the dependencies:</p> 
+<pre><code class="language-console">$ git clone https://github.com/expressjs/express.git --depth 1
+$ cd express
+$ npm install
+</code></pre> 
+<p>Then run whichever example you want:</p> 
+<pre><code class="language-console">$ node examples/content-negotiation
+</code></pre> 
+<h2>Contributing</h2> 
+<p><a href="https://github.com/expressjs/express/actions/workflows/ci.yml"><img alt="Linux Build" src="https://badgen.net/github/checks/expressjs/express/master?label=linux" /></a> <a href="https://ci.appveyor.com/project/dougwilson/express"><img alt="Windows Build" src="https://badgen.net/appveyor/ci/dougwilson/express/master?label=windows" /></a> <a href="https://coveralls.io/r/expressjs/express?branch=master"><img alt="Test Coverage" src="https://badgen.net/coveralls/c/github/expressjs/express/master" /></a></p> 
+<p>The Express.js project welcomes all constructive contributions. Contributions take many forms, from code for bug fixes and enhancements, to additions and fixes to documentation, additional tests, triaging incoming pull requests and issues, and more!</p> 
+<p>See the <a href="https://raw.githubusercontent.com/expressjs/express/master/Contributing.md">Contributing Guide</a> for more technical details on contributing.</p> 
+<h3>Security Issues</h3> 
+<p>If you discover a security vulnerability in Express, please see <a href="https://raw.githubusercontent.com/expressjs/express/master/Security.md">Security Policies and Procedures</a>.</p> 
+<h3>Running Tests</h3> 
+<p>To run the test suite, first install the dependencies, then run <code>npm test</code>:</p> 
+<pre><code class="language-console">$ npm install
+$ npm test
+</code></pre> 
+<h2>People</h2> 
+<p>The original author of Express is <a href="https://github.com/tj">TJ Holowaychuk</a></p> 
+<p><a href="https://github.com/expressjs/express/graphs/contributors">List of all contributors</a></p> 
+<h3>TC (Technical Committee)</h3> 
+<ul> 
+ <li><a href="https://github.com/UlisesGascon">UlisesGascon</a> - <strong>Ulises Gascón</strong> (he/him)</li> 
+ <li><a href="https://github.com/jonchurch">jonchurch</a> - <strong>Jon Church</strong></li> 
+ <li><a href="https://github.com/wesleytodd">wesleytodd</a> - <strong>Wes Todd</strong></li> 
+ <li><a href="https://github.com/LinusU">LinusU</a> - <strong>Linus Unnebäck</strong></li> 
+ <li><a href="https://github.com/blakeembrey">blakeembrey</a> - <strong>Blake Embrey</strong></li> 
+ <li><a href="https://github.com/sheplu">sheplu</a> - <strong>Jean Burellier</strong></li> 
+ <li><a href="https://github.com/crandmck">crandmck</a> - <strong>Rand McKinney</strong></li> 
+ <li><a href="https://github.com/ctcpip">ctcpip</a> - <strong>Chris de Almeida</strong></li> 
+</ul> 
+<details> 
+ TC emeriti members 
+ <h4>TC emeriti members</h4> 
+ <ul> 
+  <li><a href="https://github.com/dougwilson">dougwilson</a> - <strong>Douglas Wilson</strong></li> 
+  <li><a href="https://github.com/hacksparrow">hacksparrow</a> - <strong>Hage Yaapa</strong></li> 
+  <li><a href="https://github.com/jonathanong">jonathanong</a> - <strong>jongleberry</strong></li> 
+  <li><a href="https://github.com/niftylettuce">niftylettuce</a> - <strong>niftylettuce</strong></li> 
+  <li><a href="https://github.com/troygoode">troygoode</a> - <strong>Troy Goode</strong></li> 
+ </ul> 
+</details> 
+<h3>Triagers</h3> 
+<ul> 
+ <li><a href="https://github.com/aravindvnair99">aravindvnair99</a> - <strong>Aravind Nair</strong></li> 
+ <li><a href="https://github.com/carpasse">carpasse</a> - <strong>Carlos Serrano</strong></li> 
+ <li><a href="https://github.com/CBID2">CBID2</a> - <strong>Christine Belzie</strong></li> 
+ <li><a href="https://github.com/enyoghasim">enyoghasim</a> - <strong>David Enyoghasim</strong></li> 
+ <li><a href="https://github.com/UlisesGascon">UlisesGascon</a> - <strong>Ulises Gascón</strong> (he/him)</li> 
+ <li><a href="https://github.com/mertcanaltin">mertcanaltin</a> - <strong>Mert Can Altin</strong></li> 
+ <li><a href="https://github.com/0ss">0ss</a> - <strong>Salah</strong></li> 
+ <li><a href="https://github.com/import-brain">import-brain</a> - <strong>Eric Cheng</strong> (he/him)</li> 
+ <li><a href="https://github.com/3imed-jaberi">3imed-jaberi</a> - <strong>Imed Jaberi</strong></li> 
+ <li><a href="https://github.com/dakshkhetan">dakshkhetan</a> - <strong>Daksh Khetan</strong> (he/him)</li> 
+ <li><a href="https://github.com/lucasraziel">lucasraziel</a> - <strong>Lucas Soares Do Rego</strong></li> 
+ <li><a href="https://github.com/IamLizu">IamLizu</a> - <strong>S M Mahmudul Hasan</strong> (he/him)</li> 
+ <li><a href="https://github.com/Sushmeet">Sushmeet</a> - <strong>Sushmeet Sunger</strong></li> 
+</ul> 
+<details> 
+ Triagers emeriti members 
+ <h4>Emeritus Triagers</h4> 
+ <ul> 
+  <li><a href="https://github.com/AuggieH">AuggieH</a> - <strong>Auggie Hudak</strong></li> 
+  <li><a href="https://github.com/G-Rath">G-Rath</a> - <strong>Gareth Jones</strong></li> 
+  <li><a href="https://github.com/MohammadXroid">MohammadXroid</a> - <strong>Mohammad Ayashi</strong></li> 
+  <li><a href="https://github.com/NawafSwe">NawafSwe</a> - <strong>Nawaf Alsharqi</strong></li> 
+  <li><a href="https://github.com/NotMoni">NotMoni</a> - <strong>Moni</strong></li> 
+  <li><a href="https://github.com/VigneshMurugan">VigneshMurugan</a> - <strong>Vignesh Murugan</strong></li> 
+  <li><a href="https://github.com/davidmashe">davidmashe</a> - <strong>David Ashe</strong></li> 
+  <li><a href="https://github.com/digitaIfabric">digitaIfabric</a> - <strong>David</strong></li> 
+  <li><a href="https://github.com/e-l-i-s-e">e-l-i-s-e</a> - <strong>Elise Bonner</strong></li> 
+  <li><a href="https://github.com/fed135">fed135</a> - <strong>Frederic Charette</strong></li> 
+  <li><a href="https://github.com/firmanJS">firmanJS</a> - <strong>Firman Abdul Hakim</strong></li> 
+  <li><a href="https://github.com/getspooky">getspooky</a> - <strong>Yasser Ameur</strong></li> 
+  <li><a href="https://github.com/ghinks">ghinks</a> - <strong>Glenn</strong></li> 
+  <li><a href="https://github.com/ghousemohamed">ghousemohamed</a> - <strong>Ghouse Mohamed</strong></li> 
+  <li><a href="https://github.com/gireeshpunathil">gireeshpunathil</a> - <strong>Gireesh Punathil</strong></li> 
+  <li><a href="https://github.com/jake32321">jake32321</a> - <strong>Jake Reed</strong></li> 
+  <li><a href="https://github.com/jonchurch">jonchurch</a> - <strong>Jon Church</strong></li> 
+  <li><a href="https://github.com/lekanikotun">lekanikotun</a> - <strong>Troy Goode</strong></li> 
+  <li><a href="https://github.com/marsonya">marsonya</a> - <strong>Lekan Ikotun</strong></li> 
+  <li><a href="https://github.com/mastermatt">mastermatt</a> - <strong>Matt R. Wilson</strong></li> 
+  <li><a href="https://github.com/maxakuru">maxakuru</a> - <strong>Max Edell</strong></li> 
+  <li><a href="https://github.com/mlrawlings">mlrawlings</a> - <strong>Michael Rawlings</strong></li> 
+  <li><a href="https://github.com/rodion-arr">rodion-arr</a> - <strong>Rodion Abdurakhimov</strong></li> 
+  <li><a href="https://github.com/sheplu">sheplu</a> - <strong>Jean Burellier</strong></li> 
+  <li><a href="https://github.com/tarunyadav1">tarunyadav1</a> - <strong>Tarun yadav</strong></li> 
+  <li><a href="https://github.com/tunniclm">tunniclm</a> - <strong>Mike Tunnicliffe</strong></li> 
+ </ul> 
+</details> 
+<h2>License</h2> 
+<p><a href="https://raw.githubusercontent.com/expressjs/express/master/LICENSE">MIT</a></p>
+]]></content:encoded>
+
+
+</item>
+<item>
+<title>dair-ai/ML-YouTube-Courses</title>
+<link>https://github.com/dair-ai/ML-YouTube-Courses</link>
+<guid>https://github.com/dair-ai/ML-YouTube-Courses</guid>
+<content:encoded><![CDATA[
+<div> 关键词：DAIR.AI、YouTube、机器学习课程、人工智能教育、免费资源
+
+总结:
+这篇文章介绍了由DAIR.AI整理的一系列在YouTube上能找到的顶级和最新机器学习与人工智能课程。这些课程覆盖了从基础理论到深度学习、科学机器学习、实用机器学习、自然语言处理、计算机视觉、强化学习、图机器学习等多个领域。课程包括了像加州理工学院CS156: Learning from Data这样的经典课程，以及斯坦福大学CS229: Machine Learning等深入研究课程。此外，还有针对不同主题如自然语言处理、计算机视觉、强化学习和图机器学习的专业课程。这些课程提供了从入门到进阶的学习路径，适合各个层次的学习者。DAIR.AI鼓励社区成员贡献更多链接，以创建一个全面的机器学习教育资源库，并计划对这些课程进行更详细的注释和补充材料，以增强学习体验。通过这些免费资源，学习者可以系统地学习机器学习和人工智能的基础知识和高级技术，为职业发展或学术研究打下坚实的基础。 <div>
+<p>📺 Discover the latest machine learning / AI courses on YouTube.</p><hr /><h1>📺 ML YouTube Courses</h1> 
+<p>At DAIR.AI we ❤️ open AI education. In this repo, we index and organize some of the best and most recent machine learning courses available on YouTube.</p> 
+<p><strong>Machine Learning</strong></p> 
+<ul> 
+ <li><a href="https://raw.githubusercontent.com/dair-ai/ML-YouTube-Courses/main/#caltech-cs156-learning-from-data">Caltech CS156: Learning from Data</a></li> 
+ <li><a href="https://raw.githubusercontent.com/dair-ai/ML-YouTube-Courses/main/#stanford-cs229-machine-learning">Stanford CS229: Machine Learning</a></li> 
+ <li><a href="https://raw.githubusercontent.com/dair-ai/ML-YouTube-Courses/main/#making-friends-with-machine-learning">Making Friends with Machine Learning</a></li> 
+ <li><a href="https://raw.githubusercontent.com/dair-ai/ML-YouTube-Courses/main/#applied-machine-learning">Applied Machine Learning</a></li> 
+ <li><a href="https://raw.githubusercontent.com/dair-ai/ML-YouTube-Courses/main/#introduction-to-machine-learning-T%C3%BCbingen">Introduction to Machine Learning (Tübingen)</a></li> 
+ <li><a href="https://raw.githubusercontent.com/dair-ai/ML-YouTube-Courses/main/#machine-learning-lecture-stefan-harmeling">Machine Learning Lecture (Stefan Harmeling)</a></li> 
+ <li><a href="https://raw.githubusercontent.com/dair-ai/ML-YouTube-Courses/main/#statistical-machine-learning-T%C3%BCbingen">Statistical Machine Learning (Tübingen)</a></li> 
+ <li><a href="https://raw.githubusercontent.com/dair-ai/ML-YouTube-Courses/main/#probabilistic-machine-learning">Probabilistic Machine Learning</a></li> 
+ <li><a href="https://raw.githubusercontent.com/dair-ai/ML-YouTube-Courses/main/#mit-6s897-machine-learning-for-healthcare-2019">MIT 6.S897: Machine Learning for Healthcare (2019)</a></li> 
+</ul> 
+<p><strong>Deep Learning</strong></p> 
+<ul> 
+ <li><a href="https://raw.githubusercontent.com/dair-ai/ML-YouTube-Courses/main/#neural-networks-zero-to-hero-by-andrej-karpathy">Neural Networks: Zero to Hero</a></li> 
+ <li><a href="https://raw.githubusercontent.com/dair-ai/ML-YouTube-Courses/main/#mit-deep-learning-for-art-aesthetics-and-creativity">MIT: Deep Learning for Art, Aesthetics, and Creativity</a></li> 
+ <li><a href="https://raw.githubusercontent.com/dair-ai/ML-YouTube-Courses/main/#stanford-cs230-deep-learning-2018">Stanford CS230: Deep Learning (2018)</a></li> 
+ <li><a href="https://raw.githubusercontent.com/dair-ai/ML-YouTube-Courses/main/#introduction-to-deep-learning">Introduction to Deep Learning (MIT)</a></li> 
+ <li><a href="https://raw.githubusercontent.com/dair-ai/ML-YouTube-Courses/main/#cmu-introduction-to-deep-learning-11-785">CMU Introduction to Deep Learning (11-785)</a></li> 
+ <li><a href="https://raw.githubusercontent.com/dair-ai/ML-YouTube-Courses/main/#deep-learning-cs-182">Deep Learning: CS 182</a></li> 
+ <li><a href="https://raw.githubusercontent.com/dair-ai/ML-YouTube-Courses/main/#deep-unsupervised-learning">Deep Unsupervised Learning</a></li> 
+ <li><a href="https://raw.githubusercontent.com/dair-ai/ML-YouTube-Courses/main/#nyu-deep-learning-sp21">NYU Deep Learning SP21</a></li> 
+ <li><a href="https://raw.githubusercontent.com/dair-ai/ML-YouTube-Courses/main/#foundation-models">Foundation Models</a></li> 
+ <li><a href="https://raw.githubusercontent.com/dair-ai/ML-YouTube-Courses/main/#deep-learning-T%C3%BCbingen">Deep Learning (Tübingen)</a></li> 
+</ul> 
+<p><strong>Scientific Machine Learning</strong></p> 
+<ul> 
+ <li><a href="https://raw.githubusercontent.com/dair-ai/ML-YouTube-Courses/main/#parallel-computing-and-scientific-machine-learning">Parallel Computing and Scientific Machine Learning</a></li> 
+</ul> 
+<p><strong>Practical Machine Learning</strong></p> 
+<ul> 
+ <li><a href="https://raw.githubusercontent.com/dair-ai/ML-YouTube-Courses/main/#llmops-building-real-world-applications-with-large-language-models">LLMOps: Building Real-World Applications With Large Language Models</a></li> 
+ <li><a href="https://raw.githubusercontent.com/dair-ai/ML-YouTube-Courses/main/#evaluating-and-debugging-generative-ai">Evaluating and Debugging Generative AI</a></li> 
+ <li><a href="https://raw.githubusercontent.com/dair-ai/ML-YouTube-Courses/main/#chatgpt-prompt-engineering-for-developers">ChatGPT Prompt Engineering for Developers</a></li> 
+ <li><a href="https://raw.githubusercontent.com/dair-ai/ML-YouTube-Courses/main/#langchain-for-llm-application-development">LangChain for LLM Application Development</a></li> 
+ <li><a href="https://raw.githubusercontent.com/dair-ai/ML-YouTube-Courses/main/#langchain-chat-with-your-data">LangChain: Chat with Your Data</a></li> 
+ <li><a href="https://raw.githubusercontent.com/dair-ai/ML-YouTube-Courses/main/#building-systems-with-the-chatgpt-api">Building Systems with the ChatGPT API</a></li> 
+ <li><a href="https://raw.githubusercontent.com/dair-ai/ML-YouTube-Courses/main/#langchain--vector-databases-in-production">LangChain &amp; Vector Databases in Production</a></li> 
+ <li><a href="https://raw.githubusercontent.com/dair-ai/ML-YouTube-Courses/main/#building-llm-powered-apps">Building LLM-Powered Apps</a></li> 
+ <li><a href="https://raw.githubusercontent.com/dair-ai/ML-YouTube-Courses/main/#full-stack-llm-bootcamp">Full Stack LLM Bootcamp</a></li> 
+ <li><a href="https://raw.githubusercontent.com/dair-ai/ML-YouTube-Courses/main/#full-stack-deep-learning">Full Stack Deep Learning</a></li> 
+ <li><a href="https://raw.githubusercontent.com/dair-ai/ML-YouTube-Courses/main/#practical-deep-learning-for-coders">Practical Deep Learning for Coders</a></li> 
+ <li><a href="https://raw.githubusercontent.com/dair-ai/ML-YouTube-Courses/main/#stanford-mlsys-seminars">Stanford MLSys Seminars</a></li> 
+ <li><a href="https://raw.githubusercontent.com/dair-ai/ML-YouTube-Courses/main/#machine-learning-engineering-for-production-mlops">Machine Learning Engineering for Production (MLOps)</a></li> 
+ <li><a href="https://raw.githubusercontent.com/dair-ai/ML-YouTube-Courses/main/#mit-introduction-to-data-centric-ai">MIT Introduction to Data-Centric AI</a></li> 
+</ul> 
+<p><strong>Natural Language Processing</strong></p> 
+<ul> 
+ <li><a href="https://raw.githubusercontent.com/dair-ai/ML-YouTube-Courses/main/#xcs224u-natural-language-understanding-2023">XCS224U: Natural Language Understanding (2023)</a></li> 
+ <li><a href="https://raw.githubusercontent.com/dair-ai/ML-YouTube-Courses/main/#stanford-cs25---transformers-united">Stanford CS25 - Transformers United</a></li> 
+ <li><a href="https://raw.githubusercontent.com/dair-ai/ML-YouTube-Courses/main/#nlp-course-hugging-face">NLP Course (Hugging Face)</a></li> 
+ <li><a href="https://raw.githubusercontent.com/dair-ai/ML-YouTube-Courses/main/#cs224n-natural-language-processing-with-deep-learning">CS224N: Natural Language Processing with Deep Learning</a></li> 
+ <li><a href="https://raw.githubusercontent.com/dair-ai/ML-YouTube-Courses/main/#cmu-neural-networks-for-nlp">CMU Neural Networks for NLP</a></li> 
+ <li><a href="https://raw.githubusercontent.com/dair-ai/ML-YouTube-Courses/main/#cs224u-natural-language-understanding">CS224U: Natural Language Understanding</a></li> 
+ <li><a href="https://raw.githubusercontent.com/dair-ai/ML-YouTube-Courses/main/#cmu-advanced-nlp">CMU Advanced NLP 2021/2022/2024</a></li> 
+ <li><a href="https://raw.githubusercontent.com/dair-ai/ML-YouTube-Courses/main/#multilingual-nlp">Multilingual NLP</a></li> 
+ <li><a href="https://raw.githubusercontent.com/dair-ai/ML-YouTube-Courses/main/#advanced-nlp">Advanced NLP</a></li> 
+</ul> 
+<p><strong>Computer Vision</strong></p> 
+<ul> 
+ <li><a href="https://raw.githubusercontent.com/dair-ai/ML-YouTube-Courses/main/#cs231n-convolutional-neural-networks-for-visual-recognition">CS231N: Convolutional Neural Networks for Visual Recognition</a></li> 
+ <li><a href="https://raw.githubusercontent.com/dair-ai/ML-YouTube-Courses/main/#deep-learning-for-computer-vision">Deep Learning for Computer Vision</a></li> 
+ <li><a href="https://raw.githubusercontent.com/dair-ai/ML-YouTube-Courses/main/#deep-learning-for-computer-vision-dl4cv">Deep Learning for Computer Vision (DL4CV)</a></li> 
+ <li><a href="https://raw.githubusercontent.com/dair-ai/ML-YouTube-Courses/main/#deep-learning-for-computer-vision-neuralearnai">Deep Learning for Computer Vision (neuralearn.ai)</a></li> 
+</ul> 
+<p><strong>Reinforcement Learning</strong></p> 
+<ul> 
+ <li><a href="https://raw.githubusercontent.com/dair-ai/ML-YouTube-Courses/main/#deep-reinforcement-learning">Deep Reinforcement Learning</a></li> 
+ <li><a href="https://raw.githubusercontent.com/dair-ai/ML-YouTube-Courses/main/#reinforcement-learning-lecture-series-deepmind">Reinforcement Learning Lecture Series (DeepMind)</a></li> 
+ <li><a href="https://raw.githubusercontent.com/dair-ai/ML-YouTube-Courses/main/#reinforcement-learning-polytechnique-montreal-fall-2021">Reinforcement Learning (Polytechnique Montreal, Fall 2021)</a></li> 
+ <li><a href="https://raw.githubusercontent.com/dair-ai/ML-YouTube-Courses/main/#foundations-of-deep-rl">Foundations of Deep RL</a></li> 
+ <li><a href="https://raw.githubusercontent.com/dair-ai/ML-YouTube-Courses/main/#stanford-cs234-reinforcement-learning">Stanford CS234: Reinforcement Learning</a></li> 
+</ul> 
+<p><strong>Graph Machine Learning</strong></p> 
+<ul> 
+ <li><a href="https://raw.githubusercontent.com/dair-ai/ML-YouTube-Courses/main/#machine-learning-with-graphs-stanford">Machine Learning with Graphs (Stanford)</a></li> 
+ <li><a href="https://raw.githubusercontent.com/dair-ai/ML-YouTube-Courses/main/#ammi-geometric-deep-learning-course">AMMI Geometric Deep Learning Course</a></li> 
+</ul> 
+<p><strong>Multi-Task Learning</strong></p> 
+<ul> 
+ <li><a href="https://raw.githubusercontent.com/dair-ai/ML-YouTube-Courses/main/#stanford-cs330-deep-multi-task-and-meta-learning">Multi-Task and Meta-Learning (Stanford)</a></li> 
+</ul> 
+<p><strong>Others</strong></p> 
+<ul> 
+ <li><a href="https://raw.githubusercontent.com/dair-ai/ML-YouTube-Courses/main/#mit-deep-learning-in-life-sciences">MIT Deep Learning in Life Sciences</a></li> 
+ <li><a href="https://raw.githubusercontent.com/dair-ai/ML-YouTube-Courses/main/#self-driving-cars-T%C3%BCbingen">Self-Driving Cars (Tübingen)</a></li> 
+ <li><a href="https://raw.githubusercontent.com/dair-ai/ML-YouTube-Courses/main/#advanced-robotics-uc-berkeley">Advanced Robotics (Berkeley)</a></li> 
+</ul> 
+<hr /> 
+<h2>Caltech CS156: Learning from Data</h2> 
+<p>An introductory course in machine learning that covers the basic theory, algorithms, and applications.</p> 
+<ul> 
+ <li>Lecture 1: The Learning Problem</li> 
+ <li>Lecture 2: Is Learning Feasible?</li> 
+ <li>Lecture 3: The Linear Model I</li> 
+ <li>Lecture 4: Error and Noise</li> 
+ <li>Lecture 5: Training versus Testing</li> 
+ <li>Lecture 6: Theory of Generalization</li> 
+ <li>Lecture 7: The VC Dimension</li> 
+ <li>Lecture 8: Bias-Variance Tradeoff</li> 
+ <li>Lecture 9: The Linear Model II</li> 
+ <li>Lecture 10: Neural Networks</li> 
+ <li>Lecture 11: Overfitting</li> 
+ <li>Lecture 12: Regularization</li> 
+ <li>Lecture 13: Validation</li> 
+ <li>Lecture 14: Support Vector Machines</li> 
+ <li>Lecture 15: Kernel Methods</li> 
+ <li>Lecture 16: Radial Basis Functions</li> 
+ <li>Lecture 17: Three Learning Principles</li> 
+ <li>Lecture 18: Epilogue</li> 
+</ul> 
+<p>🔗 <a href="https://www.youtube.com/playlist?list=PLD63A284B7615313A">Link to Course</a></p> 
+<h2>Stanford CS229: Machine Learning</h2> 
+<p>To learn some of the basics of ML:</p> 
+<ul> 
+ <li>Linear Regression and Gradient Descent</li> 
+ <li>Logistic Regression</li> 
+ <li>Naive Bayes</li> 
+ <li>SVMs</li> 
+ <li>Kernels</li> 
+ <li>Decision Trees</li> 
+ <li>Introduction to Neural Networks</li> 
+ <li>Debugging ML Models ...</li> 
+</ul> 
+<p>🔗 <a href="https://www.youtube.com/playlist?list=PLoROMvodv4rMiGQp3WXShtMGgzqpfVfbU">Link to Course</a></p> 
+<h2>Making Friends with Machine Learning</h2> 
+<p>A series of mini lectures covering various introductory topics in ML:</p> 
+<ul> 
+ <li>Explainability in AI</li> 
+ <li>Classification vs. Regression</li> 
+ <li>Precession vs. Recall</li> 
+ <li>Statistical Significance</li> 
+ <li>Clustering and K-means</li> 
+ <li>Ensemble models ...</li> 
+</ul> 
+<p>🔗 <a href="https://www.youtube.com/playlist?list=PLRKtJ4IpxJpDxl0NTvNYQWKCYzHNuy2xG">Link to Course</a></p> 
+<h2>Neural Networks: Zero to Hero (by Andrej Karpathy)</h2> 
+<p>Course providing an in-depth overview of neural networks.</p> 
+<ul> 
+ <li>Backpropagation</li> 
+ <li>Spelled-out intro to Language Modeling</li> 
+ <li>Activation and Gradients</li> 
+ <li>Becoming a Backprop Ninja</li> 
+</ul> 
+<p>🔗 <a href="https://www.youtube.com/playlist?list=PLAqhIrjkxbuWI23v9cThsA9GvCAUhRvKZ">Link to Course</a></p> 
+<h2>MIT: Deep Learning for Art, Aesthetics, and Creativity</h2> 
+<p>Covers the application of deep learning for art, aesthetics, and creativity.</p> 
+<ul> 
+ <li>Nostalgia -&gt; Art -&gt; Creativity -&gt; Evolution as Data + Direction</li> 
+ <li>Efficient GANs</li> 
+ <li>Explorations in AI for Creativity</li> 
+ <li>Neural Abstractions</li> 
+ <li>Easy 3D Content Creation with Consistent Neural Fields ...</li> 
+</ul> 
+<p>🔗 <a href="https://www.youtube.com/playlist?list=PLCpMvp7ftsnIbNwRnQJbDNRqO6qiN3EyH">Link to Course</a></p> 
+<h2>Stanford CS230: Deep Learning (2018)</h2> 
+<p>Covers the foundations of deep learning, how to build different neural networks(CNNs, RNNs, LSTMs, etc...), how to lead machine learning projects, and career advice for deep learning practitioners.</p> 
+<ul> 
+ <li>Deep Learning Intuition</li> 
+ <li>Adversarial examples - GANs</li> 
+ <li>Full-cycle of a Deep Learning Project</li> 
+ <li>AI and Healthcare</li> 
+ <li>Deep Learning Strategy</li> 
+ <li>Interpretability of Neural Networks</li> 
+ <li>Career Advice and Reading Research Papers</li> 
+ <li>Deep Reinforcement Learning</li> 
+</ul> 
+<p>🔗 <a href="https://youtube.com/playlist?list=PLoROMvodv4rOABXSygHTsbvUz4G_YQhOb">Link to Course</a> 🔗 <a href="https://cs230.stanford.edu/syllabus/">Link to Materials</a></p> 
+<h2>Applied Machine Learning</h2> 
+<p>To learn some of the most widely used techniques in ML:</p> 
+<ul> 
+ <li>Optimization and Calculus</li> 
+ <li>Overfitting and Underfitting</li> 
+ <li>Regularization</li> 
+ <li>Monte Carlo Estimation</li> 
+ <li>Maximum Likelihood Learning</li> 
+ <li>Nearest Neighbours</li> 
+ <li>...</li> 
+</ul> 
+<p>🔗 <a href="https://www.youtube.com/playlist?list=PL2UML_KCiC0UlY7iCQDSiGDMovaupqc83">Link to Course</a></p> 
+<h2>Introduction to Machine Learning (Tübingen)</h2> 
+<p>The course serves as a basic introduction to machine learning and covers key concepts in regression, classification, optimization, regularization, clustering, and dimensionality reduction.</p> 
+<ul> 
+ <li>Linear regression</li> 
+ <li>Logistic regression</li> 
+ <li>Regularization</li> 
+ <li>Boosting</li> 
+ <li>Neural networks</li> 
+ <li>PCA</li> 
+ <li>Clustering</li> 
+ <li>...</li> 
+</ul> 
+<p>🔗 <a href="https://www.youtube.com/playlist?list=PL05umP7R6ij35ShKLDqccJSDntugY4FQT">Link to Course</a></p> 
+<h2>Machine Learning Lecture (Stefan Harmeling)</h2> 
+<p>Covers many fundamental ML concepts:</p> 
+<ul> 
+ <li>Bayes rule</li> 
+ <li>From logic to probabilities</li> 
+ <li>Distributions</li> 
+ <li>Matrix Differential Calculus</li> 
+ <li>PCA</li> 
+ <li>K-means and EM</li> 
+ <li>Causality</li> 
+ <li>Gaussian Processes</li> 
+ <li>...</li> 
+</ul> 
+<p>🔗 <a href="https://www.youtube.com/playlist?list=PLzrCXlf6ypbxS5OYOY3EN_0u2fDuIT6Gt">Link to Course</a></p> 
+<h2>Statistical Machine Learning (Tübingen)</h2> 
+<p>The course covers the standard paradigms and algorithms in statistical machine learning.</p> 
+<ul> 
+ <li>KNN</li> 
+ <li>Bayesian decision theory</li> 
+ <li>Convex optimization</li> 
+ <li>Linear and ridge regression</li> 
+ <li>Logistic regression</li> 
+ <li>SVM</li> 
+ <li>Random Forests</li> 
+ <li>Boosting</li> 
+ <li>PCA</li> 
+ <li>Clustering</li> 
+ <li>...</li> 
+</ul> 
+<p>🔗 <a href="https://www.youtube.com/playlist?list=PL05umP7R6ij2XCvrRzLokX6EoHWaGA2cC">Link to Course</a></p> 
+<h2>Practical Deep Learning for Coders</h2> 
+<p>This course covers topics such as how to:</p> 
+<ul> 
+ <li>Build and train deep learning models for computer vision, natural language processing, tabular analysis, and collaborative filtering problems</li> 
+ <li>Create random forests and regression models</li> 
+ <li>Deploy models</li> 
+ <li>Use PyTorch, the world’s fastest growing deep learning software, plus popular libraries like fastai and Hugging Face</li> 
+ <li>Foundations and Deep Dive to Diffusion Models</li> 
+ <li>...</li> 
+</ul> 
+<p>🔗 <a href="https://www.youtube.com/playlist?list=PLfYUBJiXbdtSvpQjSnJJ_PmDQB_VyT5iU">Link to Course - Part 1</a></p> 
+<p>🔗 <a href="https://www.youtube.com/watch?v=_7rMfsA24Ls&amp;ab_channel=JeremyHoward">Link to Course - Part 2</a></p> 
+<h2>Stanford MLSys Seminars</h2> 
+<p>A seminar series on all sorts of topics related to building machine learning systems.</p> 
+<p>🔗 <a href="https://www.youtube.com/playlist?list=PLSrTvUm384I9PV10koj_cqit9OfbJXEkq">Link to Lectures</a></p> 
+<h2>Machine Learning Engineering for Production (MLOps)</h2> 
+<p>Specialization course on MLOPs by Andrew Ng.</p> 
+<p>🔗 <a href="https://www.youtube.com/playlist?list=PLkDaE6sCZn6GMoA0wbpJLi3t34Gd8l0aK">Link to Lectures</a></p> 
+<h2>MIT Introduction to Data-Centric AI</h2> 
+<p>Covers the emerging science of Data-Centric AI (DCAI) that studies techniques to improve datasets, which is often the best way to improve performance in practical ML applications. Topics include:</p> 
+<ul> 
+ <li>Data-Centric AI vs. Model-Centric AI</li> 
+ <li>Label Errors</li> 
+ <li>Dataset Creation and Curation</li> 
+ <li>Data-centric Evaluation of ML Models</li> 
+ <li>Class Imbalance, Outliers, and Distribution Shift</li> 
+ <li>...</li> 
+</ul> 
+<p>🔗 <a href="https://dcai.csail.mit.edu/">Course Website</a></p> 
+<p>🔗 <a href="https://www.youtube.com/watch?v=ayzOzZGHZy4&amp;list=PLnSYPjg2dHQKdig0vVbN-ZnEU0yNJ1mo5">Lecture Videos</a></p> 
+<p>🔗 <a href="https://github.com/dcai-course/dcai-lab">Lab Assignments</a></p> 
+<h2>Machine Learning with Graphs (Stanford)</h2> 
+<p>To learn some of the latest graph techniques in machine learning:</p> 
+<ul> 
+ <li>PageRank</li> 
+ <li>Matrix Factorizing</li> 
+ <li>Node Embeddings</li> 
+ <li>Graph Neural Networks</li> 
+ <li>Knowledge Graphs</li> 
+ <li>Deep Generative Models for Graphs</li> 
+ <li>...</li> 
+</ul> 
+<p>🔗 <a href="https://www.youtube.com/playlist?list=PLoROMvodv4rPLKxIpqhjhPgdQy7imNkDn">Link to Course</a></p> 
+<h2>Probabilistic Machine Learning</h2> 
+<p>To learn the probabilistic paradigm of ML:</p> 
+<ul> 
+ <li>Reasoning about uncertainty</li> 
+ <li>Continuous Variables</li> 
+ <li>Sampling</li> 
+ <li>Markov Chain Monte Carlo</li> 
+ <li>Gaussian Distributions</li> 
+ <li>Graphical Models</li> 
+ <li>Tuning Inference Algorithms</li> 
+ <li>...</li> 
+</ul> 
+<p>🔗 <a href="https://www.youtube.com/playlist?list=PL05umP7R6ij2YE8rRJSb-olDNbntAQ_Bx">Link to Course</a></p> 
+<h2>MIT 6.S897: Machine Learning for Healthcare (2019)</h2> 
+<p>This course introduces students to machine learning in healthcare, including the nature of clinical data and the use of machine learning for risk stratification, disease progression modeling, precision medicine, diagnosis, subtype discovery, and improving clinical workflows.</p> 
+<p>🔗 <a href="https://www.youtube.com/playlist?list=PLUl4u3cNGP60B0PQXVQyGNdCyCTDU1Q5j">Link to Course</a></p> 
+<h2>Introduction to Deep Learning</h2> 
+<p>To learn some of the fundamentals of deep learning:</p> 
+<ul> 
+ <li>Introduction to Deep Learning</li> 
+</ul> 
+<p>🔗 <a href="https://www.youtube.com/playlist?list=PLtBw6njQRU-rwp5__7C0oIVt26ZgjG9NI">Link to Course</a></p> 
+<h2>CMU Introduction to Deep Learning (11-785)</h2> 
+<p>The course starts off gradually from MLPs (Multi Layer Perceptrons) and then progresses into concepts like attention and sequence-to-sequence models.</p> 
+<p>🔗 <a href="https://deeplearning.cs.cmu.edu/F22/index.html">Link to Course</a> <br /> 🔗 <a href="https://www.youtube.com/playlist?list=PLp-0K3kfddPxRmjgjm0P1WT6H-gTqE8j9">Lectures</a> <br /> 🔗 <a href="https://www.youtube.com/playlist?list=PLp-0K3kfddPz8WXg8RqH0sEN6X2L65HUZ">Tutorials/Recitations</a></p> 
+<h2>Deep Learning: CS 182</h2> 
+<p>To learn some of the widely used techniques in deep learning:</p> 
+<ul> 
+ <li>Machine Learning Basics</li> 
+ <li>Error Analysis</li> 
+ <li>Optimization</li> 
+ <li>Backpropagation</li> 
+ <li>Initialization</li> 
+ <li>Batch Normalization</li> 
+ <li>Style transfer</li> 
+ <li>Imitation Learning</li> 
+ <li>...</li> 
+</ul> 
+<p>🔗 <a href="https://www.youtube.com/playlist?list=PL_iWQOsE6TfVmKkQHucjPAoRtIJYt8a5A">Link to Course</a></p> 
+<h2>Deep Unsupervised Learning</h2> 
+<p>To learn the latest and most widely used techniques in deep unsupervised learning:</p> 
+<ul> 
+ <li>Autoregressive Models</li> 
+ <li>Flow Models</li> 
+ <li>Latent Variable Models</li> 
+ <li>Self-supervised learning</li> 
+ <li>Implicit Models</li> 
+ <li>Compression</li> 
+ <li>...</li> 
+</ul> 
+<p>🔗 <a href="https://www.youtube.com/playlist?list=PLwRJQ4m4UJjPiJP3691u-qWwPGVKzSlNP">Link to Course</a></p> 
+<h2>NYU Deep Learning SP21</h2> 
+<p>To learn some of the advanced techniques in deep learning:</p> 
+<ul> 
+ <li>Neural Nets: rotation and squashing</li> 
+ <li>Latent Variable Energy Based Models</li> 
+ <li>Unsupervised Learning</li> 
+ <li>Generative Adversarial Networks</li> 
+ <li>Autoencoders</li> 
+ <li>...</li> 
+</ul> 
+<p>🔗 <a href="https://www.youtube.com/playlist?list=PLLHTzKZzVU9e6xUfG10TkTWApKSZCzuBI">Link to Course</a></p> 
+<h2>Foundation Models</h2> 
+<p>To learn about foundation models like GPT-3, CLIP, Flamingo, Codex, and DINO.</p> 
+<p>🔗 <a href="https://www.youtube.com/playlist?list=PL9t0xVFP90GD8hox0KipBkJcLX_C3ja67">Link to Course</a></p> 
+<h2>Deep Learning (Tübingen)</h2> 
+<p>This course introduces the practical and theoretical principles of deep neural networks.</p> 
+<ul> 
+ <li>Computation graphs</li> 
+ <li>Activation functions and loss functions</li> 
+ <li>Training, regularization and data augmentation</li> 
+ <li>Basic and state-of-the-art deep neural network architectures including convolutional networks and graph neural networks</li> 
+ <li>Deep generative models such as auto-encoders, variational auto-encoders and generative adversarial networks</li> 
+ <li>...</li> 
+</ul> 
+<p>🔗 <a href="https://www.youtube.com/playlist?list=PL05umP7R6ij3NTWIdtMbfvX7Z-4WEXRqD">Link to Course</a></p> 
+<h2>Parallel Computing and Scientific Machine Learning</h2> 
+<ul> 
+ <li>The Basics of Scientific Simulators</li> 
+ <li>Introduction to Parallel Computing</li> 
+ <li>Continuous Dynamics</li> 
+ <li>Inverse Problems and Differentiable Programming</li> 
+ <li>Distributed Parallel Computing</li> 
+ <li>Physics-Informed Neural Networks and Neural Differential Equations</li> 
+ <li>Probabilistic Programming, AKA Bayesian Estimation on Programs</li> 
+ <li>Globalizing the Understanding of Models</li> 
+</ul> 
+<p>🔗 <a href="https://www.youtube.com/playlist?list=PLCAl7tjCwWyGjdzOOnlbGnVNZk0kB8VSa">Link to Course</a></p> 
+<h2>XCS224U: Natural Language Understanding (2023)</h2> 
+<p>This course covers topics such as:</p> 
+<ul> 
+ <li>Contextual Word Representations</li> 
+ <li>Information Retrieval</li> 
+ <li>In-context learning</li> 
+ <li>Behavioral Evaluation of NLU models</li> 
+ <li>NLP Methods and Metrics</li> 
+ <li>...</li> 
+</ul> 
+<p>🔗 <a href="https://www.youtube.com/playlist?list=PLoROMvodv4rOwvldxftJTmoR3kRcWkJBp">Link to Course</a></p> 
+<h2>Stanford CS25 - Transformers United</h2> 
+<p>This course consists of lectures focused on Transformers, providing a deep dive and their applications</p> 
+<ul> 
+ <li>Introduction to Transformers</li> 
+ <li>Transformers in Language: GPT-3, Codex</li> 
+ <li>Applications in Vision</li> 
+ <li>Transformers in RL &amp; Universal Compute Engines</li> 
+ <li>Scaling transformers</li> 
+ <li>Interpretability with transformers</li> 
+ <li>...</li> 
+</ul> 
+<p>🔗 <a href="https://www.youtube.com/playlist?list=PLoROMvodv4rNiJRchCzutFw5ItR_Z27CM">Link to Course</a></p> 
+<h2>NLP Course (Hugging Face)</h2> 
+<p>Learn about different NLP concepts and how to apply language models and Transformers to NLP:</p> 
+<ul> 
+ <li>What is Transfer Learning?</li> 
+ <li>BPE Tokenization</li> 
+ <li>Batching inputs</li> 
+ <li>Fine-tuning models</li> 
+ <li>Text embeddings and semantic search</li> 
+ <li>Model evaluation</li> 
+ <li>...</li> 
+</ul> 
+<p>🔗 <a href="https://www.youtube.com/playlist?list=PLo2EIpI_JMQvWfQndUesu0nPBAtZ9gP1o">Link to Course</a></p> 
+<h2>CS224N: Natural Language Processing with Deep Learning</h2> 
+<p>To learn the latest approaches for deep learning based NLP:</p> 
+<ul> 
+ <li>Dependency parsing</li> 
+ <li>Language models and RNNs</li> 
+ <li>Question Answering</li> 
+ <li>Transformers and pretraining</li> 
+ <li>Natural Language Generation</li> 
+ <li>T5 and Large Language Models</li> 
+ <li>Future of NLP</li> 
+ <li>...</li> 
+</ul> 
+<p>🔗 <a href="https://www.youtube.com/playlist?list=PLoROMvodv4rOSH4v6133s9LFPRHjEmbmJ">Link to Course</a></p> 
+<h2>CMU Neural Networks for NLP</h2> 
+<p>To learn the latest neural network based techniques for NLP:</p> 
+<ul> 
+ <li>Language Modeling</li> 
+ <li>Efficiency tricks</li> 
+ <li>Conditioned Generation</li> 
+ <li>Structured Prediction</li> 
+ <li>Model Interpretation</li> 
+ <li>Advanced Search Algorithms</li> 
+ <li>...</li> 
+</ul> 
+<p>🔗 <a href="https://www.youtube.com/playlist?list=PL8PYTP1V4I8AkaHEJ7lOOrlex-pcxS-XV">Link to Course</a></p> 
+<h2>CS224U: Natural Language Understanding</h2> 
+<p>To learn the latest concepts in natural language understanding:</p> 
+<ul> 
+ <li>Grounded Language Understanding</li> 
+ <li>Relation Extraction</li> 
+ <li>Natural Language Inference (NLI)</li> 
+ <li>NLU and Neural Information Extraction</li> 
+ <li>Adversarial testing</li> 
+ <li>...</li> 
+</ul> 
+<p>🔗 <a href="https://www.youtube.com/playlist?list=PLoROMvodv4rPt5D0zs3YhbWSZA8Q_DyiJ">Link to Course</a></p> 
+<h2>CMU Advanced NLP</h2> 
+<p>To learn:</p> 
+<ul> 
+ <li>Basics of modern NLP techniques</li> 
+ <li>Multi-task, Multi-domain, multi-lingual learning</li> 
+ <li>Prompting + Sequence-to-sequence pre-training</li> 
+ <li>Interpreting and Debugging NLP Models</li> 
+ <li>Learning from Knowledge-bases</li> 
+ <li>Adversarial learning</li> 
+ <li>...</li> 
+</ul> 
+<p>🔗 <a href="https://www.youtube.com/playlist?list=PL8PYTP1V4I8AYSXn_GKVgwXVluCT9chJ6">Link to 2021 Edition</a></p> 
+<p>🔗 <a href="https://www.youtube.com/playlist?list=PL8PYTP1V4I8D0UkqW2fEhgLrnlDW9QK7z">Link to 2022 Edition</a></p> 
+<p>🔗 <a href="https://www.youtube.com/playlist?list=PL8PYTP1V4I8DZprnWryM4nR8IZl1ZXDjg">Link to 2024 Edition</a></p> 
+<h2>Multilingual NLP</h2> 
+<p>To learn the latest concepts for doing multilingual NLP:</p> 
+<ul> 
+ <li>Typology</li> 
+ <li>Words, Part of Speech, and Morphology</li> 
+ <li>Advanced Text Classification</li> 
+ <li>Machine Translation</li> 
+ <li>Data Augmentation for MT</li> 
+ <li>Low Resource ASR</li> 
+ <li>Active Learning</li> 
+ <li>...</li> 
+</ul> 
+<p>🔗 <a href="https://www.youtube.com/playlist?list=PL8PYTP1V4I8CHhppU6n1Q9-04m96D9gt5">Link to 2020 Course</a></p> 
+<p>🔗 <a href="https://www.youtube.com/playlist?list=PL8PYTP1V4I8BhCpzfdKKdd1OnTfLcyZr7">Link to 2022 Course</a></p> 
+<h2>Advanced NLP</h2> 
+<p>To learn advanced concepts in NLP:</p> 
+<ul> 
+ <li>Attention Mechanisms</li> 
+ <li>Transformers</li> 
+ <li>BERT</li> 
+ <li>Question Answering</li> 
+ <li>Model Distillation</li> 
+ <li>Vision + Language</li> 
+ <li>Ethics in NLP</li> 
+ <li>Commonsense Reasoning</li> 
+ <li>...</li> 
+</ul> 
+<p>🔗 <a href="https://www.youtube.com/playlist?list=PLWnsVgP6CzadmQX6qevbar3_vDBioWHJL">Link to Course</a></p> 
+<h2>CS231N: Convolutional Neural Networks for Visual Recognition</h2> 
+<p>Stanford's Famous CS231n course. The videos are only available for the Spring 2017 semester. The course is currently known as Deep Learning for Computer Vision, but the Spring 2017 version is titled Convolutional Neural Networks for Visual Recognition.</p> 
+<ul> 
+ <li>Image Classification</li> 
+ <li>Loss Functions and Optimization</li> 
+ <li>Introduction to Neural Networks</li> 
+ <li>Convolutional Neural Networks</li> 
+ <li>Training Neural Networks</li> 
+ <li>Deep Learning Software</li> 
+ <li>CNN Architectures</li> 
+ <li>Recurrent Neural Networks</li> 
+ <li>Detection and Segmentation</li> 
+ <li>Visualizing and Understanding</li> 
+ <li>Generative Models</li> 
+ <li>Deep Reinforcement Learning</li> 
+</ul> 
+<p>🔗 <a href="https://www.youtube.com/playlist?list=PL3FW7Lu3i5JvHM8ljYj-zLfQRF3EO8sYv">Link to Course</a> 🔗 <a href="http://cs231n.stanford.edu/2017/">Link to Materials</a></p> 
+<h2>Deep Learning for Computer Vision</h2> 
+<p>To learn some of the fundamental concepts in CV:</p> 
+<ul> 
+ <li>Introduction to deep learning for CV</li> 
+ <li>Image Classification</li> 
+ <li>Convolutional Networks</li> 
+ <li>Attention Networks</li> 
+ <li>Detection and Segmentation</li> 
+ <li>Generative Models</li> 
+</ul> 
+<p>🔗 <a href="https://www.youtube.com/playlist?list=PL5-TkQAfAZFbzxjBHtzdVCWE0Zbhomg7r">Link to Course</a></p> 
+<h2>Deep Learning for Computer Vision (DL4CV)</h2> 
+<p>To learn modern methods for computer vision:</p> 
+<ul> 
+ <li>CNNs</li> 
+ <li>Advanced PyTorch</li> 
+ <li>Understanding Neural Networks</li> 
+ <li>RNN, Attention and ViTs</li> 
+ <li>Generative Models</li> 
+ <li>GPU Fundamentals</li> 
+ <li>Self-Supervision</li> 
+ <li>Neural Rendering</li> 
+ <li>Efficient Architectures</li> 
+</ul> 
+<p>🔗 <a href="https://www.youtube.com/playlist?list=PL_Z2_U9MIJdNgFM7-f2fZ9ZxjVRP_jhJv">Link to Course</a></p> 
+<h2>Deep Learning for Computer Vision (neuralearn.ai)</h2> 
+<p>To learn modern methods for computer vision:</p> 
+<ul> 
+ <li>Self-Supervised Learning</li> 
+ <li>Neural Rendering</li> 
+ <li>Efficient Architectures</li> 
+ <li>Machine Learning Operations (MLOps)</li> 
+ <li>Modern Convolutional Neural Networks</li> 
+ <li>Transformers in Vision</li> 
+ <li>Model Deployment</li> 
+</ul> 
+<p>🔗 <a href="https://www.youtube.com/watch?v=IA3WxTTPXqQ">Link to Course</a></p> 
+<h2>AMMI Geometric Deep Learning Course</h2> 
+<p>To learn about concepts in geometric deep learning:</p> 
+<ul> 
+ <li>Learning in High Dimensions</li> 
+ <li>Geometric Priors</li> 
+ <li>Grids</li> 
+ <li>Manifolds and Meshes</li> 
+ <li>Sequences and Time Warping</li> 
+ <li>...</li> 
+</ul> 
+<p>🔗 <a href="https://www.youtube.com/playlist?list=PLn2-dEmQeTfSLXW8yXP4q_Ii58wFdxb3C">Link to Course</a></p> 
+<h2>Deep Reinforcement Learning</h2> 
+<p>To learn the latest concepts in deep RL:</p> 
+<ul> 
+ <li>Intro to RL</li> 
+ <li>RL algorithms</li> 
+ <li>Real-world sequential decision making</li> 
+ <li>Supervised learning of behaviors</li> 
+ <li>Deep imitation learning</li> 
+ <li>Cost functions and reward functions</li> 
+ <li>...</li> 
+</ul> 
+<p>🔗 <a href="https://www.youtube.com/playlist?list=PL_iWQOsE6TfURIIhCrlt-wj9ByIVpbfGc">Link to Course</a></p> 
+<h2>Reinforcement Learning Lecture Series (DeepMind)</h2> 
+<p>The Deep Learning Lecture Series is a collaboration between DeepMind and the UCL Centre for Artificial Intelligence.</p> 
+<ul> 
+ <li>Introduction to RL</li> 
+ <li>Dynamic Programming</li> 
+ <li>Model-free algorithms</li> 
+ <li>Deep reinforcement learning</li> 
+ <li>...</li> 
+</ul> 
+<p>🔗 <a href="https://www.youtube.com/playlist?list=PLqYmG7hTraZDVH599EItlEWsUOsJbAodm">Link to Course</a></p> 
+<h2>LLMOps: Building Real-World Applications With Large Language Models</h2> 
+<p>Learn to build modern software with LLMs using the newest tools and techniques in the field.</p> 
+<p>🔗 <a href="https://www.comet.com/site/llm-course/">Link to Course</a></p> 
+<h2>Evaluating and Debugging Generative AI</h2> 
+<p>You'll learn:</p> 
+<ul> 
+ <li>Instrument A Jupyter Notebook</li> 
+ <li>Manage Hyperparameters Config</li> 
+ <li>Log Run Metrics</li> 
+ <li>Collect artifacts for dataset and model versioning</li> 
+ <li>Log experiment results</li> 
+ <li>Trace prompts and responses for LLMs</li> 
+ <li>...</li> 
+</ul> 
+<p>🔗 <a href="https://www.deeplearning.ai/short-courses/evaluating-debugging-generative-ai/">Link to Course</a></p> 
+<h2>ChatGPT Prompt Engineering for Developers</h2> 
+<p>Learn how to use a large language model (LLM) to quickly build new and powerful applications.</p> 
+<p>🔗 <a href="https://www.deeplearning.ai/short-courses/chatgpt-prompt-engineering-for-developers/">Link to Course</a></p> 
+<h2>LangChain for LLM Application Development</h2> 
+<p>You'll learn:</p> 
+<ul> 
+ <li>Models, Prompt, and Parsers</li> 
+ <li>Memories for LLMs</li> 
+ <li>Chains</li> 
+ <li>Question Answering over Documents</li> 
+ <li>Agents</li> 
+</ul> 
+<p>🔗 <a href="https://www.deeplearning.ai/short-courses/langchain-for-llm-application-development/">Link to Course</a></p> 
+<h2>LangChain: Chat with Your Data</h2> 
+<p>You'll learn about:</p> 
+<ul> 
+ <li>Document Loading</li> 
+ <li>Document Splitting</li> 
+ <li>Vector Stores and Embeddings</li> 
+ <li>Retrieval</li> 
+ <li>Question Answering</li> 
+ <li>Chat</li> 
+</ul> 
+<p>🔗 <a href="https://www.deeplearning.ai/short-courses/building-systems-with-chatgpt/">Link to Course</a></p> 
+<h2>Building Systems with the ChatGPT API</h2> 
+<p>Learn how to automate complex workflows using chain calls to a large language model.</p> 
+<p>🔗 <a href="https://www.deeplearning.ai/short-courses/building-systems-with-chatgpt/">Link to Course</a></p> 
+<h2>LangChain &amp; Vector Databases in Production</h2> 
+<p>Learn how to use LangChain and Vector DBs in Production:</p> 
+<ul> 
+ <li>LLMs and LangChain</li> 
+ <li>Learning how to Prompt</li> 
+ <li>Keeping Knowledge Organized with Indexes</li> 
+ <li>Combining Components Together with Chains</li> 
+ <li>...</li> 
+</ul> 
+<p>🔗 <a href="https://learn.activeloop.ai/courses/langchain">Link to Course</a></p> 
+<h2>Building LLM-Powered Apps</h2> 
+<p>Learn how to build LLM-powered applications using LLM APIs</p> 
+<ul> 
+ <li>Unpacking LLM APIs</li> 
+ <li>Building a Baseline LLM Application</li> 
+ <li>Enhancing and Optimizing LLM Applications</li> 
+ <li>...</li> 
+</ul> 
+<p>🔗 <a href="https://www.wandb.courses/courses/building-llm-powered-apps">Link to Course</a></p> 
+<h2>Full Stack LLM Bootcamp</h2> 
+<p>To learn how to build and deploy LLM-powered applications:</p> 
+<ul> 
+ <li>Learn to Spell: Prompt Engineering</li> 
+ <li>LLMOPs</li> 
+ <li>UX for Language User Interfaces</li> 
+ <li>Augmented Language Models</li> 
+ <li>Launch an LLM App in One Hour</li> 
+ <li>LLM Foundations</li> 
+ <li>Project Walkthrough: askFSDL</li> 
+ <li>...</li> 
+</ul> 
+<p>🔗 <a href="https://fullstackdeeplearning.com/llm-bootcamp/spring-2023/">Link to Course</a></p> 
+<h2>Full Stack Deep Learning</h2> 
+<p>To learn full-stack production deep learning:</p> 
+<ul> 
+ <li>ML Projects</li> 
+ <li>Infrastructure and Tooling</li> 
+ <li>Experiment Managing</li> 
+ <li>Troubleshooting DNNs</li> 
+ <li>Data Management</li> 
+ <li>Data Labeling</li> 
+ <li>Monitoring ML Models</li> 
+ <li>Web deployment</li> 
+ <li>...</li> 
+</ul> 
+<p>🔗 <a href="https://www.youtube.com/playlist?list=PL1T8fO7ArWlcWg04OgNiJy91PywMKT2lv">Link to Course</a></p> 
+<h2>Introduction to Deep Learning and Deep Generative Models</h2> 
+<p>Covers the fundamental concepts of deep learning</p> 
+<ul> 
+ <li>Single-layer neural networks and gradient descent</li> 
+ <li>Multi-layer neural networks and backpropagation</li> 
+ <li>Convolutional neural networks for images</li> 
+ <li>Recurrent neural networks for text</li> 
+ <li>Autoencoders, variational autoencoders, and generative adversarial networks</li> 
+ <li>Encoder-decoder recurrent neural networks and transformers</li> 
+ <li>PyTorch code examples</li> 
+</ul> 
+<p>🔗 <a href="https://www.youtube.com/watch?v=1nqCZqDYPp0&amp;list=PLTKMiZHVd_2KJtIXOW0zFhFfBaJJilH51">Link to Course</a> 🔗 <a href="https://sebastianraschka.com/blog/2021/dl-course.html">Link to Materials</a></p> 
+<h2>Self-Driving Cars (Tübingen)</h2> 
+<p>Covers the most dominant paradigms of self-driving cars: modular pipeline-based approaches as well as deep-learning based end-to-end driving techniques.</p> 
+<ul> 
+ <li>Camera, lidar and radar-based perception</li> 
+ <li>Localization, navigation, path planning</li> 
+ <li>Vehicle modeling/control</li> 
+ <li>Deep Learning</li> 
+ <li>Imitation learning</li> 
+ <li>Reinforcement learning</li> 
+</ul> 
+<p>🔗 <a href="https://www.youtube.com/playlist?list=PL05umP7R6ij321zzKXK6XCQXAaaYjQbzr">Link to Course</a></p> 
+<h2>Reinforcement Learning (Polytechnique Montreal, Fall 2021)</h2> 
+<p>Designing autonomous decision making systems is one of the longstanding goals of Artificial Intelligence. Such decision making systems, if realized, can have a big impact in machine learning for robotics, game playing, control, health care to name a few. This course introduces Reinforcement Learning as a general framework to design such autonomous decision making systems.</p> 
+<ul> 
+ <li>Introduction to RL</li> 
+ <li>Multi-armed bandits</li> 
+ <li>Policy Gradient Methods</li> 
+ <li>Contextual Bandits</li> 
+ <li>Finite Markov Decision Process</li> 
+ <li>Dynamic Programming</li> 
+ <li>Policy Iteration, Value Iteration</li> 
+ <li>Monte Carlo Methods</li> 
+ <li>...</li> 
+</ul> 
+<p>🔗 <a href="https://www.youtube.com/playlist?list=PLImtCgowF_ES_JdF_UcM60EXTcGZg67Ua">Link to Course</a> 🔗 <a href="https://chandar-lab.github.io/INF8953DE/">Link to Materials</a></p> 
+<h2>Foundations of Deep RL</h2> 
+<p>A mini 6-lecture series by Pieter Abbeel.</p> 
+<ul> 
+ <li>MDPs, Exact Solution Methods, Max-ent RL</li> 
+ <li>Deep Q-Learning</li> 
+ <li>Policy Gradients and Advantage Estimation</li> 
+ <li>TRPO and PPO</li> 
+ <li>DDPG and SAC</li> 
+ <li>Model-based RL</li> 
+</ul> 
+<p>🔗 <a href="https://www.youtube.com/playlist?list=PLwRJQ4m4UJjNymuBM9RdmB3Z9N5-0IlY0">Link to Course</a></p> 
+<h2>Stanford CS234: Reinforcement Learning</h2> 
+<p>Covers topics from basic concepts of Reinforcement Learning to more advanced ones:</p> 
+<ul> 
+ <li>Markov decision processes &amp; planning</li> 
+ <li>Model-free policy evaluation</li> 
+ <li>Model-free control</li> 
+ <li>Reinforcement learning with function approximation &amp; Deep RL</li> 
+ <li>Policy Search</li> 
+ <li>Exploration</li> 
+ <li>...</li> 
+</ul> 
+<p>🔗 <a href="https://www.youtube.com/playlist?list=PLoROMvodv4rOSOPzutgyCTapiGlY2Nd8u">Link to Course</a> 🔗 <a href="https://web.stanford.edu/class/cs234/">Link to Materials</a></p> 
+<h2>Stanford CS330: Deep Multi-Task and Meta Learning</h2> 
+<p>This is a graduate-level course covering different aspects of deep multi-task and meta learning.</p> 
+<ul> 
+ <li>Multi-task learning, transfer learning basics</li> 
+ <li>Meta-learning algorithms</li> 
+ <li>Advanced meta-learning topics</li> 
+ <li>Multi-task RL, goal-conditioned RL</li> 
+ <li>Meta-reinforcement learning</li> 
+ <li>Hierarchical RL</li> 
+ <li>Lifelong learning</li> 
+ <li>Open problems</li> 
+</ul> 
+<p>🔗 <a href="https://www.youtube.com/playlist?list=PLoROMvodv4rMC6zfYmnD7UG3LVvwaITY5">Link to Course</a> 🔗 <a href="https://cs330.stanford.edu/">Link to Materials</a></p> 
+<h2>MIT Deep Learning in Life Sciences</h2> 
+<p>A course introducing foundations of ML for applications in genomics and the life sciences more broadly.</p> 
+<ul> 
+ <li>Interpreting ML Models</li> 
+ <li>DNA Accessibility, Promoters and Enhancers</li> 
+ <li>Chromatin and gene regulation</li> 
+ <li>Gene Expression, Splicing</li> 
+ <li>RNA-seq, Splicing</li> 
+ <li>Single cell RNA-sequencing</li> 
+ <li>Dimensionality Reduction, Genetics, and Variation</li> 
+ <li>Drug Discovery</li> 
+ <li>Protein Structure Prediction</li> 
+ <li>Protein Folding</li> 
+ <li>Imaging and Cancer</li> 
+ <li>Neuroscience</li> 
+</ul> 
+<p>🔗 <a href="https://www.youtube.com/playlist?list=PLypiXJdtIca5ElZMWHl4HMeyle2AzUgVB">Link to Course</a></p> 
+<p>🔗 <a href="https://mit6874.github.io/">Link to Materials</a></p> 
+<h2>Advanced Robotics: UC Berkeley</h2> 
+<p>This is course is from Peter Abbeel and covers a review on reinforcement learning and continues to applications in robotics.</p> 
+<ul> 
+ <li>MDPs: Exact Methods</li> 
+ <li>Discretization of Continuous State Space MDPs</li> 
+ <li>Function Approximation / Feature-based Representations</li> 
+ <li>LQR, iterative LQR / Differential Dynamic Programming</li> 
+ <li>...</li> 
+</ul> 
+<p>🔗 <a href="https://www.youtube.com/playlist?list=PLwRJQ4m4UJjNBPJdt8WamRAt4XKc639wF">Link to Course</a> 🔗 <a href="https://people.eecs.berkeley.edu/~pabbeel/cs287-fa19/">Link to Materials</a></p> 
+<hr /> 
+<p>Reach out on <a href="https://twitter.com/omarsar0">Twitter</a> if you have any questions.</p> 
+<p>If you are interested to contribute, feel free to open a PR with a link to the course. It will take a bit of time, but I have plans to do many things with these individual lectures. We can summarize the lectures, include notes, provide additional reading material, include difficulty of content, etc.</p> 
+<p>You can now find ML Course notes <a href="https://github.com/dair-ai/ML-Course-Notes">here</a>.</p>
+]]></content:encoded>
+
+
+</item>
+<item>
+<title>maotoumao/MusicFree</title>
+<link>https://github.com/maotoumao/MusicFree</link>
+<guid>https://github.com/maotoumao/MusicFree</guid>
+<content:encoded><![CDATA[
+<div> 关键词: 免费音乐播放器, 插件化, 定制化, 无广告, 开源项目
+
+这篇文章主要介绍了名为MusicFree的免费音乐播放器的一些关键特点和使用方式。以下是对其主要特点的总结：
+
+1. **插件化**：MusicFree仅作为一个播放器基础，所有搜索、播放、歌单导入等功能都需要通过第三方插件实现。这种设计使得用户可以根据自己的需求选择不同的插件，极大地增加了功能的灵活性和多样性。
+
+2. **定制化与无广告**：用户可以自定义主题颜色和背景，且播放器本身不含有广告。这是为了提供更好的用户体验，同时也保证了用户的隐私安全。
+
+3. **隐私保护**：所有数据均存储在本地设备上，不收集用户个人信息，确保用户隐私得到保护。
+
+4. **歌词关联**：用户可以关联不同歌曲的歌词，实现多首歌曲共享同一歌词库的功能，便于管理和查找。
+
+5. **开源与社区参与**：MusicFree遵循AGPL 3.0开源协议，鼓励社区成员参与开发和贡献插件，同时要求用户在使用和二次分发代码时遵守开源协议。
+
+总结: MusicFree是一款插件化的免费音乐播放器，强调用户定制化体验，无广告干扰，注重隐私保护，并通过开源社区支持持续发展。用户可以通过安装各种插件来扩展播放器的功能，同时享受自定义主题和歌词关联等特色服务，整个产品旨在为用户提供一个纯净、灵活且功能丰富的音乐播放体验。 <div>
+<p>插件化、定制化、无广告的免费音乐播放器</p><hr /><h1>MusicFree</h1> 
+<blockquote> 
+ <p>[!CAUTION] 👎 小米/华为/vivo等<ins>应用市场的 MusicFree </ins>和本软件无关，<strong>是套用本软件名称和 Logo 的广告软件</strong>。</p> 
+ <p>👎 速悦音乐基于本软件二次开发，改动点仅仅是内置插件、修改一些 UI 以及引流，<strong>并未遵守本项目的开源协议，且拒绝沟通</strong>。</p> 
+</blockquote> 
+<hr /> 
+<h2>简介</h2> 
+<p>一个插件化、定制化、无广告的免费音乐播放器，目前只支持 Android 和 Harmony OS。</p> 
+<blockquote> 
+ <p><strong>桌面版来啦：<a href="https://github.com/maotoumao/MusicFreeDesktop">https://github.com/maotoumao/MusicFreeDesktop</a></strong></p> 
+</blockquote> 
+<p>如果需要了解后续进展可以关注公众号↓；如果有问题可以在 issue 区或者公众号直接留言反馈。</p> 
+<p><img alt="微信公众号" src="https://raw.githubusercontent.com/maotoumao/MusicFree/master/src/assets/imgs/wechat_channel.jpg" /></p> 
+<p>软件下载方式、插件使用说明、插件开发文档可去站点 <a href="https://musicfree.upup.fun">https://musicfree.upup.fun</a> 查看。</p> 
+<blockquote> 
+ <p>[!NOTE]</p> 
+ <ul> 
+  <li>如果你在其他的平台看到收费版/无广告版/破解版，都是假的，本来就是开源项目，<strong>遇到收费版请直接举报</strong>；</li> 
+  <li>软件首先是自用，顺带分享出来希望可以帮助到有需要的人；是业余作品，会尽量保持维护，不过每天能写的时间有限（半小时左右），目测会有很长一段时间处于不稳定测试版本，且更新频率不定，请谨慎使用；</li> 
+  <li>软件的第三方插件、及其所产生的数据与本软件无关，请合理合法使用，可能产生的版权数据请及时删除。</li> 
+  <li><strong>请不要以 VIP/破解版为噱头进行宣传</strong>，示例仓库基于互联网公开接口封装，并<strong>过滤掉所有 VIP、试听、付费歌曲</strong>，且示例仓库以后也<strong>不会提供具备破解功能的插件</strong>；</li> 
+  <li>本软件的相关信息<strong>只会主动投放在 Git 仓库以及公众号“一只猫头猫”中</strong>，如果希望写文章介绍本软件请自便，但还烦请<strong>如实陈述，涉及到示例仓库请给插件源打个码</strong>，不要给软件增加一些不实的功能（尽管我也想有）；描述冲突的地方以本仓库为准。</li> 
+ </ul> 
+</blockquote> 
+<h2>项目使用约定：</h2> 
+<p>本项目基于 AGPL 3.0 协议开源，使用此项目时请遵守开源协议。<br /> 除此外，希望你在使用代码时已经了解以下额外说明：</p> 
+<ol> 
+ <li>打包、二次分发 <strong>请保留代码出处</strong>：<a href="https://github.com/maotoumao/MusicFree">https://github.com/maotoumao/MusicFree</a></li> 
+ <li>请不要用于商业用途，合法合规使用代码；</li> 
+ <li>如果开源协议变更，将在此 Github 仓库更新，不另行通知。</li> 
+</ol> 
+<h2>特性</h2> 
+<ul> 
+ <li> <p>插件化：本软件仅仅是一个播放器，本身<strong>并不集成</strong>任何平台的任何音源，所有的搜索、播放、歌单导入等功能全部基于<strong>插件</strong>。这也就意味着，<strong>只要可以在互联网上搜索到的音源，只要有对应的插件，你都可以使用本软件进行搜索、播放等功能</strong>。关于插件的详细说明请看插件一节。</p> </li> 
+ <li> <p>插件支持的功能：搜索（音乐、专辑、作者）、播放、查看专辑、查看作者详细信息、导入单曲、导入歌单、获取歌词等。</p> </li> 
+ <li> <p>定制化、无广告：本软件提供了浅色、深色模式；支持自定义背景；本软件基于 GPL 协议开源，<del>一个 star 做交易</del> 将会保持免费。</p> </li> 
+ <li> <p>隐私：所有的数据都存储在本地，本软件不会收集你的任何个人信息。</p> </li> 
+ <li> <p>歌词关联：你可以把两首歌的歌词关联起来，比如将歌曲 A 的歌词关联到歌曲 B，关联后 A、B 两首歌都将显示歌曲 B 的歌词。你也可以关联多首歌的歌词，如 A-&gt;B-&gt;C，这样 A、B、C 三首歌都将显示 C 的歌词。</p> </li> 
+</ul> 
+<h2>插件</h2> 
+<h3>插件简介</h3> 
+<p>插件本质上是一个满足插件协议的 commonjs 模块。插件中定义了搜索（音乐、专辑、作者）、播放、查看专辑、作者详细信息、导入歌单、获取歌词等基本函数，插件的开发者只需要关心输入输出逻辑，至于分页、缓存等全都交给 MusicFree 控制即可。本软件通过插件来完成播放器的所有功能，这样解耦的设计也可以使得本软件可以专注于做一个功能完善的播放器，我直呼小而美。</p> 
+<p>插件开发文档可以参考 <a href="https://musicfree.upup.fun/plugin/introduction.html">这里</a></p> 
+<p>需要注意的是：</p> 
+<ul> 
+ <li> <p>如果你是使用第三方下载的插件，那么请自行鉴别插件的安全性（基本上看下没有奇怪的网络请求什么的就好了；自己写的最安全，<em>不要安装来路不明的东西</em>），防止恶意代码破坏。因为第三方恶意插件导致的可能的损失与本软件无关。</p> </li> 
+ <li> <p>插件使用过程中可能会产生某些和本软件无关的版权数据，插件、以及插件产生的任何数据与本软件无关，请使用者自行斟酌，及时删除数据，本软件不提倡也不会提供任何破解行为，你可以搭建自己的离线音乐仓库使用。</p> </li> 
+</ul> 
+<h3>插件使用</h3> 
+<p>下载 app 之后，只需要在侧边栏设置-插件设置中安装插件即可。支持安装本地插件和从网络安装插件（支持解析.js 文件和.json 描述文件；已经写了几个示意的插件：<a href="https://github.com/maotoumao/MusicFreePlugins">指路这个仓库</a>，不过可能功能不是很完善）；</p> 
+<p>你可以直接点击从网络安装插件，然后输入<a href="https://gitee.com/maotoumao/MusicFreePlugins/raw/master/plugins.json">https://gitee.com/maotoumao/MusicFreePlugins/raw/master/plugins.json</a> ，点击确认即可安装。</p> 
+<p>图文版详细使用说明可以参考公众号：<a href="https://mp.weixin.qq.com/s?__biz=MzkxOTM5MDI4MA==&amp;mid=2247483875&amp;idx=1&amp;sn=aedf8bb909540634d927de7fd2b4b8b1&amp;chksm=c1a390c4f6d419d233908bb781d418c6b9fd2ca82e9e93291e7c93b8ead3c50ca5ae39668212#rd">MusicFree 插件使用指南</a>，或者站点： <a href="https://musicfree.upup.fun/usage/mobile/install-plugin.html">https://musicfree.upup.fun/usage/mobile/install-plugin.html</a></p> 
+<h2>下载地址</h2> 
+<p>请转到发布页查看：<a href="https://github.com/maotoumao/MusicFree/releases">指路</a> (如果打不开可以把 github 换成 gitee)，公众号回复 Musicfree 也可以。</p> 
+<h2>Q&amp;A</h2> 
+<p>使用时遇到的常见问题可以看这里：<a href="https://musicfree.upup.fun/qa/common.html">MusicFree 使用 Q&amp;A</a></p> 
+<p>技术交流/一起写点有意思的东西/技术向的闲聊欢迎加群：<a href="https://jq.qq.com/?_wv=1027&amp;k=upVpi2k3">683467814</a>~ （不是答疑群）</p> 
+<p>闲聊可以到 <a href="https://pd.qq.com/s/cyxnf0jj1">QQ 频道</a>~</p> 
+<h2>WIP</h2> 
+<p>如果有需要讨论的新需求，可以在公众号后台留言/提issue/或者去discussion开个话题。</p> 
+<h2>支持这个项目</h2> 
+<p>如果你喜欢这个项目，或者希望我可以持续维护下去，你可以通过以下任何一种方式支持我;)</p> 
+<ol> 
+ <li>Star 这个项目，分享给你身边的人；</li> 
+ <li>关注公众号👇或 b 站 <a href="https://space.bilibili.com/12866223">不想睡觉猫头猫</a> 获取最新信息；</li> 
+</ol> 
+<p><img alt="微信公众号" src="https://raw.githubusercontent.com/maotoumao/MusicFree/master/src/assets/imgs/wechat_channel.jpg" /></p> 
+<p>感谢以下小伙伴的推荐，很意外也很惊喜 ~~~</p> 
+<p>来自<strong>果核剥壳</strong>的安利~ <a href="https://mp.weixin.qq.com/s/F6hMbLv_a-Ty0fPA_0P0Rg">https://mp.weixin.qq.com/s/F6hMbLv_a-Ty0fPA_0P0Rg</a></p> 
+<p>来自<strong>小棉袄</strong>的安利~ <a href="https://mp.weixin.qq.com/s/Fqe3o7vcTw0KDKoB-gsQfg">https://mp.weixin.qq.com/s/Fqe3o7vcTw0KDKoB-gsQfg</a></p> 
+<h2>ChangeLog</h2> 
+<p><a href="https://raw.githubusercontent.com/maotoumao/MusicFree/master/changelog.md">点击这里</a></p> 
+<hr /> 
+<p>本项目仅供学习参考使用，基于 GPL3.0 协议开源；请在符合法律法规的情况下合理使用本项目，禁止用于商业目的使用。</p> 
+<h2>应用截图</h2> 
+<p><strong>以下截图仅为 UI 样例，软件内部不提供任何音源，不代表实际使用时表现如下图。</strong></p> 
+<h4>主界面</h4> 
+<p><img alt="主界面" src="https://raw.githubusercontent.com/maotoumao/MusicFree/master/.imgs/main.jpg" /></p> 
+<h4>侧边栏</h4> 
+<ul> 
+ <li> <p>基础设置 <img alt="基础设置" src="https://raw.githubusercontent.com/maotoumao/MusicFree/master/.imgs/basic-setting.jpg" /></p> </li> 
+ <li> <p>主题设置 <img alt="主题设置" src="https://raw.githubusercontent.com/maotoumao/MusicFree/master/.imgs/theme-setting.jpg" /></p> </li> 
+</ul> 
+<h4>音乐相关</h4> 
+<ul> 
+ <li> <p>歌单页 <img alt="歌单页" src="https://raw.githubusercontent.com/maotoumao/MusicFree/master/.imgs/song-sheet.jpg" /></p> </li> 
+ <li> <p>歌单内检索 <img alt="歌单内检索" src="https://raw.githubusercontent.com/maotoumao/MusicFree/master/.imgs/search-in-sheet.jpg" /></p> </li> 
+ <li> <p>播放页 <img alt="播放页" src="https://raw.githubusercontent.com/maotoumao/MusicFree/master/.imgs/song-cover.jpg" /></p> </li> 
+ <li> <p>歌词页 <img alt="歌词页" src="https://raw.githubusercontent.com/maotoumao/MusicFree/master/.imgs/song-lrc.jpg" /></p> </li> 
+</ul> 
+<h4>搜索相关</h4> 
+<ul> 
+ <li>作者信息 <img alt="专辑信息" src="https://raw.githubusercontent.com/maotoumao/MusicFree/master/.imgs/artist-detail.jpg" /></li> 
+</ul>
+]]></content:encoded>
+
+
+</item>
 
 <item>
 <title>documenso/documenso</title>

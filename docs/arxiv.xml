@@ -4,6 +4,211 @@
 <title>cs updates on arXiv.org</title>
 <link>http://rss.arxiv.org/rss/cs</link>
 
+<item>
+<title>Detection Made Easy: Potentials of Large Language Models for Solidity Vulnerabilities</title>
+<link>https://arxiv.org/abs/2409.10574</link>
+<guid>https://arxiv.org/abs/2409.10574</guid>
+<content:encoded><![CDATA[
+<div> 关键词：Solidity智能合约、大型语言模型（LLMs）、OWASP Top Ten漏洞、VulSmart数据集、SmartVD框架
+
+<br><br>
+总结:
+本文研究了大型语言模型（LLMs）在检测以太坊主网上使用Solidity编写的智能合约中的OWASP Top Ten漏洞的能力。研究团队创建了一个名为VulSmart的新型、平衡分类、结构化和标注的数据集，用于评估开源LLMs如CodeLlama、Llama2、CodeT5和Falcon，以及闭源模型GPT-3.5 Turbo和GPT-4o Mini的表现。他们提出了一个名为SmartVD的框架，通过广泛的自动化和人工评估来测试这些模型，利用BLEU和ROUGE指标来评估漏洞检测的有效性。研究还探索了零样本、少量样本和链式思维三种不同的提示策略，以评估SmartVD框架的多类分类和生成能力。研究发现，SmartVD在检测漏洞方面优于其开源同辈，甚至超越了闭源基础模型GPT-3.5和GPT-4 Mini的性能。在微调后，闭源模型GPT-3.5 Turbo和GPT-4o Mini在检测漏洞方面达到了99%的准确率，在识别漏洞类型和确定严重程度方面的表现分别为94%和98%。特别地，SmartVD在“链式思维”提示技术上表现最佳，而微调后的闭源模型则在“零样本”提示方法上表现出色。 <div>
+arXiv:2409.10574v1 Announce Type: new 
+Abstract: The large-scale deployment of Solidity smart contracts on the Ethereum mainnet has increasingly attracted financially-motivated attackers in recent years. A few now-infamous attacks in Ethereum's history includes DAO attack in 2016 (50 million dollars lost), Parity Wallet hack in 2017 (146 million dollars locked), Beautychain's token BEC in 2018 (900 million dollars market value fell to 0), and NFT gaming blockchain breach in 2022 ($600 million in Ether stolen). This paper presents a comprehensive investigation of the use of large language models (LLMs) and their capabilities in detecting OWASP Top Ten vulnerabilities in Solidity. We introduce a novel, class-balanced, structured, and labeled dataset named VulSmart, which we use to benchmark and compare the performance of open-source LLMs such as CodeLlama, Llama2, CodeT5 and Falcon, alongside closed-source models like GPT-3.5 Turbo and GPT-4o Mini. Our proposed SmartVD framework is rigorously tested against these models through extensive automated and manual evaluations, utilizing BLEU and ROUGE metrics to assess the effectiveness of vulnerability detection in smart contracts. We also explore three distinct prompting strategies-zero-shot, few-shot, and chain-of-thought-to evaluate the multi-class classification and generative capabilities of the SmartVD framework. Our findings reveal that SmartVD outperforms its open-source counterparts and even exceeds the performance of closed-source base models like GPT-3.5 and GPT-4 Mini. After fine-tuning, the closed-source models, GPT-3.5 Turbo and GPT-4o Mini, achieved remarkable performance with 99% accuracy in detecting vulnerabilities, 94% in identifying their types, and 98% in determining severity. Notably, SmartVD performs best with the `chain-of-thought' prompting technique, whereas the fine-tuned closed-source models excel with the `zero-shot' prompting approach.
+]]></content:encoded>
+<pubDate>Wed, 18 Sep 2024 00:00:00 -0400</pubDate>
+<pubDate>Wed, 18 Sep 2024 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Deterministic Bounds in Committee Selection: Enhancing Decentralization and Scalability in Distributed Ledgers</title>
+<link>https://arxiv.org/abs/2409.10727</link>
+<guid>https://arxiv.org/abs/2409.10727</guid>
+<content:encoded><![CDATA[
+<div> 关键词：分布式共识、随机委员会选择、公平性、确定性边界、敌对影响
+
+总结:
+本文聚焦于分布式共识系统中的公平随机委员会选举过程，特别是采用加密抽签方法确保委员会大小恒定的方案。与现有协议提供的概率性保证不同，本文提出的新方法旨在提供确定性的边界，以限制委员会中敌对方的影响。通过引入创新方法和进行数值实验，文章证明了这种方法能够有效增强系统的去中心化特性。
+
+具体而言，文章首先概述了区块链系统中基于稀缺资源（如股权、存储、内存或计算能力）的加权彩票机制在选择负责共识过程及添加新信息至区块链的委员会成员中的重要性。接着，作者对比了两种主要的随机委员会选择方法：一种是每个验证候选者在共识阶段本地检查是否当选并展示证明；另一种是使用排序算法决定固定大小的全球验证委员会。
+
+文章的重点在于后者，特别是加密抽签方法，该方法确保委员会大小恒定，同时提供确定性边界来限制委员会中敌对方的影响力。这种策略克服了现有协议仅提供概率性保证的局限性，通常导致委员会规模过大，不适合许多基于多数原则的应用场景，如原子广播和随机信标协议。通过引入新的方法和分析，文章为实现更强大、更公平的去中心化系统提供了理论基础和实践指导。 <div>
+arXiv:2409.10727v1 Announce Type: new 
+Abstract: Consensus plays a crucial role in distributed ledger systems, impacting both scalability and decentralization. Many blockchain systems use a weighted lottery based on a scarce resource such as a stake, storage, memory, or computing power to select a committee whose members drive the consensus and are responsible for adding new information to the ledger. Therefore, ensuring a robust and fair committee selection process is essential for maintaining security, efficiency, and decentralization.
+  There are two main approaches to randomized committee selection. In one approach, each validator candidate locally checks whether they are elected to the committee and reveals their proof during the consensus phase. In contrast, in the second approach, a sortition algorithm decides a fixed-sized committee that is globally verified. This paper focuses on the latter approach, with cryptographic sortition as a method for fair committee selection that guarantees a constant committee size. Our goal is to develop deterministic guarantees that strengthen decentralization. We introduce novel methods that provide deterministic bounds on the influence of adversaries within the committee, as evidenced by numerical experiments. This approach overcomes the limitations of existing protocols that only offer probabilistic guarantees, often providing large committees that are impractical for many quorum-based applications like atomic broadcast and randomness beacon protocols.
+]]></content:encoded>
+<pubDate>Wed, 18 Sep 2024 00:00:00 -0400</pubDate>
+<pubDate>Wed, 18 Sep 2024 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>An Anti-disguise Authentication System Using the First Impression of Avatar in Metaverse</title>
+<link>https://arxiv.org/abs/2409.10850</link>
+<guid>https://arxiv.org/abs/2409.10850</guid>
+<content:encoded><![CDATA[
+<div> 关键词：元宇宙、身份认证、反伪装、签加密、区块链存储
+
+<br><br>
+总结:
+本文提出了一个基于元宇宙环境的反伪装身份认证方法，旨在解决虚拟世界中用户通过创建个性化数字形象（即头像）进行交互时可能出现的身份欺骗问题。该方法借鉴了现实世界中初次印象的作用，利用首次会面的场景信息来辅助用户间的身份验证过程。为防止对手替换和伪造初次印象，文中构建了一种基于变色龙的签加密机制，并设计了一个密文认证协议以确保加密身份的公开可验证性。安全分析显示，该签加密机制不仅满足了安全性需求，还实现了公开可验证性。此外，密文认证协议具备防御对手对初次印象进行替换和伪造的能力。实验结果显示，所提出的头像认证系统能够在区块链上以较低的存储消耗实现有效的反伪装身份认证。 <div>
+arXiv:2409.10850v1 Announce Type: new 
+Abstract: Metaverse is a vast virtual world parallel to the physical world, where the user acts as an avatar to enjoy various services that break through the temporal and spatial limitations of the physical world. Metaverse allows users to create arbitrary digital appearances as their own avatars by which an adversary may disguise his/her avatar to fraud others. In this paper, we propose an anti-disguise authentication method that draws on the idea of the first impression from the physical world to recognize an old friend. Specifically, the first meeting scenario in the metaverse is stored and recalled to help the authentication between avatars. To prevent the adversary from replacing and forging the first impression, we construct a chameleon-based signcryption mechanism and design a ciphertext authentication protocol to ensure the public verifiability of encrypted identities. The security analysis shows that the proposed signcryption mechanism meets not only the security requirement but also the public verifiability. Besides, the ciphertext authentication protocol has the capability of defending against the replacing and forging attacks on the first impression. Extensive experiments show that the proposed avatar authentication system is able to achieve anti-disguise authentication at a low storage consumption on the blockchain.
+]]></content:encoded>
+<pubDate>Wed, 18 Sep 2024 00:00:00 -0400</pubDate>
+<pubDate>Wed, 18 Sep 2024 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Inside Alameda Research: A Multi-Token Network Analysis</title>
+<link>https://arxiv.org/abs/2409.10949</link>
+<guid>https://arxiv.org/abs/2409.10949</guid>
+<content:encoded><![CDATA[
+<div> 关键词：Ethereum、Alameda Research、DeFi生态系统、网络分析、时间演变
+
+<br><br>
+总结:
+
+本文聚焦于对以太坊上与Alameda Research相关的代币转移网络进行的深入分析。Alameda Research是一家涉及FTX客户资金不当使用的加密货币交易公司。研究通过多代币网络表示法，分析节点中心性和网络骨架，以识别关键账户、代币和活动群体。对Alameda账户随时间的变化进行的研究揭示了其在破产前（2022年11月）的代币积累和分配模式的转变。通过网络分析，本文提供了关于塑造去中心化金融(DeFi)生态系统的活动和动态的见解。这一研究不仅有助于理解特定实体在加密市场中的行为，也为更广泛地理解DeFi生态系统中的资金流动和风险提供了洞见。 <div>
+arXiv:2409.10949v1 Announce Type: new 
+Abstract: We analyze the token transfer network on Ethereum, focusing on accounts associated with Alameda Research, a cryptocurrency trading firm implicated in the misuse of FTX customer funds. Using a multi-token network representation, we examine node centralities and the network backbone to identify critical accounts, tokens, and activity groups. The temporal evolution of Alameda accounts reveals shifts in token accumulation and distribution patterns leading up to its bankruptcy in November 2022. Through network analysis, our work offers insights into the activities and dynamics that shape the DeFi ecosystem.
+]]></content:encoded>
+<pubDate>Wed, 18 Sep 2024 00:00:00 -0400</pubDate>
+<pubDate>Wed, 18 Sep 2024 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Delay Analysis of EIP-4844</title>
+<link>https://arxiv.org/abs/2409.11043</link>
+<guid>https://arxiv.org/abs/2409.11043</guid>
+<content:encoded><![CDATA[
+<div> 关键词：Ethereum改进提案、Proto-Danksharding、数据分片、数据可用性、延迟模型
+
+总结:
+文章主要讨论了Ethereum改进提案EIP-4844中提出的Proto-Danksharding技术，该技术旨在通过引入名为blob-carrying交易的新类型来逐步提高以太坊区块链的可扩展性。这些交易将大型二进制对象（blob）存储于链下，但通过在链上引用和验证来确保数据可用性。通过将数据可用性与交易执行分离，Proto-Danksharding缓解了网络拥堵并降低了气体费用，为更高级的数据分片解决方案打下了基础。
+
+文章提供了一个分析模型，用于推导这些新交易的延迟。通过将系统建模为$\mathrm{M/D}^B/1$队列，并通过嵌入马尔可夫链和辅助变量方法找到其稳态分布，作者证明了与较低blob数量但更高频率的交易相比，具有更多blob但更少频率的交易对系统的延迟影响更大。这一发现对于优化交易处理和提高整体网络效率至关重要。 <div>
+arXiv:2409.11043v1 Announce Type: new 
+Abstract: Proto-Danksharding, proposed in Ethereum Improvement Proposal 4844 (EIP-4844), aims to incrementally improve the scalability of the Ethereum blockchain by introducing a new type of transaction known as blob-carrying transactions. These transactions incorporate binary large objects (blobs) of data that are stored off-chain but referenced and verified on-chain to ensure data availability. By decoupling data availability from transaction execution, Proto-Danksharding alleviates network congestion and reduces gas fees, laying the groundwork for future, more advanced sharding solutions. This letter provides an analytical model to derive the delay for these new transactions. We model the system as an $\mathrm{M/D}^B/1$ queue which we then find its steady state distribution through embedding a Markov chain and use of supplementary variable method. We show that transactions with more blobs but less frequent impose higher delays on the system compared to lower blobs but more frequent.
+]]></content:encoded>
+<pubDate>Wed, 18 Sep 2024 00:00:00 -0400</pubDate>
+<pubDate>Wed, 18 Sep 2024 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Multi-UAV Uniform Sweep Coverage in Unknown Environments: A Mergeable Nervous System (MNS)-Based Random Exploration</title>
+<link>https://arxiv.org/abs/2409.11116</link>
+<guid>https://arxiv.org/abs/2409.11116</guid>
+<content:encoded><![CDATA[
+<div> 关键词：多无人机、均匀覆盖、随机漫步、自组织网络、未知环境
+
+<br><br>
+总结:本文研究了多无人飞行器（UAV）在未知环境下进行均匀覆盖的问题。研究发现，基于随机游走的探索策略适用于此类覆盖场景，因为它们不需要定位信息，易于在机器人集群中实现。文中提出了一种基于自组织神经系统（MNS）框架的随机游走方法，该方法允许无人机群自我组织成一种基于局部通信的层次化自适应通信网络，并以线性队形的形式进行移动。通过模拟比较，该方法在达到全面覆盖所需的总时间以及覆盖均匀性方面，均优于几种分散的随机游走基准策略。实验结果表明，MNS基于的随机游走策略在环境覆盖效率和覆盖一致性上表现出色。 <div>
+arXiv:2409.11116v1 Announce Type: new 
+Abstract: This paper investigates the problem of multi-UAV uniform sweep coverage, where a homogeneous swarm of UAVs must collectively and evenly visit every portion of an unknown environment for a sampling task without having access to their own location and orientation. Random walk-based exploration strategies are practical for such a coverage scenario as they do not rely on localization and are easily implementable in robot swarms. We demonstrate that the Mergeable Nervous System (MNS) framework, which enables a robot swarm to self-organize into a hierarchical ad-hoc communication network using local communication, is a promising control approach for random exploration in unknown environments by UAV swarms. To this end, we propose an MNS-based random walk approach where UAVs self-organize into a line formation using the MNS framework and then follow a random walk strategy to cover the environment while maintaining the formation. Through simulations, we test the efficiency of our approach against several decentralized random walk-based strategies as benchmarks. Our results show that the MNS-based random walk outperforms the benchmarks in terms of the time required to achieve full coverage and the coverage uniformity at that time, assessed across both the entire environment and within local regions.
+]]></content:encoded>
+<pubDate>Wed, 18 Sep 2024 00:00:00 -0400</pubDate>
+<pubDate>Wed, 18 Sep 2024 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>The Incredible Shrinking Context... in a decompiler near you</title>
+<link>https://arxiv.org/abs/2409.11157</link>
+<guid>https://arxiv.org/abs/2409.11157</guid>
+<content:encoded><![CDATA[
+<div> 关键词：Shrknr、Elipmoc、静态分析、符号执行、智能合约
+
+总结:
+
+本文介绍了一种名为Shrknr的新一代智能合约二进制代码反编译工具。Shrknr通过引入“缩减上下文敏感性”这一创新技术，相较于现有的反编译工具如Elipmoc，在可扩展性、完整性、精确度等关键维度上实现了显著提升。具体而言，Shrknr能够处理更多的智能合约代码（覆盖更多代码的比例提高了67%，并达到99.5%的合约覆盖率），同时将关键的不精确度指标降低了超过65%。
+
+Shrknr采用了基于静态分析的方法进行反编译，与依赖于符号执行的技术相比，它通过深挖静态分析上下文并积极“遗忘”控制流历史来释放进一步精确推理的空间，从而实现性能的提升。在标准基准测试集中，Shrknr的表现远超其他同类工具，展现了其在智能合约反编译领域的先进性和实用性。 <div>
+arXiv:2409.11157v1 Announce Type: new 
+Abstract: Decompilation of binary code has arisen as a highly-important application in the space of Ethereum VM (EVM) smart contracts. Major new decompilers appear nearly every year and attain popularity, for a multitude of reverse-engineering or tool-building purposes. Technically, the problem is fundamental: it consists of recovering high-level control flow from a highly-optimized continuation-passing-style (CPS) representation. Architecturally, decompilers can be built using either static analysis or symbolic execution techniques.
+  We present Shrknr, a static-analysis-based decompiler succeeding the state-of-the-art Elipmoc decompiler. Shrknr manages to achieve drastic improvements relative to the state of the art, in all significant dimensions: scalability, completeness, precision. Chief among the techniques employed is a new variant of static analysis context: shrinking context sensitivity. Shrinking context sensitivity performs deep cuts in the static analysis context, eagerly "forgetting" control-flow history, in order to leave room for further precise reasoning.
+  We compare Shrnkr to state-of-the-art decompilers, both static-analysis- and symbolic-execution-based. In a standard benchmark set, Shrnkr scales to over 99.5% of contracts (compared to ~95%), covers (i.e., reaches and manages to decompile) 67% more code, and reduces key imprecision metrics by over 65%.
+]]></content:encoded>
+<pubDate>Wed, 18 Sep 2024 00:00:00 -0400</pubDate>
+<pubDate>Wed, 18 Sep 2024 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Decentralized Biometric Authentication based on Fuzzy Commitments and Blockchain</title>
+<link>https://arxiv.org/abs/2409.11303</link>
+<guid>https://arxiv.org/abs/2409.11303</guid>
+<content:encoded><![CDATA[
+<div> 关键词：区块链技术、生物识别认证、去中心化、隐私保护、模糊承诺方案
+
+<br><br>
+总结:
+本文聚焦于利用区块链技术实现生物识别认证的去中心化与隐私保护。传统上，生物识别认证依赖于中心化的系统进行，而区块链作为公开基础设施，其特性与生物识别需求存在矛盾——即需要保护个人生物特征的隐私性。为解决这一冲突，作者提出了一种基于区块链的生物识别认证协议，该协议通过引入模糊承诺方案，确保了在无需泄露生物数据的情况下完成认证过程。此外，文章还对所提出的协议进行了安全分析，考虑到可能的攻击方式，以确保其安全性。这一创新旨在为生物识别领域引入去中心化和增强的隐私保护机制，同时保持系统的可靠性和安全性。 <div>
+arXiv:2409.11303v1 Announce Type: new 
+Abstract: Blockchain technology, which was introduced for supporting cryptocurrencies, today provides a decentralized infrastructure for general information storage and execution of algorithms, thus enabling the conversion of many applications and services from a centralized and intermediated model to a decentralized and disintermediated one. In this paper we focus on biometric authentication, which is classically performed using centralized systems, and could hence benefit from decentralization. For such a purpose, however, an inherent contradiction between biometric applications and blockchain technology must be overcome, as the former require keeping biometric features private, while blockchain is a public infrastructure. We propose a blockchain-based biometric authentication protocol that enables decentralization and resilience while protecting the privacy, personal data, and, in particular, biometric features of users. The protocol we propose leverages fuzzy commitment schemes to allow biometric authentication to be performed without disclosing biometric data. We also analyze the security of the protocol we propose by considering some relevant attacks.
+]]></content:encoded>
+<pubDate>Wed, 18 Sep 2024 00:00:00 -0400</pubDate>
+<pubDate>Wed, 18 Sep 2024 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Constrained Learning for Decentralized Multi-Objective Coverage Control</title>
+<link>https://arxiv.org/abs/2409.11311</link>
+<guid>https://arxiv.org/abs/2409.11311</guid>
+<content:encoded><![CDATA[
+<div> 关键词：多目标优化、公平覆盖、约束覆盖、分布式学习、感知-行动-通信网络
+
+<br><br>
+总结:
+本文研究了机器人集群在多个异构重要性密度场（IDFs）上同时提供传感器覆盖的多目标覆盖控制问题。提出了公平覆盖和约束覆盖两种不同形式的问题，并探讨了在有限通信和局部感知能力下的分散设置。为了解决这一复杂问题，作者提出了一种新颖的分散式约束学习方法，结合了普鲁-杜尔优化和可学习感知-行动-通信（LPAC）神经网络架构。该方法将对偶问题的拉格朗日乘子重新表述为IDF的线性组合，使LPAC策略能够作为求解器。实验结果表明，该方法在覆盖成本上平均比现有最先进的分散控制器高出30%，并且在更大的环境和更多机器人的情况下表现出良好的转移性和可扩展性，特别是在处理数量更多的领域和集群机器人时。 <div>
+arXiv:2409.11311v1 Announce Type: new 
+Abstract: The multi-objective coverage control problem requires a robot swarm to collaboratively provide sensor coverage to multiple heterogeneous importance density fields (IDFs) simultaneously. We pose this as an optimization problem with constraints and study two different formulations: (1) Fair coverage, where we minimize the maximum coverage cost for any field, promoting equitable resource distribution among all fields; and (2) Constrained coverage, where each field must be covered below a certain cost threshold, ensuring that critical areas receive adequate coverage according to predefined importance levels. We study the decentralized setting where robots have limited communication and local sensing capabilities, making the system more realistic, scalable, and robust. Given the complexity, we propose a novel decentralized constrained learning approach that combines primal-dual optimization with a Learnable Perception-Action-Communication (LPAC) neural network architecture. We show that the Lagrangian of the dual problem can be reformulated as a linear combination of the IDFs, enabling the LPAC policy to serve as a primal solver. We empirically demonstrate that the proposed method (i) significantly outperforms existing state-of-the-art decentralized controllers by 30% on average in terms of coverage cost, (ii) transfers well to larger environments with more robots and (iii) is scalable in the number of fields and robots in the swarm.
+]]></content:encoded>
+<pubDate>Wed, 18 Sep 2024 00:00:00 -0400</pubDate>
+<pubDate>Wed, 18 Sep 2024 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>A Comprehensive Survey of Threshold Signatures: NIST Standards, Post-Quantum Cryptography, Exotic Techniques, and Real-World Applications</title>
+<link>https://arxiv.org/abs/2311.05514</link>
+<guid>https://arxiv.org/abs/2311.05514</guid>
+<content:encoded><![CDATA[
+<div> 关键词：阈值签名、分布式签名、后量子密码学、标准签名、安全多方计算
+
+总结:
+
+本文提供了一篇关于具有高级功能的阈值和分布式签名的全面系统综述。研究涵盖了传统和后量子密码学（PQC）环境下的阈值签名，以及定制设计和标准签名（如常规NIST和NIST-PQC）。文章深入探讨了各种签名家族中的通用（通过安全多方计算实现）和自定义阈值技术，同时考察了奇特签名、实际应用案例及其未来研究方向。该综述旨在为理解新兴去中心化下一代网络系统的安全性提供参考。
+
+本文首先概述了阈值数字签名的概念与重要性，指出它们在确保分布式系统安全方面的关键作用。接着，详细对比分析了传统和后量子密码学环境下不同类型的阈值签名方案，强调了其在不同应用场景下的适用性和优势。文中还特别关注了安全多方计算在构建高效、安全的阈值签名机制中的作用，以及如何利用这一技术优化签名过程，提高系统的整体安全性。
+
+此外，文章深入探讨了标准签名（如NIST和NIST-PQC）在现代网络安全体系中的角色，通过比较分析，揭示了它们在性能、安全性和实用性方面与其他签名方案的区别。同时，对于奇特签名的介绍，不仅展示了签名技术的多样性，也为未来的创新提供了灵感。
+
+最后，文章展望了未来研究的方向，包括如何结合最新技术（如区块链、零知识证明等）进一步提升签名机制的安全性和效率，以及在实际应用中面临的挑战与机遇。通过全面审视阈值和分布式签名的现状与未来，本文旨在为相关领域的研究人员和实践者提供有价值的见解和指导。 <div>
+arXiv:2311.05514v2 Announce Type: replace 
+Abstract: Threshold digital signatures enable a distributed execution of signature functionalities and will play a crucial role in the security of emerging decentralized next-generation networked systems and applications. In this paper, we provide a comprehensive and systematic survey of threshold and distributed signatures with advanced features. Our survey encompasses threshold signatures in conventional and post-quantum cryptography (PQC) settings and captures custom-design and standard signatures (e.g., conventional NIST and NIST-PQC). We examine both generic (via secure multi-party computation) and custom thresholding techniques for a myriad of signature families while investigating exotic signatures, real-life applications, and potential future research direction.
+]]></content:encoded>
+<pubDate>Wed, 18 Sep 2024 00:00:00 -0400</pubDate>
+<pubDate>Wed, 18 Sep 2024 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Privacy-Preserving Billing for Local Energy Markets</title>
+<link>https://arxiv.org/abs/2404.15886</link>
+<guid>https://arxiv.org/abs/2404.15886</guid>
+<content:encoded><![CDATA[
+<div> 关键词：隐私保护、本地能源市场、去中心化、信息论安全、多方计算
+
+<br><br>
+总结:本文提出了一种名为PBP-LEM的隐私保护计费协议，旨在为本地能源市场提供一种方法，以确保市场参与者能够从其投标中偏离的能源量进行联合计算，同时保持私密性并避免内部勾结的风险。该协议基于一个高效且具有信息论安全性的个体计费方案，作为构建基础。通过结合多方计算、内积功能加密和佩尔森承诺等技术，PBP-LEM确保了数据的机密性和准确性。文章还提出了三种不同隐私保护级别和性能的实现方式。经过验证，无论使用哪种最复杂或最简单的方法，该协议都能满足其安全性和隐私要求，并适用于实际部署。例如，对于4000名用户，最复杂的计算方法可在不到五分钟内完成计费计算，而最简单的方法只需0.18秒。 <div>
+arXiv:2404.15886v2 Announce Type: replace 
+Abstract: We propose a privacy-preserving billing protocol for local energy markets (PBP-LEM) that takes into account market participants' energy volume deviations from their bids. PBP-LEM enables a group of market entities to jointly compute participants' bills in a decentralized and privacy-preserving manner without sacrificing correctness. It also mitigates risks on individuals' privacy arising from any potential internal collusion. We first propose an efficient and privacy-preserving individual billing scheme, achieving information-theoretic security, which serves as a building block. PBP-LEM utilizes this scheme, along with other techniques such as multiparty computation, inner product functional encryption and Pedersen commitments to ensure data confidentiality and accuracy. Additionally, we present three approaches, resulting in different levels of privacy protection and performance. We prove that the protocol meets its security and privacy requirements and is feasible for deployment in real LEMs: bills can be computed in less than five minutes for 4,000 users using the most computationally intensive approach, and in just 0.18 seconds using the least intensive one.
+]]></content:encoded>
+<pubDate>Wed, 18 Sep 2024 00:00:00 -0400</pubDate>
+<pubDate>Wed, 18 Sep 2024 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Give and Take: An End-To-End Investigation of Giveaway Scam Conversion Rates</title>
+<link>https://arxiv.org/abs/2405.09757</link>
+<guid>https://arxiv.org/abs/2405.09757</guid>
+<content:encoded><![CDATA[
+<div> 关键词：加密货币、诈骗、社交媒体、直播、区块链
+
+总结:
+本文聚焦于加密货币赠品诈骗的规模性运作，通过整合Twitter、YouTube直播、Twitch、着陆页面与区块链数据，揭示了诈骗的模式与影响。研究发现，每1000条诈骗推文和每10万次直播观看中就有1人成为受害者，而诈骗者在观测期内从数百名受害者中榨取了近462万美元。这揭示了诈骗活动如何利用社交媒体和直播平台进行传播，以及加密货币的匿名特性为诈骗提供了便利。此外，通过区块链数据的分析，可以追踪资金流动路径，为制定更有效的反诈骗策略提供依据。此研究强调了理解诈骗生态系统的重要性，以设计出更具针对性的干预措施。 <div>
+arXiv:2405.09757v2 Announce Type: replace 
+Abstract: Scams -- fraudulent schemes designed to swindle money from victims -- have existed for as long as recorded history. However, the Internet's combination of low communication cost, global reach, and functional anonymity has allowed scam volumes to reach new heights. Designing effective interventions requires first understanding the context: how scammers reach potential victims, the earnings they make, and any potential bottlenecks for durable interventions. In this short paper, we focus on these questions in the context of cryptocurrency giveaway scams, where victims are tricked into irreversibly transferring funds to scammers under the pretense of even greater returns. Combining data from Twitter, YouTube and Twitch livestreams, landing pages, and cryptocurrency blockchains, we measure how giveaway scams operate at scale. We find that 1 in 1000 scam tweets, and 4 in 100,000 livestream views, net a victim, and that scammers managed to extract nearly \$4.62 million from just hundreds of victims during our measurement window.
+]]></content:encoded>
+<pubDate>Wed, 18 Sep 2024 00:00:00 -0400</pubDate>
+<pubDate>Wed, 18 Sep 2024 00:00:00 -0400</pubDate>
+</item>
 
 <item>
 <title>Reputation-Driven Peer-to-Peer Live Streaming Architecture for Preventing Free-Riding</title>
