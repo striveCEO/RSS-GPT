@@ -5,13 +5,33 @@
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
 <item>
+<title>Compute, but Verify: Efficient Multiparty Computation over Authenticated Inputs</title>
+<link>https://eprint.iacr.org/2022/1648</link>
+<guid>https://eprint.iacr.org/2022/1648</guid>
+<content:encoded><![CDATA[
+<div> 关键词：安全多方计算、输入认证、编译器、通信开销、计算开销
+
+总结:本文提出了一个通用且高效的编译器，用于将基于线性秘密共享的诚实多数安全多方计算(MPC)协议转换为具有输入认证的协议。该编译器显著降低了计算成本和通信开销，与现有最佳解决方案相比，其通信开销仅为O(n log l)，而计算开销仅为每个参与者O(ℓ)组指数操作，而现有最佳解决方案的通信开销为O(n²)，计算开销为O(ℓn)。对于容忍度为t<n/3的腐败阈值，该编译器保留了底层MPC协议的更强的可识别中断安全性，这是现有任何认证MPC解决方案都无法实现的，无论腐败阈值如何。
+
+文章还涉及了几个独立的技术贡献，包括分布式知识证明的概念及其对多个常用数字签名方案和Pedersen承诺开证明等关系的具体实现。这些技术不仅支持了编译器的功能，而且对其他安全计算领域也有潜在的应用价值。 <div>
+Traditional notions of secure multiparty computation (MPC) allow mutually distrusting parties to jointly compute a function over their private inputs, but typically do not specify how these inputs are chosen. Motivated by real-world applications where corrupt inputs could adversely impact privacy and operational legitimacy, we consider a notion of authenticated MPC where the inputs are authenticated, e.g., signed using a digital signature by some certification authority. We propose a generic and efficient compiler that transforms any linear secret sharing based honest-majority MPC protocol into one with input authentication.
+
+Our compiler incurs significantly lower computational costs and competitive communication overheads when compared to the best existing solutions, while entirely avoiding the (potentially expensive) protocol-specific techniques and pre-processing requirements that are inherent to these solutions. For $n$-party honest majority MPC protocols with abort security where each party has $\ell$ inputs, our compiler incurs $O(n\log \ell)$ communication overall and a computational overhead of $O(\ell)$ group exponentiations per party (the corresponding overheads for the most efficient existing solution are $O(n^2)$ and $O(\ell n)$). Finally, for a corruption threshold $t<n/3$, our compiler preserves the stronger identifiable abort security of the underlying MPC protocol. No existing solution for authenticated MPC achieves this regardless of the corruption threshold.
+
+Along the way, we make several technical contributions that are of independent interest. This includes the notion of distributed proofs of knowledge and concrete realizations of the same for several relations of interest, such as proving knowledge of many popularly used digital signature schemes, and proving knowledge of opening of a Pedersen commitment.
+]]></content:encoded>
+<pubDate>Mon, 28 Nov 2022 06:38:29 +0000</pubDate>
+<pubDate>Mon, 28 Nov 2022 06:38:29 +0000</pubDate>
+</item>
+
+<item>
 <title>Attestation Proof of Association – provability that attestation keys are bound to the same hardware and person</title>
 <link>https://eprint.iacr.org/2024/1444</link>
 <guid>https://eprint.iacr.org/2024/1444</guid>
 <content:encoded><![CDATA[
 <div> 关键词：Wallet Trust Evidence (WTE), Proof of Association (PoA), European Digital Identity (EUDI) Wallet, cryptographic hardware, eIDAS Level of Assurance
 
-<br><br>
+<br /><br />
 总结:
 
 本文主要讨论了Wallet Trust Evidence（WTE）和与之相关的三个特定指令，旨在为欧洲数字身份(EUDI)钱包中的加密硬件提供指导。这些指令特别关注了证明关联（Proof of Association，PoA）的生成，允许EUDI钱包向第三方（发行者、依赖方）保证认证私钥不仅被绑定到符合标准的加密硬件上，还被绑定到相同的硬件设备上。这一举措使EUDI钱包能够达到eIDAS高安全等级的同时，也确保了隐私保护。
@@ -19,7 +39,6 @@
 文中提出的方法不仅适用于基于全球平台的安全元素（如电子身份证或嵌入式SIM卡）等所有预期的EUDI钱包架构，还考虑到了它们的便利实施和通用标准认证（Common Criteria）。这进一步细化并具体化了由NI-Scy联盟与eIDAS专家小组合作开发的wallet架构和参考框架中关于WTE/PoA逻辑的描述，但请注意，当前文档仅为讨论稿，尚未获得NI-Scy联盟、eIDAS专家小组或荷兰政府的认可。 <div>
 We propose a wallet provider issued attestation called Wallet Trust Evidence (WTE) and three related specific instructions for the European Digital Identity (EUDI) Wallet cryptographic hardware, most notably the generation of a Proof of Association (PoA). These allow the EUDI Wallet providing verifiable assurance to third parties (issuers, relying parties) that attestation private keys are not only bound to conformant cryptographic hardware but also that they are bound to the same such hardware. This allows the EUDI Wallet meeting eIDAS Level of Assurance ``high'' as well as operating in a privacy friendly manner. The instructions specified in this document cater for convenient implementation in all envisioned EUDI Wallet architectures including those based on a GlobalPlatform based Secure Element such as an eID-card or an embedded SIM (eSIM). By their simplicity, the three instructions also allow for convenient Common Criteria certification. This document is a further refinement and cryptographic concretization of the WTE/PoA logic specified in the wallet Architecture and Reference Framework (ARF), which is based on the EPIC-09 result developed in a cooperation between the NI-Scy consortium and the eIDAS expert group. However, the present draft document is meant for discussion only and not approved by the NI-Scy consortium, the eIDAS expert group or Dutch government.
 ]]></content:encoded>
-<pubDate>Mon, 16 Sep 2024 11:40:16 +0000</pubDate>
 <pubDate>Mon, 16 Sep 2024 11:40:16 +0000</pubDate>
 </item>
 <item>
@@ -38,7 +57,6 @@ We propose a wallet provider issued attestation called Wallet Trust Evidence (WT
 The succinct non-interactive argument of knowledge (SNARK) technique has been extensively utilized in blockchain systems to replace the costly on-chain computation with the verification of a succinct proof. However, most existing applications verify each proof independently, resulting in a heavy load on nodes and high transaction fees for users. Currently, the mainstream proof aggregation schemes are based on a generalized inner product argument, which has a logarithmic proof size and verification cost. To improve the efficiency of verifying multiple proofs, we introduce SnarkFold, a novel SNARK-proof aggregation scheme with constant verification time and proof size. SnarkFold is derived from incrementally verifiable computation (IVC) and is optimized further through the folding scheme. By folding multiple instance-proof pairs, SnarkFold defers the expensive SNARK verification (e.g., elliptic curve pairing) to the final step. Additionally, we propose a generic technique to enhance the verifier's efficiency by delegating instance aggregation tasks to the prover. The verifier only needs a simple preprocessing to check the validity of the delegation. We further introduce folding schemes for Groth16 and Plonk proofs. Experimental results demonstrate that SnarkFold offers significant advantages, with an aggregated Plonk proof size of just $0.5$ KB and the verification time of only $4.5$ ms for aggregating 4096 Plonk proofs.
 ]]></content:encoded>
 <pubDate>Fri, 22 Dec 2023 15:36:21 +0000</pubDate>
-<pubDate>Fri, 22 Dec 2023 15:36:21 +0000</pubDate>
 </item>
 <item>
 <title>Traffic-aware Merkle Trees for Shortening Blockchain Transaction Proofs</title>
@@ -50,7 +68,6 @@ The succinct non-interactive argument of knowledge (SNARK) technique has been ex
 总结:本文主要研究了如何通过优化Merkle树结构和算法，以降低区块链网络中交易处理过程中的通信成本。通过分析典型交易特征，特别是多个账户共同参与的交易场景，作者提出了基于账户分布的通信成本下限理论。接着，他们设计了一套考虑流量模式的算法，旨在显著减少通信成本，该算法灵感来源于霍夫曼编码、分区与权重平衡等编码方法。此外，文章还扩展了方法以适应智能合约交易的复杂性，这些交易可能涉及任意数量的账户。为了验证方法的有效性，作者使用了真实区块链数据（以太坊网络）进行实验，结果显示对于支付交易和智能合约交易，该方法均能实现成本节省。 <div>
 Merkle trees play a crucial role in blockchain networks in organizing network state. They allow proving a particular value of an entry in the state to a node that maintains only the root of the Merkle trees, a hash-based signature computed over the data in a hierarchical manner. Verification of particular state entries is crucial in reaching a consensus on the execution of a block where state information is required in the processing of its transactions. For instance, a payment transaction should be based on the balance of the two involved accounts. The proof length affects the network communication and is typically logarithmic in the state size. In this paper, we take advantage of typical transaction characteristics for better organizing Merkle trees to improve blockchain network performance. We focus on the common transaction processing where Merkle proofs are jointly provided for multiple accounts. We first provide lower bounds for the communication cost that are based on the distribution of accounts involved in the transactions. We then describe algorithms that consider traffic patterns for significantly reducing it. The algorithms are inspired by various coding methods such as Huffman coding, partition and weight balancing. We also generalize our approach towards the encoding of smart contract transactions that involve an arbitrary number of accounts. Likewise, we rely on real blockchain data to show the savings allowed by our approach. The experimental evaluation is based on transactions from the Ethereum network and demonstrates cost reduction for both payment transactions and smart contract transactions.
 ]]></content:encoded>
-<pubDate>Tue, 17 Sep 2024 15:17:44 +0000</pubDate>
 <pubDate>Tue, 17 Sep 2024 15:17:44 +0000</pubDate>
 </item>
 <item>
@@ -81,7 +98,6 @@ Towards this our main construction is a novel PSS protocol for “strongly regul
 Our protocols are concretely efficient, has a simple structure, covers the broad class of functions with small-width, read-once (or read-a-few-times) branching programs, and hence may be of practical interest when 1-privacy is considered adequate. Also, as a consequence of our general result for SRBPs, we obtain an improvement over the protocol of Couteau and Ros ́en for $\mathsf{AND}$ in certain cases — not in terms of the number of bits of randomness, but in terms of a simpler protocol structure (sequential, stateless).
 ]]></content:encoded>
 <pubDate>Tue, 17 Sep 2024 08:22:52 +0000</pubDate>
-<pubDate>Tue, 17 Sep 2024 08:22:52 +0000</pubDate>
 </item>
 <item>
 <title>Another Walk for Monchi</title>
@@ -104,7 +120,6 @@ Our protocols are concretely efficient, has a simple structure, covers the broad
 Monchi is a new protocol aimed at privacy-preserving biometric identification. It begins with scores computation in the encrypted domain thanks to homomorphic encryption and ends with comparisons of these scores to a given threshold with function secret sharing. We here study the integration in that context of scores computation techniques recently introduced by Bassit et al. that eliminate homomorphic multiplications by replacing them by lookup tables. First, we extend this lookup tables biometric recognition solution by adding the use of function secret sharing for the final comparison of scores. Then, we introduce a two-party computation of the scores with lookup tables which fits nicely together with the function secret sharing scores comparison. Our solutions accommodate well with the flight boarding use case introduced by Monchi.
 ]]></content:encoded>
 <pubDate>Mon, 16 Sep 2024 16:17:32 +0000</pubDate>
-<pubDate>Mon, 16 Sep 2024 16:17:32 +0000</pubDate>
 </item>
 <item>
 <title>FlashSwift: A Configurable and More Efficient Range Proof With Transparent Setup</title>
@@ -121,9 +136,7 @@ Bit-decomposition-based zero-knowledge range proofs in the discrete logarithm (D
 In this paper, we introduce, FlashSwift, a stronger DLOG-based logarithmic-sized alternative. It stands out for its greater shortness and significantly enhanced computational efficiency compared with the cutting-edge logarithmic-sized ones for the most common ranges where $N \leq 64$. It is developed by integrating the techniques from Flashproof and SwiftRange without using a trusted setup. The substantial efficiency gains stem from our dedicated efforts in overcoming the inherent incompatibility barrier between the two techniques. Specifically, when $N=64$, our proof achieves the same size as Bulletproof and exhibits 1.1$\times$ communication efficiency of SwiftRange. More importantly, compared with the two, it achieves $2.3\times$ and $1.65\times$ proving efficiency, and $3.2\times$ and $1.7\times$ verification efficiency, respectively. At the time of writing, our proof also creates two new records of the smallest proof sizes, 289 bytes and 417 bytes, for 8-bit and 16-bit ranges among all the bit-decomposition-based ones without requiring trusted setups. Moreover, to the best of our knowledge, it is the first {\em configurable} range proof that is adaptable to various scenarios with different specifications, where the configurability allows to trade off communication efficiency for computational efficiency. In addition, we offer a bonus feature: FlashSwift supports the aggregation of multiple single proofs for efficiency improvement. Finally, we provide comprehensive performance benchmarks against the state-of-the-art ones to demonstrate its practicality.
 ]]></content:encoded>
 <pubDate>Mon, 16 Sep 2024 08:17:02 +0000</pubDate>
-<pubDate>Mon, 16 Sep 2024 08:17:02 +0000</pubDate>
 </item>
-
 <item>
 <title>Zero-Knowledge Proof-of-Identity: Sybil-Resistant, Anonymous Authentication on Permissionless Blockchains and Incentive Compatible, Strictly Dominant Cryptocurrencies</title>
 <link>https://eprint.iacr.org/2019/546</link>
