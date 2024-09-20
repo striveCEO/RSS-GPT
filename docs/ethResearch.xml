@@ -5,6 +5,158 @@
 <link>https://ethresear.ch/latest</link>
 
 <item>
+<title>FOCIL Resource Design Considerations</title>
+<link>https://ethresear.ch/t/focil-resource-design-considerations/20457</link>
+<guid>https://ethresear.ch/t/focil-resource-design-considerations/20457</guid>
+<content:encoded><![CDATA[
+<div> 关键词：资源约束、Electra硬分叉、Inclusion List委员会、提案者、验证节点
+
+总结:
+
+本文探讨了在Electra硬分叉背景下，以太坊网络中Inclusion List（IL）机制的实施和资源管理。文章首先强调了在设计过程中需要对资源限制进行更深入考虑的原因，主要是因为某些细节在原始协议中并未明确说明。
+
+文章进一步阐述了在实施Inclusion List机制时涉及的关键参与者及其职责。这些参与者包括Inclusion List委员会成员、提案者、见证者以及节点。各参与者的任务范围从发布本地Inclusion List、下载和验证这些列表，到构建满足Inclusion List要求的区块。
+
+文章还详细描述了不同时间点的流程和参与者的行为。例如，在slot n-1的t=6时刻，Inclusion List委员会会发布其本地列表；slot n-1的t=9时刻，见证者和诚实验证节点锁定他们的本地视图；在slot n的t=0时刻，提案者发布包含满足IL要求的区块B；最后，在slot n的t=4时刻，见证者投票确认区块B的有效性。
+
+在分析阶段，文章识别出了潜在的资源密集型区域，特别是IL委员会的CPU负载、节点的带宽使用、提案者的CPU负载以及验证节点在区块验证过程中的CPU和内存消耗。文章指出，虽然在实施过程中存在一些挑战，如带宽压力、资源消耗增加和潜在的安全风险，但总体上，这些挑战可以通过优化设计和策略来缓解。文章最后提出了几个开放问题，涉及如何处理不满足评估功能的区块、处理Inclusion List的可能矛盾情况、提案者与不同头部网络交互的情况、交易无效化对区块构建的影响以及提案者观察到的IL委员会子网的策略选择。 <div>
+<p>Special thanks to Thomas, Julian, Barnabe, and Jihoonsong for reviewing it</p>
+<p>This document was motivated by our work on the <a href="https://github.com/terencechain/consensus-specs/pull/2" rel="noopener nofollow ugc">FOCIL consensus spec</a>, where we realized that the protocol required more thoughtful consideration around resource constraints since certain details were not explicitly specified in the <a href="https://ethresear.ch/t/fork-choice-enforced-inclusion-lists-focil-a-simple-committee-based-inclusion-list-proposal/19870">FOCIL Ethereum research post</a>.</p>
+<h1><a class="anchor" href="https://ethresear.ch#p-50013-prerequisite-1" name="p-50013-prerequisite-1"></a>Prerequisite</h1>
+<p>Before we begin, we assume the following setup to establish a clean baseline for our considerations:</p>
+<ul>
+<li>The setup is based on the Electra hard fork. It also makes sense to revisit this on top of EIP-7732 (ePBS) for comparison</li>
+<li>We are assuming solo block building and releasing, where the proposer is not running MEV-Boost. This is the first key component to get right, while the Builder API is a secondary consideration</li>
+<li>We are assuming a solo staker setup with typical compute, memory requirements, and bandwidth that you can easily follow on the Ethereum chain today</li>
+</ul>
+<h1><a class="anchor" href="https://ethresear.ch#p-50013-actors-2" name="p-50013-actors-2"></a>Actors</h1>
+<p>Before we proceed, we assume the following actors are part of the protocol and analyze their responsibilities:</p>
+<ul>
+<li>Inclusion List (IL) committee members, who are responsible for constraining the next slot proposer by its set of inclusion list transactions</li>
+<li>The proposer, who is responsible for proposing the next slot</li>
+<li>Attesters, who are attesting to the next slot for the head of the chain</li>
+<li>Nodes, which are verifying and following the chain. Proposers and attesters are part of nodes that have staked Ether</li>
+</ul>
+<h1><a class="anchor" href="https://ethresear.ch#p-50013-timeline-3" name="p-50013-timeline-3"></a>Timeline</h1>
+<p>We assume the following timeline in which the IL committee, proposer, and attesters perform some honest actions:</p>
+<ul>
+<li>Slot <code>n-1</code>, <code>t=6</code>: The IL committee publishes their local Inclusion Lists (ILs) over a global topic after learning the contents of block <code>n-1</code></li>
+<li>Slot <code>n-1</code>, <code>t=9</code>: Attesters and honest verifying nodes lock in their view of the local ILs</li>
+<li>Slot <code>n</code>, <code>t=0</code>: The block proposer for slot <code>n</code> releases block <code>B</code>, which includes the payload which should satisfy the IL requirement</li>
+<li>Slot <code>n</code>, <code>t=4</code>: Attesters for slot <code>n</code> vote on block <code>B</code>, verifying the IL aggregation by comparing it to their local IL views and confirming whether block <code>B</code> is “valid”
+<ul>
+<li>We overload the word “valid” when referring to a block, but it could mean “importable,” “canonical”, or something else. See the open question for further clarification</li>
+</ul>
+</li>
+</ul>
+<h2><a class="anchor" href="https://ethresear.ch#p-50013-interval-1-il-committee-releases-local-il-4" name="p-50013-interval-1-il-committee-releases-local-il-4"></a>Interval 1: IL Committee Releases Local IL</h2>
+<h3><a class="anchor" href="https://ethresear.ch#p-50013-actor-inclusion-list-committee-5" name="p-50013-actor-inclusion-list-committee-5"></a>Actor: Inclusion List Committee</h3>
+<p>IL committee members retrieve a list of IL transactions from EL client given the head (CL → EL call), then they sign the local IL (transactions + summaries) and release it to the gossip network.</p>
+<h4><a class="anchor" href="https://ethresear.ch#p-50013-resource-considerations-6" name="p-50013-resource-considerations-6"></a>Resource Considerations</h4>
+<ul>
+<li>Retrieving IL transactions from the EL mempool → CPU/MEM</li>
+<li>Signing the inclusion list → CPU</li>
+<li>Uploading the inclusion list to the gossip network → Bandwidth (Upload)</li>
+</ul>
+<h3><a class="anchor" href="https://ethresear.ch#p-50013-actor-nodes-including-attesters-7" name="p-50013-actor-nodes-including-attesters-7"></a>Actor: Nodes (including Attesters)</h3>
+<p>Nodes following the chain will download the IL, verify it for anti-DOS (not importing it to EL yet), and forward it to other peers. Nodes also import the IL into fork choice and track which ILs have been seen using an aggregate cache. Attesters and nodes following the chain should have the same view of the chain.</p>
+<h4><a class="anchor" href="https://ethresear.ch#p-50013-resource-considerations-8" name="p-50013-resource-considerations-8"></a>Resource Considerations</h4>
+<ul>
+<li>Downloading the IL → Bandwidth (Download)</li>
+<li>Forwarding the IL → Bandwidth (Upload)</li>
+<li>Verifying the IL for anti-DOS → CPU/MEM</li>
+<li>Caching seen and aggregate ILs → MEM</li>
+</ul>
+<h3><a class="anchor" href="https://ethresear.ch#p-50013-actor-proposer-9" name="p-50013-actor-proposer-9"></a>Actor: Proposer</h3>
+<p>The proposer for the next slot actively monitors the IL gossip network and, collects and aggregates the local ILs, then at IL aggregation cutoff (interval <span class="hashtag-raw">#2</span>) proposer updates the block-building process with a list of IL transactions to be included for its block. This requires a CL to EL call.</p>
+<h4><a class="anchor" href="https://ethresear.ch#p-50013-resource-considerations-10" name="p-50013-resource-considerations-10"></a>Resource Considerations</h4>
+<ul>
+<li>Inherits the same costs as nodes following the chain</li>
+</ul>
+<h4><a class="anchor" href="https://ethresear.ch#p-50013-proposer-edge-case-11" name="p-50013-proposer-edge-case-11"></a>Proposer Edge Case</h4>
+<p>If the next slot’s proposer observes a sufficient number of inclusion lists based on a parent hash it hasn’t seen, the proposer will need to manually request the missing beacon block, import the block, and build on top of that block.</p>
+<h3><a class="anchor" href="https://ethresear.ch#p-50013-conclusion-12" name="p-50013-conclusion-12"></a>Conclusion</h3>
+<p>Based on the above, we can identify potential resource-intensive areas and narrow down on them:</p>
+<ul>
+<li><strong>IL Committee’s CPU impact</strong>: IL transaction retrieval from EL &amp; signing: while there are resource demands here, this is presumed to be relatively inexpensive and not a major concern.</li>
+<li><strong>Nodes bandwidth impact</strong>: Nodes downloading and uploading ILs may use tons of bandwidth, especially research post currently states that the inclusion list size is flexible/unbounded. This introduces a potential DOS risk, as a malicious IL committee member could flood the network with a large number of transactions, even if they are invalid. Nodes would still gossip about the IL before they import the ILs. Anti-DoS measures need to be considered carefully.</li>
+</ul>
+<h2><a class="anchor" href="https://ethresear.ch#p-50013-interval-2-nodes-lock-their-view-proposer-import-il-transactions-13" name="p-50013-interval-2-nodes-lock-their-view-proposer-import-il-transactions-13"></a>Interval 2: Nodes lock their view, proposer import IL transactions</h2>
+<h3><a class="anchor" href="https://ethresear.ch#p-50013-actor-proposer-14" name="p-50013-actor-proposer-14"></a>Actor: Proposer</h3>
+<p>The proposer updates block building process with a list of inclusion list transactions. This is a CL → EL call.</p>
+<h4><a class="anchor" href="https://ethresear.ch#p-50013-resource-considerations-15" name="p-50013-resource-considerations-15"></a>Resource Considerations</h4>
+<ul>
+<li>Updates block building process with a list of inclusion list transactions → CPU/MEM</li>
+</ul>
+<h3><a class="anchor" href="https://ethresear.ch#p-50013-actor-nodes-including-attesters-16" name="p-50013-actor-nodes-including-attesters-16"></a>Actor: Nodes (including Attesters)</h3>
+<p>Lock inclusion list view. Stop accepting local inclusion list from this point.</p>
+<h4><a class="anchor" href="https://ethresear.ch#p-50013-resource-considerations-17" name="p-50013-resource-considerations-17"></a>Resource Considerations</h4>
+<ul>
+<li>Lock local inclusion list view → None</li>
+</ul>
+<h3><a class="anchor" href="https://ethresear.ch#p-50013-conclusion-18" name="p-50013-conclusion-18"></a>Conclusion</h3>
+<ul>
+<li><strong>Proposer’s CPU impact</strong>: Importing the IL transactions into the block-building process could disrupt the block building process, potentially straining the execution layer client’s CPU during transaction simulation. This may become complicated under account abstraction as transactions may invalidate each other. This should be further analyzed.</li>
+</ul>
+<h2><a class="anchor" href="https://ethresear.ch#p-50013-interval-3-proposer-releases-block-19" name="p-50013-interval-3-proposer-releases-block-19"></a>Interval 3: Proposer Releases Block</h2>
+<h3><a class="anchor" href="https://ethresear.ch#p-50013-actor-proposer-20" name="p-50013-actor-proposer-20"></a>Actor: Proposer</h3>
+<p>The proposer retrieves the execution payload from the EL client (CL → EL call), and releases it to the beacon block gossip network. Everyone else then verifies the block.</p>
+<h4><a class="anchor" href="https://ethresear.ch#p-50013-resource-considerations-21" name="p-50013-resource-considerations-21"></a>Resource Considerations</h4>
+<ul>
+<li>Retrieving the payload from the EL client → CPU/MEM</li>
+</ul>
+<h3><a class="anchor" href="https://ethresear.ch#p-50013-actor-nodes-22" name="p-50013-actor-nodes-22"></a>Actor: Nodes</h3>
+<p>Nodes receive the beacon block and verify it. The new verification steps include checking the inclusion list aggregate construction and confirming whether the inclusion list satisfies the evaluation function, which is be completed on the CL. The checking of IL conditions (whether they can be skipped due to conflicts or not) will be performed on the EL.</p>
+<h4><a class="anchor" href="https://ethresear.ch#p-50013-resource-considerations-23" name="p-50013-resource-considerations-23"></a>Resource Considerations</h4>
+<ul>
+<li>Verifying that the inclusion list is satisfied on CL → CPU</li>
+<li>Verifying inclusion list conditions on EL → CPU</li>
+</ul>
+<h3><a class="anchor" href="https://ethresear.ch#p-50013-conclusion-24" name="p-50013-conclusion-24"></a>Conclusion</h3>
+<p>The additional duties for the proposer do not seem to be a significant concern. The new verification steps for nodes—checking verifying that the inclusion list meets the satisfactory conditions—may introduce some additional CPU load, but it doesn’t appear to be a major issue.</p>
+<h2><a class="anchor" href="https://ethresear.ch#p-50013-interval-4-attester-committee-25" name="p-50013-interval-4-attester-committee-25"></a>Interval 4: Attester Committee</h2>
+<h3><a class="anchor" href="https://ethresear.ch#p-50013-actor-attester-26" name="p-50013-actor-attester-26"></a>Actor: Attester</h3>
+<p>The attester votes for the beacon block using LMD GHOST fork choice rule. Attesters will only vote for a beacon block that satisfies the inclusion list evaluation function, based on observations from Interval 1.</p>
+<h3><a class="anchor" href="https://ethresear.ch#p-50013-resource-considerations-27" name="p-50013-resource-considerations-27"></a>Resource Considerations</h3>
+<ul>
+<li>Attesters voting for a block that satisfies the inclusion list evaluation function → No additional cost</li>
+</ul>
+<h3><a class="anchor" href="https://ethresear.ch#p-50013-conclusion-28" name="p-50013-conclusion-28"></a>Conclusion</h3>
+<p>There is no difference than today.</p>
+<h1><a class="anchor" href="https://ethresear.ch#p-50013-resource-consideration-summary-29" name="p-50013-resource-consideration-summary-29"></a>Resource Consideration Summary</h1>
+<p>As seen above, the most significant resource concerns revolve around inclusion list upload, download, and the potential for spamming from a node’s perspective. Another key concern is the overhead on nodes for verifying and importing the inclusion list, as well as the proposer’s need to update its block-building process to satisfy the inclusion list. These aspects require careful consideration and design to ensure efficiency and security.</p>
+<h1><a class="anchor" href="https://ethresear.ch#p-50013-open-questions-30" name="p-50013-open-questions-30"></a>Open Questions</h1>
+<p>Based on the above, we outline several open questions that will influence how the specification is written:</p>
+<ol>
+<li>
+<p><strong>Block Not Satisfying the Evaluation Function</strong>: How should a block that fails the inclusion list evaluation function be handled, and what design considerations come into play for such conditions?</p>
+<ul>
+<li>Should it be treated similarly to blobs and <strong>cannot be imported</strong>?</li>
+<li>Should it <strong>not be filtered</strong> by fork choice?</li>
+<li>Should it <strong>not be valid</strong> in the state transition function?</li>
+</ul>
+</li>
+<li>
+<p><strong>Inclusion List Equivocations</strong>: If an inclusion list committee member sends different versions of the inclusion list to different nodes, and they are all propagated across the network, what are the consequences of this action? How could such behavior negatively impact the proposer building the next block?</p>
+</li>
+<li>
+<p><strong>Proposer Already Building on a Different Head</strong>: If the proposer builds on a different head than the one sent by the inclusion list committee, and thus needs to change its head view, what are the consequences of this action for block validity and proposer behavior?</p>
+</li>
+<li>
+<p><strong>Inclusion List Transactions Invalidations</strong>: Local inclusion list transactions can be invalidated in a few ways. Even if these transactions are invalidated, the block should still be able to satisfy the evaluation function. Transactions may be invalidated as multiple inclusion lists merge with each other or with transactions in the block. Besides typical nonce checking, account abstraction introduces new ways for transactions to be invalidated, as balance can be drained with a static nonce. How much additional simulation a block builder needs to perform due to transaction invalidation and how much this affects its CPU compute remains to be seen for both MEV-Boost actors and local builders.</p>
+</li>
+<li>
+<p><strong>Proposer’s Observation of the IL Committee Subnet</strong>: The proposer monitors the inclusion list committee subnet to know when it is ready to construct the aggregate. There are two design approaches here, and it’s worth considering them further. The first approach is a greedy proposer, where the proposer waits until <code>t=9</code>, gathers as many ILs as possible, sends them to the EL, and the EL updates its block. The second approach is a selective proposer, where the proposer waits until it has a sufficient inclusion list to satisfy the eval function, sends them to the EL, and can do this in less than <code>t=9s</code> or even earlier. The question is whether the second approach justifies the optimization to allow the proposer to release the inclusion list aggregate earlier. The second approach may only be well suited for an IL with its own dedicated gas limit.</p>
+</li>
+</ol>
+            <p><small>1 post - 1 participant</small></p>
+            <p><a href="https://ethresear.ch/t/focil-resource-design-considerations/20457">Read full topic</a></p>
+]]></content:encoded>
+<pubDate>Thu, 19 Sep 2024 14:30:43 +0000</pubDate>
+<pubDate>Thu, 19 Sep 2024 14:30:43 +0000</pubDate>
+</item>
+
+<item>
 <title>Trusted Advantage in Slot Auction ePBS</title>
 <link>https://ethresear.ch/t/trusted-advantage-in-slot-auction-epbs/20456</link>
 <guid>https://ethresear.ch/t/trusted-advantage-in-slot-auction-epbs/20456</guid>
@@ -53,9 +205,7 @@
             <p><a href="https://ethresear.ch/t/trusted-advantage-in-slot-auction-epbs/20456">Read full topic</a></p>
 ]]></content:encoded>
 <pubDate>Thu, 19 Sep 2024 11:37:12 +0000</pubDate>
-<pubDate>Thu, 19 Sep 2024 11:37:12 +0000</pubDate>
 </item>
-
 <item>
 <title>Decentralized Anti-MEV sequencer based on Order-Fairness Byzantine Fault-Tolerant (BFT) consensus</title>
 <link>https://ethresear.ch/t/decentralized-anti-mev-sequencer-based-on-order-fairness-byzantine-fault-tolerant-bft-consensus/20427</link>
