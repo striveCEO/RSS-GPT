@@ -4,6 +4,1552 @@
 <title>GitHub All Languages Weekly Trending</title>
 <link>http://mshibanami.github.io/GitHubTrendingRSS</link>
 
+<item>
+<title>xyflow/xyflow</title>
+<link>https://github.com/xyflow/xyflow</link>
+<guid>https://github.com/xyflow/xyflow</guid>
+<content:encoded><![CDATA[
+<div> 关键词：React Flow, Svelte Flow, 开源库, 节点式UI, 强大功能
+
+总结：
+
+React Flow 和 Svelte Flow 是两个功能强大的开源库，专门用于构建基于节点的用户界面。这两个库都提供现成的解决方案，并且具备高度的自定义性。它们分别支持使用 React 和 Svelte 进行开发。
+
+React Flow 使用了 `@xyflow/react` 包装器，而 Svelte Flow 则使用了 `@xyflow/svelte`。这些库提供了丰富的功能，如迷你地图、控制面板和背景样式等，使得开发者可以快速地构建复杂的节点式UI应用。
+
+对于商业用途，个人项目使用无需特别赞助，通过star项目、提交bug报告、分享项目截图等方式支持开发者即可。如果企业或组织使用并从中获利，则需要通过捐赠的方式进行支持，以维持项目的持续开发和维护。
+
+为了快速上手，开发者可以通过查看官方的“学习”部分来获取安装和基本使用方法。React Flow的基本示例展示了如何导入必要的组件，设置节点和边的状态，以及处理连接事件。Svelte Flow则提供了更为简洁的Svelte语法示例，同样涵盖了基本使用场景。
+
+最后，项目的发布遵循特定的流程，包括创建PR、合并更改、生成版本等步骤，确保了项目的稳定性和更新效率。React Flow和Svelte Flow背后有一支活跃的团队，负责项目的维护和发展。团队成员通过各种渠道与社区保持联系，欢迎反馈和合作提议。 <div>
+<p>React Flow | Svelte Flow - Powerful open source libraries for building node-based UIs with React (https://reactflow.dev) or Svelte (https://svelteflow.dev). Ready out-of-the-box and infinitely customizable.</p><hr /><p><img alt="xyflow-header" src="https://user-images.githubusercontent.com/2857535/279643999-ffda9f91-6b6d-447d-82be-fcbd6103edb6.svg#gh-light-mode-only" /> <img alt="xyflow-header-dark" src="https://user-images.githubusercontent.com/2857535/279644026-a01c231c-6c6e-4b41-96e0-a85c75c9acee.svg#gh-dark-mode-only" /></p> 
+<div align="center"> 
+ <p><img alt="GitHub License MIT" src="https://img.shields.io/github/license/wbkd/react-flow?color=%23ff0072" /> <img alt="npm downloads" src="https://img.shields.io/npm/dt/reactflow?color=%23FF0072&amp;label=React%20Flow%20downloads" /> <img alt="npm downloads" src="https://img.shields.io/npm/dt/@xyflow/svelte?color=%23FF3E00&amp;label=Svelte%20Flow%20downloads" /></p> 
+ <p>Powerful open source libraries for building node-based UIs with React or Svelte. Ready out-of-the-box and infinitely customizable.</p> 
+ <p><a href="https://reactflow.dev/">React Flow</a> · <a href="https://svelteflow.dev/">Svelte Flow</a> · <a href="https://reactflow.dev/pro">React Flow Pro</a> · <a href="https://discord.gg/Bqt6xrs">Discord</a></p> 
+</div> 
+<hr /> 
+<h2>The xyflow mono repo</h2> 
+<p>The xyflow repository is the home of four packages:</p> 
+<ul> 
+ <li>React Flow 12 <code>@xyflow/react</code> <a href="https://raw.githubusercontent.com/xyflow/xyflow/main/packages/react">packages/react</a></li> 
+ <li>React Flow 11 <code>reactflow</code> <a href="https://github.com/xyflow/xyflow/tree/v11">v11 branch</a></li> 
+ <li>Svelte Flow <code>@xyflow/svelte</code> <a href="https://raw.githubusercontent.com/xyflow/xyflow/main/packages/svelte">packages/svelte</a></li> 
+ <li>Shared helper library <code>@xyflow/system</code> <a href="https://raw.githubusercontent.com/xyflow/xyflow/main/packages/system">packages/system</a></li> 
+</ul> 
+<h2>Commercial usage</h2> 
+<p><strong>Are you using React Flow or Svelte Flow for a personal project?</strong> Great! No sponsorship needed, you can support us by reporting any bugs you find, sending us screenshots of your projects, and starring us on Github 🌟</p> 
+<p><strong>Are you using React Flow or Svelte Flow at your organization and making money from it?</strong> Awesome! We rely on your support to keep our libraries developed and maintained under an MIT License, just how we like it. For React Flow you can do that on the <a href="https://reactflow.dev/pro">React Flow Pro website</a> and for both of our libraries you can do it through <a href="https://github.com/sponsors/xyflow">Github Sponsors</a>.</p> 
+<h2>Getting started</h2> 
+<p>The best way to get started is to check out the <a href="https://reactflow.dev/learn">React Flow</a> or <a href="https://svelteflow.dev/learn">Svelte Flow</a> learn section. However if you want to get a sneak peek of how to install and use the libraries you can see it here:</p> 
+<details> 
+ <strong>React Flow</strong> basic usage 
+ <h3>Installation</h3> 
+ <pre><code class="language-sh">npm install @xyflow/react
+</code></pre> 
+ <h3>Basic usage</h3> 
+ <pre><code class="language-jsx">import { useCallback } from 'react';
+import {
+ReactFlow,
+MiniMap,
+Controls,
+Background,
+useNodesState,
+useEdgesState,
+addEdge,
+} from '@xyflow/react';
+
+import '@xyflow/react/dist/style.css';
+
+const initialNodes = [
+{ id: '1', position: { x: 0, y: 0 }, data: { label: '1' } },
+{ id: '2', position: { x: 0, y: 100 }, data: { label: '2' } },
+];
+
+const initialEdges = [{ id: 'e1-2', source: '1', target: '2' }];
+
+function Flow() {
+const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
+const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
+
+const onConnect = useCallback((params) =&gt; setEdges((eds) =&gt; addEdge(params, eds)), [setEdges]);
+
+return (
+  &lt;ReactFlow
+    nodes={nodes}
+    edges={edges}
+    onNodesChange={onNodesChange}
+    onEdgesChange={onEdgesChange}
+    onConnect={onConnect}
+  &gt;
+    &lt;MiniMap /&gt;
+    &lt;Controls /&gt;
+    &lt;Background /&gt;
+  &lt;/ReactFlow&gt;
+);
+}
+
+export default Flow;
+</code></pre> 
+</details> 
+<details> 
+ <strong>Svelte Flow</strong> basic usage 
+ <h3>Installation</h3> 
+ <pre><code class="language-sh">npm install @xyflow/svelte
+</code></pre> 
+ <h3>Basic usage</h3> 
+ <pre><code class="language-svelte">&lt;script lang="ts"&gt;
+import { writable } from 'svelte/store';
+import {
+  SvelteFlow,
+  Controls,
+  Background,
+  BackgroundVariant,
+  MiniMap,
+} from '@xyflow/svelte';
+
+import '@xyflow/svelte/dist/style.css'
+
+const nodes = writable([
+  {
+    id: '1',
+    type: 'input',
+    data: { label: 'Input Node' },
+    position: { x: 0, y: 0 }
+  },
+  {
+    id: '2',
+    type: 'custom',
+    data: { label: 'Node' },
+    position: { x: 0, y: 150 }
+  }
+]);
+
+const edges = writable([
+  {
+    id: '1-2',
+    type: 'default',
+    source: '1',
+    target: '2',
+    label: 'Edge Text'
+  }
+]);
+&lt;/script&gt;
+
+&lt;SvelteFlow
+{nodes}
+{edges}
+fitView
+on:nodeclick={(event) =&gt; console.log('on node click', event)}
+&gt;
+&lt;Controls /&gt;
+&lt;Background variant={BackgroundVariant.Dots} /&gt;
+&lt;MiniMap /&gt;
+&lt;/SvelteFlow&gt;
+</code></pre> 
+</details> 
+<h2>Releases</h2> 
+<p>For releasing packages we are using <a href="https://github.com/changesets/changesets">changesets</a> in combination with the <a href="https://github.com/changesets/action">changeset Github action</a>. The rough idea is:</p> 
+<ol> 
+ <li>create PRs for new features, updates and fixes (with a changeset if relevant for changelog)</li> 
+ <li>merge into main</li> 
+ <li>changset creates a PR that bumps all packages based on the changesets</li> 
+ <li>merge changeset PR if you want to release to Github and npm</li> 
+</ol> 
+<h2>The xyflow team</h2> 
+<p>React Flow and Svelte Flow are maintained by the team behind <a href="https://xyflow.com">xyflow</a>. If you need help or want to talk to us about a collaboration, reach out through our&nbsp;<a href="https://xyflow.com/contact">contact form</a>&nbsp;or by joining our <a href="https://discord.gg/Bqt6xrs">Discord Server</a>.</p> 
+<ul> 
+ <li>Christopher •&nbsp;<a href="https://twitter.com/chrtze">Twitter</a>&nbsp;•&nbsp;<a href="https://github.com/chrtze">Github</a></li> 
+ <li>Hayleigh •&nbsp;<a href="https://twitter.com/hayleighdotdev">Twitter</a>&nbsp;•&nbsp;<a href="https://github.com/hayleigh-dot-dev">Github</a></li> 
+ <li>John •&nbsp;<a href="https://johnrobbdesign.com/">Website</a>&nbsp;•&nbsp;<a href="https://mastodon.social/@johnrobbjr">Mastodon</a></li> 
+ <li>Moritz •&nbsp;<a href="https://twitter.com/moklick">Twitter</a>&nbsp;•&nbsp;<a href="https://github.com/moklick">Github</a></li> 
+ <li>Peter •&nbsp;<a href="https://github.com/peterkogo">Github</a></li> 
+</ul> 
+<h2>License</h2> 
+<p>React Flow and Svelte Flow are <a href="https://raw.githubusercontent.com/xyflow/xyflow/main/LICENSE">MIT licensed</a>.</p>
+]]></content:encoded>
+
+
+</item>
+<item>
+<title>apache/iotdb</title>
+<link>https://github.com/apache/iotdb</link>
+<guid>https://github.com/apache/iotdb</guid>
+<content:encoded><![CDATA[
+<div> 关键词：IoTDB, 数据管理, 时间序列数据, 开源生态, 智能网络设备
+
+总结：
+IoTDB（互联网事物数据库）是一个专门用于时间序列数据管理的系统，提供数据收集、存储和分析服务。它具有轻量级结构、高性能、易用性等特点，能够无缝集成到Hadoop和Spark等生态系统中，满足工业物联网领域大规模数据存储、高吞吐量数据输入和复杂数据分析的需求。
+
+IoTDB支持灵活部署策略，包括云平台和终端设备的一键安装工具与数据同步工具，以及针对智能网络设备复杂数据结构的高效组织方式。它具备高吞吐量读写能力，支持低功耗设备的强大连接数据访问，以及对时间序列数据的高效处理功能，如时间对齐、频域转换计算和丰富的时间维度聚合函数。
+
+此外，IoTDB提供了SQL-like语言、JDBC标准API和导入导出工具，易于上手。它与现代开源生态系统无缝集成，支持诸如Hadoop和Spark的数据分析，以及Grafana等可视化工具的使用。
+
+通过遵循快速入门指南，用户可以了解如何安装和配置IoTDB。此指南提供了从源代码或二进制文件安装的详细步骤，并强调了必要的环境配置，如设置最大打开文件数和somaxconn参数以避免常见的系统错误。同时，IoTDB支持CLI工具进行数据操作，包括创建数据库、定义时间序列、插入数据和查询数据的功能。最后，提供了停止服务器的方法以及CSV导入/导出工具的使用说明。 <div>
+<p>Apache IoTDB</p><hr /><p><a href="https://raw.githubusercontent.com/apache/iotdb/master/README.md">English</a> | <a href="https://raw.githubusercontent.com/apache/iotdb/master/README_ZH.md">中文</a></p> 
+<h1>IoTDB</h1> 
+<p><a href="https://github.com/apache/iotdb/actions/workflows/unit-test.yml"><img alt="Unit-Test" src="https://github.com/apache/iotdb/actions/workflows/unit-test.yml/badge.svg?sanitize=true" /></a> <a href="https://codecov.io/github/apache/iotdb"><img alt="codecov" src="https://codecov.io/github/apache/iotdb/graph/badge.svg?token=ejF3UGk0Nv" /></a> <a href="https://github.com/apache/iotdb/releases"><img alt="GitHub release" src="https://img.shields.io/github/release/apache/iotdb.svg?sanitize=true" /></a> <a href="https://www.apache.org/licenses/LICENSE-2.0.html"><img alt="License" src="https://img.shields.io/badge/license-Apache%202-4EB1BA.svg?sanitize=true" /></a> <img alt="" src="https://github-size-badge.herokuapp.com/apache/iotdb.svg?sanitize=true" /> <img alt="" src="https://img.shields.io/github/downloads/apache/iotdb/total.svg?sanitize=true" /> <img alt="" src="https://img.shields.io/badge/platform-win%20%7C%20macos%20%7C%20linux-yellow.svg?sanitize=true" /> <img alt="" src="https://img.shields.io/badge/java--language-1.8%20%7C%2011%20%7C%2017-blue.svg?sanitize=true" /> <a href="https://iotdb.apache.org/"><img alt="IoTDB Website" src="https://img.shields.io/website-up-down-green-red/https/shields.io.svg?label=iotdb-website" /></a> <a href="http://search.maven.org/#search%7Cgav%7C1%7Cg:%22org.apache.iotdb%22"><img alt="Maven Version" src="https://maven-badges.herokuapp.com/maven-central/org.apache.iotdb/iotdb-parent/badge.svg?sanitize=true" /></a> <a href="https://gitpod.io/#https://github.com/apache/iotdb"><img alt="Gitpod Ready-to-Code" src="https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod" /></a> <a href="https://join.slack.com/t/apacheiotdb/shared_invite/zt-qvso1nj8-7715TpySZtZqmyG5qXQwpg"><img alt="Slack Status" src="https://img.shields.io/badge/slack-join_chat-white.svg?logo=slack&amp;style=social" /></a></p> 
+<h1>Overview</h1> 
+<p>IoTDB (Internet of Things Database) is a data management system for time series data, which provides users with specific services, including data collection, storage and analysis. Due to its lightweight structure, high performance and usable features, together with its seamless integration with the Hadoop and Spark ecosystem, IoTDB meets the requirements of massive dataset storage, high throughput data input, and complex data analysis in the industrial IoT field.</p> 
+<p><a href="https://www.timecho.com/archives/shi-xu-shu-ju-ku-iotdb-gong-neng-xiang-jie-yu-xing-ye-ying-yong">Click for More Information</a></p> 
+<p>IoTDB depends on <a href="https://github.com/apache/tsfile">TsFile</a> which is a columnar storage file format designed for time series data. The branch <code>iotdb</code> of TsFile project is used to deploy SNAPSHOT version for IoTDB project.</p> 
+<h1>Main Features</h1> 
+<p>The main features of IoTDB are as follows:</p> 
+<ol> 
+ <li>Flexible deployment strategy. IoTDB provides users with a one-click installation tool on either the cloud platform or the terminal devices, and a data synchronization tool bridging the data on cloud platform and terminals.</li> 
+ <li>Low cost on hardware. IoTDB can reach a high compression ratio of disk storage.</li> 
+ <li>Efficient directory structure. IoTDB supports efficient organization for complex time series data structures from intelligent networking devices, organization for time series data from devices of the same type, and fuzzy searching strategy for massive and complex directory of time series data.</li> 
+ <li>High-throughput read and write. IoTDB supports millions of low-power devices' strong connection data access, high-speed data read and write for intelligent networking devices and mixed devices mentioned above.</li> 
+ <li>Rich query semantics. IoTDB supports time alignment for time series data across devices and measurements, computation in time series field (frequency domain transformation) and rich aggregation function support in time dimension.</li> 
+ <li>Easy to get started. IoTDB supports SQL-like language, JDBC standard API and import/export tools which are easy to use.</li> 
+ <li>Seamless integration with state-of-the-practice Open Source Ecosystem. IoTDB supports analysis ecosystems, such as Hadoop and Spark, as well as visualization tools, such as Grafana.</li> 
+</ol> 
+<p>For the latest information about IoTDB, please visit <a href="https://iotdb.apache.org/">IoTDB official website</a>. If you encounter any problems or identify any bugs while using IoTDB, please report an issue in <a href="https://issues.apache.org/jira/projects/IOTDB/issues">Jira</a>.</p> 
+<!-- TOC --> 
+<h2>Outline</h2> 
+<ul> 
+ <li><a href="https://raw.githubusercontent.com/apache/iotdb/master/#iotdb">IoTDB</a></li> 
+ <li><a href="https://raw.githubusercontent.com/apache/iotdb/master/#overview">Overview</a></li> 
+ <li><a href="https://raw.githubusercontent.com/apache/iotdb/master/#main-features">Main Features</a> 
+  <ul> 
+   <li><a href="https://raw.githubusercontent.com/apache/iotdb/master/#outline">Outline</a></li> 
+  </ul> </li> 
+ <li><a href="https://raw.githubusercontent.com/apache/iotdb/master/#quick-start">Quick Start</a> 
+  <ul> 
+   <li><a href="https://raw.githubusercontent.com/apache/iotdb/master/#prerequisites">Prerequisites</a></li> 
+   <li><a href="https://raw.githubusercontent.com/apache/iotdb/master/#installation">Installation</a> 
+    <ul> 
+     <li><a href="https://raw.githubusercontent.com/apache/iotdb/master/#build-from-source">Build from source</a></li> 
+     <li><a href="https://raw.githubusercontent.com/apache/iotdb/master/#configurations">Configurations</a></li> 
+    </ul> </li> 
+   <li><a href="https://raw.githubusercontent.com/apache/iotdb/master/#start">Start</a> 
+    <ul> 
+     <li><a href="https://raw.githubusercontent.com/apache/iotdb/master/#start-iotdb">Start IoTDB</a></li> 
+     <li><a href="https://raw.githubusercontent.com/apache/iotdb/master/#use-iotdb">Use IoTDB</a> 
+      <ul> 
+       <li><a href="https://raw.githubusercontent.com/apache/iotdb/master/#use-cli">Use Cli</a></li> 
+       <li><a href="https://raw.githubusercontent.com/apache/iotdb/master/#basic-commands-for-iotdb">Basic commands for IoTDB</a></li> 
+      </ul> </li> 
+     <li><a href="https://raw.githubusercontent.com/apache/iotdb/master/#stop-iotdb">Stop IoTDB</a></li> 
+    </ul> </li> 
+   <li><a href="https://raw.githubusercontent.com/apache/iotdb/master/#only-build-server">Only build server</a></li> 
+   <li><a href="https://raw.githubusercontent.com/apache/iotdb/master/#only-build-cli">Only build cli</a></li> 
+   <li><a href="https://raw.githubusercontent.com/apache/iotdb/master/#usage-of-csv-import-and-export-tool">Usage of CSV Import and Export Tool</a></li> 
+  </ul> </li> 
+</ul> 
+<!-- /TOC --> 
+<h1>Quick Start</h1> 
+<p>This short guide will walk you through the basic process of using IoTDB. For a more detailed introduction, please visit our website's <a href="https://iotdb.apache.org/UserGuide/Master/QuickStart/QuickStart.html">User Guide</a>.</p> 
+<h2>Prerequisites</h2> 
+<p>To use IoTDB, you need to have:</p> 
+<ol> 
+ <li>Java &gt;= 1.8 (1.8, 11 to 17 are verified. Please make sure the environment path has been set accordingly).</li> 
+ <li>Maven &gt;= 3.6 (If you want to compile and install IoTDB from source code).</li> 
+ <li>Set the max open files num as 65535 to avoid the "too many open files" error.</li> 
+ <li>(Optional) Set the somaxconn as 65535 to avoid "connection reset" error when the system is under high load. <pre><code># Linux
+&gt; sudo sysctl -w net.core.somaxconn=65535
+
+# FreeBSD or Darwin
+&gt; sudo sysctl -w kern.ipc.somaxconn=65535
+</code></pre> </li> 
+</ol> 
+<h3>Linux</h3> 
+<p>(This guide is based on an installation of Ubuntu 22.04.)</p> 
+<h4>Git</h4> 
+<p>Make sure <code>Git</code> is installed, if it's missing, simply install it via:</p> 
+<pre><code>sudo apt install git
+</code></pre> 
+<h4>Java</h4> 
+<p>Make sure <code>Java</code> is installed, if it's missing, simply install it via:</p> 
+<pre><code>sudo apt install default-jdk
+</code></pre> 
+<h4>Flex</h4> 
+<pre><code>sudo apt install flex
+</code></pre> 
+<h4>Bison</h4> 
+<pre><code>sudo apt install bison
+</code></pre> 
+<h4>Boost</h4> 
+<pre><code>sudo apt install libboost-all-dev
+</code></pre> 
+<h4>OpenSSL header files</h4> 
+<p>Usually OpenSSL is already installed, however it's missing the header files we need to compile. So ensure these are installed:</p> 
+<pre><code>sudo apt install libssl-dev
+</code></pre> 
+<h3>Mac OS</h3> 
+<h4>Git</h4> 
+<p>First ensure <code>git</code> works.</p> 
+<p>Usually on a new Mac, as soon as you simply type <code>git</code> in a <code>Terminal</code> window, a popup will come up and ask if you want to finish installing the Mac developer tools. Just say yes. As soon as this is finished, you are free to use <code>git</code>.</p> 
+<h4>Homebrew</h4> 
+<p>Then install <code>Homebrew</code> - If this hasn't been installed yet, as we are going to be installing everything using <code>Homebrew</code>.</p> 
+<pre><code>/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+</code></pre> 
+<h4>Java</h4> 
+<p>As soon as that's done install <code>Java</code>, if this hasn't been installed yet:</p> 
+<pre><code>brew install java
+</code></pre> 
+<p>Depending on your version of Homebrew, it will tell you to do one of the following (depending on the type of processor in your device).</p> 
+<p>Mainly on the Intel-based models:</p> 
+<pre><code>sudo ln -sfn /usr/local/opt/openjdk/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk.jdk
+</code></pre> 
+<p>Mainly on the ARM-based models:</p> 
+<pre><code>sudo ln -sfn /opt/homebrew/opt/openjdk/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk.jdk
+</code></pre> 
+<h4>CPP Prerequisites</h4> 
+<p>Building <code>Thrift</code> requires us to add two more dependencies to the picture.</p> 
+<p>This however is only needed when enabling the <code>with-cpp</code> profile:</p> 
+<pre><code>brew install boost
+brew install bison
+brew install openssl
+</code></pre> 
+<h3>Windows</h3> 
+<h4>Chocolatey</h4> 
+<p>Then install <code>Chocolatey</code> - If this hasn't been installed yet, as we are going to be installing everything using <code>Chocolatey</code>.</p> 
+<p><a href="https://chocolatey.org/install">https://chocolatey.org/install</a></p> 
+<h4>Git</h4> 
+<pre><code>choco install git.install
+</code></pre> 
+<h4>Java</h4> 
+<pre><code>choco install openjdk
+</code></pre> 
+<h4>Visual Studio 19 2022</h4> 
+<pre><code>choco install visualstudio2022community
+choco install visualstudio2022buildtools
+choco install visualstudio2022-workload-nativedesktop
+</code></pre> 
+<h4>Flex / Bison</h4> 
+<pre><code>choco install winflexbison
+</code></pre> 
+<h4>Boost</h4> 
+<pre><code>choco install boost-msvc-14.2
+</code></pre> 
+<h4>OpenSSL</h4> 
+<pre><code>choco install openssl
+</code></pre> 
+<h2>Installation</h2> 
+<p>IoTDB provides three installation methods, you can refer to the following suggestions, choose the one fits you best:</p> 
+<ul> 
+ <li>Installation from source code. If you need to modify the code yourself, you can use this method.</li> 
+ <li>Installation from binary files. Download the binary files from the official website. This is the recommended method, in which you will get a binary released package which is out-of-the-box.</li> 
+ <li>Using Docker：The path to the dockerfile is <a href="https://github.com/apache/iotdb/tree/master/docker/src/main">here</a>.</li> 
+</ul> 
+<p>Here in the Quick Start, we give a brief introduction of using source code to install IoTDB. For further information, please refer to <a href="https://iotdb.apache.org/UserGuide/Master/QuickStart/QuickStart.html">User Guide</a>.</p> 
+<h2>Build from source</h2> 
+<h3>Prepare Thrift compiler</h3> 
+<p>Skip this chapter if you are using Windows.</p> 
+<p>As we use Thrift for our RPC module (communication and protocol definition), we involve Thrift during the compilation, so Thrift compiler 0.13.0 (or higher) is required to generate Thrift Java code. Thrift officially provides binary compiler for Windows, but unfortunately, they do not provide that for Unix OSs.</p> 
+<p>If you have permission to install new software, use <code>apt install</code> or <code>yum install</code> or <code>brew install</code> to install the Thrift compiler. (If you already have installed the thrift compiler, skip this step.) Then, you may add the following parameter when running Maven: <code>-Dthrift.download-url=http://apache.org/licenses/LICENSE-2.0.txt -Dthrift.exec.absolute.path=&lt;YOUR LOCAL THRIFT BINARY FILE&gt;</code>.</p> 
+<p>If not, then you have to compile the thrift compiler, and it requires you install a boost library first. Therefore, we compiled a Unix compiler ourselves and put it onto GitHub, and with the help of a maven plugin, it will be downloaded automatically during compilation. This compiler works fine with gcc8 or later, Ubuntu MacOS, and CentOS, but previous versions and other OSs are not guaranteed.</p> 
+<p>If you can not download the thrift compiler automatically because of a network problem, you can download it by yourself, and then either: rename your thrift file to <code>{project_root}\thrift\target\tools\thrift_0.12.0_0.13.0_linux.exe</code>; or, add Maven commands: <code>-Dthrift.download-url=http://apache.org/licenses/LICENSE-2.0.txt -Dthrift.exec.absolute.path=&lt;YOUR LOCAL THRIFT BINARY FILE&gt;</code>.</p> 
+<h3>Compile IoTDB</h3> 
+<p>You can download the source code from:</p> 
+<pre><code>git clone https://github.com/apache/iotdb.git
+</code></pre> 
+<p>The default dev branch is the master branch, if you want to use a released version x.x.x:</p> 
+<pre><code>git checkout vx.x.x
+</code></pre> 
+<p>Or checkout to the branch of a big version, e.g., the branch of 1.0 is rel/1.0.</p> 
+<pre><code>git checkout rel/x.x
+</code></pre> 
+<h3>Build IoTDB from source</h3> 
+<p>Under the root path of iotdb:</p> 
+<pre><code>&gt; mvn clean package -pl distribution -am -DskipTests
+</code></pre> 
+<p>After being built, the IoTDB distribution is located at the folder: "distribution/target".</p> 
+<h3>Only build cli</h3> 
+<p>Under the iotdb/iotdb-client path:</p> 
+<pre><code>&gt; mvn clean package -pl cli -am -DskipTests
+</code></pre> 
+<p>After being built, the IoTDB cli is located at the folder "cli/target".</p> 
+<h3>Build Others</h3> 
+<p>Use <code>-P with-cpp</code> for compiling the cpp client. (For more details, read client-cpp's Readme file.)</p> 
+<p><strong>NOTE: Directories "<code>thrift/target/generated-sources/thrift</code>", "<code>thrift-sync/target/generated-sources/thrift</code>", "<code>thrift-cluster/target/generated-sources/thrift</code>", "<code>thrift-influxdb/target/generated-sources/thrift</code>" and "<code>antlr/target/generated-sources/antlr4</code>" need to be added to sources roots to avoid compilation errors in the IDE.</strong></p> 
+<p><strong>In IDEA, you just need to right click on the root project name and choose "<code>Maven-&gt;Reload Project</code>" after you run <code>mvn package</code> successfully.</strong></p> 
+<h3>Configurations</h3> 
+<p>Configuration files are under the "conf" folder.</p> 
+<ul> 
+ <li>environment config module (<code>datanode-env.bat</code>, <code>datanode-env.sh</code>),</li> 
+ <li>system config module (<code>iotdb-datanode.properties</code>)</li> 
+ <li>log config module (<code>logback.xml</code>).</li> 
+</ul> 
+<p>For more information, please see <a href="https://iotdb.apache.org/UserGuide/Master/Reference/DataNode-Config-Manual.html">Config Manual</a>.</p> 
+<h2>Start</h2> 
+<p>You can go through the following steps to test the installation. If there is no error returned after execution, the installation is completed.</p> 
+<h3>Start IoTDB</h3> 
+<p>Users can start 1C1D IoTDB by the start-standalone script under the sbin folder.</p> 
+<pre><code># Unix/OS X
+&gt; sbin/start-standalone.sh
+
+# Windows
+&gt; sbin\start-standalone.bat
+</code></pre> 
+<h3>Use IoTDB</h3> 
+<h4>Use Cli</h4> 
+<p>IoTDB offers different ways to interact with server, here we introduce the basic steps of using Cli tool to insert and query data.</p> 
+<p>After installing IoTDB, there is a default user 'root', its default password is also 'root'. Users can use this default user to login Cli to use IoTDB. The start-up script of Cli is the start-cli script in the folder sbin. When executing the script, user should assign IP, PORT, USER_NAME and PASSWORD. The default parameters are "-h 127.0.0.1 -p 6667 -u root -pw -root".</p> 
+<p>Here is the command for starting the Cli:</p> 
+<pre><code># Unix/OS X
+&gt; sbin/start-cli.sh -h 127.0.0.1 -p 6667 -u root -pw root
+
+# Windows
+&gt; sbin\start-cli.bat -h 127.0.0.1 -p 6667 -u root -pw root
+</code></pre> 
+<p>The command line cli is interactive, so you should see the welcome logo and statements if everything is ready:</p> 
+<pre><code> _____       _________  ______   ______
+|_   _|     |  _   _  ||_   _ `.|_   _ \
+  | |   .--.|_/ | | \_|  | | `. \ | |_) |
+  | | / .'`\ \  | |      | |  | | |  __'.
+ _| |_| \__. | _| |_    _| |_.' /_| |__) |
+|_____|'.__.' |_____|  |______.'|_______/  version x.x.x
+
+
+IoTDB&gt; login successfully
+IoTDB&gt;
+</code></pre> 
+<h4>Basic commands for IoTDB</h4> 
+<p>Now, let us introduce the way of creating timeseries, inserting data and querying data.</p> 
+<p>The data in IoTDB is organized as timeseries. Each timeseries includes multiple data–time pairs, and is owned by a database. Before defining a timeseries, we should define a database using CREATE DATABASE first, and here is an example:</p> 
+<pre><code>IoTDB&gt; CREATE DATABASE root.ln
+</code></pre> 
+<p>We can also use SHOW DATABASES to check the database being created:</p> 
+<pre><code>IoTDB&gt; SHOW DATABASES
++-------------+
+|     Database|
++-------------+
+|      root.ln|
++-------------+
+Total line number = 1
+</code></pre> 
+<p>After the database is set, we can use CREATE TIMESERIES to create a new timeseries. When creating a timeseries, we should define its data type and the encoding scheme. Here we create two timeseries:</p> 
+<pre><code>IoTDB&gt; CREATE TIMESERIES root.ln.wf01.wt01.status WITH DATATYPE=BOOLEAN, ENCODING=PLAIN
+IoTDB&gt; CREATE TIMESERIES root.ln.wf01.wt01.temperature WITH DATATYPE=FLOAT, ENCODING=RLE
+</code></pre> 
+<p>In order to query the specific timeseries, we can use SHOW TIMESERIES 
+ 
+  . 
+  
+    represent the location of the timeseries. The default value is "null", which queries all the timeseries in the system (the same as using "SHOW TIMESERIES root"). Here are some examples:
+  
+ </p> 
+<ol> 
+ <li>Querying all timeseries in the system:</li> 
+</ol> 
+<pre><code>IoTDB&gt; SHOW TIMESERIES
++-----------------------------+-----+-------------+--------+--------+-----------+----+----------+
+|                   Timeseries|Alias|Database|DataType|Encoding|Compression|Tags|Attributes|
++-----------------------------+-----+-------------+--------+--------+-----------+----+----------+
+|root.ln.wf01.wt01.temperature| null|      root.ln|   FLOAT|     RLE|     SNAPPY|null|      null|
+|     root.ln.wf01.wt01.status| null|      root.ln| BOOLEAN|   PLAIN|     SNAPPY|null|      null|
++-----------------------------+-----+-------------+--------+--------+-----------+----+----------+
+Total line number = 2
+</code></pre> 
+<ol start="2"> 
+ <li>Querying a specific timeseries (root.ln.wf01.wt01.status):</li> 
+</ol> 
+<pre><code>IoTDB&gt; SHOW TIMESERIES root.ln.wf01.wt01.status
++------------------------+-----+-------------+--------+--------+-----------+----+----------+
+|              timeseries|alias|database|dataType|encoding|compression|tags|attributes|
++------------------------+-----+-------------+--------+--------+-----------+----+----------+
+|root.ln.wf01.wt01.status| null|      root.ln| BOOLEAN|   PLAIN|     SNAPPY|null|      null|
++------------------------+-----+-------------+--------+--------+-----------+----+----------+
+Total line number = 1
+</code></pre> 
+<p>Inserting timeseries data is a basic operation of IoTDB, you can use the ‘INSERT’ command to finish this. Before insertion, you should assign the timestamp and the suffix path name:</p> 
+<pre><code>IoTDB&gt; INSERT INTO root.ln.wf01.wt01(timestamp,status) values(100,true);
+IoTDB&gt; INSERT INTO root.ln.wf01.wt01(timestamp,status,temperature) values(200,false,20.71)
+</code></pre> 
+<p>The data that you have just inserted will be displayed as follows:</p> 
+<pre><code>IoTDB&gt; SELECT status FROM root.ln.wf01.wt01
++------------------------+------------------------+
+|                    Time|root.ln.wf01.wt01.status|
++------------------------+------------------------+
+|1970-01-01T00:00:00.100Z|                    true|
+|1970-01-01T00:00:00.200Z|                   false|
++------------------------+------------------------+
+Total line number = 2
+</code></pre> 
+<p>You can also query several timeseries data using one SQL statement:</p> 
+<pre><code>IoTDB&gt; SELECT * FROM root.ln.wf01.wt01
++------------------------+-----------------------------+------------------------+
+|                    Time|root.ln.wf01.wt01.temperature|root.ln.wf01.wt01.status|
++------------------------+-----------------------------+------------------------+
+|1970-01-01T00:00:00.100Z|                         null|                    true|
+|1970-01-01T00:00:00.200Z|                        20.71|                   false|
++------------------------+-----------------------------+------------------------+
+Total line number = 2
+</code></pre> 
+<p>To change the time zone in Cli, you can use the following SQL:</p> 
+<pre><code>IoTDB&gt; SET time_zone=+08:00
+Time zone has set to +08:00
+IoTDB&gt; SHOW time_zone
+Current time zone: Asia/Shanghai
+</code></pre> 
+<p>Add then the query result will show using the new time zone.</p> 
+<pre><code>IoTDB&gt; SELECT * FROM root.ln.wf01.wt01
++-----------------------------+-----------------------------+------------------------+
+|                         Time|root.ln.wf01.wt01.temperature|root.ln.wf01.wt01.status|
++-----------------------------+-----------------------------+------------------------+
+|1970-01-01T08:00:00.100+08:00|                         null|                    true|
+|1970-01-01T08:00:00.200+08:00|                        20.71|                   false|
++-----------------------------+-----------------------------+------------------------+
+Total line number = 2
+</code></pre> 
+<p>The commands to exit the Cli are:</p> 
+<pre><code>IoTDB&gt; quit
+or
+IoTDB&gt; exit
+</code></pre> 
+<p>For more information about the commands supported by IoTDB SQL, please see <a href="https://iotdb.apache.org/UserGuide/Master/QuickStart/QuickStart.html">User Guide</a>.</p> 
+<h3>Stop IoTDB</h3> 
+<p>The server can be stopped with "ctrl-C" or the following script:</p> 
+<pre><code># Unix/OS X
+&gt; sbin/stop-standalone.sh
+
+# Windows
+&gt; sbin\stop-standalone.bat
+</code></pre> 
+<h1>The use of CSV Import and Export Tool</h1> 
+<p>see <a href="https://iotdb.apache.org/UserGuide/latest/Tools-System/Import-Export-Tool.html">The use of CSV Import and Export Tool</a></p> 
+<h1>Frequent Questions for Compiling</h1> 
+<p>see <a href="https://iotdb.apache.org/Development/ContributeGuide.html#_Frequent-Questions-when-Compiling-the-Source-Code">Frequent Questions when Compiling the Source Code</a></p> 
+<h1>Contact Us</h1> 
+<h3>QQ Group</h3> 
+<ul> 
+ <li>Apache IoTDB User Group: 659990460</li> 
+</ul> 
+<h3>Wechat Group</h3> 
+<ul> 
+ <li>Add friend: <code>tietouqiao</code> or <code>liutaohua001</code>, and then we'll invite you to the group.</li> 
+</ul> 
+<h3>Slack</h3> 
+<ul> 
+ <li><a href="https://join.slack.com/t/apacheiotdb/shared_invite/zt-qvso1nj8-7715TpySZtZqmyG5qXQwpg">Slack channel</a></li> 
+</ul> 
+<p>see <a href="https://github.com/apache/iotdb/issues/1995">Join the community</a> for more!</p>
+]]></content:encoded>
+
+
+</item>
+<item>
+<title>Future-House/paper-qa</title>
+<link>https://github.com/Future-House/paper-qa</link>
+<guid>https://github.com/Future-House/paper-qa</guid>
+<content:encoded><![CDATA[
+
+<p>High accuracy RAG for answering questions from scientific documents with citations</p><hr /><h1>PaperQA2</h1> 
+<p><a href="https://github.com/whitead/paper-qa"><img alt="GitHub" src="https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&amp;logo=github&amp;logoColor=white" /></a> <a href="https://github.com/whitead/paper-qa"><img alt="tests" src="https://github.com/whitead/paper-qa/actions/workflows/tests.yml/badge.svg?sanitize=true" /></a> <a href="https://badge.fury.io/py/paper-qa"><img alt="PyPI version" src="https://badge.fury.io/py/paper-qa.svg?sanitize=true" /></a></p> 
+<p>PaperQA2 is a package for doing high-accuracy retrieval augmented generation (RAG) on PDFs or text files, with a focus on the scientific literature. See our <a href="https://paper.wikicrow.ai">recent 2024 paper</a> to see examples of PaperQA2's superhuman performance in scientific tasks like question answering, summarization, and contradiction detection.</p> 
+<!--TOC--> 
+<ul> 
+ <li><a href="https://raw.githubusercontent.com/Future-House/paper-qa/main/#quickstart">Quickstart</a> 
+  <ul> 
+   <li><a href="https://raw.githubusercontent.com/Future-House/paper-qa/main/#example-output">Example Output</a></li> 
+  </ul> </li> 
+ <li><a href="https://raw.githubusercontent.com/Future-House/paper-qa/main/#what-is-paperqa2">What is PaperQA2</a> 
+  <ul> 
+   <li><a href="https://raw.githubusercontent.com/Future-House/paper-qa/main/#paperqa2-vs-paperqa">PaperQA2 vs PaperQA</a></li> 
+   <li><a href="https://raw.githubusercontent.com/Future-House/paper-qa/main/#whats-new-in-version-5-aka-paperqa2">What's New in Version 5 (aka PaperQA2)?</a></li> 
+   <li><a href="https://raw.githubusercontent.com/Future-House/paper-qa/main/#paperqa2-algorithm">PaperQA2 Algorithm</a></li> 
+  </ul> </li> 
+ <li><a href="https://raw.githubusercontent.com/Future-House/paper-qa/main/#installation">Installation</a> 
+  <ul> 
+   <li><a href="https://raw.githubusercontent.com/Future-House/paper-qa/main/#cli-usage">CLI Usage</a> 
+    <ul> 
+     <li><a href="https://raw.githubusercontent.com/Future-House/paper-qa/main/#bundled-settings">Bundled Settings</a></li> 
+    </ul> </li> 
+  </ul> </li> 
+ <li><a href="https://raw.githubusercontent.com/Future-House/paper-qa/main/#library-usage">Library Usage</a> 
+  <ul> 
+   <li><a href="https://raw.githubusercontent.com/Future-House/paper-qa/main/#ask-manually"><code>ask</code> manually</a></li> 
+   <li><a href="https://raw.githubusercontent.com/Future-House/paper-qa/main/#adding-documents-manually">Adding Documents Manually</a></li> 
+   <li><a href="https://raw.githubusercontent.com/Future-House/paper-qa/main/#async">Async</a></li> 
+   <li><a href="https://raw.githubusercontent.com/Future-House/paper-qa/main/#choosing-model">Choosing Model</a> 
+    <ul> 
+     <li><a href="https://raw.githubusercontent.com/Future-House/paper-qa/main/#locally-hosted">Locally Hosted</a></li> 
+    </ul> </li> 
+   <li><a href="https://raw.githubusercontent.com/Future-House/paper-qa/main/#changing-embedding-model">Changing Embedding Model</a></li> 
+   <li><a href="https://raw.githubusercontent.com/Future-House/paper-qa/main/#adjusting-number-of-sources">Adjusting number of sources</a></li> 
+   <li><a href="https://raw.githubusercontent.com/Future-House/paper-qa/main/#using-code-or-html">Using Code or HTML</a></li> 
+   <li><a href="https://raw.githubusercontent.com/Future-House/paper-qa/main/#using-external-dbvector-db-and-caching">Using External DB/Vector DB and Caching</a></li> 
+   <li><a href="https://raw.githubusercontent.com/Future-House/paper-qa/main/#reusing-index">Reusing Index</a></li> 
+   <li><a href="https://raw.githubusercontent.com/Future-House/paper-qa/main/#running-on-litqa-v2">Running on LitQA v2</a></li> 
+   <li><a href="https://raw.githubusercontent.com/Future-House/paper-qa/main/#using-clients-directly">Using Clients Directly</a></li> 
+  </ul> </li> 
+ <li><a href="https://raw.githubusercontent.com/Future-House/paper-qa/main/#where-do-i-get-papers">Where do I get papers?</a> 
+  <ul> 
+   <li><a href="https://raw.githubusercontent.com/Future-House/paper-qa/main/#zotero">Zotero</a></li> 
+   <li><a href="https://raw.githubusercontent.com/Future-House/paper-qa/main/#paper-scraper">Paper Scraper</a></li> 
+  </ul> </li> 
+ <li><a href="https://raw.githubusercontent.com/Future-House/paper-qa/main/#callbacks">Callbacks</a> 
+  <ul> 
+   <li><a href="https://raw.githubusercontent.com/Future-House/paper-qa/main/#caching-embeddings">Caching Embeddings</a></li> 
+  </ul> </li> 
+ <li><a href="https://raw.githubusercontent.com/Future-House/paper-qa/main/#customizing-prompts">Customizing Prompts</a> 
+  <ul> 
+   <li><a href="https://raw.githubusercontent.com/Future-House/paper-qa/main/#pre-and-post-prompts">Pre and Post Prompts</a></li> 
+  </ul> </li> 
+ <li><a href="https://raw.githubusercontent.com/Future-House/paper-qa/main/#faq">FAQ</a> 
+  <ul> 
+   <li><a href="https://raw.githubusercontent.com/Future-House/paper-qa/main/#how-come-i-get-different-results-than-your-papers">How come I get different results than your papers?</a></li> 
+   <li><a href="https://raw.githubusercontent.com/Future-House/paper-qa/main/#how-is-this-different-from-llamaindex-or-langchain">How is this different from LlamaIndex or LangChain?</a></li> 
+   <li><a href="https://raw.githubusercontent.com/Future-House/paper-qa/main/#can-i-save-or-load">Can I save or load?</a></li> 
+  </ul> </li> 
+ <li><a href="https://raw.githubusercontent.com/Future-House/paper-qa/main/#citation">Citation</a></li> 
+</ul> 
+<!--TOC--> 
+<h2>Quickstart</h2> 
+<p>In this example we take a folder of research paper PDFs, magically get their metadata - including citation counts with a retraction check, then parse and cache PDFs into a full-text search index, and finally answer the user question with an LLM agent.</p> 
+<pre><code class="language-bash">pip install paper-qa
+cd my_papers
+pqa ask 'How can carbon nanotubes be manufactured at a large scale?'
+</code></pre> 
+<h3>Example Output</h3> 
+<p>Question: Has anyone designed neural networks that compute with proteins or DNA?</p> 
+<blockquote> 
+ <p>The claim that neural networks have been designed to compute with DNA is supported by multiple sources. The work by Qian, Winfree, and Bruck demonstrates the use of DNA strand displacement cascades to construct neural network components, such as artificial neurons and associative memories, using a DNA-based system (Qian2011Neural pages 1-2, Qian2011Neural pages 15-16, Qian2011Neural pages 54-56). This research includes the implementation of a 3-bit XOR gate and a four-neuron Hopfield associative memory, showcasing the potential of DNA for neural network computation. Additionally, the application of deep learning techniques to genomics, which involves computing with DNA sequences, is well-documented. Studies have applied convolutional neural networks (CNNs) to predict genomic features such as transcription factor binding and DNA accessibility (Eraslan2019Deep pages 4-5, Eraslan2019Deep pages 5-6). These models leverage DNA sequences as input data, effectively using neural networks to compute with DNA. While the provided excerpts do not explicitly mention protein-based neural network computation, they do highlight the use of neural networks in tasks related to protein sequences, such as predicting DNA-protein binding (Zeng2016Convolutional pages 1-2). However, the primary focus remains on DNA-based computation.</p> 
+</blockquote> 
+<h2>What is PaperQA2</h2> 
+<p>PaperQA2 is engineered to be the best agentic RAG model for working with scientific papers. Here are some features:</p> 
+<ul> 
+ <li>A simple interface to get good answers with grounded responses containing in-text citations.</li> 
+ <li>State-of-the-art implementation including document metadata-awareness in embeddings and LLM-based re-ranking and contextual summarization (RCS).</li> 
+ <li>Support for agentic RAG, where a language agent can iteratively refine queries and answers.</li> 
+ <li>Automatic redundant fetching of paper metadata, including citation and journal quality data from multiple providers.</li> 
+ <li>A usable full-text search engine for a local repository of PDF/text files.</li> 
+ <li>A robust interface for customization, with default support for all <a href="https://docs.litellm.ai/docs/providers">LiteLLM</a> models.</li> 
+</ul> 
+<p>By default, it uses <a href="https://platform.openai.com/docs/guides/embeddings">OpenAI embeddings</a> and <a href="https://platform.openai.com/docs/models">models</a> with a Numpy vector DB to embed and search documents. However, you can easily use other closed-source, open-source models or embeddings (see details below).</p> 
+<p>PaperQA2 depends on some awesome libraries/APIs that make our repo possible. Here are some in no particular order:</p> 
+<ol> 
+ <li><a href="https://www.semanticscholar.org/">Semantic Scholar</a></li> 
+ <li><a href="https://www.crossref.org/">Crossref</a></li> 
+ <li><a href="https://unpaywall.org/">Unpaywall</a></li> 
+ <li><a href="https://docs.pydantic.dev/latest/">Pydantic</a></li> 
+ <li><a href="https://github.com/quickwit-oss/tantivy">tantivy</a></li> 
+ <li><a href="https://docs.litellm.ai/docs/">LiteLLM</a></li> 
+ <li><a href="https://pybtex.org/">pybtex</a></li> 
+ <li><a href="https://pymupdf.readthedocs.io/en/latest/">PyMuPDF</a></li> 
+</ol> 
+<h3>PaperQA2 vs PaperQA</h3> 
+<p>We've been working on hard on fundamental upgrades for a while and mostly followed <a href="https://semver.org/">SemVer</a>. meaning we've incremented the major version number on each breaking change. This brings us to the current major version number v5. So why call is the repo now called PaperQA2? We wanted to remark on the fact though that we've exceeded human performance on <a href="https://paper.wikicrow.ai">many important metrics</a>. So we arbitrarily call version 5 and onward PaperQA2, and versions before it as PaperQA1 to denote the significant change in performance. We recognize that we are challenged at naming and counting at FutureHouse, so we reserve the right at any time to arbitrarily change the name to PaperCrow.</p> 
+<h3>What's New in Version 5 (aka PaperQA2)?</h3> 
+<p>Version 5 added:</p> 
+<ul> 
+ <li>A CLI <code>pqa</code></li> 
+ <li>Agentic workflows invoking tools for paper search, gathering evidence, and generating an answer</li> 
+ <li>Removed much of the statefulness from the <code>Docs</code> object</li> 
+ <li>A migration to LiteLLM for compatibility with many LLM providers as well as centralized rate limits and cost tracking</li> 
+ <li>A bundled set of configurations (read <a href="https://raw.githubusercontent.com/Future-House/paper-qa/main/#bundled-settings">here</a>)) containing known-good hyperparameters</li> 
+</ul> 
+<p>Note that <code>Docs</code> objects pickled from prior versions of <code>PaperQA</code> are incompatible with version 5, and will need to be rebuilt. Also, our minimum Python version was increased to Python 3.11.</p> 
+<h3>PaperQA2 Algorithm</h3> 
+<p>To understand PaperQA2, let's start with the pieces of the underlying algorithm. The default workflow of PaperQA2 is as follows:</p> 
+<table> 
+ <thead> 
+  <tr> 
+   <th>Phase</th> 
+   <th>PaperQA2 Actions</th> 
+  </tr> 
+ </thead> 
+ <tbody> 
+  <tr> 
+   <td><strong>1. Paper Search</strong></td> 
+   <td>- Get candidate papers from LLM-generated keyword query</td> 
+  </tr> 
+  <tr> 
+   <td></td> 
+   <td>- Chunk, embed, and add candidate papers to state</td> 
+  </tr> 
+  <tr> 
+   <td><strong>2. Gather Evidence</strong></td> 
+   <td>- Embed query into vector</td> 
+  </tr> 
+  <tr> 
+   <td></td> 
+   <td>- Rank top <em>k</em> document chunks in current state</td> 
+  </tr> 
+  <tr> 
+   <td></td> 
+   <td>- Create scored summary of each chunk in the context of the current query</td> 
+  </tr> 
+  <tr> 
+   <td></td> 
+   <td>- Use LLM to re-score and select most relevant summaries</td> 
+  </tr> 
+  <tr> 
+   <td><strong>3. Generate Answer</strong></td> 
+   <td>- Put best summaries into prompt with context</td> 
+  </tr> 
+  <tr> 
+   <td></td> 
+   <td>- Generate answer with prompt</td> 
+  </tr> 
+ </tbody> 
+</table> 
+<p>The tools can be invoked in any order by a language agent. For example, an LLM agent might do a narrow and broad search, or using different phrasing for the gather evidence step from the generate answer step.</p> 
+<h2>Installation</h2> 
+<p>For a non-development setup, install PaperQA2 from <a href="https://pypi.org/project/paper-qa/">PyPI</a>:</p> 
+<pre><code class="language-bash">pip install paper-qa
+</code></pre> 
+<p>For development setup, please refer to the <a href="https://raw.githubusercontent.com/Future-House/paper-qa/main/CONTRIBUTING.md">CONTRIBUTING.md</a> file.</p> 
+<p>PaperQA2 uses an LLM to operate, so you'll need to either set an appropriate <a href="https://docs.litellm.ai/docs/providers">API key environment variable</a> (i.e. <code>export OPENAI_API_KEY=sk-...</code>) or set up an open source LLM server (i.e. using <a href="https://github.com/Mozilla-Ocho/llamafile">llamafile</a>. Any LiteLLM compatible model can be configured to use with PaperQA2.</p> 
+<p>If you need to index a large set of papers (100+), you will likely want an API key for both <a href="https://www.crossref.org/documentation/metadata-plus/metadata-plus-keys/">Crossref</a> and <a href="https://www.semanticscholar.org/product/api#api-key">Semantic Scholar</a>, which will allow you to avoid hitting public rate limits using these metadata services. Those can be exported as <code>CROSSREF_API_KEY</code> and <code>SEMANTIC_SCHOLAR_API_KEY</code> variables.</p> 
+<h3>CLI Usage</h3> 
+<p>The fastest way to test PaperQA2 is via the CLI. First navigate to a directory with some papers and use the <code>pqa</code> cli:</p> 
+<pre><code class="language-bash">$ pqa ask 'What manufacturing challenges are unique to bispecific antibodies?'
+</code></pre> 
+<p>You will see PaperQA2 index your local PDF files, gathering the necessary metadata for each of them (using <a href="https://www.crossref.org/">Crossref</a> and <a href="https://www.semanticscholar.org/">Semantic Scholar</a>), search over that index, then break the files into chunked evidence contexts, rank them, and ultimately generate an answer. The next time this directory is queried, your index will already be built (save for any differences detected, like new added papers), so it will skip the indexing and chunking steps.</p> 
+<p>All prior answers will be indexed and stored, you can view them by querying via the <code>search</code> subcommand, or access them yourself in your <code>PQA_HOME</code> directory, which defaults to <code>~/.pqa/</code>.</p> 
+<pre><code class="language-bash">$ pqa search -i 'answers' 'antibodies'
+</code></pre> 
+<p>PaperQA2 is highly configurable, when running from the command line, <code>pqa --help</code> shows all options and short descriptions. For example to run with a higher temperature:</p> 
+<pre><code class="language-bash">$ pqa --temperature 0.5 ask 'What manufacturing challenges are unique to bispecific antibodies?'
+</code></pre> 
+<p>You can view all settings with <code>pqa view</code>. Another useful thing is to change to other templated settings - for example <code>fast</code> is a setting that answers more quickly and you can see it with <code>pqa -s fast view</code></p> 
+<p>Maybe you have some new settings you want to save? You can do that with</p> 
+<pre><code class="language-bash">pqa -s my_new_settings --temperature 0.5 --llm foo-bar-5 save
+</code></pre> 
+<p>and then you can use it with</p> 
+<pre><code class="language-bash">pqa -s my_new_settings ask 'What manufacturing challenges are unique to bispecific antibodies?'
+</code></pre> 
+<p>If you run <code>pqa</code> with a command which requires a new indexing, say if you change the default chunk_size, a new index will automatically be created for you.</p> 
+<pre><code class="language-bash">pqa --parsing.chunk_size 5000 ask 'What manufacturing challenges are unique to bispecific antibodies?'
+</code></pre> 
+<p>You can also use <code>pqa</code> to do full-text search with use of LLMs view the search command. For example, let's save the index from a directory and give it a name:</p> 
+<pre><code class="language-bash">pqa -i nanomaterials index
+</code></pre> 
+<p>Now I can search for papers about thermoelectrics:</p> 
+<pre><code class="language-bash">pqa -i nanomaterials search thermoelectrics
+</code></pre> 
+<p>or I can use the normal ask</p> 
+<pre><code class="language-bash">pqa -i nanomaterials ask 'Are there nm scale features in thermoelectric materials?'
+</code></pre> 
+<p>Both the CLI and module have pre-configured settings based on prior performance and our publications, they can be invoked as follows:</p> 
+<pre><code class="language-bash">pqa --settings &lt;setting name&gt; ask 'Are there nm scale features in thermoelectric materials?'
+</code></pre> 
+<h4>Bundled Settings</h4> 
+<p>Inside <a href="https://raw.githubusercontent.com/Future-House/paper-qa/main/paperqa/configs"><code>paperqa/configs</code></a> we bundle known useful settings:</p> 
+<table> 
+ <thead> 
+  <tr> 
+   <th>Setting Name</th> 
+   <th>Description</th> 
+  </tr> 
+ </thead> 
+ <tbody> 
+  <tr> 
+   <td>high_quality</td> 
+   <td>Highly performant, relatively expensive (due to having <code>evidence_k</code> = 15) query using a <code>ToolSelector</code> agent.</td> 
+  </tr> 
+  <tr> 
+   <td>fast</td> 
+   <td>Setting to get answers cheaply and quickly.</td> 
+  </tr> 
+  <tr> 
+   <td>wikicrow</td> 
+   <td>Setting to emulate the Wikipedia article writing used in our WikiCrow publication.</td> 
+  </tr> 
+  <tr> 
+   <td>contracrow</td> 
+   <td>Setting to find contradictions in papers, your query should be a claim that needs to be flagged as a contradiction (or not).</td> 
+  </tr> 
+  <tr> 
+   <td>debug</td> 
+   <td>Setting useful solely for debugging, but not in any actual application beyond debugging.</td> 
+  </tr> 
+ </tbody> 
+</table> 
+<h2>Library Usage</h2> 
+<p>PaperQA2's full workflow can be accessed via Python directly:</p> 
+<pre><code class="language-python">from paperqa import Settings, ask
+
+answer = ask(
+    "What manufacturing challenges are unique to bispecific antibodies?",
+    settings=Settings(temperature=0.5, paper_directory="my_papers"),
+)
+</code></pre> 
+<p>Please see our <a href="https://raw.githubusercontent.com/Future-House/paper-qa/main/#installation">installation docs</a> for how to install the package from PyPI.</p> 
+<h3><code>ask</code> manually</h3> 
+<p>The answer object has the following attributes: <code>formatted_answer</code>, <code>answer</code> (answer alone), <code>question</code> , and <code>context</code> (the summaries of passages found for answer). <code>ask</code> will use the <code>SearchPapers</code> tool, which will query a local index of files, you can specify this location via the <code>Settings</code> object:</p> 
+<pre><code class="language-python">from paperqa import Settings, ask
+
+answer = ask(
+    "What manufacturing challenges are unique to bispecific antibodies?",
+    settings=Settings(temperature=0.5, paper_directory="my_papers"),
+)
+</code></pre> 
+<p><code>ask</code> is just a convenience wrapper around the real entrypoint, which can be accessed if you'd like to run concurrent asynchronous workloads:</p> 
+<pre><code class="language-python">from paperqa import Settings, agent_query, QueryRequest
+
+answer = await agent_query(
+    QueryRequest(
+        query="What manufacturing challenges are unique to bispecific antibodies?",
+        settings=Settings(temperature=0.5, paper_directory="my_papers"),
+    )
+)
+</code></pre> 
+<p>The default agent will use an LLM based agent, but you can also specify a <code>"fake"</code> agent to use a hard coded call path of search -&gt; gather evidence -&gt; answer to reduce token usage.</p> 
+<h3>Adding Documents Manually</h3> 
+<p>If you prefer fine grained control, and you wish to add objects to the docs object yourself (rather than using the search tool), then the previously existing <code>Docs</code> object interface can be used:</p> 
+<pre><code class="language-python">from paperqa import Docs, Settings
+
+# valid extensions include .pdf, .txt, and .html
+doc_paths = ("myfile.pdf", "myotherfile.pdf")
+
+docs = Docs()
+
+for doc in doc_paths:
+    docs.add(doc)
+
+settings = Settings()
+settings.llm = "claude-3-5-sonnet-20240620"
+settings.answer.answer_max_sources = 3
+
+answer = docs.query(
+    "What manufacturing challenges are unique to bispecific antibodies?",
+    settings=settings,
+)
+
+print(answer.formatted_answer)
+</code></pre> 
+<h3>Async</h3> 
+<p>PaperQA2 is written to be used asynchronously. The synchronous API is just a wrapper around the async. Here are the methods and their <code>async</code> equivalents:</p> 
+<table> 
+ <thead> 
+  <tr> 
+   <th>Sync</th> 
+   <th>Async</th> 
+  </tr> 
+ </thead> 
+ <tbody> 
+  <tr> 
+   <td><code>Docs.add</code></td> 
+   <td><code>Docs.aadd</code></td> 
+  </tr> 
+  <tr> 
+   <td><code>Docs.add_file</code></td> 
+   <td><code>Docs.aadd_file</code></td> 
+  </tr> 
+  <tr> 
+   <td><code>Docs.add_url</code></td> 
+   <td><code>Docs.aadd_url</code></td> 
+  </tr> 
+  <tr> 
+   <td><code>Docs.get_evidence</code></td> 
+   <td><code>Docs.aget_evidence</code></td> 
+  </tr> 
+  <tr> 
+   <td><code>Docs.query</code></td> 
+   <td><code>Docs.aquery</code></td> 
+  </tr> 
+ </tbody> 
+</table> 
+<p>The synchronous version just calls the async version in a loop. Most modern python environments support <code>async</code> natively (including Jupyter notebooks!). So you can do this in a Jupyter Notebook:</p> 
+<pre><code class="language-python">import asyncio
+from paperqa import Docs
+
+
+async def main() -&gt; None:
+    docs = Docs()
+    # valid extensions include .pdf, .txt, and .html
+    for doc in ("myfile.pdf", "myotherfile.pdf"):
+        await docs.aadd(doc)
+
+    answer = await docs.aquery(
+        "What manufacturing challenges are unique to bispecific antibodies?"
+    )
+    print(answer.formatted_answer)
+
+
+asyncio.run(main())
+</code></pre> 
+<h3>Choosing Model</h3> 
+<p>By default, it uses OpenAI models with <code>gpt-4o-2024-08-06</code> for both the re-ranking and summary step, the <code>summary_llm</code> setting, and for the answering step, the <code>llm</code> setting. You can adjust this easily:</p> 
+<pre><code class="language-python">from paperqa import Settings, ask
+
+answer = ask(
+    "What manufacturing challenges are unique to bispecific antibodies?",
+    settings=Settings(
+        llm="gpt-4o-mini", summary_llm="gpt-4o-mini", paper_directory="my_papers"
+    ),
+)
+</code></pre> 
+<p>You can use Anthropic or any other model supported by <code>litellm</code>:</p> 
+<pre><code class="language-python">from paperqa import Settings, ask
+
+answer = ask(
+    "What manufacturing challenges are unique to bispecific antibodies?",
+    settings=Settings(
+        llm="claude-3-5-sonnet-20240620", summary_llm="claude-3-5-sonnet-20240620"
+    ),
+)
+</code></pre> 
+<h4>Locally Hosted</h4> 
+<p>You can use llama.cpp to be the LLM. Note that you should be using relatively large models, because PaperQA2 requires following a lot of instructions. You won't get good performance with 7B models.</p> 
+<p>The easiest way to get set-up is to download a <a href="https://github.com/Mozilla-Ocho/llamafile">llama file</a> and execute it with <code>-cb -np 4 -a my-llm-model --embedding</code> which will enable continuous batching and embeddings.</p> 
+<pre><code class="language-python">from paperqa import Settings, ask
+
+local_llm_config = dict(
+    model_list=[
+        dict(
+            model_name="my_llm_model",
+            litellm_params=dict(
+                model="my-llm-model",
+                api_base="http://localhost:8080/v1",
+                api_key="sk-no-key-required",
+                temperature=0.1,
+                frequency_penalty=1.5,
+                max_tokens=512,
+            ),
+        )
+    ]
+)
+
+answer = ask(
+    "What manufacturing challenges are unique to bispecific antibodies?",
+    settings=Settings(
+        llm="my-llm-model",
+        llm_config=local_llm_config,
+        summary_llm="my-llm-model",
+        summary_llm_config=local_llm_config,
+    ),
+)
+</code></pre> 
+<h3>Changing Embedding Model</h3> 
+<p>PaperQA2 defaults to using OpenAI (<code>text-embedding-3-small</code>) embeddings, but has flexible options for both vector stores and embedding choices. The simplest way to change an embedding is via the <code>embedding</code> argument to the <code>Settings</code> object constructor:</p> 
+<pre><code class="language-python">from paperqa import Settings, ask
+
+answer = ask(
+    "What manufacturing challenges are unique to bispecific antibodies?",
+    settings=Settings(embedding="text-embedding-3-large"),
+)
+</code></pre> 
+<p><code>embedding</code> accepts any embedding model name supported by litellm. PaperQA2 also supports an embedding input of <code>"hybrid-&lt;model_name&gt;"</code> i.e. <code>"hybrid-text-embedding-3-small"</code> to use a hybrid sparse keyword (based on a token modulo embedding) and dense vector embedding, where any litellm model can be used in the dense model name. <code>"sparse"</code> can be used to use a sparse keyword embedding only.</p> 
+<p>Embedding models are used to create PaperQA2's index of the full-text embedding vectors (<code>texts_index</code> argument). The embedding model can be specified as a setting when you are adding new papers to the <code>Docs</code> object:</p> 
+<pre><code class="language-python">from paperqa import Docs, Settings
+
+docs = Docs()
+for doc in ("myfile.pdf", "myotherfile.pdf"):
+    docs.add(doc, settings=Settings(embedding="text-embedding-large-3"))
+</code></pre> 
+<p>Note that PaperQA2 uses Numpy as a dense vector store. Its design of using a keyword search initially reduces the number of chunks needed for each answer to a relatively small number &lt; 1k. Therefore, <code>NumpyVectorStore</code> is a good place to start, it's a simple in-memory store, without an index. However, if a larger-than-memory vector store is needed, we are currently lacking here.</p> 
+<p>The hybrid embeddings can be customized:</p> 
+<pre><code class="language-python">from paperqa import (
+    Docs,
+    HybridEmbeddingModel,
+    SparseEmbeddingModel,
+    LiteLLMEmbeddingModel,
+)
+
+
+model = HybridEmbeddingModel(
+    models=[LiteLLMEmbeddingModel(), SparseEmbeddingModel(ndim=1024)]
+)
+docs = Docs()
+for doc in ("myfile.pdf", "myotherfile.pdf"):
+    docs.add(doc, embedding_model=model)
+</code></pre> 
+<p>The sparse embedding (keyword) models default to having 256 dimensions, but this can be specified via the <code>ndim</code> argument.</p> 
+<h3>Adjusting number of sources</h3> 
+<p>You can adjust the numbers of sources (passages of text) to reduce token usage or add more context. <code>k</code> refers to the top k most relevant and diverse (may from different sources) passages. Each passage is sent to the LLM to summarize, or determine if it is irrelevant. After this step, a limit of <code>max_sources</code> is applied so that the final answer can fit into the LLM context window. Thus, <code>k</code> &gt; <code>max_sources</code> and <code>max_sources</code> is the number of sources used in the final answer.</p> 
+<pre><code class="language-python">from paperqa import Settings
+
+settings = Settings()
+settings.answer.answer_max_sources = 3
+settings.answer.k = 5
+
+docs.query(
+    "What manufacturing challenges are unique to bispecific antibodies?",
+    settings=settings,
+)
+</code></pre> 
+<h3>Using Code or HTML</h3> 
+<p>You do not need to use papers -- you can use code or raw HTML. Note that this tool is focused on answering questions, so it won't do well at writing code. One note is that the tool cannot infer citations from code, so you will need to provide them yourself.</p> 
+<pre><code class="language-python">import glob
+import os
+from paperqa import Docs
+
+source_files = glob.glob("**/*.js")
+
+docs = Docs()
+for f in source_files:
+    # this assumes the file names are unique in code
+    docs.add(f, citation="File " + os.path.name(f), docname=os.path.name(f))
+answer = docs.query("Where is the search bar in the header defined?")
+print(answer)
+</code></pre> 
+<h3>Using External DB/Vector DB and Caching</h3> 
+<p>You may want to cache parsed texts and embeddings in an external database or file. You can then build a Docs object from those directly:</p> 
+<pre><code class="language-python">from paperqa import Docs, Doc, Text
+
+docs = Docs()
+
+for ... in my_docs:
+    doc = Doc(docname=..., citation=..., dockey=..., citation=...)
+    texts = [Text(text=..., name=..., doc=doc) for ... in my_texts]
+    docs.add_texts(texts, doc)
+</code></pre> 
+<h3>Reusing Index</h3> 
+<p>The local search indexes are built based on a hash of the current <code>Settings</code> object. So make sure you properly specify the <code>paper_directory</code> to your <code>Settings</code> object. In general, it's advisable to:</p> 
+<ol> 
+ <li>Pre-build an index given a folder of papers (can take several minutes)</li> 
+ <li>Reuse the index to perform many queries</li> 
+</ol> 
+<pre><code class="language-python">import os
+
+from paperqa import Settings
+from paperqa.agents.main import agent_query
+from paperqa.agents.models import QueryRequest
+from paperqa.agents.search import get_directory_index
+
+
+async def amain(folder_of_papers: str | os.PathLike) -&gt; None:
+    settings = Settings(paper_directory=folder_of_papers)
+
+    # 1. Build the index. Note an index name is autogenerated when unspecified
+    built_index = await get_directory_index(settings=settings)
+    print(settings.get_index_name())  # Display the autogenerated index name
+    print(await built_index.index_files)  # Display the index contents
+
+    # 2. Use the settings as many times as you want with ask
+    answer_response_1 = await agent_query(
+        query=QueryRequest(
+            query="What is the best way to make a vaccine?", settings=settings
+        )
+    )
+    answer_response_2 = await agent_query(
+        query=QueryRequest(
+            query="What manufacturing challenges are unique to bispecific antibodies?",
+            settings=settings,
+        )
+    )
+</code></pre> 
+<h3>Running on LitQA v2</h3> 
+<p>In <a href="https://raw.githubusercontent.com/Future-House/paper-qa/main/paperqa/agents/task.py"><code>paperqa/agents/task.py</code></a>, you will find:</p> 
+<ol> 
+ <li><code>GradablePaperQAEnvironment</code>: an environment that can grade answers given an evaluation function.</li> 
+ <li><code>LitQAv2TaskDataset</code>: a task dataset designed to pull LitQA v2 from Hugging Face, and create one <code>GradablePaperQAEnvironment</code> per question</li> 
+</ol> 
+<p>Here is an example of how to use them:</p> 
+<pre><code class="language-python">import os
+
+from aviary.env import TaskDataset
+from ldp.agent import SimpleAgent
+from ldp.alg.callbacks import MeanMetricsCallback
+from ldp.alg.runners import Evaluator, EvaluatorConfig
+
+from paperqa import QueryRequest, Settings
+from paperqa.agents.task import TASK_DATASET_NAME
+
+
+async def evaluate(folder_of_litqa_v2_papers: str | os.PathLike) -&gt; None:
+    base_query = QueryRequest(
+        settings=Settings(paper_directory=folder_of_litqa_v2_papers)
+    )
+    dataset = TaskDataset.from_name(TASK_DATASET_NAME, base_query=base_query)
+    metrics_callback = MeanMetricsCallback(eval_dataset=dataset)
+
+    evaluator = Evaluator(
+        config=EvaluatorConfig(batch_size=3),
+        agent=SimpleAgent(),
+        dataset=dataset,
+        callbacks=[metrics_callback],
+    )
+    await evaluator.evaluate()
+
+    print(metrics_callback.eval_means)
+</code></pre> 
+<h3>Using Clients Directly</h3> 
+<p>One of the most powerful features of PaperQA2 is its ability to combine data from multiple metadata sources. For example, <a href="https://unpaywall.org/">Unpaywall</a> can provide open access status/direct links to PDFs, <a href="https://www.crossref.org/">Crossref</a> can provide bibtex, and <a href="https://www.semanticscholar.org/">Semantic Scholar</a> can provide citation licenses. Here's a short demo of how to do this:</p> 
+<pre><code class="language-python">from paperqa.clients import DocMetadataClient, ALL_CLIENTS
+
+client = DocMetadataClient(clients=ALL_CLIENTS)
+details = await client.query(title="Augmenting language models with chemistry tools")
+
+print(details.formatted_citation)
+# Andres M. Bran, Sam Cox, Oliver Schilter, Carlo Baldassari, Andrew D. White, and Philippe Schwaller.
+#  Augmenting large language models with chemistry tools. Nature Machine Intelligence,
+# 6:525-535, May 2024. URL: https://doi.org/10.1038/s42256-024-00832-8,
+# doi:10.1038/s42256-024-00832-8.
+# This article has 243 citations and is from a domain leading peer-reviewed journal.
+
+print(details.citation_count)
+# 243
+
+print(details.license)
+# cc-by
+
+print(details.pdf_url)
+# https://www.nature.com/articles/s42256-024-00832-8.pdf
+</code></pre> 
+<p>the <code>client.query</code> is meant to check for exact matches of title. It's a bit robust (like to casing, missing a word). There are duplicates for titles though - so you can also add authors to disambiguate. Or you can provide a doi directly <code>client.query(doi="10.1038/s42256-024-00832-8")</code>.</p> 
+<p>If you're doing this at a large scale, you may not want to use <code>ALL_CLIENTS</code> (just omit the argument) and you can specify which specific fields you want to speed up queries. For example:</p> 
+<pre><code class="language-python">details = await client.query(
+    title="Augmenting large language models with chemistry tools",
+    authors=["Andres M. Bran", "Sam Cox"],
+    fields=["title", "doi"],
+)
+</code></pre> 
+<p>will return much faster than the first query and we'll be certain the authors match.</p> 
+<h2>Where do I get papers?</h2> 
+<p>Well that's a really good question! It's probably best to just download PDFs of papers you think will help answer your question and start from there.</p> 
+<h3>Zotero</h3> 
+<p><em>It's been a while since we've tested this - so let us know if it runs into issues!</em></p> 
+<p>If you use <a href="https://www.zotero.org/">Zotero</a> to organize your personal bibliography, you can use the <code>paperqa.contrib.ZoteroDB</code> to query papers from your library, which relies on <a href="https://github.com/urschrei/pyzotero">pyzotero</a>.</p> 
+<p>Install <code>pyzotero</code> via the <code>zotero</code> extra for this feature:</p> 
+<pre><code class="language-bash">pip install paperqa[zotero]
+</code></pre> 
+<p>First, note that PaperQA2 parses the PDFs of papers to store in the database, so all relevant papers should have PDFs stored inside your database. You can get Zotero to automatically do this by highlighting the references you wish to retrieve, right clicking, and selecting <em>"Find Available PDFs"</em>. You can also manually drag-and-drop PDFs onto each reference.</p> 
+<p>To download papers, you need to get an API key for your account.</p> 
+<ol> 
+ <li>Get your library ID, and set it as the environment variable <code>ZOTERO_USER_ID</code>. 
+  <ul> 
+   <li>For personal libraries, this ID is given <a href="https://www.zotero.org/settings/keys">here</a> at the part "<em>Your userID for use in API calls is XXXXXX</em>".</li> 
+   <li>For group libraries, go to your group page <code>https://www.zotero.org/groups/groupname</code>, and hover over the settings link. The ID is the integer after /groups/. (<em>h/t pyzotero!</em>)</li> 
+  </ul> </li> 
+ <li>Create a new API key <a href="https://www.zotero.org/settings/keys/new">here</a> and set it as the environment variable <code>ZOTERO_API_KEY</code>. 
+  <ul> 
+   <li>The key will need read access to the library.</li> 
+  </ul> </li> 
+</ol> 
+<p>With this, we can download papers from our library and add them to PaperQA2:</p> 
+<pre><code class="language-python">from paperqa import Docs
+from paperqa.contrib import ZoteroDB
+
+docs = Docs()
+zotero = ZoteroDB(library_type="user")  # "group" if group library
+
+for item in zotero.iterate(limit=20):
+    if item.num_pages &gt; 30:
+        continue  # skip long papers
+    docs.add(item.pdf, docname=item.key)
+</code></pre> 
+<p>which will download the first 20 papers in your Zotero database and add them to the <code>Docs</code> object.</p> 
+<p>We can also do specific queries of our Zotero library and iterate over the results:</p> 
+<pre><code class="language-python">for item in zotero.iterate(
+    q="large language models",
+    qmode="everything",
+    sort="date",
+    direction="desc",
+    limit=100,
+):
+    print("Adding", item.title)
+    docs.add(item.pdf, docname=item.key)
+</code></pre> 
+<p>You can read more about the search syntax by typing <code>zotero.iterate?</code> in IPython.</p> 
+<h3>Paper Scraper</h3> 
+<p>If you want to search for papers outside of your own collection, I've found an unrelated project called <a href="https://github.com/blackadad/paper-scraper">paper-scraper</a> that looks like it might help. But beware, this project looks like it uses some scraping tools that may violate publisher's rights or be in a gray area of legality.</p> 
+<pre><code class="language-python">from paperqa import Docs
+
+keyword_search = "bispecific antibody manufacture"
+papers = paperscraper.search_papers(keyword_search)
+docs = Docs()
+for path, data in papers.items():
+    try:
+        docs.add(path)
+    except ValueError as e:
+        # sometimes this happens if PDFs aren't downloaded or readable
+        print("Could not read", path, e)
+answer = docs.query(
+    "What manufacturing challenges are unique to bispecific antibodies?"
+)
+print(answer)
+</code></pre> 
+<h2>Callbacks</h2> 
+<p>To execute a function on each chunk of LLM completions, you need to provide a function that can be executed on each chunk. For example, to get a typewriter view of the completions, you can do:</p> 
+<pre><code class="language-python">def typewriter(chunk: str) -&gt; None:
+    print(chunk, end="")
+
+
+docs = Docs()
+
+# add some docs...
+
+docs.query(
+    "What manufacturing challenges are unique to bispecific antibodies?",
+    callbacks=[typewriter],
+)
+</code></pre> 
+<h3>Caching Embeddings</h3> 
+<p>In general, embeddings are cached when you pickle a <code>Docs</code> regardless of what vector store you use. So as long as you save your underlying <code>Docs</code> object, you should be able to avoid re-embedding your documents.</p> 
+<h2>Customizing Prompts</h2> 
+<p>You can customize any of the prompts using settings.</p> 
+<pre><code class="language-python">from paperqa import Docs, Settings
+
+my_qa_prompt = (
+    "Answer the question '{question}'\n"
+    "Use the context below if helpful. "
+    "You can cite the context using the key like (Example2012). "
+    "If there is insufficient context, write a poem "
+    "about how you cannot answer.\n\n"
+    "Context: {context}"
+)
+
+docs = Docs()
+settings = Settings()
+settings.prompts.qa = my_qa_prompt
+docs.query("Are covid-19 vaccines effective?", settings=settings)
+</code></pre> 
+<h3>Pre and Post Prompts</h3> 
+<p>Following the syntax above, you can also include prompts that are executed after the query and before the query. For example, you can use this to critique the answer.</p> 
+<h2>FAQ</h2> 
+<h3>How come I get different results than your papers?</h3> 
+<p>Internally at FutureHouse, we have a slightly different set of tools. We're trying to get some of them, like citation traversal, into this repo. However, we have APIs and licenses to access research papers that we cannot share openly. Similarly, in our research papers' results we do not start with the known relevant PDFs. Our agent has to identify them using keyword search over all papers, rather than just a subset. We're gradually aligning these two versions of PaperQA, but until there is an open-source way to freely access papers (even just open source papers) you will need to provide PDFs yourself.</p> 
+<h3>How is this different from LlamaIndex or LangChain?</h3> 
+<p><a href="https://github.com/langchain-ai/langchain">LangChain</a> and <a href="https://github.com/run-llama/llama_index">LlamaIndex</a> are both frameworks for working with LLM applications, with abstractions made for agentic workflows and retrieval augmented generation.</p> 
+<p>Over time, the PaperQA team over time chose to become framework-agnostic, instead outsourcing LLM drivers to <a href="https://docs.litellm.ai/docs/">LiteLLM</a> and no framework besides Pydantic for its tools. PaperQA focuses on scientific papers and their metadata.</p> 
+<p>PaperQA can be reimplemented using either LlamaIndex or LangChain. For example, our <code>GatherEvidence</code> tool can be reimplemented as a retriever with an LLM-based re-ranking and contextual summary. There is similar work with the tree response method in LlamaIndex.</p> 
+<h3>Can I save or load?</h3> 
+<p>The <code>Docs</code> class can be pickled and unpickled. This is useful if you want to save the embeddings of the documents and then load them later.</p> 
+<pre><code class="language-python">import pickle
+
+# save
+with open("my_docs.pkl", "wb") as f:
+    pickle.dump(docs, f)
+
+# load
+with open("my_docs.pkl", "rb") as f:
+    docs = pickle.load(f)
+</code></pre> 
+<h2>Citation</h2> 
+<p>Please read and cite the following papers if you use this software:</p> 
+<pre><code class="language-bibtex">@article{skarlinski2024language,
+  title={Language agents achieve superhuman synthesis of scientific knowledge},
+  author={
+    Michael D. Skarlinski and
+    Sam Cox and
+    Jon M. Laurent and
+    James D. Braza and
+    Michaela Hinks and
+    Michael J. Hammerling and
+    Manvitha Ponnapati and
+    Samuel G. Rodriques and
+    Andrew D. White},
+  year={2024},
+  journal={preprint},
+  url={https://paper.wikicrow.ai}
+}
+
+
+@article{lala2023paperqa,
+  title={PaperQA: Retrieval-Augmented Generative Agent for Scientific Research},
+  author={L{\'a}la, Jakub and O'Donoghue, Odhran and Shtedritski, Aleksandar and Cox, Sam and Rodriques, Samuel G and White, Andrew D},
+  journal={arXiv preprint arXiv:2312.07559},
+  year={2023}
+}
+</code></pre>
+]]></content:encoded>
+
+
+</item>
+<item>
+<title>actions/runner-images</title>
+<link>https://github.com/actions/runner-images</link>
+<guid>https://github.com/actions/runner-images</guid>
+<content:encoded><![CDATA[
+<div> 关键词：GitHub Actions, Runner Images, Ubuntu, macOS, Windows
+
+总结：
+
+本文主要介绍了GitHub Actions Runner Images仓库中的内容、可用镜像及其相关特性。仓库提供用于创建用于GitHub Actions和Azure Pipelines的VM图像的源代码。主要的镜像包括：
+
+1. **Ubuntu**：提供了Ubuntu 24.04、Ubuntu 22.04和Ubuntu 20.04版本的镜像。
+2. **macOS**：提供了macOS 14、macOS 13、macOS 12的大型和标准版本镜像。
+3. **Windows**：提供了Windows Server 2022和Windows Server 2019版本的镜像。
+
+文章还详细解释了标签方案、发布流程、支持政策以及如何与仓库互动。其中，-latest标签用于指向最新的稳定操作系统版本，迁移过程会持续1-2个月以允许用户适应新版本。仓库遵循特定的软件和图像支持政策，如工具和版本的生命周期管理、包管理器的使用以及预安装政策。此外，还介绍了默认版本更新策略、提前通知机制以及如何贡献或提出问题的流程。
+
+通过阅读本文，开发者可以了解如何获取和使用GitHub Actions Runner Images来优化其自动化工作流，同时对仓库的结构、操作和贡献规则有清晰的认识。 <div>
+<p>GitHub Actions runner images</p><hr /><h1>GitHub Actions Runner Images</h1> 
+<p><strong>Table of Contents</strong></p> 
+<ul> 
+ <li><a href="https://raw.githubusercontent.com/actions/runner-images/main/#about">About</a></li> 
+ <li><a href="https://raw.githubusercontent.com/actions/runner-images/main/#available-images">Available Images</a></li> 
+ <li><a href="https://raw.githubusercontent.com/actions/runner-images/main/#announcements">Announcements</a></li> 
+ <li><a href="https://raw.githubusercontent.com/actions/runner-images/main/#image-definitions">Image Definitions</a></li> 
+ <li><a href="https://raw.githubusercontent.com/actions/runner-images/main/#image-releases">Image Releases</a></li> 
+ <li><a href="https://raw.githubusercontent.com/actions/runner-images/main/#software-and-image-support">Software and Image Support</a></li> 
+ <li><a href="https://raw.githubusercontent.com/actions/runner-images/main/#how-to-interact-with-the-repo">How to Interact with the Repo</a></li> 
+ <li><a href="https://raw.githubusercontent.com/actions/runner-images/main/#faqs">FAQs</a></li> 
+</ul> 
+<h2>About</h2> 
+<p>This repository contains the source code used to create the VM images for <a href="https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners">GitHub-hosted runners</a> used for Actions, as well as for <a href="https://docs.microsoft.com/en-us/azure/devops/pipelines/agents/hosted?view=azure-devops#use-a-microsoft-hosted-agent">Microsoft-hosted agents</a> used for Azure Pipelines. To build a VM machine from this repo's source, see the <a href="https://raw.githubusercontent.com/actions/runner-images/main/docs/create-image-and-azure-resources.md">instructions</a>.</p> 
+<h2>Available Images</h2> 
+<table> 
+ <thead> 
+  <tr> 
+   <th>Image</th> 
+   <th>YAML Label</th> 
+   <th>Included Software</th> 
+   <th>Rollout Status of Latest Image Release</th> 
+  </tr> 
+ </thead> 
+ <tbody> 
+  <tr> 
+   <td>Ubuntu 24.04</td> 
+   <td><code>ubuntu-24.04</code></td> 
+   <td><a href="https://github.com/actions/runner-images/raw/main/images/ubuntu/Ubuntu2404-Readme.md">ubuntu-24.04</a></td> 
+   <td><img alt="Endpoint Badge" src="https://img.shields.io/endpoint?url=https%3A%2F%2Fgist.githubusercontent.com%2Fijunaidm%2F0b5459bbe18604a639e1d2f7accd204f%2Fraw%2Fubuntu24.json" /></td> 
+  </tr> 
+  <tr> 
+   <td>Ubuntu 22.04</td> 
+   <td><code>ubuntu-latest</code> or <code>ubuntu-22.04</code></td> 
+   <td><a href="https://github.com/actions/runner-images/raw/main/images/ubuntu/Ubuntu2204-Readme.md">ubuntu-22.04</a></td> 
+   <td><img alt="Endpoint Badge" src="https://img.shields.io/endpoint?url=https%3A%2F%2Fgist.githubusercontent.com%2Fijunaidm%2F0b5459bbe18604a639e1d2f7accd204f%2Fraw%2Fubuntu22.json" /></td> 
+  </tr> 
+  <tr> 
+   <td>Ubuntu 20.04</td> 
+   <td><code>ubuntu-20.04</code></td> 
+   <td><a href="https://github.com/actions/runner-images/raw/main/images/ubuntu/Ubuntu2004-Readme.md">ubuntu-20.04</a></td> 
+   <td><img alt="Endpoint Badge" src="https://img.shields.io/endpoint?url=https%3A%2F%2Fgist.githubusercontent.com%2Fijunaidm%2F0b5459bbe18604a639e1d2f7accd204f%2Fraw%2Fubuntu20.json" /></td> 
+  </tr> 
+  <tr> 
+   <td>macOS 14</td> 
+   <td><code>macos-latest-large</code> or <code>macos-14-large</code></td> 
+   <td><a href="https://github.com/actions/runner-images/raw/main/images/macos/macos-14-Readme.md">macOS-14</a></td> 
+   <td><img alt="Endpoint Badge" src="https://img.shields.io/endpoint?url=https%3A%2F%2Fgist.githubusercontent.com%2Fijunaidm%2F0b5459bbe18604a639e1d2f7accd204f%2Fraw%2Fmacos-14.json" /></td> 
+  </tr> 
+  <tr> 
+   <td>macOS 14 Arm64</td> 
+   <td><code>macos-latest</code>, <code>macos-14</code>, <code>macos-latest-xlarge</code> or <code>macos-14-xlarge</code></td> 
+   <td><a href="https://github.com/actions/runner-images/raw/main/images/macos/macos-14-arm64-Readme.md">macOS-14-arm64</a></td> 
+   <td><img alt="Endpoint Badge" src="https://img.shields.io/endpoint?url=https%3A%2F%2Fgist.githubusercontent.com%2Fijunaidm%2F0b5459bbe18604a639e1d2f7accd204f%2Fraw%2Fmacos-14-arm64.json" /></td> 
+  </tr> 
+  <tr> 
+   <td>macOS 13</td> 
+   <td><code>macos-13</code> or <code>macos-13-large</code></td> 
+   <td><a href="https://github.com/actions/runner-images/raw/main/images/macos/macos-13-Readme.md">macOS-13</a></td> 
+   <td><img alt="Endpoint Badge" src="https://img.shields.io/endpoint?url=https%3A%2F%2Fgist.githubusercontent.com%2Fijunaidm%2F0b5459bbe18604a639e1d2f7accd204f%2Fraw%2Fmacos-13.json" /></td> 
+  </tr> 
+  <tr> 
+   <td>macOS 13 Arm64</td> 
+   <td><code>macos-13-xlarge</code></td> 
+   <td><a href="https://github.com/actions/runner-images/raw/main/images/macos/macos-13-arm64-Readme.md">macOS-13-arm64</a></td> 
+   <td><img alt="Endpoint Badge" src="https://img.shields.io/endpoint?url=https%3A%2F%2Fgist.githubusercontent.com%2Fijunaidm%2F0b5459bbe18604a639e1d2f7accd204f%2Fraw%2Fmacos-13-arm64.json" /></td> 
+  </tr> 
+  <tr> 
+   <td>macOS 12</td> 
+   <td><code>macos-12</code> or <code>macos-12-large</code></td> 
+   <td><a href="https://github.com/actions/runner-images/raw/main/images/macos/macos-12-Readme.md">macOS-12</a></td> 
+   <td><img alt="Endpoint Badge" src="https://img.shields.io/endpoint?url=https%3A%2F%2Fgist.githubusercontent.com%2Fijunaidm%2F0b5459bbe18604a639e1d2f7accd204f%2Fraw%2Fmacos-12.json" /></td> 
+  </tr> 
+  <tr> 
+   <td>Windows Server 2022</td> 
+   <td><code>windows-latest</code> or <code>windows-2022</code></td> 
+   <td><a href="https://github.com/actions/runner-images/raw/main/images/windows/Windows2022-Readme.md">windows-2022</a></td> 
+   <td><img alt="Endpoint Badge" src="https://img.shields.io/endpoint?url=https%3A%2F%2Fgist.githubusercontent.com%2Fijunaidm%2F0b5459bbe18604a639e1d2f7accd204f%2Fraw%2Fwin22.json" /></td> 
+  </tr> 
+  <tr> 
+   <td>Windows Server 2019</td> 
+   <td><code>windows-2019</code></td> 
+   <td><a href="https://github.com/actions/runner-images/raw/main/images/windows/Windows2019-Readme.md">windows-2019</a></td> 
+   <td><img alt="Endpoint Badge" src="https://img.shields.io/endpoint?url=https%3A%2F%2Fgist.githubusercontent.com%2Fijunaidm%2F0b5459bbe18604a639e1d2f7accd204f%2Fraw%2Fwin19.json" /></td> 
+  </tr> 
+ </tbody> 
+</table> 
+<h3>Label scheme</h3> 
+<ul> 
+ <li>In general the <code>-latest</code> label is used for the latest OS image version that is GA</li> 
+ <li>Before moving the<code>-latest</code> label to a new OS version we will announce the change and give sufficient lead time for users to update their workflows</li> 
+</ul> 
+<h2>Announcements</h2> 
+<p>See notable upcoming changes by viewing issues with the <a href="https://github.com/actions/runner-images/labels/Announcement">Announcement</a> label.</p> 
+<h2>Image Definitions</h2> 
+<h3>Beta</h3> 
+<p>The purpose of a Beta is to collect feedback on an image before it is released to GA. The goal of a Beta is to identify and fix any potential issues that exist on that image. Images are updated on a weekly cadence. Any workflows that run on a beta image do not fall under the customer <a href="https://github.com/customer-terms/github-online-services-sla">SLA</a> in place for Actions. Customers choosing to use Beta images are encouraged to provide feedback in the runner-images repo by creating an issue. A Beta may take on different availability, i.e. public vs private.</p> 
+<h3>GA</h3> 
+<p>A GA (General Availability) image has been through a Beta period and is deemed ready for general use. Images are updated on a weekly cadence. In order to be moved to GA the image must meet the following criteria:</p> 
+<ol> 
+ <li>Has been through a Beta period (public or private)</li> 
+ <li>Most major software we install on the image has a compatible version for the underlying OS and</li> 
+ <li>All major bugs reported during the Beta period have been addressed.</li> 
+</ol> 
+<p>This image type falls under the customer <a href="https://github.com/customer-terms/github-online-services-sla">SLA</a> for actions. GA images are eventually deprecated according to our guidelines as we only support the latest 2 versions of an OS.</p> 
+<h4>Latest Migration Process</h4> 
+<p>GitHub Actions and Azure DevOps use the <code>-latest</code> YAML label (ex: <code>ubuntu-latest</code>, <code>windows-latest</code>, and <code>macos-latest</code>). These labels point towards the newest stable OS version available.</p> 
+<p>The <code>-latest</code> migration process is gradual and happens over 1-2 months in order to allow customers to adapt their workflows to the newest OS version. During this process, any workflow using the <code>-latest</code> label, may see changes in the OS version in their workflows or pipelines. To avoid unwanted migration, users can specify a specific OS version in the yaml file (ex: macos-12, windows-2022, ubuntu-22.04).</p> 
+<h2>Image Releases</h2> 
+<p><em>How to best follow along with changes</em></p> 
+<ol> 
+ <li> <p>Find the latest releases for this repository <a href="https://github.com/actions/runner-images/releases">here.</a></p> </li> 
+ <li> <p>Subscribe to the releases coming out of this repository, instructions <a href="https://docs.github.com/en/account-and-profile/managing-subscriptions-and-notifications-on-github/setting-up-notifications/configuring-notifications#configuring-your-watch-settings-for-an-individual-repository">here.</a></p> </li> 
+ <li> <p>Upcoming changes: A pre-release is created when the deployment of an image has started. As soon as the deployment is finished, the pre-release is converted to a release. If you have subscribed to releases, you will get notified of pre-releases as well.</p> 
+  <ul> 
+   <li>You can also track upcoming changes using the <a href="https://github.com/actions/runner-images/labels/awaiting-deployment">awaiting-deployment</a> label.</li> 
+  </ul> </li> 
+ <li> <p>For high impact changes, we will post these in advance to the GitHub Changelog on our <a href="https://github.blog/changelog/">blog</a> and on <a href="https://twitter.com/GHchangelog">twitter</a>.</p> 
+  <ul> 
+   <li>Ex: breaking changes, GA or deprecation of images</li> 
+  </ul> </li> 
+</ol> 
+<p><em>Cadence</em></p> 
+<ul> 
+ <li>We typically deploy weekly updates to the software on the runner images.</li> 
+</ul> 
+<h2>Software and Image Support</h2> 
+<h3>Support Policy</h3> 
+<ul> 
+ <li> <p>Tools and versions will typically be removed 6 months after they are deprecated or have reached end-of-life</p> </li> 
+ <li> <p>We support (at maximum) 2 GA images and 1 beta image at a time. We begin the deprecation process of the oldest image label once the newest OS image label has been released to GA.</p> </li> 
+ <li> <p>The images generally contain the latest versions of packages installed except for Ubuntu LTS where we mostly rely on the Canonical-provided repositories.</p> </li> 
+ <li> <p>Popular tools can have several versions installed side-by-side with the following strategy:</p> </li> 
+</ul> 
+<table> 
+ <thead> 
+  <tr> 
+   <th>Tool name</th> 
+   <th>Installation strategy</th> 
+  </tr> 
+ </thead> 
+ <tbody> 
+  <tr> 
+   <td>Docker images</td> 
+   <td>not more than 3 latest LTS OS\tool versions. New images or new versions of current images are added using the standard tool request process</td> 
+  </tr> 
+  <tr> 
+   <td>Java</td> 
+   <td>all LTS versions</td> 
+  </tr> 
+  <tr> 
+   <td>Node.js</td> 
+   <td>3 latest LTS versions</td> 
+  </tr> 
+  <tr> 
+   <td>Go</td> 
+   <td>3 latest minor versions</td> 
+  </tr> 
+  <tr> 
+   <td>Python <br /> Ruby</td> 
+   <td>5 most popular <code>major.minor</code> versions</td> 
+  </tr> 
+  <tr> 
+   <td>PyPy</td> 
+   <td>3 most popular <code>major.minor</code> versions</td> 
+  </tr> 
+  <tr> 
+   <td>.NET Core</td> 
+   <td>2 latest LTS versions and 1 latest version. For each feature version only latest patch is installed</td> 
+  </tr> 
+  <tr> 
+   <td>GCC <br /> GNU Fortran <br /> Clang <br /> GNU C++</td> 
+   <td>3 latest major versions</td> 
+  </tr> 
+  <tr> 
+   <td>Android NDK</td> 
+   <td>1 latest non-LTS, 2 latest LTS versions</td> 
+  </tr> 
+  <tr> 
+   <td>Xcode</td> 
+   <td>- all OS compatible versions side-by-side <br /> - for beta, GM versions - latest beta only <br /> - old patch versions are deprecated in 3 months</td> 
+  </tr> 
+ </tbody> 
+</table> 
+<h3>Package managers usage</h3> 
+<p>We use third-party package managers to install software during the image generation process. The table below lists the package managers and the software installed.</p> 
+<blockquote> 
+ <p><strong>Note</strong>: third-party repositories are re-evaluated every year to identify if they are still useful and secure.</p> 
+</blockquote> 
+<table> 
+ <thead> 
+  <tr> 
+   <th align="left">Operating system</th> 
+   <th align="center">Package manager</th> 
+   <th align="right">Third-party repos and packages</th> 
+  </tr> 
+ </thead> 
+ <tbody> 
+  <tr> 
+   <td align="left">Ubuntu</td> 
+   <td align="center"><a href="https://wiki.debian.org/Apt">APT</a></td> 
+   <td align="right"><a href="https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable">containers</a> (Ubuntu 20 only) <br /> <a href="https://download.docker.com/linux/ubuntu">docker</a> (Ubuntu20 0nly) <br /> <a href="https://packages.adoptium.net/artifactory/deb/">Eclipse-Temurin (Adoptium)</a> <br /> <a href="https://packages.erlang-solutions.com/ubuntu">Erlang</a> <br /> <a href="http://ppa.launchpad.net/mozillateam/ppa/ubuntu">Firefox</a> <br /> <a href="https://packagecloud.io/install/repositories/github/git-lfs">git-lfs</a> <br /> <a href="https://launchpad.net/~git-core/+archive/ubuntu/ppa">git</a> <br /> <a href="https://packages.cloud.google.com/apt">Google Cloud CLI</a> <br /> <a href="https://cli-assets.heroku.com/channels/stable/apt">Heroku</a> <br /> <a href="https://dl.hhvm.com/ubuntu">HHvm</a> <br /> <a href="https://repo.mongodb.org/apt/ubuntu">MongoDB</a> <br /> <a href="https://download.mono-project.com/repo/ubuntu">Mono</a> <br /> <a href="https://packages.microsoft.com/repos/edge">MS Edge</a> <br /> <a href="https://apt.postgresql.org/pub/repos/apt/">PostgreSQL</a> <br /> <a href="https://cloud.r-project.org/bin/linux/ubuntu">R</a></td> 
+  </tr> 
+  <tr> 
+   <td align="left"></td> 
+   <td align="center"><a href="https://pypa.github.io/pipx">pipx</a></td> 
+   <td align="right">ansible-core <br />yamllint</td> 
+  </tr> 
+  <tr> 
+   <td align="left">Windows</td> 
+   <td align="center"><a href="https://chocolatey.org">Chocolatey</a></td> 
+   <td align="right">No third-party repos installed</td> 
+  </tr> 
+  <tr> 
+   <td align="left">macOS</td> 
+   <td align="center"><a href="https://brew.sh">Homebrew</a></td> 
+   <td align="right"><a href="https://github.com/aws/homebrew-tap">aws-cli v2</a> <br /> <a href="https://github.com/Azure/homebrew-bicep">azure/bicep</a> <br /> <a href="https://github.com/mongodb/homebrew-brew">mongodb/brew</a></td> 
+  </tr> 
+  <tr> 
+   <td align="left"></td> 
+   <td align="center"><a href="https://pypa.github.io/pipx/">pipx</a></td> 
+   <td align="right">yamllint</td> 
+  </tr> 
+ </tbody> 
+</table> 
+<h3>Image Deprecation Policy</h3> 
+<ul> 
+ <li>Images begin the deprecation process of the oldest image label once a new GA OS version has been released.</li> 
+ <li>Deprecation process begins with an announcement that sets a date for deprecation</li> 
+ <li>As it gets closer to the date, GitHub begins doing scheduled brownouts of the image</li> 
+ <li>During this time there will be an Announcement pinned in the repo to remind users of the deprecation.</li> 
+ <li>Finally GitHub will deprecate the image and it will no longer be available</li> 
+</ul> 
+<h3>Preinstallation Policy</h3> 
+<p>In general, these are the guidelines we follow when deciding what to pre-install on our images:</p> 
+<ul> 
+ <li>Popularity: widely-used tools and ecosystems will be given priority.</li> 
+ <li>Latest Technology: recent versions of tools will be given priority.</li> 
+ <li>Deprecation: end-of-life tools and versions will not be added.</li> 
+ <li>Licensing: MIT, Apache, or GNU licenses are allowed.</li> 
+ <li>Time &amp; Space on the Image: we will evaluate how much time is saved and how much space is used by having the tool pre-installed.</li> 
+ <li>Support: If a tool requires the support of more than one version, we will consider the cost of this maintenance.</li> 
+</ul> 
+<h3>Default Version Update Policy</h3> 
+<ul> 
+ <li>In general, once a new version is installed on the image, we announce the default version update 2 weeks prior to deploying it.</li> 
+ <li>For potentially dangerous updates, we may extend the timeline up to 1 month between the announcement and deployment.</li> 
+</ul> 
+<h2>How to Interact with the Repo</h2> 
+<ul> 
+ <li><strong>Issues</strong>: To file a bug report, or request tools to be added/updated, please&nbsp;<a href="https://github.com/actions/runner-images/issues/new/choose">open an issue using the appropriate template</a></li> 
+ <li><strong>Discussions</strong>: If you want to share your thoughts about image configuration, installed software, or bring a new idea, please create a new topic in a&nbsp;<a href="https://github.com/actions/runner-images/discussions">discussion</a>&nbsp;for a corresponding category. Before making a new discussion please make sure no similar topics were created earlier.</li> 
+ <li>For general questions about using the runner images or writing your Actions workflow, please open requests in the <a href="https://github.community/c/github-actions/41">GitHub Actions Community Forum</a>.</li> 
+</ul> 
+<h2>FAQs</h2> 
+<details> 
+ <b><i>What images are available for GitHub Actions and Azure DevOps?</i></b> 
+ <p>The availability of images for GitHub Actions and Azure DevOps is the same. However, deprecation policies may differ. See documentation for more details:</p> 
+ <ul> 
+  <li><a href="https://docs.github.com/en/free-pro-team@latest/actions/reference/specifications-for-github-hosted-runners#supported-runners-and-hardware-resources">GitHub Actions</a></li> 
+  <li><a href="https://docs.microsoft.com/en-us/azure/devops/pipelines/agents/hosted?view=azure-devops&amp;tabs=yaml#software">Azure DevOps</a></li> 
+ </ul> 
+</details> 
+<details> 
+ <b><i>What image version is used in my build?</i></b> 
+ <p>Usually, image deployment takes 2-3 days, and documentation in the <code>main</code> branch is only updated when deployment is finished. To find out which image version and what software versions are used in a specific build, see <code>Set up job</code> (GitHub Actions) or <code>Initialize job</code> (Azure DevOps) step log. <img alt="actions-runner-image" src="https://github.com/actions/runner-images/assets/88318005/922a8bf5-3e4d-4265-9527-b3b51e6bf9c8" width="1440" /></p> 
+</details> 
+<details> 
+ <b><i>Looking for other Linux distributions?</i></b> 
+ <p>We do not plan to offer other Linux distributions. We recommend using Docker if you'd like to build using other distributions with the hosted runner images. Alternatively, you can leverage <a href="https://help.github.com/en/actions/hosting-your-own-runners">self-hosted runners</a> and fully customize your VM image to your needs.</p> 
+</details> 
+<details> 
+ <b><i>How do I contribute to the macOS source?</i></b> 
+ <p>macOS source lives in this repository and is available for everyone. However, macOS image-generation CI doesn't support external contributions yet so we are not able to accept pull-requests for now.</p> 
+ <p>We are in the process of preparing macOS CI to accept contributions. Until then, we appreciate your patience and ask you to continue to make tool requests by filing issues.</p> 
+</details> 
+<details> 
+ <b><i>How does GitHub determine what tools are installed on the images?</i></b> 
+ <p>For some tools, we always install the latest at the time of the deployment; for others, we pin the tool to specific version(s). For more details please see the <a href="https://raw.githubusercontent.com/actions/runner-images/main/#preinstallation-policy">Preinstallation Policy</a></p> 
+</details> 
+<details> 
+ <b><i>How do I request that a new tool be pre-installed on the image?</i></b> Please create an issue and get an approval from us to add this tool to the image before creating the pull request. 
+</details> 
+<details> 
+ <b><i>What branch should I use to build custom image?</i></b> We strongly encourage customers to build their own images using the main branch. This repository contains multiple branches and releases that serve as document milestones to reflect what software is installed in the images at certain point of time. Current builds are not idempotent and if one tries to build a runner image using the specific tag it is not guaranteed that the build will succeed. 
+</details>
+]]></content:encoded>
+
+
+</item>
 
 <item>
 <title>Zipstack/unstract</title>
