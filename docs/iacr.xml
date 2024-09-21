@@ -5,6 +5,59 @@
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
 <item>
+<title>GoAT: File Geolocation via Anchor Timestamping</title>
+<link>https://eprint.iacr.org/2021/697</link>
+<guid>https://eprint.iacr.org/2021/697</guid>
+<content:encoded><![CDATA[
+<div> 关键词：Decentralized存储系统、Proof of Geo-Retrievability（PoGeoRet）、GoAT、时间戳服务器、互联网物理约束
+
+总结:
+文章主要介绍了Proof of Geo-Retrievability（PoGeoRet）和GoAT，这是一种新的证明机制，旨在证明文件位于特定地理边界内。PoGeoRet通过确保文件复制分布在不同的地理位置来增强去中心化存储系统的鲁棒性。GoAT是一种实现这一目标的实际方案，它利用互联网上的任何具有固定已知位置的时间戳服务器作为地理定位锚点，提供可靠的地理定位保证。
+
+GoAT通过创新地使用通信效率高的Proof-of-Retrievability（PoRet）方案来实现其证明，使得PoRet组件的大小保持常数。这不仅确保了数据的可访问性，还提高了验证过程的效率。
+
+为了验证GoAT的实用性，文章进行了一项初步的测量研究，以寻找可用的锚点，并执行了一个实地实验。结果显示，互联网的很大一部分可以作为锚点使用，GoAT能够实现低至500公里的地理定位半径。
+
+综上所述，PoGeoRet和GoAT为去中心化存储系统提供了地理定位证明，通过利用互联网物理约束提供可靠保障，同时通过优化技术提高验证效率，从而增强了数据存储的安全性和可靠性。 <div>
+Decentralized storage systems are a crucial component of the rapidly growing blockchain ecosystem. They aim to achieve robustness by proving that they store multiple replicas of every file. They have a serious limitation, though: They cannot prove that file replicas are spread across distinct systems, e.g., different hard drives. Consequently, files are vulnerable to loss in a single, locally catastrophic event.
+
+We introduce a new primitive, Proof of Geo-Retrievability or PoGeoRet, that proves that a file is located within a strict geographic boundary. Using PoGeoRet, one can, for example, prove that a file is spread across several distinct geographic regions---and by extension across multiple systems, e.g., hard drives. We define what it means for a PoGeoRet scheme to be complete and sound, extending prior formalism in key ways. 
+
+We also propose GoAT, a practical PoGeoRet scheme to prove file geolocation. Unlike previous geolocation systems that only offer nominal geolocation guarantees and require dedicated anchors, GoAT geolocates provers using any timestamping server on the internet with a fixed, known location as a geolocation anchor.
+GoAT's geolocation guarantees directly depend on the physical constraints of the internet, making them very reliable. 
+GoAT internally uses a communication-efficient Proof-of-Retrievability (PoRet) scheme in a novel way to achieve constant-size PoRet-component in its proofs.
+
+We validate GoAT's practicality by conducting an initial measurement study to find usable anchors and perform a real-world experiment. The results show that a significant fraction of the internet can be used as anchors and that GoAT achieves geolocation radii as low as 500km.
+]]></content:encoded>
+<pubDate>Fri, 28 May 2021 09:14:42 +0000</pubDate>
+<pubDate>Fri, 28 May 2021 09:14:42 +0000</pubDate>
+</item>
+<item>
+<title>Proofs of Space with Maximal Hardness</title>
+<link>https://eprint.iacr.org/2023/1530</link>
+<guid>https://eprint.iacr.org/2023/1530</guid>
+<content:encoded><![CDATA[
+<div> 关键词：证明空间、计算复杂性、安全目标、深度鲁棒图、预后鲁棒图
+
+总结:
+
+本文提出了一种新型的证明空间构造方法，旨在确保在证明者试图节省任意小比例存储空间时，必须重做几乎全部原始复杂计算的大部分部分。这种方法的实现是通过将现有的SDR（Fisch, Eurocrypt 2019）构造进行扩展和优化完成的，这种优化不仅保持了通用性，还展示了已经部署的SDR构造在安全性方面具有比先前显示的更好的性能。
+
+该构造的核心技术在于对预后鲁棒图的增强利用。预后鲁棒图是一种特殊的有向无环图，其中任何足够相对大小的子图都包含一个相对较大的单一汇节点连接组件。文章通过构建一个更大的预后鲁棒图，不仅优化了参数设置，还增强了关于汇节点位置的额外保证，同时仅通过增加很小的常数来提高度数。这种方法实现了几乎完全的计算复原，显著提高了证明空间的安全性。 <div>
+In a proof of space, a prover performs a complex computation with a large output. A verifier periodically checks that the prover still holds the output. The security goal for a proof of space construction is to ensure that a prover who erases even a portion of the output has to redo a large portion of the complex computation in order to satisfy the verifier.
+
+In existing constructions of proofs of space, the computation that a cheating prover is forced to redo is a small fraction (vanishing or small constant) of the original complex computation. The only exception is a construction of Pietrzak (ITCS 2019) that requires extremely depth-robust graphs, which result in impractically high complexity of the initialization process.
+
+We present the first proof of space of reasonable complexity that ensures that the prover has to redo almost the entire computation (fraction arbitrarily close to 1) when trying to save even an arbitrarily small constant fraction of the space. 
+Our construction is a generalization of an existing construction called SDR (Fisch, Eurocrypt 2019) deployed on the Filecoin blockchain. Our improvements, while general, also demonstrate that the already deployed construction has considerably better security than previously shown.
+
+Technically, our construction can be viewed as amplifying predecessor-robust graphs. These are directed acyclic graphs in which every subgraph of sufficient relative size $\pi$ contains a large single-sink connected component of relative size $\alpha_\pi$. We take a predecessor-robust graph with constant parameters $(\pi, \alpha_\pi)$, and build a bigger predecessor-robust graph with a near-optimal set of parameters and additional guarantees on sink placement, while increasing the degree only by a small additive constant.
+]]></content:encoded>
+<pubDate>Fri, 06 Oct 2023 18:02:28 +0000</pubDate>
+<pubDate>Fri, 06 Oct 2023 18:02:28 +0000</pubDate>
+</item>
+
+<item>
 <title>Interactive Threshold Mercurial Signatures and Applications</title>
 <link>https://eprint.iacr.org/2024/625</link>
 <guid>https://eprint.iacr.org/2024/625</guid>
@@ -28,9 +81,7 @@ We show applications in anonymous credential systems that individually fit the t
 Finally, to showcase the practicality of our approach, we implement our interactive constructions and compare them against related alternatives.
 ]]></content:encoded>
 <pubDate>Tue, 23 Apr 2024 06:56:33 +0000</pubDate>
-<pubDate>Tue, 23 Apr 2024 06:56:33 +0000</pubDate>
 </item>
-
 <item>
 <title>Compute, but Verify: Efficient Multiparty Computation over Authenticated Inputs</title>
 <link>https://eprint.iacr.org/2022/1648</link>
