@@ -4,6 +4,451 @@
 <title>GitHub All Languages Weekly Trending</title>
 <link>http://mshibanami.github.io/GitHubTrendingRSS</link>
 
+<item>
+<title>roboflow/supervision</title>
+<link>https://github.com/roboflow/supervision</link>
+<guid>https://github.com/roboflow/supervision</guid>
+<content:encoded><![CDATA[
+<div> 关键词：supervision, computer vision, tools, quickstart, annotators
+
+总结:
+
+本文介绍了supervision，这是一个旨在提供可重用的计算机视觉工具的库。首先，它提供了一键安装方法，通过pip命令即可轻松地在Python环境中安装supervision。接着，文章展示了如何使用supervision与各种模型（如YOLO）进行集成，实现对图像或视频的检测。supervision还提供了丰富的注释器（annotators），允许用户自定义数据集的可视化方式，以满足不同的需求。
+
+其次，supervision支持多种数据集操作，包括加载、分割、合并和保存数据集，支持COCO、YOLO、PASCAL VOC等多种常见格式。这使得处理和准备数据变得更加灵活和高效。此外，supervision还提供了实用的工具来加载和管理数据集，如从Yolo格式、Pascal VOC格式或COCO格式加载数据集，并能将数据集拆分为训练集、测试集和验证集，以及将多个数据集合并为一个。
+
+最后，文章强调了supervision的社区支持和文档资源，鼓励用户探索其提供的教程，以学习如何利用supervision进行计算机视觉任务，如分析等待时间、优化流程等。同时，也欢迎用户贡献自己的项目和反馈，共同推动supervision的发展。 <div>
+<p>We write your reusable computer vision tools. 💜</p><hr /><div align="center"> 
+ <p> <a align="center" href="" target="https://supervision.roboflow.com"> <img src="https://media.roboflow.com/open-source/supervision/rf-supervision-banner.png?updatedAt=1678995927529" width="100%" /> </a> </p> 
+ <br /> 
+ <p><a href="https://github.com/roboflow/notebooks">notebooks</a> | <a href="https://github.com/roboflow/inference">inference</a> | <a href="https://github.com/autodistill/autodistill">autodistill</a> | <a href="https://github.com/roboflow/multimodal-maestro">maestro</a></p> 
+ <br /> 
+ <p><a href="https://badge.fury.io/py/supervision"><img alt="version" src="https://badge.fury.io/py/supervision.svg?sanitize=true" /></a> <a href="https://pypistats.org/packages/supervision"><img alt="downloads" src="https://img.shields.io/pypi/dm/supervision" /></a> <a href="https://snyk.io/advisor/python/supervision"><img alt="snyk" src="https://snyk.io/advisor/python/supervision/badge.svg?sanitize=true" /></a> <a href="https://github.com/roboflow/supervision/raw/main/LICENSE.md"><img alt="license" src="https://img.shields.io/pypi/l/supervision" /></a> <a href="https://badge.fury.io/py/supervision"><img alt="python-version" src="https://img.shields.io/pypi/pyversions/supervision" /></a> <a href="https://colab.research.google.com/github/roboflow/supervision/blob/main/demo.ipynb"><img alt="colab" src="https://colab.research.google.com/assets/colab-badge.svg?sanitize=true" /></a> <a href="https://huggingface.co/spaces/Roboflow/Annotators"><img alt="gradio" src="https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Spaces-blue" /></a> <a href="https://discord.gg/GbfgXGJ8Bk"><img alt="discord" src="https://img.shields.io/discord/1159501506232451173" /></a> <a href="https://squidfunk.github.io/mkdocs-material/"><img alt="built-with-material-for-mkdocs" src="https://img.shields.io/badge/Material_for_MkDocs-526CFE?logo=MaterialForMkDocs&amp;logoColor=white" /></a></p> 
+</div> 
+<h2>👋 hello</h2> 
+<p><strong>We write your reusable computer vision tools.</strong> Whether you need to load your dataset from your hard drive, draw detections on an image or video, or count how many detections are in a zone. You can count on us! 🤝</p> 
+<p><a href="https://github.com/orgs/roboflow/projects"><img alt="supervision-hackfest" src="https://github.com/roboflow/supervision/assets/26109316/c05cc954-b9a6-4ed5-9a52-d0b4b619ff65" /></a></p> 
+<h2>💻 install</h2> 
+<p>Pip install the supervision package in a <a href="https://www.python.org/"><strong>Python&gt;=3.8</strong></a> environment.</p> 
+<pre><code class="language-bash">pip install supervision
+</code></pre> 
+<p>Read more about conda, mamba, and installing from source in our <a href="https://roboflow.github.io/supervision/">guide</a>.</p> 
+<h2>🔥 quickstart</h2> 
+<h3>models</h3> 
+<p>Supervision was designed to be model agnostic. Just plug in any classification, detection, or segmentation model. For your convenience, we have created <a href="https://supervision.roboflow.com/latest/detection/core/#detections">connectors</a> for the most popular libraries like Ultralytics, Transformers, or MMDetection.</p> 
+<pre><code class="language-python">import cv2
+import supervision as sv
+from ultralytics import YOLO
+
+image = cv2.imread(...)
+model = YOLO('yolov8s.pt')
+result = model(image)[0]
+detections = sv.Detections.from_ultralytics(result)
+
+len(detections)
+# 5
+</code></pre> 
+<details> 
+ 👉 more model connectors 
+ <ul> 
+  <li> <p>inference</p> <p>Running with <a href="https://github.com/roboflow/inference">Inference</a> requires a <a href="https://docs.roboflow.com/api-reference/authentication#retrieve-an-api-key">Roboflow API KEY</a>.</p> <pre><code class="language-python">import cv2
+import supervision as sv
+from inference import get_model
+
+image = cv2.imread(...)
+model = get_model(model_id="yolov8s-640", api_key=&lt;ROBOFLOW API KEY&gt;)
+result = model.infer(image)[0]
+detections = sv.Detections.from_inference(result)
+
+len(detections)
+# 5
+</code></pre> </li> 
+ </ul> 
+</details> 
+<h3>annotators</h3> 
+<p>Supervision offers a wide range of highly customizable <a href="https://supervision.roboflow.com/latest/detection/annotators/">annotators</a>, allowing you to compose the perfect visualization for your use case.</p> 
+<pre><code class="language-python">import cv2
+import supervision as sv
+
+image = cv2.imread(...)
+detections = sv.Detections(...)
+
+box_annotator = sv.BoxAnnotator()
+annotated_frame = box_annotator.annotate(
+    scene=image.copy(),
+    detections=detections
+)
+</code></pre> 
+<p><a href="https://github.com/roboflow/supervision/assets/26109316/691e219c-0565-4403-9218-ab5644f39bce">https://github.com/roboflow/supervision/assets/26109316/691e219c-0565-4403-9218-ab5644f39bce</a></p> 
+<h3>datasets</h3> 
+<p>Supervision provides a set of <a href="https://supervision.roboflow.com/latest/datasets/core/">utils</a> that allow you to load, split, merge, and save datasets in one of the supported formats.</p> 
+<pre><code class="language-python">import supervision as sv
+from roboflow import Roboflow
+
+project = Roboflow().workspace(&lt;WORKSPACE_ID&gt;).project(&lt;PROJECT_ID&gt;)
+dataset = project.version(&lt;PROJECT_VERSION&gt;).download("coco")
+
+ds = sv.DetectionDataset.from_coco(
+    images_directory_path=f"{dataset.location}/train",
+    annotations_path=f"{dataset.location}/train/_annotations.coco.json",
+)
+
+path, image, annotation = ds[0]
+    # loads image on demand
+
+for path, image, annotation in ds:
+    # loads image on demand
+</code></pre> 
+<details> 
+ 👉 more dataset utils 
+ <ul> 
+  <li> <p>load</p> <pre><code class="language-python">dataset = sv.DetectionDataset.from_yolo(
+    images_directory_path=...,
+    annotations_directory_path=...,
+    data_yaml_path=...
+)
+
+dataset = sv.DetectionDataset.from_pascal_voc(
+    images_directory_path=...,
+    annotations_directory_path=...
+)
+
+dataset = sv.DetectionDataset.from_coco(
+    images_directory_path=...,
+    annotations_path=...
+)
+</code></pre> </li> 
+  <li> <p>split</p> <pre><code class="language-python">train_dataset, test_dataset = dataset.split(split_ratio=0.7)
+test_dataset, valid_dataset = test_dataset.split(split_ratio=0.5)
+
+len(train_dataset), len(test_dataset), len(valid_dataset)
+#&nbsp;(700, 150, 150)
+</code></pre> </li> 
+  <li> <p>merge</p> <pre><code class="language-python">ds_1 = sv.DetectionDataset(...)
+len(ds_1)
+#&nbsp;100
+ds_1.classes
+#&nbsp;['dog', 'person']
+
+ds_2 = sv.DetectionDataset(...)
+len(ds_2)
+# 200
+ds_2.classes
+#&nbsp;['cat']
+
+ds_merged = sv.DetectionDataset.merge([ds_1, ds_2])
+len(ds_merged)
+#&nbsp;300
+ds_merged.classes
+#&nbsp;['cat', 'dog', 'person']
+</code></pre> </li> 
+  <li> <p>save</p> <pre><code class="language-python">dataset.as_yolo(
+    images_directory_path=...,
+    annotations_directory_path=...,
+    data_yaml_path=...
+)
+
+dataset.as_pascal_voc(
+    images_directory_path=...,
+    annotations_directory_path=...
+)
+
+dataset.as_coco(
+    images_directory_path=...,
+    annotations_path=...
+)
+</code></pre> </li> 
+  <li> <p>convert</p> <pre><code class="language-python">sv.DetectionDataset.from_yolo(
+    images_directory_path=...,
+    annotations_directory_path=...,
+    data_yaml_path=...
+).as_pascal_voc(
+    images_directory_path=...,
+    annotations_directory_path=...
+)
+</code></pre> </li> 
+ </ul> 
+</details> 
+<h2>🎬 tutorials</h2> 
+<p>Want to learn how to use Supervision? Explore our <a href="https://supervision.roboflow.com/develop/how_to/detect_and_annotate/">how-to guides</a>, <a href="https://github.com/roboflow/supervision/tree/develop/examples">end-to-end examples</a>, <a href="https://roboflow.github.io/cheatsheet-supervision/">cheatsheet</a>, and <a href="https://supervision.roboflow.com/develop/cookbooks/">cookbooks</a>!</p> 
+<br /> 
+<p align="left"> <a href="https://youtu.be/hAWpsIuem10" title="Dwell Time Analysis with Computer Vision | Real-Time Stream Processing"><img align="left" alt="Dwell Time Analysis with Computer Vision | Real-Time Stream Processing" src="https://github.com/SkalskiP/SkalskiP/assets/26109316/a742823d-c158-407d-b30f-063a5d11b4e1" width="300px" /></a> <a href="https://youtu.be/hAWpsIuem10" title="Dwell Time Analysis with Computer Vision | Real-Time Stream Processing"><strong>Dwell Time Analysis with Computer Vision | Real-Time Stream Processing</strong></a> </p>
+<div>
+ <strong>Created: 5 Apr 2024</strong>
+</div> 
+<br />Learn how to use computer vision to analyze wait times and optimize processes. This tutorial covers object detection, tracking, and calculating time spent in designated zones. Use these techniques to improve customer experience in retail, traffic management, or other scenarios.
+<p></p> 
+<br /> 
+<p align="left"> <a href="https://youtu.be/uWP6UjDeZvY" title="Speed Estimation &amp; Vehicle Tracking | Computer Vision | Open Source"><img align="left" alt="Speed Estimation &amp; Vehicle Tracking | Computer Vision | Open Source" src="https://github.com/SkalskiP/SkalskiP/assets/26109316/61a444c8-b135-48ce-b979-2a5ab47c5a91" width="300px" /></a> <a href="https://youtu.be/uWP6UjDeZvY" title="Speed Estimation &amp; Vehicle Tracking | Computer Vision | Open Source"><strong>Speed Estimation &amp; Vehicle Tracking | Computer Vision | Open Source</strong></a> </p>
+<div>
+ <strong>Created: 11 Jan 2024</strong>
+</div> 
+<br />Learn how to track and estimate the speed of vehicles using YOLO, ByteTrack, and Roboflow Inference. This comprehensive tutorial covers object detection, multi-object tracking, filtering detections, perspective transformation, speed estimation, visualization improvements, and more.
+<p></p> 
+<h2>💜 built with supervision</h2> 
+<p>Did you build something cool using supervision? <a href="https://github.com/roboflow/supervision/discussions/categories/built-with-supervision">Let us know!</a></p> 
+<p><a href="https://user-images.githubusercontent.com/26109316/207858600-ee862b22-0353-440b-ad85-caa0c4777904.mp4">https://user-images.githubusercontent.com/26109316/207858600-ee862b22-0353-440b-ad85-caa0c4777904.mp4</a></p> 
+<p><a href="https://github.com/roboflow/supervision/assets/26109316/c9436828-9fbf-4c25-ae8c-60e9c81b3900">https://github.com/roboflow/supervision/assets/26109316/c9436828-9fbf-4c25-ae8c-60e9c81b3900</a></p> 
+<p><a href="https://github.com/roboflow/supervision/assets/26109316/3ac6982f-4943-4108-9b7f-51787ef1a69f">https://github.com/roboflow/supervision/assets/26109316/3ac6982f-4943-4108-9b7f-51787ef1a69f</a></p> 
+<h2>📚 documentation</h2> 
+<p>Visit our <a href="https://roboflow.github.io/supervision">documentation</a> page to learn how supervision can help you build computer vision applications faster and more reliably.</p> 
+<h2>🏆 contribution</h2> 
+<p>We love your input! Please see our <a href="https://github.com/roboflow/supervision/raw/main/CONTRIBUTING.md">contributing guide</a> to get started. Thank you 🙏 to all our contributors!</p> 
+<p align="center"> <a href="https://github.com/roboflow/supervision/graphs/contributors"> <img src="https://contrib.rocks/image?repo=roboflow/supervision" /> </a> </p> 
+<br /> 
+<div align="center"> 
+ <div align="center"> 
+  <a href="https://youtube.com/roboflow"> <img src="https://media.roboflow.com/notebooks/template/icons/purple/youtube.png?ik-sdk-version=javascript-1.4.3&amp;updatedAt=1672949634652" width="3%" /> </a> 
+  <img src="https://raw.githubusercontent.com/ultralytics/assets/main/social/logo-transparent.png" width="3%" /> 
+  <a href="https://roboflow.com"> <img src="https://media.roboflow.com/notebooks/template/icons/purple/roboflow-app.png?ik-sdk-version=javascript-1.4.3&amp;updatedAt=1672949746649" width="3%" /> </a> 
+  <img src="https://raw.githubusercontent.com/ultralytics/assets/main/social/logo-transparent.png" width="3%" /> 
+  <a href="https://www.linkedin.com/company/roboflow-ai/"> <img src="https://media.roboflow.com/notebooks/template/icons/purple/linkedin.png?ik-sdk-version=javascript-1.4.3&amp;updatedAt=1672949633691" width="3%" /> </a> 
+  <img src="https://raw.githubusercontent.com/ultralytics/assets/main/social/logo-transparent.png" width="3%" /> 
+  <a href="https://docs.roboflow.com"> <img src="https://media.roboflow.com/notebooks/template/icons/purple/knowledge.png?ik-sdk-version=javascript-1.4.3&amp;updatedAt=1672949634511" width="3%" /> </a> 
+  <img src="https://raw.githubusercontent.com/ultralytics/assets/main/social/logo-transparent.png" width="3%" /> 
+  <a href="https://discuss.roboflow.com"> <img src="https://media.roboflow.com/notebooks/template/icons/purple/forum.png?ik-sdk-version=javascript-1.4.3&amp;updatedAt=1672949633584" width="3%" /> <img src="https://raw.githubusercontent.com/ultralytics/assets/main/social/logo-transparent.png" width="3%" /> </a>
+  <a href="https://blog.roboflow.com"> <img src="https://media.roboflow.com/notebooks/template/icons/purple/blog.png?ik-sdk-version=javascript-1.4.3&amp;updatedAt=1672949633605" width="3%" /> </a>  
+ </div> 
+</div>
+]]></content:encoded>
+
+
+</item>
+<item>
+<title>alist-org/alist</title>
+<link>https://github.com/alist-org/alist</link>
+<guid>https://github.com/alist-org/alist</guid>
+<content:encoded><![CDATA[
+<div> 关键词：AList、Gin、Solidjs、多存储、WebDAV
+
+总结：
+AList 是一个由 Gin 和 Solidjs 支持的多功能文件列表和 WebDAV 程序，它能够处理多种存储空间，包括本地存储、OneDrive、SharePoint（个人版和家庭版）、FTP、SFTP、WebDAV（无需 API 即可处理 OneDrive/SharePoint）、Teambition（个人版和家庭版）、SMB、Cloudreve 等。程序设计简洁，易于部署，提供了多种功能，如预览 PDF、Markdown、代码、纯文本等格式的文件，预览图像、视频和音频，并支持歌词和字幕，同时还能预览办公文档（如 docx、pptx、xlsx）。AList 还具备暗模式、国际化（I18n）、保护路由（密码保护和认证）、WebDAV 功能、Cloudflare 工作代理、文件夹打包下载、网页上传功能以及离线下载等特性。用户可以在此平台之间复制文件，加速单线程下载或流媒体的多线程下载，并通过302重定向/流量转发来实现文件传输。AList 遵循 AGPL-3.0 许可证，并在使用时应遵守相关法律法规，不滥用该软件。 <div>
+<p>🗂️A file list/WebDAV program that supports multiple storages, powered by Gin and Solidjs. / 一个支持多存储的文件列表/WebDAV程序，使用 Gin 和 Solidjs。</p><hr /><div align="center"> 
+ <a href="https://alist.nn.ci"><img alt="logo" src="https://cdn.jsdelivr.net/gh/alist-org/logo@main/logo.svg?sanitize=true" width="100px" /></a> 
+ <p><em>🗂️A file list program that supports multiple storages, powered by Gin and Solidjs.</em></p> 
+ <div> 
+  <a href="https://goreportcard.com/report/github.com/alist-org/alist/v3"> <img alt="latest version" src="https://goreportcard.com/badge/github.com/alist-org/alist/v3" /> </a> 
+  <a href="https://github.com/alist-org/alist/raw/main/LICENSE"> <img alt="License" src="https://img.shields.io/github/license/Xhofe/alist" /> </a> 
+  <a href="https://github.com/alist-org/alist/actions?query=workflow%3ABuild"> <img alt="Build status" src="https://img.shields.io/github/actions/workflow/status/Xhofe/alist/build.yml?branch=main" /> </a> 
+  <a href="https://github.com/alist-org/alist/releases"> <img alt="latest version" src="https://img.shields.io/github/release/Xhofe/alist" /> </a> 
+  <a href="https://crwd.in/alist" target="_blank" title="Crowdin"> <img src="https://badges.crowdin.net/alist/localized.svg?sanitize=true" /> </a> 
+ </div> 
+ <div> 
+  <a href="https://github.com/alist-org/alist/discussions"> <img alt="discussions" src="https://img.shields.io/github/discussions/Xhofe/alist?color=%23ED8936" /> </a> 
+  <a href="https://discord.gg/F4ymsH4xv2"> <img alt="discussions" src="https://img.shields.io/discord/1018870125102895134?logo=discord" /> </a> 
+  <a href="https://github.com/alist-org/alist/releases"> <img alt="Downloads" src="https://img.shields.io/github/downloads/Xhofe/alist/total?color=%239F7AEA&amp;logo=github" /> </a> 
+  <a href="https://hub.docker.com/r/xhofe/alist"> <img alt="Downloads" src="https://img.shields.io/docker/pulls/xhofe/alist?color=%2348BB78&amp;logo=docker&amp;label=pulls" /> </a> 
+  <a href="https://alist.nn.ci/guide/sponsor.html"> <img alt="sponsor" src="https://img.shields.io/badge/%24-sponsor-F87171.svg?sanitize=true" /> </a> 
+ </div> 
+</div> 
+<hr /> 
+<p>English | <a href="https://raw.githubusercontent.com/alist-org/alist/main/README_cn.md">中文</a>| <a href="https://raw.githubusercontent.com/alist-org/alist/main/README_ja.md">日本語</a> | <a href="https://raw.githubusercontent.com/alist-org/alist/main/CONTRIBUTING.md">Contributing</a> | <a href="https://raw.githubusercontent.com/alist-org/alist/main/CODE_OF_CONDUCT.md">CODE_OF_CONDUCT</a></p> 
+<h2>Features</h2> 
+<ul> 
+ <li><input checked="checked" disabled="disabled" type="checkbox" /> Multiple storages 
+  <ul> 
+   <li><input checked="checked" disabled="disabled" type="checkbox" /> Local storage</li> 
+   <li><input checked="checked" disabled="disabled" type="checkbox" /> <a href="https://www.alipan.com/">Aliyundrive</a></li> 
+   <li><input checked="checked" disabled="disabled" type="checkbox" /> OneDrive / Sharepoint (<a href="https://www.office.com/">global</a>, <a href="https://portal.partner.microsoftonline.cn">cn</a>,de,us)</li> 
+   <li><input checked="checked" disabled="disabled" type="checkbox" /> <a href="https://cloud.189.cn">189cloud</a> (Personal, Family)</li> 
+   <li><input checked="checked" disabled="disabled" type="checkbox" /> <a href="https://drive.google.com/">GoogleDrive</a></li> 
+   <li><input checked="checked" disabled="disabled" type="checkbox" /> <a href="https://www.123pan.com/">123pan</a></li> 
+   <li><input checked="checked" disabled="disabled" type="checkbox" /> FTP / SFTP</li> 
+   <li><input checked="checked" disabled="disabled" type="checkbox" /> <a href="https://www.mypikpak.com/">PikPak</a></li> 
+   <li><input checked="checked" disabled="disabled" type="checkbox" /> <a href="https://aws.amazon.com/s3/">S3</a></li> 
+   <li><input checked="checked" disabled="disabled" type="checkbox" /> <a href="https://seafile.com/">Seafile</a></li> 
+   <li><input checked="checked" disabled="disabled" type="checkbox" /> <a href="https://www.upyun.com/products/file-storage">UPYUN Storage Service</a></li> 
+   <li><input checked="checked" disabled="disabled" type="checkbox" /> WebDav(Support OneDrive/SharePoint without API)</li> 
+   <li><input checked="checked" disabled="disabled" type="checkbox" /> Teambition(<a href="https://www.teambition.com/">China</a>,<a href="https://us.teambition.com/">International</a>)</li> 
+   <li><input checked="checked" disabled="disabled" type="checkbox" /> <a href="https://www.mediatrack.cn/">Mediatrack</a></li> 
+   <li><input checked="checked" disabled="disabled" type="checkbox" /> <a href="https://yun.139.com/">139yun</a> (Personal, Family)</li> 
+   <li><input checked="checked" disabled="disabled" type="checkbox" /> <a href="https://disk.yandex.com/">YandexDisk</a></li> 
+   <li><input checked="checked" disabled="disabled" type="checkbox" /> <a href="http://pan.baidu.com/">BaiduNetdisk</a></li> 
+   <li><input checked="checked" disabled="disabled" type="checkbox" /> <a href="https://www.terabox.com/main">Terabox</a></li> 
+   <li><input checked="checked" disabled="disabled" type="checkbox" /> <a href="https://drive.uc.cn">UC</a></li> 
+   <li><input checked="checked" disabled="disabled" type="checkbox" /> <a href="https://pan.quark.cn">Quark</a></li> 
+   <li><input checked="checked" disabled="disabled" type="checkbox" /> <a href="https://pan.xunlei.com">Thunder</a></li> 
+   <li><input checked="checked" disabled="disabled" type="checkbox" /> <a href="https://www.lanzou.com/">Lanzou</a></li> 
+   <li><input checked="checked" disabled="disabled" type="checkbox" /> <a href="https://www.ilanzou.com/">ILanzou</a></li> 
+   <li><input checked="checked" disabled="disabled" type="checkbox" /> <a href="https://www.alipan.com/">Aliyundrive share</a></li> 
+   <li><input checked="checked" disabled="disabled" type="checkbox" /> <a href="https://photos.google.com/">Google photo</a></li> 
+   <li><input checked="checked" disabled="disabled" type="checkbox" /> <a href="https://mega.nz">Mega.nz</a></li> 
+   <li><input checked="checked" disabled="disabled" type="checkbox" /> <a href="https://photo.baidu.com/">Baidu photo</a></li> 
+   <li><input checked="checked" disabled="disabled" type="checkbox" /> SMB</li> 
+   <li><input checked="checked" disabled="disabled" type="checkbox" /> <a href="https://115.com/">115</a></li> 
+   <li><input checked="checked" disabled="disabled" type="checkbox" /> Cloudreve</li> 
+   <li><input checked="checked" disabled="disabled" type="checkbox" /> <a href="https://www.dropbox.com/">Dropbox</a></li> 
+   <li><input checked="checked" disabled="disabled" type="checkbox" /> <a href="https://www.feijipan.com/">FeijiPan</a></li> 
+   <li><input checked="checked" disabled="disabled" type="checkbox" /> <a href="https://www.dogecloud.com/product/oss">dogecloud</a></li> 
+  </ul> </li> 
+ <li><input checked="checked" disabled="disabled" type="checkbox" /> Easy to deploy and out-of-the-box</li> 
+ <li><input checked="checked" disabled="disabled" type="checkbox" /> File preview (PDF, markdown, code, plain text, ...)</li> 
+ <li><input checked="checked" disabled="disabled" type="checkbox" /> Image preview in gallery mode</li> 
+ <li><input checked="checked" disabled="disabled" type="checkbox" /> Video and audio preview, support lyrics and subtitles</li> 
+ <li><input checked="checked" disabled="disabled" type="checkbox" /> Office documents preview (docx, pptx, xlsx, ...)</li> 
+ <li><input checked="checked" disabled="disabled" type="checkbox" /> <code>README.md</code> preview rendering</li> 
+ <li><input checked="checked" disabled="disabled" type="checkbox" /> File permalink copy and direct file download</li> 
+ <li><input checked="checked" disabled="disabled" type="checkbox" /> Dark mode</li> 
+ <li><input checked="checked" disabled="disabled" type="checkbox" /> I18n</li> 
+ <li><input checked="checked" disabled="disabled" type="checkbox" /> Protected routes (password protection and authentication)</li> 
+ <li><input checked="checked" disabled="disabled" type="checkbox" /> WebDav (see <a href="https://alist.nn.ci/guide/webdav.html">https://alist.nn.ci/guide/webdav.html</a> for details)</li> 
+ <li><input checked="checked" disabled="disabled" type="checkbox" /> <a href="https://hub.docker.com/r/xhofe/alist">Docker Deploy</a></li> 
+ <li><input checked="checked" disabled="disabled" type="checkbox" /> Cloudflare Workers proxy</li> 
+ <li><input checked="checked" disabled="disabled" type="checkbox" /> File/Folder package download</li> 
+ <li><input checked="checked" disabled="disabled" type="checkbox" /> Web upload(Can allow visitors to upload), delete, mkdir, rename, move and copy</li> 
+ <li><input checked="checked" disabled="disabled" type="checkbox" /> Offline download</li> 
+ <li><input checked="checked" disabled="disabled" type="checkbox" /> Copy files between two storage</li> 
+ <li><input checked="checked" disabled="disabled" type="checkbox" /> Multi-thread downloading acceleration for single-thread download/stream</li> 
+</ul> 
+<h2>Document</h2> 
+<p><a href="https://alist.nn.ci/">https://alist.nn.ci/</a></p> 
+<h2>Demo</h2> 
+<p><a href="https://al.nn.ci">https://al.nn.ci</a></p> 
+<h2>Discussion</h2> 
+<p>Please go to our <a href="https://github.com/alist-org/alist/discussions">discussion forum</a> for general questions, <strong>issues are for bug reports and feature requests only.</strong></p> 
+<h2>Sponsor</h2> 
+<p>AList is an open-source software, if you happen to like this project and want me to keep going, please consider sponsoring me or providing a single donation! Thanks for all the love and support: <a href="https://alist.nn.ci/guide/sponsor.html">https://alist.nn.ci/guide/sponsor.html</a></p> 
+<h3>Special sponsors</h3> 
+<ul> 
+ <li><a href="https://apps.apple.com/app/apple-store/id1659622164?pt=118612019&amp;ct=alist&amp;mt=8">VidHub</a> - An elegant cloud video player within the Apple ecosystem. Support for iPhone, iPad, Mac, and Apple TV.</li> 
+ <li><a href="https://www.asiayun.com/aff/QQCOOQKZ">亚洲云</a> - 高防服务器|服务器租用|福州高防|广东电信|香港服务器|美国服务器|海外服务器 - 国内靠谱的企业级云计算服务提供商 (sponsored Chinese API server)</li> 
+ <li><a href="http://zhaoziyuan2.cc/">找资源</a> - 阿里云盘资源搜索引擎</li> 
+</ul> 
+<h2>Contributors</h2> 
+<p>Thanks goes to these wonderful people:</p> 
+<p><a href="https://github.com/alist-org/alist/graphs/contributors"><img alt="Contributors" src="http://contrib.nn.ci/api?repo=alist-org/alist&amp;repo=alist-org/alist-web&amp;repo=alist-org/docs" /></a></p> 
+<h2>License</h2> 
+<p>The <code>AList</code> is open-source software licensed under the AGPL-3.0 license.</p> 
+<h2>Disclaimer</h2> 
+<ul> 
+ <li>This program is a free and open source project. It is designed to share files on the network disk, which is convenient for downloading and learning Golang. Please abide by relevant laws and regulations when using it, and do not abuse it;</li> 
+ <li>This program is implemented by calling the official sdk/interface, without destroying the official interface behavior;</li> 
+ <li>This program only does 302 redirect/traffic forwarding, and does not intercept, store, or tamper with any user data;</li> 
+ <li>Before using this program, you should understand and bear the corresponding risks, including but not limited to account ban, download speed limit, etc., which is none of this program's business;</li> 
+ <li>If there is any infringement, please contact me by <a href="mailto:i@nn.ci">email</a>, and it will be dealt with in time.</li> 
+</ul> 
+<hr /> 
+<blockquote> 
+ <p><a href="https://nn.ci/">@Blog</a> · <a href="https://github.com/alist-org">@GitHub</a> · <a href="https://t.me/alist_chat">@TelegramGroup</a> · <a href="https://discord.gg/F4ymsH4xv2">@Discord</a></p> 
+</blockquote>
+]]></content:encoded>
+
+
+</item>
+<item>
+<title>frdel/agent-zero</title>
+<link>https://github.com/frdel/agent-zero</link>
+<guid>https://github.com/frdel/agent-zero</guid>
+<content:encoded><![CDATA[
+<div> 关键词：Agent Zero AI框架、透明性、多功能性、可定制性、交互性
+
+总结:
+Agent Zero AI框架是一种动态、有机成长的个人助手工具，旨在适应用户的需求和任务。其核心特性包括：
+
+1. **透明性与可读性**：Agent Zero设计为完全透明，用户可以轻松理解其工作原理、代码和行为，从而进行调整和优化。
+
+2. **多功能性**：它不预设特定任务，而是作为一个通用的个人助理，通过搜索网络、执行代码、与其他代理协作来完成任务。其工具使用功能从零开始构建，确保兼容性和可靠性，即使是小型模型也能有效运行。
+
+3. **可定制与扩展性**：几乎所有的框架元素都可以由用户自定义或扩展，通过修改系统提示文件（agent.system.md）和工具目录（python/tools/），用户可以根据自己的需求调整AI的行为。
+
+4. **交互性与沟通**：Agent Zero强调沟通的重要性，用户可以通过系统提示指导代理如何有效地提问、提供指令和反馈，以实现高效协作。
+
+5. **安全性与环境要求**：虽然Agent Zero功能强大，但也需注意安全问题，建议在隔离环境中使用，并确保提供理想的运行环境，包括必要的操作系统、工具和API密钥。
+
+通过这些特性，Agent Zero AI框架为用户提供了一个灵活、高度可定制的AI助手平台，旨在通过持续学习和适应，满足用户在不同场景下的需求。 <div>
+<p>Agent Zero AI framework</p><hr /><h1>Agent Zero</h1> 
+<p><a href="https://www.skool.com/agent-zero"><img alt="Join our Skool Community" src="https://img.shields.io/badge/Skool-Join%20our%20Community-4A90E2?style=for-the-badge&amp;logo=skool&amp;logoColor=white" /></a> <a href="https://discord.gg/B8KZKNsPpj"><img alt="Join our Discord" src="https://img.shields.io/badge/Discord-Join%20our%20server-5865F2?style=for-the-badge&amp;logo=discord&amp;logoColor=white" /></a> <a href="https://www.youtube.com/@AgentZeroFW"><img alt="Subscribe on YouTube" src="https://img.shields.io/badge/YouTube-Subscribe-red?style=for-the-badge&amp;logo=youtube&amp;logoColor=white" /></a> <a href="https://www.linkedin.com/in/jan-tomasek/"><img alt="Connect on LinkedIn" src="https://img.shields.io/badge/LinkedIn-Connect-blue?style=for-the-badge&amp;logo=linkedin&amp;logoColor=white" /></a> <a href="https://x.com/JanTomasekDev"><img alt="Follow on X.com" src="https://img.shields.io/badge/X.com-Follow-1DA1F2?style=for-the-badge&amp;logo=x&amp;logoColor=white" /></a></p> 
+<p><a href="https://www.youtube.com/watch?v=C9n8zFpaV3I"><img alt="Intro Video" src="https://raw.githubusercontent.com/frdel/agent-zero/main/docs/res/intro_vid.jpg" /></a></p> 
+<p><strong>Personal and organic AI framework</strong></p> 
+<ul> 
+ <li>Agent Zero is not a predefined agentic framework. It is designed to be dynamic, organically growing, and learning as you use it.</li> 
+ <li>Agent Zero is fully transparent, readable, comprehensible, customizable and interactive.</li> 
+ <li>Agent Zero uses the computer as a tool to accomplish its (your) tasks.</li> 
+</ul> 
+<h2>Now with UI:</h2> 
+<p><img alt="UI prototype" src="https://raw.githubusercontent.com/frdel/agent-zero/main/docs/res/ui_screen1.png" /></p> 
+<h2>Key concepts</h2> 
+<ol> 
+ <li><strong>General-purpose assistant</strong></li> 
+</ol> 
+<ul> 
+ <li>Agent Zero is not pre-programmed for specific tasks (but can be). It is meant to be a general-purpose personal assistant. Give it a task, and it will gather information, execute commands and code, cooperate with other agent instances, and do its best to accomplish it.</li> 
+ <li>It has a persistent memory, allowing it to memorize previous solutions, code, facts, instructions, etc., to solve tasks faster and more reliably in the future.</li> 
+</ul> 
+<ol start="2"> 
+ <li><strong>Computer as a tool</strong></li> 
+</ol> 
+<ul> 
+ <li>Agent Zero uses the operating system as a tool to accomplish its tasks. It has no single-purpose tools pre-programmed. Instead, it can write its own code and use the terminal to create and use its own tools as needed.</li> 
+ <li>The only default tools in its arsenal are online search, memory features, communication (with the user and other agents), and code/terminal execution. Everything else is created by the agent itself or can be extended by the user.</li> 
+ <li>Tool usage functionality has been developed from scratch to be the most compatible and reliable, even with very small models.</li> 
+</ul> 
+<ol start="3"> 
+ <li><strong>Multi-agent cooperation</strong></li> 
+</ol> 
+<ul> 
+ <li>Every agent has a superior agent giving it tasks and instructions. Every agent then reports back to its superior.</li> 
+ <li>In the case of the first agent in the chain (Agent 0), the superior is the human user; the agent sees no difference.</li> 
+ <li>Every agent can create its subordinate agent to help break down and solve subtasks. This helps all agents keep their context clean and focused.</li> 
+</ul> 
+<ol start="4"> 
+ <li><strong>Completely customizable and extensible</strong></li> 
+</ol> 
+<ul> 
+ <li>Almost nothing in this framework is hard-coded. Nothing is hidden. Everything can be extended or changed by the user.</li> 
+ <li>The whole behavior is defined by a system prompt in the <strong>prompts/default/agent.system.md</strong> file. Change this prompt and change the framework dramatically.</li> 
+ <li>The framework does not guide or limit the agent in any way. There are no hard-coded rails that agents have to follow.</li> 
+ <li>Every prompt, every small message template sent to the agent in its communication loop, can be found in the <strong>prompts/</strong> folder and changed.</li> 
+ <li>Every default tool can be found in the <strong>python/tools/</strong> folder and changed or copied to create new predefined tools.</li> 
+ <li>Of course, it is open-source (except for some tools like Perplexity, but that will be replaced with an open-source alternative as well in the future).</li> 
+</ul> 
+<ol start="5"> 
+ <li><strong>Communication is key</strong></li> 
+</ol> 
+<ul> 
+ <li>Give your agent a proper system prompt and instructions, and it can do miracles.</li> 
+ <li>Agents can communicate with their superiors and subordinates, asking questions, giving instructions, and providing guidance. Instruct your agents in the system prompt on how to communicate effectively.</li> 
+ <li>The terminal interface is real-time streamed and interactive. You can stop and intervene at any point. If you see your agent heading in the wrong direction, just stop and tell it right away.</li> 
+ <li>There is a lot of freedom in this framework. You can instruct your agents to regularly report back to superiors asking for permission to continue. You can instruct them to use point-scoring systems when deciding when to delegate subtasks. Superiors can double-check subordinates' results and dispute. The possibilities are endless.</li> 
+</ul> 
+<p><img alt="Agent Zero" src="https://raw.githubusercontent.com/frdel/agent-zero/main/docs/res/splash_wide.png" /></p> 
+<h2>Nice features to have</h2> 
+<ul> 
+ <li>Output is very clean, colorful, readable and interactive; nothing is hidden.</li> 
+ <li>The same colorful output you see in the terminal is automatically saved to HTML file in <strong>logs/</strong> folder for every session.</li> 
+ <li>Agent output is streamed in real-time, allowing the user to read along and intervene at any time.</li> 
+ <li>No coding is required, only prompting and communication skills.</li> 
+ <li>With a solid system prompt, the framework is reliable even with small models, including precise tool usage.</li> 
+</ul> 
+<h2>Keep in mind</h2> 
+<ol> 
+ <li> <p><strong>Agent Zero can be dangerous!</strong> With proper instruction, Agent Zero is capable of many things, even potentially dangerous to your computer, data, or accounts. Always run Agent Zero in an isolated environment (like the built in docker container) and be careful what you wish for.</p> </li> 
+ <li> <p><strong>Agent Zero is not pre-programmed; it is prompt-based.</strong> The whole framework contains only a minimal amount of code and does not guide the agent in any way. Everything lies in the system prompt in the <strong>prompts/</strong> folder. Here you can rewrite the whole framework behavior to your needs. If your agent fails to communicate properly, use tools, reason, use memory, find answers - just instruct it better.</p> </li> 
+ <li> <p><strong>If you cannot provide the ideal environment, let your agent know.</strong> Agent Zero is made to be used in an isolated virtual environment (for safety) with some tools preinstalled and configured. If you cannot provide all the necessary conditions or API keys, just change the system prompt and tell your agent what operating system and tools are at its disposal. Nothing is hard-coded; if you do not tell your agent about a certain tool, it will not know about it and will not try to use it.</p> </li> 
+</ol> 
+<p><a href="https://www.youtube.com/watch?v=_Pionjv4hGc"><img alt="David Ondrej video" src="https://raw.githubusercontent.com/frdel/agent-zero/main/docs/res/david_vid.jpg" /></a></p> 
+<h2>Known problems</h2> 
+<ol> 
+ <li>The system prompt sucks. You can do better. If you do, help me please :)</li> 
+ <li>The communication between agent and terminal in docker container via SSH can sometimes break and stop producing outputs. Sometimes it is because the agent runs something like "server.serve_forever()" which causes the terminal to hang, sometimes a random error can occur. Restarting the agent and/or the docker container helps.</li> 
+ <li>The agent can break his operating system. Sometimes the agent can deactivate virtual environment, uninstall packages, change config etc. Again, removing the docker container and cleaning up the <strong>work_dir/</strong> is enough to fix that.</li> 
+</ol> 
+<h2>Ideal environment</h2> 
+<ul> 
+ <li><strong>Docker container</strong>: The perfect environment to run Agent Zero is the built-in docker container. The agent can download the image <strong>frdel/agent-zero-exe</strong> on its own and start the container, you only need to have docker running (like the Docker Desktop application).</li> 
+ <li><strong>Python</strong>: Python has to be installed on the system to run the framework.</li> 
+ <li><strong>Internet access</strong>: The agent will need internet access to use its online knowledge tool and execute commands and scripts requiring a connection. If you do not need your agent to be online, you can alter its prompts in the <strong>prompts/</strong> folder and make it fully local.</li> 
+</ul> 
+<p><img alt="Time example" src="https://raw.githubusercontent.com/frdel/agent-zero/main/docs/res/time_example.jpg" /></p> 
+<h2>Setup</h2> 
+<p>A detailed setup guide with a video can be found here: <a href="https://github.com/frdel/agent-zero/tree/main/docs/installation">/docs/installation</a>. Scroll down to see the readme file.</p> 
+<blockquote> 
+ <p>⚠️ <strong>Changes to launch files since v0.6:</strong><br /> main.py file has been replaced with run_ui.py (webui) and run_cli.py (terminal) launch files. configuration has been moved to initialize.py for both webui and terminal launch files.</p> 
+</blockquote>
+]]></content:encoded>
+
+
+</item>
 
 <item>
 <title>xyflow/xyflow</title>
