@@ -4,6 +4,335 @@
 <title>Ethereum Research - Latest topics</title>
 <link>https://ethresear.ch/latest</link>
 
+<item>
+<title>Using FRI for DA with Optimistic Correctable Commitments in Rollups</title>
+<link>https://ethresear.ch/t/using-fri-for-da-with-optimistic-correctable-commitments-in-rollups/20467</link>
+<guid>https://ethresear.ch/t/using-fri-for-da-with-optimistic-correctable-commitments-in-rollups/20467</guid>
+<content:encoded><![CDATA[
+<div> 关键词：FRI、数据可用性、乐观可纠正承诺、递归汇总、SPoRA挖矿
+
+总结：
+
+文章提出了一种利用FRI（快速重叠距离检验）与乐观可纠正承诺来实现数据可用性的新方法，该方法显著减少了存储在区块链上的数据量，相比分布式网络服务的数据量减少数百到数千倍。在汇总上下文中，引入了新的承诺构建技术，确保了在汇总中可靠存储和数据可用性，而不是使用标准承诺C。
+
+该解决方案支持通过递归汇总实现无限区块链扩展，通过将大量数据处理移至链下并仅存储少量承诺在链上，提供无限制的扩展能力，同时不牺牲安全性和分散性。通过账户抽象简化了用户体验，用户无需关注特定汇总存储其资金，同样，开发者可以创建服务而无需担心数据由哪个汇总处理。
+
+该技术允许以数百或数千倍的效率在链上存储数据，对于每个兆字节在网络中分布的数据，仅需存储32字节的哈希值。这大大降低了存储和交易成本，使技术更易于大规模采用。同时，它提供了灵活性，即块可以在不需要丢失数据完整性和可用性的情况下从链上移动到链下。
+
+此解决方案为Web2应用向Web3的转变提供了基础设施，为公司提供了利用区块链的安全性、透明度和分散性而不必完全重新设计其商业模式的机会。它在行业中的竞争优势在于结合了高效性、可扩展性和与高级技术如递归汇总的兼容性。 <div>
+<h2><a class="anchor" href="https://ethresear.ch#p-50034-abstract-1" name="p-50034-abstract-1"></a>Abstract</h2>
+<p>Scaling blockchains and transitioning from Web2 to Web3 require efficient solutions for storing and accessing large volumes of data. We present a new technique for using FRI commitments combined with optimistic correctable commitments to implement Data Availability (DA). This allows for a significant reduction in the volume of data stored on-chain, by hundreds and thousands of times compared to the volume of data served by the distributed network. For each cluster of megabytes, it is sufficient to store only a short 32-byte hash on-chain. In the context of rollups, we introduce a new commitment construction that ensures reliable storage and data availability when used in rollups instead of the standard commitment <span class="math">C</span>. Combined with recursive rollups, our solution paves the way for unlimited blockchain scaling and the transfer of Web2 to Web3, ensuring reliability, security, and data availability.</p>
+<h2><a class="anchor" href="https://ethresear.ch#p-50034-introduction-2" name="p-50034-introduction-2"></a>Introduction</h2>
+<h3><a class="anchor" href="https://ethresear.ch#p-50034-the-problem-of-scaling-and-data-storage-in-blockchain-3" name="p-50034-the-problem-of-scaling-and-data-storage-in-blockchain-3"></a>The Problem of Scaling and Data Storage in Blockchain</h3>
+<p>Blockchains produce enormous amounts of data, and efficient management of this data is critical for their scaling and widespread application in Web3. Traditional solutions, such as Filecoin, do not provide reliable data storage at the consensus level. Other solutions, like Arweave, while offering storage reliability, are not suitable for dynamic Web3 applications due to the impossibility of modifying or deleting data.</p>
+<p>Modern solutions, such as EthStorage and 0g, aim to solve these problems but face limitations:</p>
+<ul>
+<li><strong>EthStorage</strong> uses data replication, requiring the storage of multiple copies of the same volume of data to ensure reliability.</li>
+<li><strong>0g</strong> applies Reed-Solomon codes for data sharding but uses KZG10 commitments, which are not optimal for building recursion — a key mechanism for scaling through recursive rollups.</li>
+</ul>
+<h3><a class="anchor" href="https://ethresear.ch#p-50034-the-potential-of-our-solution-4" name="p-50034-the-potential-of-our-solution-4"></a>The Potential of Our Solution</h3>
+<ul>
+<li>
+<p><strong>Scaling through recursive rollups</strong>: Support for recursive rollups allows for a significant increase in network throughput. This is achieved by processing large volumes of data off-chain and storing only minimal commitments on-chain. This approach provides unlimited scaling without compromising security and decentralization.</p>
+</li>
+<li>
+<p><strong>Ease of Use through Account Abstraction</strong>: Despite the technical complexity of recursive rollups, they remain transparent for end users and developers. With the implementation of account abstraction, users don’t need to concern themselves with which specific rollup stores their funds — they see a total balance and can perform operations without additional complications. Similarly, developers of decentralized applications can create services without worrying about which rollup processes their data. This is akin to how Bitcoin wallets use UTXO abstraction: users see their total balance without delving into technical details. Thus, our solution provides scalability without compromising convenience and accessibility for users and developers.</p>
+</li>
+<li>
+<p><strong>Economical data storage</strong>: Our solution allows storing hundreds or thousands of times less information on-chain compared to the volume of data processed off-chain. For each megabyte of data distributed in the network, only a short 32-byte hash is stored on the blockchain. This significantly reduces storage and transaction costs, making the technology more accessible for mass adoption.</p>
+</li>
+<li>
+<p><strong>Flexibility through off-chain block transfer</strong>: Using recursive rollup technology, blocks can subsequently be moved off-chain without losing data integrity and availability. This provides flexibility in network architecture and optimizes resource usage.</p>
+</li>
+<li>
+<p><strong>Transformation of Web2 to Web3</strong>: Our technology provides infrastructure for transferring existing Web2 applications and services to the decentralized Web3 environment. This opens up new opportunities for companies, allowing them to leverage the advantages of blockchain — security, transparency, and decentralization — without the need to completely rethink their business models.</p>
+</li>
+<li>
+<p><strong>Competitive advantage</strong>: Unlike existing solutions, our proposal combines efficiency, scalability, and compatibility with advanced technologies such as recursive rollups. This creates a significant competitive advantage and sets new standards in the industry.</p>
+</li>
+</ul>
+<h3><a class="anchor" href="https://ethresear.ch#p-50034-our-goal-5" name="p-50034-our-goal-5"></a>Our Goal</h3>
+<p>We propose a solution that allows the use of FRI (Fast Reed-Solomon Interactive Oracle Proofs of Proximity) for DA with optimistic correctable commitments. This provides:</p>
+<ul>
+<li><strong>Efficient data storage</strong>: Storing only a small commitment (e.g., 32 bytes) on-chain for data clusters of several megabytes.</li>
+<li><strong>Compatibility with recursive rollups</strong>: Reducing the volume of data required for on-chain storage, contributing to unlimited blockchain scaling.</li>
+<li><strong>Data reliability and availability</strong>: Ensuring data correctness and availability even in the presence of errors or malicious actions.</li>
+</ul>
+<h2><a class="anchor" href="https://ethresear.ch#p-50034-preliminary-information-6" name="p-50034-preliminary-information-6"></a>Preliminary Information</h2>
+<h3><a class="anchor" href="https://ethresear.ch#p-50034-fri-and-its-application-7" name="p-50034-fri-and-its-application-7"></a>FRI and Its Application</h3>
+<p><strong>FRI</strong> is a method used in zkSNARK protocols to verify the proximity of data to Reed-Solomon code. It allows creating compact commitments to large volumes of data and provides efficient verification of their correctness.</p>
+<h3><a class="anchor" href="https://ethresear.ch#p-50034-problems-when-using-fri-for-da-8" name="p-50034-problems-when-using-fri-for-da-8"></a>Problems When Using FRI for DA</h3>
+<p>Direct implementation of FRI for DA faces problems:</p>
+<ul>
+<li><strong>Incorrect commitments</strong>: A malicious participant can present a commitment with errors in correction codes. If these errors are few enough, such a commitment will be accepted by the network.</li>
+<li><strong>Lack of connection between commitment and data</strong>: Even if the data is recovered, establishing a connection with the original commitment is difficult due to possible errors in the original commitment.</li>
+</ul>
+<h2><a class="anchor" href="https://ethresear.ch#p-50034-our-solution-optimistic-correctable-commitments-9" name="p-50034-our-solution-optimistic-correctable-commitments-9"></a>Our Solution: Optimistic Correctable Commitments</h2>
+<p>We propose an extension over FRI that solves these problems by introducing a new commitment construction <span class="math">\mathcal{C} = (C, \chi, \{a_i\})</span>, where</p>
+<p><span class="math">\mathbf{D}</span> - data we want to store in the network,</p>
+<p><span class="math">C=\mathrm{Commit}(\mathbf{D})</span> - commitment to the data,</p>
+<p><span class="math">\mathrm{Shard}_j</span> - shards into which the data is divided using Reed-Solomon codes,</p>
+<p><span class="math">H_j = \mathrm{Hash}(\mathrm{Shard}_j)</span> - hash of the shard,</p>
+<p><span class="math">\chi = \mathrm{Challenge}(C, \{H_j\})</span> - pseudorandom challenge,</p>
+<p><span class="math">\{a_i\}</span> - result of opening the commitment <span class="math">C</span> at <span class="math">\chi</span>.</p>
+<p>This construction provides:</p>
+<ul>
+<li><strong>Connection between data and commitment</strong>: Ensures that the data corresponds to the commitment and can be verified.</li>
+<li><strong>Possibility of error correction</strong>: The system is capable of detecting and correcting errors without trusting validators or clients.</li>
+<li><strong>Use in rollups</strong>: Provides mechanisms for integration with rollups, allowing them to use <span class="math">\mathcal{C}</span> instead of the standard commitment <span class="math">C</span>.</li>
+</ul>
+<p><img alt="fig0" height="500" src="https://ethresear.ch/uploads/default/original/3X/6/9/69b5279febeda88a190490a8338a91e9431cf046.svg" width="206" /></p>
+<h2><a class="anchor" href="https://ethresear.ch#p-50034-implementation-details-10" name="p-50034-implementation-details-10"></a>Implementation Details</h2>
+<h3><a class="anchor" href="https://ethresear.ch#p-50034-data-structure-and-sharding-11" name="p-50034-data-structure-and-sharding-11"></a>Data Structure and Sharding</h3>
+<h4><a class="anchor" href="https://ethresear.ch#p-50034-data-representation-12" name="p-50034-data-representation-12"></a>Data Representation</h4>
+<p>Let the data <span class="math">D</span> be represented as a matrix of size <span class="math">T \times K</span>, where <span class="math">|D| = T \cdot K</span>. We consider the matrix as a function of columns.</p>
+<h4><a class="anchor" href="https://ethresear.ch#p-50034-domain-extension-13" name="p-50034-domain-extension-13"></a>Domain Extension</h4>
+<p>We apply domain extension to the matrix, increasing the number of columns from <span class="math">K</span> to <span class="math">N</span> using Reed-Solomon codes and the Discrete Fourier Transform (DFT). This allows for redundancy for error correction.</p>
+<h4><a class="anchor" href="https://ethresear.ch#p-50034-data-sharding-14" name="p-50034-data-sharding-14"></a>Data Sharding</h4>
+<p>The resulting matrix has a size of <span class="math">T \times N</span>. Each column <span class="math">\text{Shard}_j</span> (for <span class="math">j = 1, \dots, N</span>) is considered as a separate data shard. These shards are distributed among network nodes for storage.</p>
+<h4><a class="anchor" href="https://ethresear.ch#p-50034-shard-hashing-15" name="p-50034-shard-hashing-15"></a>Shard Hashing</h4>
+<p>Each shard is hashed using a cryptographic hash function:</p>
+<p><span class="math">
+H_j = \mathrm{Hash}(\text{Shard}_j).
+</span></p>
+<p><img alt="fig1" height="362" src="https://ethresear.ch/uploads/default/original/3X/a/b/aba4dab24d942f940b86fe1914cac86be03f1d1b.svg" width="690" /></p>
+<h3><a class="anchor" href="https://ethresear.ch#p-50034-commitment-generation-and-opening-16" name="p-50034-commitment-generation-and-opening-16"></a>Commitment Generation and Opening</h3>
+<h4><a class="anchor" href="https://ethresear.ch#p-50034-commitment-to-data-17" name="p-50034-commitment-to-data-17"></a>Commitment to Data</h4>
+<p>We apply FRI to the matrix, considering it as a function of rows. This allows obtaining a commitment <span class="math">C = \mathrm{Commit}(D)</span>, compactly representing all the data.</p>
+<h4><a class="anchor" href="https://ethresear.ch#p-50034-random-point-generation-18" name="p-50034-random-point-generation-18"></a>Random Point Generation</h4>
+<p>We use the <strong>Fiat-Shamir heuristic</strong> to calculate a pseudorandom point <span class="math">\chi</span>, dependent on the commitment and shard hashes:</p>
+<p><span class="math">
+\chi = \mathrm{Challenge}(C, H_1, H_2, \dots, H_N).
+</span></p>
+<h4><a class="anchor" href="https://ethresear.ch#p-50034-commitment-opening-19" name="p-50034-commitment-opening-19"></a>Commitment Opening</h4>
+<p>We perform a polynomial opening of the commitment <span class="math">C</span> at point <span class="math">\chi</span>, obtaining proof <span class="math">\{a_i\}</span>:</p>
+<p><span class="math">
+\{a_i\} = \mathrm{Open}(C, \chi).
+</span></p>
+<h3><a class="anchor" href="https://ethresear.ch#p-50034-new-commitment-construction-for-rollups-20" name="p-50034-new-commitment-construction-for-rollups-20"></a>New Commitment Construction for Rollups</h3>
+<h4><a class="anchor" href="https://ethresear.ch#p-50034-use-in-rollups-21" name="p-50034-use-in-rollups-21"></a>Use in Rollups</h4>
+<p>When applied in rollups, <span class="math">\mathcal{C}</span> is used instead of the standard commitment <span class="math">C</span>.</p>
+<h3><a class="anchor" href="https://ethresear.ch#p-50034-shard-correctness-verification-22" name="p-50034-shard-correctness-verification-22"></a>Shard Correctness Verification</h3>
+<p>For each shard <span class="math">\text{Shard}_j</span>, a node can verify it without the need to store all the data:</p>
+<ol>
+<li>
+<p><strong>Calculate the shard value at point <span class="math">\chi</span></strong>:</p>
+<p><span class="math">
+s_j = \mathrm{Eval}(\text{Shard}_j, \chi).
+</span></p>
+</li>
+<li>
+<p><strong>Calculate the opening value at the point corresponding to the shard</strong>:</p>
+<p><span class="math">
+s'_j = \mathrm{Eval}(\{a_i\}, P_j),
+</span></p>
+<p>where <span class="math">P_j</span> is the point associated with sharding.</p>
+</li>
+<li>
+<p><strong>Compare values</strong>:</p>
+<p><span class="math">
+s_j \stackrel{?}{=} s'_j.
+</span></p>
+</li>
+</ol>
+<p>If the equality holds, shard <span class="math">\text{Shard}_j</span> is considered correct.</p>
+<p><img alt="fig2" height="414" src="https://ethresear.ch/uploads/default/original/3X/0/9/09b2e020e39c1b237b66c4e6c51d7b41153b6825.svg" width="690" /></p>
+<h4><a class="anchor" href="https://ethresear.ch#p-50034-correctness-lemma-23" name="p-50034-correctness-lemma-23"></a>Correctness Lemma</h4>
+<p><strong>Lemma</strong>: If for shard <span class="math">\text{Shard}_j</span> the equality <span class="math">s_j = a_j</span> holds, then with high probability <span class="math">\text{Shard}_j</span> is a correct shard of data <span class="math">D</span>.</p>
+<p><strong>Proof</strong>:</p>
+<p>Using the <strong>Schwartz-Zippel lemma</strong>, we know that two different polynomials of degree <span class="math">d</span> can coincide in no more than <span class="math">d</span> points out of <span class="math">|F|</span>, where <span class="math">F</span> is the field. Since <span class="math">\chi</span> is chosen randomly, the probability that an incorrect shard will pass the check is <span class="math">\frac{d}{|F|}</span>, which is negligibly small for large fields.</p>
+<h2><a class="anchor" href="https://ethresear.ch#p-50034-system-architecture-24" name="p-50034-system-architecture-24"></a>System Architecture</h2>
+<h3><a class="anchor" href="https://ethresear.ch#p-50034-data-writing-process-25" name="p-50034-data-writing-process-25"></a>Data Writing Process</h3>
+<ol>
+<li>
+<p><strong>Transaction Initiation</strong>:</p>
+<ul>
+<li>The client forms a transaction with data <span class="math">\mathbf{D}</span> and metadata <span class="math">\mathcal{M}</span>:
+<ul>
+<li>Commitment <span class="math">C</span>.</li>
+<li>Shard hashes <span class="math">\{H_j\}</span>.</li>
+<li>Opening <span class="math">\pi = \{a_i\}</span> at point <span class="math">\chi</span>.</li>
+<li>Construction <span class="math">\mathcal{C} = (C, \chi, \{a_i\})</span>.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Transaction Validation</strong>:</p>
+<ul>
+<li>Validators check the client’s signature.</li>
+<li>Verify the correctness of metadata and opening <span class="math">\pi</span>.</li>
+<li>Verify the correctness of <span class="math">\mathcal{C}</span>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Transaction Signing</strong>:</p>
+<ul>
+<li>If all checks are successful, validators sign the transaction and transmit metadata and shards to network nodes.</li>
+</ul>
+</li>
+<li>
+<p><strong>Shard Distribution</strong>:</p>
+<ul>
+<li>Data <span class="math">\mathbf{D}</span> is sharded, and shards <span class="math">\{\text{Shard}_j\}</span> are distributed among network nodes.</li>
+</ul>
+</li>
+<li>
+<p><strong>Node Verification</strong>:</p>
+<ul>
+<li>Nodes receive their shards and check:
+<ul>
+<li>Correspondence of shard hash <span class="math">H_j</span> and received shard <span class="math">\text{Shard}_j</span>.</li>
+<li>Correctness of opening <span class="math">\pi</span> and construction <span class="math">\mathcal{C}</span>.</li>
+<li>If all checks are successful, nodes sign the transaction, after which the transaction can be included in a block.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Metadata Storage</strong>:</p>
+<ul>
+<li>Nodes parse the verified metadata into fragments, sign them using threshold signature, and distribute these fragments for storage among themselves.</li>
+</ul>
+</li>
+</ol>
+<h3><a class="anchor" href="https://ethresear.ch#p-50034-optimistic-error-correction-26" name="p-50034-optimistic-error-correction-26"></a>Optimistic Error Correction</h3>
+<p>If errors or inconsistencies are detected:</p>
+<ul>
+<li><strong>Decentralized Recovery</strong>: Nodes jointly recover correct data using the redundancy of Reed-Solomon codes.</li>
+<li><strong>Fraud Proofs</strong>: Nodes can form fraud proofs if they detect incorrect actions.</li>
+<li><strong>Use of SPoRA Mining</strong>: In the process of SPoRA mining, nodes find in their data structure the data for which they can receive a reward. We have improved SPoRA mining to incentivize the node to recover all original data and commitments for the sectors involved in mining. Thus, to check the correctness of shard hashes and commitment, the miner only needs to compare several hashes, which minimally uses their resources but stimulates the miner to actively check and recover data.</li>
+</ul>
+<h2><a class="anchor" href="https://ethresear.ch#p-50034-classification-and-elimination-of-errors-27" name="p-50034-classification-and-elimination-of-errors-27"></a>Classification and Elimination of Errors</h2>
+<h3><a class="anchor" href="https://ethresear.ch#p-50034-types-of-defects-28" name="p-50034-types-of-defects-28"></a>Types of Defects</h3>
+<h4><a class="anchor" href="https://ethresear.ch#p-50034-uncorrectable-defects-29" name="p-50034-uncorrectable-defects-29"></a>Uncorrectable Defects</h4>
+<ul>
+<li><strong>Incorrect metadata structure</strong>: Inability to interpret <span class="math">C</span>, <span class="math">\pi</span>, <span class="math">\{H_j\}</span>, <span class="math">\mathcal{C}</span>.</li>
+<li><strong>Mismatch between hash and shard</strong>: <span class="math">H_j \neq \mathrm{Hash}(\text{Shard}_j)</span>.</li>
+</ul>
+<p><strong>Reaction</strong>: The transaction is rejected by validators and nodes.</p>
+<h4><a class="anchor" href="https://ethresear.ch#p-50034-metadata-inconsistency-30" name="p-50034-metadata-inconsistency-30"></a>Metadata Inconsistency</h4>
+<ul>
+<li><strong>Incorrect opening</strong>: Checking <span class="math">\pi</span> returns false.</li>
+<li><strong>Mismatch in shard verification</strong>: <span class="math">s_j \neq a_j</span>.</li>
+<li><strong>Incorrect calculation of <span class="math">\chi</span></strong>: <span class="math">\chi</span> does not correspond to the calculated value from <span class="math">C</span> and <span class="math">\{H_j\}</span>.</li>
+</ul>
+<p><strong>Reaction</strong>:</p>
+<ul>
+<li>Nodes form <strong>fraud proofs</strong>, proving incorrectness.</li>
+<li>Validators who proposed such a transaction are subject to penalties.</li>
+</ul>
+<h4><a class="anchor" href="https://ethresear.ch#p-50034-correctable-defects-31" name="p-50034-correctable-defects-31"></a>Correctable Defects</h4>
+<ul>
+<li>
+<p><strong>Errors in correction codes</strong>: Small errors in shards that can be corrected.</p>
+<p>Circuit for this fraud proof for 1 MiB cluster requires <span class="math">\sim 3 \cdot 2^{15}</span> <span class="math">(16 \to 8)</span> poseidon2 hashes.</p>
+</li>
+<li>
+<p><strong>Partial incorrectness of shards</strong>: Some shards are damaged but can be recovered from others.</p>
+<p>Circuit for this fraud proof for 1 MiB cluster requires <span class="math">\sim 2^{15}</span> <span class="math">(16 \to 8)</span> poseidon2 hashes.</p>
+</li>
+</ul>
+<p><strong>Reaction</strong>:</p>
+<ul>
+<li>Nodes use data redundancy to recover correct shards in the mining process.</li>
+<li>Miners will form <strong>fraud proofs</strong> consisting of a zkSNARK that recalculates this data correctly. Since the data of one block is just hundreds of thousands of field elements, there is no difficulty for the miner to generate such a zkSNARK. The proof and verification of the zkSNARK will be paid from the penalty of validators who proposed such a transaction.</li>
+</ul>
+<h3><a class="anchor" href="https://ethresear.ch#p-50034-security-guarantees-32" name="p-50034-security-guarantees-32"></a>Security Guarantees</h3>
+<p>It’s important to note that the optimistic elements of the protocol do not reduce the security of the system, as the assumption of the presence of a sufficient number of honest nodes is as reliable as these elements themselves. If an honest node misses defects or refuses to store data, it still won’t be able to mine and receive rewards.</p>
+<ul>
+<li>
+<p>Data preservation with an honest minority: If there is a sufficient number of honest nodes in the network, the data will be correctly stored and correspond to the corrected code close to the original code used to generate the commitment. Even if the commitment or shards were generated with errors, the network will be able to correct them and restore the data without errors.</p>
+</li>
+<li>
+<p>Protection against incorrect changes: In the process of error correction, a dishonest majority will not be able to substitute shard hashes with incorrect ones or replace the commitment with one that does not correspond to the corrected code. This guarantees the immutability of data and their correspondence to the stated commitment. If there is already an accepted commitment in the network, it is impossible to introduce errors into it during the error correction process, even if the client, all validators, and all nodes are malicious.</p>
+</li>
+</ul>
+<h2><a class="anchor" href="https://ethresear.ch#p-50034-examples-and-scenarios-33" name="p-50034-examples-and-scenarios-33"></a>Examples and Scenarios</h2>
+<h3><a class="anchor" href="https://ethresear.ch#p-50034-example-1-data-recovery-with-errors-34" name="p-50034-example-1-data-recovery-with-errors-34"></a>Example 1: Data Recovery with Errors</h3>
+<p><strong>Situation</strong>: Several shards are damaged due to failures.</p>
+<p><strong>System Actions</strong>:</p>
+<ol>
+<li><strong>Error Detection</strong>: Nodes detect incorrect shards during verification.</li>
+<li><strong>Data Recovery</strong>: Using Reed-Solomon code redundancy, nodes recover correct shards.</li>
+<li><strong>Metadata Update</strong>: Update corresponding shard hashes <span class="math">H_j</span>.</li>
+<li><strong>Continued Operation</strong>: The system functions without interruptions, data remains available.</li>
+</ol>
+<h3><a class="anchor" href="https://ethresear.ch#p-50034-example-2-use-in-rollups-35" name="p-50034-example-2-use-in-rollups-35"></a>Example 2: Use in Rollups</h3>
+<p><strong>Situation</strong>: A developer implements our system in a recursive rollup.</p>
+<p><strong>Actions</strong>:</p>
+<ol>
+<li><strong>Integration of <span class="math">\mathcal{C}</span></strong>: The rollup uses the construction <span class="math">\mathcal{C} = (C, \chi, \{a_i\})</span> instead of the standard commitment <span class="math">C</span>.</li>
+<li><strong>Additional Opening</strong>: The rollup performs commitment opening at point <span class="math">\chi</span> and includes this in the state proof.</li>
+<li><strong>State Verification</strong>: Using <span class="math">\mathcal{C}</span>, the rollup proves the correctness of its state in zkSNARK or zkSTARK.</li>
+<li><strong>Scaling</strong>: Data corresponding to <span class="math">\mathcal{C}</span> is not stored on-chain, which allows for a significant reduction in the volume of data stored on-chain.</li>
+</ol>
+<h2><a class="anchor" href="https://ethresear.ch#p-50034-explanation-of-key-concepts-36" name="p-50034-explanation-of-key-concepts-36"></a>Explanation of Key Concepts</h2>
+<h3><a class="anchor" href="https://ethresear.ch#p-50034-fiat-shamir-heuristic-37" name="p-50034-fiat-shamir-heuristic-37"></a>Fiat-Shamir Heuristic</h3>
+<p>A method of transforming interactive protocols into non-interactive ones using hash functions. In our case, it is used to generate a pseudorandom point <span class="math">\chi</span> dependent on the commitment and shard hashes.</p>
+<h3><a class="anchor" href="https://ethresear.ch#p-50034-schwartz-zippel-lemma-38" name="p-50034-schwartz-zippel-lemma-38"></a>Schwartz-Zippel Lemma</h3>
+<p>A theorem stating that two different polynomials of degree <span class="math">d</span> can coincide in no more than <span class="math">d</span> points from field <span class="math">F</span>. It ensures that the probability of successful forgery of verification is negligibly small.</p>
+<h3><a class="anchor" href="https://ethresear.ch#p-50034-reed-solomon-codes-39" name="p-50034-reed-solomon-codes-39"></a>Reed-Solomon Codes</h3>
+<p>Error correction codes that allow data recovery in the presence of errors or losses. Used to create redundancy and ensure reliability of data storage.</p>
+<h3><a class="anchor" href="https://ethresear.ch#p-50034-mathcalc-construction-in-rollups-40" name="p-50034-mathcalc-construction-in-rollups-40"></a><span class="math">\mathcal{C}</span> Construction in Rollups</h3>
+<ul>
+<li><strong>Why it’s needed</strong>: Provides a link between data and commitment, allowing rollups to prove the correctness of their state.</li>
+<li><strong>How it’s used</strong>: The rollup includes <span class="math">\mathcal{C}</span> in its proofs, which guarantees data availability and its correspondence to the commitment.</li>
+<li><strong>Advantages</strong>:
+<ul>
+<li>Reduction of on-chain data volume.</li>
+<li>Increasing proof efficiency.</li>
+<li>Ensuring data reliability and availability.</li>
+</ul>
+</li>
+</ul>
+<h2><a class="anchor" href="https://ethresear.ch#p-50034-conclusion-41" name="p-50034-conclusion-41"></a>Conclusion</h2>
+<p>We have presented a technique for using FRI for DA with optimistic correctable commitments, introducing a new construction <span class="math">\mathcal{C} = (C, \chi, \{a_i\})</span>, which is especially useful in the context of rollups. Our system allows for a significant reduction in the volume of data stored on-chain and ensures data reliability and availability. It provides developers with new tools for creating scalable decentralized applications, integrating with recursive rollups, and incentivizing nodes to behave honestly through SPoRA-mining mechanisms and fraud proofs.</p>
+<h2><a class="anchor" href="https://ethresear.ch#p-50034-appendices-42" name="p-50034-appendices-42"></a>Appendices</h2>
+<h3><a class="anchor" href="https://ethresear.ch#p-50034-detailed-explanation-of-commitment-and-opening-43" name="p-50034-detailed-explanation-of-commitment-and-opening-43"></a>Detailed Explanation of Commitment and Opening</h3>
+<h4><a class="anchor" href="https://ethresear.ch#p-50034-commitment-generation-44" name="p-50034-commitment-generation-44"></a>Commitment Generation</h4>
+<ol>
+<li><strong>Data</strong>: Matrix <span class="math">D</span> of size <span class="math">T \times K</span>.</li>
+<li><strong>Function</strong>: consider rows of <span class="math">D</span> as values of T-1 degree polynomial function <span class="math">f(x)</span> over field <span class="math">F</span>.</li>
+<li><strong>FRI Application</strong>: Apply FRI to <span class="math">f(x)</span> to obtain commitment <span class="math">C</span>.</li>
+</ol>
+<h4><a class="anchor" href="https://ethresear.ch#p-50034-generation-of-random-point-chi-45" name="p-50034-generation-of-random-point-chi-45"></a>Generation of Random Point <span class="math">\chi</span></h4>
+<ul>
+<li>Use a hash function to generate <span class="math">\chi</span>:<br />
+<span class="math">
+\chi = \mathrm{Hash}(C, H_1, H_2, \dots, H_N).
+</span></li>
+</ul>
+<h4><a class="anchor" href="https://ethresear.ch#p-50034-opening-at-point-chi-46" name="p-50034-opening-at-point-chi-46"></a>Opening at Point <span class="math">\chi</span></h4>
+<ul>
+<li>Calculate values <span class="math">\{a_i\}</span> necessary to prove that <span class="math">f(\chi)</span> corresponds to the data.</li>
+</ul>
+<h3><a class="anchor" href="https://ethresear.ch#p-50034-use-in-rollup-47" name="p-50034-use-in-rollup-47"></a>Use in Rollup</h3>
+<ul>
+<li><strong>Additional Opening</strong>: The rollup includes in the proof the opening of the commitment at point <span class="math">\chi</span>, i.e., <span class="math">\{a_i\}</span>.</li>
+<li><strong><span class="math">\mathcal{C}</span> Construction</strong>: The rollup publishes <span class="math">\mathcal{C} = (C, \chi, \{a_i\})</span>.</li>
+<li><strong>Advantages</strong>:
+<ul>
+<li>Provides data verifiability without the need for access to all data.</li>
+<li>Guarantees that data is available and stored in the network.</li>
+<li>Allows the rollup to reduce the volume of data needed for on-chain storage.</li>
+</ul>
+</li>
+</ul>
+<h3><a class="anchor" href="https://ethresear.ch#p-50034-proof-of-the-correctness-lemma-48" name="p-50034-proof-of-the-correctness-lemma-48"></a>Proof of the Correctness Lemma</h3>
+<p><strong>Assumption</strong>: Let <span class="math">\text{Shard}_j</span> be incorrect but pass the check <span class="math">s_j = a_j</span>.</p>
+<p><strong>Probability</strong>:</p>
+<ul>
+<li>The probability that an incorrect shard will coincide at point <span class="math">\chi</span> with a correct one is <span class="math">\frac{d}{|F|}</span>, where <span class="math">d</span> is the degree of the polynomial.</li>
+<li>For a large field <span class="math">F</span>, the probability is negligibly small.</li>
+</ul>
+<p><strong>Conclusion</strong>: With high probability, if a shard has passed the check, it is correct.</p>
+            <p><small>1 post - 1 participant</small></p>
+            <p><a href="https://ethresear.ch/t/using-fri-for-da-with-optimistic-correctable-commitments-in-rollups/20467">Read full topic</a></p>
+]]></content:encoded>
+<pubDate>Sat, 21 Sep 2024 20:40:04 +0000</pubDate>
+<pubDate>Sat, 21 Sep 2024 20:40:04 +0000</pubDate>
+</item>
 
 <item>
 <title>Vorbit SSF with circular and spiral finality: validator selection and distribution</title>
