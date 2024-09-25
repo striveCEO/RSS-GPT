@@ -60,4 +60,4 @@
 - https://ethresear.ch/latest.rss -> https://striveCEO.github.io/RSS-GPT/ethResearch.xml
 - https://review.stanfordblockchain.xyz/feed -> https://striveCEO.github.io/RSS-GPT/stanfordBlockchainReview.xml
 - https://feeds.simplecast.com/XPOpH7r4 -> https://striveCEO.github.io/RSS-GPT/a16zWeb3.xml
-- https://mshibanami.github.io/GitHubTrendingRSS/weekly/all.xml -> https://striveCEO.github.io/RSS-GPT/github-trending-for-all-weekly.xml
+- https://rsshub.app/reuters/world/china -> https://striveCEO.github.io/RSS-GPT/reutersNewsChina.xml
