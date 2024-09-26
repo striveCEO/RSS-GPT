@@ -4,6 +4,499 @@
 <title>Ethereum Research - Latest topics</title>
 <link>https://ethresear.ch/latest</link>
 
+<item>
+<title>Proposal: Delay stateRoot Reference to Increase Throughput and Reduce Latency</title>
+<link>https://ethresear.ch/t/proposal-delay-stateroot-reference-to-increase-throughput-and-reduce-latency/20490</link>
+<guid>https://ethresear.ch/t/proposal-delay-stateroot-reference-to-increase-throughput-and-reduce-latency/20490</guid>
+<content:encoded><![CDATA[
+<div> 关键词：Ethereum、stateRoot、block production、throughput、latency
+
+总结：
+
+文章提出了一项关于以太坊区块链技术的提案，旨在通过延迟对区块状态根（stateRoot）的引用，以期增加网络吞吐量并减少延迟。以下是该提案的主要要点：
+
+1. **当前问题**：当前每个区块头包含一个表示执行了所有交易后的状态的状态根，这要求区块构建者和中介（如MEV-Boost中继）计算状态根，这一过程耗时且增加了验证时间。
+
+2. **提案建议**：修改区块结构，使得区块n中的状态根引用的是上一区块（n-1）执行完交易后开始的状态，而非结束时的状态。这样可以将状态根计算从关键路径中移除，减少链端验证的延迟，释放资源以提高网络吞吐量。
+
+3. **技术细节**：验证区块n时，节点需要确保状态根与执行块n-1后产生的状态匹配。交易顺序不变，仍然基于n-1块的状态进行。
+
+4. **动机与优势**：移除不必要的状态根验证工作可以提高网络效率，节省时间用于执行操作，进而可能降低区块时间，改善用户体验。同时，减少了对构建区块和验证区块的硬件要求，有助于提高网络稳定性和健康状况。
+
+5. **潜在影响与挑战**：一些依赖实时状态信息的应用（如轻客户端、SPV客户端等）可能会受到影响，需要调整策略或实施。此外，需要对现有应用进行适应性调整，包括可能的网络硬分叉需求。对于状态无状态客户端协议，可能需要容忍最多一区块的延迟。
+
+通过这一提案，以太坊社区期望在不影响大多数应用的前提下，实现网络性能的显著提升，特别是通过减少验证时间，提高整体网络效率和用户体验。 <div>
+<h1><a class="anchor" href="https://ethresear.ch#p-50080-proposal-delay-stateroot-reference-to-increase-throughput-and-reduce-latency-1" name="p-50080-proposal-delay-stateroot-reference-to-increase-throughput-and-reduce-latency-1"></a>Proposal: Delay stateRoot Reference to Increase Throughput and Reduce Latency</h1>
+<p>By: <a href="https://x.com/_charlienoyes" rel="noopener nofollow ugc">Charlie Noyes</a>, <a href="https://x.com/MaxResnick1" rel="noopener nofollow ugc">Max Resnick</a></p>
+<h2><a class="anchor" href="https://ethresear.ch#p-50080-introduction-2" name="p-50080-introduction-2"></a>Introduction</h2>
+<p>Right now, each block header includes a <code>stateRoot</code> that represents the state after executing all transactions within that block. This design requires block builders and intermediaries (like MEV-Boost relays) to compute the <code>stateRoot</code>, which is computationally intensive and adds significant latency during block production.</p>
+<p>This proposal suggests modifying the Ethereum block structure so that the <code>stateRoot</code> in block <code>n</code> references the state at the beginning of the block (i.e., after executing the transactions in block <code>n - 1</code>, rather than the state at the end of the block).</p>
+<p>By delaying the <code>stateRoot</code> reference by one block, we aim to remove the <code>stateRoot</code> calculation from the critical path of block verification at the chain tip, thereby <strong>reducing L1 latency and freeing up capacity to increase L1 throughput.</strong></p>
+<h2><a class="anchor" href="https://ethresear.ch#p-50080-technical-specification-high-level-3" name="p-50080-technical-specification-high-level-3"></a>Technical Specification (High-Level)</h2>
+<p>When validating block <code>n</code>, nodes ensure that the <code>stateRoot</code> matches the state resulting from executing block <code>n-1</code> (i.e., the pre-state root of block <code>n</code>).</p>
+<p>To be clear, there is no change to exeuction ordering. Transactions in block <code>n</code> are still applied to the state resulting from block <code>n-1</code>.</p>
+<h2><a class="anchor" href="https://ethresear.ch#p-50080-motivation-4" name="p-50080-motivation-4"></a>Motivation</h2>
+<p><code>stateRoot</code> calculation and verification is unnecessary work on the critical path of block production. A builder cannot propose a block on MEV boost without first calculating the <code>stateRoot</code> and the attestation committee cannot verify a block without computing the <code>stateRoot</code> to compare with the proposed <code>stateRoot</code>. <code>stateRoot</code> calculation itself accounts for approximately <strong>half</strong> of time spent by all consensus participants working at the tip. Moreover, whatever latency implications the <code>stateRoot</code> calculation imposes are paid twice on the critical path: once at the block building stage and then again during verification.</p>
+<ul>
+<li>
+<ul>
+<li>When block builders submit blocks to relays, they are required to provide the calculated <code>stateRoot</code>. From surveying three of the four largest builders, each spends on average only 40%-50% of their time actually building each block, and the rest on <code>stateRoot</code> calculation.</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>When MEV-Boost relays recieve blocks from builders, they are supposed to verify their correctness. In Flashbots’ relay, also approximately half of the ~100ms (p90) verification time is spent on the <code>stateRoot</code> calculation.</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>When validators receive a new block, or when non-MEV-Boost validators (“home builders”) produce a block, they are also required to re-verify its execution and its <code>stateRoot</code>. Commodity hardware Reth nodes spend approximately 70% of its time in live-sync on the <code>stateRoot</code> (remainder on execution).</li>
+</ul>
+</li>
+</ul>
+
+  <div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/a/9/a94d0412f9a5ba4edd2674fa0c9e7227711a7d65.png" title="RETH benchmarks"><img alt="RETH benchmarks" height="362" src="https://ethresear.ch/uploads/default/optimized/3X/a/9/a94d0412f9a5ba4edd2674fa0c9e7227711a7d65_2_690x362.png" width="690" /></a></div>
+  ~70% of RETH's block processing time is spent on `stateRoot` calculation.
+
+<p>These participants - builders, relays, and validators - are highly latency sensitive. They operate under tight timing constraints around slot boundaries (particularly with the <a href="https://ethresear.ch/t/on-attestations-block-propagation-and-timing-games/20272">incresaing prevalence of timing games</a>).</p>
+<p>The latency introduced by <code>stateRoot</code> verification at the tip is unnecessary and removing it could allow us to improve the health of the block production pipeline, and network stability.</p>
+<h3><a class="anchor" href="https://ethresear.ch#p-50080-benefits-of-delaying-the-stateroot-5" name="p-50080-benefits-of-delaying-the-stateroot-5"></a>Benefits of Delaying the <code>stateRoot</code></h3>
+<ul>
+<li>Higher L1 throughput, because the time currently spent verifying the <code>stateRoot</code> can be re-allocated to execution. <code>stateRoot</code> verification would be pipelined to occur in parallel with the next slot (i.e. during time that nodes are currently idle). Bandwidth requirement increases and state growth would also need to be acceptable before activating a throughput increase.</li>
+<li>Time saved by pipelining the <code>stateRoot</code> could also be allocated towards lowering slot times - improving L1 Ethereum UX, and likely resulting in tighter spreads for users of decentralized exchanges.</li>
+<li>Builders and relays avoid an unnecessary latency speedbump. Both are highly latency-sensitive actors. We want to minimize the sophistication it takes to be a relay or validator. Removing <code>stateRoot</code> latency from the critical path of block verification means they will no longer have to worry about optimizing it, improving the health and efficiency of the block production pipeline.</li>
+</ul>
+<h2><a class="anchor" href="https://ethresear.ch#p-50080-potential-downsides-and-concerns-6" name="p-50080-potential-downsides-and-concerns-6"></a>Potential Downsides and Concerns</h2>
+<h3><a class="anchor" href="https://ethresear.ch#p-50080-impacted-applications-7" name="p-50080-impacted-applications-7"></a>Impacted Applications</h3>
+<ol>
+<li><strong>Light Clients and SPV Clients</strong></li>
+</ol>
+<ul>
+<li><strong>Impact</strong>: These clients rely on the latest <code>stateRoot</code> to verify transactions and account balances without downloading the entire blockchain. A one-block delay introduces a latency in accessing up-to-date state information. Cross-chain communication protocols (like bridges that utilize light clients) would also experience this delay.</li>
+<li>
+<ul>
+<li><strong>Consideration</strong>: We do not see an obvious issue with light clients being delayed by a single block.</li>
+</ul>
+</li>
+</ul>
+<ol start="2">
+<li><strong>Stateless Client Protocols</strong></li>
+</ol>
+<ul>
+<li><strong>Impact</strong>: Stateless clients rely on the latest <code>stateRoot</code> to verify transaction witnesses. A one-block delay could affect immediate transaction validation.</li>
+<li>
+<ul>
+<li><strong>Consideration</strong>: If these clients can tolerate a one-block delay, the impact may be minimal. This aligns with ongoing discussions in the statelessness roadmap.</li>
+</ul>
+</li>
+</ul>
+<h2><a class="anchor" href="https://ethresear.ch#p-50080-rationale-8" name="p-50080-rationale-8"></a>Rationale</h2>
+<h3><a class="anchor" href="https://ethresear.ch#p-50080-why-this-approach-9" name="p-50080-why-this-approach-9"></a>Why This Approach?</h3>
+<ul>
+<li><strong>Efficiency</strong>: Removing <code>stateRoot</code> computation from the critical path significantly reduces block verification time.</li>
+<li><strong>Simplicity</strong>: The change is straightforward in terms of protocol modification, affecting only the placement of the <code>stateRoot</code> reference. This is backwards-compatible with the existing block production pipeline (i.e., native building and MEV-Boost). Other proposals which include execution pipelining, like <a href="https://eips.ethereum.org/EIPS/eip-7732" rel="noopener nofollow ugc">ePBS</a>, are significantly broader in scope and complexity. Delaying the <code>stateRoot</code> is a simpler change we can make with immediate benefit and little risk.</li>
+<li><strong>Minimal Disruption</strong>: While some applications may be affected, we think most (all?) can tolerate a one-block delay without significant issues. We should collect feedback from application developers to validate this.</li>
+</ul>
+<h3><a class="anchor" href="https://ethresear.ch#p-50080-backwards-compatibility-and-transition-10" name="p-50080-backwards-compatibility-and-transition-10"></a>Backwards Compatibility and Transition</h3>
+<ul>
+<li><strong>Hard Fork Requirement</strong>: This change is not backwards compatible and would require a network hard fork.</li>
+<li><strong>Application Adaptations</strong>: Affected applications (light clients, Layer 2 solutions, stateless clients) may need to adjust their protocols or implementations.</li>
+</ul>
+<h2><a class="anchor" href="https://ethresear.ch#p-50080-request-for-feedback-11" name="p-50080-request-for-feedback-11"></a>Request for Feedback</h2>
+<p>We invite the community to provide feedback on this proposal, particularly:</p>
+<ul>
+<li><strong>Feasibility</strong>: Are there technical challenges that might impede the implementation of this change?</li>
+<li><strong>Upside</strong>: How much throughput will we be able to eke out from pipelining <code>stateRoot</code> calculation, and reallocating the time to exeuction?</li>
+<li><strong>Affected Applications</strong>: We don’t obviously see a class of widely used applications which would be affected. We hope any developers whose applications do depend on same-block <code>stateRoot</code> will let us know.</li>
+</ul>
+<h2><a class="anchor" href="https://ethresear.ch#p-50080-next-steps-12" name="p-50080-next-steps-12"></a>Next Steps</h2>
+<p>We plan to formalize this proposal into an EIP for potential inclusion in Pectra B.</p>
+<h3><a class="anchor" href="https://ethresear.ch#p-50080-acknowledgements-13" name="p-50080-acknowledgements-13"></a>Acknowledgements</h3>
+<p>Thanks to Dan Robinson, Frankie, Robert Miller, and Roman Krasiuk for feedback and input on this proposal.</p>
+            <p><small>14 posts - 10 participants</small></p>
+            <p><a href="https://ethresear.ch/t/proposal-delay-stateroot-reference-to-increase-throughput-and-reduce-latency/20490">Read full topic</a></p>
+]]></content:encoded>
+<pubDate>Wed, 25 Sep 2024 17:12:42 +0000</pubDate>
+<pubDate>Wed, 25 Sep 2024 17:12:42 +0000</pubDate>
+</item>
+<item>
+<title>Understanding Minimum Blob Base Fees</title>
+<link>https://ethresear.ch/t/understanding-minimum-blob-base-fees/20489</link>
+<guid>https://ethresear.ch/t/understanding-minimum-blob-base-fees/20489</guid>
+<content:encoded><![CDATA[
+<div> 关键词：blob费用、最低基费用、网络拥堵、交易费用、市场响应时间
+
+总结:
+
+文章探讨了以太坊网络中关于数据包（blobs）的费用问题，特别是最低基费用的设置及其影响。主要观点如下：
+
+1. **交易费用结构**：交易包含数据包时，不仅需要支付执行费用，还需要支付网络上的数据包费用。尽管执行费用相对较低，数据包费用则根据网络拥堵程度而变化。当网络拥堵时，数据包费用可能显著增加。
+
+2. **市场响应时间**：数据包费用市场的调整速度较慢，这导致在网络拥堵期间，数据包费用未能有效反映需求，从而引发了所谓的“冷启动”问题。为解决这一问题，提议设置最低数据包基费用。
+
+3. **最低基费用的影响**：最低基费用的设定旨在加速数据包费用市场对需求变化的响应，减少网络拥堵时的不确定性。根据分析，这种调整对大多数数据包提交者的影响较小，对那些成本效益较低的链影响更大。
+
+4. **市场效率与优化**：文章讨论了如何通过改进数据包费用市场和优化算法来提高网络效率，特别是在处理大量数据包的场景下。同时，提出了关于是否应该从优先级气体拍卖中获取收入的讨论。
+
+5. **未来展望**：文章提出了几个开放性问题，包括数据包费用市场是否能在未来达到平衡，以及是否会出现更多的“冷启动”问题等，这些都是未来研究和讨论的重点。
+
+文章的核心在于探讨如何优化以太坊网络中数据包的费用机制，以提高整体网络效率和用户体验，同时考虑不同数据包提交者可能面临的成本差异。 <div>
+<h1><a class="anchor" href="https://ethresear.ch#p-50078-understanding-minimum-blob-base-fees-1" name="p-50078-understanding-minimum-blob-base-fees-1"></a>Understanding Minimum Blob Base Fees</h1>
+<hr />
+<p>by <a href="https://x.com/data_always" rel="noopener nofollow ugc">Data Always</a> - <a href="https://www.flashbots.net/" rel="noopener nofollow ugc">Flashbots Research</a></p>
+<p>Special thanks to <a href="https://x.com/0xQuintus" rel="noopener nofollow ugc">Quintus</a>, <a href="https://x.com/sarahalle_" rel="noopener nofollow ugc">Sarah</a>, <a href="https://ethresear.ch/u/jcschlegel/summary">Christoph</a>, and <a href="https://x.com/potuz_eth" rel="noopener nofollow ugc">Potuz</a> for review and discussions.</p>
+<h3><a class="anchor" href="https://ethresear.ch#p-50078-tldr-2" name="p-50078-tldr-2"></a>tl;dr</h3>
+<blockquote>
+<p>The myth that blobs pay zero transaction fees is false. Depending on type of data being posted and the state of gas prices, it costs submitters between $0.10 and $3.00 per blob in mainnet execution fees. <a href="https://ethereum-magicians.org/t/eip-7762-increase-min-base-fee-per-blob-gas/20949" rel="noopener nofollow ugc">EIP-7762</a>, the implementation of a ~$0.01 minimum blob base fee, should have a minimal impact on the market, yet vastly reduce the time that the blob market spends in PGAs during surges of demand while blob usage remains below the blob target.</p>
+</blockquote>
+<hr />
+<p>Proposals to set a blobspace reserve price are <a href="https://x.com/EffortCapital/status/1829663405218693624" rel="noopener nofollow ugc">controversial</a> <a href="https://x.com/ryanberckmans/status/1829878445553402179" rel="noopener nofollow ugc">in the</a> <a href="https://x.com/0xfoobar/status/1830313459076182183" rel="noopener nofollow ugc">community</a>, but this may stem from a <a href="https://x.com/ryanberckmans/status/1830643363126587454" rel="noopener nofollow ugc">misunderstanding</a> of how blobs find their way on chain. A common impression is that blobs are currently contributing zero fees to the protocol, but this is misguided and only true when we restrict our analysis to blobspace fees.</p>
+<p>Although the blobspace fee market has been slow to reach the targeted level of demand, thus suffering from the <a href="https://ethresear.ch/t/eip-4844-fee-market-analysis/15078">cold-start problem</a> initially predicted by <a href="https://x.com/DavideCrapis" rel="noopener nofollow ugc">Davide Crapis</a> a year before Deneb, blob carrying transactions still pay <a href="https://www.blocknative.com/blog/blobsplaining" rel="noopener nofollow ugc">mainnet gas fees</a>, both for execution and priority. The current concern, raised by <a href="https://x.com/MaxResnick1" rel="noopener nofollow ugc">Max Resnick</a>, is that the hard limit of six blobs per block and the slow response time of the blobspace fee market creates the potential for long-lasting priority gas auctions (PGAs) when the network sees periods of high demand. During these PGAs it becomes much harder for L2s to price their transactions, and when coupled with the current strict <a href="https://x.com/titanbuilderxyz/status/1809231370243211601" rel="noopener nofollow ugc">blob mempool rules</a>, blob inclusion becomes less predictable.</p>
+<p><a href="https://ethereum-magicians.org/t/eip-7762-increase-min-base-fee-per-blob-gas/20949" rel="noopener nofollow ugc">EIP-7762</a> aims to minimize future dislocations between the price of blobspace and blob demand until the adoption of L2s pushes us past the cold-start problem. The current configuration, with the minimum blobspace base fee set to 1 wei, requires at least 30 minutes of fully saturated blocks for blobspace fees to reach $0.01 per blob and to begin to influence blob pricing dynamics. Under the current system, when surges of demand arise the network sees a reversion to unpredictable PGAs as L2s fight for timely inclusion.</p>
+<p>As an example, on June 20th the network saw its <a href="https://www.blocknative.com/blog/june-20th-blob-contention-event-retrospective" rel="noopener nofollow ugc">second blob inversion event</a>, stemming from the <a href="https://www.theblock.co/post/302945/arbitrum-cashed-in-on-layerzero-airdrop-but-the-boost-was-short-lived" rel="noopener nofollow ugc">LayerZero airdrop</a>. It took six hours of excess demand for blobs until the network reached equilibrium.</p>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/5/e/5ed1c53aac66015377915a554d424c352fbeab0e.png" title="Blobspace Fees During the LayerZero Airdrop"><img alt="Blobspace Fees During the LayerZero Airdrop" height="337" src="https://ethresear.ch/uploads/default/optimized/3X/5/e/5ed1c53aac66015377915a554d424c352fbeab0e_2_689x337.png" width="689" /></a></div><p></p>
+<blockquote>
+<p>Source: <a href="https://dune.com/queries/4050212/6819676?category=abstraction&amp;namespace=blobs&amp;id=ethereum.blobs" rel="noopener nofollow ugc">https://dune.com/queries/4050212/6819676</a></p>
+</blockquote>
+<hr />
+<h3><a class="anchor" href="https://ethresear.ch#p-50078-the-state-of-blob-transaction-fees-3" name="p-50078-the-state-of-blob-transaction-fees-3"></a>The State of Blob Transaction Fees</h3>
+<p>Six months post-Deneb blobspace usage <a href="https://dune.com/queries/3757544/6319515" rel="noopener nofollow ugc">remains below the target</a>. As a result, the blobspace base fee has remained low and the majority of blobs have incurred negligible blobspace gas fees. To date, there have only been three weeks where the average cost of blobspace rose above $0.01 per blob: the weeks of March 25 and April 1 during the <a href="https://www.coindesk.com/tech/2024/03/28/ethereum-hit-by-blobscriptions-in-first-stress-test-of-blockchains-new-data-system/" rel="noopener nofollow ugc">blobscription craze</a> and the week of June 17th during the LayerZero airdrop.</p>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/5/5/559e1ee7311c976cd4e130f54e920c7e07c9ce8e.png" title="Average Blobspace Fees per Blob"><img alt="Average Blobspace Fees per Blob" height="325" src="https://ethresear.ch/uploads/default/optimized/3X/5/5/559e1ee7311c976cd4e130f54e920c7e07c9ce8e_2_690x325.png" width="690" /></a></div><p></p>
+<blockquote>
+<p>Source: <a href="https://dune.com/queries/4050128/6819454?category=abstraction&amp;namespace=blobs&amp;id=ethereum.blobs" rel="noopener nofollow ugc">https://dune.com/queries/4050128/6819454</a></p>
+</blockquote>
+<p>In contrast to fees in blobspace, blob carrying transactions (also known as Type-3) are still required to pay gas fees for execution on mainnet. Despite gas prices falling to a multi-year low, the average blob pays between $0.50 to $3.00 in execution fees. When compared to the <a href="https://0xpantarhei.substack.com/i/145648175/is-using-blobs-always-more-cost-effective-than-calldata" rel="noopener nofollow ugc">price of call data</a> historically posted by L2s these costs are insignificant and blobs are essentially fully subsidized by the network, yet this small cost is important when framing a minimum base fee for blobs.</p>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/e/0/e04ba54d1e4aedf3447c63dd1569912eaf3b1fec.png" title="Average Execution Fees per Blob"><img alt="Average Execution Fees per Blob" height="314" src="https://ethresear.ch/uploads/default/optimized/3X/e/0/e04ba54d1e4aedf3447c63dd1569912eaf3b1fec_2_690x314.png" width="690" /></a></div><p></p>
+<blockquote>
+<p>Source: <a href="https://dune.com/queries/4050088/6819431" rel="noopener nofollow ugc">https://dune.com/queries/4050088/6819431</a></p>
+</blockquote>
+<p>If we go a step further and segment the execution cost of blob carrying transactions by their blob contents we see that market is highly heterogeneous. Transactions that carry only one blob pay the highest fees per blob, while transactions that carry five or six blobs pay little-to-no fees per blob. In fact these five or six blob carrying transactions pay <a href="https://dune.com/queries/4053870/6841415" rel="noopener nofollow ugc">significantly lower total fees</a>.</p>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/2/d/2d2ed2bc476512d73167911f3d279200c9dc7c49.png" title="Execution Cost per Blob for Blob Carrying Transactions"><img alt="Execution Cost per Blob for Blob Carrying Transactions" height="296" src="https://ethresear.ch/uploads/default/optimized/3X/2/d/2d2ed2bc476512d73167911f3d279200c9dc7c49_2_690x296.png" width="690" /></a></div><p></p>
+<blockquote>
+<p>Source: <a href="https://dune.com/queries/4053870/6825759" rel="noopener nofollow ugc">https://dune.com/queries/4053870/6825747</a></p>
+</blockquote>
+<p>A large factor in this discrepancy is the variance in blob <a href="https://dune.com/queries/4062897/6841224" rel="noopener nofollow ugc">submission strategies of different entities</a>: Base, OP Mainnet, and Blast, as well as many smaller L2s, are extremely financially efficient because they post their data to an EOA which requires only 21,000 mainnet gas for execution regardless of blob count, but these transactions are not well suited for fraud proofs. These chains account for the vast majority of transactions that carry five or more blobs, pushing down the perceived price of submitting many blobs in one transaction. By contrast, L2s that post more complex data to better enable fraud proofs, for instance: Arbitrum, StarkNet, Scroll, ZkSync Era, Taiko, and Linea, use <a href="https://dune.com/queries/4097909/6900990" rel="noopener nofollow ugc">significantly more mainnet gas</a> and tend to <a href="https://dune.com/queries/4097685/6900477" rel="noopener nofollow ugc">submit fewer blobs</a> (often only a single blob) per transaction.</p>
+<hr />
+<p>Following from the statistics above, if we combine the blobspace and execution fees on a per transaction basis, we see that outside of the brief surges in demand for blobs, which would not have been affected by adding a minimum base fee, the current distribution of fees paid is almost entirely concentrated in execution fees. This demonstrates that the blobspace fee market is currently non-functional and that there is room to raise the minimum cost of blob gas without meaningfully raising the total cost paid by blobs.</p>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/5/4/54a1b2fb5c880dfa45e1d1263db446697dc45501.png" title="Blobspace Share of Transaction Fees Paid by Blobs"><img alt="Blobspace Share of Transaction Fees Paid by Blobs" height="325" src="https://ethresear.ch/uploads/default/optimized/3X/5/4/54a1b2fb5c880dfa45e1d1263db446697dc45501_2_690x325.png" width="690" /></a></div><p></p>
+<blockquote>
+<p>Source: <a href="https://dune.com/queries/4034097/6792385" rel="noopener nofollow ugc">https://dune.com/queries/4034097/6792385</a></p>
+</blockquote>
+<p>By contrast, if we focus on the periods when the blobspace fee market entered price discovery we see that the majority of fee density rapidly transitions into blobspace fees. When the market works, it appears to work well. As such, the most valuable issue to address is the repeated cold-start problem—where the market currently finds itself.</p>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/7/c/7c26bb97930ae40a5902839d4d2f933b87c02fcc.png" title="Blobspace Share of Transaction Fees Paid by Blobs When Active"><img alt="Blobspace Share of Transaction Fees Paid by Blobs When Active" height="325" src="https://ethresear.ch/uploads/default/optimized/3X/7/c/7c26bb97930ae40a5902839d4d2f933b87c02fcc_2_690x325.png" width="690" /></a></div><p></p>
+<blockquote>
+<p>Source: <a href="https://dune.com/queries/4060561/6837143" rel="noopener nofollow ugc">https://dune.com/queries/4060561/6837143</a></p>
+</blockquote>
+<p>When the blobspace fee market is in an execution fee-dominant environment it benefits blob submitters who post less execution data—mostly OP Stack chains. It also complicates the block building process: historically many algorithms were deciding blob inclusion by priority fee per gas, but since the mainnet gas usage of these transactions varied greatly it forced the L2s that submit higher quality proofs to pay higher rates for the entirety of much larger transactions, further amplifying the advantage of submitting less execution data. By moving closer to a blobspace fee-dominant environment we decrease this advantage.</p>
+<hr />
+<h3><a class="anchor" href="https://ethresear.ch#p-50078-the-impact-of-a-minimum-fee-4" name="p-50078-the-impact-of-a-minimum-fee-4"></a>The Impact of a Minimum Fee</h3>
+<p>At the current value of ether, Max’s <a href="https://x.com/MaxResnick1/status/1829736908655624374" rel="noopener nofollow ugc">original proposal</a> opted to price the minimum fee per blob at $0.05 per blob. Supplementing the cost of execution with this new minimum fee, the proposal would have increased the average cost per blob by 2%.</p>
+<p>The revised proposal has decreased the minimum blob base fee to 2^25, about 1/5th the originally proposed value or $0.01 per blob under the same assumptions. Since the beginning of July, this implies an average increase in cost of 0.7% for blobs, but due to the dispersion of financial efficiencies amongst blob submitters the percentage changes are not uniform across entities.</p>
+<div class="md-table">
+<table>
+<thead>
+<tr>
+<th>Blob Submitter</th>
+<th style="text-align: right;">Dataset Size</th>
+<th style="text-align: right;">Current Cost per Blob</th>
+<th style="text-align: right;">Proposed Cost</th>
+<th style="text-align: right;">Historic Impact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Base</td>
+<td style="text-align: right;">385,077</td>
+<td style="text-align: right;">$0.0687</td>
+<td style="text-align: right;">$0.0797</td>
+<td style="text-align: right;">16.0%</td>
+</tr>
+<tr>
+<td>Taiko</td>
+<td style="text-align: right;">271,786</td>
+<td style="text-align: right;">$3.0152</td>
+<td style="text-align: right;">$3.0262</td>
+<td style="text-align: right;">0.4%</td>
+</tr>
+<tr>
+<td>Arbitrum</td>
+<td style="text-align: right;">178,127</td>
+<td style="text-align: right;">$1.0099</td>
+<td style="text-align: right;">$1.0209</td>
+<td style="text-align: right;">1.1%</td>
+</tr>
+<tr>
+<td>OP Mainnet</td>
+<td style="text-align: right;">106,979</td>
+<td style="text-align: right;">$0.0830</td>
+<td style="text-align: right;">$0.0940</td>
+<td style="text-align: right;">13.3%</td>
+</tr>
+<tr>
+<td>Blast</td>
+<td style="text-align: right;">78,430</td>
+<td style="text-align: right;">$0.1655</td>
+<td style="text-align: right;">$0.1765</td>
+<td style="text-align: right;">6.6%</td>
+</tr>
+<tr>
+<td>Scroll</td>
+<td style="text-align: right;">49,632</td>
+<td style="text-align: right;">$2.1304</td>
+<td style="text-align: right;">$2.1414</td>
+<td style="text-align: right;">0.5%</td>
+</tr>
+<tr>
+<td>Linea</td>
+<td style="text-align: right;">37,856</td>
+<td style="text-align: right;">$0.5817</td>
+<td style="text-align: right;">$0.5927</td>
+<td style="text-align: right;">1.9%</td>
+</tr>
+<tr>
+<td>zkSync Era</td>
+<td style="text-align: right;">11,837</td>
+<td style="text-align: right;">$2.6971</td>
+<td style="text-align: right;">$2.7081</td>
+<td style="text-align: right;">0.4%</td>
+</tr>
+<tr>
+<td>Others</td>
+<td style="text-align: right;">233,494</td>
+<td style="text-align: right;">$0.6273</td>
+<td style="text-align: right;">$0.6384</td>
+<td style="text-align: right;">1.8%</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td style="text-align: right;">1,354,218</td>
+<td style="text-align: right;"><strong>$1.5734</strong></td>
+<td style="text-align: right;"><strong>$1.5844</strong></td>
+<td style="text-align: right;">0.7%</td>
+</tr>
+</tbody>
+</table>
+</div><blockquote>
+<p>Table: Blob submission statistics by entity from July 1, 2024 to September 17, 2024, assuming a ETH/USD rate of $2,500. Source: <a href="https://dune.com/queries/4089576" rel="noopener nofollow ugc">https://dune.com/queries/4089576</a></p>
+</blockquote>
+<p>Modifying the earlier per-transaction breakdown to account for a 2^25 wei minimum blobspace base fee, and only considering transactions where the original blobspace base fee was less than the proposed new minimum, we see that although the profile begins to meaningfully shift, the blob base fee remains a minority component for all affected blob carrying transactions. The highly efficient transactions submitted by Base and OP Mainnet that carry five blobs would see an increase between 10 to 30% depending on the state of L1 gas prices, which should be easily absorbed. Less efficient transactions, particularly those carrying one to three blobs would see total fee increases of less than 10%.</p>
+<p>There have been no blob carrying transactions to date where a minimum blob base fee of 2^25 would have accounted for the majority of the cost paid by the transaction.</p>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/3/4/347cdc27de8a573c6be2c32f5ffde9279f6dc917.png" title="Blobspace Share of Transaction Fees Paid by Blobs with 2^25 Base Fee"><img alt="Blobspace Share of Transaction Fees Paid by Blobs with 2^25 Base Fee" height="325" src="https://ethresear.ch/uploads/default/optimized/3X/3/4/347cdc27de8a573c6be2c32f5ffde9279f6dc917_2_690x325.png" width="690" /></a></div><p></p>
+<blockquote>
+<p>Source: <a href="https://dune.com/queries/4034254/6792625" rel="noopener nofollow ugc">https://dune.com/queries/4034254/6792625</a></p>
+</blockquote>
+<hr />
+<h3><a class="anchor" href="https://ethresear.ch#p-50078-blobspace-response-time-5" name="p-50078-blobspace-response-time-5"></a>Blobspace Response Time</h3>
+<p>Under <a href="https://github.com/ethereum/EIPs/blob/7ced2f3a283ae9c2af6a4c2e33bba7fffab3e4c3/EIPS/eip-4844.md#helpers" rel="noopener nofollow ugc">EIP-4844</a>, the maximum interblock update to the blobspace base fee is 12.5%. Starting from a price of 1 wei, it takes 148 blocks at max capacity, over 29 minutes with 12 second block times, for the base fee to rise above 2^25 wei. This updating period has been framed as the response time of the protocol, but it still only represents a minimum amount of time. Due to market inefficiencies blocks do not end up full of blobs, vastly increasing the duration of price discovery.</p>
+<p>Leading into the LayerZero airdrop on June 20th, the blob base fee was sitting at its minimum value of 1 wei. At its peak, the blob base fee reached <a href="https://dune.com/queries/4050697/6820492" rel="noopener nofollow ugc">7471 gwei</a> ($3,450 per blob). Although this level could have theoretically been reached in under 51 minutes, the climb took nearly six hours. Under Max’s proposal this maximum could have theoretically been reached in 21 minutes, but it’s clear that these theoretical values are not accurate approximations.</p>
+<p>Rather than focusing on time, the goal of the proposal is to price the minimum blob base fee below, but close to, the inflection point where blobspace fees begin to form a measurable share of total fees paid by blobs. On June 20th, despite the surge in blobs beginning just after 11:00 UTC, it wasn’t until 15:17 UTC that blobspace fees began to contribute 0.1% of total fees paid by blobs, and it wasn’t until 15:41 UTC that a base fee of 2^25 wei (0.0335 gwei) was exceeded.</p>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/6/2/62d30681b4d36ed46fda6e27a080d10ba6283ca2.png" title="Breakdown of Blob Fees During the LayerZero Airdrop"><img alt="Breakdown of Blob Fees During the LayerZero Airdrop" height="296" src="https://ethresear.ch/uploads/default/optimized/3X/6/2/62d30681b4d36ed46fda6e27a080d10ba6283ca2_2_690x296.png" width="690" /></a></div><p></p>
+<blockquote>
+<p>Source: <a href="https://dune.com/queries/4050166/6819510" rel="noopener nofollow ugc">https://dune.com/queries/4050166/6819510</a></p>
+</blockquote>
+<p>By contrast, had the minimum base fee been 2^25 wei during the LayerZero airdrop, the network may have leapfrogged the cold-start problem and minimized the dislocation between price and demand. We might expect the distribution of blob fees to have behaved as follows, with the blob market still taking an hour or longer to normalize.</p>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/b/c/bc512855f739910e4b76132ceefbde4cc0ede375.png" title="Blob Fee Breakdown During the LayerZero Airdrop (above 2^25 wei base)"><img alt="Blob Fee Breakdown During the LayerZero Airdrop (above 2^25 wei base)" height="325" src="https://ethresear.ch/uploads/default/optimized/3X/b/c/bc512855f739910e4b76132ceefbde4cc0ede375_2_690x325.png" width="690" /></a></div><p></p>
+<blockquote>
+<p>Source: <a href="https://dune.com/queries/4050746/6820583" rel="noopener nofollow ugc">https://dune.com/queries/4050746/6820583</a></p>
+</blockquote>
+<p>In summary, raising the minimum blobspace base fee is not a magic bullet, but it should be viewed as a welcome change to the protocol. The market impact from the leading proposal should be minimal, with only the cheapest and lowest quality blobs seeing a price increase larger than 1%, while still remaining significantly cheaper than their competitors.</p>
+<hr />
+<h3><a class="anchor" href="https://ethresear.ch#p-50078-open-questions-6" name="p-50078-open-questions-6"></a>Open Questions</h3>
+<ul>
+<li>Will the blobspace fee market reach an equilibrium before the Pectra hardfork(s)?</li>
+<li>Will we see additional cold-start problems each time the blob limit is increased with future hard forks?</li>
+<li>Will the blob market move towards <a href="https://x.com/bertcmiller/status/1836139173159264579" rel="noopener nofollow ugc">private mempools</a>?</li>
+<li>How have block building algorithms changed to better handle blobs since the LayerZero airdrop?</li>
+<li>Should revenue from these PGAs be captured by proposers or by the protocol?</li>
+</ul>
+            <p><small>3 posts - 3 participants</small></p>
+            <p><a href="https://ethresear.ch/t/understanding-minimum-blob-base-fees/20489">Read full topic</a></p>
+]]></content:encoded>
+<pubDate>Wed, 25 Sep 2024 15:56:18 +0000</pubDate>
+<pubDate>Wed, 25 Sep 2024 15:56:18 +0000</pubDate>
+</item>
+<item>
+<title>The Portable Web: Hackable, No Data Lock-in, and Crypto-native Web World</title>
+<link>https://ethresear.ch/t/the-portable-web-hackable-no-data-lock-in-and-crypto-native-web-world/20488</link>
+<guid>https://ethresear.ch/t/the-portable-web-hackable-no-data-lock-in-and-crypto-native-web-world/20488</guid>
+<content:encoded><![CDATA[
+<div> 关键词：可定制性、数据自由、加密原生、Web2问题、Web3局限
+
+总结：
+
+文章提出了“可携带网络”这一概念，旨在解决当前网络环境中的用户数据管理难题。其核心在于提供给用户对自身数据的完全控制权和选择权，通过构建平行于现有网络的新型架构，实现应用程序的可定制化、数据的去中心化以及加密经济作为激励机制。
+
+1. **可定制性**：每个用户都可以根据自己的需求创建和定制应用单元，即“集群”，并在其中开发或引入不同的客户端、服务器和API规范，以适应个性化需求。
+   
+2. **数据自由**：用户数据被客户端缓存，通过与遵守API规范的服务器交互，实现了数据在不同服务器间的共享与迁移，确保数据不会被任何单一实体锁定。
+
+3. **加密原生**：系统采用加密技术作为经济激励的基础，集群创建者可通过发行特定于集群的加密货币来吸引用户，从而推动集群的经济活动和增长。
+
+4. **解决Web2问题**：通过限制浏览器直接访问目标URL的方式，避免用户内容和身份被单一服务垄断，减少数据和账户锁定现象。
+
+5. **Web3局限性**：尽管Web3试图挑战现有权力结构，但其实际应用仍建立在传统Web架构之上，未能充分利用区块链的去中心化优势。而“可携带网络”旨在构建一个真正去中心化的网络环境，最大化用户权利。 <div>
+<h1><a class="anchor" href="https://ethresear.ch#p-50076-about-this-post-1" name="p-50076-about-this-post-1"></a>About this post</h1>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/7/7/7736a1481d1296569277c270b8dc598d5fb8e52d.png" title="Comparison of Web Paradigms: Privacy, User Rights, and Monopoly"><img alt="Comparison of Web Paradigms: Privacy, User Rights, and Monopoly" height="353" src="https://ethresear.ch/uploads/default/optimized/3X/7/7/7736a1481d1296569277c270b8dc598d5fb8e52d_2_690x353.png" width="690" /></a></div><p></p>
+<p>In the current web environment, users find it difficult to manage their own data and are often locked into specific services. The <strong>Portable Web</strong> operates as a parallel web alongside the existing one, aiming to provide users with greater control over their data and the ability to make choices. Applications on the Portable Web are primarily envisioned to serve as public infrastructure.</p>
+<p>In this post, I will introduce the core ideas of the Portable Web. Detailed specifications unrelated to its feasibility are not included. This is still a rough draft, but I’m submitting this because if I waited for it to be perfect, I’d never finish.</p>
+<h1><a class="anchor" href="https://ethresear.ch#p-50076-summary-2" name="p-50076-summary-2"></a>Summary</h1>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/b/4/b45eddabc00a7701fa71566c6cb4ae00604da350.png" title="Cluster Architecture Overview"><img alt="Cluster Architecture Overview" height="389" src="https://ethresear.ch/uploads/default/optimized/3X/b/4/b45eddabc00a7701fa71566c6cb4ae00604da350_2_690x389.png" width="690" /></a></div><p></p>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/6/7/67bcae0547fa80eec667beeca99468609b846e79.png" title="An Example of Incentive Mechanisms in the Portable Web"><img alt="An Example of Incentive Mechanisms in the Portable Web" height="359" src="https://ethresear.ch/uploads/default/optimized/3X/6/7/67bcae0547fa80eec667beeca99468609b846e79_2_690x359.png" width="690" /></a></div><p></p>
+<ul>
+<li>
+<p><strong>Hackable: Users Can Customize Web Applications</strong></p>
+<ul>
+<li>A cluster represents a single application unit.</li>
+<li>Anyone can create a cluster, and within the cluster, entities other than the creator can create their own clients, provide servers, define API schemas, and write migration scripts.</li>
+<li>Clients and servers are loosely coupled and connected through an API schema, allowing different developers to create them independently.</li>
+<li>For example, users can create customized UIs to tailor applications to their specific needs, making them easier to use. Additionally, they can develop their own API schemas and host servers to extend particular features. In this way, the Portable Web allows not only developers but also regular users to actively contribute to the evolution of applications.</li>
+</ul>
+</li>
+<li>
+<p><strong>No Data Lock-In: Users Have Control Over Their Data</strong></p>
+<ul>
+<li>A client caches the user’s data.</li>
+<li>By using a server that conforms to the API schema, clients can share cached data across different servers.</li>
+<li>Cached data on a client can also be migrated using migration scripts.</li>
+<li>A client caches the data that a user sends and receives, but by transmitting this data to a server chosen by the user, it is managed in a decentralized manner. If needed, users can migrate their data to other servers, ensuring that their data is not locked into any particular entity.</li>
+</ul>
+</li>
+<li>
+<p><strong>Crypto-Native: Crypto-Economics as an Incentive Mechanism</strong></p>
+<ul>
+<li>In the Portable Web, cluster providers issue tokens and are incentivized by offering clusters that create real demand for those tokens.</li>
+<li>All payments within a cluster are made using the issued tokens.</li>
+<li>The presence of new participants contributes to the growth of the cluster, so the original cluster providers do not exclude them.</li>
+<li>While Web2 operates as a monopoly and winner-takes-all game, the Portable Web promotes a collaborative and inclusive approach.</li>
+</ul>
+</li>
+</ul>
+<h1><a class="anchor" href="https://ethresear.ch#p-50076-background-3" name="p-50076-background-3"></a>Background</h1>
+<h2><a class="anchor" href="https://ethresear.ch#p-50076-web2-4" name="p-50076-web2-4"></a>Web2</h2>
+<p>The Web3 community has extensively discussed the problems of Web2, so I won’t delve deeply into that here. However, it is important to emphasize that <strong>the root of Web2’s problems lies in its architecture</strong>—specifically, the way browsers directly access target URLs.</p>
+<p>In the Web2 architecture, users submit the content they generate directly to the service, without retaining ownership or local copies. User accounts and content exist within the service, and the service accumulates this data. This accumulation accelerates the creation of new data. It is extremely difficult for users to switch to another service and achieve the same level of utility. To do so, users would need to transfer their content, and other users would also need to migrate en masse.</p>
+<p>The existing Web architecture leads to content lock-in and account lock-in, which in turn fosters the concentration of power and a winner-takes-all dynamic.</p>
+<h2><a class="anchor" href="https://ethresear.ch#p-50076-web3-5" name="p-50076-web3-5"></a>Web3</h2>
+<p>While Web3 often claims to challenge existing power structures and maximize user rights, in reality, it is currently just adding a blockchain layer on top of Web2.</p>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/1/c/1cbf70828e9cfde6ab305afa732da5b326b710fa.png" title="Web3 as a marketing word"><img alt="Web3 as a marketing word" height="322" src="https://ethresear.ch/uploads/default/optimized/3X/1/c/1cbf70828e9cfde6ab305afa732da5b326b710fa_2_690x322.png" width="690" /></a></div><p></p>
+<p>Although blockchain is decentralized, the fact that existing Web3 applications are built on top of the current Web architecture undermines its potential</p>
+<h1><a class="anchor" href="https://ethresear.ch#p-50076-portable-web-architecture-6" name="p-50076-portable-web-architecture-6"></a>Portable Web Architecture</h1>
+<p>To solve the above issues and achieve a decentralized web while maximizing user rights, it is necessary to build a new architecture. The proposed solution is the <strong>Portable Web</strong>. This new web architecture provides an environment where users have complete control over their data and identity and enables developers and service providers to collaboratively evolve a single application.</p>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/b/9/b9ffee4e26b1460e627f2401db4b0003f784a8cc.png" title="Portable Web Architecture"><img alt="Portable Web Architecture" height="437" src="https://ethresear.ch/uploads/default/optimized/3X/b/9/b9ffee4e26b1460e627f2401db4b0003f784a8cc_2_690x437.png" width="690" /></a></div><p></p>
+<h2><a class="anchor" href="https://ethresear.ch#p-50076-components-of-the-portable-web-7" name="p-50076-components-of-the-portable-web-7"></a>Components of the Portable Web</h2>
+<h3><a class="anchor" href="https://ethresear.ch#p-50076-portable-web-browser-8" name="p-50076-portable-web-browser-8"></a>Portable Web Browser</h3>
+<p>The browser plays several key roles in enabling the Portable Web.</p>
+<ol>
+<li><strong>Controlled Server Communication</strong>: It limits the servers with which the client can communicate. Clients cannot interact with servers unless explicitly intended by the user.</li>
+<li><strong>Currency Restriction</strong>: It restricts the currency used for payments in applications. The browser contains a wallet, ensuring that payments can only be made using the currency initially set by the cluster. By default, the browser interacts with an internal exchange (DEX or CEX), so the user is unaware of the currency being used.</li>
+<li><strong>Identity Management</strong>: It manages the user’s identity as a Self-Sovereign Identity (SSI), preventing servers or clients from locking in the user’s identity.</li>
+<li><strong>Built-In Support for Bootstrapping</strong>: It comes with built-in client and server information for the index cluster to support bootstrapping. Users can later connect to other clients or servers.</li>
+<li><strong>Data Migration and Updates</strong>: It executes migration scripts specified by the client to transfer data and manages client updates.</li>
+</ol>
+<h3><a class="anchor" href="https://ethresear.ch#p-50076-cluster-9" name="p-50076-cluster-9"></a>Cluster</h3>
+<p>A cluster represents a single application, identified by its purpose document.</p>
+<p>The components that make up a cluster are:</p>
+<ul>
+<li><strong>Purpose Document</strong></li>
+<li><strong>API Schema</strong></li>
+<li><strong>Migration Script</strong></li>
+<li><strong>Client</strong></li>
+<li><strong>Server</strong></li>
+</ul>
+<p>Anyone can contribute components other than the purpose document to help develop and evolve the cluster.</p>
+<h3><a class="anchor" href="https://ethresear.ch#p-50076-index-cluster-10" name="p-50076-index-cluster-10"></a>Index cluster</h3>
+<p>The index cluster functions like an App Store within the Portable Web (although anyone can provide it).</p>
+<p>Providers of cluster components register their data with the index cluster. The index cluster hosts this registered data, offering users information and software. Additionally, the information includes details such as version and compatibility.</p>
+<p>The index cluster knows which components belong to which clusters and understands the relationships between servers and API schemas, clients and API schemas, as well as clients and migration scripts.</p>
+<h2><a class="anchor" href="https://ethresear.ch#p-50076-components-of-a-cluster-11" name="p-50076-components-of-a-cluster-11"></a>Components of a Cluster</h2>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/e/4/e49d0d3e46a311053e744c69bc9f63c792601554.png" title="The relationships between components"><img alt="The relationships between components" height="378" src="https://ethresear.ch/uploads/default/optimized/3X/e/4/e49d0d3e46a311053e744c69bc9f63c792601554_2_690x378.png" width="690" /></a></div><p></p>
+<h3><a class="anchor" href="https://ethresear.ch#p-50076-purpose-document-12" name="p-50076-purpose-document-12"></a>Purpose Document</h3>
+<p>The purpose document serves to enable and promote community-driven development. It defines:</p>
+<ol>
+<li><strong>The Ultimate Goal</strong>: The overarching objective that the cluster aims to achieve.</li>
+<li><strong>Tokens Used</strong>: The specific tokens to be utilized within the cluster.</li>
+</ol>
+<p>This document is made public upon the cluster’s creation and remains immutable thereafter. While the ultimate goal stated in the purpose document does not have any systemic function, the community uses this document as a basis for improving and adding features.</p>
+<h3><a class="anchor" href="https://ethresear.ch#p-50076-api-schema-13" name="p-50076-api-schema-13"></a>API Schema</h3>
+<p>The API schema is a protocol that defines the communication methods between clients and servers. It needs to be in a developer-readable format. By adhering to this schema, clients and servers created by different developers can communicate with each other.</p>
+<p>If there is compatibility between API schemas, servers and clients can support multiple Web API schemas.</p>
+<h3><a class="anchor" href="https://ethresear.ch#p-50076-migration-script-14" name="p-50076-migration-script-14"></a>Migration Script</h3>
+<p>A migration script assumes that the client has a specific data model. It allows data transfer and synchronization between clients that refer to the same migration script.</p>
+<h3><a class="anchor" href="https://ethresear.ch#p-50076-client-15" name="p-50076-client-15"></a>Client</h3>
+<p>A client consists of static content like HTML or JavaScript and can operate independently without relying on constant internet connectivity or specific servers. The client can only communicate with destinations specified by the user. It should not be implemented to depend on a specific server.</p>
+<p>The client can cache data that the user sends to or receives from the server. It must specify a particular migration script and cache data in a data structure that allows data migration by executing that script.</p>
+<h3><a class="anchor" href="https://ethresear.ch#p-50076-server-16" name="p-50076-server-16"></a>Server</h3>
+<p>A server provides APIs that conform to the API schema. Any functionality that can be defined in the API schema can be provided.</p>
+<h2><a class="anchor" href="https://ethresear.ch#p-50076-versioning-17" name="p-50076-versioning-17"></a>Versioning</h2>
+<p>In the Portable Web, a cluster is a single application unit, but it can behave differently depending on which components are used. Since anyone can create components such as migration scripts, API schemas, clients, and servers, various versions coexist within a cluster.</p>
+<h3><a class="anchor" href="https://ethresear.ch#p-50076-migration-script-18" name="p-50076-migration-script-18"></a>Migration Script</h3>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/8/1/816f44d7982b94d6c1e4e466919907be66f633b5.png" title="Version control of Migration Script"><img alt="Version control of Migration Script" height="251" src="https://ethresear.ch/uploads/default/optimized/3X/8/1/816f44d7982b94d6c1e4e466919907be66f633b5_2_690x251.png" width="690" /></a></div><p></p>
+<p>Version management of migration scripts is represented using a Directed Acyclic Graph (DAG) and can be updated by anyone. When creating a new migration script, you must specify a backward-compatible migration script. The new migration script must be able to migrate data by transforming the data structure, even when executed from clients that supported the specified backward-compatible migration script. Since anyone can create migration scripts, they may branch but can also merge.</p>
+<p>By executing the appropriate number of migration scripts, data can be migrated from older clients to clients that support the latest migration script. For example, a client that supports migration script ‘a’ can migrate data to a client that supports migration script ‘e’ by executing migration scripts three times（b→c→e or b→d→e）.</p>
+<h3><a class="anchor" href="https://ethresear.ch#p-50076-api-schema-19" name="p-50076-api-schema-19"></a>API Schema</h3>
+<p>A new API schema does not carry information about relationships with other API schemas, such as backward compatibility. Clients and servers can support multiple API schemas, so compatibility management is handled individually by clients and servers. They can support additional API schemas as long as compatibility is not broken.</p>
+<h3><a class="anchor" href="https://ethresear.ch#p-50076-client-20" name="p-50076-client-20"></a>Client</h3>
+<p>Client updates are mainly divided into three types. For all types of updates, the user can choose whether to accept the update.</p>
+<ol>
+<li><strong>Type 1</strong>: Updates that do not change either the migration script or the API schema.</li>
+<li><strong>Type 2</strong>: Updates that change the API schema.</li>
+<li><strong>Type 3</strong>: Updates that change the migration script.</li>
+</ol>
+<p>Type 1 does not affect other components.</p>
+<p>In the case of Type 2, compatibility with the servers that the user usually uses may be lost unless the server also updates to the corresponding API schema.</p>
+<p>In the case of Type 3, the client can update to a new migration script that specifies the current migration script as backward-compatible. Data can be migrated from a client supporting the previous migration script, but since it’s only backward-compatible and not fully compatible, data cached in the client that has updated the migration script cannot be migrated back to other clients still using the older migration script. In such cases, as shown in the diagram below, other clients need to either support the updated migration script or create a new one to ensure compatibility.</p>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/3/f/3fe644e9f22f77184275a467cfb51593e41bafad.png" title="Resolve Migration Script Compatibility"><img alt="Resolve Migration Script Compatibility" height="215" src="https://ethresear.ch/uploads/default/optimized/3X/3/f/3fe644e9f22f77184275a467cfb51593e41bafad_2_690x215.png" width="690" /></a></div><p></p>
+<h3><a class="anchor" href="https://ethresear.ch#p-50076-server-21" name="p-50076-server-21"></a>Server</h3>
+<p>A server update means changing or adding the corresponding API schema. You can update by registering the updated API schema information in the index cluster.</p>
+<h1><a class="anchor" href="https://ethresear.ch#p-50076-the-economics-of-the-portable-web-22" name="p-50076-the-economics-of-the-portable-web-22"></a>The Economics of the Portable Web</h1>
+<p>For the Portable Web to function sustainably and for developers and service providers to actively participate, economic incentives are essential. This section explains the economic system that supports this architecture.</p>
+<h2><a class="anchor" href="https://ethresear.ch#p-50076-incentives-for-participants-23" name="p-50076-incentives-for-participants-23"></a>Incentives for Participants</h2>
+<h3><a class="anchor" href="https://ethresear.ch#p-50076-cluster-creators-24" name="p-50076-cluster-creators-24"></a>Cluster Creators</h3>
+<p>Cluster creators launch new applications within the Portable Web ecosystem. They can issue tokens specific to their clusters, which become the foundation of the cluster’s economy. By designing tokens that encourage widespread adoption of their applications, cluster creators can earn revenue through seigniorage (profit from token issuance).</p>
+<p>As the cluster gains popularity and more users join, the demand for these tokens increases. This heightened demand raises the value of the tokens, providing economic incentives for cluster creators to continue developing and improving their applications. The success of the cluster is directly linked to the value of the tokens, aligning the interests of cluster creators with those of users and other participants.</p>
+<h3><a class="anchor" href="https://ethresear.ch#p-50076-server-providers-25" name="p-50076-server-providers-25"></a>Server Providers</h3>
+<p>Servers within the Portable Web host data and provide APIs that conform to the cluster’s API schema. Server providers can monetize their services through various billing models, such as subscription fees, pay-per-use charges, or offering premium features. Since users manage their own data and can choose which servers to interact with, service providers are encouraged to offer high-quality, reliable services to attract and retain users.</p>
+<p>By accepting payments in the cluster’s tokens, service providers also participate in the cluster’s economy. If the token’s value increases, the potential revenue for service providers grows as well. In this way, a symbiotic relationship is formed where service providers contribute to the cluster’s growth while profiting from its success.</p>
+<h3><a class="anchor" href="https://ethresear.ch#p-50076-client-developers-26" name="p-50076-client-developers-26"></a>Client Developers</h3>
+<p>Client developers create software that provides the cluster’s user interface and caches data sent to and received from servers. They can monetize their efforts by selling premium clients or offering additional features for a fee—all transacted in the cluster’s tokens.</p>
+<p>Anyone can provide clients, and because of the interoperability within the cluster’s ecosystem, developers are encouraged to innovate and offer more valuable user experiences. They are motivated to continuously improve the products they provide.</p>
+<h3><a class="anchor" href="https://ethresear.ch#p-50076-users-27" name="p-50076-users-27"></a>Users</h3>
+<p>By using the Portable Web, users enjoy greater control over their data and the ability to customize their application experience. They participate in the cluster’s economy by using tokens to access premium features and more. Additionally, users who hold tokens may see their value increase as the cluster grows, providing an incentive to support and promote the cluster.</p>
+<p>By engaging in the cluster’s economy, users have more opportunities to actively participate, provide feedback, and contribute to the community. Their involvement is expected to help develop the ecosystem further.</p>
+<h1><a class="anchor" href="https://ethresear.ch#p-50076-discussions-28" name="p-50076-discussions-28"></a>Discussions</h1>
+<p>Here, I briefly outline concerns and future challenges.</p>
+<h2><a class="anchor" href="https://ethresear.ch#p-50076-versioning-29" name="p-50076-versioning-29"></a>Versioning</h2>
+<p>With the current version management method, there’s a risk that migration scripts and API schemas could proliferate uncontrollably, negatively impacting user experience and data portability.</p>
+<p>At present, it might be desirable for the initial cluster creator to have initiative over specifications while still allowing anyone to customize.</p>
+<h2><a class="anchor" href="https://ethresear.ch#p-50076-incentives-for-data-lock-in-30" name="p-50076-incentives-for-data-lock-in-30"></a>Incentives for Data Lock-in</h2>
+<p>The initial cluster creators have a disincentive against implementing data lock-in. This is because their goal is to profit from token seigniorage rather than from data lock-in (if they aimed to profit from data lock-in, they would not choose the Portable Web architecture). To profit from token seigniorage, they need to increase the real demand for the token, thereby boosting its price. To increase this demand, cluster creators must offer more attractive applications to users. Applications that appeal to users typically offer:</p>
+<ul>
+<li>No data lock-in</li>
+<li>Customizability by anyone, fostering diversity and rapid development.</li>
+</ul>
+<p>Given this, cluster creators are likely to see remaining open as more beneficial than implementing data lock-in.</p>
+<p>In other words, within the cluster, at least one component set (server, API schema, client, and migration script) must support data portability.</p>
+<p>Service providers who join later and are not token stakeholders have a positive incentive for data lock-in, similar to conventional web environments. However, since users can choose components from the cluster, the most user-preferred components will be utilized. In an environment without data lock-in, if users still choose a locked-in component, it is a result of their own decision. This is also part of the value the Portable Web offers, and it cannot deny this choice.</p>
+<h2><a class="anchor" href="https://ethresear.ch#p-50076-economics-31" name="p-50076-economics-31"></a>Economics</h2>
+<p>If payments can be made through methods other than those provided by the browser’s standard, the system’s economy could collapse, rendering this architecture unviable.</p>
+<h2><a class="anchor" href="https://ethresear.ch#p-50076-when-the-purpose-of-a-cluster-changes-32" name="p-50076-when-the-purpose-of-a-cluster-changes-32"></a>When the Purpose of a Cluster Changes</h2>
+<p>The components of a cluster must align with its purpose. If functionalities that do not follow the cluster’s purpose are implemented, the cluster will lose its distinct identity—the symbol that differentiates it from other clusters. This would be similar to Facebook and LinkedIn—which have different purposes—losing their boundaries and becoming inconvenient applications. Moreover, if a feature does not align with users’ objectives, it is unlikely to gain their support.</p>
+<h1><a class="anchor" href="https://ethresear.ch#p-50076-qa-33" name="p-50076-qa-33"></a>Q&amp;A</h1>
+
+Is the Portable Web feasible? <a href="https://ethresear.ch/t/the-portable-web-hackable-no-data-lock-in-and-crypto-native-web-world/20488/1">(click for more details)</a>
+
+What is the difference between Fediverse? <a href="https://ethresear.ch/t/the-portable-web-hackable-no-data-lock-in-and-crypto-native-web-world/20488/1">(click for more details)</a>
+
+Why am I posting this here? <a href="https://ethresear.ch/t/the-portable-web-hackable-no-data-lock-in-and-crypto-native-web-world/20488/1">(click for more details)</a>
+
+Is this post the final version? <a href="https://ethresear.ch/t/the-portable-web-hackable-no-data-lock-in-and-crypto-native-web-world/20488/1">(click for more details)</a>
+<p>I welcome your feedback and collaboration to further develop and refine the Portable Web concept.</p>
+            <p><small>1 post - 1 participant</small></p>
+            <p><a href="https://ethresear.ch/t/the-portable-web-hackable-no-data-lock-in-and-crypto-native-web-world/20488">Read full topic</a></p>
+]]></content:encoded>
+<pubDate>Wed, 25 Sep 2024 12:57:12 +0000</pubDate>
+<pubDate>Wed, 25 Sep 2024 12:57:12 +0000</pubDate>
+</item>
 
 <item>
 <title>Using FRI for DA with Optimistic Correctable Commitments in Rollups</title>
