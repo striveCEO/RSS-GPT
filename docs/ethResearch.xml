@@ -4,6 +4,103 @@
 <title>Ethereum Research - Latest topics</title>
 <link>https://ethresear.ch/latest</link>
 
+<item>
+<title>Steelmanning a blob throughput increase for Pectra</title>
+<link>https://ethresear.ch/t/steelmanning-a-blob-throughput-increase-for-pectra/20499</link>
+<guid>https://ethresear.ch/t/steelmanning-a-blob-throughput-increase-for-pectra/20499</guid>
+<content:encoded><![CDATA[
+<div> 关键词：Pectra、硬分叉、块重组、数据分片、费用预测
+
+总结:
+本文围绕Pectra网络的当前状态和对即将进行的硬分叉中关于数据包（blob）目标或限制增加的讨论进行了深入分析。以下是关键点的总结：
+
+1. **硬分叉背景**：讨论的核心在于如何继续扩展去中心化应用（DA），并为现有的第二层（L2）解决方案及其应用提供足够的空间以实现进一步的扩展。
+
+2. **块重组趋势**：过去一年内，共发生了约5900次块重组事件，占总区块的0.225%，同时有14426次槽位未被提议者接收到信号，占比0.549%。平均每月发生492次重组和1202次槽位错过事件。
+
+3. **硬分叉后重组减少**：尽管最近的硬分叉（Dencun升级）可能导致重组事件增加的预期，实际情况却是重组事件数量减半。这可能归因于核心开发团队持续改进客户端软件。
+
+4. **数据包对重组的影响**：早期的研究表明，带有6个数据包的区块比无数据包区块更频繁地发生重组。然而，更新后的分析显示，这种差异已显著减少，单个数据包与多个数据包的区块在重组率上几乎无明显区别。
+
+5. **数据包分布**：数据显示，大多数区块要么包含0个数据包，要么包含6个数据包，而包含1到5个数据包的区块相对较少。但自某项改进以来，这种情况有所改善，极端情况下的区块数量减少了。
+
+通过这些分析，文章强调了在考虑增加数据包限制时，需要权衡网络扩展需求、现有L2解决方案的成本效益以及避免对未来采用产生不利影响的可能性。 <div>
+<h1><a class="anchor" href="https://ethresear.ch#p-50111-steelmanning-a-blob-throughput-increase-for-pectra-1" name="p-50111-steelmanning-a-blob-throughput-increase-for-pectra-1"></a>Steelmanning a blob throughput increase for Pectra</h1>
+<p>With the discussions about the Pectra hardfork scope continuing, I want to provide some empirical input on the current state of the network.<br />
+I’ll try to do so by answering some commonly raised questions that arise in discussions on the proposed blob target/limit increase for Pectra.</p>
+<p><strong>The arguments for shipping <a href="https://eips.ethereum.org/EIPS/eip-7691">EIP-7691</a> in Pectra are:</strong></p>
+<ul>
+<li><strong>Continue scaling DA</strong> - with <a href="https://github.com/ethereum/EIPs/blob/b4da6a963f0afc5e78b6071ec4c6e5ae7cada145/EIPS/eip-4844.md">EIP-4844</a>, we have only set the foundation.
+<ul>
+<li>Provide existing L2s and their apps enough blob space for further scaling.</li>
+<li>Avoid creating a precedent of “<em>blob fees can explode and are unpredictable</em>” (h/t Ansgar); this harms future adoption if rollups have to account for rare fee spikes over extended periods.</li>
+</ul>
+</li>
+<li><strong>The number of reorgs has been trending down since Dencun.</strong></li>
+<li><strong>The impact of blobs on reorgs has decreased as well.</strong></li>
+</ul>
+<h2><a class="anchor" href="https://ethresear.ch#p-50111-how-did-the-number-of-reorgs-evolve-over-time-2" name="p-50111-how-did-the-number-of-reorgs-evolve-over-time-2"></a>How did the number of reorgs evolve over time?</h2>
+<blockquote>
+<p>reorged = “nodes saw a block by the proposer of the respective slot”<br />
+missed = “no sign that the proposer was online”</p>
+</blockquote>
+<ul>
+<li>Within the last 365 days, 5,900 blocks were reorged.</li>
+<li>This equates to 0.225% of the blocks in that time interval.</li>
+<li>At the same time, 14,426 slots were missed, representing 0.549%.</li>
+<li>On average, we observe 492 reorgs and 1,202 missed slots per month.</li>
+</ul>
+<p>The number of reorgs has been decreasing, which is a positive development, though not surprising, as core devs continuously improve client software. Interestingly, contrary to expectations that the most recent hard fork (= Dencun) would lead to a significant rise in reorgs, we actually observed the opposite trend.</p>
+<p><strong>Since the Dencun upgrade, the number of reorgs halved.</strong></p>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/4/b/4b1dde8030fe4c0167480cd65d800b986c292802.png" title="combined_reorgs_missed"><img alt="combined_reorgs_missed" height="500" src="https://ethresear.ch/uploads/default/optimized/3X/4/b/4b1dde8030fe4c0167480cd65d800b986c292802_2_571x500.png" width="571" /></a></div><p></p>
+<p>It’s challenging to identify the exact reason for the change in trend, but it may be attributed to the ongoing improvements made by core devs to their client software.</p>
+<h2><a class="anchor" href="https://ethresear.ch#p-50111-whats-the-impact-of-blobs-on-reorgs-3" name="p-50111-whats-the-impact-of-blobs-on-reorgs-3"></a>What’s the impact of blobs on reorgs?</h2>
+<p><a href="https://ethresear.ch/t/big-blocks-blobs-and-reorgs/19674">Initial analysis</a> conducted a few months after the Dencun hardfork showed that blocks with 6 blobs were reorged 3 times more frequently than 0-blob blocks. In general, we observed that the reorg rate has increased steadily with a growing number of blobs.</p>
+<p>Updating this analysis presents a different picture today. Even though we still see that 6-blob blocks are reorged more frequently than 0-blob or 1-blob blocks, the numbers have decreased significantly, showing no substantial difference between blocks with one blob and those with six blobs.<br />
+We still observe a small difference in the reorg rate for 0-blob blocks and x-blob blocks (where x &gt; 0).</p>
+<p><img alt="reorgrate_animation" class="animated" height="301" src="https://ethresear.ch/uploads/default/original/3X/0/6/0609208e43c3fb8f94ebcc46b3b99a4fc79eda27.gif" width="690" /></p>
+<h2><a class="anchor" href="https://ethresear.ch#p-50111-how-well-are-blobs-distributed-over-blocks-4" name="p-50111-how-well-are-blobs-distributed-over-blocks-4"></a>How well are blobs distributed over blocks?</h2>
+<p>Plotting the distribution, we can see that most blobs contain either 0 or 6 blobs, with blocks containing 1 to 5 blobs representing the minority. However, the situation has improved since the <a href="https://ethresear.ch/t/big-blocks-blobs-and-reorgs/19674">last study</a>, with fewer slots at the extremes of 0 blobs and 6 blobs.</p>
+<p><img alt="all_blobs_day" class="animated" height="301" src="https://ethresear.ch/uploads/default/original/3X/c/c/ccf6c5d3f8fad8bbd1330b98c1bb8e804fc19014.gif" width="690" /></p>
+<h2><a class="anchor" href="https://ethresear.ch#p-50111-related-work-5" name="p-50111-related-work-5"></a>Related work</h2>
+<div class="md-table">
+<table>
+<thead>
+<tr>
+<th>Title</th>
+<th>Url</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>On Attestations, Block Propagation, and Timing Games</td>
+<td><a href="https://ethresear.ch/t/on-attestations-block-propagation-and-timing-games/20272">ethresearch</a></td>
+</tr>
+<tr>
+<td>Blobs, Reorgs, and the Role of MEV-Boost</td>
+<td><a href="https://ethresear.ch/t/blobs-reorgs-and-the-role-of-mev-boost/19783">ethresearch</a></td>
+</tr>
+<tr>
+<td>Big blocks, blobs, and reorgs</td>
+<td><a href="https://ethresear.ch/t/big-blocks-blobs-and-reorgs/19674">ethresearch</a></td>
+</tr>
+<tr>
+<td>On Block Sizes, Gas Limits and Scalability</td>
+<td><a href="https://ethresear.ch/t/on-block-sizes-gas-limits-and-scalability/18444">ethresearch</a></td>
+</tr>
+<tr>
+<td>The Second-Slot Itch - Statistical Analysis of Reorgs</td>
+<td><a href="https://ethresear.ch/t/the-second-slot-itch-statistical-analysis-of-reorgs/16333/12">ethresearch</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+            <p><small>1 post - 1 participant</small></p>
+            <p><a href="https://ethresear.ch/t/steelmanning-a-blob-throughput-increase-for-pectra/20499">Read full topic</a></p>
+]]></content:encoded>
+<pubDate>Thu, 26 Sep 2024 13:12:23 +0000</pubDate>
+<pubDate>Thu, 26 Sep 2024 13:12:23 +0000</pubDate>
+</item>
 
 <item>
 <title>Proposal: Delay stateRoot Reference to Increase Throughput and Reduce Latency</title>
