@@ -5,6 +5,45 @@
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
 <item>
+<title>Towards Practical Transciphering for FHE with Setup Independent of the Plaintext Space</title>
+<link>https://eprint.iacr.org/2023/1531</link>
+<guid>https://eprint.iacr.org/2023/1531</guid>
+<content:encoded><![CDATA[
+<div> 关键词：全同态加密、非交互式协议、带宽优化、混合同态加密、自适应精度
+
+总结: 文章提出了一种新的方法来解决全同态加密（FHE）在实际应用中带宽需求过高的问题。通过结合任何FHE兼容的对称加密算法与自适应精度的转换过程，该方法允许服务器根据具体应用需求动态选择加密精度，从而显著减少了通信成本。文章以使用FiLIP密钥作为示例，结合了最实用的同态计算技术，成功实现了从2^2到2^8的不同精度范围内的加密操作，每项操作仅需13ms至137ms的时间。这种方法不仅优化了带宽使用，而且保持了操作的高效性，为FHE的应用提供了更灵活和高效的解决方案。
+
+文章的核心贡献在于引入了一种无需预先确定消息精度的方法，解决了现有技术中对于消息大小或应用底层结构的约束问题。通过将原始数据逐位加密并随后根据需要转换为整数域上的FHE密文，这种方法使得FHE的非交互式隐私保护协议能够在保持计算和通信效率的同时，适应各种不同的应用场景。这种创新的策略极大地扩展了FHE在实际应用中的潜力，尤其是在需要处理大量数据和高精度要求的场景下。 <div>
+Fully Homomorphic Encryption (FHE) is a powerful tool to achieve non-interactive privacy preserving protocols with optimal computation/communication complexity. However, the main disadvantage is that the actual communication cost (bandwidth) is high due to the large size of FHE ciphertexts. As a solution, a technique called transciphering (also known as Hybrid Homomorphic Encryption) was introduced to achieve almost optimal bandwidth for such protocols. However, all of existing works require clients to fix a  precision for the messages or a mathematical structure for the message space beforehand. It results in unwanted constraints on the plaintext size or underlying structure of FHE based applications.
+
+In this article, we introduce a new approach for transciphering which does not require fixed message precision decided by the client, for the first time. In more detail, a client uses any kind of FHE-friendly symmetric cipher  for $\{0,1\}$ to send its input data encrypted bit-by-bit, then the server can choose a precision $p$ depending on the application and homomorphically transforms the encrypted bits into FHE ciphertexts encrypting integers in $\mathbb{Z}_p$. To illustrate our new technique, we evaluate a transciphering using FiLIP cipher and adapt the most practical homomorphic evaluation technique [CCS'22] to keep the practical latency.  As a result, our proof-of-concept implementation for $p$ from $2^2$ to $2^8$ takes only from $13$ ms to $137$ ms.
+]]></content:encoded>
+<pubDate>Fri, 06 Oct 2023 21:43:10 +0000</pubDate>
+<pubDate>Fri, 06 Oct 2023 21:43:10 +0000</pubDate>
+</item>
+<item>
+<title>Mastic: Private Weighted Heavy-Hitters and Attribute-Based Metrics</title>
+<link>https://eprint.iacr.org/2024/221</link>
+<guid>https://eprint.iacr.org/2024/221</guid>
+<content:encoded><![CDATA[
+<div> 关键词：多党计算、用户隐私、Mastic协议、重头项、属性基度量
+
+总结:
+
+本文讨论了在保护用户隐私的前提下，通过多党计算技术获取大型软件系统和网络服务中用户行为和体验的洞察。文章介绍了Prio和Poplar两种基于多党计算的协议，它们分别用于通用统计和热门输入的计算。然而，这两种协议并未覆盖所有IETF识别的应用场景。
+
+为填补这一空白，文章提出了一种名为Mastic的新协议，用于处理每个客户端持有输入及其权重的情况（例如，URL及其页面加载时间）。对于给定的候选输入或前缀，一小部分非共谋服务器可以安全地聚合持有该输入（或具有相同前缀的输入）的客户端的权重，而无需学习这些权重或哪个客户端持有哪个输入。这种功能开辟了两个新应用领域：一是对传统热门输入概念的扩展——加权热门输入；二是对Prio风格指标的增强——属性基指标，其中聚合结果根据用户的层级属性进行分类（如地理位置或软件版本）。
+
+文章还通过实际案例展示了Mastic在实现这两个新应用方面的可行性，并与Prio和Poplar进行了性能比较。结果显示，对于简单的热门输入计算，Mastic的表现优于Poplar至少一个数量级；而对于属性基指标，其性能提升幅度约为1.5到2倍。 <div>
+Insight into user experience and behavior is critical to the success of large software systems and web services. Gaining such insights, while preserving user privacy, is a significant challenge. Recent advancements in multi-party computation have made it practical to securely compute aggregates over secret shared data. Two such protocols have emerged as candidates for standardization at the IETF: Prio (NSDI 2017) for general-purpose statistics; and Poplar (IEEE S&amp;P 2021) for heavy hitters, where the goal is to compute the most popular inputs held by users without learning the inputs themselves. While each of these protocols is well-suited to certain applications, there remain a number of use cases identified by IETF for which neither Prio nor Poplar is practical.
+
+We introduce Mastic, a protocol for the following functionality: each of a large number of clients holds an input (e.g., a URL) and its corresponding weight (e.g., page load time); for a given candidate input (or prefix), a small number of non-colluding servers wish to securely aggregate the weights of clients that hold that input (or some input with that prefix), without learning the weights or which client holds which input. This functionality makes two new classes of applications possible. The first is a natural generalization of heavy hitters we call weighted heavy-hitters. The second is an enhancement of Prio-style metrics we call attribute-based metrics in which aggregates are grouped by hierarchical user attributes (e.g., their geographic location or software version). We demonstrate Mastic's practicality for these applications with a real-world example of each. We also compare our protocol with Prio and Poplar on a wide area network. Overall, we report over one order of magnitude performance improvement over Poplar for plain heavy-hitters and $1.5-2\times$ improvement over Prio for attribute-based metrics.
+]]></content:encoded>
+<pubDate>Tue, 13 Feb 2024 16:41:06 +0000</pubDate>
+<pubDate>Tue, 13 Feb 2024 16:41:06 +0000</pubDate>
+</item>
+
+<item>
 <title>PipeSwap: Forcing the Timely Release of a Secret for Atomic Swaps Across All Blockchains</title>
 <link>https://eprint.iacr.org/2024/881</link>
 <guid>https://eprint.iacr.org/2024/881</guid>
@@ -25,9 +64,7 @@ Atomic cross-chain swap, which allows users to exchange coins securely, is criti
 We present pipeSwap, a cross-chain swap protocol that satisfies both security and practical universality. To avoid transactions of the same frozen coins being double-claimed to violate the atomicity property, pipeSwap proposes a novelly designed paradigm of pipelined coins flow by using two-hop swap and two-hop refund techniques. pipeSwap achieves universality by not relying on any specific script language, aside from the basic ability to verify signatures. Furthermore, we analyze why existing ideal functionality falls short in capturing the atomicity property of Universal Atomic Swaps, and define for the first time ideal functionality to guarantee atomicity. In addition to a detailed security analysis in the Universal Composability framework, we develop a proof-of-concept implementation of pipeSwap with Schnorr/ECDSA signatures, and conduct extensive experiments to evaluate the overhead. The experimental results show that pipeSwap can be performed in less than 1.7 seconds and requires less than 7 kb of communication overhead on commodity machines, which demonstrates its high efficiency.
 ]]></content:encoded>
 <pubDate>Mon, 03 Jun 2024 01:21:19 +0000</pubDate>
-<pubDate>Mon, 03 Jun 2024 01:21:19 +0000</pubDate>
 </item>
-
 <item>
 <title>Verifiable Distributed Aggregation Functions</title>
 <link>https://eprint.iacr.org/2023/130</link>
