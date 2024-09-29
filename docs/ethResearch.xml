@@ -4,6 +4,127 @@
 <title>Ethereum Research - Latest topics</title>
 <link>https://ethresear.ch/latest</link>
 
+<item>
+<title>Attestation Verification Optimization</title>
+<link>https://ethresear.ch/t/attestation-verification-optimization/20516</link>
+<guid>https://ethresear.ch/t/attestation-verification-optimization/20516</guid>
+<content:encoded><![CDATA[
+<div> 关键词：BLS签名、聚合验证、随机化、防篡改攻击、证明所有权
+
+总结:
+本文主要探讨了基于BLS（Boneh-Lynn-Shacham）签名的聚合验证方法及其优化策略，特别是Tuyen优化。文章首先介绍了BLS签名的基本概念和性质，包括其线性组合验证的有效性以及验证过程中的非退化特性。接着，阐述了如何通过生成64位随机数来对每个签名进行盲化处理，以实现高效安全的签名聚合。
+
+Tuyen优化则进一步提出了一种方法，即在聚合前将随机数与公钥而非消息进行乘法运算，以此来保护验证过程免受特定构造的公钥攻击（“rogue”攻击）。这种方法简化了聚合过程，使得验证阶段仅需一次配对计算，从而显著提高了效率。文章还提供了理论证明，确认了Tuyen优化方法在聚合验证过程中的正确性和安全性。
+
+此外，文章还讨论了与随机化相关的其他安全考虑，如防止签名间的抵消攻击，以及如何通过证明所有权机制来增强系统的鲁棒性。最后，文章强调了在聚合签名时采取的安全措施能够有效抵御篡改攻击，并符合最佳安全实践。 <div>
+<h1><a class="anchor" href="https://ethresear.ch#p-50147-attestation-verification-optimization-1" name="p-50147-attestation-verification-optimization-1"></a>Attestation Verification Optimization</h1>
+<p>In the ethresearch post <a href="https://ethresear.ch/t/fast-verification-of-multiple-bls-signatures/5407">Fast Verification of Multiple BLS Signatures</a>, Vitalik describes a method for efficiently and securely aggregating multiple <strong>already aggregated</strong> BLS signatures where each aggregated signature can have a different message through randomization.</p>
+<p>Randomization, or “blinding,” can be used to protect against <a href="https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-bls-signature#definitions" rel="noopener nofollow ugc">rogue public key attacks</a>, in which a specially crafted public key (the “rogue” key) is used to forge an aggregated signature. Vitalik suggests 64 bit random numbers be locally generated on the client side for scalar multiplication with each signature during aggregation.  This creates a linear combination style computation of points that upholds the validity of the verification, due to the underlying bi-linear map properties of BLS signatures. The same locally generated random values are scalar multiplied with each of the messages that get aggregated prior to final verification, resulting in equality of pairings.</p>
+<p>We note that there is also an expired IETF draft <a href="https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-bls-signature" rel="noopener nofollow ugc">standard</a> that is referenced by the BLST <a href="https://github.com/supranational/blst" rel="noopener nofollow ugc">library</a>, which <a href="https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-bls-signature#name-proof-of-possession" rel="noopener nofollow ugc">suggests</a> to use a modified hash-to-curve function to implement proof of ownership as a protection against rogue public key attacks.</p>
+<h2><a class="anchor" href="https://ethresear.ch#p-50147-the-tuyen-optimization-2" name="p-50147-the-tuyen-optimization-2"></a>The Tuyen Optimization</h2>
+<p>The <a href="https://lodestar.chainsafe.io/" rel="noopener nofollow ugc">Lodestar</a> team, at <a href="https://chainsafe.io" rel="noopener nofollow ugc">ChainSafe</a>, wants to use a similar local randomization technique to securely aggregate multiple attestations <strong>over the same message</strong>, and have proposed <strong>The Tuyen Optimization</strong>. Similar to Vitalik’s implementation, 64-bit random numbers are generated client side and scalar multiplied with each signature during signature aggregation, creating a linear combination of points. To uphold equality in the final aggregated verification, each 64-bit random value is scalar multiplied with its corresponding public key (prior to aggregation) instead of the messages as in Vitalik’s post.  This is done to maintain a common message and avoid multiple aggregate verifications which is the heart of the optimization. It was found that aggregation and then single verification can be upwards of 4x faster due to the single pairing computation.</p>
+<p>In this report we present a formal proof that the Tuyen Optimization is correct. We also explore the security aspects of applying randomness to the public keys instead of the messages as suggested by Vitalik.</p>
+<h1><a class="anchor" href="https://ethresear.ch#p-50147-aggregation-over-common-message-3" name="p-50147-aggregation-over-common-message-3"></a>Aggregation over Common Message</h1>
+<p>Here we discuss why a direct aggregation of BLS signatures over a common message works, and more importantly the potential vulnerability, for mitigation.  First, we briefly cover some of the properties of bilinear pairings that are useful for proving validity of aggregated BLS signature verification adapted from <a href="https://www.math.uwaterloo.ca/~ajmeneze/publications/pairings.pdf" rel="noopener nofollow ugc">Menezes</a>.</p>
+<h2><a class="anchor" href="https://ethresear.ch#p-50147-pairings-4" name="p-50147-pairings-4"></a>Pairings</h2>
+<p>A pairing, or bilinear map, is a function</p>
+<div class="math">
+e: G_1 \times G_2  \to G_T
+</div>
+<p>between three groups <span class="math">G_1,G_2</span>, and <span class="math">G_T</span> of prime order <span class="math">p</span>, with generators <span class="math">g_1 = \langle G_1 \rangle</span>, <span class="math">g_2 = \langle G_2 \rangle</span> and <span class="math">g_T = \langle G_T \rangle</span>, respectively.</p>
+<p>When <span class="math">G_1 = G_2</span>, the pairing is called <strong>symmetric</strong>, otherwise it is called <strong>asymmetric</strong>. In our case the BLS pairing is asymmetric.</p>
+<p>A <strong>bilinear pairing</strong> on <span class="math">(G_1, G_2, G_T)</span> is a map:</p>
+<div class="math">
+e : G_1 \times G_2 \to G_T
+</div>
+<p>that satisfies the following conditions:</p>
+<ul>
+<li><strong>Bilinearity:</strong> For all <span class="math">u \in G_1</span>, <span class="math">v \in G_2</span>, and <span class="math">a,b \in \mathbb{Z}_p</span>,</li>
+</ul>
+<div class="math">
+e(u^a, v^b) = e(u, v)^{ab}\tag{1}
+</div>
+<ul>
+<li><strong>Non-degeneracy:</strong> <span class="math">e(g_1, g_2) \neq 1_{G_t}</span>. (recall <span class="math">g_1</span>, <span class="math">g_2</span> are generators of the <span class="math">G_1</span> and <span class="math">G_2</span>)</li>
+</ul>
+<h2><a class="anchor" href="https://ethresear.ch#p-50147-bls-signatures-5" name="p-50147-bls-signatures-5"></a>BLS Signatures</h2>
+<p>For a message <span class="math">m \in \{0,1\}^*</span>, a private key <span class="math">sk \in \mathbb{Z}_p</span>, and a corresponding public key</p>
+<div class="math">
+pk = sk \cdot g \in G_1,\tag{2}
+</div>
+<p>the signature on <span class="math">m</span> is</p>
+<div class="math">
+\sigma = sk \cdot H(m),\tag{3} \in G_2
+</div>
+<p>where <span class="math">H: \{0,1\}^* \rightarrow G_2</span> is a hash function mapping the message to <span class="math">G_2</span> and <span class="math">H</span> is generally a <a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-hash-to-curve-10.html" rel="noopener nofollow ugc">hash to curve function</a>.</p>
+<p><em>Note: The <span class="math">\cdot</span> operation denotes scalar multiplication.</em></p>
+<h3><a class="anchor" href="https://ethresear.ch#p-50147-signature-verification-6" name="p-50147-signature-verification-6"></a>Signature Verification</h3>
+<p>Given <span class="math">m</span>, <span class="math">pk</span>, and <span class="math">\sigma</span>, the signature is valid if</p>
+<div class="math">
+e(g, \sigma) =  e(pk, H(m))
+</div>
+<p>Where,</p>
+<div class="math">
+e(g, \sigma) \stackrel{3}{=} e(g, sk \cdot H(m)) \stackrel{1}{=} e(g, H(m))^{sk} \stackrel{1}{=} e(sk \cdot g, H(m)) \stackrel{2}{=} e(pk, H(m))
+</div>
+<h2><a class="anchor" href="https://ethresear.ch#p-50147-naive-aggregation-over-common-message-7" name="p-50147-naive-aggregation-over-common-message-7"></a>Naive Aggregation over Common Message</h2>
+<p>Consider <span class="math">n</span> signatures  <span class="math">\sigma_1, \sigma_2, \dots, \sigma_n \in G_2</span> corresponding to a common message <span class="math">H(m) \in G_2</span>, private keys <span class="math">sk_1, sk_2, \dots, sk_n \in \mathbb{Z}_p</span> and public keys <span class="math">pk_1, pk_2, \dots, pk_n \in G_1</span>.</p>
+<p>Multiple signatures can be combined to only require one verification as follows:</p>
+<h4><a class="anchor" href="https://ethresear.ch#p-50147-step-1-aggregate-signature-8" name="p-50147-step-1-aggregate-signature-8"></a>Step 1: Aggregate Signature</h4>
+<p>The aggregated signature <span class="math">\sigma_{agg}</span> is computed as:</p>
+<div class="math">
+\sigma_{agg} = \sum_{i=1}^{n} \sigma_i = \sum_{i=1}^{n} (sk_i \cdot H(m)) = \left(\sum_{i=1}^{n} sk_i\right) \cdot H(m) \tag{4}
+</div>
+<h4><a class="anchor" href="https://ethresear.ch#p-50147-step-2-aggregate-public-key-9" name="p-50147-step-2-aggregate-public-key-9"></a>Step 2: Aggregate Public Key</h4>
+<p>The corresponding aggregate public key is:</p>
+<div class="math">
+pk_{agg} = \sum_{i=1}^{n} pk_i = \sum_{i=1}^{n} (sk_i \cdot g)= \left( \sum_{i=1}^{n} sk_i\right) \cdot g\tag{5}
+</div>
+<h4><a class="anchor" href="https://ethresear.ch#p-50147-step-3-verification-10" name="p-50147-step-3-verification-10"></a>Step 3: Verification</h4>
+<p>The verification of the aggregate signature is done by checking:</p>
+<div class="math">
+e(g, \sigma_{agg}) \stackrel{4}{=} e\left(g, \left(\sum_{i=1}^{n} sk_i\right) \cdot H(m) \right)
+                                \stackrel{1}{=} e\left(\left( \sum_{i=1}^{n} sk_i\right) \cdot g, H(m) \right)
+                   \stackrel{5}{=} e\left(pk_{agg}, H(m)\right)
+</div>
+<p>The above proves that if the equality holds the aggregated signature is valid, implying all signatures that were aggregated are also valid.</p>
+<h1><a class="anchor" href="https://ethresear.ch#p-50147-blinding-with-tuyen-optimization-11" name="p-50147-blinding-with-tuyen-optimization-11"></a>Blinding With Tuyen Optimization</h1>
+<p>The Lodestar team has proposed the <strong>Tuyen Optimization</strong> for signature aggregation where random values <span class="math">r_i \in \mathbb{Z}</span> are scalar multiplied with the public keys <span class="math">pk_i</span>. This is in contrast to scalar multiplying the random values with the messages <span class="math">H(m_i)</span> as suggested in the <a href="https://ethresear.ch/t/fast-verification-of-multiple-bls-signatures/5407">Ethereum Research blog post</a>. From our research we believe, <strong>The Tuyen Optimization</strong> technique is novel within the Ethereum landscape and among client implementations.  We pose this proof for public review/audit to formalize it validity before expanding its use within the ecosystem. If a more formal audit is deemed necessary that will also be accommodated.</p>
+<p>In the following we show that applying blinding to the public key / signature pairs provides valid aggregated verification and adheres to security best-practices.</p>
+<p>To verify the blinded, aggregated signature using <strong>The Tuyen Optimization</strong>, the verifier needs to check if</p>
+<div class="math">
+e\left(g, \sum_{i=1}^{n} (r_i \cdot \sigma_i)\right) = e\left(\sum_{i=1}^{n} (r_i \cdot pk_i), H(m) \right)
+</div>
+<p>after applying scalar multiplications with a unique 64-bit random value <span class="math">r_i</span> to each signature <span class="math">\sigma_i</span> and public key <span class="math">pk_i</span> pair (randomness is common to the pair) during aggregation. The proof that equality holds and therefor verification of the aggregate signatures is valid goes as follows:</p>
+<p><span class="math">\begin{aligned} 
+e\left(g, \sum_{i=1}^{n} (r_i \cdot \sigma_i)\right) &amp;\stackrel{3}{=}  e\left(g, \sum_{i=1}^{n} (r_i sk_i \cdot H(m)) \right) &amp; \\
+                                &amp;\stackrel{}{=} e\left(g, \left(\sum_{i=1}^{n} r_i sk_i\right) \cdot H(m) \right) &amp;\\
+                                &amp;\stackrel{1}{=} e\left(\left( \sum_{i=1}^{n} r_i sk_i\right) \cdot g, H(m) \right)  &amp;\\
+                                &amp;\stackrel{}{=}  e\left(\sum_{i=1}^{n} (r_i sk_i \cdot g), H(m) \right) &amp;
+                                &amp;\stackrel{2}{=} e\left(\sum_{i=1}^{n} (r_i \cdot pk_i), H(m)\right) 
+\end{aligned}</span></p>
+<p>The above proves that if the equality holds, the blinded, aggregated signature is valid.</p>
+<h1><a class="anchor" href="https://ethresear.ch#p-50147-further-considerations-12" name="p-50147-further-considerations-12"></a>Further Considerations</h1>
+<h2><a class="anchor" href="https://ethresear.ch#p-50147-eth-research-post-13" name="p-50147-eth-research-post-13"></a>Eth Research Post</h2>
+<p>We note that Vitalik’s post has been “community audited” but not formally proven/audited/verified that we can find aside from <a href="https://ethresear.ch/t/security-of-bls-batch-verification">here</a>.  In the comments section of the original comment, there is consideration of aggregating over <a href="https://ethresear.ch/t/fast-verification-of-multiple-bls-signatures/5407/11">public keys</a> when the message is common. Vitalik mentions that it is well known to aggregate over public keys for common messages. We think they say this assuming over aggregated attestations because the verification of the individual signature pairs has already been done, so there is no chance to introduce a rogue key attack.  In our case that aggregation is happening prior to verification which opens up the attack surface.</p>
+<h2><a class="anchor" href="https://ethresear.ch#p-50147-security-14" name="p-50147-security-14"></a>Security</h2>
+<p>When aggregating signatures in the naive way attackers can craft signature/message pairs that are not legitimate and cancel each other out (add to zero) within the linear combination that is computed during aggregation.  Consequently, invalid signatures can be hidden and pass verification. Applying randomization to “<strong>blind</strong>” every signature in the aggregation is a technique used to help prevent these types of attacks.</p>
+<p>There is a published security <a href="https://crypto.stanford.edu/~dabo/pubs/papers/BLSmultisig.html" rel="noopener nofollow ugc">proof</a> by Dan Boneh for aggregating securely with public keys. The above report outlines that what is done in the Tuyen Optimzation is commensurate with what is mentioned in the “Batch Verification” section. The paper addresses signing and verification, and could be used to support the security of Tuyen Optimization.  It is in our opinion that the approaches put forth by Dan Boneh are more intricate than is necessary, or required, due to the imbued security considerations of the Ethereum protocol.</p>
+<p>Rogue key attacks are also referenced in the BLS IETF <a href="https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-bls-signature-04#section-3" rel="noopener nofollow ugc">draft</a> and in the Ethereum Specification where proof-of-possession is considered necessary for mitigation when aggregating signatures. Specifically, the Beacon Node Specifications require that validator signatures be verified prior to being allowed to attest to chain state.  That check is done in <a href="https://github.com/ethereum/consensus-specs/blob/0c5ad81145fea58504b6db9e8c73214a9fcb331a/specs/phase0/beacon-chain.md?plain=1#L1882" rel="noopener nofollow ugc">apply_deposits</a></p>
+<p>It is our opinion, that between proof-of-possession and the blinding techniques involved in <strong>The Tuyen Optimization</strong>, rogue key attacks are mitigated and the solution meets security best-practices.</p>
+<h2><a class="anchor" href="https://ethresear.ch#p-50147-acknowledgements-15" name="p-50147-acknowledgements-15"></a>Acknowledgements</h2>
+<p>Special thanks to some amazing people who helped put this together:</p>
+<ul>
+<li>Tuyen Nguyen <a href="https://github.com/twoeths" rel="noopener nofollow ugc">@twoeths</a></li>
+<li><a href="https://www.linkedin.com/in/sebastian-lindner-594363110/" rel="noopener nofollow ugc">Sebastian Lindner</a></li>
+<li>Cayman <a class="mention" href="https://ethresear.ch/u/wemeetagain">@wemeetagain</a></li>
+</ul>
+            <p><small>1 post - 1 participant</small></p>
+            <p><a href="https://ethresear.ch/t/attestation-verification-optimization/20516">Read full topic</a></p>
+]]></content:encoded>
+<pubDate>Sat, 28 Sep 2024 12:43:43 +0000</pubDate>
+<pubDate>Sat, 28 Sep 2024 12:43:43 +0000</pubDate>
+</item>
 
 <item>
 <title>Where's the home staking bandwidth research?</title>
