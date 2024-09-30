@@ -4,6 +4,205 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+<item>
+<title>DUPLEX: Scalable Zero-Knowledge Lookup Arguments over RSA Group</title>
+<link>https://eprint.iacr.org/2024/1509</link>
+<guid>https://eprint.iacr.org/2024/1509</guid>
+<content:encoded><![CDATA[
+<div> 关键词：零知识证明、查找论证、RSA组、可扩展性、隐私保护
+
+总结:本文提出了一种名为$\duplex$的新颖零知识查找论证方案，旨在解决大规模查找元素向量在SNARK中的应用问题。$\duplex$具有多项显著优势：
+
+1. **高效性**：对于$m$个查找元素，其证明时间仅为$O(m\log m)$，且证明大小固定，验证过程快速，无需依赖表大小。
+
+2. **适应性**：$\duplex$首次支持在RSA组上进行查找操作，通过将元素转换为质数，确保了与RSA组的兼容性，同时保持了较低的计算成本。
+
+3. **安全性**：该方案确保了查找元素的隐私性，即使在动态更新表的情况下，也能有效保护信息不被泄露。
+
+4. **实用性**：$\duplex$在实际应用中表现出色，相比于当前最先进的查找论证Caulk，其证明时间明显缩短，同时保持了合理的证明大小和验证速度。
+
+5. **可扩展性**：$\duplex$的设计使其非常适合于大规模、隐私敏感的计算验证场景，提高了可扩展性和实用性。
+
+通过这些特点，$\duplex$为SNARK在处理非算术运算如批量范围检查或位操作等任务提供了更为高效、安全和实用的解决方案。 <div>
+Lookup arguments enable a prover to convince a verifier that a committed vector of lookup elements $\vec{f} \in \mathbb{F}^m$ is contained within a predefined table $T \in \mathbb{F}^N$. These arguments are particularly beneficial for enhancing the performance of SNARKs in handling non-arithmetic operations, such as batched range checks or bitwise operations. While existing works have achieved efficient and succinct lookup arguments, challenges remain, particularly when dealing with large vectors of lookup elements in privacy-sensitive applications.
+
+In this paper, we introduce $\duplex$, a scalable zero-knowledge lookup argument scheme that offers significant improvements over previous approaches. Notably, we present the first lookup argument designed to operate over the RSA group. Our core technique allows for the transformation of elements into prime numbers to ensure compatibility with the RSA group, all without imposing substantial computational costs on the prover. Given $m$ lookup elements, $\duplex$ achieves an asymptotic proving time of $O(m \log m)$, with constant-sized proofs, constant-time verification, and a public parameter size independent of the table size $N$. Additionally, $\duplex$ ensures the privacy of lookup elements and is robust against dynamic table updates, making it highly suitable for scalable verifiable computation in real-world applications.
+
+We implemented and empirically evaluated $\duplex$, comparing it with the state-of-the-art zero-knowledge lookup argument Caulk [CCS'22]. Our experimental results demonstrate that $\duplex$ significantly outperforms Caulk in proving time for both single and batched lookup arguments, while maintaining practical proof size and verification time.
+]]></content:encoded>
+<pubDate>Thu, 26 Sep 2024 04:48:02 +0000</pubDate>
+<pubDate>Thu, 26 Sep 2024 04:48:02 +0000</pubDate>
+</item>
+<item>
+<title>Evaluating Leakage Attacks Against Relational Encrypted Search</title>
+<link>https://eprint.iacr.org/2024/1525</link>
+<guid>https://eprint.iacr.org/2024/1525</guid>
+<content:encoded><![CDATA[
+<div> 关键词：加密搜索算法、数据泄漏、隐私保护、安全存储、查询执行
+
+总结:
+
+本文探讨了加密搜索算法（ESAs）在关系数据库场景中的适用性，以及主要的数据泄漏攻击在这一背景下的应用。ESAs允许用户对敏感数据进行加密存储并远程访问，同时保持对关键词或查询的搜索能力，从而保护隐私和确保数据安全。
+
+1. **数据泄漏与攻击**: 原有ESAs在文档和关键词搜索中应用时，存在一定程度的信息泄露问题。这些信息泄露被用于辅助攻击者获取关于明文的额外信息。然而，大多数针对泄漏攻击的研究集中在关键词ESAs上，而非关系型ESAs。
+
+2. **攻击适应性**: 作者对主要的泄漏攻击进行了重新评估，以适应关系型ESAs环境，并在不同特性的关系型数据集上进行了广泛测试。
+
+3. **攻击效果差异**: 实验结果表明，这些主要的攻击方法在已知数据设置下确实可以有效作用于关系型ESAs。但攻击性能在不同的数据集、利用的模式和攻击方法之间存在显著差异。
+
+4. **数据集特性影响**: 不同属性的数据集对攻击效果产生了显著影响，说明了在实际应用中需要考虑数据集的具体特性来评估安全性和隐私保护水平。
+
+5. **结论与展望**: 该研究揭示了关系型ESAs面临的数据泄漏风险，并强调了对这类系统进行针对性安全性评估的重要性。未来工作可能包括开发更有效的防御策略、改进ESAs设计以减少泄漏，以及进一步探索针对关系型数据的新型攻击和防御机制。 <div>
+Encrypted Search Algorithms (ESAs) are a technique to encrypt data while the user can still search over it. ESAs can protect privacy and ensure security of sensitive data stored on a remote storage. Originally, ESAs were used in the context of documents that consist of keywords. The user encrypts the documents, sends them to a remote server and is still able to search for keywords, without exposing information about the plaintext. The idea of ESAs has also been applied to relational databases, where queries (similar to SQL statements) can be privately executed on an encrypted database.But just as traditional schemes for Keyword-ESAs, also Relational-ESAs have the drawback of exposing some information, called leakage. Leakage attacks have been proposed in the literature that use this information together with auxiliary information to learn details about the plaintext. However, these leakage attacks have overwhelmingly been designed for and applied to Keyword-ESAs and not Relational-ESAs.
+In this work, we review the suitability of major leakage attacks against ESAs in the relational setting by adapting them accordingly. We perform extensive re-evaluations of the attacks on various relational datasets with different properties.
+Our evaluations show that major attacks can work against Relational-ESAs in the known-data setting. However, the attack performance differs between datasets, exploited patterns, and attacks.
+]]></content:encoded>
+<pubDate>Sat, 28 Sep 2024 13:36:29 +0000</pubDate>
+<pubDate>Sat, 28 Sep 2024 13:36:29 +0000</pubDate>
+</item>
+<item>
+<title>Functional Adaptor Signatures: Beyond All-or-Nothing Blockchain-based Payments</title>
+<link>https://eprint.iacr.org/2024/1523</link>
+<guid>https://eprint.iacr.org/2024/1523</guid>
+<content:encoded><![CDATA[
+<div> 关键词：Web3系统、智能合约、适配签名、功能加密、公平信息销售
+
+总结:
+本文聚焦于在Web3系统的信任无界环境中，如何实现敏感数据的公平功能性销售。主要讨论了两种解决方案：基于智能合约的方法和依赖适配签名的技术。前者提供了原子交易，允许买家仅获取函数$f(x)$的结果而无法完全访问原始数据$x$，但存在效率低、成本高、隐私保护不足和与非智能合约系统兼容性差的问题。后者解决了上述问题，但买家可以完全提取$x$，不支持对敏感数据的功能性提取。
+
+为解决这些局限，文章提出了一种新的加密原语——功能适配签名（FAS）。FAS允许卖家发布承诺$x$的广告，买家预签支付交易关于函数$f$，并将该预签发送给卖家。卖家将预签适应为有效的买家签名，然后在区块链上发布支付和适应后的签名以获得付款。最后，买家使用预签和发布的签名高效提取$f(x)$，完成交易。
+
+文章详细阐述了FAS的安全属性，包括一种名为见证隐私的新概念，旨在保护卖家的隐私，确保买家仅学习到$f(x)$，而不会了解更多关于$x$的信息。文章提出了不同级别的见证隐私概念，如见证隐藏、见证不可区分性和零知识，以捕捉恶意买家可能获取的关于$x$的额外信息量。
+
+文章还介绍了两种支持线性函数（如统计/聚合、机器学习中的核等）的FAS高效构造，这些构造满足最强的见证隐私概念。一种基于素数阶群的构造兼容Schnorr签名用于支付，另一种基于格的构造兼容Lyubashevsky签名方案的变体。文章的主要理论贡献在于揭示了功能加密与适配签名之间意想不到的联系，以及通过使用特定安全增强技术的内积功能加密（IPFE）的黑盒方式来避免复杂的加密工具，从而实现改进的效率。文章还展示了FAS构造在Schnorr签名上的实现，证明即使对于大小适度的卖家证词，不同操作也相当高效，即使是普通硬件也能胜任。 <div>
+In scenarios where a seller holds sensitive data $x$, like employee / patient records or ecological data, and a buyer seeks to obtain an evaluation of specific function $f$ on this data, solutions in trustless digital environments like blockchain-based Web3 systems typically fall into two categories: (1) Smart contract-powered solutions and (2) cryptographic solutions leveraging tools such as adaptor signatures. The former approach offers atomic transactions where the buyer learns the function evaluation $f(x)$ (and not $x$ entirely) upon payment. However, this approach is often inefficient, costly, lacks privacy for the seller's data, and is incompatible with systems that do not support smart contracts with required functionalities. In contrast, the adaptor signature-based approach addresses all of the above issues but comes with an "all-or-nothing" guarantee, where the buyer fully extracts $x$ and does not support functional extraction of the sensitive data. In this work, we aim to bridge the gap between these approaches, developing a solution that enables fair functional sales of information while offering improved efficiency, privacy, and compatibility similar to adaptor signatures.
+
+Towards this, we propose functional adaptor signatures (FAS) a novel cryptographic primitive that achieves all the desired properties as listed above. Using FAS, the seller can publish an advertisement committing to $x$. The buyer can pre-sign the payment transaction w.r.t. a function $f$, and send it along with the transaction to the seller.
+The seller adapts the pre-signature into a valid (buyer's) signature and posts the payment and the adapted signature on the blockchain to get paid. Finally, using the pre-signature and the posted signature, the buyer efficiently extracts $f(x)$, and completes the sale. We formalize the security properties of FAS, among which is a new notion called witness privacy to capture seller's privacy, which ensures the buyer does not learn anything beyond $f(x)$.
+We present multiple variants of witness privacy, namely, witness hiding, witness indistinguishability, and zero-knowledge, to capture varying levels of leakage about $x$ beyond $f(x)$ to a malicious buyer.
+
+We introduce two efficient constructions of FAS supporting linear functions (like statistics/aggregates, kernels in machine learning, etc.), that satisfy the strongest notion of witness privacy. One construction is based on prime-order groups and compatible with Schnorr signatures for payments, and the other is based on lattices and compatible with a variant of Lyubashevsky's signature scheme. A central conceptual contribution of our work lies in revealing a surprising connection between functional encryption, a well-explored concept over the past decade, and adaptor signatures, a relatively new primitive in the cryptographic landscape. On a technical level, we avoid heavy cryptographic machinery and achieve improved efficiency, by making black-box use of building blocks like inner product functional encryption (IPFE) while relying on certain security-enhancing techniques for the IPFE in a non-black-box manner. We implement our FAS construction for Schnorr signatures and show that for reasonably sized seller witnesses, the different operations are quite efficient even for commodity hardware.
+]]></content:encoded>
+<pubDate>Fri, 27 Sep 2024 18:54:54 +0000</pubDate>
+<pubDate>Fri, 27 Sep 2024 18:54:54 +0000</pubDate>
+</item>
+<item>
+<title>Practical Mempool Privacy via One-time Setup Batched Threshold Encryption</title>
+<link>https://eprint.iacr.org/2024/1516</link>
+<guid>https://eprint.iacr.org/2024/1516</guid>
+<content:encoded><![CDATA[
+<div> 关键词：DeFi、mempool隐私、DKG、一次性设置、效率优化
+
+总结:
+
+文章探讨了在去中心化金融（DeFi）生态系统中保护交易隐私的重要性，特别是关于在内存池（mempool）中的交易可能遭受市场操纵的问题。文章提出了一种实用的、基于一次性分布式密钥生成（DKG）方案的mempool隐私解决方案，以确保交易隐私，并且在每个区块周期内仅需进行一次初始化设置。该方案通过让客户端加密交易，直到选定一定数量（B个）交易进入区块后，这些交易可以被解密服务器以极低的信息通信量解密。
+
+相比先前的工作，该方案在不增加初始设置开销的同时，降低了通信需求，提高了处理效率，并保证了未被选中的交易的隐私性。实证研究表明，这种加密过程几乎不受参与节点数量的影响，而批量解密所需的通信量则与每个节点无关。当应用于以太坊这样的区块链平台时，计算和解密时间也相对较低，使得整体性能优化明显。
+
+文章的贡献在于提供了一个既能有效保护交易隐私，又能保持高效运行的mempool隐私方案，这对于推动DeFi应用的安全性和用户数据保护具有重要意义。 <div>
+An important consideration with the growth of the DeFi ecosystem is the protection of clients who submit transactions to the system. As it currently stands, the public visibility of these transactions in the memory pool (mempool) makes them susceptible to market manipulations such as frontrunning and backrunning. More broadly, for various reasons—ranging from avoiding market manipulation to including time-sensitive information in their transactions—clients may want the contents of their transactions to remain private until they are executed, i.e. they have *pending transaction privacy*. Therefore, *mempool privacy* is becoming an increasingly important feature as DeFi applications continue to spread.
+
+    We construct the first *practical* mempool privacy scheme that uses a *one-time* DKG setup for $n$ decryption servers. Our scheme ensures the strong privacy requirement by not only hiding the transactions until they are decrypted but also guaranteeing privacy for transactions that were not selected in the epoch (*pending transaction privacy*). For each epoch (or block), clients can encrypt their transactions so that, once $B$ (encrypted) transactions are selected for the epoch, they can be decrypted by each decryption server while communicating only $O(1)$ information. 
+
+    Our result improves upon the best-known prior works, which either: (i) require an expensive initial setup involving a (special purpose) multiparty computation protocol executed by the $n$ decryption servers, along with an additional *per-epoch* setup; (ii) require each decryption server to communicate $O(B)$ information; or (iii) do not guarantee pending transaction privacy.
+
+    We implement our scheme and find that transactions can be encrypted in approximately 8.5 ms, independent of committee size, and the communication required to decrypt an entire batch of transactions is 48 bytes per party, independent of the number of transactions. If deployed on Ethereum, which processes close to 500 transactions per block, it takes close to 3.2 s for each committee member to compute a partial decryption and 3.0 s to decrypt all transactions for a block in single-threaded mode. Compared to prior work, which had an expensive setup phase per epoch, we incur $<2\times$ overhead in the worst case. On some metrics such as partial decryptions size, we actually fare better.
+]]></content:encoded>
+<pubDate>Thu, 26 Sep 2024 16:47:03 +0000</pubDate>
+<pubDate>Thu, 26 Sep 2024 16:47:03 +0000</pubDate>
+</item>
+<item>
+<title>Comments on "Privacy-Enhanced Federated Learning Against Poisoning Adversaries"</title>
+<link>https://eprint.iacr.org/2024/1504</link>
+<guid>https://eprint.iacr.org/2024/1504</guid>
+<content:encoded><![CDATA[
+<div> 关键词：Liu et al., IEEE TIFS'21, PEFL, 恶意行为检测, 同态加密
+
+<br><br>总结:
+
+在2021年8月发表于IEEE TIFS期刊的Liu等人的文章中，提出了一种名为PEFL的隐私增强框架。该框架旨在通过同态加密技术高效检测联邦学习（FL）中的恶意行为。然而，本文揭示了PEFL并未真正保护隐私。具体来说，文章指出PEFL实际上暴露了所有参与实体的完整梯度向量，这违反了隐私原则。
+
+文章进一步分析指出，即使对PEFL进行立即修复，也无法确保隐私安全。这是因为系统中存在多个漏洞，这些漏洞仍然允许敏感信息泄露。因此，虽然PEFL最初的目标是提高联邦学习环境的安全性，但其实际实现却未能达到预期的隐私保护效果。这一发现强调了在设计和部署用于保护敏感数据的加密技术时，需要仔细考虑潜在的弱点和漏洞。 <div>
+In August 2021, Liu et al. (IEEE TIFS'21) proposed a privacy-enhanced framework named PEFL  to efficiently detect poisoning behaviours in Federated Learning (FL) using homomorphic encryption. In this article, we show that PEFL does not preserve privacy. In particular, we illustrate that PEFL reveals the entire gradient vector of all users in clear to one of the participating entities, thereby violating privacy. Furthermore, we clearly show that an immediate fix for this issue is still insufficient to achieve privacy by pointing out multiple flaws in the proposed system.
+]]></content:encoded>
+<pubDate>Wed, 25 Sep 2024 10:52:18 +0000</pubDate>
+<pubDate>Wed, 25 Sep 2024 10:52:18 +0000</pubDate>
+</item>
+<item>
+<title>Practical Implementation of Pairing-Based zkSNARK in Bitcoin Script</title>
+<link>https://eprint.iacr.org/2024/1498</link>
+<guid>https://eprint.iacr.org/2024/1498</guid>
+<content:encoded><![CDATA[
+<div> 关键词：Groth16、零知识证明、比特币脚本、主网、可验证计算
+
+总结:
+
+本文介绍了在BSV主网上实现Groth16验证器的实践性方法。Groth16是一个基于配对的零知识证明方案，其证明大小固定，验证算法高效。通过将Groth16验证器集成到比特币脚本中，可以在区块链上进行链上验证，从而实现离链计算的验证。这种解决方案不仅提供了隐私保护，还提升了区块链的扩展性。此外，它还为比特币引入了智能合约功能，这在过去被认为是非常有限或不存在的。通过生成Groth16证明来验证离链计算的正确性，再使用比特币脚本在链上进行验证，这种方式不仅保证了数据的机密性，而且提高了交易处理能力，为比特币生态系统带来了新的可能性和灵活性。 <div>
+Groth16 is a pairing-based zero-knowledge proof scheme that has a constant proof size and an efficient verification algorithm. Bitcoin Script is a stack-based low-level programming language that is used to lock and unlock bitcoins. In this paper, we present a practical implementation of the Groth16 verifier in Bitcoin Script deployable on the mainnet of a Bitcoin blockchain called BSV. Our result paves the way for a framework of verifiable computation on Bitcoin: a Groth16 proof is generated for the correctness of an off-chain computation and is verified in Bitcoin Script on-chain. This approach not only offers privacy but also scalability. Moreover, this approach enables smart contract capability on Bitcoin which was previously thought rather limited if not non-existent.
+]]></content:encoded>
+<pubDate>Tue, 24 Sep 2024 16:56:05 +0000</pubDate>
+<pubDate>Tue, 24 Sep 2024 16:56:05 +0000</pubDate>
+</item>
+<item>
+<title>No Fish Is Too Big for Flash Boys! Frontrunning on DAG-based Blockchains</title>
+<link>https://eprint.iacr.org/2024/1496</link>
+<guid>https://eprint.iacr.org/2024/1496</guid>
+<content:encoded><![CDATA[
+<div> 关键词：区块链、Frontrunning攻击、DAG、区块优先级、对策
+
+总结:
+
+本文深入分析了针对基于有向无环图(DAG)的区块链系统的Frontrunning攻击策略。主要发现和讨论如下：
+
+1. **新型攻击策略**：提出了一种新颖的跨区块Frontrunning攻击方法，允许攻击者在其交易在不同区块中优先于受害者交易。
+
+2. **攻击策略介绍**：介绍了三种攻击策略——裂缝攻击（通过断开受害者区块来推迟受害者交易的排序）、投机攻击（预先构建具有优先排序的交易块）以及迟缓攻击（通过故意创建低轮次但高优先级的区块来影响排序）。
+
+3. **实验验证**：通过在AWS和本地环境中使用开源DAG区块链Bullshark和Tusk进行了实验，结果显示攻击的有效性极高，尤其是投机攻击在Bullshark和Tusk上的成功率分别达到92.86%和86.27%。
+
+4. **对策探讨**：提出了随机排序区块和基于交易费用全局重排序的对策以抵御攻击，但发现这些措施可能损害系统性能或增加现有Frontrunning策略的脆弱性。
+
+5. **结论与展望**：强调了对DAG区块链系统中Frontrunning攻击的深入理解和防御的重要性，指出需要进一步研究更有效的防御机制以保护此类区块链系统的安全性和公平性。 <div>
+Frontrunning is rampant in blockchain ecosystems, yielding attackers profits that have already soared into several million. Most existing frontrunning attacks focus on manipulating transaction order (namely, prioritizing attackers' transactions before victims' transactions) $\textit{within}$ a block. However, for the emerging directed acyclic graph (DAG)-based blockchains, these intra-block frontrunning attacks may not fully reveal the frontrunning vulnerabilities as they introduce block ordering rules to order transactions belonging to distinct blocks. 
+
+This work performs the first in-depth analysis of frontrunning attacks toward DAG-based blockchains. We observe that the current block ordering rule is vulnerable to a novel $\textit{inter-block}$ frontrunning attack, which enables the attacker to prioritize ordering its transactions before the victim transactions across blocks. We introduce three attacking strategies: $\textit{(i)}$ Fissure attack, where attackers render the victim transactions ordered later by disconnecting the victim's blocks. $\textit{(ii)}$ Speculative attack, where attackers speculatively construct order-priority blocks. $\textit{(iii)}$ Sluggish attack, where attackers deliberately create low-round blocks assigned a higher ordering priority by the block ordering rule.
+
+We implement our attacks on two open-source DAG-based blockchains, Bullshark and Tusk. We extensively evaluate our attacks in geo-distributed AWS and local environments by running up to $n=100$ nodes. Our experiments show remarkable attack effectiveness. For instance, with the speculative attack, the attackers can achieve a $92.86\%$ attack success rate (ASR) on Bullshark and an $86.27\%$ ASR on Tusk. Using the fissure attack, the attackers can achieve a $94.81\%$ ASR on Bullshark and an $87.31\%$ ASR on Tusk. 
+
+We also discuss potential countermeasures for the proposed attack, such as ordering blocks randomly and reordering transactions globally based on transaction fees. However, we find that they either compromise the performance of the system or make the protocol more vulnerable to frontrunning using the existing frontrunning strategies.
+]]></content:encoded>
+<pubDate>Tue, 24 Sep 2024 13:34:03 +0000</pubDate>
+<pubDate>Tue, 24 Sep 2024 13:34:03 +0000</pubDate>
+</item>
+<item>
+<title>Concretely Efficient Private Set Union via Circuit-based PSI</title>
+<link>https://eprint.iacr.org/2024/1494</link>
+<guid>https://eprint.iacr.org/2024/1494</guid>
+<content:encoded><![CDATA[
+<div> 关键词：Private Set Intersection (PSI), Private Set Union (PSU), Public-key operations, Communication overhead, Symmetric-key primitives
+
+总结:
+
+本文提出了一种新型的私有集合并集（PSU）协议，该协议主要基于高效对称密钥机制，同时保持与公钥基础替代方案相当的通信效率。PSU协议的核心创新在于利用先进的电路基PSI技术实现多查询反向私有成员测试（mq-RPMT），这一技术对于构建PSU至关重要。文章揭示了电路基PSI中常见哈希方法导致的隐私泄露问题，并通过盲化伪随机函数（OPRF）和新设计的洗牌子协议来缓解这一问题。
+
+该协议采用模块化设计，各个组成部分可以方便地替换为更高效的版本，这将直接提升整体性能。实验结果显示，与Chen等人在PKC'24上提出的公钥基础PSU协议相比，本文的PSU协议在输入集大小为$2^{20}$时运行时间提高了10%。此外，与Zhang等人在USENIX Sec'23上提出的基于对称密钥的PSU协议相比，本文的协议在通信方面改善了1.6倍。
+
+通过这些改进，本文的PSU协议不仅优化了计算效率，还降低了通信开销，为私有集合操作提供了更为高效、实用的解决方案。 <div>
+Private set intersection (PSI) is a type of private set operation (PSO) for which concretely efficient linear-complexity protocols do exist.
+However, the situation is currently less satisfactory for other relevant PSO problems such as private set union (PSU):
+For PSU, the most promising protocols either rely entirely on computationally expensive public-key operations or suffer from substantial communication overhead.
+
+In this work, we present the first PSU protocol that is mainly based on efficient symmetric-key primitives yet enjoys comparable communication as public-key-based alternatives.
+Our core idea is to re-purpose state-of-the-art circuit-based PSI to realize a multi-query reverse private membership test (mq-RPMT), which is instrumental for building PSU.
+We carefully analyze a privacy leakage issue resulting from the hashing paradigm commonly utilized in circuit-based PSI and show how to mitigate this via oblivious pseudorandom function (OPRF) and new shuffle sub-protocols.
+Our protocol is modularly designed as a sequential execution of different building blocks that can be easily replaced by more efficient variants in the future, which will directly benefit the overall performance.
+
+We implement our resulting PSU protocol, showing a run-time improvement of 10% over the state-of-the-art public-key-based protocol of Chen et al. (PKC'24) for input sets of size $2^{20}$.
+Furthermore, we improve communication by $1.6\times$ over the state-of-the-art symmetric-key-based protocol of Zhang et al. (USENIX Sec'23).
+]]></content:encoded>
+<pubDate>Tue, 24 Sep 2024 11:57:38 +0000</pubDate>
+<pubDate>Tue, 24 Sep 2024 11:57:38 +0000</pubDate>
+</item>
 
 <item>
 <title>Simple and Practical Amortized Sublinear Private Information Retrieval using Dummy Subsets</title>
