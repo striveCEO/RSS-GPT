@@ -4,6 +4,97 @@
 <title>Ethereum Research - Latest topics</title>
 <link>https://ethresear.ch/latest</link>
 
+<item>
+<title>FOCIL CL &amp; EL workflow</title>
+<link>https://ethresear.ch/t/focil-cl-el-workflow/20526</link>
+<guid>https://ethresear.ch/t/focil-cl-el-workflow/20526</guid>
+<content:encoded><![CDATA[
+<div> 关键词：Fork-Choice enforced Inclusion Lists (FOCIL)、Ethereum、链中性、交易排除、边案例对
+
+总结:
+
+本文详细介绍了Fork-Choice enforced Inclusion Lists (FOCIL)机制，旨在提升以太坊的去中心化和抗审查能力。FOCIL通过确保交易及时被纳入区块链来实现这一目标。文章阐述了FOCIL的工作流程，包括了IL委员会成员、节点、提议者和见证者的角色与职责。重点强调了构建本地Inclusion List（IL）的规则、节点验证和转发IL的过程、提议者整合IL数据以及见证者验证提议者的执行负载。
+
+在FOCIL机制中，IL委员会成员负责构建并广播本地IL，节点接收并验证这些IL，提议者在特定时间点冻结IL视图并更新执行负载，而见证者则监控提议者块并验证其有效性。为确保FOCIL的稳定运行，文章讨论了可能遇到的边缘情况和应对策略，如处理无效交易、防止委员会成员的投票欺诈以及防止IL填充攻击等。
+
+在边案例处理方面，文章指出通过使用验证函数检查缺失交易的有效性，FOCIL能够兼容账户抽象。同时，通过限制节点转发本地IL的数量，有效防止了委员会成员的投票欺诈行为。此外，文中还提到了一种防御IL填充攻击的方法，即通过在交易计划被提交到内存池前确保能够成功获得构建块的权利，使得这种攻击变得风险极高且不具成本效益。
+
+总的来说，FOCIL通过精心设计的流程和策略，不仅增强了以太坊的链中性和去中心化特性，还有效应对了潜在的安全挑战，从而确保了交易的及时和公正处理。 <div>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/3/d/3d093019b9cabaa6a15341bc12abbbb000ed0b62.jpeg" title="Screenshot 2024-09-30 at 14.48.26"><img alt="Screenshot 2024-09-30 at 14.48.26" height="450" src="https://ethresear.ch/uploads/default/optimized/3X/3/d/3d093019b9cabaa6a15341bc12abbbb000ed0b62_2_450x450.jpeg" width="450" /></a></div><p></p>
+<p>by <a href="https://ethresear.ch/u/soispoke/summary">Thomas Thiery</a>, on <code>September 30th, 2024</code></p>
+<p><em>Thanks to <a href="https://x.com/_julianma" rel="noopener nofollow ugc">Julian</a>, <a href="https://ethresear.ch/u/terence/summary">Terence</a>, <a href="https://x.com/jih2nn" rel="noopener nofollow ugc">Jihoon</a>, <a href="https://ethresear.ch/u/jacobkaufmann/summary">Jacob</a> and <a href="https://ethresear.ch/u/aelowsson/summary">Anders</a> for their input and feedback on this post.</em></p>
+<h2><a class="anchor" href="https://ethresear.ch#p-50164-introduction-1" name="p-50164-introduction-1"></a>Introduction</h2>
+<p>Fork-Choice enforced Inclusion Lists (FOCIL) is a mechanism designed to enhance Ethereum’s censorship resistance and chain neutrality properties by enforcing timely transaction inclusion. Since its <a href="https://ethresear.ch/t/fork-choice-enforced-inclusion-lists-focil-a-simple-committee-based-inclusion-list-proposal/19870">inception</a>, our focus has shifted towards working on an EIP and specifying its implementation on both the <a href="https://github.com/terencechain/consensus-specs/pull/2" rel="noopener nofollow ugc">consensus layer</a> (CL) and the execution layer (EL). This document outlines the workflow of FOCIL, detailing the roles and responsibilities of various participants, including IL committee members, nodes, proposers, and attesters. It also addresses potential edge cases and mitigation strategies to ensure the robustness of the mechanism.</p>
+<h2><a class="anchor" href="https://ethresear.ch#p-50164-roles-participants-2" name="p-50164-roles-participants-2"></a>Roles &amp; Participants</h2>
+<h3><a class="anchor" href="https://ethresear.ch#p-50164-il-committee-members-3" name="p-50164-il-committee-members-3"></a>IL committee members</h3>
+<ul>
+<li>
+<p>Slot <span class="math">n</span>, <code>t = 0 to 9s</code>: IL committee members construct their local ILs and broadcast them over the P2P network after processing the block for slot <span class="math">n</span> and confirming it as the head. If no block is received by <code>t = 8s</code>, they should run <code>get_head</code> and build and release their local ILs based on their node’s canonical head.</p>
+<blockquote>
+<p><em>By default, local ILs are built by selecting raw  transactions from the public mempool, ordered by priority fees, up to the local IL’s maximum <code>gas</code> limit (we could also set a limit in <code>bits</code> if we consider that local ILs mostly consume bandwidth). Additional rules can be optionally applied to maximize CR, such as prioritizing valid transactions that have been pending in the mempool the longest.</em></p>
+</blockquote>
+</li>
+</ul>
+<h3><a class="anchor" href="https://ethresear.ch#p-50164-nodes-4" name="p-50164-nodes-4"></a>Nodes</h3>
+<ul>
+<li>
+<p>Slot <span class="math">n</span>, <code>t = 0 to 9s</code>: Nodes receive local ILs from the P2P network and only forward and cache those that pass the CL P2P validation rules.</p>
+</li>
+<li>
+<p>Slot <span class="math">n</span>, <code>t = 9s</code>, <em>IL freeze deadline</em>: Nodes freeze their local ILs view, stop forwarding and caching new local ILs.</p>
+<blockquote>
+<p><strong>CL P2P validation rules:</strong></p>
+<ul>
+<li><em>The number of transactions in the local IL does not exceed the maximum <code>gas</code> limit allowed.</em></li>
+<li><em>The slot of the local IL matches the current slot. Locals ILs not matching the current slot should be ignored.</em></li>
+<li><em>The parent hash of the IL is recognized.</em></li>
+<li><em>The IL is received before the local IL freeze deadline (e.g., <code>9s</code>) into the slot.</em></li>
+<li><em>Received two or fewer local ILs from this IL committee member (see Local IL equivocation section below).</em></li>
+<li><em>The local IL is correctly signed by the validator.</em></li>
+<li><em>The validator is part of the IL committee.</em></li>
+</ul>
+</blockquote>
+</li>
+</ul>
+<h3><a class="anchor" href="https://ethresear.ch#p-50164-proposer-5" name="p-50164-proposer-5"></a>Proposer</h3>
+<ul>
+<li>
+<p>Slot <span class="math">n</span>, <code>t = 11s</code>: The proposer freezes its view of local ILs, and asks the EL to update its execution payload by adding transactions from its view (the exact timings will be defined after running some tests/benchmarks). Optionally, an RPC endpoint can be added to allow the proposer to request the missing local ILs from its peers (e.g., by committee index).</p>
+<blockquote>
+<p><em>By <strong>(1)</strong> allowing sufficient time between the local IL freeze deadline and the moment the proposer must broadcast its block with the updated execution payload, and <strong>(2)</strong> potentially adding a mechanism for the proposer to request missing local ILs from peers via an RPC endpoint, we ensure that the proposer’s IL aggregate contains <em>all</em> transactions observed local ILs, thus eliminating the need for the Δ parameter described in the  <a href="https://ethresear.ch/t/fork-choice-enforced-inclusion-lists-focil-a-simple-committee-based-inclusion-list-proposal/19870">FOCIL research post</a>.</em></p>
+</blockquote>
+</li>
+<li>
+<p>Slot <span class="math">n+1</span>, <code>t = 0s</code>: The proposer broadcasts its block with the up-to-date execution payload satisfying IL transactions over the P2P network.</p>
+</li>
+</ul>
+<h3><a class="anchor" href="https://ethresear.ch#p-50164-attesters-6" name="p-50164-attesters-6"></a>Attesters</h3>
+<ul>
+<li>
+<p>Slot <span class="math">n+1</span>, <code>t = 0 to 4s</code>: Attesters monitor the P2P network for the proposer’s block. Upon detecting the block, they check whether all transactions from their cached local ILs are included in the proposer’s execution payload. The <span class="math">Valid</span> function verifies if the execution payload satisfies IL validity conditions either when all transactions are present or when any missing transactions are found to be invalid when appended to the end of the payload. In these cases, attesters use the EL to verify the validity of missing transactions.</p>
+<blockquote>
+<p>Since we set <span class="math">Δ = 0</span> (or rather, got rid of the parameter altogether), the proposer’s execution payload must contain at least all transactions from the attester’s local ILs. Therefore, the attester does not need an IL aggregate from the proposer to perform this check.</p>
+</blockquote>
+</li>
+</ul>
+<h2><a class="anchor" href="https://ethresear.ch#p-50164-mitigations-and-edge-cases-7" name="p-50164-mitigations-and-edge-cases-7"></a>Mitigations and Edge Cases</h2>
+<h3><a class="anchor" href="https://ethresear.ch#p-50164-invalidation-8" name="p-50164-invalidation-8"></a>Invalidation</h3>
+<p>By having attesters use the <span class="math">Valid</span> function to check if each missing transaction would be valid when added to the end of the execution payload, we ensure that FOCIL is compatible with account abstraction.</p>
+<p>To handle invalidation cases—including those introduced by full Account Abstraction (AA)—attesters use the <span class="math">Valid</span> function to verify each missing transaction from the execution payload. They check whether each missing transaction would be valid if appended to the end of the execution payload using the EL.</p>
+<p>By evaluating missing transactions in the context of the execution payload’s post-state, attesters can accurately determine whether the proposer has wrongly omitted any valid transactions from the ILs. If a missing transaction is found to be invalid when appended—due to state changes caused by earlier transactions—the proposer isn’t penalized for leaving it out, and the IL validity condition is satisfied.</p>
+<p>This approach effectively handles invalidation scenarios and provides a robust mechanism that accommodates the complexities of transaction validity, ensuring that all valid transactions from local ILs are included whenever possible.</p>
+<h3><a class="anchor" href="https://ethresear.ch#p-50164-equivocation-9" name="p-50164-equivocation-9"></a>Equivocation</h3>
+<p>To mitigate local IL equivocation, attesters should stop caching local ILs after the freeze deadline but continue to monitor the P2P network and forward multiple local ILs from the same IL committee member. If the proposer or attesters detect that a committee member has broadcast multiple local ILs (i.e., has equivocated), they should ignore all local ILs from that member.</p>
+<p>We also introduce a P2P network rule that limits nodes to forwarding no more than two local ILs per validator index. This approach ensures that information about equivocation spreads while preventing spam, keeping the maximum bandwidth increase to at most <code>2×</code>.</p>
+<p>It is also worth noting that the IL aggregate doesn’t exist as an explicit object in FOCIL; instead, the proposer includes transactions from the local ILs directly into the execution payload. Therefore, there is no IL aggregate that can cause equivocations.</p>
+<h3><a class="anchor" href="https://ethresear.ch#p-50164-il-stuffing-10" name="p-50164-il-stuffing-10"></a>IL stuffing</h3>
+<p>We also considered IL stuffing, where a builder floods the mempool with transactions they plan to invalidate later—such as by draining the account’s ETH to prevent base fee payment or causing the transactions to revert. However, this attack is risky because the builder must submit these transactions to the mempool before the target block, without knowing if they will secure the right to build it. This means another builder could win the block, include and execute the transactions intended to be invalidated, making the attack costly and impractical.</p>
+            <p><small>1 post - 1 participant</small></p>
+            <p><a href="https://ethresear.ch/t/focil-cl-el-workflow/20526">Read full topic</a></p>
+]]></content:encoded>
+<pubDate>Mon, 30 Sep 2024 13:51:43 +0000</pubDate>
+<pubDate>Mon, 30 Sep 2024 13:51:43 +0000</pubDate>
+</item>
 
 <item>
 <title>Attestation Verification Optimization</title>
