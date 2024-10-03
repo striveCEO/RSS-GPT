@@ -4,6 +4,98 @@
 <title>Ethereum Research - Latest topics</title>
 <link>https://ethresear.ch/latest</link>
 
+<item>
+<title>On solo staking, local block building and blobs</title>
+<link>https://ethresear.ch/t/on-solo-staking-local-block-building-and-blobs/20540</link>
+<guid>https://ethresear.ch/t/on-solo-staking-local-block-building-and-blobs/20540</guid>
+<content:encoded><![CDATA[
+<div> 关键词：独占质押、本地区块构建、块重组、专业节点运营商、MEV-Boost
+
+总结:
+
+文章主要探讨了在Pectra网络中，关于增加blob吞吐量的讨论与争议。其中，独占质押者被视为以太坊社区的核心力量，他们反对牺牲独占质押者来实现线性扩展。然而，社区需要权衡的是，当弱小、低带宽的质押者对去中心化做出贡献时，其限制是否足以阻碍以太坊的扩展能力。
+
+文章提供了关键数据和见解：
+
+1. **独占质押者的角色**：独占质押者在区块链中扮演着重要角色，但他们也面临着更高的块重组风险，这表明他们在网络中的稳定性不如专业节点运营商。
+
+2. **块重组率**：数据显示，自Dencun硬叉以来，块重组率总体呈下降趋势，但不同类型的节点（如独占质押者、未识别类别等）的重组率变化不一。独占质押者和未识别类别的重组率有所下降，而使用本地构建的节点（如非MEV-Boost用户）的重组率则相对稳定或略有上升。
+
+3. **本地区块构建与MEV-Boost**：本地构建的节点倾向于更频繁地重组，可能是因为它们无法从MEV-Boost提供的快速传播优势中获益。此外，MEV-Boost用户的重组率明显低于本地构建节点。
+
+4. **角色分析**：独占质押者是本地构建节点的最大组成部分，而一些专业节点运营商如Lido，即使使用本地构建，也可能选择不使用MEV-Boost或仅使用最低竞标标志。
+
+5. **多因素导致重组**：文章强调了多种因素可能导致块重组，包括独占质押者的高槽位错过率、本地构建的策略以及与MEV-Boost相关的时机策略等。
+
+综上所述，文章通过数据分析和案例研究，深入探讨了以太坊网络中独占质押者、本地区块构建、块重组及其与专业节点运营商和MEV-Boost之间的关系。这些发现对于理解以太坊网络的去中心化与扩展挑战至关重要。 <div>
+<h1><a class="anchor" href="https://ethresear.ch#p-50190-on-solo-staking-local-block-building-and-blobs-1" name="p-50190-on-solo-staking-local-block-building-and-blobs-1"></a>On solo staking, local block building and blobs</h1>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/6/7/679782c02f64eba56e5061a305e16a7815b77bc5.jpeg" title=""><img alt="" height="375" src="https://ethresear.ch/uploads/default/optimized/3X/6/7/679782c02f64eba56e5061a305e16a7815b77bc5_2_377x375.jpeg" width="377" /></a></div><br />
+In recent weeks, discussions about a potential increase in blob throughput in Pectra have intensified, with two distinct groups emerging. One advocates for the increase, while the other is hesitant, preferring to wait for clear data supporting such a change.<p></p>
+<p>From my perspective, one sentiment is overwhelmingly clear within the community:</p>
+<div class="math">
+\textbf{Solo stakers are at the heart of Ethereum.}
+</div>
+<p>While there hasn’t been a consensus on the minimum requirements for validators (see <a href="https://x.com/sassal0x/status/1839684947864322320">sassal.eth’s tweet</a> on that), the Ethereum community has made one thing clear:</p>
+<div class="math">
+\textbf{We do not want to sacrifice solo/home stakers for additional linear scaling.}
+</div>
+<p>In my view, this reflects a healthy direction for Ethereum and underscores the community’s view on the importance of viable solo staking.</p>
+<p>However, it raises an important question: “<em><strong>Where is the line?</strong></em>”</p>
+<p><em><strong>Specifically, at what point does the contribution of a weaker, lower-bandwidth staker to decentralization no longer justify the limitations it imposes on Ethereum’s ability to scale?</strong></em></p>
+<p>In this piece, I aim to provide additional data points to help the community make an informed decision on whether we want to pursue a blob throughput increase in Pectra.</p>
+<blockquote>
+<p>As <a href="https://x.com/potuz_eth">Potuz</a>, a core developer from Prysm, aptly stated, the real question is not “Do we want to scale, and how?” but rather, “Are we ready to do so now?”</p>
+</blockquote>
+<h2><a class="anchor" href="https://ethresear.ch#p-50190-who-is-being-reorged-today-oct-23-oct-24-2" name="p-50190-who-is-being-reorged-today-oct-23-oct-24-2"></a>Who is being reorged today?  (Oct 23 - Oct 24)</h2>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/f/7/f76b082ee7f082c61d5c9d69136f1151f702f5d3.png" title=""><img alt="" height="345" src="https://ethresear.ch/uploads/default/optimized/3X/f/7/f76b082ee7f082c61d5c9d69136f1151f702f5d3_2_690x345.png" width="690" /></a></div><p></p>
+<ul>
+<li>On average ~0.2% of blocks are reorged (=reorged ⊆ missed).</li>
+<li>Professional node operators (NOs) such as Lido, Kiln, Figment, and EtherFi are reorged less often than the average.</li>
+<li>Less professional NOs such as solo stakers, Rocketpool operators, or the unidentified category which likely includes many solo stakers that couldn’t be identified, are more frequently reorged.</li>
+</ul>
+<br />
+<p>As shown in <a href="https://ethresear.ch/t/steelmanning-a-blob-throughput-increase-for-pectra/20499">an earlier analysis</a>, the reorg rate has been trending down since the Dencun hardfork.<br />
+In the following chart, we can see that this effect was different for different entities:<br />
+</p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/6/0/60009e3ddd9404a75f92b335b6acfa5fc7dfc4d2.png" title="reorgs_entites_over_time (3)"><img alt="reorgs_entites_over_time (3)" height="345" src="https://ethresear.ch/uploads/default/optimized/3X/6/0/60009e3ddd9404a75f92b335b6acfa5fc7dfc4d2_2_690x345.png" width="690" /></a></div><p></p>
+<ul>
+<li>The reorg rate decreased for solo stakers and <code>unidentified</code> since Dencun.</li>
+<li>The same applies to Rocketpool operators, as well as larger operators such as Lido, Coinbase, Figment, and OKX.</li>
+</ul>
+<h2><a class="anchor" href="https://ethresear.ch#p-50190-what-about-local-block-building-oct-23-oct-24-3" name="p-50190-what-about-local-block-building-oct-23-oct-24-3"></a>What about local block building? (Oct 23 - Oct 24)</h2>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/8/3/8395fc7a154b30a8dc6cfabd6e3f5ca242a37c1d.png" title=""><img alt="" height="345" src="https://ethresear.ch/uploads/default/optimized/3X/8/3/8395fc7a154b30a8dc6cfabd6e3f5ca242a37c1d_2_690x345.png" width="690" /></a></div><p></p>
+<ul>
+<li>Local builders have a reorg rate of approximately 1.02%.</li>
+<li>MEV-Boost builders have a reorg rate of approximately 0.20%.</li>
+<li>Local builders are approximately 5 times more likely to be reorged than MEV-Boost builders.<br />
+<br /></li>
+</ul>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/9/c/9cb8adb2f9f76b5c455c8d2857d15ae29686ef03.png" title=""><img alt="" height="345" src="https://ethresear.ch/uploads/default/optimized/3X/9/c/9cb8adb2f9f76b5c455c8d2857d15ae29686ef03_2_690x345.png" width="690" /></a></div><p></p>
+<ul>
+<li>The reorg share for local block builders seems to have remained constant or even increased after the Dencun hardfork.</li>
+<li>For MEV-Boost users, reorgs have been trending down since Dencun.</li>
+<li>Notably, <a href="https://ethresear.ch/t/blobs-reorgs-and-the-role-of-mev-boost/19783">previous analysis</a> showed that local builders included on average more blobs into their blocks. Furthermore <a href="https://ethresear.ch/t/big-blocks-blobs-and-reorgs/19674">we have seen</a> that right after the Dencun hardfork blocks with 6 blobs struggled a bit, but this eventually stabilized again. This might explain why the reorg rate didn’t decrease for local builders.</li>
+</ul>
+<h2><a class="anchor" href="https://ethresear.ch#p-50190-who-are-the-local-builders-oct-23-oct-24-4" name="p-50190-who-are-the-local-builders-oct-23-oct-24-4"></a>Who are the local builders? (Oct 23 - Oct 24)</h2>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/c/6/c69dfe7af38af8f4d0f4da5172d1b415c82c1ddd.png" title=""><img alt="" height="172" src="https://ethresear.ch/uploads/default/optimized/3X/c/6/c69dfe7af38af8f4d0f4da5172d1b415c82c1ddd_2_690x172.png" width="690" /></a></div><p></p>
+<ul>
+<li>Solo stakers (here labeled as “solo staker” but with many solo stakers in the <code>unidentified</code> category) are the largest entity within the “local builder” category.</li>
+<li>Furthermore there are Lido NOs that are not using MEV-Boost at all or use the min-bid flag.</li>
+</ul>
+<h1><a class="anchor" href="https://ethresear.ch#p-50190-key-insights-5" name="p-50190-key-insights-5"></a>Key Insights</h1>
+<ul>
+<li>Solo stakers tend to miss more slots compared to professional validators.</li>
+<li>Solo stakers often build their blocks locally rather than using MEV-Boost.</li>
+<li>Local block builders don’t benefit from the fast propagation offered by MEV-Boost relays.</li>
+<li>Relays engage in timing strategies (e.g., relay delays, allowing time to wait for even more profitable blocks).</li>
+<li>Epoch boundaries contribute to an increase in reorgs.</li>
+</ul>
+<p>Multiple factors can lead to reorgs, making it challenging to pinpoint exactly why certain validators, like solo stakers, experience them more frequently than others.</p>
+            <p><small>5 posts - 5 participants</small></p>
+            <p><a href="https://ethresear.ch/t/on-solo-staking-local-block-building-and-blobs/20540">Read full topic</a></p>
+]]></content:encoded>
+<pubDate>Wed, 02 Oct 2024 13:16:48 +0000</pubDate>
+<pubDate>Wed, 02 Oct 2024 13:16:48 +0000</pubDate>
+</item>
 
 <item>
 <title>FOCIL CL &amp; EL workflow</title>
