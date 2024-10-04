@@ -4,6 +4,145 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+<item>
+<title>Revisiting Keyed-Verification Anonymous Credentials</title>
+<link>https://eprint.iacr.org/2024/1552</link>
+<guid>https://eprint.iacr.org/2024/1552</guid>
+<content:encoded><![CDATA[
+<div> 关键词：匿名认证、CMZ、BBDT、BBS RFC、非交互式证明
+
+文章主要探讨了两种关键的匿名认证系统——Chase等人的CMZ（或PS MAC）和Barki等人的BBDT（或BBS MAC）。作者提出了一种方法使CMZ具有统计匿名性，并使BBDT与BBS RFC草案兼容。他们对这些系统的安全性进行了全面分析，包括更强的不可伪造性和匿名性的属性。这使得用户可以根据需要选择组合这些属性。
+
+为了加速复杂证明的速度，文章中提供了一个编译器，该编译器使用交互式Oracle证明和指定验证者多项式承诺来构建指定验证者的非交互式论证。对于基于密钥验证的匿名认证，指定验证者证明就足够了，因为验证者的身份在预先已知。
+
+文章还讨论了可能从这种方法受益的扩展，例如那些需要快速证明的复杂情况。
+
+总结：
+文章重新审视了两种主流的匿名认证系统，即CMZ（PS MAC）和BBDT（BBS MAC），并提出了使其更安全和兼容的技术改进。通过构建一个专门的编译器，提高了复杂证明的处理速度，同时确保了系统的匿名性和不可伪造性。这种方法不仅增强了原有系统的安全性，还提供了更多的灵活性，允许用户根据实际需求定制认证流程。此外，该技术还能应用于其他需要快速证明验证的情况，进一步扩大了其应用范围。 <div>
+Keyed-verification anonymous credentials are widely recognized as among the most efficient tools for anonymous authentication. In this work, we revisit two prominent credential systems: the scheme by Chase et al. (CCS 2014), commonly referred to as CMZ or PS MAC, and the scheme by Barki et al. (SAC 2016), known as BBDT or BBS MAC. We show how to make CMZ statistically anonymous and BBDT compatible with the BBS RFC draft. We provide a comprehensive security analysis for strong(er) properties of unforgeability and anonymity. These properties allow them to be composed with extensions that users can pick and choose.  We show that simpler variants satisfying one-more unforgeability can still be anonymous tokens (Kreuter et al., CRYPTO 2020).
+
+To enable faster proofs for complex presentations, we present a compiler that uses an interactive oracle proof and a designated-verifier polynomial commitment to construct a designated-verifier non-interactive argument. For keyed-verification anonymous credentials, designated-verifier proofs suffice since the verifier is known in advance. We explore extensions that could benefit from this approach.
+]]></content:encoded>
+<pubDate>Thu, 03 Oct 2024 15:37:29 +0000</pubDate>
+<pubDate>Thu, 03 Oct 2024 15:37:29 +0000</pubDate>
+</item>
+<item>
+<title>PoUDR: Proof of Unified Data Retrieval in Decentralized Storage Networks</title>
+<link>https://eprint.iacr.org/2024/1544</link>
+<guid>https://eprint.iacr.org/2024/1544</guid>
+<content:encoded><![CDATA[
+<div> 关键词：IPFS、Filecoin、Proof of Unified Data Retrieval（PoUDR）、ZK-SNARK、Secure Swarming Data Exchange（SSDE）
+
+总结:
+
+本文探讨了去中心化存储网络中数据检索支付机制的缺失，并提出了解决方案——Proof of Unified Data Retrieval（PoUDR）协议。PoUDR通过整合零知识证明（ZK-SNARK）技术，旨在实现数据交换过程中的公平性和效率性。该协议显著减少了区块链交易的数量，无论是单个块还是数据簇检索，只需要提供方在特定时间框架内提交一次密钥揭示交易即可。
+
+为了进一步优化交易数量，PoUDR采用了提供方侧的批处理证明技术，使得在数据由多个提供者提供、被多个查询者请求的情况下，仅需N_P次交易，而非N_P*N_Q次。这极大地提高了经济效率和可扩展性。
+
+此外，文章详细定义了安全集群数据交换（SSDE），并提供了基于游戏的安全分析。通过将PoUDR集成到Bitswap协议（IPFS的一部分），实现了一种名为Relaxed Groth16的算法，该算法解决了生成零知识证明的重大技术挑战，有效降低了整体成本，为去中心化存储网络中的安全数据检索提供了可行解决方案。 <div>
+Decentralized storage networks, including IPFS and Filecoin, have created a marketplace where individuals exchange storage space for profit. These networks employ protocols that reliably ensure data storage providers accurately store data without alterations, safeguarding the interests of storage purchasers. However, these protocols lack an effective and equitable payment mechanism for data retrieval, particularly when multiple data queriers are involved. This necessitates a protocol that ensures both data integrity and fair compensation for data providers.
+
+In decentralized storage, data is fragmented into small blocks and stored across multiple nodes, a process known as data swarming. Due to this property, traditional data exchange protocols are inadequate in terms of communication and economic efficiency.
+
+We propose the Proof of Unified Data Retrieval protocol (PoUDR). PoUDR incorporates ZK-SNARK to facilitate a fair data exchange protocol. PoUDR reduces the number of blockchain transactions for both single block and data swarming retrieval. The protocol requires only a single key-revealing transaction submitted by the provider to the blockchain for each data block. This architecture allows for further optimization of transaction numbers through a batched proof technique on the provider's side.  This approach necessitates only $N_P$ transactions within a specific time frame when data consisting of $N_D$ blocks, provided by $N_P$ providers, is queried by $N_Q$ queriers.
+
+This work provides a comprehensive definition for Secure Swarming Data Exchange (SSDE), including security assumptions. Also it offers a detailed game-based security analysis for the PoUDR protocol. Moreover, the PoUDR protocol has been fully integrated into the Bitswap protocol (IPFS). Within this integration, our proposed Relaxed Groth16 algorithm addresses the significant technical challenge of generating zero-knowledge proofs, leading to substantial cost reductions for overall feasibility of secure data retrieval in decentralized storage networks.
+]]></content:encoded>
+<pubDate>Wed, 02 Oct 2024 22:42:26 +0000</pubDate>
+<pubDate>Wed, 02 Oct 2024 22:42:26 +0000</pubDate>
+</item>
+<item>
+<title>HEonGPU: a GPU-based Fully Homomorphic Encryption Library 1.0</title>
+<link>https://eprint.iacr.org/2024/1543</link>
+<guid>https://eprint.iacr.org/2024/1543</guid>
+<content:encoded><![CDATA[
+<div> 关键词：HEonGPU、高效率、全同态加密、图形处理单元、多流架构
+
+总结:
+
+HEonGPU是一种旨在优化全同态加密(FHE)操作在图形处理器(GPU)上的性能的高级库。它通过利用GPU的并行处理能力显著减少了与FHE相关的计算开销，允许对加密数据执行更快速的同态计算。这种能力特别适用于隐私保护机器学习和安全数据处理的实时应用。HEonGPU的关键优势在于其多流架构，不仅能够实现任务的并行处理以提高吞吐量，还能消除主机设备（即CPU）与GPU之间的数据传输开销。通过在GPU内部高效管理数据，多流架构减少了重复内存传输的需求，进一步提高了性能。针对各种FHE方案，HEonGPU的GPU优化设计使其非常适合大规模加密计算，为用户提供更低的延迟和更高的性能。 <div>
+HEonGPU is a high-performance library designed to optimize Fully Homomorphic Encryption (FHE) operations on Graphics Processing Unit (GPU). By leveraging the parallel processing capac- ity of GPUs, HEonGPU significantly reduces the computational overhead typically associated with FHE by executing complex operation concurrently. This allows for faster execution of homomorphic computations on encrypted data, enabling real-time applications in privacy-preserving machine learn- ing and secure data processing. A key advantage of HEonGPU lies in its multi-stream architecture, which not only allows parallel processing of tasks to improve throughput but also eliminates the over- head of data transfers between the host device (i.e., CPU) and GPU. By efficiently managing data within the GPU using multi-streams, HEonGPU minimizes the need for repeated memory transfers, further enhancing performance. HEonGPU’s GPU-optimized design makes it ideal for large-scale encrypted computations, providing users with reduced latency and higher performance across various FHE schemes.
+]]></content:encoded>
+<pubDate>Wed, 02 Oct 2024 22:05:03 +0000</pubDate>
+<pubDate>Wed, 02 Oct 2024 22:05:03 +0000</pubDate>
+</item>
+<item>
+<title>More Efficient Lattice-based OLE from Circuit-private Linear HE with Polynomial Overhead</title>
+<link>https://eprint.iacr.org/2024/1534</link>
+<guid>https://eprint.iacr.org/2024/1534</guid>
+<content:encoded><![CDATA[
+<div> 关键词：电路隐私、线性同态加密、半诚实模型、零知识证明、主动安全性
+
+总结:
+文章提出了一种新的方法，用于获得基于格的线性同态加密的电路隐私，该方法避免了使用指数级大错误的噪声泛滥或迭代重启动。这种方法直接导致了一个半诚实盲线性评估(OLE)协议，其效率显著提高，将前代最佳通信成本减少了50%。在100Mbps网络环境下，我们的协议的平均时间改进了前工作33%。我们的半诚实OLE首次实现了同时的高效率和近最优的渐进性。通过结合最近的零知识证明的密文知识，我们的LHE提供了一个比前作通信量减少2.7倍的主动安全OLE。当应用于Overdrive（Eurocrypt '18）这一预处理协议时，我们的方法在通信上提供了相对于现状1.4倍的改进。
+
+文章的核心贡献在于提出了一种高效且无需复杂计算步骤的方法来实现电路隐私，从而显著提高了OLE协议的效率，特别是通信成本的大幅降低。同时，该方法还扩展了零知识证明技术的应用，使得OLE协议在保证安全性的同时，也能达到较高的通信效率。在实际应用中，这种方法被证明能有效提升MPC预处理协议的通信效率，展现出在现代密码学领域的广泛潜力与应用价值。 <div>
+We present a new and efficient method to obtain circuit privacy for lattice-based linearly homomorphic encryptions (LHE). In particular, our method does not involve noise-flooding with exponetially large errors or iterative bootstrapping. As a direct result, we obtain a semi-honest oblivious linear evaluation (OLE) protocol with the same efficiency, reducing the communication cost of the prior state of the art by 50%. 
+Consequently, the amortized time of our protocol improves the prior work by 33% under 100Mbps network setting. Our semi-honest OLE is the first to achieve both concrete efficiency and asymptotic quasi-optimality. Together with an extension of the recent zero-knowledge proof of plaintext knowledge, our LHE yields actively-secure OLE with 2.7x reduced communication from the prior work. When applied to Overdrive (Eurocrypt '18), an MPC preprocessing protocol, our method provides 1.4x improvement in communication over the state of the art.
+]]></content:encoded>
+<pubDate>Tue, 01 Oct 2024 08:11:22 +0000</pubDate>
+<pubDate>Tue, 01 Oct 2024 08:11:22 +0000</pubDate>
+</item>
+<item>
+<title>BEAT-MEV: Epochless Approach to Batched Threshold Encryption for MEV Prevention</title>
+<link>https://eprint.iacr.org/2024/1533</link>
+<guid>https://eprint.iacr.org/2024/1533</guid>
+<content:encoded><![CDATA[
+<div> 关键词：Decentralized Finance（DeFi）、Batched Threshold Encryption（BTE）、Market Manipulation、Miner Extractable Value（MEV）、Privacy Concerns
+
+总结:
+
+本文探讨了去中心化金融（DeFi）中公开待处理交易带来的隐私问题及其对市场操纵的影响，特别是通过矿工可提取价值（MEV）所引发的潜在风险。研究指出，当区块提议者利用重新排序、省略或添加交易的能力时，用户可能会遭受由抢先交易导致的经济损失。近期的研究方向集中在加密待处理交易上，以隐藏交易数据直至区块最终确定。
+
+Choudhuri等人提出了一个名为Batched Threshold Encryption（BTE）的新原始概念，它允许一个委员会选择一批加密交易，并在区块最终确定后才进行解密。BTE实现了低通信复杂度的解密过程，并确保了未被选入批次的所有加密交易的隐私性。然而，其存在需要昂贵的MPC设置来为每批解密过程创建的局限性。
+
+本文提出了一种新颖的BTE方案，解决了上述限制，无需昂贵的周期性设置即可实现实用的加密和解密时间（分别小于2ms和440ms，对于512笔交易）。此外，文章还探索了用户如何协调其交易的问题，这对于系统功能至关重要。在过程中，文章提供了多项优化和复杂度之间的权衡策略，以实现标准硬件上的实用性能。最后，证明了构建方案的安全性，涵盖了对MEV预防机制的实际攻击模型。 <div>
+In decentralized finance (DeFi), the public availability of pending transactions presents significant privacy concerns, enabling market manipulation through miner extractable value (MEV). MEV occurs when block proposers exploit the ability to reorder, omit, or include transactions, causing financial loss to users from frontrunning. Recent research has focused on encrypting pending transactions, hiding transaction data until block finalization. To this end, Choudhuri et al. (USENIX '24) introduce an elegant new primitive called Batched Threshold Encryption (BTE) where a batch of encrypted transactions is selected by a committee and only decrypted after block finalization. Crucially,  BTE achieves low communication complexity during decryption and guarantees that all encrypted transactions outside the batch remain private. An important shortcoming of their construction is, however, that it progresses in epochs and requires a costly setup in MPC for each batch decryption.
+    In this work, we introduce a novel BTE scheme addressing the limitations by eliminating the need for an expensive epoch setup while achieving practical encryption and decryption times. Additionally, we explore the problem of how users can coordinate their transactions, which is crucial for the functionality of the system. Along the way, we present several optimizations and trade-offs between communication and computational complexity that allow us to achieve practical performance on standard hardware ($<2$ ms for encryption and $<440$ ms for decrypting $512$ transactions). Finally, we prove our constructions secure in a model that captures practical attacks on MEV-prevention mechanisms.
+]]></content:encoded>
+<pubDate>Mon, 30 Sep 2024 21:36:16 +0000</pubDate>
+<pubDate>Mon, 30 Sep 2024 21:36:16 +0000</pubDate>
+</item>
+<item>
+<title>Folding Schemes with Privacy Preserving Selective Verification</title>
+<link>https://eprint.iacr.org/2024/1530</link>
+<guid>https://eprint.iacr.org/2024/1530</guid>
+<content:encoded><![CDATA[
+<div> 关键词：零知识证明、折叠方案、隐私保护、陈述隐藏、验证成本
+
+总结: 
+
+文章主要探讨了折叠方案这一新颖的理论，它将执行多个关于相同关系的零知识证明任务简化为一次零知识证明和若干低成本的包含证明。近期，折叠方案被用于减轻向多个独立验证者证明不同陈述的成本问题，这在多种应用中展现出潜力。然而，当一起证明的陈述信息可能泄露时，这种设计可能会引起安全问题。
+
+为解决此问题，作者提出了隐私保护折叠方案的概念及其所需的安全性定义。隐私保护折叠方案旨在确保在证明过程中不泄露任何有关被合并陈述的信息。为了构建此类方案，作者引入了“陈述隐藏”这一概念，它允许将一个关系实例隐秘地表示为另一个关系实例，同时保持其真实性的验证。通过结合现有折叠方案和“陈述隐藏”的技术，可以构造出既能降低验证成本又具备隐私保护功能的方案。该方案首先对每个需要证明的陈述进行隐藏，然后利用折叠方案验证这些隐藏的陈述是否正确地合并到其他声明中。 <div>
+Folding schemes are an exciting new primitive, transforming the task of performing multiple zero-knowledge proofs of knowledge for a relation into performing just one zero-knowledge proof, for the same relation, and a number of cheap inclusion-proofs. Recently, folding schemes have been used to amortize the cost associated with proving different statements to multiple distinct verifiers, which has various applications. We observe that for these uses, leaking information about the statements folded together can be problematic, yet this happens with previous constructions. Towards resolving this issue, we give a natural definition of privacy preserving folding schemes, and what security they should offer. To construct privacy preserving folding schemes, we first define a statement hiders, a primitive which might be of independent interest. In a nutshell, a statement hider hides an instance of a relation as a new instance in the same relation. The new instance is in the relation if and only if the initial instance is. With this building block, we can utilize existing folding schemes to construct a privacy preserving folding scheme, by first hiding each of the statements. Folding schemes allow verifying that a statement was folded into another statement, while statement hiders allow verifying that a statement was hidden as another statement.
+]]></content:encoded>
+<pubDate>Mon, 30 Sep 2024 10:49:25 +0000</pubDate>
+<pubDate>Mon, 30 Sep 2024 10:49:25 +0000</pubDate>
+</item>
+<item>
+<title>Challenges in Timed Cryptography: A Position Paper</title>
+<link>https://eprint.iacr.org/2024/1529</link>
+<guid>https://eprint.iacr.org/2024/1529</guid>
+<content:encoded><![CDATA[
+<div> 关键词：时间锁谜题、理想化、分析技术、陷阱门函数、模拟器
+
+总结:
+
+本文探讨了时间锁谜题这一领域，该领域涉及使用计算复杂性来在一段时间后解锁信息。文章指出，尽管该领域已有超过25年的历史，但其基础并未得到充分理解。当前的分析技术在构建包含过期安全性的组件时缺乏稳固机制，特别是在多方协议中。此外，现有分析常常依赖于对理想化和模拟器进行不切实际计算能力的理想化假设。
+
+文章首先指出了现有尝试存在的问题，包括缺乏可组合性、不一致的分析或功能限制。这些缺陷最终归结为Mahmoody等人的一项不可能性结果，即无法仅通过随机或acles构建具有超多项式差距的时间锁谜题。然而，当前对代数谜题的分析仍假定每一步都是通用或随机或acles。文章指出，如果生成过程依赖于不能被视为随机或acles的陷阱门函数（以允许高效生成并避免上述不可能性结果），那么在分析求解过程时，也应不将此类陷阱门函数及其中间状态视为随机或acles。
+
+文章还讨论了时间锁谜题证明技术中的其他问题，特别是当谜题需要保密一段时间时，减少应限制模拟器的运行时间。它评估了各种尝试对这一原则的遵守情况以及它们在组合方面的实现程度。文章强调了现有框架在构建包含过期安全性的复合多方协议时的局限性和潜在挑战，并提出了解决这些问题的可能方向。 <div>
+Time-lock puzzles are unique cryptographic primitives that use computational complexity to keep information secret for some period of time, after which security expires. This topic, while over 25 years old, is still in a state where foundations are not well understood: For example, current analysis techniques of time-lock primitives provide no sound mechanism to build composed multi-party cryptographic protocols which use expiring security as a building block. Further, there are analyses that employ idealizations and simulators of unrealistic computational power to be an acceptable sound security argument. Our goal with this short paper is to advocate for understanding what approaches may lead to sound modeling beyond idealization, and what approaches may, in fact, be hopeless at this task of sound modeling. 
+
+We explain in this paper how existing  attempts at this subtle problem lack either composability, a fully consistent analysis, or functionality. The subtle flaws in the existing frameworks reduce to an impossibility result by Mahmoody et al., who showed that time-lock puzzles with super-polynomial gaps (between committer and solver) cannot be constructed from random oracles alone (or any repetitive computation where the next state is completely random given the prior state); yet still the analyses of algebraic puzzles today treat the solving process as if each step is a generic or random oracle. We point out that if the generation process relies on a trapdoor function that cannot be treated as a random oracle (to allow efficient generation while avoiding this impossibility result), then, to be consistent, the analysis of the solving process should also not treat such a trapdoor function (and its intermediate states) as a random oracle. 
+
+We also delineate additional issues with the proof techniques used for time-lock puzzles. Specifically, when a time-lock puzzle must retain privacy for some amount of time, the reduction should bound the running time of the simulator. A simulator that can ``simulate" if given time that if given to an adversary allows said adversary to solve the puzzle is not a valid security argument. We survey the adherence of various attempts to this principle, as well as the properties that different attempts achieve toward composition.
+]]></content:encoded>
+<pubDate>Mon, 30 Sep 2024 02:01:32 +0000</pubDate>
+<pubDate>Mon, 30 Sep 2024 02:01:32 +0000</pubDate>
+</item>
 
 <item>
 <title>FANNG-MPC: Framework for Artificial Neural Networks and Generic MPC</title>
