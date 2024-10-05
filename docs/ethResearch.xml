@@ -4,6 +4,150 @@
 <title>Ethereum Research - Latest topics</title>
 <link>https://ethresear.ch/latest</link>
 
+<item>
+<title>Number of peers you need for peer sampling in PeerDAS (EIP-7594)</title>
+<link>https://ethresear.ch/t/number-of-peers-you-need-for-peer-sampling-in-peerdas-eip-7594/20562</link>
+<guid>https://ethresear.ch/t/number-of-peers-you-need-for-peer-sampling-in-peerdas-eip-7594/20562</guid>
+<content:encoded><![CDATA[
+<div> 关键词：PeerDAS、CUSTODY_REQUIREMENT、DATA_COLUMN_SIDECAR_SUBNET_COUNT、peer_count、模拟
+
+总结:
+
+本文基于PeerDAS，旨在探讨节点需连接多少对等体以成功覆盖所有列进行采样。主要通过以下几点进行阐述：
+
+1. **PeerDAS机制**：文章指出，节点连接的对等体数量由`CUSTODY_REQUIREMENT`和`DATA_COLUMN_SIDECAR_SUBNET_COUNT`决定。这是节点发现新对等体并了解它们所承担的子网覆盖情况的过程。
+
+2. **模拟过程**：引入了一个名为`peer_count`的函数，用于模拟节点发现机制。该函数通过随机选择子网集来模拟节点如何继续发现新对等体直到所有子网被覆盖。
+
+3. **结果分析**：
+   - 当`C`（CUSTODY_REQUIREMENT）固定，`N`（`DATA_COLUMN_SIDECAR_SUBNET_COUNT`）增加时，所需的对等体数量增加。
+   - 当`N`固定，`C`增加时，所需的对等体数量减少。
+   - 有趣的是，即使`(N/C)`比值不变，`peer_count`值也可能变化，这表明随着子网数量的增加，所需的对等体数量会增加。
+
+4. **结论**：文章强调，仅凭`N`和`C`值很难计算出预期的对等体数量，需要通过实际模拟来调整参数以获得准确值。
+
+5. **实验方法**：通过运行大量模拟实验（例如1000次）来估算平均所需的对等体数量，展示了不同条件下的结果，并分析了这些结果以得出结论。 <div>
+<p><em>Authors: <a href="https://github.com/ppopth" rel="noopener nofollow ugc">pop</a></em></p>
+<p><em>This post is based on the <a href="https://github.com/ethereum/consensus-specs/tree/cb03c8/specs/_features/eip7594" rel="noopener nofollow ugc">current spec</a> of PeerDAS</em></p>
+<p>This post will tell you the expected number of peers each node must connect to in order to cover all the columns to do peer sampling successfully.</p>
+<h1><a class="anchor" href="https://ethresear.ch#p-50233-simulation-1" name="p-50233-simulation-1"></a>Simulation</h1>
+<p>In PeerDAS, at the time of writing, the number of peers you are expected to connect to is solely calculated by <code>CUSTODY_REQUIREMENT</code> and <code>DATA_COLUMN_SIDECAR_SUBNET_COUNT</code>. We write the following simulation to count how many peers you need to connect.</p>
+<pre><code class="lang-auto">import math
+import random
+
+def peer_count(N, C):
+    num_trials = 1000
+    counts = []
+    for trial in range(num_trials):
+        covered = set()
+        peers = set()
+        count = 0
+        while len(covered) != N:
+            selected = frozenset(random.sample(range(N), C))
+            if not selected in peers:
+                peers.add(selected)
+                covered = covered.union(selected)
+                count += 1
+        counts.append(count)
+    return sum(counts)/len(counts)
+</code></pre>
+<p><em>where N and C are <code>DATA_COLUMN_SIDECAR_SUBNET_COUNT</code> and <code>CUSTODY_REQUIREMENT</code>, respectively.</em></p>
+<p>What this function does is to simulate the node discovery mechanism. What it does in the real world is that the node will discover new peers and find out what subnets the peer is taking custody of. It will continue discovering new peers until all the subnets are covered by those peers. What’s important is that the node will not keep a peer with a set of custody it has seen, because it doesn’t add any more coverage to the subnets. So when N=32 and C=1, <code>peer_count</code> will be exactly 32.</p>
+<p>The set of subnets each peer is supposed to custody is determined by its Peer ID. However, in our simulation, such set is just randomized, which shouldn’t be different from the real world.</p>
+<p>In order to get the expected number, we run 1,000 simulations and get only the mean.</p>
+<h1><a class="anchor" href="https://ethresear.ch#p-50233-result-2" name="p-50233-result-2"></a>Result</h1>
+<p>Trivially, if we fix C and make only N variable, <code>peer_count</code> will increase as N increases since, when there are more subnets to cover, the more peers you should have. And, if we fix N and make only C variable, <code>peer_count</code> will decrease as C increases since, when each peer custodies more, the number of peers you should have should be lower. Even if it’s trivial, we did the simulation for completeness.</p>
+<div class="d-image-grid">
+<p><img alt="" height="360" src="https://ethresear.ch/uploads/default/original/3X/e/6/e683b38be6eadbcd02ae9e8167a275f9ba87d18d.png" width="480" /><br />
+<img alt="" height="360" src="https://ethresear.ch/uploads/default/original/3X/5/1/5187900ba4a547aea139a2534e59b1e896ad50bf.png" width="480" /></p>
+</div>
+<p>You can see that with N=128 and C=16, you need 41.6 peers on average (so it’s far different from N/C=8).</p>
+<p>From the second figure, you can see that when C=1, <code>peer_count</code> is outstandingly low. It’s because there is no overlap of the custody sets.</p>
+<p>Now, let’s consider an interesting non-trivial scenario, if the ratio (N/C) remains unchanged, do you think <code>peer_count</code> will remain unchanged? That is, do you think <code>peer_count(64, 8)</code> and <code>peer_count(128, 16)</code> will be the same? The answer is no. As shown below, the higher N is, the higher <code>peer_count</code> is.</p>
+<p><img alt="Figure_3" height="360" src="https://ethresear.ch/uploads/default/original/3X/a/8/a85174f1e76d15d90336da7ffd6bc8ce7a0c2c5f.png" width="480" /></p>
+<p>So the expected number of peers you will have cannot be easily calculated with N and C. You need to do the simulation to tune the parameters.</p>
+            <p><small>1 post - 1 participant</small></p>
+            <p><a href="https://ethresear.ch/t/number-of-peers-you-need-for-peer-sampling-in-peerdas-eip-7594/20562">Read full topic</a></p>
+]]></content:encoded>
+<pubDate>Fri, 04 Oct 2024 17:41:34 +0000</pubDate>
+<pubDate>Fri, 04 Oct 2024 17:41:34 +0000</pubDate>
+</item>
+<item>
+<title>Can Ethereum Distribution System reduce disk space usage &amp; enable object passing?</title>
+<link>https://ethresear.ch/t/can-ethereum-distribution-system-reduce-disk-space-usage-enable-object-passing/20560</link>
+<guid>https://ethresear.ch/t/can-ethereum-distribution-system-reduce-disk-space-usage-enable-object-passing/20560</guid>
+<content:encoded><![CDATA[
+<div> 关键词：Ethereum Distribution System、智能合约分布、区块链大小、状态无状态、执行层迁移
+
+文章总结：
+
+Ethereum Distribution System（EDS）是一个旨在解决当前以太坊网络中智能合约分布碎片化和效率低下的问题的项目。主要关注点包括：
+
+1. **当前状况**：目前的智能合约部署方式导致了大量无法优化存储在数据库中的元数据影响代码哈希的情况，这增加了节点操作者的区块链大小，远超必要水平。
+
+2. **问题与挑战**：由于执行客户端可能并未将合同字节码分割到单独的表中，且开发者缺乏复用代码的激励，这可能导致了不必要的部署冗余，增加了字节码占用的存储空间，长期来看可能会成为一个实际问题。
+
+3. **新兴优势**：新生态系统如Sui等声称拥有竞争优势，例如通过在合约之间传递对象的能力。EDS通过提出状态无状态的分布概念，允许在EVM上构建类似抽象模型，从而实现类似于Sui的功能，如两个通过同一分发系统分发的应用程序无需用户明确批准即可协同工作。
+
+4. **潜在应用**：状态无状态的分布块有可能被用于提供执行层迁移脚本，比如EIP 7702讨论中的例子，这是一种对许多安全假设构成破坏性改变的硬分叉。这可以设想为“以太坊3.0”，一个网络内的网络，在分叉日，信标链承诺迁移社区添加的所有基础设施，并在用户请求时通过指定迁移合约进行用户状态（资产）迁移。
+
+5. **未来展望与开放问题**：文章提出了几个关键问题和可能性，包括是否低估了提案的价值，字节码大小在未来是否成为问题，以及是否应该将使用字节码哈希的提议整合到EIP中。此外，考虑到广泛的代理使用，可能需要一个专门的EIP来支持原生代理功能，尽管代理在当前已经很受欢迎。
+
+总结：
+Ethereum Distribution System旨在通过改进智能合约的部署和管理方式，解决当前以太坊网络中的效率问题。它通过减少冗余部署、利用状态无状态的分布特性，以及可能的执行层迁移功能，为以太坊生态系统引入新的潜力。同时，文章提出了若干关键问题和未来可能的扩展方向，包括字节码大小管理、EIP整合、以及原生代理支持的可能性，这些都指向了EDS作为以太坊技术演进的重要组成部分所具有的长远价值。 <div>
+<p>Im looking for a developer community feedback for Ethereum Distribution System project: a generalized, semver enabled fully-on chain distribution system (generalized factory)</p>
+<p>Please reach back in thread or leave comments in discussion tab on github! <img alt=":handshake:" class="emoji" height="20" src="https://ethresear.ch/images/emoji/facebook_messenger/handshake.png?v=12" title=":handshake:" width="20" /></p>
+<aside class="onebox githubrepo">
+  <header class="source">
+
+      <a href="https://github.com/peeramid-labs/eds" rel="noopener nofollow ugc" target="_blank">github.com</a>
+  </header>
+
+  <article class="onebox-body">
+    <div class="github-row">
+  <img class="thumbnail" height="344" src="https://ethresear.ch/uploads/default/optimized/3X/0/f/0f4d7eee7f9125d3e2d66d5eb61f0979eea61f6d_2_690x344.png" width="690" />
+
+  <h3><a href="https://github.com/peeramid-labs/eds" rel="noopener nofollow ugc" target="_blank">GitHub - peeramid-labs/eds: Ethereum Distribution System </a></h3>
+
+    <p><span class="github-repo-description">Ethereum Distribution System </span></p>
+</div>
+
+  </article>
+
+  <div class="onebox-metadata">
+    
+    
+  </div>
+
+  <div style="clear: both;"></div>
+</aside>
+
+<p><strong>TLDR, hypotesis I want to validate:</strong></p>
+<h3><a class="anchor" href="https://ethresear.ch#p-50231-hypotesis-1-1" name="p-50231-hypotesis-1-1"></a>Hypotesis 1</h3>
+<p>The current landscape of smart contract distribution on the Ethereum network is fragmented and inefficient.</p>
+<p>Mostly, projects generate numerous deployment artifacts that <strong>cannot be optimized in database</strong>(?) because of built metadata affects code hashes.</p>
+<p>This practice results in a increase in blockchain size for node operators, far beyond what is necessary.<br />
+This likely is much below what storage / tx takes, however, contrary to tx data, bytecode is not something nodes can prune, meaning in the long run it may become more actual?</p>
+<p>I am not familiar with how execution clients store contract bytecode, but I doubt they split metadata objects in separate table, and even if, the smart contract devs are not incentivised to re-use heavily and likely anyway produce overhead number of artefacts</p>
+<h3><a class="anchor" href="https://ethresear.ch#p-50231-hypotesis-2-2" name="p-50231-hypotesis-2-2"></a>Hypotesis 2</h3>
+<p>Newer ecosystems such as Sui claim competitive advantage over Ethereum, for example, for being able to pass objects between contracts.</p>
+<p>From my understanding, the EVM is eventually right concept because it allows to build similar abstraction model on top, as it is just a computer architecture.</p>
+<p>With stateless Distributions proposed in EDS, <strong>it is possible to write software that will enable functionality similar as Sui proposes</strong> on inside evm. ( e.g,: Two applications distributed trough same distribution / distributor do not need for user explicit <code>approval</code>s as they are by design distributed together. )</p>
+<h3><a class="anchor" href="https://ethresear.ch#p-50231-hypotesis-3-3" name="p-50231-hypotesis-3-3"></a>Hypotesis 3</h3>
+<p>Distributions that are stateless chunks of code, in principle could be used to provision execution layer migration scripts for the whole protocol.</p>
+<p>EIP 7702 discussion is exemplary for this, it’s a breaking change for many security assertions.</p>
+<p>It could be presented as “Ethereum 3.0”, a network within a network, where upon fork day, Beacon chain promises to migrate all of infrastructure that community added and then do user states (assets) migration ad-hoc whenever users reach out to designated migration contract.</p>
+<h3><a class="anchor" href="https://ethresear.ch#p-50231-open-questions-4" name="p-50231-open-questions-4"></a>Open questions</h3>
+<p>How dumb am I <img alt=":slight_smile:" class="emoji" height="20" src="https://ethresear.ch/images/emoji/facebook_messenger/slight_smile.png?v=12" title=":slight_smile:" width="20" /> any of these hypothesises can hold their truth?</p>
+<p>Can bytecode size on Ethereum become a problem in foreseeable future?</p>
+<p>I’ve encapsulated proposal to enshrine use of bytecode hashes in <a href="https://eips.ethereum.org/EIPS/eip-7744" rel="noopener nofollow ugc">ERC7744</a> however If this proves to be very helpful, perhaps it’s worth to move in EIPs?</p>
+<p>If EDS proves to have positive perception, this implies that there will be extensive use of proxies instead of new deployments, perhaps an EIP needed to bake native proxy support for this (even if not, proxies are very popular) ?</p>
+            <p><small>1 post - 1 participant</small></p>
+            <p><a href="https://ethresear.ch/t/can-ethereum-distribution-system-reduce-disk-space-usage-enable-object-passing/20560">Read full topic</a></p>
+]]></content:encoded>
+<pubDate>Fri, 04 Oct 2024 13:27:32 +0000</pubDate>
+<pubDate>Fri, 04 Oct 2024 13:27:32 +0000</pubDate>
+</item>
 
 <item>
 <title>Honest MEV: a Theoretical Perspective</title>

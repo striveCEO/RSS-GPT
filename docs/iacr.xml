@@ -5,6 +5,28 @@
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
 <item>
+<title>Application-Aware Approximate Homomorphic Encryption: Configuring FHE for Practical Use</title>
+<link>https://eprint.iacr.org/2024/203</link>
+<guid>https://eprint.iacr.org/2024/203</guid>
+<content:encoded><![CDATA[
+<div> 关键词：全同态加密、Cheon-Kim-Kim-Song（CKKS）方案、隐私保护机器学习、应用感知同态加密、安全性定义
+
+总结：
+
+文章主要讨论了全同态加密（FHE）中的一个具体实现——基于Cheon-Kim-Kim-Song（CKKS）方案的同态加密技术，特别是在处理实数和复数时的应用。该方案为许多隐私保护机器学习应用提供了高效计算能力。然而，随着Li和Micciancio在EUROCRYPT'21中发现的针对$IND-CPA^D$设置的秘密密钥恢复攻击，现有关于如何安全地为特定应用实例化该方案的理解变得模糊。
+
+为了澄清这一混乱，文章引入了“应用感知同态加密”概念，并提出相关安全定义，这些定义更符合同态加密方案的实际实施和应用方式。同时，文章还制定了实施应用感知同态加密模型以达到$IND-CPA^D$安全性的指导原则，适用于CKKS的实际应用。此外，文章表明应用感知模型不仅适用于CKKS方案，还能用于安全、高效地实例化精确同态加密方案。
+
+通过上述措施，文章旨在提供一个更为明确和实用的框架，以确保在实际应用中正确和安全地使用FHE技术，特别是在面对复杂的安全挑战时。 <div>
+Fully Homomorphic Encryption (FHE) is a powerful tool for performing privacy-preserving analytics over encrypted data. A promising method for FHE over real and complex numbers is approximate homomorphic encryption, instantiated with the Cheon-Kim-Kim-Song (CKKS) scheme. The CKKS scheme enables efficient evaluation for many privacy-preserving machine learning applications. While the efficiency advantages of CKKS are clear, there is currently a lot of confusion on how to securely instantiate the scheme for any given application, especially after secret-key recovery attacks were discovered by Li and Micciancio (EUROCRYPT'21) for the $IND-CPA^D$ setting, i.e., where decryption results are shared with other parties. On the one hand, the generic definition of $IND-CPA^D$ is application-agnostic and often requires impractically large parameters. On the other hand, practical CKKS implementations target specific applications and use tighter parameters. A good illustration are the recent secret-key recovery attacks against a CKKS implementation in the OpenFHE library by Guo et al. (USENIX Security'24). These attacks misuse the library by employing different circuits during parameter estimation and run-time computation, yet they do not violate the generic (application-agnostic) $IND-CPA^D$ definition.
+
+To address this confusion, we introduce the notion of application-aware homomorphic encryption and devise related security definitions, which correspond more closely to how homomorphic encryption schemes are implemented and used in practice. We then formulate the guidelines for implementing the application-aware homomorphic encryption model to achieve $IND-CPA^D$ security for practical applications of CKKS. We also show that our application-aware model can be used for secure, efficient instantiation of exact homomorphic encryption schemes.
+]]></content:encoded>
+<pubDate>Fri, 09 Feb 2024 20:24:14 +0000</pubDate>
+<pubDate>Fri, 09 Feb 2024 20:24:14 +0000</pubDate>
+</item>
+
+<item>
 <title>Revisiting Keyed-Verification Anonymous Credentials</title>
 <link>https://eprint.iacr.org/2024/1552</link>
 <guid>https://eprint.iacr.org/2024/1552</guid>
@@ -23,7 +45,6 @@ Keyed-verification anonymous credentials are widely recognized as among the most
 
 To enable faster proofs for complex presentations, we present a compiler that uses an interactive oracle proof and a designated-verifier polynomial commitment to construct a designated-verifier non-interactive argument. For keyed-verification anonymous credentials, designated-verifier proofs suffice since the verifier is known in advance. We explore extensions that could benefit from this approach.
 ]]></content:encoded>
-<pubDate>Thu, 03 Oct 2024 15:37:29 +0000</pubDate>
 <pubDate>Thu, 03 Oct 2024 15:37:29 +0000</pubDate>
 </item>
 <item>
@@ -49,7 +70,6 @@ We propose the Proof of Unified Data Retrieval protocol (PoUDR). PoUDR incorpora
 This work provides a comprehensive definition for Secure Swarming Data Exchange (SSDE), including security assumptions. Also it offers a detailed game-based security analysis for the PoUDR protocol. Moreover, the PoUDR protocol has been fully integrated into the Bitswap protocol (IPFS). Within this integration, our proposed Relaxed Groth16 algorithm addresses the significant technical challenge of generating zero-knowledge proofs, leading to substantial cost reductions for overall feasibility of secure data retrieval in decentralized storage networks.
 ]]></content:encoded>
 <pubDate>Wed, 02 Oct 2024 22:42:26 +0000</pubDate>
-<pubDate>Wed, 02 Oct 2024 22:42:26 +0000</pubDate>
 </item>
 <item>
 <title>HEonGPU: a GPU-based Fully Homomorphic Encryption Library 1.0</title>
@@ -63,7 +83,6 @@ This work provides a comprehensive definition for Secure Swarming Data Exchange 
 HEonGPU是一种旨在优化全同态加密(FHE)操作在图形处理器(GPU)上的性能的高级库。它通过利用GPU的并行处理能力显著减少了与FHE相关的计算开销，允许对加密数据执行更快速的同态计算。这种能力特别适用于隐私保护机器学习和安全数据处理的实时应用。HEonGPU的关键优势在于其多流架构，不仅能够实现任务的并行处理以提高吞吐量，还能消除主机设备（即CPU）与GPU之间的数据传输开销。通过在GPU内部高效管理数据，多流架构减少了重复内存传输的需求，进一步提高了性能。针对各种FHE方案，HEonGPU的GPU优化设计使其非常适合大规模加密计算，为用户提供更低的延迟和更高的性能。 <div>
 HEonGPU is a high-performance library designed to optimize Fully Homomorphic Encryption (FHE) operations on Graphics Processing Unit (GPU). By leveraging the parallel processing capac- ity of GPUs, HEonGPU significantly reduces the computational overhead typically associated with FHE by executing complex operation concurrently. This allows for faster execution of homomorphic computations on encrypted data, enabling real-time applications in privacy-preserving machine learn- ing and secure data processing. A key advantage of HEonGPU lies in its multi-stream architecture, which not only allows parallel processing of tasks to improve throughput but also eliminates the over- head of data transfers between the host device (i.e., CPU) and GPU. By efficiently managing data within the GPU using multi-streams, HEonGPU minimizes the need for repeated memory transfers, further enhancing performance. HEonGPU’s GPU-optimized design makes it ideal for large-scale encrypted computations, providing users with reduced latency and higher performance across various FHE schemes.
 ]]></content:encoded>
-<pubDate>Wed, 02 Oct 2024 22:05:03 +0000</pubDate>
 <pubDate>Wed, 02 Oct 2024 22:05:03 +0000</pubDate>
 </item>
 <item>
@@ -80,7 +99,6 @@ HEonGPU is a high-performance library designed to optimize Fully Homomorphic Enc
 We present a new and efficient method to obtain circuit privacy for lattice-based linearly homomorphic encryptions (LHE). In particular, our method does not involve noise-flooding with exponetially large errors or iterative bootstrapping. As a direct result, we obtain a semi-honest oblivious linear evaluation (OLE) protocol with the same efficiency, reducing the communication cost of the prior state of the art by 50%. 
 Consequently, the amortized time of our protocol improves the prior work by 33% under 100Mbps network setting. Our semi-honest OLE is the first to achieve both concrete efficiency and asymptotic quasi-optimality. Together with an extension of the recent zero-knowledge proof of plaintext knowledge, our LHE yields actively-secure OLE with 2.7x reduced communication from the prior work. When applied to Overdrive (Eurocrypt '18), an MPC preprocessing protocol, our method provides 1.4x improvement in communication over the state of the art.
 ]]></content:encoded>
-<pubDate>Tue, 01 Oct 2024 08:11:22 +0000</pubDate>
 <pubDate>Tue, 01 Oct 2024 08:11:22 +0000</pubDate>
 </item>
 <item>
@@ -101,7 +119,6 @@ In decentralized finance (DeFi), the public availability of pending transactions
     In this work, we introduce a novel BTE scheme addressing the limitations by eliminating the need for an expensive epoch setup while achieving practical encryption and decryption times. Additionally, we explore the problem of how users can coordinate their transactions, which is crucial for the functionality of the system. Along the way, we present several optimizations and trade-offs between communication and computational complexity that allow us to achieve practical performance on standard hardware ($<2$ ms for encryption and $<440$ ms for decrypting $512$ transactions). Finally, we prove our constructions secure in a model that captures practical attacks on MEV-prevention mechanisms.
 ]]></content:encoded>
 <pubDate>Mon, 30 Sep 2024 21:36:16 +0000</pubDate>
-<pubDate>Mon, 30 Sep 2024 21:36:16 +0000</pubDate>
 </item>
 <item>
 <title>Folding Schemes with Privacy Preserving Selective Verification</title>
@@ -117,7 +134,6 @@ In decentralized finance (DeFi), the public availability of pending transactions
 为解决此问题，作者提出了隐私保护折叠方案的概念及其所需的安全性定义。隐私保护折叠方案旨在确保在证明过程中不泄露任何有关被合并陈述的信息。为了构建此类方案，作者引入了“陈述隐藏”这一概念，它允许将一个关系实例隐秘地表示为另一个关系实例，同时保持其真实性的验证。通过结合现有折叠方案和“陈述隐藏”的技术，可以构造出既能降低验证成本又具备隐私保护功能的方案。该方案首先对每个需要证明的陈述进行隐藏，然后利用折叠方案验证这些隐藏的陈述是否正确地合并到其他声明中。 <div>
 Folding schemes are an exciting new primitive, transforming the task of performing multiple zero-knowledge proofs of knowledge for a relation into performing just one zero-knowledge proof, for the same relation, and a number of cheap inclusion-proofs. Recently, folding schemes have been used to amortize the cost associated with proving different statements to multiple distinct verifiers, which has various applications. We observe that for these uses, leaking information about the statements folded together can be problematic, yet this happens with previous constructions. Towards resolving this issue, we give a natural definition of privacy preserving folding schemes, and what security they should offer. To construct privacy preserving folding schemes, we first define a statement hiders, a primitive which might be of independent interest. In a nutshell, a statement hider hides an instance of a relation as a new instance in the same relation. The new instance is in the relation if and only if the initial instance is. With this building block, we can utilize existing folding schemes to construct a privacy preserving folding scheme, by first hiding each of the statements. Folding schemes allow verifying that a statement was folded into another statement, while statement hiders allow verifying that a statement was hidden as another statement.
 ]]></content:encoded>
-<pubDate>Mon, 30 Sep 2024 10:49:25 +0000</pubDate>
 <pubDate>Mon, 30 Sep 2024 10:49:25 +0000</pubDate>
 </item>
 <item>
@@ -141,9 +157,7 @@ We explain in this paper how existing  attempts at this subtle problem lack eith
 We also delineate additional issues with the proof techniques used for time-lock puzzles. Specifically, when a time-lock puzzle must retain privacy for some amount of time, the reduction should bound the running time of the simulator. A simulator that can ``simulate" if given time that if given to an adversary allows said adversary to solve the puzzle is not a valid security argument. We survey the adherence of various attempts to this principle, as well as the properties that different attempts achieve toward composition.
 ]]></content:encoded>
 <pubDate>Mon, 30 Sep 2024 02:01:32 +0000</pubDate>
-<pubDate>Mon, 30 Sep 2024 02:01:32 +0000</pubDate>
 </item>
-
 <item>
 <title>FANNG-MPC: Framework for Artificial Neural Networks and Generic MPC</title>
 <link>https://eprint.iacr.org/2023/1918</link>
