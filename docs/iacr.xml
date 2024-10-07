@@ -5,6 +5,28 @@
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
 <item>
+<title>Scalable and Adaptively Secure Any-Trust Distributed Key Generation and All-hands Checkpointing</title>
+<link>https://eprint.iacr.org/2023/1773</link>
+<guid>https://eprint.iacr.org/2023/1773</guid>
+<content:encoded><![CDATA[
+<div> 关键词：分布式密钥生成、DLog基密码系统、适应性安全、区块链、广播通道
+
+总结:
+
+本文提出了一种面向DLog基密码系统的实用分布式密钥生成（DKG）协议，旨在解决大型分布式部署中的计算和通信开销问题。该协议利用“共同硬币”机制和一系列针对适应性安全的策略，使得即使在最多存在拜占庭节点的情况下，每个节点的计算和通信成本也能保持线性或接近线性。此外，该协议确保了当超过半数节点被适配性攻击者控制时，系统依然能够维持安全性。
+
+文章还引入了一种通用转换器，用于在参与者具有不同权重的情况下高效部署传统分布式协议，如上述DKG。通过结合区块链和数据分散网络（如IPFS）构建的扩展广播通道，实现了任意大小消息的可靠广播，同时仅需常量大小的区块链存储空间。
+
+该DKG协议的应用实例为Filecoin的检查点机制提供了基础，允许所有验证者定期执行DKG和阈值签名来创建比特币上的检查点，从而增强PoS区块链的安全性。与最近的检查点方法Babylon相比，本文提出的方案在比特币交易费用成本上有着显著优势，对于2^12个验证者的场景，其成本仅为Babylon方法的0.4%。 <div>
+The classical distributed key generation protocols (DKG) are resurging due to their widespread applications in blockchain. While efforts have been made to improve DKG communication, practical large-scale deployments are still yet to come due to various challenges, including the heavy computation and communication (particularly broadcast) overhead in their adversarial cases. In this paper, we propose a practical DKG for DLog-based cryptosystems, which achieves (quasi-)linear computation and communication per-node cost with the help of a common coin, even in the face of the maximal amount of Byzantine nodes. Moreover, our protocol is secure against adaptive adversaries, which can corrupt less than half of all nodes. The key to our improvements lies in delegating the most costly operations to an Any-Trust group together with a set of techniques for adaptive security. This group is randomly sampled and consists of a small number of individuals. The population only trusts that at least one member in the group is honest, without knowing which one. Moreover, we present a generic transformer that enables us to efficiently deploy a conventional distributed protocol like our DKG, even when the participants have different weights. Additionally, we introduce an extended broadcast channel based on a blockchain and data dispersal network (such as IPFS), enabling reliable broadcasting of arbitrary-size messages at the cost of constant-size blockchain storage. 
+
+Our DKG leads to a fully practical instantiation of Filecoin's checkpointing mechanism, in which all validators of a Proof-of-Stake (PoS) blockchain periodically run DKG and threshold signing to create checkpoints on Bitcoin, to enhance the security of the PoS chain. In comparison with the recent checkpointing approach of Babylon (Oakland, 2023), ours enjoys a significantly smaller cost of Bitcoin transaction fees. For $2^{12}$ validators,  our cost is merely 0.4\% of that incurred by Babylon's approach.
+]]></content:encoded>
+<pubDate>Thu, 16 Nov 2023 01:44:04 +0000</pubDate>
+<pubDate>Thu, 16 Nov 2023 01:44:04 +0000</pubDate>
+</item>
+
+<item>
 <title>Distributed Randomness using Weighted VUFs</title>
 <link>https://eprint.iacr.org/2024/198</link>
 <guid>https://eprint.iacr.org/2024/198</guid>
@@ -22,9 +44,7 @@ Shared randomness in blockchain can expand its support for randomized applicatio
 In this paper, we design an efficient on-chain randomness protocol for Byzantine fault-tolerance based Proof-of-Stake blockchains with weighted validators. A key component of our protocol is a weighted verifiable unpredictable function (VUF). The notable feature of our weighted VUF is that the computation and communication costs of parties are independent of their weight. This is crucial for scalability of on-chain randomness where we repeatedly evaluate the weighted VUF in quick succession. We also design a new scalable publicly verifiable secret sharing~(PVSS) scheme with aggregatable transcript and use it to design a distributed key generation~(DKG) protocol for our VUF. We implemented our schemes on top of Aptos, a proof-of-stake blockchain deployed in production, conducted an end-to-end evaluation with 112 validators and a total weight of up to 4053. In this setup, our on-chain randomness protocol adds only 133 milliseconds of latency compared to a protocol without randomness. We also demonstrate the performance improvements of our design through rigorous comparison with baseline methods.
 ]]></content:encoded>
 <pubDate>Fri, 09 Feb 2024 15:48:28 +0000</pubDate>
-<pubDate>Fri, 09 Feb 2024 15:48:28 +0000</pubDate>
 </item>
-
 <item>
 <title>PAC-Private Algorithms</title>
 <link>https://eprint.iacr.org/2024/718</link>

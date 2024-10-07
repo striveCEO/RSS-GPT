@@ -4,6 +4,188 @@
 <title>cs updates on arXiv.org</title>
 <link>http://rss.arxiv.org/rss/cs</link>
 
+<item>
+<title>FedCert: Federated Accuracy Certification</title>
+<link>https://arxiv.org/abs/2410.03067</link>
+<guid>https://arxiv.org/abs/2410.03067</guid>
+<content:encoded><![CDATA[
+<div> 关键词：Federated Learning、FedCert、Robustness Evaluation、Certified Accuracy、Client Grouping Algorithm
+
+<br><br>
+总结:
+
+本文聚焦于Federated Learning（FL）领域的一个关键问题：如何评估模型在面对客户端数据扰动时的鲁棒性。在传统的集中式训练中，通过认证精度可以确保一定比例的预测即使在输入数据被扰动后也能保持正确。然而，这一评估方式难以直接应用于FL，因为FL模型的训练依赖于分散在不同客户端的数据，而这些数据的具体分布未知。
+
+为解决这一挑战，研究团队提出了FedCert方法，这是评估FL系统鲁棒性的第一步。FedCert通过估计全局模型的认证精度，基于每个客户端的认证精度和类分布来实现这一目标。考虑到现实世界中数据非独立同分布（Non-IID）的特性，研究引入了客户端分组算法，以确保聚合步骤中的认证精度可靠性。
+
+理论分析证明了FedCert的有效性，实验结果在CIFAR-10和CIFAR-100数据集下的多种场景下显示，FedCert能显著降低与基准方法相比的估计误差。这项工作为评估FL系统的鲁棒性和可靠性提供了解决方案，并为未来增强分散学习的可靠性铺平了道路。 <div>
+arXiv:2410.03067v1 Announce Type: new 
+Abstract: Federated Learning (FL) has emerged as a powerful paradigm for training machine learning models in a decentralized manner, preserving data privacy by keeping local data on clients. However, evaluating the robustness of these models against data perturbations on clients remains a significant challenge. Previous studies have assessed the effectiveness of models in centralized training based on certified accuracy, which guarantees that a certain percentage of the model's predictions will remain correct even if the input data is perturbed. However, the challenge of extending these evaluations to FL remains unresolved due to the unknown client's local data. To tackle this challenge, this study proposed a method named FedCert to take the first step toward evaluating the robustness of FL systems. The proposed method is designed to approximate the certified accuracy of a global model based on the certified accuracy and class distribution of each client. Additionally, considering the Non-Independent and Identically Distributed (Non-IID) nature of data in real-world scenarios, we introduce the client grouping algorithm to ensure reliable certified accuracy during the aggregation step of the approximation algorithm. Through theoretical analysis, we demonstrate the effectiveness of FedCert in assessing the robustness and reliability of FL systems. Moreover, experimental results on the CIFAR-10 and CIFAR-100 datasets under various scenarios show that FedCert consistently reduces the estimation error compared to baseline methods. This study offers a solution for evaluating the robustness of FL systems and lays the groundwork for future research to enhance the dependability of decentralized learning. The source code is available at https://github.com/thanhhff/FedCert/.
+]]></content:encoded>
+<pubDate>Mon, 07 Oct 2024 00:00:00 -0400</pubDate>
+<pubDate>Mon, 07 Oct 2024 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Research Directions for Verifiable Crypto-Physically Secure TEEs</title>
+<link>https://arxiv.org/abs/2410.03183</link>
+<guid>https://arxiv.org/abs/2410.03183</guid>
+<content:encoded><![CDATA[
+<div> 关键词：Web3、Trusted Execution Environments（TEE）、物理不可复制函数（PUFs）、硬件安全、云计算信任问题
+
+总结:
+
+本文探讨了Web3领域如何利用硬件可信执行环境(TEE)构建去中心化基础设施的可能性，以及当前TEE存在的物理攻击风险和制造商信任问题。文章提出通过采用物理不可复制函数(Physical Unclonable Functions, PUFs)、计算保护的掩码和冗余技术、开源硬件以及验证芯片设计一致性的方法，来构建一种无需依赖云提供商和制造商信任的安全TEE架构。具体来说：
+
+1. **物理不可复制函数（PUFs）**：用于确保TEE的安全基础，防止克隆和复制，提高TEE的物理安全性。
+   
+2. **计算保护的掩码和冗余技术**：用于保护TEE内的计算过程，增加数据处理的安全性，即使在面临攻击的情况下也能保持数据完整性和隐私。
+
+3. **开源硬件**：提倡使用开源硬件方案，减少对特定制造商的依赖，增加透明度和可验证性，有助于构建更可信的TEE系统。
+
+4. **验证芯片设计一致性**：通过先进的成像技术，确保芯片的设计与预期相符，进一步增强TEE系统的可信度和安全性。
+
+5. **减少对云提供商和制造商的信任**：通过上述措施，旨在构建一种TEE系统，使得Web3应用程序能够直接信任硬件的安全性，而无需完全依赖于云服务提供商或制造商的信任。
+
+综上所述，本文旨在激发Web3社区认识到现有硬件安全研究的价值，并探索通过结合PUFs、计算保护技术、开源硬件和验证方法，构建一个更加安全、自主可控的TEE体系，从而解决当前TEE面临的物理攻击和信任问题，为Web3应用提供更加可靠的基础设施支持。 <div>
+arXiv:2410.03183v1 Announce Type: new 
+Abstract: A niche corner of the Web3 world is increasingly making use of hardware-based Trusted Execution Environments (TEEs) to build decentralized infrastructure. One of the motivations to use TEEs is to go beyond the current performance limitations of cryptography-based alternatives such as zero-knowledge proofs (ZKP), fully homomorphic encryption (FHE), and multi-party computation (MPC). Despite their appealing advantages, current TEEs suffer from serious limitations as they are not secure against physical attacks, and their attestation mechanism is rooted in the chip manufacturer's trust. As a result, Web3 applications have to rely on cloud infrastruture to act as trusted guardians of hardware-based TEEs and have to accept to trust chip manufacturers. This work aims at exploring how we could potentially architect and implement chips that would be secure against physical attacks and would not require putting trust in chip manufacturers. One goal of this work is to motivate the Web3 movement to acknowledge and leverage the substantial amount of relevant hardware research that already exists. In brief, a combination of: (1) physical unclonable functions (PUFs) to secure the root-of-trust; (2) masking and redundancy techniques to secure computations; (3) open source hardware and imaging techniques to verify that a chip matches its expected design; can help move towards attesting that a given TEE can be trusted without the need to trust a cloud provider and a chip manufacturer.
+]]></content:encoded>
+<pubDate>Mon, 07 Oct 2024 00:00:00 -0400</pubDate>
+<pubDate>Mon, 07 Oct 2024 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>BN-SCAFFOLD: controlling the drift of Batch Normalization statistics in Federated Learning</title>
+<link>https://arxiv.org/abs/2410.03281</link>
+<guid>https://arxiv.org/abs/2410.03281</guid>
+<content:encoded><![CDATA[
+<div> 关键词：Federated Learning（FL）、Batch Normalization（BN）、FedTAN、SCAFFOLD、BN-SCAFFOLD
+
+<br><br>
+总结:
+文章主要探讨了在异构联邦学习(Federated Learning, FL)环境中，如何有效地利用批量归一化(Batch Normalization, BN)来训练深度神经网络(Depth Neural Networks, DNN)。文章首先指出，尽管联邦学习作为一种分散式机器学习范式正逐渐受到关注，但传统的批量归一化方法在异构环境中可能会降低模型性能。为此，作者提出了一种名为FedTAN的算法，旨在通过聚合所有客户端的批量归一化统计和梯度来减轻异构性的影响。然而，该算法存在较高的通信成本问题，其复杂度与DNN的深度成线性关系。
+
+接着，文章引入了SCAFFOLD算法，这是一种能够以高效方式减少客户端漂移的偏差减少算法。虽然SCAFFOLD在异构联邦学习中显示出良好的潜力，但其在具有批量归一化的模型上表现不佳。为了解决这个问题，作者提出了BN-SCAFFOLD算法，它将SCAFFOLD的客户端漂移修正策略扩展到批量归一化统计。通过引入统一的理论框架，基于Wang等人2023年的工作，文章证明了BN-SCAFFOLD算法能够有效消除批量归一化引入的偏见，并通过实验验证了理论结果在MNIST和CIFAR-10数据集上的有效性。实验结果表明，BN-SCAFFOLD算法在性能上与FedTAN相当，但无需后者高昂的通信成本，同时优于传统的联邦平均(FedAvg)方法和其他旨在缓解批量归一化异构性的联邦学习算法。 <div>
+arXiv:2410.03281v1 Announce Type: new 
+Abstract: Federated Learning (FL) is gaining traction as a learning paradigm for training Machine Learning (ML) models in a decentralized way. Batch Normalization (BN) is ubiquitous in Deep Neural Networks (DNN), as it improves convergence and generalization. However, BN has been reported to hinder performance of DNNs in heterogeneous FL. Recently, the FedTAN algorithm has been proposed to mitigate the effect of heterogeneity on BN, by aggregating BN statistics and gradients from all the clients. However, it has a high communication cost, that increases linearly with the depth of the DNN. SCAFFOLD is a variance reduction algorithm, that estimates and corrects the client drift in a communication-efficient manner. Despite its promising results in heterogeneous FL settings, it has been reported to underperform for models with BN. In this work, we seek to revive SCAFFOLD, and more generally variance reduction, as an efficient way of training DNN with BN in heterogeneous FL. We introduce a unified theoretical framework for analyzing the convergence of variance reduction algorithms in the BN-DNN setting, inspired of by the work of Wang et al. 2023, and show that SCAFFOLD is unable to remove the bias introduced by BN. We thus propose the BN-SCAFFOLD algorithm, which extends the client drift correction of SCAFFOLD to BN statistics. We prove convergence using the aforementioned framework and validate the theoretical results with experiments on MNIST and CIFAR-10. BN-SCAFFOLD equals the performance of FedTAN, without its high communication cost, outperforming Federated Averaging (FedAvg), SCAFFOLD, and other FL algorithms designed to mitigate BN heterogeneity.
+]]></content:encoded>
+<pubDate>Mon, 07 Oct 2024 00:00:00 -0400</pubDate>
+<pubDate>Mon, 07 Oct 2024 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Practical Light Clients for Committee-Based Blockchains</title>
+<link>https://arxiv.org/abs/2410.03347</link>
+<guid>https://arxiv.org/abs/2410.03347</guid>
+<content:encoded><![CDATA[
+<div> 关键词：轻客户端、区块链、验证效率、通信成本、计算成本
+
+总结:
+本文通过实证研究发现，大部分用户并不经常处于离线状态超过一周，且在受权限控制的区块链以及Cosmos、Polkadot等无权限区块链中，验证节点变动的可能性较小。基于此，文章提出了一种新型的轻客户端系统，旨在优化现实情况下的需求，减少轻客户端的通信和计算成本。相较于现有文献中的两种先进轻客户端实现，该新系统在端到端延迟上降低了最高达90%，证明大小减少了最高达40000倍，且在某些情况下，证明大小甚至缩小了高达10000倍。这显著提高了轻客户端在实际应用中的效率和性能。 <div>
+arXiv:2410.03347v1 Announce Type: new 
+Abstract: Light clients are gaining increasing attention in the literature since they obviate the need for users to set up dedicated blockchain full nodes. While the literature features a number of light client instantiations, most light client protocols optimize for long offline phases and implicitly assume that the block headers to be verified are signed by highly dynamic validators.
+  In this paper, we show that (i) most light clients are rarely offline for more than a week, and (ii) validators are unlikely to drastically change in most permissioned blockchains and in a number of permissionless blockchains, such as Cosmos and Polkadot. Motivated by these findings, we propose a novel practical system that optimizes for such realistic assumptions and achieves minimal communication and computational costs for light clients when compared to existing protocols. By means of a prototype implementation of our solution, we show that our protocol achieves a reduction by up to $90$ and $40000\times$ (respectively) in end-to-end latency and up to $1000$ and $10000\times$ (respectively) smaller proof size when compared to two state-of-the-art light client instantiations from the literature.
+]]></content:encoded>
+<pubDate>Mon, 07 Oct 2024 00:00:00 -0400</pubDate>
+<pubDate>Mon, 07 Oct 2024 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>FedStein: Enhancing Multi-Domain Federated Learning Through James-Stein Estimator</title>
+<link>https://arxiv.org/abs/2410.03499</link>
+<guid>https://arxiv.org/abs/2410.03499</guid>
+<content:encoded><![CDATA[
+<div> 关键词：Federated Learning、FedStein、James-Stein Estimator、多域学习、数据非独立同分布
+
+<br><br>
+总结:
+文章介绍了针对多域联邦学习(Federated Learning)中数据来源不同、特征分布各异这一挑战的新方法——FedStein。FedStein通过使用詹姆斯-斯蒂恩(James-Stein)估计器来共享批量归一化(Batch Normalization, BN)统计量的估计值，同时保持本地BN参数不变，以此来提高多域联邦学习的性能和收敛性。该方法允许非BN层参数通过标准联邦学习技术进行交换，从而在多个数据集和模型上展现出显著优于现有方法（如FedAvg和FedBN）的准确性提升，特别是在特定领域的准确性提高了14%以上，增强了模型的泛化能力。此外，研究团队提供了实现FedStein方法的代码，以便其他研究者和开发者可以复现和扩展相关工作。 <div>
+arXiv:2410.03499v1 Announce Type: new 
+Abstract: Federated Learning (FL) facilitates data privacy by enabling collaborative in-situ training across decentralized clients. Despite its inherent advantages, FL faces significant challenges of performance and convergence when dealing with data that is not independently and identically distributed (non-i.i.d.). While previous research has primarily addressed the issue of skewed label distribution across clients, this study focuses on the less explored challenge of multi-domain FL, where client data originates from distinct domains with varying feature distributions. We introduce a novel method designed to address these challenges FedStein: Enhancing Multi-Domain Federated Learning Through the James-Stein Estimator. FedStein uniquely shares only the James-Stein (JS) estimates of batch normalization (BN) statistics across clients, while maintaining local BN parameters. The non-BN layer parameters are exchanged via standard FL techniques. Extensive experiments conducted across three datasets and multiple models demonstrate that FedStein surpasses existing methods such as FedAvg and FedBN, with accuracy improvements exceeding 14% in certain domains leading to enhanced domain generalization. The code is available at https://github.com/sunnyinAI/FedStein
+]]></content:encoded>
+<pubDate>Mon, 07 Oct 2024 00:00:00 -0400</pubDate>
+<pubDate>Mon, 07 Oct 2024 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>What Matters for Model Merging at Scale?</title>
+<link>https://arxiv.org/abs/2410.03617</link>
+<guid>https://arxiv.org/abs/2410.03617</guid>
+<content:encoded><![CDATA[
+<div> 关键词：模型合并、大规模模型、综合性能提升、专家模型、分散式开发
+
+<br><br>总结:
+
+本文主要探讨了模型合并技术在大规模模型中的应用与效果。首先，研究发现当合并的专家模型源自高质量的基础模型时，合并的效果更为显著，即零样本性能较好的基础模型有助于提高合并模型的整体性能。其次，较大的模型更容易进行有效合并，这意味着大模型在合并过程中表现出更好的适应性和融合性。第三，合并模型在泛化能力上普遍表现出优势，尤其是在合并多个大型专家模型时，合并后的模型往往在未见过的任务上表现得更好，相较于多任务训练的模型。第四，随着合并的专家模型数量增加，使用更大规模的模型可以更有效地进行合并，这揭示了在合并过程中的规模效应。最后，不同合并方法在大规模场景下的行为表现相似，说明选择何种合并策略对最终模型性能的影响在大型模型中可能不是决定性的。
+
+通过这些发现，研究为未来在大规模模型合并领域的工作提供了有价值的参考点，对于促进高效、高质量模型的开发和利用具有重要意义。 <div>
+arXiv:2410.03617v1 Announce Type: new 
+Abstract: Model merging aims to combine multiple expert models into a more capable single model, offering benefits such as reduced storage and serving costs, improved generalization, and support for decentralized model development. Despite its promise, previous studies have primarily focused on merging a few small models. This leaves many unanswered questions about the effect of scaling model size and how it interplays with other key factors -- like the base model quality and number of expert models -- , to affect the merged model's performance. This work systematically evaluates the utility of model merging at scale, examining the impact of these different factors. We experiment with merging fully fine-tuned models using 4 popular merging methods -- Averaging, Task~Arithmetic, Dare, and TIES -- across model sizes ranging from 1B-64B parameters and merging up to 8 different expert models. We evaluate the merged models on both held-in tasks, i.e., the expert's training tasks, and zero-shot generalization to unseen held-out tasks. Our experiments provide several new insights about model merging at scale and the interplay between different factors. First, we find that merging is more effective when experts are created from strong base models, i.e., models with good zero-shot performance. Second, larger models facilitate easier merging. Third merging consistently improves generalization capabilities. Notably, when merging 8 large expert models, the merged models often generalize better compared to the multitask trained models. Fourth, we can better merge more expert models when working with larger models. Fifth, different merging methods behave very similarly at larger scales. Overall, our findings shed light on some interesting properties of model merging while also highlighting some limitations. We hope that this study will serve as a reference point on large-scale merging for upcoming research.
+]]></content:encoded>
+<pubDate>Mon, 07 Oct 2024 00:00:00 -0400</pubDate>
+<pubDate>Mon, 07 Oct 2024 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>TOB-SVD: Total-Order Broadcast with Single-Vote Decisions in the Sleepy Model</title>
+<link>https://arxiv.org/abs/2310.11331</link>
+<guid>https://arxiv.org/abs/2310.11331</guid>
+<content:encoded><![CDATA[
+<div> 关键词：分布式共识、区块链、动态参与、总序广播、TOB-SVD
+
+总结:
+本文聚焦于大型、无许可系统中分布式共识研究的新方向，特别针对动态参与的挑战。对比传统的静态参与者模型，这类系统需要适应参与者数量和在线状态的频繁变化。比特币和“沉睡模型”等先驱工作为这一领域奠定了基础。
+
+Momose和Ren（2022年CCS）的研究及后续工作引入了利用分级协议的总序广播机制，旨在支持动态参与度。然而，这些方法通常需要每个决策过程中的多轮投票，可能成为大规模实时系统的瓶颈。
+
+针对这一问题，本文提出了一种新的总序广播协议——TOB-SVD，它在“沉睡模型”下工作，能够抵抗最多半数的敌对参与者。TOB-SVD的创新之处在于，它在最佳情况下只需一轮投票即可完成决策，同时实现与现有最优敌对方抗性方案相比更低的预期延迟。这项工作为在大型参与度波动的实时系统中实施更实用的总序广播协议铺平了道路。 <div>
+arXiv:2310.11331v2 Announce Type: replace 
+Abstract: Over the past years, distributed consensus research has extended its focus towards addressing challenges in large-scale, permissionless systems, such as blockchains. This shift is characterized by the need to accommodate dynamic participation, contrasting the traditional approach of a static set of continuously online participants. Works like Bitcoin and the sleepy model have set the stage for this evolving framework.
+  Notable contributions from Momose and Ren (CCS 2022) and subsequent works have introduced Total-Order Broadcast protocols leveraging Graded Agreement primitives and supporting dynamic participation. However, these approaches often require multiple phases of voting per decision, creating a potential bottleneck for real-world large-scale systems.
+  Addressing this, our paper introduces TOB-SVD, a novel Total-Order Broadcast protocol in the sleepy model, which is resilient to up to 1/2 of adversarial participants. TOB-SVD requires only a single phase of voting per decision in the best case and achieves lower expected latency compared to existing approaches offering the same optimal adversarial resilience. This work paves the way to more practical Total-Order Broadcast protocols to be implemented in real-world systems where a large number of participants are involved simultaneously and their participation level might fluctuate over time.
+]]></content:encoded>
+<pubDate>Mon, 07 Oct 2024 00:00:00 -0400</pubDate>
+<pubDate>Mon, 07 Oct 2024 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Insights and caveats from mining local and global temporal motifs in cryptocurrency transaction networks</title>
+<link>https://arxiv.org/abs/2402.09272</link>
+<guid>https://arxiv.org/abs/2402.09272</guid>
+<content:encoded><![CDATA[
+<div> 关键词：分布式账本技术、交易数据、异常检测、反洗钱、时间网络
+
+总结:
+本文探讨了分布式账本技术（DLT）在加密货币如比特币和以太坊中产生的精细交易数据，为研究问题如异常检测、反洗钱、模式挖掘和活动聚类提供了可能。时间网络的框架为表示这些数据提供了一种自然的方式，并且提供了丰富的度量标准和模型。然而，大规模的数据对传统图分析技术构成了挑战。作者使用时间模式分析了两个比特币数据集和一个NFT数据集，利用了三个交易和最多三个用户序列。他们发现仅通过所有用户和所有时间的模式计数可能会导致误导性的结论。进一步的研究表明，每个用户的贡献模式分布呈重尾现象，关键参与者具有多样化的模式特征。通过对不同时间段发生的事件和异常活动进行分析，发现仅通过整个数据集的计数无法揭示的内容。此外，研究模式完成时间揭示了由人类行为和算法行为驱动的动力学。
+
+文章详细阐述了如何使用时间模式分析大规模交易数据集，以及这种方法如何帮助识别异常行为和事件。研究结果不仅对理解加密货币市场的运作机制有重要意义，也为设计更有效的监控系统和策略提供了理论基础。通过对比特币和NFT数据集的应用，文章展示了时间网络方法在实际场景中的潜在应用价值。 <div>
+arXiv:2402.09272v2 Announce Type: replace 
+Abstract: Distributed ledger technologies have opened up a wealth of fine-grained transaction data from cryptocurrencies like Bitcoin and Ethereum. This allows research into problems like anomaly detection, anti-money laundering, pattern mining and activity clustering (where data from traditional currencies is rarely available). The formalism of temporal networks offers a natural way of representing this data and offers access to a wealth of metrics and models. However, the large scale of the data presents a challenge using standard graph analysis techniques. We use temporal motifs to analyse two Bitcoin datasets and one NFT dataset, using sequences of three transactions and up to three users. We show that the commonly used technique of simply counting temporal motifs over all users and all time can give misleading conclusions. Here we also study the motifs contributed by each user and discover that the motif distribution is heavy-tailed and that the key players have diverse motif signatures. We study the motifs that occur in different time periods and find events and anomalous activity that cannot be seen just by a count on the whole dataset. Studying motif completion time reveals dynamics driven by human behaviour as well as algorithmic behaviour.
+]]></content:encoded>
+<pubDate>Mon, 07 Oct 2024 00:00:00 -0400</pubDate>
+<pubDate>Mon, 07 Oct 2024 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Dense Passage Retrieval: Is it Retrieving?</title>
+<link>https://arxiv.org/abs/2402.11035</link>
+<guid>https://arxiv.org/abs/2402.11035</guid>
+<content:encoded><![CDATA[
+<div> 关键词：Dense Passage Retrieval（DPR）、大型语言模型（LLM）、模型编辑、知识分散、知识不确定性
+
+总结:
+本文深入探讨了密集段落检索（Dense Passage Retrieval, DPR）在检索增强生成（RAG）范式中的作用及其对大型语言模型（LLM）性能提升的影响。研究者通过结合探针、层激活分析和模型编辑的方法，对经过DPR训练的模型进行了机制性探索。主要发现包括：
+
+1. **知识分散**：DPR训练过程导致网络内部知识存储方式发生改变，使得相同信息可以通过多个途径访问，提高了检索效率。
+   
+2. **知识上限**：预训练模型内部的知识限制了检索模型的检索能力，表明了当前DPR训练风格的局限性。
+
+3. **潜在改进方向**：
+   - **更多知识暴露**：增加对DPR训练过程的知识输入，以促进更多知识的分散化。
+   - **事实注入**：将具体事实作为分散表示注入到模型中，以丰富其检索能力。
+   - **知识不确定性建模**：在检索过程中考虑知识的不确定性和不完整性，提高检索结果的可靠性。
+   - **内部知识映射**：直接将模型内部的知识映射到知识库中，增强模型的可解释性和实用性。
+
+这些发现为未来改进DPR和相关技术提供了理论基础和实践指导，旨在更全面地挖掘和利用模型内部的知识资源，进一步提升大规模语言模型的性能和应用潜力。 <div>
+arXiv:2402.11035v3 Announce Type: replace 
+Abstract: Dense passage retrieval (DPR) is the first step in the retrieval augmented generation (RAG) paradigm for improving the performance of large language models (LLM). DPR fine-tunes pre-trained networks to enhance the alignment of the embeddings between queries and relevant textual data. A deeper understanding of DPR fine-tuning will be required to fundamentally unlock the full potential of this approach. In this work, we explore DPR-trained models mechanistically by using a combination of probing, layer activation analysis, and model editing. Our experiments show that DPR training decentralizes how knowledge is stored in the network, creating multiple access pathways to the same information. We also uncover a limitation in this training style: the internal knowledge of the pre-trained model bounds what the retrieval model can retrieve. These findings suggest a few possible directions for dense retrieval: (1) expose the DPR training process to more knowledge so more can be decentralized, (2) inject facts as decentralized representations, (3) model and incorporate knowledge uncertainty in the retrieval process, and (4) directly map internal model knowledge to a knowledge base.
+]]></content:encoded>
+<pubDate>Mon, 07 Oct 2024 00:00:00 -0400</pubDate>
+<pubDate>Mon, 07 Oct 2024 00:00:00 -0400</pubDate>
+</item>
 
 <item>
 <title>From Experts to the Public: Governing Multimodal Language Models in Politically Sensitive Video Analysis</title>
