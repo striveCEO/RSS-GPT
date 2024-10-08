@@ -4,6 +4,124 @@
 <title>Ethereum Research - Latest topics</title>
 <link>https://ethresear.ch/latest</link>
 
+<item>
+<title>Anoiden: Zero Knowledge SSO with Semaphore</title>
+<link>https://ethresear.ch/t/anoiden-zero-knowledge-sso-with-semaphore/20579</link>
+<guid>https://ethresear.ch/t/anoiden-zero-knowledge-sso-with-semaphore/20579</guid>
+<content:encoded><![CDATA[
+<div> 关键词：anoiden、零知识证明、单点登录（SSO）、身份提供者（IdP）、服务提供者（SP）
+
+总结：
+Anoiden是一种基于零知识证明的匿名单点登录协议，允许用户通过身份提供者（IdP）的信息在服务提供者（SP）处登录，同时保持用户的隐私，即使IdP和SP合作。它利用了Semaphore协议。
+
+1. **注册流程**：用户通过IdP完成账户注册后，可以将该账户与扩展程序中的密钥关联起来。这样，当需要通过SP进行身份验证时，用户就可以匿名使用此IdP。
+
+2. **认证过程**：当SP信任并已预先通知给特定的IdP时，SP的客户端通过扩展程序向IdP请求签名。IdP验证签名后，创建相应的签名并返回给SP。
+
+3. **术语解释**：**Extension**（扩展）指的是管理用户密钥并生成证明的浏览器扩展或应用；**anoiden.js** 是提供网站客户端与扩展交互的接口；**身份提供者（IdP）** 是提供用户有效性的实体；**服务提供者（SP）** 则是利用IdP提供的用户有效性进行身份验证的实体。
+
+4. **安全措施**：协议中使用了**nonce**（随机数）来防止重放攻击，以及**clientId**和**hostname**来确保仅向授权的SP传递用户的有效性，从而防止未经授权的域发起请求。
+
+5. **顾虑**：当SP仅使用单一的IdP时，需要对这个IdP有绝对的信任。然而，通过在登录过程中同时使用多个IdP（去中心化SSO），可以降低对每个IdP的信任要求。随着身份数量的增加，效率会下降，因此正在考虑分组身份，但这引发了隐私问题。 <div>
+<h2><a class="anchor" href="https://ethresear.ch#p-50265-about-this-post-1" name="p-50265-about-this-post-1"></a>About this post</h2>
+<p>This is a cross-post of content uploaded to GitHub. I am sharing it here to introduce it to the Ethereum community and facilitate discussion.</p>
+<h2><a class="anchor" href="https://ethresear.ch#p-50265-summary-2" name="p-50265-summary-2"></a>Summary</h2>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/a/9/a99c53ec75d00e734fc14ce4a88a614def1c05fc.png" title="Overview"><img alt="Overview" height="327" src="https://ethresear.ch/uploads/default/optimized/3X/a/9/a99c53ec75d00e734fc14ce4a88a614def1c05fc_2_690x327.png" width="690" /></a></div><p></p>
+<p>Anoiden is an anonymous single sign-on (SSO) protocol that uses zero-knowledge proofs. This protocol allows users to sign in to a Service Provider (SP) using information from an Identity Provider (IdP) while keeping the user’s identity secret—even if the IdP and SP collude. It utilizes the <a href="https://github.com/semaphore-protocol/semaphore" rel="noopener nofollow ugc">Semaphore library</a>.</p>
+<ol>
+<li>Connect
+<ul>
+<li>The user creates an account using methods specified by the IdP (such as email or phone number registration) and links their zero-knowledge proof keys.</li>
+</ul>
+</li>
+<li>Auth
+<ul>
+<li>The SP trusts the IdP and knows its authentication endpoint. The user requests to log in to the SP via the IdP and obtains a nonce.</li>
+<li>The user then creates a proof of their identity and sends it to the IdP. The IdP verifies the proof and, if valid, creates a corresponding signature.</li>
+</ul>
+</li>
+</ol>
+<h2><a class="anchor" href="https://ethresear.ch#p-50265-terminology-3" name="p-50265-terminology-3"></a>Terminology</h2>
+<ul>
+<li><strong>Extension</strong>: A browser extension (or app) that manages the user’s keys and creates proofs. It is necessary to keep the identity confidential even if the SP and IdP collude.</li>
+<li><strong>anoiden.js</strong>: Provides an interface for website clients to communicate with the extension.</li>
+<li><strong>Identity Provider (IdP)</strong>: An entity that provides information about the user’s validity to the SP.</li>
+<li><strong>Service Provider (SP)</strong>: An entity that utilizes the user’s validity provided by the IdP.</li>
+</ul>
+<h2><a class="anchor" href="https://ethresear.ch#p-50265-protocol-4" name="p-50265-protocol-4"></a>Protocol</h2>
+<h3><a class="anchor" href="https://ethresear.ch#p-50265-registration-with-idp-connect-5" name="p-50265-registration-with-idp-connect-5"></a><strong>Registration with IdP (Connect)</strong></h3>
+<p>After the user completes account registration with the IdP, they can link that account with the key in the extension. Through this linkage, the user can use this IdP when authentication is requested in the future. Additionally, it becomes possible to log in to the IdP anonymously using the key.</p>
+<p>The IdP client obtains the signature and public key through anoiden.js:</p>
+<pre><code class="lang-js">const {signature, publicKey} = await connect(serviceName, nonce);
+</code></pre>
+<ul>
+<li><code>serviceName</code> refers to the Identity Provider’s name and is used for key management within the extension.</li>
+<li><code>nonce</code> is an unpredictable string obtained from the server side of the IdP.</li>
+</ul>
+<p>The following diagram shows the flow until the IdP client obtains the user’s signature:<br />
+</p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/8/e/8e0f26036d0590458476d9aed15c0132bd64d615.png" title="Connect Flow"><img alt="Connect Flow" height="500" src="https://ethresear.ch/uploads/default/optimized/3X/8/e/8e0f26036d0590458476d9aed15c0132bd64d615_2_591x500.png" width="591" /></a></div><p></p>
+<p>The client sends the obtained signature, public key, and nonce to the server. The server checks the session and verifies whether it issued that nonce to the user. If valid, it verifies the signature, obtains the identifier (Poseidon hash of the public key), adds the identifier to a Merkle tree, and saves the Merkle root after the addition.</p>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/5/2/523eb38b3a1fe30f597d2327ea178e4022597044.png" title="Connect Flow"><img alt="Connect Flow" height="500" src="https://ethresear.ch/uploads/default/optimized/3X/5/2/523eb38b3a1fe30f597d2327ea178e4022597044_2_583x500.png" width="583" /></a></div><p></p>
+<h3><a class="anchor" href="https://ethresear.ch#p-50265-auth-6" name="p-50265-auth-6"></a>Auth</h3>
+<p>When the SP uses the IdP, it is assumed that it has informed the IdP in advance and has received a client ID from the IdP.</p>
+<p>The SP’s client obtains a signature from the IdP through anoiden.js as follows:</p>
+<pre><code class="lang-js">const idpSignature = await auth(endpoint, nonce, params);
+</code></pre>
+<ul>
+<li><code>endpoint</code> is the endpoint of the IdP.</li>
+<li><code>nonce</code> is obtained from the server side of the SP.</li>
+<li><code>params</code> are arbitrary parameters defined between the SP and IdP, but clientId is required.</li>
+</ul>
+<p>After the extension receives the endpoint, nonce, and params, it obtains identifiers from the IdP’s endpoint and uses Semaphore to create a proof as follows:</p>
+<pre><code class="lang-js">// https://js.semaphore.pse.dev/functions/_semaphore_protocol_proof.generateProof.html
+await generateProof(identity, group, nonce, "signIn");
+</code></pre>
+<ul>
+<li><code>identity</code> is the key created for each IdP.</li>
+<li><code>group</code> is an object created from identifiers.</li>
+<li><code>nonce</code> is the nonce passed from the SP.</li>
+</ul>
+<p>The extension adds the hostname of the SP to params. The IdP uses the clientId and hostname to identify the SP that requested the signature.</p>
+<p>The IdP receives the proof and parameters, verifies the proof, and then creates a signature of the nonce and parameters using a key in a format shared in advance with the SP.</p>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/f/2/f2da965eea0a5c5c1fe8dd36b1430094919c4b5d.png" title="Authorization Flow"><img alt="Authorization Flow" height="500" src="https://ethresear.ch/uploads/default/optimized/3X/f/2/f2da965eea0a5c5c1fe8dd36b1430094919c4b5d_2_631x500.png" width="631" /></a></div><p></p>
+<p>The client sends the received signature to the server, which verifies it on the server side.</p>
+<h3><a class="anchor" href="https://ethresear.ch#p-50265-endpoint-interface-7" name="p-50265-endpoint-interface-7"></a>Endpoint interface</h3>
+<p>The IdP’s endpoint has GET and POST methods. GET returns the identifiers of all accounts. POST verifies the proof and confirms the validity of the user.</p>
+<h4><a class="anchor" href="https://ethresear.ch#p-50265-get-endpointidentifiers-8" name="p-50265-get-endpointidentifiers-8"></a>GET endpoint/identifiers</h4>
+<p>There are no parameters. The response is in JSON and returns a list of identifiers as strings under the key identifiers.</p>
+<p>Example response:</p>
+<pre><code class="lang-json">{
+  "identifiers": ["6423154662976160105169106896701549153516891642211172349909782921108153674476"]
+}
+</code></pre>
+<h4><a class="anchor" href="https://ethresear.ch#p-50265-post-endpointauth-9" name="p-50265-post-endpointauth-9"></a>POST endpoint/auth</h4>
+<p>The request body requires a JSON object containing the proof and parameters (params):</p>
+<pre><code class="lang-json">{
+  "proof": "Semaphore proof here",
+  "params": {
+    "clientId": "exampleClientId",
+    "hostname": "example.com",
+    "other_params": "additional parameters here"
+  }
+}
+</code></pre>
+<p>The response is returned in JSON format and includes the IdP’s signature as a string under the key signature:</p>
+<pre><code class="lang-json">{
+  "signature": "example_signature"
+}
+</code></pre>
+<h2><a class="anchor" href="https://ethresear.ch#p-50265-security-10" name="p-50265-security-10"></a>Security</h2>
+<p>The <code>nonce</code> is used to prevent replay attacks.</p>
+<p>The <code>clientId</code> and <code>hostname</code> are mechanisms that ensure the IdP passes user validity only to SPs it has authorized. This also helps prevent requests from unauthorized domains.</p>
+<h2><a class="anchor" href="https://ethresear.ch#p-50265-concerns-11" name="p-50265-concerns-11"></a>Concerns</h2>
+<p>When an SP uses only a single IdP, absolute trust in that IdP is required. However, by utilizing multiple IdPs simultaneously during sign-in (Decentralized SSO), the necessary level of trust in each IdP is reduced.</p>
+<p>When the number of identities increases, it becomes inefficient. Therefore, we are considering dividing identity groups, but this raises privacy concerns.</p>
+            <p><small>1 post - 1 participant</small></p>
+            <p><a href="https://ethresear.ch/t/anoiden-zero-knowledge-sso-with-semaphore/20579">Read full topic</a></p>
+]]></content:encoded>
+<pubDate>Mon, 07 Oct 2024 14:13:59 +0000</pubDate>
+<pubDate>Mon, 07 Oct 2024 14:13:59 +0000</pubDate>
+</item>
 
 <item>
 <title>EIP 7779: Discussion thread</title>

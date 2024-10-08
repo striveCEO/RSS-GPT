@@ -4,6 +4,7 @@
 <title>cs updates on arXiv.org</title>
 <link>http://rss.arxiv.org/rss/cs</link>
 
+
 <item>
 <title>FedCert: Federated Accuracy Certification</title>
 <link>https://arxiv.org/abs/2410.03067</link>
@@ -11,7 +12,7 @@
 <content:encoded><![CDATA[
 <div> 关键词：Federated Learning、FedCert、Robustness Evaluation、Certified Accuracy、Client Grouping Algorithm
 
-<br><br>
+<br /><br />
 总结:
 
 本文聚焦于Federated Learning（FL）领域的一个关键问题：如何评估模型在面对客户端数据扰动时的鲁棒性。在传统的集中式训练中，通过认证精度可以确保一定比例的预测即使在输入数据被扰动后也能保持正确。然而，这一评估方式难以直接应用于FL，因为FL模型的训练依赖于分散在不同客户端的数据，而这些数据的具体分布未知。
@@ -22,7 +23,6 @@
 arXiv:2410.03067v1 Announce Type: new 
 Abstract: Federated Learning (FL) has emerged as a powerful paradigm for training machine learning models in a decentralized manner, preserving data privacy by keeping local data on clients. However, evaluating the robustness of these models against data perturbations on clients remains a significant challenge. Previous studies have assessed the effectiveness of models in centralized training based on certified accuracy, which guarantees that a certain percentage of the model's predictions will remain correct even if the input data is perturbed. However, the challenge of extending these evaluations to FL remains unresolved due to the unknown client's local data. To tackle this challenge, this study proposed a method named FedCert to take the first step toward evaluating the robustness of FL systems. The proposed method is designed to approximate the certified accuracy of a global model based on the certified accuracy and class distribution of each client. Additionally, considering the Non-Independent and Identically Distributed (Non-IID) nature of data in real-world scenarios, we introduce the client grouping algorithm to ensure reliable certified accuracy during the aggregation step of the approximation algorithm. Through theoretical analysis, we demonstrate the effectiveness of FedCert in assessing the robustness and reliability of FL systems. Moreover, experimental results on the CIFAR-10 and CIFAR-100 datasets under various scenarios show that FedCert consistently reduces the estimation error compared to baseline methods. This study offers a solution for evaluating the robustness of FL systems and lays the groundwork for future research to enhance the dependability of decentralized learning. The source code is available at https://github.com/thanhhff/FedCert/.
 ]]></content:encoded>
-<pubDate>Mon, 07 Oct 2024 00:00:00 -0400</pubDate>
 <pubDate>Mon, 07 Oct 2024 00:00:00 -0400</pubDate>
 </item>
 <item>
@@ -51,7 +51,6 @@ arXiv:2410.03183v1 Announce Type: new
 Abstract: A niche corner of the Web3 world is increasingly making use of hardware-based Trusted Execution Environments (TEEs) to build decentralized infrastructure. One of the motivations to use TEEs is to go beyond the current performance limitations of cryptography-based alternatives such as zero-knowledge proofs (ZKP), fully homomorphic encryption (FHE), and multi-party computation (MPC). Despite their appealing advantages, current TEEs suffer from serious limitations as they are not secure against physical attacks, and their attestation mechanism is rooted in the chip manufacturer's trust. As a result, Web3 applications have to rely on cloud infrastruture to act as trusted guardians of hardware-based TEEs and have to accept to trust chip manufacturers. This work aims at exploring how we could potentially architect and implement chips that would be secure against physical attacks and would not require putting trust in chip manufacturers. One goal of this work is to motivate the Web3 movement to acknowledge and leverage the substantial amount of relevant hardware research that already exists. In brief, a combination of: (1) physical unclonable functions (PUFs) to secure the root-of-trust; (2) masking and redundancy techniques to secure computations; (3) open source hardware and imaging techniques to verify that a chip matches its expected design; can help move towards attesting that a given TEE can be trusted without the need to trust a cloud provider and a chip manufacturer.
 ]]></content:encoded>
 <pubDate>Mon, 07 Oct 2024 00:00:00 -0400</pubDate>
-<pubDate>Mon, 07 Oct 2024 00:00:00 -0400</pubDate>
 </item>
 <item>
 <title>BN-SCAFFOLD: controlling the drift of Batch Normalization statistics in Federated Learning</title>
@@ -60,7 +59,7 @@ Abstract: A niche corner of the Web3 world is increasingly making use of hardwar
 <content:encoded><![CDATA[
 <div> 关键词：Federated Learning（FL）、Batch Normalization（BN）、FedTAN、SCAFFOLD、BN-SCAFFOLD
 
-<br><br>
+<br /><br />
 总结:
 文章主要探讨了在异构联邦学习(Federated Learning, FL)环境中，如何有效地利用批量归一化(Batch Normalization, BN)来训练深度神经网络(Depth Neural Networks, DNN)。文章首先指出，尽管联邦学习作为一种分散式机器学习范式正逐渐受到关注，但传统的批量归一化方法在异构环境中可能会降低模型性能。为此，作者提出了一种名为FedTAN的算法，旨在通过聚合所有客户端的批量归一化统计和梯度来减轻异构性的影响。然而，该算法存在较高的通信成本问题，其复杂度与DNN的深度成线性关系。
 
@@ -68,7 +67,6 @@ Abstract: A niche corner of the Web3 world is increasingly making use of hardwar
 arXiv:2410.03281v1 Announce Type: new 
 Abstract: Federated Learning (FL) is gaining traction as a learning paradigm for training Machine Learning (ML) models in a decentralized way. Batch Normalization (BN) is ubiquitous in Deep Neural Networks (DNN), as it improves convergence and generalization. However, BN has been reported to hinder performance of DNNs in heterogeneous FL. Recently, the FedTAN algorithm has been proposed to mitigate the effect of heterogeneity on BN, by aggregating BN statistics and gradients from all the clients. However, it has a high communication cost, that increases linearly with the depth of the DNN. SCAFFOLD is a variance reduction algorithm, that estimates and corrects the client drift in a communication-efficient manner. Despite its promising results in heterogeneous FL settings, it has been reported to underperform for models with BN. In this work, we seek to revive SCAFFOLD, and more generally variance reduction, as an efficient way of training DNN with BN in heterogeneous FL. We introduce a unified theoretical framework for analyzing the convergence of variance reduction algorithms in the BN-DNN setting, inspired of by the work of Wang et al. 2023, and show that SCAFFOLD is unable to remove the bias introduced by BN. We thus propose the BN-SCAFFOLD algorithm, which extends the client drift correction of SCAFFOLD to BN statistics. We prove convergence using the aforementioned framework and validate the theoretical results with experiments on MNIST and CIFAR-10. BN-SCAFFOLD equals the performance of FedTAN, without its high communication cost, outperforming Federated Averaging (FedAvg), SCAFFOLD, and other FL algorithms designed to mitigate BN heterogeneity.
 ]]></content:encoded>
-<pubDate>Mon, 07 Oct 2024 00:00:00 -0400</pubDate>
 <pubDate>Mon, 07 Oct 2024 00:00:00 -0400</pubDate>
 </item>
 <item>
@@ -85,7 +83,6 @@ Abstract: Light clients are gaining increasing attention in the literature since
   In this paper, we show that (i) most light clients are rarely offline for more than a week, and (ii) validators are unlikely to drastically change in most permissioned blockchains and in a number of permissionless blockchains, such as Cosmos and Polkadot. Motivated by these findings, we propose a novel practical system that optimizes for such realistic assumptions and achieves minimal communication and computational costs for light clients when compared to existing protocols. By means of a prototype implementation of our solution, we show that our protocol achieves a reduction by up to $90$ and $40000\times$ (respectively) in end-to-end latency and up to $1000$ and $10000\times$ (respectively) smaller proof size when compared to two state-of-the-art light client instantiations from the literature.
 ]]></content:encoded>
 <pubDate>Mon, 07 Oct 2024 00:00:00 -0400</pubDate>
-<pubDate>Mon, 07 Oct 2024 00:00:00 -0400</pubDate>
 </item>
 <item>
 <title>FedStein: Enhancing Multi-Domain Federated Learning Through James-Stein Estimator</title>
@@ -94,13 +91,12 @@ Abstract: Light clients are gaining increasing attention in the literature since
 <content:encoded><![CDATA[
 <div> 关键词：Federated Learning、FedStein、James-Stein Estimator、多域学习、数据非独立同分布
 
-<br><br>
+<br /><br />
 总结:
 文章介绍了针对多域联邦学习(Federated Learning)中数据来源不同、特征分布各异这一挑战的新方法——FedStein。FedStein通过使用詹姆斯-斯蒂恩(James-Stein)估计器来共享批量归一化(Batch Normalization, BN)统计量的估计值，同时保持本地BN参数不变，以此来提高多域联邦学习的性能和收敛性。该方法允许非BN层参数通过标准联邦学习技术进行交换，从而在多个数据集和模型上展现出显著优于现有方法（如FedAvg和FedBN）的准确性提升，特别是在特定领域的准确性提高了14%以上，增强了模型的泛化能力。此外，研究团队提供了实现FedStein方法的代码，以便其他研究者和开发者可以复现和扩展相关工作。 <div>
 arXiv:2410.03499v1 Announce Type: new 
 Abstract: Federated Learning (FL) facilitates data privacy by enabling collaborative in-situ training across decentralized clients. Despite its inherent advantages, FL faces significant challenges of performance and convergence when dealing with data that is not independently and identically distributed (non-i.i.d.). While previous research has primarily addressed the issue of skewed label distribution across clients, this study focuses on the less explored challenge of multi-domain FL, where client data originates from distinct domains with varying feature distributions. We introduce a novel method designed to address these challenges FedStein: Enhancing Multi-Domain Federated Learning Through the James-Stein Estimator. FedStein uniquely shares only the James-Stein (JS) estimates of batch normalization (BN) statistics across clients, while maintaining local BN parameters. The non-BN layer parameters are exchanged via standard FL techniques. Extensive experiments conducted across three datasets and multiple models demonstrate that FedStein surpasses existing methods such as FedAvg and FedBN, with accuracy improvements exceeding 14% in certain domains leading to enhanced domain generalization. The code is available at https://github.com/sunnyinAI/FedStein
 ]]></content:encoded>
-<pubDate>Mon, 07 Oct 2024 00:00:00 -0400</pubDate>
 <pubDate>Mon, 07 Oct 2024 00:00:00 -0400</pubDate>
 </item>
 <item>
@@ -110,7 +106,7 @@ Abstract: Federated Learning (FL) facilitates data privacy by enabling collabora
 <content:encoded><![CDATA[
 <div> 关键词：模型合并、大规模模型、综合性能提升、专家模型、分散式开发
 
-<br><br>总结:
+<br /><br />总结:
 
 本文主要探讨了模型合并技术在大规模模型中的应用与效果。首先，研究发现当合并的专家模型源自高质量的基础模型时，合并的效果更为显著，即零样本性能较好的基础模型有助于提高合并模型的整体性能。其次，较大的模型更容易进行有效合并，这意味着大模型在合并过程中表现出更好的适应性和融合性。第三，合并模型在泛化能力上普遍表现出优势，尤其是在合并多个大型专家模型时，合并后的模型往往在未见过的任务上表现得更好，相较于多任务训练的模型。第四，随着合并的专家模型数量增加，使用更大规模的模型可以更有效地进行合并，这揭示了在合并过程中的规模效应。最后，不同合并方法在大规模场景下的行为表现相似，说明选择何种合并策略对最终模型性能的影响在大型模型中可能不是决定性的。
 
@@ -118,7 +114,6 @@ Abstract: Federated Learning (FL) facilitates data privacy by enabling collabora
 arXiv:2410.03617v1 Announce Type: new 
 Abstract: Model merging aims to combine multiple expert models into a more capable single model, offering benefits such as reduced storage and serving costs, improved generalization, and support for decentralized model development. Despite its promise, previous studies have primarily focused on merging a few small models. This leaves many unanswered questions about the effect of scaling model size and how it interplays with other key factors -- like the base model quality and number of expert models -- , to affect the merged model's performance. This work systematically evaluates the utility of model merging at scale, examining the impact of these different factors. We experiment with merging fully fine-tuned models using 4 popular merging methods -- Averaging, Task~Arithmetic, Dare, and TIES -- across model sizes ranging from 1B-64B parameters and merging up to 8 different expert models. We evaluate the merged models on both held-in tasks, i.e., the expert's training tasks, and zero-shot generalization to unseen held-out tasks. Our experiments provide several new insights about model merging at scale and the interplay between different factors. First, we find that merging is more effective when experts are created from strong base models, i.e., models with good zero-shot performance. Second, larger models facilitate easier merging. Third merging consistently improves generalization capabilities. Notably, when merging 8 large expert models, the merged models often generalize better compared to the multitask trained models. Fourth, we can better merge more expert models when working with larger models. Fifth, different merging methods behave very similarly at larger scales. Overall, our findings shed light on some interesting properties of model merging while also highlighting some limitations. We hope that this study will serve as a reference point on large-scale merging for upcoming research.
 ]]></content:encoded>
-<pubDate>Mon, 07 Oct 2024 00:00:00 -0400</pubDate>
 <pubDate>Mon, 07 Oct 2024 00:00:00 -0400</pubDate>
 </item>
 <item>
@@ -140,7 +135,6 @@ Abstract: Over the past years, distributed consensus research has extended its f
   Addressing this, our paper introduces TOB-SVD, a novel Total-Order Broadcast protocol in the sleepy model, which is resilient to up to 1/2 of adversarial participants. TOB-SVD requires only a single phase of voting per decision in the best case and achieves lower expected latency compared to existing approaches offering the same optimal adversarial resilience. This work paves the way to more practical Total-Order Broadcast protocols to be implemented in real-world systems where a large number of participants are involved simultaneously and their participation level might fluctuate over time.
 ]]></content:encoded>
 <pubDate>Mon, 07 Oct 2024 00:00:00 -0400</pubDate>
-<pubDate>Mon, 07 Oct 2024 00:00:00 -0400</pubDate>
 </item>
 <item>
 <title>Insights and caveats from mining local and global temporal motifs in cryptocurrency transaction networks</title>
@@ -156,7 +150,6 @@ Abstract: Over the past years, distributed consensus research has extended its f
 arXiv:2402.09272v2 Announce Type: replace 
 Abstract: Distributed ledger technologies have opened up a wealth of fine-grained transaction data from cryptocurrencies like Bitcoin and Ethereum. This allows research into problems like anomaly detection, anti-money laundering, pattern mining and activity clustering (where data from traditional currencies is rarely available). The formalism of temporal networks offers a natural way of representing this data and offers access to a wealth of metrics and models. However, the large scale of the data presents a challenge using standard graph analysis techniques. We use temporal motifs to analyse two Bitcoin datasets and one NFT dataset, using sequences of three transactions and up to three users. We show that the commonly used technique of simply counting temporal motifs over all users and all time can give misleading conclusions. Here we also study the motifs contributed by each user and discover that the motif distribution is heavy-tailed and that the key players have diverse motif signatures. We study the motifs that occur in different time periods and find events and anomalous activity that cannot be seen just by a count on the whole dataset. Studying motif completion time reveals dynamics driven by human behaviour as well as algorithmic behaviour.
 ]]></content:encoded>
-<pubDate>Mon, 07 Oct 2024 00:00:00 -0400</pubDate>
 <pubDate>Mon, 07 Oct 2024 00:00:00 -0400</pubDate>
 </item>
 <item>
@@ -184,9 +177,7 @@ arXiv:2402.11035v3 Announce Type: replace
 Abstract: Dense passage retrieval (DPR) is the first step in the retrieval augmented generation (RAG) paradigm for improving the performance of large language models (LLM). DPR fine-tunes pre-trained networks to enhance the alignment of the embeddings between queries and relevant textual data. A deeper understanding of DPR fine-tuning will be required to fundamentally unlock the full potential of this approach. In this work, we explore DPR-trained models mechanistically by using a combination of probing, layer activation analysis, and model editing. Our experiments show that DPR training decentralizes how knowledge is stored in the network, creating multiple access pathways to the same information. We also uncover a limitation in this training style: the internal knowledge of the pre-trained model bounds what the retrieval model can retrieve. These findings suggest a few possible directions for dense retrieval: (1) expose the DPR training process to more knowledge so more can be decentralized, (2) inject facts as decentralized representations, (3) model and incorporate knowledge uncertainty in the retrieval process, and (4) directly map internal model knowledge to a knowledge base.
 ]]></content:encoded>
 <pubDate>Mon, 07 Oct 2024 00:00:00 -0400</pubDate>
-<pubDate>Mon, 07 Oct 2024 00:00:00 -0400</pubDate>
 </item>
-
 <item>
 <title>From Experts to the Public: Governing Multimodal Language Models in Politically Sensitive Video Analysis</title>
 <link>https://arxiv.org/abs/2410.01817</link>
