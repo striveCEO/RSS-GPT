@@ -5,6 +5,312 @@
 <link>https://ethresear.ch/latest</link>
 
 <item>
+<title>Modeling Security for Cross Rollup Interoperability</title>
+<link>https://ethresear.ch/t/modeling-security-for-cross-rollup-interoperability/20591</link>
+<guid>https://ethresear.ch/t/modeling-security-for-cross-rollup-interoperability/20591</guid>
+<content:encoded><![CDATA[
+<div> 关键词：跨Rollup互操作性、安全模型、有效性、本地排序、全球排序（数据可用性）
+
+总结:
+本文提出了一种用于评估跨Rollup互操作性的安全模型。该模型基于Rollup安全的五个关键属性：账本增长、去中心化、数据可用性、重组织抗性以及有效性。通过将这些属性映射到跨Rollup互操作性的三个阶段——有效验证、本地排序保证和全球排序保证——文章详细分析了现有互操作协议在实现这些安全属性方面的局限性。
+
+文章首先介绍了不同类型的互操作模型，包括点对点、主权中心与分散式模式和Rollup中心与分散式模式。接着，针对有效性、本地排序和全球排序这三个安全属性，文章详细探讨了每种互操作模型在实施这些属性时的具体挑战和策略。
+
+对于有效性，文章指出，最安全的验证方法包括零知识证明验证、乐观欺诈证明验证和链上验证。然而，在实现全球排序之前，仅依赖序签验证并不能改善信任模型，因为序列器仍然控制排序过程。
+
+在本地排序方面，文章强调了其作为活性和抗审查性的关键作用，但现有的互操作协议并未充分考虑这一属性。文章建议在实现阶段1和阶段2时，应更加重视本地排序保证。
+
+关于全球排序（数据可用性），文章指出，当链上数据可获得性被证明时，实现了全局排序保证。这确保了跨Rollup交易的顺序不会被更改。文章指出，虽然现有的协议已经在这方面取得了一些进展，但仍需要改进以提供更可靠的全局排序保证。
+
+最后，文章呼吁开发人员和研究人员努力提高跨Rollup互操作性的安全性，特别是在阶段1和阶段2中实现本地排序保证和全球排序保证，以尊重Rollup的实施细节，如从L1继承的审查抵抗性和活牲。 <div>
+<h2><a class="anchor" href="https://ethresear.ch#p-50284-introduction-1" name="p-50284-introduction-1"></a>Introduction</h2>
+<p>The goal of this post is to describe a mental model for the security of cross rollup interoperability (interop). To start, we’ll use <a href="https://x.com/sreeramkannan/status/1683735133835370499?s=20" rel="noopener nofollow ugc">Sreeram’s model</a> for determining the security of a chain or in this case a rollup.</p>
+<p>There are five properties that determine the security of a rollup:</p>
+<ol>
+<li><strong>Ledger growth.</strong> The ledger keeps growing.</li>
+<li><strong>Censorship resistance.</strong> New honest transactions are included if the ledger is growing.</li>
+<li><strong>Data availability.</strong> Ledger transaction data is published and not withheld from actors attempting to verify the network.</li>
+<li><strong>Re-org resistance.</strong> Confirmed transactions stay confirmed.</li>
+<li><strong>Validity.</strong> Only valid state transitions are accepted by the ledger.</li>
+</ol>
+<p>The first two properties ensure the liveness of the chain while the latter three properties ensure safety. The combination of liveness and safety makes up the security of the chain.</p>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/3/6/36fd4ad601353c3ec708f7d5bc5a6298d9516a0b.png" title=""><img alt="" height="333" src="https://ethresear.ch/uploads/default/optimized/3X/3/6/36fd4ad601353c3ec708f7d5bc5a6298d9516a0b_2_433x333.png" width="433" /></a></div><p></p>
+<p>Based on this model for rollup security, we’ll attempt to derive a security model and set of security stages for cross rollup interop. There are three interop security properties that map to the five security properties of a rollup.</p>
+<ol>
+<li><strong>Validity.</strong> Only valid cross rollup transactions are accepted by connected rollups.</li>
+<li><strong>Local Ordering.</strong> Local or sequencer made guarantees that the ordering of cross rollup transactions will not change. This is the only ordering guarantee available until batch data is published to the L1.</li>
+<li><strong>Global Ordering (Data Availability).</strong> This represents a globally enforced ordering of the rollup. Ledger data containing cross rollup transactions are published to the L1 and not withheld from actors attempting to verify connected rollups.</li>
+</ol>
+<p>The validity guarantee is the most commonly discussed security property and where the entire industry has been primarily investing their time. The reason local and global ordering are separated below is because local ordering accounts for both liveness properties and partially re-org resistance. The censorship resistance and liveness mechanism of a rollup is implementation and configuration specific which impacts local or sequencer made ordering guarantees potentially resulting in reorgs. Global ordering is the final security property where ordering is enforced by the L1 or Ethereum.</p>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/f/c/fca632e44efb9d3479e31e4bbcd0af9d07fc48ed.png" title=""><img alt="" height="336" src="https://ethresear.ch/uploads/default/optimized/3X/f/c/fca632e44efb9d3479e31e4bbcd0af9d07fc48ed_2_624x336.png" width="624" /></a></div><p></p>
+<p>These three interop security properties map to the three security stages for rollup interop protocols.</p>
+<ol>
+<li><strong>Stage 0.</strong> Validity guarantee.</li>
+<li><strong>Stage 1.</strong> Local ordering guarantee.</li>
+<li><strong>Stage 2.</strong> Global ordering guarantee.</li>
+</ol>
+<p>In the interop space today, every existing interop protocol is still stuck at stage 0. Let’s explore how each of these interop security stages and properties apply to cross rollup interop. But first, we need to define the different interop models.</p>
+<h2><a class="anchor" href="https://ethresear.ch#p-50284-interoperability-models-2" name="p-50284-interoperability-models-2"></a>Interoperability Models</h2>
+<p>There are a number of interop models used across rollups:</p>
+<ol>
+<li>Point to point (e.g. Rollup Ecosystem Native, Layerzero, Hyperlane)</li>
+</ol>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/3/9/399b86d64698b96bb5abbde1277f30d595531280.png" title=""><img alt="" height="149" src="https://ethresear.ch/uploads/default/optimized/3X/3/9/399b86d64698b96bb5abbde1277f30d595531280_2_467x149.png" width="467" /></a></div><p></p>
+<ol start="2">
+<li>Sovereign / L1 hub and spoke (e.g. Wormhole, Axelar)</li>
+</ol>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/b/2/b27f21123446d7259e48a08b596f8070a24efdf0.png" title=""><img alt="" height="254" src="https://ethresear.ch/uploads/default/optimized/3X/b/2/b27f21123446d7259e48a08b596f8070a24efdf0_2_479x254.png" width="479" /></a></div><p></p>
+<ol start="3">
+<li>Rollup hub and spoke (e.g. Polymer)</li>
+</ol>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/7/2/72594b91f5dcb293652867051a3013ab4c059595.png" title=""><img alt="" height="138" src="https://ethresear.ch/uploads/default/optimized/3X/7/2/72594b91f5dcb293652867051a3013ab4c059595_2_476x138.png" width="476" /></a></div><p></p>
+<p>Each of these interop models come with different implications for the security and performance of an interop protocol. The rest of this post will visit each security property in the context of each of these interop models.</p>
+<h2><a class="anchor" href="https://ethresear.ch#p-50284-security-properties-3" name="p-50284-security-properties-3"></a>Security Properties</h2>
+<h3><a class="anchor" href="https://ethresear.ch#p-50284-validity-4" name="p-50284-validity-4"></a>Validity</h3>
+<p>Let’s start with the most talked about security property. Validity in this context is defined as the valid execution of the state transition function (STF) of a rollup based on inputs from both the L1 and L2 transaction data. Strong validity guarantees improve the trust model after global ordering has been achieved.</p>
+<p>The most secure (trust-minimized) verification methods are:</p>
+<ul>
+<li>Verifying a ZK validity proof of the counterparty L2 STF.</li>
+<li>Optimistically verifying fraud proofs within some challenge window.</li>
+<li>Verifying counterparty L2 settlement on the L1 against the latest L1 state it knows about.</li>
+</ul>
+<p>Less secure verification methods are:</p>
+<ul>
+<li>Sequencer attestation.</li>
+<li>Reputationally secured third party attestation.</li>
+<li>Cryptoeconomically secured third party attestation.</li>
+</ul>
+<p>Before global ordering has been achieved, stronger validity guarantees beyond that of a sequencer attestation do not improve the trust model as the sequencer retains control of ordering during that period.</p>
+<p>To summarize, the L2 has the option of either directly verifying the validity of a counterparty L2 or indirectly verifying by waiting for the L1 to verify. For direct verification, very secure options leverage ZK validity or optimistic fraud proofs and other less secure options are secured by attestations. Next let’s look at validity in the context of what’s being used within each interop model.</p>
+<h4><a class="anchor" href="https://ethresear.ch#p-50284-point-to-point-5" name="p-50284-point-to-point-5"></a>Point to Point</h4>
+<p>Both LayerZero and Hyperlane predominantly use reputation based M of N muti-sigs for validity. In practice, this has been shown to be <a href="https://x.com/sandmanarc/status/1823898977668047303" rel="noopener nofollow ugc">small quorums starting ranging from 1/1 to 3/7</a> in production today. Both <a href="https://medium.com/layerzero-official/layerzero-x-eigenlayer-the-cryptoeconomic-dvn-framework-68af27ca2040" rel="noopener nofollow ugc">LayerZero</a> and <a href="https://docs.hyperlane.xyz/docs/protocol/economic-security/hyperlane-avs" rel="noopener nofollow ugc">Hyperlane</a> are currently exploring adding crypto economic security to this model via EigenLayer.</p>
+<p>Point to point protocols can support trust-minimized verification methods described earlier. However, this would greatly increase the total cost of these protocols as N^2 verifications are required for N connected chains and these more secure proofs are very expensive. For example, verifying raw storage proofs into the state of the L1 on an L2 to verify L2 settlement can be &gt; 800k gas.</p>
+<h4><a class="anchor" href="https://ethresear.ch#p-50284-sovereign-hub-and-spoke-6" name="p-50284-sovereign-hub-and-spoke-6"></a>Sovereign Hub and Spoke</h4>
+<p>Wormhole also uses a reputation based M of N multi-sig but with a higher signer set. In production today, Wormhole runs <a href="https://wormhole-foundation.github.io/wormhole-dashboard/#/?endpoint=Mainnet" rel="noopener nofollow ugc">19 guardians</a> and requires a supermajority of guardians to vote.</p>
+<p>Axelar is its own L1 which can be thought of as an economically secured dynamic M of N multi-sig in terms of security. Axelar has <a href="https://axelarscan.io/" rel="noopener nofollow ugc">75 validators</a> which use threshold signatures under the hood. However, the size of the threshold signing set varies depending on the connected chain. Axelar is currently exploring adding crypto economic security from other assets such as <a href="https://www.axelar.network/blog/mobius-development-stack-launch" rel="noopener nofollow ugc">BTC and ETH via Babylon and EigenLayer</a>.</p>
+<p>Sovereign hub and spoke protocols cannot support trust-minimized verification of L2 settlement. They have to start by verifying Ethereum execution by either running full nodes or leveraging an <a href="https://prestwich.substack.com/p/altair" rel="noopener nofollow ugc">ethereum light client</a> neither of which is trust minimized. Since doing so doesn’t improve the trust model, most sovereign hub and spoke protocols choose to verify L2 execution directly instead by running full nodes for connected rollups.</p>
+<h4><a class="anchor" href="https://ethresear.ch#p-50284-rollup-hub-and-spoke-7" name="p-50284-rollup-hub-and-spoke-7"></a>Rollup Hub and Spoke</h4>
+<p>Polymer hub supports a number of different verification modes that allow developers to tradeoff between security, cost and latency. As an L2, Polymer derives its blocks from L1 blocks allowing it to use L1 block information to prove the settlement of counterparty L2s. Proving partial settlement is possible as well such as proving a configurable fraud window over the full fraud window of an optimistic rollup. This approach is generally expensive with long latencies (hours - days) but is trust-minimized assuming the presence of fraud and/or validity proofs.</p>
+<p>Polymer also supports faster verification modes such as <a href="https://www.lagrange.dev/state-committees" rel="noopener nofollow ugc">Lagrange State Committees</a> which can run as fast as batch data publishing (mins). This is a crypto economically secured dynamic M of N multi-sig in terms of security. Lagrange allows for near unbounded growth in the size of the state committee while retaining constant verification costs via ZKPs. Unlike other multi-sig solutions, their attestations are chained together so you can trace both rollup state and committee history. They then recursively prove the full chain of attestations using ZKPs.</p>
+<p>The fastest verification method uses sequencer signatures. This is a reputation based 1 of 1 multisig in terms of security. A sequencer attestation could be considered relatively more secure than the 1 of 1 third party attestations used in point to point protocols as many L2s operate their own sequencers and have significant reputational risks on the line. This method has the lowest latencies which can be almost as fast as the block time of the L2 (ms - secs).</p>
+<h3><a class="anchor" href="https://ethresear.ch#p-50284-local-ordering-8" name="p-50284-local-ordering-8"></a>Local Ordering</h3>
+<p>Cross rollup ordering guarantees are the hardest security property to achieve and currently not being discussed at all. This is because ordering covers three fundamental security properties of a rollup - liveness, censorship resistance and re-org resistance.</p>
+<p>Local ordering is guaranteed by the sequencer and deals with L2 blocks where batch data has not yet been posted to the L1. Stronger validity guarantees at this level of ordering do not improve the trust model as the sequencer defines final ordering posted to the L1. Sequencer guaranteed ordering has the lowest latencies but is extremely nuanced and highly implementation and configuration dependent. The following configuration and implementation details are relevant.</p>
+<ul>
+<li>Which L1 block is an L2 block built upon?
+<ul>
+<li>Communicating across L2 blocks requires those blocks to be created from the same history of Ethereum or L1.</li>
+</ul>
+</li>
+<li>What are the censorship resistance guarantees?
+<ul>
+<li>In some designs, force transaction inclusion will trigger an L2 reorg.</li>
+</ul>
+</li>
+<li>What are the chain liveness guarantees?
+<ul>
+<li>To inherit liveness from its L1, L2s generally trigger large reorgs to allow for block production via the L1.</li>
+</ul>
+</li>
+</ul>
+<p>An L2 block is created from both L1 and L2 inputs. Most L2s build blocks off of sub finality Ethereum L1 blocks which significantly affects the behavior of L2 ordering guarantees. Different L1 histories can have different L1 inputs resulting in an entirely different L2 chain. </p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/1/1/11ae81f1dad240d611c636465a8f47156caa431f.png" title=""><img alt="" height="360" src="https://ethresear.ch/uploads/default/optimized/3X/1/1/11ae81f1dad240d611c636465a8f47156caa431f_2_624x360.png" width="624" /></a></div><p></p>
+<p>The OP stack has a configuration option for SequencerConfDepth that sets the L1 depth upon which it reads L1 inputs. Arbitrum Nitro has a slow (delayed) inbox for L1 inputs which can be configured to read from a specific L1 depth (like the OP stack) or read from the “merged” or “finalized” head.</p>
+<p>L2 blocks have a temporal relationship to each other based on how L2 block production is configured above. There is a past, present and future based on the L1 history. Like in any time travel movie, the past can leave messages for the future but the future cannot communicate with the past. From the past’s POV, the future has not happened yet and any number of futures are possible (e.g. sub-finality Ethereum forks).</p>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/4/4/446690dee876f398b2b47ae6df636ef6ffedcc80.png" title=""><img alt="" height="227" src="https://ethresear.ch/uploads/default/optimized/3X/4/4/446690dee876f398b2b47ae6df636ef6ffedcc80_2_624x227.png" width="624" /></a></div><p></p>
+<p>We also need to account for the censorship resistance mechanism and guarantees as it may trigger an L2 reorg. Here, the OP stack and Arbitrum Nitro differ significantly. The OP stack has better short term censorship resistance guarantees than Arbitrum Ntiro.</p>
+<p>In the OP stack, forced included transactions can take the path of L1 deposits which are associated with a specific L1 block. These later get included as L1 inputs in the normal path of chain derivation. There is a MaxSequencerDrift configuration option which is generally set at around ~10 mins. This means that the L2 sequencer can censor L1 inputs for a maximum of 10 mins before it can no longer produce valid L2 blocks. No L2 reorgs are triggered in this process.</p>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/6/1/61b8d81eaea1288ee5597754740eea584dbff471.png" title=""><img alt="" height="500" src="https://ethresear.ch/uploads/default/optimized/3X/6/1/61b8d81eaea1288ee5597754740eea584dbff471_2_585x500.png" width="585" /></a></div><p></p>
+<p>Arbitrum Nitro takes a different approach. There is a slow and a fast inbox on the L1. The slow inbox represents L1 inputs while the fast inbox represents L2 inputs. After a configurable delay period (24 hours in Arbitrum One), censored transactions in the slow inbox may be force included into the fast inbox. These force-included transactions generate their own sequencer batch which creates a new L2 block. This mechanism triggers a reorg of all L2 blocks that have not been posted to the L1 yet.</p>
+<p><strong></strong></p><div class="lightbox-wrapper"><strong><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/7/0/70e748673f74e3a56543c1f0696f3ccbf7f5a393.png" title=""><img alt="" height="500" src="https://ethresear.ch/uploads/default/optimized/3X/7/0/70e748673f74e3a56543c1f0696f3ccbf7f5a393_2_608x500.png" width="608" /></a></strong></div><p></p>
+<p>Liveness is the last property we need to cover. In order to inherit liveness from its L1, L2s must have a mechanism for which blocks can be produced solely based on L1 inputs. The liveness guarantees in Arbitrum Nitro and the OP stack result in similar guarantees depending on configuration but are functionally different.</p>
+<p>In the OP stack, there is a SequencerWindowSize config option that specifies the upper time bound for batch data submission. This is generally configured to be 12 hours. If the L2 sequencer is down or unable to submit batch data for 12 hours, all L2 blocks in that range become deposit-only blocks. This allows for block production to occur solely from L1 inputs resulting in a 12 hour liveness guarantee. If the L2 sequencer is not down, this can cause a large 12 hour reorg on the L2.</p>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/a/8/a83759ce546561e816a8ab74a447293c01c52886.png" title=""><img alt="" height="317" src="https://ethresear.ch/uploads/default/optimized/3X/a/8/a83759ce546561e816a8ab74a447293c01c52886_2_624x317.png" width="624" /></a></div><p></p>
+<p>Arbitrum Ntiro inherits liveness from the L1 using its force transaction inclusion mechanism. If the Nitro sequencer is down for longer than the delay period (24 hours in Arbitrum One), any user can trigger L2 block production by force including transactions from the slow inbox into the fast inbox. If the L2 sequencer is not down, this can cause a large 24 hour reorg on the L2. Refer to Nitro’s force transaction inclusion diagram above for how this works.</p>
+<p><strong></strong></p><div class="lightbox-wrapper"><strong><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/1/5/1511e455c080c38113b506dc98565a175bce589a.png" title=""><img alt="" height="339" src="https://ethresear.ch/uploads/default/optimized/3X/1/5/1511e455c080c38113b506dc98565a175bce589a_2_624x339.png" width="624" /></a></strong></div><p></p>
+<p>With all of this background context covered, we can move on to how local ordering guarantees are managed today within various interop models.</p>
+<h4><a class="anchor" href="https://ethresear.ch#p-50284-point-to-point-9" name="p-50284-point-to-point-9"></a>Point to Point</h4>
+<p>LayerZero allows builders to <a href="https://docs.layerzero.network/v2/developers/evm/protocol-gas-settings/default-config#setting-receive-config" rel="noopener nofollow ugc">configure the number of L2 block confirmations</a> to wait before relaying a message. Hyperlane has some arbitrary and <a href="https://docs.hyperlane.xyz/docs/guides/latencies" rel="noopener nofollow ugc">unsafe defaults</a> for the number of L2 confirmations which can be made configurable if you create your own deployment. Both approaches ignore local ordering considerations completely and places reorg risk solely on the application builder to handle. These protocols are unaware of the chain liveness and censorship resistance mechanisms of connected L2s which carry the greatest risk to application builders as these can trigger extremely large reorgs.</p>
+<h4><a class="anchor" href="https://ethresear.ch#p-50284-sovereign-hub-and-spoke-10" name="p-50284-sovereign-hub-and-spoke-10"></a>Sovereign Hub and Spoke</h4>
+<p>Wormhole supports low latency messaging via an<a href="https://wormhole.com/docs/build/reference/consistency-levels/" rel="noopener nofollow ugc"> “instant” configuration or consistency level</a> using their terminology. Like the point to point protocols above, this approach does not account for any local ordering considerations explained earlier. This can expose apps to both small and large reorgs. Axelar does not support low latency messaging.</p>
+<h4><a class="anchor" href="https://ethresear.ch#p-50284-rollup-hub-and-spoke-11" name="p-50284-rollup-hub-and-spoke-11"></a>Rollup Hub and Spoke</h4>
+<p>Polymer is the only interop protocol that accounts for all aspects of L2 ordering guarantees at low latencies. To solve this problem, Polymer builds a dependency graph of cross rollup transactions sub Ethereum finality. This dependency graph is then committed or reverted based on the L1 history that gets finalized. The diagram below visualizes this dependency graph across three L2s that are all building off the same L1 history in L1’.</p>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/1/6/1612d137a3ee7995fcad56cd711578c184ee423f.png" title=""><img alt="" height="400" src="https://ethresear.ch/uploads/default/optimized/3X/1/6/1612d137a3ee7995fcad56cd711578c184ee423f_2_624x400.png" width="624" /></a></div><p></p>
+<p>Polymer names this approach “cross rollup contingent transactions” which is somewhat similar to Prestwich’s proposal of <a href="https://prestwich.substack.com/p/contingency" rel="noopener nofollow ugc">cross rollup contingent blocks</a>. Polymer’s approach is lighter weight and does not require rollup level opt-in. The dependency graph only spans a subset of transactions across blocks. Polymer is building additional mechanisms in place to cover both the chain liveness and censorship resistance mechanisms for Arbitrum Nitro and the OP stack. This protects application builders from extremely large reorgs.</p>
+<h3><a class="anchor" href="https://ethresear.ch#p-50284-global-ordering-da-12" name="p-50284-global-ordering-da-12"></a>Global Ordering (DA)</h3>
+<p>Global ordering is established when data availability (DA) is published to the L1. DA is the reliable broadcast of L2 batch data that is required for the prevention of data withholding attacks. For rollups, the availability of batch data is required for a third party to either generate a fraud proof in an optimistic rollup or a ZK proof of validity in a ZK rollup. Stronger validity guarantees at this level of ordering do improve the trust model as there’s already a global source of truth (Ethereum) for ordering.</p>
+<p>We’ll define global ordering here as a guarantee made by the L1 that the order of the transactions within an L2 block stay in that order without being reorged. There are two levels of global ordering guarantees. The “merged” level is true as long as the L1 does not reorg while the “finalized” level is true in perpetuity.</p>
+<ul>
+<li>Merged → An L2 block where batch data has been posted to the L1.</li>
+<li>Finalized → An L2 block where batch data on the L1 has finalized.</li>
+</ul>
+<p>To ensure that global ordering has been achieved, we need to check for DA published on the L1 which varies depending on the DA layer that the rollup uses. This can be any of the following:</p>
+<ul>
+<li>Calldata on Ethereum</li>
+<li>Blobs on Ethereum</li>
+<li>Alt-DA (e.g. EigenDA, Celestia)</li>
+</ul>
+<p>Proving calldata inclusion in an execution header would require</p>
+<ul>
+<li>Proving that batch publishing transaction in the transaction root</li>
+<li>Comparing RLP encoded transaction data against the transaction hash committed to within the root</li>
+<li>Unpacking the batch data (this is rollup specific) to derive information around which L2 block(s) were posted</li>
+</ul>
+<p>Proving blob inclusion in an execution header would require</p>
+<ul>
+<li>Proving that blob publishing transaction in the transaction root</li>
+<li>Proving the blob against the relevant blob versioned hash</li>
+<li>Unpacking the blob data (this is rollup specific) to derive information around which L2 block(s) were posted</li>
+</ul>
+<p>Proving batch inclusion in an alt-DA layer would require</p>
+<ul>
+<li>Proving batch data against the DA commitment (e.g. Merkle root or KZG commitment)</li>
+<li>Unpacking the batch data (this is rollup specific) to derive information around which L2 block(s) were posted</li>
+</ul>
+<p>DA checks are also useful in securing some of the more nuanced ordering properties such as chain liveness. Delayed or halted DA publishing can result in large reorgs of 12-24 hours or more depending on rollup configuration. For example, the degen chain reorg occurred due to its <a href="https://x.com/0xCygaar/status/1793056013446226200" rel="noopener nofollow ugc">inability to publish batch data</a>.</p>
+<h4><a class="anchor" href="https://ethresear.ch#p-50284-point-to-point-13" name="p-50284-point-to-point-13"></a>Point to Point</h4>
+<p>LayerZero and Hyperlane can be configured to wait for a sufficiently large number of L2 confirmations but do not actually check for DA. Hyperlane requires a custom deployment to configure the number of confirmations. Since DA is not checked, global ordering is not 100% guaranteed exposing apps to potential large reorgs as mentioned above.</p>
+<p>Performing DA checks on-chain would add significant costs to their protocols as both verification and the proof data associated would need to be published to connected L2s. The proving logic described above is quite involved.</p>
+<h4><a class="anchor" href="https://ethresear.ch#p-50284-sovereign-hub-and-spoke-14" name="p-50284-sovereign-hub-and-spoke-14"></a>Sovereign Hub and Spoke</h4>
+<p>Wormhole can be <a href="https://wormhole.com/docs/build/reference/consistency-levels/" rel="noopener nofollow ugc">configured to work off a “safe” or “finalized” consistency level</a> which should correspond to when batch data is published to the L1 and when that data is finalized. Axelar waits an <a href="https://docs.axelar.dev/learn/txduration/" rel="noopener nofollow ugc">arbitrarily long number of L2 confirmations</a> before relaying a message. Setting a fixed number of L2 confirmations to wait works in the happy path but does not cover for the unhappy path where batch submission is delayed or halted.</p>
+<h4><a class="anchor" href="https://ethresear.ch#p-50284-rollup-hub-and-spoke-15" name="p-50284-rollup-hub-and-spoke-15"></a>Rollup Hub and Spoke</h4>
+<p>Polymer supports verification modes that check for when batch data is published to the L1 as well as when that batch data is finalized. This accounts for edge cases where batch submission is delayed or halted protecting apps from large reorgs.</p>
+<p>The cross rollup contingent transaction protocol also applies here during the “merged” phase of global ordering. This is when DA has been published to the L1 but that L1 block has not yet been finalized.</p>
+<h2><a class="anchor" href="https://ethresear.ch#p-50284-conclusion-16" name="p-50284-conclusion-16"></a>Conclusion</h2>
+<p>Existing interop protocols are all stuck at stage 0 or only providing validity guarantees today. We would like to see efforts made to advance the security of interop protocols to stage 1 and 2 to provide both local and global ordering guarantees. This would effectively make interop protocols respect safety critical implementation details of rollups such as how they inherit censorship resistance and liveness from the L1 or Ethereum.</p>
+            <p><small>1 post - 1 participant</small></p>
+            <p><a href="https://ethresear.ch/t/modeling-security-for-cross-rollup-interoperability/20591">Read full topic</a></p>
+]]></content:encoded>
+<pubDate>Tue, 08 Oct 2024 18:31:40 +0000</pubDate>
+<pubDate>Tue, 08 Oct 2024 18:31:40 +0000</pubDate>
+</item>
+<item>
+<title>Parallelizing Ethereum: A Novel Approach Using Historical Data and Transactional Data</title>
+<link>https://ethresear.ch/t/parallelizing-ethereum-a-novel-approach-using-historical-data-and-transactional-data/20590</link>
+<guid>https://ethresear.ch/t/parallelizing-ethereum-a-novel-approach-using-historical-data-and-transactional-data/20590</guid>
+<content:encoded><![CDATA[
+<div> 关键词：Ethereum, TPS, 并行化, 历史数据, 事务数据
+
+总结:
+文章提出了两种方法来提高以太坊的交易处理速度（TPS），使其能够与Visa等传统支付系统相媲美。这两种方法分别是基于历史数据和事务数据的并行化策略。
+
+1. **历史数据并行化**：通过分析过去执行的热门合约行为，预测未来可能的交互状态，从而实现交易的预排序和并行执行。
+   
+2. **事务数据并行化**：利用静态分析、calldata和合约字节码，预测交易可能引起的预期状态变化，以此来优化交易顺序和并行处理。
+
+文章还讨论了并行化过程中可能遇到的挑战，如依赖性交易（如转账前的审批）和内部交易间的相互依赖问题。为了解决这些问题，提出了一种名为“事务图分析”（TGA）的方法，用于识别交易之间的依赖关系，将独立交易分组以便并行处理，同时确保有依赖关系的交易按照正确顺序执行。
+
+最后，文章指出在实际应用中，可以使用TGA在打包块之前对所有交易进行分析，以确定哪些交易可以并行处理，哪些需要按照依赖关系顺序执行。这种方法不仅适用于L1网络，也适合在L2扩展解决方案中实施，以进一步提升交易处理效率。 <div>
+<p>Currently at max, Ethereum TPS is maxed out 12-15 TPS  compared to VISA(Visa does 25k up to 65k per seconds btw) that’s like way too low, now of course one of the main reasons this is happening is due to lack of parallelization on Ethereum but what if there was a way we could parallize Ethereum, in my current research which is still in work, I propose two ways to parallelize Ethereum transactions using two methods:</p>
+<p><strong>1. Historical data</strong></p>
+<p><strong>2. Transactional data</strong></p>
+<p><strong>Historical data</strong>: when you think about historical data, think about branch prediction your compiler uses. This would involve analysing past transactions from popular contracts that are not proxies or dynamic in nature. For example, think about Uniswap v3 contracts, non-upgradeable and highly predictable due to the number of times it has been executed there’s no reason we can’t predict possible states a popular or highly executed non-upgradeable smart contract can interact with, this is how it works: based on how highly executed contracts have behaved previously (which states they accessed), the system could predict which states future transactions will likely interact with.</p>
+<p><strong>Transactional data</strong>: 3 methods and 3 ways, ever heard of static analysis, using a transaction method, the calldata and the contract bytecode there is way we can predict the expected states a transaction will cause effect</p>
+<h3><a class="anchor" href="https://ethresear.ch#p-50283-how-the-parallelization-will-work-1" name="p-50283-how-the-parallelization-will-work-1"></a><strong>How the parallelization will work:</strong></h3>
+<ul>
+<li>
+<p><strong>Block Builders</strong> can perform this analysis before proposing blocks. Once the <strong>transactional or historical data</strong> is analysed, the block builder can organize the transactions into groups or clusters that can be parallelized. Each cluster represents transactions that do not conflict with each other.</p>
+</li>
+<li>
+<p><strong>Block Proposal</strong>: After grouping transactions into parallelizable clusters, the block builder can propose a block in a way that <strong>minimizes execution time</strong>, potentially allowing multiple processors or threads to handle different clusters in parallel.</p>
+</li>
+</ul>
+<h3><a class="anchor" href="https://ethresear.ch#p-50283-challenges-2" name="p-50283-challenges-2"></a><strong>Challenges</strong></h3>
+<ol>
+<li>
+<p><strong>Dependent Transactions:  let’s</strong> assume we have two transactions (y1, y2) that depend on each other, parallelization of this will be extremely difficult, a popular example of this would be a transaction to approve a number of tokens for spending(y1) and another one to actually transfer the token by a smart contract, trying to parallelize this will throw an error. A common way to solve this is not to parallelize transactions or use a single processor to process these transactions, how do we identify these transactions? quite simple, we can use Tx.origin and msg.sender to identify these types of transactions</p>
+</li>
+<li>
+<p><strong>Internal transactions that are inter and intra dependent:</strong> The only way to solve these types is to implement a type of algorithm I call TGA (Transactional Graph Analysis). What’s TGA,</p>
+</li>
+</ol>
+<h3><a class="anchor" href="https://ethresear.ch#p-50283-how-tga-works-3" name="p-50283-how-tga-works-3"></a>How TGA works:</h3>
+<ol>
+<li><strong>Understanding Transaction Dependencies</strong></li>
+</ol>
+<ul>
+<li>Each Ethereum transaction can modify or read certain parts of the state (e.g., account balances, contract storage).</li>
+<li>Some transactions depend on the results of previous transactions. For example, a transaction to transfer tokens depends on a prior approval transaction. If the approval hasn’t happened yet, the transfer will fail.</li>
+<li>TGA helps <strong>map out these dependencies</strong> by constructing a graph where each node is a transaction, and edges between nodes represent dependencies.</li>
+</ul>
+<ol start="2">
+<li><strong>Building the Transaction Graph</strong></li>
+</ol>
+<ul>
+<li><strong>Nodes</strong>: Each transaction in a block is represented as a node in the graph.</li>
+<li><strong>Edges</strong>: An edge between two nodes (transactions) indicates that one transaction depends on the other. For example, if <code>Tx1</code> modifies a state that <code>Tx2</code> will read, an edge would be drawn from <code>Tx1</code> to <code>Tx2</code>, showing that <code>Tx2</code> depends on <code>Tx1</code>.</li>
+</ul>
+<ol start="3">
+<li><strong>Analyzing the Graph</strong></li>
+</ol>
+<ul>
+<li>Once the graph is constructed, TGA analyzes the dependencies to identify independent transactions (i.e., nodes without incoming or outgoing edges).</li>
+<li><strong>Parallelizable clusters</strong>: Transactions that are not connected by edges can be grouped into clusters that can be processed in parallel. These clusters are independent and won’t conflict with each other.</li>
+<li><strong>Sequential clusters</strong>: If transactions are connected by edges, TGA ensures that they are processed sequentially to preserve the correct execution order.</li>
+</ul>
+<ol start="4">
+<li><strong>Handling Cycles (Mutual Dependencies)</strong></li>
+</ol>
+<ul>
+<li>Sometimes, transactions may form a cycle where <code>Tx1</code> depends on <code>Tx2</code>, and <code>Tx2</code> depends on <code>Tx1</code>. This situation is called a <strong>cyclic dependency</strong>.</li>
+<li>TGA would detect these cycles and flag the transactions involved as requiring sequential processing, meaning they cannot be parallelized.</li>
+</ul>
+<ol start="5">
+<li><strong>Practical Implementation</strong></li>
+</ol>
+<ul>
+<li>In a block, the <strong>Block Builder</strong> could run TGA to analyse all transactions before proposing the block. This analysis would result in two sets:
+<ul>
+<li>
+<p><strong>Independent transactions</strong>: These can be executed in parallel across different processors.</p>
+</li>
+<li>
+<p><strong>Dependent transactions</strong>: These must be executed sequentially, based on their dependencies.</p>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>Example:</strong></p>
+<p>Let’s say a block has 5 transactions:</p>
+<ul>
+<li><strong>Tx1</strong>: Transfers ETH from Alice to Bob.</li>
+<li><strong>Tx2</strong>: Approves a DAI transfer for a DeFi contract.</li>
+<li><strong>Tx3</strong>: Transfers DAI from Alice to the contract (depends on Tx2).</li>
+<li><strong>Tx4</strong>: Changes a parameter in a governance contract.</li>
+<li><strong>Tx5</strong>: Reads a balance from the governance contract (depends on Tx4).</li>
+</ul>
+<p>Using TGA:</p>
+<ul>
+<li><strong>Tx1</strong>, <strong>Tx2</strong>, and <strong>Tx4</strong> are independent (no edges between them), so they can be parallelized.</li>
+<li><strong>Tx3</strong> depends on <strong>Tx2</strong> and must be executed after it.</li>
+<li><strong>Tx5</strong> depends on <strong>Tx4</strong>, so it must be executed after <strong>Tx4</strong>.</li>
+</ul>
+<p><strong>Of course, a better method will be to implement timestamps for each transaction <img alt=":slight_smile:" class="emoji" height="20" src="https://ethresear.ch/images/emoji/facebook_messenger/slight_smile.png?v=12" title=":slight_smile:" width="20" /></strong><br />
+<strong>I also think this is more suitable to a L2 <img alt=":slight_smile:" class="emoji" height="20" src="https://ethresear.ch/images/emoji/facebook_messenger/slight_smile.png?v=12" title=":slight_smile:" width="20" /></strong></p>
+            <p><small>1 post - 1 participant</small></p>
+            <p><a href="https://ethresear.ch/t/parallelizing-ethereum-a-novel-approach-using-historical-data-and-transactional-data/20590">Read full topic</a></p>
+]]></content:encoded>
+<pubDate>Tue, 08 Oct 2024 18:09:38 +0000</pubDate>
+<pubDate>Tue, 08 Oct 2024 18:09:38 +0000</pubDate>
+</item>
+<item>
+<title>[deleted post ]</title>
+<link>https://ethresear.ch/t/deleted-post/20589</link>
+<guid>https://ethresear.ch/t/deleted-post/20589</guid>
+<content:encoded><![CDATA[
+<div> 关键词：提前、发布、草稿、修复、完成
+
+<br><br>
+总结:
+一位用户不慎过早地发布了其文章的草稿。用户表示，一旦文章完成修订和编辑，将进行修正和更新。此情况强调了在正式发布内容前进行审阅和编辑的重要性，以确保最终呈现的文章质量与预期相符。用户对可能引起的混淆或误解表示歉意，并承诺尽快提供修正版本供读者参考。这一事件提醒了所有人，在互联网上分享信息时需格外小心，以避免造成不必要的误解或混乱。 <div>
+<p>Accidentally posted the draft too early, will fix once it’s done.</p>
+            <p><small>1 post - 1 participant</small></p>
+            <p><a href="https://ethresear.ch/t/deleted-post/20589">Read full topic</a></p>
+]]></content:encoded>
+<pubDate>Tue, 08 Oct 2024 16:48:40 +0000</pubDate>
+<pubDate>Tue, 08 Oct 2024 16:48:40 +0000</pubDate>
+</item>
+
+<item>
 <title>The purpose of the PoW hashing challenge in Bitcoin</title>
 <link>https://ethresear.ch/t/the-purpose-of-the-pow-hashing-challenge-in-bitcoin/20585</link>
 <guid>https://ethresear.ch/t/the-purpose-of-the-pow-hashing-challenge-in-bitcoin/20585</guid>
@@ -51,7 +357,6 @@
             <p><small>1 post - 1 participant</small></p>
             <p><a href="https://ethresear.ch/t/the-purpose-of-the-pow-hashing-challenge-in-bitcoin/20585">Read full topic</a></p>
 ]]></content:encoded>
-<pubDate>Tue, 08 Oct 2024 12:33:35 +0000</pubDate>
 <pubDate>Tue, 08 Oct 2024 12:33:35 +0000</pubDate>
 </item>
 <item>
@@ -111,9 +416,7 @@
             <p><a href="https://ethresear.ch/t/how-mev-works-in-ethereum-post-merge-including-the-role-of-proposers-builders-and-searchers/20584">Read full topic</a></p>
 ]]></content:encoded>
 <pubDate>Tue, 08 Oct 2024 12:05:01 +0000</pubDate>
-<pubDate>Tue, 08 Oct 2024 12:05:01 +0000</pubDate>
 </item>
-
 <item>
 <title>Anoiden: Zero Knowledge SSO with Semaphore</title>
 <link>https://ethresear.ch/t/anoiden-zero-knowledge-sso-with-semaphore/20579</link>
