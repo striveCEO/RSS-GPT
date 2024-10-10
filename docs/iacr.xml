@@ -5,6 +5,29 @@
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
 <item>
+<title>Reckle Trees: Updatable Merkle Batch Proofs with Applications</title>
+<link>https://eprint.iacr.org/2024/493</link>
+<guid>https://eprint.iacr.org/2024/493</guid>
+<content:encoded><![CDATA[
+<div> 关键词: Reckle树、矢量承诺、递归论证、梅克尔树、更新性批验证
+
+总结:
+文章提出了一种新的矢量承诺机制——Reckle树，它基于递归论证和梅克尔树。Reckle树的独特之处在于支持紧凑的可更新批验证，这对于区块链环境中的应用非常关键，因为这些应用需要高效地处理不断变化的块流。该机制通过嵌入批哈希计算到递归梅克尔验证中，利用哈希基积构造“标准”进行实现。这使得批证明能够在时间复杂度为对数级别的情况下更新，且当批中的某个梅克尔叶（无论是否属于批）发生变化时，只需要维护一个存储先前计算的递归证明的数据结构。
+
+为了进一步扩展其应用范围，文章还引入了Reckle+树，这是一种用于某些类型Map/Reduce运算的矢量承诺机制。在Reckle+树中，验证者可以对内存进行承诺，并为子集上的Map/Reduce运算生成紧凑的证明。当子集或内存发生变化时，证明可以被有效地更新。
+
+文章还介绍了Reckle树和Reckle+树在动态摘要转换和可更新BLS聚合两个具体应用中的实现与评估。在动态摘要转换中，系统维护着两种不同哈希函数计算的梅克尔摘要等价性的证明。在可更新BLS聚合中，系统维护着对一组BLS密钥集合中子集的正确聚合证明。
+
+实验结果表明，与现有方法相比，Reckle树和Reckle+树在更新时间和验证时间上表现出显著优势，提高了应用效率，降低了成本。同时，它们在聚合性能方面也具有竞争力。 <div>
+We propose Reckle trees, a new vector commitment based on succinct RECursive arguments and MerKLE trees. Reckle trees' distinguishing feature is their support for succinct batch proofs that are updatable - enabling new applications in the blockchain setting where a proof needs to be computed and efficiently maintained over a moving stream of blocks. Our technical approach is based on embedding the computation of the batch hash inside the recursive Merkle verification via a hash-based accumulator called canonical hashing. Due to this embedding, our batch proofs can be updated in logarithmic time, whenever a Merkle leaf (belonging to the batch or not) changes, by maintaining a data structure that stores previously-computed recursive proofs. Assuming enough parallelism, our batch proofs are also computable in $O(\log n)$ parallel time - independent of the size of the batch. As a natural extension of Reckle trees, we also introduce Reckle+ trees. Reckle+ trees provide updatable and succinct proofs for certain types of Map/Reduce computations. In this setting, a prover can commit to a memory $\mathsf{M}$ and produce a succinct proof for a Map/Reduce computation over a subset $I$ of $\mathsf{M}$. The proof can be efficiently updated whenever $I$ or $\mathsf{M}$ changes.
+
+We present and experimentally evaluate two applications of Reckle+ trees, dynamic digest translation and updatable BLS aggregation. In dynamic digest translation we are maintaining a proof of equivalence between Merkle digests computed with different hash functions, e.g., one with a SNARK-friendly Poseidon and the other with a SNARK-unfriendly Keccak. In updatable BLS aggregation we maintain a proof for the correct aggregation of a $t$-aggregate BLS key, derived from a $t$-subset of a Merkle-committed set of individual BLS keys. Our evaluation using Plonky2 shows that Reckle trees and Reckle+ trees have small memory footprint, significantly outperform previous approaches in terms of updates ($10\times$ to $15\times$) and verification  ($4.78\times$ to $1485\times$) time, enable applications that were not possible before due to huge costs involved (Reckle trees are up to 200 times faster), and have similar aggregation performance with previous implementations of batch proofs.
+]]></content:encoded>
+<pubDate>Wed, 27 Mar 2024 19:01:01 +0000</pubDate>
+<pubDate>Wed, 27 Mar 2024 19:01:01 +0000</pubDate>
+</item>
+
+<item>
 <title>Nebula: Efficient read-write memory and switchboard circuits for folding schemes</title>
 <link>https://eprint.iacr.org/2024/1605</link>
 <guid>https://eprint.iacr.org/2024/1605</guid>
@@ -29,7 +52,6 @@ Nebula addresses these with new techniques that can paired with modern folding s
 
 We implement a prototype of a Nebula-based zkVM for the Ethereum virtual machine (EVM). We find that Nebula’s techniques qualitatively provide a $30\times$ smaller constraint system to represent the EVM over standard memory-checking techniques, and lead to over $260\times$ faster proof generation for the standard ERC20 token transfer transaction.
 ]]></content:encoded>
-<pubDate>Wed, 09 Oct 2024 00:36:09 +0000</pubDate>
 <pubDate>Wed, 09 Oct 2024 00:36:09 +0000</pubDate>
 </item>
 <item>
@@ -56,7 +78,6 @@ A key feature of Chat Sessions is modularity: we extend Chat Sessions to capture
 
 We use Chat Sessions to construct UatChat: a simple and equally modular messaging application. Since UatChat preserves each of the guarantees mentioned above, this means we give the first fully Off-The-Record messaging application: parties can plausibly deny not only having sent any messages but even of being aware of a chat's existence.
 ]]></content:encoded>
-<pubDate>Tue, 08 Oct 2024 10:20:30 +0000</pubDate>
 <pubDate>Tue, 08 Oct 2024 10:20:30 +0000</pubDate>
 </item>
 <item>
@@ -86,9 +107,7 @@ dominated by three pairings - and the communication complexity between the Prove
 The effective Prover time for a circuit of size T ·M on M machines is O(T · log(T)+M · log(M)). The work of each Prover machine is dominated by the MSMs of length T in the group G1 and a single sum of univariate polynomial products computed via multimodular FFTs1 of size 2T. Likewise, the work of the master node is dominated by the MSMs of length M in the group G1 and a single sum of univariate polynomial products via multimodular FFTs of size 2M.
 ]]></content:encoded>
 <pubDate>Tue, 08 Oct 2024 09:29:20 +0000</pubDate>
-<pubDate>Tue, 08 Oct 2024 09:29:20 +0000</pubDate>
 </item>
-
 <item>
 <title>Mutable Batch Arguments and Applications</title>
 <link>https://eprint.iacr.org/2024/737</link>
