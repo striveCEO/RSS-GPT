@@ -4,6 +4,507 @@
 <title>Ethereum Research - Latest topics</title>
 <link>https://ethresear.ch/latest</link>
 
+<item>
+<title>The Impact of Quantum Computing on the Security of zk-Proofs: Approaches to Post-Quantum Cryptography</title>
+<link>https://ethresear.ch/t/the-impact-of-quantum-computing-on-the-security-of-zk-proofs-approaches-to-post-quantum-cryptography/20623</link>
+<guid>https://ethresear.ch/t/the-impact-of-quantum-computing-on-the-security-of-zk-proofs-approaches-to-post-quantum-cryptography/20623</guid>
+<content:encoded><![CDATA[
+<div> 关键词：量子计算、零知识证明、后量子密码学、挑战与机遇、未来发展
+
+总结:
+量子计算的兴起对基于经典算法的零知识证明（zk-Proofs）构成了重大威胁，尤其是针对依赖于离散对数问题和整数分解问题的安全性假设。然而，后量子密码学（Post-Quantum Cryptography, PQC）为抵御量子攻击提供了新的解决方案。本文深入探讨了量子计算对zk-Proofs的影响，分析了传统zk-Proofs在量子环境下的脆弱性，并介绍了几种基于后量子密码学的解决方案，如基于格的零知识证明和基于代码的零知识证明。
+
+在面临量子计算带来的挑战时，研究人员提出了几种改进策略来集成PQC到zk-Proof中，包括优化算法以减少计算开销，提升实施复杂性，以及标准化和互操作性的问题。此外，文章还讨论了在实际应用中采用后量子zk-Proof可能遇到的挑战，如性能优化、安全性验证、标准制定和跨领域合作的重要性。
+
+未来方向涉及进一步的算法创新、硬件加速技术、并行处理方法以及教育和培训计划，以促进量子安全的zk-Proof发展。同时，这些系统将扩展应用范围，提供增强的隐私保护、安全的电子投票系统以及具有保密性的智能合约等，从而在量子时代确保隐私和安全。总的来说，尽管存在挑战，但通过持续的研究和协作，后量子zk-Proof有望在未来实现高效、安全的应用，推动区块链、隐私计算和信息安全领域的革新。 <div>
+<h2><a class="anchor" href="https://ethresear.ch#p-50344-introduction-1" name="p-50344-introduction-1"></a>Introduction</h2>
+<p>Zero-Knowledge Proofs (zk-Proofs) have emerged as a cornerstone in modern cryptography, enabling secure and private verification of information without revealing the underlying data. These proofs are integral to various applications, including blockchain scalability solutions like zk-Rollups, secure authentication systems, and confidential computing. However, the rapid advancements in quantum computing pose significant threats to the foundational cryptographic assumptions underpinning many zk-Proofs. This article delves into the potential impact of quantum computing on the security of zk-Proofs and explores post-quantum cryptographic (PQC) approaches designed to mitigate these threats.</p>
+<h2><a class="anchor" href="https://ethresear.ch#p-50344-understanding-zk-proofs-2" name="p-50344-understanding-zk-proofs-2"></a>Understanding zk-Proofs</h2>
+<h3><a class="anchor" href="https://ethresear.ch#p-50344-what-are-zk-proofs-3" name="p-50344-what-are-zk-proofs-3"></a>What are zk-Proofs?</h3>
+<p>Zero-Knowledge Proofs allow one party (the prover) to convince another party (the verifier) of the truth of a statement without revealing any additional information beyond the validity of the statement itself. The primary characteristics of zk-Proofs include:</p>
+<ol>
+<li><strong>Zero-Knowledge:</strong> No extra information is disclosed apart from the fact that the statement is true.</li>
+<li><strong>Succinctness:</strong> Proofs are typically small in size and can be verified quickly.</li>
+<li><strong>Soundness:</strong> If the statement is false, no cheating prover can convince the verifier that it is true, except with some small probability.</li>
+</ol>
+<h3><a class="anchor" href="https://ethresear.ch#p-50344-types-of-zk-proofs-4" name="p-50344-types-of-zk-proofs-4"></a>Types of zk-Proofs</h3>
+<ul>
+<li><strong>zk-SNARKs (Zero-Knowledge Succinct Non-interactive Arguments of Knowledge):</strong> These require a trusted setup and are known for their compact proof sizes and fast verification times. Examples include Groth16 and PLONK.</li>
+<li><strong>zk-STARKs (Zero-Knowledge Scalable Transparent Arguments of Knowledge):</strong> These do not require a trusted setup and are designed to be scalable and transparent, leveraging collision-resistant hash functions.</li>
+<li><strong>zk-Rollups:</strong> A layer-2 scaling solution for blockchains that aggregates multiple transactions into a single proof, thereby enhancing scalability and reducing on-chain data.</li>
+</ul>
+<h2><a class="anchor" href="https://ethresear.ch#p-50344-quantum-computing-and-its-threat-to-cryptography-5" name="p-50344-quantum-computing-and-its-threat-to-cryptography-5"></a>Quantum Computing and Its Threat to Cryptography</h2>
+<h3><a class="anchor" href="https://ethresear.ch#p-50344-the-rise-of-quantum-computing-6" name="p-50344-the-rise-of-quantum-computing-6"></a>The Rise of Quantum Computing</h3>
+<p>Quantum computers leverage principles of quantum mechanics to perform computations that are infeasible for classical computers. Algorithms like Shor’s and Grover’s can solve specific problems exponentially faster than their classical counterparts:</p>
+<ul>
+<li><strong>Shor’s Algorithm:</strong> Efficiently factors large integers and computes discrete logarithms, undermining the security of widely used cryptographic systems like RSA and ECC (Elliptic Curve Cryptography).</li>
+<li><strong>Grover’s Algorithm:</strong> Provides a quadratic speedup for brute-force searching, affecting symmetric cryptographic schemes by effectively halving their key lengths.</li>
+</ul>
+<h3><a class="anchor" href="https://ethresear.ch#p-50344-quantum-threats-to-zk-proofs-7" name="p-50344-quantum-threats-to-zk-proofs-7"></a>Quantum Threats to zk-Proofs</h3>
+<p>The security of many zk-Proofs, especially zk-SNARKs, relies on cryptographic assumptions that are vulnerable to quantum attacks:</p>
+<ul>
+<li><strong>Discrete Logarithm Problem (DLP):</strong> zk-SNARKs often depend on the hardness of DLP on elliptic curves. Shor’s algorithm can solve DLP efficiently, compromising the security of these proofs.</li>
+<li><strong>Integer Factorization:</strong> Similar to DLP, algorithms that depend on the difficulty of factoring large integers are at risk.</li>
+<li><strong>Hash Functions:</strong> While zk-STARKs rely on hash functions, Grover’s algorithm can speed up finding collisions, necessitating the use of longer hash outputs to maintain security levels.</li>
+</ul>
+<h2><a class="anchor" href="https://ethresear.ch#p-50344-post-quantum-cryptography-pqc-approaches-8" name="p-50344-post-quantum-cryptography-pqc-approaches-8"></a>Post-Quantum Cryptography (PQC) Approaches</h2>
+<h3><a class="anchor" href="https://ethresear.ch#p-50344-overview-of-pqc-9" name="p-50344-overview-of-pqc-9"></a>Overview of PQC</h3>
+<p>Post-Quantum Cryptography aims to develop cryptographic systems that are secure against both classical and quantum adversaries. The National Institute of Standards and Technology (NIST) has been leading efforts to standardize PQC algorithms, focusing on various mathematical problems believed to be resistant to quantum attacks.</p>
+<h3><a class="anchor" href="https://ethresear.ch#p-50344-pqc-candidates-relevant-to-zk-proofs-10" name="p-50344-pqc-candidates-relevant-to-zk-proofs-10"></a>PQC Candidates Relevant to zk-Proofs</h3>
+<ol>
+<li><strong>Lattice-Based Cryptography:</strong></li>
+</ol>
+<ul>
+<li><strong>Hard Problems:</strong> Learning With Errors (LWE), Ring-LWE, Shortest Vector Problem (SVP).</li>
+<li><strong>Advantages:</strong> Strong resistance to quantum attacks, versatility in constructing various cryptographic primitives.</li>
+<li><strong>Applications:</strong> Basis for post-quantum zk-SNARKs and other zero-knowledge systems.</li>
+</ul>
+<ol start="2">
+<li><strong>Code-Based Cryptography:</strong></li>
+</ol>
+<ul>
+<li><strong>Hard Problems:</strong> Syndrome Decoding, Generalized Decoding Problem.</li>
+<li><strong>Advantages:</strong> High security margins, established mathematical foundations.</li>
+<li><strong>Applications:</strong> Potential basis for new zk-Proof systems, though less flexible than lattice-based approaches.</li>
+</ul>
+<ol start="3">
+<li><strong>Multivariate Quadratic (MQ) Cryptography:</strong></li>
+</ol>
+<ul>
+<li><strong>Hard Problems:</strong> Solving systems of multivariate quadratic equations.</li>
+<li><strong>Advantages:</strong> Efficient signature schemes and encryption methods.</li>
+<li><strong>Applications:</strong> Limited in scope for zk-Proofs but useful for specific zero-knowledge protocols.</li>
+</ul>
+<ol start="4">
+<li><strong>Hash-Based Cryptography:</strong></li>
+</ol>
+<ul>
+<li><strong>Hard Problems:</strong> Security relies on the collision resistance of hash functions.</li>
+<li><strong>Advantages:</strong> Simple security assumptions, robust against quantum attacks when using appropriate hash functions.</li>
+<li><strong>Applications:</strong> Enhancing zk-STARKs with quantum-resistant hash functions.</li>
+</ul>
+<h3><a class="anchor" href="https://ethresear.ch#p-50344-integrating-pqc-into-zk-proofs-11" name="p-50344-integrating-pqc-into-zk-proofs-11"></a>Integrating PQC into zk-Proofs</h3>
+<h4><a class="anchor" href="https://ethresear.ch#p-50344-lattice-based-zk-snarks-12" name="p-50344-lattice-based-zk-snarks-12"></a>Lattice-Based zk-SNARKs</h4>
+<p>Lattice-based zk-SNARKs aim to replace the elliptic curve assumptions with lattice problems like LWE. This integration involves:</p>
+<ul>
+<li><strong>Parameter Selection:</strong> Choosing lattice dimensions and error rates that ensure security against quantum attacks while maintaining efficiency.</li>
+<li><strong>Protocol Design:</strong> Adapting zk-SNARK protocols to utilize lattice-based commitments and proofs.</li>
+<li><strong>Optimization:</strong> Reducing proof sizes and verification times through algorithmic improvements and efficient implementations.</li>
+</ul>
+<p><strong>Example:</strong> Ligero is a lattice-based zk-SNARK that demonstrates the feasibility of constructing efficient zero-knowledge proofs resistant to quantum attacks.</p>
+<h4><a class="anchor" href="https://ethresear.ch#p-50344-enhancing-zk-starks-with-pqc-13" name="p-50344-enhancing-zk-starks-with-pqc-13"></a>Enhancing zk-STARKs with PQC</h4>
+<p>While zk-STARKs are inherently more resistant to quantum attacks due to their reliance on hash functions, further enhancements include:</p>
+<ul>
+<li><strong>Quantum-Resistant Hash Functions:</strong> Utilizing hash functions like SHA-3 or those specifically designed for post-quantum security to prevent collision attacks by quantum algorithms.</li>
+<li><strong>Optimized Polynomial Commitments:</strong> Implementing commitment schemes that maintain zero-knowledge properties without relying on structures vulnerable to quantum attacks.</li>
+</ul>
+<p><strong>Example:</strong> Enhanced zk-STARKs incorporate SHA-3-based commitments and optimized FRI (Fast Reed-Solomon Interactive Oracle Proofs of Proximity) protocols to bolster security against quantum adversaries.</p>
+<h3><a class="anchor" href="https://ethresear.ch#p-50344-hybrid-approaches-14" name="p-50344-hybrid-approaches-14"></a>Hybrid Approaches</h3>
+<p>Combining multiple PQC techniques can provide layered security and mitigate the weaknesses of individual systems. For instance, integrating lattice-based commitments with hash-based schemes can enhance the overall security of zk-Proofs, ensuring robustness against a broader range of quantum attacks.</p>
+<h2><a class="anchor" href="https://ethresear.ch#p-50344-challenges-in-adopting-pqc-for-zk-proofs-15" name="p-50344-challenges-in-adopting-pqc-for-zk-proofs-15"></a>Challenges in Adopting PQC for zk-Proofs</h2>
+<h3><a class="anchor" href="https://ethresear.ch#p-50344-computational-overhead-16" name="p-50344-computational-overhead-16"></a>Computational Overhead</h3>
+<p>Post-quantum zk-Proofs often require more computational resources than their classical counterparts due to the complexity of lattice-based or code-based operations. This increased overhead can impact:</p>
+<ul>
+<li><strong>Proof Generation Time:</strong> Longer computation times for generating proofs, which may affect real-time applications.</li>
+<li><strong>Proof Size:</strong> Larger proof sizes that consume more bandwidth and storage, posing challenges for blockchain scalability.</li>
+</ul>
+<h3><a class="anchor" href="https://ethresear.ch#p-50344-implementation-complexity-17" name="p-50344-implementation-complexity-17"></a>Implementation Complexity</h3>
+<p>Developing zk-Proofs based on PQC involves intricate mathematical and algorithmic modifications. Ensuring correctness, efficiency, and security in these implementations demands:</p>
+<ul>
+<li><strong>Expertise:</strong> Specialized knowledge in both zero-knowledge systems and post-quantum cryptography.</li>
+<li><strong>Rigorous Testing:</strong> Extensive testing and formal verification to prevent vulnerabilities arising from new algorithmic integrations.</li>
+</ul>
+<h3><a class="anchor" href="https://ethresear.ch#p-50344-standardization-and-interoperability-18" name="p-50344-standardization-and-interoperability-18"></a>Standardization and Interoperability</h3>
+<p>The ongoing standardization process for PQC algorithms poses challenges for zk-Proofs:</p>
+<ul>
+<li><strong>Algorithm Selection:</strong> Choosing the most appropriate and standardized PQC algorithms to ensure long-term security and compatibility.</li>
+<li><strong>Interoperability:</strong> Ensuring that post-quantum zk-Proofs can seamlessly integrate with existing cryptographic protocols and blockchain infrastructures.</li>
+</ul>
+<h3><a class="anchor" href="https://ethresear.ch#p-50344-security-assurance-19" name="p-50344-security-assurance-19"></a>Security Assurance</h3>
+<p>While PQC offers robust theoretical security, practical implementations must undergo rigorous scrutiny:</p>
+<ul>
+<li><strong>Cryptanalysis:</strong> Continuous analysis to identify potential weaknesses in lattice-based or code-based zk-Proofs.</li>
+<li><strong>Quantum-Safe Assumptions:</strong> Validating that the underlying mathematical problems remain hard for quantum adversaries.</li>
+</ul>
+<h2><a class="anchor" href="https://ethresear.ch#p-50344-case-studies-and-research-developments-20" name="p-50344-case-studies-and-research-developments-20"></a>Case Studies and Research Developments</h2>
+<h3><a class="anchor" href="https://ethresear.ch#p-50344-ligero-a-lattice-based-zk-snark-21" name="p-50344-ligero-a-lattice-based-zk-snark-21"></a>Ligero: A Lattice-Based zk-SNARK</h3>
+<p>Ligero exemplifies the application of lattice-based cryptography in zk-Proofs:</p>
+<ul>
+<li><strong>Design:</strong> Utilizes Ring-LWE for secure and efficient proof generation.</li>
+<li><strong>Performance:</strong> Demonstrates comparable proof sizes and verification times to traditional zk-SNARKs while ensuring quantum resistance.</li>
+<li><strong>Implications:</strong> Highlights the feasibility of deploying post-quantum zk-Proofs in practical applications like blockchain and confidential transactions.</li>
+</ul>
+<h3><a class="anchor" href="https://ethresear.ch#p-50344-enhanced-zk-starks-with-sha-3-22" name="p-50344-enhanced-zk-starks-with-sha-3-22"></a>Enhanced zk-STARKs with SHA-3</h3>
+<p>Research has focused on integrating SHA-3 into zk-STARKs to enhance their quantum resistance:</p>
+<ul>
+<li><strong>Implementation:</strong> Replaces existing hash functions with SHA-3 in the FRI protocol.</li>
+<li><strong>Security:</strong> Provides stronger guarantees against collision attacks by quantum adversaries.</li>
+<li><strong>Performance:</strong> Maintains scalability and transparency advantages inherent to zk-STARKs.</li>
+</ul>
+<h3><a class="anchor" href="https://ethresear.ch#p-50344-hybrid-zk-proofs-combining-lattices-and-hash-functions-23" name="p-50344-hybrid-zk-proofs-combining-lattices-and-hash-functions-23"></a>Hybrid zk-Proofs Combining Lattices and Hash Functions</h3>
+<p>Hybrid zk-Proofs leverage both lattice-based and hash-based cryptographic primitives:</p>
+<ul>
+<li><strong>Security:</strong> Offers layered protection by addressing different aspects of quantum vulnerabilities.</li>
+<li><strong>Efficiency:</strong> Balances the computational overhead by optimizing the integration of multiple cryptographic techniques.</li>
+<li><strong>Use Cases:</strong> Suitable for high-security applications requiring robust resistance against diverse quantum attacks.</li>
+</ul>
+<h2><a class="anchor" href="https://ethresear.ch#p-50344-future-directions-24" name="p-50344-future-directions-24"></a>Future Directions</h2>
+<h3><a class="anchor" href="https://ethresear.ch#p-50344-advanced-optimization-techniques-25" name="p-50344-advanced-optimization-techniques-25"></a>Advanced Optimization Techniques</h3>
+<p>To mitigate the computational and size overheads associated with post-quantum zk-Proofs, ongoing research focuses on:</p>
+<ul>
+<li><strong>Algorithmic Innovations:</strong> Developing more efficient lattice-based algorithms tailored for zero-knowledge applications.</li>
+<li><strong>Hardware Acceleration:</strong> Utilizing specialized hardware like GPUs and FPGAs to speed up proof generation and verification.</li>
+<li><strong>Parallelization:</strong> Implementing parallel processing techniques to distribute computational tasks and reduce latency.</li>
+</ul>
+<h3><a class="anchor" href="https://ethresear.ch#p-50344-standardization-efforts-26" name="p-50344-standardization-efforts-26"></a>Standardization Efforts</h3>
+<p>Collaborative efforts between cryptographic researchers and standardization bodies aim to:</p>
+<ul>
+<li><strong>Finalize PQC Standards:</strong> Ensure that zk-Proofs adopt widely accepted and vetted post-quantum algorithms.</li>
+<li><strong>Develop Best Practices:</strong> Create guidelines for implementing and deploying post-quantum zk-Proofs securely and efficiently.</li>
+<li><strong>Foster Interoperability:</strong> Promote compatibility between different zk-Proof systems and existing cryptographic infrastructures.</li>
+</ul>
+<h3><a class="anchor" href="https://ethresear.ch#p-50344-expanding-applications-27" name="p-50344-expanding-applications-27"></a>Expanding Applications</h3>
+<p>Post-quantum zk-Proofs have the potential to revolutionize various sectors by providing:</p>
+<ul>
+<li><strong>Enhanced Privacy:</strong> In healthcare, finance, and personal data management, ensuring that sensitive information remains secure against quantum threats.</li>
+<li><strong>Secure Voting Systems:</strong> Building robust and verifiable electronic voting systems that are resistant to quantum tampering.</li>
+<li><strong>Confidential Smart Contracts:</strong> Enabling smart contracts that can execute complex logic while maintaining the confidentiality of proprietary data against quantum adversaries.</li>
+</ul>
+<h3><a class="anchor" href="https://ethresear.ch#p-50344-interdisciplinary-research-28" name="p-50344-interdisciplinary-research-28"></a>Interdisciplinary Research</h3>
+<p>Bridging the gap between quantum computing and cryptographic research is crucial for advancing zk-Proofs:</p>
+<ul>
+<li><strong>Collaborative Projects:</strong> Initiatives that bring together experts from quantum physics, cryptography, and computer science to develop integrated solutions.</li>
+<li><strong>Educational Programs:</strong> Training the next generation of cryptographers and quantum computing specialists to address emerging challenges in zk-Proofs.</li>
+<li><strong>Open-Source Contributions:</strong> Encouraging community-driven projects to experiment with and refine post-quantum zk-Proofs.</li>
+</ul>
+<h2><a class="anchor" href="https://ethresear.ch#p-50344-conclusion-29" name="p-50344-conclusion-29"></a>Conclusion</h2>
+<p>The advent of quantum computing presents significant challenges to the security of zk-Proofs, particularly those relying on cryptographic assumptions vulnerable to quantum attacks. Post-Quantum Cryptography offers promising avenues to fortify zk-Proofs against these emerging threats through lattice-based, code-based, and hybrid approaches. However, the transition to post-quantum zk-Proofs involves overcoming substantial computational, implementation, and standardization hurdles. Continued research, collaboration, and innovation are essential to develop efficient, secure, and scalable post-quantum zk-Proofs that can safeguard privacy and security in the quantum era.</p>
+<h2><a class="anchor" href="https://ethresear.ch#p-50344-references-30" name="p-50344-references-30"></a>References</h2>
+<ol>
+<li><strong>Groth, Jens</strong>, “A verifiable secret shuffle and its application to e-voting,” in EUROCRYPT 2010.</li>
+<li><strong>Chiesa, Alessandro; Tromer, Eran; Virza, Madars</strong>, “Zerocash: Decentralized anonymous payments from bitcoin,” 2014.</li>
+<li><strong>Tromer, Eran; Virza, Madars</strong>, “Polynomial commitments and applications,” 2017.</li>
+<li><strong>Buterin, Vitalik</strong>, “Rollup-centric scaling for Ethereum,” 2021.</li>
+<li><strong>Post-Quantum Cryptography Standardization</strong>, <a href="https://csrc.nist.gov/projects/post-quantum-cryptography" rel="noopener nofollow ugc">NIST Post-Quantum Cryptography</a>.</li>
+<li><strong>Boneh, Dan; Mosca, Michele</strong>, “Quantum attacks on Bitcoin, and classical countermeasures,” 2017.</li>
+<li><strong>Fisch, Ben; Langley, Adam; Regehr, John</strong>, “Quantum computer attacks on ECDSA and RSA: An experimental analysis,” 2018.</li>
+<li><strong>Zebra Systems</strong>, “Lattice-based cryptography for post-quantum security,” 2020.</li>
+<li><strong>Lauter, Kyle; Johnson, David S.; Peikert, Chris</strong>, “Practical Lattice-Based Cryptography: A Survey,” 2017.</li>
+<li><strong>Aroca, Javier et al.</strong>, “Enhancing zk-STARKs with Lattice-based Commitments,” 2022.</li>
+</ol>
+            <p><small>2 posts - 2 participants</small></p>
+            <p><a href="https://ethresear.ch/t/the-impact-of-quantum-computing-on-the-security-of-zk-proofs-approaches-to-post-quantum-cryptography/20623">Read full topic</a></p>
+]]></content:encoded>
+<pubDate>Sat, 12 Oct 2024 11:50:02 +0000</pubDate>
+<pubDate>Sat, 12 Oct 2024 11:50:02 +0000</pubDate>
+</item>
+<item>
+<title>Potential impact of blob sharing for rollups</title>
+<link>https://ethresear.ch/t/potential-impact-of-blob-sharing-for-rollups/20619</link>
+<guid>https://ethresear.ch/t/potential-impact-of-blob-sharing-for-rollups/20619</guid>
+<content:encoded><![CDATA[
+<div> 关键词：EIP-4844、Blob共享、数据可用性（DA）、成本节约、服务质量提升
+
+总结:
+文章主要探讨了在以太坊网络中，通过EIP-4844引入的Blob机制后，小规模的Rollups所面临的挑战以及解决策略。主要包含以下几个关键点：
+
+1. **挑战与困境**：小规模Rollups在使用Blob机制时面临的问题在于，由于其较低的数据吞吐量，无法充分利用Blob的固定大小空间，导致两种可能的选择：要么不充分使用空间而支付全额费用，要么积攒足够数据后再提交，从而导致数据提交时间较长，影响服务质量和成本效率。
+
+2. **Blob共享方案**：文章提出了一种解决方案——Blob共享。该方案允许多个Rollups共同在一个Blob中存储数据，通过这种方式提高数据使用效率，减少成本并提升服务质量。
+
+3. **模拟研究**：通过模拟实验，研究了将26个Rollups的Blob数据进行共享的效果。结果显示，无论是大Rollups还是小Rollups，都能从这种共享中获得至少85%的成本节省，同时提高了数据可用性服务的质量。
+
+4. **成本与服务质量改善**：改进的关键在于通过Blob共享减少了Blob的数量，平滑了Blob基础费用的增长，避免了因Blob数量过多导致的基础费用急剧增加，从而有效降低了总成本，并通过更频繁的数据提交提升了服务质量。
+
+5. **未来展望**：文章指出，实现Blob共享需要引入代理数据可用性（Proxy DA）合约，并升级每个Rollup的数据可用性合约以支持与代理合约的交互。尽管这涉及一定的技术调整和安全考量，但通过建立协作机制，可以显著优化整个以太坊网络的效率和成本效益。
+
+通过上述分析，Blob共享作为一种创新的策略，为解决小规模Rollups在使用EIP-4844后遇到的特定问题提供了有效途径，不仅降低了成本，还提升了数据可用性的服务质量，对以太坊生态系统的优化具有重要意义。 <div>
+<p>By <a href="https://suhyeonlee.xyz/" rel="noopener nofollow ugc">Suhyeon</a> - <a href="https://www.tokamak.network/" rel="noopener nofollow ugc">Tokamak Network</a></p>
+<h2><a class="anchor" href="https://ethresear.ch#p-50336-tldr-1" name="p-50336-tldr-1"></a>TL;DR</h2>
+<blockquote>
+<ul>
+<li>Small rollups encounter a dilemma because of their low L2 data throughput: blob use inefficiency or long blob delay.</li>
+<li>One solution to this problem is blob sharing, which is to put multiple rollups’ data into one blob.</li>
+<li>Our research simulated blob sharing of 26 rollups using nearly 6 months of data.</li>
+<li>The simulation results show all rollups (not only small ones) get at least 85% cost savings in DA.</li>
+<li>We found this is because active blob sharing reduces the number of blobs and smooths the blob base fee without spikes.</li>
+</ul>
+</blockquote>
+<h2><a class="anchor" href="https://ethresear.ch#p-50336-introduction-2" name="p-50336-introduction-2"></a>Introduction</h2>
+<p>Rollups are a key scalability solution for Ethereum, processing transactions off-chain and submitting compressed data back to the main network. Before EIP-4844, rollups faced high data availability (DA) costs because all transaction data (calldata) had to be included on-chain, which was expensive.</p>
+<p>EIP-4844 introduced blobs, a new type of transaction data that is cheaper to include on-chain compared to calldata. Blobs are fixed in size at 128 KB and are stored for about 18 days. This upgrade was intended to reduce DA costs significantly for rollups.</p>
+<h2><a class="anchor" href="https://ethresear.ch#p-50336-the-small-rollups-dilemma-3" name="p-50336-the-small-rollups-dilemma-3"></a>The Small Rollup’s Dilemma</h2>
+<p>While blobs reduce costs, their fixed size poses a challenge for small rollups with low data throughput. These rollups often cannot fill the entire 128 KB blob, leading to inefficiencies. They are faced with two options:</p>
+<ul>
+<li><strong>Use blob space inefficiently:</strong> Pay for the full blob even if they don’t need all that space.</li>
+<li><strong>DA submissions with long delay:</strong> Wait until they accumulate enough data to fill a blob, which can reduce their DA service quality.</li>
+</ul>
+<p>To illustrate this issue, we analyzed the blob utilization and performance of various rollups over a period from block number 19,426,589 to 20,611,514. The results are summarized in Table 1.</p>
+<h2><a class="anchor" href="https://ethresear.ch#p-50336-defining-da-service-quality-4" name="p-50336-defining-da-service-quality-4"></a>Defining DA Service Quality</h2>
+<p>Here, to quantitatively measure the data availability service quality, we use a new indicator defined by the following formula:</p>
+<div class="math">
+\text{DA_Quality} = \frac{1}{\ln(\text{Average_Block_Gap}) + 1}
+</div>
+<p>This formula assigns a higher DA quality score to rollups that submit blobs more frequently (i.e., smaller average block gaps between blob submissions). It’s a logarithmic function to handle large block intervals, ensuring meaningful comparisons across different rollups.</p>
+<p><strong>Table 1: Rollup Blob Utilization and Performance (Blocks 19,426,589 to 20,611,514)</strong></p>
+<div class="md-table">
+<table>
+<thead>
+<tr>
+<th>Rollup</th>
+<th>Blob Count</th>
+<th>Average Size (KB)</th>
+<th>Total Size (GB)</th>
+<th>DA Quality</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Base</td>
+<td>690,356</td>
+<td>126.51 (98.84%)</td>
+<td>83.293</td>
+<td>0.309</td>
+</tr>
+<tr>
+<td>Arbitrum</td>
+<td>375,014</td>
+<td>127.52 (99.63%)</td>
+<td>45.607</td>
+<td>0.288</td>
+</tr>
+<tr>
+<td>Taiko</td>
+<td>328,805</td>
+<td>30.70 (23.99%)</td>
+<td>9.628</td>
+<td>0.592</td>
+</tr>
+<tr>
+<td>OP Mainnet</td>
+<td>265,469</td>
+<td>126.71 (98.99%)</td>
+<td>32.080</td>
+<td>0.239</td>
+</tr>
+<tr>
+<td>Scroll</td>
+<td>139,199</td>
+<td>105.35 (82.30%)</td>
+<td>13.985</td>
+<td>0.332</td>
+</tr>
+<tr>
+<td>Blast</td>
+<td>106,033</td>
+<td>115.03 (89.87%)</td>
+<td>11.632</td>
+<td>0.255</td>
+</tr>
+<tr>
+<td>Linea</td>
+<td>93,604</td>
+<td>117.64 (91.90%)</td>
+<td>10.501</td>
+<td>0.237</td>
+</tr>
+<tr>
+<td>StarkNet</td>
+<td>62,361</td>
+<td>127.98 (99.98%)</td>
+<td>7.611</td>
+<td>0.242</td>
+</tr>
+<tr>
+<td>zkSync Era</td>
+<td>62,149</td>
+<td>128.00 (99.99%)</td>
+<td>7.586</td>
+<td>0.215</td>
+</tr>
+<tr>
+<td>Paradex</td>
+<td>44,300</td>
+<td>127.99 (99.99%)</td>
+<td>5.407</td>
+<td>0.234</td>
+</tr>
+<tr>
+<td>Metal</td>
+<td>31,382</td>
+<td>0.18 (0.14%)</td>
+<td>0.005</td>
+<td>0.220</td>
+</tr>
+<tr>
+<td>Zircuit</td>
+<td>27,821</td>
+<td>6.04 (4.72%)</td>
+<td>0.160</td>
+<td>0.275</td>
+</tr>
+<tr>
+<td>Kroma</td>
+<td>24,193</td>
+<td>59.65 (46.60%)</td>
+<td>1.376</td>
+<td>0.208</td>
+</tr>
+<tr>
+<td>Zora</td>
+<td>23,592</td>
+<td>126.58 (98.89%)</td>
+<td>2.848</td>
+<td>0.161</td>
+</tr>
+<tr>
+<td>Mode</td>
+<td>22,585</td>
+<td>126.56 (98.88%)</td>
+<td>2.726</td>
+<td>0.159</td>
+</tr>
+<tr>
+<td>Rari</td>
+<td>19,583</td>
+<td>31.08 (24.28%)</td>
+<td>0.581</td>
+<td>0.214</td>
+</tr>
+<tr>
+<td>Optopia</td>
+<td>7,851</td>
+<td>16.19 (12.65%)</td>
+<td>0.121</td>
+<td>0.179</td>
+</tr>
+<tr>
+<td>Boba Network</td>
+<td>6,236</td>
+<td>3.29 (2.57%)</td>
+<td>0.020</td>
+<td>0.166</td>
+</tr>
+<tr>
+<td>Debank Chain</td>
+<td>3,358</td>
+<td>113.84 (88.94%)</td>
+<td>0.365</td>
+<td>0.162</td>
+</tr>
+<tr>
+<td>Camp Network</td>
+<td>3,292</td>
+<td>98.39 (76.87%)</td>
+<td>0.309</td>
+<td>0.136</td>
+</tr>
+<tr>
+<td>Nal</td>
+<td>2,998</td>
+<td>0.21 (0.17%)</td>
+<td>0.001</td>
+<td>0.168</td>
+</tr>
+<tr>
+<td>Mint</td>
+<td>2,515</td>
+<td>90.89 (71.01%)</td>
+<td>0.218</td>
+<td>0.140</td>
+</tr>
+<tr>
+<td>Lambda</td>
+<td>2,336</td>
+<td>103.80 (81.09%)</td>
+<td>0.231</td>
+<td>0.143</td>
+</tr>
+<tr>
+<td>Lumio</td>
+<td>1,390</td>
+<td>0.43 (0.33%)</td>
+<td>0.001</td>
+<td>0.137</td>
+</tr>
+<tr>
+<td>Parallel</td>
+<td>1,348</td>
+<td>119.29 (93.20%)</td>
+<td>0.153</td>
+<td>0.113</td>
+</tr>
+<tr>
+<td>XGA</td>
+<td>1,031</td>
+<td>98.20 (76.72%)</td>
+<td>0.097</td>
+<td>0.142</td>
+</tr>
+<tr>
+<td>Lisk</td>
+<td>811</td>
+<td>8.04 (6.28%)</td>
+<td>0.006</td>
+<td>0.126</td>
+</tr>
+<tr>
+<td>Kinto</td>
+<td>204</td>
+<td>13.20 (10.31%)</td>
+<td>0.003</td>
+<td>0.124</td>
+</tr>
+</tbody>
+</table>
+</div><p>As seen in Table 1, smaller rollups often have low blob utilization percentages, indicating they are not efficiently using the blob space. This leads to higher costs per unit of data or potential delays in DA submissions.</p>
+<h2><a class="anchor" href="https://ethresear.ch#p-50336-blob-sharing-and-simulation-5" name="p-50336-blob-sharing-and-simulation-5"></a>Blob Sharing and Simulation</h2>
+<p>Blob sharing is a strategy that allows multiple rollups to combine their data into a single blob. This approach maximizes the utilization of the blob space and reduces costs for all participating rollups. We wondered how much of the DA costs can be saved if rollups collaborate.</p>
+<p>To evaluate the effectiveness of blob sharing, we conducted a simulation using real-world data collected over nearly six months (block number 19,426,589 to 24,848,485) after the implementation of EIP-4844. Here are the key assumptions and the process we followed:</p>
+<ul>
+<li><strong>Constant Data Rate:</strong> We assumed that each rollup produces data at a consistent rate between blob submissions.</li>
+<li><strong>Blob Sharing Structure:</strong> In our simulation, blobs are shared by including multiple rollups’ data in a single blob, each preceded by a signature and data length for proper identification.</li>
+<li><strong>Uniform Gas Consumption:</strong> We assumed a uniform gas cost for data availability transactions, focusing on the minimal gas required for a Type-3 transaction.</li>
+<li><strong>No Impact on Ethereum Base Fee and Priority Fee:</strong> We assumed that the reduction in transactions due to blob sharing does not affect the Ethereum base fee or the priority fees paid by transactions.</li>
+</ul>
+<p>The simulation involved the following steps:</p>
+<ol>
+<li><strong>Data Preprocessing:</strong> We calculated the amount of data each rollup produced in every block based on their actual blob sizes and submission intervals.</li>
+<li><strong>Blob Reconstruction:</strong> Rollup data was accumulated until it reached 128 KB, at which point it was packed into a shared blob for submission.</li>
+<li><strong>Handling Excess Data/Blob:</strong> If a rollup’s data exceeded 128 KB, the surplus was included in a new blob. Excess blobs were deferred to the next block.</li>
+<li><strong>Inclusion of Unlabeled Blobs:</strong> We accounted for existing unlabeled blobs in the data, ensuring they were included in the transactions appropriately.</li>
+</ol>
+<h2><a class="anchor" href="https://ethresear.ch#p-50336-findings-6" name="p-50336-findings-6"></a>Findings</h2>
+<p>Our simulation results indicate that blob sharing can significantly reduce DA costs for all the rollups, with cost savings exceeding 85% for most rollups. Additionally, DA service quality improved due to more frequent data submissions enabled by blob sharing.</p>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/5/4/54f1fb5a0f0cbd9c9346937e926ffcc95585dd1d.png" title="USD Cost Difference between Real and Simulated Blob Sharing"><img alt="USD Cost Difference between Real and Simulated Blob Sharing" height="412" src="https://ethresear.ch/uploads/default/optimized/3X/5/4/54f1fb5a0f0cbd9c9346937e926ffcc95585dd1d_2_690x412.png" width="690" /></a></div><p></p>
+<p>As shown in Figure 1, the total costs for rollups decreased significantly in the simulation with blob sharing. The DA service quality, measured by our new indicator, also improved (you can see more data in our preprint).</p>
+<h2><a class="anchor" href="https://ethresear.ch#p-50336-understanding-the-fee-mechanism-7" name="p-50336-understanding-the-fee-mechanism-7"></a>Understanding the Fee Mechanism</h2>
+<p>A key factor contributing to the substantial cost reductions is the Ethereum blob fee mechanism. The blob base fee increases exponentially when blocks include more than three blobs. By reducing the total number of blobs through sharing, we prevent sharp increases in the blob base fee, leading to significant cost savings.</p>
+<p>The pricing of blobs follows an exponential function based on the number of blobs in a block, defined by the following equations:</p>
+<div class="math">
+\text{new_base_fee} = \max \left( B, B \times \exp \left( \frac{\text{excess_blob_gas}}{F} \right) \right)
+</div>
+<div class="math">
+\text{excess_blob_gas}_i = \max \left( 0, \text{excess_blob_gas}_{i-1} + \left( \text{blob_count}_i \times G - T \right) \right)
+</div>
+<p>Here, <em>B</em> is the minimum base fee per unit of blob gas, <em>F</em> is the update fraction constant, and <em>excess_blob_gas<sub>i</sub></em> represents the excess blob gas for block <em>i</em>. By minimizing the number of blobs per block through sharing, we can smooth out the blob base fee over time.</p>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/7/8/7835427ce6e7a408a58600de6a757c4cbaa31b3d.png" title="Blob Counts per 100,000 Blocks"><img alt="Blob Counts per 100,000 Blocks" height="293" src="https://ethresear.ch/uploads/default/optimized/3X/7/8/7835427ce6e7a408a58600de6a757c4cbaa31b3d_2_690x293.png" width="690" /></a></div><p></p>
+<p>Figure 2 shows the reduction in blob counts per block due to blob sharing. The total number of blobs changes by about 20%. However, the number of blocks with more than three blobs decreases dramatically. With fewer blobs per block, the blob base fee stays lower and more stable.</p>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/b/8/b828548d4c6946cf53adb652eb3350b0d0cf4c99.png" title="Blob Base Fee and Difference"><img alt="Blob Base Fee and Difference" height="189" src="https://ethresear.ch/uploads/default/optimized/3X/b/8/b828548d4c6946cf53adb652eb3350b0d0cf4c99_2_690x189.png" width="690" /></a></div><p></p>
+<p>In the result, Figure 3 shows how blob sharing leads to a smoother and lower blob base fee over time, compared to the sharp fluctuations observed without sharing. It removed over 99% of blob cost in many rollups in Figure 1.</p>
+<h2><a class="anchor" href="https://ethresear.ch#p-50336-conclusion-8" name="p-50336-conclusion-8"></a>Conclusion</h2>
+<p>Blob sharing offers a practical solution to the inefficiencies faced by small rollups following the implementation of EIP-4844. By collaborating and sharing blobs, rollups can reduce costs, improve data availability service quality, and contribute to a more efficient Ethereum network.</p>
+<p>Looking ahead, we cautiously predict that implementing blob sharing will require the introduction of a Proxy DA contract and the upgrade of each rollup’s DA contract to facilitate communication with this proxy. While direct access to blob data remains restricted, minimizing security concerns, establishing this interconnected and integrated data structure will necessitate active collaboration among rollups.</p>
+<p>We believe that these findings have significant implications for the Ethereum community, especially for (smaller) rollups seeking sustainable operations. We welcome any feedback, comments, or questions about our research.</p>
+<p>For more detailed information, please refer to our full paper available at <a href="https://arxiv.org/abs/2410.04111" rel="noopener nofollow ugc">https://arxiv.org/abs/2410.04111</a>.</p>
+<h2><a class="anchor" href="https://ethresear.ch#p-50336-acknowledgements-9" name="p-50336-acknowledgements-9"></a>Acknowledgements</h2>
+<p>Special thanks to Boo-Hyung Lee from <a href="https://www.tokamak.network/" rel="noopener nofollow ugc">Tokamak Network</a> for discussions on the rollup structure and Akaki Mamageishvili from <a href="https://www.offchainlabs.com/" rel="noopener nofollow ugc">Offchain Labs</a> for discussions on blob sharing and encouragement to post here.</p>
+            <p><small>2 posts - 2 participants</small></p>
+            <p><a href="https://ethresear.ch/t/potential-impact-of-blob-sharing-for-rollups/20619">Read full topic</a></p>
+]]></content:encoded>
+<pubDate>Sat, 12 Oct 2024 05:28:31 +0000</pubDate>
+<pubDate>Sat, 12 Oct 2024 05:28:31 +0000</pubDate>
+</item>
 
 <item>
 <title>RPC Nodes Management Tools</title>
