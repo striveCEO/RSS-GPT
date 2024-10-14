@@ -4,6 +4,84 @@
 <title>Ethereum Research - Latest topics</title>
 <link>https://ethresear.ch/latest</link>
 
+<item>
+<title>Hermes: a monitoring light node for Ethereum's Gossipsub network</title>
+<link>https://ethresear.ch/t/hermes-a-monitoring-light-node-for-ethereums-gossipsub-network/20639</link>
+<guid>https://ethresear.ch/t/hermes-a-monitoring-light-node-for-ethereums-gossipsub-network/20639</guid>
+<content:encoded><![CDATA[
+<div> 关键词：Hermes、轻节点、libp2p、网络监听、性能测量
+
+总结:
+Hermes是一个基于libp2p网络的监听和追踪工具，由轻节点组成。它能够连接到网络中的其他参与者，并依赖于一个可信的本地节点来确保响应所有传入请求并维护稳定的连接。Hermes设计用于与任何基于Consensus层的区块链网络协同工作，但未来将支持更多网络。它通过订阅所有可用的GossipSub主题来全面接收、揭示和追踪网络交互，这有助于开发者根据消息传播延迟和控制消息开销来调整网络协议。
+
+Hermes的运行需要两个主要组件：一个可信的本地节点提供链状态信息以及一个事件消费者接收libp2p跟踪并存储它们。轻节点负责发现和连接到网络中的伙伴，维护与它们的连接，并监控libp2p主机内的内部事件。为了确保连接的稳定性，Hermes需要成功响应远程节点可能提出的链向RPC调用。
+
+目前，Hermes支持将这些跟踪发送给不同的数据消费者或数据流，包括HTTP API和gRPC主机端点的EF使用。它还提供了三种不同的持久化选项以存储事件跟踪：EF使用的回调、日志输出（适用于本地开发测试）和存储在本地。
+
+Hermes已被应用于研究Gossipsub在以太坊网络上的运行情况，并帮助发现了不同实现中Gossipsub操作的错误，以及支持了IDONTWANT消息的采纳。未来，团队欢迎社区对工具进行改进和扩展，支持更多网络或数据流，并提出了参与贡献的方式。
+
+Hermes作为一个开源项目，旨在促进libp2p网络的研究和优化，通过收集关键数据来提高网络效率和性能。 <div>
+<p>The <a href="https://probelab.io" rel="noopener nofollow ugc">ProbeLab team</a> is happy to announce <a href="https://github.com/probe-lab/hermes" rel="noopener nofollow ugc">Hermes</a>, built primarily by <a class="mention" href="https://ethresear.ch/u/dennis-tra">@dennis-tra</a> and <a class="mention" href="https://ethresear.ch/u/cortze">@cortze</a>. <em>Hermes is a <a href="https://docs.libp2p.io/concepts/pubsub/overview/" rel="noopener nofollow ugc">GossipSub</a> listener and tracer for <a href="https://libp2p.io/" rel="noopener nofollow ugc">libp2p</a>-based networks.</em> We hope that the tool will see wide use by the community and contributions to include more features and support for other networks.</p>
+<h2><a class="anchor" href="https://ethresear.ch#p-50382-what-is-hermes-and-what-can-you-do-with-it-1" name="p-50382-what-is-hermes-and-what-can-you-do-with-it-1"></a>What is Hermes and what can you do with it</h2>
+<p>Hermes behaves like a light-node and connects to other participants in the network. It relies on a trusted local node that ensures we can reply to any incoming requests and maintain stable connections.</p>
+<p>Hermes-based experiments aim to measure the efficiency and performance of the GossipSub message broadcasting protocol in any libp2p-based network. Hermes can help developers tune their network’s protocols based on the message propagation latency and control message overhead.</p>
+<p>The tool currently supports any <a href="https://ethereum.org/en/" rel="noopener nofollow ugc">Ethereum</a> network (at the Consensus Layer), although there will be more networks supported in the future.</p>
+<h2><a class="anchor" href="https://ethresear.ch#p-50382-how-does-it-work-2" name="p-50382-how-does-it-work-2"></a>How does it work</h2>
+<h3><a class="anchor" href="https://ethresear.ch#p-50382-components-3" name="p-50382-components-3"></a>Components</h3>
+<p>Hermes operates as a single component, the <strong>light-node</strong>, for each network it is deployed in. However, it has two major requirements to work: 1) a <strong>trusted local node</strong> that will provide the right view of the chain’s state and 2) an <strong>event consumer</strong> that will receive all the libp2p traces and will store them. The light-node is responsible for discovering peers, maintain connections with them, and monitor the internal events at the libp2p host.</p>
+<h3><a class="anchor" href="https://ethresear.ch#p-50382-light-node-4" name="p-50382-light-node-4"></a>Light-node</h3>
+<p>Hermes operates like a standard libp2p node, discovering and connecting to the network while supporting all libp2p protocols to ensure reliable and secure communication. It connects to a trusted local, or remote node for certain RPCs that require chain state information, leveraging these trusted sources to enhance its capabilities.</p>
+<p>Hermes subscribes to all available GossipSub topics, allowing it to comprehensively receive, unveil and trace all the interactions with the network. This enables the tool to keep track of network activity efficiently.</p>
+<p>Additionally, Hermes can submit these traces to any defined consumer, with current support for <a href="https://aws.amazon.com/kinesis/" rel="noopener nofollow ugc">AWS Kinesis</a> and <a href="https://github.com/ethpandaops/xatu" rel="noopener nofollow ugc">Xatu</a> from the Ethereum Foundation (EF). This feature facilitates the integration of network data with analytics and monitoring tools, aiding in the overall security and functionality of the network.</p>
+<h3><a class="anchor" href="https://ethresear.ch#p-50382-deployment-5" name="p-50382-deployment-5"></a>Deployment</h3>
+<p>Hermes has been developed to run continuously. However, to increase the steadiness of the light-node’s connectivity, the node must successfully respond to chain-oriented RPC calls that remote peers might ask. Since Hermes has been designed to be chain-agnostic, we must rely on an external trusted node to serve that information.</p>
+<p>Hermes must be paired with one chain client: in our case and for Ethereum’s Consensus Layer, we used Prysm. Giving Hermes the HTTP API and the gRPC host’s endpoints, Hermes can add itself as a “whitelisted” node, in order to later forward most of the chain- or state-related RPC calls. However, the same Prysm node could be connected to several Hermes instances as the following graph shows, which helps reduce the deployment requirements.</p>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/f/9/f9928f77c5bd3d905868ad64c330545ef157b990.png" title="hermes-arch"><img alt="hermes-arch" height="238" src="https://ethresear.ch/uploads/default/optimized/3X/f/9/f9928f77c5bd3d905868ad64c330545ef157b990_2_690x238.png" width="690" /></a></div><p></p>
+<p>Hermes has been extended to support a different set of data consumers or data streams. Since all the event traces need to be persisted somewhere, the tool offers three different options:</p>
+<ul>
+<li><a href="https://aws.amazon.com/kinesis/" rel="noopener nofollow ugc">AWS Kinesis</a> (our deployment)</li>
+<li><a href="https://github.com/ethpandaops/xatu" rel="noopener nofollow ugc">Xatu</a> callbacks (used by the EF)</li>
+<li>Trace logger to stdout (for local dev-testing)</li>
+</ul>
+<p>If you are interested in using or upgrading the tool to support other networks or data streams, <a href="https://probelab.network/contact" rel="noopener nofollow ugc">reach out to us</a>.</p>
+<h2><a class="anchor" href="https://ethresear.ch#p-50382-what-data-does-hermes-gather-6" name="p-50382-what-data-does-hermes-gather-6"></a>What data does Hermes gather</h2>
+<p>As Hermes maintains stable connections with the rest of the network nodes, it can emit debugging traces of how libp2p and GossipSub work in the wild.</p>
+<p>Hermes gathers the following information out of the box from the libp2p host and the GossipSub protocol:</p>
+<ul>
+<li>Connections and Disconnections from the libp2p host</li>
+<li>Control GossipSub messages:
+<ul>
+<li>Subscriptions from other nodes to topics</li>
+<li><code>GRAFT</code> and <code>PRUNE</code> control messages</li>
+<li>GossipSub peer scores</li>
+<li><code>IHAVE</code> and <code>IWANT</code> control messages</li>
+<li>the recent <a href="https://github.com/probe-lab/hermes/pull/37" rel="noopener nofollow ugc"><code>IDONTWANT</code></a> control messages</li>
+</ul>
+</li>
+<li>Sent and received messages</li>
+<li>Protocol RPCs</li>
+</ul>
+<p>This is a very valuable set of data to have, as it covers a large footprint of the behaviour of Gossipsub in a given network. Relatively simple data analysis can reveal very important metrics and inform engineers of the healthy (or not) operation of the protocol. For cases where Gossipsub serves as the block propagation protocol of a blockchain network, having deep insights into these metrics is critical!</p>
+<h2><a class="anchor" href="https://ethresear.ch#p-50382-how-have-we-used-it-so-far-7" name="p-50382-how-have-we-used-it-so-far-7"></a>How have we used it so far</h2>
+<p>Hermes has helped the ProbeLab team carry out an extensive study on Gossipsub’s operation on the Ethereum network. Here are the links to the relevant <a href="http://ethresear.ch/">ethresear.ch</a> posts:</p>
+<ul>
+<li><a href="https://ethresear.ch/t/gossip-iwant-ihave-effectiveness-in-ethereums-gossipsusb-network/19686"><strong>Gossip IWANT/IHAVE Effectiveness in Ethereum’s Gossipsusb network</strong></a></li>
+<li><a href="https://ethresear.ch/t/gossipsub-network-dynamicity-through-grafts-and-prunes/19750"><strong>Gossipsub Network Dynamicity through GRAFTs and PRUNEs</strong></a></li>
+<li><a href="https://ethresear.ch/t/number-duplicate-messages-in-ethereums-gossipsub-network/19921"><strong>Number Duplicate Messages in Ethereum’s Gossipsub Network</strong></a></li>
+<li><a href="https://ethresear.ch/t/ethereum-node-message-propagation-bandwidth-consumption/19952"><strong>Ethereum Node Message Propagation Bandwidth Consumption</strong></a></li>
+<li><a href="https://ethresear.ch/t/gossipsub-message-propagation-latency/19982"><strong>Gossipsub Message Propagation Latency</strong></a></li>
+</ul>
+<p>Furthermore, it helped uncover bugs in the operation of Gossipsub across implementations and provided supporting evidence regarding the need for <code>IDONTWANT</code> message adoption.</p>
+<h2><a class="anchor" href="https://ethresear.ch#p-50382-future-plans-how-to-contribute-8" name="p-50382-future-plans-how-to-contribute-8"></a>Future plans &amp; how to contribute</h2>
+<p>Hermes is open-source - its Github repository is: <a class="inline-onebox" href="https://github.com/probe-lab/hermes" rel="noopener nofollow ugc">GitHub - probe-lab/hermes: A Gossipsub listener and tracer.</a>. We welcome Github Issues to discuss with the community, receive feature requests and hear feedback. We also welcome Pull Requests to improve the tool and add features or support for other networks. If you are interested in data from other networks and would like Hermes to support those, <a href="https://probelab.network/contact" rel="noopener nofollow ugc">reach out</a>.</p>
+<p>We hope you’ll enjoy playing around with Hermes. We would love to hear how you’ve used it and any improvements you’ve made.</p>
+<p>[Originally posted at: <a href="https://www.probelab.network/blog/hermes-a-monitoring-light-node-for-gossipsub-based-networks." rel="noopener nofollow ugc">https://www.probelab.network/blog/hermes-a-monitoring-light-node-for-gossipsub-based-networks.</a>]</p>
+            <p><small>1 post - 1 participant</small></p>
+            <p><a href="https://ethresear.ch/t/hermes-a-monitoring-light-node-for-ethereums-gossipsub-network/20639">Read full topic</a></p>
+]]></content:encoded>
+<pubDate>Mon, 14 Oct 2024 09:06:47 +0000</pubDate>
+<pubDate>Mon, 14 Oct 2024 09:06:47 +0000</pubDate>
+</item>
 
 <item>
 <title>The Impact of Quantum Computing on the Security of zk-Proofs: Approaches to Post-Quantum Cryptography</title>

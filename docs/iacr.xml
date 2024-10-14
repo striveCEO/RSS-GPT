@@ -4,6 +4,122 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+<item>
+<title>Curve Forests: Transparent Zero-Knowledge Set Membership with Batching and  Strong Security</title>
+<link>https://eprint.iacr.org/2024/1647</link>
+<guid>https://eprint.iacr.org/2024/1647</guid>
+<content:encoded><![CDATA[
+<div> 关键词: 零知识证明、集合成员性、透明性、曲线树、批量验证
+
+总结:
+
+本文提出了一种新的高效构造方法，用于解决批量验证的零知识集合成员性问题。该构造方法具有透明性，无需信任设置，基于Campanelli、Hall-Andersen和Kamp在USENIX 2023年会议上提出的曲线树。主要技术贡献包括在批量设置中通过利用曲线树的代数特性来实现曲线树成本的摊销，这使得证明速度提升约2倍，验证速度提升约3倍，证明大小减少约60%。此外，文章还对曲线树的关键技术要求进行了修改，简化了其设计并获得了更强的安全属性，特别是当集合的承诺由攻击者提供时，仍能保持安全，而原始的曲线树则要求诚实的承诺。
+
+这种新的构造方法为隐私保护应用提供了更高效的解决方案，如匿名支付、凭证和白名单，通过减少信息泄露，增强了数据安全性与隐私保护。 <div>
+Zero-knowledge for set membership is a building block at the core of several privacy-aware applications, such as anonymous payments, credentials and whitelists.
+We propose a new efficient construction for the batching variant of the problem, where a user intends to show knowledge of several elements (a batch) in a  set without any leakage on the elements. Our construction is transparent—it does not requires a trusted setup—and based on Curve Trees by Campanelli, Hall-Andersen and Kamp (USENIX 2023). Our first technical contribution consists in techniques to amortize Curve Trees costs in the batching setting for which we crucially exploit its algebraic properties. Even for small batches we obtain $\approx 2\times$ speedups for proving, $\approx3\times$ speedups for verification and $\approx 60\%$ reduction in proof size. Our second contribution is a modifications of a key technical requirement in Curve Trees (related to so called "permissible points") which arguably simplifies its design and obtains a stronger security property. In particular, our construction is secure even for the case where the  commitment  to the set is provided by the adversary (in contrast to the honest one required by the original Curve Trees).
+]]></content:encoded>
+<pubDate>Sat, 12 Oct 2024 17:11:18 +0000</pubDate>
+<pubDate>Sat, 12 Oct 2024 17:11:18 +0000</pubDate>
+</item>
+<item>
+<title>Fiat-Shamir Goes Rational</title>
+<link>https://eprint.iacr.org/2024/1645</link>
+<guid>https://eprint.iacr.org/2024/1645</guid>
+<content:encoded><![CDATA[
+<div> 关键词：非交互式、理性证明、Fiat-Shamir变换、智能合约、安全保证
+
+总结:
+本文探讨了构建非交互式理性证明的开放性问题。理性证明是由Azar和Micali在2012年提出的模型，其中计算能力强大的服务器可以通过运行昂贵的计算$f(x)$来获得弱客户端的奖励。当服务器理性行事时，任何声称错误输出$y \neq f(x)$的对手将预期损失金钱。当前所有非平凡的理性证明构造都是交互式的。开发非交互式理性协议将是一个游戏规则改变者，使其在智能合约等自然应用中变得可行。
+
+文章的主要发现包括：
+1. 提出并解决了标准Fiat-Shamir变换不适用于验证器仅对输入$x$有随机探针访问的问题。
+2. 提出了两种版本的Fiat-Shamir变换：一种是基本版，另一种是增强版（验证器可以访问其输入的真实计算摘要）。这两种版本都无法确保AM13或CG15在非交互式设置下保持安全性。
+3. 提供了一个关于理性证明（无论是交互式还是非交互式）的原始兴趣的新颖且可能更简单的完好数学定义。
+
+通过这些研究，文章为理解Fiat-Shamir变换在理性证明中的适用性和构建非交互式理性证明提供了关键洞察，并指出了未来工作的可能性。 <div>
+This paper investigates the open problem of how to construct non-interactive rational proofs. Rational proofs, introduced by Azar and Micali (STOC 2012), are a model of interactive proofs where a computationally powerful server can be rewarded by a weaker client for running an expensive computation $f(x)$. The honest strategy is enforced by design when the server is rational: any adversary claiming a false output $y \neq f(x)$ will lose money on expectation.
+Rational proof constructions have appealing properties: they are simple, feature an extremely efficient verifier—reading only a sublinear number of bits of the input $x$—and do not require any collateral from the prover. Currently, all non-trivial constructions of rational proofs are interactive. Developing non-interactive rational protocols would be a game-changer, making them practical for use in smart contracts, one of their most natural applications.
+Our investigation revolves around the Fiat-Shamir transform, a common approach to compiling interactive proofs into their non-interactive counterparts. We are the first to tackle the question: "Can Fiat-Shamir be successfully applied to rational protocols?"
+We find negative evidence by showing that, after applying Fiat-Shamir in the random oracle model to two representative protocols in literature (AM13 and CG15) these lose their security guarantees. Our findings point to more general impossibility theorems, which we leave as future work.
+To achieve our results we first need to address a fundamental technical challenge:  the standard Fiat-Shamir transform does not apply to protocols where the verifier has only oracle access to its input $x$ (a core feature of the rational setting). We propose two versions of Fiat-Shamir for this setting, a "vanilla" variant and a "stronger" variant (where the verifier has access to an honestly computed digest of its input). We show that neither variant is sufficient to ensure that AM13 or CG15 are secure in the non-interactive setting.
+Finally, as an additional contribution, we provide a novel, and arguably simpler, definition for the soundness property of rational proofs (interactive or non-interactive) of independent interest.
+]]></content:encoded>
+<pubDate>Sat, 12 Oct 2024 13:30:06 +0000</pubDate>
+<pubDate>Sat, 12 Oct 2024 13:30:06 +0000</pubDate>
+</item>
+<item>
+<title>Transaction Execution Mechanisms</title>
+<link>https://eprint.iacr.org/2024/1646</link>
+<guid>https://eprint.iacr.org/2024/1646</guid>
+<content:encoded><![CDATA[
+<div> 关键词：区块链、交易执行机制、资源分配、多队列系统、全局共识
+
+总结:本文探讨了区块链中的交易执行机制(TEM)，着重于如何在多个并行执行队列或“本地费用市场”之间高效分配资源。研究构建了一个模型，考虑了容量限制、用户评估和延迟成本，在具有全球共识的聚合容量约束的多队列系统中。文章指出，收益最大化倾向于将容量分配给支付最高的队列，而福利最大化通常服务于所有队列。不同队列的相对定价取决于市场大小、需求弹性以及局部和全局拥堵之间的平衡。这些发现对正在演变的区块链架构具有重要影响，包括并行执行、DAG基系统和多个并发提议者，并能帮助设计更高效的TEM。通过理解这些机制，开发者可以优化网络性能，提高用户体验，并确保系统的公平性和稳定性。 <div>
+This paper studies transaction execution mechanisms (TEMs) for blockchains, as the efficient resource allocation across multiple parallel executions queues or "local fee markets." We present a model considering capacity constraints, user valuations, and delay costs in a multi-queue system with an aggregate capacity constraint due to global consensus. We show that revenue maximization tends to allocate capacity to the highest-paying queue, while welfare maximization generally serves all queues. Optimal relative pricing of different queues depends on factors such as market size, demand elasticity, and the balance between local and global congestion.  Our results have implications for evolving blockchain architectures, including parallel execution, DAG-based systems, and multiple concurrent proposers, and can help design more efficient TEMs.
+]]></content:encoded>
+<pubDate>Sat, 12 Oct 2024 15:16:32 +0000</pubDate>
+<pubDate>Sat, 12 Oct 2024 15:16:32 +0000</pubDate>
+</item>
+<item>
+<title>Optimizing Liveness for Blockchain-Based Sealed-Bid Auctions in Rational Settings</title>
+<link>https://eprint.iacr.org/2024/1643</link>
+<guid>https://eprint.iacr.org/2024/1643</guid>
+<content:encoded><![CDATA[
+<div> 关键词：区块链、拍卖市场、公平性、透明度、分布式匿名出价
+
+总结:
+
+本文研究了基于区块链的拍卖市场，与传统中心化拍卖相比，其在公平性和透明度上具有显著优势。文章主要贡献在于提出了一种去中心化的匿名存入出价（DADB）方案，为该机制提供了正式的语法和安全性定义。不同于依赖智能合约的传统方法，该方案采用了主链-侧链架构，兼容扩展的UTXO模型。这种设计使得能够构建一个专门用于安全记录投标并进行分配的共识机制在侧链上。
+
+文章通过游戏理论视角证明，即使没有明确的激励（如费用）来包括投标，我们的设计也能优化理性参与者加入拍卖的存活延迟时间。最后，实施结果表明，缺乏块资格机制可能导致性能下降。
+
+综上所述，本文通过提出DADB方案，不仅增强了区块链拍卖市场的公平性和透明度，还通过理论分析和实证研究验证了其在提高效率方面的潜力，为区块链技术在拍卖领域的应用提供了新的思路和方法。 <div>
+Blockchain-based auction markets offer stronger fairness and transparency compared to their centralized counterparts. Deposits and sealed bid formats are usually applied to enhance security and privacy. However, to our best knowledge, the formal treatment of deposit-enabled sealed-bid auctions remains lacking in the cryptographic literature. To address this gap, we first propose a decentralized anonymous deposited-bidding (DADB) scheme, providing formal syntax and security definitions. Unlike existing approaches that rely on smart contracts, our construction utilizes a mainchain-sidechain structure that is also compatible with the extended UTXO model. This design further allows us to develop a consensus mechanism on the sidechain dedicated to securely recording bids for allocation. Specifically, we build atop an Algorand-style protocol and integrate a novel block qualification mechanism into the block selection. Consequently, we prove, from a game-theoretical perspective, that our design optimizes liveness latency for rational users who want to join the auction, even without explicit incentives (e.g., fees) for including bids. Finally, our implementation results demonstrate the potential performance degradation without the block qualification mechanism.
+]]></content:encoded>
+<pubDate>Sat, 12 Oct 2024 04:24:11 +0000</pubDate>
+<pubDate>Sat, 12 Oct 2024 04:24:11 +0000</pubDate>
+</item>
+<item>
+<title>Fully Secure Searchable Encryption from PRFs, Pairings, and Lattices</title>
+<link>https://eprint.iacr.org/2024/1632</link>
+<guid>https://eprint.iacr.org/2024/1632</guid>
+<content:encoded><![CDATA[
+<div> 关键词：搜索加密、全安全、查询限制、普适、假随机函数
+
+本文主要探讨了搜索加密领域中的全安全性概念及其实现。全安全包括了密文隐私和陷阱门隐私两个方面，确保在进行搜索操作时，既不泄露密文内容也不泄露陷阱门信息。文章首先指出，由于理论限制，目前仅能构建查询限制的全安全方案，而实现普适的全安全方案较为困难。
+
+接着，作者提出了一种基于伪随机函数的查询限制全安全方案，并进一步设计了两种基于双线性对和格的高效（无限制）全安全方案。这些方案在保证全安全性的前提下，提高了搜索效率和实用性。
+
+同时，文章还对已有的全安全方案进行了深入分析。通过简化前人的工作并提供正式证明，澄清了某方案关于安全性的错误宣传。这不仅增强了对现有方案的理解，也为后续研究提供了宝贵的反馈。
+
+总结: 本文通过构建新的全安全搜索加密方案，以及对现有方案的深入分析与优化，推动了搜索加密领域的理论与实践发展。其中，基于伪随机函数的方案为查询限制场景提供了安全保证；基于双线性和格的方案则在保持全安全性的同时，提升了方案的适用性和效率；此外，通过修正前人关于安全性的错误表述，为学术界提供了更为准确的安全性评估标准。这些贡献共同推进了搜索加密技术在隐私保护与数据检索领域的应用。 <div>
+Searchable encryption is a cryptographic primitive that allows us to perform searches on encrypted data. Searchable encryption schemes require that ciphertexts do not leak information about keywords. However, most of the existing schemes do not achieve the security notion that trapdoors do not leak information. Shen et al. (TCC 2009) proposed a security notion called full security, which includes both ciphertext privacy and trapdoor privacy, but there are few fully secure constructions. Full security is defined for the secret key settings since it is known that public key schemes cannot achieve the trapdoor privacy in principle.
+In this paper, we construct a query-bounded fully secure scheme from pseudorandom functions. In addition, we propose two types of efficient (unbounded) fully secure schemes, each of which is based on bilinear groups and lattices respectively. We then analyze the existing constructions. First, we simplify the Cheng et al. scheme (Information Sciences 2023) and prove its security. This scheme had not been proved to be secure. Second, we show that the Li-Boyen pairing-based scheme (IACR CiC 2024) does not achieve the trapdoor privacy, not as claimed.
+]]></content:encoded>
+<pubDate>Fri, 11 Oct 2024 12:31:16 +0000</pubDate>
+<pubDate>Fri, 11 Oct 2024 12:31:16 +0000</pubDate>
+</item>
+<item>
+<title>Efficient Key-Switching for Word-Type FHE and GPU Acceleration</title>
+<link>https://eprint.iacr.org/2024/1629</link>
+<guid>https://eprint.iacr.org/2024/1629</guid>
+<content:encoded><![CDATA[
+<div> 关键词：云计算、全同态加密（FHE）、量子安全性、线性复杂度、GPU优化
+
+总结:
+本文研究了云计算环境下提高全同态加密（FHE）性能和安全性的方法。全同态加密允许在数据加密状态下进行计算，同时保护数据隐私。特别地，基于格的全同态加密具有量子安全性，可抵御量子计算机攻击。然而，当前FHE方案的性能不佳，主要由于数据长度和多个资源密集型操作的高成本。
+
+研究中引入了一种新算法，该算法通过实现Number Theoretic Transform（NTT）的线性复杂度，有效解决了关键切换过程中的复杂计算问题。该算法不仅在效率上与现有最佳方法相当，而且在复杂性和GPU内存使用上显著简化，节省高达95%的空间，特别适合GPU环境。
+
+通过优化GPU性能，此算法实现了相比基线方法和当前最佳方法高达2.0倍的加速效果。这种平衡了简单性和性能的算法，为现代硬件平台上的加密计算提供了更实际和高效的实现方式，从而推动了全同态加密在云计算环境中的广泛应用。 <div>
+Speed efficiency, memory optimization, and quantum resistance are essential for safeguarding the performance and security of cloud computing environments. Fully Homomorphic Encryption (FHE) addresses this need by enabling computations on encrypted data without requiring decryption, thereby maintaining data privacy. Additionally, lattice-based FHE is quantum secure, providing defense against potential quantum computer attacks. However, the performance of current FHE schemes remains unsatisfactory, largely because of the length of the operands and the computational expense associated with several resource-intensive operations. Among these operations, key-switching is one of the most demanding processes because it involves complex arithmetic operations necessary to conduct computations in a larger cyclotomic ring.
+
+In this research, we introduce a novel algorithm that achieves linear complexity in the Number Theoretic Transform (NTT) for key-switching. This algorithm offers efficiency comparable to the state-of-the-art while being significantly simpler and consumes less GPU memory. Notably, it reduces space consumption by up to 95\%, making it highly friendly for GPU memory. By optimizing GPU performance, our implementation achieves up to a 2.0$\times$ speedup compared to both the baseline approach and the current state-of-the-art methods. This algorithm effectively balances simplicity and performance, thereby enhancing cryptographic computations on modern hardware platforms and paving the way to more practical and efficient FHE implementations in cloud computing environments.
+]]></content:encoded>
+<pubDate>Fri, 11 Oct 2024 04:59:43 +0000</pubDate>
+<pubDate>Fri, 11 Oct 2024 04:59:43 +0000</pubDate>
+</item>
 
 <item>
 <title>General Functional Bootstrapping using CKKS</title>
