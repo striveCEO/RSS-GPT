@@ -5,6 +5,276 @@
 <link>https://ethresear.ch/latest</link>
 
 <item>
+<title>The Multidimensional Scale of Overhead, Availability, and Validation Requirements</title>
+<link>https://ethresear.ch/t/the-multidimensional-scale-of-overhead-availability-and-validation-requirements/20645</link>
+<guid>https://ethresear.ch/t/the-multidimensional-scale-of-overhead-availability-and-validation-requirements/20645</guid>
+<content:encoded><![CDATA[
+<div> 关键词：Ethereum、验证成本、计算开销、最终确认时间（Permitted TTF）、验证权利与集中
+
+总结：
+文章探讨了以太坊协议中隐藏的权衡与相互影响，主要围绕着验证成本、计算开销、最终确认时间（Permitted TTF）、验证权利与集中的概念展开。首先，文章介绍了增加验证成本如何能够集中验证责任、减少恶意活动、降低计算开销，但同时也会对网络健康产生潜在负面影响。其次，讨论了最终确认时间的调整如何影响计算开销，提出通过延长或缩短最终确认时间来加快或减慢整个过程，从而可能降低或增加计算要求。再次，文章阐述了验证成本与安全之间的关系，指出提高验证成本可以降低恶意行为的威胁，但同时也可能导致验证权利集中和网络主权削弱。最后，文章强调了验证权利的提高会减少用户基数，而降低验证成本则会增加计算开销，这些机制之间存在着复杂的相互作用。整体而言，文章提醒开发者和用户，任何对核心以太坊协议的修改都将产生深远的影响，需要谨慎考虑。 <div>
+<p>If you’ve ever wondered why the cost of Ethereum validation is so high; or why nodes can be so computationally demanding, this paper is for you. From SSF to Validation requirements, this paper aims to uncover the lost world of tradeoffs enshrined within the Ethereum protocol.</p>
+<p>Special thanks to <a href="https://ethereum.org/en/" rel="noopener nofollow ugc">ethereum.org</a> and <a href="http://hacken.io" rel="noopener nofollow ugc">Hacken.io</a> for their insight into <a href="https://ethereum.org/en/roadmap/single-slot-finality/" rel="noopener nofollow ugc">SSF dynamics</a> and <a href="https://hacken.io/discover/eip-4844-explained/" rel="noopener nofollow ugc">Proto-Danksharding research</a>. Additional thanks to <a href="http://chainspace.co" rel="noopener nofollow ugc">Chainspace.co</a> for their invaluable mission of bringing semi-premises storage to the masses.</p>
+<aside class="onebox allowlistedgeneric">
+  <header class="source">
+      <img class="site-icon" height="32" src="https://ethresear.ch/uploads/default/original/3X/e/4/e49d1fe9444f4691cbd97c962880d5b07059f973.png" width="32" />
+
+      <a href="https://chainspace.co" rel="noopener nofollow ugc" target="_blank">Chainspace</a>
+  </header>
+
+  <article class="onebox-body">
+    <div class="aspect-image"><img class="thumbnail" height="500" src="https://ethresear.ch/uploads/default/optimized/3X/2/c/2cbf3304777231fb85177d3170f5cea3ba0ae54f_2_666x500.jpeg" width="666" /></div>
+
+<h3><a href="https://chainspace.co" rel="noopener nofollow ugc" target="_blank">Ture Data Sovereignty</a></h3>
+
+  <p>With Chainspace, maintain peace of mind by avoiding central data centers. Store data between peers, they never see your data but they verify its integrity at every step.</p>
+
+
+  </article>
+
+  <div class="onebox-metadata">
+    
+    
+  </div>
+
+  <div style="clear: both;"></div>
+</aside>
+
+<h1><a class="anchor" href="https://ethresear.ch#p-50393-overview-1" name="p-50393-overview-1"></a><strong>Overview:</strong></h1>
+<p>Ethereum is a complicated system. Nearly every protocol choice has downstream cascading effects, from the scale of Validation Requirements (VR) and Security to TTF tradeoffs, every EIP or network alteration, no matter the size, will impact nearly every corner of the network. This paper features a few sections covering the hidden impacts of certain well-known network goals.</p>
+<p>Every mechanic implemented in the Ethereum protocol has some downstream effect, for example, following the EIP-4844 Proto-Danksharding implementation, the Base rollup experienced a ~200% tx volume increase. Enjoy this simplicity while you can, as it’s the simplest example throughout this paper. Moving away from predictable effects, it’s clear that even core protocol mechanics have radiating effects on other protocol functionality; An example of this being validation cost.</p>
+<p>This section merely introduces these concepts so you’ll have to read further to get more details, but in short, increasing validation cost concentrates validation responsibility, discourages malicious activity, decreases computational overhead, and affects countless other Ethereum components. Some of these effects are objectively good, some bad, and some in the grey. In addition to numerous other examples, this paper outlines these dynamics between a few critical Ethereum components. Interested? Good.</p>
+<h1><a class="anchor" href="https://ethresear.ch#p-50393-computational-overhead-ttf-2" name="p-50393-computational-overhead-ttf-2"></a><strong>Computational Overhead &amp; TTF</strong></h1>
+<p>SSF, or Single Slot Finality, has recently been a rather dismissed area of research. Overshadowed by ePBS, Verkle implementations, and countless other protocol research projects. SSF has missed the impact research phase and, nearly blindly has been accepted as a future protocol goal. While SSF should, in itself be a network improvement, many of the paths to get there could pose a detrimental impact to network health. Although an unlikely approach to solving the TTF problem, the permitted time to finality could be altered to achieve either a faster or slower finality time. You may be asking, “Why increase the Permitted TTF?” well, let’s start with the impact of decreasing it.</p>
+<p>To clear things up, TTF is the time it takes for the Ethereum network to back a transaction with at least 33% of the total network ETH. This process requires validators to give a supermajority justification to a checkpoint that must be followed by another justified checkpoint. This practically gives an irreversible guarantee that transactions within that block are agreed upon and legitimate. This finality is required for many Dapps such as L2 - Mainnet bridges that need a guarantee that deposits were made. Permitted TTF simplifies the checkpoint bundling, block creation, and attestation process, and it represents the total time needed for this finality if the protocol enforced some time limit.</p>
+<p>Assuming that all protocol, networking, computational inefficiencies, and bottlenecks are minimal, it can be roughly assumed that changing permitted TTF would have a linear impact on the average validator computational overhead. These are <em>incredibly</em> crude and idealistic circumstances but they do provide a baseline for expected network impacts when changing the permitted TTF. By increasing the pTTF, or by slowing down the entire finality process it can be expected that computational requirements will decrease, and under the previously stated circumstances, in a linear manner. On the other hand, by decreasing pTTF or forcibly speeding up the finality process, it can be expected that computational overhead will increase. Here are some basic and idealistic equations that represent this relationship:</p>
+<p><strong>Change in computational overhead:</strong></p>
+<p><span class="math">
+CO_{new​}=CO_{old}​×\frac{TTF_{new}}{​TTF_{old}​​}
+</span></p>
+<p>(the percent change in TTF proportionally affects the change in Computational Overhead)</p>
+<p><strong>Impact on computational overhead:</strong></p>
+<p><span class="math">
+\textbf{Percent Impact On CO}=\frac{CO_{old}}{CO_{new}​−CO_{old}​​}×100
+</span></p>
+<p>(Basic percent change formula)</p>
+<p>&amp;&amp;</p>
+<p><span class="math">
+\textbf{Percent Impact on CO}=\frac{TTF_{new}}{​TTF_{old}​​−1}×100
+</span></p>
+<p>(the percent impact on Computational Overhead derived by the proportional change in TTF)</p>
+<p>Once again, these equations do not represent the actual network impact if the pTTF was changed/enforced but it does provide a minimum expected impact on computational requirements.</p>
+<p>Through these relationships, a scale can be derived that reveals how, although reducing pTTF and speeding up the finality process may provide countless benefits, its impact on computational requirements would reduce validator numbers and make it increasingly difficult for individuals to validate. By increasing validation requirements, smaller home validators would be deterred and provide more space for larger computational centers, this then reduces networking requirements and decreases CO, potentially attracting Validators again. Considering these interactions, Validator Count impact will still be noticeable but not crippling.</p>
+<svg class="graphviz-svg-render" height="310pt" viewBox="0.00 0.00 456.43 310.40" width="456pt" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g class="graph" id="graph0" transform="scale(1 1) rotate(0) translate(4 306.4)">
+<polygon fill="white" points="-4,4 -4,-306.4 452.43,-306.4 452.43,4 -4,4" stroke="transparent"></polygon>
+<!-- pTTF -->
+<g class="node" id="node1">
+<title>pTTF</title>
+<ellipse cx="185.35" cy="-284.4" fill="none" rx="33.06" ry="18" stroke="black"></ellipse>
+<text font-family="Times,serif" font-size="14.00" text-anchor="middle" x="185.35" y="-280.2">pTTF</text>
+</g>
+<!-- Reduced TTF -->
+<g class="node" id="node2">
+<title>Reduced TTF</title>
+<ellipse cx="185.35" cy="-195.6" fill="none" rx="64.31" ry="18" stroke="black"></ellipse>
+<text font-family="Times,serif" font-size="14.00" text-anchor="middle" x="185.35" y="-191.4">Reduced TTF</text>
+</g>
+<!-- pTTF&#45;&gt;Reduced TTF -->
+<g class="edge" id="edge1">
+<title>pTTF-&gt;Reduced TTF</title>
+<path d="M185.35,-266.25C185.35,-254.12 185.35,-237.62 185.35,-223.72" fill="none" stroke="red"></path>
+<polygon fill="red" points="188.85,-223.71 185.35,-213.71 181.85,-223.71 188.85,-223.71" stroke="red"></polygon>
+<text font-family="Times,serif" font-size="14.00" text-anchor="middle" x="234.52" y="-235.8">TTF enforcement</text>
+</g>
+<!-- CO -->
+<g class="node" id="node3">
+<title>CO</title>
+<ellipse cx="185.35" cy="-106.8" fill="none" rx="27" ry="18" stroke="black"></ellipse>
+<text font-family="Times,serif" font-size="14.00" text-anchor="middle" x="185.35" y="-102.6">CO</text>
+</g>
+<!-- Reduced TTF&#45;&gt;CO -->
+<g class="edge" id="edge2">
+<title>Reduced TTF-&gt;CO</title>
+<path d="M185.35,-177.45C185.35,-165.32 185.35,-148.82 185.35,-134.92" fill="none" stroke="green"></path>
+<polygon fill="green" points="188.85,-134.91 185.35,-124.91 181.85,-134.91 188.85,-134.91" stroke="green"></polygon>
+<text font-family="Times,serif" font-size="14.00" text-anchor="middle" x="265.65" y="-147">Computational Compression</text>
+</g>
+<!-- Validator Count -->
+<g class="node" id="node4">
+<title>Validator Count</title>
+<ellipse cx="185.35" cy="-18" fill="none" rx="73.56" ry="18" stroke="black"></ellipse>
+<text font-family="Times,serif" font-size="14.00" text-anchor="middle" x="185.35" y="-13.8">Validator Count</text>
+</g>
+<!-- CO&#45;&gt;Validator Count -->
+<g class="edge" id="edge3">
+<title>CO-&gt;Validator Count</title>
+<path d="M158.49,-104.67C112.77,-102.14 22.91,-94.22 3.57,-70.8 -1.19,-65.04 -1.19,-59.76 3.57,-54 16.73,-38.06 62.6,-29.3 104.96,-24.53" fill="none" stroke="red"></path>
+<polygon fill="red" points="105.48,-27.99 115.06,-23.46 104.75,-21.03 105.48,-27.99" stroke="red"></polygon>
+<text font-family="Times,serif" font-size="14.00" text-anchor="middle" x="84.24" y="-58.2">1: Increased Validation Cost</text>
+</g>
+<!-- CO&#45;&gt;Validator Count -->
+<g class="edge" id="edge5">
+<title>CO-&gt;Validator Count</title>
+<path d="M183.51,-88.73C182.98,-83.04 182.47,-76.65 182.21,-70.8 181.88,-63.34 181.88,-61.46 182.21,-54 182.32,-51.44 182.49,-48.78 182.68,-46.12" fill="none" stroke="green"></path>
+<polygon fill="green" points="186.17,-46.32 183.51,-36.07 179.19,-45.75 186.17,-46.32" stroke="green"></polygon>
+<text font-family="Times,serif" font-size="14.00" text-anchor="middle" x="259.92" y="-58.2">3: Reduced Validation Cost</text>
+</g>
+<!-- Validator Count&#45;&gt;CO -->
+<g class="edge" id="edge4">
+<title>Validator Count-&gt;CO</title>
+<path d="M257.99,-21.16C310.52,-25.46 367.97,-37.55 341.35,-70.8 326.68,-89.13 263.28,-98.52 221.96,-102.78" fill="none" stroke="red"></path>
+<polygon fill="red" points="221.58,-99.3 211.97,-103.75 222.26,-106.26 221.58,-99.3" stroke="red"></polygon>
+<text font-family="Times,serif" font-size="14.00" text-anchor="middle" x="397.89" y="-58.2">2: Network Relief</text>
+</g>
+</g>
+</svg>
+<p>Concluding this segment, it’s clear that as we demand a faster TTF, our computational overhead increases and we (potentially) begin to lose the major benefit of PoS. According to the Ethereum Foundation, PoS reduces energy requirements by over 99% compared to PoW, which is great, but we must notice that this is variable, and demanding some TTF convenience via “brute force” may negate this major benefit of PoS. There are a few patterns that will arise as I continue this paper but one I’ll reveal now is how PoS and PoW are on more of a spectrum than you might think. Both Sybil Resistance mechanisms provide benefits but both are distorted with each convenience. In this case, as TTF decreases (presumably through an enforced pTTF) and we move towards convenience we lose some of our consensus identity leading to either severe Validation concentration or a larger environmental impact.</p>
+<h1><a class="anchor" href="https://ethresear.ch#p-50393-validation-cost-security-3" name="p-50393-validation-cost-security-3"></a><strong>Validation Cost &amp; Security</strong></h1>
+<p>Looking into the world of validation costs, (either computationally or financially) you can find another tradeoff between the cost of validation and security. Validation costs, in the traditional sense, are large deposits required of users to participate in block assembly. This deposit incentivizes good behavior through the threat of penalties and reduces validator turbulence. The difference in validation requirements between BTC and ETH is found in the discouragement method, while the cost of entry for BTC is in computation only (leading to probability discouragement) ETH validation requirements are financial (leading to price discouragement). Both of these discouragement methods, make it too costly for a malicious actor to launch a chain-destabilizing attack. By increasing validation requirements, malicious actors can be better deterred and chain integrity can be further guaranteed. Increasing this validation requirement, however, doesn’t always benefit the chain. Take, for example, validation rights and concentration.</p>
+<h2><a class="anchor" href="https://ethresear.ch#p-50393-validation-rights-and-concentration-4" name="p-50393-validation-rights-and-concentration-4"></a><strong>Validation Rights &amp; and Concentration</strong></h2>
+<p>As validation cost increases, fewer and fewer people are able to participate in the validation process, and remaining validators are allowed more responsibility over network activities. As validation requirements increase, validation is concentrated and network manipulation is possible. The saying, ‘Too much of a good thing’ applies here, as without high validation requirements, bad actors have more opportunity to strike, but with VR being too high, validation responsibilities are concentrated and network sovereignty is compromised. The major punchline of these distributed ledgers is their ability to incorporate the community in network-wide decisions and block assembly. Currently, Bitcoin is able to provide a lower barrier to entry for community validation contributions, while Ethereum is able to provide more equitable validation selection. In short, validation cost influences network security on both ends, one end enables community validation but reduces the cost of malicious activity, on the other end validation is concentrated, and network sovereignty is compromised. One last thing to mention is that if VRs are lowered, more will participate in network validation leading to a higher computational overhead. This mechanism alongside the aforementioned ones plays into each other creating a web of interactions all based upon each other:</p>
+<svg class="graphviz-svg-render" height="488pt" viewBox="0.00 0.00 722.30 488.00" width="722pt" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g class="graph" id="graph0" transform="scale(1 1) rotate(0) translate(4 484)">
+<polygon fill="white" points="-4,4 -4,-484 718.3,-484 718.3,4 -4,4" stroke="transparent"></polygon>
+<!-- pTTF -->
+<g class="node" id="node1">
+<title>pTTF</title>
+<ellipse cx="560.22" cy="-462" fill="none" rx="33.06" ry="18" stroke="black"></ellipse>
+<text font-family="Times,serif" font-size="14.00" text-anchor="middle" x="560.22" y="-457.8">pTTF</text>
+</g>
+<!-- Reduced TTF -->
+<g class="node" id="node2">
+<title>Reduced TTF</title>
+<ellipse cx="560.22" cy="-373.2" fill="none" rx="64.31" ry="18" stroke="black"></ellipse>
+<text font-family="Times,serif" font-size="14.00" text-anchor="middle" x="560.22" y="-369">Reduced TTF</text>
+</g>
+<!-- pTTF&#45;&gt;Reduced TTF -->
+<g class="edge" id="edge1">
+<title>pTTF-&gt;Reduced TTF</title>
+<path d="M560.22,-443.85C560.22,-431.72 560.22,-415.22 560.22,-401.32" fill="none" stroke="red"></path>
+<polygon fill="red" points="563.72,-401.31 560.22,-391.31 556.72,-401.31 563.72,-401.31" stroke="red"></polygon>
+<text font-family="Times,serif" font-size="14.00" text-anchor="middle" x="609.39" y="-413.4">TTF enforcement</text>
+</g>
+<!-- CO -->
+<g class="node" id="node3">
+<title>CO</title>
+<ellipse cx="468.22" cy="-284.4" fill="none" rx="27" ry="18" stroke="black"></ellipse>
+<text font-family="Times,serif" font-size="14.00" text-anchor="middle" x="468.22" y="-280.2">CO</text>
+</g>
+<!-- Reduced TTF&#45;&gt;CO -->
+<g class="edge" id="edge2">
+<title>Reduced TTF-&gt;CO</title>
+<path d="M506.85,-362.95C492.47,-357.78 478.46,-349.74 469.62,-337.2 464.6,-330.09 463.17,-320.97 463.34,-312.36" fill="none" stroke="green"></path>
+<polygon fill="green" points="466.84,-312.55 464.2,-302.29 459.86,-311.95 466.84,-312.55" stroke="green"></polygon>
+<text font-family="Times,serif" font-size="14.00" text-anchor="middle" x="550.52" y="-324.6">Computational Compression</text>
+</g>
+<!-- User Base -->
+<g class="node" id="node4">
+<title>User Base</title>
+<ellipse cx="652.22" cy="-284.4" fill="none" rx="50.4" ry="18" stroke="black"></ellipse>
+<text font-family="Times,serif" font-size="14.00" text-anchor="middle" x="652.22" y="-280.2">User Base</text>
+</g>
+<!-- Reduced TTF&#45;&gt;User Base -->
+<g class="edge" id="edge3">
+<title>Reduced TTF-&gt;User Base</title>
+<path d="M599.05,-358.73C610.21,-353.39 621.66,-346.31 630.22,-337.2 636.83,-330.16 641.61,-320.84 645,-312.05" fill="none" stroke="green"></path>
+<polygon fill="green" points="648.34,-313.09 648.25,-302.49 641.71,-310.83 648.34,-313.09" stroke="green"></polygon>
+<text font-family="Times,serif" font-size="14.00" text-anchor="middle" x="677.76" y="-324.6">Convenience</text>
+</g>
+<!-- Validation Cost -->
+<g class="node" id="node5">
+<title>Validation Cost</title>
+<ellipse cx="411.22" cy="-195.6" fill="none" rx="71.85" ry="18" stroke="black"></ellipse>
+<text font-family="Times,serif" font-size="14.00" text-anchor="middle" x="411.22" y="-191.4">Validation Cost</text>
+</g>
+<!-- CO&#45;&gt;Validation Cost -->
+<g class="edge" id="edge4">
+<title>CO-&gt;Validation Cost</title>
+<path d="M440.88,-283.42C414.36,-281.79 375.37,-274.7 356.03,-248.4 347.66,-237.02 356.04,-226.07 368.59,-217.19" fill="none" stroke="green"></path>
+<polygon fill="green" points="370.72,-219.98 377.3,-211.67 366.98,-214.07 370.72,-219.98" stroke="green"></polygon>
+<text font-family="Times,serif" font-size="14.00" text-anchor="middle" x="401.31" y="-235.8">1: Increased CR</text>
+</g>
+<!-- CO&#45;&gt;Validation Cost -->
+<g class="edge" id="edge5">
+<title>CO-&gt;Validation Cost</title>
+<path d="M462.98,-266.71C459.22,-256.14 453.54,-242.45 446.22,-231.6 443.66,-227.81 440.66,-224.09 437.5,-220.56" fill="none" stroke="red"></path>
+<polygon fill="red" points="439.91,-218.02 430.46,-213.22 434.85,-222.86 439.91,-218.02" stroke="red"></polygon>
+<text font-family="Times,serif" font-size="14.00" text-anchor="middle" x="503.64" y="-235.8">4: Decreased CR</text>
+</g>
+<!-- Validator Count -->
+<g class="node" id="node6">
+<title>Validator Count</title>
+<ellipse cx="529.22" cy="-106.8" fill="none" rx="73.56" ry="18" stroke="black"></ellipse>
+<text font-family="Times,serif" font-size="14.00" text-anchor="middle" x="529.22" y="-102.6">Validator Count</text>
+</g>
+<!-- Validation Cost&#45;&gt;Validator Count -->
+<g class="edge" id="edge6">
+<title>Validation Cost-&gt;Validator Count</title>
+<path d="M464.86,-183.57C479.99,-178.35 495.51,-170.71 507.22,-159.6 514.22,-152.95 519.09,-143.72 522.44,-134.89" fill="none" stroke="red"></path>
+<polygon fill="red" points="525.81,-135.84 525.6,-125.24 519.16,-133.66 525.81,-135.84" stroke="red"></polygon>
+<text font-family="Times,serif" font-size="14.00" text-anchor="middle" x="536.13" y="-147">2: VR</text>
+</g>
+<!-- Validation Cost&#45;&gt;Validator Count -->
+<g class="edge" id="edge7">
+<title>Validation Cost-&gt;Validator Count</title>
+<path d="M429.62,-178.05C445.85,-163.49 467.24,-144.36 469.38,-142.8 476.09,-137.93 483.52,-133.14 490.8,-128.75" fill="none" stroke="green"></path>
+<polygon fill="green" points="493.03,-131.5 499.88,-123.42 489.48,-125.46 493.03,-131.5" stroke="green"></polygon>
+<text font-family="Times,serif" font-size="14.00" text-anchor="middle" x="487.13" y="-147">5: VR</text>
+</g>
+<!-- Security -->
+<g class="node" id="node7">
+<title>Security</title>
+<ellipse cx="43.22" cy="-18" fill="none" rx="43.44" ry="18" stroke="black"></ellipse>
+<text font-family="Times,serif" font-size="14.00" text-anchor="middle" x="43.22" y="-13.8">Security</text>
+</g>
+<!-- Validation Cost&#45;&gt;Security -->
+<g class="edge" id="edge9">
+<title>Validation Cost-&gt;Security</title>
+<path d="M340.49,-191.86C242.7,-186.41 73.92,-170.48 35.95,-124.8 17.81,-102.97 24.15,-69.06 32.07,-45.53" fill="none" stroke="green"></path>
+<polygon fill="green" points="35.47,-46.44 35.62,-35.85 28.89,-44.04 35.47,-46.44" stroke="green"></polygon>
+<text font-family="Times,serif" font-size="14.00" text-anchor="middle" x="121.35" y="-102.6">Malicious Activity Deterrence</text>
+</g>
+<!-- Validator Concentration -->
+<g class="node" id="node8">
+<title>Validator Concentration</title>
+<ellipse cx="320.22" cy="-106.8" fill="none" rx="104.75" ry="18" stroke="black"></ellipse>
+<text font-family="Times,serif" font-size="14.00" text-anchor="middle" x="320.22" y="-102.6">Validator Concentration</text>
+</g>
+<!-- Validation Cost&#45;&gt;Validator Concentration -->
+<g class="edge" id="edge10">
+<title>Validation Cost-&gt;Validator Concentration</title>
+<path d="M348.65,-186.52C332.99,-181.36 317.92,-173.02 308.31,-159.6 303.08,-152.3 303.55,-143.06 306.14,-134.41" fill="none" stroke="green"></path>
+<polygon fill="green" points="309.42,-135.62 309.77,-125.03 302.9,-133.09 309.42,-135.62" stroke="green"></polygon>
+<text font-family="Times,serif" font-size="14.00" text-anchor="middle" x="380.17" y="-147">Validation Concentration</text>
+</g>
+<!-- Validator Count&#45;&gt;CO -->
+<g class="edge" id="edge8">
+<title>Validator Count-&gt;CO</title>
+<path d="M546.34,-124.53C550.75,-129.9 554.9,-136.19 557.22,-142.8 572.76,-187.1 581.93,-209.8 555.22,-248.4 543.73,-265 522.95,-273.73 504.58,-278.32" fill="none" stroke="red"></path>
+<polygon fill="red" points="503.72,-274.93 494.7,-280.47 505.21,-281.77 503.72,-274.93" stroke="red"></polygon>
+<text font-family="Times,serif" font-size="14.00" text-anchor="middle" x="621.76" y="-191.4">3: Network Relief</text>
+</g>
+<!-- Validator Concentration&#45;&gt;Security -->
+<g class="edge" id="edge11">
+<title>Validator Concentration-&gt;Security</title>
+<path d="M272.28,-90.78C219.88,-74.36 136.67,-48.28 86.27,-32.49" fill="none" stroke="red"></path>
+<polygon fill="red" points="87.24,-29.13 76.65,-29.48 85.15,-35.81 87.24,-29.13" stroke="red"></polygon>
+<text font-family="Times,serif" font-size="14.00" text-anchor="middle" x="246.87" y="-58.2">Centralization</text>
+</g>
+</g>
+</svg>
+<p><em>CR=computational requirement, VR=validation requirement, CO=computational overhead</em></p>
+<h1><a class="anchor" href="https://ethresear.ch#p-50393-wrapping-it-all-up-5" name="p-50393-wrapping-it-all-up-5"></a><strong>Wrapping it all up:</strong></h1>
+<p>Overall this article aimed not just to list out singular interactions, but to remind developers and users alike that any development made to the core Ethereum protocol will have countless lasting impacts. From computational overhead to validation concentration, this web of interactions is a testimony to the complexity of the core Ethereum protocol, and a reminder that protocol decisions should not be taken lightly.</p>
+            <p><small>1 post - 1 participant</small></p>
+            <p><a href="https://ethresear.ch/t/the-multidimensional-scale-of-overhead-availability-and-validation-requirements/20645">Read full topic</a></p>
+]]></content:encoded>
+<pubDate>Mon, 14 Oct 2024 16:53:07 +0000</pubDate>
+<pubDate>Mon, 14 Oct 2024 16:53:07 +0000</pubDate>
+</item>
+
+<item>
 <title>Hermes: a monitoring light node for Ethereum's Gossipsub network</title>
 <link>https://ethresear.ch/t/hermes-a-monitoring-light-node-for-ethereums-gossipsub-network/20639</link>
 <guid>https://ethresear.ch/t/hermes-a-monitoring-light-node-for-ethereums-gossipsub-network/20639</guid>
@@ -80,9 +350,7 @@ Hermes作为一个开源项目，旨在促进libp2p网络的研究和优化，�
             <p><a href="https://ethresear.ch/t/hermes-a-monitoring-light-node-for-ethereums-gossipsub-network/20639">Read full topic</a></p>
 ]]></content:encoded>
 <pubDate>Mon, 14 Oct 2024 09:06:47 +0000</pubDate>
-<pubDate>Mon, 14 Oct 2024 09:06:47 +0000</pubDate>
 </item>
-
 <item>
 <title>The Impact of Quantum Computing on the Security of zk-Proofs: Approaches to Post-Quantum Cryptography</title>
 <link>https://ethresear.ch/t/the-impact-of-quantum-computing-on-the-security-of-zk-proofs-approaches-to-post-quantum-cryptography/20623</link>
