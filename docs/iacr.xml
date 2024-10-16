@@ -5,17 +5,36 @@
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
 <item>
+<title>Secure Transformer Inference</title>
+<link>https://eprint.iacr.org/2023/1763</link>
+<guid>https://eprint.iacr.org/2023/1763</guid>
+<content:encoded><![CDATA[
+<div> 安全 模型参数 用户数据 效率瓶颈 半对称置换<br><br>总结: 本文针对Transformer模型服务中的安全问题，特别是模型参数和用户数据的安全性进行了探讨。作者基于实际开发经验，指出传统的两方威胁模型存在效率瓶颈，并提出了一种新的三方威胁模型，包括模型开发者、模型服务器和数据所有者。在此基础上，设计了一种半对称置换保护方案STIP，实现了无推断准确度损失的高效安全推断协议。文章还分析了STIP对暴力破解、已知明文和社交工程攻击的抵抗能力，并通过实验验证了其在大规模模型上的安全性和准确性。此外，还提出了一种方法将可信执行环境与STIP结合，增强模型参数对模型提取和微调攻击的抵抗力。实验结果表明，STIP在保持高安全性的同时，大幅降低了推断延迟。 <div>
+Security of model parameters and user data is critical for Transformer-based services, such as ChatGPT.
+While recent strides in secure two-party protocols have successfully addressed security concerns in serving Transformer models, their adoption is practically infeasible due to the prohibitive cryptographic overheads involved.
+Drawing insights from our hands-on experience in developing two real-world Transformer-based services, we identify the inherent efficiency bottleneck in the two-party assumption. 
+To overcome this limitation, we propose a novel three-party threat model that consists of model developer, model server, and data owner. 
+Based on this framework, we design a semi-symmetric permutation-based protection scheme and present STIP, the first secure Transformer inference protocol without any inference accuracy loss.
+We analyze STIP's resistance to brute force, known-plaintext, and social engineering attacks and prove the privacy leakage upper bound using distance correlation.
+And we propose a method to integrate the trusted execution environment with STIP to make model parameters resistant to model extraction and fine-tuning attacks.
+Experiments on six representative series of Transformer models, with up to 70 billion parameters, in real systems show that STIP has strong security and no loss of accuracy.
+For auto-regressive token generation, STIP achieves 31.7 ms latency for LLaMA2-7b model, significantly reducing the 5-minute overhead of the state-of-the-art two-party protocols.
+]]></content:encoded>
+<pubDate>Wed, 15 Nov 2023 02:55:09 +0000</pubDate>
+<pubDate>Wed, 15 Nov 2023 02:55:09 +0000</pubDate>
+</item>
+
+<item>
 <title>Ripple: Accelerating Programmable Bootstraps for FHE with Wavelet Approximations</title>
 <link>https://eprint.iacr.org/2024/866</link>
 <guid>https://eprint.iacr.org/2024/866</guid>
 <content:encoded><![CDATA[
 <div> 关键词：同态加密 查找表 离散小波变换 精度 误差减少
 
-<Br><Br>总结:<br>
+<br /><br />总结:<br />
 文章介绍了一种名为Ripple的新框架，该框架旨在解决同态加密中查找表精度与成本之间的矛盾。通过采用离散小波变换（DWT）方法来减少查找表中的条目数量，同时保持高精度。研究表明，与传统的量化方法相比，Ripple在多个非线性函数上实现了显著的误差减少。此外，Ripple还提高了如逻辑回归和互相关等实际基准测试的运行时间性能。 <div>
 Homomorphic encryption can address key privacy challenges in cloud-based outsourcing by enabling potentially untrusted servers to perform meaningful computation directly on encrypted data. While most homomorphic encryption schemes offer addition and multiplication over ciphertexts natively, any non-linear functions must be implemented as costly polynomial approximations due to this restricted computational model. Nevertheless, the CGGI cryptosystem is capable of performing arbitrary univariate functions over ciphertexts in the form of lookup tables through the use of programmable bootstrapping. While promising, this procedure can quickly become costly when high degrees of precision are required. To address this challenge, we propose Ripple: a framework that introduces different approximation methodologies based on discrete wavelet transforms (DWT) to decrease the number of entries in homomorphic lookup tables while maintaining high accuracy. Our empirical evaluations demonstrate significant error reduction compared to plain quantization methods across multiple non-linear functions. Notably, Ripple improves runtime performance for several realistic benchmarks, such as logistic regression and cross-correlation, among others.
 ]]></content:encoded>
-<pubDate>Fri, 31 May 2024 20:57:39 +0000</pubDate>
 <pubDate>Fri, 31 May 2024 20:57:39 +0000</pubDate>
 </item>
 <item>
@@ -23,7 +42,7 @@ Homomorphic encryption can address key privacy challenges in cloud-based outsour
 <link>https://eprint.iacr.org/2022/1691</link>
 <guid>https://eprint.iacr.org/2022/1691</guid>
 <content:encoded><![CDATA[
-<div> TokenWeaver 可证明性 隐私保护 后妥协安全 链式令牌 互不连接<br><br>总结: 本文介绍了一种名为TokenWeaver的方法，这是一种基于可信执行环境（TEE）的隐私保护后妥协安全证明方法。通过结合可链接和不可链接两种类型的令牌链，TokenWeaver旨在即使在TEE被攻击后也能恢复其安全性，同时保证用户隐私不被追踪。该方法提供了Tamarin和DeepSec验证器的完整形式化模型及协议、安全属性和证明，以确保其核心特性的正确性。此外，还提供了一个Python的概念验证实现，展示了解决方案的简洁性和适用性。这一研究有助于解决现代认证系统中的隐私保护与安全性之间的矛盾。 <div>
+<div> TokenWeaver 可证明性 隐私保护 后妥协安全 链式令牌 互不连接<br /><br />总结: 本文介绍了一种名为TokenWeaver的方法，这是一种基于可信执行环境（TEE）的隐私保护后妥协安全证明方法。通过结合可链接和不可链接两种类型的令牌链，TokenWeaver旨在即使在TEE被攻击后也能恢复其安全性，同时保证用户隐私不被追踪。该方法提供了Tamarin和DeepSec验证器的完整形式化模型及协议、安全属性和证明，以确保其核心特性的正确性。此外，还提供了一个Python的概念验证实现，展示了解决方案的简洁性和适用性。这一研究有助于解决现代认证系统中的隐私保护与安全性之间的矛盾。 <div>
 Modern attestation based on Trusted Execution Environments (TEEs) can significantly reduce the risk of secret compromise,  allowing users to securely perform sensitive computations such as running cryptographic protocols for authentication across security critical services. However, this has also made TEEs a high-value attack target, driving an arms race between novel compromise attacks and continuous TEEs updates. 
 
 Ideally, we want to achieve Post-Compromise Security (PCS): even after a TEE compromise, we can update it back into a secure state. However, at the same time, we would like to guarantee the privacy of users, in particular preventing providers (such as Intel, Google, or Samsung) or services from tracking users across services. This requires unlinkability, which seems incompatible with standard PCS healing mechanisms.
@@ -31,9 +50,7 @@ Ideally, we want to achieve Post-Compromise Security (PCS): even after a TEE com
 In this work, we develop TokenWeaver, the first privacy-preserving post-compromise secure attestation method with automated formal proofs for its core properties. We base our construction on weaving together two types of token chains, one of which is linkable and the other is unlinkable. We provide the full formal models based on the Tamarin and DeepSec provers, including protocol, security properties, and proofs for reproducibility, as well as a proof-of-concept implementation in python that shows the simplicity and applicability of our solution.
 ]]></content:encoded>
 <pubDate>Tue, 06 Dec 2022 15:45:37 +0000</pubDate>
-<pubDate>Tue, 06 Dec 2022 15:45:37 +0000</pubDate>
 </item>
-
 <item>
 <title>Curve Forests: Transparent Zero-Knowledge Set Membership with Batching and  Strong Security</title>
 <link>https://eprint.iacr.org/2024/1647</link>
