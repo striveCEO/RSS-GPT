@@ -4,6 +4,171 @@
 <title>Ethereum Research - Latest topics</title>
 <link>https://ethresear.ch/latest</link>
 
+<item>
+<title>Dynamic Blob Targets for Better Blob Pricing</title>
+<link>https://ethresear.ch/t/dynamic-blob-targets-for-better-blob-pricing/20687</link>
+<guid>https://ethresear.ch/t/dynamic-blob-targets-for-better-blob-pricing/20687</guid>
+<content:encoded><![CDATA[
+<div> PID控制器 动态定价 以太坊 Blob 安全性 网络效率<br><br>总结:<br>本文提出了一种基于以太坊的动态Blob定价机制，通过PID控制器调整Blob目标数量，以优化Blob使用和燃烧率，确保经济稳定性和可预测性。该机制在设定的目标范围内线性调整价格，超出范围则采用现有定价机制，实现指数级价格变化。关键在于PID控制器根据网络使用情况调整目标Blob数量，同时保持安全性和经济稳定性。此外，该方案还考虑了网络带宽限制和验证者数量等因素，旨在更高效利用网络带宽，同时避免超过验证者的最小带宽要求。通过模拟和建模来验证机制的稳定性和有效性，以期提供更稳定的长期行为。 <div>
+<h1><a class="anchor" href="https://ethresear.ch#p-50495-dynamic-blob-targets-for-better-blob-pricing-1" name="p-50495-dynamic-blob-targets-for-better-blob-pricing-1"></a>Dynamic Blob Targets for Better Blob Pricing</h1>
+<h2><a class="anchor" href="https://ethresear.ch#p-50495-abstract-2" name="p-50495-abstract-2"></a>Abstract</h2>
+<p>This proposal introduces a dynamic pricing mechanism for blobs in Ethereum, using a PID (Proportional-Integral-Derivative) controller to adjust the target number of blobs. The goal is to maintain baseline security and assumes Data Availability Sampling (DAS) while optimizing blob usage and burn rates, ensuring economic stability and predictability for network participants.</p>
+<h2><a class="anchor" href="https://ethresear.ch#p-50495-key-concepts-3" name="p-50495-key-concepts-3"></a>Key Concepts</h2>
+<ol>
+<li><strong>PID-Controlled Blob Target</strong>: Adjust the target number of blobs based on network usage over time.</li>
+<li><strong>Bounded Pricing Mechanism</strong>: Implement different pricing behaviors within and outside target bounds.</li>
+<li><strong>Existing Pricing Mechanism at Limits</strong>: Use existing blob pricing mechanisms at the bounds.</li>
+<li><strong>Burn Rate Optimization</strong>: Balance per-blob pricing with overall burn amounts.</li>
+</ol>
+<h2><a class="anchor" href="https://ethresear.ch#p-50495-detailed-mechanism-4" name="p-50495-detailed-mechanism-4"></a>Detailed Mechanism</h2>
+<h3><a class="anchor" href="https://ethresear.ch#p-50495-blob-target-adjustment-5" name="p-50495-blob-target-adjustment-5"></a>Blob Target Adjustment</h3>
+<ul>
+<li>-A PID controller algorithm adjusts the target number of blobs based on consistent deviations from the current target.</li>
+<li>-The target blob count floats between predetermined lower and upper bounds, the upper bound is set based on security considerations and the lower bound is assumed to be 1.</li>
+</ul>
+<h3><a class="anchor" href="https://ethresear.ch#p-50495-pricing-mechanism-6" name="p-50495-pricing-mechanism-6"></a>Pricing Mechanism</h3>
+<ol>
+<li>
+<p><strong>Within Target Bounds</strong>:</p>
+<ul>
+<li>-Price adjusts linearly as actual blob count varies from the target.</li>
+<li>-Increases when above target, decreases when below.</li>
+</ul>
+</li>
+<li>
+<p><strong>Outside Target Bounds</strong>:</p>
+<ul>
+<li>-Existing blob pricing mechanisms take over, causing exponential price changes.</li>
+<li>-This continues until actual blob count returns within the target bounds.</li>
+</ul>
+</li>
+<li>
+<p><strong>Blob Target Adjustment Effects</strong>:</p>
+<ul>
+<li>-When target increases: Price per blob decreases, but overall burn amount increases.</li>
+<li>-When target decreases: Price per blob increases, but overall burn amount decreases.</li>
+</ul>
+</li>
+</ol>
+<h3><a class="anchor" href="https://ethresear.ch#p-50495-security-and-economic-considerations-7" name="p-50495-security-and-economic-considerations-7"></a>Security and Economic Considerations</h3>
+<ul>
+<li>-Upper bound for blob target is determined by validator count and DAS security requirements assuming a given bandwidth per validator (i.e. we know in advance when validators are withdrawing and it is rate limited as well so we should be safe and able to account for those with enough time to start adjusting the upper blob target limit if needed). We can assume 33% or something similar of validators online in determine how many samples can be completed, etc. to determine a conservative upper limit.</li>
+<li>-The system aims to maintain predictable pricing within the target range while ensuring security at the limits.</li>
+<li>-Economic stability is prioritized by making gradual adjustments to the target, avoiding sudden price shocks.</li>
+</ul>
+<h2><a class="anchor" href="https://ethresear.ch#p-50495-benefits-8" name="p-50495-benefits-8"></a>Benefits</h2>
+<ol>
+<li>More predictable and stable pricing within the target range.</li>
+<li>Adaptive to long-term changes in network conditions.</li>
+<li>Maintains crucial security guarantees through existing mechanisms at the bounds.</li>
+<li>Optimizes network usage and burn rates over time. The current system always aims to underutilize available bandwidth while still requiring higher bandwidth be available to support blocks where max blobs is reached. This proposal aims to make more consistent use of available bandwidth without exceeding validator minimum bandwidth requirements (assuming we actually get those).</li>
+</ol>
+<h2><a class="anchor" href="https://ethresear.ch#p-50495-challenges-and-considerations-9" name="p-50495-challenges-and-considerations-9"></a>Challenges and Considerations</h2>
+<ol>
+<li>Tuning the PID controller parameters for optimal responsiveness without introducing instability.</li>
+<li>Ensuring the mechanism remains economically sound under various network conditions.</li>
+<li>Balancing short-term price stability with long-term adaptability to network changes.</li>
+</ol>
+<h2><a class="anchor" href="https://ethresear.ch#p-50495-implementation-considerations-10" name="p-50495-implementation-considerations-10"></a>Implementation Considerations</h2>
+<ul>
+<li>-Thorough economic modeling and simulation are necessary to validate the mechanism’s stability and effectiveness.</li>
+<li>-At the lower and upper target blob bound you can define a target burn as a percentage of issuance rates as well. e.g. lower target burn of 1% of issuance and upper target burn of 33% of issuance before we are considered to have re-entered the target blob bounds and start making blob target adjustments. What these targets should be should have modeling and simulations and should be discussed thoroughly as well. As indicated above, a smooth curve where price per blob drops but overall burn increases would be reasonable.</li>
+<li>-Currently another constraint–the bandwidth of the proposer/publisher–may exist on the upper target of blobs. Adopting multiple concurrent proposers where each proposer publishes a portion of the total blobs (doing sampling on the others could still occur) would enable the network to have blob targets beyond the limits of a single validator. One of the beautiful things about blobs <img alt=":slight_smile:" class="emoji" height="20" src="https://ethresear.ch/images/emoji/facebook_messenger/slight_smile.png?v=12" title=":slight_smile:" width="20" /></li>
+</ul>
+<p>This proposal aims to create a more dynamic and responsive blob pricing system for Ethereum, enhancing network efficiency and economic stability while maintaining crucial security guarantees. The use of a PID controller for target adjustment provides a well-established control mechanism, potentially offering more predictable, sustainable, and stable long-term behavior compared to other algorithmic approaches. It is my belief that a pricing mechanism with similar behavior to what I’ve described would better match the inelastic demand common to L2s utilizing blobs for DA.</p>
+            <p><small>1 post - 1 participant</small></p>
+            <p><a href="https://ethresear.ch/t/dynamic-blob-targets-for-better-blob-pricing/20687">Read full topic</a></p>
+]]></content:encoded>
+<pubDate>Thu, 17 Oct 2024 01:03:07 +0000</pubDate>
+<pubDate>Thu, 17 Oct 2024 01:03:07 +0000</pubDate>
+</item>
+<item>
+<title>Blob EIPs and Minimum Validator Requirements</title>
+<link>https://ethresear.ch/t/blob-eips-and-minimum-validator-requirements/20679</link>
+<guid>https://ethresear.ch/t/blob-eips-and-minimum-validator-requirements/20679</guid>
+<content:encoded><![CDATA[
+<div> 关键词：Max Resnick, Blob EIPs, 最小验证者要求, 独立质押, 带宽需求<br>
+
+<blockquote>
+总结: 文章由Max Resnick撰写，讨论了与Blob EIPs和以太坊最小验证者要求相关的提案。这些提案包括增加调用数据成本（EIP 7623），设置小的Blob价格下限（EIP 7762）以及解耦CL和EL中的Blob计数（EIP 7742）。尽管有独占质押者的反对意见，认为这会增加带宽需求，但作者指出这些提案实际上会降低区块的最大大小。此外，文章还讨论了最低质押要求的问题，建议设定50Mb/s的上传速度作为初始讨论点，以应对未来的扩展需求。作者反对降低最低质押要求的观点，认为现有的最低质押水平已经合适，并且有助于控制网络签名的数量。 
+</blockquote> <div>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/4/7/477a44b70c262a922a22163da6ab2246f13fc6fa.png" title=""><img alt="" height="376" src="https://ethresear.ch/uploads/default/optimized/3X/4/7/477a44b70c262a922a22163da6ab2246f13fc6fa_2_690x376.png" width="690" /></a></div><p></p>
+<p>Author: Max Resnick</p>
+<p>Acknowledgements: <a class="mention" href="https://ethresear.ch/u/mikeneuder">@mikeneuder</a>, <a class="mention" href="https://ethresear.ch/u/timbeiko">@timbeiko</a>, <a class="mention" href="https://ethresear.ch/u/gakonst">@gakonst</a>, <a class="mention" href="https://ethresear.ch/u/mmp">@mmp</a>, and Tivas Gupta for helpful comments.</p>
+<h1><a class="anchor" href="https://ethresear.ch#p-50474-blob-eips-and-minimum-validator-requirements-1" name="p-50474-blob-eips-and-minimum-validator-requirements-1"></a>Blob EIPs and Minimum Validator Requirements</h1>
+<p>On the last execution ACD, a blob target increase as well as some other auxiliary proposals were moved to CFI status.</p>
+<p><strong>Those proposals were:</strong></p>
+<ul>
+<li>EIP 7623 (Increase call data costs)
+<ul>
+<li>This EIP increases the gas cost of call data so that the maximum amount of call data possible in a block is lower, reducing the maximum size of a block. Before 4844 call data was how rollups posted their data to the blockchain so increasing the price of call data was not feasible but now that rollups are posting blobs instead we can raise the price of call data to control the max block size without causing problems for rollups.</li>
+</ul>
+</li>
+<li>EIP 7762 (Increase min_base_fee_per_blob_gas)
+<ul>
+<li>This EIP sets a small reserve price for blobs (~1c) which is designed to increase the speed of price discovery. Each factor of 2 increase in the price of blobs takes almost 6 full blocks to achieve due to the controller implementation so setting this parameter to 2^25 wei rather than 1 wei saves a lot of time for the controller to ramp up.</li>
+</ul>
+</li>
+<li>EIP 7742 (Uncouple blob count between CL and EL)
+<ul>
+<li>This is mostly a housekeeping change of putting blob count variables in the right place in keeping with the proper separation of concerns between the EL and CL.</li>
+</ul>
+</li>
+<li>EIP 7691 (increase blob target to 4 from 3, blob limit remains at 6)
+<ul>
+<li>The EIP 4844 fee controller is an integral controller which would work just as well for 4 target, 6 limit as it does for 3 target, 6 limit.</li>
+</ul>
+</li>
+</ul>
+<h2><a class="anchor" href="https://ethresear.ch#p-50474-the-pushback-2" name="p-50474-the-pushback-2"></a>The Pushback</h2>
+<p>There was some pushback on the call and from solo stakers against these proposals. In particular, solo stakers were worried about the additional bandwidth required to solo propose a block. But if you look at the above proposals those fears may be misplaced. In fact if all the proposals were included together, it would lower the maximum size of the block. Increasing the blob target doesn’t mean increasing the blob limit and the addition of 7623 would lower the maximum size of the non-blob portion of the block payload.</p>
+<p>In addition some solo-stakers posted about their poor upload bandwidth speeds which sparked a discussion of minimum validator requirements for solo-staking, especially if they are solo-proposing . Only a small fraction of nodes solo-propose blocks and doing so has a high opportunity cost. Still, let’s take these concerns at face value.</p>
+<h2><a class="anchor" href="https://ethresear.ch#p-50474-response-to-pushback-3" name="p-50474-response-to-pushback-3"></a>Response to Pushback</h2>
+<p>First, how much bandwidth does it take to reliably propose a block of size x? The proposer needs their block to reach at least 40% of the network before 4 seconds into the slot. The block propagates through the P2P network but before this can happen, the proposer needs to seed it. It sends the full block to a subset of N of its peers. Sending to more and higher quality peers improves the probability that the block will reach a sufficient portion of the network before timeout.</p>
+<p>But as I understand it, the default client implementations have very naive optimization for latency and reliability with peers. In other words, there may be ways that nodes can optimize their block propagation speed without using additional bandwidth.</p>
+<p>Regardless, extremely poor connections from rural stakers are likely to present a bottleneck in the future so it is important to set internet connection requirements just as we set hardware requirements. I suggest 50Mb/s upload speed as a starting point for these discussions. While we don’t need nearly that much bandwidth today, the goal of the rollup roadmap is to get to 64 blobs per block so, even with optimizations coming with PeerDAS, we would have room for significant scaling in the future. Furthermore, 50MB upload speed on consumer internet is broadly available in North and South America, Asia and Europe. Africa also has substantial (albeit much less comprehensive) access at this speed range. This speed range will therefore give the network substantial headroom to grow, while still allowing for desirable levels of geographic decentralization.</p>
+<h2><a class="anchor" href="https://ethresear.ch#p-50474-proposals-to-decrease-the-minimum-stake-4" name="p-50474-proposals-to-decrease-the-minimum-stake-4"></a>Proposals to Decrease The Minimum Stake</h2>
+<p>On Twitter, Vitalik proposed lowering the stake required to run a node. I think this would be a bad idea. There are two reasons we have stake, the first is accountability (slashing for bad behavior), and the second is sybil proofness (you need stake to participate). Lowering the minimum staking requirement would be bad on the margin because we already have far too many signatures to aggregate for finality. Each additional signature imposes a cost on the network by introducing another signature that must be aggregated each epoch. The current minimum stake seems about right to me and hopefully we see a large reduction in the node count after MAXEB in the next hardfork. Further, out-of-protocol solutions already allow solo-stakers to stake with substantially lower collateral.</p>
+            <p><small>7 posts - 6 participants</small></p>
+            <p><a href="https://ethresear.ch/t/blob-eips-and-minimum-validator-requirements/20679">Read full topic</a></p>
+]]></content:encoded>
+<pubDate>Wed, 16 Oct 2024 19:41:27 +0000</pubDate>
+<pubDate>Wed, 16 Oct 2024 19:41:27 +0000</pubDate>
+</item>
+<item>
+<title>MEV Capture Through Time-Advantaged Arbitrage</title>
+<link>https://ethresear.ch/t/mev-capture-through-time-advantaged-arbitrage/20677</link>
+<guid>https://ethresear.ch/t/mev-capture-through-time-advantaged-arbitrage/20677</guid>
+<content:encoded><![CDATA[
+<div> 时间优势 模型 套利 MEV 拍卖<br><br>总结:<br>文章讨论了Ethereum上的最大可提取价值（MEV），包括价格套利、清算、背跑和夹心攻击等四种主要形式。提出了一种名为TimeBoost的时间拍卖机制，允许用户竞拍时间优势以优先执行交易。研究分析了拥有时间优势的套利者策略，并评估了不同交易排序政策对套利利润的影响。文章还探讨了如何通过让流动性池了解TimeBoost交易来捕获部分套利机会的价值，使流动性池和套利者在均衡状态下分别获得25%和50%的总价值。<br> <div>
+<p>Cross-posting from here:<br />
+<a href="https://research.arbitrum.io/t/mev-capture-through-time-advantaged-arbitrage/9683" rel="noopener nofollow ugc">MEV Capture Through Time-Advantaged Arbitrage - Arbitrum Research</a> because of its potential general interest. Time advantage can come from many different sources, TimeBoost is just one example. We also discuss MEV capture by the liquidity pool itself, by letting the contract know about arbitrage transaction. This is completely independent of how this label is obtained.</p>
+<p>"We discuss modeling assumptions and empirical results from the paper: (<a class="inline-onebox" href="http://arxiv.org/abs/2410.10797" rel="noopener nofollow ugc">[2410.10797] MEV Capture Through Time-Advantaged Arbitrage</a>), a joint work with Ed Felten, Robin Frisch, Maria Ines Silva and Ben Livshits.</p>
+<p>We look into the Maximal Extractable Value (MEV). Currently, there are four most popular forms of MEV on Ethereum.</p>
+<ol>
+<li>price arbitrages: to capitalize on price discrepancies between different exchanges,</li>
+<li>liquidations: collateral from debt repayment in lending protocols can be purchased at a discount,</li>
+<li>backrunning: similar to price arbitrage, with a difference that the fundamental price on outside markets is not changed,</li>
+<li>sandwiching: involves wrapping a victim’s swap transaction between two new transactions in such a way that provides a worse trade execution to the victim while tracking a small profit.</li>
+</ol>
+<p>Effective mechanisms for transaction ordering becomes a key aspect of blockchain design. With arbitrage activity increasing, rollups are considering which policies they should use to include and order transactions. The simplest and natural approach is the first-come-first-serve (FCFS), used in traditional exchanges, and Priority Fees, used in many popular blockchains. In FCFS system, transactions pay the same gas fees determined by the state transition function, and users cannot pay a premium for faster inclusion. Instead, users who value fast transaction inclusion are likely to invest in latency infrastructure in order to improve their latency.</p>
+<p>A recent TimeBoost proposal auctions a time advantage for transaction inclusion. The winner of the auction gets its transactions scheduled in FCFS order. Other transactions are also scheduled in FCFS order, but with a fixed time delay. More concretely, users bid for the right to access an "express lane” where transactions are sequenced for execution immediately. This access is sold for a fixed time interval to a single user. The transactions submitted by the remaining users are artificially delayed by the sequencer for a predefined time, which results in the user who purchases the time advantage being able to guarantee that their transactions will be sequenced ahead of its potential competitors. Our paper investigate the impact of this time advantage, focusing on arbitrage opportunities exposed via automated market makers. We analyze the optimal strategy for a time-advantaged arbitrageur and compare it to the profits generated by other MEV extraction approaches.</p>
+<p>As expected, the transaction ordering policy significantly influences how the profit from MEV extraction is distributed among participants. For instance, on Ethereum, most profits are paid to validators through MEV-Boost, while on Arbitrum currently, and on FCFS systems more generally, profits stay with MEV extractors and are likely invested in improving their access to sequencers (e.g., through latency improvements). One can argue that avoiding such a latency competition would be favorable and more efficient for the underlying chain. Letting the extractors bid for the opportunity to extract MEV in an auction, allows the rollup protocol redirect proceeds to it.</p>
+<p>The emergence of these mechanisms raises the question of how arbitrageurs will react to the design and how much rollups are expected to capture. There is also the question of whether a particular design introduces new opportunities for MEV extraction or increases the magnitude of existing MEV opportunities. Both of these may lead to higher profits for extractors at the expense of other participants. In this paper, we aim to tackle these questions. First, note that time advantage does not create sadnwiching opportunities itself. As long as the sequencer is trusted not to leak transactions before they are sequenced, no party will have the information they would need to sandwich, with or without TimeBoost. Next, given zero (or very low) chain gas fees, backrunning opportunities cannot be efficiently exploited by the time-advantaged arbitrageur, as probabilistic exploitation by any player is still possible. The time-advantage can be efficiently used when exploiting price arbitrages and liquidations. We focus on the former, and leave the latter for future research. Our paper is the first that not only measures the impact on arbitrage profits of changing the block production policy, but also analyses how introducing a time advantage to the sequencing policy impacts arbitrageurs’ decisions. Concretely, this work provides five main contributions:</p>
+<ol>
+<li>A theoretical model to analyze the scenario where a single actor has a time advantage and uses it to perform arbitrage between a liquidity pool in a DEX and an infinitely liquid external market. Another assumption in the theoretical model is that nobody has any information advantage on the outside market, i.e., the race is decided at the DEX.</li>
+<li>A theoretical derivation of the optimal strategy for when the advantaged arbitrageur submits the extraction transaction under the proposed timeboost model. For this derivation, we assume that prices evolve according to certain distributions (including a geometric Brownian motion) and that the liquidity pool charges no fees.</li>
+<li>Using dynamic programming and the empirical price distributions of some key liquidity pools, we analyze the optimal strategy for when the advantaged arbitrageur submits the extracting trade. The state in the dynamic programming table is characterized by three parameters: how much time has passed in the 1 minute interval of holding the express lane license, how much time passed in the 200ms advantage since the price difference crossed the threshold where arbitraging is profitable, and the price difference.</li>
+<li>We simulate the expected profits an arbitrageur could extract in some key liquidity pools under different sequencing regimes: FCFS, fixed time interval arbitraging and Timeboost, estimating the price change over time from the most traded marketplace.</li>
+<li>We look into an option of letting pools capture some share of the value from the arbitrage opportunity by letting the contract know about Timeboost transaction at the time of execution. This results in a sequential game where the pool first sets up a fee structure for extracting the value, and then the arbitrageur best responds to it by choosing the price that maximizes its returns. In the equilibrium of this game, the pool obtains 25% and the time-advantaged arbitrageur obtains 50% of the total value.</li>
+</ol>
+<p>For details check out the paper. Any feedback is welcome."</p>
+            <p><small>1 post - 1 participant</small></p>
+            <p><a href="https://ethresear.ch/t/mev-capture-through-time-advantaged-arbitrage/20677">Read full topic</a></p>
+]]></content:encoded>
+<pubDate>Wed, 16 Oct 2024 16:42:41 +0000</pubDate>
+<pubDate>Wed, 16 Oct 2024 16:42:41 +0000</pubDate>
+</item>
 
 <item>
 <title>Comparing Two Hash Functions for Multi-Party Computation and Zero-Knowledge</title>
