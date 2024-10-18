@@ -4,6 +4,34 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+<item>
+<title>Logstar: Efficient Linear* Time Secure Merge</title>
+<link>https://eprint.iacr.org/2024/159</link>
+<guid>https://eprint.iacr.org/2024/159</guid>
+<content:encoded><![CDATA[
+<div> Logstar Median SquareRootMerge CubeRootMerge 实效优化<br><br>总结: 本文介绍了两种高效的隐私保护合并算法：Logstar和Median。Logstar通过减少通信带宽实现了接近线性的运行时间，而Median则通过减少轮次优化了时间复杂度。此外，文章还提出了两种处理不同列表大小的合并算法，即SquareRootMerge和CubeRootMerge，它们分别能在O(n)时间内完成合并操作。这些算法不仅提高了理论效率，还在实际应用中展示了更好的性能，比如Logstar减少了约2倍的带宽成本，Median减少了约1.5倍的轮次。这些成果对于需要高效、安全地合并数据的应用场景具有重要意义。 <div>
+Secure merge considers the problem of combining two sorted lists into a single sorted secret-shared list. Merge is a fundamental building block for many real-world applications. For example, secure merge can implement a large number of SQL-like database joins, which are essential for almost any data processing task such as privacy-preserving fraud detection, ad conversion rates, data deduplication, and many more.
+
+We present two constructions with communication bandwidth and rounds tradeoff. Logstar, our bandwidth-optimized construction, takes inspiration from Falk and Ostrovsky (ITC, 2021) and runs in  $O(n\log^*n)$ time and communication with $O(\log n)$ rounds. In particular, for all conceivable $n$, the $\log^*n$ factor will be equal to the constant $2$, and therefore we achieve a near-linear running time. Median, our rounds-optimized construction, builds on the classic parallel medians-based insecure merge approach of Valiant (SIAM J. Comput., 1975), later explored in the secure setting by Blunk et al. (2022), and requires $O(n \log^c n)$, $c \approx 1.71$, communication with $O(\log \log n)$ rounds. 
+
+We introduce two additional constructions that merge input lists of different sizes. SquareRootMerge merges lists of sizes $n^{\frac{1}{2}}$ and $n$ and runs in $O(n)$ time and communication with $O(\log n)$ rounds. CubeRootMerge is closely inspired by Blunk et al.'s (2022) construction and merges lists of sizes $n^{\frac{1}{3}}$ and $n$. It runs in $O(n)$ time and communication with $O(1)$ rounds.
+
+We optimize our constructions for concrete efficiency. Today, concretely efficient secure merge protocols rely on standard techniques such as Batcher's merging network or generic sorting. These approaches require an $O(n \log n)$ size circuit of $O(\log n)$ depth. Despite significant research thrust, no work has been able to reduce their concrete costs. Our constructions are the first to be more efficient by improving their asymptotics and maintaining small constants. We analytically benchmark against these constructions and show that Logstar reduces bandwidth costs $\approx2.0\times$ and Median reduces rounds $\approx1.5\times$.
+]]></content:encoded>
+<pubDate>Sat, 03 Feb 2024 01:07:24 +0000</pubDate>
+<pubDate>Sat, 03 Feb 2024 01:07:24 +0000</pubDate>
+</item>
+<item>
+<title>Large-Scale MPC: Scaling Private Iris Code Uniqueness Checks to Millions of Users</title>
+<link>https://eprint.iacr.org/2024/705</link>
+<guid>https://eprint.iacr.org/2024/705</guid>
+<content:encoded><![CDATA[
+<div> 隐私保护 生物特征验证 神经网络通信库 高性能计算 安全多方计算<br><br>总结: 本文介绍了一种用于生物特征验证系统中的隐私保护方案，通过安全多方计算（MPC）技术保护查询和数据库中的虹膜代码。该方案显著提升了性能，比现有最先进的系统Janus快三个数量级，单核CPU下每秒可处理超过69万次虹膜代码比较。此外，利用Nvidia NCCL实现GPU版本的协议，直接让GPU访问网络接口，从而避免了数据传输成本，使得在三方MPC设置中，每秒可以进行42.9亿次虹膜代码比较。此GPU实现满足了Worldcoin基金会的性能需求，将应用于其部署的World ID基础设施中。 <div>
+In this work we tackle privacy concerns in biometric verification systems that typically require server-side processing of sensitive data (e.g., fingerprints and Iris Codes). Concretely, we design a solution that allows us to query whether a given Iris Code is similar to one contained in a given database, while all queries and datasets are being protected using secure multiparty computation (MPC). Addressing the substantial performance demands of operational systems like World ID and aid distributions by the Red Cross, we propose new protocols to improve performance by more than three orders of magnitude compared to the recent state-of-the-art system Janus (S&amp;P 24). Our final protocol can achieve a throughput of over 690 thousand Iris Code comparisons per second on a single CPU core, while protecting the privacy of both the query and database Iris Codes. Furthermore, using Nvidia NCCL we implement the whole protocol on GPUs while letting GPUs directly access the network interface. Thus we are able to avoid the costly data transfer between GPUs and CPUs, allowing us to achieve a throughput of 4.29 billion Iris Code comparisons per second in a 3-party MPC setting, where each party has access to 8 H100 GPUs. This GPU implementation achieves the performance requirements set by the Worldcoin foundation and will thus be used in their deployed World ID infrastructure.
+]]></content:encoded>
+<pubDate>Tue, 07 May 2024 16:38:57 +0000</pubDate>
+<pubDate>Tue, 07 May 2024 16:38:57 +0000</pubDate>
+</item>
 
 <item>
 <title>Computationally Secure Aggregation and Private Information Retrieval in the Shuffle Model</title>
