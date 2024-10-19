@@ -4,15 +4,15 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+
 <item>
 <title>Computational Attestations of Polynomial Integrity Towards Verifiable Machine Learning</title>
 <link>https://eprint.iacr.org/2024/639</link>
 <guid>https://eprint.iacr.org/2024/639</guid>
 <content:encoded><![CDATA[
-<div> 零知识证明 差分隐私 线性回归 MLaaS 计算效率<br><br>总结: 本文展示了使用零知识证明技术验证差分隐私线性回归训练的过程。实验在单机上对50,000样本数据集进行训练，耗时不到6分钟，并且验证整个计算过程仅需0.17秒。据我们所知，这是目前文献中已知的针对如此大规模数据集的最快可证明差分隐私实例。这一结果被认为是构建端到端隐私机器学习即服务（MLaaS）的关键步骤。 <div>
+<div> 零知识证明 差分隐私 线性回归 MLaaS 计算效率<br /><br />总结: 本文展示了使用零知识证明技术验证差分隐私线性回归训练的过程。实验在单机上对50,000样本数据集进行训练，耗时不到6分钟，并且验证整个计算过程仅需0.17秒。据我们所知，这是目前文献中已知的针对如此大规模数据集的最快可证明差分隐私实例。这一结果被认为是构建端到端隐私机器学习即服务（MLaaS）的关键步骤。 <div>
 Machine-learning systems continue to advance at a rapid pace, demonstrating remarkable utility in various fields and disciplines. As these systems continue to grow in size and complexity, a nascent industry is emerging which aims to bring machine-learning-as-a-service (MLaaS) to market. Outsourcing the operation and training of these systems to powerful hardware carries numerous advantages, but challenges arise when privacy and the correctness of work carried out must be ensured. Recent advancements in the field of zero-knowledge cryptography have led to a means of generating arguments of integrity for any computation, which in turn can be efficiently verified by any party, in any place, at any time. In this work we prove the correct training of a differentially-private (DP) linear regression over a dataset of 50,000 samples on a single machine in less than 6 minutes, verifying the entire computation in 0.17 seconds. To our knowledge, this result represents the fastest known instance in the literature of provable-DP over a dataset of this size. We believe this result constitutes a key stepping-stone towards end-to-end private MLaaS.
 ]]></content:encoded>
-<pubDate>Fri, 26 Apr 2024 02:17:26 +0000</pubDate>
 <pubDate>Fri, 26 Apr 2024 02:17:26 +0000</pubDate>
 </item>
 <item>
@@ -20,15 +20,13 @@ Machine-learning systems continue to advance at a rapid pace, demonstrating rema
 <link>https://eprint.iacr.org/2023/1076</link>
 <guid>https://eprint.iacr.org/2023/1076</guid>
 <content:encoded><![CDATA[
-<div> 阈值签名 非交互式签名 子线性通信 多方计算 普遍组合模型<br><br>总结: 本文提出了一种新的$t$-out-of-$n$门限BBS+协议，以解决单点故障问题。该协议支持任意安全阈值$t \leq n$，并在预处理设置中实现了非交互式签名和子线性通信复杂度。文中设计了专门的预签名，可以直接从伪随机相关性计算得到，使得服务器可以在没有跨服务器通信的情况下创建签名份额。该协议在主动安全性的普遍组合模型中有效。实验结果表明，对于$t \leq 30$的情况，在线协议执行时间少于15毫秒，且在线签名过程中$t$的影响小于6%，大部分开销发生在离线阶段。此外，本文实现的PCG扩展是首个考虑多于3方之间相关性的实现，显示了即使在10个服务器组成的委员会中，每个服务器也可以在大约600毫秒内扩展多达$2^{16}$个预签名。 <div>
+<div> 阈值签名 非交互式签名 子线性通信 多方计算 普遍组合模型<br /><br />总结: 本文提出了一种新的$t$-out-of-$n$门限BBS+协议，以解决单点故障问题。该协议支持任意安全阈值$t \leq n$，并在预处理设置中实现了非交互式签名和子线性通信复杂度。文中设计了专门的预签名，可以直接从伪随机相关性计算得到，使得服务器可以在没有跨服务器通信的情况下创建签名份额。该协议在主动安全性的普遍组合模型中有效。实验结果表明，对于$t \leq 30$的情况，在线协议执行时间少于15毫秒，且在线签名过程中$t$的影响小于6%，大部分开销发生在离线阶段。此外，本文实现的PCG扩展是首个考虑多于3方之间相关性的实现，显示了即使在10个服务器组成的委员会中，每个服务器也可以在大约600毫秒内扩展多达$2^{16}$个预签名。 <div>
 The BBS+ signature scheme is one of the most prominent solutions for realizing anonymous credentials. Its prominence is due to properties like selective disclosure and efficient protocols for creating and showing possession of credentials. Traditionally, a single credential issuer produces BBS+ signatures, which poses significant risks due to a single point of failure.
 
 In this work, we address this threat via a novel $t$-out-of-$n$ threshold BBS+ protocol. Our protocol supports an arbitrary security threshold $t \leq n$ and works in the so-called preprocessing setting. In this setting, we achieve non-interactive signing in the online phase and sublinear communication complexity in the number of signatures in the offline phase, which, as we show in this work, are important features from a practical point of view. As it stands today, none of the widely studied signature schemes, such as threshold ECDSA and threshold Schnorr, achieve both properties simultaneously. To this end, we design specifically tailored presignatures that can be directly computed from pseudorandom correlations and allow servers to create signature shares without additional cross-server communication. Both our offline and online protocols are actively secure in the Universal Composability model. Finally, we evaluate the concrete efficiency of our protocol, including an implementation of the online phase and the expansion algorithm of the pseudorandom correlation generator (PCG) used during the offline phase. The online protocol without network latency takes less than $15 ms$ for $t \leq 30$ and credentials sizes up to $10$. Further, our results indicate that the influence of $t$ on the online signing is insignificant, $< 6 \%$ for $t \leq 30$, and the overhead of the thresholdization occurs almost exclusively in the offline phase. Our implementation of the PCG expansion is the first considering correlations between more than $3$ parties and shows that even for a committee size of $10$ servers, each server can expand a correlation of up to $2^{16}$ presignatures in about $600$ ms per presignature.
 ]]></content:encoded>
 <pubDate>Tue, 11 Jul 2023 05:09:29 +0000</pubDate>
-<pubDate>Tue, 11 Jul 2023 05:09:29 +0000</pubDate>
 </item>
-
 <item>
 <title>Overlapped Bootstrapping for FHEW/TFHE and Its Application to SHA3</title>
 <link>https://eprint.iacr.org/2024/1667</link>
