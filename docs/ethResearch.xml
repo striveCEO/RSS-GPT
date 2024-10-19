@@ -5,11 +5,46 @@
 <link>https://ethresear.ch/latest</link>
 
 <item>
+<title>On Distributed FRI Computation</title>
+<link>https://ethresear.ch/t/on-distributed-fri-computation/20697</link>
+<guid>https://ethresear.ch/t/on-distributed-fri-computation/20697</guid>
+<content:encoded><![CDATA[
+<div> 分布式计算 FRI 协议 批量 FRI 分布式 FRI 可信证明<br><br>总结:<br>
+本文讨论了FRI协议的分布式计算方法。首先介绍了批量FRI协议，通过随机θ值计算线性组合来评估多个函数与RS码的接近程度。接着探讨了分布式FRI的情况，其中n个多项式由M个证明者分担处理。为提高效率，采用Merkle树承诺机制，各证明者将多项式承诺发送给主证明者。主证明者接收挑战θ并广播至各证明者，生成部分线性组合后发送回主证明者。主证明者执行标准FRI协议，对多项式求值和Merkle验证路径进行一致性检查，确保恶意行为可被检测。证明者的时间复杂度为O(d log d)，通信成本主要为传输部分线性组合，显著减少了验证最终证明所需的哈希调用次数。这种方法适用于分布式SNARK生成过程，有利于实施经济措施惩罚不合规行为。 <div>
+<p>In this note we discuss the distributed computation of the FRI protocol. In practice, we often need to distribute the prover’s work across many servers. In the case of using a FRI-based proof system, this leads to the expensive recursive aggregation of the obtained proofs or exchanging data, the size of which is comparable to the size of the circuit. Below, we describe a technical trick that allows us to optimize obtaining a single final proof.</p>
+<h3><a class="anchor" href="https://ethresear.ch#p-50535-batched-fri-1" name="p-50535-batched-fri-1"></a>Batched FRI</h3>
+<p>The <strong>batched</strong> version of the <span class="math">\mathtt{FRI}</span> protocol allows one to estimate the closeness of each of the functions <span class="math">f_1, \dots, f_L</span> to the <span class="math">\mathsf{RS}</span> code. To do this, the <span class="math">\mathtt{Verifier}</span> samples and sends a random <span class="math">\theta \in \mathbb{F}_p</span> to the <span class="math">\mathtt{Prover}</span>. The latter calculates a linear combination</p>
+<div class="math">
+F = \theta^1 \cdot f_1 + \theta^2 \cdot f_2 + \dots + \theta^L \cdot f_L
+</div>
+<p>Then the <span class="math">\mathtt{Prover}</span> and <span class="math">\mathtt{Verifier}</span> execute the regular version of the <span class="math">\mathtt{FRI}</span> protocol for testing <span class="math">F</span>. The only difference is that each time <span class="math">F</span> is queried at point <span class="math">x</span>, the <span class="math">\mathtt{Verifier}</span> also performs a consistency check:</p>
+<div class="math">
+F(x) = \theta^1 \cdot f_1(x) + \theta^2 \cdot f_2(x) + \dots + \theta^L \cdot f_L(x).
+</div>
+<p>If the <span class="math">\mathtt{Verifier}</span> accepted in the end of the protocol, then all <span class="math">f_i</span> are close to <span class="math">\mathsf{RS}</span>.</p>
+<h3><a class="anchor" href="https://ethresear.ch#p-50535-distributed-fri-2" name="p-50535-distributed-fri-2"></a>Distributed FRI</h3>
+<p>Let us now consider a distributed setting in which <span class="math">n=L \cdot M</span> polynomials of degree at most <span class="math">d</span> are divided among <span class="math">M</span> <span class="math">\mathtt{Provers}</span>. The output of the protocol should be a proof that all the polynomials <span class="math">f_1, \dots, f_n</span> are close enough to the <span class="math">\mathsf{RS}</span> code. A naive approach would be to send all polynomials in plaintext to one of the provers, who in turn would execute the batched <span class="math">\mathtt{FRI}</span> protocol. Let us consider how this problem can be solved more efficiently.</p>
+<p><span class="math">\mathtt{Provers}</span> generate <span class="math">\mathsf{Merkle~ Tree}</span> commitments to their polynomials and send them to the <span class="math">\mathtt{Master~Prover}</span> (this function can be performed by one of the provers, for simplicity we will assume that this is a separate entity). The <span class="math">\mathtt{Master~Prover}</span> gets a random challenge <span class="math">\theta</span> from the <span class="math">\mathtt{Verifier}</span> and broadcasts it among all <span class="math">\mathtt{Provers}</span>. Now each <span class="math">\mathtt{Prover}</span> <span class="math">P_i</span>, knowing its number <span class="math">i</span>, can generate its “part of the linear combination” and send it to the <span class="math">\mathtt{Master~Prover}</span>.</p>
+<div class="math">
+F_i = \sum_{j=1}^{L}\theta^{(i-1) \cdot L + j}f_{(i-1) \cdot L + j}.
+</div>
+<p><span class="math">\mathtt{Master~Prover}</span> runs a regular version of <span class="math">\mathtt{FRI}</span> for the polynomial <span class="math">\sum_{i=1}^{M}F_i</span>. However, it cannot provide polynomial evaluations and Merkle auth paths for  consistency checks in the query phase of the protocol for individual polynomials, so it asks the corresponding <span class="math">\mathtt{Prover}</span> for each of them.</p>
+<p><span class="math">\mathtt{Master~prover}</span> can easily detect malicious behavior of individual <span class="math">\mathtt{Provers}</span>. This is achieved due to the fact that the partial linear combinations <span class="math">F_i</span> belong to <span class="math">\mathsf{RS}</span> code. This property is especially useful in a distributed SNARK generation process, as it allows for the implementation of economic measures to penalize participants for misbehaving.</p>
+<p>It is easy to see that the time complexity of the <span class="math">\mathtt{Provers}</span> is <span class="math">O(d\log d)</span>. The communication cost (this is communication between provers and master prover) is dominated by sending a partial linear combination, whose size is <span class="math">O(d)</span> elements from <span class="math">\mathbb{F}_p</span>. Moreover, the number of hash invocations required to verify the final proof is significantly less than that needed to verify <span class="math">M</span> independent proofs.</p>
+<p>You can find a more detailed description <a href="https://hackmd.io/@nil-research/rJ_NVyiRA" rel="noopener nofollow ugc">here</a>. Feel free to share your comments!</p>
+            <p><small>1 post - 1 participant</small></p>
+            <p><a href="https://ethresear.ch/t/on-distributed-fri-computation/20697">Read full topic</a></p>
+]]></content:encoded>
+<pubDate>Fri, 18 Oct 2024 14:48:50 +0000</pubDate>
+<pubDate>Fri, 18 Oct 2024 14:48:50 +0000</pubDate>
+</item>
+
+<item>
 <title>BitBadges: Cross-Chain Tokens (EVM <-> SOL <-> BTC <-> COSMOS)</title>
 <link>https://ethresear.ch/t/bitbadges-cross-chain-tokens-evm-sol-btc-cosmos/20696</link>
 <guid>https://ethresear.ch/t/bitbadges-cross-chain-tokens-evm-sol-btc-cosmos/20696</guid>
 <content:encoded><![CDATA[
-<div> BitBadges 多链 应用程序 代币 转移性<br><br>总结:<br>BitBadges 是一种跨链代币标准，旨在为用户提供一个多链应用程序开发平台。它支持包括比特币、以太坊、Solana 和 Cosmos 在内的多个区块链。<br>用户可以通过单一界面和单一服务访问这些不同的链。<br>主要服务包括代币（徽章）的转移功能，使以太坊用户可以将代币发送到 Solana，反之亦然，并提供细粒度的可转让性、默认无智能合约、时间依赖余额等创新功能。<br>BitBadges 通过自身作为 Cosmos 区块链来支持多链操作，兼容任何生态系统的签名。<br>虽然有设计上的权衡，但 BitBadges 提供了一个一站式解决方案，适合需要整合多种区块链应用的用户。 <div>
+<div> BitBadges 多链 应用程序 代币 转移性<br /><br />总结:<br />BitBadges 是一种跨链代币标准，旨在为用户提供一个多链应用程序开发平台。它支持包括比特币、以太坊、Solana 和 Cosmos 在内的多个区块链。<br />用户可以通过单一界面和单一服务访问这些不同的链。<br />主要服务包括代币（徽章）的转移功能，使以太坊用户可以将代币发送到 Solana，反之亦然，并提供细粒度的可转让性、默认无智能合约、时间依赖余额等创新功能。<br />BitBadges 通过自身作为 Cosmos 区块链来支持多链操作，兼容任何生态系统的签名。<br />虽然有设计上的权衡，但 BitBadges 提供了一个一站式解决方案，适合需要整合多种区块链应用的用户。 <div>
 <p>I wanted to introduce you all to BitBadges and what we are building: a cross-chain token standard. See <a href="https://bitbadges.io" rel="noopener nofollow ugc">https://bitbadges.io</a> for it in action or <a href="https://docs.bitbadges.io" rel="noopener nofollow ugc">https://docs.bitbadges.io</a>.</p>
 <p>BitBadges offers a range of tools for building multi-chain applications (Bitcoin, Ethereum, Solana, and Cosmos). All tools are a single interface, a single service, but support users from all chains.</p>
 <p>Our main service is tokens (badges) where an Ethereum user can transfer / send tokens to a Solana and vice versa, along with tons of new innovative features like fine-grained transferability, no smart contracts by default, time-dependent balances, and more.</p>
@@ -20,9 +55,7 @@
             <p><a href="https://ethresear.ch/t/bitbadges-cross-chain-tokens-evm-sol-btc-cosmos/20696">Read full topic</a></p>
 ]]></content:encoded>
 <pubDate>Fri, 18 Oct 2024 11:36:38 +0000</pubDate>
-<pubDate>Fri, 18 Oct 2024 11:36:38 +0000</pubDate>
 </item>
-
 <item>
 <title>Dynamic Blob Targets for Better Blob Pricing</title>
 <link>https://ethresear.ch/t/dynamic-blob-targets-for-better-blob-pricing/20687</link>
