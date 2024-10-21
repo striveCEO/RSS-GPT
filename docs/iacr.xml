@@ -5,11 +5,81 @@
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
 <item>
+<title>Dumbo-MPC: Efficient Fully Asynchronous MPC with Optimal Resilience</title>
+<link>https://eprint.iacr.org/2024/1705</link>
+<guid>https://eprint.iacr.org/2024/1705</guid>
+<content:encoded><![CDATA[
+<div> 关键词: 完全异步多 party 计算 (AMPC), 隐私保护, 保证输出交付 (G.O.D.), Dumbo-MPC, HoneyBadgerMPC, 抗恶意攻击
+
+总结:
+本文提出了一种名为 Dumbo-MPC 的全新完全异步多 party 计算 (AMPC) 设计方案，旨在解决现有 AMPC 协议在实际应用中的局限性，如非最优鲁棒性、高通信成本和额外的在线加密开销。Dumbo-MPC 提供了全面的 G.O.D. 和对 $t3$ 恶意参与者的最优鲁棒性保障（总参与者数为 $n$）。其在线阶段与 HoneyBadgerMPC 类似，具有稳健的、几乎信息理论级别的安全性，但不同的是，Dumbo-MPC 设计了一个创新的双模式离线协议，能在异步环境中鲁棒地预处理乘法三元组。该协议在乐观情况下每三元组通信复杂度为 $O(n)$，并在出现故障时无缝切换到悲观路径以保持 G.O.D. 安全性。为了优化悲观路径的实现效率，文章设计了一种基于紧凑型 KZG 多项式承诺的、针对秘密份额产品关系的高效零知识证明，将两个秘密份额乘积的次数从 $2t$ 减少到 $t$，具有独立的研究价值。
+
+此外，研究者实现了 Dumbo-MPC 并在最多 31 台 AWS 服务器的不同网络设置下进行了详尽评估。据所知，这是首个实现所有阶段 G.O.D. 的 AMPC 实例。文章还将 Dumbo-MPC 与近期由 Groth 和 Shoup 提出的异步三元生成协议 (GS23) 进行了实测对比。当 $n=31$ 时，Dumbo-MPC 在悲观情况下的三元生成速度达到了 94 个/秒（几乎是 GS23 的两倍），而在良好条件下达到了 349 个/秒（比 GS23 快六倍）。这使得 31 个参与者仅需 2-8 分钟即可准备好涉及 100 名竞标者的私人 Vickrey 拍卖的预处理工作，或者只需 10-36 分钟完成包含 $2^{10}$ 输入的混合网络的预处理任务。 <div>
+Fully asynchronous multi-party computation (AMPC) has superior robustness in realizing privacy and guaranteed output delivery (G.O.D.) against asynchronous adversaries that can arbitrarily delay communications. However, none of these protocols are truly practical, as they either have sub-optimal resilience, incur cumbersome communication cost, or suffer from an online phase with extra cryptographic overhead. The only attempting implementation---HoneyBadgerMPC (hbMPC)---merely ensures G.O.D. in some implausible optimistic cases due to a non-robust offline pre-processing phase.
+
+We propose Dumbo-MPC a concretely efficient  AMPC-as-a-service design with all phases G.O.D. and optimal resilience against  $t3$ malicious parties (where $n$ is the total number of parties). Same to hbMPC, Dumbo-MPC has a robust (almost) information-theoretic online phase that can efficiently perform online computations, given pre-processed multiplication triples. While for achieving all phases G.O.D., we design a novel dual-mode offline protocol that can robustly pre-process multiplication triples in asynchrony. The offline phase features $O(n)$ per-triple communication in the optimistic case, followed by a fully asynchronous fallback to a pessimistic path to securely restore G.O.D. in the bad case. To efficiently implement the pessimistic path, we devise a concretely efficient zk-proof for product relationship of secret shares over compact KZG polynomial commitments, which enables us to reduce the degree of two secret shares' product from $2t$ to  $t$ and could be of independent interest.
+
+We also implement and extensively evaluate Dumbo-MPC (particularly its offline phase) in varying network settings with up to 31 AWS servers. To our knowledge, we provide the first implementation of AMPC with all-phase G.O.D. A recent asynchronous triple generation protocol from Groth and Shoup (GS23) is also implemented and experimentally compared. When $n = 31$, Dumbo-MPC generates 94 triplessec (almost twice of GS23) in the pessimistic case and 349 triples/sec (6X of GS23) in the good case, such that 31 parties require only 2-8 min to prepare a private Vickrey auction of 100 bidders or 10-36 min for a mixing network of $2^{10}$ inputs.
+]]></content:encoded>
+<pubDate>Fri, 18 Oct 2024 12:14:10 +0000</pubDate>
+<pubDate>Fri, 18 Oct 2024 12:14:10 +0000</pubDate>
+</item>
+<item>
+<title>From One-Time to Two-Round Reusable Multi-Signatures without Nested Forking</title>
+<link>https://eprint.iacr.org/2024/1704</link>
+<guid>https://eprint.iacr.org/2024/1704</guid>
+<content:encoded><![CDATA[
+<div> 关键词: 多重签名方案、两轮方案、DLOG问题、安全性证明、应用
+
+总结:
+本文关注了基于DLOG难题安全性的两轮多重签名方案，特别是那些具有键聚合功能并在明文公钥模型中运行的方案。针对现有方案的安全性证明提供的具体保证不足的问题，文章提出了两种放松的安全性概念。首先，定义了一次性不可伪造性，扩展了单签署者情况下的类似概念，允许攻击者获取一条特定消息和一组选定签署者的签名。文章构造了一个基于环同态一维函数的非交互式一次性方案，并提供了基于DLOG和RSA假设的有效实例。其次，提出了单集合不可伪造性，限制攻击者只能使用一组选定的签署者来获取多项签名。通过将任何非交互式一次性方案转换为两轮单集合方案的新颖无分支构造方法，该方法将经典的Naor-Yung树形方法扩展到多签署者场景。文章中的多重签名方案在保持安全性的同时，优化了验证密钥和签名的长度，使其独立于签署者数量。 <div>
+Multi-signature schemes are gaining significant interest due to their blockchain applications. Of particular interest are two-round schemes in the plain public-key model that offer key aggregation, and whose security is based on the hardness of the DLOG problem. Unfortunately, despite substantial recent progress, the security proofs of the proposed schemes provide rather insufficient concrete guarantees (especially for 256-bit groups). This frustrating situation has so far been approached either by relying on the security of seemingly stronger assumptions or by considering restricted classes of attackers (e.g., algebraic attackers, which are assumed to provide an algebraic justification of each group element that they produce).
+
+We present a complementing approach by constructing multi-signature schemes that satisfy two relaxed notions of security, whose applicability nevertheless ranges from serving as drop-in replacements to enabling expressive smart contract validation procedures. Our first notion, one-time unforgeability, extends the analogous single-signer notion by considering attackers that obtain a single signature for some message and set of signers of their choice. We construct a non-interactive one-time scheme based on any ring-homomorphic one-way function, admitting efficient instantiations based on the DLOG and RSA assumptions. Aggregated verification keys and signatures consist of two group elements and a single group element, respectively, and our security proof consists of a single application of the forking lemma (thus avoiding the substantial security loss exhibited by the proposed two-round schemes). Additionally, we demonstrate that our scheme naturally extends to a $t$-time scheme, where aggregated verification keys consist of $t+1$ group elements, while aggregated signatures still consist of a single group element.
+
+Our second notion, single-set unforgeability, considers attackers that obtain any polynomial number of signatures but are restricted to a single set of signers of their choice. We transform any non-interactive one-time scheme into a two-round single-set scheme via a novel forking-free construction that extends the seminal Naor-Yung tree-based approach to the multi-signer setting. Aggregated verification keys are essentially identical to those of the underlying one-time scheme, and the length of aggregated signatures is determined by that of the underlying scheme while scaling linearly with the length of messages (noting that long messages can always be hashed using a collision-resistant function). Instantiated with our one-time scheme, we obtain aggregated verification keys and signatures whose lengths are completely independent of the number of signers.
+]]></content:encoded>
+<pubDate>Fri, 18 Oct 2024 11:55:05 +0000</pubDate>
+<pubDate>Fri, 18 Oct 2024 11:55:05 +0000</pubDate>
+</item>
+<item>
+<title>Secure Computation with Parallel Calls to 2-ary Functions</title>
+<link>https://eprint.iacr.org/2024/1701</link>
+<guid>https://eprint.iacr.org/2024/1701</guid>
+<content:encoded><![CDATA[
+<div> 关键词：加密算法、简化的函数、二元函数、安全计算、协议
+
+<br><br>总结:
+
+本文研究了将任意函数的安全计算简化为仅使用二元函数进行安全计算的问题。首先，文章指出存在一个次数为2的多项式$p$，表明没有任何利用并行调用二元函数的协议可以以统计安全性（带有abort）来计算它。接着，文章给出了两种绕过这一不可能性结果的方法：一是通过弱化安全定义，证明所有次数为2的多项式可以通过并行调用二元函数实现具有统计隐私和已知输出的知识（PwKO）；二是借助计算安全性，证明对于任何函数$f$，都存在一种依赖于半诚实安全盲转移假设的协议，该协议可并行调用二元函数并实现对计算受限敌手的安全性（带有abort）。此外，文章还将此问题与减少多党派随机编码（MPRE）的编码复杂性的任务联系起来，展示在标准计算假设下，存在一种可通过常数扇出的$\mathrm{NC}^0$电路实现编码器的MPRE。最后，文章还探讨了在诚实多数设置和具有三元函数情况下的问题，并分别给出了类似的结果，其中后者在恶意多数设置中假设了一次性函数的存在。 <div>
+Reductions are the workhorses of cryptography. They allow constructions of complex cryptographic primitives from simple building blocks. A prominent example is the non-interactive reduction from securely computing a ``complex" function $f$ to securely computing a ``simple" function $g$ via randomized encodings.
+
+    Prior work equated simplicity with functions of small degree. In this work, we consider a different notion of simplicity where we require $g$ to only take inputs from a small number of parties. In other words, we want the arity of $g$ to be as small as possible. 
+
+    In more detail, we consider the problem of reducing secure computation of arbitrary functions to secure computation of functions with arity two (two is the minimal arity required to compute non-trivial functions). Specifically, we want to compute a function $f$ via a protocol that makes parallel calls to 2-ary functions. We want this protocol to be secure against malicious adversaries that could corrupt an arbitrary number of parties. We obtain the following results:
+    
+- Negative Result: We show that there exists a degree-2 polynomial $p$ such that no protocol that makes parallel calls to 2-ary functions can compute $p$ with statistical security with abort.
+            
+- Positive Results: We give two ways to bypass the above impossibility result.
+             
+  1. Weakening the Security Notion. We show that every degree-2 polynomial can be computed with statistical privacy with knowledge of outputs (PwKO) by making parallel calls to 2-ary functions. Privacy with knowledge of outputs is weaker than security with abort.
+                        
+  2. Computational Security. We prove that for every function $f$, there exists a protocol for computing $f$ that makes parallel calls to 2-ary functions and achieves security with abort against computationally-bounded adversaries. The security of this protocol relies on the existence of semi-honest secure oblivious transfer.
+              
+- Applications: We give connections between this problem and the task of reducing the encoding complexity of Multiparty Randomized Encodings (MPRE) (Applebaum, Brakerski, and Tsabary, TCC 2018). Specifically, we show that under standard computational assumptions, there exists an MPRE where the encoder can be implemented by an $\mathrm{NC}^0$ circuit with constant fan-out.
+  
+- Extensions: We explore this problem in the honest majority setting and give similar results assuming one-way functions. We also show that if the parties have access to 3-ary functions then we can construct a computationally secure protocol in the dishonest majority setting assuming one-way functions.
+]]></content:encoded>
+<pubDate>Fri, 18 Oct 2024 04:58:31 +0000</pubDate>
+<pubDate>Fri, 18 Oct 2024 04:58:31 +0000</pubDate>
+</item>
+
+<item>
 <title>Updatable Privacy-Preserving Blueprints</title>
 <link>https://eprint.iacr.org/2023/1787</link>
 <guid>https://eprint.iacr.org/2023/1787</guid>
 <content:encoded><![CDATA[
-<div> 隐私保护蓝图方案 更新 零知识证明 同态加密 蓝图大小<br><br>总结:<br>本文介绍了一种新的隐私保护蓝图方案（UPPB），该方案允许多个用户非交互式地更新其私人输入，同时保持更新过程的隐私性。与原始方案相比，UPPB引入了对累积输入进行验证的能力，而无需泄露用户的私人信息。本文提出了UBlu方案，专门用于比较用户累计输入和审计员提供的固定值，适用于反洗钱等场景。技术上，通过引入一种新颖的可塑性表征方法，有效控制了蓝图的大小，使其不依赖于更新次数，从而适用于实际应用。这一方案基于全同态加密和非交互式零知识证明构建。 <div>
+<div> 隐私保护蓝图方案 更新 零知识证明 同态加密 蓝图大小<br /><br />总结:<br />本文介绍了一种新的隐私保护蓝图方案（UPPB），该方案允许多个用户非交互式地更新其私人输入，同时保持更新过程的隐私性。与原始方案相比，UPPB引入了对累积输入进行验证的能力，而无需泄露用户的私人信息。本文提出了UBlu方案，专门用于比较用户累计输入和审计员提供的固定值，适用于反洗钱等场景。技术上，通过引入一种新颖的可塑性表征方法，有效控制了蓝图的大小，使其不依赖于更新次数，从而适用于实际应用。这一方案基于全同态加密和非交互式零知识证明构建。 <div>
 Privacy-preserving blueprint schemes (Kohlweiss et al., EUROCRYPT'23) offer a mechanism for safeguarding user's privacy while allowing for specific legitimate controls by a designated auditor agent. 
 
 These schemes enable users to create escrows encrypting the result of evaluating a function $y=P(t,x)$, with $P$ being publicly known, $t$ a secret used during the auditor's key generation, and $x$ the user's private input.  Crucially, escrows only disclose the blueprinting result $y=P(t,x)$ to the designated auditor, even in cases where the auditor is fully compromised. The original definition and construction only support the evaluation of functions $P$ on an input $x$ provided by a single user. 
@@ -19,9 +89,7 @@ We address this limitation by introducing updatable privacy-preserving blueprint
 From the technical perspective, we devise a novel technique to keep the escrow size concise, independent of the number of updates, and reasonable for practical applications. We achieve this via a novel characterization of malleability for the algebraic NIZK by Couteau and Hartmann (CRYPTO’20) that allows for an additive update function.
 ]]></content:encoded>
 <pubDate>Sun, 19 Nov 2023 17:36:23 +0000</pubDate>
-<pubDate>Sun, 19 Nov 2023 17:36:23 +0000</pubDate>
 </item>
-
 <item>
 <title>Computational Attestations of Polynomial Integrity Towards Verifiable Machine Learning</title>
 <link>https://eprint.iacr.org/2024/639</link>
