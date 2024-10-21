@@ -4,6 +4,23 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+<item>
+<title>Updatable Privacy-Preserving Blueprints</title>
+<link>https://eprint.iacr.org/2023/1787</link>
+<guid>https://eprint.iacr.org/2023/1787</guid>
+<content:encoded><![CDATA[
+<div> 隐私保护蓝图方案 更新 零知识证明 同态加密 蓝图大小<br><br>总结:<br>本文介绍了一种新的隐私保护蓝图方案（UPPB），该方案允许多个用户非交互式地更新其私人输入，同时保持更新过程的隐私性。与原始方案相比，UPPB引入了对累积输入进行验证的能力，而无需泄露用户的私人信息。本文提出了UBlu方案，专门用于比较用户累计输入和审计员提供的固定值，适用于反洗钱等场景。技术上，通过引入一种新颖的可塑性表征方法，有效控制了蓝图的大小，使其不依赖于更新次数，从而适用于实际应用。这一方案基于全同态加密和非交互式零知识证明构建。 <div>
+Privacy-preserving blueprint schemes (Kohlweiss et al., EUROCRYPT'23) offer a mechanism for safeguarding user's privacy while allowing for specific legitimate controls by a designated auditor agent. 
+
+These schemes enable users to create escrows encrypting the result of evaluating a function $y=P(t,x)$, with $P$ being publicly known, $t$ a secret used during the auditor's key generation, and $x$ the user's private input.  Crucially, escrows only disclose the blueprinting result $y=P(t,x)$ to the designated auditor, even in cases where the auditor is fully compromised. The original definition and construction only support the evaluation of functions $P$ on an input $x$ provided by a single user. 
+    
+We address this limitation by introducing updatable privacy-preserving blueprint schemes (UPPB), which enhance the original notion with the ability for multiple users to non-interactively update the private user input $x$ while blueprinting. Moreover, UPPBs contain a proof that $y$ is the result of a sequence of valid updates, while revealing nothing else about the private inputs $\{x_i\}$ of updates. As in the case of privacy-preserving blueprints, we first observe that UPPBs can be realized via a generic construction for arbitrary predicates $P$ based on FHE and NIZKs. Our main result is UBlu, an efficient instantiation for a specific predicate comparing the values $x$ and $t$, where $x$ is the cumulative sum of users' private inputs and $t$ is a fixed private value provided by the auditor in the setup phase. This rather specific setting already finds interesting applications such as privacy-preserving anti-money laundering and location tracking, and can be extended to support more generic predicates.
+    
+From the technical perspective, we devise a novel technique to keep the escrow size concise, independent of the number of updates, and reasonable for practical applications. We achieve this via a novel characterization of malleability for the algebraic NIZK by Couteau and Hartmann (CRYPTO’20) that allows for an additive update function.
+]]></content:encoded>
+<pubDate>Sun, 19 Nov 2023 17:36:23 +0000</pubDate>
+<pubDate>Sun, 19 Nov 2023 17:36:23 +0000</pubDate>
+</item>
 
 <item>
 <title>Computational Attestations of Polynomial Integrity Towards Verifiable Machine Learning</title>
