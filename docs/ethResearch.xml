@@ -4,6 +4,169 @@
 <title>Ethereum Research - Latest topics</title>
 <link>https://ethresear.ch/latest</link>
 
+<item>
+<title>Proposal for a L2 Keystore based on global SSI standards and reference implementations</title>
+<link>https://ethresear.ch/t/proposal-for-a-l2-keystore-based-on-global-ssi-standards-and-reference-implementations/20732</link>
+<guid>https://ethresear.ch/t/proposal-for-a-l2-keystore-based-on-global-ssi-standards-and-reference-implementations/20732</guid>
+<content:encoded><![CDATA[
+<div> 关键词：Sidetree、DIDs、Ethereum、L2网络、key管理
+
+总结：
+我们提议构建一个基于Sidetree协议的二级（L2）密钥存储网络，由以太坊生态系统中值得信赖的实体，如L2运营商和大型企业部署并运营，以此作为公共基础设施。该网络将提供一个标准化的跨链和低成本非托管密钥管理解决方案，支持W3C去中心化身份标识符（DIDs）。文章指出，随着以太坊经历扩容（L2 rollups）、智能合约钱包安全性和隐私增强等三个重大转变，DIDs和可验证凭证（VCs）能解决用户在身份、密钥和地址管理方面面临的挑战。Sidetree作为一个可在现有区块链网络之上运行的L2协议，能够通过批量处理和数据锚定实现降低成本和提高扩展性，并具有区块链无关性。我们建议建立这样一个L2层的Sidetree网络，以实现跨链DID解析、降低密钥管理操作成本、利用零知识证明保护隐私、支持与智能合约钱包结合以及促进与其他DID系统和应用的互操作性和标准化，同时避免供应商锁定。 <div>
+<p>TLDR: We propose a Sidetree-based key store L2 network as a public utility deployed and operated by trusted Ethereum ecosystem entities such as L2 operators and large enterprises supporting Ethereum as a standardized cross-chain and low-cost non-custodial key management stack using W3C Decentralized Identifiers (DIDs).</p>
+<p><strong>Background</strong></p>
+<p>The <a href="https://github.com/ethereum-oasis-op/L2" rel="noopener nofollow ugc">Ethereum Oasis Community Projects L2 Standards WG</a> recently published <a href="https://entethalliance.org/w3cs-did-and-vc-technology-can-help-with-ethereums-three-transitions/" rel="noopener nofollow ugc">a report</a> " How W3C DIDs and VCs can help with Ethereum’s Three Transitions". This report aligns with the recent posts (<a href="https://ethresear.ch/t/self-sovereign-identity-and-account-abstraction-for-privacy-preserving-cross-chain-user-operations-across-roll-ups/19599">1</a> and <a href="https://ethresear.ch/t/enabling-standardized-on-chain-executions-through-modular-accounts/20127">2</a>) by <a class="mention" href="https://ethresear.ch/u/eugere">@EugeRe</a>. In our report, we discuss how the integration of W3C Decentralized Identifiers (DIDs) and Verifiable Credentials (VCs) can address challenges faced by Ethereum as it undergoes its three major transitions: scaling through L2 rollups, enhancing wallet security via smart contract wallets, and advancing privacy. Ethereum’s transitions necessitate changes in how users manage identities, keys, and addresses. DIDs and VCs, core components of the decentralized identity ecosystem, offer solutions for these challenges.</p>
+<p>We argue that DIDs provide globally unique, resolvable identifiers, while VCs enable verifiable claims about identity, attributes, or qualifications. By leveraging DIDs and VCs, Ethereum can improve identity management, key rotation and recovery, and privacy. DID documents can store addresses across various networks and facilitate key management, including social recovery. Additionally, zero-knowledge proofs can enhance privacy when using keys from DID documents in Ethereum ecosystem transactions both on and offchain.</p>
+<p>Several DID methods, based on the <a href="https://identity.foundation/sidetree/spec/" rel="noopener nofollow ugc">Sidetree Protocol</a>, a Layer 2 DID standard with <a href="https://github.com/decentralized-identity/sidetree" rel="noopener nofollow ugc">reference implementations</a>, are suitable for the Ethereum ecosystem, offering permissionless, blockchain-anchored, scalable, and cost-effective solutions. The Sidetree Protocol was developed by the Decentralized Identity Foundation (<a href="https://identity.foundation/" rel="noopener nofollow ugc">DIF</a>) and enables the creation and management of scalable DIDs on various blockchain networks, making it a blockchain-agnostic solution. This allows DIDs to be anchored to different distributed ledger technologies such as Ethereum Mainnet.</p>
+<p><strong>Key Technical Aspects</strong></p>
+<ul>
+<li>
+<p><strong>Layer 2 Protocol:</strong> Sidetree operates as a layer on top of existing blockchain networks, decoupling DID operations from the base layer’s transaction limitations. This allows for improved scalability and reduced costs compared to directly interacting with the blockchain for every DID operation.</p>
+</li>
+<li>
+<p><strong>Blockchain Agnostic:</strong> The protocol is designed to work with any blockchain that supports anchoring data, providing flexibility in choosing the underlying network. Popular implementations exist on blockchains like Bitcoin (ION) and Ethereum (<a href="https://transmute.industries/technology/element/" rel="noopener nofollow ugc">Element</a>).</p>
+</li>
+<li>
+<p><strong>Decentralized PKI (DPKI):</strong> Sidetree leverages a decentralized public key infrastructure, where DID controllers hold the private keys associated with their DIDs. This empowers users with full control over their digital identities.</p>
+</li>
+<li>
+<p><strong>DID Operations:</strong> The core operations supported by Sidetree are Create, Update, Recover, and Deactivate. These actions allow for the lifecycle management of DIDs and their associated DID documents.</p>
+</li>
+<li>
+<p><strong>Content-Addressable Storage (CAS):</strong> Sidetree utilizes CAS systems like IPFS or Filecoin to store DID documents and other related data. This ensures data immutability and availability through a decentralized network.</p>
+</li>
+<li>
+<p><strong>Batching and Anchoring:</strong> To optimize efficiency, Sidetree nodes batch multiple DID operations together and anchor them to the underlying blockchain in a single transaction. This significantly reduces transaction costs and improves throughput.</p>
+</li>
+<li>
+<p><strong>Conflict-Free Replicated Data Types (CRDTs):</strong> Sidetree employs CRDTs to manage DID document updates and resolve conflicts in a decentralized manner. This ensures data consistency across the network.</p>
+</li>
+</ul>
+<p>In the Sidetree protocol, updating a DID document is a multi-step process as summarized below:</p>
+<ol>
+<li><strong>Generate Update Payload</strong>: The DID controller creates an update payload, which includes the following components:</li>
+</ol>
+<ul>
+<li>
+<p><code>didSuffix</code>: The unique suffix of the DID being updated.</p>
+</li>
+<li>
+<p><code>revealValue</code>: The revealed value of the previous update commitment, used for verification.</p>
+</li>
+<li>
+<p><code>patches</code>: An array of JSON Patch operations specifying the modifications to be made to the DID Document.</p>
+</li>
+<li>
+<p><code>updateCommitment</code>: A new commitment value for the next update operation.</p>
+</li>
+</ul>
+<ol start="2">
+<li>
+<p><strong>Submit to Sidetree Node</strong>: The DID controller submits the update payload to a Sidetree node.</p>
+</li>
+<li>
+<p><strong>Batching and Anchoring</strong>: The Sidetree node collects multiple update operations and other DID operations, batches them together into an anchor file, and anchors this file to the underlying blockchain. The anchor file contains hashes of the operations and other metadata, but not the actual operation data.</p>
+</li>
+<li>
+<p><strong>Store Operation Data</strong>: The Sidetree node stores the full update operation data, along with other operations, in a ‘chunk file’ and makes it available via a content-addressable storage (CAS) system like IPFS or Filecoin. The anchor file on the blockchain contains a reference to this chunk file.</p>
+</li>
+<li>
+<p><strong>Resolution</strong>: When another entity wants to resolve the DID and obtain the latest DID Document, they query a Sidetree node.</p>
+</li>
+<li>
+<p><strong>Retrieve and Apply Updates</strong>: The Sidetree node retrieves the relevant anchor files from the blockchain, follows the references to the chunk files on the CAS, and applies all the update operations in chronological order to the original DID Document to construct the latest version.</p>
+</li>
+</ol>
+<p>The Sidetree protocol furthermore incorporates several security measures to ensure the integrity of DID operations and mitigate potential attack vectors:</p>
+<p><strong>1. Decentralized Public Key Infrastructure (DPKI)</strong></p>
+<ul>
+<li><strong>DID Controller Holds Private Keys:</strong> Each DID controller possesses the private keys associated with their DIDs, giving them complete control over their identity data. This eliminates the risk of a single point of failure or compromise associated with centralized key management systems.</li>
+</ul>
+<p><strong>2. Commitment Scheme</strong></p>
+<ul>
+<li>
+<p><strong>Update Commitments:</strong> Each update operation includes a commitment to the next update, cryptographically linking successive updates. This prevents unauthorized modifications or tampering with the DID Document’s history.</p>
+</li>
+<li>
+<p><strong>Reveal Value:</strong> The reveal value associated with the previous update commitment ensures that only the DID controller with the corresponding private key can initiate a new update.</p>
+</li>
+</ul>
+<p><strong>3. Batching and Anchoring</strong></p>
+<ul>
+<li>
+<p><strong>Blockchain Anchoring:</strong> Batching multiple DID operations into anchor files and anchoring them to the blockchain provides a tamper-proof and auditable history of operations.</p>
+</li>
+<li>
+<p><strong>Content-Addressable Storage (CAS):</strong> Storing operation data in a CAS like IPFS or Filecoin further enhances immutability and prevents unauthorized modification.</p>
+</li>
+</ul>
+<p><strong>4. Cryptographic Operations</strong></p>
+<ul>
+<li>
+<p><strong>Digital Signatures:</strong> Operations are signed using the DID controller’s private key, ensuring authenticity and non-repudiation.</p>
+</li>
+<li>
+<p><strong>Hashing:</strong> Hash functions are used extensively for creating commitments, linking operations, and generating identifiers, adding another layer of security and integrity.</p>
+</li>
+</ul>
+<p><strong>5. Conflict-Free Replicated Data Types (CRDTs)</strong></p>
+<ul>
+<li><strong>Deterministic Conflict Resolution:</strong> CRDTs enable the network to handle concurrent updates to the same DID Document and resolve conflicts in a consistent and predictable manner.</li>
+</ul>
+<p><strong>6. Network Redundancy and Decentralization</strong></p>
+<ul>
+<li>
+<p><strong>Multiple Sidetree Nodes:</strong> The existence of multiple Sidetree nodes operated by different entities reduces the risk of a single point of failure or censorship.</p>
+</li>
+<li>
+<p><strong>Peer-to-Peer Resolution:</strong> The ability to resolve DIDs by querying any Sidetree node further enhances decentralization and resilience.</p>
+</li>
+</ul>
+<p><strong>Mitigation of Attack Vectors</strong></p>
+<ul>
+<li>
+<p><strong>Unauthorized Updates:</strong> The commitment scheme and the requirement for the DID controller’s private key for updates prevent unauthorized modifications to the DID Document.</p>
+</li>
+<li>
+<p><strong>Data Tampering:</strong> Blockchain anchoring and CAS storage ensure data immutability, making it difficult to tamper with past operations or DID documents.</p>
+</li>
+<li>
+<p><strong>Censorship:</strong> The decentralized nature of the network with multiple nodes and peer-to-peer resolution mitigates the risk of censorship or denial of service attacks.</p>
+</li>
+<li>
+<p><strong>Single Point of Failure:</strong> The distribution of private keys among DID controllers and the redundancy of Sidetree nodes reduce the risk of a single point of compromise.</p>
+</li>
+</ul>
+<p><strong>Proposal</strong></p>
+<p>Given the above, we propose that a Sidetree-based L2 key store network be deployed and operated as a public utility by trusted Ethereum ecosystem entities such as L2 operators, and large enterprises supporting Ethereum as a standardized cross-chain and low-cost non-custodial key management solution without vendor-lockin in contrast to any bespoke solution currently contemplated.</p>
+<p>We envision the following beneficial characteristics of such an approach:</p>
+<ol>
+<li>
+<p><strong>Cross-chain DID resolution:</strong> When interacting with different Ethereum networks (mainnet, testnets, or other L2s), the user’s DID can be resolved through the L2 Sidetree network. This allows applications and smart contracts on these networks to access the user’s DID document and verify their keys.</p>
+</li>
+<li>
+<p><strong>Low-cost key management operations:</strong> Key rotation, recovery, and other key management operations can be performed on the L2 Sidetree network in batches significantly lowering individual transaction costs.</p>
+</li>
+<li>
+<p><strong>ZK proofs for privacy:</strong> Zero-knowledge proofs can be used to selectively reveal information about the user’s keys and DID document while preserving privacy. This allows for secure and private interactions across different Ethereum networks without exposing sensitive data.</p>
+</li>
+<li>
+<p><strong>Smart contract wallets and DIDs:</strong> Smart contract wallets can be associated with DIDs, enabling secure and decentralized key management for these wallets. The DID document can specify the controlling keys for the wallet, allowing for multi-signature and social recovery mechanisms.</p>
+</li>
+<li>
+<p><strong>Interoperability and standardization:</strong> By leveraging the W3C DID standard and the Sidetree protocol, the L2 Sidetree network ensures interoperability with other DID systems and applications within the Ethereum ecosystem such as Polygon ID. This promotes a seamless and user-friendly experience for managing keys and identities across different chains.</p>
+</li>
+<li>
+<p><strong>Avoiding Vendor Lock-In:</strong> By using global identity standards from the W3C and DIF together with open-source reference implementations and independent Sidetree node operators, the ecosystem can make cross-chain identity/key operations a public utility at very low to no costs.</p>
+</li>
+</ol>
+<p>We are inviting and looking forward to comments on this proposal.</p>
+            <p><small>2 posts - 2 participants</small></p>
+            <p><a href="https://ethresear.ch/t/proposal-for-a-l2-keystore-based-on-global-ssi-standards-and-reference-implementations/20732">Read full topic</a></p>
+]]></content:encoded>
+<pubDate>Mon, 21 Oct 2024 18:58:56 +0000</pubDate>
+<pubDate>Mon, 21 Oct 2024 18:58:56 +0000</pubDate>
+</item>
 
 <item>
 <title>On Distributed FRI Computation</title>
