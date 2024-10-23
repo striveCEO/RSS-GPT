@@ -4,6 +4,7 @@
 <title>cs updates on arXiv.org</title>
 <link>http://rss.arxiv.org/rss/cs</link>
 
+
 <item>
 <title>Deep Domain Isolation and Sample Clustered Federated Learning for Semantic Segmentation</title>
 <link>https://arxiv.org/abs/2410.14693</link>
@@ -11,12 +12,11 @@
 <content:encoded><![CDATA[
 <div> 关键词：联邦学习、非独立同分布、协变量偏移、深度域隔离、样例聚类联邦学习
 
-<br><br>总结:
+<br /><br />总结:
 该文首次探究了联邦学习在二维分割任务中因参与者数据间的协变量偏移而带来的收敛问题，发现其影响虽小于标签偏移但仍存在。现有的个性化联邦学习（PFL）和集群联邦学习（CFL）方法假设每个参与者的数据集内部是一致且与未来测试样本相匹配的。为了解决这一问题，文中提出了深度域隔离（DDI）技术，能够在模型梯度空间中直接隔离图像域。进一步地，文章提出了一种样例聚类联邦学习（SCFL）框架，结合了联邦高斯混合模型和谱聚类算法，以标准联邦学习方式训练针对不同分散图像域的独立模型。最后，通过训练一个分类器，可以在推理时将测试样本关联到对应的域簇，从而实现对每个参与者测试分布假设的无关性。实验证明，该方法在玩具分割数据集以及Cityscapes和GTA5数据集的不同划分上使用EfficientVIT-B0模型进行实验，相比其他方法有显著的性能提升。研究成果已开源发布于GitHub仓库https://github.com/MatthisManthe/DDI_SCFL 。 <div>
 arXiv:2410.14693v1 Announce Type: new 
 Abstract: Empirical studies show that federated learning exhibits convergence issues in Non Independent and Identically Distributed (IID) setups. However, these studies only focus on label distribution shifts, or concept shifts (e.g. ambiguous tasks). In this paper, we explore for the first time the effect of covariate shifts between participants' data in 2D segmentation tasks, showing an impact way less serious than label shifts but still present on convergence. Moreover, current Personalized (PFL) and Clustered (CFL) Federated Learning methods intrinsically assume the homogeneity of the dataset of each participant and its consistency with future test samples by operating at the client level. We introduce a more general and realistic framework where each participant owns a mixture of multiple underlying feature domain distributions. To diagnose such pathological feature distributions affecting a model being trained in a federated fashion, we develop Deep Domain Isolation (DDI) to isolate image domains directly in the gradient space of the model. A federated Gaussian Mixture Model is fit to the sample gradients of each class, while the results are combined with spectral clustering on the server side to isolate decentralized sample-level domains. We leverage this clustering algorithm through a Sample Clustered Federated Learning (SCFL) framework, performing standard federated learning of several independent models, one for each decentralized image domain. Finally, we train a classifier enabling to associate a test sample to its corresponding domain cluster at inference time, offering a final set of models that are agnostic to any assumptions on the test distribution of each participant. We validate our approach on a toy segmentation dataset as well as different partitionings of a combination of Cityscapes and GTA5 datasets using an EfficientVIT-B0 model, showing a significant performance gain compared to other approaches. Our code is available at https://github.com/MatthisManthe/DDI_SCFL .
 ]]></content:encoded>
-<pubDate>Tue, 22 Oct 2024 00:00:00 -0400</pubDate>
 <pubDate>Tue, 22 Oct 2024 00:00:00 -0400</pubDate>
 </item>
 <item>
@@ -26,12 +26,11 @@ Abstract: Empirical studies show that federated learning exhibits convergence is
 <content:encoded><![CDATA[
 <div> 关键词：联邦学习（Federated Learning）、通信成本、视觉基础模型、对比语言图像预训练（Contrastive Language Image Pretraining, CLIP）、特征注意力模块（Feature Attention Module）
 
-总结:<br>
+总结:<br />
 本文提出了一种用于分类任务的联邦学习环境下自适应的CLIP模型，名为FACMIC。该模型旨在解决在保证数据隐私的同时，进行深度模型训练时面临的通信成本问题。FACMIC采用了一个轻量级且高效的特征注意力模块，可以根据每个客户端的数据选择合适的特征。此外，还提出了一个领域适应技术以减小客户端间数据分布的差异。实验结果表明，FACMIC在处理真实世界和多源医学影像数据方面表现优越。相关代码已开源，可在https://github.com/AIPMLab/FACMIC获取。 <div>
 arXiv:2410.14707v1 Announce Type: new 
 Abstract: Federated learning (FL) has emerged as a promising approach to medical image analysis that allows deep model training using decentralized data while ensuring data privacy. However, in the field of FL, communication cost plays a critical role in evaluating the performance of the model. Thus, transferring vision foundation models can be particularly challenging due to the significant resource costs involved. In this paper, we introduce a federated adaptive Contrastive Language Image Pretraining CLIP model designed for classification tasks. We employ a light-weight and efficient feature attention module for CLIP that selects suitable features for each client's data. Additionally, we propose a domain adaptation technique to reduce differences in data distribution between clients. Experimental results on four publicly available datasets demonstrate the superior performance of FACMIC in dealing with real-world and multisource medical imaging data. Our codes are available at https://github.com/AIPMLab/FACMIC.
 ]]></content:encoded>
-<pubDate>Tue, 22 Oct 2024 00:00:00 -0400</pubDate>
 <pubDate>Tue, 22 Oct 2024 00:00:00 -0400</pubDate>
 </item>
 <item>
@@ -41,13 +40,12 @@ Abstract: Federated learning (FL) has emerged as a promising approach to medical
 <content:encoded><![CDATA[
 <div> 关键词: on-device control agents, Multimodal Large Language Models (MLLMs), DistRL, reinforcement learning (RL), training efficiency
 
-<br><br>总结:
+<br /><br />总结:
 
 本文介绍了一种针对移动设备控制代理的新型框架DistRL，该框架旨在提高集成多模态大型语言模型（MLLMs）的在线强化学习（RL）微调效率。针对数据有限和在线训练过程低效的问题，DistRL采用集中式训练与分布式数据采集相结合的方式，确保动态在线交互下的高效微调。此外，DistRL还配备了一个定制的RL算法，有效地平衡了探索性与收集数据的优先使用，以实现稳定而健壮的训练。实验结果显示，相比于领先的同步多机器方法，DistRL的训练效率提高了3倍，训练数据收集速度提高了2.4倍。在完成实际设备控制任务方面，经过训练后，DistRL在公开基准测试中的成功率相对提升了20%，显著优于现有方法的同时，保持了相同的训练时间。这些结果验证了DistRL是一个可扩展、高效的解决方案，为现实世界中的设备控制任务提供了显著提升的训练效率和代理性能。 <div>
 arXiv:2410.14803v1 Announce Type: new 
 Abstract: On-device control agents, especially on mobile devices, are responsible for operating mobile devices to fulfill users' requests, enabling seamless and intuitive interactions. Integrating Multimodal Large Language Models (MLLMs) into these agents enhances their ability to understand and execute complex commands, thereby improving user experience. However, fine-tuning MLLMs for on-device control presents significant challenges due to limited data availability and inefficient online training processes. This paper introduces DistRL, a novel framework designed to enhance the efficiency of online RL fine-tuning for mobile device control agents. DistRL employs centralized training and decentralized data acquisition to ensure efficient fine-tuning in the context of dynamic online interactions. Additionally, the framework is backed by our tailor-made RL algorithm, which effectively balances exploration with the prioritized utilization of collected data to ensure stable and robust training. Our experiments show that, on average, DistRL delivers a 3X improvement in training efficiency and enables training data collection 2.4X faster than the leading synchronous multi-machine methods. Notably, after training, DistRL achieves a 20% relative improvement in success rate compared to state-of-the-art methods on general Android tasks from an open benchmark, significantly outperforming existing approaches while maintaining the same training time. These results validate DistRL as a scalable and efficient solution, offering substantial improvements in both training efficiency and agent performance for real-world, in-the-wild device control tasks.
 ]]></content:encoded>
-<pubDate>Tue, 22 Oct 2024 00:00:00 -0400</pubDate>
 <pubDate>Tue, 22 Oct 2024 00:00:00 -0400</pubDate>
 </item>
 <item>
@@ -55,13 +53,12 @@ Abstract: On-device control agents, especially on mobile devices, are responsibl
 <link>https://arxiv.org/abs/2410.14877</link>
 <guid>https://arxiv.org/abs/2410.14877</guid>
 <content:encoded><![CDATA[
-<div> 关键词: 变流器存储、电网、有源发电机控制、共识算法、安全限制<br><br>总结:
+<div> 关键词: 变流器存储、电网、有源发电机控制、共识算法、安全限制<br /><br />总结:
 
 本文探讨了变流器储能系统在未来大规模可再生能源并网中的关键作用。为了实现类似同步发电机特性的电网形成型逆变器(GFM)通过初级控制环路参与频率调节和故障后恢复频率至正常水平。然而，确保在电网从预扰动到后扰动运行点过渡期间，暂态频率跃变不会超出安全极限至关重要。文章提出了一种层次化的安全强制共识方法，该方法结合设备层（分布式）瞬态安全性滤波器与二级层（分布式）共识协调，以实现三个目标：将暂态频率跃变限制在安全范围内、最小化频率偏离额定值以及确保GFM接口存储单元间的协同功率共享。通过在IEEE 68节点系统上使用GFM接口储能网络模拟多种电网暂态场景，验证了所提出的两层安全共识技术的有效性。 <div>
 arXiv:2410.14877v1 Announce Type: new 
 Abstract: Inverter-based storages are poised to play a prominent role in future power grids with massive renewable generation. Grid-forming inverters (GFMs) are emerging as a dominant technology with synchronous generators (SG)-like characteristics through primary control loops. Advanced secondary control schemes, e.g., consensus algorithms, allow GFM-interfaced storage units to participate in frequency regulations and restore nominal frequency following grid disturbances. However, it is imperative to ensure transient frequency excursions do not violate critical safety limits while the grid transitions from pre- to post-disturbance operating point. This paper presents a hierarchical safety-enforced consensus method -- combining a device-layer (decentralized) transient safety filter with a secondary-layer (distributed) consensus coordination -- to achieve three distinct objectives: limiting transient frequency excursions to safe limits, minimizing frequency deviations from nominal, and ensuring coordinated power sharing among GFM-storage units. The proposed hierarchical (two-layered) safety-consensus technique is illustrated using a GFM-interfaced storage network on an IEEE 68-bus system under multiple grid transient scenarios.
 ]]></content:encoded>
-<pubDate>Tue, 22 Oct 2024 00:00:00 -0400</pubDate>
 <pubDate>Tue, 22 Oct 2024 00:00:00 -0400</pubDate>
 </item>
 <item>
@@ -77,7 +74,6 @@ arXiv:2410.14916v1 Announce Type: new
 Abstract: Multi-agent systems are trained to maximize shared cost objectives, which typically reflect system-level efficiency. However, in the resource-constrained environments of mobility and transportation systems, efficiency may be achieved at the expense of fairness -- certain agents may incur significantly greater costs or lower rewards compared to others. Tasks could be distributed inequitably, leading to some agents receiving an unfair advantage while others incur disproportionately high costs. It is important to consider the tradeoffs between efficiency and fairness. We consider the problem of fair multi-agent navigation for a group of decentralized agents using multi-agent reinforcement learning (MARL). We consider the reciprocal of the coefficient of variation of the distances traveled by different agents as a measure of fairness and investigate whether agents can learn to be fair without significantly sacrificing efficiency (i.e., increasing the total distance traveled). We find that by training agents using min-max fair distance goal assignments along with a reward term that incentivizes fairness as they move towards their goals, the agents (1) learn a fair assignment of goals and (2) achieve almost perfect goal coverage in navigation scenarios using only local observations. For goal coverage scenarios, we find that, on average, our model yields a 14% improvement in efficiency and a 5% improvement in fairness over a baseline trained using random assignments. Furthermore, an average of 21% improvement in fairness can be achieved compared to a model trained on optimally efficient assignments; this increase in fairness comes at the expense of only a 7% decrease in efficiency. Finally, we extend our method to environments in which agents must complete coverage tasks in prescribed formations and show that it is possible to do so without tailoring the models to specific formation shapes.
 ]]></content:encoded>
 <pubDate>Tue, 22 Oct 2024 00:00:00 -0400</pubDate>
-<pubDate>Tue, 22 Oct 2024 00:00:00 -0400</pubDate>
 </item>
 <item>
 <title>MorphAgent: Empowering Agents through Self-Evolving Profiles and Decentralized Collaboration</title>
@@ -87,11 +83,10 @@ Abstract: Multi-agent systems are trained to maximize shared cost objectives, wh
 <div> 关键词: 大型语言模型 (LLM), 分布式多智能体系统 (MAS), 变形代理 (MorphAgent), 自我演进的代理配置文件, 动态角色演化
 
 总结:
-本文介绍了MorphAgent，这是一种用于分布式多智能体协作的新颖框架，允许代理动态地进化其角色和能力。该框架利用自我演进的代理配置文件，通过三个关键指标进行优化，引导代理在保持互补团队动态的同时细化各自的专长。MorphAgent实现了一个两阶段过程：初始配置文件优化的预热阶段，以及根据任务反馈持续调整角色的任务执行阶段。实验结果显示，与传统的静态角色MAS相比，MorphAgent在任务性能和适应变化需求方面表现出优越性，为构建更强大和灵活的多智能体协作系统开辟了道路。相关代码将在 https://github.com/LINs-lab/learn2collaborate 公开可用。<br><br> <div>
+本文介绍了MorphAgent，这是一种用于分布式多智能体协作的新颖框架，允许代理动态地进化其角色和能力。该框架利用自我演进的代理配置文件，通过三个关键指标进行优化，引导代理在保持互补团队动态的同时细化各自的专长。MorphAgent实现了一个两阶段过程：初始配置文件优化的预热阶段，以及根据任务反馈持续调整角色的任务执行阶段。实验结果显示，与传统的静态角色MAS相比，MorphAgent在任务性能和适应变化需求方面表现出优越性，为构建更强大和灵活的多智能体协作系统开辟了道路。相关代码将在 https://github.com/LINs-lab/learn2collaborate 公开可用。<br /><br /> <div>
 arXiv:2410.15048v1 Announce Type: new 
 Abstract: Large Language Model (LLM) based multi-agent systems (MAS) have shown promise in tackling complex tasks, but often rely on predefined roles and centralized coordination, limiting their adaptability to evolving challenges. This paper introduces MorphAgent, a novel framework for decentralized multi-agent collaboration that enables agents to dynamically evolve their roles and capabilities. Our approach employs self-evolving agent profiles, optimized through three key metrics, guiding agents in refining their individual expertise while maintaining complementary team dynamics. MorphAgent implements a two-phase process: a warm-up phase for initial profile optimization, followed by a task execution phase where agents continuously adapt their roles based on task feedback. Our experimental results show that MorphAgent outperforms traditional static-role MAS in terms of task performance and adaptability to changing requirements, paving the way for more robust and versatile multi-agent collaborative systems. Our code will be publicly available at \url{https://github.com/LINs-lab/learn2collaborate}.
 ]]></content:encoded>
-<pubDate>Tue, 22 Oct 2024 00:00:00 -0400</pubDate>
 <pubDate>Tue, 22 Oct 2024 00:00:00 -0400</pubDate>
 </item>
 <item>
@@ -101,12 +96,11 @@ Abstract: Large Language Model (LLM) based multi-agent systems (MAS) have shown 
 <content:encoded><![CDATA[
 <div> 关键词：Federated Learning（联邦学习）、Personalized FL（个性化联邦学习）、Non-IID数据、FedAFK、性能提升
 
-<br><br>总结:
+<br /><br />总结:
 本文提出了一种名为FedAFK的新方法，用于解决联邦学习中的统计异质性挑战，特别是针对非独立同分布(Non-IID)数据的个性化联邦学习（pFL）问题。FedAFK通过自适应特征聚合和知识转移机制，旨在更好地训练特征提取器，同时在保证全局模型知识利用的同时实现客户端的个性化。实验结果表明，在三个数据集和两种常用的异构设置下，FedAFK相比于十三种主流基线方法具有更优的性能表现。 <div>
 arXiv:2410.15073v1 Announce Type: new 
 Abstract: Federated Learning(FL) is popular as a privacy-preserving machine learning paradigm for generating a single model on decentralized data. However, statistical heterogeneity poses a significant challenge for FL. As a subfield of FL, personalized FL (pFL) has attracted attention for its ability to achieve personalized models that perform well on non-independent and identically distributed (Non-IID) data. However, existing pFL methods are limited in terms of leveraging the global model's knowledge to enhance generalization while achieving personalization on local data. To address this, we proposed a new method personalized Federated learning with Adaptive Feature Aggregation and Knowledge Transfer (FedAFK), to train better feature extractors while balancing generalization and personalization for participating clients, which improves the performance of personalized models on Non-IID data. We conduct extensive experiments on three datasets in two widely-used heterogeneous settings and show the superior performance of our proposed method over thirteen state-of-the-art baselines.
 ]]></content:encoded>
-<pubDate>Tue, 22 Oct 2024 00:00:00 -0400</pubDate>
 <pubDate>Tue, 22 Oct 2024 00:00:00 -0400</pubDate>
 </item>
 <item>
@@ -116,12 +110,11 @@ Abstract: Federated Learning(FL) is popular as a privacy-preserving machine lear
 <content:encoded><![CDATA[
 <div> 关键词：federated learning, contribution evaluation, Shapley value, Dynamic Pruning Validation Set Shapley (DPVS-Shapley), data privacy
 
-总结:<br>
+总结:<br />
 本文介绍了在人工智能时代下，为了解决集中式学习中的数据隐私问题而出现的联邦学习。该分散式学习模型提出了一个新的挑战，即如何公平准确地评估每个参与者的贡献。为此，提出了一种名为动态修剪验证集沙利值（DPVS-Shapley）的方法，用于加速贡献评估过程并保持准确性。DPVS-Shapley方法能够根据不同样本的重要性赋予不同权重，使那些能区分困难示例的客户端获得更高的贡献评分。此外，有效的贡献评估机制可以激励参与者积极贡献数据和计算资源，从而提升整个联邦学习系统的性能并确保公平对待每个参与者。 <div>
 arXiv:2410.15093v1 Announce Type: new 
 Abstract: In the current era of artificial intelligence, federated learning has emerged as a novel approach to addressing data privacy concerns inherent in centralized learning paradigms. This decentralized learning model not only mitigates the risk of data breaches but also enhances the system's scalability and robustness. However, this approach introduces a new challenge: how to fairly and accurately assess the contribution of each participant. Developing an effective contribution evaluation mechanism is crucial for federated learning. Such a mechanism incentivizes participants to actively contribute their data and computational resources, thereby improving the overall performance of the federated learning system. By allocating resources and rewards based on the size of the contributions, it ensures that each participant receives fair treatment, fostering sustained engagement.Currently, Shapley value-based methods are widely used to evaluate participants' contributions, with many researchers proposing modifications to adapt these methods to real-world scenarios. In this paper, we introduce a component called Dynamic Pruning Validation Set Shapley (DPVS-Shapley). This method accelerates the contribution assessment process by dynamically pruning the original dataset without compromising the evaluation's accuracy. Furthermore, this component can assign different weights to various samples, thereby allowing clients capable of distinguishing difficult examples to receive higher contribution scores.
 ]]></content:encoded>
-<pubDate>Tue, 22 Oct 2024 00:00:00 -0400</pubDate>
 <pubDate>Tue, 22 Oct 2024 00:00:00 -0400</pubDate>
 </item>
 <item>
@@ -131,12 +124,11 @@ Abstract: In the current era of artificial intelligence, federated learning has 
 <content:encoded><![CDATA[
 <div> 关键词: 数据驱动、有功无功控制、约束马尔科夫决策过程、强化学习、分布式系统
 
-总结:<br>
+总结:<br />
 本文提出了一种数据驱动的解决主动配电系统中伏特-瓦特(Volt-VAR)控制问题的方法。针对配电系统模型往往不准确和不完整的问题，该文将Volt-VAR控制问题建模为约束马尔科夫决策过程(CMDP)。通过结合增广拉格朗日法与软策略迭代算法，文中创新性地提出了一种安全的离线强化学习方法来求解CMDP。该算法利用拉格朗日值函数对策略网络进行梯度更新，并采用双批评网络同步估计动作价值函数以避免过估计偏差。此方法无需被优化问题具有强凸性保证，并具备样本效率。采取两阶段策略分别进行离线训练和在线执行，因此不再需要精确的配电系统模型。为了实现可扩展性，文章采用了集中式训练分布式执行的多智能体框架，实现了大规模配电系统的去中心化Volt-VAR控制。通过使用真实电力数据的综合数值实验表明，所提出的算法能够达到较高的解决方案最优性和约束满足性。 <div>
 arXiv:2410.15188v1 Announce Type: new 
 Abstract: This paper proposes a data-driven solution for Volt-VAR control problem in active distribution system. As distribution system models are always inaccurate and incomplete, it is quite difficult to solve the problem. To handle with this dilemma, this paper formulates the Volt-VAR control problem as a constrained Markov decision process (CMDP). By synergistically combining the augmented Lagrangian method and soft actor critic algorithm, a novel safe off-policy reinforcement learning (RL) approach is proposed in this paper to solve the CMDP. The actor network is updated in a policy gradient manner with the Lagrangian value function. A double-critics network is adopted to synchronously estimate the action-value function to avoid overestimation bias. The proposed algorithm does not require strong convexity guarantee of examined problems and is sample efficient. A two-stage strategy is adopted for offline training and online execution, so the accurate distribution system model is no longer needed. To achieve scalability, a centralized training distributed execution strategy is adopted for a multi-agent framework, which enables a decentralized Volt-VAR control for large-scale distribution system. Comprehensive numerical experiments with real-world electricity data demonstrate that our proposed algorithm can achieve high solution optimality and constraints compliance.
 ]]></content:encoded>
-<pubDate>Tue, 22 Oct 2024 00:00:00 -0400</pubDate>
 <pubDate>Tue, 22 Oct 2024 00:00:00 -0400</pubDate>
 </item>
 <item>
@@ -144,11 +136,10 @@ Abstract: This paper proposes a data-driven solution for Volt-VAR control proble
 <link>https://arxiv.org/abs/2410.15264</link>
 <guid>https://arxiv.org/abs/2410.15264</guid>
 <content:encoded><![CDATA[
-<div> 关键词：peer推荐引擎、创意表现、自组织社交网络、数据收集、干预设计<br><br>总结: 该研究探索了在自组织社交网络中，同伴推荐引擎是否能够提升人们的创新表现。为了解答这一问题，文章解决了数据收集（如追踪灵感链接和节点的心理社会属性）和干预设计（如平衡思想刺激与信息环境中冗余的进化）方面的挑战。研究者训练了一个模型，用于预测在线平台上个人的创新表现，并基于此构建了SocialMuse系统，该系统能最大化预测的个人表现以生成同行推荐。实验结果显示，采用SocialMuse的处理组网络在多项创造力指标上优于不依赖AI的对照组网络。此外，处理组网络在较大的网络规模下更为去中心化，SocialMuse在推荐过程中更加重视网络结构特征，这种去中心化有助于分散人们的灵感来源，使受启发的想法更易于突出。这项研究为构建提升创新力的智能系统提供了可操作的见解。 <div>
+<div> 关键词：peer推荐引擎、创意表现、自组织社交网络、数据收集、干预设计<br /><br />总结: 该研究探索了在自组织社交网络中，同伴推荐引擎是否能够提升人们的创新表现。为了解答这一问题，文章解决了数据收集（如追踪灵感链接和节点的心理社会属性）和干预设计（如平衡思想刺激与信息环境中冗余的进化）方面的挑战。研究者训练了一个模型，用于预测在线平台上个人的创新表现，并基于此构建了SocialMuse系统，该系统能最大化预测的个人表现以生成同行推荐。实验结果显示，采用SocialMuse的处理组网络在多项创造力指标上优于不依赖AI的对照组网络。此外，处理组网络在较大的网络规模下更为去中心化，SocialMuse在推荐过程中更加重视网络结构特征，这种去中心化有助于分散人们的灵感来源，使受启发的想法更易于突出。这项研究为构建提升创新力的智能系统提供了可操作的见解。 <div>
 arXiv:2410.15264v1 Announce Type: new 
 Abstract: Can peer recommendation engines elevate people's creative performances in self-organizing social networks? Answering this question requires resolving challenges in data collection (e.g., tracing inspiration links and psycho-social attributes of nodes) and intervention design (e.g., balancing idea stimulation and redundancy in evolving information environments). We trained a model that predicts people's ideation performances using semantic and network-structural features in an online platform. Using this model, we built SocialMuse, which maximizes people's predicted performances to generate peer recommendations for them. We found treatment networks leveraging SocialMuse outperforming AI-agnostic control networks in several creativity measures. The treatment networks were more decentralized than the control, as SocialMuse increasingly emphasized network-structural features at large network sizes. This decentralization spreads people's inspiration sources, helping inspired ideas stand out better. Our study provides actionable insights into building intelligent systems for elevating creativity.
 ]]></content:encoded>
-<pubDate>Tue, 22 Oct 2024 00:00:00 -0400</pubDate>
 <pubDate>Tue, 22 Oct 2024 00:00:00 -0400</pubDate>
 </item>
 <item>
@@ -166,7 +157,6 @@ Abstract: Web3 aims to enhance user control over data and assets, but this visio
   MAD has practical implications for blockchain smart contract transparency, auditing, and education. It empowers users to review and audit non-open-source smart contracts, fostering trust and accountability. Additionally, MAD's approach could potentially extend to other smart contract languages, like Solidity, promoting transparency across various blockchains.
 ]]></content:encoded>
 <pubDate>Tue, 22 Oct 2024 00:00:00 -0400</pubDate>
-<pubDate>Tue, 22 Oct 2024 00:00:00 -0400</pubDate>
 </item>
 <item>
 <title>Attention Is All You Need for LLM-based Code Vulnerability Localization</title>
@@ -181,7 +171,6 @@ arXiv:2410.15288v1 Announce Type: new
 Abstract: The rapid expansion of software systems and the growing number of reported vulnerabilities have emphasized the importance of accurately identifying vulnerable code segments. Traditional methods for vulnerability localization, such as manual code audits or rule-based tools, are often time-consuming and limited in scope, typically focusing on specific programming languages or types of vulnerabilities. In recent years, the introduction of large language models (LLMs) such as GPT and LLaMA has opened new possibilities for automating vulnerability detection. However, while LLMs show promise in this area, they face challenges, particularly in maintaining accuracy over longer code contexts. This paper introduces LOVA, a novel framework leveraging the self-attention mechanisms inherent in LLMs to enhance vulnerability localization. Our key insight is that self-attention mechanisms assign varying importance to different parts of the input, making it possible to track how much attention the model focuses on specific lines of code. In the context of vulnerability localization, the hypothesis is that vulnerable lines of code will naturally attract higher attention weights because they have a greater influence on the model's output. By systematically tracking changes in attention weights and focusing on specific lines of code, LOVA improves the precision of identifying vulnerable lines across various programming languages. Through rigorous experimentation and evaluation, we demonstrate that LOVA significantly outperforms existing LLM-based approaches, achieving up to a 5.3x improvement in F1-scores. LOVA also demonstrated strong scalability, with up to a 14.6x improvement in smart contract vulnerability localization across languages like C, Python, Java, and Solidity. Its robustness was proven through consistent performance across different LLM architectures.
 ]]></content:encoded>
 <pubDate>Tue, 22 Oct 2024 00:00:00 -0400</pubDate>
-<pubDate>Tue, 22 Oct 2024 00:00:00 -0400</pubDate>
 </item>
 <item>
 <title>A Distributed Primal-Dual Method for Constrained Multi-agent Reinforcement Learning with General Parameterization</title>
@@ -191,12 +180,11 @@ Abstract: The rapid expansion of software systems and the growing number of repo
 <div> 关键词：分布式、约束多智能体强化学习(CMARL)、全局目标函数、局部估计、对偶变量
 
 总结:
-<br>
+<br />
 本文提出了一种新颖的分布式方法来解决合作型约束多智能体强化学习问题。该方法允许智能体在完全去中心化的在线学习环境中，独立维护局部的原变量和对偶变量估计值。具体而言，文章开发了一个基于actor-critic方法的分布式原-对偶算法，利用局部信息来估计拉格朗日乘子，并实现了这些乘子在各智能体间的共识。此外，文中证明了该算法能收敛到一个平衡点，并分析了这个平衡点相对于无参数化问题精确解的次优性。为了验证算法在复杂现实场景中的性能，文中引入了一个具有随机动态的受约束的合作Cournot博弈作为测试环境。 <div>
 arXiv:2410.15335v1 Announce Type: new 
 Abstract: This paper proposes a novel distributed approach for solving a cooperative Constrained Multi-agent Reinforcement Learning (CMARL) problem, where agents seek to minimize a global objective function subject to shared constraints. Unlike existing methods that rely on centralized training or coordination, our approach enables fully decentralized online learning, with each agent maintaining local estimates of both primal and dual variables. Specifically, we develop a distributed primal-dual algorithm based on actor-critic methods, leveraging local information to estimate Lagrangian multipliers. We establish consensus among the Lagrangian multipliers across agents and prove the convergence of our algorithm to an equilibrium point, analyzing the sub-optimality of this equilibrium compared to the exact solution of the unparameterized problem. Furthermore, we introduce a constrained cooperative Cournot game with stochastic dynamics as a test environment to evaluate the algorithm's performance in complex, real-world scenarios.
 ]]></content:encoded>
-<pubDate>Tue, 22 Oct 2024 00:00:00 -0400</pubDate>
 <pubDate>Tue, 22 Oct 2024 00:00:00 -0400</pubDate>
 </item>
 <item>
@@ -212,7 +200,6 @@ arXiv:2410.15394v1 Announce Type: new
 Abstract: This paper designs a novel trajectory planning approach to resolve the computational efficiency and safety problems in uncoordinated methods by exploiting vehicle-to-everything (V2X) technology. The trajectory planning for connected and autonomous vehicles (CAVs) is formulated as a game with coupled safety constraints. We then define interaction-fair trajectories and prove that they correspond to the variational equilibrium (VE) of this game. We propose a semi-decentralized planner for the vehicles to seek VE-based fair trajectories, which can significantly improve computational efficiency through parallel computing among CAVs and enhance the safety of planned trajectories by ensuring equilibrium concordance among CAVs. Finally, experimental results show the advantages of the approach, including fast computation speed, high scalability, equilibrium concordance, and safety.
 ]]></content:encoded>
 <pubDate>Tue, 22 Oct 2024 00:00:00 -0400</pubDate>
-<pubDate>Tue, 22 Oct 2024 00:00:00 -0400</pubDate>
 </item>
 <item>
 <title>Power Plays: Unleashing Machine Learning Magic in Smart Grids</title>
@@ -221,12 +208,11 @@ Abstract: This paper designs a novel trajectory planning approach to resolve the
 <content:encoded><![CDATA[
 <div> 关键词：机器学习、智能电网、效率、可持续性、数据隐私
 
-总结:<br>
+总结:<br />
 本文探讨了将机器学习融入智能电网系统对于提升现代能源网络效率、可靠性和可持续性的变革性影响。通过高级数据分析，这些系统能更好地管理可再生能源整合、需求响应和预测性维护等方面的复杂性。利用机器学习算法分析来自智能电表、传感器等设备的大数据，可以优化能源分配、预测需求并检测可能预示故障的异常情况，从而实现更精确的负荷平衡、降低运营成本并增强对电网扰动的韧性。此外，预测模型有助于预见设备故障，进而提高能源供应的可靠性。随着智能电网的发展，机器学习在管理分布式能源源和实现实时决策中的作用将愈发关键。然而，部署这些技术也带来了关于数据隐私、安全以及对强大基础设施需求的挑战。本文的研究重点在于利用机器学习技术充分发掘智能电网的潜力，确保它们在满足日益增长的能源需求的同时，兼顾可持续性和效率。同时，文中还对比分析了多种机器学习算法及其优缺点，并展望了这些算法的未来应用前景。 <div>
 arXiv:2410.15423v1 Announce Type: new 
 Abstract: The integration of machine learning into smart grid systems represents a transformative step in enhancing the efficiency, reliability, and sustainability of modern energy networks. By adding advanced data analytics, these systems can better manage the complexities of renewable energy integration, demand response, and predictive maintenance. Machine learning algorithms analyze vast amounts of data from smart meters, sensors, and other grid components to optimize energy distribution, forecast demand, and detect irregularities that could indicate potential failures. This enables more precise load balancing, reduces operational costs, and enhances the resilience of the grid against disturbances. Furthermore, the use of predictive models helps in anticipating equipment failures, thereby improving the reliability of the energy supply. As smart grids continue to evolve, the role of machine learning in managing decentralized energy sources and enabling real-time decision-making will become increasingly critical. However, the deployment of these technologies also raises challenges related to data privacy, security, and the need for robust infrastructure. Addressing these issues in this research authors will focus on realizing the full potential of smart grids, ensuring they meet the growing energy demands while maintaining a focus on sustainability and efficiency using Machine Learning techniques. Furthermore, this research will help determine the smart grid's essentiality with the aid of Machine Learning. Multiple ML algorithms have been integrated along with their pros and cons. The future scope of these algorithms are also integrated.
 ]]></content:encoded>
-<pubDate>Tue, 22 Oct 2024 00:00:00 -0400</pubDate>
 <pubDate>Tue, 22 Oct 2024 00:00:00 -0400</pubDate>
 </item>
 <item>
@@ -236,13 +222,12 @@ Abstract: The integration of machine learning into smart grid systems represents
 <content:encoded><![CDATA[
 <div> 关键词：集成感知与通信(ISAC)，大规模多用户多输入多输出(Massive MU MIMO-ISAC)，多用户干扰(MUI)，分布式基带处理(DBP)预编码，部分连接结构(PCS)，瑟姆林森-原田预编码(THP)
 
-<br><br>总结:
+<br /><br />总结:
 
 本文提出了一个针对大规模多用户多输入多输出集成感知与通信系统(Massive MU MIMO-ISAC)中密集用户接入引起的严重多用户干扰问题的解决方案。该方案采用分布式基带处理(DBP)预编码方法，将最小化Cramer-Rao下界(CRB)作为目标函数来建模密集用户场景下的MUI问题。同时，结合部分连接结构(PCS)的混合预编码技术，有效降低了硬件成本和功耗。通过应用瑟姆林森-原田预编码(THP)进一步减轻用户间的MUI。仿真实验表明，相较于现有方法，所提方法能显著提升密集用户接入场景下的通信数据速率和能源效率，并降低Massive MU MIMO-ISAC系统的硬件复杂度，验证了其在解决ISAC系统中密集用户接入场景下的MUI问题上的有效性。 <div>
 arXiv:2410.15659v1 Announce Type: new 
 Abstract: Integrated sensing and communication (ISAC) is a very promising technology designed to provide both high rate communication capabilities and sensing capabilities. However, in Massive Multi User Multiple-Input Multiple-Output (Massive MU MIMO-ISAC) systems, the dense user access creates a serious multi-user interference (MUI) problem, leading to degradation of communication performance. To alleviate this problem, we propose a decentralized baseband processing (DBP) precoding method. We first model the MUI of dense user scenarios with minimizing Cramer-Rao bound (CRB) as an objective function.Hybrid precoding is an attractive ISAC technique, and hybrid precoding using Partially Connected Structures (PCS) can effectively reduce hardware cost and power consumption. We mitigate the MUI between dense users based on ThomlinsonHarashima Precoding (THP). We demonstrate the effectiveness of the proposed method through simulation experiments. Compared with the existing methods, it can effectively improve the communication data rates and energy efficiency in dense user access scenario, and reduce the hardware complexity of Massive MU MIMO-ISAC systems. The experimental results demonstrate the usefulness of our method for improving the MUI problem in ISAC systems for dense user access scenarios.
 ]]></content:encoded>
-<pubDate>Tue, 22 Oct 2024 00:00:00 -0400</pubDate>
 <pubDate>Tue, 22 Oct 2024 00:00:00 -0400</pubDate>
 </item>
 <item>
@@ -250,11 +235,10 @@ Abstract: Integrated sensing and communication (ISAC) is a very promising techno
 <link>https://arxiv.org/abs/2410.15693</link>
 <guid>https://arxiv.org/abs/2410.15693</guid>
 <content:encoded><![CDATA[
-<div> 关键词：联邦学习 (Federated Learning)，非IID数据集问题，物联网设备 (IoT)，地理特性，动态聚类算法<br><br>总结: 这篇文章主要探讨了联邦学习中非IID数据集问题对模型性能的影响。研究发现物联网设备的数据独立性和相同性与其相互间的距离有关。为此，文章提出了一个新颖的方法，利用设备的地理位置信息进行动态聚类和部分稳定分组算法，旨在确保每个FL小组内部的数据达到近似的IID性。实验结果显示，该机制相比于基准分组算法，在联合成本（包括设备掉线数量与各组设备数均衡度）上至少提高了110倍，同时仅使组别数量最多增加了0.93组。 <div>
+<div> 关键词：联邦学习 (Federated Learning)，非IID数据集问题，物联网设备 (IoT)，地理特性，动态聚类算法<br /><br />总结: 这篇文章主要探讨了联邦学习中非IID数据集问题对模型性能的影响。研究发现物联网设备的数据独立性和相同性与其相互间的距离有关。为此，文章提出了一个新颖的方法，利用设备的地理位置信息进行动态聚类和部分稳定分组算法，旨在确保每个FL小组内部的数据达到近似的IID性。实验结果显示，该机制相比于基准分组算法，在联合成本（包括设备掉线数量与各组设备数均衡度）上至少提高了110倍，同时仅使组别数量最多增加了0.93组。 <div>
 arXiv:2410.15693v1 Announce Type: new 
 Abstract: Federated learning (FL) is a decentralized AI mechanism suitable for a large number of devices like in smart IoT. A major challenge of FL is the non-IID dataset problem, originating from the heterogeneous data collected by FL participants, leading to performance deterioration of the trained global model. There have been various attempts to rectify non-IID dataset, mostly focusing on manipulating the collected data. This paper, however, proposes a novel approach to ensure data IIDness by properly clustering and grouping mobile IoT nodes exploiting their geographical characteristics, so that each FL group can achieve IID dataset. We first provide an experimental evidence for the independence and identicalness features of IoT data according to the inter-device distance, and then propose Dynamic Clustering and Partial-Steady Grouping algorithms that partition FL participants to achieve near-IIDness in their dataset while considering device mobility. Our mechanism significantly outperforms benchmark grouping algorithms at least by 110 times in terms of the joint cost between the number of dropout devices and the evenness in per-group device count, with a mild increase in the number of groups only by up to 0.93 groups.
 ]]></content:encoded>
-<pubDate>Tue, 22 Oct 2024 00:00:00 -0400</pubDate>
 <pubDate>Tue, 22 Oct 2024 00:00:00 -0400</pubDate>
 </item>
 <item>
@@ -264,13 +248,12 @@ Abstract: Federated learning (FL) is a decentralized AI mechanism suitable for a
 <content:encoded><![CDATA[
 <div> 关键词: 区块链、期权交易、无需抵押品、双认证防止签名(DAPS)、跨链
 
-总结:<br>
+总结:<br />
 本文提出了一种新的区块链期权交易协议，旨在解决现有机制中资产支持有限、交易延迟高以及期权持有者需要提供前期抵押品等问题。该协议实现了无需期权持有者提供抵押品即可高效、广泛地进行期权交易，且其创新性地运用了双认证防止签名（DAPS）技术，显著降低了交易延迟。此外，通过引入期权发行方的保证，本协议消除了持有人的预付抵押需求。评估结果显示，所提方案将期权转移延迟降低到现有方法的一半以下。同时，严格的security分析证明，即使面对恶意行为，该协议也能实现安全的期权交易。此协议还支持任意两条不同区块链之间几乎任何资产的跨链期权交易，只要这两条链的编程语言能够执行和强制实施必要的合同逻辑。 <div>
 arXiv:2410.15724v1 Announce Type: new 
 Abstract: Options are fundamental to blockchain-based financial markets, offering essential tools for risk management and price speculation, which enhance liquidity, flexibility, and market efficiency in decentralized finance (DeFi). Despite the growing interest in options for blockchain-resident assets, such as cryptocurrencies, current option mechanisms face significant challenges, including limited asset support, high trading delays, and the requirement for option holders to provide upfront collateral.
   In this paper, we present a protocol that addresses the aforementioned issues by facilitating efficient and universally accessible option trading without requiring holders to post collateral when establishing options. Our protocol's universality allows for cross-chain options involving nearly $\textit{any}$ assets on $\textit{any}$ two different blockchains, provided the chains' programming languages can enforce and execute the necessary contract logic. A key innovation in our approach is the use of Double-Authentication-Preventing Signatures (DAPS), which significantly reduces trading latency. Additionally, by introducing a guarantee from the option writer, our protocol removes the need of upfront collateral from holders. Our evaluation demonstrates that the proposed scheme reduces option transfer latency to less than half of that in existing methods. Rigorous security analysis proves that our protocol achieves secure option trading, even when facing adversarial behaviors.
 ]]></content:encoded>
-<pubDate>Tue, 22 Oct 2024 00:00:00 -0400</pubDate>
 <pubDate>Tue, 22 Oct 2024 00:00:00 -0400</pubDate>
 </item>
 <item>
@@ -287,7 +270,6 @@ arXiv:2410.15841v1 Announce Type: new
 Abstract: In multi-agent reinforcement learning, a commonly considered paradigm is centralized training with decentralized execution. However, in this framework, decentralized execution restricts the development of coordinated policies due to the local observation limitation. In this paper, we consider the cooperation among neighboring agents during execution and formulate their interactions as a graph. Thus, we introduce a novel encoder-decoder architecture named Factor-based Multi-Agent Transformer ($f$-MAT) that utilizes a transformer to enable the communication between neighboring agents during both training and execution. By dividing agents into different overlapping groups and representing each group with a factor, $f$-MAT fulfills efficient message passing among agents through factor-based attention layers. Empirical results on networked systems such as traffic scheduling and power control demonstrate that $f$-MAT achieves superior performance compared to strong baselines, thereby paving the way for handling complex collaborative problems.
 ]]></content:encoded>
 <pubDate>Tue, 22 Oct 2024 00:00:00 -0400</pubDate>
-<pubDate>Tue, 22 Oct 2024 00:00:00 -0400</pubDate>
 </item>
 <item>
 <title>AdChain: Decentralized Header Bidding</title>
@@ -297,12 +279,11 @@ Abstract: In multi-agent reinforcement learning, a commonly considered paradigm 
 <div> 关键词: AdChain、去中心化、广告印象差异、共识协议、区块链
 
 总结:
-<br>
+<br />
 AdChain 是一种针对在线广告中因多方中介缺乏信任、法规不完善和供应链复杂导致的广告印象差异问题提出的解决方案。该文介绍了一个去中心化、分布式和可验证的 AdChain 系统，它利用多个独立代理接收并记录日志级数据，并采用共识协议来验证每个广告数据，从而建立信任。AdChain 具有可扩展性、效率高并且与现有基础设施兼容的特点。实验结果显示，在超过五十万条广告数据上运行，AdChain 可以达到 98% 的准确性，将广告差异率从 20% 降低到 2%。此外，分析还表明 AdChain 上活跃节点的利润可以与比特币等主要区块链网络上的矿工相当。 <div>
 arXiv:2410.16141v1 Announce Type: new 
 Abstract: Due to the involvement of multiple intermediaries without trusted parties, lack of proper regulations, and a complicated supply chain, ad impression discrepancy affects online advertising. This issue causes up to $82 billion annual revenue loss for honest parties. The loss can be significantly reduced with a precise and trusted decentralized mechanism. This paper presents AdChain, a decentralized, distributed, and verifiable solution that detects and minimizes online advertisement impression discrepancies. AdChain establishes trust by employing multiple independent agents to receive and record log-level data, along with a consensus protocol to validate each ad data. AdChain is scalable, efficient, and compatible with the current infrastructure. Our experimental evaluation, using over half a million ad data points, identifies system parameters that achieve 98% accuracy, reducing the ad discrepancy rate from 20% to 2%. Our cost analysis shows that active nodes on AdChain can generate profits comparable to miners on major blockchain networks like Bitcoin.
 ]]></content:encoded>
-<pubDate>Tue, 22 Oct 2024 00:00:00 -0400</pubDate>
 <pubDate>Tue, 22 Oct 2024 00:00:00 -0400</pubDate>
 </item>
 <item>
@@ -318,7 +299,6 @@ arXiv:2311.11144v3 Announce Type: replace
 Abstract: This paper reports a new hierarchical architecture for modeling autonomous multi-robot systems (MRSs): a nonlinear dynamical opinion process is used to model high-level group choice, and multi-objective behavior optimization is used to model individual decisions. Using previously reported theoretical results, we show it is possible to design the behavior of the MRS by the selection of a relatively small set of parameters. The resulting behavior - both collective actions and individual actions - can be understood intuitively. The approach is entirely decentralized and the communication cost scales by the number of group options, not agents. We demonstrated the effectiveness of this approach using a hypothetical `explore-exploit-migrate' scenario in a two hour field demonstration with eight unmanned surface vessels (USVs). The results from our preliminary field experiment show the collective behavior is robust even with time-varying network topology and agent dropouts.
 ]]></content:encoded>
 <pubDate>Tue, 22 Oct 2024 00:00:00 -0400</pubDate>
-<pubDate>Tue, 22 Oct 2024 00:00:00 -0400</pubDate>
 </item>
 <item>
 <title>Multi-Agent Reinforcement Learning for Connected and Automated Vehicles Control: Recent Advancements and Future Prospects</title>
@@ -327,12 +307,11 @@ Abstract: This paper reports a new hierarchical architecture for modeling autono
 <content:encoded><![CDATA[
 <div> 关键词：Connected and Automated Vehicles (CAVs)，Multi-Agent Reinforcement Learning (MARL)，Control Dimensions，Simulation Platforms，Challenges and Solutions
 
-<br><br>总结：
+<br /><br />总结：
 本文针对互联与自动驾驶车辆（CAVs）领域的复杂协调控制问题，重点介绍了多智能体强化学习（MARL）的应用。文章首先阐述了MARL在处理复杂多智能体场景中的独特优势；接着，详细梳理了MARL在CAV控制的不同维度上的应用，如车队控制、变道和无信号交叉口管理等关键场景；同时，也回顾了用于开发和测试MARL算法的重要仿真平台。此外，文章还探讨了将MARL应用于CAV控制面临的挑战，包括宏观微观优化、通信、混合交通以及模拟到现实的转化等问题，并提出了可能的解决方案，如层次化MARL、去中心化MARL、自适应交互以及离线MARL等。 <div>
 arXiv:2312.11084v3 Announce Type: replace 
 Abstract: Connected and automated vehicles (CAVs) are considered a potential solution for future transportation challenges, aiming to develop systems that are efficient, safe, and environmentally friendly. However, CAV control presents significant challenges due to the complexity of interconnectivity and coordination required among vehicles. Multi-agent reinforcement learning (MARL), which has shown notable advancements in addressing complex problems in autonomous driving, robotics, and human-vehicle interaction, emerges as a promising tool to enhance CAV capabilities. Despite its potential, there is a notable absence of current reviews on mainstream MARL algorithms for CAVs. To fill this gap, this paper offers a comprehensive review of MARL's application in CAV control. The paper begins with an introduction to MARL, explaining its unique advantages in handling complex and multi-agent scenarios. It then presents a detailed survey of MARL applications across various control dimensions for CAVs, including critical scenarios such as platooning control, lane-changing, and unsignalized intersections. Additionally, the paper reviews prominent simulation platforms essential for developing and testing MARL algorithms. Lastly, it examines the current challenges in deploying MARL for CAV control, including macro-micro optimization, communication, mixed traffic, and sim-to-real challenges. Potential solutions discussed include hierarchical MARL, decentralized MARL, adaptive interactions, and offline MARL.
 ]]></content:encoded>
-<pubDate>Tue, 22 Oct 2024 00:00:00 -0400</pubDate>
 <pubDate>Tue, 22 Oct 2024 00:00:00 -0400</pubDate>
 </item>
 <item>
@@ -342,13 +321,12 @@ Abstract: Connected and automated vehicles (CAVs) are considered a potential sol
 <content:encoded><![CDATA[
 <div> 关键词：多智能体系统、协同优化、负外部性、分散式Markov决策过程、信用分配
 
-<br>
+<br />
 总结:
 本文针对在共享环境中独立训练或设计的机器人可能产生的意外负面效应问题，提出了将该问题建模为双目标优先级分散式Markov决策过程的方法。研究假设机器人任务间的转换和奖励相互独立，但联合的负面效应惩罚则在这种情况下形成了依赖关系。为提高可扩展性，文章利用信用分配方法将联合负面效应惩罚分解为每个机器人的个体惩罚，从而便于进行分散式的策略计算。通过移动机器人以及模拟实验，作者实证展示了所提出方法在减轻负面效应方面的有效性和可扩展性。 <div>
 arXiv:2405.04702v2 Announce Type: replace 
 Abstract: When independently trained or designed robots are deployed in a shared environment, their combined actions can lead to unintended negative side effects (NSEs). To ensure safe and efficient operation, robots must optimize task performance while minimizing the penalties associated with NSEs, balancing individual objectives with collective impact. We model the problem of mitigating NSEs in a cooperative multi-agent system as a bi-objective lexicographic decentralized Markov decision process. We assume independence of transitions and rewards with respect to the robots' tasks, but the joint NSE penalty creates a form of dependence in this setting. To improve scalability, the joint NSE penalty is decomposed into individual penalties for each robot using credit assignment, which facilitates decentralized policy computation. We empirically demonstrate, using mobile robots and in simulation, the effectiveness and scalability of our approach in mitigating NSEs.
 ]]></content:encoded>
-<pubDate>Tue, 22 Oct 2024 00:00:00 -0400</pubDate>
 <pubDate>Tue, 22 Oct 2024 00:00:00 -0400</pubDate>
 </item>
 <item>
@@ -364,9 +342,7 @@ arXiv:2406.13707v2 Announce Type: replace
 Abstract: This paper presents a novel estimator-based safety-critical controller for formation control of non-holonomic mobile robots in communication-limited environments. The proposed decentralized framework integrates a robust state estimator with a formation tracking control law, addressing the challenges of inter-agent collision avoidance and disturbance attenuation in leader-follower formations using control barrier functions. The estimator's design accounts for both constant and time-varying velocity profiles, enhancing the system's adaptability to dynamic scenarios. A closed-form solution for the tracking controller facilitates efficient implementation while maintaining formation integrity. The incorporation of string stability metrics further reinforces the framework's resilience against propagating disturbances from predecessors. Rigorous stability analysis using Lyapunov functions ensures the stability of estimation errors and the convergence of the formation to desired configurations. The effectiveness and robustness of the proposed approach are validated through numerical simulations of various maneuvers and realistic Gazebo experiments involving formations in a warehouse environment. The results demonstrate the controller's ability to maintain safety, achieve precise formation control, and mitigate disturbances in scenarios without inter-robot communication.
 ]]></content:encoded>
 <pubDate>Tue, 22 Oct 2024 00:00:00 -0400</pubDate>
-<pubDate>Tue, 22 Oct 2024 00:00:00 -0400</pubDate>
 </item>
-
 <item>
 <title>Leveraging Fine-Tuned Language Models for Efficient and Accurate Smart Contract Auditing</title>
 <link>https://arxiv.org/abs/2410.13918</link>
