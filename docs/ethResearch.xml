@@ -5,6 +5,24 @@
 <link>https://ethresear.ch/latest</link>
 
 <item>
+<title>Several implementations only randomnize δ when using Groth16. Does this means sampling only 1 of γ or δ is enough to prevent forgeries?</title>
+<link>https://ethresear.ch/t/several-implementations-only-randomnize-when-using-groth16-does-this-means-sampling-only-1-of-or-is-enough-to-prevent-forgeries/20859</link>
+<guid>https://ethresear.ch/t/several-implementations-only-randomnize-when-using-groth16-does-this-means-sampling-only-1-of-or-is-enough-to-prevent-forgeries/20859</guid>
+<content:encoded><![CDATA[
+<div> 关键词：trusted setup、α、β、γ、δ、攻击、随机化、δ、γ、Generator点、公开输入、离散对数关系、安全性
+
+总结:
+根据页面17所述，α、β、γ和δ应在可信设置过程中进行采样。然而，描述的攻击似乎仅在γ和δ相等时才有效。但目前有些实现方案只对δ进行随机化处理，从而将γ留给生成器点。这似乎意味着在现实中，为了防止可能的攻击，代表公开输入的两个G_2点应当具有未知的离散对数关系。但我未能明白为何这种做法可能不安全。 <div>
+<p>According to page 17 <a href="https://eprint.iacr.org/2016/260.pdf" rel="noopener nofollow ugc">from groth16</a>,  α ; β ; γ ; δ should be sampled by the trusted setup. <a href="https://github.com/RareSkills/zk-book/blob/9289f45462a7fe73b7462cf6c45e5c76af97001d/content/groth16/en/groth16.md?plain=1#L276" rel="noopener nofollow ugc">This article describe an attack</a>. But the attack described seems to only work when <span class="math">\gamma, \delta</span> are equal. <a href="https://github.com/RareSkills/zk-book/blob/9289f45462a7fe73b7462cf6c45e5c76af97001d/content/groth16/en/groth16.md?plain=1#L303" rel="noopener nofollow ugc">Nerveless it also states both values should be sampled and not just 1</a>.</p>
+<p><strong>But I’m seeing several implementation that randomize just δ thus leaving γ to the Generator point</strong>. Does this means in reality that the 2 <span class="math">G_2</span> points representing public inputs should just have unknown discrete logarithms relation in order to thwart any possible attack ? I fail to see how this could be unsafe.</p>
+            <p><small>1 post - 1 participant</small></p>
+            <p><a href="https://ethresear.ch/t/several-implementations-only-randomnize-when-using-groth16-does-this-means-sampling-only-1-of-or-is-enough-to-prevent-forgeries/20859">Read full topic</a></p>
+]]></content:encoded>
+<pubDate>Tue, 29 Oct 2024 12:08:04 +0000</pubDate>
+<pubDate>Tue, 29 Oct 2024 12:08:04 +0000</pubDate>
+</item>
+
+<item>
 <title>zkLogin Framework (Based on 4337 Contract Wallet)</title>
 <link>https://ethresear.ch/t/zklogin-framework-based-on-4337-contract-wallet/20855</link>
 <guid>https://ethresear.ch/t/zklogin-framework-based-on-4337-contract-wallet/20855</guid>
@@ -196,9 +214,7 @@ ZEROBASE is collaborating with TOMO Wallet and World Liberty Financial, a projec
             <p><a href="https://ethresear.ch/t/zklogin-framework-based-on-4337-contract-wallet/20855">Read full topic</a></p>
 ]]></content:encoded>
 <pubDate>Mon, 28 Oct 2024 13:37:07 +0000</pubDate>
-<pubDate>Mon, 28 Oct 2024 13:37:07 +0000</pubDate>
 </item>
-
 <item>
 <title>Local Fee Markets in Ethereum</title>
 <link>https://ethresear.ch/t/local-fee-markets-in-ethereum/20754</link>
