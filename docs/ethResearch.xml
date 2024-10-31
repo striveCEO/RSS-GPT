@@ -5,6 +5,40 @@
 <link>https://ethresear.ch/latest</link>
 
 <item>
+<title>Curvy Protocol - Dual Key Stealth Address Protocol based on Elliptic Curve Pairing</title>
+<link>https://ethresear.ch/t/curvy-protocol-dual-key-stealth-address-protocol-based-on-elliptic-curve-pairing/20897</link>
+<guid>https://ethresear.ch/t/curvy-protocol-dual-key-stealth-address-protocol-based-on-elliptic-curve-pairing/20897</guid>
+<content:encoded><![CDATA[
+<div> 关键词：Curvy协议、隐形地址协议、椭圆曲线配对、DKSAP、优化
+
+总结:
+Curvy协议是一种基于椭圆曲线配对的隐形地址协议，旨在克服现有协议中的一些缺点。与使用共享密钥计算的DKSAP不同，Curvy协议不再使用共享密钥哈希值来计算地址，而是仅用于视图标签，从而提高了安全性。此外，通过使用Go语言和gnark-crypto库进行实现，针对交易接收方生成新隐形地址的时间敏感部分进行了优化。实验结果对比显示，Curvy协议（采用配对友好的BN254曲线及最优Ate配对）在处理不同数量的公告时，其查找时间性能优于DKSAP的实现。 <div>
+<p>With this post, I would like to introduce you to the rationale behind the Curvy protocol, a pairing-based stealth address protocol. You can find a detailed description of the Curvy protocol in our paper <a href="https://arxiv.org/pdf/2312.12131" rel="noopener nofollow ugc">Elliptic Curve Pairing Stealth Address Protocols</a>. For those who prefer reading a blog instead of the paper, you can check out our <a href="https://3327.io/curvy-protocol-for-fast-anonymous-transactions-on-ethereum/" rel="noopener nofollow ugc">blog</a> on this topic. I will try to answer all your questions in the comments!</p>
+<h2><a class="anchor" href="https://ethresear.ch#p-50984-introduction-1" name="p-50984-introduction-1"></a>Introduction</h2>
+<p>We can use different versions of the stealth address protocol. Some of them, such as DKSAP (Dual-Key Stealth Address Protocol), are based on a cryptographic mechanism similar to the Diffie-Hellman method, i.e. the private and public keys for the stealth address contain a shared secret that can be computed by both the sender and the recipient. DKSAP is explained in detail in <a href="https://vitalik.eth.limo/general/2023/01/20/stealth.html" rel="noopener nofollow ugc">Vitalik’s blog</a>, and Vitalik also suggested SAPs based on pairing as one of the directions of stealth address research. Stealth addresses can be generated using another cryptographic method: elliptic curve pairing. In the papers <a href="https://ieeexplore.ieee.org/document/9724375" rel="noopener nofollow ugc">EDKSAP: Efficient Double-Key Stealth Address Protocol in Blockchain</a> and <a href="https://dl.acm.org/doi/10.1145/3321408.3321573" rel="noopener nofollow ugc">A New Stealth Address Scheme for Blockchain</a>, SAPs based on pairing are presented. In the first paper, there is a gap that allows the sender and the person holding the viewing key to pair to obtain the private key of the stealth address. In the second paper, the private key of the stealth address is such that it can be computed by the sender without teamwork. We propose the Curvy protocol, which is based on elliptic curve pairing and overcomes these shortcomings.</p>
+<p>Some of the optimizations we have made in the Curvy protocol (the reader can find more about them in our paper) can also be used to optimize DKSAP, while others cannot. The peculiarity is that the hash of the shared secret is not used to calculate the address in the Curvy protocol, but only for the view tag. Therefore, we can also use two bytes of the hash of the shared secret as the view tag, while using the same view tag would compromise the security of DKSAP. Note that in the Curvy protocol, we can also use the entire hash of the shared secret for the view tag without compromising security of the user.</p>
+<h2><a class="anchor" href="https://ethresear.ch#p-50984-curvy-protocol-2" name="p-50984-curvy-protocol-2"></a>Curvy protocol</h2>
+<p>Let <span class="math">e: \mathbb{G}_1 \times \mathbb{G}_2 \rightarrow \mathbb{G}_T </span> be elliptic curve pairing. Let <span class="math">g_e</span> be the generator point of the elliptic curve Secp256k1, and let <span class="math">g_1</span> and <span class="math">g_2</span> be the generator points of the subgroups <span class="math">\mathbb{G}_1</span> and <span class="math">\mathbb{G}_2</span> of the elliptic curve BN254.</p>
+<p>Curvy protocol is shown in a detail in the following figure:<br />
+</p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/b/2/b28ce7c37a600294f313116d95fda9abcc921a6d.jpeg" title=""><img alt="" height="375" src="https://ethresear.ch/uploads/default/optimized/3X/b/2/b28ce7c37a600294f313116d95fda9abcc921a6d_2_471x375.jpeg" width="471" /></a></div><p></p>
+<h2><a class="anchor" href="https://ethresear.ch#p-50984-implementation-results-3" name="p-50984-implementation-results-3"></a>Implementation results</h2>
+<p>Since transaction speed is crucial from the users’ perspective, we aimed to create a protocol that meets their needs. For this reason, it was important to optimize the most sensitive part (which takes the longest) - the calculation of the new stealth address by the recipient of the transaction.</p>
+<p>In our implementation of the Curvy protocol, we used the Go programming language together with the gnark-crypto library. The figure below compares the search times of the ephemeral public key registry for different numbers of announcements (5000, 10000, 20000, 40000 and 80000) of the Curvy protocol (with pairing-friendly curve BN254 and optimal Ate pairing) and the implementation of DKSAP from <a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&amp;arnumber=10426757" rel="noopener nofollow ugc">BaseSAP</a>. The values of the private keys and the size of the view tag (5.5 bytes) from BaseSAP were used.<br />
+</p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/4/1/41006e850082c189fb4f2ccb04dfc307d9566140.png" title=""><img alt="" height="300" src="https://ethresear.ch/uploads/default/optimized/3X/4/1/41006e850082c189fb4f2ccb04dfc307d9566140_2_517x300.png" width="517" /></a></div><p></p>
+<p>Useful links for further exploration:</p>
+<ul>
+<li><a href="https://arxiv.org/pdf/2312.12131" rel="noopener nofollow ugc">Our paper</a></li>
+<li><a href="https://3327.io/curvy-protocol-for-fast-anonymous-transactions-on-ethereum/" rel="noopener nofollow ugc">Our blog</a></li>
+<li><a href="https://github.com/0x3327/ecpdksap?tab=readme-ov-file" rel="noopener nofollow ugc">GitHub repo</a></li>
+</ul>
+            <p><small>1 post - 1 participant</small></p>
+            <p><a href="https://ethresear.ch/t/curvy-protocol-dual-key-stealth-address-protocol-based-on-elliptic-curve-pairing/20897">Read full topic</a></p>
+]]></content:encoded>
+<pubDate>Wed, 30 Oct 2024 13:58:17 +0000</pubDate>
+<pubDate>Wed, 30 Oct 2024 13:58:17 +0000</pubDate>
+</item>
+
+<item>
 <title>Hybrid Rollups: Optimistic Performance meets ZK Security</title>
 <link>https://ethresear.ch/t/hybrid-rollups-optimistic-performance-meets-zk-security/20896</link>
 <guid>https://ethresear.ch/t/hybrid-rollups-optimistic-performance-meets-zk-security/20896</guid>
@@ -263,7 +297,6 @@
             <p><a href="https://ethresear.ch/t/hybrid-rollups-optimistic-performance-meets-zk-security/20896">Read full topic</a></p>
 ]]></content:encoded>
 <pubDate>Wed, 30 Oct 2024 11:15:41 +0000</pubDate>
-<pubDate>Wed, 30 Oct 2024 11:15:41 +0000</pubDate>
 </item>
 <item>
 <title>Hybrid Rollup: Optimistic Performance meets ZK Security</title>
@@ -276,9 +309,7 @@
             <p><a href="https://ethresear.ch/t/hybrid-rollup-optimistic-performance-meets-zk-security/20894">Read full topic</a></p>
 ]]></content:encoded>
 <pubDate>Wed, 30 Oct 2024 11:07:50 +0000</pubDate>
-<pubDate>Wed, 30 Oct 2024 11:07:50 +0000</pubDate>
 </item>
-
 <item>
 <title>Several implementations only randomnize δ when using Groth16. Does this means sampling only 1 of γ or δ is enough to prevent forgeries?</title>
 <link>https://ethresear.ch/t/several-implementations-only-randomnize-when-using-groth16-does-this-means-sampling-only-1-of-or-is-enough-to-prevent-forgeries/20859</link>
