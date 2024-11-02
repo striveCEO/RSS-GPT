@@ -4,6 +4,47 @@
 <title>Ethereum Research - Latest topics</title>
 <link>https://ethresear.ch/latest</link>
 
+<item>
+<title>GossipSub Topic Observation (proposed GossipSub 1.3)</title>
+<link>https://ethresear.ch/t/gossipsub-topic-observation-proposed-gossipsub-1-3/20907</link>
+<guid>https://ethresear.ch/t/gossipsub-topic-observation-proposed-gossipsub-1-3/20907</guid>
+<content:encoded><![CDATA[
+<div> 关键词：主题观察、带宽消耗、GossipSub、稳定性、可扩展性
+
+总结:
+本文提出了主题观察的概念，旨在减少GossipSub协议中由于网状结构导致的带宽放大消费问题。主题观察允许节点仅被通知有新消息而无需实际接收完整消息。当一个节点想要观察某个主题时，它需要告知订阅该主题的其他节点，这些订阅节点会在接收到新消息时向观察节点发送通知。观察节点仅消费而不贡献网络稳定性，因此对网络稳定性的维持要求有足够的订阅节点存在。此设计可能带来的问题在于，若太多相邻节点请求观察，可能会增加发送通知的开销，但目前假设消息ID的通知开销可以忽略不计。为实现这一功能，文章提出两个新的控制消息：OBSERVE和UNOBSERVE，用于请求和取消主题观察。在接收到OBSERVE请求后，邻节点会在接收到新消息时发送修改后的IHAVE消息作为通知，此时的IHAVE消息不再仅在心跳时发送，而是可以在接收到消息后立即发送，观察节点收到IHAVE后无需再发送IWANT。 <div>
+<p><em>Authors: <a href="https://github.com/ppopth" rel="noopener nofollow ugc">pop</a></em></p>
+<p><em>tldr; topic observation enables the nodes to get notified when there is a new message in<br />
+a topic without actually receiving the actual message.</em></p>
+<p>This proposal enables you to tell your peers to notify you when there is a new message in the topic without consuming the bandwidth to download the actual message. When you do this, you are called an observing node in that topic.</p>
+<h1><a class="anchor" href="https://ethresear.ch#p-51008-motivation-1" name="p-51008-motivation-1"></a>Motivation</h1>
+<p>Topic observation is motivated by the amplification factor on bandwidth consumption due to the mesh degree of GossipSub. When you subscribe to a topic, you would need to download as many copies of messages as the mesh degree. For example, if the mesh degree is 8, you would roughly download 8 copies.</p>
+<p>We have <code>IDONTWANT</code> implemented in GossipSub 1.2 which will reduce the number of copies you will download, but it doesn’t guarantee exactly how many.</p>
+<p>When you observe a topic, you won’t receive any message. You will only get notified when there is a new message. If you want the actual message, you can request the message from the peer that notifies you first, so you will download only one copy. However, the message request part is out-of-scope of this proposal. This proposal only deals with notifications.</p>
+<h1><a class="anchor" href="https://ethresear.ch#p-51008-high-level-design-2" name="p-51008-high-level-design-2"></a>High-level design</h1>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/b/7/b77e73993faca2c60d123d3700f2e20d3cbf3f24.png" title="output"><img alt="output" height="500" src="https://ethresear.ch/uploads/default/optimized/3X/b/7/b77e73993faca2c60d123d3700f2e20d3cbf3f24_2_663x500.png" width="663" /></a></div><p></p>
+<p>When you want to observe a topic, you would need to find subscribing nodes in the topic and tell them you want to observe the topic. Later, when there is a new message, those subscribing nodes will notify you.</p>
+<p>Let’s see examples in the figure, node 11 is observing the topic. Node 1, 9, and 10 will notify node 11 when there are new messages. Similarly, node 4 and 5 will notify node 12.</p>
+<p>Notice that the relationship is unidirectional rather then bidirectional like mesh connections.</p>
+<p>You can also tell your subscribing peers when you don’t want to observe the topic anymore. That is when you want to unobserve it.</p>
+<h1><a class="anchor" href="https://ethresear.ch#p-51008-stability-3" name="p-51008-stability-3"></a>Stability</h1>
+<p>Notice that observing nodes only receive notifications. They neither send notifications nor forward messages. In other words, they only consume, not contribute. So, they are only on the border of the network (as shown in the figure) and don’t provide any stability to the network. It means that there must be enough subscribing nodes in the network to provide stability.</p>
+<p>However, the good side of this is that the churn rate of observing nodes doesn’t matter at all. Nodes can observe and unobserve as often as they want.</p>
+<h1><a class="anchor" href="https://ethresear.ch#p-51008-scalability-4" name="p-51008-scalability-4"></a>Scalability</h1>
+<p>Currently, when your peers want to observe the topic and tell you to notify, you are obligated to notify them without the option to decline. This has a downside that if too many of your peers want to observe, you will have too much overhead to do the job.</p>
+<p>However, the notifications consist only of messages ids which we now assume to be negligible. You may argue that if the number of observing peers is high enough, the total size of notifications will be significant. That’s true, but for the first iteration of the design, we should make this assumption to make the protocol simple.</p>
+<h1><a class="anchor" href="https://ethresear.ch#p-51008-protocol-messages-5" name="p-51008-protocol-messages-5"></a>Protocol messages</h1>
+<p>There are two new control messages: <code>OBSERVE</code> and <code>UNOBSERVE</code>.</p>
+<p>You send <code>OBSERVE</code> to your peer when you want to observe a topic and have that peer notify you.</p>
+<p>You send <code>UNOBSERVE</code> to your peer to tell that you don’t observe the topic anymore.</p>
+<p>After sending <code>OBSERVE</code> to your peer, the peer will send <code>IHAVE</code> to you as a notification, when there is a new message in the topic.</p>
+<p>However, <code>IHAVE</code> in this proposal is different from the previous GossipSub versions. In the previous versions, <code>IHAVE</code> is sent only at the heartbeats, while in this version, it can also be sent right after peers receives messages. Previously, you can send <code>IWANT</code> after receiving <code>IHAVE</code>, but in topic observations, you aren’t expected to send <code>IWANT</code>, since <code>IHAVE</code> serves only as a notification.</p>
+            <p><small>1 post - 1 participant</small></p>
+            <p><a href="https://ethresear.ch/t/gossipsub-topic-observation-proposed-gossipsub-1-3/20907">Read full topic</a></p>
+]]></content:encoded>
+<pubDate>Sat, 02 Nov 2024 06:34:49 +0000</pubDate>
+<pubDate>Sat, 02 Nov 2024 06:34:49 +0000</pubDate>
+</item>
 
 <item>
 <title>Curvy Protocol - Dual Key Stealth Address Protocol based on Elliptic Curve Pairing</title>
