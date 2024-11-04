@@ -4,6 +4,100 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+<item>
+<title>Is Periodic Pseudo-randomization Sufficient for Beacon Privacy?</title>
+<link>https://eprint.iacr.org/2024/1782</link>
+<guid>https://eprint.iacr.org/2024/1782</guid>
+<content:encoded><![CDATA[
+<div> 关键词: 蓝牙低功耗(BLE)、隐私机制、定时序列不可区分性、计时器操纵攻击、随机化调度
+
+总结:
+本文研究了蓝牙低功耗(BLE)信标周期性更换伪随机身份的隐私机制是否足以确保隐私。文章提出了一个新的自然隐私概念，称为“定时序列不可区分性”，它不仅关注广播内容，还考虑了可从物理世界中观察到的广播时间，这一定义比传统的不可区分性更强。接着，文章证明周期性更换身份的BLE信标无法实现定时序列不可区分性，并提出了一种名为“计时器操纵攻击”的新颖隐私攻击方法，该攻击只需在对手选择的时间插入或重新插入信标的电池即可实施。作者们对一个实际部署的信标执行了此攻击。为了对抗这种基于周期信号的攻击，他们提出了一种新的随机化调度身份变化的对策，证明此对策可以确保信标的定时序列不可区分性，从而增强其隐私性。此外，文中还展示了如何在被攻击系统中集成这一对策，同时基本上保持其实现可行性和实用性，这对于实际工业应用至关重要。 <div>
+In this paper, we investigate whether the privacy mechanism of periodically changing the pseudorandom identities of Bluetooth Low Energy (BLE) beacons is sufficient to ensure privacy.
+
+We consider a new natural privacy notion for BLE broadcasting beacons which we call ``Timed-sequence- indistinguishability'' of beacons. This new privacy definition is stronger than the well-known indistinguishability, since it considers not just the advertisements' content, but also the advertisements' broadcasting times which are observable in the physical world. 
+
+We then prove that beacons with periodically changing pseudorandom identities do not achieve timed-sequence- indistinguishability. We do this by presenting a novel privacy attack against BLE beacons, which we call the ``Timer Manipulation Attack.'' This new time-based privacy attack can be executed by merely inserting or reinserting the beacon's battery at the adversary's chosen time. We performed this attack against an actually deployed beacon.
+
+To mitigate the ``Timer Manipulation Attack'' and other attacks associated with periodic signaling, we propose a new countermeasure involving quasi-periodic randomized scheduling of identity changes. We prove that our countermeasure ensures timed-sequence indistinguishability for beacons, thereby enhancing the beacon's privacy. Additionally, we show how to integrate this countermeasure in the attacked system while essentially preserving its feasibility and utility, which is crucial for practical industrial adoption.
+]]></content:encoded>
+<pubDate>Fri, 01 Nov 2024 07:41:25 +0000</pubDate>
+<pubDate>Fri, 01 Nov 2024 07:41:25 +0000</pubDate>
+</item>
+<item>
+<title>FLock: Robust and Privacy-Preserving Federated Learning based on Practical Blockchain State Channels</title>
+<link>https://eprint.iacr.org/2024/1797</link>
+<guid>https://eprint.iacr.org/2024/1797</guid>
+<content:encoded><![CDATA[
+<div> 关键词: 联邦学习、中毒攻击防御、数据隐私、区块链、状态通道
+
+<br><br>总结:
+本文提出了一种基于实用区块链状态通道的联邦学习方案——FLock，旨在解决现有联邦学习中的关键问题。首先，FLock通过量化、中位数和汉明距离方法，提出一种轻量级安全的多党计算友好型鲁棒聚合策略，能抵抗最多半数恶意客户端的中毒攻击，同时保证模型准确度。其次，利用通信效率高的基于Shamir秘密分享的多党计算协议保护数据隐私并维持高模型精度。再者，FLock借助区块链的离链状态通道实现不可篡改的模型记录和激励分配，并与以太坊等实际加密货币平台实现了成本效益兼容及公平激励机制。此外，FLock还整合了流水线式的拜占庭容错共识，使每个聚合器能够重建最终聚合结果，增强聚合环节的容错性。最后，实验证明FLock能够在保持高效和高模型准确度的同时，显著提升抗毒性和隐私保护，例如在具有25个聚合器和100个客户端的情况下，FLock可在WAN上于两分钟内完成一次针对ResNet的安全聚合，成功实现了大量聚合器下的安全聚合，增强了聚合环节的容错能力。 <div>
+\textit{Federated Learning} (FL) is a distributed machine learning paradigm that allows multiple clients to train models collaboratively without sharing local data. Numerous works have explored security and privacy protection in FL, as well as its integration with blockchain technology. However, existing FL works still face critical issues.  \romannumeral1) It is difficult to achieving \textit{poisoning robustness} and \textit{data privacy} while ensuring high \textit{model accuracy}. Malicious clients can launch \textit{poisoning attacks} that degrade the global model. Besides, aggregators can infer private data from the gradients, causing \textit{privacy leakages}. Existing privacy-preserving poisoning defense FL solutions suffer from decreased model accuracy and high computational overhead. \romannumeral2) Blockchain-assisted FL records iterative gradient updates on-chain to prevent model tampering, yet existing schemes are not compatible with practical blockchains and incur high costs for maintaining the gradients on-chain. Besides, incentives are overlooked, where unfair reward distribution hinders the sustainable development of the FL community. In this work, we propose FLock, a robust and privacy-preserving FL scheme based on practical blockchain state channels. First, we propose a lightweight secure \textit{Multi-party Computation} (MPC)-friendly robust aggregation method through quantization, median, and Hamming distance, which could resist poisoning attacks against up to $<50\%$ malicious clients. Besides, we propose communication-efficient Shamir's secret sharing-based MPC protocols to protect data privacy with high model accuracy. Second, we utilize blockchain off-chain state channels to achieve immutable model records and incentive distribution. FLock achieves cost-effective compatibility with practical cryptocurrency platforms, e.g. Ethereum, along with fair incentives, by merging the secure aggregation into a multi-party state channel. In addition, a pipelined \textit{Byzantine Fault-Tolerant} (BFT) consensus is integrated where each aggregator can reconstruct the final aggregated results. Lastly, we implement FLock and the evaluation results demonstrate that FLock enhances robustness and privacy, while maintaining efficiency and high model accuracy. Even with 25 aggregators and 100 clients, FLock can complete one secure aggregation for ResNet in $2$ minutes over a WAN. FLock successfully implements secure aggregation with such a large number of aggregators, thereby enhancing the fault tolerance of the aggregation.
+]]></content:encoded>
+<pubDate>Sun, 03 Nov 2024 16:32:03 +0000</pubDate>
+<pubDate>Sun, 03 Nov 2024 16:32:03 +0000</pubDate>
+</item>
+<item>
+<title>How Much Public Randomness Do Modern Consensus Protocols Need?</title>
+<link>https://eprint.iacr.org/2024/1794</link>
+<guid>https://eprint.iacr.org/2024/1794</guid>
+<content:encoded><![CDATA[
+<div> 关键词: 区块链、共识协议、效率、安全性、随机性<br><br>总结:
+现代基于区块链的共识协议旨在实现高效性和对适应性敌手的安全性，通常依赖公共随机性源来为参与者分配角色。本文深入研究了这种随机性需求的程度。首先，文章证明了没有任何共识协议能够同时做到高效、适应性安全并且仅使用$O(\log n)$位的随机源熵。接下来，展示了一个三难困境：存在三个共识协议方案，它们可以分别实现这三个属性中的任意两个。 <div>
+Modern blockchain-based consensus protocols 
+aim for efficiency (i.e., low communication and round complexity) while maintaining security against adaptive adversaries.
+These goals are usually achieved using a public randomness beacon to select roles for each participant.  
+We examine to what extent this randomness is necessary.
+Specifically, we provide tight bounds on the amount of entropy a Byzantine Agreement protocol must consume from a beacon in order to enjoy efficiency and adaptive security.
+We first establish that no consensus protocol can simultaneously be efficient, be adaptively secure, and use $O(\log n)$ bits of beacon entropy. We then show this bound is tight and, in fact, a trilemma by presenting three consensus protocols that achieve any two of these three properties.
+]]></content:encoded>
+<pubDate>Sat, 02 Nov 2024 18:00:29 +0000</pubDate>
+<pubDate>Sat, 02 Nov 2024 18:00:29 +0000</pubDate>
+</item>
+<item>
+<title>Stealth and Beyond: Attribute-Driven Accountability in Bitcoin Transactions</title>
+<link>https://eprint.iacr.org/2024/1789</link>
+<guid>https://eprint.iacr.org/2024/1789</guid>
+<content:encoded><![CDATA[
+<div> 关键词: Bitcoin、隐私、问责制、双责任机制、Identity-Based Matchmaking Signatures (IB-MSS)
+
+<br><br>总结:
+该论文针对比特币交易中隐私与问责制平衡的问题，提出了一种新颖的双责任机制。此机制在比特币交易中既约束发送者只能花费符合特定条件的未花费交易输出（UTXOs），又要求接收方在接受资金前满足法律和道德要求。通过将合规属性融入隐形地址，方案在保持用户隐私的同时确保了政策遵循。为支持审计流程简化，文中引入了一种新的密码学原语——基于身份的匹配签名（IB-MSS）。这一解决方案完全兼容现有的比特币基础设施，不需要对核心协议进行改动，从而在保护隐私和去中心化的同时实现了交易审计和合规性。 <div>
+Bitcoin enables decentralized, pseudonymous transactions, but balancing privacy with accountability remains a challenge. This paper introduces a novel dual accountability mechanism that enforces both sender and recipient compliance in Bitcoin transactions. Senders are restricted to spending Unspent Transaction Outputs (UTXOs) that meet specific criteria, while recipients must satisfy legal and ethical requirements before receiving funds. We enhance stealth addresses by integrating compliance attributes, preserving privacy while ensuring policy adherence. Our solution introduces a new cryptographic primitive, Identity-Based Matchmaking Signatures (IB-MSS), which supports streamlined auditing. Our approach is fully compatible with existing Bitcoin infrastructure and does not require changes to the core protocol, preserving both privacy and decentralization while enabling transaction auditing and compliance.
+]]></content:encoded>
+<pubDate>Fri, 01 Nov 2024 16:32:51 +0000</pubDate>
+<pubDate>Fri, 01 Nov 2024 16:32:51 +0000</pubDate>
+</item>
+<item>
+<title>An Efficient and Secure Boolean Function Evaluation Protocol</title>
+<link>https://eprint.iacr.org/2024/1787</link>
+<guid>https://eprint.iacr.org/2024/1787</guid>
+<content:encoded><![CDATA[
+<div> 关键词: 布尔函数、密码学、安全布尔评估、两方协议、轻量级
+
+总结:
+布尔函数在加密系统设计和分析中扮演重要角色，而安全布尔评估（SBE）则是研究重点，允许双方在不暴露私有输入的情况下联合计算布尔函数。本文提出了一种利用1-out-of-2 不知转移（OT）作为构建模块的高效、通用的两方协议——$\textsf{BooleanEval}$。该协议仅使用XOR操作作为核心计算步骤，因此轻量且快速。与当前其他轻量级SBE设计不同，$\textsf{BooleanEval}$避免了使用额外的加密原语，如哈希函数和承诺方案，从而减少了计算开销。<br><br> <div>
+Boolean functions play an important role in designing and analyzing many cryptographic systems, such as block ciphers, stream ciphers, and hash functions, due to their unique cryptographic properties such as nonlinearity, correlation immunity, and algebraic properties. The secure evaluation of Boolean functions or Secure Boolean Evaluation (SBE) is an important area of research. SBE allows parties to jointly compute Boolean functions without exposing their private inputs. SBE finds applications in privacy-preserving protocols and secure multi-party computations. In this manuscript, we present an efficient and generic two-party protocol
+(namely $\textsf{BooleanEval}$) for the secure evaluation of Boolean functions by utilizing a 1-out-of-2 Oblivious Transfer (OT) as a building block. $\textsf{BooleanEval}$ only employs XOR operations as the core computational step, thus making it lightweight and fast. Unlike other lightweight state-of-the-art designs of SBE, $\textsf{BooleanEval}$ avoids the use of additional cryptographic primitives, such as hash functions and commitment schemes to reduce the computational overhead.
+]]></content:encoded>
+<pubDate>Fri, 01 Nov 2024 14:02:24 +0000</pubDate>
+<pubDate>Fri, 01 Nov 2024 14:02:24 +0000</pubDate>
+</item>
+<item>
+<title>PriSrv: Privacy-Enhanced and Highly Usable Service Discovery in Wireless Communications</title>
+<link>https://eprint.iacr.org/2024/1783</link>
+<guid>https://eprint.iacr.org/2024/1783</guid>
+<content:encoded><![CDATA[
+<div> 关键词：服务发现、隐私保护、PriSrv、匿名凭证基匹配加密（ACME）、快速匿名凭证（FAC）
+
+<br><br>总结:
+本文提出了一种名为PriSrv的私有服务发现协议，旨在解决无线通信中服务提供者和客户端的隐私保护问题。PriSrv允许双方指定细粒度的身份验证策略，在建立连接前确保对方满足条件。该协议包括私人服务广播阶段和匿名相互认证阶段，同时隐藏双方的敏感信息。为实现这一目标，文章引入了匿名凭证基匹配加密（ACME）的概念，一次操作即可实现双边灵活策略控制、选择性属性披露及多展示不可链接性。作为ACME的基础组件，还设计了一个快速匿名凭证（FAC）方案，以提供常量大小的凭证和高效的展示/验证机制，适合于无线网络中的隐私增强型和高可用性服务发现。此外，PriSrv协议与Wi-Fi EAP、mDNS、BLE和Airdrop等流行无线通信协议兼容，提供了增强隐私保护的功能。文章对PriSrv进行了形式化安全证明并对其在多种硬件平台上的性能进行了评估，实现在桌面、笔记本电脑和移动电话上完成私人发现和安全连接的时间均少于0.973秒，在Raspberry Pi 4B上的时间则少于2.712秒。最后，将PriSrv集成到IEEE 802.1X的实际网络环境中，证实了其实用性。 <div>
+Service discovery is essential in wireless communications. However, existing service discovery protocols provide no or very limited privacy protection for service providers and clients, and they often leak sensitive information (e.g., service type, client’s identity and mobility pattern), which leads to various network-based attacks (e.g., spoofing, man-in-the-middle, identification and tracking). In this paper, we propose a private service discovery protocol, called PriSrv, which allows a service provider and a client to respectively specify a fine-grained authentication policy that the other party must satisfy before a connection is established. PriSrv consists of a private service broadcast phase and an anonymous mutual authentication phase with bilateral control, where the private information of both parties is hidden beyond the fact that a mutual match to the respective authentication policy occurred. As a core component of PriSrv, we introduce the notion of anonymous credential-based matchmaking encryption (ACME), which exerts dual-layer matching in one step to simultaneously achieve bilateral  flexible policy control, selective attribute disclosure and multi-show unlinkability. As a building block of ACME, we design a fast anonymous credential (FAC) scheme to provide constant size credentials and efficient show/verification mechanisms, which is suitable for privacy-enhanced and highly usable service discovery in wireless networks. We present a concrete PriSrv protocol that is interoperable with popular wireless communication protocols, such as Wi-Fi Extensible Authentication Protocol (EAP), mDNS, BLE and Airdrop, to offer privacy-enhanced protection. We present formal security proof of our protocol and evaluate its performance on multiple hardware platforms: desktop, laptop, mobile phone and Raspberry Pi. PriSrv accomplishes private discovery and secure connection in less than 0.973 s on the first three platforms, and in less than 2.712 s on Raspberry Pi 4B. We also implement PriSrv into IEEE 802.1X in the real network to demonstrate its practicality.
+]]></content:encoded>
+<pubDate>Fri, 01 Nov 2024 10:02:29 +0000</pubDate>
+<pubDate>Fri, 01 Nov 2024 10:02:29 +0000</pubDate>
+</item>
 
 <item>
 <title>zkMarket : Privacy-preserving Digital Data Trade System via Blockchain</title>
