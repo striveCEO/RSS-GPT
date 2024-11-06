@@ -5,13 +5,83 @@
 <link>https://ethresear.ch/latest</link>
 
 <item>
+<title>PeerDAS with significantly less bandwidth consumption</title>
+<link>https://ethresear.ch/t/peerdas-with-significantly-less-bandwidth-consumption/20932</link>
+<guid>https://ethresear.ch/t/peerdas-with-significantly-less-bandwidth-consumption/20932</guid>
+<content:encoded><![CDATA[
+<div> 关键词: PeerDAS、GossipSub、带宽消耗、IDONTWANT、订阅策略
+
+总结:
+本文提出了一种改进方案，旨在降低PeerDAS的带宽消耗。当前方案中，GossipSub协议导致了带宽的放大因子浪费，因为多个节点可能向单个节点发送相同的列。此前已实现IDONTWANT机制来减少接收副本的数量，但不能确保确切数量。新提案将每个节点订阅的GossipSub主题数从S减至K（如设为2），从而减少了带宽消耗。虽然仍需要订阅一定数量的主题以保证稳定性，但节点仅需从其余未订阅的主题中获取S-K列。通过观察并请求其他节点的通知来获取缺失的列，利用超时机制选择下一个源节点，从而有效地减少副本的接收。新设计下，带宽消耗从原来的64C降至22C，减少了65.6%。此外，该方案与IDONTWANT机制结合使用可进一步节省带宽，同时与“对等体采样”方法相比，本方案在请求列的时间和条件上具有不同优势。 <div>
+<p><em>Authors: <a href="https://github.com/ppopth" rel="noopener nofollow ugc">pop</a></em></p>
+<p><em>tldr; this proposal reduces the bandwidth consumption of PeerDAS by 65.6%</em></p>
+<ul>
+<li><em>Since this proposal is an improvement to PeerDAS. <a href="https://github.com/ethereum/consensus-specs/tree/dev/specs/_features/eip7594" rel="noopener nofollow ugc">Familiarity with PeerDAS</a> is required.</em></li>
+<li><em><a href="https://ethresear.ch/t/gossipsub-topic-observation-proposed-gossipsub-1-3/20907">Topic observation</a> is a building block of this design so it would be helpful if you read it first.</em></li>
+</ul>
+<p>Currently GossipSub imposes an amplification factor on the bandwidth consumption to PeerDAS, since more than one peers can send you the same columns. In fact, you need only one copy, so this amplification wastes your bandwidth.</p>
+<p>Previously we have <code>IDONTWANT</code> implemented which reduces the number of copies you will receive, but it doesn’t guarantee exactly how many.</p>
+<p>This proposal enables nodes to receive only one copy of most of their sampled columns.</p>
+<h1><a class="anchor" href="https://ethresear.ch#p-51060-current-bandwidth-consumption-1" name="p-51060-current-bandwidth-consumption-1"></a>Current bandwidth consumption</h1>
+<p><em>(For simplicity, let’s assume that <code>DATA_COLUMN_SIDECAR_SUBNET_COUNT</code> and <code>NUMBER_OF_CUSTODY_GROUPS</code> are equal to <code>NUMBER_OF_COLUMNS</code>)</em></p>
+<p>Let <span class="math">S</span> be <code>SAMPLES_PER_SLOT</code>, <span class="math">C</span> be the size of a column, and <span class="math">D</span> be the amplification factor of GossipSub (aka the mesh degree).</p>
+<p>Nodes are required to subscribe to and sample <span class="math">S</span> columns, so each node has to consume the bandwidth about <span class="math">D*S*C</span> bytes per slot.</p>
+<h1><a class="anchor" href="https://ethresear.ch#p-51060-new-design-2" name="p-51060-new-design-2"></a>New design</h1>
+<p>Previously, we have each node subscribe to <span class="math">S</span> GossipSub topics. Now, we subscribe to fewer topics than that. We have each node subscribe to <span class="math">K=2</span> topics which is lower than <span class="math">S</span>. Nodes will still receive or forward <span class="math">D</span> copies in these <span class="math">K</span> topics, but they will receive only one copy and forward no copy for the remaining <span class="math">S-K</span> topics.</p>
+<p>The reason that we still need to subscribe to <span class="math">K</span> topics is because we need to provide backbones for the topics as required by <a href="https://ethresear.ch/t/gossipsub-topic-observation-proposed-gossipsub-1-3/20907">topic observations</a> (aka stability of the topics).</p>
+<p>The bandwidth consumption of <span class="math">K</span> subscriptions is <span class="math">D*K*C</span> bytes per slot.</p>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/1/a/1aafa726959d5acdd03d61f0201e9c2e0effdaf9.png" title="slot-breakdown"><img alt="slot-breakdown" height="210" src="https://ethresear.ch/uploads/default/optimized/3X/1/a/1aafa726959d5acdd03d61f0201e9c2e0effdaf9_2_690x210.png" width="690" /></a></div><p></p>
+<p>Now, the remaining question is how the node can get the remaining <span class="math">S-K</span> columns that it needs.</p>
+<p>Firstly, you start observing the topic at the beginning of the slot (shown as a blue line).</p>
+<p>After that, your peers will notify you when there is a new message in the topic. Orange lines show when your peers notify you. Notice that peer 2 is the first one who gets the message (column) and notifies you first.</p>
+<p>Since peer 2 notifies you first, you request the actual column from peer 2 with the timeout <span class="math">T</span> (400 ms). After the timeout, if you don’t get it from peer 2, you request it from the peer that notifies you second which is peer 4. If you still don’t get it, you keep going on. Red lines show when you request the column from each peer. The further lines are lighter to indicate that it’s less probable. Consecutive lines are 400ms apart indicating the timeout.</p>
+<p>It looks like timeouts will delay the column reception a lot because with the current PeerDAS you will get the column right at the orange lines which are faster. In fact, it’s not that bad for the following reasons.</p>
+<ol>
+<li>It saves a lot of bandwidth. Imagine that you get a copy of the column at each orange line. That looks very wasteful. With this proposal, you get only one copy at one of the red lines.</li>
+<li>Timeouts are rare. You don’t expect to get many timeouts for the following reasons.
+<ul>
+<li>The network condition is already good. If not, how could your peer notify you that it gets a message?. If you could notify me, so you could also send me the column. If it doesn’t, you can probably de-score it.</li>
+<li>Your peer can send you an early rejection without waiting for the timeout. For instance, if your peer is overloaded and doesn’t want to waste the bandwidth sending you the column, it can just send a rejection to you and you can move forward to another peer quickly.</li>
+</ul>
+</li>
+</ol>
+<h1><a class="anchor" href="https://ethresear.ch#p-51060-new-bandwidth-consumption-3" name="p-51060-new-bandwidth-consumption-3"></a>New bandwidth consumption</h1>
+<ul>
+<li>The bandwidth consumption due to subscribing to <span class="math">K</span> topics is <span class="math">D*K*C</span> bytes per slot.</li>
+<li>The bandwdith consumption due to observing and downloading the remaining <span class="math">S-K</span> columns is <span class="math">(S-K)*C</span> bytes per slot.</li>
+</ul>
+<p>The total bandwidth consumption would be <span class="math">(D*K+S-K)*C</span> bytes per slot.</p>
+<p>Assign the parameters with the current assignments in the spec: <span class="math">D = 8</span>, <span class="math">K = 2</span>, and <span class="math">S = 8</span>.</p>
+<ul>
+<li>The bandwidth consumption of the current PeerDAS is <span class="math">64*C</span>.</li>
+<li>The bandwidth consumption of the new one is <span class="math">22*C</span> which is 65.6% reduction.</li>
+</ul>
+<p>The reason I assign <span class="math">K=2</span> is because, with 8k nodes and the number of columns of 128, there will be at least 100 nodes in each topic.</p>
+<p>Pessimistically, if you think <span class="math">K=2</span> doesn’t make the topics stable enough, we can go to <span class="math">K=4</span> and the bandwidth consumption would be <span class="math">36*C</span> which is still 43.8% reduction.</p>
+<h1><a class="anchor" href="https://ethresear.ch#p-51060-comparison-to-idontwant-4" name="p-51060-comparison-to-idontwant-4"></a>Comparison to IDONTWANT</h1>
+<p>You can note that the analysis in the previous sections assumes that you will receive or forward exactly <span class="math">D</span> copies of messages when subscribing to topics.</p>
+<p>This is not true with <code>IDONTWANT</code> since it can reduce the number of copies you will receive by sending <code>IDONTWANT</code> to your peers before they send you a copy.</p>
+<p>There is a still corner case that <code>IDONTWANT</code> doesn’t help reduce the number of copies at all. Imagine that all of your peers send you the message at the same time (the orange lines are very close to each other), so you don’t have a chance to send <code>IDONTWANT</code> to them in time. So, in this case, you still receive the same number of copies as before. While in this proposal, it’s guaranteed that you will receive only one copy.</p>
+<p>However, we can combine this proposal with <code>IDONTWANT</code> to get an even better protocol. Since nodes still subscribe to <span class="math">K</span> topics. <code>IDONTWANT</code> can reduce a lot of bandwidth consumption there.</p>
+<h1><a class="anchor" href="https://ethresear.ch#p-51060-comparison-to-peer-sampling-5" name="p-51060-comparison-to-peer-sampling-5"></a>Comparison to Peer Sampling</h1>
+<p>Peer sampling is a process that after all the columns are disseminated through the network, you request a column from your peer that’s supposed to have it. If you get the column back, it means that column is available. If not, you may either request another peer or decide that the column is not available.</p>
+<p>You can see that you always request for a column no matter what which is different from this proposal. In this proposal, you will request a column only if your peer notifies you that it has one. So peer sampling and this proposal are fundamentally different.</p>
+<p>Another difference is, in peer sampling, you aren’t sure when to request a column. In other words, you don’t know when the column dissemination is finished so that you can start requesting the column. What you can do is to set an exact timestamp that you will assume the dissemination is already finished and start requesting. This sometimes waste you some time since the dissemination is finished far before the timestamp. In this proposal, you don’t get this problem since you’re notified when you can request.</p>
+            <p><small>1 post - 1 participant</small></p>
+            <p><a href="https://ethresear.ch/t/peerdas-with-significantly-less-bandwidth-consumption/20932">Read full topic</a></p>
+]]></content:encoded>
+<pubDate>Tue, 05 Nov 2024 19:33:20 +0000</pubDate>
+<pubDate>Tue, 05 Nov 2024 19:33:20 +0000</pubDate>
+</item>
+
+<item>
 <title>Economic Implications of a Competitive Blob Market</title>
 <link>https://ethresear.ch/t/economic-implications-of-a-competitive-blob-market/20931</link>
 <guid>https://ethresear.ch/t/economic-implications-of-a-competitive-blob-market/20931</guid>
 <content:encoded><![CDATA[
 <div> 关键词：blob市场、竞争、费用、利润边际、L2扩容
 
-总结:<br>
+总结:<br />
 随着最近blob市场的竞争加剧，其交易费用持续超过目标计数，标志着从低竞争环境向活跃竞争阶段的转变。这可能导致更高的费用，并需要更具有竞争力的blob发布策略以减轻fee slippage的影响。目前，priority费用仅占总费用的11.8%，而rollups通过转向blob市场已获得了显著的利润提升，但未来市场竞争将可能压缩这些利润边际。为应对竞争，rollups可能需要支付更高优先级费用，这将增加构建者和验证者的收入。此外，blob市场的扩容，如增大最大blob数量，可能会进一步影响收入分布与市场动态。然而，如何平衡竞争和盈利能力仍然是未来的挑战。同时，文章提出了对新进入的rollup经济模型、EIP-7762提案对blob市场经济学影响以及除提高优先级费用和预确认之外，L2还可以采取哪些其他方法来优化其blob包含流程和成本结构等开放性问题的探讨。 <div>
 <h1><a class="anchor" href="https://ethresear.ch#p-51058-intro-1" name="p-51058-intro-1"></a>Intro</h1>
 <p>Until recently, the blob market has seen minimal competition, with fees hovering near the base minimum since its inception, interrupted only several times briefly by blob market volatility. However, this past week marked a shift: the blob market has consistently exceeded the target blob count, signaling a tipping point toward prolonged competition.</p>
@@ -50,9 +120,7 @@ The chart below shows that immediately after Dencun, some rollup margins shot up
             <p><a href="https://ethresear.ch/t/economic-implications-of-a-competitive-blob-market/20931">Read full topic</a></p>
 ]]></content:encoded>
 <pubDate>Tue, 05 Nov 2024 12:32:08 +0000</pubDate>
-<pubDate>Tue, 05 Nov 2024 12:32:08 +0000</pubDate>
 </item>
-
 <item>
 <title>3-Slot-Finality: SSF is not about "Single" Slot</title>
 <link>https://ethresear.ch/t/3-slot-finality-ssf-is-not-about-single-slot/20927</link>

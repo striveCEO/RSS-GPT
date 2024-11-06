@@ -5,11 +5,44 @@
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
 <item>
+<title>IrisLock: Iris Biometric Key Derivation with 42 bits of security</title>
+<link>https://eprint.iacr.org/2024/100</link>
+<guid>https://eprint.iacr.org/2024/100</guid>
+<content:encoded><![CDATA[
+<div> 关键词：生物特征认证、模糊提取器、安全、独立性假设、IrisLock
+
+总结:
+
+本文介绍了IrisLock，一种基于虹膜的密钥衍生系统，该系统结合了虹膜特征提取技术与改进后的模糊提取器，旨在解决生物特征认证领域的理论与实践之间的鸿沟。传统的生物特征认证算法依赖于泄露私人信息的数据和外部的安全措施，而模糊提取器理论上可以实现安全且保护隐私的生物特征认证。然而，现有模糊提取器系统要么基于未经统计验证或已被证明为错误的独立性假设，要么使用了错误的密码学分析。
+
+IrisLock系统纠正了sample-then-lock方法的证明，并指出子集最小最小熵是相关安全性度量标准。它提供$42$位安全性以及$45\%$的真实接受率(TAR)，与现有系统相比，其定量安全性水平相当甚至更高。通过添加密码，安全性可提升至$64$位。在评估TAR和安全性时，所使用的虹膜数据与训练和收集统计数据的数据类互不重叠（开放式数据集方案）。IrisLock唯一必要的统计假设是对最小熵估计的准确性。 <div>
+Despite decades of effort, a chasm exists between the theory and practice of device-level biometric authentication. Deployed authentication algorithms rely on data that overtly leaks private information about the biometric; thus systems rely on externalized security measures such as trusted execution environments. The authentication algorithms have no cryptographic guarantees.
+  
+This is  frustrating given the research that has developed theoretical tools, known as fuzzy extractors, that enable secure, privacy-preserving biometric authentication with public enrollment data (Dodis et al., SIAM JoC 2008). Unfortunately, fuzzy extractor systems either:
+-Make strong independence assumptions, such as:
+-- Bits of biometrics are i.i.d. (or that all correlation is pairwise between features (Hine et al., TIFS 2023)), or
+-- For an error-correcting code, the nearest codeword and the coset of biometric readings are independent (Zhang, Cui, and Yu, ePrint 2021/1559).
+  These assumptions either have not been statistically checked or 
+  statistical analysis indicates they are false.
+- Or use incorrect cryptographic analysis.  Simhadri et al. (ISC, 2019) assume the security of sample-then-lock (Canetti et al., Journal of Cryptology 2021) is captured by the average min-entropy of subsets.  Zhang et al. (ICPR, 2022) show an attack on this incorrect analysis. 
+
+This work introduces IrisLock, an iris key derivation system powered by technical advances in both
+1) feature extraction from the iris  and
+2) the fuzzy extractor used to secure authentication keys.  The fuzzy extractor builds on sample-then-lock (Canetti et al., Journal of Cryptology 2021). We correct a proof in Canetti et al. and show the minimum of min-entropy of subsets is the relevant security measure.  Our primary parameters are $42$ bits of security at $45\%$ true accept rate (TAR).  Our quantitive level of security is as good as the above systems, Simhadri et al's incorrect analysis yields an estimate of $32$ bits, while Zhang et al.'s system on the face estimates $45$ bits (with the independence condition). One can easily incorporate a password, boosting security to $64$ bits.
+
+Irises used to evaluate TAR and security are class disjoint from those used for training and collecting statistics (the open dataset regime).
+The only statistical assumption made is necessary: the accuracy of min-entropy estimation.
+]]></content:encoded>
+<pubDate>Mon, 22 Jan 2024 18:21:35 +0000</pubDate>
+<pubDate>Mon, 22 Jan 2024 18:21:35 +0000</pubDate>
+</item>
+
+<item>
 <title>Amun: Securing E-Voting Against Over-the-Shoulder Coercion</title>
 <link>https://eprint.iacr.org/2021/851</link>
 <guid>https://eprint.iacr.org/2021/851</guid>
 <content:encoded><![CDATA[
-<div> 关键词：Amun协议、选举、投票隐私、防肩窥、安全性证明<br><br>总结:
+<div> 关键词：Amun协议、选举、投票隐私、防肩窥、安全性证明<br /><br />总结:
 Amun协议是在一场允许每个选民对M个可能选项表达P个偏好级别的选举中，确保投票安全性的方案。它防范了过肩窥视攻击，保护了投票隐私，同时保持了公平性、端到端可验证性和正确性。在选举前，每位选民会收到含有有效和干扰代币的选票，只有有效代币会对最终计票产生影响，但它们与干扰代币无法区分，从而防止了肩窥攻击的发生。我们依据随机预言模型下标准的决策Diffie-Hellman假设证明了该构造的安全性。 <div>
 In an election where each voter may express $P$ preferences among $M$ possible choices, the Amun protocol allows to secure vote casting against over-the-shoulder adversaries, retaining privacy, fairness, end-to-end verifiability, and correctness.
 
@@ -19,9 +52,7 @@ Since the voter is the only one who knows which tokens are valid (without being 
 We prove the security of the construction under the standard Decisional Diffie Hellman assumption in the random oracle model.
 ]]></content:encoded>
 <pubDate>Tue, 22 Jun 2021 14:37:01 +0000</pubDate>
-<pubDate>Tue, 22 Jun 2021 14:37:01 +0000</pubDate>
 </item>
-
 <item>
 <title>Is Periodic Pseudo-randomization Sufficient for Beacon Privacy?</title>
 <link>https://eprint.iacr.org/2024/1782</link>
