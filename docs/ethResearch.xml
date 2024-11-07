@@ -4,6 +4,164 @@
 <title>Ethereum Research - Latest topics</title>
 <link>https://ethresear.ch/latest</link>
 
+<item>
+<title>Proposers do play dice: Introducing random Execution Auctions (randEAs)</title>
+<link>https://ethresear.ch/t/proposers-do-play-dice-introducing-random-execution-auctions-randeas/20938</link>
+<guid>https://ethresear.ch/t/proposers-do-play-dice-introducing-random-execution-auctions-randeas/20938</guid>
+<content:encoded><![CDATA[
+<div> 关键词: 执行拍卖（EAs）、最大可提取价值（MEV）、提前分配、多块控制影响（MMEV）、随机执行拍卖（randEAs）
+
+总结:
+本文探讨了执行拍卖（EAs）作为实现最大可提取价值（MEV）治理方案的一种候选机制，旨在通过提前分配和区块执行提议权来解决提案者的时间游戏问题以及提议者收益的波动性。然而，EAs可能存在集中化风险，例如导致特定参与者更易获取执行提议权，并可能催生多块控制影响（MMEV）。为了解决MMEV问题，文章提出了随机执行拍卖（randEAs）的新方法。在randEAs中，中标者虽然获得了一定时间段内的执行提议权，但具体的提议槽位是在临近提议前才随机确定并揭晓。randEAs通过这种方式减少了中标者能够提前知晓并控制连续多个区块的可能性。同时，文章还指出了randEAs可能会带来的市场结构变化及不平等现象等问题，需要谨慎考虑实施影响。 <div>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/1/a/1ad5e515fee1d377e9c25de34aa072469479e79e.jpeg" title="Screenshot 2024-10-09 at 10.25.42"><img alt="Screenshot 2024-10-09 at 10.25.42" height="500" src="https://ethresear.ch/uploads/default/optimized/3X/1/a/1ad5e515fee1d377e9c25de34aa072469479e79e_2_498x500.jpeg" width="498" /></a></div><p></p>
+<p><em>by <a href="https://x.com/soispoke" rel="noopener nofollow ugc">Thomas Thiery</a></em> - November 6th, 2024</p>
+<p><em>Thanks to <a href="https://x.com/_julianma" rel="noopener nofollow ugc">Julian</a>, <a href="https://x.com/barnabemonnot" rel="noopener nofollow ugc">Barnabé</a>, <a href="https://x.com/weboftrees" rel="noopener nofollow ugc">Anders</a> and <a href="https://x.com/_JonahB_" rel="noopener nofollow ugc">Jonah Burian </a> for discussions, feedback and comments on this post.</em></p>
+<h2><a class="anchor" href="https://ethresear.ch#p-51078-introduction-1" name="p-51078-introduction-1"></a>Introduction</h2>
+<p><a href="https://mirror.xyz/barnabe.eth/QJ6W0mmyOwjec-2zuH6lZb0iEI2aYFB9gE-LHWIMzjQ" rel="noopener nofollow ugc">Execution Auctions</a> (EAs) have been proposed as a candidate implementation of <a href="https://youtu.be/MtvbGuBbNqI?si=YXgH0JkF8EZCMvPg" rel="noopener nofollow ugc">Attester-Proposer Separation</a> (APS). EAs aim to prevent the negative externalities of Maximal Extractable Value (MEV) by further <a href="https://collective.flashbots.net/t/isolating-attesters-from-mev/3837" rel="noopener nofollow ugc">separating the roles of attesting/validating</a> and block execution proposing. Specifically, EAs address two key issues: the incentive to engage in beacon proposer timing games and the variance in execution proposer payoffs.</p>
+<p>By auctioning the right to propose execution payloads well in advance (e.g., 32 slots ahead), EAs potentially mitigate timing games by removing the immediate incentive to delay block proposals. Additionally, by burning the value of the winning bid, EAs could reduce the variance in proposer payoffs and help <a href="https://ethresear.ch/t/mev-burn-a-simple-design/15590">improve both micro and macro consensus stability</a>. In essence, EAs involve the protocol running an auction to sell future execution proposing rights, with attesters monitoring bids to ensure the highest bid is selected and the proceeds are <a href="https://ethresear.ch/t/mev-burn-a-simple-design/15590">burned</a>.</p>
+<p>The simplicity of EAs and some of their <a href="https://ethresear.ch/t/execution-auctions-as-an-alternative-to-execution-tickets/19894">economic properties</a> make them a potential candidate for implementation in Ethereum. By running auctions to allocate proposing rights, EAs (1) effectively separate block execution proposing from attesting/validating, (2) enforce a new competition for every slot, and (3) aim to resolve the “value-in-flight problem” by removing reliance on time-sensitive block value fluctuations (e.g., from CEX-DEX arbitrages).</p>
+<p>However, concerns have been raised regarding the centralizing forces inherent in Execution Auctions (EAs) and other Attester-Proposer Separation (APS) designs. These concerns specifically include:</p>
+<ul>
+<li>Moving from relying on ex post to ex ante MEV valuations for winning execution proposing rights can influence which actors are able to secure these rights (see papers from <a href="https://arxiv.org/abs/2408.11255" rel="noopener nofollow ugc">Burian, Crapis, Saleh</a> and <a href="https://arxiv.org/abs/2408.03116" rel="noopener nofollow ugc">Pai and Resnick</a>).</li>
+<li>Allowing proposers to know in advance if they have won proposing rights for multiple consecutive slots may lead to the emergence of toxic <a href="https://ethresear.ch/t/does-multi-block-mev-exist-analysis-of-2-years-of-mev-data/20345">multi-block MEV</a> (MMEV), where a single actor can exert excessive control over multiple blocks in succession.</li>
+</ul>
+<p>Importantly, randEAs solely focus on proposing a candidate design to mitigate problems related to MMEV. One potential solution to mitigate MMEV is to introduce a second auction—conducted by the execution proposer (i.e., the winner of the initial auction)—just in time (e.g., during slot <code>n+32</code>). In this second auction, the right to insert the first set of transactions—the Top-of-Block—would be sold to a party potentially different from the winner of the first auction (see <a href="https://x.com/barnabemonnot/status/1808444733305258047" rel="noopener nofollow ugc">Barnabé’s thread</a> and <a href="https://ethresear.ch/t/mechan-stein-alt-franken-ism/20321">Mike’s post</a>). Introducing this additional auction during the slot eliminates the certainty of controlling the full content of multiple blocks in a row ahead of time, thus mitigating MMEV. Additionally, inclusion list (IL) designs like <a href="https://ethresear.ch/t/fork-choice-enforced-inclusion-lists-focil-a-simple-committee-based-inclusion-list-proposal/19870">FOCIL</a>, which require the execution proposer to include transactions from multiple parties (e.g., IL committee members) in the block, could further alleviate some concerns related to MMEV by adding constraints to the execution proposer.</p>
+<p>In this post, we propose an alternative way to address MMEV concerns without the need for an additional auction. In randEAs, similar to <a href="https://arxiv.org/abs/2408.11255" rel="noopener nofollow ugc">execution tickets</a> (ETs), winning the initial auction guarantees execution proposing rights within a specific slot window (e.g., from slot <code>n+16</code> to <code>n+32</code>), but the exact slot for which the proposing rights are won is only <strong>assigned and revealed one slot in advance</strong>. However, unlike ETs, the mechanism to assign execution proposing rights is an auction. This simple approach allows participants to secure future execution proposing rights if they win the auction without knowing exactly if or when they would control multiple consecutive slots.</p>
+<h2><a class="anchor" href="https://ethresear.ch#p-51078-design-2" name="p-51078-design-2"></a>Design</h2>
+<p>We begin with a high-level overview of the randEAs design (see <strong>Figure 1</strong>), intentionally omitting some implementation details for simplicity.</p>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/c/5/c55ca434612e45eedafd29681755b1f276ce871f.png" title="Sept 23 Screenshot from Notion"><img alt="Sept 23 Screenshot from Notion" height="500" src="https://ethresear.ch/uploads/default/optimized/3X/c/5/c55ca434612e45eedafd29681755b1f276ce871f_2_689x500.png" width="689" /></a></div><p></p>
+<ol>
+<li>
+<p><strong>Auctioning Execution Proposing Rights</strong>: During slot <code>n</code>, the beacon proposer conducts an auction for execution proposing rights within a future slot window (e.g., slots <code>n+16</code> to <code>n+32</code>). Participants submit bids to acquire the right to propose an execution payload in one of these future slots. Attesters of slot <code>n</code> monitor these bids and ensure that the beacon proposer commits to the highest bid (e.g., <code>0.2 ETH</code>) and the execution proposing right winner’s associated public key (e.g., execution proposer <code>0xA12</code>). They will only attest to the beacon block if the committed bid matches the highest bid they have seen, using a <a href="https://ethresear.ch/t/mev-burn-a-simple-design/15590">MEV burn</a> like mechanism.</p>
+</li>
+<li>
+<p><strong>Revealing the Exact Execution Slot</strong>: The exact slot assignment is revealed by the beacon proposer right before the execution slot occurs. For example, during beacon slot <code>n+22</code>, the beacon proposer discloses that the winner of the auction in slot <code>n</code>, Execution Proposer <code>0xA12</code>, will have to provide the execution payload for execution slot <code>n+22</code>. This means that although the auction winner knows they will propose within the window <code>n+16</code> to <code>n+32</code>, they only learn their specific execution slot (e.g., <code>n+22</code>) right before they have to propose.</p>
+</li>
+</ol>
+<p>By randomizing the exact slot assignment within a known window and revealing it just in time, randEAs prevent proposers from knowing far in advance whether they will control multiple consecutive slots.</p>
+<h3><a class="anchor" href="https://ethresear.ch#p-51078-beacon-proposer-slot-assignment-mechanism-3" name="p-51078-beacon-proposer-slot-assignment-mechanism-3"></a><strong>Beacon Proposer Slot Assignment Mechanism</strong></h3>
+<p>To ensure that beacon proposers exclusively and securely assign execution slots to winners, we incorporate a mechanism inspired by <a href="https://github.com/ethereum/consensus-specs/blob/a09d0c321550c5411557674a981e2b444a1178c0/specs/phase0/validator.md#aggregation-selection" rel="noopener nofollow ugc">**attestation aggregation</a>.** We use cryptographic signatures and deterministic selection functions to maintain randomness and fairness in execution slot assignments.</p>
+<p><strong>1. Key Components</strong></p>
+<ul>
+<li><strong>Execution Proposer Pool</strong>: A list of execution proposers who have won the initial randEA auction for a specific slot window.</li>
+<li><strong>Slot Signature</strong>: A unique BLS signature generated by the beacon proposer for each execution slot to introduce randomness.</li>
+<li><strong>Selection Function</strong>: A deterministic method that uses the slot signature to select an execution proposer from the pool.</li>
+</ul>
+<p><strong>2. Generating Slot Signatures</strong></p>
+<p>For each execution slot within the auction window (e.g., <code>n+16</code> to <code>n+32</code>), the beacon proposer of that specific slot generates a unique <strong>slot signature</strong>. This signature serves as a cryptographic source of randomness for selecting the execution proposer for that specific slot.</p>
+<pre><code class="lang-python">def get_slot_signature(state: BeaconState, slot: Slot, privkey: int) -&gt; BLSSignature:
+    domain = get_domain(state, DOMAIN_EXECUTION_SLOT_SELECTION, compute_epoch_at_slot(slot))
+    signing_root = compute_signing_root(slot, domain)
+    return bls.Sign(privkey, signing_root)
+</code></pre>
+<ul>
+<li><strong>Function Breakdown</strong>:
+<ul>
+<li><strong><code>get_domain</code></strong>: Defines the context for slot selection.</li>
+<li><strong><code>compute_signing_root</code></strong>: Combines slot and domain to create a unique message for signing.</li>
+<li><strong><code>bls.Sign</code></strong>: Generates the BLS signature using the Beacon Proposer’s private key.</li>
+</ul>
+</li>
+</ul>
+<p><strong>3. Selecting an Execution Proposer</strong></p>
+<p>Using the generated <strong>slot signature</strong>, the beacon proposer of slot <code>n+22</code> deterministically selects an <strong>Execution Proposer</strong> from the <strong>Execution Proposer Pool</strong> for execution slot <code>n+22</code>.</p>
+<pre><code class="lang-python">def select_execution_proposer(proposer_pool: List[str], slot_signature: BLSSignature) -&gt; str:
+    signature_bytes = bls.Signature.to_bytes(slot_signature)
+    hashed_signature = hashlib.sha256(signature_bytes).digest()
+    hashed_int = int.from_bytes(hashed_signature[:8], 'big')
+    proposer_index = hashed_int % len(proposer_pool)
+    selected_proposer = proposer_pool[proposer_index]
+    return selected_proposer
+</code></pre>
+<p>This function <strong>(1)</strong> converts the slot signature into a hash using SHA-256 to ensure unpredictability, <strong>(2)</strong> maps the hashed value to an index within the Execution Proposer Pool, and <strong>(3)</strong> chooses the proposer at the determined index, ensuring each proposer has an equal chance of being selected.</p>
+<p><strong>4. Delayed Reveal</strong></p>
+<p>The selected execution proposer for a specific slot is revealed during the beacon slot <strong>immediately preceding</strong> to the execution slot.</p>
+<ul>
+<li><strong>Example</strong>: For execution slot <code>n+22</code>, the assignment is revealed during beacon slot <code>n+22</code> by the beacon proposer of slot <code>n+22</code>.</li>
+</ul>
+<h2><a class="anchor" href="https://ethresear.ch#p-51078-model-4" name="p-51078-model-4"></a><strong>Model</strong></h2>
+<p>To demonstrate how randEAs could work, we present a simple model based on the following assumptions:</p>
+<ul>
+<li><strong>Slot Windows</strong>: Each proposer is assigned a slot from a predefined window of slots.</li>
+<li><strong>Random, Non-Reassignable Slots</strong>: Slots within the window are assigned randomly, and once assigned, a slot cannot be taken by another proposer.</li>
+<li><strong>Window Progression</strong>: Once all slots in a window are assigned, the process moves to the next window.</li>
+<li><strong>Delayed Slot Reveal</strong>: Although execution proposers are pre-assigned slots, the exact slot is revealed only one slot before they are scheduled to propose.</li>
+</ul>
+<p>We define the following variables:</p>
+<ul>
+<li><span class="math">W</span>: Slot window size (e.g., <span class="math">W = 16</span>). Note that the size of the window is a parameter that should be carefully set after conducting further analyses.</li>
+<li><span class="math">S_i</span>: Slot assigned to execution proposer <span class="math">i</span>.</li>
+</ul>
+<h3><a class="anchor" href="https://ethresear.ch#p-51078-slot-window-5" name="p-51078-slot-window-5"></a><strong>Slot window</strong></h3>
+<p>Each execution proposer <span class="math">i</span> is assigned a slot from the following window:</p>
+<p><span class="math">
+W_i = \{ \text{slot}_{n+16}, \dots, \text{slot}_{n+15+W} \}
+</span></p>
+<p>Execution proposer $is slot is chosen randomly from the available slots in <span class="math">W_i</span>.</p>
+<p>The slot assignment follows these rules:</p>
+<ul>
+<li>
+<p><strong>Random Selection</strong>: A slot is randomly allocated to execution proposer <span class="math">i</span> from <span class="math">W_i</span>, and once assigned, it cannot be reassigned.</p>
+</li>
+<li>
+<p><strong>Window Progression</strong>: Once all slots in <span class="math">W_n</span> are assigned, the next window,<br />
+<span class="math">W_{i+W} = \{ \text{slot}_{n+32}, \dots, \text{slot}_{i+31+W} \},</span> is opened for the next set of execution proposers.</p>
+</li>
+<li>
+<p><strong>Delayed Slot Reveal:</strong> Although execution proposer <span class="math">i</span> has a slot assigned within their window, the exact slot  <span class="math">S_i</span> is revealed to them is revealed to them only one slot before they are scheduled to propose.</p>
+</li>
+</ul>
+<h3><a class="anchor" href="https://ethresear.ch#p-51078-probability-of-knowing-the-exact-slot-6" name="p-51078-probability-of-knowing-the-exact-slot-6"></a>Probability of Knowing the Exact Slot</h3>
+<p>As more slots within a window are assigned, the probability that an execution proposer knows their exact slot increases because they can observe which slots have already been allocated. This probability reaches certainty when only one slot remains unassigned (see <strong>Figure 2</strong>).</p>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/1/6/16eb5fe32bebf09ff9d5e96f929ba24cee2c58c4.png" title="Slot Allocation Mechanism output (1) (1)"><img alt="Slot Allocation Mechanism output (1) (1)" height="500" src="https://ethresear.ch/uploads/default/optimized/3X/1/6/16eb5fe32bebf09ff9d5e96f929ba24cee2c58c4_2_601x500.png" width="601" /></a></div><p></p>
+<p>Let <span class="math">k</span> represent the number of slots already allocated in proposer $is window <span class="math">W_i</span>. The probability that proposer <span class="math">n</span> knows their exact slot prior to the final reveal is:</p>
+<div class="math">
+P_i(k) = \frac{1}{W - k}
+</div>
+<p>Here’s why:</p>
+<p><strong>Total Remaining Slots:</strong> There are <span class="math">W - k</span> unassigned slots remaining in <span class="math">W_i</span>:</p>
+<div class="math">
+\text{Total Remaining Slots} = W - k
+</div>
+<p><strong>Equal Probability:</strong> Since slots are assigned randomly, each of the remaining slots has an equal chance of being assigned to proposer <span class="math">n</span>.</p>
+<p><strong>Certainty with One Slot Left:</strong> When only one slot remains unassigned <span class="math">W - k = 1</span>, the probability becomes:</p>
+<div class="math">
+P_i(W - 1) = \frac{1}{W - (W - 1)} = \frac{1}{1} = 1
+</div>
+<p>As the window fills up, the probability of knowing the exact slot increases, ultimately reaching certainty when only one slot remains unassigned.</p>
+<h2><a class="anchor" href="https://ethresear.ch#p-51078-pros-7" name="p-51078-pros-7"></a>Pros</h2>
+<ul>
+<li>
+<p><strong>Simplicity</strong>: Employing slot windows with random slot allocation, instead of introducing a second <a href="https://hackmd.io/@mikeneuder/mechan-stein" rel="noopener nofollow ugc">just-in-time (JIT) auction</a>, simplifies implementation and requires fewer resources from protocol actors like attesters, who would otherwise need to ensure that the additional auction is conducted properly and that participants adhere to the rules.</p>
+</li>
+<li>
+<p>Random EAs effectively differentiate between <strong>knowing that you will propose</strong> and <strong>knowing the exact slot in which you will propose</strong>. This allows proposers to leverage the certainty of having won the right to propose in the near future to price the value of winning the auction while limiting potential abuses  that could arise from knowing the exact slots they will control well in advance (e.g., MMEV).</p>
+</li>
+<li>
+<p><strong>Reduced edge for sophisticated bidders</strong>: Not knowing the exact slot you will control may also reduce the edge that sophisticated parties gain when bidding during the execution proposing rights auction. For example, if a token or NFT is scheduled to launch at a specific slot, the uncertainty in slot allocation might prevent sophisticated actors from exploiting this information to extract more MEV by pricing the expected block value ahead of time.</p>
+</li>
+<li>
+<p>Random EAs allow execution proposers to provide both short-lived (lookahead of 1) and long-lived (guaranteed to get the execution proposing rights in a given slot window) <strong>preconfirmations</strong>. We could also envision proposers who have won the right to propose within a given time window coordinating off-chain to offer better guarantees to users.</p>
+</li>
+</ul>
+<h2><a class="anchor" href="https://ethresear.ch#p-51078-things-to-look-out-for-8" name="p-51078-things-to-look-out-for-8"></a>Things to look out for</h2>
+<ul>
+<li>
+<p>The current market structure, which employs out-of-protocol Proposer-Builder Separation (PBS), tends to centralize block proposals among a few actors with the highest ex post MEV (Maximal Extractable Value) extraction abilities. This concentration leads to significant variability and results in an oligopoly, where only two builders are responsible for producing more than 85% of all blocks. In contrast, random Execution Auctions (randEAs), similar to Execution Tickets (ETs), may shift this concentration toward actors with the highest ex ante value for MEV extraction (see <a href="https://arxiv.org/abs/2408.03116" rel="noopener nofollow ugc">Pai and Resnick, 2024</a>). Under randEAs, the winners of execution proposing rights might have limited MEV extraction capabilities themselves and instead outsource block construction. This outsourcing causes execution proposing rights to concentrate among those with the lowest capital costs. If capital costs are uniform across participants, the concentration instead favors those with superior MEV extraction abilities. In more realistic scenarios, when both capital costs and MEV extraction abilities vary among participants, the interplay between these two factors might lead to further concentration, potentially resulting in a monopoly (see <a href="https://arxiv.org/abs/2408.11255" rel="noopener nofollow ugc">Burian, Crapis, Saleh, 2024</a>). This shift in market structure could cause greater centralization than the current PBS system, and the possibility of increased concentration with randEAs must be carefully considered.</p>
+</li>
+<li>
+<p>If slot windows are relatively small (e.g., 16 slots), random EAs may introduce some inequality among proposers within a given window. Proposers assigned to slots towards the end of the window have a higher probability of knowing their exact slot in advance, as more slots are allocated and revealed. Conversely, an infinitely long time window would provide a memoryless property (i.e., the probability of knowing the exact slot remains constant), but it would make pricing highly complex: Without a bounded window, assigning a fair value to execution proposing rights is inherently difficult, as there are no natural limits or constraints to guide pricing decisions.</p>
+</li>
+<li>
+<p>Bidders that win multiple auctions gain an increased ability to predict the exact slots they will propose, especially as the number of unassigned slots decreases and if their own slots haven’t been assigned yet. For example, if a single party has won three auctions in a row and their slots have not been assigned while only three slots remain unassigned in the window, they are certain to be allocated those three remaining slots. This certainty allows them to control multiple consecutive slots, potentially giving them an unfair advantage and enabling them to exploit MMEV opportunities.</p>
+</li>
+</ul>
+            <p><small>1 post - 1 participant</small></p>
+            <p><a href="https://ethresear.ch/t/proposers-do-play-dice-introducing-random-execution-auctions-randeas/20938">Read full topic</a></p>
+]]></content:encoded>
+<pubDate>Wed, 06 Nov 2024 14:58:56 +0000</pubDate>
+<pubDate>Wed, 06 Nov 2024 14:58:56 +0000</pubDate>
+</item>
 
 <item>
 <title>PeerDAS with significantly less bandwidth consumption</title>
