@@ -5,6 +5,61 @@
 <link>https://ethresear.ch/latest</link>
 
 <item>
+<title>Improving connectivity and preventing censorship in networks</title>
+<link>https://ethresear.ch/t/improving-connectivity-and-preventing-censorship-in-networks/20942</link>
+<guid>https://ethresear.ch/t/improving-connectivity-and-preventing-censorship-in-networks/20942</guid>
+<content:encoded><![CDATA[
+<div> 关键词: 区块链节点、NAT、火墙、Libp2p、连接策略
+
+总结:
+本文提出了一个针对当前区块链节点及P2P应用连通性问题的解决方案。现有的P2P库如Libp2p依赖于分布式中继网络，但这种做法并不利于增强网络资源并实现真正的点对点通信。作者设计了一个系统，支持包括UPnP端口转发、UPnP打洞、TCP直接连接、TCP反向连接、TCP打洞以及UDP TURN代理等多种常见的连接策略，并构建了一个框架用于新的连接策略开发，支持NAT枚举、多接口和改进的服务跨网络寻址设计。
+
+作者已经编写了一个Python 3.6+异步库，并进行了多平台测试，虽仍处于Beta阶段，但提供了简单的文本演示Demo。感兴趣的读者可以通过指定命令尝试运行Demo，并阅读作者的博客文章以获取更多信息。作者正在寻求反馈，以判断是否值得继续推进该项目。 <div>
+<p><img alt="demo_small (1)" class="animated" height="437" src="https://ethresear.ch/uploads/default/original/3X/c/0/c0a496d5821b840a46b956450fbab0271213cb35.gif" width="690" /></p>
+<p>Imagine if you could easily run a blockchain node and anyone could connect. Whether on a phone, desktop, or even locked-down IoT connection. Imagine that there was no way to filter such connections. Imagine peer-to-peer apps like chat programs that worked effortlessly. Where connections always succeeded.</p>
+<p>You can’t do this today because of NATs and firewalls used in the networks most people have at home. But this is an important part of decentralization. If you can improve connectivity in general you can also help bypass censorship. And improved connectivity isn’t just useful for censorship edge-cases. It solves a practical problem experienced by many programs…</p>
+<h1><a class="anchor" href="https://ethresear.ch#p-51084-what-options-are-there-to-do-this-already-1" name="p-51084-what-options-are-there-to-do-this-already-1"></a>What options are there to do this already?</h1>
+<p>Well, the design favored today by ‘P2P libraries’ like Libp2p is to use a ‘decentralized’ network of relays. The logic behind this is easy to understand. There are many different types of NATs with sub-types of external mapping allocation behaviors. An effective algorithm for punching holes through NATs has to be designed to take into account both sides – which some may consider an unnecessary complexity. But this approach isn’t compatible with the scenarios in the introduction.</p>
+<p><strong>If you have to consume relay bandwidth to reach a new node in the network then you’re not strengthening the network’s resources. Likewise, relying on a proxy to do ‘direct’ connections in say – a chat program – is a bit of an oxymoron.</strong></p>
+<p>Relays work well as a fallback for worse-case scenarios. But they don’t fundamentally contribute to the technological development of a model to improve connectivity. Perhaps useful if we want to start to think about network censorship or even just useability improvements.</p>
+<h1><a class="anchor" href="https://ethresear.ch#p-51084-my-approach-to-the-problem-2" name="p-51084-my-approach-to-the-problem-2"></a>My approach to the problem:</h1>
+<p>Relay servers are a short-cut and I don’t take shortcuts. I designed a system that supports every common strategy for connectivity. They include all the approaches you’re familiar with and introduce a framework for building new ones. The framework includes comprehensive support for NAT enumeration, multi-interface support, and a unique address design that improves pathing to services across networks. Here is a list of the connectivity strategies supported:</p>
+<ul>
+<li>
+<p>UPnP port forwarding (IPv4)</p>
+</li>
+<li>
+<p>UPnP pin holing (IPv6)</p>
+</li>
+<li>
+<p>TCP direct connect</p>
+</li>
+<li>
+<p>TCP reverse connect</p>
+</li>
+<li>
+<p>TCP hole punching</p>
+</li>
+<li>
+<p>UDP TURN proxy (fallback, non-default)</p>
+</li>
+</ul>
+<h1><a class="anchor" href="https://ethresear.ch#p-51084-status-3" name="p-51084-status-3"></a>Status</h1>
+<p>Currently I have a Python 3.6 &gt;= async library written. It’s portable (avoids C extensions) and tested on many OS. The software is currently a beta release and may contain bugs.<br />
+If you want to try out a simple, text-based demo:</p>
+<p>python3 -m pip install p2pd<br />
+python3 -m p2pd.demo</p>
+<p>Also, here’s my blog post on the project with more information:<br />
+<a class="onebox" href="https://roberts.pm/index.php/2024/11/05/p2pd/" rel="noopener nofollow ugc" target="_blank">https://roberts.pm/index.php/2024/11/05/p2pd/</a></p>
+<p>Let me know what your thoughts are on the above and whether it’s worth continuing.</p>
+            <p><small>1 post - 1 participant</small></p>
+            <p><a href="https://ethresear.ch/t/improving-connectivity-and-preventing-censorship-in-networks/20942">Read full topic</a></p>
+]]></content:encoded>
+<pubDate>Thu, 07 Nov 2024 07:22:57 +0000</pubDate>
+<pubDate>Thu, 07 Nov 2024 07:22:57 +0000</pubDate>
+</item>
+
+<item>
 <title>Proposers do play dice: Introducing random Execution Auctions (randEAs)</title>
 <link>https://ethresear.ch/t/proposers-do-play-dice-introducing-random-execution-auctions-randeas/20938</link>
 <guid>https://ethresear.ch/t/proposers-do-play-dice-introducing-random-execution-auctions-randeas/20938</guid>
@@ -160,9 +215,7 @@ P_i(W - 1) = \frac{1}{W - (W - 1)} = \frac{1}{1} = 1
             <p><a href="https://ethresear.ch/t/proposers-do-play-dice-introducing-random-execution-auctions-randeas/20938">Read full topic</a></p>
 ]]></content:encoded>
 <pubDate>Wed, 06 Nov 2024 14:58:56 +0000</pubDate>
-<pubDate>Wed, 06 Nov 2024 14:58:56 +0000</pubDate>
 </item>
-
 <item>
 <title>PeerDAS with significantly less bandwidth consumption</title>
 <link>https://ethresear.ch/t/peerdas-with-significantly-less-bandwidth-consumption/20932</link>
