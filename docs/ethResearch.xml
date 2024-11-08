@@ -5,6 +5,140 @@
 <link>https://ethresear.ch/latest</link>
 
 <item>
+<title>Orbit SSF in Practice</title>
+<link>https://ethresear.ch/t/orbit-ssf-in-practice/20943</link>
+<guid>https://ethresear.ch/t/orbit-ssf-in-practice/20943</guid>
+<content:encoded><![CDATA[
+<div> 关键词：Orbit SSF、单槽最终性（SSF）、委员会选择、ETH_CEIL、epoch 过程优化
+
+总结：
+本文提出了一种针对以太坊协议实施Orbit SSF方法的方案，该方案通过仅使用一个控制参数ETH_CEIL简化了验证者抽样形成的委员会过程，旨在实现单槽最终性，提高网络的最终性和安全性。文章介绍MaxEB背景，它限制每个验证者的最大有效余额为2048 ETH，以平衡经济权重和网络效率。
+
+在委员会选择方面，Orbit SSF采用基于余额权重的随机性方法，根据每个验证者的余额（上限为ETH_CEIL）调整其入选概率。具体操作包括生成每个验证者的独特随机数，并根据此确定其是否应被纳入委员会。同时，提议仅对委员会成员更新奖励、惩罚及不活动分数，以降低处理开销。
+
+在epoch过程中，为适应Orbit SSF，提议客户端可以预计算下一槽位的随机数，在当前槽位的空闲时段进行，以便顺利进行epoch过渡。
+
+最后，SSF带来的潜在优化可能在于减少与见证相关的网络流量并去除聚合层，从而简化协议并释放更多时间用于区块验证。未来工作需要评估随着验证者集中的变化，这些改进如何影响协议的健壮性和韧性，以及保持经济安全和强最终性保证所需的任何调整。 <div>
+<p>I would like to thank <a class="mention" href="https://ethresear.ch/u/fradamt">@fradamt</a> and <a class="mention" href="https://ethresear.ch/u/potuz">@potuz</a> for their review and insights</p>
+<p>We propose an approach for implementing the Orbit method for Single Slot Finality (SSF) with minimal adjustments to the base Ethereum protocol. This proposal simplifies committee formation by using a single control parameter, <code>ETH_CEIL</code>, for validator sampling.</p>
+<h2><a class="anchor" href="https://ethresear.ch#p-51085-introduction-to-orbit-ssf-1" name="p-51085-introduction-to-orbit-ssf-1"></a>Introduction to Orbit SSF</h2>
+<p>Orbit SSF aims to achieve single-slot finality (SSF) in the Ethereum network by optimally selecting validators for committee formation. SSF allows Ethereum to finalize blocks within a single slot, significantly enhancing finality speed and network security. As the validator count and concentration of high-balance validators (e.g., from entities like Coinbase or Lido) increase, Orbit offers an efficient and balanced way to sample validators, reducing bandwidth requirements while maintaining economic security and robustness.</p>
+<h3><a class="anchor" href="https://ethresear.ch#p-51085-orbit-ssf-and-maxeb-2" name="p-51085-orbit-ssf-and-maxeb-2"></a>Orbit SSF and MaxEB</h3>
+<p>The protocol operates under the assumption that MAXEB (Maximum Effective Balance) has been implemented, creating a predictable validator landscape. MAXEB establishes a balance cap of 2048 ETH per validator, concentrating economic weight among fewer, larger validators. By leveraging the security of high-balance validators, the protocol achieves robust finality without imposing high network overhead.</p>
+<h2><a class="anchor" href="https://ethresear.ch#p-51085-idea-of-a-specification-3" name="p-51085-idea-of-a-specification-3"></a>Idea of a Specification</h2>
+<p>Our goal is to start thinking about a minimally invasive implementantion of Orbit SSF within the Ethereum 2.0’s consensus framework. Thus, We will focus on modifying:</p>
+<ul>
+<li>Committee Selection</li>
+<li>Attestation Format</li>
+</ul>
+<p>Additionally, we explore how clients can perform an epoch transition every slot without falling out of sync.</p>
+<h3><a class="anchor" href="https://ethresear.ch#p-51085-changes-in-committee-selection-4" name="p-51085-changes-in-committee-selection-4"></a>Changes in Committee Selection</h3>
+<p>Orbit’s committee selection method deviates from purely random sampling, employing a “weighted-by-balance” randomness approach. This method adjusts validator inclusion probability based on each validator’s balance, capped by <code>ETH_CEIL</code>.</p>
+<div class="md-table">
+<table>
+<thead>
+<tr>
+<th>Constant</th>
+<th>Description</th>
+<th>Value/Unit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ETH_CEIL</code></td>
+<td>Balance ceiling used to calculate validator inclusion probability</td>
+<td>2048 ETH</td>
+</tr>
+</tbody>
+</table>
+</div><h4><a class="anchor" href="https://ethresear.ch#p-51085-committee-selection-process-5" name="p-51085-committee-selection-process-5"></a>Committee Selection Process</h4>
+<ol>
+<li>
+<p><strong>Generate random numbers for each validator</strong>:<br />
+Generate a unique random number for each validator’s inclusion decision. This random number, limited to a 16-bit space, is based on the current epoch’s mix.</p>
+<pre><code class="lang-python">def get_random_numbers_for_orbit_sampling(state: State) -&gt; Sequence[uint64]:
+    epoch = get_current_epoch(state)
+    seed = get_seed(state, epoch, DOMAIN_ORBIT_COMMITTEE)
+    expanded_seed = b''.join(
+        hash(seed + to_bytes(i))
+        for i in range((len(validators) + 15) // 16)
+    )
+    return [from_bytes(expanded_seed[i:i+2]) for i in range(0, len(validators)*2, 2)]
+</code></pre>
+</li>
+<li>
+<p><strong>Calculate inclusion probability based on balance</strong>:<br />
+Using <code>ETH_CEIL</code> as the sole parameter, we calculate the probability for each validator to be included in the committee.</p>
+<p>By adjusting <code>ETH_CEIL</code>, we control the maximum inclusion probability. A higher <code>ETH_CEIL</code> decreases the probability of validators with balances near the <code>MaxEB</code>cap, whereas a lower <code>ETH_CEIL</code> increases the committee size by increasing the inclusion of validators.</p>
+</li>
+<li>
+<p><strong>Determine committee inclusion</strong>:<br />
+A validator’s inclusion is determined by the following inequality:</p>
+<div class="math">
+\frac{M_{i} \times \text{ETH}_{\text{ceil}}}{\min(\text{ETH}_{\text{ceil}}, \text{validator}_{\text{balance}})} &lt; 2^{16}
+</div>
+<p>Where:</p>
+<ul>
+<li><span class="math">M_{i}</span> is the random 64-bit number generated for the validator.</li>
+<li><span class="math">2^{16}</span> is the threshold based on the 16-bit space.</li>
+<li><span class="math">\text{ETH}_{\text{ceil}}</span> is the balance cap that determines the maximum inclusion probability.</li>
+</ul>
+<p>If this inequality holds true, the validator is included in the committee; otherwise, they are excluded. Adjusting <code>ETH_CEIL</code> allows us to control the committee size without additional ratio parameters.</p>
+</li>
+</ol>
+<h4><a class="anchor" href="https://ethresear.ch#p-51085-pseudo-code-for-committee-selection-6" name="p-51085-pseudo-code-for-committee-selection-6"></a>Pseudo-code for Committee Selection</h4>
+<pre><code class="lang-python"># Constants
+ETH_CEIL = 2048 * ETH  # Control parameter for inclusion probability
+
+def calculate_probability_factors(balance):
+    numerator = min(ETH_CEIL, balance)
+    denominator = ETH_CEIL
+    return numerator, denominator
+
+def check_committee_inclusion(rng_u64, numerator, denominator):
+    return (rng_u64 * denominator) / numerator &lt; 2**16
+
+def select_committee(state):
+    random_numbers = get_random_numbers_for_orbit_sampling(state)
+    committee = []
+    for i, validator in enumerate(state.validators):
+        numerator, denominator = calculate_probability_factors(validator['balance'])
+        if check_committee_inclusion(random_numbers[i], numerator, denominator):
+            committee.append(validator)
+    return committee
+</code></pre>
+<h3><a class="anchor" href="https://ethresear.ch#p-51085-changes-in-epoch-processing-7" name="p-51085-changes-in-epoch-processing-7"></a>Changes in Epoch Processing</h3>
+<h4><a class="anchor" href="https://ethresear.ch#p-51085-update-rewards-penalties-and-inactivity-scores-only-for-committee-members-8" name="p-51085-update-rewards-penalties-and-inactivity-scores-only-for-committee-members-8"></a>Update Rewards, Penalties, and Inactivity Scores Only for Committee Members</h4>
+<p>To further optimize, we modify the <code>get_unslashed_participating_indices</code> function to return only validators included in the committee. This ensures rewards, penalties, and inactivity scores apply only to committee members, reducing processing overhead.</p>
+<pre><code class="lang-python">def get_unslashed_participating_indices(state: BeaconState, flag_index: int, epoch: Epoch) -&gt; Set[ValidatorIndex]:
+    assert epoch in (get_previous_epoch(state), get_current_epoch(state))
+    epoch_participation = (
+        state.current_epoch_participation if epoch == get_current_epoch(state) else state.previous_epoch_participation
+    )
+    active_validator_indices = get_active_validator_indices(state, epoch)
+    participating_indices = [
+        i for i in select_committee(state) if has_flag(epoch_participation[i], flag_index)
+    ]
+    return set(filter(lambda index: not state.validators[index].slashed, participating_indices))
+</code></pre>
+<p>With this change, only committee members are processed for inactivity scores, penalties, and rewards. Similarly, only committee members are considered in justification bits and related processes.</p>
+<h4><a class="anchor" href="https://ethresear.ch#p-51085-finality-condition-9" name="p-51085-finality-condition-9"></a>Finality Condition</h4>
+<p>Finality is achieved when <code>66%</code> of the Orbit committee attests to a slot. In case of non-finality, the protocol falls back to LMD-GHOST.</p>
+<h3><a class="anchor" href="https://ethresear.ch#p-51085-epoch-transition-every-slot-10" name="p-51085-epoch-transition-every-slot-10"></a>Epoch Transition Every Slot</h3>
+<p>In a post-MAXEB world, where the active validator set is expected to decrease significantly, epoch transitions may have reduced overhead. However, generating fresh random numbers each slot remains essential to maintain committee integrity. To achieve this efficiently, clients can precompute random numbers for the next slot during idle periods within the current slot, ensuring they are ready for the transition.</p>
+<h3><a class="anchor" href="https://ethresear.ch#p-51085-potential-optimization-with-ssf-11" name="p-51085-potential-optimization-with-ssf-11"></a>Potential Optimization with SSF</h3>
+<p>SSF allows for protocol simplifications depending on the post-MAXEB validator set structure. as a matter of fact, by sampling only a subset of validators, the protocol can reduce attestation-related traffic and get rid of the aggregation layer. This enables the potential removal of aggregators, streamlining the protocol and freeing up additional slot time for block verification.</p>
+<p><strong>NOTE:</strong> at this time this is quite unclear if this is a feasible path.</p>
+<h2><a class="anchor" href="https://ethresear.ch#p-51085-future-work-12" name="p-51085-future-work-12"></a>Future Work:</h2>
+<p>As MAXEB concentrates validator balances, we will need to conduct an analysis to assess how these changes impact the robustness and resilience of the protocol. Such as how, as the validator set consolidates,  how effectively Orbit SSF can maintain economic security and robust finality guarantees. This includes examining any adjustments needed to preserve Ethereum’s security standards.</p>
+            <p><small>1 post - 1 participant</small></p>
+            <p><a href="https://ethresear.ch/t/orbit-ssf-in-practice/20943">Read full topic</a></p>
+]]></content:encoded>
+<pubDate>Thu, 07 Nov 2024 14:57:34 +0000</pubDate>
+<pubDate>Thu, 07 Nov 2024 14:57:34 +0000</pubDate>
+</item>
+
+<item>
 <title>Improving connectivity and preventing censorship in networks</title>
 <link>https://ethresear.ch/t/improving-connectivity-and-preventing-censorship-in-networks/20942</link>
 <guid>https://ethresear.ch/t/improving-connectivity-and-preventing-censorship-in-networks/20942</guid>
@@ -56,9 +190,7 @@ python3 -m p2pd.demo</p>
             <p><a href="https://ethresear.ch/t/improving-connectivity-and-preventing-censorship-in-networks/20942">Read full topic</a></p>
 ]]></content:encoded>
 <pubDate>Thu, 07 Nov 2024 07:22:57 +0000</pubDate>
-<pubDate>Thu, 07 Nov 2024 07:22:57 +0000</pubDate>
 </item>
-
 <item>
 <title>Proposers do play dice: Introducing random Execution Auctions (randEAs)</title>
 <link>https://ethresear.ch/t/proposers-do-play-dice-introducing-random-execution-auctions-randeas/20938</link>
