@@ -4,6 +4,185 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+<item>
+<title>Scutum: Temporal Verification for Cross-Rollup Bridges via Goal-Driven Reduction</title>
+<link>https://eprint.iacr.org/2024/1834</link>
+<guid>https://eprint.iacr.org/2024/1834</guid>
+<content:encoded><![CDATA[
+<div> 关键词: Scalability, Blockchain, Rollups, Cross-rollup bridges, Security verification
+
+总结:
+随着区块链领域对可扩展性的需求日益增加，Rollups（尤其是零知识和乐观Rollups）通过链下处理交易以保持以太坊的安全性，降低 gas 费并提高速度。然而，跨Rollup桥接器如Orbiter Finance虽然实现了不同Layer 2及与Layer 1之间的资产无缝转移，但其安全性问题也愈发突出，近期多起重大黑客攻击事件造成了数亿美元损失。鉴于传统安全分析方法如静态分析和模糊测试对于这类复杂设计的跨Rollup桥接器难以奏效，本文提出了一种可扩展的验证器来系统评估跨Rollup桥接器的安全性。该方法采用全面的多模型框架，利用时态属性捕获单个行为和复杂的交互关系。为了提高可扩展性，我们通过图表示合约的可达性分析近似实现时态安全性验证，并结合先进的程序分析技术。此外，我们引入了基于冲突驱动的细化循环来消除误报并提高精度。实证研究中，我们在主流跨Rollup桥接器（包括Orbiter Finance）上发现多个零日漏洞，证明了这种方法的实际应用价值。该工具还表现出良好的运行时间性能，适合实时或近乎实时的应用场景进行有效分析。 <div>
+Scalability remains a key challenge for blockchain adoption. Rollups—especially zero-knowledge (ZK) and optimistic rollups—address this by processing transactions off-chain while maintaining Ethereum’s security, thus reducing gas fees and improving speeds. Cross-rollup bridges like Orbiter Finance enable seamless asset transfers across various Layer 2 (L2) rollups and between L2 and Layer 1 (L1) chains. However, the increasing reliance on these bridges raises significant security concerns, as evidenced by major hacks like those of Poly Network and Nomad Bridge, resulting in losses of hundreds of millions of dollars. Traditional security analysis methods such as static analysis and fuzzing are inadequate for cross-rollup bridges due to their complex designs involving multiple entities, smart contracts, and zero-knowledge circuits. These systems require reasoning about temporal sequences of events across different entities, which exceeds the capabilities of conventional analyzers.
+In this paper, we introduce a scalable verifier to systematically assess the security of cross-rollup bridges. Our approach features a comprehensive multi-model framework that captures both individual behaviors and complex interactions using temporal properties. To enhance scalability, we approximate temporal safety verification through reachability analysis of a graph representation of the contracts, leveraging advanced program analysis techniques. Additionally, we incorporate a conflict-driven refinement loop to eliminate false positives and improve precision. Our evaluation on mainstream cross-rollup bridges, including Orbiter Finance, uncovered multiple zero-day vulnerabilities, demonstrating the practical utility of our method. The tool also exhibited favorable runtime performance, enabling efficient analysis suitable for real-time or near-real-time applications.
+]]></content:encoded>
+<pubDate>Fri, 08 Nov 2024 04:03:24 +0000</pubDate>
+<pubDate>Fri, 08 Nov 2024 04:03:24 +0000</pubDate>
+</item>
+<item>
+<title>A Tight Analysis of GHOST Consistency</title>
+<link>https://eprint.iacr.org/2024/1830</link>
+<guid>https://eprint.iacr.org/2024/1830</guid>
+<content:encoded><![CDATA[
+<div> 关键词: GHOST协议、Nakamoto共识机制、以太坊、安全性区域、区块生产率
+
+总结:
+本文探讨了GHOST协议作为对比特币中Nakamoto共识机制改进的安全性区域。与Nakamoto共识规则不同，GHOST规则通过计算子树权重而非单个路径来选择区块链。该机制已被多种共识协议采纳，并应用于当前支持以太坊的协议中。文章精确刻画了GHOST协议的安全性区域，揭示了诚实区块生产和恶意区块生产速率以及网络延迟之间达成共识所需的关联关系。研究发现，其安全性区域取决于协议采用的平局解决方式：针对敌对平局解决（不利于共识）和确定性平局解决（在整个执行过程中一致性地打破平局），文中都提出了具体的攻击策略并证明了两种情况下共识可能在安全区域之外被阻塞。结果表明，通过引入平局解决机制可以严格改善GHOST协议的安全性区域，但无论采用何种方式，最终的安全性区域仍逊色于Nakamoto共识机制的安全性区域。 <div>
+The GHOST protocol has been proposed as an improvement to the Nakamoto consensus mechanism that underlies Bitcoin. In contrast to the Nakamoto fork-choice rule, the GHOST rule justifies selection of a chain with weights computed over subtrees rather than individual paths. This mechanism has been adopted by a variety of consensus protocols, and is a part of the currently deployed protocol supporting Ethereum.
+
+We establish an exact characterization of the security region of the GHOST protocol, identifying the relationship between the rate of honest block production, the rate of adversarial block production, and network delays that guarantee that the protocol reaches consensus. In contrast to the closely related Nakamoto consensus protocol, we find that the region depends on the convention used by the protocol for tiebreaking; we establish tight results for both adversarial tiebreaking, in which ties are broken adversarially in order to frustrate consensus, and deterministic tiebreaking, in which ties between pairs of blocks are broken consistently throughout an execution. We provide explicit attacks for both conventions which stall consensus outside of the security region. 
+
+Our results conclude that the security region of GHOST can be strictly improved by incorporating a tiebreaking mechanism; in either case, however, the final region of security is inferior to the region of Nakamoto consensus.
+]]></content:encoded>
+<pubDate>Thu, 07 Nov 2024 19:37:02 +0000</pubDate>
+<pubDate>Thu, 07 Nov 2024 19:37:02 +0000</pubDate>
+</item>
+<item>
+<title>A Composability Treatment of Bitcoin's Transaction Ledger with Variable Difficulty</title>
+<link>https://eprint.iacr.org/2024/1823</link>
+<guid>https://eprint.iacr.org/2024/1823</guid>
+<content:encoded><![CDATA[
+<div> 关键词: Bitcoin、proof-of-work (PoW)、动态参与、安全性分析、模拟-based 分析
+
+总结:<br>
+本文首次（据作者所知）针对运行于动态环境中的比特币区块链进行了基于模拟的分析。文章指出，现有的关于比特币的安全性分析是基于属性的，仅保证了协议在孤立运行时的安全性。研究中，提出了比特币背骨协议的抽象模型，该模型在特定参与限制条件下，能够体现出比特币预期的设计规范。此外，本文扩展了固定难度设置下的普适组合性处理方式，并发展出了可能具有更广泛适用性的技术，特别是对于依赖难度调整的其他可组合区块链协议的分析形式。 <div>
+As the first proof-of-work (PoW) permissionless blockchain, Bitcoin aims at maintaining a decentralized yet consistent transaction ledger as protocol participants (“miners”) join and leave as they please. This is achieved by means of a subtle PoW difficulty adjustment mechanism that adapts to the perceived block generation rate, and important steps have been taken in previous work to provide a rigorous analysis of the conditions (such as bounds on dynamic participation) that are sufficient for Bitcoin’s security properties to be ascertained.
+
+Such existing analysis, however, is property-based, and as such only guarantees security when the protocol is run $\textbf{in isolation}$. In this paper we present the first (to our knowledge) simulation-based analysis of the Bitcoin ledger in the dynamic setting where it operates, and show that the protocol abstraction known as the Bitcoin backbone protocol emulates, under certain participation restrictions, Bitcoin’s intended specification. Our formulation and analysis extend the existing Universally Composable treatment for the fixed-difficulty setting, and develop techniques that might be of broader applicability, in particular to other composable formulations of blockchain protocols that rely on difficulty adjustment.
+]]></content:encoded>
+<pubDate>Thu, 07 Nov 2024 09:30:47 +0000</pubDate>
+<pubDate>Thu, 07 Nov 2024 09:30:47 +0000</pubDate>
+</item>
+<item>
+<title>Anonymous Public-Key Quantum Money and Quantum Voting</title>
+<link>https://eprint.iacr.org/2024/1822</link>
+<guid>https://eprint.iacr.org/2024/1822</guid>
+<content:encoded><![CDATA[
+<div> 关键词：量子货币、隐私、公开密钥、不可追踪性、投票方案<br><br>总结:<br>
+本文主要关注了量子货币领域的隐私问题以及其在投票应用中的潜力。首先，文章提出了量子货币的隐私安全定义，并构建了首个具有用户匿名性和当局可追踪性的公钥量子货币方案。同时，也设计了一个连当局都无法追踪的不可追踪量子货币方案。此外，利用量子力学的不可克隆原理，文章还构造了一个基于经典投票的、具有普适验证性的量子投票方案。为了实现这些目标，文中引入了一种新的技术工具——具有强正确性的公共重随机化加密方案，并在假设学习错误困难性和量子学习错误困难性的前提下，给出了一个后量子时代的经典实现。 <div>
+Quantum information allows us to build quantum money schemes, where a bank can issue banknotes in the form of authenticatable quantum states that cannot be cloned or counterfeited: a user in possession of k banknotes cannot produce k +1 banknotes. Similar to paper banknotes, in existing quantum money schemes, a banknote consists of an unclonable quantum state and a classical serial number, signed by bank. Thus, they lack one of the most fundamental properties cryptographers look for in a currency scheme: privacy. In this work, we first further develop the formal definitions of privacy for quantum money schemes. Then, we construct the first public-key quantum money schemes that satisfy these security notions. Namely, 
+• Assuming existence of indistinguishability obfuscation and hardness of Learning with Errors, we construct a public-key quantum money scheme with anonymity against users and traceability by authorities. 
+
+Since it is a policy choice whether authorities should be able to track banknotes or not, we also construct an untraceable money scheme, where no one (not even the authorities) can track banknotes. 
+• Assuming existence of indistinguishability obfuscation and hardness of Learning with Er- rors, we construct a public-key quantum money scheme with untraceability. 
+
+Further, we show that the no-cloning principle, a result of quantum mechanics, allows us to construct schemes, with security guarantees that are classically impossible, for a seemingly unrelated application: voting! 
+• Assuming existence of indistinguishability obfuscation and hardness of Learning with Errors, we construct a universally verifiable quantum voting scheme with classical votes. 
+
+Finally, as a technical tool, we introduce the notion of publicly rerandomizable encryption with strong correctness, where no adversary is able to produce a malicious ciphertext and a malicious random tape such that the ciphertext before and after rerandomization (with the malicious tape) decrypts to different values! We believe this might be of independent interest. • Assuming the (quantum) hardness of Learning with Errors, we construct a (post-quantum) classical publicly rerandomizable encryption scheme with strong correctness
+]]></content:encoded>
+<pubDate>Thu, 07 Nov 2024 07:25:38 +0000</pubDate>
+<pubDate>Thu, 07 Nov 2024 07:25:38 +0000</pubDate>
+</item>
+<item>
+<title>SCIF: Privacy-Preserving Statistics Collection with Input Validation and Full Security</title>
+<link>https://eprint.iacr.org/2024/1821</link>
+<guid>https://eprint.iacr.org/2024/1821</guid>
+<content:encoded><![CDATA[
+<div> 关键词: 安全聚合、SCIF、输入验证、恶意服务器、拒绝服务攻击
+
+<br><br>总结:
+本文介绍了一种名为SCIF的新颖多服务器安全聚合协议，该协议带有输入验证功能，并能在存在少于三分之一恶意服务器的情况下确保安全性。与现有协议（如Prio、Prio+、Elsa和Whisper）相比，SCIF具有两大优势：(1) 确保输出交付，即恶意参与者无法阻止协议完成，从而增强了对拒绝服务攻击的抵抗能力；(2) 确保输入包含，意味着恶意参与者无法阻止诚实参与者的输入被纳入计算。同时，SCIF在不增加客户端成本的同时保持了服务器成本的适度。文章还展示了SCIF的强大可实施性，通过将其集成到模拟的Tor网络中，实现了隐私保护测量的便捷部署。 <div>
+Secure aggregation is the distributed task of securely computing a sum of values (or a vector of values) held by a set of parties, revealing only the output (i.e., the sum) in the computation. Existing protocols, such as Prio (NDSI’17), Prio+ (SCN’22), Elsa (S&amp;P’23), and Whisper (S&amp;P’24), support secure aggregation with input validation to ensure inputs belong to a specified domain. However, when malicious servers are present, these protocols primarily guarantee privacy but not input validity. Also, malicious server(s) can cause the protocol to abort. We introduce SCIF, a novel multi-server secure aggregation protocol with input validation, that remains secure even in the presence of malicious actors, provided fewer than one-third of the servers are malicious. Our protocol overcomes previous limitations by providing two key properties: (1) guaranteed output delivery, ensuring malicious parties cannot prevent the protocol from completing, and (2) guaranteed input inclusion, ensuring no malicious party can prevent an honest party’s input from being included in the computation. Together, these guarantees provide strong resilience against denial-of-service attacks. Moreover, SCIF offers these guarantees without increasing client costs over Prio and keeps server costs moderate. We present a robust end-to-end implementation of SCIF and demonstrate the ease with which it can be instrumented by integrating it in a simulated Tor network for privacy-preserving measurement.
+]]></content:encoded>
+<pubDate>Wed, 06 Nov 2024 21:12:04 +0000</pubDate>
+<pubDate>Wed, 06 Nov 2024 21:12:04 +0000</pubDate>
+</item>
+<item>
+<title>SophOMR: Improved Oblivious Message Retrieval from SIMD-Aware Homomorphic Compression</title>
+<link>https://eprint.iacr.org/2024/1814</link>
+<guid>https://eprint.iacr.org/2024/1814</guid>
+<content:encoded><![CDATA[
+<div> 关键词：隐私保护区块链、私密消息服务、Oblivious Message Retrieval (OMR)、Homomorphic Encryption (HE)、性能优化
+
+总结:
+
+我们提出了一种新的Oblivious Message Retrieval (OMR)方案，旨在解决隐私保护区块链和私密消息服务中客户端需逐个扫描大量公开载荷以避免漏收消息的用户体验问题。该方案通过使用Homomorphic Encryption (HE)将昂贵的扫描过程安全地外包给服务提供商。相比于之前的最优方案PerfOMR，我们的实现显示出了显著的改进：运行时间减少了3.3倍，摘要大小减小了2.2倍，密钥大小减小了1.3倍。这些提升的核心在于我们创新的同态压缩机制，它能够将长度与总载荷数成比例的密文压缩为长度与相关载荷数上限成比例的摘要。不同于以往的方法，我们的方案充分利用了底层HE方案固有的同态SIMD结构，从而大幅提高了效率。在描述的场景（65536个每个612字节的载荷，其中最多50个相关）下，我们的压缩方案相比PerfOMR实现了7.4倍的速度提升。 <div>
+Privacy-preserving blockchains and private messaging services that ensure receiver-privacy face a significant UX challenge: each client must scan every payload posted on the public bulletin board individually to avoid missing messages intended for them. Oblivious Message Retrieval (OMR) addresses this issue by securely outsourcing this expensive scanning process to a service provider using Homomorphic Encryption (HE).
+
+In this work, we propose a new OMR scheme that substantially improves upon the previous state-of-the-art, PerfOMR (USENIX Security'24). Our implementation demonstrates reductions of 3.3x in runtime, 2.2x in digest size, and 1.3x in key size, in a scenario with 65536 payloads (each 612 bytes), of which up to 50 are pertinent.
+
+At the core of these improvements is a new homomorphic compression mechanism, where ciphertexts of length proportional to the number of total payloads are compressed into a digest whose length is proportional to the upper bound on the number of pertinent payloads. Unlike previous approaches, our scheme fully exploits the native homomorphic SIMD structure of the underlying HE scheme, significantly enhancing efficiency. In the setting described above, our compression scheme achieves 7.4x speedup compared to PerfOMR.
+]]></content:encoded>
+<pubDate>Wed, 06 Nov 2024 00:39:25 +0000</pubDate>
+<pubDate>Wed, 06 Nov 2024 00:39:25 +0000</pubDate>
+</item>
+<item>
+<title>Revisiting Leakage-Resilient MACs and Succinctly-Committing AEAD: More Applications of Pseudo-Random Injections</title>
+<link>https://eprint.iacr.org/2024/1813</link>
+<guid>https://eprint.iacr.org/2024/1813</guid>
+<content:encoded><![CDATA[
+<div> 关键词: Pseudo-Random Injections (PRIs), Message Authentication Codes (MACs), Authenticated Encryption with Associated Data (AEAD), Collision Resistance, UnForgeability
+
+总结:
+本文重新探讨了伪随机注入（PRIs）在构建消息认证码（MACs）和Authenticated Encryption with Associated Data（AEAD）方案中的应用。首先，文章分析了在不同泄漏模型下，PRIs作为具有小明文空间的MAC时所具有的碰撞抵抗性和不可伪造性等性质。接着，展示了如何将PRIs与抗碰撞哈希函数结合，构建针对长明文的MAC，根据PRI和相等性检查的实现方式提供灵活的安全性。若两者都无泄漏，则MAC提供接近最优安全性；即使仅相等性检查具有泄漏抵抗力，安全性能也只会轻微下降；而在相等性检查有无界泄漏的情况下，安全性降低至基线水平而非完全不安全。
+
+此外，文章提出了使用PRIs从头开始构建一个名为scoAE的简洁承诺在线AEAD方案，该方案实现了简洁的CMT4安全、隐私以及Ciphertext Integrity with Misuse and Leakage (CIML2) 安全性。最后，通过结合SIV范式与基于PRI的加密（例如Encode-then-Encipher (EtE)框架），文章展示了一个简洁的nonce耐滥用（MRAE）AEAD方案——scMRAE。 <div>
+Pseudo-Random Injections (PRIs) have had several applications in symmetric-key cryptography, such as in the idealization of Authenticated Encryption with Associated Data (AEAD) schemes, building robust AEAD, and, recently, in converting a committing AEAD scheme into a succinctly committing AEAD scheme. In Crypto 2024, Bellare and Hoang showed that if an AEAD scheme is already committing, it can be transformed into a succinctly committed scheme by encrypting part of the plaintext using a PRI. In this paper, we revisit the applications of PRIs in building Message Authentication Codes (MACs) and AEAD schemes. 
+
+First, we look at some of the properties and definitions PRIs, such as collision resistance and unforgeability when used as a MAC with small plaintext space, under different leakage models. Next, we show how they can be combined with collision-resistant hash functions to build a MAC for long plaintexts, offering flexible security depending on how the PRI and equality check are implemented. If both the PRI and equality check are leak-free, the MAC provides almost optimal security, but the security 
+only degrades a little if the equality check is only leakage-resilient (rather than leak-free). If the equality check has unbounded leakage, the security drops to a baseline security, rather than being completely insecure. Next, we show how to use PRIs to build a succinctly committing online AEAD scheme dubbed as scoAE from scratch that achieves succinct CMT4 security, privacy, and Ciphertext Integrity with Misuse and Leakage (CIML2) security. Last but not least, we show how to build a succinct nonce Misuse-Resistant (MRAE) AEAD scheme, dubbed as scMRAE. The construction combines the SIV paradigm with PRI-based encryption (e.g. the Encode-then-Encipher (EtE) framework).
+]]></content:encoded>
+<pubDate>Tue, 05 Nov 2024 21:43:34 +0000</pubDate>
+<pubDate>Tue, 05 Nov 2024 21:43:34 +0000</pubDate>
+</item>
+<item>
+<title>Foundations of Adaptor Signatures</title>
+<link>https://eprint.iacr.org/2024/1809</link>
+<guid>https://eprint.iacr.org/2024/1809</guid>
+<content:encoded><![CDATA[
+<div> 关键词：adaptor签名、安全性、预签名、应用、安全模型<br><br>总结:
+本文针对adaptor签名的安全性和构建进行了重新审视。首先，作者指出了Aumayr等人在ASIACRYPT'21中提出的adaptor签名安全模型存在的缺陷，这些缺陷导致已知的一些应用于私人币混洗和基于oracle支付的协议不安全，并通过实例说明了根据原有定义仍被认为是安全的adaptor签名可能在实际应用中引发不安全性。为填补这一空白，作者提出了适应这些实际应用场景的最小化模块化定义。其次，鉴于所有已知构造要么源自识别方案并通过Fiat-Shamir变换在随机预言机模型中构建，要么需要修改基础签名验证算法而不适用于加密货币场景，而且它们都只是基于Aumayr等人的不足定义证明了安全性，因此目前没有可用于实际应用的可证明安全的adaptor签名方案。对此，本文证明了广泛使用的Schnorr adaptor签名在新提议的定义下是安全的，并提供了新的构造，包括首次为Camenisch-Lysyanskaya（CL）、Boneh-Boyen-Shacham（BBS+）和Waters签名设计的adaptor签名方案，且所有这些都在标准模型中被证明安全。新构造依赖于名为dichotomic签名的新颖数字签名抽象，以及一种用于证明所有构造（包括基于识别的方案）安全性的新型非黑盒证明技术。同时，作者提出的新数字签名抽象和证明技术对于社区来说具有独立的研究价值。 <div>
+Adaptor signatures extend the functionality of regular signatures through the computation of pre-signatures on messages for statements of NP relations. Pre-signatures are publicly verifiable; they simultaneously hide and commit to a signature of an underlying signature scheme on that message. Anybody possessing a corresponding witness for the statement can adapt the pre-signature to obtain the "regular" signature. Adaptor signatures have found numerous applications for conditional payments in blockchain systems, like payment channels (CCS'20, CCS'21), private coin mixing (CCS'22, SP'23), and oracle-based payments (NDSS'23). 
+
+In our work, we revisit the state of the security of adaptor signatures and their constructions. In particular, our two main contributions are:
+
+- Security Gaps and Definitions: We review the widely-used security model of adaptor signatures due to Aumayr et al. (ASIACRYPT'21) and identify gaps in their definitions that render known protocols for private coin-mixing and oracle-based payments insecure. We give simple counterexamples of adaptor signatures that are secure w.r.t. their definitions but result in insecure instantiations of these protocols. To fill these gaps, we identify a minimal set of modular definitions that align with these practical applications.
+ 
+- Secure Constructions: Despite their popularity, all known constructions are (1) derived from identification schemes via the Fiat-Shamir transform in the random oracle model or (2) require modifications to the underlying signature verification algorithm, thus making the construction useless in the setting of cryptocurrencies. More concerningly, all known constructions were proven secure w.r.t. the insufficient definitions of Aumayr et al., leaving us with no provably secure adaptor signature scheme to use in applications.
+    
+    Firstly, in this work, we salvage all current applications by proving the security of the widely-used Schnorr adaptor signatures under our proposed definitions. We then provide several new constructions, including presenting the first adaptor signature schemes for Camenisch-Lysyanskaya (CL), Boneh-Boyen-Shacham (BBS+), and Waters signatures, all of which are proven secure in the standard model. Our new constructions rely on a new abstraction of digital signatures, called dichotomic signatures, which covers the essential properties we need to build adaptor signatures. Proving the security of all constructions (including identification-based schemes) relies on a novel non-black-box proof technique. Both our digital signature abstraction and the proof technique could be of independent interest to the community.
+]]></content:encoded>
+<pubDate>Tue, 05 Nov 2024 10:37:42 +0000</pubDate>
+<pubDate>Tue, 05 Nov 2024 10:37:42 +0000</pubDate>
+</item>
+<item>
+<title>Siniel: Distributed Privacy-Preserving zkSNARK</title>
+<link>https://eprint.iacr.org/2024/1803</link>
+<guid>https://eprint.iacr.org/2024/1803</guid>
+<content:encoded><![CDATA[
+<div> 关键词：zkSNARK、计算开销、私有委托、Siniel、EOS
+
+<br><br>总结：
+
+本文提出了一种名为Siniel的高效私有委托框架，用于优化zkSNARK（零知识简洁非交互式知识论证）。Siniel通过结合多项式交互式预言机证明（PIOP）和多项式承诺方案（PCS），使得计算能力有限的证明者（即委托人）能够将昂贵的证明计算任务安全地委托给多个工作者，同时不泄露任何关于私有见证的信息。与当前最先进的zkSNARK证明者委托框架EOS相比，Siniel的独特之处在于，证明者在发送私有见证的份额后无需参与多 party 计算（MPC）协议，这意味着证明者可以完全将计算过程外包给工作者。实验结果显示，在低带宽（10Mbps）条件下，Siniel相较于EOS为委托者节省约65%的时间；而在高带宽（1000Mbps）条件下，这一比例提高到约95%，显示了Siniel在性能上的显著优势。 <div>
+Zero-knowledge Succinct Non-interactive Argument of Knowledge (zkSNARK) is a powerful cryptographic primitive, in which a prover convinces a verifier that a given statement is true without leaking any additional information. However, existing zkSNARKs suffer from high computation overhead in the proof generation. This limits the applications of zkSNARKs, such as private payments, private smart contracts, and anonymous credentials. Private delegation has become a prominent way to accelerate proof generation.
+In this work, we propose Siniel, an efficient private delegation framework for zkSNARKs constructed from polynomial interactive oracle proof (PIOP) and polynomial commitment scheme (PCS). Our protocol allows a computationally limited prover (a.k.a. delegator) to delegate its expensive prover computation to several workers without leaking any information about the private witness. Most importantly, compared with the recent work EOS (USENIX’23), the state-of-the-art zkSNARK prover delegation framework, a prover in Siniel needs not to engage in the MPC protocol after sending its shares of private witness. This means that a Siniel prover can outsource the entire computation to the workers.
+We compare Siniel with EOS and show significant performance advantages of the former. The experimental results show that, under low bandwidth conditions (10MBps),
+Siniel saves about 65% time for delegators than that of EOS, whereas under high bandwidth conditions (1000MBps), Siniel saves about 95% than EOS.
+]]></content:encoded>
+<pubDate>Mon, 04 Nov 2024 13:08:31 +0000</pubDate>
+<pubDate>Mon, 04 Nov 2024 13:08:31 +0000</pubDate>
+</item>
+<item>
+<title>Privacy-Preserving Multi-Party Search via Homomorphic Encryption with Constant Multiplicative Depth</title>
+<link>https://eprint.iacr.org/2024/1800</link>
+<guid>https://eprint.iacr.org/2024/1800</guid>
+<content:encoded><![CDATA[
+<div> 关键词：隐私保护、多方搜索协议、阈值级同态加密、电路深度常数、动态数据库
+
+总结:
+我们的研究提出了一种采用阈值级同态加密技术的隐私保护多方搜索协议。我们证明了该协议在诚实但好奇的对手面前是正确且安全的。与现有方法不同的是，我们的协议保持了恒定的电路深度，这使得它更适用于涉及动态底层数据库的实际应用场景。<br><br> <div>
+We propose a privacy-preserving multiparty search protocol
+using threshold-level homomorphic encryption, which we prove correct
+and secure to honest but curious adversaries. Unlike existing approaches,
+our protocol maintains a constant circuit depth. This feature enhances
+its suitability for practical applications involving dynamic underlying
+databases.
+]]></content:encoded>
+<pubDate>Mon, 04 Nov 2024 08:14:14 +0000</pubDate>
+<pubDate>Mon, 04 Nov 2024 08:14:14 +0000</pubDate>
+</item>
 
 <item>
 <title>IrisLock: Iris Biometric Key Derivation with 42 bits of security</title>

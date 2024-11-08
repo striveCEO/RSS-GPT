@@ -5,6 +5,62 @@
 <link>https://ethresear.ch/latest</link>
 
 <item>
+<title>Multilane Sequencing</title>
+<link>https://ethresear.ch/t/multilane-sequencing/20946</link>
+<guid>https://ethresear.ch/t/multilane-sequencing/20946</guid>
+<content:encoded><![CDATA[
+<div> 关键词: 多车道序列化、Layer 2 可互操作性、安全性、交易原子性、成本
+
+总结:
+多车道序列化是一种针对以太坊Layer 2扩展方案的模型，旨在解决Layer 2之间的可互操作性、交易安全性和资产转移成本等问题。该模型通过将Layer 2分类为基于与以太坊主网结算频率的“车道”，如Lane-1、Lane-2等。车道频率越高（更慢），结算越不频繁；反之则更频繁。
+
+任何位于Lane-M的链可以作为两个Lane-N之间（N>M）的桥梁。在Lane-N上，每N个块都会利用以太坊的安全性锁定整个Lane的状态，特殊车道结算合约和原子操作可以在区块编号为N的倍数时执行。
+
+Rollup在Lane-N上的生产速度自然会超过N，这意味着Rollup的序列器或预确认者群体在L1结算上下文中扮演着未来将在L1上结算用户交易的角色。独立的预确认者可以提供更细粒度的保证，进一步分割Rollup块。
+
+每个Rollup状态在任何时候都可能在具有不同安全保证的不同车道上得到结算。这创造了一个安全性、可组合性和价格之间的权衡——可组合性安全性价格权衡（CST）。Rollup选择更高的车道可以降低安全性和原子性成本，但也会限制其与更低车道的直接交互。
+
+此外，Rollup还可以支持原生的多车道序列化，允许资产在不同车道间移动，遵循仅能在车道结算时间进行跨车道移动的规则。这种机制使得应用开发者可以根据智能合约对安全性及交易成本的需求，选择部署到特定车道的分片上。例如，Rollup X可以为游戏提供16天结算周期的车道、为资产转移提供6分钟结算周期的车道，以及为大规模跨Rollup交换提供1分钟结算周期的车道。 <div>
+<h1><a class="anchor" href="https://ethresear.ch#p-51091-multilane-sequencing-1" name="p-51091-multilane-sequencing-1"></a>Multilane Sequencing</h1>
+<p>Thanks to Conor McMenamin for the review and comments (and yes, he said it needs to be better before I post it here but there is a limit to my research skills)</p>
+<h3><a class="anchor" href="https://ethresear.ch#p-51091-intro-2" name="p-51091-intro-2"></a>Intro</h3>
+<p>L2 interoperability / L2 bridging is the subject of major discussion now. It is worth noting that L2 interop touches all the important aspects of Ethereum scaling—security of L2s, atomicity of transactions, cost of moving assets between chains, etc.</p>
+<p>Any solutions bringing us closer to a standardization of the bridging, or at least a standardization of how we describe them, would likely help with cross-chain risk management, better comparability of L2s, and better scaling UX.</p>
+<p>Below, I am proposing a multilane sequencing model for L2s on Ethereum that aims at addressing these problems (or rather not really solving them but creating ways of talking and thinking about tradeoffs and classification).</p>
+<h3><a class="anchor" href="https://ethresear.ch#p-51091-how-do-we-construct-lanes-3" name="p-51091-how-do-we-construct-lanes-3"></a>How do we construct Lanes?</h3>
+<p>First, we construct the lanes based on their settlement frequency measured as an L1 blocks multiplier. We make the construction binary, so the lanes are Lane-1, Lane-2, Lane-4, Lane-8, Lane-16, and so on. Lane-8 settles to Ethereum every 8 blocks. Lane-1 settles to Ethereum on every Ethereum block. For every chain, we place it on a corresponding lane depending on how often it settles on L1. And so, Ethereum mainnet trivially lands on Lane-1. Any rollup that produces a block every N Ethereum blocks lands on Lane-N. A rollup targeting Lane-256 settles on Ethereum L1 every ~50 minutes (12 seconds × 256 blocks / 60 seconds is 51.2).</p>
+<p>We call Lanes ‘lower’ or ‘faster’ if they settle more often. We call Lanes ‘higher’ or ‘slower’ if they settle less often.</p>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/4/d/4d021fa96f3e6052958ff4bf3860fab4c1b38d09.png" title="image"><img alt="image" height="480" src="https://ethresear.ch/uploads/default/optimized/3X/4/d/4d021fa96f3e6052958ff4bf3860fab4c1b38d09_2_690x480.png" width="690" /></a></div><p></p>
+<h3><a class="anchor" href="https://ethresear.ch#p-51091-details-4" name="p-51091-details-4"></a>Details</h3>
+<p>Any chain on Lane-M can serve as a bridge between chains on Lane-N as long as N &gt; M. So any of the below can be a bridge:</p>
+<ul>
+<li>L1 for any two L2s</li>
+<li>Any generic L2 for other L2s that are settling less often
+<ul>
+<li>specifically any ‘bridge rollup’ that settles on Ethereum more often than the rollups that it facilitates bridging between</li>
+</ul>
+</li>
+</ul>
+<p>Why so? On Lane N, every N blocks we lock the state of the entire Lane N using Ethereum security. Any special lane-settling contracts, atomic operations, etc., can be executed on blocks with numbers being a multiple of N.</p>
+<p>Rollups on Lane-N naturally produce blocks more often than N (which is practically the rollup sequencer or group of sequencers acting as preconfirmers in the context of L1 settlement—the user trusts the L2 sequencer layer that it will settle user transactions on L1 in the future).</p>
+<p>Separately, any independent preconfirmer can offer even more fine-grained guarantees and split rollup blocks even further (for example, rollup-boost can act as the Unichain block preconfirmer by splitting the block into 250 ms chunks).</p>
+<p>At any Lane-N, there may exist alternative settlement chains with their own security guarantees. As such, you can imagine a Layer-1/8th which allows for settlements up to every 1.5 seconds. These may include, for example, DA layers.</p>
+<p>Any state of a rollup can, at a given time, be settled at various different lanes with varying security guarantees. If I have an account entry on a Rollup X on Lane-N, then I can take timestamps of the state at times modulo various multiples of 12 seconds (1.5 seconds, 3 seconds, 6 seconds, 12 seconds, etc.) and find any settlement layer to which the rollup settles at the given lane. Then I can say that my state at that time is secured to that layer’s security level. For example, if Ethereum’s security level is $100 B, and there is a DA layer secured by $10 B that the rollup settles to every 3 seconds, and my account had $1000 at time 12k and $1500 at time 12k + 3, then I have $1000 secured by $100 B and an additional $500 ($1500 − $1000) secured by a $10 B settlement layer until time 12(k+1) when (assuming the balance does not change) it will get secured by $100B as well.</p>
+<p>Now, security itself may actually be seen as a bit more tricky, as it is affected by the security of the layer that the rollup settles to, as well as the security of the rollup’s enshrined bridge. It defines how likely the rollup may be seen as a pure security settlement route from higher lanes all the way to Lane-1 (Ethereum mainnet). Simply speaking, if you have a pure security route (absolutely no-risk bridge—theoretical), then bridging through a Lane-256 rollup between two Lane-512 rollups is as secure as bridging directly via L1.</p>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/5/a/5aa4e2fdbcd321b475f68565850baf3ca3cd8b56.jpeg" title="image"><img alt="image" height="500" src="https://ethresear.ch/uploads/default/optimized/3X/5/a/5aa4e2fdbcd321b475f68565850baf3ca3cd8b56_2_642x500.jpeg" width="642" /></a></div><p></p>
+<h3><a class="anchor" href="https://ethresear.ch#p-51091-composability-security-price-trade-off-5" name="p-51091-composability-security-price-trade-off-5"></a>Composability-Security-Price Trade-off</h3>
+<p>Why would a rollup ever choose to be placed on higher lanes? Because lower lanes (Lane-1, Lane-2, etc.) are much more expensive—settling on Ethereum mainnet is expensive as it has to pay for the borrowed security. Also, the higher the Lane level, the higher the price of atomic composability—I can atomically compose with any other rollup at the same or higher Lane, but to compose with a rollup on a lower Lane I need to settle to at least one of the lower Lane rollups—borrowing security from Ethereum mainnet for that Lane settlement or finding another settlement layer on the Lane. Hence, we have a trade-off between the price of composability and the price of security—Composability-Security Trade-off (CST). This seems to be an intuition from all economic activity—the more different markets I want to access, the more I have to pay for access to the markets that everyone uses for settlement or to access alternative, more shady settlement venues.</p>
+<h3><a class="anchor" href="https://ethresear.ch#p-51091-multilane-sequencing-6" name="p-51091-multilane-sequencing-6"></a>Multilane Sequencing</h3>
+<p>Now, interestingly, any rollup may participate in native multilane sequencing, allowing for some kind of Lane sharding. The rollup allows assets to move between the Lane shards with the following rules—you can move assets from Lane-N to another Lane only at the time when Lane-N settles. This means that I can move assets quite often to slower settling lanes, but I can only move assets back to the faster lanes every now and then. And so, if Rollup X supports sequencing on Lane-8 and Lane-32, then I can move assets from Lane-32 to Lane-8 at blocks 32k, but I can move assets from Lane-8 to Lane-32 at blocks 32k, 32k+8, 32k+16, 32k+24. Moving assets to a faster lane means that I will be ready to pay more for any transactions involving these assets (I settle more often to Ethereum mainnet), but I am getting more composability natively. Solutions like this should be a relatively simple state sharding for L2s, and application developers could even choose which Lane shard they deploy their smart contract to, hence deciding the level of security the application guarantees and the cost of transactions. So, for example, Rollup X could offer a 16-day Lane for gaming, a 6-minute Lane for asset transfers, or a 1-minute Lane for large cross-rollup swaps.</p>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/5/b/5bdbad3ebd2cea676dc51e6f20ec41f9b7a6db65.png" title="image"><img alt="image" height="318" src="https://ethresear.ch/uploads/default/optimized/3X/5/b/5bdbad3ebd2cea676dc51e6f20ec41f9b7a6db65_2_689x318.png" width="689" /></a></div><p></p>
+            <p><small>2 posts - 2 participants</small></p>
+            <p><a href="https://ethresear.ch/t/multilane-sequencing/20946">Read full topic</a></p>
+]]></content:encoded>
+<pubDate>Fri, 08 Nov 2024 07:44:38 +0000</pubDate>
+<pubDate>Fri, 08 Nov 2024 07:44:38 +0000</pubDate>
+</item>
+
+<item>
 <title>Orbit SSF in Practice</title>
 <link>https://ethresear.ch/t/orbit-ssf-in-practice/20943</link>
 <guid>https://ethresear.ch/t/orbit-ssf-in-practice/20943</guid>
@@ -135,9 +191,7 @@ def select_committee(state):
             <p><a href="https://ethresear.ch/t/orbit-ssf-in-practice/20943">Read full topic</a></p>
 ]]></content:encoded>
 <pubDate>Thu, 07 Nov 2024 14:57:34 +0000</pubDate>
-<pubDate>Thu, 07 Nov 2024 14:57:34 +0000</pubDate>
 </item>
-
 <item>
 <title>Improving connectivity and preventing censorship in networks</title>
 <link>https://ethresear.ch/t/improving-connectivity-and-preventing-censorship-in-networks/20942</link>
