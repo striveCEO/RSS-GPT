@@ -4,6 +4,109 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+<item>
+<title>The LaZer Library: Lattice-Based Zero Knowledge and Succinct Proofs for Quantum-Safe Privacy</title>
+<link>https://eprint.iacr.org/2024/1846</link>
+<guid>https://eprint.iacr.org/2024/1846</guid>
+<content:encoded><![CDATA[
+<div> 关键词: 硬度、格问题、量子安全加密、零知识证明、简洁证明库
+
+总结:
+文章介绍了基于格问题硬度的量子安全加密技术，特别是其中的零知识证明领域取得了显著效率提升，并为许多场景提供了最短、最高效的证明。然而，非专家使用这些证明时面临诸多挑战，因为它们内部参数依赖于特定实例。为此，文中提出了一款简洁而高效的C代码库，其上层封装了易于使用的Python接口，使用户无需了解格基础证明知识，只需指定要证明的格关系和范数约束，库就能自动生成相应的证明系统。该库支持LaBRADOR或Lyubashevsky等人提出的两种证明方案。通过Python接口，用户还能进行常见的 lattice 基础密码学操作，方便在简单的Python环境中编写和原型化完整协议。文章以盲签协议、匿名凭据、Swoosh协议所需的零知识证明、Kyber密钥知识证明以及聚合签名方案等为例，展示了该库的应用价值，表明这些实现从尺寸、速度和内存角度讲，均是最优的量子安全实例。 <div>
+The hardness of lattice problems offers one of the most promising
+security foundations for quantum-safe cryptography. Basic schemes
+for public key encryption and digital signatures are already close to
+standardization at NIST and several other standardization bodies,
+and the research frontier has moved on to building primitives with
+more advanced privacy features. At the core of many such primi-
+tives are zero-knowledge proofs. In recent years, zero-knowledge
+proofs for (and using) lattice relations have seen a dramatic jump
+in efficiency and they currently provide arguably the shortest, and
+most computationally efficient, quantum-safe proofs for many sce-
+narios. The main difficulty in using these proofs by non-experts
+(and experts!) is that they have a lot of moving parts and a lot of
+internal parameters depend on the particular instance that one is
+trying to prove.
+Our main contribution is a library for zero-knowledge and suc-
+cinct proofs which consists of efficient and flexible C code under-
+neath a simple-to-use Python interface. Users without any back-
+ground in lattice-based proofs should be able to specify the lattice
+relations and the norm bounds that they would like to prove and the
+library will automatically create a proof system, complete with the
+intrinsic parameters, using either the succinct proofs of LaBRADOR
+(Beullens and Seiler, Crypto 2023) or the linear-size, though smaller
+for certain application, proofs of Lyubashevsky et al. (Crypto 2022).
+The Python interface also allows for common operations used in
+lattice-based cryptography which will enable users to write and pro-
+totype their full protocols within the syntactically simple Python
+environment.
+We showcase some of the library’s usefulness by giving protocol
+implementations for blind signatures, anonymous credentials, the
+zero-knowledge proof needed in the recent Swoosh protocol (Gaj-
+land et al., Usenix 2024), proving knowledge of Kyber keys, and an
+aggregate signature scheme. Most of these are the most efficient,
+from a size, speed, and memory perspective, known quantum-safe
+instantiations.
+]]></content:encoded>
+<pubDate>Sun, 10 Nov 2024 18:41:01 +0000</pubDate>
+<pubDate>Sun, 10 Nov 2024 18:41:01 +0000</pubDate>
+</item>
+<item>
+<title>Zero-Knowledge Location Privacy via Accurate Floating-Point SNARKs</title>
+<link>https://eprint.iacr.org/2024/1842</link>
+<guid>https://eprint.iacr.org/2024/1842</guid>
+<content:encoded><![CDATA[
+<div> 关键词: Zero-Knowledge Location Privacy (ZKLP), Zero-Knowledge Proof (ZKP), IEEE 754标准, 浮点运算, 隐私保护
+
+总结:
+本文介绍了零知识位置隐私（ZKLP）技术，该技术允许用户向第三方证明他们位于特定地理区域内，而不泄露其精确位置。ZKLP支持不同级别的粒度，可以根据具体应用场景进行定制。为了实现ZKLP，研究者首次提出了完全符合IEEE 754浮点运算标准的ZKP电路。实验结果显示，这些浮点电路具有高效的摊还性能，对于$2^{15}$个单精度浮点数乘法操作，每个乘法仅需$64$个约束条件。利用这一浮点数实现，成功地实现了ZKLP范式。与基准方案相比，使用单精度浮点值优化后的实现方案约束条件减少了$15.9\times$，而使用双精度浮点值则减少了$12.2\times$。为了验证ZKLP的实用性，文章构建了一个隐私保护的点对点近邻测试协议，使得Alice无需透露任何其他地理位置信息就能通过接收一条消息来判断自己是否接近Bob。在这种配置下，Bob可以在$0.26s$内创建一个（非）接近性的证明，而Alice每秒可以验证约$470$个同伴的距离。 <div>
+We introduce Zero-Knowledge Location Privacy (ZKLP), enabling users to prove to third parties that they are within a specified geographical region while not disclosing their exact location. ZKLP supports varying levels of granularity, allowing for customization depending on the use case. To realize ZKLP, we introduce the first set of Zero-Knowledge Proof (ZKP) circuits that are fully compliant to the IEEE 754 standard for floating-point arithmetic.
+  Our results demonstrate that our floating point circuits amortize efficiently, requiring only $64$ constraints per multiplication for $2^{15}$ single-precision floating-point multiplications. We utilize our floating point implementation to realize the ZKLP paradigm. In comparison to a baseline, we find that our optimized implementation has $15.9 \times$ less constraints utilizing single precision floating-point values, and $12.2 \times$ less constraints when utilizing double precision floating-point values. We demonstrate the practicability of ZKLP by building a protocol for privacy preserving peer-to-peer proximity testing - Alice can test if she is close to Bob by receiving a single message, without either party revealing any other information about their location. In such a configuration, Bob can create a proof of (non-)proximity in $0.26 s$, whereas Alice can verify her distance to about $470$ peers per second.
+]]></content:encoded>
+<pubDate>Sat, 09 Nov 2024 13:29:56 +0000</pubDate>
+<pubDate>Sat, 09 Nov 2024 13:29:56 +0000</pubDate>
+</item>
+<item>
+<title>Cryptographically Secure Digital Consent</title>
+<link>https://eprint.iacr.org/2024/1839</link>
+<guid>https://eprint.iacr.org/2024/1839</guid>
+<content:encoded><![CDATA[
+<div> 关键词: 数字同意、加密安全、第三方服务、客户端、身份管理器
+
+总结:
+本文提出了一个灵活且加密安全的数字同意方案，以适应不同的在线应用场景并确保同意过程的完整性。该框架涉及客户端（指用户或其设备）、身份管理器（负责认证客户端）和代理（在获得同意后执行操作）。客户端仅需记住一个密码，方案着重解决了防止离线词典攻击、确保不可否认的同意证明以及防止代理人未经授权的操作等安全与隐私挑战。即使身份管理器或代理被妥协，只要不同时发生，仍能保持安全性。文中所指的身份管理器可以包括多种认证因素的组合，如密码、智能手机、安全设备、生物特征或电子护照，并通过签署PDF文档、电子银行和密钥恢复等多个应用实例进行了演示。 <div>
+In the digital age, the concept of consent for online actions executed by third parties is crucial for maintaining trust and security in third-party services. 
+This work introduces the notion of cryptographically secure digital consent, which aims to replicate the traditional consent process in the online world. 
+We provide a flexible digital consent solution that accommodates different use cases and ensures the integrity of the consent process.
+
+The proposed framework involves a client (referring to the user or their devices), an identity manager (which authenticates the client), and an agent (which executes the action upon receiving consent). 
+It supports various applications and ensures compatibility with existing identity managers. 
+We require the client to keep no more than a password. The design addresses several security and privacy challenges, including preventing offline dictionary attacks, ensuring non-repudiable consent, and preventing unauthorized actions by the agent. 
+Security is maintained even if either the identity manager or the agent is compromised, but not both.
+
+Our notion of an identity manager is broad enough to include combinations of different authentication factors such as a password, a smartphone, a security device, biometrics, or an e-passport. We demonstrate applications for signing PDF documents, e-banking, and key recovery.
+]]></content:encoded>
+<pubDate>Fri, 08 Nov 2024 20:24:02 +0000</pubDate>
+<pubDate>Fri, 08 Nov 2024 20:24:02 +0000</pubDate>
+</item>
+<item>
+<title>A Query Reconstruction Attack on the Chase-Shen Substring-Searchable Symmetric Encryption Scheme</title>
+<link>https://eprint.iacr.org/2024/1837</link>
+<guid>https://eprint.iacr.org/2024/1837</guid>
+<content:encoded><![CDATA[
+<div> 关键词：可搜索对称加密（SSE）、泄漏分析、子串查询、Chase和Shen方案、攻击模型
+
+<br><br>总结:
+本文首次针对Chase和Shen在 PoPETS '15 提出的子串可搜索对称加密（substring-SSE）方案进行了泄漏分析。研究中，作者提出了一个创新的基于推理的查询重建攻击方法，该方法利用了该方案实际泄漏概况的一个简化版本，并假设了一个比原方案声称的安全模型更为宽松的攻击模型。作者已实现并实验验证了此攻击的成功率和效率，它在包含10万条字符串的真实世界数据集上实现了高查询重建率，并能有效扩展到大规模数据集。据所知，这是至今为止对任何子串-SSE方案的第一个也是唯一一个查询重建攻击，以及第一次系统性的泄漏分析。 <div>
+Searchable symmetric encryption (SSE) enables queries over symmetrically encrypted databases. To achieve practical efficiency, SSE schemes incur a certain amount of leakage; however, this leads to the possibility of leakage cryptanalysis, i.e., cryptanalytic attacks that exploit the leakage from the target SSE scheme to subvert its data and query privacy guarantees. Leakage cryptanalysis has been widely studied in the context of SSE schemes supporting either keyword queries or range queries, often with devastating consequences. However, little or no attention has been paid to cryptanalysing substring-SSE schemes, i.e., SSE schemes supporting arbitrary substring queries over encrypted data. This is despite their relevance to many real-world applications, e.g., in the context of securely querying outsourced genomic databases. In particular, the first ever substring-SSE scheme, proposed nearly a decade ago by Chase and Shen (PoPETS '15), has not been cryptanalysed to date.
+
+In this paper, we present the first leakage cryptanalysis of the substring-SSE scheme of  Chase and Shen. We propose a novel inference-based query reconstruction attack that: (i) exploits a reduced version of the actual leakage profile of their scheme,  and (ii) assumes a weaker attack model as compared to the one in which Chase and Shen originally claimed security. We implement our attack and experimentally validate its success rate and efficiency over two real-world datasets. Our attack achieves high query reconstruction rate with practical efficiency, and scales smoothly to large datasets containing $100,000$ strings. 
+
+To the best of our knowledge, ours is the first and only query reconstruction attack on (and the first systematic leakage cryptanalysis of) any substring-SSE scheme till date.
+]]></content:encoded>
+<pubDate>Fri, 08 Nov 2024 10:59:11 +0000</pubDate>
+<pubDate>Fri, 08 Nov 2024 10:59:11 +0000</pubDate>
+</item>
 
 <item>
 <title>One Server for the Price of Two: Simple and Fast Single-Server Private Information Retrieval</title>
