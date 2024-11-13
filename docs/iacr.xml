@@ -4,6 +4,27 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+<item>
+<title>MixBuy: Contingent Payment in the Presence of Coin Mixers</title>
+<link>https://eprint.iacr.org/2024/953</link>
+<guid>https://eprint.iacr.org/2024/953</guid>
+<content:encoded><![CDATA[
+<div> 关键词: 继承支付协议、区块链、混淆器、unlinkable 继承支付（UCP）、MixBuy
+
+总结:
+本文提出了一个名为MixBuy的系统，实现了unlinkable 继承支付（UCP），这是一种在买家购买数字产品时通过不可信混淆器路由支付的方式，同时确保支付过程中的 unlinkability，即混淆器和其他观察者无法得知哪个买家向哪个卖家付款。为了实现这一目标，文章提出了一种基于预言机的unlinkable 继承支付（O-UCP）四方加密协议，该协议要求四个安全属性：(i) 混淆器安全性，保证如果混淆器向卖家付款，则混淆器必须从买家那里获得付款；(ii) 卖家安全性，保证如果卖家向买家交付产品，卖家必须从混淆器处获得付款；(iii) 买家安全性，保证如果买家向混淆器付款，买家必须获得产品；以及(iv) 不可链接性，保证混淆器不应知道哪些买家向哪些卖家付款。文中给出了一个经过形式化安全证明和高效实施的O-UCP构造方案，适用于大多数区块链，因为其功能需求最小（例如只需数字签名和时间锁）。为了展示其实用性，文章提供了O-UCP的概念验证及性能基准测试，结果显示通信开销小（每条消息仅几kB）且运行时间低于一秒。 <div>
+A contingent payment protocol involves two mutually distrustful parties,  a buyer and a seller, operating on the same blockchain, and a digital product, whose ownership is not tracked on a blockchain (e.g. a digital book). The buyer holds coins on the blockchain and transfers them to the seller in exchange for the product.  However, if the blockchain does not hide transaction details, any observer can learn that a buyer purchased some product from a seller.
+
+    In this work, we take contingent payment a step further: we consider a buyer who wishes to buy a digital product from a seller routing the payment via an untrusted mixer.
+    Crucially, we require that said payment is unlinkable, meaning that the mixer (or any other observer) does not learn which buyer is paying  which seller. We refer to such setting as unlinkable contingent payment (UCP).
+    
+    We present MixBuy,  a system that realizes UCP. Mixbuy relies on oracle-based unlinkable contingent payment (O-UCP), a novel four-party cryptographic protocol where the mixer pays the seller and the seller provides the buyer with the product only if a semi-trusted notary attests that the buyer has paid the mixer. More specifically, we require four security notions: (i) mixer security that guarantees that if the mixer pays the seller, the mixer must get paid from the buyer; (ii) seller security that guarantees that if the seller delivers the product to the buyer, the seller must get paid from the mixer; (iii) buyer security that guarantees that if the buyer pays the mixer, the buyer must obtain the product; and  (iv) unlinkability that guarantees that given a set of buyers and sellers, the mixer should not learn which buyer paid which seller.
+
+    We present a provably secure and efficient cryptographic construction for O-UCP. Our construction can be readily used to realize UCP on most blockchains, as it has minimal functionality requirements (i.e., digital signatures and timelocks). To demonstrate the practicality of our construction, we provide a proof of concept for O-UCP and our benchmarks in commodity hardware show that the communication overhead is small (a few kB per message) and the running time is below one second.
+]]></content:encoded>
+<pubDate>Thu, 13 Jun 2024 15:27:21 +0000</pubDate>
+<pubDate>Thu, 13 Jun 2024 15:27:21 +0000</pubDate>
+</item>
 
 <item>
 <title>The LaZer Library: Lattice-Based Zero Knowledge and Succinct Proofs for Quantum-Safe Privacy</title>
