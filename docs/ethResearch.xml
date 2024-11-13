@@ -4,6 +4,158 @@
 <title>Ethereum Research - Latest topics</title>
 <link>https://ethresear.ch/latest</link>
 
+<item>
+<title>Ethereum Needs to Dream Bigger</title>
+<link>https://ethresear.ch/t/ethereum-needs-to-dream-bigger/20963</link>
+<guid>https://ethresear.ch/t/ethereum-needs-to-dream-bigger/20963</guid>
+<content:encoded><![CDATA[
+<div> 关键词：Ethereum、竞争、区块链市场、愿景、技术进步<br><br>总结: 以太坊自2013年创立以来，其作为全球金融新秩序基石的原始愿景因开发难题和核心开发者政治而受挫。如今，以太坊面临着来自具有不同愿景的区块链竞争对手的压力，并需要接受技术快速发展的现实，五年规划的方式已不再适用。为了重振雄风，首先应明确并阐述以太坊的发展愿景：成为全球计算平台，为解决世界上最复杂的协调问题提供开发者所需的所有工具。接下来的五年目标包括实现1秒区块时间、单槽最终性、大幅提高吞吐量（超过1000TPS）以及实现多个并发提议者。这些改变将有助于提升以太坊的竞争力、降低交易成本、增强实时抗审查能力，并使其更贴近最初的理念。 <div>
+<p><strong>Ethereum Needs to Dream Bigger</strong></p>
+<p>Ethereum was conceived in 2013 to change the world. Since then, the original vision of a blockchain that would serve as the backbone for a new world order—a permissionless financial substrate with endless possibilities—has been ground to dust by the harsh realities of developing bulletproof production software and navigating core developer politics. In other words, Ethereum is jaded and burnt out. Our most “ambitious” proposals are five-year megaprojects to ship marginal improvements, and progress is slowing incrementally with each hard fork.</p>
+<p>Reversing these trends requires accepting two hard truths:</p>
+<ol>
+<li>
+<p><strong>We are no longer the only game in town; Ethereum is now competing in a marketplace of blockchains.</strong> Other teams with different visions are credible threats to Ethereum’s dominance.</p>
+</li>
+<li>
+<p><strong>Making decisions on five-year timescales doesn’t make sense when cryptography, consensus, engineering, and mechanism design are advancing at an extreme pace.</strong> State-of-the-art technology today may not be state-of-the-art in five years.</p>
+</li>
+</ol>
+<p>But enough with the diagnosis; how can we treat this ailment? First, we need to agree on and articulate a clear vision for what we are trying to build. In my opinion, this doesn’t require changing course; it requires doubling down on the core values that we started with in 2013:</p>
+<blockquote>
+<p><strong>“Ethereum should be a global compute platform that provides developers all the tools they need to solve the world’s hardest coordination problems.”</strong></p>
+</blockquote>
+<p>In many ways, we have achieved, at least partially, this vision already, but to complete the project we have a long way to go. Smart contracts on Ethereum are Turing complete, but fees on the blockchain are too high for many applications, and block times are long enough that Ethereum isn’t the ideal place to host financial applications. Moreover, Turing completeness means we can write arbitrary smart contract programs that execute logic on their inputs, but if app developers can’t trust the quality of their inputs, then they can’t trust the outputs either.</p>
+<p>Ethereum today is credibly neutral and censorship-resistant if given enough time, but when you zoom in to millisecond timescales, it looks a lot more centralized. Within each 12-second block, a single proposer must approve every transaction. This temporary proposer monopoly distorts markets and makes many mechanisms that app developers want to build completely intractable on Ethereum.</p>
+<p>With that said, here are the goals for the next five years on Ethereum:</p>
+<ul>
+<li><strong>1-second block times</strong></li>
+<li><strong>Single-slot finality</strong></li>
+<li><strong>Vastly increased throughput (&gt;1000 TPS)</strong></li>
+<li><strong>Multiple concurrent proposers</strong></li>
+</ul>
+<p><strong>1-Second Block Times</strong></p>
+<p>A round trip from NYC to Tokyo takes less than 200 ms. You can round-trip a message from NYC to Tokyo five times in one second. If anything, 1-second block times are not ambitious enough. Implementing them would be a major unlock for applications on the L1 and would improve the speed to L1 confirmation for L2 transactions.</p>
+<p><strong>Single-Slot Finality</strong></p>
+<p>Single-slot finality is important for rollup interoperability. In five years, all rollups will be ZK rollups. Bridging will happen in the span of two slots on the L1. But this requires single-slot finality because a ZK rollup cannot allow funds to be withdrawn before finality, even with a valid proof.</p>
+<p><strong>Vastly Increased Throughput</strong></p>
+<p>Fees on Ethereum L1 are too high. Even if we think rollups are going to be where Ethereum activity takes place, L1 fees will still be a multiplier in those fees. We also need to credibly signal to app developers that Ethereum is a place they can safely build their apps—that we will continue to scale as new technologies become available—so there is no possibility that their app, if it becomes successful, will outgrow the capacity of Ethereum.</p>
+<p><strong>Multiple Concurrent Proposers</strong></p>
+<p>Of all these proposed changes, Multiple Concurrent Proposers may be the highest lift but also the highest potential reward. While the other items on the list are parameter changes (which will require a lot of work to accomplish, no doubt), MCP unlocks capabilities that no blockchain has had ever before: real-time censorship resistance guarantees. The types of applications that can be built with this technology are purely theoretical today. MCP is the capstone that brings Ethereum’s market microstructure—which today is extremely centralized and extractive—in line with its broader macro vision of credible neutrality and decentralization.</p>
+            <p><small>1 post - 1 participant</small></p>
+            <p><a href="https://ethresear.ch/t/ethereum-needs-to-dream-bigger/20963">Read full topic</a></p>
+]]></content:encoded>
+<pubDate>Tue, 12 Nov 2024 22:46:51 +0000</pubDate>
+<pubDate>Tue, 12 Nov 2024 22:46:51 +0000</pubDate>
+</item>
+<item>
+<title>Crawling the Ethereum discv5 network - fast</title>
+<link>https://ethresear.ch/t/crawling-the-ethereum-discv5-network-fast/20962</link>
+<guid>https://ethresear.ch/t/crawling-the-ethereum-discv5-network-fast/20962</guid>
+<content:encoded><![CDATA[
+<div> 关键词：FastEthereumCrawler、Portal Network、DHT性能优化、FINDNODE请求、网络测量
+
+总结:
+本文介绍了名为FastEthereumCrawler的新爬虫，该爬虫用于以太坊、Portal Network等网络，能在不到一分钟的时间里快速抓取大量网络数据。该爬虫是从针对DHT性能优化的工作中衍生出来的，并受到与EF研究人员关于DAS讨论的启发。FastEthereumCrawler基于discv5实现，能够在55秒内从单个引导ENR开始，发现并验证大约50000个ENR和20000个节点。其通过巧妙构造的FINDNODE请求直接遍历网络，同时进行发现和测量，而不是重建单个节点的完整路由表。此外，该爬虫还利用UDP包进行网络测量，包括RTT和带宽估计，并展示了相关的分布图。尽管有约一半的ENR未响应，但研究显示，该爬虫在首次运行中可能已经发现了几乎所有可连接的节点。最后，文章探讨了加快或减缓爬取速度的可能性，并提供了Nim语言编写的源代码供用户尝试。 <div>
+<p>In this post we introduce <strong>FastEthereumCrawler</strong>, a new crawler for the <a href="https://github.com/ethereum/devp2p/blob/5713591d0366da78a913a811c7502d9ca91d29a8/discv5/discv5.md" rel="noopener nofollow ugc">Node Discovery v5 (discv5)</a> network used by Ethereum, the Portal Network, and a few others, allowing the crawling of large portions of the network in less than a minute.</p>
+<p>The crawler is a side-product of our DHT performance optimization work at <a href="https://codex.storage/" rel="noopener nofollow ugc">Codex.storage Research</a>, inspired also by discussions about DAS with EF researchers. Of course, this is not the first crawler, see other works from <a href="https://migalabs.io/blog/post/presenting-the-ant-crawler-release" rel="noopener nofollow ugc">MigaLabs</a>, from <a href="https://ethresear.ch/t/nebula-a-novel-discv5-dht-crawler/17488">Protocol Labs</a>, and from the Geth team. Our crawler is based on the discv5 implementation in <a href="https://github.com/status-im/nim-eth" rel="noopener nofollow ugc">nim-eth</a>.</p>
+<h2><a class="anchor" href="https://ethresear.ch#p-51134-cutting-to-the-chase-1" name="p-51134-cutting-to-the-chase-1"></a>Cutting to the chase</h2>
+<p>Below is the progress graph of a crawl of the entire network, mapping out approx. <strong>50000 ENRs</strong>, while also verifying connectivity to approx. <strong>20000 nodes</strong>, in <strong>55 seconds</strong>. This is from a fiber connected but otherwise home node. A small NUC, nothing special.</p>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/d/7/d72f63522e40b4f2c63cd58a1b6699ec62e3c399.png" title=""><img alt="" height="345" src="https://ethresear.ch/uploads/default/optimized/3X/d/7/d72f63522e40b4f2c63cd58a1b6699ec62e3c399_2_690x345.png" width="690" /></a></div><br />
+<em>Figure 1: Crawling the Discovery v5 network, progress in time</em><p></p>
+<p>The crawl started from knowing a single bootstrap ENR, and took 55 seconds, after which eventually new iterations could start. The figure shows the number of nodes discovered as a function of time, in different categories:</p>
+<ul>
+<li><strong>discovered</strong>: unique nodes discovered till that point in time. Uniqueness is defined by discv5 nodeID here (although we could also use IP:port pairs, which should lead to similar, although not identical, results).</li>
+<li><strong>measured</strong>: nodes that already responded to a direct request message.</li>
+<li><strong>pending</strong>: nodes to which we’ve sent a request, but haven’t responded (or timed out) yet.</li>
+<li><strong>failed</strong>: nodes to which we’ve sent a request, which already timed-out.</li>
+<li><strong>queued</strong>: nodes that are discovered, but we haven’t sent a request yet.</li>
+</ul>
+<p>Note that by definition</p>
+<div class="math">
+\text{measured} + \text{pending} + \text{failed} + \text{queued} = \text{discovered}
+</div>
+<p>Interesting to note also how in the <strong>first 10 seconds</strong> we learn almost <strong>30000 ENRs.</strong> Besides identities and IP:port pairs, these ENRs also contain service related metadata published by the nodes. Zooming in on the first 10 seconds shows an interesting perspective on finding nodes providing services, even rare services, surprisingly fast.</p>
+<p>Soon, with <a href="https://ethresear.ch/t/peerdas-a-simpler-das-approach-using-battle-tested-p2p-components/16541">PeerDAS</a>, the metadata in the ENR will include the custody count required for identifying peers having specific columns in custody. If we are able to get many ENRs fast, like we show here, we can also search for custody nodes for specific rows/columns fast, which was a concern for DAS.</p>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/d/1/d1f480819782d7e31bed244d787fcb07bc93120c.png" title=""><img alt="" height="345" src="https://ethresear.ch/uploads/default/optimized/3X/d/1/d1f480819782d7e31bed244d787fcb07bc93120c_2_690x345.png" width="690" /></a></div><br />
+<em>Figure 2: Discovery progress in the first 10 secondds of the crawl</em><p></p>
+<p>Not all the discovered nodes are Ethereum nodes, and not all are on Mainnet. Below we give the distribution of discovered nodes belonging to different networks, showing only the nodes that we actually managed to contact, the “measured” nodes in the plots above. For Ethereum consensus nodes, we also show the breakdown based on their published forkDigest.</p>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/e/1/e19d89d918ab4f8680b7a9c22404570c0a1f1991.png" title=""><img alt="" height="413" src="https://ethresear.ch/uploads/default/optimized/3X/e/1/e19d89d918ab4f8680b7a9c22404570c0a1f1991_2_690x413.png" width="690" /></a></div><br />
+<em>Figure 3: Ratio of connectable nodes belonging to different networks.</em><br />
+<em>Deneb’s fork digest is 0x6a95a1a9, accounting for 35% of the nodes.</em><p></p>
+<p>Note that we discover all these nodes belonging to different networks in one crawl, since they all use a joint Discovery v5 DHT. Nothing forbids other networks to use this DHT. Some examples are the SSV, C, and Opera categories, each indicating nodes distinguished by publishing fields with these names in their ENR, but not belonging to the Ethereum network. “C”, for example, identifies Portal Network nodes. Services could also start their own isolated discv5 network, in which case we would have to bootstrap the crawl from a node belonging to that network.</p>
+<h2><a class="anchor" href="https://ethresear.ch#p-51134-why-is-our-crawler-so-fast-2" name="p-51134-why-is-our-crawler-so-fast-2"></a>Why is our crawler so fast?</h2>
+<p>Ethereum relies on the Node Discovery v5 protocol for bootstrap and peer discovery. This is a Kademlia-style DHT in which most Ethereum nodes participate, providing their Ethereum Node Record (ENR) to their neighbors, while keeping ENRs of all their neighbor nodes in their Kademlia routing table. We use this DHT to crawl the network.</p>
+<p>The typical operation on a Kademlia DHT is a so-called ‘Lookup’, which searches in the DHT for nodes close to a target address, iteratively getting closer-and-closer to this address, until reaching the nodes closest to it. Under the hood, the iterative step uses the FINDNODE request-response pair.</p>
+<p>Instead of using high-level DHT primitives like lookups, our crawler directly uses <strong>cleverly crafted individual FINDNODE requests</strong> to crawl the network fast.</p>
+<p>Our first FINDNODE returns a set of ENRs from the bootstrap node. In most cases, 16 ENRs are returned, containing IP:port pairs for 16 new nodes. We can then start new findNode requests to all these nodes, which will similarly return new ENRs. The overlap between these sets will be statistically negligible at the beginning, hence we have a nice exponential start. Of course later, when we have already discovered a large part of the network, we will get less and less new ENRs, however this is not a problem, since we can’t scale our discovery exponentially anyway to avoid using too much bandwidth. We <strong>rate-limit FINDNODE requests</strong>, while queuing newly discovered nodes for sending requests.</p>
+<p>At the end of the process, we’ve sent a <strong>single FINDNODE to every single discovered node</strong>. By this we verify every single node, checking if there is a real reachable node behind the ENR.</p>
+<p>By using FINDNODE requests and queuing discovered nodes, we get both crawling progress (discovering new ENRs) and measurements (verifying that there is a node behind the ENR, but also more) at the same time. Contrary to some other crawlers, we do not try to reconstruct the entire routing table of single nodes. We instead settle for getting only 16 ENRs out of the routing table of a single node, and focus on mapping the whole network fast.</p>
+<p>When crafting FINDNODE requests, we also take into account how implementations select the 16 ENRs for their response. This is needed for fast crawling since the discv5 specification does not mandate this behavior, leaving it to the implementation. In more detail, we <strong>diversify between the requests sent to the nodes</strong>, by flipping one of the first 16 prefix bits. In discv5, where there is no explicit target address in the FINDNODE request, this is achieved by specifying requested distances between 256 and 240. With this logic, we expect to explore sub-spaces belonging to each combinations of the first 16 bits quite fast, which is very likely to provide us the whole network (nodes from each of the <span class="math"> 2^{16} </span> sub-spaces explored).</p>
+<h2><a class="anchor" href="https://ethresear.ch#p-51134-what-else-can-we-measure-3" name="p-51134-what-else-can-we-measure-3"></a>What else can we measure?</h2>
+<p>When sending a FINDNODE request to a node, under the hood, several things happen. First, discv5 performs a key exchange. Then, the 16 ENRs are sent back, but an ENR is up to 300 bytes long, so to avoid large UDP packets, discv5 sends the response in multiple smaller UDP packets, sending only 3-4 ENRs per packet.</p>
+<p>We can use these UDP packets to perform additional network measurements. Even better, these measurements are free, without requiring additional network traffic.</p>
+<p>First, we can <strong>measure Round Trip Time (RTT)</strong>. We have modified the underlying code to measure RTT already during the key exchange, with the added benefit of measuring RTT on first contact independent of the actual Discv5 message sent. Below we show the RTT distribution to all the nodes found.</p>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/7/a/7a69a5f4e062287e81648488c669d561db7cc0ff.png" title=""><img alt="" height="345" src="https://ethresear.ch/uploads/default/optimized/3X/7/a/7a69a5f4e062287e81648488c669d561db7cc0ff_2_690x345.png" width="690" /></a></div><br />
+<em>Figure 4: Rount Trip Time (RTT) distribution, measured from Italy, to all nodes, and to nodes belonging to Ethereum mainnet (Deneb)</em><p></p>
+<p>We can also <strong>estimate bandwidth</strong> using the packet-pair technique based on the time-difference of received response packets. We have an initial implementation of this, although it needs a bit more work to return reliable results. Below we show what we get now, we plan to update this soon with better results.</p>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/3/c/3c507bb0acb128fd4183ab89e85c14ac252d1e04.png" title=""><img alt="" height="345" src="https://ethresear.ch/uploads/default/optimized/3X/3/c/3c507bb0acb128fd4183ab89e85c14ac252d1e04_2_690x345.png" width="690" /></a></div><br />
+<em>Figure 5: distribution of estimated bandwidth from other nodes to our node, measured from Italy.</em><p></p>
+<h2><a class="anchor" href="https://ethresear.ch#p-51134-how-much-traffic-does-this-use-4" name="p-51134-how-much-traffic-does-this-use-4"></a>How much traffic does this use?</h2>
+<p>For each findnode, we send 2 packets (one for key negotiation, one with the actual message), and receive 5-6 packets. Approximately 500 bytes egress, 3600 bytes ingress, on average. With 20000 nodes responding and another 30000 not responding, that’s around 87 MB of traffic. Below we show the traffic trace of the crawler, obtained with tcpdump.</p>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/a/a/aa575538514c428e1e6e2c3cb5f43a87d3272b5d.png" title=""><img alt="" height="295" src="https://ethresear.ch/uploads/default/optimized/3X/a/a/aa575538514c428e1e6e2c3cb5f43a87d3272b5d_2_690x295.png" width="690" /></a></div><br />
+<em>Figure 6: Traffic amount consumed by a full crawl cycle.</em><p></p>
+<p>By rate-limiting FINDNODE requests, we control egress bandwidth consumption directly. Since replies are limited in size, we also keep ingress under control with this. For RTT and bandwidth measurements to be meaningful, it is important to keep these limits well below the uplink and the downlink bandwidth of the crawler node, but as shown above, this is hardly an issue, as the top usage is 20 Mbits/sec downlink and 4 Mbits/sec uplink with the rate we’ve used here.</p>
+<h2><a class="anchor" href="https://ethresear.ch#p-51134-what-about-all-those-failed-nodes-5" name="p-51134-what-about-all-those-failed-nodes-5"></a>What about all those failed nodes?</h2>
+<p>Our crawler checked all discovered ENRs by sending a FINDNODE request, but about half of them failed to respond. This could be due to several reasons:</p>
+<ul>
+<li>Lost UDP packets</li>
+<li>Stale ENRs of nodes long gone</li>
+<li>Connectivity limitations due to NAT and/or firewall</li>
+</ul>
+<p>We have added an option to the crowler to have multiple retries, but that did not change much, as it can be seen below. Even if retrying failed nodes 3 times, the “measured” curve showing connectable nodes flatline, showing that we can rule out random UDP losses. Whether these nodes left the network, or just can’t be connected, is something to investigate. The crawler itself can’t distinguish.</p>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/e/a/ea02c5ca6b26bc204906b01f526ad61faaa02c00.jpeg" title=""><img alt="" height="328" src="https://ethresear.ch/uploads/default/optimized/3X/e/a/ea02c5ca6b26bc204906b01f526ad61faaa02c00_2_624x328.jpeg" width="624" /></a></div><br />
+<em>Figure 7: Retrying failed FINDNODE queries 3 times.</em><p></p>
+<p>It might also happend that nodes avoided responding if they have blacklisted our node for some reason. Our crawler is basically undetectable, since it sends only a single message to every node. However, during development we’ve run it a many times, so there is a slight chance that some of the nodes did not respond because they’ve blacklisted our IP. We tried to double-check this by running the crawler from a different location, and the results matched, so we don’t think blacklisting was an issue.</p>
+<h2><a class="anchor" href="https://ethresear.ch#p-51134-do-we-discover-the-whole-network-6" name="p-51134-do-we-discover-the-whole-network-6"></a>Do we discover the whole network?</h2>
+<p>One of the most interesting questions is whether we discover the whole network. It is also a question that does not have a single answer.<br />
+The answer is: <strong>Yes or No</strong>, depending on how we interpret the questions.</p>
+<h3><a class="anchor" href="https://ethresear.ch#p-51134-answer-from-the-enr-point-of-view-no-there-are-more-enrs-to-discover-7" name="p-51134-answer-from-the-enr-point-of-view-no-there-are-more-enrs-to-discover-7"></a>Answer from the ENR point of view: No, there are more ENRs to discover</h3>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/c/8/c8f19fec590556609a2cc78ec1b5970048990800.png" title=""><img alt="" height="345" src="https://ethresear.ch/uploads/default/optimized/3X/c/8/c8f19fec590556609a2cc78ec1b5970048990800_2_690x345.png" width="690" /></a></div><br />
+<em>Figure 8: Running 50 crawl cycles while accumulating results.</em><p></p>
+<p>If we run more iterations, we can discover much more ENRs, as the red line in the figure below shows. After 50 cycles, we discovered almost 230000 ENRs belonging to unique nodeIDs! More specifically, we see 228852 unique nodeIDs, but only 145512 unique IP:port combinations, which is already a bit suspicious.</p>
+<h3><a class="anchor" href="https://ethresear.ch#p-51134-answer-from-the-nodes-point-of-view-yes-all-connectable-nodes-were-discovered-in-55-seconds-8" name="p-51134-answer-from-the-nodes-point-of-view-yes-all-connectable-nodes-were-discovered-in-55-seconds-8"></a>Answer from the Nodes point of view: Yes, all connectable nodes were discovered in 55 seconds</h3>
+<p>As the figure above also shows, the “measured” line remains constant after the first cycle. We did not manage to connect to almost any of these ENRs discovered later. We are still investigating whether this is an error in our code, or the reality, but currently it seems our crawler manages to find almost all connectable nodes in the first cycle, in less than 55 seconds.</p>
+<p>We could still discover more nodes in a few ways:</p>
+<ul>
+<li>Staying longer in the network, we could wait for nodes behind NAT to connect to us</li>
+<li>We could also try to connect to nodes using other protocols, e.g. libP2P, hoping that that would succeed.</li>
+</ul>
+<p>Our crawler is not doing these at the moment, but these are obvious potential extensions.</p>
+<p>The relative ratios of discovered ENRs is slightly different, but similar to those of measured nodes.</p>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/4/0/401af386e00226a2bfc4e932a646998e701fd996.png" title=""><img alt="" height="413" src="https://ethresear.ch/uploads/default/optimized/3X/4/0/401af386e00226a2bfc4e932a646998e701fd996_2_690x413.png" width="690" /></a></div><br />
+<em>Figure 9: Ratio of ENRs belonging to different networks.</em><br />
+<em>Deneb’s fork digest is 0x6a95a1a9, accounting for 35% of all ENRs.</em><p></p>
+<h2><a class="anchor" href="https://ethresear.ch#p-51134-can-we-do-the-crawl-even-faster-9" name="p-51134-can-we-do-the-crawl-even-faster-9"></a>Can we do the crawl even faster?</h2>
+<p>There are still a few ways to crawl faster, which we haven’t explored yet. A few that comes to mind:</p>
+<ul>
+<li>The trivial: start from more Bootstrap nodes, or actually from any list of nodes belonging to the network.</li>
+<li>The obvious: allow more requests per second. The fastest we’ve tried is 1000 FINDNODE requests/second, which is far from maxing out our uplink or downlink. However, it is already maxing out a single CPU core. We’ve yet to streamline the code to use less CPU or use multiple cores.</li>
+<li>The UDP level API: As we’ve said, responses to FINDNODE are coming in multiple UDP packets. Yet, we are using the “findnode” API, which waits for all the response UDP packets, aggregates all 16 ENRs into one response, and only then handles it back to the caller. We could clearly be more reactive here.</li>
+<li>The ID space conscious: our crawler explores the node ID space randomly, without looking into the distribution of what IDs we find, and where are the “holes” in the ID space where we could probably find more nodes. If we would store discovered nodeIDs in a “B+ tree”, we could explore the ID space in a structured way, probably leading to better crawl performance.</li>
+</ul>
+<h2><a class="anchor" href="https://ethresear.ch#p-51134-can-we-do-the-crawl-slower-10" name="p-51134-can-we-do-the-crawl-slower-10"></a>Can we do the crawl slower?</h2>
+<p>Of course, crawling could also be done slower. In fact, most DHT implementations perform random lookups every now-and-then to explore the network. Slow, or repeated crawls can also be useful to give historical perspective on the lifetime of records and nodes, on node-churn, etc.</p>
+<h2><a class="anchor" href="https://ethresear.ch#p-51134-finally-can-i-try-the-crawler-11" name="p-51134-finally-can-i-try-the-crawler-11"></a>Finally, can I try the crawler?</h2>
+<p>Sure, <a href="https://github.com/cskiraly/fast-ethereum-crawler" rel="noopener nofollow ugc">here’s the code on GitHub</a>. Although written in the Nim language, it is self-contained, building also the compiler itself. Just git clone, and make. Enjoy! Even during Devcon SEA <img alt=":slight_smile:" class="emoji" height="20" src="https://ethresear.ch/images/emoji/facebook_messenger/slight_smile.png?v=12" title=":slight_smile:" width="20" /></p>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/9/9/9941dee4335839c6866ba9d5a28c1e575597b6b6.png" title=""><img alt="" height="345" src="https://ethresear.ch/uploads/default/optimized/3X/9/9/9941dee4335839c6866ba9d5a28c1e575597b6b6_2_690x345.png" width="690" /></a></div><br />
+<em>Figure 10: RTT distribution from Devcon SEA</em><p></p>
+            <p><small>1 post - 1 participant</small></p>
+            <p><a href="https://ethresear.ch/t/crawling-the-ethereum-discv5-network-fast/20962">Read full topic</a></p>
+]]></content:encoded>
+<pubDate>Tue, 12 Nov 2024 19:06:21 +0000</pubDate>
+<pubDate>Tue, 12 Nov 2024 19:06:21 +0000</pubDate>
+</item>
 
 <item>
 <title>ZKMPC: Publicly Auditable MPC for general-purpose computations</title>
