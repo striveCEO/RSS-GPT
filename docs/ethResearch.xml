@@ -5,13 +5,229 @@
 <link>https://ethresear.ch/latest</link>
 
 <item>
+<title>Proving multi-client Beam chain</title>
+<link>https://ethresear.ch/t/proving-multi-client-beam-chain/21027</link>
+<guid>https://ethresear.ch/t/proving-multi-client-beam-chain/21027</guid>
+<content:encoded><![CDATA[
+<div> 关键词: zkVM, 客户端语言, Nethermind, Teku/Besu, 网络协议, 证明大小, 性能, 出块时间, 证明聚合
+
+总结:
+关于zkVM团队对Beam链提案的支持，文章提及了以下几个要点：
+
+1. 客户端实现将支持多种语言，包括C、Nim（通过C）、Rust，并计划增加Go、WASM（用于JavaScript客户端）以及Zig支持。同时询问Nethermind和Teku/Besu团队是否打算构建Beam客户端，他们是否会使用C#和Java。
+
+2. 在网络协议方面，文章未明确提到具体的网络协议内容，但询问了目标证明大小是多少。
+
+3. 对于性能需求，计划基准测试Grandine、Lighthouse和Nimbus当前状态转换函数的速度。考虑到若出块时间变为4秒，是否应将证明聚合在一个完整的“时代”（epoch）中进行。
+
+请注意：以上信息为原文摘要，并非具体实施方案或最终决定。 <div>
+<p>Hello teams,</p>
+<p>I have a couple questions to make sure zkVM teams support the Beam chain proposal as best as possible.</p>
+<h2><a class="anchor" href="https://ethresear.ch#p-51269-implementation-1" name="p-51269-implementation-1"></a>Implementation</h2>
+<p>What languages will clients be built in. In our case at Lita/Valida, we can support C, Nim (through C), Rust. And we plan to add Go, WASM (for Javascript clients) and Zig support (seems to be a popular new language that Eth devs want to build in).</p>
+<p>Are Nethermind and Teku/Besu team planning to build a Beam Client, will it be in C# and Java? What about LambdaClass and Elixir?</p>
+<h2><a class="anchor" href="https://ethresear.ch#p-51269-networking-2" name="p-51269-networking-2"></a>Networking</h2>
+<p>What proof sizes are we targeting?</p>
+<h2><a class="anchor" href="https://ethresear.ch#p-51269-performance-3" name="p-51269-performance-3"></a>Performance</h2>
+<p>What proving speed do we need? We plan to add some benchmarks of the current state transition function of Grandine, Lighthouse and Nimbus to get a baseline.</p>
+<p>If block times become 4s, should the proof be aggregated over a whole “epoch”</p>
+            <p><small>1 post - 1 participant</small></p>
+            <p><a href="https://ethresear.ch/t/proving-multi-client-beam-chain/21027">Read full topic</a></p>
+]]></content:encoded>
+<pubDate>Mon, 18 Nov 2024 11:43:02 +0000</pubDate>
+<pubDate>Mon, 18 Nov 2024 11:43:02 +0000</pubDate>
+</item>
+<item>
+<title>On Blob Markets, Base Fee Adjustments and Optimizations</title>
+<link>https://ethresear.ch/t/on-blob-markets-base-fee-adjustments-and-optimizations/21024</link>
+<guid>https://ethresear.ch/t/on-blob-markets-base-fee-adjustments-and-optimizations/21024</guid>
+<content:encoded><![CDATA[
+<div> 关键词: Blob Markets、Base Fee Adjustments、Pectra、Ethereum、Price Discovery
+
+总结:
+
+Blob Markets 是以太坊引入的一种新的费用市场机制，通过设置Blob基础费用来为数据提供专用空间，使得应用和Rollups无需执行EVM即可发布信息。随着需求增加，目前提议对Blob费用机制进行一系列调整：
+
+1. 提高最小Blob基础费用：加快价格发现过程，减少波动，但需要重置累积的超额气体并可能导致短期的价格重新调整。
+2. 自动化Blob基础费用更新比例：根据目标Blob数量动态调整更新比例，确保±12.5%的变化率不变，提高未来适应性。
+3. 正常化超额气体计算：避免因目标Blob数量增加而导致的基础费用突然下降，增强费用调整的可预测性和平滑度。
+4. 对称化Blob基础费用更新：确保在不同目标和最大值设定下，基础费用增减幅度保持一致。
+
+建议在将目标/最大Blob数量从3/6调整至4/6或更高级别的同时，实施这些更改。需要注意的是，这些调整可能是微优化，需权衡是否改变尚未出现问题的现有协议。 <div>
+<h1><a class="anchor" href="https://ethresear.ch#p-51263-on-blob-markets-base-fee-adjustments-and-optimizations-1" name="p-51263-on-blob-markets-base-fee-adjustments-and-optimizations-1"></a>On Blob Markets, Base Fee Adjustments and Optimizations</h1>
+<blockquote>
+<p>Special thanks to <a href="https://x.com/adietrichs">Ansgar</a>, <a href="https://x.com/barnabemonnot">Barnabé</a>, <a href="https://x.com/ralexstokes">Alex</a>, <a href="https://x.com/gakonst">Georgios</a>, <a href="https://x.com/r_krasiuk">Roman</a> and <a href="https://x.com/dankrad">Dankrad</a> for their input and discussions, as well as <a href="https://x.com/BertKellerman">Bert</a>, <a href="https://x.com/Gajpower">Gajinder</a> and <a href="https://x.com/MaxResnick1">Max</a> for their efforts on this topic!</p>
+</blockquote>
+<p><strong>The tl;dr:</strong><br />
+All the suggested updates make sense in theory. Should we do them in Pectra - depends.</p>
+<ol>
+<li>Raising the min blob fee allows faster price discovery.</li>
+<li>Automating the blob gas update fraction makes it future-proof.</li>
+<li>Normalizing the excess gas prevents an edge gas where the blob base fee drops after a fork that increases the target, though, nothing bad can happen if we don’t do it.</li>
+<li>Making the base fee scaling symmetric ensures the mechanism stays as-is (scales <span class="math">\pm 12.5%</span> at the extremes of 0 and 6 blobs)</li>
+</ol>
+<hr />
+<p><strong>I would propose to summarize all those changes in <a href="https://github.com/ethereum/EIPs/blob/16a12dcf41251c592f74042b6aa5727097f60167/EIPS%2Feip-7762.md">EIP-7762</a> and ship them together when we change the target/max from 3/6 to 4/6. If we’re afraid that Pectra might grow too big with adding yet more changes, I’d propose them in the following order with decreasing importance:</strong></p>
+<ol>
+<li>Increase blob count.<br />
+a) Do 4/6, being conservative, or something like 6/9 if we feel more confident.<br />
+b) Ship <a href="https://github.com/ethereum/EIPs/blob/16a12dcf41251c592f74042b6aa5727097f60167/EIPS/eip-7623.md">EIP-7623</a> to ensure the EL payload size is significantly reduced to make room for more blobs.</li>
+<li>Ship the outlined base fee changes.</li>
+</ol>
+<hr />
+<h3><a class="anchor" href="https://ethresear.ch#p-51263-recap-of-the-blob-fee-mechanism-2" name="p-51263-recap-of-the-blob-fee-mechanism-2"></a>Recap of the Blob Fee Mechanism</h3>
+<p>With the launch of <a href="https://github.com/ethereum/EIPs/blob/16a12dcf41251c592f74042b6aa5727097f60167/EIPS%2Feip-4844.md">EIP-4844</a>, Ethereum added a new dimension to its fee market. Blobs, coming with their own base fee, provide dedicated space for data, allowing applications and rollups to post information on-chain without requiring EVM execution.<br />
+The blob fee structure is governed by a base fee update rule, which approximates the formula:</p>
+<pre><code class="lang-python">base_fee_per_blob_gas = MIN_BASE_FEE_PER_BLOB_GAS * e**(excess_blob_gas / BLOB_BASE_FEE_UPDATE_FRACTION)
+</code></pre>
+<p>In this equation, <code>excess_blob_gas</code> represents the total surplus of blob gas usage compared to the target amount (<code>TARGET_BLOB_GAS_PER_BLOCK</code> per block). Like the <a href="https://github.com/ethereum/EIPs/blob/16a12dcf41251c592f74042b6aa5727097f60167/EIPS%2Feip-1559.md">EIP-1559</a> fee mechanism, this formula is self-adjusting: as the excess blob gas increases, the <code>base_fee_per_blob_gas</code> rises exponentially, which discourages excessive usage and nudges the excess back toward a level at which rollups perceive the base fee as a “fair” price.</p>
+<p>The process operates as follows: if block <code>N</code> consumes <code>X</code> blob gas, then in block <code>N+1</code>, the <code>excess_blob_gas</code> increases by <code>X - TARGET_BLOB_GAS_PER_BLOCK</code>. Consequently, the <code>base_fee_per_blob_gas</code> for block <code>N+1</code> adjusts by a factor of <code>e**((X - TARGET_BLOB_GAS_PER_BLOCK) / BLOB_BASE_FEE_UPDATE_FRACTION)</code>.</p>
+<p>The parameter <code>BLOB_BASE_FEE_UPDATE_FRACTION</code> controls the maximum possible rate of change for the blob base fee. This rate is set to achieve a target maximum increase and decrease of approximately <code>1.125</code> per block, based on <code>e**(TARGET_BLOB_GAS_PER_BLOCK / BLOB_BASE_FEE_UPDATE_FRACTION)</code>.</p>
+<p>In the initial rollout, blob prices were expected to be low, with gradual increases until the market finds an equilibrium or “fair” price (i.e., price discovery). The blob fee market introduced by EIP-<a href="https://github.com/ethereum/EIPs/blob/16a12dcf41251c592f74042b6aa5727097f60167/EIPS%2Feip-4844.md">4844</a> follows a structure similar to <a href="https://github.com/ethereum/EIPs/blob/16a12dcf41251c592f74042b6aa5727097f60167/EIPS%2Feip-1559.md">EIP-1559</a>, with a base fee that adjusts dynamically based on demand.</p>
+<h4><a class="anchor" href="https://ethresear.ch#p-51263-reaching-the-point-of-price-discovery-3" name="p-51263-reaching-the-point-of-price-discovery-3"></a>Reaching the Point of “Price Discovery”</h4>
+<p>As of November 2024, Ethereum has reached a level of demand where rollups would stop posting blobs no matter what the base fee is, but instead post an amount of blobs that keeps the base fee quite stable. People like calling that a phase of “price discovery”, even though it just means that at that specific point in time a certain base fee X is regarded as a fair price. At the time of “price discovery”, rollups would no longer consistently post 6 blobs per block without considering the blob base fee, as it is no longer negligible. However, an increasing demand for blobs without an increasing supply (i.e. more blobs available) will lead to higher blob fees. For the following, forgive me when using this simplified concept of “price discovery,” even though prices are discovered every 12 seconds with every slot.</p>
+<h2><a class="anchor" href="https://ethresear.ch#p-51263-proposed-adjustments-and-their-pros-cons-4" name="p-51263-proposed-adjustments-and-their-pros-cons-4"></a>Proposed Adjustments, and their Pros &amp; Cons</h2>
+<p>Looking ahead to the upcoming Pectra fork, there is a clear demand for scaling blobs (from 3/6 to 4/6 or, more sophisticated, 6/9), which could necessitate adjustments to the blob fee market.</p>
+<p>In the following sections, I will outline 4 potential changes to the blob fee market and discuss the associated benefits and challenges for each.</p>
+<ol>
+<li><strong>Adjusting the Minimum Base Fee</strong>: One of the simplest adjustments is to modify the <code>MIN_BASE_FEE</code> parameter, as suggested by Max Resnick.</li>
+<li><strong>Automating Blob Base Fee Update Fraction</strong>: A simple change to ensure the blob base fee update fraction scales with the target number of blobs.</li>
+<li><strong>Normalization of Excess Gas</strong>: Another proposal from Bert Kellerman and Gajinder suggests “normalizing” the calculation for excess gas usage.</li>
+<li><strong>Symmetrizing the Base Fee Updates</strong>: A proposal to adjust the base fee formula.</li>
+</ol>
+<hr />
+<h2><a class="anchor" href="https://ethresear.ch#p-51263-h-1-increase-min_base_fee_per_blob_gas-eip-7762httpsgithubcomethereumeipsblob16a12dcf41251c592f74042b6aa5727097f60167eips2feip-7762md-5" name="p-51263-h-1-increase-min_base_fee_per_blob_gas-eip-7762httpsgithubcomethereumeipsblob16a12dcf41251c592f74042b6aa5727097f60167eips2feip-7762md-5"></a>1. Increase MIN_BASE_FEE_PER_BLOB_GAS (<a href="https://github.com/ethereum/EIPs/blob/16a12dcf41251c592f74042b6aa5727097f60167/EIPS%2Feip-7762.md">EIP-7762</a>)</h2>
+<p>The blob base fee starts at 0 and then slowly increases until the point of price discovery. Every ~6 blocks (with 6 blobs) the base fee doubles but it’s a long way to go from 1 wei to a price that is more reasonable, like, for example, 5 gwei. Until we’re at that level, the price may fluctuate a lot and rollups basically get “overly” cheap DA.</p>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/0/e/0e1ac5c0a500f95aea3f6eca8114744eae97c7aa.png" title="Screenshot from 2024-11-07 05-33-46"><img alt="Screenshot from 2024-11-07 05-33-46" height="324" src="https://ethresear.ch/uploads/default/optimized/3X/0/e/0e1ac5c0a500f95aea3f6eca8114744eae97c7aa_2_690x324.png" width="690" /></a></div><p></p>
+<p>The mentioned EIP proposes to increase the minimum base fee from 1 wei to ~0.034 gwei. This would shorten the time until price discovery and thus quicker pushes rollups towards a more stable price range that is considered “fair”.</p>
+<p>For the base fee to climb from 1 to 5 gwei, it takes…<br />
+<span class="math">\frac{\ln\left(\frac{\text{base_fee_target}}{\text{base_fee_start}}\right)}{\text{growth_rate}} = \frac{\ln(5 \times 10^9 / 1)}{0.117} \approx 190 \text{ blocks}</span> and all of those blocks need to have 6 blobs. This equals to approx. 38 minutes.</p>
+<p>With the new, increased <code>MIN_BASE_FEE_PER_BLOB_GAS</code>, we would lower this duration to…<br />
+<span class="math">\frac{\ln(5 \times 10^9 / 2^{25})}{0.117} \approx  \text{42 blocks}</span>, equaling 8.4 minutes.</p>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/4/1/417b2a602b0027c374bb9ba5aa1277a3e91fc684.png" title="Screenshot from 2024-11-07 05-41-23"><img alt="Screenshot from 2024-11-07 05-41-23" height="324" src="https://ethresear.ch/uploads/default/optimized/3X/4/1/417b2a602b0027c374bb9ba5aa1277a3e91fc684_2_690x324.png" width="690" /></a></div><p></p>
+<p><strong>One highly important caveat/implementation detail:</strong></p>
+<p><strong>We MUST reset the excess gas when updating the <code>MIN_BASE_FEE_PER_BLOB_GAS</code></strong>.</p>
+<p>The reason for that is that otherwise we would see an unpredictable, extreme spike in the blob base fee right after the fork. This is because the min base fee acts as a multiplier to the base fee and a small adjustment to it can greatly impact the base fee if the excess gas accumulated until that point is not reset.<br />
+Here’s an example of that: A apparently “meaningless” increase from 1 to 5 wei is enough to make the base fee skyrocketing and then, rollups would have to wait for a certain period of time until the price calms down again.</p>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/8/8/8871037f542b273f175a81102502555816cc4f65.png" title="Screenshot from 2024-11-08 11-05-08"><img alt="Screenshot from 2024-11-08 11-05-08" height="305" src="https://ethresear.ch/uploads/default/optimized/3X/8/8/8871037f542b273f175a81102502555816cc4f65_2_690x305.png" width="690" /></a></div><p></p>
+<h3><a class="anchor" href="https://ethresear.ch#p-51263-summarizing-6" name="p-51263-summarizing-6"></a>Summarizing</h3>
+<h4><a class="anchor" href="https://ethresear.ch#p-51263-pros-7" name="p-51263-pros-7"></a>Pros:</h4>
+<ul>
+<li>Faster “price discovery”.</li>
+<li>Less volatility in times of supply &lt; demand.</li>
+</ul>
+<h4><a class="anchor" href="https://ethresear.ch#p-51263-cons-8" name="p-51263-cons-8"></a>Cons:</h4>
+<ul>
+<li>Required touching the protocol and we usually aren’t “micro-optimizing” things that aren’t broken.</li>
+<li>Since excess gas is reset, we have to go through a phase of price discovery again, though, starting at a higher level thus shortening that time.</li>
+</ul>
+<p>This can be simplified as “ossification vs. optimizations” and, imo, there’s no right or wrong, even though I personally think that NOT touching the protocol has value too.</p>
+<hr />
+<h2><a class="anchor" href="https://ethresear.ch#p-51263-h-2-automating-blob-base-fee-update-fraction-9" name="p-51263-h-2-automating-blob-base-fee-update-fraction-9"></a>2. Automating Blob Base Fee Update Fraction</h2>
+<p>This change is super simple: As of now, the update fraction is set to 3338477, as specified in <a href="https://github.com/ethereum/EIPs/blob/16a12dcf41251c592f74042b6aa5727097f60167/EIPS%2Feip-4844.md">EIP-4844</a>. One gets to that number by doing <span class="math">\frac{target\_gas}{ln(1.125)}</span>. If we now replace the hardcoded number with this, we can make sure that we maintain the desired <span class="math">\pm 12.5%</span> change.</p>
+<p>There is currently an <a href="https://github.com/ethereum/EIPs/pull/8994">open PR</a> for this change to be included in <a href="https://github.com/ethereum/EIPs/blob/16a12dcf41251c592f74042b6aa5727097f60167/EIPS%2Feip-7742.md">EIP-7742</a> but I’d argue we shouldn’t bundle it together and instead propose this change individually together with the other changes to the base fee mechanism that we might want to ship.</p>
+<hr />
+<h2><a class="anchor" href="https://ethresear.ch#p-51263-h-3-normalization-of-excess-gas-10" name="p-51263-h-3-normalization-of-excess-gas-10"></a>3. Normalization of Excess Gas</h2>
+<p>That’s a proposal that aims to avoid steep base fee drops after forks that increase the blob target.</p>
+<p>To avoid a sudden drop in the base fee right after a fork that increases the blob target, this proposal suggests adjusting the way we calculate excess gas. Normally, the base fee should change smoothly—only up to 12.5% per slot. By normalizing excess gas, we can ensure the base fee remains stable and doesn’t drop sharply beyond the expected 12.5% limit when the target increases, keeping fee adjustments predictable and gradual.</p>
+<p>Simply put, instead of accumulating excess gas, we accumulate normalized excess gas. This way the target blob number doesn’t matter.</p>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/f/e/fea44d6615fabcf4e78b59a55a9edbdc57ecdb1b.png" title="Screenshot from 2024-11-14 04-14-09"><img alt="Screenshot from 2024-11-14 04-14-09" height="328" src="https://ethresear.ch/uploads/default/optimized/3X/f/e/fea44d6615fabcf4e78b59a55a9edbdc57ecdb1b_2_690x328.png" width="690" /></a></div><p></p>
+<p>By introducing a normalization factor in the excess gas calculation, we can adjust the accumulated excess gas to remain proportionate to the new target. This ensures that the base fee adjusts smoothly, maintaining consistent fee dynamics even when the target changes.</p>
+<p>Normalization involves scaling the excess gas using a constant factor, so that it reflects the deviation from the target in a consistent manner regardless of the target’s value. This approach keeps the base fee adjustments within the expected limits, preventing sudden drops or spikes that could disrupt the network’s fee market.</p>
+<p>For more details on this change, check <a href="https://github.com/ethereum/EIPs/blob/4ce73bd55eacae560073622c1af2aac0ab362a52/EIPS/eip-7742.md">this commit</a>.</p>
+<h3><a class="anchor" href="https://ethresear.ch#p-51263-summarizing-11" name="p-51263-summarizing-11"></a>Summarizing</h3>
+<h4><a class="anchor" href="https://ethresear.ch#p-51263-pros-12" name="p-51263-pros-12"></a>Pros</h4>
+<ul>
+<li>Avoids base fee drop after fork with target increase.
+<ul>
+<li>more predictability for blob users</li>
+</ul>
+</li>
+</ul>
+<h4><a class="anchor" href="https://ethresear.ch#p-51263-cons-13" name="p-51263-cons-13"></a>Cons</h4>
+<ul>
+<li>Another potential “micro-optimization”.</li>
+</ul>
+<hr />
+<h3><a class="anchor" href="https://ethresear.ch#p-51263-symmetrizing-blob-base-fee-updates-around-the-target-14" name="p-51263-symmetrizing-blob-base-fee-updates-around-the-target-14"></a>Symmetrizing Blob Base Fee Updates around the Target</h3>
+<p>With changing the target such that <span class="math">target=\frac{max}{2}</span> doesn’t hold anymore, we change the distance from the target to the min/max. E.g., going to a blob target of 4 and a max of 6, there is room for 2 blobs up and 4 blobs down.</p>
+<p><img alt="blob-target-max" height="216" src="https://ethresear.ch/uploads/default/original/3X/1/6/16bbe3da3a37a6134fe4878c7771e8aaff4dd555.png" width="380" /></p>
+<p>Now, with more room on the negative side than on the positive side, the base fee can move down faster than it can move up.</p>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/4/c/4ced4a84d32f81d3705402822fa4e527fdda158b.png" title="base_fee_symmetry"><img alt="base_fee_symmetry" height="500" src="https://ethresear.ch/uploads/default/optimized/3X/4/c/4ced4a84d32f81d3705402822fa4e527fdda158b_2_404x500.png" width="404" /></a></div><p></p>
+<p>A simple fix to this is the following:<br />
+We first determine the delta between the gas used and the target (same as we do now). Then we apply a scaling factor that is simply <code>target/(max-target)</code> to the side that has <strong>less</strong> “room” (e.g., the “up” side when doing 4/6 target/max).</p>
+<p>The <code>calc_excess_blob_gas</code> function would look like the following:</p>
+<pre><code class="lang-python">def calc_excess_blob_gas(parent_header: Header) -&gt; int:
+    scaling_factor = TARGET_BLOB_GAS_PER_BLOCK / (MAX_BLOB_GAS_PER_BLOCK - TARGET_BLOB_GAS_PER_BLOCK)
+    blob_gas_delta = parent_header.blob_gas_used - TARGET_BLOB_GAS_PER_BLOCK
+    if blob_gas_delta &gt; 0:
+        scaled_delta = blob_gas_delta * scaling_factor
+    else:
+        scaled_delta = blob_gas_delta
+    excess_blob_gas = max(0, parent_header.excess_blob_gas + scaled_delta)
+    return excess_blob_gas
+</code></pre>
+<p>Of course, this only works in cases where <span class="math">max-target&lt;target</span> and one could generalize it even more, but I’d guess it’s not worth it.</p>
+<p>To better understand the effects of this symmetrizing process, let’s walk through a simple example:</p>
+<ol>
+<li>Imagine we have three slots:
+<ul>
+<li>The first two slots contain 6 blobs each.</li>
+<li>The last slot contains 0 blobs.</li>
+</ul>
+</li>
+<li>This results in a total of 12 blobs across the 3 slots.</li>
+<li>The target is set to 4 blobs per block, with a maximum of 6 blobs.</li>
+</ol>
+<h4><a class="anchor" href="https://ethresear.ch#p-51263-symmetric-vs-non-symmetric-base-fee-adjustments-15" name="p-51263-symmetric-vs-non-symmetric-base-fee-adjustments-15"></a>Symmetric vs. Non-Symmetric Base Fee Adjustments:</h4>
+<ul>
+<li>
+<p><strong>Symmetric Base Fee</strong>:</p>
+<ul>
+<li>The base fee increases by approximately 12.5% twice (for the two 6-blob slots) and then decreases by 12.5% once (for the 0-blob slot).</li>
+<li>After these adjustments, the base fee ends up <strong>higher</strong> than its initial value.</li>
+</ul>
+</li>
+<li>
+<p><strong>Non-Symmetric Base Fee</strong>:</p>
+<ul>
+<li>The base fee remains unchanged after the 6-6-0 blob sequence.</li>
+</ul>
+</li>
+</ul>
+<p>This example highlights the benefits of a symmetric adjustment:</p>
+<ul>
+<li>The 6-6-0 blob sequence pushes us toward extremes (max utilization followed by none), which is undesirable.</li>
+<li>Ideally, the load should be more evenly distributed across the three slots (e.g., 4 blobs in each block).</li>
+<li>A symmetric base fee discourages extreme behavior by “penalizing” uneven usage (6 blobs instead of 4) more with a higher base fee, promoting a more balanced load.</li>
+<li>Of course, one could argue that blob users might not care about pushing the base fee up because they might only need to post blobs a few times in every epoch and therefore don’t care about the slot following their 6-blob posting. Though, this argument is short-sighted.</li>
+</ul>
+<h3><a class="anchor" href="https://ethresear.ch#p-51263-summarizing-16" name="p-51263-summarizing-16"></a>Summarizing</h3>
+<h4><a class="anchor" href="https://ethresear.ch#p-51263-pros-17" name="p-51263-pros-17"></a>Pros</h4>
+<ul>
+<li>Ensure “price discovery” happens as fast as it does now.</li>
+<li>Ensure the “extremes” (0 and 6 blobs) cause the same percentage increases/decreases.</li>
+</ul>
+<h4><a class="anchor" href="https://ethresear.ch#p-51263-cons-18" name="p-51263-cons-18"></a>Cons</h4>
+<ul>
+<li>Yet another “micro-optimization” and everything might be fine without doing it.</li>
+<li>Introducing some path dependency. E.g. jumping between <span class="math">gas\_used= target \pm 1\ blobs</span> causes the base fee to increase steadily over time. This behavior can be counteracted by avoiding posting more blobs than the target, which may even incentivize a more balanced posting strategy.</li>
+</ul>
+            <p><small>1 post - 1 participant</small></p>
+            <p><a href="https://ethresear.ch/t/on-blob-markets-base-fee-adjustments-and-optimizations/21024">Read full topic</a></p>
+]]></content:encoded>
+<pubDate>Mon, 18 Nov 2024 10:31:58 +0000</pubDate>
+<pubDate>Mon, 18 Nov 2024 10:31:58 +0000</pubDate>
+</item>
+
+<item>
 <title>The 1st mathematically, proven and mid development: FULLY, TRUSTLESS BTC bridge ~ "The Holy Grail"</title>
 <link>https://ethresear.ch/t/the-1st-mathematically-proven-and-mid-development-fully-trustless-btc-bridge-the-holy-grail/20987</link>
 <guid>https://ethresear.ch/t/the-1st-mathematically-proven-and-mid-development-fully-trustless-btc-bridge-the-holy-grail/20987</guid>
 <content:encoded><![CDATA[
 <div> 关键词: Overpass Channels, Bitcoin, 层2解决方案, 隐私保护, 扩展性
 
-总结:<br>
+总结:<br />
 本文介绍了Overpass Channels作为比特币的一种创新层2解决方案，旨在实现大规模交易的同时保持协议完整性和隐私性。该方案对比了Overpass Channels与BitVM2，强调Overpass的优势在于其对隐私的强化保护、网络完整性维护以及无需更改比特币核心协议即可实现高容量交易的能力。通过分布式存储、优化的状态管理和Plonky2基的zk-SNARKs，Overpass Channels提供了与比特币原生HTLC兼容的交易方式。文章证明了Overpass Channels在维持比特币的安全属性和货币政策方面的重要性，并通过一系列定理和证明确立了其在隐私、扩展性、经济中立性和安全性方面的优越性。总的来说，Overpass Channels为比特币扩展性问题提供了一种具有较强竞争力的解决方案，有望成为比特币和其他区块链网络的理想现金层。 <div>
 <h2><a class="anchor" href="https://ethresear.ch#p-51185-overpass-channel-sub-paper-1" name="p-51185-overpass-channel-sub-paper-1"></a>Overpass Channel Sub-paper:</h2>
 <h1><a class="anchor" href="https://ethresear.ch#p-51185-bitcoin-bo-instant-private-massively-scalable-liquid-bitcoin-with-true-trustless-bridge-pro-maxi-choice-l1-heterogenous-2" name="p-51185-bitcoin-bo-instant-private-massively-scalable-liquid-bitcoin-with-true-trustless-bridge-pro-maxi-choice-l1-heterogenous-2"></a>Bitcoin (B²O): Instant, Private, Massively Scalable, Liquid Bitcoin with true trustless bridge - Pro Maxi Choice  - [L1 heterogenous]</h1>
@@ -654,9 +870,7 @@ The preservation of trust assumptions is achieved by both systems through:</p>
             <p><a href="https://ethresear.ch/t/the-1st-mathematically-proven-and-mid-development-fully-trustless-btc-bridge-the-holy-grail/20987">Read full topic</a></p>
 ]]></content:encoded>
 <pubDate>Thu, 14 Nov 2024 23:54:37 +0000</pubDate>
-<pubDate>Thu, 14 Nov 2024 23:54:37 +0000</pubDate>
 </item>
-
 <item>
 <title>On trustless cross-chain asset transfers</title>
 <link>https://ethresear.ch/t/on-trustless-cross-chain-asset-transfers/20992</link>
