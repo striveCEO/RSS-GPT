@@ -4,6 +4,239 @@
 <title>Ethereum Research - Latest topics</title>
 <link>https://ethresear.ch/latest</link>
 
+<item>
+<title>Vocdoni Protocol: Enabling Decentralized Voting for the Masses with ZK Technology</title>
+<link>https://ethresear.ch/t/vocdoni-protocol-enabling-decentralized-voting-for-the-masses-with-zk-technology/21036</link>
+<guid>https://ethresear.ch/t/vocdoni-protocol-enabling-decentralized-voting-for-the-masses-with-zk-technology/21036</guid>
+<content:encoded><![CDATA[
+<div> 关键词：去中心化投票、零知识证明（zk）、zkSNARKs、椭圆曲线加密（ElGamal）、分布式密钥生成（DKG）
+
+总结：
+我们是一家专注于构建去中心化投票解决方案的公司，已成功为足球俱乐部、市政府等组织执行高风险投票。过去六年里，我们依赖自定义的权威证明Layer 1网络，现在计划转向基于零知识证明（zk）的基础设施以实现完全去中心化，并解决数字投票系统的挑战。为此，我们提出了一种新的通用投票协议，采用zkSNARKs和阈值同态加密（ElGamal），确保端到端可验证性和用户隐私。该系统利用基于Ethereum区块链的zkSNARK层来提供审查抵抗性、完整性、无信任操作以及透明的审计。
+
+关键设计包括使用分布式密钥生成（DKG）协调智能合约，使序列器能安全、分散地创建加密密钥而不依赖中心机构。投票者通过友好的界面进行匿名、安全的投票，并生成zkSNARK证明其加密选票符合规则但不透露选择。序列器负责收集、验证选票并更新共享状态，以保持投票过程的完整性和防止双重投票。
+
+新协议着重于可扩展性和易访问性，支持高频低成本投票，适用于大规模采用。预计将在2025年第一季度至第二季度推出测试网。我们正在使用Circom和SnarkJS实现投票者侧的组件，而序列器则利用Gnark和BLS12-377及BW6-761曲线实现原生递归投票聚合，产生可在Ethereum上验证的BN254证明。为了保证参与门槛低，序列器可以在具有64GB内存的普通CPU系统上运行。
+
+我们的投票协议通过椭圆曲线上的ElGamal同态加密维护投票隐私，利用一组分散的序列器和默克尔树确保投票完整性，并通过重加密和投票覆盖机制实现收据不可追溯性，防范胁迫和贿选行为。此外，还引入了zkSNARK证明确保状态转换的有效性，从而实现全程透明审计。 <div>
+<p>At <a href="https://blog.vocdoni.io" rel="noopener nofollow ugc">Vocdoni</a>, we’ve spent the last six years advancing decentralized voting solutions, focusing on bridging web2 applications with web3 technologies. We’ve successfully executed high-stakes voting for organizations such as football clubs, city councils, associations, political parties, professional bodies, movements under prosecution and more.</p>
+<p>Until today, we have been relying on a customized proof-of-authority Layer 1 network.<br />
+But we believe it’s now time to transition to a zero-knowledge (zk) based infrastructure to achieve <strong>full decentralization</strong> and address the main challenges of digital voting systems</p>
+<p>On the road to this new protocol implementation, we would like to receive feedback from the Ethereum community <img alt=":heartbeat:" class="emoji" height="20" src="https://ethresear.ch/images/emoji/facebook_messenger/heartbeat.png?v=12" title=":heartbeat:" width="20" />.</p>
+<hr />
+<p>By taking ideas from our expertise, MACI, and others. We introduce a new universal voting protocol that tackles critical issues like receipt-freeness, voter privacy, scrutiny transparency, universal auditing, and eliminating the need for a trusted coordinator.</p>
+<p>Designed for scalability and accessibility, the system enables high-frequency, low-cost voting suitable for mass adoption.  We laverage on zkSNARKs and threshold homomorphic encryption (ElGamal), to ensure end-to-end verifiability and anonymity for the end user.</p>
+<p>A decentralized zkSNARK-based state machine, operating as specialized layer 2 on the Ethereum blockchain, provides censorship-resistance, integrity, trutless operation and a transparent scrutiny of results. A distributed key generation (DKG) among sequencers, coordinated via smart contracts, allows for secure and decentralized encryption key creation without reliance on a central authority.</p>
+<p>Most components have been implemented using accessible technologies and have undergone proof-of-concept testing, confirming that the protocol is practical and ready for immediate deployment. We plan to launch the testnet in Q1–Q2 2025.</p>
+<p>Our implementation uses Circom and SnarkJS on the voter side, enabling voting from any device, including smartphones and web browsers. For the sequencers, we use Gnark with curves BLS12-377 and BW6-761 for native recursion in vote aggregation. This setup produces a final BN254 proof that can be verified on Ethereum.</p>
+<p>Focusing on decentralization, we designed the sequencer to operate on accessible machines—CPU-based systems with 64 GiB of memory—so that participation doesn’t require specialized hardware.</p>
+<hr />
+<h1><a class="anchor" href="https://ethresear.ch#p-51289-actors-1" name="p-51289-actors-1"></a>Actors</h1>
+<p><strong>Organizers</strong> set up and manage voting processes, defining parameters such as voting options, duration, and voter registries (census).</p>
+<p><strong>Voters</strong> interact with the system through user-friendly interfaces, enabling them to cast their votes securely and privately. Voters generate zkSNARKs to prove that their encrypted votes comply with voting rules without revealing their choices.</p>
+<p><strong>Sequencers</strong> are specialized nodes responsible for collecting votes, verifying their validity, and updating the shared state. They participate in the Distributed Key Generation (DKG) protocol to collaboratively generate encryption keys without any single party controlling the private key.</p>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/a/7/a7aa54df4abda59985545fef1ed402d388278ff8.png" title="image"><img alt="image" height="500" src="https://ethresear.ch/uploads/default/optimized/3X/a/7/a7aa54df4abda59985545fef1ed402d388278ff8_2_642x500.png" width="642" /></a></div><p></p>
+<h1><a class="anchor" href="https://ethresear.ch#p-51289-properties-2" name="p-51289-properties-2"></a>Properties</h1>
+<p><strong>Privacy</strong> is maintained using homomorphic encryption. Votes are encrypted with the ElGamal cryptosystem over elliptic curves, allowing the aggregation of encrypted votes without decrypting individual ballots, thus keeping voter choices confidential.</p>
+<p><strong>Integrity</strong> is ensured through the collaborative efforts of a <strong>decentralized network</strong> of sequencers, who maintain a shared state represented by a Merkle tree that summarizes the current status of the voting process, including accumulated votes and nullifiers to prevent double voting. Each time the state is updated with new votes, a sequencer generates a zkSNARK proof attesting to the validity of the state transition.</p>
+<p><strong>Receipt-freeness</strong> is achieved by preventing voters from being able to prove to third parties how they voted, mitigating risks of coercion and vote-buying. This is accomplished through ballot re-encryption and vote overwriting mechanisms. When a voter submits an encrypted ballot, sequencers re-encrypt it before storing it in the state, making it computationally infeasible to link the original and re-encrypted ciphertexts. Voters are also allowed to overwrite their votes; if a voter casts a new vote, the sequencer subtracts the previous encrypted vote from the tally and adds the new one. Regular re-encryption of random ballots by sequencers conceals when overwrites occur, enhancing receipt-freeness by making it indistinguishable whether a ballot was overwritten or simply re-randomized.</p>
+<h1><a class="anchor" href="https://ethresear.ch#p-51289-end-to-end-workflow-3" name="p-51289-end-to-end-workflow-3"></a>End-to-End Workflow</h1>
+<ol>
+<li><strong>Process Initialization</strong>: The organizer defines the voting parameters—including options, duration, and census—and registers the new process on the Ethereum blockchain via smart contracts.</li>
+<li><strong>Distributed Key Generation (DKG)</strong>: Sequencers collaboratively execute the DKG protocol to generate the collective public encryption key without any single party knowing the private key. The generated public key is published on-chain for voters to use when encrypting their ballots.</li>
+<li><strong>Voter Preparation</strong>: Voters retrieve the public encryption key and their inclusion proof (Merkle proof) from the census registry.</li>
+<li><strong>Vote Casting</strong>: Voters select their choices and encrypt their ballots using the public key. Generate zkSNARK proofs to prove the validity of their encrypted votes without revealing their selections. Encrypted ballots and proofs are submitted to a sequencer for processing.</li>
+<li><strong>Vote Collection and Verification</strong>: Sequencers verify the zkSNARK proofs to ensure each vote complies with the protocol rules. Confirm that the voter is eligible and has not already voted, or handle vote overwrites appropriately. Valid encrypted votes are aggregated homomorphically, allowing for tallying without decryption. The sequencer updates the State Merkle Tree to reflect new votes and nullifiers.</li>
+<li><strong>State Transition and Proof Submission</strong>: Sequencers create zkProofs attesting to the validity of the state transition from the previous state to the new one. The new root and corresponding proof are submitted to the Ethereum smart contract. The contract verifies the data and updates the stored state root.</li>
+<li><strong>Data Availability</strong>: Necessary data to reconstruct the state is published to the data availability layer (Ethereum data blobs), ensuring accessibility for verification and reconstruction of the new state.</li>
+<li><strong>Process Finalization</strong>: At the end of the voting period, the process is finalized on-chain, and no further votes are accepted.</li>
+<li><strong>Result Decryption</strong>: Sequencers collaborate to decrypt the aggregated vote totals using the threshold decryption protocol. Decrypted results are published on-chain, providing an immutable and transparent outcome.</li>
+</ol>
+<h1><a class="anchor" href="https://ethresear.ch#p-51289-threshold-homomorphic-encryption-4" name="p-51289-threshold-homomorphic-encryption-4"></a>Threshold Homomorphic Encryption</h1>
+<p>The system utilizes the ElGamal threshold encryption scheme over the elliptic curve bn254, which provides additive homomorphic properties essential for securely aggregating votes.</p>
+<p><strong>Encryption</strong></p>
+<p>A voter’s choice is represented as a message <span class="math">m \in \mathbb{Z}_q</span>. To encrypt the vote:</p>
+<ol>
+<li>The voter encodes the message as a point on the elliptic curve: <span class="math">M = m G.</span></li>
+<li>The voter selects a random scalar <span class="math">k \in \mathbb{Z}_q^*</span>.</li>
+<li>The ciphertext is computed as: <span class="math">C = (C_1, C_2) = (k G, M + k H).</span></li>
+</ol>
+<p><strong>Homomorphic Addition</strong></p>
+<p>The ElGamal cryptosystem over elliptic curves supports additive homomorphism for messages represented as points. Given two ciphertexts <span class="math">(C_1^{(1)}, C_2^{(1)})</span> and <span class="math">(C_1^{(2)}, C_2^{(2)})</span>, their component-wise addition yields:</p>
+<ul>
+<li><span class="math">C_1^{(\text{sum})} = C_1^{(1)} + C_1^{(2)}</span></li>
+<li><span class="math">C_2^{(\text{sum})} = C_2^{(1)} + C_2^{(2)}</span></li>
+</ul>
+<p>The aggregated ciphertext decrypts to the sum of the messages:  <span class="math">M^{(\text{sum})} = M_1 + M_2</span></p>
+<p><strong>Threshold Decryption</strong></p>
+<p>After the voting period ends, the sequencers collaboratively decrypt the aggregated ciphertext. Each sequencer <span class="math">P_j</span> computes a partial decryption share:</p>
+<ol>
+<li>Compute:  <span class="math">D_j = s_j C_1.</span></li>
+<li>The partial decryptions are combined using Lagrange interpolation coefficients <span class="math">\lambda_j</span>:<br />
+<span class="math">D = \sum_{j \in T} \lambda_j D_j = s C_1</span><br />
+where <span class="math">T</span> is a set of at least <span class="math">t</span> sequencers.</li>
+<li>The plaintext message is recovered by computing:<br />
+<span class="math">M = C_2 - D = M + k H - s k G = M</span></li>
+<li>The final result <span class="math">m</span> is obtained by solving <span class="math">M = m G</span>, which yields <span class="math">m</span>.</li>
+</ol>
+<h1><a class="anchor" href="https://ethresear.ch#p-51289-distributed-key-generation-dkg-5" name="p-51289-distributed-key-generation-dkg-5"></a>Distributed Key Generation (DKG)</h1>
+<p>To eliminate the need for a trusted authority, the encryption key used for ballot encryption is generated collaboratively by the sequencers through a Distributed Key Generation protocol, which proceeds as follows:</p>
+<ol>
+<li><strong>Initialization</strong>: Let <span class="math">G</span> be the generator of an elliptic curve group of prime order <span class="math">q</span>. The threshold <span class="math">t</span> and the number of sequencers <span class="math">n</span> are predefined, with <span class="math">t \leq n</span>.</li>
+<li><strong>Secret Sharing</strong>: Each sequencer <span class="math">P_i</span> randomly selects a secret polynomial <span class="math">f_i(x)</span> of degree <span class="math">t - 1</span>, where <span class="math">f_i(0) = a_{i,0}</span>, and the coefficients <span class="math">a_{i,j}</span> are chosen uniformly at random from <span class="math">\mathbb{Z}_q</span>.</li>
+<li><strong>Commitments</strong>: Each sequencer publishes commitments to their polynomial coefficients: <span class="math">C_{i,j} = a_{i,j} G \quad \text{for} \quad j = 0, \ldots, t - 1.</span></li>
+<li><strong>Share Distribution</strong>: Sequencer <span class="math">P_i</span> computes shares for every other sequencer <span class="math">P_j</span>: <span class="math">s_{i,j} = f_i(j), \quad \text{for} \quad j = 1, \ldots, n</span><br />
+These shares are securely transmitted to the respective sequencers using a simplified version of ECIES.</li>
+<li><strong>Verification</strong>: Each sequencer <span class="math">P_j</span> verifies the received shares <span class="math">s_{i,j}</span> by checking: <span class="math">s_{i,j} G \stackrel{?}{=} \sum_{k=0}^{t - 1} C_{i,k} \cdot j^k</span></li>
+<li><strong>Private Key Share Computation</strong>: Each sequencer computes their private key share: <span class="math">s_j = \sum_{i=1}^n s_{i,j} \mod q</span></li>
+<li><strong>Public Key Computation</strong>: The collective public key is computed as: <span class="math">H = \sum_{i=1}^n C_{i,0} = s G</span>, where <span class="math">s = \sum_{i=1}^n a_{i,0} \mod q</span> is the aggregate private key known only in a distributed form among the sequencers.</li>
+</ol>
+<h1><a class="anchor" href="https://ethresear.ch#p-51289-the-vote-6" name="p-51289-the-vote-6"></a>The Vote</h1>
+<p>The vote consists of several components and mechanisms listed below.</p>
+<p><strong>Process Identifier</strong>: A unique identifier <span class="math">\text{ProcessId}</span> for the voting process. This ensures that votes are correctly associated with the specific voting event and prevents cross-process interference.</p>
+<p><strong>Census Proof</strong>: A Merkle proof demonstrating the voter’s inclusion in the authorized voter registry (census). This proof allows the sequencers to verify the voter’s eligibility without revealing the entire voter list, preserving privacy and efficiency.</p>
+<p><strong>Identity Commitment</strong>: The voter computes a commitment using a cryptographic hash function: <span class="math">C = Hash(\text{Address} \parallel \text{ProcessId} \parallel s)</span>, where <span class="math">H</span> is a cryptographic hash function, <span class="math">\text{Address}</span> is the voter’s unique identifier (such as a public key or an address), and <span class="math">s</span> is a secret known only to the voter.</p>
+<p>By incorporating the secret <span class="math">s</span> into the commitment <span class="math">C</span>, we effectively detach the nullifier from any direct association with the voter’s identity in the publicly accessible data. This means that even if future quantum computing advancements were to compromise the ElGamal encryption and reveal the contents of encrypted ballots, there would be no practical method to link a decrypted ballot back to a specific voter’s address using the nullifier.</p>
+<p><strong>Nullifier</strong>: To prevent double voting and handle vote overwriting, the voter computes a nullifier: <span class="math">N = Hash(C \parallel s)</span>. The nullifier acts as a one-time token that uniquely represents the voter’s participation without revealing their identity.</p>
+<p>By avoiding the use of the private key or deterministic signatures when computing the nullifier, we ensure compatibility with hardware wallets and non-deterministic signature schemes.</p>
+<p><strong>Ballot</strong>: The ballot represents the voter’s choices as an array of individual selections that must adhere to the ballot protocol rules defined by the organizer. This flexible approach allows the protocol to support various voting configurations, including range voting, ranking, quadratic voting and more.</p>
+<p>Suppose an organizer wants to implement a quadratic voting system with the following parameters:</p>
+<ul>
+<li>Maximum Selections: Up to 5 options can be selected.</li>
+<li>Value Range: Each selection must be a non-negative integer.</li>
+<li>Total Cost Constraint: The sum of the squares of the selections must not exceed a budget of 100 credits.</li>
+<li>Unique Values Constraint: Duplicate values are allowed.</li>
+</ul>
+<p>The protocol would enforce that for a ballot <span class="math">\mathbf{m} = (m_1, m_2, \ldots, m_5)</span>:</p>
+<ul>
+<li>Each <span class="math">m_i \geq 0</span>.</li>
+<li><span class="math">\sum_{i=1}^5 m_i^2 \leq 100</span>.</li>
+</ul>
+<p><strong>Encryped Ballot</strong>: The voter encrypts their ballot using the homomorphic ElGamal encryption scheme, proceeding as follows:</p>
+<ul>
+<li>The voter’s choices are encoded into a message vector <span class="math">\mathbf{m} = (m_1, m_2, \ldots, m_n)</span>, where each <span class="math">m_i</span> corresponds to a selection in the ballot array.</li>
+<li>Each element <span class="math">m_i</span> is encoded as a point on the elliptic curve: <span class="math">M_i = m_i G</span>, where <span class="math">G</span> is the generator of the curve.</li>
+<li>The voter selects a random scalar <span class="math">k \in \mathbb{Z}_q^*</span>, where <span class="math">q</span> is the order of the curve.</li>
+<li>The ciphertext is computed as: <span class="math">C = (C_1, C_2) = \left( k G,\; \sum_{i=1}^n M_i + k H \right)</span><br />
+where <span class="math">H</span> is the public key obtained from the Distributed Key Generation protocol.</li>
+</ul>
+<p><strong>Zero-Knowledge Proof (zkSNARK)</strong>: The voter generates a zkSNARK that proves, without revealing the ballot content, that:</p>
+<ul>
+<li>Correct Encryption: The encrypted ballot is correctly formed according to the encryption scheme.</li>
+<li>Protocol Compliance: The voter’s selections adhere to the ballot protocol rules defined by the organizer.</li>
+<li>Correct Nullifier and Commitment: The nullifier and commitment are correctly computed using the voter’s secret <span class="math">s</span> and address.</li>
+<li>Knowledge of Secrets: The voter knows the secret <span class="math">s</span> and the random scalar <span class="math">k</span> used in encryption.</li>
+</ul>
+<p><strong>Signature</strong>: The voter signs necessary components of the vote using their private key associated with their address. This authenticates the vote and binds it to the voter’s identity in a verifiable manner. Many signature schemes may be supported (ECDSA, EdDSA, RSA, etc.).</p>
+<h1><a class="anchor" href="https://ethresear.ch#p-51289-state-transitions-7" name="p-51289-state-transitions-7"></a>State Transitions</h1>
+<p>The <strong>State Merkle Tree</strong> is a cryptographic data structure that allows efficient and secure verification of the data it contains. The tree is structured to store various types of information at predefined indices or addresses:</p>
+<ul>
+<li><strong>Process Parameters</strong>: Stored at static indices, containing essential information such as the <span class="math">\text{ProcessId}</span>, the root of the census Merkle tree (<span class="math">\text{censusRoot}</span>), ballot protocol configurations, and the public encryption key <span class="math">H</span> generated through the DKG protocol.</li>
+<li><strong>Results Accumulators</strong>: Two accumulators are maintained to handle vote additions and subtractions:
+<ul>
+<li><strong>Addition Accumulator</strong> (<span class="math">C_{\text{add}}</span>): Stores the homomorphically aggregated encrypted votes that have been added to the tally.</li>
+<li><strong>Subtraction Accumulator</strong> (<span class="math">C_{\text{sub}}</span>): Stores the homomorphically aggregated encrypted votes that have been subtracted due to vote overwrites.</li>
+</ul>
+</li>
+<li><strong>Nullifiers</strong>: Stored to prevent double voting. Each nullifier <span class="math">N</span> is associated with a voter’s commitment and is unique to that voter for the specific voting process.</li>
+<li><strong>Commitments</strong>: Stored to keep track of voter participation and to facilitate vote overwriting.</li>
+</ul>
+<p>Sequencers are responsible for processing new votes and updating the shared state. Each state transition involves the following steps:</p>
+<ol>
+<li>
+<p><strong>Batch Collection of Votes</strong>: The sequencer collects a batch of up to <span class="math">N</span> new votes from voters. Batching votes enhances efficiency and scalability, allowing the sequencer to process multiple votes simultaneously. The value of <span class="math">N</span> is determined by system parameters that balance computational constraints and network throughput.</p>
+</li>
+<li>
+<p><strong>Verification of Votes</strong>: For each vote in the batch, the sequencer performs:</p>
+<ul>
+<li><strong>zkSNARK Proof Verification</strong>: Ensures that the zero-knowledge proof submitted with each vote is valid and that the vote complies with the protocol rules, including correct encryption, adherence to ballot protocol constraints, and proper computation of the nullifier and commitment.</li>
+<li><strong>Eligibility Check</strong>: Verifies the voter’s eligibility by checking the provided census Merkle proof against the stored <span class="math">\text{censusRoot}</span> in the state.</li>
+<li><strong>Double Voting Prevention</strong>: Checks whether the nullifier <span class="math">N</span> already exists in the state. If it does not, the vote is processed as a new vote. If it does, the vote is considered a <strong>vote overwrite</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Handling Vote Overwrites</strong>: If a voter submits a new vote with the same nullifier <span class="math">N</span>, the sequencer:</p>
+<ul>
+<li>Subtracts the previous encrypted vote from the subtraction accumulator <span class="math">C_{\text{sub}}</span>.</li>
+<li>Adds the new encrypted vote to the addition accumulator <span class="math">C_{\text{add}}</span>.</li>
+<li>Replaces the new encrypted ballot within the State.</li>
+</ul>
+</li>
+<li>
+<p><strong>Random Re-encryptions</strong>: To enhance receipt-freeness and prevent linkage between votes and voters, the sequencer performs random re-encryptions of existing encrypted ballots:</p>
+<ul>
+<li>Selects a random subset of encrypted ballots in the state.</li>
+<li>Re-encrypts each selected ballot by adding an encryption of zero, using a new random scalar.</li>
+<li>Updates the encrypted ballots in the state with the re-encrypted versions.</li>
+</ul>
+</li>
+<li>
+<p><strong>Homomorphic Aggregation of Votes</strong>: The sequencer updates the accumulators using the homomorphic properties of the ElGamal encryption:</p>
+</li>
+<li>
+<p><strong>Generation of State Transition zkSNARK</strong>: The sequencer generates a zkSNARK proof that attests to the validity of the state transition from the previous root <span class="math">\text{Root1}</span> to the new root <span class="math">\text{Root2}</span>. The zkSNARK proof verifies all previous constraints and operations.</p>
+</li>
+<li>
+<p><strong>On-Chain Submission</strong>: The sequencer submits:, the updated state root <span class="math">\text{Root2}</span>. The proof attesting to the validity of the state transition. A hash commitment to the data blob containing the votes and state updates, ensuring data availability.</p>
+</li>
+</ol>
+<h1><a class="anchor" href="https://ethresear.ch#p-51289-the-vocdoni-token-voc-8" name="p-51289-the-vocdoni-token-voc-8"></a>The Vocdoni Token (VOC)</h1>
+<p>Vocdoni introduces a new token (VOC) to align incentives among participants and ensure the sustainability of the decentralized voting ecosystem. The token serves multiple essential functions: it incentivizes sequencers, facilitates payments for voting processes, and enables decentralized governance.</p>
+<p>Sequencers must stake tokens as collateral to participate in the network, promoting honest behavior and network security. They earn rewards in VOC tokens based on their contributions to processing valid votes and maintaining the network’s integrity.</p>
+<p>Organizers use tokens to pay for creating and managing voting processes. The costs depend on factors such as the maximum number of votes (<span class="math">\text{maxVotes}</span>), the voting duration (<span class="math">\text{processDuration}</span>), and the desired security level, which relates to the number of participating sequencers.</p>
+<p>The total cost for a voting process is calculated using the formula:</p>
+<p><span class="math">\text{totalCost} = \text{baseCost} + \text{capacityCost} + \text{durationCost} + \text{securityCost}</span></p>
+<p><strong>Components of the Cost:</strong></p>
+<ul>
+<li>
+<p><strong>Base Cost:</strong> <span class="math">\text{baseCost} = \text{fixedCost} + \text{maxVotes} \cdot p</span>, where <span class="math">\text{fixedCost}</span> is a fixed fee, and <span class="math">p</span> is a small linear factor.</p>
+</li>
+<li>
+<p><strong>Capacity Cost:</strong> <span class="math">\text{capacityCost} = k_1 \left( \frac{\text{totalVotingProcesses}}{\text{totalSequencers} - \text{usedSequencers} + \epsilon} \cdot \text{maxVotes} \right)^a</span>, where <span class="math">k_1</span> is a scaling factor, <span class="math">a</span> controls non-linearity, and <span class="math">\epsilon</span> is a small number to prevent division by zero.</p>
+</li>
+<li>
+<p><strong>Duration Cost:</strong> <span class="math">\text{durationCost} = k_2 \cdot \text{processDuration}^b</span>, with <span class="math">k_2</span> as a scaling factor and <span class="math">b</span> controlling the scaling based on duration.</p>
+</li>
+<li>
+<p><strong>Security Cost:</strong> <span class="math">\text{securityCost} = k_3 \cdot e^{c \left( \frac{\text{numSequencers}}{\text{totalSequencers}} \right)^d}</span>, where <span class="math">k_3</span> is a scaling factor, and <span class="math">c</span>, <span class="math">d</span> control the exponential scaling related to the number of sequencers used.</p>
+</li>
+</ul>
+<br />
+<p><strong>Sequencers earn rewards</strong> based on the number of votes processed and the number of vote rewrites (including re-encryptions for receipt-freeness). The total reward for a sequencer <span class="math">i</span> is calculated as:</p>
+<p><span class="math">\text{sequencerReward}_i = R \left( \frac{\text{votes}_i}{\text{maxVotes}} \right) + W \left( \frac{\text{voteRewrites}_i}{\text{totalRewrites}} \right)</span></p>
+<p>This is subject to the constraints:</p>
+<p><span class="math">\frac{\text{voteRewrites}_i}{\text{votes}_i} \leq T</span> and <span class="math">R &gt; W</span></p>
+<p>Ensuring that sequencers prioritize processing new votes over rewrites. Here, <span class="math">R</span> and <span class="math">W</span> are parts of the reward pool allocated for processing votes and vote rewrites, respectively, and <span class="math">T</span> is a predefined constant limiting the number of rewrites per vote.</p>
+<p>Sequencers who fail to meet their obligations may have their collateral slashed, calculated as:</p>
+<p><span class="math">\text{SlashedAmount}_i = s \cdot \text{StakedCollateral}_i</span></p>
+<p>where <span class="math">s</span> is the slashing coefficient (<span class="math">0 \leq s \leq 1</span>).</p>
+<h1><a class="anchor" href="https://ethresear.ch#p-51289-resources-9" name="p-51289-resources-9"></a>Resources</h1>
+<ul>
+<li>
+<p>Full version of the whitepaper: <a href="https://whitepaper.vocdoni.io" rel="noopener nofollow ugc">https://whitepaper.vocdoni.io</a></p>
+</li>
+<li>
+<p>List of repositories where the MVP version of the protocol is being implemented:</p>
+<ul>
+<li>Circom circuits for voter <a class="inline-onebox" href="https://github.com/vocdoni/z-ircuits" rel="noopener nofollow ugc">GitHub - vocdoni/z-ircuits: Vocdoni Z snark circuits.</a></li>
+<li>Sequencer crypto primitives <a class="inline-onebox" href="https://github.com/vocdoni/gnark-crypto-primitives" rel="noopener nofollow ugc">GitHub - vocdoni/gnark-crypto-primitives: A set of custom circuits writted in Gnark that are required to support anonymous voting on Vocdoni.</a></li>
+<li>Circom to Gnark parser <a class="inline-onebox" href="https://github.com/vocdoni/circom2gnark" rel="noopener nofollow ugc">GitHub - vocdoni/circom2gnark: Circom to Gnark Groth16 parser and recursion example</a></li>
+<li>ElGamal and DKG sandbox: <a class="inline-onebox" href="https://github.com/vocdoni/vocdoni-z-sandbox" rel="noopener nofollow ugc">GitHub - vocdoni/vocdoni-z-sandbox</a></li>
+</ul>
+</li>
+<li>
+<p>Contact: pau [at] vocdoni [dot] io</p>
+</li>
+<li>
+<p>Discord: <a href="https://chat.vocdoni.io" rel="noopener nofollow ugc">https://chat.vocdoni.io</a></p>
+</li>
+</ul>
+            <p><small>1 post - 1 participant</small></p>
+            <p><a href="https://ethresear.ch/t/vocdoni-protocol-enabling-decentralized-voting-for-the-masses-with-zk-technology/21036">Read full topic</a></p>
+]]></content:encoded>
+<pubDate>Tue, 19 Nov 2024 12:01:04 +0000</pubDate>
+<pubDate>Tue, 19 Nov 2024 12:01:04 +0000</pubDate>
+</item>
 
 <item>
 <title>Proving multi-client Beam chain</title>
