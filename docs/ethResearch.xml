@@ -5,6 +5,375 @@
 <link>https://ethresear.ch/latest</link>
 
 <item>
+<title>Overpass Channels - The Key to Unlock a New Era for All of Web3</title>
+<link>https://ethresear.ch/t/overpass-channels-the-key-to-unlock-a-new-era-for-all-of-web3/21046</link>
+<guid>https://ethresear.ch/t/overpass-channels-the-key-to-unlock-a-new-era-for-all-of-web3/21046</guid>
+<content:encoded><![CDATA[
+<div> 关键词: 网络验证、私有状态转换、稀疏默克尔树、加密证明、Layer 2可扩展性
+
+总结:
+网络验证私有状态转换是一种创新的Layer 2可扩展性方案，它不依赖传统的共识机制。该方法利用加密证明和稀疏默克尔树，确保了隐私、可扩展性和网络中的可验证性。具体实现步骤如下：
+
+1. 使用私有稀疏默克尔树存储钱包数据（如余额和通道状态），网络仅知道代表钱包聚合状态的默克尔根。
+
+2. 钱包执行状态更新时计算新默克尔根及其对应的证明，以展示新的状态如何从旧状态衍生出来。
+
+3. 网络通过重新计算新根并验证提供的证明和约束条件来验证状态转换的有效性，而无需访问底层的私人数据。
+
+4. 初始默克尔根在网络中被记录下来，后续每次状态转移都需要提交与之匹配的新根和证明，同时满足预定义的约束条件。
+
+5. 这种方法保护了数据隐私，降低了网络负载，并通过即时最终确认提高了交易处理速度，为实现大规模可扩展的区块链应用提供了可能。 <div>
+<h2><a class="anchor" href="https://ethresear.ch#p-51309-tldr-network-verification-of-private-state-transitions-1" name="p-51309-tldr-network-verification-of-private-state-transitions-1"></a>TL;DR: Network Verification of Private State Transitions</h2>
+<p>Overpass Channels introduce an innovative approach to Layer 2 scalability by enabling network verification of private state transitions without relying on traditional consensus mechanisms. This is achieved through the use of cryptographic proofs and sparse Merkle trees, ensuring privacy, scalability, and verifiability across the network.</p>
+<hr />
+<h3><a class="anchor" href="https://ethresear.ch#p-51309-how-it-works-2" name="p-51309-how-it-works-2"></a>How It Works</h3>
+<h4><a class="anchor" href="https://ethresear.ch#p-51309-h-1-merkle-tree-structure-3" name="p-51309-h-1-merkle-tree-structure-3"></a>1. <strong>Merkle Tree Structure</strong></h4>
+<ul>
+<li><strong>Private Sparse Merkle Trees (SMTs)</strong>: Each wallet maintains a private sparse Merkle tree containing all its data, such as balances and channel states.</li>
+<li><strong>Merkle Root (<span class="math">R</span>)</strong>: The network only knows the Merkle root <span class="math">R</span>, which represents the aggregated state of the wallet. The underlying data remains private on the client side.</li>
+</ul>
+<h4><a class="anchor" href="https://ethresear.ch#p-51309-h-2-state-transitions-4" name="p-51309-h-2-state-transitions-4"></a>2. <strong>State Transitions</strong></h4>
+<ul>
+<li><strong>Updating State</strong>: When a wallet performs a state transition (e.g., a channel update), it computes:
+<ul>
+<li>A new Merkle root <span class="math">R'</span> reflecting the updated state.</li>
+<li>A <strong>proof <span class="math">P</span></strong> that demonstrates how <span class="math">R'</span> is derived from the previous state.</li>
+</ul>
+</li>
+<li><strong>Proof Components</strong>: The proof includes sibling hashes necessary to recompute <span class="math">R'</span> from the modified leaf node in the Merkle tree.</li>
+</ul>
+<h4><a class="anchor" href="https://ethresear.ch#p-51309-h-3-networks-role-5" name="p-51309-h-3-networks-role-5"></a>3. <strong>Network’s Role</strong></h4>
+<ul>
+<li><strong>Verification without Accessing Private Data</strong>: The network verifies transitions by:
+<ul>
+<li>Recomputing <span class="math">R'</span> using the provided proof <span class="math">P</span> and new state data.</li>
+<li>Ensuring the transition adheres to predefined <strong>constraints</strong> (e.g., balance integrity, nonce increments).</li>
+</ul>
+</li>
+<li><strong>Constraints Enforcement</strong>: By checking these constraints, the network ensures the validity of each state transition without needing to see the underlying private data.</li>
+</ul>
+<h4><a class="anchor" href="https://ethresear.ch#p-51309-h-4-how-the-network-knows-what-to-expect-6" name="p-51309-h-4-how-the-network-knows-what-to-expect-6"></a>4. <strong>How the Network Knows What to Expect</strong></h4>
+<ul>
+<li><strong>Initial Merkle Root (<span class="math">R_0</span>)</strong>: At wallet creation, the network stores the initial Merkle root <span class="math">R_0</span>.</li>
+<li><strong>Subsequent Transitions</strong>: For every state transition:
+<ul>
+<li>The network expects a proof <span class="math">P</span> that aligns with the new root <span class="math">R'</span>.</li>
+<li>It verifies that the transition constraints are satisfied, ensuring validity.</li>
+</ul>
+</li>
+<li><strong>Trustless Validation</strong>: Relying on the initial root and cryptographic proofs allows the network to detect tampering or invalid operations without accessing private client data.</li>
+</ul>
+<h4><a class="anchor" href="https://ethresear.ch#p-51309-h-5-privacy-and-security-7" name="p-51309-h-5-privacy-and-security-7"></a>5. <strong>Privacy and Security</strong></h4>
+<ul>
+<li><strong>Data Privacy</strong>: All underlying data remains on the client side within the SMT.</li>
+<li><strong>Minimal Exposure</strong>: The network only checks the public roots (<span class="math">R_0</span>, <span class="math">R'</span>) and proofs (<span class="math">P</span>), along with transition constraints.</li>
+<li><strong>Security Assurance</strong>: This approach ensures privacy, scalability, and verifiability across the network.</li>
+</ul>
+<hr />
+<h2><a class="anchor" href="https://ethresear.ch#p-51309-why-this-approach-works-8" name="p-51309-why-this-approach-works-8"></a>Why This Approach Works</h2>
+<p>By relying solely on the Merkle root and cryptographic proofs, the network can detect tampering or invalid operations without ever seeing private client data. Each transition must cryptographically align with the initial state and follow the rules, ensuring trustless validation. This design works exceptionally well without consensus because it leverages unidirectional cryptographic proofs and the inherent properties of sparse Merkle trees and unilateral channels.</p>
+<hr />
+<h2><a class="anchor" href="https://ethresear.ch#p-51309-formalized-explanation-with-latex-math-and-pseudocode-9" name="p-51309-formalized-explanation-with-latex-math-and-pseudocode-9"></a>Formalized Explanation with LaTeX Math and Pseudocode</h2>
+<h3><a class="anchor" href="https://ethresear.ch#p-51309-merkle-tree-initialization-and-verification-10" name="p-51309-merkle-tree-initialization-and-verification-10"></a>Merkle Tree Initialization and Verification</h3>
+<h4><a class="anchor" href="https://ethresear.ch#p-51309-h-1-merkle-tree-basics-11" name="p-51309-h-1-merkle-tree-basics-11"></a>1. <strong>Merkle Tree Basics</strong></h4>
+<ul>
+<li>
+<p><strong>Initialization</strong>: The Merkle tree is initialized with a set of leaves <span class="math">\{L_1, L_2, \ldots, L_n\}</span>, where each leaf <span class="math">L_i</span> represents some data (e.g., channel state).</p>
+</li>
+<li>
+<p><strong>Computing the Root</strong>: The tree computes hashes up to the Merkle root <span class="math">R</span>:</p>
+<div class="math">
+R = H(\ldots H(H(L_1, L_2), H(L_3, L_4)), \ldots)
+</div>
+</li>
+</ul>
+<h4><a class="anchor" href="https://ethresear.ch#p-51309-h-2-state-transition-proof-12" name="p-51309-h-2-state-transition-proof-12"></a>2. <strong>State Transition Proof</strong></h4>
+<ul>
+<li>
+<p><strong>Updating a Leaf</strong>: For a state transition, the client computes:</p>
+<ul>
+<li>The updated leaf <span class="math">L_i'</span> based on the channel operation.</li>
+<li>A proof <span class="math">P_i</span> consisting of sibling hashes needed to recompute the root.</li>
+</ul>
+</li>
+<li>
+<p><strong>New Root Computation</strong>:</p>
+<div class="math">
+R' = \text{RecomputeRoot}(L_i', P_i)
+</div>
+</li>
+</ul>
+<h4><a class="anchor" href="https://ethresear.ch#p-51309-h-3-networks-knowledge-13" name="p-51309-h-3-networks-knowledge-13"></a>3. <strong>Network’s Knowledge</strong></h4>
+<ul>
+<li><strong>Stored Information</strong>: The network only has:
+<ul>
+<li>The initial root <span class="math">R_0</span> shared during wallet creation.</li>
+<li>Transition rules encoded into the system (e.g., balance integrity, nonce increments).</li>
+<li>The proof <span class="math">P_i</span> submitted with each updated root <span class="math">R'</span>.</li>
+</ul>
+</li>
+</ul>
+<h4><a class="anchor" href="https://ethresear.ch#p-51309-h-4-network-verification-14" name="p-51309-h-4-network-verification-14"></a>4. <strong>Network Verification</strong></h4>
+<ul>
+<li>
+<p><strong>Proof Validity</strong>: The network verifies that the proof recomputes <span class="math">R'</span> correctly from <span class="math">L_i'</span> and <span class="math">P_i</span>:</p>
+<div class="math">
+R' \stackrel{?}{=} \text{RecomputeRoot}(L_i', P_i)
+</div>
+</li>
+<li>
+<p><strong>State Transition Validity</strong>: Ensures that transition constraints hold true:</p>
+<div class="math">
+\text{Constraints: } \left\{
+      \begin{aligned}
+          &amp;L_i' = L_i - \text{amount} &amp;\text{(balance update)} \\
+          &amp;\text{nonce}_{i}' = \text{nonce}_i + 1 &amp;\text{(nonce update)}
+      \end{aligned}
+  \right.
+</div>
+</li>
+</ul>
+<hr />
+<h3><a class="anchor" href="https://ethresear.ch#p-51309-latex-formalization-15" name="p-51309-latex-formalization-15"></a>LaTeX Formalization</h3>
+<p>Define:</p>
+<ul>
+<li><span class="math">R_0</span>: Initial Merkle root shared during wallet creation.</li>
+<li><span class="math">R_k</span>: Merkle root after the <span class="math">k</span>-th state transition.</li>
+<li><span class="math">L_k^{(i)}</span>: Leaf <span class="math">i</span> after the <span class="math">k</span>-th state transition.</li>
+<li><span class="math">P_k^{(i)}</span>: Proof for leaf <span class="math">L_k^{(i)}</span> for the <span class="math">k</span>-th state transition.</li>
+<li><span class="math">\text{RecomputeRoot}(L_k^{(i)}, P_k^{(i)})</span>: Function to recompute the root from the updated leaf and proof.</li>
+<li><span class="math">C(L_k^{(i)}, L_{k+1}^{(i)})</span>: Constraints for valid transitions.</li>
+</ul>
+<p><strong>Verification by the Network</strong>:</p>
+<ol>
+<li>
+<p><strong>Initial State</strong>:</p>
+<div class="math">
+R_0 = \text{RecomputeRoot}(\{L_1, \ldots, L_n\}, \{\})
+</div>
+</li>
+<li>
+<p><strong>State Transition</strong>:</p>
+<ul>
+<li>
+<p>The network receives <span class="math">R_{k+1}</span>, <span class="math">P_k^{(i)}</span>, and <span class="math">L_{k+1}^{(i)}</span>.</p>
+</li>
+<li>
+<p>Verifies:</p>
+<div class="math">
+R_{k+1} = \text{RecomputeRoot}(L_{k+1}^{(i)}, P_k^{(i)})
+</div>
+</li>
+<li>
+<p>Ensures that:</p>
+<div class="math">
+C(L_k^{(i)}, L_{k+1}^{(i)})
+</div>
+</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h3><a class="anchor" href="https://ethresear.ch#p-51309-pseudocode-algorithm-16" name="p-51309-pseudocode-algorithm-16"></a>Pseudocode Algorithm</h3>
+<pre><code class="lang-pseudocode"># Network Initialization
+R_current = R_0  # Initial root stored during wallet creation
+
+# Verification Function
+function verify_state_transition(new_root, proof, updated_leaf, constraints):
+    computed_root = recompute_root(updated_leaf, proof)
+    if computed_root != new_root:
+        return False  # Proof is invalid
+    if not constraints(updated_leaf):
+        return False  # Transition violates rules
+    return True  # Valid transition
+
+# State Transition Process
+function on_state_transition(new_root, proof, updated_leaf, constraints):
+    if verify_state_transition(new_root, proof, updated_leaf, constraints):
+        R_current = new_root  # Update the stored root
+        return True
+    else:
+        return False
+</code></pre>
+<hr />
+<h2><a class="anchor" href="https://ethresear.ch#p-51309-how-the-network-knows-what-to-expect-17" name="p-51309-how-the-network-knows-what-to-expect-17"></a>How the Network Knows What to Expect</h2>
+<h3><a class="anchor" href="https://ethresear.ch#p-51309-establishing-the-initial-state-18" name="p-51309-establishing-the-initial-state-18"></a>Establishing the Initial State</h3>
+<ul>
+<li><strong>Initial Root (<span class="math">R_0</span>)</strong>: Provided during wallet creation, it serves as the baseline for all future validations.</li>
+<li><strong>Cryptographic Integrity</strong>: <span class="math">R_0</span> encapsulates the entire wallet state, ensuring that all subsequent transitions start from a provable and tamper-proof origin.</li>
+</ul>
+<h3><a class="anchor" href="https://ethresear.ch#p-51309-incremental-updates-19" name="p-51309-incremental-updates-19"></a>Incremental Updates</h3>
+<ul>
+<li><strong>Client Computations</strong>:
+<ul>
+<li>Generates an updated Merkle root <span class="math">R'</span> representing the new wallet state.</li>
+<li>Creates a cryptographic proof <span class="math">P</span> showing how <span class="math">R'</span> was derived from the prior state.</li>
+</ul>
+</li>
+<li><strong>Proof Components</strong>:
+<ul>
+<li>The updated leaf (<span class="math">L_i'</span>).</li>
+<li>Sibling hashes required to recompute the new Merkle root.</li>
+</ul>
+</li>
+</ul>
+<h3><a class="anchor" href="https://ethresear.ch#p-51309-network-verification-process-20" name="p-51309-network-verification-process-20"></a>Network Verification Process</h3>
+<ul>
+<li>
+<p><strong>Proof Verification</strong>:</p>
+<ul>
+<li>Recomputes the new root <span class="math">R'</span> using the submitted proof <span class="math">P</span> and verifies that it matches the provided <span class="math">R'</span>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Constraints Validation</strong>:</p>
+<ul>
+<li>
+<p>Ensures compliance with predefined constraints, such as balance integrity and nonce progression:</p>
+<div class="math">
+\begin{aligned}
+    &amp;L_i' = L_i - \text{amount} \\
+    &amp;\text{nonce}_{i}' = \text{nonce}_i + 1
+    \end{aligned}
+</div>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Trustless Validation</strong>: Any deviation from expected results invalidates the transition, ensuring that the network can trustlessly validate updates without needing access to underlying data.</p>
+</li>
+</ul>
+<hr />
+<h2><a class="anchor" href="https://ethresear.ch#p-51309-key-benefits-21" name="p-51309-key-benefits-21"></a>Key Benefits</h2>
+<ul>
+<li><strong>Data Privacy</strong>: Only cryptographic proofs and Merkle roots are shared; the network never accesses private data.</li>
+<li><strong>Scalability</strong>: Lightweight proofs and the elimination of consensus mechanisms allow for massive scalability.</li>
+<li><strong>Security</strong>: Tampering or unauthorized modifications result in invalid roots, ensuring network integrity.</li>
+<li><strong>Simplicity</strong>: The network acts as a passive verifier, reducing complexity by removing consensus protocols.</li>
+<li><strong>Instant Finality</strong>: Transactions are finalized upon proof verification, enhancing user experience.</li>
+</ul>
+<hr />
+<h2><a class="anchor" href="https://ethresear.ch#p-51309-why-this-works-so-well-22" name="p-51309-why-this-works-so-well-22"></a>Why This Works So Well</h2>
+<h3><a class="anchor" href="https://ethresear.ch#p-51309-the-power-of-cryptographic-proofs-23" name="p-51309-the-power-of-cryptographic-proofs-23"></a>The Power of Cryptographic Proofs</h3>
+<ul>
+<li><strong>Merkle Proofs</strong>: Each state transition is verified using cryptographic Merkle proofs linking the current state (<span class="math">R</span>) to the new state (<span class="math">R'</span>).</li>
+<li><strong>Tamper Detection</strong>: Any unauthorized modification results in a mismatch of the expected root, making fraud immediately detectable.</li>
+<li><strong>Zero-Knowledge Proofs (Optional)</strong>: Can confirm compliance with rules (e.g., balance integrity) without exposing private data.</li>
+</ul>
+<h3><a class="anchor" href="https://ethresear.ch#p-51309-unidirectional-information-flow-24" name="p-51309-unidirectional-information-flow-24"></a>Unidirectional Information Flow</h3>
+<ul>
+<li><strong>Simplified Communication</strong>: Information flows from the source of truth (network) to clients, maintaining strict control and eliminating bidirectional dependencies.</li>
+<li><strong>Independent Validation</strong>: Clients independently prove their updates to the network, removing the need for consensus among multiple nodes.</li>
+</ul>
+<h3><a class="anchor" href="https://ethresear.ch#p-51309-elimination-of-consensus-25" name="p-51309-elimination-of-consensus-25"></a>Elimination of Consensus</h3>
+<ul>
+<li><strong>No Validators Required</strong>: The network retains the initial root (<span class="math">R_0</span>) and validates transitions using cryptographic proofs instead of consensus algorithms.</li>
+<li><strong>Reduced Latency</strong>: Transactions can be validated and finalized quickly, as there’s no need for agreement across nodes.</li>
+</ul>
+<h3><a class="anchor" href="https://ethresear.ch#p-51309-privacy-by-design-26" name="p-51309-privacy-by-design-26"></a>Privacy by Design</h3>
+<ul>
+<li><strong>Client-Side Data Management</strong>: All underlying data (e.g., wallet or channel states) remains private on the client side.</li>
+<li><strong>Minimal Network Exposure</strong>: The network validates transitions without processing or storing user data, preserving privacy.</li>
+</ul>
+<h3><a class="anchor" href="https://ethresear.ch#p-51309-scalability-27" name="p-51309-scalability-27"></a>Scalability</h3>
+<ul>
+<li><strong>Parallel Processing</strong>: Nodes independently validate proofs in parallel, avoiding bottlenecks.</li>
+<li><strong>Efficient Verification</strong>: Cryptographic proofs are computationally efficient to verify.</li>
+<li><strong>Sparse Merkle Trees</strong>: Proof sizes remain logarithmic in the tree size, ensuring consistent performance as the system scales.</li>
+</ul>
+<hr />
+<h2><a class="anchor" href="https://ethresear.ch#p-51309-impact-on-throughput-tps-transactions-per-second-28" name="p-51309-impact-on-throughput-tps-transactions-per-second-28"></a>Impact on Throughput (TPS - Transactions Per Second)</h2>
+<h3><a class="anchor" href="https://ethresear.ch#p-51309-removal-of-consensus-bottlenecks-29" name="p-51309-removal-of-consensus-bottlenecks-29"></a>Removal of Consensus Bottlenecks</h3>
+<ul>
+<li><strong>No Global State Synchronization</strong>: Eliminating consensus removes latency and limits on scalability.</li>
+<li><strong>Instant Finality</strong>: Transactions are finalized upon proof verification, significantly increasing throughput.</li>
+</ul>
+<h3><a class="anchor" href="https://ethresear.ch#p-51309-lightweight-validation-with-cryptographic-proofs-30" name="p-51309-lightweight-validation-with-cryptographic-proofs-30"></a>Lightweight Validation with Cryptographic Proofs</h3>
+<ul>
+<li><strong>Efficiency</strong>: Verifying cryptographic proofs involves minimal computation.</li>
+<li><strong>Parallelism</strong>: Each transaction’s proof can be validated independently, allowing for parallel processing.</li>
+</ul>
+<h3><a class="anchor" href="https://ethresear.ch#p-51309-unilateral-channels-and-unidirectional-information-flow-31" name="p-51309-unilateral-channels-and-unidirectional-information-flow-31"></a>Unilateral Channels and Unidirectional Information Flow</h3>
+<ul>
+<li><strong>Streamlined Transaction Flow</strong>: Unilateral channels remove bidirectional dependencies, simplifying the system.</li>
+<li><strong>Concurrent Updates</strong>: Multiple state transitions can occur in parallel without interference.</li>
+</ul>
+<h3><a class="anchor" href="https://ethresear.ch#p-51309-client-side-operations-32" name="p-51309-client-side-operations-32"></a>Client-Side Operations</h3>
+<ul>
+<li><strong>Offloading to Clients</strong>: Clients handle most computational overhead, including generating proofs and updating local Merkle trees.</li>
+<li><strong>Network Efficiency</strong>: The network focuses on verifying proofs and maintaining roots, reducing its workload.</li>
+</ul>
+<h3><a class="anchor" href="https://ethresear.ch#p-51309-scalable-state-management-33" name="p-51309-scalable-state-management-33"></a>Scalable State Management</h3>
+<ul>
+<li><strong>Sparse Merkle Trees</strong>: Ensure proof sizes remain constant (logarithmic in tree size), supporting scalability.</li>
+<li><strong>Consistent Performance</strong>: Maintains high throughput as the system grows.</li>
+</ul>
+<hr />
+<h3><a class="anchor" href="https://ethresear.ch#p-51309-theoretical-tps-potential-34" name="p-51309-theoretical-tps-potential-34"></a>Theoretical TPS Potential</h3>
+<ul>
+<li><strong>No Theoretical Limit</strong>: Throughput is primarily limited by hardware capabilities.</li>
+<li><strong>High Efficiency</strong>: Proof verification can be performed in microseconds, allowing for millions of transactions per second in ideal conditions.</li>
+<li><strong>Practical Scalability</strong>: Even with conservative estimates, Overpass can achieve hundreds of thousands of TPS in real-world scenarios.</li>
+</ul>
+<hr />
+<h2><a class="anchor" href="https://ethresear.ch#p-51309-comparison-with-traditional-systems-35" name="p-51309-comparison-with-traditional-systems-35"></a>Comparison with Traditional Systems</h2>
+<div class="md-table">
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Traditional Blockchain</th>
+<th>Overpass Channels</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Consensus</strong></td>
+<td>Required (validators)</td>
+<td>Not required</td>
+</tr>
+<tr>
+<td><strong>Transaction Finality</strong></td>
+<td>Minutes (block time)</td>
+<td>Instant (proof verification)</td>
+</tr>
+<tr>
+<td><strong>Network Bandwidth</strong></td>
+<td>High (global state sync)</td>
+<td>Low (proof propagation)</td>
+</tr>
+<tr>
+<td><strong>Throughput (TPS)</strong></td>
+<td>10–1,000</td>
+<td>100,000+</td>
+</tr>
+<tr>
+<td><strong>Scalability</strong></td>
+<td>Limited by consensus</td>
+<td>Linear (client activity)</td>
+</tr>
+</tbody>
+</table>
+</div><hr />
+<h2><a class="anchor" href="https://ethresear.ch#p-51309-conclusion-36" name="p-51309-conclusion-36"></a>Conclusion</h2>
+<p>Overpass Channels fundamentally transform Layer 2 scalability by leveraging cryptographic proofs, unidirectional information flow, and the elimination of consensus mechanisms. This architecture achieves:</p>
+<ul>
+<li><strong>Privacy</strong>: Client data stays private, with only proofs and roots shared for verification.</li>
+<li><strong>Scalability</strong>: Parallel validation and efficient proof verification support millions of transactions.</li>
+<li><strong>Security</strong>: Tampering is immediately detectable, and privacy-preserving techniques enhance user trust.</li>
+<li><strong>Simplicity</strong>: The network’s role is reduced to passive verification, eliminating consensus complexities.</li>
+<li><strong>Instant Finality</strong>: Transactions are finalized as soon as their proofs are verified.</li>
+</ul>
+<p>By addressing the fundamental limitations of traditional blockchain systems, Overpass Channels emerge as the next-generation Layer 2 solution for Web3, capable of scaling to meet the demands of global decentralized applications while maintaining privacy and security.</p>
+<hr />
+            <p><small>3 posts - 1 participant</small></p>
+            <p><a href="https://ethresear.ch/t/overpass-channels-the-key-to-unlock-a-new-era-for-all-of-web3/21046">Read full topic</a></p>
+]]></content:encoded>
+<pubDate>Tue, 19 Nov 2024 18:21:41 +0000</pubDate>
+<pubDate>Tue, 19 Nov 2024 18:21:41 +0000</pubDate>
+</item>
+
+<item>
 <title>Vocdoni Protocol: Enabling Decentralized Voting for the Masses with ZK Technology</title>
 <link>https://ethresear.ch/t/vocdoni-protocol-enabling-decentralized-voting-for-the-masses-with-zk-technology/21036</link>
 <guid>https://ethresear.ch/t/vocdoni-protocol-enabling-decentralized-voting-for-the-masses-with-zk-technology/21036</guid>
@@ -235,9 +604,7 @@ where <span class="math">H</span> is the public key obtained from the Distribute
             <p><a href="https://ethresear.ch/t/vocdoni-protocol-enabling-decentralized-voting-for-the-masses-with-zk-technology/21036">Read full topic</a></p>
 ]]></content:encoded>
 <pubDate>Tue, 19 Nov 2024 12:01:04 +0000</pubDate>
-<pubDate>Tue, 19 Nov 2024 12:01:04 +0000</pubDate>
 </item>
-
 <item>
 <title>Proving multi-client Beam chain</title>
 <link>https://ethresear.ch/t/proving-multi-client-beam-chain/21027</link>
