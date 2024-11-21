@@ -4,6 +4,80 @@
 <title>Ethereum Research - Latest topics</title>
 <link>https://ethresear.ch/latest</link>
 
+<item>
+<title>RFC: Using this.balance as a Storage-Free Deactivation Mechanism Post-Cancun</title>
+<link>https://ethresear.ch/t/rfc-using-this-balance-as-a-storage-free-deactivation-mechanism-post-cancun/21056</link>
+<guid>https://ethresear.ch/t/rfc-using-this-balance-as-a-storage-free-deactivation-mechanism-post-cancun/21056</guid>
+<content:encoded><![CDATA[
+<div> 关键词: RFC、Cancun升级、EIP-6780、合约激活/停用、this.balance
+
+总结:
+本文提出了一种利用内置变量this.balance作为存储无关的合约停用机制建议。在Cancun升级和EIP-6780改变后，动态停用和重新激活合约变得更加复杂，尤其是在不希望每次交易都查询存储的情况下。该提议针对一种路由合约，它持有用户授权但不持币，需要一种可靠的、无需查询或存储自定义状态变量的方式来切换活跃与非活跃状态。
+
+具体实现逻辑为：当合约余额(this.balance)为0时，表示合约处于停用状态，拒绝所有交互；当合约余额为1wei时，则表示处于激活状态。合约的状态切换通过名为activate()和deactivate()的函数完成，这两个函数由一个不可变的DEACTIVATOR地址调用，分别向合约发送1wei以激活合约，或将合约内的ETH转移回DEACTIVATOR以停用合约。
+
+此机制的特点包括：
+1. 不读取存储：状态检查仅依赖于this.balance，避免了从存储中读取数据的gas成本。
+2. 高效状态切换：激活或停用只需进行最小限度的ETH转账操作。
+3. 安全性：合约没有receive函数，确保其无法意外或恶意地接收ETH。
+
+这个方法提供了一种轻量级的处理路由器停用的方式，特别是在因合约出现漏洞导致用户需手动撤销授权，或者因gas成本和复杂度而不希望每个交易都查询状态的情况下。使用合约的ETH余额作为切换开关可以在无需存储变量的同时，实现快速而高效的态 <div>
+<h3><a class="anchor" href="https://ethresear.ch#p-51335-rfc-using-thisbalance-as-a-storage-free-deactivation-mechanism-post-cancun-1" name="p-51335-rfc-using-thisbalance-as-a-storage-free-deactivation-mechanism-post-cancun-1"></a>RFC: Using <code>this.balance</code> as a Storage-Free Deactivation Mechanism Post-Cancun</h3>
+<p>After the Cancun upgrade and the changes introduced by EIP-6780, the ability to deactivate and reactivate a contract dynamically has become more challenging, particularly in scenarios where querying storage for every transaction is not desirable. I am proposing a minimalistic mechanism for activating and deactivating a contract (specifically a router contract) using the built-in <code>this.balance</code> variable as a control flag.</p>
+<h3><a class="anchor" href="https://ethresear.ch#p-51335-use-case-2" name="p-51335-use-case-2"></a>Use Case</h3>
+<p>The router contract in question:</p>
+<ul>
+<li><strong>Holds user approvals</strong> but no tokens or significant business logic.</li>
+<li>Does <strong>not hold ETH</strong> in its normal operation.</li>
+<li>Needs a reliable, storage-free way to toggle between an <strong>active</strong> and <strong>inactive</strong> state.</li>
+</ul>
+<p>This is particularly useful in cases where:</p>
+<ul>
+<li>A bug is identified in the contract, and users need to be prevented from interacting with it until it is fixed.</li>
+<li>There’s a need to deactivate the router swiftly without requiring manual revocation of user approvals.</li>
+</ul>
+<h3><a class="anchor" href="https://ethresear.ch#p-51335-proposed-mechanism-3" name="p-51335-proposed-mechanism-3"></a>Proposed Mechanism</h3>
+<p>The mechanism relies solely on the contract’s ETH balance (<code>this.balance</code>) to toggle its state. The logic is as follows:</p>
+<ol>
+<li><strong>State Definition:</strong></li>
+</ol>
+<ul>
+<li><strong>Deactivated:</strong> <code>this.balance == 0</code>. The contract rejects all interactions.</li>
+<li><strong>Activated:</strong> <code>this.balance == 1 wei</code>. The contract functions normally.</li>
+</ul>
+<ol start="2">
+<li><strong>State Transitions:</strong></li>
+</ol>
+<ul>
+<li><strong>Activate the Contract:</strong> The <code>activate()</code> function (restricted to an immutable DEACTIVATOR address) sends 1 wei to the contract, setting it to an active state.</li>
+<li><strong>Deactivate the Contract:</strong> The <code>deactivate()</code> function (also restricted) transfers all ETH in the contract back to the DEACTIVATOR, setting the balance to zero.</li>
+</ul>
+<ol start="3">
+<li><strong>Key Features:</strong></li>
+</ol>
+<ul>
+<li>The router has <strong>no <code>receive</code> function</strong>, ensuring that ETH cannot be accidentally or maliciously sent to it.</li>
+<li>All state transitions rely exclusively on the ETH balance, eliminating the need to query or store custom state variables.</li>
+</ul>
+<h3><a class="anchor" href="https://ethresear.ch#p-51335-benefits-4" name="p-51335-benefits-4"></a>Benefits</h3>
+<ol>
+<li><strong>No Storage Reads:</strong> State checking relies on <code>this.balance</code>, avoiding the gas cost of reading from storage.</li>
+<li><strong>Efficient State Transitions:</strong> Activating or deactivating involves only minimal ETH transfers.</li>
+<li><strong>Safety:</strong> The absence of a <code>receive</code> function ensures the router cannot accidentally accumulate ETH.</li>
+</ol>
+<h3><a class="anchor" href="https://ethresear.ch#p-51335-why-this-is-useful-5" name="p-51335-why-this-is-useful-5"></a>Why This Is Useful</h3>
+<p>This mechanism provides a lightweight way to handle router deactivation, especially in scenarios where:</p>
+<ul>
+<li>Bugs in router contracts force users to manually revoke approvals.</li>
+<li>State querying for every transaction is undesirable due to gas costs or complexity.</li>
+</ul>
+<p>Using the contract’s ETH balance as a toggle avoids the need for storage variables while enabling quick and efficient state changes. This approach could benefit other contract designs requiring similar activation/deactivation mechanisms in a storage-free context.</p>
+            <p><small>1 post - 1 participant</small></p>
+            <p><a href="https://ethresear.ch/t/rfc-using-this-balance-as-a-storage-free-deactivation-mechanism-post-cancun/21056">Read full topic</a></p>
+]]></content:encoded>
+<pubDate>Thu, 21 Nov 2024 09:26:39 +0000</pubDate>
+<pubDate>Thu, 21 Nov 2024 09:26:39 +0000</pubDate>
+</item>
 
 <item>
 <title>Transport privacy exploration of the Validator-Relayer Builder API</title>
