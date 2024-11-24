@@ -4,6 +4,69 @@
 <title>Ethereum Research - Latest topics</title>
 <link>https://ethresear.ch/latest</link>
 
+<item>
+<title>Concerning Ethereum's Fee Issues</title>
+<link>https://ethresear.ch/t/concerning-ethereums-fee-issues/21070</link>
+<guid>https://ethresear.ch/t/concerning-ethereums-fee-issues/21070</guid>
+<content:encoded><![CDATA[
+<div> 关键词: Ethereum、gas费用、智能合约、交易费用、简化交换应用
+
+总结:
+在考虑以太坊交易中的gas成本（交易费）时，发现单纯发送交易的成本相对较低，约为1美元以下。然而，执行涉及更多操作的智能合约任务时，费用会变得更高。例如，通过自动化做市商如Uniswap进行代币交换，每次合同调用的成本大约为16美元。文章提出了一种简化交换应用的概念，该应用仅包含PEPE和USDC两种代币，定期从中心化交易所推送PEPE/USD汇率，并基于存储的汇率进行代币交换，无需订单簿、市场制造、多维交换、存款或取款功能。这样的简单智能合约预计可以降低计算成本并减少交易费用。
+
+由此带来的优势可能包括：降低成本敏感用户的交易费用、更易于实现以及降低被攻击的风险和合同风险。问题在于这种简约智能合约的方法是否已被探索以及它能多大程度上解决交易费用问题。
+
+a) 简约智能合约的方法是否已经被探索？
+b) 这种方法能否帮助解决交易费用问题？
+c) 如果可以解决问题，那么费用可以减少多少？ <div>
+<p>I have been looking at the Ethereum prices for gas costs (transaction fees?).</p>
+<p>Gas tracking resources  — <a href="https://etherscan.io/gastracker" rel="noopener nofollow ugc">https://etherscan.io/gastracker</a></p>
+<p>I noticed that simply sending a transaction is actually decently cheap, about under $1.</p>
+<p>What’s seems to be costly for making transactions is <a href="https://etherscan.io/gastracker#gasguzzler" rel="noopener nofollow ugc">smart contract calls</a>.</p>
+<p>My assumption is that, the more operations a smart contract runs to execute its task the costlier it’s is in terms of fees.</p>
+<p>It is said that swapping, costs about $16 per contract call.</p>
+<p>I am assuming that this is expensive because the swap is probably made via an automated market maker like uniswap. (i.e lots of code to run)</p>
+<p>Here is my idea.</p>
+<p>What if I am to strip down the concept of swapping a coin in to a very simple smart contract.</p>
+<p>By simple, I mean;</p>
+<ul>
+<li>No order books</li>
+<li>No market making</li>
+<li>Higher dimensional swaps (ability to swap any combination of assets)</li>
+<li>No Deposits</li>
+<li>No Withdraws</li>
+</ul>
+<p>How the basic swap application would work. (Let’s say a PEPE/USDC swap application)</p>
+<ul>
+<li>Create a contract that only holds PEPE &amp; USDC</li>
+<li>Periodically push exchange rates between PEPE/USD to contract from centralised exchange</li>
+<li>When users send USDC to swap contact it simply uses the stored exchange rate to send an equivalent amount of PEPE</li>
+<li>When users send an an amount of PEPE to the swap contract it also uses the stored exchange rate to send back a proportional amount of USDC to the sender.</li>
+<li>Has basic error handling (when not enough USDC or PEPE to swap, unsupported coins etc)</li>
+</ul>
+<p>I am assuming that these stripped down smart contracts would cost way less since there would be less compute.</p>
+<p>Why may this be useful.</p>
+<ol>
+<li>
+<p>Cheaper transaction costs for fee sensitive users.</p>
+</li>
+<li>
+<p>Easier to implement</p>
+</li>
+<li>
+<p>Lower surface of attack and hence, reduced contract risk (hacking risk)</p>
+</li>
+</ol>
+<p>My questions for this forum.</p>
+<p>a) Has this minimalist approach to smart contracts been explored?</p>
+<p>b) Can it help in solving fee issues?</p>
+<p>c) If it can help, by how much can fees be reduced?</p>
+            <p><small>1 post - 1 participant</small></p>
+            <p><a href="https://ethresear.ch/t/concerning-ethereums-fee-issues/21070">Read full topic</a></p>
+]]></content:encoded>
+<pubDate>Sat, 23 Nov 2024 19:13:40 +0000</pubDate>
+<pubDate>Sat, 23 Nov 2024 19:13:40 +0000</pubDate>
+</item>
 
 <item>
 <title>RFC: Using this.balance as a Storage-Free Deactivation Mechanism Post-Cancun</title>
