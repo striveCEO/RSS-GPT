@@ -4,6 +4,130 @@
 <title>Ethereum Research - Latest topics</title>
 <link>https://ethresear.ch/latest</link>
 
+<item>
+<title>In-Protocol Transaction Ordering</title>
+<link>https://ethresear.ch/t/in-protocol-transaction-ordering/21084</link>
+<guid>https://ethresear.ch/t/in-protocol-transaction-ordering/21084</guid>
+<content:encoded><![CDATA[
+<div> 关键词: FOCIL、交易排序、奖励与惩罚、随机种子、确定性排序
+
+总结:
+本文提出了一个基于FOCIL设计提案的改进方案，旨在进一步去除区块链协议中的中心化构建者工作流。该方案关注交易选择和排序两个方面，而FOCIL已经很好地解决了交易选择问题。为防止恶意行为和最大化公平性，该方案提出使用“包含列表”和“包含种子”，以确保交易在区块内的确定性和非可预测性排序。
+
+具体设计包括三个关键要素：交易截止时间、包含种子的选择时间和交易随机化的可验证性。提议在前一个槽位（slot N-1）由提议者生成并传播一个随机数（nonce），在交易截止时间之后，用于创建包含种子。这样可以确保无法提前“挖掘”特定排序位置的交易。同时，为了避免攻击，如最后一个提交包含列表的委员会成员操纵种子或合谋，提议者需要在一个早期的时间点公布一个加密后的随机值，并在生成区块时揭示其真实值。
+
+此外，该方案还考虑了奖励和处罚机制的更新，强调搜索者（即提供包含列表的参与者）应获得更大的奖励份额，而提议者的职责减少，因此他们的奖励也相应降低。对于未被纳入当前区块的剩余交易，文章探讨了几种可能的处理方式，例如使用一种启发式方法决定哪些交易进入下一个区块。
+
+总的来说，该方案通过引入确定性和可验证的交易排序机制，以及调整经济激励措施，旨在实现更去中心化、公平和安全的交易处理流程。 <div>
+<h2><a class="anchor" href="https://ethresear.ch#p-51392-preface-1" name="p-51392-preface-1"></a>Preface</h2>
+<p>This idea is an extension to the FOCIL design proposal. This was initially created concurrently/independently to FOCIL, and started as a way to funnel and order transactions with intention to fully remove the builder workflow from the protocol design. In speaking with several people it was brought to light that FOCIL was progressing, and after going through it, the timing put forth in that design was much better (required 1 less slot and used a larger committee) for transaction selection than this idea proposed.</p>
+<p>This idea was whittled down to build on top of FOCIL instead of being a competitor as they achieved the same goal.  It’s possible that some of the idea contained here can be integrated with FOCIL but it is provided separately to facilitate targeted discussion and to not muddy the waters of that ongoing design.</p>
+<p>Special thanks to Phil Ngo, Nico Flaig, Cayman Nava, Guillaume Ballet, Greg Markou, Gajinder Singh, Navie Chan and many many others for taking the time to help hone this idea.</p>
+<h2><a class="anchor" href="https://ethresear.ch#p-51392-abstract-2" name="p-51392-abstract-2"></a>Abstract</h2>
+<p>Where this proposal focusses is the ordering of transactions.  It also addresses rewards and penalties to coincide with the new inclusion committees and updated proposer duties.</p>
+<p>There are two main duties, with regards to builders, of the proposal process that need to be addressed to facilitate exclusion of centralized forces through crypto economic means.</p>
+<ul>
+<li>Selection of transactions for inclusion</li>
+<li>Ordering of transactions</li>
+</ul>
+<p>FOCIL is an excellent solution to address the heart of the first of those two topics, but it can be further refined by restricting transactions included in blocks to ONLY those on the inclusion list.  This removes economic incentives, through loss of agency, to add transactions to a block that would negatively affect ordering to capture MEV.</p>
+<p>Ordering will become a deterministic process using the Aggregated Inclusion List, put forth via FOCIL, and an Inclusion Seed.  The Inclusion Seed is entropy generated on a slot-wise basis, specifically to prevent collusive and extractive behaviors during transaction ordering.</p>
+<p>Because the bulk of the work during block building (inclusion and ordering of transactions in a block that is proposed on the current head) is removed from the proposer the rewards mechanisms should be updated proportionally to compensate the parties providing the value to the protocol.</p>
+<h2><a class="anchor" href="https://ethresear.ch#p-51392-design-3" name="p-51392-design-3"></a>Design</h2>
+<p>There are three things that need to be accounted for to provision deterministic, non-gameable ordering. In particular ordering that is probabilistically infeasible to predict such that sandwich attacks and multi-block mev are economically disincentivized.</p>
+<ol>
+<li>The cutoff time in which transactions can no longer be included in a block for slot N</li>
+<li>The time in which the Inclusion Seed is selected for slot N</li>
+<li>The verifiability of the randomization of transactions within slot N</li>
+</ol>
+<p>The key to the ordering heuristic is such that the first two items happen in that order. If the seed is not known until after the window for inclusion closes, the heuristic can be built such that “mining an ordered transaction”, to be executed at a certain position in the transaction list, is infeasible.</p>
+<p>The third item ensures that once the seed is known, any node on the network can calculate the same order of the transactions to prove compliance with the protocol. It also allows rewards and penalties to be assessed for (non)compliance.</p>
+<h3><a class="anchor" href="https://ethresear.ch#p-51392-timing-considerations-4" name="p-51392-timing-considerations-4"></a>Timing Considerations</h3>
+<p><em><strong>Slot N-1</strong></em><br />
+t0: Proposer of slot N selects a random nonce, prepares and gossips it for use by the Inclusion Committee<br />
+t9: Cutoff for FOCIL IL committee to select IL from local mempool and gossip individual IL based on consensus head of slot N-1, IL includes the hashed nonce produced by the producer in slot N</p>
+<p><em><strong>Slot N</strong></em><br />
+t0: Inclusion nonce, gossiped in N-1 is un-blinded and used to create Inclusion Seed. Inclusion Seed is sent to EL for use as an argument to an idempotent ordering function. An ordered list is produced that represents a full blocks worth of gas, and that list of transactions is executed. Block is produced jointly by EL/CL and CL adds un-blinded nonce to block before releasing to the network.<br />
+t4: Attesters must verify blinded/revealed nonce, inclusion seed and transaction ordering during block validity checks. Attesters vote on valid block at slot N.</p>
+<h3><a class="anchor" href="https://ethresear.ch#p-51392-inclusion-seed-5" name="p-51392-inclusion-seed-5"></a>Inclusion Seed</h3>
+<p>The purpose of the Inclusion Seed is to provide the entropy to the transaction order.  It should be similar to RANDAO such that it uses on-chain data that is provable and knowable by everyone that follows the chain. However, RANDAO is too infrequently refreshed as it is epoch based and not slot based. For slot-wise ordering the entropy would also need to be slot-wise. The key to minimizing extractive behavior is that the seed needs to be selected after the window for transaction inclusion has closed in slot N-1, but prior to the end of slot N-1, so that it is available to the proposer of slot N.</p>
+<p>When using the assumption that this proposal builds on top of FOCIL then the ideal source for entropy selection would be the aggregated Inclusion Lists which would be hard to mine against.</p>
+<h4><a class="anchor" href="https://ethresear.ch#p-51392-timing-based-seed-attack-solution-6" name="p-51392-timing-based-seed-attack-solution-6"></a>Timing-Based Seed Attack Solution</h4>
+<p>A likely attack vector to this scheme though would be waiting to be the last committee member to submit an IL which will open the opportunity to include content that affects the seed, and thus the final ordering. It would also incentivize timing games with the knock-on effect of detracting from network propagation of the un-aggregated lists.</p>
+<p>A workaround would be to have the IL aggregation process include some additional entropy in the final list, such as the signature or a nonce.</p>
+<h4><a class="anchor" href="https://ethresear.ch#p-51392-aggregator-collusion-seed-attack-solution-7" name="p-51392-aggregator-collusion-seed-attack-solution-7"></a>Aggregator-Collusion Seed Attack Solution</h4>
+<p>Signing the list or using a simple nonce is insufficient though, as it would open attack surface for the final committee member to collude with the next proposer. For the collusion to work the collusive committee member could either have access to the next proposers key or simply coordinate with the next proposer to mine a transaction (and IL with its inclusion) for slot N.</p>
+<p>To prevent against this attack a reveal process should be used. The first duty a proposer would do is gossip a signed hash in the slot prior to proposal.  The gossiped message would need to be announced very early, within 0-2 sec into the slot, ideally before the block is published (realistically just needs to be before the un-aggregated inclusion lists are gossiped as they need to include the nonce in the IL for validation purposes).</p>
+<p>The announcement of the blinded nonce before gossip of the un-aggregated lists, with revealed afterwards, makes it impossible to collude in mining a transaction unless the entire inclusion committee participates in the scheme.</p>
+<h4><a class="anchor" href="https://ethresear.ch#p-51392-nonce-generation-and-reveal-mechanism-8" name="p-51392-nonce-generation-and-reveal-mechanism-8"></a>Nonce Generation and Reveal Mechanism</h4>
+<p>To ensure adequate entropy the proposer would select some random bytes, perhaps in the range of 8-32 bytes to prevent brute force guessing within the alloted time, and then mix in some stateful randomness from RANDAO.  The randomness would then be hashed to blind the true value and the hash would be signed by the proposer of slot and, but critically it would be gossiped in slot N-1 so it could be appended to the IL’s to prove that it was received prior to IL creation.</p>
+<p>In slot N the proposer, the only participant that should know the true un-blinded value thus far, would pass the nonce to the EL to the EL can order the transactions to protocol specifications.  The un-blinded value would be appended to the block so it can be revealed to the attestors for block validation and voting.</p>
+<h4><a class="anchor" href="https://ethresear.ch#p-51392-inclusion-seed-verification-9" name="p-51392-inclusion-seed-verification-9"></a>Inclusion Seed Verification</h4>
+<p>The Inclusion Seed used to shuffle the transactions could then be verified by attestors by checking the hashed nonce in the Inclusion Lists matches the hash of the un-blinded nonce value included in the block once the stateful randomness (from RANDAO) was mixed in.</p>
+<h3><a class="anchor" href="https://ethresear.ch#p-51392-deterministic-and-verifiable-ordering-10" name="p-51392-deterministic-and-verifiable-ordering-10"></a>Deterministic and Verifiable Ordering</h3>
+<p>The only two pieces that are needed for ordering to be both deterministic and verifiable are known inputs and and a well-known, idempotent ordering function such that:</p>
+<p>Torderd, Tremaining = f(ILagg, IS)</p>
+<p>where:<br />
+ILagg - Aggregated Inclusion List<br />
+IS - Inclusion Seed<br />
+Tordered - Ordered list of transactions<br />
+Tremaining - Left-Over transactions that roll over to next block</p>
+<h3><a class="anchor" href="https://ethresear.ch#p-51392-ordering-algorithm-11" name="p-51392-ordering-algorithm-11"></a>Ordering Algorithm</h3>
+<p>Ordering could be easily achieved by multiplying the transaction hash by the Inclusion Seed, letting values that overflow wrap around, and then putting the transactions in numeric order. This is overly simplistic and may not provide resistance to mining transactions that could game the system.</p>
+<p>Another option is ordering the transactions in the Aggregated Inclusion List numerically, by hash, and then running an algorithm similar to swap-or-not over the set utilizing the Inclusion Seed instead of RANDAO. This may be more cpu intensive, but for a small set (1000± transactions) it should be relatively performant.</p>
+<p>The sender address can alternately be used instead of the transaction hash as the root value that gets ordered but preference currently is to the transaction hash.</p>
+<h3><a class="anchor" href="https://ethresear.ch#p-51392-ordering-heuristic-12" name="p-51392-ordering-heuristic-12"></a>Ordering Heuristic</h3>
+<p>There are some user considerations that need to be addressed when implementing deterministic, non-gameable ordering. There is a balance that needs to be achieved between the crypto economic incentives of priority fees and rigor for prevention of sandwich attacks and monitoring the mempool for value extraction through transaction copies.</p>
+<h4><a class="anchor" href="https://ethresear.ch#p-51392-pseudo-random-ordering-13" name="p-51392-pseudo-random-ordering-13"></a>Pseudo-Random Ordering</h4>
+<p>Everyone will have the same fair shot at the order within a block.  While the most egalitarian solution this ignores the crypto economics of paying a higher priority fee.  The most important instance where ignoring this makes sense is for reducing the potential for someone to monitor the transaction pool, for transactions that are profitable to front-run.  The illegitimate actor can simply submit a transaction that with a higher priority fee.</p>
+<p>Randomized ordering takes away much of the economic incentive to copy transactions but does not address undesirable spamming of several conditional-execution transactions to increase probability of being executed ahead of the legitimate actor.</p>
+<h4><a class="anchor" href="https://ethresear.ch#p-51392-priority-fee-aware-pseudo-random-ordering-14" name="p-51392-priority-fee-aware-pseudo-random-ordering-14"></a>Priority-Fee Aware Pseudo-Random Ordering</h4>
+<p>To address the spamming of conditional-execution transactions to try to ensure one randomly executes first, a heuristic that crafts tranches of transactions, bundled by fees, such that higher fees go towards the beginning of the block could be used. For transactions with relatively high priority fee (likely profitable arbitrage) it would be very expensive to match the fee for a large number of transactions. Keeping pseudo-randomness within the tranches will make that gamble, or single transaction out bidding expensive and without guarantee of success. It would also be possible to craft the tranches dynamically so that if there are transactions, with fees that are outliers, the bounds of the tranches can be structured to promote fairer execution.</p>
+<pre><code class="lang-txt">As an example for a given block, the transaction priority fees in gwei:
+`[ 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 4, 100 ]`
+
+The tranches could be crafted like:
+`[ 1, 1, 1, 1, 1, 1, 1, 1, 1 ]`
+`[ 2, 2, 2, 2, 2, 2, 2 ]`
+`[ 4, 100 ]`
+</code></pre>
+<h4><a class="anchor" href="https://ethresear.ch#p-51392-priority-fee-based-ordering-non-pseudo-random-15" name="p-51392-priority-fee-based-ordering-non-pseudo-random-15"></a>Priority-Fee Based Ordering (Non-Pseudo-Random)</h4>
+<p>Once encrypted mem-pools are fully implemented it would be possible to move to a fully priority-fee based ordering heuristic. This would be the ideal situation that solely relies on market dynamics to set pricing for execution order.</p>
+<h3><a class="anchor" href="https://ethresear.ch#p-51392-rewards-and-penalties-16" name="p-51392-rewards-and-penalties-16"></a>Rewards and Penalties</h3>
+<p>In this paradigm, the searchers adding transactions to the Inclusion Lists are the ones that would receive a bulk of the reward.  The block proposer would now be strictly following the protocol and have reduced agency. With the reduction of duty a majority of the proposal rewards should get shifted to searchers to avoid inflation. This will also have the added benefit of smoothing rewards from a single proposer to the whole IL committee. It could be argued that the proposer generating and gossiping the Inclusion Nonce at N-1 is now a critical point of failure though because the proposal process would hinge upon them.  Thus the block reward that is earned in slot N should be requisite of the nonce gossip at slot N-1.</p>
+<p>The rewards mechanism of FOCIL would also need to be extended to accommodate the moving of partial block rewards to the searchers for including novel transactions.  This idea is referenced by the FOCIL team but is not finalized yet and thus needs to be updated here once that proposal progresses.</p>
+<p>Because the IL Committee now hold the critical piece to transaction selection the task is now of high importance. Thusly, equivocation by a committee member should be slashable similar to creating conflicting attestations or blocks.</p>
+<h3><a class="anchor" href="https://ethresear.ch#p-51392-left-over-transactions-17" name="p-51392-left-over-transactions-17"></a>Left-Over Transactions</h3>
+<p>The implication of having multiple un-aggregated inclusion lists and all transactions for a block being sourced through combining them into a single list is the potential for more transactions being submitted than can fit into a single block. This means that the Inclusion Pool (transactions submitted by IL committee members) might need to be inserted into the subsequent block. How this happens is still an area of research but some suggestions proposed so far are:</p>
+<ul>
+<li>Do not guarantee IL transactions MUST be included. More like Inclusion Suggestions Lists and a heuristic will be used to include transactions in the block that is reproducible. All transactions that are not included may be added to subsequent block lists</li>
+<li>Limiting IL size to prevent overflow</li>
+<li>Adding a time weighting such that transactions that have waited for inclusion get higher precedence in the next block. This could be added to the priority fee for instance.  If a large collection of high fee transactions are submitted which prevent inclusion the time weighting could be increased for subsequent blocks to help push the transaction through eventually</li>
+<li>Setting a threshold for sequencing.  If the transaction has a very low priority fee, and does not make it into several blocks it gets removed from the overflow</li>
+</ul>
+<p>Of the suggestions the first is easiest, and most pragmatic to implement. The only thing that would be needed is to develop the heuristic for block inclusion for transactions on a list.</p>
+<h2><a class="anchor" href="https://ethresear.ch#p-51392-interactions-with-other-eips-and-existing-roadmap-18" name="p-51392-interactions-with-other-eips-and-existing-roadmap-18"></a>Interactions with Other EIP’s and Existing Roadmap</h2>
+<h3><a class="anchor" href="https://ethresear.ch#p-51392-account-abstractions-19" name="p-51392-account-abstractions-19"></a>Account Abstractions</h3>
+<p>It would be possible to have the EL’s include AA generated transactions to the IL when a list is generated. There are some nuances to fees for prioritization with this though.</p>
+<h3><a class="anchor" href="https://ethresear.ch#p-51392-epbs-20" name="p-51392-epbs-20"></a>ePBS</h3>
+<p>This proposal would remove the need for ePBS and the complexity that it adds to the protocol</p>
+<h3><a class="anchor" href="https://ethresear.ch#p-51392-proposer-attester-separation-21" name="p-51392-proposer-attester-separation-21"></a>Proposer-Attester Separation</h3>
+<p>The chance for Execution Tickets, and other slot auction style proposals, to create further vertical integration by the builders is a real concern. If ordering was done in protocol it reduces this risk substantially. This would be a boon to all suggestions that separate the proposer duty from attester duties which would greatly increase the successful implementation of protocol developments that allow for very light attestation-only clients</p>
+<h2><a class="anchor" href="https://ethresear.ch#p-51392-discussion-22" name="p-51392-discussion-22"></a>Discussion</h2>
+<h3><a class="anchor" href="https://ethresear.ch#p-51392-protocol-simplification-23" name="p-51392-protocol-simplification-23"></a>Protocol Simplification</h3>
+<p>The more complex systems become, the more difficult game theory is when planning and implementing protocols within the system. I argue that building widgets on top of widgets to solve problems creates more attacks surface within the system the widgets are designed to protect. In the case of building protocols to inhibit MEV/builders/relays without doing away with builder flow creates more nooks for exploitation to live in. We must address the existing system design and attack the root cause, selection and ordering of transactions without the help of “out of protocol” opaque solutions.</p>
+<h3><a class="anchor" href="https://ethresear.ch#p-51392-preserving-cypherpunk-and-egalitarian-principles-in-the-protocol-24" name="p-51392-preserving-cypherpunk-and-egalitarian-principles-in-the-protocol-24"></a>Preserving Cypherpunk and Egalitarian Principles in the Protocol</h3>
+<p>Make Ethereum Cypherpunk Again. This is a call to action on our pilgrimage to MECA. To preserve the ethos that brought us all here.  Builders and the ecosystem that has built up around them must not be allowed to usurp L1. Allowing actors to extract value from honest participants is not only antithetical to the ideals of blockchain but it dissuades adoption by traditional industries. Blockchain brings Rule of Law to the digital space. The idea that single participant is above the protocol. Restoring and preserving that will entice experimentation with blockchain as the root of trust for inter-system interactions.</p>
+<h3><a class="anchor" href="https://ethresear.ch#p-51392-layered-settlement-25" name="p-51392-layered-settlement-25"></a>Layered Settlement</h3>
+<p>The traditional financial system is built upon layers of infrastructure. It is important to highlight this because there may be significant push-back to the trade-offs this proposal introduces. Settlement time will potentially increase for some participants. Some transactions may fail because builders provide some level of transaction coordination (at the expense of the MEV). Transaction fees might go up.  L1 is not, and should not be designed for instantaneous settlement.  Consensus takes time and the tradeoff for that speed is decentralization and the security it imbues.  Builders will be upset and if incentives are tuned correctly because value extraction will be converted into priority fees. Transaction volume will move to L2.  But these are healthy things for an L2 centric scaling roadmap.</p>
+<p>Being able to facilitate liquidity pool price discovery, ie very large buys/sells between LPs, across L2s and other application chains like the Uniswap rollup will benefit from surety of price discovery and honest auctions.  The trade off is small transactions will be too expensive to run on L1. This is similar to how our existing financial system works today.  Shares are held by DTCC on behalf of brokers for the benefit of the broker’s clients.  It is costly and difficult for individuals to transact small positions because order books at that level are for very very large quantities.  Brokers facilitate this by providing localized liquidity and pay for the service through transaction sequencing (and in some instances sandwich trades).  The end consumers, however, get to create trades for no fee (other than the slippage that is introduced by the broker).</p>
+<p>The bottom line is consensus takes time and the trade-off between decentralization and throughput is real. For the benefit of the protocol over the long term, preserving the decentralization at all costs is the secret sauce of what will preserve Ethereum far into the future.</p>
+            <p><small>1 post - 1 participant</small></p>
+            <p><a href="https://ethresear.ch/t/in-protocol-transaction-ordering/21084">Read full topic</a></p>
+]]></content:encoded>
+<pubDate>Mon, 25 Nov 2024 08:18:48 +0000</pubDate>
+<pubDate>Mon, 25 Nov 2024 08:18:48 +0000</pubDate>
+</item>
 
 <item>
 <title>Bitcoin: A Peer-to-Peer Electronic CASH System ~ in part by: Overpass Channels</title>
