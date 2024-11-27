@@ -5,13 +5,153 @@
 <link>https://ethresear.ch/latest</link>
 
 <item>
+<title>Block Arrivals, Home Stakers &amp; Bumping the blob count</title>
+<link>https://ethresear.ch/t/block-arrivals-home-stakers-bumping-the-blob-count/21096</link>
+<guid>https://ethresear.ch/t/block-arrivals-home-stakers-bumping-the-blob-count/21096</guid>
+<content:encoded><![CDATA[
+<div> 关键词：区块到达时间、家庭质押者、blob计数、网络带宽、EIP7623
+
+总结:<br>
+本文分析了以太坊网络中区块和blob到达时间数据，发现由于家庭质押者的参与，对网络状况有了更深入的理解。研究显示，在当前最敏感的带宽场景下，区块和blob到达时间表现健康。结合EIP7623提案，分析结果支持将blob计数增加到4/8或6/9。文章指出，家庭质押者在网络中的地位重要，但他们面临的带宽资源有限，因此其成为评估blob计数增加安全性的关键群体。通过考察过去六周的数据，得出结论：仅从区块/blob到达时间这一指标来看，将blob计数从（目标3/最大6）提高到（目标4/最大8）或（目标6/最大9）似乎是可行的，但这只是决定blob计数调整时需要考虑的多个因素之一。 <div>
+<h1><a class="anchor" href="https://ethresear.ch#p-51417-block-arrivals-home-stakers-bumping-the-blob-count-1" name="p-51417-block-arrivals-home-stakers-bumping-the-blob-count-1"></a>Block Arrivals, Home Stakers &amp; Bumping the blob count</h1>
+<blockquote>
+<p>Thanks to all the community members that are selflessly sharing their data that allowed this analysis to be possible, to <a href="https://migalabs.io/" rel="noopener nofollow ugc">MigaLabs</a> for their validator entity data and to <a href="https://probelab.io" rel="noopener nofollow ugc">ProbeLab</a> for an early version of their Mainnet bandwidth report.</p>
+<p>Special thanks to <a href="https://twitter.com/parithoshj" rel="noopener nofollow ugc">Parithosh</a>, <a href="https://twitter.com/nero_eth" rel="noopener nofollow ugc">Toni</a>, <a href="https://twitter.com/cortze_" rel="noopener nofollow ugc">Mikel</a>, <a href="https://twitter.com/savid" rel="noopener nofollow ugc">Andrew</a>, and <a href="https://twitter.com/mattevansnz" rel="noopener nofollow ugc">Matty</a> for their feedback and help throughout this analysis.</p>
+</blockquote>
+<h2><a class="anchor" href="https://ethresear.ch#p-51417-tldr-2" name="p-51417-tldr-2"></a>TL;DR</h2>
+<h3><a class="anchor" href="https://ethresear.ch#p-51417-summary-3" name="p-51417-summary-3"></a>Summary</h3>
+<ul>
+<li>Timing games have historically made it hard to predict a safe blob count bump</li>
+<li>ethPandaOps recently started receiving block arrival timing data from the community</li>
+<li>Analysis of the most bandwidth sensitive scenario shows a healthy block &amp; blobs arrival time</li>
+</ul>
+<h3><a class="anchor" href="https://ethresear.ch#p-51417-outcomes-4" name="p-51417-outcomes-4"></a>Outcomes</h3>
+<ul>
+<li>When naively extrapolating this data and combining with EIP7623, <strong>this analysis supports increasing the blob count in <a href="https://eips.ethereum.org/EIPS/eip-7691" rel="noopener nofollow ugc">EIP7691</a> to either 4/8 or 6/9.</strong>
+<ul>
+<li>This is only one data point, but it leads to a more optimistic outlook on a potential blob count bump than previous analysis.</li>
+</ul>
+</li>
+</ul>
+<h2><a class="anchor" href="https://ethresear.ch#p-51417-intro-5" name="p-51417-intro-5"></a>Intro</h2>
+<p>The <a href="https://ethpandaops.io/posts/contribute-to-xatu-data/" rel="noopener nofollow ugc">ethPandaOps team has recently started receiving data from members of the community</a>. Home stakers are one of the Ethereum network’s most valuable assets, and this scheme is starting to shine a light on how they see the network. A <a href="https://ethpandaops.io/data/xatu/#get-started" rel="noopener nofollow ugc">sidecar binary</a> is run alongside a beacon node, and records the events happening on the node via the beacon API event stream. These events are sent to the ethPandaOps team, who then publishes the data (with a small delay &amp; some data scrubbing).</p>
+<p>For more info:</p>
+<ul>
+<li><a href="https://ethpandaops.io/posts/contribute-to-xatu-data/#data-collection" rel="noopener nofollow ugc">Data collection</a></li>
+<li><a href="https://ethpandaops.io/data/xatu/#available-data" rel="noopener nofollow ugc">Accessing the data</a></li>
+</ul>
+<p>The team has been collecting community data for around 6 weeks, and we now have enough data to make some interesting observations that were previously not possible.</p>
+<h2><a class="anchor" href="https://ethresear.ch#p-51417-background-6" name="p-51417-background-6"></a>Background</h2>
+<p>With the arrival of <a href="https://eips.ethereum.org/EIPS/eip-4844" rel="noopener nofollow ugc">EIP4844</a>, a block is only considered valid once the block &amp; the blobs referenced in the block are received by a node. This block/blob bundle has until 4s in the slot to be received by the majority of the network otherwise it runs the risk of being re-orged.</p>
+<p><a href="https://timing.pics/" rel="noopener nofollow ugc">Sophisticated operators (and now MEV-Relays) play block proposal timing games</a>. These operators submit their blocks as late as possible to maximise their profit while minimizing their risk of being re-orged. These timing games have historically obfuscated block arrival timing data.</p>
+<p><a href="https://probelab.io/" rel="noopener nofollow ugc">Unreleased, upcoming research from ProbeLab</a> indicates that the 50th percentile of non-cloud nodes on the network have 20Mbps of upload bandwidth.</p>
+<p><a href="https://dune.com/queries/3757544/6319515" rel="noopener nofollow ugc">Blob usage on Mainnet continues to grow.</a></p>
+<h2><a class="anchor" href="https://ethresear.ch#p-51417-problem-statement-7" name="p-51417-problem-statement-7"></a>Problem statement</h2>
+<p>Ethereum’s decentralization is paramount to it’s success. <a href="https://eips.ethereum.org/EIPS/eip-7691" rel="noopener nofollow ugc">EIP7691</a> aims to increase the blob count, and runs the risk of unintentionally excluding some node operators from it’s set if the parameters are too high.</p>
+<p>We need to:</p>
+<ul>
+<li>Ensure that a blob count increase is safe for home stakers, as this group of actors is the “worst case” for a blob count increase as they have the lowest available bandwidth.</li>
+<li>Ensure that the network has enough data throughput to support Layer 2 growth.</li>
+</ul>
+<p>Given the existing landscape, we can make some assumptions with regards to a potential blob count increase:</p>
+<p><strong>Least at risk:</strong><br />
+Counterintuitively, if you looked at block arrival data, operators playing timing games would appear to be the most at risk of being impacted by a blob count increase. Being reorged out for proposing late is bad for business, and we can assume they’ll adjust their block proposal timings accordingly. <strong>A blob count increase is unlikely to be problematic here.</strong></p>
+<p><strong>Most at risk:</strong><br />
+A solo staker building a block locally (no mev-relay) and being attested to by other home stakers. In this scenario:</p>
+<ul>
+<li>The proposer:
+<ul>
+<li>needs to publish their block and all blobs to the network. This node needs to publish the block (~100KB), and then all of the blobs (128KB each) to all of its mesh peers as fast as possible.
+<ul>
+<li>when building blocks locally, the proposer does not have the help of the MEV Relay gossiping the block/blobs bundle to its own peers.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>The attesters:
+<ul>
+<li>need to download the block/blobs bundle from the p2p network before 4s in to the slot.</li>
+</ul>
+</li>
+</ul>
+<p><strong>This analysis will ask the following questions:</strong></p>
+<ul>
+<li><strong>Question 1</strong>: How is 3/6 performing on Mainnet?</li>
+<li><strong>Question 2</strong>: Does arrival time scale with block/blob bundle size?</li>
+<li><strong>Question 3</strong>: How much more can we support on Mainnet today?</li>
+</ul>
+<p><strong>We’ll answer these questions from the perspective of a home staker as this is our most at-risk group of operators.</strong></p>
+<h2><a class="anchor" href="https://ethresear.ch#p-51417-analysis-8" name="p-51417-analysis-8"></a>Analysis</h2>
+<pre><code class="lang-auto">Start: 2024-10-04T22:00:00Z
+End: 2024-11-25T02:00:00Z
+Blocks: 366,384
+Arrival events: 75,945,392
+Countries: 9 (Australia, Bulgaria, Czechia, Germany, Italy, Spain, The Netherlands, United Kingdom, United States)
+</code></pre>
+<p>Check out the juypter notebook <a href="https://github.com/ethpandaops/xatu-data/blob/6ff49435d3e2bd078155ad06040d584e89ea3289/analysis/mainnet/blob-bump-prediction/prediction.ipynb" rel="noopener nofollow ugc">here</a>.</p>
+<p>The timing data was captured by Xatu Sentry, a sidecar binary that runs alongside a beacon node and records many events via the beacon API event stream. These events can be considered <em>worst case</em> for block arrival times as there is additional processing time and network overhead for the event to be recorded. From analysis, this overhead ranges between 50-300ms but we have kept the timing data as-is in the interest of safety.</p>
+<p>Each beacon node implementation emits <code>block</code>, <code>head</code>, and <code>blob_sidecar</code> events in different orders. To address this, we define a block/blob bundle as “arrived” only after all associated events for the slot have been recorded from each beacon node. This is once again a <em>worst case</em> scenario.</p>
+<h3><a class="anchor" href="https://ethresear.ch#p-51417-question-1-9" name="p-51417-question-1-9"></a>Question 1</h3>
+<p><strong>How is 3/6 performing on Mainnet?</strong></p>
+<blockquote>
+<p>TL;DR: Pretty well!</p>
+</blockquote>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/3/2/3221f9f6e15311cbe773da0ffec6cd9df34fe899.png" title=""><img alt="" height="475" src="https://ethresear.ch/uploads/default/optimized/3X/3/2/3221f9f6e15311cbe773da0ffec6cd9df34fe899_2_690x475.png" width="690" /></a></div><p></p>
+<p>This chart shows block/blob bundle seen arrival times against the combined size of the bundle. When looking at locally built blocks proposed by solo stakers and seen by home users, a lot of block/blob bundles are seen before 4s.</p>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/5/0/503985d3e43892b27f5b8b85bdb4282958eb96a4.png" title=""><img alt="" height="475" src="https://ethresear.ch/uploads/default/optimized/3X/5/0/503985d3e43892b27f5b8b85bdb4282958eb96a4_2_690x475.png" width="690" /></a></div><p></p>
+<p>We should also look at blocks provided by MEV Relay as the reality is that a lot of blocks are proposed via this route. We can see an increase in the <code>min</code>, as there are additional round trips involved in this process, but things still look healthy!</p>
+<p><strong>Outcome:</strong> Block/blob bundles are arriving well within the 4s deadline for our home users.</p>
+<h3><a class="anchor" href="https://ethresear.ch#p-51417-question-2-10" name="p-51417-question-2-10"></a>Question 2</h3>
+<p><strong>Does arrival time scale with block/blob bundle size?</strong></p>
+<blockquote>
+<p>TL;DR: Yes</p>
+</blockquote>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/9/5/95b81d2dec4ec6041818b4b717f5961957a0f90e.jpeg" title=""><img alt="" height="471" src="https://ethresear.ch/uploads/default/optimized/3X/9/5/95b81d2dec4ec6041818b4b717f5961957a0f90e_2_690x471.jpeg" width="690" /></a></div><p></p>
+<p>The trend lines show the 99th, 95th, and 50th percentiles of arrival times - meaning what percentage of blocks arrive were seen faster than that line.</p>
+<p>These percentile trend lines answer our question: as bundle sizes increase, arrival times also increase. This suggests bandwidth is the primary bottleneck for these actors.<br />
+</p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/5/7/576cfaad3fa0db3276a657322f7180f6a4edf1b8.jpeg" title=""><img alt="" height="471" src="https://ethresear.ch/uploads/default/optimized/3X/5/7/576cfaad3fa0db3276a657322f7180f6a4edf1b8_2_690x471.jpeg" width="690" /></a></div><p></p>
+<p>Again looking at blocks provided via MEV Relay, we see a similar story.</p>
+<p><strong>Outcome:</strong> Yes, arrival times scale with block/blob bundles size</p>
+<h3><a class="anchor" href="https://ethresear.ch#p-51417-question-3-11" name="p-51417-question-3-11"></a>Question 3:</h3>
+<p><strong>How much more can we support on Mainnet today?</strong></p>
+<blockquote>
+<p>TLDR: 4/8 and 6/9 are both achievable</p>
+</blockquote>
+<p>To answer this question we need to check how big the block is. The 99th percentile of compressed beacon block size through our time period is <code>101KB</code>. Our blobs are fixed at a size of <code>128KB</code>.</p>
+<p>Using these parameters, we can overlay the block/blob count:</p>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/3/c/3c3dbd09011f7924bf7c6eb43536b51fcb659c66.jpeg" title=""><img alt="" height="471" src="https://ethresear.ch/uploads/default/optimized/3X/3/c/3c3dbd09011f7924bf7c6eb43536b51fcb659c66_2_690x471.jpeg" width="690" /></a></div><p></p>
+<p>We can <strong>very naively</strong> plot a trend line to see when would cross the 4s attestation deadline.<br />
+</p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/5/5/55e090af2d5dcc7100554dc6d544be282c54d989.jpeg" title=""><img alt="" height="471" src="https://ethresear.ch/uploads/default/optimized/3X/5/5/55e090af2d5dcc7100554dc6d544be282c54d989_2_690x471.jpeg" width="690" /></a></div><p></p>
+<p>This trend line assumes a linear relationship between blob count and arrival time. Under this assumption, we can support up to 14 blobs per block while maintaining 95% of block/blob bundles arriving within the deadline. The 95% target provides margin for the 50-300ms processing overhead in our measurements, while also accounting for outliers.</p>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/9/e/9ea71149e7ec70d2fb3c96f23538dbc1c85a79fb.jpeg" title=""><img alt="" height="471" src="https://ethresear.ch/uploads/default/optimized/3X/9/e/9ea71149e7ec70d2fb3c96f23538dbc1c85a79fb_2_690x471.jpeg" width="690" /></a></div><p></p>
+<p>When looking at MEV Relay blocks specifically, the data shows an even more optimistic picture - the 95th percentile trend line indicates support for up to 20 blobs per block. This improved performance can be attributed to MEV Relays being high-bandwidth nodes that help distribute blocks and blobs across the network in parallel with the proposer.</p>
+<h5><a class="anchor" href="https://ethresear.ch#p-51417-eip7623-12" name="p-51417-eip7623-12"></a>EIP7623</h5>
+<p><a href="https://eips.ethereum.org/EIPS/eip-7623" rel="noopener nofollow ugc">EIP7623</a> improves the worst case compressed block size to ~720KB - about 7x larger than our average historical block. Let’s analyze if we can still support more blobs with this increased block size.</p>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/f/d/fd1ab2e34d37c616c3f6a59bd19cab1e5daf7cbe.jpeg" title=""><img alt="" height="471" src="https://ethresear.ch/uploads/default/optimized/3X/f/d/fd1ab2e34d37c616c3f6a59bd19cab1e5daf7cbe_2_690x471.jpeg" width="690" /></a></div><p></p>
+<p>Even with an absolute <em>worst case</em> block size with <a href="https://eips.ethereum.org/EIPS/eip-7623" rel="noopener nofollow ugc">EIP7623</a> we still support a blob increase. Note that the current maximum compressed block size on Mainnet is 1.79MB (and we’re seemingly going ok!), so take this data point with a grain of salt.</p>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/f/d/fdcce8fa1e9401070d2d913db490fac1667c47a0.jpeg" title=""><img alt="" height="472" src="https://ethresear.ch/uploads/default/optimized/3X/f/d/fdcce8fa1e9401070d2d913db490fac1667c47a0_2_690x472.jpeg" width="690" /></a></div><br />
+The trend for MEV Relay blocks again supports a much higher blob count compared to locally built blocks.<p></p>
+<p><strong>Outcome:</strong> The data supports a blob count increase, especially if <a href="https://eips.ethereum.org/EIPS/eip-7623" rel="noopener nofollow ugc">EIP7623</a> is included at the same time. 4/8 or 6/9 are both safe to apply. There is potential for a higher blob count, but we’ll need to see how the network performs with an initial bump first.</p>
+<h3><a class="anchor" href="https://ethresear.ch#p-51417-conclusion-13" name="p-51417-conclusion-13"></a>Conclusion</h3>
+<p>Ethereum’s decentralization is fundamental, and home stakers play a crucial role in this picture. The network is a delicate and intricate system that demands thoughtful and deliberate consideration.</p>
+<p>Our analysis indicates that block arrival performance surpasses initial expectations for nodes with limited bandwidth. The community-contributed data offers valuable real-world insights into the network’s capabilities, and we would like to once again thank those who are contributing their data.</p>
+<p>While we naively assumed a linear relationship between blob count and arrival time, this is a simplified view of a highly complex distributed system. Additionally, there are ongoing work streams that could either improve or worsen bandwidth requirements over time. Our analysis is focused on the data available to us now, based on observations from the past six weeks of network performance.</p>
+<p>Based on block/blob arrival metrics alone, increasing the blob count from (target 3/max 6) to (target 4/max 8) or (target 6/max 9) appears to be viable. <strong>However, this is just one of many factors to evaluate when deciding on blob count adjustments.</strong></p>
+            <p><small>1 post - 1 participant</small></p>
+            <p><a href="https://ethresear.ch/t/block-arrivals-home-stakers-bumping-the-blob-count/21096">Read full topic</a></p>
+]]></content:encoded>
+<pubDate>Wed, 27 Nov 2024 12:36:03 +0000</pubDate>
+<pubDate>Wed, 27 Nov 2024 12:36:03 +0000</pubDate>
+</item>
+
+<item>
 <title>Deterministic Consensus using Overpass Channels in Distributed Ledger Technology</title>
 <link>https://ethresear.ch/t/deterministic-consensus-using-overpass-channels-in-distributed-ledger-technology/21046</link>
 <guid>https://ethresear.ch/t/deterministic-consensus-using-overpass-channels-in-distributed-ledger-technology/21046</guid>
 <content:encoded><![CDATA[
 <div> 关键词：Overpass、零知识证明、状态通道、即时最终性、扩展性
 
-总结:<br>
+总结:<br />
 本文介绍了Overpass协议，这是一种基于零知识证明（ZK-SNARKs）的新型二层区块链扩容解决方案。Overpass实现了单边状态通道，允许参与者无需共识、对方在线或看门人即可进行独立的状态更新，从而达到即时最终性。协议提供了严格的数学安全性保证，其安全边界为2^-λ，并具有线性的吞吐量扩展性和对数级的成本增长。此外，Overpass满足了高交易频率市场、零售支付网络、跨境支付和金融服务等多个实际应用场景的需求。文章通过理论分析、性能评估以及经济模型探讨了该协议的设计原理、优势及未来可能的研究方向。 <div>
 <p><strong>Brandon “Cryptskii” Ramsay</strong><br />
 info@overpass.network<br />
@@ -1529,9 +1669,7 @@ Envision financial institutions that can automate compliance checks and instanta
             <p><a href="https://ethresear.ch/t/deterministic-consensus-using-overpass-channels-in-distributed-ledger-technology/21046">Read full topic</a></p>
 ]]></content:encoded>
 <pubDate>Tue, 19 Nov 2024 18:21:41 +0000</pubDate>
-<pubDate>Tue, 19 Nov 2024 18:21:41 +0000</pubDate>
 </item>
-
 <item>
 <title>In-Protocol Transaction Ordering</title>
 <link>https://ethresear.ch/t/in-protocol-transaction-ordering/21084</link>
