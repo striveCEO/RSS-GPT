@@ -5,6 +5,83 @@
 <link>https://ethresear.ch/latest</link>
 
 <item>
+<title>QUIC Support Among Ethereum Consensus Layer Clients</title>
+<link>https://ethresear.ch/t/quic-support-among-ethereum-consensus-layer-clients/21102</link>
+<guid>https://ethresear.ch/t/quic-support-among-ethereum-consensus-layer-clients/21102</guid>
+<content:encoded><![CDATA[
+<div> 关键词：QUIC、Ethereum共识层客户端、Nebula Crawler、IPv4、IPv6
+
+总结:
+<br><br>
+本文分析了使用Nebula Crawler对以太坊共识层（CL）客户端中QUIC协议采纳情况的研究。约有42%的CL节点支持QUIC，其中主要是由于Lighthouse客户端默认开启QUIC。虽然QUIC支持度正在增长，但主要集中在IPv4上，IPv6上的采用率极低。文章介绍了QUIC在以太坊网络中的作用以及libp2p提供的支持，并指出Lighthouse、Prysm和Grandine等客户端在QUIC支持方面的现状和差异。目前只有少量QUIC启用节点运行在IPv6上，大部分仍在IPv4上。随着规范的成熟，预计其他客户端也将逐步引入QUIC支持。ProbeLab将持续监测并报告QUIC采纳趋势，为相关利益方提供持续的洞察。 <div>
+<p><strong>TL;DR</strong>: We (<a href="https://probelab.io" rel="noopener nofollow ugc">ProbeLab</a>) analyzed the adoption of QUIC among Ethereum Consensus Layer (CL) clients using the Nebula Crawler. Approximately 42% of CL nodes support QUIC, primarily because Lighthouse has it enabled by default. While QUIC support is growing, mainly over IPv4, there’s minimal adoption over IPv6. This post details our findings and encourages monitoring future trends on <a href="http://probelab.io" rel="noopener nofollow ugc">probelab.io</a>.</p>
+<hr />
+<p>The Ethereum network is continually evolving to improve performance, scalability, and security. One of the recent advancements is the integration of QUIC support in Ethereum Consensus Layer clients. This post examines the current state of QUIC adoption among these clients, based on data collected and analyzed using the Nebula Crawler on <a href="http://probelab.io" rel="noopener nofollow ugc">probelab.io</a>.</p>
+<h2><a class="anchor" href="https://ethresear.ch#p-51431-introduction-to-quic-and-libp2p-1" name="p-51431-introduction-to-quic-and-libp2p-1"></a>Introduction to QUIC and libp2p</h2>
+<p>QUIC is a transport protocol built on top of UDP, designed to enhance the performance of connection-oriented applications. It offers several benefits:</p>
+<ul>
+<li><strong>Reduced Latency</strong>: QUIC integrates the handshake processes, reducing connection establishment times.</li>
+<li><strong>Improved Congestion Control</strong>: It adapts effectively to network conditions, enhancing throughput.</li>
+<li><strong>Stream Multiplexing</strong>: Allows multiple streams within a single connection without head-of-line blocking.</li>
+</ul>
+<p>In the Ethereum ecosystem, libp2p provides QUIC support, enabling Consensus Layer clients to leverage these advantages for peer-to-peer communication.</p>
+<h2><a class="anchor" href="https://ethresear.ch#p-51431-incorporating-quic-into-ethereums-enr-2" name="p-51431-incorporating-quic-into-ethereums-enr-2"></a>Incorporating QUIC into Ethereum’s ENR</h2>
+<p>An open pull request recommends including QUIC entries in Ethereum Node Records (ENRs): <a href="https://github.com/ethereum/consensus-specs/pull/3644" rel="noopener nofollow ugc">ethereum/consensus-specs#3644</a>. Sigma Prime has been driving this initiative by adding QUIC addresses to ENRs proactively.</p>
+<p>To facilitate this integration, we implemented ENR QUIC entry parsing in <a href="https://github.com/ethereum/go-ethereum" rel="noopener nofollow ugc">go-ethereum</a>: <a href="https://github.com/ethereum/go-ethereum/pull/30283" rel="noopener nofollow ugc">ethereum/go-ethereum#30283</a>. This enhancement allows clients like Prysm and tools like the Nebula Crawler to recognize and utilize QUIC addresses effectively.</p>
+<h2><a class="anchor" href="https://ethresear.ch#p-51431-data-collection-methodology-3" name="p-51431-data-collection-methodology-3"></a>Data Collection Methodology</h2>
+<p>At ProbeLab, we conduct two crawls per hour of the Ethereum CL network using the Nebula Crawler. We are able to identify which clients support QUIC and quantify the number of nodes for each client. The Nebula Crawler achieves this by:</p>
+<ul>
+<li><strong>Parsing ENRs</strong>: Extracting QUIC addresses present in the node records.</li>
+<li><strong>Using libp2p’s Identify Protocol</strong>: Discovering QUIC addresses advertised by the node after opening a libp2p connection.</li>
+</ul>
+<h2><a class="anchor" href="https://ethresear.ch#p-51431-findings-on-quic-support-4" name="p-51431-findings-on-quic-support-4"></a>Findings on QUIC Support</h2>
+<p>Our analysis reveals insightful trends in QUIC adoption among Ethereum CL clients. Below are the key observations, with full results available at <a href="https://probelab.io/ethereum/discv5/2024-46/#discv5-quic-support-plot" rel="noopener nofollow ugc">probelab.io</a>.</p>
+<h3><a class="anchor" href="https://ethresear.ch#p-51431-overall-quic-support-5" name="p-51431-overall-quic-support-5"></a>Overall QUIC Support</h3>
+<ul>
+<li><strong>Total QUIC-enabled Nodes</strong>: Approximately 42% (~3,700 nodes) of the CL nodes support QUIC.</li>
+<li><strong>Client Distribution</strong>: Out of these QUIC-supporting nodes, the vast majority are running Lighthouse.</li>
+</ul>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/b/7/b74e093c7d745ae0143431f134bc7cd69477d5c7.png" title="all-nodes"><img alt="all-nodes" height="375" src="https://ethresear.ch/uploads/default/optimized/3X/b/7/b74e093c7d745ae0143431f134bc7cd69477d5c7_2_489x375.png" width="489" /></a></div><p></p>
+<h3><a class="anchor" href="https://ethresear.ch#p-51431-client-specific-insights-6" name="p-51431-client-specific-insights-6"></a>Client-Specific Insights</h3>
+<h3><a class="anchor" href="https://ethresear.ch#p-51431-lighthouse-7" name="p-51431-lighthouse-7"></a>Lighthouse</h3>
+<ul>
+<li><strong>QUIC Support</strong>: An impressive 98% (~3,600 nodes) of Lighthouse nodes have QUIC enabled. Lighthouse has QUIC support enabled by default.</li>
+<li><strong>Observation</strong>: Lighthouse nodes constitute the majority of QUIC-supporting nodes in the CL network.</li>
+</ul>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/4/1/4199a1bec6478bd55e3f58f8fa4a14a3d287552e.png" title="lighthouse"><img alt="lighthouse" height="375" src="https://ethresear.ch/uploads/default/optimized/3X/4/1/4199a1bec6478bd55e3f58f8fa4a14a3d287552e_2_489x375.png" width="489" /></a></div><p></p>
+<h3><a class="anchor" href="https://ethresear.ch#p-51431-prysm-8" name="p-51431-prysm-8"></a>Prysm</h3>
+<ul>
+<li><strong>QUIC Support</strong>: Around 2% (~75 nodes) of Prysm nodes support QUIC.</li>
+<li><strong>Note</strong>: QUIC support isn’t enabled by default in Prysm, but the presence of these nodes is encouraging for future adoption.</li>
+</ul>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/0/7/07f6ba2a90041d626df4cd63689d76e2be95ea95.png" title="prysm"><img alt="prysm" height="375" src="https://ethresear.ch/uploads/default/optimized/3X/0/7/07f6ba2a90041d626df4cd63689d76e2be95ea95_2_489x375.png" width="489" /></a></div><p></p>
+<h3><a class="anchor" href="https://ethresear.ch#p-51431-grandine-9" name="p-51431-grandine-9"></a>Grandine</h3>
+<ul>
+<li><strong>QUIC Support</strong>: All nodes are advertising QUIC addresses.</li>
+<li><strong>Comment</strong>: Grandine seems to have QUIC enabled by default but doesn’t constitute a significant portion of the network yet. An honorable mention for its proactive support.</li>
+</ul>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/2/c/2ca613916198d295e29411a662fb9339008d0ffa.png" title="grandine"><img alt="grandine" height="375" src="https://ethresear.ch/uploads/default/optimized/3X/2/c/2ca613916198d295e29411a662fb9339008d0ffa_2_489x375.png" width="489" /></a></div><p></p>
+<h3><a class="anchor" href="https://ethresear.ch#p-51431-other-clients-10" name="p-51431-other-clients-10"></a>Other Clients</h3>
+<ul>
+<li><strong>Clients</strong>: Teku, Nimbus, Lodestar, Erigon.</li>
+<li><strong>QUIC Support</strong>: Currently, none of these clients support QUIC.</li>
+<li><strong>Expectation</strong>: With recent spec changes, we expect that these clients will incorporate QUIC support in upcoming releases.</li>
+</ul>
+<h3><a class="anchor" href="https://ethresear.ch#p-51431-quic-over-ipv6-vs-ipv4-11" name="p-51431-quic-over-ipv6-vs-ipv4-11"></a>QUIC over IPv6 vs. IPv4</h3>
+<p>Despite the growing support for QUIC, primarily due to Lighthouse, there are only a few nodes supporting QUIC over IPv6. The overwhelming majority of QUIC-enabled nodes operate over IPv4. This indicates an area for potential growth in IPv6 adoption.</p>
+<h2><a class="anchor" href="https://ethresear.ch#p-51431-conclusion-and-future-outlook-12" name="p-51431-conclusion-and-future-outlook-12"></a>Conclusion and Future Outlook</h2>
+<p>The integration of QUIC into Ethereum’s networking stack represents a significant step toward enhanced network performance. While Lighthouse leads in adoption, we are encouraged by the initial support seen in Prysm and Grandine. As the specification matures, we anticipate broader adoption across other clients.</p>
+<p>At ProbeLab, we will continue to monitor and report on QUIC adoption trends. Our <a href="https://probelab.io/ethereum/discv5/" rel="noopener nofollow ugc">discv5 CL Weekly Reports</a> will provide ongoing insights, so we encourage stakeholders to stay tuned for further updates.</p>
+<hr />
+<p><em>For detailed data and interactive charts, please visit</em> <a href="https://probelab.io/" rel="noopener nofollow ugc">probelab.io</a><em>.</em></p>
+            <p><small>1 post - 1 participant</small></p>
+            <p><a href="https://ethresear.ch/t/quic-support-among-ethereum-consensus-layer-clients/21102">Read full topic</a></p>
+]]></content:encoded>
+<pubDate>Thu, 28 Nov 2024 12:01:30 +0000</pubDate>
+<pubDate>Thu, 28 Nov 2024 12:01:30 +0000</pubDate>
+</item>
+
+<item>
 <title>Deterministic Consensus using Overpass Channels [𝗏.2] in Distributed Ledger Technology</title>
 <link>https://ethresear.ch/t/deterministic-consensus-using-overpass-channels-2-in-distributed-ledger-technology/21046</link>
 <guid>https://ethresear.ch/t/deterministic-consensus-using-overpass-channels-2-in-distributed-ledger-technology/21046</guid>
@@ -1583,9 +1660,7 @@ Envision financial institutions that can automate compliance checks and instanta
             <p><a href="https://ethresear.ch/t/deterministic-consensus-using-overpass-channels-2-in-distributed-ledger-technology/21046">Read full topic</a></p>
 ]]></content:encoded>
 <pubDate>Tue, 19 Nov 2024 18:21:41 +0000</pubDate>
-<pubDate>Tue, 19 Nov 2024 18:21:41 +0000</pubDate>
 </item>
-
 <item>
 <title>Block Arrivals, Home Stakers &amp; Bumping the blob count</title>
 <link>https://ethresear.ch/t/block-arrivals-home-stakers-bumping-the-blob-count/21096</link>
