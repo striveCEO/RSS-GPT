@@ -5,6 +5,47 @@
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
 <item>
+<title>Sublinear-Round Broadcast without Trusted Setup</title>
+<link>https://eprint.iacr.org/2024/770</link>
+<guid>https://eprint.iacr.org/2024/770</guid>
+<content:encoded><![CDATA[
+<div> 关键词: Byzantine广播、分布式计算、信任假设、可扩展性、子线性轮次<br><br>总结:
+本文提出了一种针对不诚实多数环境下的首个无需信任设置、子线性轮次的拜占庭广播协议。该协议不再依赖于线性数量级的通信轮次或对可信设置的要求，也不需要存在一个诚实的密钥发放者和相关随机字符串的经销商，以及随机预言机。协议的设置仅限于无结构的均匀参考字符串和平凡公钥基础设施（即公告板PKI）。协议的核心是一个“有调解的梯度广播”协议，用于达成共享随机字符串的弱一致性。利用这些字符串，可以公正地运行基于委员会的拜占庭协议，实现子线性轮次的终止。为此，文章提出了一个新的委员会选举构造，它既不依赖随机预言机，也不依赖可信经销商，而是使用了NIZK证明和时间锁谜题。此协议能抵抗任意常数比例的动态敌手攻击。 <div>
+Byzantine broadcast is one of the fundamental problems in distributed computing. Many of its practical applications, from multiparty computation to consensus mechanisms for blockchains,  require increasingly weaker trust assumptions, as well as scalability for an ever-growing number of users $n$. This rules out existing solutions which run in a linear number of rounds in $n$ or rely on trusted setup requirements. In this paper, we propose the first sublinear-round and trustless Byzantine broadcast protocol for the dishonest majority setting. Unlike previous sublinear-round protocols, our protocol assumes neither the existence of a trusted dealer who honestly issues keys and correlated random strings to the parties nor random oracles. Instead, we present a solution whose setup is limited to an unstructured uniform reference string and a plain public key infrastructure (a.k.a. bulletin-board PKI).
+
+    Our broadcast protocol builds on top of a \emph{moderated gradecast} protocol which parties can use to reach weak agreement on shared random strings. Using these strings, we can then run in an unbiased fashion a committee-based Byzantine protocol, similar to that of Chan et al. (PKC 2020), which terminates in a sublinear number of rounds. To this end, we propose a novel construction for committee election, which does not rely either on random oracles or on a trusted dealer, and uses NIZKs and time-lock puzzles. Our protocol is resilient against an adaptive adversary who corrupts any constant fraction of parties.
+]]></content:encoded>
+<pubDate>Mon, 20 May 2024 08:30:07 +0000</pubDate>
+<pubDate>Mon, 20 May 2024 08:30:07 +0000</pubDate>
+</item>
+<item>
+<title>DiStefano: Decentralized Infrastructure for Sharing Trusted Encrypted Facts and Nothing More</title>
+<link>https://eprint.iacr.org/2023/1063</link>
+<guid>https://eprint.iacr.org/2023/1063</guid>
+<content:encoded><![CDATA[
+<div> 关键词：DiStefano、TLS加密、私人承诺、第三方验证、性能优化
+
+总结:
+DiStefano 是一个高效且针对恶意攻击安全的框架，用于在使用 TLS-1.3 加密的网络流量上生成私有承诺，以便由指定的第三方进行验证。相较于之前的 TLS 承诺系统，DiStefano 提供了多项改进，包括：针对 TLS 1.3 的模块化协议、对加密数据上任意可验证声明的支持、客户端浏览历史在预批准 TLS 服务器之间的隐私保护，以及确保 TLS 1.3 会话快速在线性能的各种优化。DiStefano 的一个开源实现已经集成到 BoringSSL 密码学库（被基于 Chromium 的互联网浏览器使用）中。实验表明，无论是在局域网还是广域网环境中，DiStefano 在对任意 TLS 流量中的事实进行承诺时都具有实用性，完成整个在线阶段协议的执行所需时间少于 1 秒且数据传输量不超过 80 KiB。 <div>
+We design DiStefano: an efficient, maliciously-secure framework for generating private commitments over TLS-encrypted web traffic, for verification by a designated third-party. DiStefano provides many improvements over previous TLS commitment systems, including: a modular protocol specific to TLS 1.3, support for arbitrary verifiable claims over encrypted data, client browsing history privacy amongst pre-approved TLS servers, and various optimisations to ensure fast online performance of the TLS 1.3 session. We build a permissive open-source implementation of DiStefano integrated into the BoringSSL cryptographic library (used by Chromium-based Internet browsers). We show that DiStefano is practical in both LAN and WAN settings for committing to facts in arbitrary TLS traffic, requiring \(<\) 1 s and \(≤\) 80 KiB to execute the complete online phase of the protocol.
+]]></content:encoded>
+<pubDate>Fri, 07 Jul 2023 17:56:08 +0000</pubDate>
+<pubDate>Fri, 07 Jul 2023 17:56:08 +0000</pubDate>
+</item>
+<item>
+<title>A Better Proof-of-Work Fork Choice Rule</title>
+<link>https://eprint.iacr.org/2024/200</link>
+<guid>https://eprint.iacr.org/2024/200</guid>
+<content:encoded><![CDATA[
+<div> 关键词: 修改、工作量证明、选择规则、内在工作、确认延迟<br><br>总结:<br>
+我们提出了一种针对工作量证明区块链的共识机制修改方案，即不再选择最长链，而是选择具有最多内在工作量的链。内在工作量是指区块哈希值前部的零数量。这一改动使得协议运行速度得以安全提升，相较于比特币，在面对近10%的恶意节点情况下，确认延迟可以大约减少40%。该修改是在工作量证明不等式层面进行的，因此可以与文献中提出的其他提高延迟的方法（如GHOST）结合使用。我们通过模拟执行了长达3,000年的系统仿真，获取了详细的证据。同时，我们在比特币骨干模型下正式证明了新协议的安全性，并在证明过程中引入了一个新的技术工具：实值随机Oracle，这可能具有独立的研究价值。 <div>
+We propose a modification to the fork choice rule of proof-of-work blockchains. Instead of choosing the heaviest chain, we choose the chain with the most intrinsic work. The intrinsic work of a block is roughly the number of zeroes at the front of its hash. This modification allows us to safely speed up the protocol, yielding a roughly 40% improvement in confirmation delay as compared to Bitcoin for adversaries close to 10%. Our modification is at the level of the proof-of-work inequality, and thus can be composed with any other methods to improve latency proposed in the literature (e.g., GHOST). We compile detailed simulation evidence from 3,000 years of simulated executions of our system across different parameters. We formally prove the security of our new protocol in the Bitcoin Backbone model. These proofs use a new technical tool, the real-valued Random Oracle which may be of independent interest.
+]]></content:encoded>
+<pubDate>Fri, 09 Feb 2024 16:50:17 +0000</pubDate>
+<pubDate>Fri, 09 Feb 2024 16:50:17 +0000</pubDate>
+</item>
+
+<item>
 <title>Double Auction Meets Blockchain: Consensus from Scored Bid-Assignment</title>
 <link>https://eprint.iacr.org/2022/1471</link>
 <guid>https://eprint.iacr.org/2022/1471</guid>
@@ -16,9 +57,7 @@
 A double auction system, where buyers and sellers trade through bids, requires a transparent and immutable mechanism to record allocation results. This demand can be met with robust ledgers that ensure persistence and liveness, as exemplified by the Bitcoin blockchain (EuroCrypt '15). While existing blockchain-aided auction systems often rely on secure smart contracts or layer-$2$ techniques, this work proposes a more fundamental approach by constructing a provably secure blockchain protocol directly from the computation of bid allocations. The core component is an alternative proof-of-work (PoW) scheme based on a scored generalized multiple assignment problem (SGMAP), integrated into a tailored blockchain protocol. Unlike conventional PoW-based protocols, our leader selection is driven by block scores derived from the SGMAP scoring function, which is designed to be flexible enough to define the difficulty level and accommodate real-life requirements of the underlying double auction system. We prove persistence and a modified liveness property for our design, and present implementation results to validate its robustness and practicality.
 ]]></content:encoded>
 <pubDate>Thu, 27 Oct 2022 03:19:10 +0000</pubDate>
-<pubDate>Thu, 27 Oct 2022 03:19:10 +0000</pubDate>
 </item>
-
 <item>
 <title>Stealth Software Trojan: Amplifying Hidden RF Side-Channels with Ultra High SNR and Data-Rate</title>
 <link>https://eprint.iacr.org/2024/1910</link>
