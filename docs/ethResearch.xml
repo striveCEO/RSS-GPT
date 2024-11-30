@@ -4,6 +4,192 @@
 <title>Ethereum Research - Latest topics</title>
 <link>https://ethresear.ch/latest</link>
 
+<item>
+<title>Dynamic Finalization Considering 51% Attacks</title>
+<link>https://ethresear.ch/t/dynamic-finalization-considering-51-attacks/21112</link>
+<guid>https://ethresear.ch/t/dynamic-finalization-considering-51-attacks/21112</guid>
+<content:encoded><![CDATA[
+<div> 关键词：PoS Ethereum、51%攻击、防御机制、Close Vote Detection、Emergent Dynamic Finalization
+
+总结:
+本文针对PoS以太坊网络中的攻击方法进行了分类，并特别关注了危险的51%攻击及其风险。文章提出了两种新的防御机制：Close Vote Detection（用于检测潜在的51%攻击可能性）和Emergent Dynamic Finalization（当风险升高时延迟最终确认）。文章分析了不同类型的攻击，包括最终性延迟33%攻击、双重最终性34%攻击以及控制未来和过去的短重组织与审查51%及66%攻击。其中，51%及以上的攻击因其高隐蔽性和可持续性而更具威胁。文章强调了51%攻击可能导致的巨大影响，因为成功实施后攻击者可利用利润进一步扩大其优势至66%攻击。
+
+为了应对51%攻击，文章提出了Close Vote Detection机制，通过统计接近对半投票的槽位数量来预判攻击的可能性，并在紧急情况下动态增加所需最终确认的epoch数。Emergent Dynamic Finalization机制则是在超过一定阈值的“接近投票”发生时大幅提高最终化所需的epochs数，为社区采取社会层面的反制措施赢得时间。
+
+总之，该提案旨在强化PoS以太坊的安全性，尤其是增强对致命性的51%攻击的防御能力，同时也指出了新防御机制可能带来的问题及未来的挑战。 <div>
+<p>from <a href="https://x.com/titaniaresearch" rel="noopener nofollow ugc">Titania Research</a></p>
+<p><em>Thank you <a href="https://x.com/ChenXuan_C" rel="noopener nofollow ugc">Ambition</a>, <a href="https://x.com/terencechain" rel="noopener nofollow ugc">terence</a>, <a href="https://x.com/artofkot" rel="noopener nofollow ugc">Artem</a>, Titania Research Protocol Team for discussion and feedback</em></p>
+<hr />
+<h2><a class="anchor" href="https://ethresear.ch#p-51450-tldr-1" name="p-51450-tldr-1"></a>TL;DR</h2>
+<p>This document classifies attack methods against PoS Ethereum and proposes countermeasures, particularly against the notably dangerous 51% attack. The main points are as follows:</p>
+<ol>
+<li><strong>Classification of Attack Methods:</strong> Two indicators, attack stealthability and attack sustainability, are introduced to analyze known attack methods.</li>
+<li><strong>Risks of a 51% Attack:</strong> It highlights the particular danger posed by attacks where the attacker controls more than 51% of the staking ratio and explains why this is the case.</li>
+<li><strong>Proposals for New Defenses:</strong> Two new mechanisms are suggested to counter the high likelihood of a 51% attack: Close Vote Detection, which detects the potential for such an attack, and Emergent Dynamic Finalization, which delays finalization when the risk is elevated.</li>
+<li><strong>Concerns and Future Challenges:</strong> It addresses potential issues with the proposed mechanisms and discusses future research directions.</li>
+</ol>
+<p>The aim of this proposal is to enhance the security of PoS Ethereum, specifically by strengthening defenses against the perilous 51% attack.</p>
+<h2><a class="anchor" href="https://ethresear.ch#p-51450-h-1-classification-of-existing-attack-methods-using-attack-stealthability-and-attack-sustainability-2" name="p-51450-h-1-classification-of-existing-attack-methods-using-attack-stealthability-and-attack-sustainability-2"></a>1. Classification of Existing Attack Methods Using Attack Stealthability and Attack Sustainability</h2>
+<p>Several attack methods against PoS Ethereum are known, with potential outcomes that attackers might realistically target, including reorg, double finality, and finality delay. A crucial factor in this analysis is the staking ratio required for an attack, indicating the minimum stake necessary, which serves as a barrier to entry. However, nearly as critical is attack sustainability, which measures how continuously an attacker can maintain the attack. If an attack is sustainable, it could cause significant damage. Additionally, attack stealthability is also important, as it indicates how covertly an attacker can execute an attack. If a protocol cannot detect an attack, it becomes difficult to determine whether defensive measures are necessary. Higher values for both metrics indicate a more negative outlook from the protocol’s perspective. The representative attack methods analyzed include:</p>
+<ol>
+<li>Finality delay 33% attack</li>
+<li>Double finality 34% attack</li>
+<li>Short-reorg &amp; censoring 51% attack (control over future)</li>
+<li>Short-reorg &amp; censoring 66% attack (control over past and future)</li>
+</ol>
+<h3><a class="anchor" href="https://ethresear.ch#p-51450-a-finality-delay-33-attack-3" name="p-51450-a-finality-delay-33-attack-3"></a>A: Finality delay 33% attack</h3>
+<p>The finality delay is an attack that can be executed with a staking ratio of 33%. The attacker prevents finalization by failing to provide 33% of attestations. A defensive measure during this attack is the inactivity leak mechanism. This mechanism identifies validators who either fail to attest or attest against the majority, reducing the staked ETH of such inactive validators. During a 33% attack, the inactivity leak activates, causing the attacker’s ETH to decrease and fall below the amount needed to sustain the finality delay. Consequently, the attack’s sustainability is relatively low and temporary, making it easier to detect due to the inactivity leak.</p>
+<h3><a class="anchor" href="https://ethresear.ch#p-51450-b-double-finality-34-attack-4" name="p-51450-b-double-finality-34-attack-4"></a>B: Double finality 34% attack</h3>
+<p>Double finality refers to an attack wherein the attacker submits attestations to finalize two branches simultaneously. To achieve double finality, the attacker requires a staking ratio of 34%. The attacker engages in double voting for the 34% of attestations, working to finalize both forks. Defensive measures during this attack include the slashing mechanism. Since double voting is prohibited, the attacker would lose their staked ETH, making the attack easily detectable (low undetectability). Furthermore, the substantial slashing penalty means that attacking will likely only happen once; if the attacker had the budget to attack multiple times, they would likely choose a 66% attack instead. Thus, attack sustainability for this method is also very low.</p>
+<h3><a class="anchor" href="https://ethresear.ch#p-51450-c-short-reorg-censoring-51-attack-control-over-future-5" name="p-51450-c-short-reorg-censoring-51-attack-control-over-future-5"></a>C: Short-reorg &amp; censoring 51% attack (control over future)</h3>
+<p>When an attacker possesses a staking ratio of 51%, they can manipulate the fork choice algorithm. Attacks A and B were directed at the Casper FFG (finality gadget), whereas this attack targets the LMD GHOST (fork choice algorithm). In this scenario, the attacker can freely create the heaviest branch in LMD GHOST, causing honest validators to follow the attacker’s branch, resulting in finalization. This enables the attacker to censor specific transactions and perform short-term reorganization (reorg) to maximize their miner extractable value (MEV) without incurring slashing penalties.</p>
+<p>In attacks A and B, mechanisms existed to reduce the attacker’s potential upon occurrence. In attack A, the inactivity leak decreases the attacker’s staking ratio below the 33% threshold, rendering the attack impossible. In attack B, one-third of their staking ratio is slashed during that epoch, making repeated attacks effectively unfeasible.</p>
+<p>However, there are currently no algorithmic defensive measures against attack C. Even if there is a slot with a 51% voting ratio, there is no way to distinguish whether that attestation is malicious or a legitimate disagreement among honest validators. This means that attack undetectability is significantly high. Once an attack succeeds, the attacker can persistently continue the attack until a hard fork decision is made through the social layer, resulting in very high attack sustainability.</p>
+<h3><a class="anchor" href="https://ethresear.ch#p-51450-d-short-reorg-censoring-66-attack-control-over-past-and-future-6" name="p-51450-d-short-reorg-censoring-66-attack-control-over-past-and-future-6"></a>D: Short-reorg &amp; censoring 66% attack (control over past and future)</h3>
+<p>In the short-reorg &amp; censoring 66% attack, the attacker can freely manipulate finalization, rewriting past chains and finalizing new branches. The characteristics of attack D are similar to attack C, with both exhibiting high undetectability and high sustainability.</p>
+<p>A critical point to highlight is that after executing a 51% attack, the attacker can utilize the profits to aim for a 66% attack. The potential gains from a 51% attack are significantly higher compared to the 33% and 34% attacks, and because they incur no penalties such as inactivity leak or slashing, a successful attempt could exponentially increase their dominance.</p>
+<h3><a class="anchor" href="https://ethresear.ch#p-51450-summary-of-attack-methods-7" name="p-51450-summary-of-attack-methods-7"></a>Summary of attack methods</h3>
+<p>The following table summarizes the characteristics of the representative attack methods analyzed:</p>
+<div class="md-table">
+<table>
+<thead>
+<tr>
+<th>Attack Method</th>
+<th>Staking Ratio</th>
+<th>Attack Stealthability</th>
+<th>Attack Sustainability</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A. Finality delay attack</td>
+<td>33%</td>
+<td>Low</td>
+<td>Low</td>
+</tr>
+<tr>
+<td>B. Double finality attack</td>
+<td>34%</td>
+<td>Low</td>
+<td>Low</td>
+</tr>
+<tr>
+<td>C. Short-reorg &amp; censoring attack (control over future)</td>
+<td>51%</td>
+<td>High</td>
+<td>High</td>
+</tr>
+<tr>
+<td>D. Short-reorg &amp; censoring attack (control over past and future)</td>
+<td>66%</td>
+<td>High</td>
+<td>High</td>
+</tr>
+</tbody>
+</table>
+</div><p>From this table, an interesting trend can be observed: attacks at the 33% and 34% levels (A and B) are easy to detect and exhibit low sustainability, while attacks of 51% and higher (C and D) are difficult to detect and show high sustainability, illustrating a clear dichotomy.</p>
+<h2><a class="anchor" href="https://ethresear.ch#p-51450-h-2-the-potential-impact-of-a-51-attack-8" name="p-51450-h-2-the-potential-impact-of-a-51-attack-8"></a>2. The Potential Impact of a 51% Attack</h2>
+<p>I would like to emphasize the importance of considering worst-case scenarios regarding the security of PoS Ethereum. Simply put, there is a real possibility that Ethereum could face a situation described as ‘game over.’ If such a scenario were to occur, all past activities and data within countless ecosystems would be rendered null and void.</p>
+<p>Referring to the earlier table, attacks A and B have low levels of both attack undetectability and attack sustainability. From the perspective of an attacker, there is a high likelihood that their actions will be exposed, and these attacks tend to be short-lived.</p>
+<p>In contrast, attacks C and D exhibit high levels of both attack stealthiness and sustainability. For attackers, these actions are less likely to be detected, allowing them to sustain the attack over a longer period and potentially reap immense profits. When considering which of the two attacks, C or D, to focus on, we must first pay attention to the staking ratio as a barrier to attack. While both attacks could cause significant damage, attack C, which requires a smaller absolute amount to execute, is more realistically targeted (especially considering its potential to lead to attack D). In light of these considerations, this discussion will explore defensive measures against short-reorganization and censoring 51% attacks.</p>
+<p>The key issue with short-reorganization and censoring 51% attacks, as mentioned above, is their high levels of attack undetectability and sustainability, which imply that the potential damage could be extensive.</p>
+<p>Let’s delve deeper into attack sustainability. The reason these attacks are sustainable is that the only defensive measure available is a hard fork through social consensus, which takes considerable time (as demonstrated by the DAO incident, which took a month from the discovery of the hack to the hard fork). During this interval, blocks and epochs finalized by the attacker will accumulate on the legitimate chain. Honest validators risk being penalized for attesting to blocks on an illegitimate chain that has become the minority despite being the canonical one. The crux of the matter lies in the fact that the number of epochs required for finalization is fixed; hence, even in emergencies, the finalization occurs over the same two epochs (approximately 13 minutes) as it does under normal circumstances.</p>
+<h2><a class="anchor" href="https://ethresear.ch#p-51450-h-3-proposals-for-detecting-and-defending-against-51-attacks-9" name="p-51450-h-3-proposals-for-detecting-and-defending-against-51-attacks-9"></a>3. Proposals for Detecting and Defending Against 51% Attacks</h2>
+<p>In the event of a 51% attack, we anticipate that attestations will exhibit a tight margin, such as 50.5% vs. 49.5%, and such close contests are relatively rare during normal operations. We introduce a metric to indicate the likelihood of the current epoch being attacked based on the number of slots where the head votes are ‘close.’ Furthermore, as this metric increases, the number of epochs necessary for finalization will rise exponentially. This mechanism allows for the algorithmic postponement of finalization during emergencies, enabling the community to respond to attackers through social means without requiring a hard fork. Because normal finalization periods will remain unchanged, this implementation can be seamlessly integrated without compromising user experience. We propose the close vote detection mechanism for the former and emergent dynamic finalization for the latter as defenses against 51% attacks.</p>
+<h3><a class="anchor" href="https://ethresear.ch#p-51450-close-vote-detection-10" name="p-51450-close-vote-detection-10"></a>Close Vote Detection</h3>
+<p>When a 51% attack occurs, attackers will deliberately choose a head that appears canonical by being the heaviest. Honest validators can still propose blocks, but attackers can easily manipulate the canonical head through short-term reorganizations whenever they find the proposed blocks undesirable. The closer the attacker’s staking ratio is to 50%, the closer the amount of attestations will be to 50%. Such attestations that are very near to 50% of the head will be referred to as ‘close votes.’ Currently, the determination of whether to finalize an epoch is made at the last slot of that epoch, where we will add the counting of close votes.</p>
+<h3><a class="anchor" href="https://ethresear.ch#p-51450-emergent-dynamic-finalization-11" name="p-51450-emergent-dynamic-finalization-11"></a>Emergent Dynamic Finalization</h3>
+<p>If the occurrence of close votes exceeds a certain threshold, the system will recognize a state of emergency and significantly increase the number of epochs required for finalization. As a result, the attacker will need to maintain a substantial majority of votes over a longer period to achieve finalization. During this time, the community will have the opportunity to implement countermeasures. Specifically, if the number of slots classified as close votes in the current epoch exceeds a certain threshold, the required number of epochs for finalization will be raised dramatically from the standard two. We refer to this as emergency mode. While there is plenty of room for debate on what this value should be, aiming for a significant improvement over the DAO incident’s month-long delay might suggest trying a value like <span class="math">2^{15}</span>. This would require the attacker to continue their assault for about nine days (32,768 * 12 seconds ≈ 4,551,168 seconds ≈ 9 days), providing the community ample time to implement countermeasures quickly. This defensive mechanism ensures that normal network operations are unaffected and activates only during emergencies, thereby allowing for smooth implementation without degrading user experience. Moreover, since it functions algorithmically, it can be executed immediately without waiting for human judgment, allowing for rapid responses.</p>
+<h3><a class="anchor" href="https://ethresear.ch#p-51450-formalization-12" name="p-51450-formalization-12"></a>Formalization</h3>
+<p>Let’s define the following symbols, where <span class="math">W, E, F</span> are parameters:</p>
+<ul>
+<li><span class="math">i</span>: Slot index of the current epoch, ranging from 1 to 32</li>
+<li><span class="math">C_i</span>: Indicates whether the voting at slot index <span class="math">i</span> is close (1) or not (0)</li>
+<li><span class="math">V_i</span>: The percentage of attestations at slot index <span class="math">i</span>, expressed in %</li>
+<li><span class="math">F</span>: The number of epochs required for finalization</li>
+</ul>
+<p>In its simplest initial form, we propose the following:</p>
+<p><span class="math">
+\ C_i =  \begin{cases}
+1 &amp; (|V_i-0.5| &lt; W) \\
+0 &amp; (otherwise)
+\end{cases}
+</span></p>
+<p><span class="math">
+\ F = \begin{cases}
+D &amp; (\sum_{1\le i \le32} C_i \ge E) \\
+2 &amp; (otherwise)
+\end{cases}
+</span></p>
+<p>Here are the parameters defined:</p>
+<ul>
+<li><span class="math">W</span>: The percentage point deviation from 50% that qualifies as a close vote</li>
+<li><span class="math">E</span>: The threshold number of close vote slots to trigger the emergency mode</li>
+<li><span class="math">D</span>: The number of epochs required for finalization when in emergency mode</li>
+</ul>
+<p>The formulas provided define two indicators indicating the possibility of a 51% attack. First, <span class="math">C_i</span> indicates whether a specific slot is considered a close vote, yielding 1 when <span class="math">|V_i - 0.5|</span> falls within the threshold <span class="math">W</span>. Second, <span class="math">F</span> indicates the number of epochs required for finalization. Hence, if the number of close vote slots reaches the threshold <span class="math">E</span>, the required number of epochs increases to <span class="math">D</span>, thereby planning for sustained attacks and mitigating their potential impacts.</p>
+<p>Let’s consider specific values:</p>
+<p><span class="math">
+\ W = 1\% \\
+\ E = 4 \\
+\ D = 2^{15}
+</span></p>
+<p>Thus, we have:</p>
+<p><span class="math">
+\ C_i =  \begin{cases}
+1 \ ,&amp; \text{if} \ |V_i-0.5| &lt; 0.01 \\
+0 \ ,&amp; \text{otherwise}
+\end{cases}
+</span></p>
+<p><span class="math">
+\ F = \begin{cases}
+2^{15} \ , &amp; \text{if} \ \sum_{1\le i \le32} C_i \ge 4
+\\
+2 \ ,&amp; \text{otherwise}
+\end{cases}
+</span></p>
+<p>With these settings, if the attestation percentage <span class="math">V_i</span> for any slot is within ±1% of 50%, that slot will be counted as a close vote. If, for instance, 4 out of the 32 slots are close votes, the total of <span class="math">C_i</span> will be 4, requiring <span class="math">F</span> to be set to <span class="math">2^{15}</span>. Consequently, the attacker will not be able to finalize the chain for approximately nine days, allowing the community enough time to implement a quick hard fork to restore the legitimate Ethereum blockchain.</p>
+<h3><a class="anchor" href="https://ethresear.ch#p-51450-reducing-the-estimated-maximum-damage-13" name="p-51450-reducing-the-estimated-maximum-damage-13"></a>Reducing the estimated maximum damage</h3>
+<p>The goal of this proposal is to reduce the estimated maximum damage during a 51% attack. It aims to mitigate the likelihood of a ‘game over’ scenario. While it’s challenging to discuss specific quantitative changes, it is feasible to set the parameter <span class="math">D</span> to ensure that the duration does not extend to a month like in the DAO incident. It is essential to consider that the anticipated response time from the social layer should also be factored into this aspect.</p>
+<p>Moreover, various services that interact with Ethereum, such as other chains and centralized exchanges, can operate based on this <span class="math">D</span>. By introducing algorithmic mechanisms, the surrounding ecosystems will also be able to respond algorithmically.</p>
+<h2><a class="anchor" href="https://ethresear.ch#p-51450-h-4-concerns-and-future-work-14" name="p-51450-h-4-concerns-and-future-work-14"></a>4. Concerns and Future Work</h2>
+<h3><a class="anchor" href="https://ethresear.ch#p-51450-concerns-about-new-finality-delay-mechanisms-15" name="p-51450-concerns-about-new-finality-delay-mechanisms-15"></a>Concerns about new finality delay mechanisms</h3>
+<p>There is a concern that this proposal may inadvertently create a new finality delay mechanism. For example, it is possible to randomly control 51% dominance over <span class="math">L</span> occurrences among 32 slots, which can be easily calculated using a binomial distribution. While the economic incentive to delay finality is generally low, we cannot rule out potential incentives that may not have been considered. If such incentives arise, they could potentially be addressed by introducing a reputation system. Since attestations involve signatures, attempts to impersonate other validators would require significant time to execute.</p>
+<h3><a class="anchor" href="https://ethresear.ch#p-51450-scrutinizing-the-procedure-for-implementing-a-hard-fork-via-social-layer-16" name="p-51450-scrutinizing-the-procedure-for-implementing-a-hard-fork-via-social-layer-16"></a>Scrutinizing the procedure for implementing a hard fork via social layer</h3>
+<p>To determine optimal parameters, we need to carefully examine the specific procedures required to execute a hard fork through the social layer.</p>
+<h3><a class="anchor" href="https://ethresear.ch#p-51450-determining-parameters-w-e-d-and-formula-f-through-empirical-evidence-17" name="p-51450-determining-parameters-w-e-d-and-formula-f-through-empirical-evidence-17"></a>Determining parameters <span class="math">W, E, D</span> and formula <span class="math">F</span> through empirical evidence</h3>
+<p>It is necessary to empirically determine suitable values for parameters <span class="math">W</span> (defining the range for close votes), <span class="math">E</span> (defining the threshold for emergency mode activation), and <span class="math">D</span> (defining how much to delay finalization). Additionally, <span class="math">D</span> is a component of the formula <span class="math">F</span>, but we could also consider a more dynamic design where the increase in the number of close votes <span class="math">\sum_i C_i</span> would result in a greater value for <span class="math">F</span>.</p>
+<p><span class="math">
+\ F = \begin{cases}
+2^{\sum_i C_i - E+\text{const}} \ ,&amp; \text{if} \ \sum_i C_i \ge E
+\\
+2 \ ,&amp; \text{otherwise}
+\end{cases}
+</span></p>
+<h3><a class="anchor" href="https://ethresear.ch#p-51450-determining-the-specifications-of-attestation-18" name="p-51450-determining-the-specifications-of-attestation-18"></a>Determining the specifications of attestation</h3>
+<p>We need to determine the specifications for attestations.</p>
+<ul>
+<li>How to handle justifications during emergency mode</li>
+<li>The behavior of inactivity leaks during emergency mode</li>
+<li>How to specifically update the data types submitted through attestations.</li>
+</ul>
+<h2><a class="anchor" href="https://ethresear.ch#p-51450-h-5-conclusion-19" name="p-51450-h-5-conclusion-19"></a>5. Conclusion</h2>
+<p>In this proposal, we focused on the particularly dangerous 51% attack as one of the attack methods against PoS Ethereum, discussing its risks and implications while proposing new defense strategies. Specifically, we aimed to enhance resistance to 51% attacks by introducing mechanisms like Close Vote Detection and Emergent Dynamic Finalization.</p>
+<p>Future research should further explore the effectiveness of the proposed defense strategies and their applicability to other attack methods. There is also a need to continue investigating parameter optimization and specific implementation methods.</p>
+<p>Additionally, analyzing attack methods against different consensus algorithms and formulating defense strategies based on social incentives are valuable directions for further discussion. I look forward to engaging with the Ethereum community about the value of these ideas and addressing any concerns.</p>
+<h2><a class="anchor" href="https://ethresear.ch#p-51450-reference-20" name="p-51450-reference-20"></a>Reference</h2>
+<ul>
+<li><a class="inline-onebox" href="https://ethereum.org/en/developers/docs/consensus-mechanisms/pos/attack-and-defense" rel="noopener nofollow ugc">Ethereum proof-of-stake attack and defense | ethereum.org</a></li>
+<li><a class="inline-onebox" href="https://ethereum.org/en/history/#dao-fork-summary" rel="noopener nofollow ugc">History and Forks of Ethereum | ethereum.org</a></li>
+<li><a class="inline-onebox" href="https://www.coindesk.com/learn/understanding-the-dao-attack" rel="noopener nofollow ugc">Understanding The DAO Attack</a></li>
+<li><a class="inline-onebox" href="https://blog.ethereum.org/2016/07/20/hard-fork-completed" rel="noopener nofollow ugc">Hard Fork Completed | Ethereum Foundation Blog</a></li>
+</ul>
+            <p><small>1 post - 1 participant</small></p>
+            <p><a href="https://ethresear.ch/t/dynamic-finalization-considering-51-attacks/21112">Read full topic</a></p>
+]]></content:encoded>
+<pubDate>Fri, 29 Nov 2024 15:28:27 +0000</pubDate>
+<pubDate>Fri, 29 Nov 2024 15:28:27 +0000</pubDate>
+</item>
 
 <item>
 <title>QUIC Support Among Ethereum Consensus Layer Clients</title>
