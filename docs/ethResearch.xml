@@ -4,6 +4,183 @@
 <title>Ethereum Research - Latest topics</title>
 <link>https://ethresear.ch/latest</link>
 
+<item>
+<title>Bandwidth Availability in Ethereum: Regional Differences and Network Impacts</title>
+<link>https://ethresear.ch/t/bandwidth-availability-in-ethereum-regional-differences-and-network-impacts/21138</link>
+<guid>https://ethresear.ch/t/bandwidth-availability-in-ethereum-regional-differences-and-network-impacts/21138</guid>
+<content:encoded><![CDATA[
+<div> 关键词：Ethereum、Blob交易、网络带宽、节点测量、升级影响
+
+总结:
+该研究由ProbeLab团队与EF和PeerDAS社区反馈合作完成，关注于以太坊Dencun升级后网络对Blob交易和Blob侧车处理能力的现状及其极限。研究发现，60%位于欧美地区的节点上行带宽超过20Mbps，而澳大利亚仅20%达到此水平；在网络中，第1至第4秒（区块传播时段）的带宽可用性降低了9%-13%，但即使在这些较繁忙时段，全球四个地理区域的节点平均可用带宽仍保持在18到23 Mbps之间，表明仍有空间承载更多Blob。目前，已有42%的槽位处于当前3/6目标/最大Blob值的上限或接近上限。因此，研究认为将Blob计数从3/6增加到6/9是合理的，但同时也强调需要针对Gossipsub协议进行带宽节省优化，以便应对未来进一步的Blob数量增长需求。此外，研究还揭示了不同地理位置、基础设施部署类型、客户端实现以及槽位窗口内的带宽可用性差异，并指出目前有35%的槽位未包含任何Blob。 <div>
+<p><em>This study was done by <a class="mention" href="https://ethresear.ch/u/cortze">@cortze</a> and <a class="mention" href="https://ethresear.ch/u/yiannisbot">@yiannisbot</a> from the ProbeLab team (<a href="https://probelab.io/" rel="noopener nofollow ugc">probelab.io</a>), with the feedback of the EF and the PeerDAS community.</em></p>
+<h1><a class="anchor" href="https://ethresear.ch#p-51501-introduction-1" name="p-51501-introduction-1"></a>Introduction</h1>
+<p>The Dencun upgrade was an important milestone for Ethereum’s roadmap. It introduced Blob transactions and Blob sidecars (through <a href="https://www.eip4844.com/" rel="noopener nofollow ugc">EIP-4844</a>). The upgrade included major updates for the underlying network, which now has to share over GossipSub a target of three blob sidecars of 128KBs each per slot, caped to six of them as a maximum (often referenced as “3/6”, referring to target and max blob sidecars, respectively).</p>
+<p>The current network hasn’t experienced any major outage or finalization difficulty since the upgrade. Nodes in the network could get along with the current blob target and max values with the blob sidecars propagating through the network well within the 4 second propagation window, as can be seen in ProbeLab’s weekly report on Block Arrivals: <a class="inline-onebox" href="https://probelab.io/ethereum/block_arrival/2024-47/#message_arrivals_max_min_on_1536s_window_on_topic_mainnet_beacon_block-plot" rel="noopener nofollow ugc">Week 2024-47 | ProbeLab</a>.</p>
+<p>However, with increased demand from L2s for more capacity, <a href="https://ethresear.ch/t/wheres-the-home-staking-bandwidth-research/20507">questions</a> come up with regard to “what is the maximum “target/max” blob count that the network can comfortably handle?”, especially for home stakers.</p>
+<hr />
+<p>The motivation and target of this study is to help define <strong>how much extra bandwidth is available in the network to support a blob target and max value increase for the next hard fork</strong>.</p>
+<p>In this post, we:</p>
+<ul>
+<li>introduce the measurement methodology and framework we’ve prepared to estimate the available upload bandwidth of nodes in the network.</li>
+<li>present a comprehensive bandwidth measurement study that we carried out, where we measured the bandwidth availability of most online and reachable nodes in the Ethereum network over a period of 6 days from <code>2024-11-23</code> to <code>2024-11-28</code>.</li>
+</ul>
+<h1><a class="anchor" href="https://ethresear.ch#p-51501-tldr-2" name="p-51501-tldr-2"></a>TL;DR</h1>
+<ul>
+<li>60% of nodes deployed in Europe or the US have bandwidth availability of more than 20Mbps, while only 20% of nodes deployed in Australia can go above 20Mbps. This is not related to line speed availability in Australia, but rather it is due to the fact that 65% of Ethereum nodes are located in Europe or the US and therefore geographically far from Asia-based nodes.</li>
+<li>Seconds 1 to 4 of the slot, when block propagation takes place, are clearly more loaded in terms of bandwidth availability. Nodes show 9%-13% less bandwidth availability during those seconds.</li>
+<li>However, even during the more loaded periods of the slot (1st to 4th second), our measurements from 4 different geographical regions indicate that the mean available bandwidth for nodes (either in cloud or non-cloud infra) stayed between 18 and 23 Mbps. This tells us that there is still space for more blobs to be carried, although this will result in even less bandwidth availability during this loaded part of the slot.</li>
+<li>During our 6 day measurement period, we’ve seen that 35% of the slots had no blobs at all, while 42% of the slots included 5 to 6 blobs. Given the current 3/6 target/max blob values, 42% of the bandwidth measurements we did were performed at almost the blob max capacity.</li>
+<li>With the current discussion around increasing the blob count from a target and max values of 3/6 to 6/9, <strong>the presented metrics align with the EthPandaOps recent post (<a href="https://ethresear.ch/t/block-arrivals-home-stakers-bumping-the-blob-count/21096">link</a>) that it should be a reasonable increase with the current network state.</strong> The network already has 50% of slots at the targeted blob count goal or beyond, while 35% of slots don’t even have associated blobs.</li>
+<li>At the same time, we expect that nodes will be stressed with regard to bandwidth availability during the 1st and 4th seconds of the slot, especially assuming the number of duplicate messages that Gossipsub inevitably propagates through the network. <strong>It is therefore critical to work on and apply bandwidth-saving improvements to Gossipsub,</strong> such as the ones discussed in the following GH issues and <a href="http://ethresear.ch">ethresear.ch</a>, given that further increases in blob count will be needed in the near future:
+<ul>
+<li><a class="inline-onebox" href="https://github.com/ethereum/consensus-specs/issues/4030" rel="noopener nofollow ugc">Different Gossipsub versions per topic (class) · Issue #4030 · ethereum/consensus-specs · GitHub</a></li>
+<li><a class="inline-onebox" href="https://github.com/ethereum/consensus-specs/issues/4031" rel="noopener nofollow ugc">Gossipsub Dynamic Message Diffusion · Issue #4031 · ethereum/consensus-specs · GitHub</a></li>
+<li><a href="https://ethresear.ch/t/peerdas-with-significantly-less-bandwidth-consumption/20932">PeerDAS with significantly less bandwidth consumption</a></li>
+<li><a href="https://ethresear.ch/t/gossipsub-topic-observation-proposed-gossipsub-1-3/20907">GossipSub Topic Observation (proposed GossipSub 1.3)</a></li>
+</ul>
+</li>
+</ul>
+<h1><a class="anchor" href="https://ethresear.ch#p-51501-measurement-tooling-study-preparation-3" name="p-51501-measurement-tooling-study-preparation-3"></a>Measurement Tooling &amp; Study Preparation</h1>
+<p>We’ve built a tool called <code>net-probe</code> that:</p>
+<ul>
+<li>pulls node information from the <a href="https://probelab.io/tools/nebula/" rel="noopener nofollow ugc">Nebula</a> crawler, which crawls the Ethereum <code>discv5</code> network every 2 hours.</li>
+<li>connects to each node discovered during the crawl through <a href="https://probelab.io/tools/hermes/" rel="noopener nofollow ugc">Hermes</a>.</li>
+<li>downloads a carefully chosen volume of data from each node Hermes connected to.</li>
+</ul>
+<p>Before executing the full experiment, we had to find out what’s the right amount of data we should be pulling from each node, in order to: i) saturate the node’s uplink and as a result find out how much bandwidth it’s got available, but at the same time, ii) avoid disrupting the node’s operation. Note that these are Ethereum mainnet nodes, so we had to proceed with care to avoid any disruption.</p>
+<p>We tested the following parameters:</p>
+<ul>
+<li>Block-by-range RPC calls requesting:  <code>1</code>, <code>5</code> <code>10</code>, <code>20</code>, <code>30</code> and <code>40</code> blocks,</li>
+<li><code>10</code> retries for the RPCs with  <code>1</code>, <code>5</code>, <code>10</code>, and <code>20</code> blocks,</li>
+<li><code>5</code> retries for the RPCs with <code>30</code> and <code>40</code> blocks, to avoid spamming those peers.</li>
+</ul>
+<h2><a class="anchor" href="https://ethresear.ch#p-51501-setting-the-rpc-size-4" name="p-51501-setting-the-rpc-size-4"></a>Setting the RPC size</h2>
+<p>The following plot shows the bandwidth we could measure (x-axis) for the nodes we managed to connect to for different RPC size requests, i.e., different number of blocks requested per RPC.</p>
+<p>We extract the following conclusions from the comparison of the different test studies:</p>
+<ul>
+<li>Sending RPC calls for <code>1</code>, <code>5</code> and <code>10</code> blocks gives widely different results, with higher RPC size requests showing more bandwidth availability. This is a clear indicator for increasing the “blocks requested per RPC” value, as we don’t seem to be saturating the nodes’ bandwidth with smaller RPC calls.</li>
+<li>The CDF plot shows that the BW measurement barely changes when we request <code>20</code>, <code>30</code>  or <code>40</code> blocks per RPC, indicating that this RPC size seems to generate enough traffic on the TCP connection to saturate the uplink bandwidth of nodes.</li>
+</ul>
+<p><em></em></p><div class="lightbox-wrapper"><em><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/d/a/dae21bab3a73aadb52152c9c34acd5d9beabee26.jpeg" title="image"><img alt="image" height="413" src="https://ethresear.ch/uploads/default/optimized/3X/d/a/dae21bab3a73aadb52152c9c34acd5d9beabee26_2_690x413.jpeg" width="690" /></a></em></div><br />
+<em>NOTE: the mean size of the 54,463 downloaded blocks was 101.30 KB of serialized data and 47.76 KB of compressed data.</em><p></p>
+<h2><a class="anchor" href="https://ethresear.ch#p-51501-setting-rpc-retries-5" name="p-51501-setting-rpc-retries-5"></a>Setting RPC retries</h2>
+<p>As expected, there are also some differences in the bandwidth availability (y-axis) observed after consecutive RPC retries (x-axis in the following plot):</p>
+<ul>
+<li>The first 2 RPC responses do not max out the available bandwidth in the TCP connection (see upward trend of line-plots).</li>
+<li>After the 3rd one, the measurements become pretty stable for most RPC sizes, i.e., the trend is flattening.<br />
+<div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/e/7/e75865c2122b6bb1ed9cc9b6ee5e4e343d653d3e.jpeg" title="image"><img alt="image" height="413" src="https://ethresear.ch/uploads/default/optimized/3X/e/7/e75865c2122b6bb1ed9cc9b6ee5e4e343d653d3e_2_690x413.jpeg" width="690" /></a></div></li>
+<li>The above plot gives the impression that larger RPC-sized requests result in higher BW availability.</li>
+<li>However, taking into account the ratio of requests that are successful at each RPC retry, we see that requesting a larger number of blocks does have an impact on the success rate of the responses. For example, requesting 30 or 40 blocks starts failing after the third retry. Furthermore, requesting consecutively larger RPCs also generates a faster decrease in the success rate over the RPC retries.<br />
+<div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/3/4/34bf2c9f801c30d086f1fb5ebb21eb6f0b3c86f4.jpeg" title="image"><img alt="image" height="413" src="https://ethresear.ch/uploads/default/optimized/3X/3/4/34bf2c9f801c30d086f1fb5ebb21eb6f0b3c86f4_2_690x413.jpeg" width="690" /></a></div></li>
+</ul>
+<h2><a class="anchor" href="https://ethresear.ch#p-51501-final-parameters-6" name="p-51501-final-parameters-6"></a>Final parameters</h2>
+<p>Given the above observations, we have chosen the following values for our production study:</p>
+<ul>
+<li>Retries: <code>6</code> sequential RPC Requests</li>
+<li>RPC size:  <code>20</code> blocks per retry</li>
+<li>Request concurrency of <code>2</code> nodes at a time</li>
+<li>Dates: <code>2024-11-23</code> to <code>2024-11-28</code></li>
+<li>Infrastructure: AWS EC2 instance from the following regions:
+<ul>
+<li><code>us-west-1</code>  - California</li>
+<li><code>us-east-2</code> - Virginia</li>
+<li><code>eu-central-1</code> - Frankfurt</li>
+<li><code>ap-southeast-1</code> - Sydney</li>
+</ul>
+</li>
+<li>Resulting statistical sample:
+<ul>
+<li>The results we present in the following were obtained from a total of <code>13,023</code> unique peers from the <code>Nebula</code> Ethereum database for 6 days (unique online peers over those dates).</li>
+<li>We collected BW measurements from <code>9,179</code> nodes, representing 70,48% of the total online and reachable nodes.</li>
+</ul>
+</li>
+</ul>
+<h1><a class="anchor" href="https://ethresear.ch#p-51501-analysis-of-the-bandwidth-data-7" name="p-51501-analysis-of-the-bandwidth-data-7"></a>Analysis of the bandwidth data</h1>
+<h2><a class="anchor" href="https://ethresear.ch#p-51501-overall-bandwidth-availability-results-8" name="p-51501-overall-bandwidth-availability-results-8"></a>Overall Bandwidth Availability Results</h2>
+<blockquote>
+<p>NOTE: The tool can measure 3 different types of BW measurements:</p>
+<ul>
+<li>the effective BW: the bytes of <em>serialized</em> data we could measure,</li>
+<li>the compressed BW: the bytes of <em>compressed</em> data we could measure,</li>
+<li>the wire BW: all the bytes shared over the wire.</li>
+</ul>
+<p>For simplicity and completeness, the rest of the report will refer to the “wire BW”.</p>
+</blockquote>
+<p>The following plot shows the CDF of the mean wire BW we measured from the <code>9,179</code> unique nodes <code>net-probe</code> could successfully connect over these 6 days. The graph shows the BW measurements experienced from each region <code>net-probe</code> was running on, so the figure can be read as follows:</p>
+<ul>
+<li>The BW measurements from our <code>net-probe</code> deployments in the US and Europe show that 40% of the network peers served blocks at a rate below ~20Mbps. This also means that the remaining ~60% of nodes had an upload capacity of more than ~20Mbps.</li>
+<li>Meanwhile, our <code>net-probe</code> deployment in Sydney could only achieve 20Mbps upload speed with 20% of network nodes (see 0.8 mark on the y-axis for the <code>ap-southeast-2</code> region). This is not surprising, given that the geographical distribution of nodes we observe at <a href="https://probelab.io/ethereum/discv5/2024-47/#geolocation" rel="noopener nofollow ugc">ProbeLab</a> shows that almost 65% of the network nodes are deployed in the US and Europe.<br />
+<div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/8/c/8c34010b0e56c6fd15e5de5b4f9077ec1ed02050.jpeg" title="image"><img alt="image" height="413" src="https://ethresear.ch/uploads/default/optimized/3X/8/c/8c34010b0e56c6fd15e5de5b4f9077ec1ed02050_2_690x413.jpeg" width="690" /></a></div><br />
+<em>CDF of the wire bandwidth for each of the nodes 9,179 successfully connected. Please note that the graph is zoomed within the 0 to 150 Mbps range.</em></li>
+</ul>
+<h2><a class="anchor" href="https://ethresear.ch#p-51501-bandwidth-availability-per-infrastructure-deployment-cloud-vs-non-cloud-9" name="p-51501-bandwidth-availability-per-infrastructure-deployment-cloud-vs-non-cloud-9"></a>Bandwidth Availability per Infrastructure Deployment (cloud vs non-cloud)</h2>
+<p>In the following plot, we present the bandwidth observed for different types of node deployments, namely, those that are hosted on public cloud infra versus those that are not.</p>
+<p>We observe that nodes operating in cloud providers provide blocks at a higher upload BW rate, having approximately 5Mbps of extra bandwidth available, compared to non-cloud deployments.</p>
+<p>This marginal difference in bandwidth availability between cloud and non-cloud deployments shows that solo stakers (most likely to use non-cloud infra), are putting enough resources into their node deployment.<br />
+</p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/0/e/0e7f5402614db899c745b83bbc597c03005436ea.png" title="image"><img alt="image" height="413" src="https://ethresear.ch/uploads/default/optimized/3X/0/e/0e7f5402614db899c745b83bbc597c03005436ea_2_690x413.png" width="690" /></a></div><br />
+<em>CDF of the wire bandwidth segregated by the nodes’ hosting type ( 4,409 cloud vs 4,770 non-could nodes).</em><p></p>
+<h2><a class="anchor" href="https://ethresear.ch#p-51501-bandwidth-availability-per-client-implementation-10" name="p-51501-bandwidth-availability-per-client-implementation-10"></a>Bandwidth Availability per Client Implementation</h2>
+<p>Comparing the upload bandwidth by the client implementation of the remote nodes, the following image shows that most clients share similar distributions until the 70th percentile, with the exception of Lodestar, which we discuss below. From that point on, the differences in the distribution’s tail become slightly more visible.</p>
+<p>Our takeaway points from this measurement are:</p>
+<ul>
+<li>No major differences between different client implementations in terms of bandwidth availability.</li>
+<li>Lodestar seems to be outperforming the rest by at least 10Mbps at the 60th percentile.</li>
+<li>Lodestar’s improved performance is very likely due to the fact that more than 80% of its nodes are based in the US or EU (<a href="https://probelab.io/ethereum/discv5/2024-47/#discv5-geo-agents-bars-plot" rel="noopener nofollow ugc">link</a>), which as we’ve seen earlier present higher bandwidth availability.<br />
+<div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/1/a/1aaea5d67b3ff25da8630be7c51d2195bd8c3371.jpeg" title="image"><img alt="image" height="413" src="https://ethresear.ch/uploads/default/optimized/3X/1/a/1aaea5d67b3ff25da8630be7c51d2195bd8c3371_2_690x413.jpeg" width="690" /></a></div><br />
+<em>CDF of the wire bandwidth segregated by the nodes’ client.</em></li>
+</ul>
+<h2><a class="anchor" href="https://ethresear.ch#p-51501-bandwidth-availability-per-region-11" name="p-51501-bandwidth-availability-per-region-11"></a>Bandwidth Availability per Region</h2>
+<p>Bandwidth measurements, as well as latency measurements, are highly subjected to the location from where the data is being generated. Thus, we’ve chosen our <code>net-probe</code> deployments to represent: the most popular regions for Ethereum node deployments (US and EU), and the one geolocated the furthest (AUS). The following image provides the CDF of the wire BW of nodes from the four regions aggregated by continents. The measurements indicate that, as expected, regions further away present lower bandwidth availability. In this case, we observe that:</p>
+<ul>
+<li>Oceania and Africa are at least 8 to 10 Mbps behind the rest of the regions, providing a non-desirable 90th percentile below the 20 Mbps mark.</li>
+<li>Nodes in Asia and South America achieve 15 to 25 Mbps between the 50th and 80th percentile.</li>
+<li>Nodes in Europe match the BW distribution of NA nodes until the 40th percentile, which later diverted towards a median of 24 Mbps up to the 90th percentile of 60 Mbps.<br />
+<div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/4/f/4f0ea9bdaf4ad9d884c90224a3f7029a326e80cb.jpeg" title="image"><img alt="image" height="413" src="https://ethresear.ch/uploads/default/optimized/3X/4/f/4f0ea9bdaf4ad9d884c90224a3f7029a326e80cb_2_690x413.jpeg" width="690" /></a></div><br />
+<em>CDF of the wire bandwidth segregated by the nodes’ continents</em></li>
+</ul>
+<h2><a class="anchor" href="https://ethresear.ch#p-51501-bandwidth-availability-per-slot-window-12" name="p-51501-bandwidth-availability-per-slot-window-12"></a>Bandwidth Availability per Slot Window</h2>
+<p>Each Ethereum slot is split into different parts each of which is allocated to different duties over the 12 seconds slot duration. Trying to correlate the available wire BW across the slot time, the following image shows the mean wire BW availability of nodes for each node hosting type at each second within the slot. We observe the following:</p>
+<ul>
+<li>Cloud-hosted nodes have a higher mean of available BW, but both cloud and non-cloud nodes’ portion of available bandwidth fluctuates visibly throughout the slot.</li>
+<li>There is clearly less bandwidth availability from the 1st to the 4th second of the slot, which is the window when blocks and blobs are broadcasted to the network. The bandwidth drop we were able to measure represents a 9,5% to 10% drop for non-cloud users, while it was a 13% of bandwidth reduction for nodes located in data centers.</li>
+<li>Despite this drop in the mean amount of bandwidth available, there is still ~19Mbps for non-cloud hosted nodes and ~23Mbps for cloud hosted nodes available. This is a strong indication that a slight increase in the blob count target and max values should not be disruptive to the network.<br />
+<div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/3/0/30889063c58c781c1e52ca0899a8d8fc0141ae7a.png" title="image"><img alt="image" height="413" src="https://ethresear.ch/uploads/default/optimized/3X/3/0/30889063c58c781c1e52ca0899a8d8fc0141ae7a_2_690x413.png" width="690" /></a></div><br />
+<em>Mean wire bandwidth availability per deployment type over time within the slot.</em></li>
+</ul>
+<h2><a class="anchor" href="https://ethresear.ch#p-51501-rpc-success-rates-throughout-the-slot-13" name="p-51501-rpc-success-rates-throughout-the-slot-13"></a>RPC Success Rates Throughout the Slot</h2>
+<p>As a byproduct of our study, we captured the number of successful RPC replies that we got throughout the slot, presented by the “Number of data points” available to us. There is a dip in the number of data points (i.e., successful RPCs) between the 2nd and 7th/8th second of the slot when blocks, blobs and attestations are getting broadcasted, propagated and processed.</p>
+<p></p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/3/9/39a6099f5247faa8a03ae8dc1823c91ffec8b77e.png" title="image"><img alt="image" height="413" src="https://ethresear.ch/uploads/default/optimized/3X/3/9/39a6099f5247faa8a03ae8dc1823c91ffec8b77e_2_690x413.png" width="690" /></a></div><br />
+<em>Histogram of the successful data points at each slot-second.</em><p></p>
+<h2><a class="anchor" href="https://ethresear.ch#p-51501-current-blob-count-per-block-14" name="p-51501-current-blob-count-per-block-14"></a>Current blob count per block</h2>
+<p>Having seen node bandwidth availability from several perspectives, it is important to understand how many blob transactions have been included in blocks during the measurement period. This aspect is important in order to asses what are the implications of a blob count increase, i.e., how many blobs resulted in the bandwidth availability that we’ve seen and how much space is there for extra blobs.</p>
+<p>The following graph shows the number of blobs that were included in each slot throughout the 6 days of study. Here are our observations:</p>
+<ul>
+<li>35% of the slots had no blobs at all.</li>
+<li>42% of the slots included 5 to 6 blobs.</li>
+<li>Given the current 3/6 target/max blob values, 42% of the bandwidth measurements we did were performed at almost the blob max capacity.</li>
+<li>Assuming demand will keep up when the blob count target and max increase to 6/9, we can project that in ~42% of the cases there will be 9 blobs per block and in ~50% there will be 6 blobs per block, or less.</li>
+</ul>
+<p><strong>Given the above, our take is that we don’t see any critical objection to the current desired blob target and max values of 6/9 discussed in the All Core Dev CL Call on Thursday 28th of November.</strong><br />
+</p><div class="lightbox-wrapper"><a class="lightbox" href="https://ethresear.ch/uploads/default/original/3X/9/f/9f1ea004ccdd3f9c19f75bb736c01c79140efd9c.png" title="image"><img alt="image" height="413" src="https://ethresear.ch/uploads/default/optimized/3X/9/f/9f1ea004ccdd3f9c19f75bb736c01c79140efd9c_2_690x413.png" width="690" /></a></div><br />
+<em>CDF of the number of blobs per slot.</em><p></p>
+<h1><a class="anchor" href="https://ethresear.ch#p-51501-conclusions-15" name="p-51501-conclusions-15"></a>Conclusions</h1>
+<p>From this extensive set of measurements, we extract the following conclusions:</p>
+<ul>
+<li>Representing the perspective of at least 65% of the network (nodes in NA and EU), we’ve measured that only 30% to 40% of the measured peers reported an upload link below the 20 Mbps mark.</li>
+<li>On the other hand, <strong>when nodes are located in more remote locations like Sydney, only 20% of connections went above 20 Mbps</strong>.</li>
+<li>We need to keep in mind that this available BW is effectively doubled if we consider that 80% of the blocks achieve at least a snappy compression rate of 2.</li>
+<li>Nodes deployed in cloud infra seem to have at least 5 Mbps more bandwidth available than non-cloud nodes.</li>
+<li>The measured bandwidth throughout the slot time shows that there is, on average, a <strong>9% to 13% drop in bandwidth availability between seconds 1 and 4.</strong>. The precise moment where the block plus blobs are meant to be broadcasted to the network.</li>
+<li>We could spot a slight decrease in the success rate of the RPC requests we sent during the “busy” moments of the slot, which could affect, to some degree, the sampling of blobs in PeerDAS.</li>
+<li>With the current discussion around increasing the blob count from a target and max values of 3/6 to 6/9, <strong>the presented metrics align with the EthPandaOps recent post (<a href="https://ethresear.ch/t/block-arrivals-home-stakers-bumping-the-blob-count/21096">link</a>) that it should be a reasonable increase with the current network state.</strong> The network already has 50% of slots at the targeted blob count goal or beyond, while 35% of slots don’t even have associated blobs.</li>
+</ul>
+            <p><small>1 post - 1 participant</small></p>
+            <p><a href="https://ethresear.ch/t/bandwidth-availability-in-ethereum-regional-differences-and-network-impacts/21138">Read full topic</a></p>
+]]></content:encoded>
+<pubDate>Mon, 02 Dec 2024 15:09:07 +0000</pubDate>
+<pubDate>Mon, 02 Dec 2024 15:09:07 +0000</pubDate>
+</item>
 
 <item>
 <title>AI4Science Oracle for DeSci: Revolutionizing Scientific Discovery with Blockchain</title>
