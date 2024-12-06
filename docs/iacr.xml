@@ -5,6 +5,86 @@
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
 <item>
+<title>Onion Franking: Abuse Reports for Mix-Based Private Messaging</title>
+<link>https://eprint.iacr.org/2024/1965</link>
+<guid>https://eprint.iacr.org/2024/1965</guid>
+<content:encoded><![CDATA[
+<div> 关键词: 私人消息应用、端到端加密、滥用报告、元数据保护、洋葱加密
+
+总结:<br>
+本文提出了适用于基于洋葱加密的任何私人消息系统的新型滥用报告机制，这包括采用启发式或机会性用户流量混合的低延迟系统以及基于混排网络的方案。文章指出，适合E2EE环境的设计决策和抽象可能在保护元数据的场景中阻碍安全性和性能提升，并探讨了比先前工作更强的滥用报告和内容审核威胁模型。此外，文中还分析了现有工作的不足，并提出如何强化自身方案和其他方案（包括已部署的E2EE消息平台）以实现更高安全级别。实验结果显示，所提出的原型系统在消息传递和报告过程中的每个步骤上，其性能优于当前最优解决方案一个数量级以上，且开销接近现今E2EE加密消息应用所使用的消息认证技术。 <div>
+The fast-paced development and deployment of private messaging applications demands mechanisms to protect against the concomitant potential for abuse. While widely used end-to-end encrypted (E2EE) messaging systems have deployed mechanisms for users to verifiably report abusive messages without compromising the privacy of unreported messages, abuse reporting schemes for systems that additionally protect message metadata are still in their infancy. Existing solutions either focus on a relatively small portion of the design space or incur much higher communication and computation costs than their E2EE brethren.
+
+This paper introduces new abuse reporting mechanisms that work for any private messaging system based on onion encryption. This includes low-latency systems that employ heuristic or opportunistic mixing of user traffic, as well as schemes based on mixnets. Along the way, we show that design decisions and abstractions that are well-suited to the E2EE setting may actually impede security and performance improvements in the metadata-hiding setting. We also explore stronger threat models for abuse reporting and moderation not explored in prior work, showing where prior work falls short and how to strengthen both our scheme and others' -- including deployed E2EE messaging platforms -- to achieve higher levels of security.
+
+We implement a prototype of our scheme and find that it outperforms the best known solutions in this setting by well over an order of magnitude for each step of the message delivery and reporting process, with overheads almost matching those of message franking techniques used by E2EE encrypted messaging apps today.
+]]></content:encoded>
+<pubDate>Wed, 04 Dec 2024 15:32:40 +0000</pubDate>
+<pubDate>Wed, 04 Dec 2024 15:32:40 +0000</pubDate>
+</item>
+<item>
+<title>SoK: Privacy-Preserving Transactions in Blockchains</title>
+<link>https://eprint.iacr.org/2024/1959</link>
+<guid>https://eprint.iacr.org/2024/1959</guid>
+<content:encoded><![CDATA[
+<div> 关键词: 交易隐私、区块链系统、隐私保护技术、加密货币、匿名性
+
+总结:<br>
+本文针对具有原生隐私特性的加密货币中的隐私保护技术进行了系统化知识研究。文章界定了包括机密性、k-匿名性、完全匿名性和发送者-接收者不可链接性在内的隐私概念，并对实现这些保证所采用的密码学技术进行了分类和比较。分析指出了隐私保障与可扩展性以及监管合规性之间的权衡关系。同时，评估了最受欢迎的私人加密货币的实际部署和用户体验。通过这项分析，文章识别出现在隐私解决方案中的关键差距和挑战，强调了需要进一步研究和开发以增强隐私性的同时保持可扩展性和安全性的重要性。 <div>
+Ensuring transaction privacy in blockchain systems is essential to safeguard user data and financial activity from exposure on public ledgers. This paper conducts a systematization of knowledge (SoK) on privacy-preserving techniques in cryptocurrencies with native privacy features. We define and compare privacy notions such as confidentiality, k-anonymity, full anonymity, and sender-receiver unlinkability, and categorize the cryptographic techniques employed to achieve these guarantees. Our analysis highlights the trade-offs between privacy guarantees, scalability, and regulatory compliance.  Finally, we evaluate the usability of the most popular private cryptocurrencies providing insights into their practical deployment and user interaction. 
+
+Through this analysis, we identify key gaps and challenges in current privacy solutions, highlighting areas where further research and development are needed to enhance privacy while maintaining scalability and security.
+]]></content:encoded>
+<pubDate>Tue, 03 Dec 2024 17:04:55 +0000</pubDate>
+<pubDate>Tue, 03 Dec 2024 17:04:55 +0000</pubDate>
+</item>
+<item>
+<title>Worst-Case Lattice Sampler with Truncated Gadgets and Applications</title>
+<link>https://eprint.iacr.org/2024/1952</link>
+<guid>https://eprint.iacr.org/2024/1952</guid>
+<content:encoded><![CDATA[
+<div> 关键词: gadget-based sampler、Micciancio-Peikert (MP)、truncation、worst-case sampler、performance improvement
+
+总结:<br>
+本文提出了一个新的最坏情况下的采样器，该采样器适用于截断的gadget，解决了现有截断方案无法逆推任意 syndrome 的问题。这一创新克服了MP采样器线性增长维度的问题，同时保持了其主要特性，并为选择截断参数提供了灵活性。因此，它可以作为依赖于MP采样器的所有应用的直接替代品，实验证明能带来高达30%的性能提升。文章还对新采样器进行了全面的安全分析，并通过具体实现展示了其实用性。 <div>
+Gadget-based samplers have proven to be a key component of several cryptographic primitives, in particular in the area of privacy-preserving mechanisms. Most constructions today follow the approach introduced by Micciancio and Peikert (MP) yielding preimages whose dimension linearly grows with that of the gadget. To improve performance, some papers have proposed to truncate the gadget but at the cost of an important feature of the MP sampler, namely the ability to invert arbitrary syndromes. Technically speaking, they replace the worst-case MP sampler by an average-case sampler that can only be used in specific contexts. Far from being a mere theoretical restriction, it prevents the main applications of gadget-based samplers from using truncated variants and thus from benefiting from the associated performance gains.
+In this paper, we solve this problem by describing a worst-case sampler that still works with truncated gadgets. Its main strength is that it retains the main characteristics of the MP sampler while providing flexibility in the choice of the truncation parameter. As a consequence, it can be used as a plug-in replacement for all applications relying on the MP sampler so far, leading to performance improvements up to 30% as illustrated by several examples in this paper. Our sampler is supported by a thorough security analysis that addresses the hurdles met by previous works and its practicality is demonstrated by a concrete implementation.
+]]></content:encoded>
+<pubDate>Mon, 02 Dec 2024 16:45:40 +0000</pubDate>
+<pubDate>Mon, 02 Dec 2024 16:45:40 +0000</pubDate>
+</item>
+<item>
+<title>Vote&amp;Check: Secure Postal Voting with Reduced Trust Assumptions</title>
+<link>https://eprint.iacr.org/2024/1951</link>
+<guid>https://eprint.iacr.org/2024/1951</guid>
+<content:encoded><![CDATA[
+<div> 关键词: 邮政投票、安全性、验证性、隐私保护、Vote&Check
+
+总结:
+邮政投票是一种常用的替代现场投票的方式，其安全性和可验证性历来依赖于组织措施和多方信任。近年来，已有方案提出增加邮政投票的可验证性同时保持投票隐私。文章对邮政投票环境进行了系统分析，识别出一系列不可避免的攻击风险，并将这些分析应用于现有文献中的系统。针对这些问题，文章提出了一个名为Vote&Check的邮政投票协议，该协议具有高安全级别并仅需少数基础加密原语——哈希函数和签名。Vote&Check的安全属性已在符号模型中通过ProVerif工具得到了证明。 <div>
+Postal voting is a frequently used alternative to on-site voting. Traditionally, its security relies on organizational measures, and voters have to trust many entities. In the recent years, several schemes have been proposed to add verifiability properties to postal voting, while preserving vote privacy.
+Postal voting comes with specific constraints. We conduct a systematic analysis of this setting and we identify a list of generic attacks, highlighting that some attacks seem unavoidable. This study is applied to existing systems of the literature.
+We then propose Vote&amp;Check, a postal voting protocol which provides a high level of security, with a reduced number of authorities. Furthermore, it requires only basic cryptographic primitives, namely hash functions and signatures. The security properties are proven in a symbolic model, with the help of the ProVerif tool.
+]]></content:encoded>
+<pubDate>Mon, 02 Dec 2024 13:13:03 +0000</pubDate>
+<pubDate>Mon, 02 Dec 2024 13:13:03 +0000</pubDate>
+</item>
+<item>
+<title>ARK: Adaptive Rotation Key Management for Fully Homomorphic Encryption Targeting Memory Efficient Deep Learning Inference</title>
+<link>https://eprint.iacr.org/2024/1948</link>
+<guid>https://eprint.iacr.org/2024/1948</guid>
+<content:encoded><![CDATA[
+<div> 关键词: 深度学习、隐私保护、全同态加密(FHE)、内存消耗、Adaptive Rotation Key(ARK)
+
+总结:
+本文关注深度学习中隐私保护的问题，提出了一种名为Adaptive Rotation Key (ARK)的新技术，旨在解决全同态加密(FHE)的高内存消耗问题。ARKeep能够通过全面分析数值模式来生成最小化的共享旋转密钥集合，从而减少旋转密钥的内存占用。此外，ARK还提供了两种配置选项，允许用户根据需求在内存效率和计算速度之间进行权衡。在内存优先模式下，ARK能降低41.17%的旋转密钥内存消耗，但会导致执行时间增加12.57%；而在速度优先模式下，它实现了24.62%的旋转密钥内存减少，仅对执行时间造成0.21%的影响。因此，ARK为优化基于FHE的隐私保护系统提供了一个灵活而有效的解决方案，标志着该领域在优化策略上的一项重要进展。 <div>
+Advancements in deep learning (DL) not only revolutionized many aspects in our lives, but also introduced privacy concerns, because it processed vast amounts of information that was closely related to our daily life. Fully Homomorphic Encryption (FHE) is one of the promising solutions to this privacy issue, as it allows computations to be carried out directly on the encrypted data. However, FHE requires high computational cost, which is a huge barrier to its widespread adoption. Many prior works proposed techniques to enhance the speed performance of FHE in the past decade, but they often impose significant memory requirements, which may be up to hundreds of gigabytes. Recently, focus has shifted from purely improving speed performance to managing FHE’s memory consumption as a critical challenge. Rovida and Leporati introduced a technique to minimize rotation key memory by retaining only essential keys, yet this technique is limited to cases with symmetric numerical patterns (e.g., -2 -1 0 1 2), constraining its broader utility. In this paper, a new technique, Adaptive Rotation Key (ARK), is proposed that minimizes rotation key memory consumption by exhaustively analyzing numerical patterns to produce a minimal subset of shared rotation keys. ARK also provides a dual-configuration option, enabling users to prioritize memory efficiency or computational speed. In memory-prioritized mode, ARK reduces rotation key memory consumption by 41.17% with a 12.57% increase in execution time. For speed-prioritized mode, it achieves a 24.62% rotation key memory reduction with only a 0.21% impact on execution time. This flexibility positions ARK as an effective solution for optimizing FHE across varied use cases, marking a significant advancement in optimization strategies for FHE-based privacy-preserving systems.
+]]></content:encoded>
+<pubDate>Mon, 02 Dec 2024 03:50:20 +0000</pubDate>
+<pubDate>Mon, 02 Dec 2024 03:50:20 +0000</pubDate>
+</item>
+
+<item>
 <title>Alba: The Dawn of Scalable Bridges for Blockchains</title>
 <link>https://eprint.iacr.org/2024/197</link>
 <guid>https://eprint.iacr.org/2024/197</guid>
@@ -22,7 +102,6 @@ This paper fills this gap by introducing the concept of Pay2Chain bridges that l
 We formalize the security of Alba against Byzantine adversaries in the UC framework and complement it with a game theoretic analysis. We further introduce formal scalability metrics to demonstrate Alba’s efficiency. Our empirical evaluation confirms Alba efficiency in terms of communication complexity and on-chain costs, with its optimistic case incurring only twice the cost of a standard Ethereum transaction of token ownership transfer.
 ]]></content:encoded>
 <pubDate>Fri, 09 Feb 2024 14:38:00 +0000</pubDate>
-<pubDate>Fri, 09 Feb 2024 14:38:00 +0000</pubDate>
 </item>
 <item>
 <title>Dynamic-FROST: Schnorr Threshold Signatures with a Flexible Committee</title>
@@ -31,7 +110,7 @@ We formalize the security of Alba against Byzantine adversaries in the UC framew
 <content:encoded><![CDATA[
 <div> 关键词：_threshold signatures_ ， _FROST_ ， _CHURP_ ， _dynamic update_ ， _Schnorr threshold signature_
 
-<br><br>总结：
+<br /><br />总结：
 
 本文提出了一个名为Dynamic-FROST (简称D-FROST) 的协议，它将FROST——一种基于Schnorr的阈值签名方案，与CHURP——一种动态主动秘密分享方案相结合。D-FROST 是首个能够支持委员会成员和阈值值动态变更的Schnorr阈值签名方案，而且无需依赖可信第三方。此外，文章还对D-FROST的安全性进行了证明，表明其保持了原签署方案的存在的选择消息攻击下的不可伪造性属性。这一创新对于那些需要动态调整阈值或参与者的应用，如共识算法和区块链钱包等，具有实际意义和应用价值。 <div>
 Threshold signatures enable any subgroup of predefined cardinality $t$ out of a committee of $n$ participants to generate a valid, aggregated signature. 
@@ -41,9 +120,7 @@ In this paper, we present Dynamic-FROST (D-FROST, for short) that combines FROST
 Besides detailing the protocol, we present a proof of its security: as the original signing scheme, D-FROST preserves the property of Existential Unforgeability under Chosen-Message Attack.
 ]]></content:encoded>
 <pubDate>Wed, 05 Jun 2024 12:34:38 +0000</pubDate>
-<pubDate>Wed, 05 Jun 2024 12:34:38 +0000</pubDate>
 </item>
-
 <item>
 <title>Distributed Differentially Private Data Analytics via Secure Sketching</title>
 <link>https://eprint.iacr.org/2024/1946</link>

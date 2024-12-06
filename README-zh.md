@@ -56,4 +56,3 @@
 
 - https://eprint.iacr.org/rss/rss.xml -> https://striveCEO.github.io/RSS-GPT/iacr.xml
 - https://rss.arxiv.org/rss/cs -> https://striveCEO.github.io/RSS-GPT/arxiv.xml
-- https://rsshub.app/usenix/usenix-security-sympoium -> https://striveCEO.github.io/RSS-GPT/UsenixSecurity.xml

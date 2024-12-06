@@ -57,4 +57,3 @@ I will consider hosting more feeds in the future. Email me or submit an issue if
 
 - https://eprint.iacr.org/rss/rss.xml -> https://striveCEO.github.io/RSS-GPT/iacr.xml
 - https://rss.arxiv.org/rss/cs -> https://striveCEO.github.io/RSS-GPT/arxiv.xml
-- https://rsshub.app/usenix/usenix-security-sympoium -> https://striveCEO.github.io/RSS-GPT/UsenixSecurity.xml
