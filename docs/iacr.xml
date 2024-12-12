@@ -4,6 +4,79 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+<item>
+<title>Xiezhi: Toward Succinct Proofs of Solvency</title>
+<link>https://eprint.iacr.org/2024/2001</link>
+<guid>https://eprint.iacr.org/2024/2001</guid>
+<content:encoded><![CDATA[
+<div> 关键词: 证明清偿能力、零知识证明、中心化加密货币交易所、验证时间、bls12-381
+
+总结:
+本文提出了改进中心化加密货币交易所的证明清偿能力方案，旨在提供一种快速（几分钟）、体积小（KB级）和验证快捷（几秒钟）的全程端到端论证。文章关注的重点包括：一是提出并实现这样一个优化的证明系统；二是针对比特币与以太坊不同的密码学环境（如secp256k1曲线与更为理想的简洁性设置，如配对密码学），采用了一种新颖的映射方法来处理两者间的自然冲突；三是讨论了如何将该协议适应于具体参数为bls12-381的情况，因为对于规模稍大的交易所，所有用户余额的位分解将会超过该曲线的最大单位根。 <div>
+A proof of solvency (or proof of reserves) is a zero-knowledge proof conducted by centralized cryptocurrency exchange to offer evidence that the exchange owns enough cryptocurrency to settle each of its users' balances. The proof seeks to reveal nothing about the finances of the exchange or its users, only the fact that it is solvent. The literature has already started to explore how to make proof size and verifier time independent of the number of (i) users on the exchange, and (ii) addresses used by the exchange. We argue there are a few areas of improvement. First, we propose and implement a full end-to-end argument that is fast for the exchange to prove (minutes), small in size (KBs), and fast to verify (seconds). Second, we deal with the natural conflict between Bitcoin and Ethereum's cryptographic setting (secp256k1) and more ideal settings for succinctness (e.g., pairing-based cryptography) with a novel mapping approach. Finally, we discuss how to adapt the protocol to the concrete parameters of bls12-381 (which is relevant because the bit-decomposition of all user balances will exceed the largest root of unity of the curve for even moderately-sized exchanges).
+]]></content:encoded>
+<pubDate>Wed, 11 Dec 2024 21:55:31 +0000</pubDate>
+<pubDate>Wed, 11 Dec 2024 21:55:31 +0000</pubDate>
+</item>
+<item>
+<title>BitVM: Quasi-Turing Complete Computation on Bitcoin</title>
+<link>https://eprint.iacr.org/2024/1995</link>
+<guid>https://eprint.iacr.org/2024/1995</guid>
+<content:encoded><![CDATA[
+<div> 关键词：区块链、比特币脚本、计算能力、虚拟机、BitVM
+
+总结:
+本文针对区块链社区长期存在的一个问题进行了研究，即在具有有限脚本语言（如比特币脚本）的加密货币中，哪些类型的计算能够得到有效表达。文章首次证明了无需修改现有语言或依赖额外安全假设（例如可信硬件、可信方或安全多数委员会），任意计算可以在今天的比特币脚本中被编码。为此，提出了$\mathsf{BitVM}$，这是一个结合了密码学和激励机制的两方协议，实现了一个通用虚拟机。对$\mathsf{BitVM}$进行了形式化分析，明确了其功能、系统假设及安全性属性。同时，文章还展示了该方法的实用性：在乐观情况下，只需三次链上交易即可完成协议执行；而在悲观情况下，交易数量随着虚拟机规模的增长呈对数级增加。这项工作不仅解决了长期以来的理论问题，而且还对实践产生了强烈影响，为在比特币中开发复杂应用开辟了新的可能。 <div>
+A long-standing question in the blockchain community is which class of computations are efficiently expressible in cryptocurrencies with limited scripting languages, such as Bitcoin Script. Such languages expose a reduced trusted computing base, thereby being less prone to hacks and vulnerabilities, but have long been believed to support only limited classes of payments.
+
+In this work, we confute this long-standing belief by showing for the first time that arbitrary computations can be encoded in today's Bitcoin Script, without introducing any language modification or additional security assumptions, such as trusted hardware, trusted parties, or committees with secure majority. In particular, we present $\mathsf{BitVM}$, a two-party protocol realizing a generic virtual machine by a combination of cryptographic and incentive mechanisms. We conduct a formal analysis of $\mathsf{BitVM}$, characterizing its functionality, system assumptions, and security properties. We further demonstrate the practicality of our approach:  in the optimistic case (i.e., in the absence of disputes between parties), our protocol requires just three on-chain transactions, whereas in the pessimistic case, the number of transactions grows logarithmically with the size of the virtual machine.  This work not only solves a long-standing theoretical problem, but it also promises a strong practical impact, enabling the development of complex applications in Bitcoin.
+]]></content:encoded>
+<pubDate>Tue, 10 Dec 2024 21:56:17 +0000</pubDate>
+<pubDate>Tue, 10 Dec 2024 21:56:17 +0000</pubDate>
+</item>
+<item>
+<title>UTRA: Universe Token Reusability Attack and Verifiable Delegatable Order-Revealing Encryption</title>
+<link>https://eprint.iacr.org/2024/1983</link>
+<guid>https://eprint.iacr.org/2024/1983</guid>
+<content:encoded><![CDATA[
+<div> 关键词: 数据集增长、隐私保护、加密数据、委托可揭示加密、安全可揭示加密
+
+总结:
+随着数据集的增长，用户在本地机器上处理任务面临困难，同时对数据泄漏的隐私关注导致数据拥有者将加密数据上传至云端并使用安全范围查询。为了解决这些问题，出现了针对大量数值数据的可揭示排序加密（ORE），并在多客户端环境中进一步发展出了委托可揭示加密（DORE）。然而，存在安全风险，即未经授权的用户可能利用授权令牌进行未授权的数据操作。因此，提出了安全可揭示加密方案（SEDORE）和高效的委托可揭示加密（EDORE）。尽管SEDORE和EDORE旨在抵御这类攻击，但我们发现它们仍存在相同威胁模型下的漏洞。为此，我们提出了验证性委托可揭示加密（VDORE），通过使用Schnorr签名方案验证用户发送的令牌的有效性，以防止此类攻击。此外，VDORE的令牌生成算法相比SEDORE提供了大约1.5倍的速度提升。 <div>
+As dataset sizes continue to grow, users face increasing difficulties in performing processing tasks on their local machines. From this, privacy concerns about data leakage have led data owners to upload encrypted data and utilize secure range queries to cloud servers. 
+To address these challenges, order-revealing encryption (ORE) has emerged as a promising solution for large numerical datasets. Building on this, delegatable order-revealing encryption (DORE) was introduced, allowing operations between encrypted datasets with different secret keys in multi-client ORE environments. DORE operates through authorization tokens issued by the data owner. However, security concerns had arisen about unauthorized users exploiting data without permission, leading to the development of a secure order-revealing encryption scheme (SEDORE). These attacks can result in unauthorized data access and significant financial losses in modern cloud service providers (CSPs) utilizing pay-per-query systems. In addition, efficient delegatable order-revealing encryption (EDORE), which improves speed and storage compared to SEDORE with identical security levels, was also introduced.
+Although both SEDORE and EDORE were designed to be robust against these attacks, we have identified that they still retain the same vulnerabilities within the same threat model. To address these issues, we propose Verifiable Delegatable Order-Revealing Encryption (VDORE), which protects against attacks by using the Schnorr Signature Scheme to verify the validity of the token that users send. We propose a precise definition and robust proof to improve the unclear definition and insufficient proof regarding token unforgeability in the SEDORE.
+Furthermore, the token generation algorithm in VDORE provides about a $1.5\times$ speed-up compared to SEDORE.
+]]></content:encoded>
+<pubDate>Sun, 08 Dec 2024 01:46:18 +0000</pubDate>
+<pubDate>Sun, 08 Dec 2024 01:46:18 +0000</pubDate>
+</item>
+<item>
+<title>Shutter Network: Private Transactions from Threshold Cryptography</title>
+<link>https://eprint.iacr.org/2024/1981</link>
+<guid>https://eprint.iacr.org/2024/1981</guid>
+<content:encoded><![CDATA[
+<div> 关键词: DeFi, 交易重排序攻击, 前序交易/夹心交易, MEV, Shutter网络<br><br>总结:
+随着DeFi的发展，基于交易重排序的攻击成为公共区块链面临的重要问题，如前序交易或夹心交易，攻击者通过操纵交易顺序影响金融资产市场价格，这种价值在以太坊生态系统中被称为矿工/最大可提取价值(MEV)，目前估计已超过13亿美元。为抵御MEV，一种有前景的方法是隐藏交易数据，使区块提议者无法根据交易内容选择执行顺序。本文描述了Shutter网络所采用的加密协议，该网络自2021年底以来已成为开源项目，并自2022年10月起投入生产运行。 <div>
+With the emergence of DeFi, attacks based on re-ordering transactions have become an essential problem for public blockchains. Such attacks include front-running or sandwiching transactions, where the adversary places transactions at a particular place within a block to influence a financial asset’s market price. In the Ethereum space, the value extracted by such attacks is often referred to as miner/maximal extractable value (MEV), which to date is estimated to have reached a value of more than USD 1.3B. A promising approach to protect against MEV is to hide the transaction data so block proposers cannot choose the order in which transactions are executed based on the transactions’ content. This paper describes the cryptographic protocol underlying the Shutter network. Shutter has been available as an open-source project since the end of 2021 and has been running in production since Oct. 2022.
+]]></content:encoded>
+<pubDate>Fri, 06 Dec 2024 21:34:08 +0000</pubDate>
+<pubDate>Fri, 06 Dec 2024 21:34:08 +0000</pubDate>
+</item>
+<item>
+<title>HI-CKKS: Is High-Throughput Neglected? Reimagining CKKS Efficiency with Parallelism</title>
+<link>https://eprint.iacr.org/2024/1976</link>
+<guid>https://eprint.iacr.org/2024/1976</guid>
+<content:encoded><![CDATA[
+<div> 关键词: 数据外包, 云服务, 隐私保护, CKKS, Homomorphic加密, 性能优化, HI-CKKS, 吞吐量, 异步执行, (I)NTT 原语, 高性能实现, 数学模块指令集, 内存优化, 并行同态乘法
+
+总结:<br>
+随着数据外包和云服务的普及，隐私问题日益凸显。CKKS作为一种重要的全同态加密方案，可以在加密数据上进行计算，为隐私保护提供了关键保障。然而，其性能瓶颈限制了广泛应用。本文提出了HI-CKKS，一种面向吞吐量优化、高性能实现的CKKS全同态加密方案。HI-CKKS通过引入支持批处理的异步执行策略，有效缓解了主机与服务器间频繁的数据交互及等待延迟问题。同时，针对CKKS中的核心(I)NTT原语，开发了一种层次化、混合型高吞吐量实现方法，包括高效的算术模块指令集、统一内核融合以及混合内存优化策略。此外，还提出了一种多维度并行同态乘法方案，旨在最大化吞吐量并提升(I)NTT和同态乘法的性能。实验结果表明，HI-CKKS在RTX 4090显卡上实现了显著的吞吐量性能提升，与CPU实现相比，NTT、INTT和HMult的吞吐量分别提高了$175.08\times$、$191.27\times$和$679.57\times$；相较于最新的GPU基线工作，其吞吐量性能仍然表现出显著优势，提升幅度从$1.54\times$到$693.17\times$不等。 <div>
+The proliferation of data outsourcing and cloud services has heightened privacy vulnerabilities. CKKS, among the most prominent homomorphic encryption schemes, allows computations on encrypted data, serving as a critical privacy safeguard. However, performance remains a central bottleneck, hindering widespread adoption. Existing optimization efforts often prioritize latency reduction over throughput performance. This paper presents HI-CKKS, a throughput-oriented High-performance Implementation of CKKS homomorphic encryption, addressing these challenges. Our HI-CKKS introduces a batch-supporting asynchronous execution scheme, effectively mitigating frequent data interactions and high waiting delays between hosts and servers in service-oriented scenarios. We analyze the fundamental (I)NTT primitive, which is critical in CKKS, and develop a hierarchical, hybrid high-throughput implementation. This includes efficient arithmetic module instruction set implementations, unified kernel fusion, and hybrid memory optimization strategies that significantly improve memory access efficiency and the performance of (I)NTT operations. Additionally, we propose a multi-dimensional parallel homomorphic multiplication scheme aimed at maximizing throughput and enhancing the performance of (I)NTT and homomorphic multiplication. In conclusion, our implementation is deployed on the RTX 4090, where we conduct a thorough throughput performance evaluation of HI-CKKS, enabling us to pinpoint the most effective parallel parameter settings. Compared to the CPU implementation, our system achieves throughput increases of $175.08\times$, $191.27\times$, and $679.57\times$ for NTT, INTT, and HMult, respectively. And our throughput performance still demonstrates a significant improvement, ranging from $1.54\times$ to $693.17\times$ compared to the latest GPU-based works.
+]]></content:encoded>
+<pubDate>Fri, 06 Dec 2024 11:53:02 +0000</pubDate>
+<pubDate>Fri, 06 Dec 2024 11:53:02 +0000</pubDate>
+</item>
 
 <item>
 <title>Arke: Scalable and Byzantine Fault Tolerant Privacy-Preserving Contact Discovery</title>
