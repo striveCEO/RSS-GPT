@@ -5,6 +5,80 @@
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
 <item>
+<title>Crescent: Stronger Privacy for Existing Credentials</title>
+<link>https://eprint.iacr.org/2024/2013</link>
+<guid>https://eprint.iacr.org/2024/2013</guid>
+<content:encoded><![CDATA[
+<div> 关键词: Crescent、隐私保护凭证、零知识证明、选择性披露、unlinkability
+
+总结:
+Crescent是一个旨在提升现有凭证（如JSON Web Tokens (JWTs)和Mobile Driver's License (mDL)）隐私特性的系统实现。该系统无需新的发证方即可通过使用零知识证明技术来实现凭证的选择性披露和不可链接性等功能。Crescent具备实际应用性能，能在一次性的凭证设置阶段后提供快速的证明生成和验证时间（数十毫秒）。文中展示了两个实用场景的演示：基于雇主颁发JWT的福利资格证明以及基于mDL的在线年龄验证。此外，他们提供了开源实现以促进进一步的研究与实验，相关代码库可在https://github.com/microsoft/crescent-credentials找到。 <div>
+We describe Crescent, a construction and implementation of privacy-preserving credentials. The system works by upgrading the privacy features of existing credentials, such as JSON Web Tokens (JWTs) and Mobile Driver’s License (mDL) and as such does not require a new party to issue credentials. By using zero-knowledge proofs of possession of these credentials, we can add privacy features such as selective disclosure and unlinkability, without help from credential issuers. The system has practical performance, offering fast proof generation and verification times (tens of milliseconds) after a once-per-credential setup phase. We give demos for two practical scenarios, proof of employment for benefits eligibility (based on an employer-issued JWT), and online age verification (based on an mDL). We provide an open-source implementation to enable further research and experimentation.
+
+This paper is an early draft describing our work, aiming to include enough material to describe the functionality, and some details of the internals of our new library, available at https://github.com/microsoft/crescent-credentials.
+]]></content:encoded>
+<pubDate>Fri, 13 Dec 2024 01:42:20 +0000</pubDate>
+<pubDate>Fri, 13 Dec 2024 01:42:20 +0000</pubDate>
+</item>
+<item>
+<title>GraSS: Graph-based Similarity Search on Encrypted Query</title>
+<link>https://eprint.iacr.org/2024/2012</link>
+<guid>https://eprint.iacr.org/2024/2012</guid>
+<content:encoded><![CDATA[
+<div> 关键词：相似性搜索、图基方法、全同态加密（FHE）、客户端隐私、服务器隐私
+
+总结:
+我们提出了一种名为GraSS的安全协议，用于基于全同态加密（FHE）实现客户端（查询拥有者）和服务器端（数据集拥有者）之间的图基相似性搜索。该协议能够在基于FHE的安全假设下保证客户端输入对服务器的隐私以及服务器输入对客户端的隐私。为了提高可扩展性和降低计算复杂度，我们设计了一个对FHE友好的图结构及新颖的索引编码方法，将邻域检索过程的时间复杂度从$O(n^2)$降低到$\tilde{O}(n)$，其中n为总节点数。同时，我们还提出了几项核心的FHE算法，用于在新的图结构下执行图操作。最后，我们实现了完整的GraSS解决方案，这是首个基于FHE的安全图基数据库搜索方案。经过实测，GraSS在百万规模的数据集上可以在约83小时内找到近似的前16名结果，准确率达到0.918，比此前已知的最佳FHE方案快了超过28倍。 <div>
+Similarity search, i.e., retrieving vectors in a database that are similar to a query, is the backbone of many applications. Especially, graph-based methods show state-of-the-art performance. For sensitive applications, it is critical to ensure the privacy of the query and the dataset.
+
+In this work, we introduce GraSS, a secure protocol between client (query owner) and server (dataset owner) for graph-based similarity search based on fully homomorphic encryption (FHE).  Both the client-input privacy against the server and the server-input privacy against the client are achievable based on underlying security assumptions on FHE.
+
+We first propose an FHE-friendly graph structure with a novel index encoding method that makes our protocol highly scalable in terms of data size, reducing the computational complexity of neighborhood retrieval process from $O(n^2)$ to $\tilde{O}(n)$ for the total number of nodes $n$. We also propose several core FHE algorithms to perform graph operations under the new graph structure. Finally, we introduce GraSS, an end-to-end solution of secure graph-based similarity search based on FHE. To the best of our knowledge, it is the first FHE-based solution for secure graph-based database search.
+
+We implemented GraSS with an open-source FHE library and estimated the performance on a million-scale dataset. GraSS identifies (approximate) top-16 in about $83$ hours achieving search accuracy of $0.918$, making it over $28\times$ faster than the previous best-known FHE-based solution.
+]]></content:encoded>
+<pubDate>Fri, 13 Dec 2024 00:11:45 +0000</pubDate>
+<pubDate>Fri, 13 Dec 2024 00:11:45 +0000</pubDate>
+</item>
+<item>
+<title>Anonymous credentials from ECDSA</title>
+<link>https://eprint.iacr.org/2024/2010</link>
+<guid>https://eprint.iacr.org/2024/2010</guid>
+<content:encoded><![CDATA[
+<div> 关键词：匿名数字凭证、大规模部署、BBS+、ECDSA、零知识证明
+
+总结:<br>
+本文提出了一种新的匿名数字凭证方案，该方案针对广泛应用且具有大量历史部署的椭圆曲线数字签名算法（ECDSA）进行设计。此方案无需改变身份发行者的现有流程，不需对移动设备进行硬件安全元素和操作系统的更新，也不依赖非标准的密码学假设，从而解决了大规模部署匿名凭证体系面临的困难。为了实现这一目标，文章通过采用基于sumcheck和Ligero论证系统的零知识证明方法，设计了适用于ECDSA所需的有限域上的高效Reed-Solomon编码方法以及专门的电路。生成ECDSA的零知识证明只需60毫秒，在结合ISO标准化的身份协议如MDOC标准后，可在移动设备上根据凭证大小在1.2秒内生成MDOC展示流程的零知识证明。因此，该方案被认为是隐私保护型数字身份应用的一个有前景的候选方案。 <div>
+Anonymous digital credentials allow a user to prove possession of an attribute that has been asserted by an identity issuer without revealing any extra information about themselves.  For example, a user who has received a digital passport credential can prove their “age is $>18$” without revealing any other attributes such as their name or date of birth.
+
+    Despite inherent value for privacy-preserving authentication, anonymous credential schemes have been difficult to deploy at scale.  Part of the difficulty arises because schemes in the literature, such as BBS+, use new cryptographic assumptions that require system-wide changes to existing issuer infrastructure.  In addition,  issuers often require digital identity credentials to be *device-bound* by incorporating the device’s secure element into the presentation flow.  As a result, schemes like BBS+ require updates to the hardware secure elements and OS on every user's device.
+    
+    In this paper, we propose a new anonymous credential scheme for the popular and legacy-deployed Elliptic Curve Digital Signature Algorithm (ECDSA) signature scheme.  By adding efficient zk arguments for statements about SHA256 and document parsing for ISO-standardized identity formats, our anonymous credential scheme is that first one that can be deployed *without* changing any issuer processes, *without* requiring changes to mobile devices, and *without* requiring non-standard cryptographic assumptions.
+
+    Producing ZK proofs about ECDSA signatures has been a bottleneck for other ZK proof systems because standardized curves such as P256 use finite fields which do not support efficient number theoretic transforms.  We overcome this bottleneck by designing a ZK proof system around sumcheck and the Ligero argument system, by designing efficient methods for Reed-Solomon encoding over the required fields, and by designing specialized circuits for ECDSA.
+        
+    Our proofs for ECDSA can be generated in 60ms.  When incorporated into a fully standardized identity protocol such as the ISO MDOC standard, we can generate a zero-knowledge proof for the MDOC presentation flow in 1.2 seconds on mobile devices depending on the credential size. These advantages make our scheme a promising candidate for privacy-preserving digital identity applications.
+]]></content:encoded>
+<pubDate>Thu, 12 Dec 2024 18:49:06 +0000</pubDate>
+<pubDate>Thu, 12 Dec 2024 18:49:06 +0000</pubDate>
+</item>
+<item>
+<title>PrivCirNet: Efficient Private Inference via Block Circulant Transformation</title>
+<link>https://eprint.iacr.org/2024/2008</link>
+<guid>https://eprint.iacr.org/2024/2008</guid>
+<content:encoded><![CDATA[
+<div> 关键词: Homomorphic Encryption (HE), Deep Neural Network (DNN), Circulant Matrices, PrivCirNet, Computation Overhead
+
+总结:
+本文提出了一种名为PrivCirNet的新框架，该框架基于块循环变换对同态加密（HE）下的深度神经网络（DNN）推理进行了协议与网络的联合优化。通过将DNN权重转化为循环矩阵，可以将一般的矩阵向量乘法转换为HE友好的一维卷积，显著降低了HE计算成本。在协议层面，PrivCirNet定制了与块循环变换完全兼容的HE编码算法，能够按块大小比例减少计算延迟。在网络层面，文章提出了一个基于二阶信息的延迟感知公式来搜索各层的块大小分配，并利用层融合进一步降低推理成本。实验结果表明，相比于最先进的HE基框架Bolt和HE友好剪枝方法SpENCNN，PrivCirNet在ResNet-18和Vision Transformer (ViT)在Tiny ImageNet上的推理延迟分别减少了5.0倍和1.3倍，同时保持了相同的精度水平，并在准确性上分别提升了4.1%和12%。对于MobileNetV2在ImageNet上的任务，PrivCirNet实现了比Bolt和SpENCNN低1.7倍的延迟以及更高的4.2%准确率。项目代码和检查点已在https://github.com/Tianshi-Xu/PrivCirNet开源。 <div>
+Homomorphic encryption (HE)-based deep neural network (DNN) inference protects data and model privacy but suffers from significant computation overhead. We observe transforming the DNN weights into circulant matrices converts general matrix-vector multiplications into HE-friendly 1-dimensional convolutions, drastically reducing the HE computation cost. Hence, in this paper, we propose PrivCirNet, a protocol/network co-optimization framework based on block circulant transformation. At the protocol level, PrivCirNet customizes the HE encoding algorithm that is fully compatible with the block circulant transformation and reduces the computation latency in proportion to the block size. At the network level, we propose a latency-aware formulation to search for the layer-wise block size assignment based on second-order information. PrivCirNet also leverages layer fusion to further reduce the inference cost. We compare PrivCirNet with the state-of-the-art HE-based framework Bolt (IEEE S&amp;P 2024) and HE-friendly pruning method SpENCNN (ICML 2023). For ResNet-18 and Vision Transformer (ViT) on Tiny ImageNet, PrivCirNet reduces latency by $5.0\times$ and $1.3\times$ with iso-accuracy over Bolt, respectively, and improves accuracy by $4.1\%$ and $12\%$ over SpENCNN, respectively. For MobileNetV2 on ImageNet, PrivCirNet achieves $1.7\times$ lower latency and $4.2\%$ better accuracy over Bolt and SpENCNN, respectively. 
+    Our code and checkpoints are available at https://github.com/Tianshi-Xu/PrivCirNet.
+]]></content:encoded>
+<pubDate>Thu, 12 Dec 2024 14:46:10 +0000</pubDate>
+<pubDate>Thu, 12 Dec 2024 14:46:10 +0000</pubDate>
+</item>
+
+<item>
 <title>Xiezhi: Toward Succinct Proofs of Solvency</title>
 <link>https://eprint.iacr.org/2024/2001</link>
 <guid>https://eprint.iacr.org/2024/2001</guid>
@@ -15,7 +89,6 @@
 本文提出了改进中心化加密货币交易所的证明清偿能力方案，旨在提供一种快速（几分钟）、体积小（KB级）和验证快捷（几秒钟）的全程端到端论证。文章关注的重点包括：一是提出并实现这样一个优化的证明系统；二是针对比特币与以太坊不同的密码学环境（如secp256k1曲线与更为理想的简洁性设置，如配对密码学），采用了一种新颖的映射方法来处理两者间的自然冲突；三是讨论了如何将该协议适应于具体参数为bls12-381的情况，因为对于规模稍大的交易所，所有用户余额的位分解将会超过该曲线的最大单位根。 <div>
 A proof of solvency (or proof of reserves) is a zero-knowledge proof conducted by centralized cryptocurrency exchange to offer evidence that the exchange owns enough cryptocurrency to settle each of its users' balances. The proof seeks to reveal nothing about the finances of the exchange or its users, only the fact that it is solvent. The literature has already started to explore how to make proof size and verifier time independent of the number of (i) users on the exchange, and (ii) addresses used by the exchange. We argue there are a few areas of improvement. First, we propose and implement a full end-to-end argument that is fast for the exchange to prove (minutes), small in size (KBs), and fast to verify (seconds). Second, we deal with the natural conflict between Bitcoin and Ethereum's cryptographic setting (secp256k1) and more ideal settings for succinctness (e.g., pairing-based cryptography) with a novel mapping approach. Finally, we discuss how to adapt the protocol to the concrete parameters of bls12-381 (which is relevant because the bit-decomposition of all user balances will exceed the largest root of unity of the curve for even moderately-sized exchanges).
 ]]></content:encoded>
-<pubDate>Wed, 11 Dec 2024 21:55:31 +0000</pubDate>
 <pubDate>Wed, 11 Dec 2024 21:55:31 +0000</pubDate>
 </item>
 <item>
@@ -31,7 +104,6 @@ A long-standing question in the blockchain community is which class of computati
 
 In this work, we confute this long-standing belief by showing for the first time that arbitrary computations can be encoded in today's Bitcoin Script, without introducing any language modification or additional security assumptions, such as trusted hardware, trusted parties, or committees with secure majority. In particular, we present $\mathsf{BitVM}$, a two-party protocol realizing a generic virtual machine by a combination of cryptographic and incentive mechanisms. We conduct a formal analysis of $\mathsf{BitVM}$, characterizing its functionality, system assumptions, and security properties. We further demonstrate the practicality of our approach:  in the optimistic case (i.e., in the absence of disputes between parties), our protocol requires just three on-chain transactions, whereas in the pessimistic case, the number of transactions grows logarithmically with the size of the virtual machine.  This work not only solves a long-standing theoretical problem, but it also promises a strong practical impact, enabling the development of complex applications in Bitcoin.
 ]]></content:encoded>
-<pubDate>Tue, 10 Dec 2024 21:56:17 +0000</pubDate>
 <pubDate>Tue, 10 Dec 2024 21:56:17 +0000</pubDate>
 </item>
 <item>
@@ -49,18 +121,16 @@ Although both SEDORE and EDORE were designed to be robust against these attacks,
 Furthermore, the token generation algorithm in VDORE provides about a $1.5\times$ speed-up compared to SEDORE.
 ]]></content:encoded>
 <pubDate>Sun, 08 Dec 2024 01:46:18 +0000</pubDate>
-<pubDate>Sun, 08 Dec 2024 01:46:18 +0000</pubDate>
 </item>
 <item>
 <title>Shutter Network: Private Transactions from Threshold Cryptography</title>
 <link>https://eprint.iacr.org/2024/1981</link>
 <guid>https://eprint.iacr.org/2024/1981</guid>
 <content:encoded><![CDATA[
-<div> 关键词: DeFi, 交易重排序攻击, 前序交易/夹心交易, MEV, Shutter网络<br><br>总结:
+<div> 关键词: DeFi, 交易重排序攻击, 前序交易/夹心交易, MEV, Shutter网络<br /><br />总结:
 随着DeFi的发展，基于交易重排序的攻击成为公共区块链面临的重要问题，如前序交易或夹心交易，攻击者通过操纵交易顺序影响金融资产市场价格，这种价值在以太坊生态系统中被称为矿工/最大可提取价值(MEV)，目前估计已超过13亿美元。为抵御MEV，一种有前景的方法是隐藏交易数据，使区块提议者无法根据交易内容选择执行顺序。本文描述了Shutter网络所采用的加密协议，该网络自2021年底以来已成为开源项目，并自2022年10月起投入生产运行。 <div>
 With the emergence of DeFi, attacks based on re-ordering transactions have become an essential problem for public blockchains. Such attacks include front-running or sandwiching transactions, where the adversary places transactions at a particular place within a block to influence a financial asset’s market price. In the Ethereum space, the value extracted by such attacks is often referred to as miner/maximal extractable value (MEV), which to date is estimated to have reached a value of more than USD 1.3B. A promising approach to protect against MEV is to hide the transaction data so block proposers cannot choose the order in which transactions are executed based on the transactions’ content. This paper describes the cryptographic protocol underlying the Shutter network. Shutter has been available as an open-source project since the end of 2021 and has been running in production since Oct. 2022.
 ]]></content:encoded>
-<pubDate>Fri, 06 Dec 2024 21:34:08 +0000</pubDate>
 <pubDate>Fri, 06 Dec 2024 21:34:08 +0000</pubDate>
 </item>
 <item>
@@ -70,14 +140,12 @@ With the emergence of DeFi, attacks based on re-ordering transactions have becom
 <content:encoded><![CDATA[
 <div> 关键词: 数据外包, 云服务, 隐私保护, CKKS, Homomorphic加密, 性能优化, HI-CKKS, 吞吐量, 异步执行, (I)NTT 原语, 高性能实现, 数学模块指令集, 内存优化, 并行同态乘法
 
-总结:<br>
+总结:<br />
 随着数据外包和云服务的普及，隐私问题日益凸显。CKKS作为一种重要的全同态加密方案，可以在加密数据上进行计算，为隐私保护提供了关键保障。然而，其性能瓶颈限制了广泛应用。本文提出了HI-CKKS，一种面向吞吐量优化、高性能实现的CKKS全同态加密方案。HI-CKKS通过引入支持批处理的异步执行策略，有效缓解了主机与服务器间频繁的数据交互及等待延迟问题。同时，针对CKKS中的核心(I)NTT原语，开发了一种层次化、混合型高吞吐量实现方法，包括高效的算术模块指令集、统一内核融合以及混合内存优化策略。此外，还提出了一种多维度并行同态乘法方案，旨在最大化吞吐量并提升(I)NTT和同态乘法的性能。实验结果表明，HI-CKKS在RTX 4090显卡上实现了显著的吞吐量性能提升，与CPU实现相比，NTT、INTT和HMult的吞吐量分别提高了$175.08\times$、$191.27\times$和$679.57\times$；相较于最新的GPU基线工作，其吞吐量性能仍然表现出显著优势，提升幅度从$1.54\times$到$693.17\times$不等。 <div>
 The proliferation of data outsourcing and cloud services has heightened privacy vulnerabilities. CKKS, among the most prominent homomorphic encryption schemes, allows computations on encrypted data, serving as a critical privacy safeguard. However, performance remains a central bottleneck, hindering widespread adoption. Existing optimization efforts often prioritize latency reduction over throughput performance. This paper presents HI-CKKS, a throughput-oriented High-performance Implementation of CKKS homomorphic encryption, addressing these challenges. Our HI-CKKS introduces a batch-supporting asynchronous execution scheme, effectively mitigating frequent data interactions and high waiting delays between hosts and servers in service-oriented scenarios. We analyze the fundamental (I)NTT primitive, which is critical in CKKS, and develop a hierarchical, hybrid high-throughput implementation. This includes efficient arithmetic module instruction set implementations, unified kernel fusion, and hybrid memory optimization strategies that significantly improve memory access efficiency and the performance of (I)NTT operations. Additionally, we propose a multi-dimensional parallel homomorphic multiplication scheme aimed at maximizing throughput and enhancing the performance of (I)NTT and homomorphic multiplication. In conclusion, our implementation is deployed on the RTX 4090, where we conduct a thorough throughput performance evaluation of HI-CKKS, enabling us to pinpoint the most effective parallel parameter settings. Compared to the CPU implementation, our system achieves throughput increases of $175.08\times$, $191.27\times$, and $679.57\times$ for NTT, INTT, and HMult, respectively. And our throughput performance still demonstrates a significant improvement, ranging from $1.54\times$ to $693.17\times$ compared to the latest GPU-based works.
 ]]></content:encoded>
 <pubDate>Fri, 06 Dec 2024 11:53:02 +0000</pubDate>
-<pubDate>Fri, 06 Dec 2024 11:53:02 +0000</pubDate>
 </item>
-
 <item>
 <title>Arke: Scalable and Byzantine Fault Tolerant Privacy-Preserving Contact Discovery</title>
 <link>https://eprint.iacr.org/2023/1218</link>
