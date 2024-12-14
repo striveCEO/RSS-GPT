@@ -5,6 +5,54 @@
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
 <item>
+<title>Derecho: Privacy Pools with Proof-Carrying Disclosures</title>
+<link>https://eprint.iacr.org/2023/273</link>
+<guid>https://eprint.iacr.org/2023/273</guid>
+<content:encoded><![CDATA[
+<div> 关键词: 隐私池、Tornado Cash、美国财政部、Derecho、证明携带数据
+
+总结:<br>
+本文介绍了隐私池的概念及其可能被用于隐藏资金来源的问题，特别是在美国财政部制裁了最大的以太坊隐私池Tornado Cash之后，该池被指控为朝鲜支持的Lazarus集团洗钱超过4.55亿美元。这一裁决使得美国个人和机构接收或使用经过Tornado Cash的资金成为非法行为。针对此背景，文章提出了名为Derecho的新系统。Derecho利用证明携带数据技术，使用户能够在隐私池的交易图中传播允许列表成员资格的证明，从而让机构可以请求基金来源的加密证明而非简单地拒绝来自隐私池的所有资金。Derecho系统与现有的以太坊隐私池设计向后兼容，不会增加gas成本，并且用户生成证明仅需花费几秒钟时间。 <div>
+A privacy pool enables clients to deposit units of a cryptocurrency into a shared pool where ownership of deposited currency is tracked via a system of cryptographically hidden records. Clients may later withdraw from the pool without linkage to previous deposits. Some privacy pools also support hidden transfer of currency ownership within the pool. In August 2022, the U.S. Department of Treasury sanctioned Tornado Cash, the largest Ethereum privacy pool, on the premise that it enables illicit actors to hide the origin of funds, citing its usage by the DPRK-sponsored Lazarus Group to launder over \$455 million dollars worth of stolen cryptocurrency. This ruling effectively made it illegal for U.S. persons/institutions to use or accept funds that went through Tornado Cash, sparking a global debate among privacy rights activists and lawmakers. Against this backdrop, we present Derecho, a system that institutions could use to request cryptographic attestations of fund origins rather than naively rejecting all funds coming from privacy pools. Derecho is a novel application of proof-carrying data, which allows users to propagate allowlist membership proofs through a privacy pool's transaction graph. Derecho is backwards-compatible with existing Ethereum privacy pool designs, adds no overhead in gas costs, and costs users only a few seconds to produce attestations.
+]]></content:encoded>
+<pubDate>Thu, 23 Feb 2023 20:59:36 +0000</pubDate>
+<pubDate>Thu, 23 Feb 2023 20:59:36 +0000</pubDate>
+</item>
+<item>
+<title>Hash-Prune-Invert: Improved Differentially Private Heavy-Hitter Detection in the Two-Server Model</title>
+<link>https://eprint.iacr.org/2024/2024</link>
+<guid>https://eprint.iacr.org/2024/2024</guid>
+<content:encoded><![CDATA[
+<div> 关键词：差分隐私(DP)，重 hitter 检测，错误边际(Δ)，服务器协同计算，hash-prune-invert (HPI)
+
+总结:
+文章介绍了一种针对大规模数据域(d)下的差分隐私重 hitter 检测新方法——hash-prune-invert (HPI) 技术。现有的多服务器协同计算协议在效率（计算、通信和轮复杂度）与准确性（即错误边际）上对 log(d) 有依赖性，不适合处理大型数据域。而 HPI 技术可以将具有上述问题的重 hitter 协议转化为一个新的协议，使得计算、通信和轮复杂度大致依赖于 log(n) 而非 log(d)，并且错误边际不再依赖于数据域大小 d。此外，该转换还保持了在最多一个服务器被恶意攻击者篡改以及任意数量客户端的情况下，依然能保证隐私安全。文中还将 HPI 应用于改进版的 Poplar 算法，使 Poplar 的错误边际提高了大约 n 的平方根倍（与 d 无关）。实验结果显示，由此产生的新协议在大 d 情况下显著提升了效率和准确性。 <div>
+Differentially private (DP) heavy-hitter detection is an important primitive for  data analysis. Given a threshold $t$ and a dataset of $n$ items from a domain of size $d$, such detection algorithms ignore items occurring fewer than $t$ times while identifying items occurring more than $t+\Delta$ times; we call $\Delta$ the error margin. In the central model where a curator holds the entire dataset, $(\varepsilon,\delta)$-DP algorithms can achieve error margin $\Theta(\frac 1 \varepsilon \log \frac 1 \delta)$, which is optimal when $d \gg 1/\delta$.
+    
+    Several works, e.g., Poplar (S&amp;P 2021), have proposed protocols in which two or more non-colluding servers jointly compute the heavy hitters from inputs held by $n$ clients. Unfortunately, existing protocols suffer from an undesirable dependence on $\log d$ in terms of both server efficiency (computation, communication, and round complexity) and accuracy (i.e., error margin), making them unsuitable for large domains (e.g., when items are kB-long strings, $\log d \approx 10^4$).
+    
+    We present hash-prune-invert (HPI), a technique for compiling any heavy-hitter protocol with the $\log d$ dependencies mentioned above into a new protocol with improvements across the board: computation, communication, and round complexity depend (roughly) on $\log n$ rather than $\log d$, and the error margin is independent of $d$. Our transformation preserves privacy against an active adversary corrupting at most one of the servers and any number of clients. We apply HPI to an improved version of Poplar, also introduced in this work, that improves Poplar's error margin by roughly a factor of $\sqrt{n}$ (regardless of $d$). Our experiments confirm that the resulting protocol improves efficiency and accuracy for large $d$.
+]]></content:encoded>
+<pubDate>Fri, 13 Dec 2024 20:56:38 +0000</pubDate>
+<pubDate>Fri, 13 Dec 2024 20:56:38 +0000</pubDate>
+</item>
+<item>
+<title>PrivQuant: Communication-Efficient Private Inference with Quantized Network/Protocol Co-Optimization</title>
+<link>https://eprint.iacr.org/2024/2021</link>
+<guid>https://eprint.iacr.org/2024/2021</guid>
+<content:encoded><![CDATA[
+<div> 关键词: 私有深度神经网络、安全两方计算、通信效率、 PrivQuant、协议优化
+
+总结:
+
+ PrivQuant是一个针对私有深度神经网络(DNN)推理的安全两方计算(2PC)框架，旨在提升隐私保护的同时降低高延迟问题。该框架通过同时优化基于2PC的量化推理协议和网络量化算法，实现更高效的通信私密推断。具体来说，PrivQuant针对通信密集型量化运算符提出了DNN架构感知的优化方案，并进行了图级操作器融合以减少通信量。此外，它还开发了一种通信感知的混合精度量化算法，旨在提高推断效率并保持高准确性。通过网络/协议协同优化，PrivQuant相比于现有2PC框架如SiRNN、COINN和CoPriv，显著降低了通信量（分别减少了11倍、2.5倍和2.8倍），进而将延迟减少了8.7倍、1.8倍和2.4倍。 <div>
+Private deep neural network (DNN) inference based on secure two-party computation (2PC) enables secure privacy protection for both the server and the client. However, existing secure 2PC frameworks suffer from a high inference latency due to enormous communication. As the communication of both linear and non-linear DNN layers reduces with the bit widths of weight and activation, in this paper, we propose PrivQuant, a framework that jointly optimizes the 2PC-based quantized inference protocols and the network quantization algorithm, enabling communication-efficient private inference. PrivQuant proposes DNN architecture-aware optimizations for the 2PC protocols for communication-intensive quantized operators and conducts graph-level operator fusion for communication reduction. Moreover, PrivQuant also develops a communication-aware mixed precision quantization algorithm to improve the inference efficiency while maintaining high accuracy. The network/protocol co-optimization enables PrivQuant to outperform prior-art 2PC frameworks. With extensive experiments, we demonstrate PrivQuant reduces communication by $11\times, 2.5\times \mathrm{and}~  2.8\times$, which results in $8.7\times, 1.8\times ~ \mathrm{and}~ 2.4\times$ latency reduction compared with SiRNN, COINN, and CoPriv, respectively.
+]]></content:encoded>
+<pubDate>Fri, 13 Dec 2024 13:51:36 +0000</pubDate>
+<pubDate>Fri, 13 Dec 2024 13:51:36 +0000</pubDate>
+</item>
+
+<item>
 <title>On the BUFF Security of ECDSA with Key Recovery</title>
 <link>https://eprint.iacr.org/2024/2018</link>
 <guid>https://eprint.iacr.org/2024/2018</guid>
@@ -15,7 +63,6 @@
 本文探讨了使用密钥恢复的椭圆曲线数字签名算法（KR-ECDSA）的安全性，特别是在Ethereum环境下的Beyond UnForgeability Features（BUFF）安全。研究结果显示，KR-ECDSA提供了BUFF安全性，但存在弱非重签性（wNR）问题。文中指出，KR-ECDSA验证算法需要输入以太坊地址addr，该地址由对应的ECDSA验证密钥通过Keccak-256哈希计算得到的右起160位组成，并检查恢复的验证密钥的哈希值是否等于addr，这是保证BUFF安全性的必要条件。此外，文章分析表明原始ECDSA不提供任何BUFF安全性，并揭示了一个针对Aumayr等人提出的基于ECDSA的适配器签名方案的攻击，此攻击超出了其安全模型范围。 <div>
 In the usual syntax of digital signatures, the verification algorithm takes a verification key in addition to a signature and a message, whereas in ECDSA with key recovery, which is used in Ethereum,  no verification key is input to the verification algorithm. Instead, a verification key is recovered from a signature and a message. In this paper, we explore BUFF security of ECDSA with key recovery (KR-ECDSA), where BUFF stands for Beyond UnForgeability Features (Cremers et al., IEEE S&amp;P 2021).  As a result, we show that KR-ECDSA provides BUFF security, except weak non-resignability (wNR). We pay attention to that the verification algorithm of KR-ECDSA takes an Ethereum address addr as input, which is defined as the rightmost 160-bits of the Keccak-256 hash of the corresponding ECDSA verification key, and checks the hash value of the recovered verification key is equal to addr.  Our security analysis shows that this procedure is mandatory to provide BUFF security. We also discuss whether wNR is mandatory in Ethereum or not.  To clarify the above equality check is mandatory to provide BUFF security in KR-ECDSA, we show that the original ECDSA does not provide any BUFF security. As a by-product of the analysis, we show that one of our BUFF attacks also works against the Aumayr et al.'s ECDSA-based adaptor signature scheme (ASIACRYPT 2021). We emphasize that the attack is positioned outside of their security model.
 ]]></content:encoded>
-<pubDate>Fri, 13 Dec 2024 05:56:52 +0000</pubDate>
 <pubDate>Fri, 13 Dec 2024 05:56:52 +0000</pubDate>
 </item>
 <item>
@@ -34,9 +81,7 @@ However, consensus in wireless networks has equal significance as in wired netwo
 In this paper, we propose a new reliable broadcast protocol that can achieve reliability with high fault tolerance over than the SOTA (PODC '05). With the new protocol, we further develop the first wireless network Byzantine consensus protocol under the assumption of partial synchrony. Notably, this consensus protocol removes the requirement of leaders and fail-over mechanism in prior works. We formally prove the correctness of both our new broadcast protocol and consensus protocol.
 ]]></content:encoded>
 <pubDate>Fri, 13 Dec 2024 04:46:33 +0000</pubDate>
-<pubDate>Fri, 13 Dec 2024 04:46:33 +0000</pubDate>
 </item>
-
 <item>
 <title>Crescent: Stronger Privacy for Existing Credentials</title>
 <link>https://eprint.iacr.org/2024/2013</link>
