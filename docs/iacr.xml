@@ -5,17 +5,32 @@
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
 <item>
+<title>COCO: Coconuts and Oblivious Computations for Orthogonal Authentication</title>
+<link>https://eprint.iacr.org/2024/2066</link>
+<guid>https://eprint.iacr.org/2024/2066</guid>
+<content:encoded><![CDATA[
+<div> 关键词：COCO、身份验证、隐私保护、Oblivious Pseudorandom Functions (OPRFs)、 CoconutCredential Scheme
+
+<br><br>总结：
+本文提出了一种名为COCO（Coconuts和 Oblivious Computations for Orthogonal Authentication）的框架，旨在实现隐私保护的身份验证。COCO通过将角色分割为验证者、认证器和客户端，避免了认证器直接访问虚拟公共标识或现实世界标识的需求。该框架利用Oblivious Pseudorandom Functions (OPRFs) 和扩展的Coconut Credential Scheme，引入了独立的不可链接的正交认证标识以及全共识机制，从而进行零知识认证，保证证明在多个会话中均不可链接。这种身份验证过程成为自我包含的，防止虚拟公共标识与现实世界标识之间的明确反向追踪。 <div>
+Authentication often bridges real-world individuals and their virtual public identities, like usernames, user IDs and e-mails, exposing vulnerabilities that threaten user privacy. This research introduces COCO (Coconuts and Oblivious Computations for Orthogonal Authentication), a framework that segregates roles among Verifiers, Authenticators, and Clients to achieve privacy-preserving authentication.
+
+COCO eliminates the need for Authenticators to directly access virtual public identifiers or real-world identifiers for authentication. Instead, the framework leverages Oblivious Pseudorandom Functions (OPRFs) and an extended Coconut Credential Scheme to ensure privacy by introducing separate unlinkable orthogonal authentication identifiers and a full-consensus mechanism to perform zero-knowledge authentications whose proof-s are unlinkable across multiple sessions. Authentication process becomes self-contained, preventing definitive reverse tracing of virtual public identifiers to real-world identifiers.
+]]></content:encoded>
+<pubDate>Mon, 23 Dec 2024 14:43:26 +0000</pubDate>
+<pubDate>Mon, 23 Dec 2024 14:43:26 +0000</pubDate>
+</item>
+
+<item>
 <title>Greco: Fast Zero-Knowledge Proofs for Valid FHE RLWE Ciphertexts Formation</title>
 <link>https://eprint.iacr.org/2024/594</link>
 <guid>https://eprint.iacr.org/2024/594</guid>
 <content:encoded><![CDATA[
-<div> 关键词: 全同态加密(FHE), 多方计算, 密文投票, 零知识证明, Greco<br><br>总结: 全同态加密（FHE）允许对加密数据执行任意函数运算。在多方FHE应用中，不同参与者加密其秘密数据并提交给服务器，服务器根据应用逻辑对这些密文进行同态操作。以秘密投票为例，计票是通过对表示选票的密文求和来计算的。恶意选民可能会发送如$E(145127835)$这样的无效加密选票，从而破坏选举结果。为解决此问题，用户需利用零知识证明证明他们提交的RLWE密文是有效的，并且加密的消息是一个有效的选票（例如，1或0）。Greco利用零知识证明让用户证明其RLWE密文构造正确。此外，该证明可以与特定应用逻辑结合，并在非交互式环境中公开验证。对于秘密投票应用，还可以进一步证明消息的其他属性甚至关于选民的属性，从而支持匿名投票。Greco的实现采用了Halo2-lib作为证明系统，基准测试显示它可以被无缝集成到面向用户的应用程序中，而不会过度增加用户使用的摩擦。该实现已在https://github.com/privacy-scaling-explorations/greco上发布。 <div>
+<div> 关键词: 全同态加密(FHE), 多方计算, 密文投票, 零知识证明, Greco<br /><br />总结: 全同态加密（FHE）允许对加密数据执行任意函数运算。在多方FHE应用中，不同参与者加密其秘密数据并提交给服务器，服务器根据应用逻辑对这些密文进行同态操作。以秘密投票为例，计票是通过对表示选票的密文求和来计算的。恶意选民可能会发送如$E(145127835)$这样的无效加密选票，从而破坏选举结果。为解决此问题，用户需利用零知识证明证明他们提交的RLWE密文是有效的，并且加密的消息是一个有效的选票（例如，1或0）。Greco利用零知识证明让用户证明其RLWE密文构造正确。此外，该证明可以与特定应用逻辑结合，并在非交互式环境中公开验证。对于秘密投票应用，还可以进一步证明消息的其他属性甚至关于选民的属性，从而支持匿名投票。Greco的实现采用了Halo2-lib作为证明系统，基准测试显示它可以被无缝集成到面向用户的应用程序中，而不会过度增加用户使用的摩擦。该实现已在https://github.com/privacy-scaling-explorations/greco上发布。 <div>
 Fully homomorphic encryption (FHE) allows for evaluating arbitrary functions over encrypted data. In Multi-party FHE applications, different parties encrypt their secret data and submit ciphertexts to a server, which, according to the application logic, performs homomorphic operations on them. For example, in a secret voting application, the tally is computed by summing up the ciphertexts encoding the votes. Valid encrypted votes are of the form $E(0)$ and $E(1)$. A malicious voter could send an invalid encrypted vote such as $E(145127835)$, which can mess up the whole election. Because of that, users must prove that the ciphertext they submitted is a valid Ring-Learning with Errors (RLWE) ciphertext and that the plaintext message they encrypted is a valid vote (for example, either a 1 or 0). Greco uses zero-knowledge proof to let a user prove that their RLWE ciphertext is well-formed. Or, in other words, that the encryption operation was performed correctly. The resulting proof can be, therefore, composed with additional application-specific logic and subject to public verification in a non-interactive setting. Considering the secret voting application, one can prove further properties of the message being encrypted or even properties about the voter, allowing the application to support anonymous voting as well. The prover has been implemented using Halo2-lib as a proving system, and the benchmarks have shown that Greco can already be integrated into user-facing applications without creating excessive friction for the user. The implementation is available at https://github.com/privacy-scaling-explorations/greco
 ]]></content:encoded>
 <pubDate>Tue, 16 Apr 2024 09:49:00 +0000</pubDate>
-<pubDate>Tue, 16 Apr 2024 09:49:00 +0000</pubDate>
 </item>
-
 <item>
 <title>Security Analysis of SFrame</title>
 <link>https://eprint.iacr.org/2021/424</link>
