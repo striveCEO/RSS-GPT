@@ -4,6 +4,45 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+<item>
+<title>Blind Signatures from Proofs of Inequality</title>
+<link>https://eprint.iacr.org/2024/2076</link>
+<guid>https://eprint.iacr.org/2024/2076</guid>
+<content:encoded><![CDATA[
+<div> 关键词: Blind signatures、pairing-free、random oracle模型、DDH假设、效率提升
+
+总结:
+这篇文章介绍了新的盲签名构造方法，该方法旨在缩小效率上的差距，特别是在不需要配对的情况下。与最高效的基于配对的AGM盲签名方案相比，新方案在通信和签名大小上分别只有3倍和2倍的相对开销，并在随机预言机模型下基于DDH假设可证明安全性。此外，通过增加一步操作和一个$\mathbb{Z}_p$元素，该方案还实现了更强的防伪造性。这一成果受到了Chairattana-Apirom, Tessaro, 和 Zhu (Crypto 2024)以及Klooß, Reichle, 和Wagner (Asiacrypt 2024)近期工作的启发，并针对这些工作中的效率瓶颈开发了定制化技术。具体来说，新方案实现了192字节的签名大小和608字节的通信大小。 <div>
+Blind signatures are an important primitive for privacy-preserving technologies. To date, highly efficient pairing-free constructions rely on the random oracle model, and additionally, a strong assumption, such as interactive assumptions or the algebraic group model.
+
+In contrast, for signatures we know many efficient constructions that rely on the random oracle model and standard assumptions. In this work, we develop techniques to close this gap. Compared to the most efficient pairing-free AGM-based blind signature by Crites et. al. (Crypto 2023), our construction has a relative overhead of only a factor $3\times$ and $2\times$ in terms of communication and signature size, and it is provable in the random oracle model under the DDH assumption. With one additional move and $\mathbb{Z}_p$ element, we also achieve one-more strong unforgeability.
+
+Our construction is inspired by the recent works by Chairattana-Apirom, Tessaro, and Zhu (Crypto 2024) and Klooß, Reichle, and Wagner (Asiacrypt 2024), and we develop a tailored technique to circumvent the sources of inefficiency in their constructions. Concretely, we achieve signature and communication size of $192$ B and $608$ B, respectively.
+]]></content:encoded>
+<pubDate>Wed, 25 Dec 2024 20:28:26 +0000</pubDate>
+<pubDate>Wed, 25 Dec 2024 20:28:26 +0000</pubDate>
+</item>
+<item>
+<title>Advancements in Distributed RSA Key Generation: Enhanced Biprimality Tests</title>
+<link>https://eprint.iacr.org/2024/2072</link>
+<guid>https://eprint.iacr.org/2024/2072</guid>
+<content:encoded><![CDATA[
+<div> 关键词：RSA、安全多方计算、Boneh-Franklin测试、Lucas双素性测试、分布式RSA模数生成
+
+总结:
+
+本文针对RSA密码学实践中广泛使用的 Boneh-Franklin 双素性测试进行了深入研究。首先，证明了该测试在接受概率上的上限其实为1/4，而非原先假设的1/2，除非$p=q=3$，这意味着在实际应用中执行相同安全性检验所需的迭代次数可以减半。随后，文章提出了两种类型的Lucas双素性测试。其中一种测试在最坏情况下的接受率不超过$1/4 + 1.25/(p_{\min}-3)$，其中$p_{\min}$为$N$的最小质因数，模拟研究表明它通常比Boneh-Franklin测试更高效地检测$N$是否为RSA模数。另一种Lucas测试可应用于任意RSA模数$p$和$q$，但其效率较低。当生成RSA模数的安全性错误设定约为$2^{-80}$时，该测试最多泄露46个二次符号值。此外，文章还设计了对应于这两种测试的协议，并验证了它们对于半诚实敌手的鲁棒性，这些协议可以应用于已知的大多数分布式RSA模数生成协议。通过对包括Burkhardt等人在CCS 2023上提出的Miller-Rabin测试变种、Boneh-Franklin测试以及所提Lucas型测试在内的多种知名协议进行详尽分析和比较后，发现所提Lucas测试在验证$N$是否为RSA模数方面具有高度竞争力。 <div>
+RSA is widely used in modern cryptographic practice, with certain RSA-based protocols relying on the secrecy of $p$ and $q$. A common approach is to use secure multiparty computation to address the privacy concerns of 
+$p$ and $q$.
+Specifically constrained to distributed RSA modulus generation protocols, the biprimality test for Blum integers $N=pq$, where $p\equiv q\equiv 3 \mod 4$ are two primes, proposed by Boneh and Franklin in $2001$ is the most commonly used. Over the past $20 $ years, the worst-case acceptance rate of this test has been consistently assumed to be $1/2$ under the condition $\gcd(pq,p+q-1)=1$.
+In this paper, we show that for the Boneh-Franklin test, its acceptance probability is at most $1/4$ rather than $1/2$,
+except in the case where $p = q = 3$.  At the same time, $1/4$ is also the tightest upper bound. Enhance the effectiveness of applying the Boneh-Franklin test in this result: achieving the same soundness for the RSA modulus requires only half the number of iterations commonly recognized. 
+Furthermore, we propose two types of Lucas biprimality tests. In the worst case, one of proposed tests acceptance rate is at most $1/4 +  1.25/(p_{\min} -3)$, where $p_{\min}$ is the smallest prime factors of $N$. However, simulation study suggests that this test is generally more efficient than the Boneh-Franklin test for detecting when $N$ is not an RSA modulus.
+The second type of Lucas test, though less efficient, can be applied to arbitrary RSA moduli $p$ and $q$. Nevertheless, if the soundness error for generating an RSA modulus is set at approximately $2^{-80}$, it leaks at most $46$ quadratic symbol values, regardless of the public key length. We also design corresponding protocols for both tests and validate their resilience against semi-honest adversaries, which can be applied to most known distributed RSA modulus generation protocols. After thoroughly analyzing and comparing well-known protocols, including the variant Miller-Rabin test used by Burkhardt et al. (CCS 2023), the Boneh-Franklin test, and our proposed Lucas-type tests, our proposed Lucas test is also highly competitive in verifying whether $N$ is an RSA modulus.
+]]></content:encoded>
+<pubDate>Tue, 24 Dec 2024 16:44:46 +0000</pubDate>
+<pubDate>Tue, 24 Dec 2024 16:44:46 +0000</pubDate>
+</item>
 
 <item>
 <title>COCO: Coconuts and Oblivious Computations for Orthogonal Authentication</title>
