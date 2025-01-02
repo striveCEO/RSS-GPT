@@ -4,6 +4,85 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+<item>
+<title>Voting with coercion resistance and everlasting privacy using linkable ring signatures</title>
+<link>https://eprint.iacr.org/2025/002</link>
+<guid>https://eprint.iacr.org/2025/002</guid>
+<content:encoded><![CDATA[
+<div> 关键词：e-voting协议、linkable环签名、无条件匿名性、胁迫抵抗、JCJ框架、可验证性、选票保密性。
+
+总结:<br>
+我们提出了一种基于新颖linkable环签名方案的电子投票协议，该协议具有无条件匿名性，确保无论攻击者多么强大都无法推断出投票者的身份，从而实现永久隐私。此外，我们的协议在JCJ框架下提供了胁迫抵抗力，当对手试图强迫投票者进行特定投票时，投票者可通过创建一个带有假但无法区分凭证的签名来规避攻击，在确保隐私的时刻投出真实选票。同时，该协议还具备可验证性和选票保密性。 <div>
+We propose an e-voting protocol based on a novel linkable ring signature scheme with unconditional anonymity. In our system, all voters register create private credentials and register their public counterparts. To vote, they create a ring (anonymity set) consisting of public credentials together with a proof of knowledge of their secret credential via our signature. Its unconditional anonymity prevents an attacker, no matter how powerful, from deducing the identity of the voter, thus attaining everlasting privacy. Additionally, our protocol provides coercion resistance in the JCJ framework; when an adversary tries to coerce a voter, the attack can be evaded by creating a signature with a fake but indistinguishable credential. During a moment of privacy, they will cast their real vote. Our scheme also provides verifiability and ballot secrecy.
+]]></content:encoded>
+<pubDate>Wed, 01 Jan 2025 08:08:50 +0000</pubDate>
+<pubDate>Wed, 01 Jan 2025 08:08:50 +0000</pubDate>
+</item>
+<item>
+<title>Smaug: Modular Augmentation of LLVM for MPC</title>
+<link>https://eprint.iacr.org/2025/004</link>
+<guid>https://eprint.iacr.org/2025/004</guid>
+<content:encoded><![CDATA[
+<div> 关键词: Secure Multi-Party Computation, MPC编程工具, Smaug, LLVM, Oblivious Computation
+
+总结:
+Smaug是一个基于LLVM的模块化扩展，旨在为MPC（安全多方计算）程序员提供更好的支持。现有的MPC编程工具由于缺乏文档、维护和与传统代码库的组合能力而难以吸引用户。Smaug引入了错误消息、文档、代码优化和多种语言编译至LLVM中间表示(IR)的支持。它可以有效地将非无知(Non-oblivious)的LLVM IR转换为其无知(Oblivious)等价物，同时应用LLVM的常用优化技术。通过C++和Rust编写并使用Yao和GMW协议作为后端的基准测试，Smaug的表现与使用领域特定语言的先前工具相当，甚至有时更优。最后，利用Smaug成功地将实现扫雷和21点游戏的开源项目编译成了可行的两方游戏，使得开发过程变得简单易行。 <div>
+Secure multi-party computation (MPC) is a crucial tool for privacy-preserving computation, but it is getting increasingly complicated due to recent advancements and optimizations. Programming tools for MPC allow programmers to develop MPC applications without mastering all cryptography. However, most existing MPC programming tools fail to attract real users due to the lack of documentation, maintenance, and the ability to compose with legacy codebases. In this work, we build Smaug, a modular extension of LLVM. Smaug seamlessly brings all LLVM support to MPC programmers, including error messaging, documentation, code optimization, and frontend support to compile from various languages to LLVM intermediate representation (IR). Smaug can efficiently convert non-oblivious LLVM IR to their oblivious counterparts while applying popular optimizations as LLVM code transformations. With benchmarks written in C++ and Rust and backends for Yao and GMW protocols, we observe that Smaug performs as well as (and sometimes much better than) prior tools using domain-specific languages with similar backends. Finally, we use Smaug to compile open-source projects that
+implement Minesweeper and Blackjack, producing usable two-party games with ease.
+]]></content:encoded>
+<pubDate>Wed, 01 Jan 2025 04:01:59 +0000</pubDate>
+<pubDate>Wed, 01 Jan 2025 04:01:59 +0000</pubDate>
+</item>
+<item>
+<title>MicroNova: Folding-based arguments with efficient (on-chain) verification</title>
+<link>https://eprint.iacr.org/2024/2099</link>
+<guid>https://eprint.iacr.org/2024/2099</guid>
+<content:encoded><![CDATA[
+<div> 关键词: MicroNova、折叠式递归论证、增量计算、验证效率、以太坊区块链
+
+总结:
+MicroNova是一种用于生成形式为$y=F^{(\ell)}(x)$的增量计算证明的设计与实现方案，其中$F$是一个可能非确定性的计算（使用如R1CS这样的约束系统编码），$x$是初始输入，$y$是输出，$\ell > 0$表示步骤数。该证明逐步生成，无论$\ell$大小，其证明大小和验证时间均不依赖于它。最后一步的证明会被压缩，进一步提高证明的简洁性。相比于之前的折叠式论证，MicroNova的一个显著特点是其在资源受限环境（如以太坊区块链）中具有高效的验证器实现。具体来说，压缩后的证明仅包含$O(\log{N})$个群元素，并能通过$O(\log{N})$个群标量乘法和两次配对操作进行验证，其中$N$是单次调用$F$时的约束数量。MicroNova需要一个通用的可信设置，并可以利用已经为流行的KZG一元多项式承诺方案创建的任何现有设置材料。实验结果显示，MicroNova的证明可以在以太坊区块链上高效地验证，大约耗用2.2M gas。此外，MicroNova的证明者在其基线Nova证明者的顶部只产生了轻微的开销。 <div>
+We describe the design and implementation of MicroNova, a folding-based recursive argument for producing proofs of incremental computations of the form $y = F^{(\ell)}(x)$, where $F$ is a possibly non-deterministic computation (encoded using a constraint system such as R1CS), $x$ is the initial input, $y$ is the output, and $\ell > 0$. The proof of an $\ell$-step computation is produced step-by-step such that the proof size nor the time to verify it depends on $\ell$. The proof at the final iteration is then compressed, to achieve further succinctness in terms of proof size and verification time. Compared to prior folding-based arguments, a distinguishing aspect of MicroNova is the concrete efficiency of the verifier—even in a resource-constrained environment such as Ethereum’s blockchain. In particular, the compressed proof consists of $O(\log{N})$ group elements and it can be verified with $O(\log{N})$ group scalar multiplications and two pairing operations, where $N$ is the number of constraints for a single invocation of $F$. MicroNova requires a universal trusted setup and can employ any existing setup material created for the popular KZG univariate polynomial commitment scheme. Finally, we implement and experimentally evaluate MicroNova. We find that MicroNova’s proofs can be efficiently verified on the Ethereum blockchain with $\approx$2.2M gas. Furthermore, MicroNova’s prover incurs minimal overheads atop its baseline Nova’s prover.
+]]></content:encoded>
+<pubDate>Tue, 31 Dec 2024 17:29:55 +0000</pubDate>
+<pubDate>Tue, 31 Dec 2024 17:29:55 +0000</pubDate>
+</item>
+<item>
+<title>NMFT: A Copyrighted Data Trading Protocol based on NFT and AI-powered Merkle Feature Tree</title>
+<link>https://eprint.iacr.org/2024/2097</link>
+<guid>https://eprint.iacr.org/2024/2097</guid>
+<content:encoded><![CDATA[
+<div> 关键词: 区块链、NFT、版权保护、Merkle Feature Tree (MFT)、Locality-Sensitive Hashing (LSH)
+
+总结:
+为了解决区块链上基于NFT的数据交易中面临的版权保护问题，本文提出了一种版权保护数据交易协议。该协议主要包括两个创新点：首先，引入了增强版的默克尔树——Merkle Feature Tree (MFT)，它在数据层之上结合了一个AI驱动的特征层，以更好地保护版权信息；其次，在交易过程中设计了版权挑战阶段，利用高相似度特征向量和更早的链上时间戳来确认原始所有者的合法地位。为了实现在区块链上进行高效低能耗的特征向量相似性计算，文章采用了Locality-Sensitive Hashing (LSH)算法，将高维浮点特征向量压缩成单个uint256整数。实验结果显示，LSH能够在压缩前后有效地保持高度相似特征向量之间的相似性，支持基于相似性的版权挑战。此外，以太坊Sepolia测试网上的实验表明，NMFT具有可扩展性，其 Gas 消耗随规模增长呈亚线性，同时保持稳定的延迟。 <div>
+With the rapid growth of blockchain-based Non-Fungible Tokens (NFTs), data trading has evolved to incorporate NFTs for ownership verification. However, the NFT ecosystem faces significant challenges in copyright protection, particularly when malicious buyers slightly modify the purchased data and re-mint it as a new NFT, infringing upon the original owner's rights. In this paper, we propose a copyright-preserving data trading protocol to address this challenge.
+
+First, we introduce the Merkle Feature Tree (MFT), an enhanced version of the traditional Merkle Tree that incorporates an AI-powered feature layer above the data layer. Second, we design a copyright challenge phase during the trading process, which recognizes the data owner with highly similar feature vectors and earlier on-chain timestamp as the legitimate owner. Furthermore, to achieve efficient and low-gas feature vector similarity computation on blockchain, we employ Locality-Sensitive Hashing (LSH) to compress high-dimensional floating-point feature vectors into single uint256 integers.
+
+Experiments with multiple image and text feature extraction models demonstrate that LSH effectively preserves the similarity between highly similar feature vectors before and after compression, thus supporting similarity-based copyright challenges. Experimental results on the Ethereum Sepolia testnet demonstrate NMFT's scalability with sublinear growth in gas consumption while maintaining stable latency.
+]]></content:encoded>
+<pubDate>Tue, 31 Dec 2024 10:37:15 +0000</pubDate>
+<pubDate>Tue, 31 Dec 2024 10:37:15 +0000</pubDate>
+</item>
+<item>
+<title>Secure Vault scheme in the Cloud Operating Model</title>
+<link>https://eprint.iacr.org/2024/2094</link>
+<guid>https://eprint.iacr.org/2024/2094</guid>
+<content:encoded><![CDATA[
+<div> 关键词: 数据隐私保险库、云环境、数据安全、令牌化算法、形式化框架
+
+总结:
+文章介绍了随着对云环境中数据隐私需求的增长，数据隐私保险库作为一种安全管理敏感信息的解决方案应运而生。然而，目前尚无针对数据隐私保险库的安全性进行严格定义和形式化证明的工作。本文关注这一问题，提出了适用于大型语言模型训练数据存储的数据隐私保险库新框架，该框架在云操作模式下运行，假设服务器可信但无状态，存储外包。文中提出了一种新颖的令牌化算法作为保护敏感数据的核心机制，既能生成安全、不可预测的令牌，又能确保敏感数据的安全存储并实现基于预定义访问级别的受控数据检索。此外，本文还为数据隐私保险库提供了正式定义和具体实现，并附带了安全性证明，填补了现有文献中的空白，从而增强了对保险库方案的理解，并为云计算时代安全数据管理提供了一个可行的解决方案。 <div>
+The rising demand for data privacy in cloud-based environments has led to the development of advanced mechanisms for securely managing sensitive information. A prominent solution in this domain is the "Data Privacy Vault," a concept that is being provided commercially by companies such as Hashicorp, Basis Theory, Skyflow Inc., VGS, Evervault, Protegrity, Anonomatic, and BoxyHQ. However, no existing work has rigorously defined the security notions required for a Data Privacy Vault or proven them within a formal framework which is the focus of this paper.
+
+Among its other uses, data privacy vaults are increasingly being used as storage for LLM training data which necessitates a scheme that enables users to securely store sensitive information in the cloud while allowing controlled access for performing analytics on specific non-sensitive attributes without exposing sensitive data. Conventional solutions involve users generating encryption keys to safeguard their data, but these solutions are not deterministic and are therefore unsuited for the LLM setting. To address this, we propose a novel framework that is deterministic as well as semantically secure. Our scheme operates in the Cloud Operating model where the server is trusted but stateless, and the storage is outsourced.
+
+We provide a formal definition and a concrete instantiation of this data privacy vault scheme. We introduce a novel tokenization algorithm that serves as the core mechanism for protecting sensitive data within the vault. Our approach not only generates secure, unpredictable tokens for sensitive data but also securely stores sensitive data while enabling controlled data retrieval based on predefined access levels. Our work fills a significant gap in the existing literature by providing a formalized framework for the data privacy vault, complete with security proofs and a practical construction - not only enhancing the understanding of vault schemes but also offering a viable solution for secure data management in the era of cloud computing.
+]]></content:encoded>
+<pubDate>Mon, 30 Dec 2024 14:03:33 +0000</pubDate>
+<pubDate>Mon, 30 Dec 2024 14:03:33 +0000</pubDate>
+</item>
 
 <item>
 <title>Post-Quantum Privacy for Traceable Receipt-Free Encryption</title>
