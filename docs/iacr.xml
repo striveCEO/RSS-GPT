@@ -4,6 +4,26 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+<item>
+<title>Probabilistic Attacks and Enhanced Security for "Private Set Intersection in the Internet Setting from Lightweight Oblivious PRF"</title>
+<link>https://eprint.iacr.org/2024/969</link>
+<guid>https://eprint.iacr.org/2024/969</guid>
+<content:encoded><![CDATA[
+<div> 关键词: Privacy Set Intersection (PSI), CM20协议, 安全漏洞, 概率攻击, 敏感数据保护<br><br>总结:<br>
+本文针对隐私集合交集(PSI)中的CM20协议进行了分析，指出了其存在的安全漏洞。CM20协议利用伪随机函数(PRF)加密用户隐私，但若攻击者获取了$\delta$和$F_2$，则可能恢复PRF加密的隐私信息。文章提出了名为“概率攻击”的方法来利用这一漏洞对CM20进行攻击。为解决此问题，文中引入了一种新的工具——扰动伪随机生成器(PPRG)，通过替换CM20协议中的随机 Oblivious Transfer 和其中一个哈希函数，以抵御此类概率攻击。最后，文章制定了一个针对该 PSI 协议的针对性选择明文攻击(IND-CPA)安全性模型，并表明提出的 PSI 解决方案在各种设备上的效率可与 CM20 相媲美。 <div>
+Privacy Set Intersection (PSI) has been an important research topic within privacy computation. Its main function is to allow two parties to compute the intersection of their private sets without revealing any other private information. Therefore, PSI can be applied to various real-world scenarios.
+
+Chase and Miao presented an impressive construction ``Private set intersection in the Internet setting from lightweight oblivious prf'' (CM20 for short) at Crypto 2020, highlighting its convenient structure and optimal communication cost. However, it does have some security vulnerabilities. Let $X$ be the privacy set of user $P_1$, $Y$ be the privacy set of user $P_2$. The CM20 protocol uses a pseudorandom function (PRF) to encrypt the privacy $x\in X$ of $P_1$ into $D_1$ and the privacy $y\in Y$ of $P_2$ into $D_2$, $D_1 = D_2$ as $x=y$. It then sends random data $F_1$ to user $P_1$ and random data $F_2$ to user $P_2$ using a random oblivious transfer technique. User $P_2$ computes $\delta=D_2\oplus F_2$ and sends $\delta$ to user $P_1$, and user $P_1$ uses $\delta$ and $F_1$ to re-encrypt $D_1$. Repeat this until $P_1$ re-encrypts all the privacy in all the privacy sets $X$, packages them up and sends them to $P_2$, who completes the privacy set intersection. However, if an adversary obtains $\delta$ and $F_2$ by any means, they can recover the PRF's encryption of the user's privacy, and the recovery process is non-trivial. This significantly weakens the security of the CM20 protocol.
+
+In this paper, we make three main contributions. First, based on the above analysis, we present a method for attacking CM20, called {\em probabilistic attacks}. This attack is based on estimating and analysing the frequency distribution of the encrypted data from the PRF and the probability distribution of the original private data, and determining the relationship between the two. Although not 100\% effective, this method of attack poses a significant threat to the security of user data.
+
+Secondly, we introduce a new tool called the {\em perturbed pseudorandom generator} (PPRG). We show that the PPRG can overcome probabilistic attacks by replacing the random oblivious transfer and one of the hash functions (originally there were two) in CM20.
+
+Finally, we provide a dedicated indistinguishability against chosen-plaintext attack (IND-CPA) security model for this PSI protocol. The efficiency analysis shows that the proposed PSI is comparable to CM20's PSI, whether on a PC, MAC, pad or mobile phone.
+]]></content:encoded>
+<pubDate>Sun, 16 Jun 2024 02:53:16 +0000</pubDate>
+<pubDate>Sun, 16 Jun 2024 02:53:16 +0000</pubDate>
+</item>
 
 <item>
 <title>Leverage Staking with Liquid Staking Derivatives (LSDs): Opportunities and Risks</title>
