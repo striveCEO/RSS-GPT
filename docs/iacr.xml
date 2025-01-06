@@ -5,11 +5,43 @@
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
 <item>
+<title>Dynamically Available Common Subset</title>
+<link>https://eprint.iacr.org/2025/016</link>
+<guid>https://eprint.iacr.org/2025/016</guid>
+<content:encoded><![CDATA[
+<div> 关键词: 共识协议、区块链、临时故障、审查攻击、动态可用公共子集(DACS)
+
+总结:
+本文针对互联网规模的区块链共识协议提出了一个全新的原子广播协议，该协议在存在预期的临时故障（即睡眠模型）的情况下仍能保持运行，尤其适合对延迟敏感的金融应用。现有的领导者架构使这些协议容易受到短期审查攻击，允许提案者排除特定交易以获取利益。与传统方法不同，新协议不依赖于每个区块高度的单一提案者，而是采用了一种名为动态可用公共子集(DACS)的协议，这是在睡眠模型中的首创。此外，该构建还确保了确定性同步：一旦诚实节点确认一个区块，所有其他诚实节点将在常数时间内进行确认，从而解决了许多低延迟睡眠协议中存在的问题。 <div>
+Internet-scale consensus protocols used by blockchains are designed to remain operational in the presence of unexpected temporary crash faults (the so-called sleepy model of consensus) -- a critical feature for the latency-sensitive financial applications running on these systems. 
+However, their leader-based architecture, where a single block proposer is responsible for creating the block at each height, makes them vulnerable to short-term censorship attacks, in which the proposers profit at the application layer by excluding certain transactions. 
+In this work, we introduce an atomic broadcast protocol, secure in the sleepy model, that ensures the inclusion of all transactions within a constant expected time, provided that at least one participating node is non-censoring at all times. 
+Unlike traditional approaches, our protocol avoids designating a single proposer per block height, instead leveraging a so-called dynamically available common subset (DACS) protocol -- the first of its kind in the sleepy model. Additionally, our construction guarantees deterministic synchronization -- once an honest node confirms a block, all other honest nodes do so within a constant time, thus addressing a shortcoming of many low-latency sleepy protocols.
+]]></content:encoded>
+<pubDate>Sat, 04 Jan 2025 14:19:51 +0000</pubDate>
+<pubDate>Sat, 04 Jan 2025 14:19:51 +0000</pubDate>
+</item>
+<item>
+<title>SPY-PMU: Side-Channel Profiling of Your Performance Monitoring Unit to Leak Remote User Activity</title>
+<link>https://eprint.iacr.org/2025/014</link>
+<guid>https://eprint.iacr.org/2025/014</guid>
+<content:encoded><![CDATA[
+<div> 关键词: 性能监控单元(PMU), 边信道攻击, 微架构指纹, 机器学习(ML), 隐私泄露
+
+总结:<br>
+本文探讨了现代计算系统中普遍存在的性能监控单元（PMU）所带来的安全风险。通过利用PMU数据进行远程边信道攻击，揭示了能够侵犯用户隐私并实现远程隐秘监视的安全漏洞。研究团队通过对PMU特征空间分析，为基准应用创建独特的微架构指纹，并运用这些指纹构建机器学习（ML）模型以检测对应的基准应用。这种方法使得攻击者在远程访问受害者的PMU数据时，可以使用预训练模型准确识别受害者正在使用的应用程序。实验中，该预训练模型成功地通过远程PMU数据识别出受害者所使用的应用程序，证明了PMU数据用于远程侧信道分析的潜在恶意利用风险。研究人员针对stress-ng基准测试构建了逻辑回归、决策树、k近邻和随机森林等ML分类器模型，平均预测精度高达98%。这凸显了防范PMU数据远程侧信道攻击的紧迫性，并为未来微架构安全领域的研究奠定了基础。 <div>
+The Performance Monitoring Unit (PMU), a standard feature in all modern computing systems, presents significant security risks by leaking sensitive user activities through microarchitectural event data. This work demonstrates the feasibility of remote side-channel attacks leveraging PMU data, revealing vulnerabilities that compromise user privacy and enable covert surveillance without physical access to the target machine. By analyzing the PMU feature space, we create distinct micro-architectural fingerprints for benchmark applications, which are then utilized in machine learning (ML) models to detect the corresponding benchmarks. This approach allows us to build a pre-trained model for benchmark detection using the unique micro-architectural fingerprints derived from PMU data. Subsequently, when an attacker remotely accesses the victim’s PMU data, the pre-trained model enables the identification of applications used by the victim with high accuracy. In our proof-of-concept demonstration, the pre-trained model successfully identifies applications used by a victim when the attacker remotely accesses PMU data, showcasing the potential for malicious exploitation of PMU data. We analyze stress-ng benchmarks and build our classifiers using logistic regression, decision tree, k-nearest neighbors, and random forest ML models. Our proposed models achieve an average prediction accuracy of 98%, underscoring the potential risks associated with remote side-channel analysis using PMU data and emphasizing the need for more robust safeguards. This work underscores the urgent need for robust countermeasures to protect against such vulnerabilities and provides a foundation for future research in micro-architectural security.
+]]></content:encoded>
+<pubDate>Fri, 03 Jan 2025 20:29:25 +0000</pubDate>
+<pubDate>Fri, 03 Jan 2025 20:29:25 +0000</pubDate>
+</item>
+
+<item>
 <title>Probabilistic Attacks and Enhanced Security for "Private Set Intersection in the Internet Setting from Lightweight Oblivious PRF"</title>
 <link>https://eprint.iacr.org/2024/969</link>
 <guid>https://eprint.iacr.org/2024/969</guid>
 <content:encoded><![CDATA[
-<div> 关键词: Privacy Set Intersection (PSI), CM20协议, 安全漏洞, 概率攻击, 敏感数据保护<br><br>总结:<br>
+<div> 关键词: Privacy Set Intersection (PSI), CM20协议, 安全漏洞, 概率攻击, 敏感数据保护<br /><br />总结:<br />
 本文针对隐私集合交集(PSI)中的CM20协议进行了分析，指出了其存在的安全漏洞。CM20协议利用伪随机函数(PRF)加密用户隐私，但若攻击者获取了$\delta$和$F_2$，则可能恢复PRF加密的隐私信息。文章提出了名为“概率攻击”的方法来利用这一漏洞对CM20进行攻击。为解决此问题，文中引入了一种新的工具——扰动伪随机生成器(PPRG)，通过替换CM20协议中的随机 Oblivious Transfer 和其中一个哈希函数，以抵御此类概率攻击。最后，文章制定了一个针对该 PSI 协议的针对性选择明文攻击(IND-CPA)安全性模型，并表明提出的 PSI 解决方案在各种设备上的效率可与 CM20 相媲美。 <div>
 Privacy Set Intersection (PSI) has been an important research topic within privacy computation. Its main function is to allow two parties to compute the intersection of their private sets without revealing any other private information. Therefore, PSI can be applied to various real-world scenarios.
 
@@ -22,9 +54,7 @@ Secondly, we introduce a new tool called the {\em perturbed pseudorandom generat
 Finally, we provide a dedicated indistinguishability against chosen-plaintext attack (IND-CPA) security model for this PSI protocol. The efficiency analysis shows that the proposed PSI is comparable to CM20's PSI, whether on a PC, MAC, pad or mobile phone.
 ]]></content:encoded>
 <pubDate>Sun, 16 Jun 2024 02:53:16 +0000</pubDate>
-<pubDate>Sun, 16 Jun 2024 02:53:16 +0000</pubDate>
 </item>
-
 <item>
 <title>Leverage Staking with Liquid Staking Derivatives (LSDs): Opportunities and Risks</title>
 <link>https://eprint.iacr.org/2023/1842</link>
