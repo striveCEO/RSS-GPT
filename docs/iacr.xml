@@ -5,6 +5,24 @@
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
 <item>
+<title>Zero-Knowledge Proofs for Set Membership: Efficient, Succinct, Modular</title>
+<link>https://eprint.iacr.org/2019/1255</link>
+<guid>https://eprint.iacr.org/2019/1255</guid>
+<content:encoded><![CDATA[
+<div> 关键词: 零知识证明、集合成员资格、隐私保护、非成员资格证明、Pedersen承诺
+
+总结:
+本文关注的是在不泄露元素本身的情况下，利用零知识证明技术证明某个元素属于公开集合且满足特定属性的问题。文章设计了一种新的模块化和高效的方法，构建了基于承诺的集合并验证零知识系统，用于证明某值 $u$ 在公共承诺 $c_u$ 中属于集合 $S$。同时，该方法还支持非成员资格证明，即证明 $u$ 不属于集合 $S$。由于采用的是基于 Pedersen 承诺的方案，这些解决方案与诸如 Bulletproofs 或 Groth16 等流行系统兼容，可作为“$u \in S$ 并且 $P(u)$ 成立”这类复合声明中的即插即用模块。相较于之前的类似工作（如结合 zkSNARKs 和默克尔树的 Zcash 技术），实验表明，该方案提供了更高的灵活性，更短的公共参数以及对于大小为 $2^{64}$ 的集合，证明时间提升了 3.7 倍至 30 倍之多。此外，作者已将这些方案实现为软件库，并进行了性能测试。 <div>
+We consider the problem of proving in zero knowledge that an element of a public set satisfies a given property without disclosing the element, i.e., for some $u$, ``$u \in S$ and $P(u)$ holds''. This problem arises in many applications (anonymous cryptocurrencies, credentials or whitelists) where, for privacy or anonymity reasons, it is crucial to hide certain data while ensuring properties of such data.
+We design new \textit{modular} and \textit{efficient} constructions for this problem through new \textit{commit-and-prove zero-knowledge systems for set membership}, i.e. schemes proving  $u \in S$ for a value $u$ that is in a public commitment $c_u$. We also extend our results to support {\em non-membership proofs}, i.e. proving $u \notin S$.
+Being commit-and-prove, our solutions can act as plug-and-play modules in statements of the form ``$u \in S$ and $P(u)$ holds'' by combining our set (non-)membership systems with any other commit-and-prove scheme for $P(u)$. Also, they work with Pedersen commitments over prime order groups which makes them compatible with popular systems such as Bulletproofs or Groth16.
+We implemented our schemes as a software library, and tested experimentally their performance. Compared to previous work that achieves similar properties---the clever techniques combining zkSNARKs and Merkle Trees in Zcash---our solutions offer more flexibility, shorter public parameters and $3.7 \times$--$30\times$ faster proving time for a set of size $2^{64}$.
+]]></content:encoded>
+<pubDate>Mon, 28 Oct 2019 08:28:02 +0000</pubDate>
+<pubDate>Mon, 28 Oct 2019 08:28:02 +0000</pubDate>
+</item>
+
+<item>
 <title>Blind accumulators for e-voting</title>
 <link>https://eprint.iacr.org/2022/373</link>
 <guid>https://eprint.iacr.org/2022/373</guid>
@@ -16,9 +34,7 @@
 We present a novel cryptographic primitive, blind accumulator, aimed at constructing e-voting systems. Blind accumulators collect private keys of eligible voters in a decentralized manner not getting information about the keys. Once the accumulation is complete, a voter processes the resulting accumulator and derives a public key which refers to a private key previously added by this voter. Public keys are derived deterministically and can therefore stand as fixed voter pseudonyms. The voter can prove that the derived key refers to some accumulated private key without revealing neither that key nor the voter itself. The voter uses the accumulated private key to sign a ballot. The corresponding public key is used to verify the signature. Since the public key is fixed, it is easy to achieve verifiability, to protect against multiple submissions of ballots by the same voter or, conversely, to allow multiple submissions but count only the last one. We suggest a syntax of blind accumulators and security requirements for them. We embed blind accumulators in the Pseudonymous Key Generation (PKG) protocol which details the use of accumulators in practical settings close to e-voting. We propose an instantiation of the blind accumulator scheme whose main computations resemble the Diffie-Hellman protocol. We justify the security of the proposed instantiation.
 ]]></content:encoded>
 <pubDate>Tue, 22 Mar 2022 13:27:26 +0000</pubDate>
-<pubDate>Tue, 22 Mar 2022 13:27:26 +0000</pubDate>
 </item>
-
 <item>
 <title>Extending Groth16 for Disjunctive Statements</title>
 <link>https://eprint.iacr.org/2025/028</link>
