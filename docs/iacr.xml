@@ -5,6 +5,86 @@
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
 <item>
+<title>Forking the RANDAO: Manipulating Ethereum's Distributed Randomness Beacon</title>
+<link>https://eprint.iacr.org/2025/037</link>
+<guid>https://eprint.iacr.org/2025/037</guid>
+<content:encoded><![CDATA[
+<div> 关键词：proof-of-stake、distributed randomness beacons (DRBs)、RANDAO、forking attack、selfish mining
+
+总结:
+本文分析了以太坊共识机制中当前使用的分布式随机数生成器（RANDAO）的操纵性。尽管RANDAO具有高效率，但仍存在通过故意省略区块来操纵随机数生成的漏洞，即所谓的自私挖矿攻击。文章提出并评估了一种新的操纵策略——RANDAO分叉攻击，与自私挖矿不同的是，这种策略依赖于选择性地分叉诚实提议者的区块以最大化交易费收入和区块奖励。文章指出，分叉攻击比自私挖矿更具危害性，因为它加剧了验证者之间的不公平，并严重损害了区块链对普通用户的可靠性，导致已发布的区块频繁被分叉出去。同时，研究发现攻击者可以发起分叉而不损失槽位，并且这些损失会在后期得到充分补偿。实证测量表明，在以太坊主网上目前尚未发现这类攻击的统计显著痕迹。 <div>
+Proof-of-stake consensus protocols often rely on distributed randomness beacons (DRBs) to generate randomness for leader selection. This work analyses the manipulability of Ethereum's DRB implementation, RANDAO, in its current consensus mechanism. Even with its efficiency, RANDAO remains vulnerable to manipulation through the deliberate omission of blocks from the canonical chain. Previous research has shown that economically rational players can withhold blocks --~known as a block withholding attack or selfish mixing~-- when the manipulated RANDAO outcome yields greater financial rewards.
+
+We introduce and evaluate a new manipulation strategy, the RANDAO forking attack. Unlike block withholding, whereby validators opt to hide a block, this strategy relies on selectively forking out an honest proposer's block to maximize transaction fee revenues and block rewards. 
+In this paper, we draw attention to the fact that the forking attack is significantly more harmful than selfish mixing for two reasons. Firstly, it exacerbates the unfairness among validators. More importantly, it significantly undermines the reliability of the blockchain for the average user by frequently causing already published blocks to be forked out. By doing so, the attacker can fork the chain without losing slots, and we demonstrate that these are later fully compensated for. Our empirical measurements, investigating such manipulations on Ethereum mainnet, revealed no statistically significant traces of these attacks to date.
+]]></content:encoded>
+<pubDate>Thu, 09 Jan 2025 19:24:20 +0000</pubDate>
+<pubDate>Thu, 09 Jan 2025 19:24:20 +0000</pubDate>
+</item>
+<item>
+<title>Scalable Post-Quantum Oblivious Transfers for Resource-Constrained Receivers</title>
+<link>https://eprint.iacr.org/2025/036</link>
+<guid>https://eprint.iacr.org/2025/036</guid>
+<content:encoded><![CDATA[
+<div> 关键词: 原子转移、现代化、低功耗设备、Helix OT、Priority OT
+
+总结:
+本文提出两种可扩展的原子转移方案以适应现代数字时代对隐私保护计算的需求，尤其是在低功耗设备上的应用。这两种方案分别是：1-out-of-n 的 Helix OT 和 t-out-of-n 的 Priority OT，两者均具有无条件安全性，能抵抗量子攻击。Helix OT 实现了接收端下载复杂度为 O(1)，优化了大规模数据场景下的效率。针对有紧急或重要性区分的数据传输需求，Priority OT 则通过 O(t) 的接收端下载复杂度实现数据优先级传输，确保最重要数据优先接收，从而更有效地利用带宽、存储和处理资源。实验结果显示，Helix OT 在1秒内完成从 n=16,777,216 消息中选择1条的消息传输，而 Priority OT 可在30秒内处理 t=1,048,576 项选择任务，性能优于现有 t-out-of-n OT（当 t≥1 时）。据作者所知，Helix OT 和 Priority OT 均具备与以往方案不同的独特优势，适用于大规模应用场景。 <div>
+It is imperative to modernize traditional core cryptographic primitives, such as Oblivious Transfer (OT), to address the demands of the new digital era, where privacy-preserving computations are executed on low-power devices. This modernization is not merely an enhancement but a necessity to ensure security, efficiency, and continued relevance in an ever-evolving technological landscape. 
+
+This work introduces two scalable OT schemes: (1) Helix OT, a $1$-out-of-$n$ OT, and (2) Priority OT, a $t$-out-of-$n$ OT. Both schemes provide unconditional security, ensuring resilience against quantum adversaries. Helix OT achieves a receiver-side download complexity of $O(1)$. In big data scenarios, where certain data may be more urgent or valuable, we propose Priority OT. With a receiver-side download complexity of $O(t)$, this scheme allows data to be received based on specified priorities. By prioritizing data transmission, Priority OT ensures that the most important data is received first, optimizing bandwidth, storage, and processing resources.  Performance evaluations indicate that Helix OT completes the transfer of 1 out of $n=$ 16,777,216 messages in 9 seconds, and Priority OT handles $t=$ 1,048,576 out of $n$ selections in 30 seconds. Both outperform existing $t$-out-of-$n$ OTs (when $t\geq 1$), underscoring their suitability for large-scale applications. To the best of our knowledge, Helix OT and Priority OT introduce unique advancements that distinguish them from previous schemes.
+]]></content:encoded>
+<pubDate>Thu, 09 Jan 2025 14:44:28 +0000</pubDate>
+<pubDate>Thu, 09 Jan 2025 14:44:28 +0000</pubDate>
+</item>
+<item>
+<title>A New Paradigm for Server-Aided MPC</title>
+<link>https://eprint.iacr.org/2025/032</link>
+<guid>https://eprint.iacr.org/2025/032</guid>
+<content:encoded><![CDATA[
+<div> 关键词：server-aided MPC、多党计算、安全性保证、信任假设、效率
+
+总结:
+该文提出了一个新的服务器辅助多党计算（MPC）模型，挑战了原有假设，即所有客户端必须选择相同的服务器和接受相同的腐败阈值。在这个新模型中，每个客户端可以选择自己的服务器集和自己的腐败阈值，并且只要满足其自身的阈值，就能保证其隐私安全，这一特性被称为“每党私有”服务器辅助MPC，兼顾了安全性和效率两方面保障：(1) 每党隐私，意味着每个参与方根据自身选择的服务器得到独立的隐私保护；(2) 每党复杂度，意味着每个参与方只需与其选定的服务器进行通信。文章的主要贡献是一个新的服务器辅助MPC理论框架，并给出了两个可行性协议，但将追求具体效率的协议留作未来工作。 <div>
+The server-aided model for multiparty computation (MPC) was introduced to capture a real-world scenario where clients wish to off-load the heavy computation of MPC protocols to dedicated servers. A rich body of work has studied various trade-offs between security guarantees (e.g., semi-honest vs malicious),  trust assumptions (e.g., the threshold on corrupted servers), and efficiency. 
+
+However, all existing works make the assumption that all clients must agree on employing the same servers, and accept the same corruption threshold. In this paper, we challenge this assumption and introduce a new paradigm for server-aided MPC, where each client can choose their own set of servers and their own threshold of corrupted servers. In this new model, the privacy of each client is guaranteed as long as their own threshold is satisfied, regardless of the other servers/clients. We call this paradigm per-party private server-aided MPC to highlight both a security and efficiency guarantee: (1) per-party privacy, which means that each party gets their own privacy guarantees that depend on their own choice of the servers; (2) per-party complexity, which means that each party only needs to communicate with their chosen servers. Our primary contribution is a new theoretical framework for server-aided MPC. We provide two protocols to show feasibility, but leave it as a future work to investigate protocols that focus on concrete efficiency.
+]]></content:encoded>
+<pubDate>Wed, 08 Jan 2025 20:17:40 +0000</pubDate>
+<pubDate>Wed, 08 Jan 2025 20:17:40 +0000</pubDate>
+</item>
+<item>
+<title>Delegated Multi-party Private Set Intersection from Secret Sharing</title>
+<link>https://eprint.iacr.org/2025/030</link>
+<guid>https://eprint.iacr.org/2025/030</guid>
+<content:encoded><![CDATA[
+<div> 关键词: Delegated PSI (D-PSI)、云服务器、多党设置、安全、计算复杂性
+
+总结:
+本文探讨了委托私有集合交集(D-PSI)问题，其中引入云服务器处理大部分计算和通信任务。D-PSI允许用户安全地将私人集合委托给云端，同时保证数据隐私并有效计算交集。该云服务器在严格的安全要求下运行，不获取个体集合或交集结果的任何信息。此外，D-PSI减少了用户间的通信并支持“静默”处理，即除了集合委托和结果检索外，云可以独立执行计算。文章形式化定义了D-PSI问题，并提出一种创新构建方案，不仅适用于两方场景，还可扩展到多方设置。该方案满足对半诚实敌手的安全性要求，并实现了接近理想“完美”D-PSI协议的计算和通信复杂度。通过基准实现和优化版本，作者展示了其方法的实用性，进一步降低了计算开销，为现实世界云计算场景中安全高效的PSI奠定了坚实基础。 <div>
+In this work, we address the problem of Delegated PSI (D-PSI), where a cloud server is introduced to handle most computational and communication tasks. D-PSI enables users to securely delegate their private sets to the cloud, ensuring the privacy of their data while allowing efficient computation of the intersection. The cloud operates under strict security requirements, learning nothing about the individual sets or the intersection result. Moreover, D-PSI minimizes user-to-user communication and supports "silent" processing, where the cloud can perform computations independently without user interaction, apart from set delegation and result retrieval.
+
+We formally define the D-PSI problem and propose a novel construction that extends beyond two-party scenarios to support multi-party settings. Our construction adheres to the D-PSI requirements, including security against semi-honest adversaries, and achieves computational and communication complexities close to the ideal "perfect" D-PSI protocol. Additionally, we demonstrate the practicality of our approach through a baseline implementation and an optimized version that further reduces computational overhead. Our results establish a strong foundation for secure and efficient PSI in real-world cloud computing scenarios.
+]]></content:encoded>
+<pubDate>Wed, 08 Jan 2025 11:35:17 +0000</pubDate>
+<pubDate>Wed, 08 Jan 2025 11:35:17 +0000</pubDate>
+</item>
+<item>
+<title>Highly Efficient Server-Aided Multiparty Subfield VOLE Distribution Protocol</title>
+<link>https://eprint.iacr.org/2025/029</link>
+<guid>https://eprint.iacr.org/2025/029</guid>
+<content:encoded><![CDATA[
+<div> 关键词：secure multi-party computation, pseudorandom correlations, subfield vector oblivious linear evaluation (sVOLE), three-party, four-party honest majority settings, trusted server, communication cost, memory storage, arbitrary length, utility rate, precomputability.
+
+<br><br>总结：
+本文介绍了一种新的子域向量无意识线性评估（sVOLE）分布方法，该方法应用于三 party 和四 party 诚实多数设置中，借助可信服务器的帮助。新方法显著降低了随机 sVOLE 实例的通信成本和内存存储需求。同时，它还实现了一个流畅的分布流程，能够生成任意长度的 sVOLE 实例，从而在多维度的隐私保护计算协议中实现了随机 sVOLE 的100%效用率，同时保持了完整的预计算能力。 <div>
+In recent development of secure multi-party computation (MPC), pseudorandom correlations of subfield vector oblivious linear evaluation (sVOLE) type become popular due to their amazing applicability in multi-dimensional MPC protocols such as privacy-preserving biometric identification and privacy-preserving machine learning protocols. In this paper, we introduce a novel way of VOLE distribution in three-party and four-party honest majority settings with the aid of a trusted server. This new method significantly decreases the communication cost and the memory storage of random sVOLE instances. On the other hand, it also enables a streamline distribution process that can generate a sVOLE instance of an arbitrary length, which results in 100 percent of utility rate of random sVOLE in multi-dimensional MPC protocols while preserving complete precomputability.
+]]></content:encoded>
+<pubDate>Wed, 08 Jan 2025 09:01:56 +0000</pubDate>
+<pubDate>Wed, 08 Jan 2025 09:01:56 +0000</pubDate>
+</item>
+
+<item>
 <title>Zero-Knowledge Proofs for Set Membership: Efficient, Succinct, Modular</title>
 <link>https://eprint.iacr.org/2019/1255</link>
 <guid>https://eprint.iacr.org/2019/1255</guid>
@@ -19,9 +99,7 @@ Being commit-and-prove, our solutions can act as plug-and-play modules in statem
 We implemented our schemes as a software library, and tested experimentally their performance. Compared to previous work that achieves similar properties---the clever techniques combining zkSNARKs and Merkle Trees in Zcash---our solutions offer more flexibility, shorter public parameters and $3.7 \times$--$30\times$ faster proving time for a set of size $2^{64}$.
 ]]></content:encoded>
 <pubDate>Mon, 28 Oct 2019 08:28:02 +0000</pubDate>
-<pubDate>Mon, 28 Oct 2019 08:28:02 +0000</pubDate>
 </item>
-
 <item>
 <title>Blind accumulators for e-voting</title>
 <link>https://eprint.iacr.org/2022/373</link>
