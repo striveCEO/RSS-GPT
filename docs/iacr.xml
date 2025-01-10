@@ -5,6 +5,28 @@
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
 <item>
+<title>Blink: An Optimal Proof of Proof-of-Work</title>
+<link>https://eprint.iacr.org/2024/692</link>
+<guid>https://eprint.iacr.org/2024/692</guid>
+<content:encoded><![CDATA[
+<div> 关键词：轻客户端、Proof-of-Work、区块链、Blink、安全性、资源消耗、零知识证明、可信设置、Bitcoin Backbone模型、评估、下载量
+
+总结:<br>
+本文介绍了Blink，这是首个无需可信设置的交互式、安全的$\mathcal{O}(1)$ PoW轻客户端。Blink可以应用于支付验证、启动引导以及跨链桥接等多个场景。相比于传统的线性资源消耗，近年来轻客户端的资源需求已逐步降低至$\mathcal{O}(\text{polylog}( \mathcal{C}))$和$\mathcal{O}(1)$，但后者的实现往往依赖于可信设置。而Blink则在不需可信设置的前提下实现了$\mathcal{O}(1)$的资源效率。文章证明了Blink在比特币背骨模型中的安全性，并对其证明大小进行了评估，结果显示，使用Blink只需下载1.6KB即可获取到比特币当前状态的承诺，相较于SPV（需要67.3MB）和基于零知识的轻客户端（需要197KB）显著降低了资源消耗。 <div>
+Designing light clients to securely and efficiently read Proof-of-Work blockchains has been a foundational problem since the inception of blockchains. Nakamoto themselves, in the original Bitcoin paper, presented the first client protocol, i.e., the Simplified Payment Verification, which consumes an amount of bandwidth, computational, and storage resources that grows linearly in the system's lifetime $\mathcal{C}$.
+
+Today, the blockchain ecosystem is more mature and presents a variety of applications and protocols deployed on-chain and, often, cross-chain. In this landscape, light clients have become the cornerstone of decentralized bridges, playing a pivotal role in the security and efficiency of cross-chain operations. 
+These new use cases, combined with the growth of blockchains over time, raise the need for more minimalist clients, which further reduce the resource requirements and, when applicable, on-chain costs. 
+Over the years, the light client resource consumption has been reduced from $\mathcal{O}( \mathcal{C})$ to $\mathcal{O}(\text{polylog}( \mathcal{C}))$, and then down to $\mathcal{O}(1)$ with zero-knowledge techniques at the cost of often assuming a trusted setup. 
+
+In this paper, we present Blink, the first interactive provably secure $\mathcal{O}(1)$ PoW light client without trusted setup. Blink can be used for a variety of applications ranging from payment verification and bootstrapping, to bridges. 
+We prove Blink secure in the Bitcoin Backbone model, and we evaluate its proof size demonstrating that, at the moment of writing, Blink obtains a commitment to the current state of Bitcoin by downloading only 1.6KB, instead of 67.3MB and 197KB for SPV and zk-based clients, respectively.
+]]></content:encoded>
+<pubDate>Mon, 06 May 2024 08:32:01 +0000</pubDate>
+<pubDate>Mon, 06 May 2024 08:32:01 +0000</pubDate>
+</item>
+
+<item>
 <title>Forking the RANDAO: Manipulating Ethereum's Distributed Randomness Beacon</title>
 <link>https://eprint.iacr.org/2025/037</link>
 <guid>https://eprint.iacr.org/2025/037</guid>
@@ -18,7 +40,6 @@ Proof-of-stake consensus protocols often rely on distributed randomness beacons 
 We introduce and evaluate a new manipulation strategy, the RANDAO forking attack. Unlike block withholding, whereby validators opt to hide a block, this strategy relies on selectively forking out an honest proposer's block to maximize transaction fee revenues and block rewards. 
 In this paper, we draw attention to the fact that the forking attack is significantly more harmful than selfish mixing for two reasons. Firstly, it exacerbates the unfairness among validators. More importantly, it significantly undermines the reliability of the blockchain for the average user by frequently causing already published blocks to be forked out. By doing so, the attacker can fork the chain without losing slots, and we demonstrate that these are later fully compensated for. Our empirical measurements, investigating such manipulations on Ethereum mainnet, revealed no statistically significant traces of these attacks to date.
 ]]></content:encoded>
-<pubDate>Thu, 09 Jan 2025 19:24:20 +0000</pubDate>
 <pubDate>Thu, 09 Jan 2025 19:24:20 +0000</pubDate>
 </item>
 <item>
@@ -35,7 +56,6 @@ It is imperative to modernize traditional core cryptographic primitives, such as
 This work introduces two scalable OT schemes: (1) Helix OT, a $1$-out-of-$n$ OT, and (2) Priority OT, a $t$-out-of-$n$ OT. Both schemes provide unconditional security, ensuring resilience against quantum adversaries. Helix OT achieves a receiver-side download complexity of $O(1)$. In big data scenarios, where certain data may be more urgent or valuable, we propose Priority OT. With a receiver-side download complexity of $O(t)$, this scheme allows data to be received based on specified priorities. By prioritizing data transmission, Priority OT ensures that the most important data is received first, optimizing bandwidth, storage, and processing resources.  Performance evaluations indicate that Helix OT completes the transfer of 1 out of $n=$ 16,777,216 messages in 9 seconds, and Priority OT handles $t=$ 1,048,576 out of $n$ selections in 30 seconds. Both outperform existing $t$-out-of-$n$ OTs (when $t\geq 1$), underscoring their suitability for large-scale applications. To the best of our knowledge, Helix OT and Priority OT introduce unique advancements that distinguish them from previous schemes.
 ]]></content:encoded>
 <pubDate>Thu, 09 Jan 2025 14:44:28 +0000</pubDate>
-<pubDate>Thu, 09 Jan 2025 14:44:28 +0000</pubDate>
 </item>
 <item>
 <title>A New Paradigm for Server-Aided MPC</title>
@@ -50,7 +70,6 @@ The server-aided model for multiparty computation (MPC) was introduced to captur
 
 However, all existing works make the assumption that all clients must agree on employing the same servers, and accept the same corruption threshold. In this paper, we challenge this assumption and introduce a new paradigm for server-aided MPC, where each client can choose their own set of servers and their own threshold of corrupted servers. In this new model, the privacy of each client is guaranteed as long as their own threshold is satisfied, regardless of the other servers/clients. We call this paradigm per-party private server-aided MPC to highlight both a security and efficiency guarantee: (1) per-party privacy, which means that each party gets their own privacy guarantees that depend on their own choice of the servers; (2) per-party complexity, which means that each party only needs to communicate with their chosen servers. Our primary contribution is a new theoretical framework for server-aided MPC. We provide two protocols to show feasibility, but leave it as a future work to investigate protocols that focus on concrete efficiency.
 ]]></content:encoded>
-<pubDate>Wed, 08 Jan 2025 20:17:40 +0000</pubDate>
 <pubDate>Wed, 08 Jan 2025 20:17:40 +0000</pubDate>
 </item>
 <item>
@@ -67,7 +86,6 @@ In this work, we address the problem of Delegated PSI (D-PSI), where a cloud ser
 We formally define the D-PSI problem and propose a novel construction that extends beyond two-party scenarios to support multi-party settings. Our construction adheres to the D-PSI requirements, including security against semi-honest adversaries, and achieves computational and communication complexities close to the ideal "perfect" D-PSI protocol. Additionally, we demonstrate the practicality of our approach through a baseline implementation and an optimized version that further reduces computational overhead. Our results establish a strong foundation for secure and efficient PSI in real-world cloud computing scenarios.
 ]]></content:encoded>
 <pubDate>Wed, 08 Jan 2025 11:35:17 +0000</pubDate>
-<pubDate>Wed, 08 Jan 2025 11:35:17 +0000</pubDate>
 </item>
 <item>
 <title>Highly Efficient Server-Aided Multiparty Subfield VOLE Distribution Protocol</title>
@@ -76,14 +94,12 @@ We formally define the D-PSI problem and propose a novel construction that exten
 <content:encoded><![CDATA[
 <div> 关键词：secure multi-party computation, pseudorandom correlations, subfield vector oblivious linear evaluation (sVOLE), three-party, four-party honest majority settings, trusted server, communication cost, memory storage, arbitrary length, utility rate, precomputability.
 
-<br><br>总结：
+<br /><br />总结：
 本文介绍了一种新的子域向量无意识线性评估（sVOLE）分布方法，该方法应用于三 party 和四 party 诚实多数设置中，借助可信服务器的帮助。新方法显著降低了随机 sVOLE 实例的通信成本和内存存储需求。同时，它还实现了一个流畅的分布流程，能够生成任意长度的 sVOLE 实例，从而在多维度的隐私保护计算协议中实现了随机 sVOLE 的100%效用率，同时保持了完整的预计算能力。 <div>
 In recent development of secure multi-party computation (MPC), pseudorandom correlations of subfield vector oblivious linear evaluation (sVOLE) type become popular due to their amazing applicability in multi-dimensional MPC protocols such as privacy-preserving biometric identification and privacy-preserving machine learning protocols. In this paper, we introduce a novel way of VOLE distribution in three-party and four-party honest majority settings with the aid of a trusted server. This new method significantly decreases the communication cost and the memory storage of random sVOLE instances. On the other hand, it also enables a streamline distribution process that can generate a sVOLE instance of an arbitrary length, which results in 100 percent of utility rate of random sVOLE in multi-dimensional MPC protocols while preserving complete precomputability.
 ]]></content:encoded>
 <pubDate>Wed, 08 Jan 2025 09:01:56 +0000</pubDate>
-<pubDate>Wed, 08 Jan 2025 09:01:56 +0000</pubDate>
 </item>
-
 <item>
 <title>Zero-Knowledge Proofs for Set Membership: Efficient, Succinct, Modular</title>
 <link>https://eprint.iacr.org/2019/1255</link>
