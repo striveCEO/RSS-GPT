@@ -4,6 +4,61 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+<item>
+<title>$\mathsf{Cougar}$: Cubic Root Verifier Inner Product Argument under Discrete Logarithm Assumption</title>
+<link>https://eprint.iacr.org/2024/616</link>
+<guid>https://eprint.iacr.org/2024/616</guid>
+<content:encoded><![CDATA[
+<div> 关键词：内心积论证（IPA），$\mathsf{Cougar}$，零知识证明，立方根验证器，离散对数假设
+
+总结：
+
+本文提出了一种新的高效内心积论证（IPA）——$\mathsf{Cougar}$，它旨在克服基于离散对数假设下平方根复杂度的限制。$\mathsf{Cougar}$的特点包括立方根验证器和在通信复杂性上的对数级别性能。为了实现这一目标，我们结合了Kim等人在Asiacrypt2022上提出的两个基于离散对数假设的平方根验证器IPA，即使用配对的$\mathsf{Protocol3}$（后来被称为$\mathsf{Leopard}$）和不使用配对的$\mathsf{Protocol4}$。通过重新构建$\mathsf{Protocol4}$并使其与同态承诺方案的证明系统兼容，再利用$\mathsf{Protocol3}$作为其证明系统。此外，为了解决$\mathsf{Protocol4}$中出现的椭圆曲线点之间的关系证明问题，我们引入了一个基于$\mathsf{Plonkish}$的新证明系统，该系统配备了混合椭圆曲线加法的定制门电路。我们证明了$\mathsf{Cougar}$确实满足所声称的所有特性，并在离散对数假设下提供了完整性的证明。此外，我们使用Rust实现了$\mathsf{Cougar}$，结果显示当见证长度$N=2^{20}$时，其验证时间仅为0.346秒，相比其他基于离散对数假设和透明设置的IPA（如BulletProofs和$\mathsf{Leopard}$）有显著速度提升，具体来说，比BulletProofs快约50倍。 <div>
+An inner product argument (IPA) is a cryptographic primitive used to construct a zero-knowledge proof system, which is a notable privacy-enhancing technology. We propose a novel efficient IPA called $\mathsf{Cougar}$. $\mathsf{Cougar}$ features cubic root verifier and logarithmic communication under the discrete logarithm (DL) assumption. At Asiacrypt2022, Kim et al. proposed two square root verifier IPAs under the DL assumption. Our main objective is to overcome the limitation of square root complexity in the DL setting. To achieve this, we combine two distinct square root IPAs from Kim et al.: one with pairing ($\mathsf{Protocol3}$; one was later named $\mathsf{Leopard}$) and one without pairing ($\mathsf{Protocol4}$). To construct $\mathsf{Cougar}$, we first revisit $\mathsf{Protocol4}$ and reconstruct it to make it compatible with the proof system for the homomorphic commitment scheme. Next, we utilize $\mathsf{Protocol3}$ as the proof system for the reconstructed $\mathsf{Protocol4}$. Finally, to facilitate proving the relation between elliptic curve points appearing in $\mathsf{Protocol4}$, we introduce a novel $\mathsf{Plonkish}$-based proof system equipped with custom gates for mixed elliptic curve addition. We show that $\mathsf{Cougar}$ indeed satisfies all the claimed features, along with providing a soundness proof under the DL assumption. In addition, we implemented $\mathsf{Cougar}$ in Rust, demonstrating that the verification time of $\mathsf{Cougar}$ increases much slowly as the length of the witness $N$ grows, compared to other IPAs under the DL assumption and transparatent setup: BulletProofs and $\mathsf{Leopard}$. Concretely, $\mathsf{Cougar}$ takes 0.346s for verification in our setting when $N = 2^{20}$, which is a $50\times$ speed-up from BulletProofs.
+]]></content:encoded>
+<pubDate>Mon, 22 Apr 2024 05:48:25 +0000</pubDate>
+<pubDate>Mon, 22 Apr 2024 05:48:25 +0000</pubDate>
+</item>
+<item>
+<title>Foundations of Data Availability Sampling</title>
+<link>https://eprint.iacr.org/2023/1079</link>
+<guid>https://eprint.iacr.org/2023/1079</guid>
+<content:encoded><![CDATA[
+<div> 关键词: 数据可用性采样(DAS), 以太坊, 密码学研究, 消息认证码, 抵抗删除编码<br><br>总结:<br>
+本文针对数据可用性采样（DAS）这一用于提升区块链可扩展性的技术展开了密码学研究。DAS允许网络参与者确保数据完全可用，而无需任何一方完全下载。鉴于DAS在实践中受到广泛关注，但目前尚无其正式定义、安全概念和安全证明，文章首先对DAS进行了精确的密码学原始定义。接着，文章通过定义一种新型的消息认证码，该认证码自然地推广了向量承诺和多项式承诺，展示了DAS与擦除编码的关系。文中分析并证明了现有构造的安全性，并提出了基于更弱假设、计算效率更高且不依赖可信设置的新构造，尽管通信复杂度略有增加。最后，文章评估了不同构造之间的权衡。 <div>
+Towards building more scalable blockchains, an approach known as data availability sampling (DAS) has emerged over the past few years. 
+Even large blockchains like Ethereum are planning to eventually deploy DAS to improve their scalability.
+In a nutshell, DAS allows the participants of a network to ensure the full availability of some data without any one participant downloading it entirely.
+Despite the significant practical interest that DAS has received, there are currently no formal definitions for this primitive, no security notions, and no security proofs for any candidate constructions.
+For a cryptographic primitive that may end up being widely deployed in large real-world systems, this is a rather unsatisfactory state of affairs.
+
+In this work, we initiate a cryptographic study of data availability sampling.
+To this end, we define data availability sampling precisely as a clean cryptographic primitive.
+Then, we show how data availability sampling relates to erasure codes.
+We do so by defining a new type of commitment schemes which naturally generalizes vector commitments and polynomial commitments.
+Using our framework, we analyze existing constructions and prove them secure.
+In addition, we give new constructions which are based on weaker assumptions, computationally more efficient, and do not rely on a trusted setup, at the cost of slightly larger communication complexity.
+Finally, we evaluate the trade-offs of the different constructions.
+]]></content:encoded>
+<pubDate>Tue, 11 Jul 2023 10:50:30 +0000</pubDate>
+<pubDate>Tue, 11 Jul 2023 10:50:30 +0000</pubDate>
+</item>
+<item>
+<title>REED: Chiplet-Based  Accelerator for Fully Homomorphic Encryption</title>
+<link>https://eprint.iacr.org/2023/1190</link>
+<guid>https://eprint.iacr.org/2023/1190</guid>
+<content:encoded><![CDATA[
+<div> 关键词: 全同态加密（FHE）、ASIC加速器、多芯片模块化、REED、性能提升
+
+总结:<br>
+本文提出了一种名为REED的创新性多芯片模块化全同态加密（FHE）加速器，旨在解决现有单片式（monolithic）ASIC FHE加速器所面临的挑战，如不灵活性、低良率和高昂制造成本。REED采用了可扩展的芯片设计方法、有效的负载分布框架、定制化的跨芯片通信策略以及优化的管道数论变换和自同构设计以提升性能。实验结果显示，基于7纳米技术的REED 2.5D微处理器面积为96.7mm²，平均功率消耗为49.4W，相比于24核双倍英特尔X5690 CPU，其运行速度提高了约2991倍，性能提升了1.9倍，并且相较于最先进的ASIC FHE加速器，开发成本降低了50%。此外，文中还首次展示了对加密深度神经网络（DNN）训练的基准测试。总体而言，REED架构设计为加速FHE提供了极具实效性的解决方案，显著推进了FHE在现实世界应用中的实用性和部署可行性。 <div>
+Fully Homomorphic Encryption (FHE) enables privacy-preserving computation and has many applications. However, its practical implementation faces massive computation and memory overheads. To address this bottleneck, several Application-Specific Integrated Circuit (ASIC) FHE accelerators have been proposed. All these prior works put every component needed for FHE onto one chip (monolithic), hence offering high performance. However, they encounter common challenges associated with large-scale chip design, such as inflexibility, low yield, and high  manufacturing costs. In this paper, we present the first-of-its-kind multi-chiplet-based FHE accelerator ‘REED’ for overcoming the limitations of prior monolithic designs. To utilize the advantages of multi-chiplet structures while matching the performance of larger monolithic systems, we propose and implement several novel strategies in the context of FHE. These include a scalable chiplet design approach, an effective framework for workload distribution, a custom inter-chiplet communication strategy, and advanced pipelined Number Theoretic Transform and automorphism design to enhance performance.
+
+Our instruction-set and power simulations experiments with a prelayout netlist indicate that REED 2.5D microprocessor consumes 96.7mm2 chip area, 49.4 W average power in 7nm technology. It could achieve a remarkable speedup of up to 2,991× compared to a CPU (24-core 2×Intel X5690) and offer 1.9× better performance, along with a 50% reduction in development costs when compared to state-of-the-art ASIC FHE accelerators. Furthermore, our work presents the first instance of benchmarking an encrypted deep neural network (DNN) training. Overall, the REED architecture design offers a highly effective solution for accelerating FHE, thereby significantly  advancing the practicality and deployability of FHE in real-world applications.
+]]></content:encoded>
+<pubDate>Fri, 04 Aug 2023 05:21:11 +0000</pubDate>
+<pubDate>Fri, 04 Aug 2023 05:21:11 +0000</pubDate>
+</item>
 
 <item>
 <title>BlindPerm: Efficient MEV Mitigation with an Encrypted Mempool and Permutation</title>
