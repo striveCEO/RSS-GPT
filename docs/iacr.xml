@@ -4,6 +4,45 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+<item>
+<title>Arbitrary-Threshold Fully Homomorphic Encryption with Lower Complexity</title>
+<link>https://eprint.iacr.org/2025/084</link>
+<guid>https://eprint.iacr.org/2025/084</guid>
+<content:encoded><![CDATA[
+<div> 关键词: Threshold Fully Homomorphic Encryption (ThFHE), Arbitrary Threshold (ATh)-FHE, Non-participants, Approximate Secret Sharing (ApproxSS), ATASSES
+
+总结:
+本文提出了一种新的任意阈值全同态加密(ThFHE)方案——ATh-FHE，旨在解决多方在不泄露敏感数据隐私的情况下计算函数的问题。相较于大多数仅支持完全阈值的ThFHE方案，ATh-FHE能更好地应对非参与者的情况，并适用于更多现实世界的应用场景。然而，现有的ATh-FHE方案要么在处理大量参与方和大数据规模时效率低下，要么无法容忍所有类型的非参与者。为此，本文提出了一个新的抽象原语——近似秘密分享(ApproxSS)，并将ATh-FHE方案的构建归约为设计该原语的问题。通过建立ApproxSS与ATh-FHE之间正确性和安全性的理论证明，作者揭示了现有ATh-FHE方案隐含地采用了“噪声份额”的设计理念，但这种方法存在高复杂度问题，成为性能瓶颈。为了解决这个问题，文章开发了一个基于“加密份额”新理念的ATh-ApproxSS方案——ATASSES，将其计算和通信复杂度分别从$\mathcal{O}(N^2K)$降低到$\mathcal{O}(N^2+K)$和从$\mathcal{O}(NK)$降低到$\mathcal{O}(N+K)$。理论分析与实证评估均表明，相比于现有基准方案，当应用于包含一千个参与方的系统时，ATASSES可实现高达$3.83\times$至$15.4\times$的速度提升。 <div>
+Threshold fully homomorphic encryption (ThFHE) enables multiple parties to compute functions over their sensitive data without leaking data privacy. Most of existing ThFHE schemes are restricted to full threshold and require the participation of all parties to output computing results. Compared with these full-threshold schemes, arbitrary threshold (ATh)-FHE schemes are robust to non-participants and can be a promising solution to many real-world applications. However, existing AThFHE schemes are either inefficient to be applied with a large number of parties $N$ and a large data size $K$, or insufficient to tolerate all types of non-participants. In this paper, we propose an AThFHE scheme to handle all types of non-participants with lower complexity over existing schemes. At the core of our scheme is the reduction from AThFHE construction to the design of a new primitive called approximate secret sharing (ApproxSS). Particularly, we formulate ApproxSS and prove the correctness and security of AThFHE on top of arbitrary-threshold (ATh)-ApproxSS's properties. Such a reduction reveals that existing AThFHE schemes implicitly design ATh-ApproxSS following a similar idea called ``noisy share''. Nonetheless, their ATh-ApproxSS design has high complexity and become the performance bottleneck. By developing ATASSES, an ATh-ApproxSS scheme based on a novel ``encrypted share'' idea, we reduce the computation (resp. communication) complexity from $\mathcal{O}(N^2K)$ to $\mathcal{O}(N^2+K)$ (resp. from $\mathcal{O}(NK)$ to $\mathcal{O}(N+K)$). We not only theoretically prove the (approximate) correctness and security of ATASSES, but also empirically evaluate its efficiency against existing baselines. Particularly, when applying to a system with one thousand parties, ATASSES achieves a speedup of $3.83\times$ -- $15.4\times$ over baselines.
+]]></content:encoded>
+<pubDate>Mon, 20 Jan 2025 02:29:50 +0000</pubDate>
+<pubDate>Mon, 20 Jan 2025 02:29:50 +0000</pubDate>
+</item>
+<item>
+<title>Recover from Excessive Faults in Partially-Synchronous BFT SMR</title>
+<link>https://eprint.iacr.org/2025/083</link>
+<guid>https://eprint.iacr.org/2025/083</guid>
+<content:encoded><![CDATA[
+<div> 关键词: Byzantine故障容错(BFT SMR), 过度故障设置, 修复算法, 线性链状、群组同步SMR, 故障检测模块
+
+总结:
+本文研究了在过度故障设置下，拜占庭容错（BFT SMR）状态机复制协议如何从由过多故障引发的错误状态中恢复。首先，文章提出了首个针对线性链状和基于群组同步的SMR的部分故障修复算法，该算法利用不误判正常副本的任何故障检测模块实现。在此过程中，虽然活动生成保证略有减弱，但原文档中不可能在存在过多故障的情况下维持原安全特性。
+
+文章实现了可恢复的HotStuff协议，并使用Rust编程语言完成。在恢复程序结束后，当有7个副本发生故障时，吞吐量恢复到无过多故障情况下的正常水平，并且在有30个副本发生故障时，仅减少了不超过4.3%。平均而言，对于7个副本，延迟增加了12.87%\usenix{(而对于30个副本，延迟增加为8.85%)}。
+
+此外，文章还建立了对于具有最多(n-2)个（总共有n个副本）拜占庭副本攻击安全性的情况，一般BFT SMR协议能够实现完整且准确的故障检测的充分条件。文章首次提出了一种适用于任意SMR协议的无需额外通信轮次的封闭式故障检测算法，并进一步描述了在Tendermint和HotStuff中的开箱即用的故障检测例程，从而在理论上和具体实现上都降低了开销。 <div>
+Byzantine fault-tolerant (BFT) state machine replication (SMR) protocols form the basis of modern blockchains as they maintain a consistent state across all blockchain nodes while tolerating a bounded number of Byzantine faults. We analyze BFT SMR in the excessive fault setting where the actual number of Byzantine faults surpasses a protocol's tolerance. 
+
+We start by devising the very first repair algorithm for linearly chained and quorum-based partially synchronous SMR to recover from faulty states caused by excessive faults. Such a procedure can be realized using any commission fault detection module -- an algorithm that identifies the faulty replicas without falsely locating any correct replica. We achieve this with a slightly weaker liveness guarantee, as the original security notion is impossible to satisfy given excessive faults.
+
+
+We implement recoverable HotStuff in Rust. The throughput resumes to the normal level (without excessive faults) after recovery routines terminate for $7$ replicas and is slightly reduced by $\leq 4.3\%$ for $30$ replicas. On average, it increases the latency by $12.87\%$ for $7$ replicas \usenix{and $8.85\%$ for $30$ replicas}.
+
+Aside from adopting existing detection modules, we also establish the sufficient condition for a general BFT SMR protocol to allow for complete and sound fault detection when up to $(n-2)$ Byzantine replicas (out of $n$ total replicas) attack safety. We start by providing the first closed-box fault detection algorithm for any SMR protocol without any extra rounds of communication. We then describe open-box instantiations of our fault detection routines in Tendermint and Hotstuff, further reducing the overhead, both asymptotically and concretely.
+]]></content:encoded>
+<pubDate>Mon, 20 Jan 2025 00:31:06 +0000</pubDate>
+<pubDate>Mon, 20 Jan 2025 00:31:06 +0000</pubDate>
+</item>
 
 <item>
 <title>Breaking verifiability and vote privacy in CHVote</title>
