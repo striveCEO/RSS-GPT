@@ -4,6 +4,73 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+<item>
+<title>HyperLoop: Rationally secure efficient cross-chain bridge</title>
+<link>https://eprint.iacr.org/2025/176</link>
+<guid>https://eprint.iacr.org/2025/176</guid>
+<content:encoded><![CDATA[
+<div> 关键词: Cross-chain bridges, rational-malicious model, HyperLoop, whistle-blower nodes, sliding window mechanism
+
+总结:
+本文提出了一种名为HyperLoop的高效跨链多签名桥接器，该桥接器在更为现实的理性恶意模型下被证明在安全性和活跃性方面具有理论保障。针对理性节点可能因经济利益而偏离协议甚至合谋的问题，文章引入了吹哨人节点作为监控机制，它们持续检查桥接器的操作并在发现异常时向投诉解决网络报告。为实施惩罚并确保安全性，要求节点在参与成为桥接器前需要抵押一定金额，并通过滑动窗口机制设置资金转移量上限。此外，文中描述的滑动窗口机制确立了抵押额与滑动窗口限制之间的关系。最终，实现了一个在经济、计算和通信效率上均表现出色的桥接器原型，并成功部署在以太坊和Polygon两条测试链之间。实验结果显示，在一个由19个节点组成的桥接器网络中，每个桥接器节点平均只需3毫秒就能检测并签署源链请求，体现出极高的效率和低延迟特性。 <div>
+Cross-chain bridges, realizing the transfer of information and assets between blockchains, form the core of blockchain interoperability solutions. Most existing bridge networks are modeled in an honest-malicious setting, where the bridge nodes are either honest or malicious. Rationality allows the nodes to deviate from the protocol arbitrarily for an economic incentive. In this work, we present HyperLoop, an efficient cross-chain multi-signature bridge and prove that it is safe and live game-theoretically, under the more realistic rational-malicious model.
+
+As rational bridge nodes are allowed to deviate from the protocol and even collude, a monitor mechanism is necessitated, which we realize by introducing whistle-blower nodes. These whistle-blowers constantly check the operations of the bridge and raise complaints to a complaint resolution network in case of discrepancies. To enforce punishments, it is necessary for the nodes to stake an amount before participating as bridge nodes. Consequently, a cap on the volume of funds transferred over the bridge is established. We describe a sliding window mechanism and establish a relation between the stake and the sliding window limit necessary for the safety of the bridge.
+
+Our design yields an economic, computation, and communication-efficient bridge. We realize and deploy our bridge prototype bridging Ethereum and Polygon chains over testnets. For a 19-node bridge network, each bridge node takes an average of only 3 msec to detect and sign a source chain request, showing the highly efficiency and low-latency of the bridge.
+]]></content:encoded>
+<pubDate>Wed, 05 Feb 2025 20:06:00 +0000</pubDate>
+<pubDate>Wed, 05 Feb 2025 20:06:00 +0000</pubDate>
+</item>
+<item>
+<title>VITARIT: Paying for Threshold Services on Bitcoin and Friends</title>
+<link>https://eprint.iacr.org/2025/174</link>
+<guid>https://eprint.iacr.org/2025/174</guid>
+<content:encoded><![CDATA[
+<div> 关键词: 区块链服务、分布式阈值加密服务、UTXO模型、公平性、VITARIT
+
+总结:
+
+本文介绍了一种名为VITARIT的新颖支付解决方案，该方案针对比特币等基于UTXO模型的区块链系统中，分布式阈值加密服务（如t-out-of-n分布式阈值可验证随机函数VRF服务）的需求进行了定制。VITARIT协议保证了强大的可证明安全性并方便实际部署，允许客户端向分布式阈值VRF服务请求可验证随机函数值，并触发对最多t+1个服务器的支付。该设计依赖于简单的交易和签名验证脚本，可以直接应用于类似比特币的系统。同时，文章还引入了新的密码学和交易层面的工具与技术，包括一种用于标准构建的创新性的签名-VRF交换协议，以及防止恶意服务器重复获取支付的交易流程设计，对去中心化支付系统具有更广泛的影响。原型实现表明，在两方交互情况下，客户端耗时126.4毫秒，服务器耗时204毫秒，证实了系统的实用性和可部署性。 <div>
+Blockchain service offerings have seen a rapid rise
+in recent times. Many of these services realize a decentralized
+architecture with a threshold adversary to avoid a single
+point of failure and to mitigate key escrow issues. While
+payments to such services are straightforward in systems
+supporting smart contracts, achieving fairness poses challenges
+in systems like Bitcoin, adhering to the UTXO model with
+limited scripting capabilities. This is especially challenging
+without smart contracts, as we wish to pay only the required
+threshold of t + 1 out of the n servers offering the service
+together, without any server claiming the payment twice.
+
+In this paper, we introduce VITARIT 1, a novel payment
+solution tailored for threshold cryptographic services in UTXO
+systems like Bitcoin. Our approach guarantees robust provable
+security while facilitating practical deployment. We focus on
+the t-out-of-n distributed threshold verifiable random function
+(VRF) service with certain properties, such as threshold BLS
+signatures, a recently highlighted area of interest. Our protocol
+enables clients to request verifiable random function (VRF)
+values from the threshold service, triggering payments to up
+to t + 1 servers of the distributed threshold VRF.
+
+Our efficient design relies on simple transactions using
+signature verification scripts, making it immediately applicable
+in Bitcoin-like systems. We also introduce new tools and
+techniques at both the cryptographic and transaction layers,
+including a novel signature-VRF exchange protocol for standard
+constructions, which may be of independent interest. Addition-
+ally, our transaction flow design prevents malicious servers
+from claiming payments twice, offering broader implications for
+decentralized payment systems. Our prototype implementation
+shows that in the two-party interaction, the client takes 126.4
+msec, and the server takes 204 msec, demonstrating practicality
+and deployability of the system
+]]></content:encoded>
+<pubDate>Wed, 05 Feb 2025 18:17:35 +0000</pubDate>
+<pubDate>Wed, 05 Feb 2025 18:17:35 +0000</pubDate>
+</item>
 
 <item>
 <title>VRaaS: Verifiable Randomness as a Service on Blockchains</title>
