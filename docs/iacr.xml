@@ -4,6 +4,82 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+<item>
+<title>Masquerade: Verifiable Multi-Party Aggregation with Secure Multiplicative Commitments</title>
+<link>https://eprint.iacr.org/2021/1370</link>
+<guid>https://eprint.iacr.org/2021/1370</guid>
+<content:encoded><![CDATA[
+<div> 关键词: 众包数据聚合、隐私保护、公共审计、可验证性、分布式账本
+
+总结:
+本文提出两种名为Masquerade和zk-Masquerade的协议，用于计算私有统计数据（如求和、平均值和直方图）的同时，不泄露参与者的原始数据。为确保数据聚合的完整性，文中设计了一种定制化的乘法承诺方案，并将所有参与者的承诺发布到分布式账本上，以实现公众可验证性。针对恶意参与者可能尝试破坏聚合结果的问题，zk-Masquerade采用两种零知识证明协议，确保共享数据点的有效性并在聚合前进行验证，从而支持广泛的数量和类别研究。实验中，使用了同态加密和承诺对不同数量的参与者进行了评估，并分析了协议运行时间和通信成本。 <div>
+In crowd-sourced data aggregation over the Internet, participants share their data points with curators. However, a lack of strong privacy guarantees may discourage participation, which motivates the need for privacy-preserving aggregation protocols. Moreover, existing solutions remain limited with respect to public auditing without revealing the participants' data. In realistic applications, however, there is an increasing need for public verifiability (i.e., verifying the protocol correctness) while preserving the privacy of the participants' inputs, since the participants do not always trust the data curators. At the same time, while publicly distributed ledgers may provide public auditing, these schemes are not designed to protect sensitive information.
+
+In this work, we introduce two protocols, dubbed Masquerade and zk-Masquerade, for computing private statistics, such as sum, average, and histograms, without revealing anything about participants' data. We propose a tailored multiplicative commitment scheme to ensure the integrity of data aggregations and publish all the participants' commitments on a ledger to provide public verifiability. zk-Masquerade detects malicious participants who attempt to poison the aggregation results by adopting two zero-knowledge proof protocols that ensure the validity of shared data points before being aggregated and enable a broad range of numerical and categorical studies. In our experiments, we use homomorphic ciphertexts and commitments for a variable number of participants and evaluate the runtime and the communication cost of our protocols.
+]]></content:encoded>
+<pubDate>Tue, 12 Oct 2021 06:24:19 +0000</pubDate>
+<pubDate>Tue, 12 Oct 2021 06:24:19 +0000</pubDate>
+</item>
+<item>
+<title>K-Linkable Ring Signatures and Applications in Generalized Voting</title>
+<link>https://eprint.iacr.org/2025/243</link>
+<guid>https://eprint.iacr.org/2025/243</guid>
+<content:encoded><![CDATA[
+<div> 关键词：Linkable Ring Signatures (LRS)，$k$-Linkable Ring Signatures ($k$-LRS)，投票隐私，匿名性，集体$k$-链接性
+
+总结:
+
+本文提出了$k$-可链接环签名($k$-LRS)这一新型密码学原语，用于在多样化的投票场景中同时实现匿名性和隐私保护。传统的可链接环签名(LRS)适用于防止重复投票的多数制选举，但在排名投票等更复杂的规则下，会暴露选民个体的投票偏好。$k$-LRS具有$k$级匿名性和$k$级链接性特点：用户最多可以匿名签署$k$次，使得即使是无限制的对手也无法关联其签名（$k$级匿名性）；若任何签名人签超过$k$次，则其所有签名将被公开链接（个体$k$-链接性），并且任何$c$个签名人无法生成多于$k\cdot c$个未链接的签名（集体$k$-链接性）。文章提供了基于DDH和SIS（因此是后量子安全的）两种$k$-LRS构造方法，并展示了如何将其应用于包括得分投票、多轮投票和博尔达计数等多种投票规则中。提出的协议为非交互式投票，即每个选民只需在公告板上发布一条消息，这突显了$k$-LRS在区块链治理等场景中的应用潜力。 <div>
+$\textit{Linkable ring signatures}$ (LRS) allow a user to sign anonymously on behalf of a ring, while maintaining linkability—two signatures from the same signer are publicly identified, i.e., linked. This linkability makes LRS suitable to prevent double-voting in classical, $\textit{plurality}$ voting protocols—each voter casts one vote and the candidate with the most votes wins the election. 
+
+    Several voting scenarios rely on (generalized) rules rather than plurality. For example, in $\textit{ranked voting}$, voters submit a ranking of the candidates, and the outcome is a function of these rankings. Such generalized voting rules are common in social choice theory, and have recently found their way into blockchain governance, e.g., for prioritizing (voting on) proposed (candidate)  projects. However, unlike plurality voting, using LRS for voters to sign their votes (rankings) does not guarantee vote privacy as one can observe the rankings of each individual voter, which, depending on the scoring rule, is more information than what the outcome of the election offers. 
+
+We introduce $k$-$\textit{linkable ring signatures}$ ($k$-LRS) as a primitive for simultaneously achieving anonymity and privacy in generalized voting. A $k$-LRS scheme has the following properties: 
+   ($k$-)$\textit{Anonymity}$: a user can sign anonymously (on behalf of the ring) up to $k$ times, so that even an unbounded adversary cannot link his signatures.
+   ($k$-)$\textit{Linkability}$: If any signer signs more than $k$ times, all his signatures are publicly linked $\textit{(individual $k$-linkability)}$; and, any set of $c$ signers cannot generate more than $k\cdot c$ unlinked signatures $\textit{(collective $k$-linkability)}$.
+
+    We provide two constructions of $k$-LRS: one is from the DDH, and the other is from SIS (hence post-quantum). Finally, we show how $k$-LRS can be applied to a broad range of voting rules, including $\textit{score voting}$, $\textit{multi-voting}$, and $\textit{Borda}$. Our protocols are non-interactive voting—each voter just posts a message on a bulletin board—which highlights the potential of $k$-LRS in blockchain-governance scenarios.
+]]></content:encoded>
+<pubDate>Sun, 16 Feb 2025 05:14:11 +0000</pubDate>
+<pubDate>Sun, 16 Feb 2025 05:14:11 +0000</pubDate>
+</item>
+<item>
+<title>IBE-IBE: Intent-Based Execution through Identity-Based Encryption and Auctions</title>
+<link>https://eprint.iacr.org/2025/241</link>
+<guid>https://eprint.iacr.org/2025/241</guid>
+<content:encoded><![CDATA[
+<div> 关键词: 分布式、无领导节点、密封投标拍卖、动态定价、区块链网络、多党计算(MPC)、身份基加密(IBE)、公平性、去中心化、价格发现透明度、安全性、竞争、意图保密、全同态加密(FHE)、可信执行环境(TEE)、 frontrunning风险、中央集权化、快速结算、去中心金融(DeFi)
+
+<br><br>总结:
+
+本文提出了一种基于区块链网络的分布式、无领导节点的密封投标拍卖模型，用于动态定价意图。该模型利用多党计算(MPC)和身份基加密(IBE)来提升定价效率并确保公平与去中心化。通过解决当前集中式或静态定价机制的脆弱性，我们的方法促进了透明、安全且具有竞争力的价格发现过程。同时，我们通过多党计算(MPC)、全同态加密(FHE)和可信执行环境(TEE)进一步增强了意图信息的机密性，有效降低了frontrunning风险和中央集权化的隐患，保持了去中心金融(DeFi)中至关重要的快速结算时间。 <div>
+This paper introduces a decentralized and leaderless sealed bid auction model for dynamic pricing of intents across blockchain networks. We leverage Multi-Party Computation (MPC) and Identity-Based Encryption (IBE) to improve pricing while ensuring fairness and decentralization. By addressing the vulnerabilities of current centralized or static pricing mechanisms, our approach fosters transparent, secure, and competitive price discovery. We further enhance the confidentiality of intents through Multi-Party Computation (MPC), Fully Homomorphic Encryption (FHE), and Trusted Execution Environments (TEE). Our novel methodology mitigates the risks of frontrunning and centralization while preserving the rapid settlement times essential to decentralized finance (DeFi).
+]]></content:encoded>
+<pubDate>Sat, 15 Feb 2025 22:52:28 +0000</pubDate>
+<pubDate>Sat, 15 Feb 2025 22:52:28 +0000</pubDate>
+</item>
+<item>
+<title>DART: Decentralized, Anonymous, and Regulation-friendly Tokenization</title>
+<link>https://eprint.iacr.org/2025/239</link>
+<guid>https://eprint.iacr.org/2025/239</guid>
+<content:encoded><![CDATA[
+<div> 关键词: DART、匿名支付系统、多资产类型、非交互式支付、可逆性机制
+
+总结:
+DART是一个全新的完全匿名、基于账户的支付系统，它兼顾了现实世界的多种考量因素，包括监管合规性，并实现了常量级别的交易大小。该系统支持多种资产类型，允许用户发行链上资产，如代币化的现实世界资产。通过隐藏资产类型、交易金额、余额以及发送者和接收者的身份信息，DART确保了交易的机密性和匿名性，并保证了交易间的不可链接性。同时，系统提供了一种针对特定资产的审计机制，使得发行人可以为他们发行的资产指定特定的审计员，同时保护审计员的身份隐私，以实现资产类型隐私。只有指定的审计员才能解密与其关联资产相关的交易，并且用户能在交易中有效地证明（隐藏的）资产类型与（隐藏的）指定审计员之间的关联。
+
+DART还支持非交互式支付，即使接收方离线，在线的发送方也能提交交易，同时还结合了一个接收方确认机制，体现了现实中接收方需确认或否认接收到的交易这一合规要求。据我们所知，这是无许可环境中首个此类方案。为了应对各种可能情况，DART还包括了一个可逆性机制，使发送方可以在接收方未确认的情况下从待处理交易中取回资金。此外，它还提供了保护隐私的资产余额证明机制。
+
+DART系统在支持并发的入站和出站交易的同时保持了完全匿名性，解决了许多基于账户的匿名系统中存在的常见问题。DART还展示了如何高效地支持多方交易，即在一个交易中向多个接收方付款。我们在通用组合(UC)设置下给出了完整的正式模型以及一个UC协议实现。 <div>
+We introduce DART, a fully anonymous, account-based payment system designed to address a comprehensive set of real-world considerations, including regulatory compliance, while achieving constant transaction size. DART supports multiple asset types, enabling users to issue on-chain assets such as tokenized real-world assets. It ensures confidentiality and anonymity by concealing asset types, transaction amounts, balances, and the identities of both senders and receivers, while guaranteeing unlinkability between transactions. Our design provides a mechanism for asset-specific auditing. Issuers can designate asset-specific auditors for the assets they issue, with the system preserving the privacy of the auditor’s identity to achieve asset type privacy. Only the designated auditor is authorized to decrypt transactions related to their associated asset, and users efficiently prove the association between the (hidden) asset type and the (hidden) designated auditor in their transactions. 
+
+DART supports non-interactive payments, allowing an online sender to submit a transaction even when the receiver is offline, while still incorporating a receiver affirmation mechanism that captures the real-world compliance consideration where the receiver must confirm (or deny) an incoming transaction. To the best of our knowledge, this is the first scheme of this kind in the permissionless setting. To accommodate all eventualities, DART also incorporates a reversibility mechanism, enabling senders to reclaim funds from pending transactions if the receiver’s affirmation is not yet provided. Finally, it offers a privacy-preserving proof of balance (per asset type) mechanism. 
+
+Our system achieves full anonymity while supporting concurrent incoming and outgoing transactions, resolving a common issue that plagues many account-based anonymous systems. We further demonstrate how our system supports multi-party transactions, allowing payment to multiple receivers in one transaction efficiently. We provide a full formal model in the Universal Composition (UC) setting, as well as a UC protocol realization.
+]]></content:encoded>
+<pubDate>Sat, 15 Feb 2025 14:46:13 +0000</pubDate>
+<pubDate>Sat, 15 Feb 2025 14:46:13 +0000</pubDate>
+</item>
 
 <item>
 <title>The Quantum Decoherence Model: Everlasting Composable Secure Computation and More</title>
