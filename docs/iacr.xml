@@ -4,6 +4,79 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+<item>
+<title>Tighter Control for Distributed Key Generation: Share Refreshing and Expressive Reconstruction Policies</title>
+<link>https://eprint.iacr.org/2025/277</link>
+<guid>https://eprint.iacr.org/2025/277</guid>
+<content:encoded><![CDATA[
+<div> 关键词: 私钥管理、安全性、分布式秘密共享、Shamir's secret sharing、刷新机制、访问结构、阈值访问树
+
+<br><br>总结:
+本文针对私钥安全管理问题，特别是对于公众而言，丢失私钥可能导致不可逆资产损失的挑战。文章关注了传统的托管方式存在的安全风险，并提出了一种基于Shamir's secret sharing的分布式、可验证和可扩展的密钥恢复方案的扩展，该方案通过将信任分散到多个参与方来提高安全性。关键创新在于引入了一个刷新阶段，确保私钥份额的安全性，防止长期暴露。文中探讨了三种不同的份额刷新方法，分析并比较了它们的安全保证和计算复杂度。此外，为了实现对密钥重构更细粒度的控制，该协议还被扩展以支持更复杂的访问结构，特别关注了阈值访问树的应用。 <div>
+The secure management of private keys is a fundamental challenge, particularly for the general public, as losing these keys can result in irreversible asset loss. Traditional custodial approaches pose security risks, while decentralized secret sharing schemes offer a more resilient alternative by distributing trust among multiple parties. In this work, we extend an existing decentralized, verifiable, and extensible cryptographic key recovery scheme based on Shamir's secret sharing. We introduce a refresh phase that ensures proactive security, preventing long-term exposure of secret shares. Our approach explores three distinct methods for refreshing shares, analyzing and comparing their security guarantees and computational complexity. Additionally, we extend the protocol to support more complex access structures, with a particular focus on threshold access trees, enabling fine-grained control over key reconstruction.
+]]></content:encoded>
+<pubDate>Tue, 18 Feb 2025 14:56:47 +0000</pubDate>
+<pubDate>Tue, 18 Feb 2025 14:56:47 +0000</pubDate>
+</item>
+<item>
+<title>White-Box Watermarking Signatures against Quantum Adversaries and Its Applications</title>
+<link>https://eprint.iacr.org/2025/265</link>
+<guid>https://eprint.iacr.org/2025/265</guid>
+<content:encoded><![CDATA[
+<div> 关键词：软件水印、公钥加密、量子对手、数字签名、白盒提取
+
+总结:
+本文探讨了针对量子敌手的白盒水印技术在数字签名中的应用。研究内容包括构造能在保证签名功能完整性的前提下，从海盗量子电路中安全提取嵌入水印的白盒水印签名方案，同时确保对带有水印的签名函数的黑盒访问不会泄露嵌入信息。文章指出，在签名场景下，隐私保护问题相比公钥加密更为关键，并提出了利用学习错误（LWE）假设和量子全同态加密构建的安全方案。此外，文中还关注了签名的通用复制保护概念，定义了一个不改变验证密钥或验证算法，将任何量子安全签名方案转化为具有复制保护特性的机制。然而，文章进一步证明了对于所有量子安全签名实现普遍复制保护是不可能的，这一结论基于其提出的对抗量子敌手的白盒水印签名方案。 <div>
+Software watermarking for cryptographic functionalities enables embedding an arbitrary message (a mark) into a cryptographic function. An extraction algorithm, when provided with a (potentially unauthorized) circuit, retrieves either the embedded mark or a special symbol unmarked indicating the absence of a mark. It is difficult to modify or remove the embedded mark without destroying the functionality of a marked function. Previous works have primarily employed black-box extraction techniques, where the extraction algorithm requires only input-output access to the circuit rather than its internal descriptions (white-box extraction). Zhandry (CRYPTO 2021) identified several challenges in watermarking public-key encryption (PKE) with black-box extraction and introduced the notion of privacy for white-box watermarking against classical adversaries. Kitagawa and Nishimaki (Journal of Cryptology 37(3)) extended watermarking techniques to pseudorandom functions (PRFs) and PKE in the presence of quantum adversaries, enabling extraction from pirate quantum circuits but failing to achieve privacy.
+
+In this work, we investigate white-box watermarking for digital signatures secure against quantum adversaries. Our constructions enable the extraction of embedded marks from the description of a pirate quantum circuit that produces valid signatures while ensuring that black-box access to a marked signing function does not reveal information about the embedded mark. We define and construct white-box watermarking signatures that are secure against quantum adversaries, leveraging the leaning with errors (LWE) assumption and quantum fully homomorphic encryption. Furthermore, we highlight that privacy concerns are even more critical in the context of signatures than in PKE. We also present a compelling practical application of white-box watermarking signatures.
+
+Additionally, we explore the concept of universal copy protection for signatures. We define universal copy protection as a mechanism that transforms any quantumly secure signature scheme into a copy-protected variant without altering the verification key or verification algorithm. This approach is preferable to developing specific copy-protected signature schemes, as it allows existing schemes to be secured without modifying their published verification keys. We demonstrate that universal copy protection for all quantum secure signatures is impossible by leveraging our white-box watermarking signatures secure against quantum adversaries.
+]]></content:encoded>
+<pubDate>Tue, 18 Feb 2025 05:01:32 +0000</pubDate>
+<pubDate>Tue, 18 Feb 2025 05:01:32 +0000</pubDate>
+</item>
+<item>
+<title>HasteBoots: Proving FHE Bootstrapping in Seconds</title>
+<link>https://eprint.iacr.org/2025/261</link>
+<guid>https://eprint.iacr.org/2025/261</guid>
+<content:encoded><![CDATA[
+<div> 关键词：Fully Homomorphic Encryption (FHE)，验证完整性，bootstrapping，HasteBoots，zkVM，SNARKs，证明生成时间，效率提升，可扩展性，隐私保护计算。
+
+<br><br>总结: 本文提出了一个名为HasteBoots的新颖方案，用于解决全同态加密（FHE）中计算完整性的验证问题，特别是针对FHE中最耗时的操作——引导（bootstrapping）。现有的方法如基于zkVM的解决方案和通用SNARKs在证明生成时间上存在效率低下问题，可能需要数小时至数天。通过定制化的多项式交互式Oracle证明和优化的多项式承诺方案，HasteBoots实现了对FHE引导操作在几秒内完成证明生成，显著优于现有技术。这表明了实现可扩展且高效的可验证FHE的可能性，为实践中的隐私保护计算铺平道路。 <div>
+Fully Homomorphic Encryption (FHE) enables computations on encrypted data, ensuring privacy for outsourced computation. However, verifying the integrity of FHE computations remains a significant challenge, especially for bootstrapping, the most computationally intensive operation in FHE. Prior approaches, including zkVM-based solutions and general-purpose SNARKs, suffer from inefficiencies, with proof generation times ranging from several hours to days. In this work, we propose HasteBoots, a succinct argument tailored for FHE operations. By designing customized polynomial interactive oracle proofs and optimized polynomial commitment schemes, HasteBoots achieves proof generation in a few seconds for FHE bootstrapping, significantly outperforming existing methods. Our approach demonstrates the potential for scalable and efficient verifiable FHE, paving the way for practical, privacy-preserving computations.
+]]></content:encoded>
+<pubDate>Tue, 18 Feb 2025 02:20:55 +0000</pubDate>
+<pubDate>Tue, 18 Feb 2025 02:20:55 +0000</pubDate>
+</item>
+<item>
+<title>TFHE Gets Real: an Efficient and Flexible Homomorphic Floating-Point Arithmetic</title>
+<link>https://eprint.iacr.org/2025/257</link>
+<guid>https://eprint.iacr.org/2025/257</guid>
+<content:encoded><![CDATA[
+<div> 关键词: 浮点数运算、全同态加密(FHE)、TFHE、精度、计算速度
+
+总结:
+本文关注于在全同态加密（FHE）领域中实现浮点数运算是如何至关重要的，特别是在保护机器学习中的用户隐私方面。文章以TFHE为例，开发了新的同态算子，旨在构建精确且可适应的同态浮点运算。尽管面临如小消息空间和计算过程中缺乏信息等挑战，研究者仍成功为常见的浮点数精度（例如32位和64位）确定了参数，并实现了较高的计算速度：在多线程环境下，32位浮点数加法可在2.5秒内完成，乘法大约需要1秒。这些实测结果表明，提出的方案具有高效性和实用性，显著超越了先前的工作，从而在理论上与实际应用之间架起了一座桥梁，使FHE在现实场景中的运用变得更加可行。 <div>
+Floating-point arithmetic plays a central role in computer science and is used in various domains where precision and computational scale are essential. One notable application is in machine learning, where Fully Homomorphic Encryption (FHE) can play a crucial role in safeguarding user privacy. In this paper, we focus on TFHE and develop novel homomorphic operators designed to enable the construction of precise and adaptable homomorphic floating-point operations. Integrating floating-point arithmetic within the context of FHE is particularly challenging due to constraints such as small message space and the lack of information during computation. Despite these challenges, we were able to determine parameters for common precisions (e.g., 32-bit, 64-bit) and achieve remarkable computational speeds, with 32-bit floating-point additions completing in 2.5 seconds and multiplications in approximately 1 second in a multi-threaded environment. These metrics provide empirical evidence of the efficiency and practicality of our proposed methods, which significantly outperform previous efforts. Our results demonstrate a significant advancement in the practical application of FHE, making it more viable for real-world scenarios and bridging the gap between theoretical encryption techniques and practical usability.
+]]></content:encoded>
+<pubDate>Mon, 17 Feb 2025 14:59:27 +0000</pubDate>
+<pubDate>Mon, 17 Feb 2025 14:59:27 +0000</pubDate>
+</item>
+<item>
+<title>Inaccessible Entropy for Watermarking Generative Agents</title>
+<link>https://eprint.iacr.org/2025/256</link>
+<guid>https://eprint.iacr.org/2025/256</guid>
+<content:encoded><![CDATA[
+<div> 关键词：语言模型、生成式代理、不可伪造水印、无失真、公开验证
+
+总结:
+本文提出了一种针对语言模型和生成式代理的无失真、不可伪造水印构造方法。该水印方案确保了水印无法被对手有效伪造或在不显著降低模型输出质量的情况下移除。水印输出保持无失真，即水印算法不会明显改变模型输出的质量，而且没有公共检测密钥的攻击者无法有效区分是否添加了水印的输出。水印方案的核心在于将消息与可公开验证的数字签名嵌入到生成的模型输出中。在检测阶段，任何拥有公钥的授权实体都可以提取并验证这些信息。文章证明，基于标准密码学假设——单向函数的存在，可以构建这样的无失真、不可伪造水印方案。该框架依赖于分析基于单向函数的计算熵概念的水印方案的不可访问熵。 <div>
+In this work, we construct distortion-free and unforgeable watermarks for language models and generative agents. The watermarked output cannot be forged by a adversary nor removed by the adversary without significantly degrading model output quality. That is, the watermarked output is distortion-free: the watermarking algorithm does not noticeably change the quality of the model output and without the public detection key, no efficient adversary can distinguish output that is watermarked from outputs which are not. The core of the watermarking schemes involve embedding a message and publicly-verifiable digital signature in the generated model output. The message and signature can be extracted during the detection phase and verified by any authorized entity that has a public key. We show that, assuming the standard cryptographic assumption of one-way functions, we can construct distortion-free and unforgeable watermark schemes. Our framework relies on analyzing the inaccessible entropy of the watermarking schemes based on computational entropy notions derived from the existence of one-way functions.
+]]></content:encoded>
+<pubDate>Mon, 17 Feb 2025 13:09:06 +0000</pubDate>
+<pubDate>Mon, 17 Feb 2025 13:09:06 +0000</pubDate>
+</item>
 
 <item>
 <title>Masquerade: Verifiable Multi-Party Aggregation with Secure Multiplicative Commitments</title>
