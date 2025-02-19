@@ -5,17 +5,35 @@
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
 <item>
+<title>Transistor: a TFHE-friendly Stream Cipher</title>
+<link>https://eprint.iacr.org/2025/282</link>
+<guid>https://eprint.iacr.org/2025/282</guid>
+<content:encoded><![CDATA[
+<div> 关键词: 全同态加密(FHE), 通信开销, 变换加密, Transistor, TFHE框架
+
+总结:
+Transistor是一种针对TFHE全同态加密框架设计的高效流密码，旨在解决FHE中因数据加密导致的通信开销问题。Transistor工作在$\mathbb{F}_{17}$域上，优化了TFHE性能。该流密码的关键组件采用TFHE友好的LFSR实现技术来低成本地增加状态大小，并使用类似于AES轮函数的非线性变换来更新仅有的、在TFHE中对应于昂贵可编程引导操作的小型有限状态机。与SNOW或LEX等其他流密码不同，Transistor提供了信息论安全证明，表明攻击者无法从三个或更少连续密钥流输出中获取关于秘密密钥的任何信息。通过对潜在相关性的深入分析，进一步限制了恢复秘密密钥所需的最小密钥流长度。在实际应用中，Transistor的实现显著优于现有TFHE变换加密技术，实现了超过60位/秒的标准CPU吞吐量，同时避免了需要昂贵的初始化过程。 <div>
+Fully Homomorphic Encryption (FHE) allows computations on encrypted data without requiring decryption, ensuring data privacy during processing.  However, FHE introduces a significant expansion of ciphertext sizes compared to plaintexts, which results in higher communication. A practical solution to mitigate this issue is  transciphering, where only the master key is homomorphically encrypted, while the actual data is encrypted using a symmetric cipher, usually a stream cipher. The server then homomorphically evaluates the stream cipher to convert the encrypted data into a homomorphically encrypted form.
+
+We introduce Transistor, a stream cipher specifically designed for efficient homomorphic evaluation within the TFHE scheme, a widely-used FHE framework known for its fast bootstrapping and ability to handle low-precision data. Transistor operates on $\mathbb{F}_{17}$ which is chosen to optimize TFHE performances. Its components are carefully engineered to both control noise growth and provide strong security guarantees. First, a simple TFHE-friendly implementation technique for LFSRs allows us to use such components to cheaply increase the state size. At the same time, a small Finite State Machine is the only part of the state updated non-linearly, each non-linear operation corresponding in TFHE to a rather expensive Programmable Bootstrapping. This update is done using an AES-round-like transformation. But, in contrast to other stream ciphers like SNOW or LEX, our construction comes with information-theoretic security arguments proving that an attacker cannot obtain any information about the secret key from three or fewer consecutive keystream outputs. These information-theoretic arguments are then combined with a thorough analysis of potential correlations to bound the minimal keystream length required for recovering the secret key.
+
+Our implementation of Transistor significantly outperforms the state of the art of TFHE transciphering, achieving a throughput of over 60 bits/s on a standard CPU, all while avoiding the need for an expensive initialization process.
+]]></content:encoded>
+<pubDate>Tue, 18 Feb 2025 19:21:38 +0000</pubDate>
+<pubDate>Tue, 18 Feb 2025 19:21:38 +0000</pubDate>
+</item>
+
+<item>
 <title>Tighter Control for Distributed Key Generation: Share Refreshing and Expressive Reconstruction Policies</title>
 <link>https://eprint.iacr.org/2025/277</link>
 <guid>https://eprint.iacr.org/2025/277</guid>
 <content:encoded><![CDATA[
 <div> 关键词: 私钥管理、安全性、分布式秘密共享、Shamir's secret sharing、刷新机制、访问结构、阈值访问树
 
-<br><br>总结:
+<br /><br />总结:
 本文针对私钥安全管理问题，特别是对于公众而言，丢失私钥可能导致不可逆资产损失的挑战。文章关注了传统的托管方式存在的安全风险，并提出了一种基于Shamir's secret sharing的分布式、可验证和可扩展的密钥恢复方案的扩展，该方案通过将信任分散到多个参与方来提高安全性。关键创新在于引入了一个刷新阶段，确保私钥份额的安全性，防止长期暴露。文中探讨了三种不同的份额刷新方法，分析并比较了它们的安全保证和计算复杂度。此外，为了实现对密钥重构更细粒度的控制，该协议还被扩展以支持更复杂的访问结构，特别关注了阈值访问树的应用。 <div>
 The secure management of private keys is a fundamental challenge, particularly for the general public, as losing these keys can result in irreversible asset loss. Traditional custodial approaches pose security risks, while decentralized secret sharing schemes offer a more resilient alternative by distributing trust among multiple parties. In this work, we extend an existing decentralized, verifiable, and extensible cryptographic key recovery scheme based on Shamir's secret sharing. We introduce a refresh phase that ensures proactive security, preventing long-term exposure of secret shares. Our approach explores three distinct methods for refreshing shares, analyzing and comparing their security guarantees and computational complexity. Additionally, we extend the protocol to support more complex access structures, with a particular focus on threshold access trees, enabling fine-grained control over key reconstruction.
 ]]></content:encoded>
-<pubDate>Tue, 18 Feb 2025 14:56:47 +0000</pubDate>
 <pubDate>Tue, 18 Feb 2025 14:56:47 +0000</pubDate>
 </item>
 <item>
@@ -34,7 +52,6 @@ In this work, we investigate white-box watermarking for digital signatures secur
 Additionally, we explore the concept of universal copy protection for signatures. We define universal copy protection as a mechanism that transforms any quantumly secure signature scheme into a copy-protected variant without altering the verification key or verification algorithm. This approach is preferable to developing specific copy-protected signature schemes, as it allows existing schemes to be secured without modifying their published verification keys. We demonstrate that universal copy protection for all quantum secure signatures is impossible by leveraging our white-box watermarking signatures secure against quantum adversaries.
 ]]></content:encoded>
 <pubDate>Tue, 18 Feb 2025 05:01:32 +0000</pubDate>
-<pubDate>Tue, 18 Feb 2025 05:01:32 +0000</pubDate>
 </item>
 <item>
 <title>HasteBoots: Proving FHE Bootstrapping in Seconds</title>
@@ -43,10 +60,9 @@ Additionally, we explore the concept of universal copy protection for signatures
 <content:encoded><![CDATA[
 <div> 关键词：Fully Homomorphic Encryption (FHE)，验证完整性，bootstrapping，HasteBoots，zkVM，SNARKs，证明生成时间，效率提升，可扩展性，隐私保护计算。
 
-<br><br>总结: 本文提出了一个名为HasteBoots的新颖方案，用于解决全同态加密（FHE）中计算完整性的验证问题，特别是针对FHE中最耗时的操作——引导（bootstrapping）。现有的方法如基于zkVM的解决方案和通用SNARKs在证明生成时间上存在效率低下问题，可能需要数小时至数天。通过定制化的多项式交互式Oracle证明和优化的多项式承诺方案，HasteBoots实现了对FHE引导操作在几秒内完成证明生成，显著优于现有技术。这表明了实现可扩展且高效的可验证FHE的可能性，为实践中的隐私保护计算铺平道路。 <div>
+<br /><br />总结: 本文提出了一个名为HasteBoots的新颖方案，用于解决全同态加密（FHE）中计算完整性的验证问题，特别是针对FHE中最耗时的操作——引导（bootstrapping）。现有的方法如基于zkVM的解决方案和通用SNARKs在证明生成时间上存在效率低下问题，可能需要数小时至数天。通过定制化的多项式交互式Oracle证明和优化的多项式承诺方案，HasteBoots实现了对FHE引导操作在几秒内完成证明生成，显著优于现有技术。这表明了实现可扩展且高效的可验证FHE的可能性，为实践中的隐私保护计算铺平道路。 <div>
 Fully Homomorphic Encryption (FHE) enables computations on encrypted data, ensuring privacy for outsourced computation. However, verifying the integrity of FHE computations remains a significant challenge, especially for bootstrapping, the most computationally intensive operation in FHE. Prior approaches, including zkVM-based solutions and general-purpose SNARKs, suffer from inefficiencies, with proof generation times ranging from several hours to days. In this work, we propose HasteBoots, a succinct argument tailored for FHE operations. By designing customized polynomial interactive oracle proofs and optimized polynomial commitment schemes, HasteBoots achieves proof generation in a few seconds for FHE bootstrapping, significantly outperforming existing methods. Our approach demonstrates the potential for scalable and efficient verifiable FHE, paving the way for practical, privacy-preserving computations.
 ]]></content:encoded>
-<pubDate>Tue, 18 Feb 2025 02:20:55 +0000</pubDate>
 <pubDate>Tue, 18 Feb 2025 02:20:55 +0000</pubDate>
 </item>
 <item>
@@ -61,7 +77,6 @@ Fully Homomorphic Encryption (FHE) enables computations on encrypted data, ensur
 Floating-point arithmetic plays a central role in computer science and is used in various domains where precision and computational scale are essential. One notable application is in machine learning, where Fully Homomorphic Encryption (FHE) can play a crucial role in safeguarding user privacy. In this paper, we focus on TFHE and develop novel homomorphic operators designed to enable the construction of precise and adaptable homomorphic floating-point operations. Integrating floating-point arithmetic within the context of FHE is particularly challenging due to constraints such as small message space and the lack of information during computation. Despite these challenges, we were able to determine parameters for common precisions (e.g., 32-bit, 64-bit) and achieve remarkable computational speeds, with 32-bit floating-point additions completing in 2.5 seconds and multiplications in approximately 1 second in a multi-threaded environment. These metrics provide empirical evidence of the efficiency and practicality of our proposed methods, which significantly outperform previous efforts. Our results demonstrate a significant advancement in the practical application of FHE, making it more viable for real-world scenarios and bridging the gap between theoretical encryption techniques and practical usability.
 ]]></content:encoded>
 <pubDate>Mon, 17 Feb 2025 14:59:27 +0000</pubDate>
-<pubDate>Mon, 17 Feb 2025 14:59:27 +0000</pubDate>
 </item>
 <item>
 <title>Inaccessible Entropy for Watermarking Generative Agents</title>
@@ -75,9 +90,7 @@ Floating-point arithmetic plays a central role in computer science and is used i
 In this work, we construct distortion-free and unforgeable watermarks for language models and generative agents. The watermarked output cannot be forged by a adversary nor removed by the adversary without significantly degrading model output quality. That is, the watermarked output is distortion-free: the watermarking algorithm does not noticeably change the quality of the model output and without the public detection key, no efficient adversary can distinguish output that is watermarked from outputs which are not. The core of the watermarking schemes involve embedding a message and publicly-verifiable digital signature in the generated model output. The message and signature can be extracted during the detection phase and verified by any authorized entity that has a public key. We show that, assuming the standard cryptographic assumption of one-way functions, we can construct distortion-free and unforgeable watermark schemes. Our framework relies on analyzing the inaccessible entropy of the watermarking schemes based on computational entropy notions derived from the existence of one-way functions.
 ]]></content:encoded>
 <pubDate>Mon, 17 Feb 2025 13:09:06 +0000</pubDate>
-<pubDate>Mon, 17 Feb 2025 13:09:06 +0000</pubDate>
 </item>
-
 <item>
 <title>Masquerade: Verifiable Multi-Party Aggregation with Secure Multiplicative Commitments</title>
 <link>https://eprint.iacr.org/2021/1370</link>
