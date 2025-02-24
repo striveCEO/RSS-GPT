@@ -5,6 +5,39 @@
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
 <item>
+<title>Partial and Fully Homomorphic Matching of IP Addresses Against Blacklists for Threat Analysis</title>
+<link>https://eprint.iacr.org/2025/322</link>
+<guid>https://eprint.iacr.org/2025/322</guid>
+<content:encoded><![CDATA[
+<div> 关键词: 个人信息安全、同态加密、IP地址、BFV方法、性能比较
+
+总结:
+本文关注于在网络信息安全领域中保护个人隐私的问题，特别是涉及IP地址的情况下。为了解决这一问题，文章提出使用同态加密技术来隐藏IP地址，同时实现对黑名单的匹配检查。具体而言，文中采用了OpenFHE库将网络地址转换为BFV同态加密方法。为了评估BFV方法的性能影响，文章将其与部分同态加密方法（包括Paillier、Damgard-Jurik、Okamoto-Uchiyama、Naccache-Stern和Benaloh）进行了对比测试。结果显示，BFV方法在多数情况下相对于这些部分同态加密方法表现更优。 <div>
+In many areas of cybersecurity, we require access to Personally Identifiable Information (PII), such as names, postal addresses and email addresses. Unfortunately, this can lead to data breaches, especially in relation to data compliance regulations such as GDPR. An IP address is a typical identifier which is used to map a network address to a person. Thus, in applications which are privacy-aware, we may aim to hide the IP address while aiming to determine if the address comes from a blacklist. One solution to this is to use homomorphic encryption to match an encrypted version of an IP address to a blacklisted network list. This matching allows us to encrypt the IP address and match it to an encrypted version of a blacklist. In this paper, we use the OpenFHE library \cite{OpenFHE} to convert network addresses into the BFV homomorphic encryption method. In order to assess the performance impact of BFV, it implements a matching method using the OpenFHE library and compares this against the partial homomorphic methods of Paillier, Damgard-Jurik, Okamoto-Uchiyama, Naccache-Stern and Benaloh. The main findings are that the BFV method compares favourably against the partial homomorphic methods in most cases.
+]]></content:encoded>
+<pubDate>Fri, 21 Feb 2025 20:36:43 +0000</pubDate>
+<pubDate>Fri, 21 Feb 2025 20:36:43 +0000</pubDate>
+</item>
+<item>
+<title>Committing Authenticated Encryption: Generic Transforms with Hash Functions</title>
+<link>https://eprint.iacr.org/2025/320</link>
+<guid>https://eprint.iacr.org/2025/320</guid>
+<content:encoded><![CDATA[
+<div> 关键词：authenticated encryption, committing security, generic transform, hash function, MR security
+
+总结:
+本文关注了认证加密（AE）方案中的承诺安全性需求，提出了多种基于哈希函数的通用转换方法，以克服现有技术的局限性，包括不完全承诺加密上下文、涉及非标准原语、非黑盒转换以及有限的承诺安全性。研究中，作者构建了三个基础转换方案$\mathsf{HtAE}, \mathsf{AEaH}$和$\mathsf{EtH}$，它们都保证了强大的安全性，并指出$\mathsf{EtH}$可应用于AE和基本隐私加密方案。对于滥用抵抗（MR）安全，作者提出了两个高级哈希基转换方案$\mathsf{AEtH}$和$\mathsf{chaSIV}$。其中，$\mathsf{AEtH}$可以为MR安全的AE方案添加承诺安全性，而$\mathsf{chaSIV}$则是首个能直接将基本AE提升至同时具有承诺和MR安全性的通用转换方案，而且它还可与任意隐私加密方案配合使用。在性能评估方面，$\mathsf{AEaH}$显示出了基础转换中的最高实际效率，而$\mathsf{AEtH}$在MRAE保持型转换中表现出色。MRAE提升转换$\mathsf{chaSIV}$在消息长度超过约360字节时，其性能与MRAE保持型转换相当甚至更优；对于更长的消息，它甚至超越了标准化的非承诺方案$\mathsf{AES}\text{-}\mathsf{GCM}\text{-}\mathsf{SIV}$。<br><br> <div>
+Recent applications and attacks have highlighted the need for authenticated encryption (AE) schemes to achieve the so-called committing security beyond privacy and authenticity. As a result, several generic solutions have been proposed to transform a non-committing AE scheme to a committing one, for both basic unique-nonce security and advanced misuse-resistant (MR) security. We observe that all existing practical generic transforms are subject to at least one of the following limitations: (i) not committing to the entire encryption context, (ii) involving non-standard primitives, (iii) not being a black-box transform, (iv) providing limited committing security. Furthermore, so far, there has been no generic transform that can directly elevate a basic AE scheme to a committing AE scheme that offers MR security. Our work fills these gaps by developing black-box generic transforms that crucially rely on hash functions, which are well standardized and widely deployed.
+
+First, we construct three basic transforms that combine AE with a single hash function, which we call $\mathsf{HtAE}, \mathsf{AEaH}$ and $\mathsf{EtH}$. They all guarantee strong security, and $\mathsf{EtH}$ can be applied to both AE and basic privacy-only encryption schemes. Next, for MR security, we propose two advanced hash-based transforms that we call $\mathsf{AEtH}$ and $\mathsf{chaSIV}$. $\mathsf{AEtH}$ is an MRAE-preserving transform that adds committing security to an MR-secure AE scheme. $\mathsf{chaSIV}$ is the first generic transform that can directly elevate basic AE to one with both committing and MR security; moreover, $\mathsf{chaSIV}$ also works with arbitrary privacy-only encryption schemes. Both of them feature a simple design and ensure strong security.
+
+For performance evaluation, we compare our transforms to similar existing ones, both in theory and through practical implementations. The results show that our $\mathsf{AEaH}$ achieves the highest practical efficiency among basic transforms, while $\mathsf{AEtH}$ excels in MRAE-preserving transforms. Our MRAE-lifting transform $\mathsf{chaSIV}$ demonstrates comparable performance to MRAE-preserving ones and surpasses them for messages larger than approximately $360$ bytes; for longer messages, it even outperforms the benchmark, non-committing standardized $\mathsf{AES}\text{-}\mathsf{GCM}\text{-}\mathsf{SIV}$.
+]]></content:encoded>
+<pubDate>Fri, 21 Feb 2025 15:51:43 +0000</pubDate>
+<pubDate>Fri, 21 Feb 2025 15:51:43 +0000</pubDate>
+</item>
+
+<item>
 <title>Stateless Deterministic Multi-Party EdDSA Signatures with Low Communication</title>
 <link>https://eprint.iacr.org/2024/358</link>
 <guid>https://eprint.iacr.org/2024/358</guid>
@@ -12,13 +45,11 @@
 <div> 关键词: EdDSA、多党派、阈值签名、零知识证明、信息论安全消息认证码
 
 总结:
-本文提出了一种新的全阈值环境下，能够容忍最多一名恶意成员破坏的无状态、确定性多党派EdDSA协议。相较于现有的Garillot等人提出的方案，新协议在保持三轮通信结构不变的同时，将通信成本降低了56倍，但计算成本增加了约2.25倍。我们利用信息论安全的消息认证码（IT-MAC）在多验证器场景下对值进行身份验证，并通过改进的多验证器扩展双重认证位（mv-edabits）将其从布尔域转换到算术域。此外，采用伪随机相关函数（PCF）以无状态和确定性的方式生成IT-MAC。结合这些元素，设计了一个用于无状态和确定性随机数生成的多验证器零知识（MVZK）协议。该协议可应用于构建更安全的区块链钱包和托管解决方案，增强密钥保护。<br><br> <div>
+本文提出了一种新的全阈值环境下，能够容忍最多一名恶意成员破坏的无状态、确定性多党派EdDSA协议。相较于现有的Garillot等人提出的方案，新协议在保持三轮通信结构不变的同时，将通信成本降低了56倍，但计算成本增加了约2.25倍。我们利用信息论安全的消息认证码（IT-MAC）在多验证器场景下对值进行身份验证，并通过改进的多验证器扩展双重认证位（mv-edabits）将其从布尔域转换到算术域。此外，采用伪随机相关函数（PCF）以无状态和确定性的方式生成IT-MAC。结合这些元素，设计了一个用于无状态和确定性随机数生成的多验证器零知识（MVZK）协议。该协议可应用于构建更安全的区块链钱包和托管解决方案，增强密钥保护。<br /><br /> <div>
 EdDSA is a standardized signing algorithm, by both the IRTF and NIST, that is widely used in blockchain, e.g., Hyperledger, Cardano, Zcash, etc. It is a variant of the well-known Schnorr signature scheme that leverages Edwards curves. It features stateless and deterministic nonce generation, meaning it does not rely on a reliable source of randomness or state continuity. Recently, NIST issued a call for multi-party threshold EdDSA signatures, with one approach verifying nonce generation through zero-knowledge (ZK) proofs. In this paper, we propose a new stateless and deterministic multi-party EdDSA protocol in the full-threshold setting, capable of tolerating all-but-one malicious corruption. Compared to the state-of-the-art multi-party EdDSA protocol by Garillot et al. (Crypto’21), our protocol reduces communication cost by a factor of 56x while maintaining the same three-round structure, albeit with a roughly 2.25x increase in computational cost. We utilize information-theoretic message authentication codes (IT-MACs) in a multi-verifier setting to authenticate values and transform them from the Boolean domain to the arithmetic domain by refining multi-verifier extended doubly-authenticated bits (mv-edabits). Additionally, we employ pseudorandom correlation functions (PCF) to generate IT-MACs in a stateless and deterministic manner. Combining these elements, we design a multi-verifier zero-knowledge (MVZK) protocol for stateless and deterministic nonce generation. Our protocol can be used to build secure blockchain wallets and custody solutions, enhancing key protection.
 ]]></content:encoded>
 <pubDate>Wed, 28 Feb 2024 07:51:27 +0000</pubDate>
-<pubDate>Wed, 28 Feb 2024 07:51:27 +0000</pubDate>
 </item>
-
 <item>
 <title>HELM: Navigating Homomorphic Encryption through Gates and Lookup Tables</title>
 <link>https://eprint.iacr.org/2023/1382</link>
