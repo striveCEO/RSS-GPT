@@ -5,6 +5,22 @@
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
 <item>
+<title>Black-box Collision Attacks on Widely Deployed Perceptual Hash Functions</title>
+<link>https://eprint.iacr.org/2024/1869</link>
+<guid>https://eprint.iacr.org/2024/1869</guid>
+<content:encoded><![CDATA[
+<div> 关键词：感知哈希函数、客户端扫描、神经网络哈希、NeuralHash、PhotoDNA<br><br>总结:<br>
+本文讨论了感知哈希函数在识别多媒体内容中的应用及其潜在问题。它们常用于检测版权侵犯和非法内容，但设计细节通常保密，缺乏透明度。政府考虑将其应用于客户端扫描（CSS）中，对端到端加密服务的内容进行预加密验证。苹果曾提出基于NeuralHash的CSS方案，但由于隐私和安全顾虑受到强烈批评而撤回，尽管该软件仍存在于Apple设备上。研究发现，NeuralHash存在易构造两个视觉上明显不同的输入产生相同哈希值的问题，对于人脸图像集合，随机碰撞的概率在$2^{16}$大小的输入集里显著增加。此外，还指出其错误否定率也较高。相似攻击也被成功应用于微软提出的广泛部署的PhotoDNA感知哈希函数。这些结果表明，当前的感知哈希函数设计不适合大规模客户端扫描，因为会导致无法接受的高误报率。因此，文章强调需要重新评估感知哈希函数的安全性和可行性，特别是在具有严重后果的大型应用场景下。 <div>
+Perceptual hash functions identify multimedia content by mapping similar inputs to similar outputs. They are widely used for detecting copyright violations and illegal content but lack transparency, as their design details are typically kept secret.
+Governments are considering extending the application of these functions to Client-Side Scanning (CSS) for end-to-end encrypted services: multimedia content would be verified against known illegal content before applying encryption.
+In 2021, Apple presented a detailed proposal for CSS based on the NeuralHash perceptual hash function. After strong criticism pointing out privacy and security concerns, Apple has withdrawn the proposal, but the NeuralHash software is  still present on Apple devices. 
+Brute force collisions for NeuralHash (with a 96-bit result) require $2^{48}$ evaluations. Shortly after the publication of NeuralHash, it was demonstrated that it is easy to craft two  colliding inputs for NeuralHash that are perceptually dissimilar. In the context of CSS, this means that it is easy to falsely incriminate someone by sending an innocent picture with the same hash value as illegal content. This work shows a more serious weakness: when inputs are restricted to a set of human faces, random collisions are highly likely to occur in input sets of size $2^{16}$. Unlike the targeted attack, our attacks are black-box attacks: they do not require knowledge of the design of the perceptual hash functions. In addition, we show that the false negative rate is high as well. We demonstrate the generality of our approach by applying a similar attack to PhotoDNA, a widely deployed perceptual hash function proposed by Microsoft with a hash result of 1152 bits. Here we show that specific small input sets result in near-collisions, with similar impact. These results imply that the current designs of perceptual hash function are completely unsuitable for large-scale client scanning, as they would result in an unacceptably high false positive rate. This work underscores the need to reassess the security and feasibility of perceptual hash functions, particularly for large-scale applications where privacy risks and false positives have serious consequences.
+]]></content:encoded>
+<pubDate>Fri, 15 Nov 2024 13:00:53 +0000</pubDate>
+<pubDate>Fri, 15 Nov 2024 13:00:53 +0000</pubDate>
+</item>
+
+<item>
 <title>Partial and Fully Homomorphic Matching of IP Addresses Against Blacklists for Threat Analysis</title>
 <link>https://eprint.iacr.org/2025/322</link>
 <guid>https://eprint.iacr.org/2025/322</guid>
@@ -16,7 +32,6 @@
 In many areas of cybersecurity, we require access to Personally Identifiable Information (PII), such as names, postal addresses and email addresses. Unfortunately, this can lead to data breaches, especially in relation to data compliance regulations such as GDPR. An IP address is a typical identifier which is used to map a network address to a person. Thus, in applications which are privacy-aware, we may aim to hide the IP address while aiming to determine if the address comes from a blacklist. One solution to this is to use homomorphic encryption to match an encrypted version of an IP address to a blacklisted network list. This matching allows us to encrypt the IP address and match it to an encrypted version of a blacklist. In this paper, we use the OpenFHE library \cite{OpenFHE} to convert network addresses into the BFV homomorphic encryption method. In order to assess the performance impact of BFV, it implements a matching method using the OpenFHE library and compares this against the partial homomorphic methods of Paillier, Damgard-Jurik, Okamoto-Uchiyama, Naccache-Stern and Benaloh. The main findings are that the BFV method compares favourably against the partial homomorphic methods in most cases.
 ]]></content:encoded>
 <pubDate>Fri, 21 Feb 2025 20:36:43 +0000</pubDate>
-<pubDate>Fri, 21 Feb 2025 20:36:43 +0000</pubDate>
 </item>
 <item>
 <title>Committing Authenticated Encryption: Generic Transforms with Hash Functions</title>
@@ -26,7 +41,7 @@ In many areas of cybersecurity, we require access to Personally Identifiable Inf
 <div> 关键词：authenticated encryption, committing security, generic transform, hash function, MR security
 
 总结:
-本文关注了认证加密（AE）方案中的承诺安全性需求，提出了多种基于哈希函数的通用转换方法，以克服现有技术的局限性，包括不完全承诺加密上下文、涉及非标准原语、非黑盒转换以及有限的承诺安全性。研究中，作者构建了三个基础转换方案$\mathsf{HtAE}, \mathsf{AEaH}$和$\mathsf{EtH}$，它们都保证了强大的安全性，并指出$\mathsf{EtH}$可应用于AE和基本隐私加密方案。对于滥用抵抗（MR）安全，作者提出了两个高级哈希基转换方案$\mathsf{AEtH}$和$\mathsf{chaSIV}$。其中，$\mathsf{AEtH}$可以为MR安全的AE方案添加承诺安全性，而$\mathsf{chaSIV}$则是首个能直接将基本AE提升至同时具有承诺和MR安全性的通用转换方案，而且它还可与任意隐私加密方案配合使用。在性能评估方面，$\mathsf{AEaH}$显示出了基础转换中的最高实际效率，而$\mathsf{AEtH}$在MRAE保持型转换中表现出色。MRAE提升转换$\mathsf{chaSIV}$在消息长度超过约360字节时，其性能与MRAE保持型转换相当甚至更优；对于更长的消息，它甚至超越了标准化的非承诺方案$\mathsf{AES}\text{-}\mathsf{GCM}\text{-}\mathsf{SIV}$。<br><br> <div>
+本文关注了认证加密（AE）方案中的承诺安全性需求，提出了多种基于哈希函数的通用转换方法，以克服现有技术的局限性，包括不完全承诺加密上下文、涉及非标准原语、非黑盒转换以及有限的承诺安全性。研究中，作者构建了三个基础转换方案$\mathsf{HtAE}, \mathsf{AEaH}$和$\mathsf{EtH}$，它们都保证了强大的安全性，并指出$\mathsf{EtH}$可应用于AE和基本隐私加密方案。对于滥用抵抗（MR）安全，作者提出了两个高级哈希基转换方案$\mathsf{AEtH}$和$\mathsf{chaSIV}$。其中，$\mathsf{AEtH}$可以为MR安全的AE方案添加承诺安全性，而$\mathsf{chaSIV}$则是首个能直接将基本AE提升至同时具有承诺和MR安全性的通用转换方案，而且它还可与任意隐私加密方案配合使用。在性能评估方面，$\mathsf{AEaH}$显示出了基础转换中的最高实际效率，而$\mathsf{AEtH}$在MRAE保持型转换中表现出色。MRAE提升转换$\mathsf{chaSIV}$在消息长度超过约360字节时，其性能与MRAE保持型转换相当甚至更优；对于更长的消息，它甚至超越了标准化的非承诺方案$\mathsf{AES}\text{-}\mathsf{GCM}\text{-}\mathsf{SIV}$。<br /><br /> <div>
 Recent applications and attacks have highlighted the need for authenticated encryption (AE) schemes to achieve the so-called committing security beyond privacy and authenticity. As a result, several generic solutions have been proposed to transform a non-committing AE scheme to a committing one, for both basic unique-nonce security and advanced misuse-resistant (MR) security. We observe that all existing practical generic transforms are subject to at least one of the following limitations: (i) not committing to the entire encryption context, (ii) involving non-standard primitives, (iii) not being a black-box transform, (iv) providing limited committing security. Furthermore, so far, there has been no generic transform that can directly elevate a basic AE scheme to a committing AE scheme that offers MR security. Our work fills these gaps by developing black-box generic transforms that crucially rely on hash functions, which are well standardized and widely deployed.
 
 First, we construct three basic transforms that combine AE with a single hash function, which we call $\mathsf{HtAE}, \mathsf{AEaH}$ and $\mathsf{EtH}$. They all guarantee strong security, and $\mathsf{EtH}$ can be applied to both AE and basic privacy-only encryption schemes. Next, for MR security, we propose two advanced hash-based transforms that we call $\mathsf{AEtH}$ and $\mathsf{chaSIV}$. $\mathsf{AEtH}$ is an MRAE-preserving transform that adds committing security to an MR-secure AE scheme. $\mathsf{chaSIV}$ is the first generic transform that can directly elevate basic AE to one with both committing and MR security; moreover, $\mathsf{chaSIV}$ also works with arbitrary privacy-only encryption schemes. Both of them feature a simple design and ensure strong security.
@@ -34,9 +49,7 @@ First, we construct three basic transforms that combine AE with a single hash fu
 For performance evaluation, we compare our transforms to similar existing ones, both in theory and through practical implementations. The results show that our $\mathsf{AEaH}$ achieves the highest practical efficiency among basic transforms, while $\mathsf{AEtH}$ excels in MRAE-preserving transforms. Our MRAE-lifting transform $\mathsf{chaSIV}$ demonstrates comparable performance to MRAE-preserving ones and surpasses them for messages larger than approximately $360$ bytes; for longer messages, it even outperforms the benchmark, non-committing standardized $\mathsf{AES}\text{-}\mathsf{GCM}\text{-}\mathsf{SIV}$.
 ]]></content:encoded>
 <pubDate>Fri, 21 Feb 2025 15:51:43 +0000</pubDate>
-<pubDate>Fri, 21 Feb 2025 15:51:43 +0000</pubDate>
 </item>
-
 <item>
 <title>Stateless Deterministic Multi-Party EdDSA Signatures with Low Communication</title>
 <link>https://eprint.iacr.org/2024/358</link>
