@@ -5,6 +5,21 @@
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
 <item>
+<title>OCash: Fully Anonymous Payments between Blockchain Light Clients</title>
+<link>https://eprint.iacr.org/2024/246</link>
+<guid>https://eprint.iacr.org/2024/246</guid>
+<content:encoded><![CDATA[
+<div> 关键词: 区块链、匿名支付系统、轻客户端、全节点、UC模型
+
+总结:
+本文研究了一种基于区块链的轻客户端之间的可验证匿名支付系统。该系统中，轻客户端通过全节点与区块链交互，而全节点可以看到轻客户端的读写操作。文章旨在实现即使在面对能观察到数据元素移动情况的全节点情况下，也能保障轻客户端进行匿名支付并维持隐私的目标。作者在UC模型下对问题进行了形式化定义，并提出了一种可证明安全的解决方案。他们展示了一种树ORAM的变体可以实现即使对手能够追踪其自身数据元素在树中的移动也能够保持无感知性。利用这一特性，文章实现了在区块链上的支付混淆以保证匿名性，同时允许轻客户端在不知道当前区块链状态的情况下知道其支付可能存在的几个位置。相较于现有工作，本文首次同时提供了强匿名性保证、可证明的安全性和针对全节点的匿名性。此外，文中还做出了一些独立贡献，包括定义并构建了适用于匿名支付系统的匿名币友好加密方案，以及定义和构造了高效的可压缩随机性信标，这种信标能够在规定时间间隔内生成不可预测的值，并能将其所有发布的值存储在一个简短的摘要中。 <div>
+We study blockchain-based provably anonymous payment systems between light clients. Such clients interact with the blockchain through full nodes, which can see what the light clients read and write. The goal of our work is to enable light clients to perform anonymous payments, while maintaining privacy even against the full nodes through which they interact with the blockchain. We formalize the problem in the UC model and present a provably secure solution. We show that a variation of tree ORAM gives obliviousness even when an adversary can follow how its own data elements move in the tree. We use this for anonymity via shuffling of payments on the blockchain, while at the same time allowing the light client to know a few positions among which to find its payment without knowing the current state of the blockchain. In comparison to existing works, we are the first ones that simultaneously provide strong anonymity guarantees, provable security, and anonymity with respect to full nodes. Along the way, we make several contributions that may be of independent interest. We define and construct anonymous-coin friendly encryption schemes and show how they can be used within anonymous payment systems. We define and construct efficient compressible randomness beacons, which produce unpredictable values in regular intervals and allow for storing all published values in a short digest.
+]]></content:encoded>
+<pubDate>Thu, 15 Feb 2024 14:42:02 +0000</pubDate>
+<pubDate>Thu, 15 Feb 2024 14:42:02 +0000</pubDate>
+</item>
+
+<item>
 <title>Stronger Security for Threshold Blind Signatures</title>
 <link>https://eprint.iacr.org/2025/353</link>
 <guid>https://eprint.iacr.org/2025/353</guid>
@@ -15,7 +30,6 @@
 文章探讨了阈值盲签名的安全性问题，其中盲签名允许用户以保护隐私的方式从签发者获取签名，而阈值版本则将私钥分散到n个签发者中，需要用户至少从t≤n个签发者那里获得签名份额才能生成最终签名。文章指出现有的一更多不可伪造性概念在单签发者场景下理解清晰，但在阈值场景中由于盲签名发行的特性导致挑战较大。现有的工作通过简化模型规避这一挑战，但无法完全体现阈值设置的预期。为此，文章提出了一个新的适用于c＜t个签发者被攻击情况的一更多不可伪造性框架，该框架可适应交互式和非交互式协议，并提供了一组逐步增强保证的自然属性，使签发者对份额组合拥有更多控制权。接着，文章重新审视了现有基于BLS和Snowblind的阈值盲签名方案在新框架下的安全性，并展示了如何提升它们的安全性。总的来说，文章旨在为阈值盲签名提供更强大且明确的安全保障。 <div>
 Blind signatures allow a user to obtain a signature from an issuer in a privacy-preserving way: the issuer neither learns the signed message, nor can link the signature to its issuance. The threshold version of blind signatures further splits the secret key among n issuers, and requires the user to obtain at least t ≤ n of signature shares in order to derive the final signature. Security should then hold as long as at most t − 1 issuers are corrupt. Security for blind signatures is expressed through the notion of one-more unforgeability and demands that an adversary must not be able to produce more signatures than what is considered trivial after its interactions with the honest issuer(s). While one-more unforgeability is well understood for the single-issuer setting, the situation is much less clear in the threshold case: due to the blind issuance, counting which interactions can yield a trivial signature is a challenging task. Existing works bypass that challenge by using simplified models that do not fully capture the expectations of the threshold setting. In this work, we study the security of threshold blind signatures, and propose a framework of one-more unforgeability notions where the adversary can corrupt c < t issuers. Our model is generic enough to capture both interactive and non-interactive protocols, and it provides a set of natural properties with increasingly stronger guarantees, giving the issuers gradually more control over how their shares can be combined. As a point of comparison, we reconsider the existing threshold blind signature models and show that their security guarantees are weaker and less clearly comprehensible than they seem. We then re-assess the security of existing threshold blind signature schemes – BLS-based and Snowblind – in our framework, and show how to lift them to provide stronger security.
 ]]></content:encoded>
-<pubDate>Tue, 25 Feb 2025 12:39:58 +0000</pubDate>
 <pubDate>Tue, 25 Feb 2025 12:39:58 +0000</pubDate>
 </item>
 <item>
@@ -31,7 +45,6 @@ With the growing emphasis on data privacy, secure multi-party computation has ga
 In this paper, we propose Helix, a scalable framework for maliciously secure PPML in the honest majority setting, aiming to enhance both the scalability and practicality of maliciously secure protocols. In particular, we report a privacy leakage issue in LXY24 during prefix OR operations and introduce a round-optimized alternative based on a single-round vectorized three-layer multiplication protocol. Additionally, by exploiting reusability properties within the computation process, we propose lightweight compression protocols that substantially improve the efficiency of multiplication verification. We also develop a batch check protocol to reduce the computational complexity of revealing operations in the malicious setting. For 63-party neural network inference, compared to the semi-honest LXY24, Helix is only 1.9$\times$ (1.1$\times$) slower in the online phase and 1.2$\times$ (1.1$\times$) slower in preprocessing under LAN (WAN) in the best case.
 ]]></content:encoded>
 <pubDate>Tue, 25 Feb 2025 01:34:53 +0000</pubDate>
-<pubDate>Tue, 25 Feb 2025 01:34:53 +0000</pubDate>
 </item>
 <item>
 <title>Publicly Verifiable Threshold Proxy Re-encryption and Its Application in Data Rights Confirmation</title>
@@ -45,7 +58,6 @@ In this paper, we propose Helix, a scalable framework for maliciously secure PPM
 Proxy re-encryption (PRE) has been regarded as an effective cryptographic primitive in data sharing systems with distributed proxies. However, no literature considers the honesty of data owners, which is critical in the age of big data. In this paper, we fill the gap by introducing a new proxy re-encryption scheme, called publicly verifiable threshold PRE (PVTPRE). Briefly speaking, we innovatively apply a slightly modified publicly verifiable secret sharing (PVSS) scheme to distribute the re-encryption keys to multiple proxies. Consequently, we achieve publicly verifiability of data owners non-interactively. Then, the correctness of data users in decryption and public verifiability of proxies in re-encryption are guaranteed seamlessly through execution of the PVSS reconstruction algorithms. We further prove that PVTPRE satisfies IND-CPA security. Besides, we put forward a privacy-preserving data rights confirmation framework by providing clear principles for data ownership and usage, based on the PVTPRE scheme and blockchain. Blockchain plays the role of data bank and smart contract engine, providing reliable storage and verification for all framework. To our knowledge, we are the first to systematically investigate data rights confirmation considering privacy as well as public verifiability, addressing the growing need for robust mechanisms to protect data rights and ensure transparency. Finally, we conduct comprehensive experiments to illustrate the correctness, feasibility and effectiveness. The experimental results show that our PVTPRE outperforms other PREs in many aspects.
 ]]></content:encoded>
 <pubDate>Tue, 25 Feb 2025 00:21:38 +0000</pubDate>
-<pubDate>Tue, 25 Feb 2025 00:21:38 +0000</pubDate>
 </item>
 <item>
 <title>Publicly Verifiable Generalized Secret Sharing and Its Application in Building Decentralized Exchange</title>
@@ -54,11 +66,10 @@ Proxy re-encryption (PRE) has been regarded as an effective cryptographic primit
 <content:encoded><![CDATA[
 <div> 关键词: Generalized Secret Sharing (GSS), Publicly Verifiable Generalized Secret Sharing (PVGSS), Non-Interactive Zero-Knowledge (NIZK), Decentralized Exchange (DEX), Fairness
 
-<br><br>总结:
+<br /><br />总结:
 本文提出了公开可验证广义秘密共享（PVGSS）方案，旨在提升分布式计算中GSS机制的适用性，尤其是在区块链等透明系统中的应用。首先介绍了基于Shamir秘密共享和线性秘密共享方案两种GSS构造方法。接着，将GSS与非交互式零知识证明（NIZK）相结合构建了PVGSS方案。进一步地，利用PVGSS方案设计了一个去中心化交易所（DEX），用户可以在其中公平地进行ERC-20代币交换，而被动观察者通过提供仲裁服务获取利润。DEX的关键特性“公平性”由PVGSS方案支持的复杂访问结构保障。文章还对PVGSS方案的性能以及DEX中用户的经济成本进行了全面评估，结果表明该方法在现实世界应用中具有可行性和实用性。 <div>
 Generalized secret sharing (GSS), which can offer more flexibility by accommodating diverse access structures and conditions, has been under-explored in distributed computing over the past decades. To address the gaps, we propose the publicly verifiable generalized secret sharing (PVGSS) scheme, enhancing the applicability of GSS in transparent systems. Public verifiability is a crucial property to gain trustworthiness for decentralized systems like blockchain.  We begin by introducing two GSS constructions, one based on Shamir's secret sharing and the other on the linear secret sharing scheme (LSSS). Next, we present PVGSS schemes that combine GSS with non-interactive zero-knowledge (NIZK) proofs.  Further, we construct a decentralized exchange (DEX) based on PVGSS scheme, where any users can participate in exchanges and engage in arbitrage. Specifically, users can fairly swap ERC-20 tokens with passive watchers, who earn profits by providing arbitration services. The critical property of "fairness" required by the DEX is ensured through a sophisticated access structure, supported by the PVGSS scheme. We provide a comprehensive evaluation on the performance of the PVGSS schemes and the monetary costs for users in the DEX. The results demonstrate the feasibility and practicality of this approach in real-world applications.
 ]]></content:encoded>
-<pubDate>Mon, 24 Feb 2025 23:42:56 +0000</pubDate>
 <pubDate>Mon, 24 Feb 2025 23:42:56 +0000</pubDate>
 </item>
 <item>
@@ -68,7 +79,7 @@ Generalized secret sharing (GSS), which can offer more flexibility by accommodat
 <content:encoded><![CDATA[
 <div> 关键词：traceable threshold encryption、CCA安全性、一致性、身份基加密、Boneh-Franklin IBE、Boneh-Boyen IBE
 
-<br><br>总结：
+<br /><br />总结：
 
 本文提出了更强版本的可追踪门限加密定义，支持CCA安全性与解密一致性。文章首先引入了基于身份的可追踪加密变种，并通过两个通用变换将其转化为CCA安全构造，这些变换利用了一次性签名和指纹编码技术。接着，文章给出了两种高效的身份基方案实例，第一种基于Boneh-Franklin IBE，具有常数大小的密文但公钥大小为二次级，其安全性依赖于XDH和BDDH假设；第二种基于Boneh-Boyen IBE，同时支持常数大小的密文和公钥，安全性基于双线性配对的一种变种——“uber”假设。具体分析表明，第一种方案的密文比第二种小约6倍。最后，为了实现一致性，文章扩展了相关定义并加入了一个有效的非交互式正确加密证明。 <div>
 A recent work by Boneh, Partap, and Rotem [Crypto'24] introduced the concept of traceable threshold encryption, in that if $t$ or more parties collude to construct a decryption box, which performs decryptions, then at least one party's identity can be traced by making a few black-box queries to the box. This has important applications, e.g., in blockchain mempool privacy, where collusion yields high financial gain through MEVs without any consequence - the possibility of tracing discourages collusion.
@@ -77,7 +88,6 @@ Nevertheless, their definitions leave room for exploitation as they only achieve
 This paper proposes stronger definitions of traceable threshold encryption, which supports CCA-security and consistency. Our main approach considers identity-based variants of traceable encryption (which we also define). It converts that to a CCA-secure construction, adapting two generic transformations, first using a one-time signature and then a fingerprinting code. 
 We put forward two efficient instantiations of our identity-based scheme with different merits: our first construction is based on Boneh-Franklin IBE [Crypto'01] and has constant size ciphertexts but quadratic size public keys - this is proven secure based on XDH and BDDH. Our second construction is based on Boneh-Boyen IBE [Eurocrypt'04]. It supports both constant-size ciphertexts and constant-size public keys - this is proven secure based on a variant of the uber assumption over bilinear pairings. Our concrete analysis shows that the first construction's ciphertext is much (~6x) smaller than the second construction. Finally, we extend the definitions to support consistency and achieve it by adjoining an efficient, non-interactive proof of correct encryption.
 ]]></content:encoded>
-<pubDate>Mon, 24 Feb 2025 15:59:42 +0000</pubDate>
 <pubDate>Mon, 24 Feb 2025 15:59:42 +0000</pubDate>
 </item>
 <item>
@@ -94,7 +104,6 @@ Multi-signatures allow a set of parties to produce a single signature for a comm
 In this work, we revisit the privacy framework from Lehmann and Özbay. Our first contribution is a generic lift that adds privacy to any multi-signature with deterministic key aggregation. As our second contribution, we study two concrete multi-signatures, and give dedicated transforms that take advantage of the underlying structures for improved efficiency. The first one is a slight modification of the popular MuSig2 scheme, achieving the strongest privacy property for free compared to the original scheme. The second is a variant of the lattice-based multi-signature scheme DualMS, making our construction the first post-quantum secure multi-signature for ad-hoc privacy-preserving group signing. The light overhead incurred by the modifications in our DualMS variant still allow us to benefit from the competitiveness of the original scheme.
 ]]></content:encoded>
 <pubDate>Mon, 24 Feb 2025 13:35:38 +0000</pubDate>
-<pubDate>Mon, 24 Feb 2025 13:35:38 +0000</pubDate>
 </item>
 <item>
 <title>How to Share an NP Statement or Combiners for Zero-Knowledge Proofs</title>
@@ -103,7 +112,7 @@ In this work, we revisit the privacy framework from Lehmann and Özbay. Our firs
 <content:encoded><![CDATA[
 <div> 关键词：秘密分享、NP陈述、信息论安全性、多项式复杂性、非交互式组合
 
-<br><br>总结:
+<br /><br />总结:
 本文探讨了秘密分享NP陈述（NPSS）的概念，并对其进行了深化，提出了信息论安全性的NPSS定义，该定义可以视为标准NP归约的加密变体，并能利用任何单向函数编译为GJS定义。文章构建了一个适用于任意$t\leq n$值的信息论安全的$t$-out-of-$n$ NPSS构造，其复杂度为多项式级别。在此过程中，作者引入了一种新的安全多方计算概念，具有独立的研究价值。
 
 接着，本文的NPSS框架支持非交互式地结合$n$个零知识证明实例，只要其中满足$t_s + t_z > n$，即可实现仅有$t_s$个实例保证声音性和仅有$t_z$个实例保证零知识性。基于此，文章在仅需单向函数假设下实现了以下成果：
@@ -122,7 +131,6 @@ In Crypto'19, Goyal, Jain, and Sahai (GJS) introduced the elegant notion of *sec
 (iii) A *three-round secure multiparty computation protocol* for general functions in the honest-majority setting. The round complexity of this protocol is optimal, resolving a line of research that previously relied on stronger assumptions (Aharonov et al., Eurocrypt'12; Gordon et al., Crypto'15; Ananth et al., Crypto'18; Badrinarayanan et al., Asiacrypt'20; Applebaum et al., TCC'22).
 ]]></content:encoded>
 <pubDate>Mon, 24 Feb 2025 11:30:03 +0000</pubDate>
-<pubDate>Mon, 24 Feb 2025 11:30:03 +0000</pubDate>
 </item>
 <item>
 <title>Leap: A Fast, Lattice-based OPRF With Application to Private Set Intersection</title>
@@ -140,7 +148,6 @@ To close this gap, we introduce Leap, a novel OPRF based on heuristic lattice as
 Efficiency-wise, our prototype implementation achieves computation times of just 11 microseconds for the client and 750 microseconds for the server, excluding some base OT preprocessing overhead. Moreover, Leap requires an online communication cost of 23 kB per evaluation, where the client only has to send around 380 bytes online. To demonstrate the practical applicability of Leap, we present an efficient private set intersection (PSI) protocol built on top of Leap. This application highlights the potential for the integration of Leap into various privacy-preserving applications: We can compute an unbalanced set intersection with set sizes of 2^24 and 2^15 in under a minute of online time and just over two minutes overall.
 ]]></content:encoded>
 <pubDate>Mon, 24 Feb 2025 11:20:47 +0000</pubDate>
-<pubDate>Mon, 24 Feb 2025 11:20:47 +0000</pubDate>
 </item>
 <item>
 <title>Private Multi-Party Neural Network Training over $\mathbb{Z}_{2^k}$ via Galois Rings</title>
@@ -154,9 +161,7 @@ Efficiency-wise, our prototype implementation achieves computation times of just
 Secret-sharing-based multi-party computation provides effective solutions for privacy-preserving machine learning. In this paper, we present novel protocols for privacy-preserving neural network training using Shamir secret sharing scheme over Galois rings. The specific Galois ring we use is \(GR(2^k, d)\), which contains $\mathbb{Z}_{2^k}$ as a subring. The algebraic structure of \(GR(2^k, d)\) enables us to benefit from Shamir scheme while performing modulo operations only on \(2^k\) instead of a prime number, making our protocols more compatible with modern computer architectures. We achieve the parallel processing of training data by embedding different training samples into the different coefficients of the polynomial representing a single Galois ring element, and we show that this embedding can be performed with no additional communication overhead compared to processing only one sample at a time. To evaluate our methods, we conduct private training of neural networks on the MNIST dataset between different numbers of participants. The experimental results indicate the advantages of our protocols compared to existing $\mathbb{F}_p$-based implementations in this domain.
 ]]></content:encoded>
 <pubDate>Mon, 24 Feb 2025 02:00:59 +0000</pubDate>
-<pubDate>Mon, 24 Feb 2025 02:00:59 +0000</pubDate>
 </item>
-
 <item>
 <title>Privacy-Preserving Epidemiological Modeling on Mobile Graphs</title>
 <link>https://eprint.iacr.org/2020/1546</link>
