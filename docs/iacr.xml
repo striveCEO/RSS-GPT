@@ -4,6 +4,181 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+<item>
+<title>Hybrid Obfuscated Key Exchange and KEMs</title>
+<link>https://eprint.iacr.org/2025/408</link>
+<guid>https://eprint.iacr.org/2025/408</guid>
+<content:encoded><![CDATA[
+<div> 关键词：元数据隐藏、互联网协议、加密协议、后量子安全、OKEMs<br><br>总结:
+
+本文关注于互联网协议中元数据隐藏的重要性，以及在后量子时代实现完全加密协议的安全性。现有的如Tor的pluggable transport协议obfs4依赖于Diffie-Hellman和Elligator编码进行密钥交换的模糊处理。然而，目前还没有提供混合模糊保障的OKEM（模糊密钥封装机制）用于实际过渡协议。文章提出了首个同时具备混合IND-CCA安全性和混合模糊保证的OKEM组合器，并基于此构建了Drivel协议，使其与混合OKEM兼容。此外，文章还介绍了如何实现LWE基OKEM的无条件公钥模糊化，并探讨了包括构建第一个在UC模型下抗适应性破坏的混合密码验证密钥交换（PAKE）协议在内的混合OKEM更广泛的应用。 <div>
+Hiding the metadata in Internet protocols serves to protect user privacy, dissuade traffic analysis, and prevent network ossification. Fully encrypted protocols require even the initial key exchange to be obfuscated: a passive observer should be unable to distinguish a protocol execution from an exchange of random bitstrings. Deployed obfuscated key exchanges such as Tor's pluggable transport protocol obfs4 are Diffie–Hellman-based, and rely on the Elligator encoding for obfuscation. Recently, Günther, Stebila, and Veitch (CCS '24) proposed a post-quantum variant pq-obfs, using a novel building block called obfuscated key encapsulation mechanisms (OKEMs): KEMs whose public keys and ciphertexts look like random bitstrings.
+
+For transitioning real-world protocols, pure post-quantum security is not enough. Many are taking a hybrid approach, combining traditional and post-quantum schemes to hedge against security failures in either component. While hybrid KEMs are already widely deployed (e.g., in TLS 1.3), existing hybridization techniques fail to provide hybrid obfuscation guarantees for OKEMs. Further, even if a hybrid OKEM existed, the pq-obfs protocol would still not achieve hybrid obfuscation.
+
+In this work, we address these challenges by presenting the first OKEM combiner that achieves hybrid IND-CCA security with hybrid ciphertext obfuscation guarantees, and using this to build Drivel, a modification of pq-obfs that is compatible with hybrid OKEMs. Our OKEM combiner allows for a variety of practical instantiations, e.g., combining obfuscated versions of DHKEM and ML-KEM. We additionally provide techniques to achieve unconditional public key obfuscation for LWE-based OKEMs, and explore broader applications of hybrid OKEMs, including a construction of the first hybrid password-authenticated key exchange (PAKE) protocol secure against adaptive corruptions in the UC model.
+]]></content:encoded>
+<pubDate>Tue, 04 Mar 2025 00:52:26 +0000</pubDate>
+<pubDate>Tue, 04 Mar 2025 00:52:26 +0000</pubDate>
+</item>
+<item>
+<title>Provably Secure Approximate Computation Protocols from CKKS</title>
+<link>https://eprint.iacr.org/2025/395</link>
+<guid>https://eprint.iacr.org/2025/395</guid>
+<content:encoded><![CDATA[
+<div> 关键词: 安全多方计算、同态加密、CKKS方案、噪音模糊技术、分布式采样
+
+总结:
+本文研究了基于CKKS方案的安全近似多方计算问题。首先分析了在两方设置中，CKKS基础协议的应用情况：当仅一方持有私人输入而另一方作为评估者时，通过在加密方使用噪音模糊技术可实现标准意义上的安全性。当双方都具有私人输入时，现有协议只能满足宽松的“自由安全”定义，为此，文章提出了一种新的协议，利用分布式采样方法在安全环境下生成模糊噪音，从而满足标准安全性定义。进一步地，将两方协议扩展到多方面设置，由于现有的基于阈值的CKKS多方计算协议仅能满足“自由安全”，文中提出一种新颖的多方面协议，通过应用多方分布式采样生成模糊误差来实现标准安全性。对于所有提出的协议，作者均形式化定义了其功能并在基于模拟的安全框架下进行了严谨的安全性分析。据作者所知，这是首次对基于CKKS的近似多方计算功能进行明确定义并实现正式的安全性保证的工作。 <div>
+Secure multi-party computation (MPC) enables collaborative, privacy-preserving computation over private inputs. Advances in homomorphic encryption (HE), particularly the CKKS scheme, have made secure computation practical, making it well-suited for real-world applications involving approximate computations. However, the inherent approximation errors in CKKS present significant challenges in developing MPC protocols.
+
+This paper investigates the problem of secure approximate MPC from CKKS. We first analyze CKKS-based protocols in two-party setting. When only one party holds a private input and the other party acts as an evaluator, a simple protocol with the noise smudging technique on the encryptor's side achieves security in the standard manner. When both parties have private inputs, we demonstrate that the protocol incorporating independent errors from each party achieves a relaxed standard security notion, referred to as a liberal security. Nevertheless, such a protocol fails to satisfy the standard security definition. To address this limitation, we propose a novel protocol that employs a distributed sampling approach to generate smudging noise in a secure manner, which satisfies the standard security definition. 
+
+Finally, we extend the two-party protocols to the multi-party setting. Since the existing threshold CKKS-based MPC protocol only satisfies the liberal security, we present a novel multi-party protocol achieving the standard security by applying multi-party distributed sampling of a smudging error. 
+
+For all the proposed protocols, we formally define the functionalities and provide rigorous security analysis within the simulation-based security framework. To the best of our knowledge, this is the first work to explicitly define the functionality of CKKS-based approximate MPC and achieve formal security guarantees.
+]]></content:encoded>
+<pubDate>Mon, 03 Mar 2025 02:34:42 +0000</pubDate>
+<pubDate>Mon, 03 Mar 2025 02:34:42 +0000</pubDate>
+</item>
+<item>
+<title>An Efficient Quantum Oblivious Transfer Protocol</title>
+<link>https://eprint.iacr.org/2025/393</link>
+<guid>https://eprint.iacr.org/2025/393</guid>
+<content:encoded><![CDATA[
+<div> 关键词: Oblivious Transfer (OT), 量子OT (qOT), 单光子, 项目测量, 长期安全
+
+总结:
+本文介绍了量子隐私保护协议的重要组成部分——量子版的 Oblivious Transfer (qOT)。现有的经典 OT 协议基于非量子安全的数论假设，而许多量子 OT 协议效率不高或不够实用。文章提出了一种名为 qOT 的简洁高效量子 OT 协议，它利用了 Gao 等人提出的非对称密钥分布作为构建模块。qOT 协议仅需要单光子作为量子态源，并通过单粒子投影测量来计算状态，这使得 qOT 在实际应用中更为高效。此外，该设计被证明能抵抗量子攻击，并提供长期安全性。 <div>
+Oblivious Transfer (OT) is a significant two party privacy preserving cryptographic primitive. OT involves a sender having several pieces of information and a receiver having a choice bit. The choice bit represents the piece of information that the receiver wants to obtain as an output of OT. At the end of the protocol, sender remains oblivious about the choice bit and receiver remains oblivious to the contents of the information that were not chosen. It has applications ranging from secure multi-party computation, privacy-preserving protocols to cryptographic protocols for secure communication. Most of the classical OT protocols are based on number theoretic assumptions which are not quantum secure and existing quantum OT protocols are not so efficient and practical. Herein, we present the design and analysis of a simple yet efficient quantum OT protocol, namely qOT. qOT is designed by using the asymmetric key distribution proposed by Gao et al. [18] as a building block. The designed qOT requires only single photons as a source of a quantum state, and the measurements of the states are computed using single particle projective measurement. These make qOT efficient and practical. Our proposed design is secure against quantum attacks. Moreover, qOT also provides long-term security.
+]]></content:encoded>
+<pubDate>Sun, 02 Mar 2025 13:47:20 +0000</pubDate>
+<pubDate>Sun, 02 Mar 2025 13:47:20 +0000</pubDate>
+</item>
+<item>
+<title>Blockchain-based Secure D2D localisation with adaptive precision</title>
+<link>https://eprint.iacr.org/2025/392</link>
+<guid>https://eprint.iacr.org/2025/392</guid>
+<content:encoded><![CDATA[
+<div> 关键词: 安全、最佳努力、局部化信息、分布式账本、智能合约
+
+总结:
+本文提出了一种安全的最佳努力方法，用于在异构网络中为无法访问GPS或重型加密基础设施的设备提供局部化信息。该方法使每个设备仅基于其相邻锚点提供的数据就能计算出自身位置，以最高精度保证定位准确性。通过利用智能合约在分布式账本上注册局部化信息，确保了定位服务的安全性。文中证明了方案在适应性选择消息攻击模型下的安全性。此外，作者通过以Hyperledger Besu与QBFT共识作为案例研究，评估了该解决方案的有效性，具体考察了平均注册位置时间、失败请求以及总执行时间等指标。 <div>
+In this paper we propose a secure  best effort methodology for providing localisation information to devices in a heterogenous network where devices do not have access to GPS-like technology or heavy cryptographic infrastructure. Each device will compute its localisation with the highest possible accuracy  based solely on the data provided by its neighboring anchors. The security of the localisation is guarantied by registering the localisation information on  a distributed ledger via smart contracts. We prove the security of our solution under  the adaptive chosen  message attacks model. We furthermore evaluate the effectiveness of our solution by measuring the  average register location time,  failed  requests, and total execution time using as DLT case study Hyperledger Besu with QBFT consensus.
+]]></content:encoded>
+<pubDate>Sun, 02 Mar 2025 10:11:56 +0000</pubDate>
+<pubDate>Sun, 02 Mar 2025 10:11:56 +0000</pubDate>
+</item>
+<item>
+<title>Fair Exchange for Decentralized Autonomous Organizations via Threshold Adaptor Signatures</title>
+<link>https://eprint.iacr.org/2025/388</link>
+<guid>https://eprint.iacr.org/2025/388</guid>
+<content:encoded><![CDATA[
+<div> 关键词：Decentralized Autonomous Organization (DAO)，公平交换，区块链，加密机制，智能合约，多党派管理，数字资产，见证分享，签名密钥分享，资金转移，公平性保障，DAO间公平性，DAO内公平性，标准密码学假设，高效协议，认证见证加密，门限适配器签名。
+
+<br><br>总结:
+本文关注的是在不依赖智能合约的情况下，通过一种基于区块链技术的加密机制实现DAO间的公平交换。研究场景涉及由$n_\mathsf{S}$个卖家持有的见证分享$w$与由$n_\mathsf{B}$个买家持有的签名密钥分享$sk$之间的交互，目标是以预定金额的资金转移换取$w$。文章提出了DAO间及DAO内部的双重公平性要求：只有当双方DAO都完成资产交换时，各自的成员才能获取相应的资产。为达成这一目标，文章形式化定义了公平性属性并设计了一个高效的协议，该协议利用了认证见证加密和门限适配器签名这两个具有独立研究价值的新颖原语，并展示了它们的高效构建方法。 <div>
+A Decentralized Autonomous Organization (DAO) enables multiple parties to collectively manage digital assets in a blockchain setting. We focus on achieving fair exchange between DAOs using a cryptographic mechanism that operates with minimal blockchain assumptions and, crucially, does not rely on smart contracts.  
+
+Specifically, we consider a setting where a DAO consisting of $n_\mathsf{S}$ sellers holding shares of a witness $w$ interacts with a DAO comprising $n_\mathsf{B}$ buyers holding shares of a signing key $sk$; the goal is for the sellers to exchange $w$ for a signature under $sk$ transferring a predetermined amount of funds.  
+Fairness is required to hold both between DAOs (i.e., ensuring that each DAO receives its asset if and only if the other does) as well as within each DAO (i.e., ensuring that all members of a DAO receive their asset if and only if every other member does).  
+
+We formalize these fairness properties and present an efficient protocol for DAO-based fair exchange under standard cryptographic assumptions. Our protocol leverages certified witness encryption and threshold adaptor signatures, two primitives of independent interest that we introduce and show how to construct efficiently.
+]]></content:encoded>
+<pubDate>Fri, 28 Feb 2025 21:49:09 +0000</pubDate>
+<pubDate>Fri, 28 Feb 2025 21:49:09 +0000</pubDate>
+</item>
+<item>
+<title>Generic Composition: From Classical to Quantum Security</title>
+<link>https://eprint.iacr.org/2025/387</link>
+<guid>https://eprint.iacr.org/2025/387</guid>
+<content:encoded><![CDATA[
+<div> 关键词: Authenticated encryption, Encrypt-then-MAC, Quantum setting, Chosen-ciphertext security, Quantum pseudorandom function<br><br>总结:<br>
+该文研究了量子环境下的Encrypt-then-MAC组合的安全性，其中攻击者对加密和响应的查询可能处于叠加状态。文章指出，当使用选择明文（IND-qCPA）安全的对称加密方案SE与加一不可伪造MAC结合时，Encrypt-then-MAC组合无法实现选择密文（IND-qCCA）安全性。然而，通过将MAC替换为量子伪随机函数（qPRF），Encrypt-then-MAC或Encrypt-and-MAC组合能够确保IND-qCCA安全性。 <div>
+Authenticated encryption (AE) provides both authenticity and privacy.
+Starting with Bellare's and Namprempre's work in 2000, the Encrypt-then-MAC composition of an encryption scheme for privacy and a MAC for authenticity has become a well-studied and common approach.
+This work investigates the security of the Encrypt-then-MAC composition in a quantum setting which means that adversarial queries as well as the responses to those queries may be in superposition.
+We demonstrate that the Encrypt-then-MAC composition of a chosen-plaintext (IND-qCPA) secure symmetric encryption scheme SE and a plus-one unforgeable MAC fails to achieve chosen-ciphertext (IND-qCCA) security.
+On the other hand, we show that it suffices to choose a quantum pseudorandom function (qPRF) as the MAC.
+Namely, the Encrypt-then-MAC composition of SE and a qPRF is IND-qCCA secure.
+The same holds for the Encrypt-and-MAC composition of SE and a qPRF
+]]></content:encoded>
+<pubDate>Fri, 28 Feb 2025 16:45:24 +0000</pubDate>
+<pubDate>Fri, 28 Feb 2025 16:45:24 +0000</pubDate>
+</item>
+<item>
+<title>On the Security and Privacy of CKKS-based Homomorphic Evaluation Protocols</title>
+<link>https://eprint.iacr.org/2025/382</link>
+<guid>https://eprint.iacr.org/2025/382</guid>
+<content:encoded><![CDATA[
+<div> 关键词: CKKS、同态加密、差分隐私、DPHE协议、零知识证明<br><br>总结:
+本文提出了一种针对基于CKKS的同态加密协议的新定义——差分隐私同态评估(DPHE)协议。该定义将发送者的隐私条件从不可区分性放松到差分隐私的范畴，重点关注PPML协议中评价结果的差分隐私而非仿真可评估性。作者证明了如果理想功能满足差分隐私，且一个协议满足DPHE，则其输出也满足差分隐私。文章进一步提供了一个通用编译器，通过结合拉普拉斯机制和CKKS的零知识论证知识(ZKAoK)，将普通的CKKS协议转换为DPHE协议，实现了发送者隐私保护并降低了噪声。同时，文章对CKKS的ZKAoK进行了具体实现，采用PIOP形式，并设计了新的验证技术，利用同态计算在验证过程中证明CKKS密文和公钥的正确性。最后，作者通过使用HSS多项式承诺方案实现了PIOP的编译，展示了所提ZKAoK应用于CKKS的实用性。 <div>
+CKKS is a homomorphic encryption (HE) scheme that supports arithmetic over complex numbers in an approximate manner. 
+Despite its utility in PPML protocols, formally defining the security of CKKS-based protocols is challenging due to its approximate nature.
+To be precise, in a sender-receiver model, where the receiver holds input ciphertexts and the sender evaluates its private circuit, it is difficult to define sender's privacy in terms of indistinguishability, whereas receiver's privacy is easily achieved through the semantic security of CKKS.
+
+In this paper, we present a new definition for CKKS-based protocols, called Differentially Private Homomorphic Evaluation (DPHE) protocols, along with a general method to achieve this.
+In our definition, we relax the sender’s privacy condition from indistinguishability to differential privacy notion. 
+We focus on the fact that most security concern for PPML protocols is differential privacy on evaluation results, rather than the simulatability of the evaluation.
+We prove that if the ideal functionality satisfies differential privacy and a protocol satisfies DPHE, then the output of the protocol also satisfies differential privacy.
+
+Next, we provide a general compiler that transforms a plain CKKS-based protocol into a DPHE one. 
+We achieve this by mixing the Laplace mechanism and zero-knowledge argument of knowledge (ZKAoK) for CKKS. 
+This approach allows us to achieve sender's privacy with a moderate noise, whereas the previous indistinguishability-based approach requires exponentially large overhead.
+
+Finally, we provide a concrete instantiation of ZKAoK for CKKS in the form of PIOP.
+To prove the well-formedness of CKKS ciphertexts and public keys, we devise new proof techniques that use homomorphic evaluation during verification.
+We also provide an implementation to demonstrate the practicality of our ZKAoK for CKKS by compiling PIOPs using the HSS polynomial commitment scheme (Crypto'24).
+]]></content:encoded>
+<pubDate>Fri, 28 Feb 2025 03:24:53 +0000</pubDate>
+<pubDate>Fri, 28 Feb 2025 03:24:53 +0000</pubDate>
+</item>
+<item>
+<title>Functional Oblivious Transfer with Applications in Privacy-Preserving Machine Learning</title>
+<link>https://eprint.iacr.org/2025/371</link>
+<guid>https://eprint.iacr.org/2025/371</guid>
+<content:encoded><![CDATA[
+<div> 关键词: Oblivious Transfer (OT), Functional OT (FOT), 加密原语, 隐私保护机器学习, Federated Learning (FL)
+
+总结:
+本文首次提出了功能性隐匿传输(FOT)的概念，这是一种对传统隐匿传输的增强，确保接收者只能了解到所选消息的函数值而非具体的消息本身。文中提出了一系列实现FOT的协议，针对求平均值、众数、加法和乘法等特定函数进行了具体的实例化设计。这些方案高效且无条件安全。此外，还提到了一个利用全同态加密(FHE)和 oblivionous 线性函数评估来支持任意函数的非平凡协议，其对消息数量 n 的 FHE 调用次数为常数 O(1)。文章通过渐进和具体的成本分析展示了无条件安全的 FOT 协议的效率。FOT 可以提升隐私保护机器学习的安全性，尤其是在K-最近邻算法和联邦学习中的客户端选择场景中。 <div>
+Oblivious Transfer (OT) is a fundamental cryptographic primitive introduced nearly four decades ago. OT allows a receiver to select and learn $t$ out of $n$ private messages held by a sender. It ensures that the sender does not learn which specific messages the receiver has chosen, while the receiver gains no information about the remaining $n − t$ messages. In this work, we introduce the notion of functional OT (FOT), for the first time. FOT adds a layer of security to the conventional OT by ensuring that the receiver only learns a function of the selected messages rather than the $t$ individual messages themselves. We propose several protocols that realize this concept. In particular, we propose concrete instantiations of FOT when the function to be executed on the selected message is mean, mode, addition, or multiplication. The schemes are efficient and unconditionally secure. We also propose a non-trivial protocol that supports arbitrary functions on the selected messages mainly using fully homomorphic encryption (FHE) and oblivious linear function evaluation, where the number of FHE invocations is constant $O(1)$ with respect to $n$. Our asymptotic and concrete cost analyses demonstrate the efficiency of our unconditionally secure FOT protocols. FOT can enhance the security of privacy-preserving machine learning, particularly in (i) K-Nearest Neighbors schemes and (ii) client selection in Federated Learning (FL).
+]]></content:encoded>
+<pubDate>Wed, 26 Feb 2025 19:00:47 +0000</pubDate>
+<pubDate>Wed, 26 Feb 2025 19:00:47 +0000</pubDate>
+</item>
+<item>
+<title>Higher Residuosity Attacks on Small RSA Subgroup Decision Problems</title>
+<link>https://eprint.iacr.org/2025/369</link>
+<guid>https://eprint.iacr.org/2025/369</guid>
+<content:encoded><![CDATA[
+<div> 关键词: 安全两方比较、同态加密、 Carlton et al.、Bourse et al.、高次剩余攻击
+
+总结:
+本文关注于安全两方比较这一隐私保护计算中的核心问题，特别是在基于同态加密的解决方案上。Carlton et al.和Bourse et al.提出的新型协议相较于传统的DGK协议，已经展现出显著的性能提升。然而，文章中引入了一类新的高次剩余攻击，将其视为对决策性Diffie-Hellman问题的经典二次剩余攻击的扩展。研究发现，CEK和BST协议所依赖的小RSA子群决策问题在素基数$p_0$较小时（如$p_0 < 100$）并不难解决，这使得这两种协议在这些条件下达到最优整体性能。对此，文章给出了防范此类攻击的建议，其中包括一种不会影响协议性能的方法。同时，作者希望这种攻击分析方法可以应用于其他数论难度假设的研究中。<br><br> <div>
+Secure two-party comparison, known as Yao's millionaires' problem, has been a fundamental challenge in privacy-preserving computation. It enables two parties to compare their inputs without revealing the exact values of those inputs or relying on any trusted third party. One elegant approach to secure computation is based on homomorphic encryption. Recently, building on this approach, Carlton et al. (CT-RSA 2018) and Bourse et al. (CT-RSA 2020) presented novel solutions for the problem of secure integer comparison. These protocols have demonstrated significantly improved performance compared to the well-known and frequently used DGK protocol (ACISP 2007 and Int. J. Appl. Cryptogr. 1(4),323–324, 2009). In this paper, we introduce a class of higher residuosity attacks, which can be regarded as an extension of the classical quadratic residuosity attack on the decisional Diffie-Hellman problem. We demonstrate that the small RSA subgroup decision problems, upon which both the CEK and BST protocols are based, are not difficult to solve when the prime base $p_0$ is small (e.g., \( p_0 < 100 \)). Under these conditions, the protocols achieve optimal overall performance. Furthermore, we offer recommendations for precluding such attacks, including one approach that does not adversely affect performance. We hope that these attacks can be applied to analyze other number-theoretic hardness assumptions.
+]]></content:encoded>
+<pubDate>Wed, 26 Feb 2025 11:42:03 +0000</pubDate>
+<pubDate>Wed, 26 Feb 2025 11:42:03 +0000</pubDate>
+</item>
+<item>
+<title>Traitor Tracing in Multi-sender Setting ($\textsf{TMCFE}$: Traceable Multi-client Functional Encryption)</title>
+<link>https://eprint.iacr.org/2025/364</link>
+<guid>https://eprint.iacr.org/2025/364</guid>
+<content:encoded><![CDATA[
+<div> 关键词：traitor tracing、functional encryption、multi-client functional encryption、traceable multi-client functional encryption、lattice-based security
+
+总结:<br>
+本文提出了一个新的密码学原语——可追踪多客户端功能加密（$\textsf{TMCFE}$），旨在解决多发送者环境下隐私保护联合计算中的背叛追溯问题。传统背叛追溯技术仅限于单一发送者场景，而本文概念性地将这一框架扩展到多发送者加密中，允许追踪来自接收者和发送者的秘密信息泄露源头。从技术层面，文章基于近期提出的强可承认性概念构建了一个通用编译器，该编译器能将具有弱可承认性的多客户端功能加密方案转化为具有强可承认性的方案，克服了现有挑战并可能在功能性加密领域具有广泛应用价值。此外，文中还提供了一种针对内积功能的基于晶格的安全实现$\textsf{TMCFE}$方案，该方案在标准假设下具备后量子安全性。 <div>
+Traitor tracing is a traditional cryptographic primitive designed for scenarios with multiple legitimate receivers. When the plaintext - that is, the output of decryption - is leaked and more than one legitimate receiver exists, it becomes imperative to identify the source of the leakage, a need that has motivated the development of traitor tracing techniques. Recent advances in standard encryption have enabled decryption outcomes to be defined in a fine-grained manner through the introduction of Functional Encryption (FE). Constructing FE schemes is intriguing, and achieving the tracing property adds an additional layer of complexity. Traitor tracing techniques have been actively developed for more than three decades, yet they have always remained within the same framework - a single sender responsible for encrypting all the data.
+
+However, fine-grained decryption is particularly useful when data originates from multiple sources, allowing for joint computation on personal data. This leads to the concept of multi-client functional encryption (MCFE), where multiple concurrent senders independently encrypt their data while agreeing on the decryption of a specific function (e.g., a statistical measure) computed on the aggregated data, without revealing any additional information. In the era of cloud computing and big data, privacy-preserving joint computation is crucial, and tracing the source of any breach by dishonest participants becomes essential. Thus, in this paper we take the first step toward addressing the tracing problem in the general context of joint computation with multiple senders. Our contributions are twofold:
+  - $\textbf{Conceptually:}$ We propose the first tracing model in the context of multi-sender encryption, namely $\textit{Traceable Multi-Client Functional Encryption}$ ($\textsf{TMCFE}$), which allows a pirate to extract secret information from both receivers and senders. Our model supports strong and naturally admissible decoders, removing artificial restrictions on the pirate decoder and thus addressing the shortcomings of existing traceable functional encryption schemes designed for the single-sender setting.
+  - $\textbf{Technically:}$ To achieve our conceptual objective, we build upon the recently introduced notion of strong admissibility for MCFE. Our main technical contribution is a generic compiler that transforms a large class of MCFE schemes with weak admissibility into schemes with strong admissibility. This compiler not only helps overcome existing challenges but may also be of general interest within the functional encryption domain. Finally, we present a concrete lattice-based scheme $\textsf{TMCFE}$ for inner-product functionalities that achieves post-quantum security under standard assumptions.
+]]></content:encoded>
+<pubDate>Wed, 26 Feb 2025 10:11:10 +0000</pubDate>
+<pubDate>Wed, 26 Feb 2025 10:11:10 +0000</pubDate>
+</item>
 
 <item>
 <title>Identity-based Matchmaking Encryption with Stronger Security and Instantiation on Lattices</title>
