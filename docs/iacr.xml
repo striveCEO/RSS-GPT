@@ -4,6 +4,7 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+
 <item>
 <title>Garblet: Multi-party Computation for Protecting Chiplet-based Systems</title>
 <link>https://eprint.iacr.org/2025/413</link>
@@ -11,13 +12,12 @@
 <content:encoded><![CDATA[
 <div> 关键词：芯片模块化、安全威胁、Garblet、Garbled Circuits（GC）、Oblivious Transfer（OT）
 
-<br><br>总结：
+<br /><br />总结：
 
 本文提出了一个名为Garblet的新框架，用于应对由异构芯片模块化架构引入的安全威胁。该框架利用芯片模块技术与基于Garbled Circuits（GC）的多方计算，确保在潜在恶意芯片let环境中也能实现高效、安全的计算。Garblet将定制化的硬件Oblivious Transfer（OT）模块和优化的评估器引擎集成到基于芯片模块的平台上，通过在两个芯片模块之间分配电路的加扰和评估任务，降低通信成本并提升计算速度。文章在AMD/Xilinx UltraScale+多芯片模块上实现了这一框架，并通过基准函数展示了其实效性。此外，文中还介绍了一种新的电路分解技术，允许在多个芯片模块间进行并行处理，从而进一步提高计算效率。实验结果显示，芯片模块系统有望加速GC计算，例如加扰AES的时间复杂度可降至0.0226毫秒，有效保障了芯片模块计算的安全性和隐私性。 <div>
 The introduction of shared computation architectures assembled from
 heterogeneous chiplets introduces new security threats. Due to the shared logical and physical resources, an untrusted chiplet can act maliciously to surreptitiously probe the data communication between chiplets or sense the computation shared between them. This paper presents Garblet, the first framework to leverage the flexibility offered by chiplet technology and Garbled Circuits (GC)-based MPC to enable efficient, secure computation even in the presence of potentially compromised chiplets. Our approach integrates a customized hardware Oblivious Transfer (OT) module and an optimized evaluator engine into chiplet-based platforms. This configuration distributes the tasks of garbling and evaluating circuits across two chiplets, reducing communication costs and enhancing computation speed. We implement this framework on an AMD/Xilinx UltraScale+ multi-chip module and demonstrate its effectiveness using benchmark functions. Additionally, we introduce a novel circuit decomposition technique that allows for parallel processing across multiple chiplets to further improve computational efficiency. Our results highlight the potential of chiplet systems for accelerating GC (e.g., the time complexity of garbled AES is 0.0226ms) in order to guarantee the security and privacy of the computation on chiplets.
 ]]></content:encoded>
-<pubDate>Tue, 04 Mar 2025 16:32:54 +0000</pubDate>
 <pubDate>Tue, 04 Mar 2025 16:32:54 +0000</pubDate>
 </item>
 <item>
@@ -29,10 +29,10 @@ heterogeneous chiplets introduces new security threats. Due to the shared logica
 
 总结：
 
-本文研究了多权威功能性加密（MAFE）问题，这是一种分布式加密系统的流行形式。文章主要贡献如下：<br>
-1. 设计了一种适用于所有多项式大小电路的MAFE方案，基于PKE和OWFs的最小假设，改进了先前需要次指数级安全的混淆、$\log n$-党派密钥交换或随机预言机与次指数级安全PKE的需求。此外，在IBE和OWFs的最小假设下，我们还将其扩展到动态共谋模型，并且该系统真正动态，不限制最大权限数量。<br>
-2. 在学习带有错误（LWE）假设下，设计了一个允许对手自适应腐败局部权限的MAFE方案，其中敌手可以腐蚀任意$k$个($k$小于等于$n$，且${n}\choose{k}$为多项式阶的$\lambda$)局部权限。这比先前依赖次指数级安全混淆的方案有所改进，并提出了一个新的MAFE编译器，用于将选择性权限腐败提升为非自适应权限腐败。<br>
-3. 证明了MAFE与(变种模糊/不可区分性)混淆之间的紧密蕴含关系，表明只有当所有被腐败的局部权限共同控制的属性位数大于$\omega(\log \lambda)$时，MAFE才意味着混淆。这证明了对于广泛参数范围内的第二个结果的最优性。<br>
+本文研究了多权威功能性加密（MAFE）问题，这是一种分布式加密系统的流行形式。文章主要贡献如下：<br />
+1. 设计了一种适用于所有多项式大小电路的MAFE方案，基于PKE和OWFs的最小假设，改进了先前需要次指数级安全的混淆、$\log n$-党派密钥交换或随机预言机与次指数级安全PKE的需求。此外，在IBE和OWFs的最小假设下，我们还将其扩展到动态共谋模型，并且该系统真正动态，不限制最大权限数量。<br />
+2. 在学习带有错误（LWE）假设下，设计了一个允许对手自适应腐败局部权限的MAFE方案，其中敌手可以腐蚀任意$k$个($k$小于等于$n$，且${n}\choose{k}$为多项式阶的$\lambda$)局部权限。这比先前依赖次指数级安全混淆的方案有所改进，并提出了一个新的MAFE编译器，用于将选择性权限腐败提升为非自适应权限腐败。<br />
+3. 证明了MAFE与(变种模糊/不可区分性)混淆之间的紧密蕴含关系，表明只有当所有被腐败的局部权限共同控制的属性位数大于$\omega(\log \lambda)$时，MAFE才意味着混淆。这证明了对于广泛参数范围内的第二个结果的最优性。<br />
 4. 提出了一种新的MAFE系统，称为多权威属性基功能加密（MA-ABFE），旨在融合完全共谋抵抗的MA-ABE和有限共谋抵抗的MAFE的优势。结合现有MA-ABE结果，从标准双线性配对假设出发，获得了适用于$\mathsf{NC}^1 \circ \mathsf{P}/\mathsf{Poly}$的MA-ABFE；从LWE假设出发，在随机预言机模型中获得了适用于$\mathsf{DNF} \circ \mathsf{P}/\mathsf{Poly}$的MA-ABFE；并描述了一个基于见证加密的简单MA-ABE构造，以及通过已知结果，得到了适用于$\mathsf{P}/\mathsf{Poly} \circ \mathsf{P}/\mathsf{Poly}$的MA-ABFE，这是从逃避型LWE假设得出的。 <div>
 Decentralization is a great enabler for adoption of modern cryptography in real-world systems. Widespread adoption of blockchains and secure multi-party computation protocols are perfect evidentiary examples for dramatic rise in deployment of decentralized cryptographic systems. Much of cryptographic research can be viewed as reducing (or eliminating) the dependence on trusted parties, while shielding from stronger adversarial threats. In this work, we study the problem of multi-authority functional encryption (MAFE), a popular decentralized generalization of functional encryption (FE). Our main contributions are:
 
@@ -45,9 +45,7 @@ Decentralization is a great enabler for adoption of modern cryptography in real-
     4. Finally, we propose a new MAFE system that we refer to as multi-authority attribute-based functional encryption (MA-ABFE). We view it as an approach to get best of both worlds (fully collusion resistant MA-ABE, and bounded collusion resistant MAFE). By combining our results with prior MA-ABE results, we obtain MA-ABFE for $\mathsf{NC}^1 \circ \mathsf{P}/\mathsf{Poly}$ from standard pairing-based assumptions, and for $\mathsf{DNF} \circ \mathsf{P}/\mathsf{Poly}$ from LWE, both in the Random Oracle Model. We also describe a simple construction of MA-ABE for general predicates from witness encryption, and combining with known results, we also get MA-ABFE for $\mathsf{P}/\mathsf{Poly} \circ \mathsf{P}/\mathsf{Poly}$ from evasive LWE.
 ]]></content:encoded>
 <pubDate>Tue, 04 Mar 2025 14:22:01 +0000</pubDate>
-<pubDate>Tue, 04 Mar 2025 14:22:01 +0000</pubDate>
 </item>
-
 <item>
 <title>Hybrid Obfuscated Key Exchange and KEMs</title>
 <link>https://eprint.iacr.org/2025/408</link>
