@@ -4,6 +4,77 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+<item>
+<title>Disincentivize Collusion in Verifiable Secret Sharing</title>
+<link>https://eprint.iacr.org/2025/446</link>
+<guid>https://eprint.iacr.org/2025/446</guid>
+<content:encoded><![CDATA[
+<div> 关键词: 可验证秘密共享(VSS), 隐私针对性合谋, 冗余机制, 跟踪可访问结构(TAS), 斯蒂尼系统
+
+总结:
+
+本文研究了在可验证秘密共享(VSS)场景中，如何设计和分析阻止持有份额的理性与恶意党派进行隐私针对性合谋的机制。首先，文章提出了两种防止合谋的冗余机制，特别是在希望实现公平性（即非合谋者不受损失）的同时，允许在最佳恶意故障容忍度下恢复秘密的情况下，定义并设计了适用于TAS的专用威慑机制。其次，文中估算了最优TAS的大小，利用斯蒂尼系统构造了它们，并使用部分斯蒂尼系统构建了高度鲁棒的TAS，还为各种参数范围提供了接近最优TAS的高效秘密分享方案。最后，作者展示了TAS中的可追踪性与离散数学中的组合对象如（部分）斯蒂尼系统、受限交集的均匀子集以及适当的二进制码之间的联系，并指出访问结构的鲁棒性等价于超图的最小顶点覆盖问题。文章认为这些密码学、博弈论和离散数学之间的连接具有更广泛的研究价值。 <div>
+In verifiable secret sharing (VSS), a dealer shares a secret input among several parties, ensuring each share is verifiable. Motivated by its applications in the blockchain space, we focus on a VSS where parties holding shares are not allowed to reconstruct the dealer's secret (even partially) on their own terms, which we address as privacy-targeted collusion if attempted. 
+
+    In this context, our work investigates mechanisms deterring such collusion in VSS among rational and malicious parties. For this problem, we make both algorithmic and combinatorial contributions:
+    1. We provide two collusion-deterrent mechanisms to discourage parties from colluding and recovering the dealer's secret. Notably, when it is desired to achieve fairness---where non-colluding parties are not at a loss---while allowing for the best achievable malicious fault tolerance, we define ``trackable access structures'' (TAS) and design a deterrence mechanism tailored for VSS on these structures. 
+    2. We estimate the size of the optimal TAS, construct them from Steiner systems, provide highly robust TAS using partial Steiner systems, and present efficient secret sharing schemes for the latter close-to-optimal TAS for various parameter regimes.
+    3. We demonstrate that trackability in access structures is connected to combinatorial objects like (partial) Steiner systems, uniform subsets with restricted intersections, and appropriate binary codes. The robustness of access structures is equivalent to the minimum vertex cover of hypergraphs. 
+
+    We believe these connections between cryptography, game theory, and discrete mathematics will be of broader interest.
+]]></content:encoded>
+<pubDate>Sun, 09 Mar 2025 00:20:38 +0000</pubDate>
+<pubDate>Sun, 09 Mar 2025 00:20:38 +0000</pubDate>
+</item>
+<item>
+<title>Homomorphic Signature-based Witness Encryption and Applications</title>
+<link>https://eprint.iacr.org/2025/443</link>
+<guid>https://eprint.iacr.org/2025/443</guid>
+<content:encoded><![CDATA[
+<div> 关键词: 实际应用、签名基础见证加密（SWE）、未来加密、同态SWE（HSWE）、隐私保护
+
+总结:
+本文提出了同态签名基础见证加密（HSWE）的概念，以提升定时释放加密方案的实用性。HSWE能够在保持时间释放功能的同时，提高效率并促进部署。文章指出构建HSWE需要依赖于一对加密和签名方案，其中签名的独特性是在加密方案基于单向注入函数时所必需的。接着，文中利用BLS、RSA和Rabin签名技术构建了三种不同的HSWE方案，并展示如何实现一种隐私保护的变体，该变体只允许提取同态聚合的结果，同时保持各个明文的机密性。 <div>
+Practical signature-based witness encryption (SWE) schemes recently emerged as a viable alternative to instantiate timed-release cryptography in the honest majority setting. In particular, assuming threshold trust in a set of parties that release signatures at a specified time, one can ``encrypt to the future'' using an SWE scheme. Applications of SWE schemes include voting, auctions, distributed randomness beacons, and more. However, the lack of homomorphism in existing SWE schemes reduces efficiency and hinders deployment. In this work, we introduce the notion of homomorphic SWE (HSWE) to improve the practicality of timed-release encryption schemes. We show one can build HSWE using a pair of encryption and signature schemes where the uniqueness of the signature is required when the encryption scheme relies on injective one-way functions. We then build three HSWE schemes in various settings using BLS, RSA, and Rabin signatures and show how to achieve a privacy-preserving variant that only allows extracting the homomorphically aggregated result while keeping the individual plaintexts confidential
+]]></content:encoded>
+<pubDate>Fri, 07 Mar 2025 17:27:02 +0000</pubDate>
+<pubDate>Fri, 07 Mar 2025 17:27:02 +0000</pubDate>
+</item>
+<item>
+<title>A Unified Framework for Succinct Garbling from Homomorphic Secret Sharing</title>
+<link>https://eprint.iacr.org/2025/442</link>
+<guid>https://eprint.iacr.org/2025/442</guid>
+<content:encoded><![CDATA[
+<div> 关键词: 密码学、简洁加密方案、Yao's 加密电路构造、同态秘密分享、布尔电路
+
+总结:
+本文提出了一种新的简洁加密方案框架，该框架利用轻量级的同态秘密分享技术替代了以往大多数构造中的繁重机制。具体来说，该框架在复合阶或素数阶群以及基于晶格的基础上，实现了布尔电路每门电路只需1比特的（平均）加密大小。同时，这一思想被扩展到分层电路和算术电路中，将每门电路的成本降低至1比特以下，并消除了模p计算通常具有的Ω(λ)-因子开销。这些构建还包括了消除对循环安全要求的“分级”变体，但会在加密大小上增加与深度相关的项。
+
+本研究显著拓展了Liu等人（Eurocrypt 2025）关于基于晶格的简洁加密方案的技术，并为实现实用化的简洁加密开辟了新途径。对于拥有几百万门电路的中等规模电路，我们的加密电路可以比Yao风格的加密电路小两个数量级。虽然我们的加密和解密算法速度较慢，但仍具备实际可行性，这与依赖昂贵工具如iO或FHE和ABE非黑盒组合的先前完全简洁加密方案不同。这种权衡使得当加密电路作为功能密文被广播或存储在多个位置（例如区块链上）时，我们的框架可能会更具吸引力，因为在这种情况下，通信和存储成本可能主导总体开销。 <div>
+A major challenge in cryptography is the construction of succinct garbling schemes that have asymptotically smaller size than Yao’s garbled circuit construction. We present a new framework for succinct garbling that replaces the heavy machinery of most previous constructions by lighter-weight homomorphic secret sharing techniques.
+
+Concretely, we achieve 1-bit-per-gate (amortized) garbling size for Boolean circuits under circular variants of standard assumptions in composite-order or prime-order groups, as well as a lattice-based instantiation. We further extend these ideas to layered circuits, improving the per-gate cost below 1 bit, and to arithmetic circuits, eliminating the typical Ω(λ)-factor overhead for garbling mod-p computations. Our constructions also feature “leveled” variants that remove circular-security requirements at the cost of adding a depth-dependent term to the garbling size.
+
+Our framework significantly extends a recent technique of Liu, Wang, Yang, and Yu (Eurocrypt 2025) for lattice-based succinct garbling, and opens new avenues toward practical succinct garbling. For moderately large circuits with a few million gates, our garbled circuits can be two orders of magnitude smaller than Yao-style garbling. While our garbling and evaluation algorithms are much slower, they are still practically feasible, unlike previous fully succinct garbling schemes that rely on expensive tools such as iO or a non-black-box combination of FHE and ABE. This trade-off
+can make our framework appealing when a garbled circuit is used as a functional ciphertext that is broadcast or stored in multiple locations (e.g., on a blockchain), in which case communication and storage may dominate computational cost.
+]]></content:encoded>
+<pubDate>Fri, 07 Mar 2025 17:14:00 +0000</pubDate>
+<pubDate>Fri, 07 Mar 2025 17:14:00 +0000</pubDate>
+</item>
+<item>
+<title>Transmitting Secrets by Transmitting only Plaintext</title>
+<link>https://eprint.iacr.org/2025/438</link>
+<guid>https://eprint.iacr.org/2025/438</guid>
+<content:encoded><![CDATA[
+<div> 关键词：加密、标记字母、密钥、隐藏信息、网络安全
+
+总结：
+该文提出了一种新的加密使用方式，不是用于隐藏秘密，而是用于标记字母。发送者将2n个字母的明文分为两部分，分别用密钥K1和K2加密得到n个对应的密文字母。尽管发送者同时提供了两个密钥，使得接收者可以轻易解密回原始明文，但其实这个过程暗含了一个秘密消息S，它由n位组成。通过记录经K1和K2加密后的字母混合顺序（共有2^n种可能），可以在看似平常的信息传输中隐藏秘密消息。这种技术可在文本消息平台上应用，使得网络空间中的用户能够在不暴露正在传递秘密信息的情况下进行秘密通信，从而大大提高网络安全性和隐私保护水平。 <div>
+Presenting a novel use of encryption, not for hiding a secret, but for marking letters.  Given a 2n letters plaintext, the transmitter encrypts the first n letters with  key K1 to generate corresponding n cipherletters, and encrypts the second n letters with key K2 to generate n corresponding cipherletters. The transmitter sends the 2n cipherletters along with the keys, K1 and K2  The recipient (and any interceptor) will readily decrypt the 2n cipherletters to the original plaintext.  This makes the above procedure equivalent to sending out the plaintext.  So why bother?  When decrypting the 2n cipherletters one will make a note of how the letters that were encrypted with K1 are mixed with the letters encrypted with K2 while keeping the original order of the letters encrypted with each key. There are 2^n possible mixings. Which means that the choice of mixing order can deliver a secret message, S,  comprising n bits. So while on the surface a given plaintext is sent out from transmitter to recipient, this plaintext hides a secret.  Imagine a text messaging platform that uses this protocol. An adversary will not know which plain innocent message harbors a secret message.  This allows residents of cyberspace to communicate secrets without exposing the fact that they communicated a secret. Expect a big impact on the level of cyberspace privacy.
+]]></content:encoded>
+<pubDate>Fri, 07 Mar 2025 03:08:44 +0000</pubDate>
+<pubDate>Fri, 07 Mar 2025 03:08:44 +0000</pubDate>
+</item>
 
 <item>
 <title>The 2Hash OPRF Framework and Efficient Post-Quantum Instantiations</title>
