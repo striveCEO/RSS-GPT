@@ -4,6 +4,45 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+<item>
+<title>Concretely Efficient Correlated Oblivious Permutation</title>
+<link>https://eprint.iacr.org/2025/449</link>
+<guid>https://eprint.iacr.org/2025/449</guid>
+<content:encoded><![CDATA[
+<div> 关键词： Oblivious Permutation (OP)，Correlated Oblivious Permutation (COP)，secure multi-party computation (MPC)，communication cost，execution time。
+
+总结:<br>
+本文针对 Oblivious Permutation (OP) 中的性能瓶颈问题进行了研究。OP 是许多重要 MPC 应用的基础，但其高复杂度限制了其实效性。Chase 等人在 Asiacrypt'20 提出了离线-在线 OP 模型，利用可预计算资源“Share Translation”降低在线成本。然而，生成 Share Translation 的高额离线成本仍是待优化领域。本文重新定义了该预计算资源为新的密码学原语——Correlated Oblivious Permutation (COP) 并对其两种生成方案（网络和矩阵方案）进行了深入分析与优化。对于网络方案，改进减少了构建交换机的通信/计算成本并降低了网络中的交换机数量；对矩阵方案，则降低了小规模 COP 生成的通信成本及大规模 COP 生成的通过内外分解的成本。作者实现了这两种 COP 生成协议并进行了全面评估，结果显示，使用 128 位输入数据为例，网络方案和矩阵方案分别比基线协议快达 1.7 倍和 1.6 倍。进一步地，将优化后的 COP 应用于最先进的 PSU 协议中，实现了超过 25% 的通信成本减少和 35% 的执行时间下降，证明了 COP 优化对于现实世界 MPC 原语的重大改进意义。 <div>
+Oblivious permutation (OP) enables two parties, a sender with a private data vector $x$ and a receiver with a private permutation π, to securely obtain the shares of π(x). OP has been used to construct many important MPC primitives and applications such as secret shuffle, oblivious sorting, private set operations, secure database analysis, and privacy-preserving machine learning. Due to its high complexity, OP has become a performance bottleneck in several practical applications, and many efforts have been devoted to enhancing its concrete efficiency. Chase et al. (Asiacrypt'20) proposed an offline-online OP paradigm leveraging a pre-computable resource termed Share Translation. While this paradigm significantly reduces online costs, the substantial offline cost of generating Share Translation remains an area for further investigation.
+
+In this work, we redefine the pre-computable resource as a cryptographic primitive known as Correlated Oblivious Permutation (COP) and conduct in-depth analyses and optimizations of the two COP generation solutions: network-based solution and matrix-based solution. The optimizations for the network-based solution halve the communication/computation cost of constructing a switch (the basic unit of the permutation network) and reduce the number of switches in the permutation network. The optimizations for the matrix-based solution halve the communication cost of small-size COP generation and reduce the cost of large-size COP generation with in-outside permutation decomposition.
+
+We implement our two COP generation protocols and conduct comprehensive evaluations. Taking commonly used 128-bit input data as an example, our network-based and matrix-based solutions are up to 1.7x and 1.6x faster than baseline protocols, respectively. 
+ We further facilitate the state-of-the-art (SOTA) PSU protocols with our optimized COP, achieving over 25% reduction in communication cost and 35% decrease in execution time. This shows that our COP optimizations bring significant improvements for real-world MPC primitives.
+]]></content:encoded>
+<pubDate>Mon, 10 Mar 2025 09:25:29 +0000</pubDate>
+<pubDate>Mon, 10 Mar 2025 09:25:29 +0000</pubDate>
+</item>
+<item>
+<title>Ciphertext-Ciphertext Matrix Multiplication: Fast for Large Matrices</title>
+<link>https://eprint.iacr.org/2025/448</link>
+<guid>https://eprint.iacr.org/2025/448</guid>
+<content:encoded><![CDATA[
+<div> 关键词：隐私保护机器学习、加密矩阵乘法、大规模、快速算法、密钥大小优化
+
+总结:
+为了解决隐私保护机器学习中大型加密矩阵乘法（CC-MM）的关键挑战，本文提出了一种新的算法。该算法结合了明文矩阵乘法（PP-MM）和加密矩阵转置算法（C-MT），其中我们设计了一个计算成本较低的快速C-MT算法。通过利用高性能BLAS库优化PP-MM，实现了大规模CC-MM并显著提升了性能。此外，我们还提出了轻量级算法，将CC-MM所需的密钥大小从1960 MB降低到1.57 MB，同时保持了相当的效率。
+
+实验结果显示，对于单线程实现，C-MT算法能在$0.76$秒内完成对一个$2\ 048 \times 2\ 048$的加密矩阵进行转置；而我们的CC-MM算法可在$85.2$秒内完成两个$4\ 096 \times 4\ 096$加密矩阵的乘法操作。相较于Jiang-Kim-Lauter-Song在CCS'18会议上提出的最先进的CC-MM方法，我们的算法在处理大规模矩阵时表现出超过$800$倍的性能提升。 <div>
+Matrix multiplication of two encrypted matrices (CC-MM) is a key challenge for privacy-preserving machine learning applications. As modern machine learning models focus on scalability, fast CC-MM on large datasets is increasingly in demand.
+
+In this work, we present a CC-MM algorithm for large matrices. The algorithm consists of plaintext matrix multiplications (PP-MM) and ciphertext matrix transpose algorithms (C-MT). We propose a fast C-MT algorithm, which is computationally inexpensive compared to PP-MM. By leveraging high-performance BLAS libraries to optimize PP-MM, we implement large-scale CC-MM with substantial performance improvements. Furthermore, we propose lightweight algorithms, significantly reducing the key size from $1\ 960$ MB to $1.57$ MB for CC-MM with comparable efficiency.
+
+In a single-thread implementation, the C-MT algorithm takes $0.76$ seconds to transpose a $2\ 048\times 2\ 048$ encrypted matrix. The CC-MM algorithm requires $85.2$ seconds to multiply two $4\ 096\times 4\ 096$ encrypted matrices. For large matrices, our algorithm outperforms the state-of-the-art CC-MM method from Jiang-Kim-Lauter-Song [CCS'18] by a factor of over $800$.
+]]></content:encoded>
+<pubDate>Mon, 10 Mar 2025 07:30:23 +0000</pubDate>
+<pubDate>Mon, 10 Mar 2025 07:30:23 +0000</pubDate>
+</item>
 
 <item>
 <title>Disincentivize Collusion in Verifiable Secret Sharing</title>
