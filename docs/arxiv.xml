@@ -4,6 +4,176 @@
 <title>cs updates on arXiv.org</title>
 <link>http://rss.arxiv.org/rss/cs</link>
 
+<item>
+<title>HIPPO-MAT: Decentralized Task Allocation Using GraphSAGE and Multi-Agent Deep Reinforcement Learning</title>
+<link>https://arxiv.org/abs/2503.07662</link>
+<guid>https://arxiv.org/abs/2503.07662</guid>
+<content:encoded><![CDATA[
+<div> 关键词：多智能体系统、分布式连续任务分配、图神经网络、独立策略优化、碰撞避免<br><br>总结：<br>
+本文提出了一种名为HIPPO-MAT的新颖框架，用于解决异构多智能体系统的分布式连续任务分配问题。该框架结合了使用GraphSAGE架构计算各代理独立嵌入的图神经网络与独立策略优化（IPPO）方法进行多智能体深度强化学习。在这个系统中，无人机（UAVs）和无人地面车辆（UGVs）通过通信通道共享聚合观察数据并独立处理这些输入生成丰富状态嵌入，从而使动态、成本最优、冲突感知的任务分配在三维网格环境中得以实现，无需集中式协调。文中还整合了一个修改后的A*路径规划器以实现高效的路由和碰撞避免。模拟实验显示，该方法对于多达30个智能体具有可扩展性，并在JetBot ROS AI机器人上进行了初步的现实世界验证，每个机器人都在其Jetson Nano上运行模型并通过ESP-NOW协议利用ESP32-S3进行通信，证实了该方法结合同时定位和映射（SLAM）的实际可行性。实验结果显示，所提方法实现了高达92.5%的无冲突成功率，与中心化的匈牙利方法相比，性能差距仅为16.49%，并且优于基于贪婪算法的分散式基线。此外，该框架表现出对多达30个智能体的可扩展性，任务分配处理时间为0.32个仿真步骤时间，并展现出对动态生成任务的良好鲁棒性。 <div>
+arXiv:2503.07662v1 Announce Type: new 
+Abstract: This paper tackles decentralized continuous task allocation in heterogeneous multi-agent systems. We present a novel framework HIPPO-MAT that integrates graph neural networks (GNN) employing a GraphSAGE architecture to compute independent embeddings on each agent with an Independent Proximal Policy Optimization (IPPO) approach for multi-agent deep reinforcement learning. In our system, unmanned aerial vehicles (UAVs) and unmanned ground vehicles (UGVs) share aggregated observation data via communication channels while independently processing these inputs to generate enriched state embeddings. This design enables dynamic, cost-optimal, conflict-aware task allocation in a 3D grid environment without the need for centralized coordination. A modified A* path planner is incorporated for efficient routing and collision avoidance. Simulation experiments demonstrate scalability with up to 30 agents and preliminary real-world validation on JetBot ROS AI Robots, each running its model on a Jetson Nano and communicating through an ESP-NOW protocol using ESP32-S3, which confirms the practical viability of the approach that incorporates simultaneous localization and mapping (SLAM). Experimental results revealed that our method achieves a high 92.5% conflict-free success rate, with only a 16.49% performance gap compared to the centralized Hungarian method, while outperforming the heuristic decentralized baseline based on greedy approach. Additionally, the framework exhibits scalability with up to 30 agents with allocation processing of 0.32 simulation step time and robustness in responding to dynamically generated tasks.
+]]></content:encoded>
+<pubDate>Wed, 12 Mar 2025 00:00:00 -0400</pubDate>
+<pubDate>Wed, 12 Mar 2025 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Using a single actor to output personalized policy for different intersections</title>
+<link>https://arxiv.org/abs/2503.07678</link>
+<guid>https://arxiv.org/abs/2503.07678</guid>
+<content:encoded><![CDATA[
+<div> 关键词: 多智能体强化学习 (MARL), 适应性交通信号控制 (ATSC), 非独立同分布观测 (non-iid 观测分布), 超行动多头近邻策略优化 (HAMH-PPO), 中心化训练与分散化执行 (CTDE)
+
+总结:
+本文提出了一种新的多智能体强化学习方法——超行动多头近邻策略优化（HAMH-PPO），用于解决适应性交通信号控制问题。在具有多个交叉口的交通场景中，HAMH-PPO采用中心化训练与分散化执行（CTDE）框架，将每个交叉口视为一个智能体并通过学习和实时决策制定优化交通信号控制策略。针对实际场景中交叉口观察分布可能存在的非独立同分布问题，文章指出共享参数方法可能存在缺乏多样性的挑战，单纯增加网络参数规模并不一定能提高策略泛化能力。为了解决这一问题，HAMH-PPO利用共享的PPO策略网络生成个性化的交叉口控制策略。其中，集中式批评者通过图注意力单元计算所有交叉口的图表示并为每个交叉口输出多套值估计；而分散式执行演员则依据本地观测历史输入，输出动作分布以及一种称为“超行动”的量，以平衡集中式批评者给出的多套值估计，进一步指导交通信号控制策略的更新。通过超行动和多头值的结合，HAMH-PPO实现了多个智能体共享单一演员-批评者的架构同时达成个性化策略。 <div>
+arXiv:2503.07678v1 Announce Type: new 
+Abstract: Recently, with the development of Multi-agent reinforcement learning (MARL), adaptive traffic signal control (ATSC) has achieved satisfactory results. In traffic scenarios with multiple intersections, MARL treats each intersection as an agent and optimizes traffic signal control strategies through learning and real-time decision-making. Considering that observation distributions of intersections might be different in real-world scenarios, shared parameter methods might lack diversity and thus lead to high generalization requirements in the shared-policy network. A typical solution is to increase the size of network parameters. However, simply increasing the scale of the network does not necessarily improve policy generalization, which is validated in our experiments. Accordingly, an approach that considers both the personalization of intersections and the efficiency of parameter sharing is required. To this end, we propose Hyper-Action Multi-Head Proximal Policy Optimization (HAMH-PPO), a Centralized Training with Decentralized Execution (CTDE) MARL method that utilizes a shared PPO policy network to deliver personalized policies for intersections with non-iid observation distributions. The centralized critic in HAMH-PPO uses graph attention units to calculate the graph representations of all intersections and outputs a set of value estimates with multiple output heads for each intersection. The decentralized execution actor takes the local observation history as input and output distributions of action as well as a so-called hyper-action to balance the multiple values estimated from the centralized critic to further guide the updating of TSC policies. The combination of hyper-action and multi-head values enables multiple agents to share a single actor-critic while achieving personalized policies.
+]]></content:encoded>
+<pubDate>Wed, 12 Mar 2025 00:00:00 -0400</pubDate>
+<pubDate>Wed, 12 Mar 2025 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Self-supervised Normality Learning and Divergence Vector-guided Model Merging for Zero-shot Congenital Heart Disease Detection in Fetal Ultrasound Videos</title>
+<link>https://arxiv.org/abs/2503.07799</link>
+<guid>https://arxiv.org/abs/2503.07799</guid>
+<content:encoded><![CDATA[
+<div> 关键词: 先天性心脏病(CHD)，深度学习，隐私保护，零样本检测，分布式模型融合
+
+总结:
+本文提出了一种针对先天性心脏病(CHD)筛查的创新隐私保护、零样本检测框架——稀疏管状超声蒸馏(STUD)。该框架将CHD检测转化为正常性建模问题，并结合模型聚合方法。每个医院站点首先利用自我监督视频异常检测(VAD)模型，在本地正常胎儿心脏超声片段上进行自蒸馏损失训练，从而独立学习健康病例分布。为实现数据隐私保护下的分布式模型融合，文章提出了差异向量引导的模型合并方法(DivMerge)，它能在无需数据交换的情况下，将各站点模型整合为单一VAD模型，同时保持领域无关的丰富空间时间表示，确保对未见CHD病例的泛化能力。实验证明，所提出的融合模型在外部测试集上的准确率和F1得分分别比单个站点模型提高了23.77%和30.13%。这项工作使用了来自5家医院的真实胎儿超声数据进行评估。 <div>
+arXiv:2503.07799v1 Announce Type: new 
+Abstract: Congenital Heart Disease (CHD) is one of the leading causes of fetal mortality, yet the scarcity of labeled CHD data and strict privacy regulations surrounding fetal ultrasound (US) imaging present significant challenges for the development of deep learning-based models for CHD detection. Centralised collection of large real-world datasets for rare conditions, such as CHD, from large populations requires significant co-ordination and resource. In addition, data governance rules increasingly prevent data sharing between sites. To address these challenges, we introduce, for the first time, a novel privacy-preserving, zero-shot CHD detection framework that formulates CHD detection as a normality modeling problem integrated with model merging. In our framework dubbed Sparse Tube Ultrasound Distillation (STUD), each hospital site first trains a sparse video tube-based self-supervised video anomaly detection (VAD) model on normal fetal heart US clips with self-distillation loss. This enables site-specific models to independently learn the distribution of healthy cases. To aggregate knowledge across the decentralized models while maintaining privacy, we propose a Divergence Vector-Guided Model Merging approach, DivMerge, that combines site-specific models into a single VAD model without data exchange. Our approach preserves domain-agnostic rich spatio-temporal representations, ensuring generalization to unseen CHD cases. We evaluated our approach on real-world fetal US data collected from 5 hospital sites. Our merged model outperformed site-specific models by 23.77% and 30.13% in accuracy and F1-score respectively on external test sets.
+]]></content:encoded>
+<pubDate>Wed, 12 Mar 2025 00:00:00 -0400</pubDate>
+<pubDate>Wed, 12 Mar 2025 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Network Analysis of Uniswap: Centralization and Fragility in the Decentralized Exchange Market</title>
+<link>https://arxiv.org/abs/2503.07834</link>
+<guid>https://arxiv.org/abs/2503.07834</guid>
+<content:encoded><![CDATA[
+<div> 关键词：Uniswap、复杂网络、节点中心性、边中心性、鲁棒性分析
+
+<br>
+总结:
+
+本文针对Uniswap协议进行了深入的复杂网络方法分析。研究基于2023年10月31日的Uniswap网络构建，揭示了其规模自由和核心-边缘属性。通过使用节点和边中心性度量标准，研究人员识别出了最重要的代币和流动性池。此外，从2020年5月5日Uniswap V2启动到2023年10月31日的每日网络构建显示，该网络随时间逐渐变得脆弱。同时，通过对节点删除的模拟进行鲁棒性分析，结果显示尽管Uniswap作为一个去中心化交易所表现出一定的韧性，但当删除具有高中心性的代币时，其显著地易受冲击。这表明Uniswap在网络连通性和TVL分布上存在一定程度的集中化趋势。 <div>
+arXiv:2503.07834v1 Announce Type: new 
+Abstract: The Uniswap is a Decentralized Exchange (DEX) protocol that facilitates automatic token exchange without the need for traditional order books. Every pair of tokens forms a liquidity pool on Uniswap, and each token can be paired with any other token to create liquidity pools. This characteristic motivates us to employ a complex network approach to analyze the features of the Uniswap market. This research presents a comprehensive analysis of the Uniswap network using complex network methods. The network on October 31, 2023, is built to observe its recent features, showcasing both scale-free and core-periphery properties. By employing node and edge-betweenness metrics, we detect the most important tokens and liquidity pools. Additionally, we construct daily networks spanning from the beginning of Uniswap V2 on May 5, 2020, until October 31, 2023, and our findings demonstrate that the network becomes increasingly fragile over time. Furthermore, we conduct a robustness analysis by simulating the deletion of nodes to estimate the impact of some extreme events such as the Terra collapse. The results indicate that the Uniswap network exhibits robustness, yet it is notably fragile when deleting tokens with high betweenness centrality. This finding highlights that, despite being a decentralized exchange, Uniswap exhibits significant centralization tendencies in terms of token network connectivity and the distribution of TVL across nodes (tokens) and edges (liquidity pools).
+]]></content:encoded>
+<pubDate>Wed, 12 Mar 2025 00:00:00 -0400</pubDate>
+<pubDate>Wed, 12 Mar 2025 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Decentralized Integration of Grid Edge Resources into Wholesale Electricity Markets via Mean-field Games</title>
+<link>https://arxiv.org/abs/2503.07984</link>
+<guid>https://arxiv.org/abs/2503.07984</guid>
+<content:encoded><![CDATA[
+<div> 关键词：电网边缘资源、分布式能源资源、实时电价、批发能源市场、均场博弈框架
+
+总结:
+本文针对电网边缘资源（即消费者侧的分布式能源资源）与实时电价整合的问题，提出了一种均场博弈框架。该框架旨在解决由于缺乏专业知识和资源而无法充分利用资产经济潜力的分布式能源资源所有者（即生产消费者或prosumer）参与批发能源市场的难题。随着DER采纳率的增长，大量prosumer的加入带来了协调和市场参与的新挑战。文章提出的框架能适应异质性代理并证明了在众多prosumer参与的批发能源市场上存在均场均衡（MFE）。此外，还引入了一个自动化资源控制算法，以支持储能管理的实时决策。数值实验表明，所提方法能收敛到MFE，并有效降低峰值负荷和价格波动，特别是在外部需求或供应冲击时期。这项研究突显了采用完全去中心化方式将DER融入批发市场的潜力，同时也能提升市场效率。 <div>
+arXiv:2503.07984v1 Announce Type: new 
+Abstract: Grid edge resources refer to distributed energy resources (DERs) located on the consumer side of the electrical grid, controlled by consumers rather than utility companies. Integrating DERs with real-time electricity pricing can better align distributed supply with system demand, improving grid efficiency and reliability. However, DER owners, known as prosumers, often lack the expertise and resources to directly participate in wholesale energy markets, limiting their ability to fully realize the economic potential of their assets. Meanwhile, as DER adoption grows, the number of prosumers participating in the energy system is expected to increase significantly, creating additional challenges in coordination and market participation.
+  To address these challenges, we propose a mean-field game framework that enables prosumers to autonomously learn optimal decision policies based on dynamic market prices and their variable solar generation. Our framework is designed to accommodate heterogeneous agents and demonstrates the existence of a mean-field equilibrium (MFE) in a wholesale energy market with many prosumers. Additionally, we introduce an algorithm that automates prosumers' resource control, facilitating real-time decision-making for energy storage management. Numerical experiments suggest that our approach converges towards an MFE and effectively reduces peak loads and price volatility, especially during periods of external demand or supply shocks. This study highlights the potential of a fully decentralized approach to integrating DERs into wholesale markets while improving market efficiency.
+]]></content:encoded>
+<pubDate>Wed, 12 Mar 2025 00:00:00 -0400</pubDate>
+<pubDate>Wed, 12 Mar 2025 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Coordinated Path Following of UAVs using Event-Triggered Communication over Networks with Digraph Topologies</title>
+<link>https://arxiv.org/abs/2503.08129</link>
+<guid>https://arxiv.org/abs/2503.08129</guid>
+<content:encoded><![CDATA[
+<div> 关键词：多UAV协调、事件触发通信、时间同步算法、间歇通信、指数收敛
+
+总结:
+本文提出了一种基于事件触发通信的新型时间协调算法，用于确保多个无人机协同沿着各自期望路径前进。该算法中，无人机仅在其满足局部触发条件时才向邻近无人机传输进度信息，从而显著减少了实现目标所需的车辆间通信量，相比现有的连续通信算法具有优势。通过这种间歇性通信，证明了采用分布式协调控制器可以保证协调误差以指数方式收敛到零的邻域。此外，文章还提供了两个连续事件触发时刻差值的下界，证明了所提算法消除了Zeno行为的可能性。最后，仿真结果验证了所提算法的有效性。<br><br> <div>
+arXiv:2503.08129v1 Announce Type: new 
+Abstract: This article presents a novel time-coordination algorithm based on event-triggered communication to ensure multiple UAVs progress along their desired paths in coordination with one another. In the proposed algorithm, a UAV transmits its progression information to its neighbor UAVs only when a decentralized trigger condition is satisfied. Consequently, it significantly reduces the volume of inter-vehicle communications required to achieve the goal compared with the existing algorithms based on continuous communication. With such intermittent communications, it is shown that a decentralized coordination controller guarantees exponential convergence of the coordination error to a neighborhood of zero. Furthermore, a lower bound on the difference between two consecutive event-triggered times is provided showing that the Zeno behavior is excluded with the proposed algorithm. Lastly, simulation results validate the efficacy of the proposed algorithm.
+]]></content:encoded>
+<pubDate>Wed, 12 Mar 2025 00:00:00 -0400</pubDate>
+<pubDate>Wed, 12 Mar 2025 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Efficient Query Verification for Blockchain Superlight Clients Using SNARKs</title>
+<link>https://arxiv.org/abs/2503.08359</link>
+<guid>https://arxiv.org/abs/2503.08359</guid>
+<content:encoded><![CDATA[
+<div> 关键词：区块链、轻量级客户端、服务器、SNARKs、智能合约
+
+<br><br>总结:
+本文提出了一个利用SNARKs技术的架构，旨在让超级轻量级客户端（不下载交易数据的客户端）能够在不信任的服务器上外包查询计算并获得可信答案。该架构通过从全节点和区块链探索器获取数据，可能利用智能合约的存在，减轻了SNARKs的计算负担。实验评估证实了此架构的可行性。这项工作为用户依赖常见超级轻量级客户端（如智能手机）时仍能保持去中心化和可靠性的区块链信息系统铺平了道路。 <div>
+arXiv:2503.08359v1 Announce Type: new 
+Abstract: Blockchains are among the most powerful technologies to realize decentralized information systems. In order to safely enjoy all guarantees provided by a blockchain, one should maintain a full node, therefore maintaining an updated local copy of the ledger. This allows one to locally verify transactions, states of smart contracts, and to compute any information over them.
+  Unfortunately, for obvious practical reasons, a very large part of blockchain-based information systems consists of users relying on clients that access data stored in blockchains only through servers, without verifying what is received. In notable use cases, the user has application-specific queries that can be answered only by very few servers, sometimes all belonging to the same organization. This clearly re-introduces a single point of failure.
+  In this work we present an architecture allowing superlight clients (i.e., clients that do not want to download the involved transactions) to outsource the computation of a query to a (possibly untrusted) server, receiving a trustworthy answer. Our architecture relies on the power of SNARKs and makes them lighter to compute by using data obtained from full nodes and blockchain explorers, possibly leveraging the existence of smart contracts.
+  The viability of our architecture is confirmed by an experimental evaluation on concrete scenarios. Our work paves the road towards blockchain-based information systems that remain decentralized and reliable even when users rely on common superlight clients (e.g., smartphones).
+]]></content:encoded>
+<pubDate>Wed, 12 Mar 2025 00:00:00 -0400</pubDate>
+<pubDate>Wed, 12 Mar 2025 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Modular Customization of Diffusion Models via Blockwise-Parameterized Low-Rank Adaptation</title>
+<link>https://arxiv.org/abs/2503.08575</link>
+<guid>https://arxiv.org/abs/2503.08575</guid>
+<content:encoded><![CDATA[
+<div> 关键词: 分布式训练、概念定制、模型融合、身份保持、BlockLoRA
+
+总结:
+本文提出了一种名为BlockLoRA的新方法，旨在解决多概念定制模型中的模块化组合问题。现有的后训练方法仅限于固定的概念集合，而即时合并方法往往会导致个体概念的身份损失和干扰，并且通常局限于少量概念。BlockLoRA通过分析导致干扰的根本原因并提出了随机输出擦除技术，有效减少了不同定制模型间的干扰。同时，该方法还提出了块级LoRA参数化来减少即时模型合并过程中的身份损失。实验表明，BlockLoRA可以高效地即时合并15个人物、主题、场景和风格的概念，并能高保真地保持每个概念的独特性。 <div>
+arXiv:2503.08575v1 Announce Type: new 
+Abstract: Recent diffusion model customization has shown impressive results in incorporating subject or style concepts with a handful of images. However, the modular composition of multiple concepts into a customized model, aimed to efficiently merge decentralized-trained concepts without influencing their identities, remains unresolved. Modular customization is essential for applications like concept stylization and multi-concept customization using concepts trained by different users. Existing post-training methods are only confined to a fixed set of concepts, and any different combinations require a new round of retraining. In contrast, instant merging methods often cause identity loss and interference of individual merged concepts and are usually limited to a small number of concepts. To address these issues, we propose BlockLoRA, an instant merging method designed to efficiently combine multiple concepts while accurately preserving individual concepts' identity. With a careful analysis of the underlying reason for interference, we develop the Randomized Output Erasure technique to minimize the interference of different customized models. Additionally, Blockwise LoRA Parameterization is proposed to reduce the identity loss during instant model merging. Extensive experiments validate the effectiveness of BlockLoRA, which can instantly merge 15 concepts of people, subjects, scenes, and styles with high fidelity.
+]]></content:encoded>
+<pubDate>Wed, 12 Mar 2025 00:00:00 -0400</pubDate>
+<pubDate>Wed, 12 Mar 2025 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>A Fair and Lightweight Consensus Algorithm for IoT</title>
+<link>https://arxiv.org/abs/2503.08607</link>
+<guid>https://arxiv.org/abs/2503.08607</guid>
+<content:encoded><![CDATA[
+<div> 关键词：IoT、区块链、共识算法、分布式彩票机制、信誉投票机制
+
+总结:
+<br>
+本文针对物联网(IoT)交易安全问题，提出了一种适用于资源受限环境的公平且轻量级的混合共识算法。该算法结合了区块链技术，旨在降低节点的资源需求并确保安全、公平的协议过程。其主要特点包括：1) 利用分布式彩票机制，无需专用硬件即可实现公正的区块提议；2) 引入基于信誉的区块投票机制，以增强信任并确立交易最终性；3) 通过实验评估验证了该共识算法的关键特性。 <div>
+arXiv:2503.08607v1 Announce Type: new 
+Abstract: As hyperconnected devices and decentralized data architectures expand, securing IoT transactions becomes increasingly challenging. Blockchain offers a promising solution, but its effectiveness relies on the underlying consensus algorithm. Traditional mechanisms like PoW and PoS are often impractical for resource-constrained IoT environments. To address these limitations, this work introduces a fair and lightweight hybrid consensus algorithm tailored for IoT. The proposed approach minimizes resource demands on the nodes while ensuring a secure and fair agreement process. Specifically, it leverages a distributed lottery mechanism to fairly propose blocks without requiring specialized hardware. In addition, a reputation-based block voting mechanism is incorporated to enhance trust and establish finality. Finally, experimental evaluation was conducted to validate the key features of the consensus algorithm.
+]]></content:encoded>
+<pubDate>Wed, 12 Mar 2025 00:00:00 -0400</pubDate>
+<pubDate>Wed, 12 Mar 2025 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Low-Cost Privacy-Preserving Decentralized Learning</title>
+<link>https://arxiv.org/abs/2403.11795</link>
+<guid>https://arxiv.org/abs/2403.11795</guid>
+<content:encoded><![CDATA[
+<div> 关键词: 分布式学习, Zip-DL, 隐私保护, 沟通成本, 准确性
+
+总结:<br>
+本文介绍了一种新的隐私意识型分布式学习算法Zip-DL，该算法利用相关噪声实现对局部敌手的稳健隐私保护，同时保证在低通信成本下有效收敛。Zip-DL通过逐步中和分布式平均过程中的添加噪声，结合了强大的隐私保障与高模型准确性，并只需每次梯度下降迭代进行一次通信轮次，显著降低通信开销。文章还确立了关于收敛速度与隐私保障的理论界限，并通过大量实验验证了Zip-DL的实际应用效能，显示其在准确性和攻击脆弱性之间取得优于现有方法的表现。具体来说，相比于基线分布式学习，Zip-DL可将成员推理攻击成功率降低最多35%，相比提供相似效用的竞争对手，降低了最多13%的攻击效果，并且相较于一种先进的隐私保护方法，在相同威胁模型下，Zip-DL能实现高达59%的更高准确率以完全抵消基础攻击场景。这些结果表明，Zip-DL是一种适用于现实世界应用中隐私保护分布式学习的实用且高效解决方案。 <div>
+arXiv:2403.11795v3 Announce Type: replace 
+Abstract: Decentralized learning (DL) is an emerging paradigm of collaborative machine learning that enables nodes in a network to train models collectively without sharing their raw data or relying on a central server. This paper introduces Zip-DL, a privacy-aware DL algorithm that leverages correlated noise to achieve robust privacy against local adversaries while ensuring efficient convergence at low communication costs. By progressively neutralizing the noise added during distributed averaging, Zip-DL combines strong privacy guarantees with high model accuracy. Its design requires only one communication round per gradient descent iteration, significantly reducing communication overhead compared to competitors. We establish theoretical bounds on both convergence speed and privacy guarantees. Moreover, extensive experiments demonstrating Zip-DL's practical applicability make it outperform state-of-the-art methods in the accuracy vs. vulnerability trade-off. Specifically, Zip-DL (i) reduces membership-inference attack success rates by up to 35% compared to baseline DL, (ii) decreases attack efficacy by up to 13% compared to competitors offering similar utility, and (iii) achieves up to 59% higher accuracy to completely nullify a basic attack scenario, compared to a state-of-the-art privacy-preserving approach under the same threat model. These results position Zip-DL as a practical and efficient solution for privacy-preserving decentralized learning in real-world applications.
+]]></content:encoded>
+<pubDate>Wed, 12 Mar 2025 00:00:00 -0400</pubDate>
+<pubDate>Wed, 12 Mar 2025 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Towards a Formal Foundation for Blockchain Rollups</title>
+<link>https://arxiv.org/abs/2406.16219</link>
+<guid>https://arxiv.org/abs/2406.16219</guid>
+<content:encoded><![CDATA[
+<div> 关键词：区块链、Layer 2、ZK-Rollups、安全性、审查抵抗性
+
+<br><br>总结:
+本文针对比特币和以太坊等区块链面临的可扩展性问题，重点介绍了Layer 2解决方案中的有效性证明Rollups（ZK-Rollups）。文章指出了Layer 2在集中控制、安全性和审查抵抗性方面存在的潜在问题。通过使用Alloy规范语言进行形式化分析，作者研究并设计了关键的Layer 2功能，包括强制交易队列、安全黑名单以及升级机制。在此过程中，他们发现了现有机制中的潜在漏洞，并提出了强化安全性和审查抵抗性的改进模型，为Rollups的安全标准设定了新的方向。 <div>
+arXiv:2406.16219v2 Announce Type: replace 
+Abstract: Blockchains like Bitcoin and Ethereum have revolutionized digital transactions, yet scalability issues persist. Layer 2 solutions, such as validity proof Rollups (ZK-Rollups), aim to address these challenges by processing transactions off-chain and validating them on the main chain. However, concerns remain about security and censorship resistance, particularly regarding centralized control in Layer 2 and inadequate mechanisms for enforcing these properties through Layer 1 contracts. This work presents a formal analysis using the Alloy specification language to examine and design key Layer 2 functionalities, including forced transaction queues, safe blacklisting, and upgradeability. Through this analysis, we identify potential vulnerabilities in current mechanisms and propose enhanced models to strengthen security and censorship resistance, setting new standards for the security of rollups.
+]]></content:encoded>
+<pubDate>Wed, 12 Mar 2025 00:00:00 -0400</pubDate>
+<pubDate>Wed, 12 Mar 2025 00:00:00 -0400</pubDate>
+</item>
 
 <item>
 <title>A new framework for prognostics in decentralized industries: Enhancing fairness, security, and transparency through Blockchain and Federated Learning</title>
