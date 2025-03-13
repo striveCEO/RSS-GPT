@@ -4,6 +4,57 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+<item>
+<title>Multi-Party Computation in Corporate Data Processing: Legal and Technical Insights</title>
+<link>https://eprint.iacr.org/2025/463</link>
+<guid>https://eprint.iacr.org/2025/463</guid>
+<content:encoded><![CDATA[
+<div> 关键词: 多方计算(MPC), 欧盟通用数据保护条例(GDPR), 法律分析, 技术实现, 隐私保护
+
+总结:
+本文研究了多方计算（MPC）在企业数据处理环境中的应用及其在欧洲联盟通用数据保护条例（GDPR）下的法律和技术影响。文章通过结合密码学和法律分析的专业知识，探讨了MPC作为匿名化方法在GDPR下适用性的关键问题，重点关注分布式控制等架构要求以有效降低重新识别风险。法律评估得到两个独立评估的支持。文章系统性地回答了关键监管问题，强调对于意图采用MPC的同时确保遵守隐私法的组织来说，结构化的法律评估至关重要。此外，为了补充这一理论分析，文章还利用Carbyne Stack——一个基于云原生的、用于可扩展MPC应用的开源平台，以及其后端集成的MP-SPDZ框架，实现了隐私保护的数据分析，并对不同安全模型下的SQL查询进行了基准测试，以评估其可扩展性和效率。 <div>
+This paper examines the deployment of Multi-Party Computation (MPC) in corporate data processing environments, focusing on its legal and technical implications under the European Union’s General Data Protection Regulation (GDPR). By combining expertise in cryptography and legal analysis, we address critical questions necessary for assessing the suitability of MPC for real-world applications. Our legal evaluation explores the conditions under which MPC qualifies as an anonymizing approach under GDPR, emphasizing the architectural requirements, such as the distribution of control among compute parties, to minimize re-identification risks effectively. The assertions put forth in the legal opinion are validated by two distinct assessments conducted independently.
+
+We systematically answer key regulatory questions, demonstrating that a structured legal assessment is indispensable for organizations aiming to adopt MPC while ensuring compliance with privacy laws. In addition, we complement this analysis with a practical implementation of privacy-preserving analytics using Carbyne Stack, a cloud-native open-source platform for scalable MPC applications, which integrates the MP-SPDZ framework as its backend. We benchmark SQL queries under various security models to evaluate scalability and efficiency.
+]]></content:encoded>
+<pubDate>Wed, 12 Mar 2025 08:19:28 +0000</pubDate>
+<pubDate>Wed, 12 Mar 2025 08:19:28 +0000</pubDate>
+</item>
+<item>
+<title>Achieving Data Reconstruction Hardness and Efficient Computation in Multiparty Minimax Training</title>
+<link>https://eprint.iacr.org/2025/460</link>
+<guid>https://eprint.iacr.org/2025/460</guid>
+<content:encoded><![CDATA[
+<div> 关键词：生成模型、联邦学习、数据重建、多 party 计算、生成对抗网络<br><br>总结: 本文关注在保持训练成本可管理的同时，提高基于生成对抗网络（GAN）训练过程中数据重构的难度。研究了两种使用公共生成器和多方计算（MPC）鉴别器的训练协议：协议1（P1）采用完全私有的鉴别器，而协议2（P2）仅对前三层鉴别器进行隐私保护。我们证明了对于P1和P2，只要鉴别器的前两层是私有的，公共生成器就不能恢复真实的训练数据；并通过ReLU网络存在的已知近似难度结果，证明了至少有三层私有层的鉴别器不能通过多项式时间复杂度的算法来重构真实数据。实验结果显示，与完全MPC训练相比，P1能够将训练时间减少2倍，而P2则能进一步将其减少到4至16倍。 <div>
+Generative models have achieved remarkable success in a wide range of applications. Training such models using proprietary data from multiple parties has been studied in the realm of federated learning. Yet recent studies showed that reconstruction of authentic training data can be achieved in such settings. 
+On the other hand, multiparty computation (MPC) guarantees standard data privacy, yet scales poorly for training generative models. 
+In this paper, we focus on improving reconstruction hardness during Generative Adversarial Network (GAN) training while keeping the training cost tractable. To this end, we explore two training protocols that use a public generator and an MPC discriminator: Protocol 1 (P1) uses a fully private discriminator, while Protocol 2 (P2) privatizes the first three discriminator layers. We prove reconstruction hardness for P1 and P2 by showing that (1) a public generator does not allow recovery of authentic training data, as long as the first two layers of the discriminator are private; and through an existing approximation hardness result on ReLU networks, (2) a discriminator with at least three private layers does not allow authentic data reconstruction with algorithms polynomial in network depth and size. We show empirically that compared with fully MPC training, P1 reduces the training time by $2\times$ and P2 further by $4-16\times$.
+]]></content:encoded>
+<pubDate>Tue, 11 Mar 2025 22:39:40 +0000</pubDate>
+<pubDate>Tue, 11 Mar 2025 22:39:40 +0000</pubDate>
+</item>
+<item>
+<title>Revisiting the Security and Privacy of FIDO2</title>
+<link>https://eprint.iacr.org/2025/459</link>
+<guid>https://eprint.iacr.org/2025/459</guid>
+<content:encoded><![CDATA[
+<div> 关键词: FIDO2、隐私安全分析、信任设置假设、安全模型、隐私保证
+
+总结:<br>
+本文重新审视了广泛应用于网络无密码认证标准FIDO2的隐私与安全性分析。文中指出了以往工作的局限性，包括不切实际的信任设置假设、针对当前实战攻击的安全模型不足以及未全面分析FIDO2的整体隐私保障。为填补这些空白，文章提出了修订后的隐私和身份验证安全模型，并采用新模型对FIDO2进行模块化分析，重点关注其组件协议WebAuthn和CTAP2，明确了它们的确切安全保障。特别地，本研究首次确立了FIDO2整体的隐私保护承诺。此外，还提出了一些小修改建议，以帮助FIDO2能够达到更强大的隐私和认证定义要求，并抵抗已知和新型攻击。 <div>
+We revisit the privacy and security analyses of FIDO2, a widely deployed standard for passwordless authentication on the Web. 
+We discuss previous works 
+and conclude that each of them has at least one of the following limitations:
+(i) impractical trusted setup assumptions, 
+(ii) security models that are inadequate in light of state of the art of practical attacks,
+(iii) not analyzing FIDO2 as a whole, especially for its privacy guarantees.
+Our work addresses these gaps and proposes revised security models for privacy and authentication. Equipped with our new models, we analyze FIDO2 modularly and focus on its component protocols, WebAuthn and CTAP2, clarifying their exact security guarantees. 
+In particular, our results, for the first time, establish privacy guarantees for FIDO2 as a whole.
+Furthermore, we suggest minor modifications that can help FIDO2 provably meet stronger privacy and authentication definitions and withstand known and novel attacks.
+]]></content:encoded>
+<pubDate>Tue, 11 Mar 2025 21:09:06 +0000</pubDate>
+<pubDate>Tue, 11 Mar 2025 21:09:06 +0000</pubDate>
+</item>
 
 <item>
 <title>Concretely Efficient Correlated Oblivious Permutation</title>

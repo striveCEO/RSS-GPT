@@ -4,17 +4,17 @@
 <title>cs updates on arXiv.org</title>
 <link>http://rss.arxiv.org/rss/cs</link>
 
+
 <item>
 <title>HIPPO-MAT: Decentralized Task Allocation Using GraphSAGE and Multi-Agent Deep Reinforcement Learning</title>
 <link>https://arxiv.org/abs/2503.07662</link>
 <guid>https://arxiv.org/abs/2503.07662</guid>
 <content:encoded><![CDATA[
-<div> 关键词：多智能体系统、分布式连续任务分配、图神经网络、独立策略优化、碰撞避免<br><br>总结：<br>
+<div> 关键词：多智能体系统、分布式连续任务分配、图神经网络、独立策略优化、碰撞避免<br /><br />总结：<br />
 本文提出了一种名为HIPPO-MAT的新颖框架，用于解决异构多智能体系统的分布式连续任务分配问题。该框架结合了使用GraphSAGE架构计算各代理独立嵌入的图神经网络与独立策略优化（IPPO）方法进行多智能体深度强化学习。在这个系统中，无人机（UAVs）和无人地面车辆（UGVs）通过通信通道共享聚合观察数据并独立处理这些输入生成丰富状态嵌入，从而使动态、成本最优、冲突感知的任务分配在三维网格环境中得以实现，无需集中式协调。文中还整合了一个修改后的A*路径规划器以实现高效的路由和碰撞避免。模拟实验显示，该方法对于多达30个智能体具有可扩展性，并在JetBot ROS AI机器人上进行了初步的现实世界验证，每个机器人都在其Jetson Nano上运行模型并通过ESP-NOW协议利用ESP32-S3进行通信，证实了该方法结合同时定位和映射（SLAM）的实际可行性。实验结果显示，所提方法实现了高达92.5%的无冲突成功率，与中心化的匈牙利方法相比，性能差距仅为16.49%，并且优于基于贪婪算法的分散式基线。此外，该框架表现出对多达30个智能体的可扩展性，任务分配处理时间为0.32个仿真步骤时间，并展现出对动态生成任务的良好鲁棒性。 <div>
 arXiv:2503.07662v1 Announce Type: new 
 Abstract: This paper tackles decentralized continuous task allocation in heterogeneous multi-agent systems. We present a novel framework HIPPO-MAT that integrates graph neural networks (GNN) employing a GraphSAGE architecture to compute independent embeddings on each agent with an Independent Proximal Policy Optimization (IPPO) approach for multi-agent deep reinforcement learning. In our system, unmanned aerial vehicles (UAVs) and unmanned ground vehicles (UGVs) share aggregated observation data via communication channels while independently processing these inputs to generate enriched state embeddings. This design enables dynamic, cost-optimal, conflict-aware task allocation in a 3D grid environment without the need for centralized coordination. A modified A* path planner is incorporated for efficient routing and collision avoidance. Simulation experiments demonstrate scalability with up to 30 agents and preliminary real-world validation on JetBot ROS AI Robots, each running its model on a Jetson Nano and communicating through an ESP-NOW protocol using ESP32-S3, which confirms the practical viability of the approach that incorporates simultaneous localization and mapping (SLAM). Experimental results revealed that our method achieves a high 92.5% conflict-free success rate, with only a 16.49% performance gap compared to the centralized Hungarian method, while outperforming the heuristic decentralized baseline based on greedy approach. Additionally, the framework exhibits scalability with up to 30 agents with allocation processing of 0.32 simulation step time and robustness in responding to dynamically generated tasks.
 ]]></content:encoded>
-<pubDate>Wed, 12 Mar 2025 00:00:00 -0400</pubDate>
 <pubDate>Wed, 12 Mar 2025 00:00:00 -0400</pubDate>
 </item>
 <item>
@@ -30,7 +30,6 @@ arXiv:2503.07678v1 Announce Type: new
 Abstract: Recently, with the development of Multi-agent reinforcement learning (MARL), adaptive traffic signal control (ATSC) has achieved satisfactory results. In traffic scenarios with multiple intersections, MARL treats each intersection as an agent and optimizes traffic signal control strategies through learning and real-time decision-making. Considering that observation distributions of intersections might be different in real-world scenarios, shared parameter methods might lack diversity and thus lead to high generalization requirements in the shared-policy network. A typical solution is to increase the size of network parameters. However, simply increasing the scale of the network does not necessarily improve policy generalization, which is validated in our experiments. Accordingly, an approach that considers both the personalization of intersections and the efficiency of parameter sharing is required. To this end, we propose Hyper-Action Multi-Head Proximal Policy Optimization (HAMH-PPO), a Centralized Training with Decentralized Execution (CTDE) MARL method that utilizes a shared PPO policy network to deliver personalized policies for intersections with non-iid observation distributions. The centralized critic in HAMH-PPO uses graph attention units to calculate the graph representations of all intersections and outputs a set of value estimates with multiple output heads for each intersection. The decentralized execution actor takes the local observation history as input and output distributions of action as well as a so-called hyper-action to balance the multiple values estimated from the centralized critic to further guide the updating of TSC policies. The combination of hyper-action and multi-head values enables multiple agents to share a single actor-critic while achieving personalized policies.
 ]]></content:encoded>
 <pubDate>Wed, 12 Mar 2025 00:00:00 -0400</pubDate>
-<pubDate>Wed, 12 Mar 2025 00:00:00 -0400</pubDate>
 </item>
 <item>
 <title>Self-supervised Normality Learning and Divergence Vector-guided Model Merging for Zero-shot Congenital Heart Disease Detection in Fetal Ultrasound Videos</title>
@@ -45,7 +44,6 @@ arXiv:2503.07799v1 Announce Type: new
 Abstract: Congenital Heart Disease (CHD) is one of the leading causes of fetal mortality, yet the scarcity of labeled CHD data and strict privacy regulations surrounding fetal ultrasound (US) imaging present significant challenges for the development of deep learning-based models for CHD detection. Centralised collection of large real-world datasets for rare conditions, such as CHD, from large populations requires significant co-ordination and resource. In addition, data governance rules increasingly prevent data sharing between sites. To address these challenges, we introduce, for the first time, a novel privacy-preserving, zero-shot CHD detection framework that formulates CHD detection as a normality modeling problem integrated with model merging. In our framework dubbed Sparse Tube Ultrasound Distillation (STUD), each hospital site first trains a sparse video tube-based self-supervised video anomaly detection (VAD) model on normal fetal heart US clips with self-distillation loss. This enables site-specific models to independently learn the distribution of healthy cases. To aggregate knowledge across the decentralized models while maintaining privacy, we propose a Divergence Vector-Guided Model Merging approach, DivMerge, that combines site-specific models into a single VAD model without data exchange. Our approach preserves domain-agnostic rich spatio-temporal representations, ensuring generalization to unseen CHD cases. We evaluated our approach on real-world fetal US data collected from 5 hospital sites. Our merged model outperformed site-specific models by 23.77% and 30.13% in accuracy and F1-score respectively on external test sets.
 ]]></content:encoded>
 <pubDate>Wed, 12 Mar 2025 00:00:00 -0400</pubDate>
-<pubDate>Wed, 12 Mar 2025 00:00:00 -0400</pubDate>
 </item>
 <item>
 <title>Network Analysis of Uniswap: Centralization and Fragility in the Decentralized Exchange Market</title>
@@ -54,14 +52,13 @@ Abstract: Congenital Heart Disease (CHD) is one of the leading causes of fetal m
 <content:encoded><![CDATA[
 <div> 关键词：Uniswap、复杂网络、节点中心性、边中心性、鲁棒性分析
 
-<br>
+<br />
 总结:
 
 本文针对Uniswap协议进行了深入的复杂网络方法分析。研究基于2023年10月31日的Uniswap网络构建，揭示了其规模自由和核心-边缘属性。通过使用节点和边中心性度量标准，研究人员识别出了最重要的代币和流动性池。此外，从2020年5月5日Uniswap V2启动到2023年10月31日的每日网络构建显示，该网络随时间逐渐变得脆弱。同时，通过对节点删除的模拟进行鲁棒性分析，结果显示尽管Uniswap作为一个去中心化交易所表现出一定的韧性，但当删除具有高中心性的代币时，其显著地易受冲击。这表明Uniswap在网络连通性和TVL分布上存在一定程度的集中化趋势。 <div>
 arXiv:2503.07834v1 Announce Type: new 
 Abstract: The Uniswap is a Decentralized Exchange (DEX) protocol that facilitates automatic token exchange without the need for traditional order books. Every pair of tokens forms a liquidity pool on Uniswap, and each token can be paired with any other token to create liquidity pools. This characteristic motivates us to employ a complex network approach to analyze the features of the Uniswap market. This research presents a comprehensive analysis of the Uniswap network using complex network methods. The network on October 31, 2023, is built to observe its recent features, showcasing both scale-free and core-periphery properties. By employing node and edge-betweenness metrics, we detect the most important tokens and liquidity pools. Additionally, we construct daily networks spanning from the beginning of Uniswap V2 on May 5, 2020, until October 31, 2023, and our findings demonstrate that the network becomes increasingly fragile over time. Furthermore, we conduct a robustness analysis by simulating the deletion of nodes to estimate the impact of some extreme events such as the Terra collapse. The results indicate that the Uniswap network exhibits robustness, yet it is notably fragile when deleting tokens with high betweenness centrality. This finding highlights that, despite being a decentralized exchange, Uniswap exhibits significant centralization tendencies in terms of token network connectivity and the distribution of TVL across nodes (tokens) and edges (liquidity pools).
 ]]></content:encoded>
-<pubDate>Wed, 12 Mar 2025 00:00:00 -0400</pubDate>
 <pubDate>Wed, 12 Mar 2025 00:00:00 -0400</pubDate>
 </item>
 <item>
@@ -78,7 +75,6 @@ Abstract: Grid edge resources refer to distributed energy resources (DERs) locat
   To address these challenges, we propose a mean-field game framework that enables prosumers to autonomously learn optimal decision policies based on dynamic market prices and their variable solar generation. Our framework is designed to accommodate heterogeneous agents and demonstrates the existence of a mean-field equilibrium (MFE) in a wholesale energy market with many prosumers. Additionally, we introduce an algorithm that automates prosumers' resource control, facilitating real-time decision-making for energy storage management. Numerical experiments suggest that our approach converges towards an MFE and effectively reduces peak loads and price volatility, especially during periods of external demand or supply shocks. This study highlights the potential of a fully decentralized approach to integrating DERs into wholesale markets while improving market efficiency.
 ]]></content:encoded>
 <pubDate>Wed, 12 Mar 2025 00:00:00 -0400</pubDate>
-<pubDate>Wed, 12 Mar 2025 00:00:00 -0400</pubDate>
 </item>
 <item>
 <title>Coordinated Path Following of UAVs using Event-Triggered Communication over Networks with Digraph Topologies</title>
@@ -88,11 +84,10 @@ Abstract: Grid edge resources refer to distributed energy resources (DERs) locat
 <div> 关键词：多UAV协调、事件触发通信、时间同步算法、间歇通信、指数收敛
 
 总结:
-本文提出了一种基于事件触发通信的新型时间协调算法，用于确保多个无人机协同沿着各自期望路径前进。该算法中，无人机仅在其满足局部触发条件时才向邻近无人机传输进度信息，从而显著减少了实现目标所需的车辆间通信量，相比现有的连续通信算法具有优势。通过这种间歇性通信，证明了采用分布式协调控制器可以保证协调误差以指数方式收敛到零的邻域。此外，文章还提供了两个连续事件触发时刻差值的下界，证明了所提算法消除了Zeno行为的可能性。最后，仿真结果验证了所提算法的有效性。<br><br> <div>
+本文提出了一种基于事件触发通信的新型时间协调算法，用于确保多个无人机协同沿着各自期望路径前进。该算法中，无人机仅在其满足局部触发条件时才向邻近无人机传输进度信息，从而显著减少了实现目标所需的车辆间通信量，相比现有的连续通信算法具有优势。通过这种间歇性通信，证明了采用分布式协调控制器可以保证协调误差以指数方式收敛到零的邻域。此外，文章还提供了两个连续事件触发时刻差值的下界，证明了所提算法消除了Zeno行为的可能性。最后，仿真结果验证了所提算法的有效性。<br /><br /> <div>
 arXiv:2503.08129v1 Announce Type: new 
 Abstract: This article presents a novel time-coordination algorithm based on event-triggered communication to ensure multiple UAVs progress along their desired paths in coordination with one another. In the proposed algorithm, a UAV transmits its progression information to its neighbor UAVs only when a decentralized trigger condition is satisfied. Consequently, it significantly reduces the volume of inter-vehicle communications required to achieve the goal compared with the existing algorithms based on continuous communication. With such intermittent communications, it is shown that a decentralized coordination controller guarantees exponential convergence of the coordination error to a neighborhood of zero. Furthermore, a lower bound on the difference between two consecutive event-triggered times is provided showing that the Zeno behavior is excluded with the proposed algorithm. Lastly, simulation results validate the efficacy of the proposed algorithm.
 ]]></content:encoded>
-<pubDate>Wed, 12 Mar 2025 00:00:00 -0400</pubDate>
 <pubDate>Wed, 12 Mar 2025 00:00:00 -0400</pubDate>
 </item>
 <item>
@@ -102,7 +97,7 @@ Abstract: This article presents a novel time-coordination algorithm based on eve
 <content:encoded><![CDATA[
 <div> 关键词：区块链、轻量级客户端、服务器、SNARKs、智能合约
 
-<br><br>总结:
+<br /><br />总结:
 本文提出了一个利用SNARKs技术的架构，旨在让超级轻量级客户端（不下载交易数据的客户端）能够在不信任的服务器上外包查询计算并获得可信答案。该架构通过从全节点和区块链探索器获取数据，可能利用智能合约的存在，减轻了SNARKs的计算负担。实验评估证实了此架构的可行性。这项工作为用户依赖常见超级轻量级客户端（如智能手机）时仍能保持去中心化和可靠性的区块链信息系统铺平了道路。 <div>
 arXiv:2503.08359v1 Announce Type: new 
 Abstract: Blockchains are among the most powerful technologies to realize decentralized information systems. In order to safely enjoy all guarantees provided by a blockchain, one should maintain a full node, therefore maintaining an updated local copy of the ledger. This allows one to locally verify transactions, states of smart contracts, and to compute any information over them.
@@ -110,7 +105,6 @@ Abstract: Blockchains are among the most powerful technologies to realize decent
   In this work we present an architecture allowing superlight clients (i.e., clients that do not want to download the involved transactions) to outsource the computation of a query to a (possibly untrusted) server, receiving a trustworthy answer. Our architecture relies on the power of SNARKs and makes them lighter to compute by using data obtained from full nodes and blockchain explorers, possibly leveraging the existence of smart contracts.
   The viability of our architecture is confirmed by an experimental evaluation on concrete scenarios. Our work paves the road towards blockchain-based information systems that remain decentralized and reliable even when users rely on common superlight clients (e.g., smartphones).
 ]]></content:encoded>
-<pubDate>Wed, 12 Mar 2025 00:00:00 -0400</pubDate>
 <pubDate>Wed, 12 Mar 2025 00:00:00 -0400</pubDate>
 </item>
 <item>
@@ -126,7 +120,6 @@ arXiv:2503.08575v1 Announce Type: new
 Abstract: Recent diffusion model customization has shown impressive results in incorporating subject or style concepts with a handful of images. However, the modular composition of multiple concepts into a customized model, aimed to efficiently merge decentralized-trained concepts without influencing their identities, remains unresolved. Modular customization is essential for applications like concept stylization and multi-concept customization using concepts trained by different users. Existing post-training methods are only confined to a fixed set of concepts, and any different combinations require a new round of retraining. In contrast, instant merging methods often cause identity loss and interference of individual merged concepts and are usually limited to a small number of concepts. To address these issues, we propose BlockLoRA, an instant merging method designed to efficiently combine multiple concepts while accurately preserving individual concepts' identity. With a careful analysis of the underlying reason for interference, we develop the Randomized Output Erasure technique to minimize the interference of different customized models. Additionally, Blockwise LoRA Parameterization is proposed to reduce the identity loss during instant model merging. Extensive experiments validate the effectiveness of BlockLoRA, which can instantly merge 15 concepts of people, subjects, scenes, and styles with high fidelity.
 ]]></content:encoded>
 <pubDate>Wed, 12 Mar 2025 00:00:00 -0400</pubDate>
-<pubDate>Wed, 12 Mar 2025 00:00:00 -0400</pubDate>
 </item>
 <item>
 <title>A Fair and Lightweight Consensus Algorithm for IoT</title>
@@ -136,12 +129,11 @@ Abstract: Recent diffusion model customization has shown impressive results in i
 <div> 关键词：IoT、区块链、共识算法、分布式彩票机制、信誉投票机制
 
 总结:
-<br>
+<br />
 本文针对物联网(IoT)交易安全问题，提出了一种适用于资源受限环境的公平且轻量级的混合共识算法。该算法结合了区块链技术，旨在降低节点的资源需求并确保安全、公平的协议过程。其主要特点包括：1) 利用分布式彩票机制，无需专用硬件即可实现公正的区块提议；2) 引入基于信誉的区块投票机制，以增强信任并确立交易最终性；3) 通过实验评估验证了该共识算法的关键特性。 <div>
 arXiv:2503.08607v1 Announce Type: new 
 Abstract: As hyperconnected devices and decentralized data architectures expand, securing IoT transactions becomes increasingly challenging. Blockchain offers a promising solution, but its effectiveness relies on the underlying consensus algorithm. Traditional mechanisms like PoW and PoS are often impractical for resource-constrained IoT environments. To address these limitations, this work introduces a fair and lightweight hybrid consensus algorithm tailored for IoT. The proposed approach minimizes resource demands on the nodes while ensuring a secure and fair agreement process. Specifically, it leverages a distributed lottery mechanism to fairly propose blocks without requiring specialized hardware. In addition, a reputation-based block voting mechanism is incorporated to enhance trust and establish finality. Finally, experimental evaluation was conducted to validate the key features of the consensus algorithm.
 ]]></content:encoded>
-<pubDate>Wed, 12 Mar 2025 00:00:00 -0400</pubDate>
 <pubDate>Wed, 12 Mar 2025 00:00:00 -0400</pubDate>
 </item>
 <item>
@@ -151,12 +143,11 @@ Abstract: As hyperconnected devices and decentralized data architectures expand,
 <content:encoded><![CDATA[
 <div> 关键词: 分布式学习, Zip-DL, 隐私保护, 沟通成本, 准确性
 
-总结:<br>
+总结:<br />
 本文介绍了一种新的隐私意识型分布式学习算法Zip-DL，该算法利用相关噪声实现对局部敌手的稳健隐私保护，同时保证在低通信成本下有效收敛。Zip-DL通过逐步中和分布式平均过程中的添加噪声，结合了强大的隐私保障与高模型准确性，并只需每次梯度下降迭代进行一次通信轮次，显著降低通信开销。文章还确立了关于收敛速度与隐私保障的理论界限，并通过大量实验验证了Zip-DL的实际应用效能，显示其在准确性和攻击脆弱性之间取得优于现有方法的表现。具体来说，相比于基线分布式学习，Zip-DL可将成员推理攻击成功率降低最多35%，相比提供相似效用的竞争对手，降低了最多13%的攻击效果，并且相较于一种先进的隐私保护方法，在相同威胁模型下，Zip-DL能实现高达59%的更高准确率以完全抵消基础攻击场景。这些结果表明，Zip-DL是一种适用于现实世界应用中隐私保护分布式学习的实用且高效解决方案。 <div>
 arXiv:2403.11795v3 Announce Type: replace 
 Abstract: Decentralized learning (DL) is an emerging paradigm of collaborative machine learning that enables nodes in a network to train models collectively without sharing their raw data or relying on a central server. This paper introduces Zip-DL, a privacy-aware DL algorithm that leverages correlated noise to achieve robust privacy against local adversaries while ensuring efficient convergence at low communication costs. By progressively neutralizing the noise added during distributed averaging, Zip-DL combines strong privacy guarantees with high model accuracy. Its design requires only one communication round per gradient descent iteration, significantly reducing communication overhead compared to competitors. We establish theoretical bounds on both convergence speed and privacy guarantees. Moreover, extensive experiments demonstrating Zip-DL's practical applicability make it outperform state-of-the-art methods in the accuracy vs. vulnerability trade-off. Specifically, Zip-DL (i) reduces membership-inference attack success rates by up to 35% compared to baseline DL, (ii) decreases attack efficacy by up to 13% compared to competitors offering similar utility, and (iii) achieves up to 59% higher accuracy to completely nullify a basic attack scenario, compared to a state-of-the-art privacy-preserving approach under the same threat model. These results position Zip-DL as a practical and efficient solution for privacy-preserving decentralized learning in real-world applications.
 ]]></content:encoded>
-<pubDate>Wed, 12 Mar 2025 00:00:00 -0400</pubDate>
 <pubDate>Wed, 12 Mar 2025 00:00:00 -0400</pubDate>
 </item>
 <item>
@@ -166,15 +157,13 @@ Abstract: Decentralized learning (DL) is an emerging paradigm of collaborative m
 <content:encoded><![CDATA[
 <div> 关键词：区块链、Layer 2、ZK-Rollups、安全性、审查抵抗性
 
-<br><br>总结:
+<br /><br />总结:
 本文针对比特币和以太坊等区块链面临的可扩展性问题，重点介绍了Layer 2解决方案中的有效性证明Rollups（ZK-Rollups）。文章指出了Layer 2在集中控制、安全性和审查抵抗性方面存在的潜在问题。通过使用Alloy规范语言进行形式化分析，作者研究并设计了关键的Layer 2功能，包括强制交易队列、安全黑名单以及升级机制。在此过程中，他们发现了现有机制中的潜在漏洞，并提出了强化安全性和审查抵抗性的改进模型，为Rollups的安全标准设定了新的方向。 <div>
 arXiv:2406.16219v2 Announce Type: replace 
 Abstract: Blockchains like Bitcoin and Ethereum have revolutionized digital transactions, yet scalability issues persist. Layer 2 solutions, such as validity proof Rollups (ZK-Rollups), aim to address these challenges by processing transactions off-chain and validating them on the main chain. However, concerns remain about security and censorship resistance, particularly regarding centralized control in Layer 2 and inadequate mechanisms for enforcing these properties through Layer 1 contracts. This work presents a formal analysis using the Alloy specification language to examine and design key Layer 2 functionalities, including forced transaction queues, safe blacklisting, and upgradeability. Through this analysis, we identify potential vulnerabilities in current mechanisms and propose enhanced models to strengthen security and censorship resistance, setting new standards for the security of rollups.
 ]]></content:encoded>
 <pubDate>Wed, 12 Mar 2025 00:00:00 -0400</pubDate>
-<pubDate>Wed, 12 Mar 2025 00:00:00 -0400</pubDate>
 </item>
-
 <item>
 <title>A new framework for prognostics in decentralized industries: Enhancing fairness, security, and transparency through Blockchain and Federated Learning</title>
 <link>https://arxiv.org/abs/2503.05725</link>
@@ -14083,162 +14072,6 @@ arXiv:2412.02535v1 Announce Type: new
 Abstract: Adversarial attacks pose significant challenges in many machine learning applications, particularly in the setting of distributed training and federated learning, where malicious agents seek to corrupt the training process with the goal of jeopardizing and compromising the performance and reliability of the final models. In this paper, we address the problem of robust federated learning in the presence of such attacks by formulating the training task as a bi-level optimization problem. We conduct a theoretical analysis of the resilience of consensus-based bi-level optimization (CB$^2$O), an interacting multi-particle metaheuristic optimization method, in adversarial settings. Specifically, we provide a global convergence analysis of CB$^2$O in mean-field law in the presence of malicious agents, demonstrating the robustness of CB$^2$O against a diverse range of attacks. Thereby, we offer insights into how specific hyperparameter choices enable to mitigate adversarial effects. On the practical side, we extend CB$^2$O to the clustered federated learning setting by proposing FedCB$^2$O, a novel interacting multi-particle system, and design a practical algorithm that addresses the demands of real-world applications. Extensive experiments demonstrate the robustness of the FedCB$^2$O algorithm against label-flipping attacks in decentralized clustered federated learning scenarios, showcasing its effectiveness in practical contexts.
 ]]></content:encoded>
 <pubDate>Wed, 04 Dec 2024 00:00:00 -0500</pubDate>
-</item>
-<item>
-<title>Decentralized Reliability Estimation for Low Latency Mixnets</title>
-<link>https://arxiv.org/abs/2406.06760</link>
-<guid>https://arxiv.org/abs/2406.06760</guid>
-<content:encoded><![CDATA[
-<div> 关键词: mixnet、匿名路由、低延迟、可验证性、可靠性评分
-
-总结:
-<br />
-本文提出了一种新的方案，旨在解决大规模低延迟混合网络（mixnet）与强可验证性和可靠性之间的挑战。现有的可验证性机制会引入显著的延迟开销，限制了mixnet的应用范围。该方案能够以几乎最优的时间复杂度，在去中心化的环境中估算mixnet中链接和节点的可靠性评分，且此过程独立于通过mixnet路由的总流量。它依赖于客户端凭证和基于VRF的路由新原语，确保合法客户端数据包遵循mixnet的路由策略，并随机生成不可伪造的测量数据包。实验结果在不可靠和对抗性环境下验证了该构造的可行性，证明了其可以实现在不影响客户端数据包传输延迟或产生显著带宽开销的情况下进行可靠性的估计。 <div>
-arXiv:2406.06760v2 Announce Type: replace 
-Abstract: While there exist mixnets that can anonymously route large amounts of data packets with end to end latency that can be as low as a second, %making them attractive for a variety of applications, combining this level of performance with strong verifiability and reliability properties that ensure the correct processing and delivery of packets has proved challenging. Indeed, existing verifiability mechanisms are incompatible with scalable low-latency operation due to imposing significant latency overheads measuring in minutes to hours, hence severely limiting the variety of applications mixnets can serve. We address this important gap by proposing a scheme that can estimate reliability scores for a mixnet's links and nodes in a decentralized manner with essentially optimal complexity that is independent of the total traffic routed through the mixnet. The scores can be computed publicly by all participants from a set of measurement packets that are eventually revealed and act as a random sample of the traffic, without affecting mixnet transmission latency for client packets or incurring significant bandwidth overhead. Our scheme assumes client credentials and relies on VRF-based routing, a novel primitive that ensures that legitimate client packets follow the routing policy of the mixnet, as well as randomly generating unforgeable measurement packets. We experimentally validate our construction both in unreliable and adversarial settings, demonstrating its feasibility.
-]]></content:encoded>
-<pubDate>Wed, 04 Dec 2024 00:00:00 -0500</pubDate>
-</item>
-<item>
-<title>Relaxing Trust Assumptions on Quantum Key Distribution Networks</title>
-<link>https://arxiv.org/abs/2402.13136</link>
-<guid>https://arxiv.org/abs/2402.13136</guid>
-<content:encoded><![CDATA[
-<div> 关键词：量子安全、长距离、不信任中继器、QKD网络、信任级别
-
-总结:
-本文探讨了在量子通信网络中如何在对中继器的信任程度降低的情况下实现安全的秘密接力。文章提出了三种不同的QKD中继器信任级别：完全访问信任（FAT）、部分访问信任（PAT）和无访问信任（NAT），定义了中继器处理秘密信息的不同权限。针对不同信任级别，文中回顾并提出多种基于QKD的密钥管理系统构建方案，特别是在无访问信任级别的密钥管理系统的评估上，重点讨论了集中式与新型去中心化的密钥管理系统架构。这些不同架构为QKD网络的需求提供了灵活性，为未来长距离安全通信提供了一种更可靠且实用的解决方案思路。 <div>
-arXiv:2402.13136v2 Announce Type: replace-cross 
-Abstract: Quantum security over long distances with untrusted relays is largely unfounded and is still an open question for active research. Nevertheless, quantum networks based on trusted relays are being built across the globe. However, standard QKD network architecture implores a complete trust requirement on QKD relays, which is too demanding and limits the use cases for QKD networks. In this work, we explore the possibility to securely relay a secret in a QKD network by relaxing the trust assumptions (if not completely) on the relay. We characterize QKD relays with different trust levels, namely, Full Access Trust (FAT), Partial Access Trust (PAT), and No Access Trust (NAT). As the name suggests, each level defines the degree with which a relay is required to be trusted with the secret provided by the key management system for end-to-end communication. We then review and propose multiple constructions of the QKD key management system based on the different trust levels. Main contribution of the paper is realized by evaluating key management systems with no access trust level. In principle, we review key management with centralized topology and propose a new decentralized key management system. These different topologies provide various advantages based on the QKD network requirements, allowing an operational flexibility in the architecture. We believe this work presents a new perspective to the open problem of providing a confiding and a practical solution for future long range secure communications
-]]></content:encoded>
-<pubDate>Wed, 04 Dec 2024 00:00:00 -0500</pubDate>
-</item>
-<item>
-<title>DeTEcT: Dynamic and Probabilistic Parameters Extension</title>
-<link>https://arxiv.org/abs/2405.16688</link>
-<guid>https://arxiv.org/abs/2405.16688</guid>
-<content:encoded><![CDATA[
-<div> 关键词：DeTEcT框架、财富分布、参数化、动态货币供应、模拟经济活动
-
-总结:
-本文扩展了Sadykhov等人提出的DeTEcT框架，该框架用于建模代币经济中的财富分配和宏观经济场景模拟。文章提出了四种对DeTEcT框架进行参数化的方法，包括动态与静态以及概率性与非概率性的区分。通过这些参数化技术，研究者展示了如何限制框架以从DeTEcT中推导出现有的财富分布模型。此外，论文还探讨了使DeTEcT框架中的货币供应变得动态化的可能性及其对财富分布动态的影响，其目的在于使DeTEcT能够应用于没有最大供应量（如Ethereum）的代币经济模型，并为框架增加了约束形式的对称性。 <div>
-arXiv:2405.16688v2 Announce Type: replace-cross 
-Abstract: This paper presents a theoretical extension of the DeTEcT framework proposed by Sadykhov et al., DeTEcT, where a formal analysis framework was introduced for modelling wealth distribution in token economies. DeTEcT is a framework for analysing economic activity, simulating macroeconomic scenarios, and algorithmically setting policies in token economies. This paper proposes four ways of parametrizing the framework, where dynamic vs static parametrization is considered along with the probabilistic vs non-probabilistic. Using these parametrization techniques, we demonstrate that by adding restrictions to the framework it is possible to derive the existing wealth distribution models from DeTEcT. In addition to exploring parametrization techniques, this paper studies how money supply in DeTEcT framework can be transformed to become dynamic, and how this change will affect the dynamics of wealth distribution. The motivation for studying dynamic money supply is that it enables DeTEcT to be applied to modelling token economies without maximum supply (i.e., Ethereum), and it adds constraints to the framework in the form of symmetries.
-]]></content:encoded>
-<pubDate>Wed, 04 Dec 2024 00:00:00 -0500</pubDate>
-</item>
-<item>
-<title>A Supercomputing Based Distributed Cloud Marketplace</title>
-<link>https://arxiv.org/abs/2412.00016</link>
-<guid>https://arxiv.org/abs/2412.00016</guid>
-<content:encoded><![CDATA[
-<div> 关键词: 区块链、51%攻击、可扩展性、LuluChain、超级计算机速度
-
-总结:<br />
-本文提出了一个新的区块链技术——LuluChain，它旨在解决当前区块链面临的51%攻击威胁和可扩展性问题。现有的区块链系统在处理能力上不及集中式系统，这使得51%攻击成为可能。LuluChain致力于提供一种无限可扩展、安全且高吞吐量的解决方案，能实现接近超级计算机速度的性能，仅使用商业现成硬件。该系统简化了区块链模型，提高了功能、速度、可扩展性、隐私和灵活性，并能对抗云计算市场的寡头垄断定价模式，因为它对计算工作负载的需求极低。通过消除时间戳同步和所有参与者之间的多数同意需求，LuluChain开启了可靠信任、低成本即时交易和灵活即时智能合约的新可能。作为一个基于高性能分布式系统的分布式云市场基础，LuluChain被视为一种理想方案。 <div>
-arXiv:2412.00016v1 Announce Type: new 
-Abstract: The once mythological 51% attack has moved beyond the hypothetical and now poses a legitimate widespread threat to blockchain technology. Current blockchains provide inferior throughput capacity when compared to that of centralized systems, creating an obvious vulnerability which allows the 51% attack to occur within decentralized systems. Despite recent advancements in blockchain which introduce interesting models that achieve high throughputs with enhanced security and privacy, no current networks have evolved to deploy the optimal solution of combining scalability, security, and distributed systems to create a legitimate supercomputing enterprise-grade developer sandbox. In this paper, we introduce an infinitely scalable, secure, and high throughput blockchain capable of amassing supercomputer speeds with off-the-shelf hardware, LuluChain. LuluChain simplifies the blockchain model to obtain greater functionality, speed, scalability, privacy, and flexibility, that works to combat the inflated pricing models set by the oligopolistic cloud computing market as it requires minimal computational work. By eliminating the need for timestamp synchronization and majority agreement among all participants, LuluChain opens the door to reliable trust, low-cost instant transactions, and flexible instant smart contracts. The supercomputing, high throughput distributed system is the ideal foundation for an essential distributed cloud marketplace.
-]]></content:encoded>
-<pubDate>Tue, 03 Dec 2024 00:00:00 -0500</pubDate>
-</item>
-<item>
-<title>Multi-Agent Collaboration in Incident Response with Large Language Models</title>
-<link>https://arxiv.org/abs/2412.00652</link>
-<guid>https://arxiv.org/abs/2412.00652</guid>
-<content:encoded><![CDATA[
-<div> 关键词：incident response，large language models，multi-agent collaboration，Backdoors & Breaches框架，cybersecurity training
-
-<br /><br />总结:
-本文探讨了利用大型语言模型（LLMs）作为智能代理来提升网络安全中事件响应（IR）协作效率和效果的新方法。研究通过在Backdoors & Breaches框架下模拟真实的IR场景，采用了集中式、分布式和混合型等多种团队结构进行实验。通过对不同配置下的代理人交互与性能分析，文章揭示了LLMs在优化多代理协作、增强决策制定、提高适应性和流程整合以更有效地应对网络威胁方面的潜力。 <div>
-arXiv:2412.00652v1 Announce Type: new 
-Abstract: Incident response (IR) is a critical aspect of cybersecurity, requiring rapid decision-making and coordinated efforts to address cyberattacks effectively. Leveraging large language models (LLMs) as intelligent agents offers a novel approach to enhancing collaboration and efficiency in IR scenarios. This paper explores the application of LLM-based multi-agent collaboration using the Backdoors & Breaches framework, a tabletop game designed for cybersecurity training. We simulate real-world IR dynamics through various team structures, including centralized, decentralized, and hybrid configurations. By analyzing agent interactions and performance across these setups, we provide insights into optimizing multi-agent collaboration for incident response. Our findings highlight the potential of LLMs to enhance decision-making, improve adaptability, and streamline IR processes, paving the way for more effective and coordinated responses to cyber threats.
-]]></content:encoded>
-<pubDate>Tue, 03 Dec 2024 00:00:00 -0500</pubDate>
-</item>
-<item>
-<title>Mean-Field Sampling for Cooperative Multi-Agent Reinforcement Learning</title>
-<link>https://arxiv.org/abs/2412.00661</link>
-<guid>https://arxiv.org/abs/2412.00661</guid>
-<content:encoded><![CDATA[
-<div> 关键词：多智能体强化学习（MARL）、子采样、均值场Q学习（MFQ）、多项式时间、收敛性
-
-总结:
-本文提出了一种名为“SUBSAMPLE-MFQ”的新算法，用于解决多智能体强化学习中的挑战，特别是应对由于智能体数量增加导致的联合状态和动作空间指数级增长的问题。该算法结合了子采样技术和均值场Q学习，设计了一个针对$n$个智能体系统的去中心化随机策略。SUBSAMPLE-MFQ能够在时间复杂度为$k$的多项式时间内学习到系统策略，并随着子采样的智能体数量$k$增加，其收敛至最优策略的阶数为$\tilde{O}(1/\sqrt{k})$。实验部分验证了该方法在高斯挤压和全局探索等场景的有效性。 <div>
-arXiv:2412.00661v1 Announce Type: new 
-Abstract: Designing efficient algorithms for multi-agent reinforcement learning (MARL) is fundamentally challenging due to the fact that the size of the joint state and action spaces are exponentially large in the number of agents. These difficulties are exacerbated when balancing sequential global decision-making with local agent interactions. In this work, we propose a new algorithm \texttt{SUBSAMPLE-MFQ} (\textbf{Subsample}-\textbf{M}ean-\textbf{F}ield-\textbf{Q}-learning) and a decentralized randomized policy for a system with $n$ agents. For $k\leq n$, our algorithm system learns a policy for the system in time polynomial in $k$. We show that this learned policy converges to the optimal policy in the order of $\tilde{O}(1/\sqrt{k})$ as the number of subsampled agents $k$ increases. We validate our method empirically on Gaussian squeeze and global exploration settings.
-]]></content:encoded>
-<pubDate>Tue, 03 Dec 2024 00:00:00 -0500</pubDate>
-</item>
-<item>
-<title>ChainGuard: A Blockchain-based Authentication and Access Control Scheme for Distributed Networks</title>
-<link>https://arxiv.org/abs/2412.00677</link>
-<guid>https://arxiv.org/abs/2412.00677</guid>
-<content:encoded><![CDATA[
-<div> 关键词：区块链技术、去中心化认证、访问控制、ChainGuard、智能合约
-
-<br /><br />总结:
-本文提出了一个名为ChainGuard的新型方案，旨在解决如何在分布式网络中实现去中心化的身份认证和访问控制问题。ChainGuard利用区块链技术动态管理用户角色和权限，无需中央服务器，从而消除了传统集中式系统的瓶颈。该机制同时支持跨多个组织的用户交互，提升了安全性、效率和透明度。通过解决可扩展性、安全性和透明度等关键挑战，ChainGuard不仅弥合了传统集中式系统与区块链去中心化理念之间的鸿沟，还进一步加强了数据保护和操作效率。 <div>
-arXiv:2412.00677v1 Announce Type: new 
-Abstract: As blockchain technology gains traction for enhancing data security and operational efficiency, traditional centralized authentication systems remain a significant bottleneck. This paper addresses the challenge of integrating decentralized authentication and access control within distributed networks. We propose a novel solution named ChainGuard, a fully decentralized authentication and access control mechanism based on smart contracts. ChainGuard eliminates the need for a central server by leveraging blockchain technology to manage user roles and permissions dynamically. Our scheme supports user interactions across multiple organizations simultaneously, enhancing security, efficiency, and transparency. By addressing key challenges such as scalability, security, and transparency, ChainGuard not only bridges the gap between traditional centralized systems and blockchain's decentralized ethos but also enhances data protection and operational efficiency.
-]]></content:encoded>
-<pubDate>Tue, 03 Dec 2024 00:00:00 -0500</pubDate>
-</item>
-<item>
-<title>SEAM: A Secure Automated and Maintainable Smart Contract Upgrade Framework</title>
-<link>https://arxiv.org/abs/2412.00680</link>
-<guid>https://arxiv.org/abs/2412.00680</guid>
-<content:encoded><![CDATA[
-<div> 关键词: smart contracts, upgrading, SEAM, diamond pattern, security
-
-总结:<br />
-本文提出了一种名为SEAM的新颖框架，用于解决智能合约升级这一关键挑战。SEAM通过使用钻石模式自动化将标准Solidity合约转换为可升级版本，简化了升级流程并解决了函数选择器冲突和存储槽碰撞两个主要安全漏洞问题。此外，该框架还提供了用于高效部署、修改和管理智能合约生命周期的工具。通过增强合同安全性并降低开发者的学习曲线，SEAM为构建更灵活和可维护的区块链应用奠定了坚实基础。 <div>
-arXiv:2412.00680v1 Announce Type: new 
-Abstract: This work addresses the critical challenges of upgrading smart contracts, which are vital for trust in automated transactions but difficult to modify once deployed. To address this issue, we propose SEAM, a novel framework that automates the conversion of standard Solidity contracts into upgradable versions using the diamond pattern. SEAM simplifies the upgrade process and addresses two key vulnerabilities: function selector clashes and storage slot collisions. Additionally, the framework provides tools for efficiently deploying, modifying, and managing smart contract lifecycles. By enhancing contract security and reducing the learning curve for developers, SEAM lays a robust foundation for more flexible and maintainable blockchain applications.
-]]></content:encoded>
-<pubDate>Tue, 03 Dec 2024 00:00:00 -0500</pubDate>
-</item>
-<item>
-<title>Collaborative Proof-of-Work: A Secure Dynamic Approach to Fair and Efficient Blockchain Mining</title>
-<link>https://arxiv.org/abs/2412.00690</link>
-<guid>https://arxiv.org/abs/2412.00690</guid>
-<content:encoded><![CDATA[
-<div> 关键词: Proof-of-Work (PoW), 能耗, 中心化, Collaborative Proof-of-Work (CPoW), 动态挖矿池形成协议
-
-总结:<br />
-本文针对Proof-of-Work (PoW)系统存在的能耗过高、挖矿权力中心化等问题，以及静态挖矿池对区块链去中心化特性与公平性的削弱，提出了一个新的Collaborative Proof-of-Work (CPoW)挖矿方法。该方法致力于提升以太坊网络的效率和公平性，具体表现为设计了一种动态挖矿池形成协议，使矿工能够根据计算能力进行协作，并通过精准验证和分配奖励的机制保障了奖励分配的安全与公正。这一研究通过解决传统挖矿的中心化和能源效率问题，为构建更加可持续的区块链生态系统做出了贡献。 <div>
-arXiv:2412.00690v1 Announce Type: new 
-Abstract: Proof-of-Work (PoW) systems face critical challenges, including excessive energy consumption and the centralization of mining power among entities with expensive hardware. Static mining pools exacerbate these issues by reducing competition and undermining the decentralized nature of blockchain networks, leading to economic inequality and inefficiencies in resource allocation. Their reliance on centralized pool managers further introduces vulnerabilities by creating a system that fails to ensure secure and fair reward distribution. This paper introduces a novel Collaborative Proof-of-Work (CPoW) mining approach designed to enhance efficiency and fairness in the Ethereum network. We propose a dynamic mining pool formation protocol that enables miners to collaborate based on their computational capabilities, ensuring fair and secure reward distribution by incorporating mechanisms to accurately verify and allocate rewards. By addressing the centralization and energy inefficiencies of traditional mining, this research contributes to a more sustainable blockchain ecosystem.
-]]></content:encoded>
-<pubDate>Tue, 03 Dec 2024 00:00:00 -0500</pubDate>
-</item>
-<item>
-<title>The Forking Way: When TEEs Meet Consensus</title>
-<link>https://arxiv.org/abs/2412.00706</link>
-<guid>https://arxiv.org/abs/2412.00706</guid>
-<content:encoded><![CDATA[
-<div> 关键词：Trusted Execution Environments (TEE), 区块链, 分布式平台, 叉攻击, 安全性分析
-
-总结:
-本文针对越来越多的分布式平台结合可信执行环境(TEE)和区块链的情况进行了系统研究，强调了这一组合被认为是保障区块链机密计算与防御叉攻击的良好方式。通过对29项TEE基区块链方案的深入分析，发现社区中对于如何整合TEE和区块链缺乏共识，并归纳出四种主要的互联手段及其局限性。此外，文章还揭示了三个生产就绪的TEE基区块链——Ten、Phala和Secret Network中存在的此前未被记录的叉攻击漏洞，并对这些漏洞提出了有效的应对措施。已将研究成果负责任地披露给相关平台的开发者。 <div>
-arXiv:2412.00706v1 Announce Type: new 
-Abstract: An increasing number of distributed platforms combine Trusted Execution Environments (TEEs) with blockchains. Indeed, many hail the combination of TEEs and blockchains a good "marriage": TEEs bring confidential computing to the blockchain while the consensus layer could help defend TEEs from forking attacks.
-  In this paper, we systemize how current blockchain solutions integrate TEEs and to what extent they are secure against forking attacks. To do so, we thoroughly analyze 29 proposals for TEE-based blockchains, ranging from academic proposals to production-ready platforms. We uncover a lack of consensus in the community on how to combine TEEs and blockchains. In particular, we identify four broad means to interconnect TEEs with consensus, analyze their limitations, and discuss possible remedies. Our analysis also reveals previously undocumented forking attacks on three production-ready TEE-based blockchains: Ten, Phala, and the Secret Network. We leverage our analysis to propose effective countermeasures against those vulnerabilities; we responsibly disclosed our findings to the developers of each affected platform.
-]]></content:encoded>
-<pubDate>Tue, 03 Dec 2024 00:00:00 -0500</pubDate>
-</item>
-<item>
-<title>EnFed: An Energy-aware Opportunistic Federated Learning in Resource Constrained Environments for Human Activity Recognition</title>
-<link>https://arxiv.org/abs/2412.00768</link>
-<guid>https://arxiv.org/abs/2412.00768</guid>
-<content:encoded><![CDATA[
-<div> 关键词：能源效率、联邦学习、人类活动监测、模型更新、预测准确性
-
-总结:<br />
-本文提出了一种能源高效的联邦学习方法及其在人体活动监测与识别中的应用。该方法中，需要模型的应用设备请求其附近设备进行协作，同意请求的附近设备将模型更新发送至请求设备。请求设备接收到模型更新后进行聚合以构建自身模型。鉴于移动设备电池寿命有限，参与轮数依据所需精度水平和请求设备的电池电量来决定。实验结果表明，相比于分布式联邦学习方法，当使用LSTM作为底层数据分析模型时，该提议的方法能分别降低第一和第二数据集约59%和19%的训练时间和约19%的训练能量消耗；而使用MLP作为底层数据分析模型时，可分别减少约55%和72%的训练时间和训练能量消耗，同时保持了良好的预测准确性。 <div>
-arXiv:2412.00768v1 Announce Type: new 
-Abstract: This paper proposes an energy-efficient federated learning method and its application in human activity monitoring and recognition. In the proposed approach, the device that needs a model for an application requests its nearby devices for collaboration. The nearby devices that accept the request, send their model updates to the requesting device. The device receives the model updates from the collaborators and performs aggregation to build its model. As mobile devices have limited battery life, the number of rounds is decided based on the desired accuracy level and battery level of the requesting device. The performance of the proposed approach is evaluated with respect to prediction accuracy, training time, training energy consumption of the device, and response time. We have used two different datasets for performance evaluation. The first dataset contains different types of physical activities and the respective calorie burn. The second dataset is a human activity recognition dataset that considers six types of physical activities. The experimental results show that using the proposed method the training time and training energy consumption of the device are reduced by approximately 59% and 19% for the first and second datasets respectively, than the decentralized federated learning approach, while using LSTM as the underlying data analysis model. The results also present that the proposed method reduces the training time and energy consumption by approximately 55% and 72% for the first and second datasets respectively, than the decentralized federated learning approach while using MLP as the underlying data analysis model.
-]]></content:encoded>
-<pubDate>Tue, 03 Dec 2024 00:00:00 -0500</pubDate>
 </item>
 </channel>
 </rss>
