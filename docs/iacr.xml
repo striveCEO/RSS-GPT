@@ -5,6 +5,45 @@
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
 <item>
+<title>Leaking Arbitrarily Many Secrets: Any-out-of-Many Proofs and Applications to RingCT Protocols</title>
+<link>https://eprint.iacr.org/2021/1405</link>
+<guid>https://eprint.iacr.org/2021/1405</guid>
+<content:encoded><![CDATA[
+<div> 关键词：Ring Confidential Transaction (RingCT), 任何-out-of-many证明, 零知识证明, 多重秘密, 匿名性<br><br>总结: 本文提出了一种新颖的“任何-out-of-many”证明方案，这是一种对公开列表中任意多的秘密进行知识证明的、对数大小的零知识证明策略。与现有部分知识证明不同，该方法在证明多个秘密的同时不泄露确切的秘密数量。通过采用Bulletproofs压缩技术的通用内积变换，进一步提高了效率，将证明尺寸减少到$2 \lceil \log_2(N) \rceil \! + \! 9$。基于此证明方案，文章构建了一个紧凑型的RingCT协议，用于隐私加密货币，实现了处理具有多个输入交易的对数级通信复杂度，并提供了最高级别的匿名性。相较于如Omniring等其他方法，这是首个从部分知识证明实例化的RingCT协议，同时它也可以适应其他应用，如多重环签名和区块链中的币混服务。文章认为这些技术在更多隐私保护场景中也具有潜在的应用价值。 <div>
+Ring Confidential Transaction (RingCT) protocol is an effective cryptographic component for preserving the privacy of cryptocurrencies. However, existing RingCT protocols are instantiated from one-out-of-many proofs with only one secret, leading to low efficiency and weak anonymity when handling transactions with multiple inputs. Additionally, current partial knowledge proofs with multiple secrets are neither secure nor efficient to be applied in a RingCT protocol.
+    
+In this paper, we propose a novel \emph{any-out-of-many proof}, a logarithmic-sized zero-knowledge proof scheme for showing the knowledge of arbitrarily many secrets out of a public list. Unlike other partial knowledge proofs that have to reveal the number of secrets [ACF21], our approach proves the knowledge of multiple secrets without leaking the exact number of them. Furthermore, we improve the efficiency of our method with a generic inner-product transformation to adopt the Bulletproofs compression [BBB+18], which reduces the proof size to $2 \lceil \log_2(N) \rceil \! + \! 9$.
+    
+Based on our proposed proof scheme, we further construct a compact RingCT protocol for privacy cryptocurrencies, which can provide a logarithmic-sized communication complexity for transactions with multiple inputs. More importantly, as the only known RingCT protocol instantiated from the partial knowledge proofs, our protocol can achieve the highest anonymity level compared with other approaches like Omniring [LRR+19]. For other applications, such as multiple ring signatures, our protocol can also be applied with some modifications. We believe our techniques are also applicable in other privacy-preserving scenarios, such as multiple ring signatures and coin-mixing in the blockchain.
+]]></content:encoded>
+<pubDate>Sun, 24 Oct 2021 07:27:47 +0000</pubDate>
+<pubDate>Sun, 24 Oct 2021 07:27:47 +0000</pubDate>
+</item>
+<item>
+<title>Token meets Wallet: Formalizing Privacy and Revocation for FIDO2</title>
+<link>https://eprint.iacr.org/2022/084</link>
+<guid>https://eprint.iacr.org/2022/084</guid>
+<content:encoded><![CDATA[
+<div> 关键词：FIDO2标准、WebAuthn组件、安全模型、隐私保护、全局密钥撤销
+
+总结:<br>
+本文针对FIDO2标准中的WebAuthn组件进行了安全性重新审视。首先，改进了Barbosa等人提出的模型，以涵盖使用密钥派生或密钥封装的认证令牌。其次，提出了FIDO2中WebAuthn组件的第一个正式隐私定义，并证明如果选用适当的底层构建模块，则该组件在常见FIDO2令牌实现中可保证用户隐私。最后，解决了FIDO2全局密钥撤销问题，为此引入并分析了一种基于广泛应用于加密货币钱包的BIP32标准的简单撤销程序，该程序能够与现有的FIDO2服务器高效实施。 <div>
+The FIDO2 standard is a widely-used class of challenge-response type protocols that allows to authenticate to an online service using a hardware token.  
+Barbosa et al. (CRYPTO `21) provided the first formal security model and analysis for the FIDO2 standard.
+However, their model has two shortcomings: (1) It does not include privacy, one of the key features claimed by FIDO2. (2) It only covers tokens that store {all secret keys locally}.
+In contrast, due to limited memory, most existing FIDO2 tokens either derive all secret keys from a common seed or store keys on the server (the latter approach is also known as {key wrapping}).
+
+In this paper, we revisit the security of the WebAuthn component of FIDO2 as implemented in practice. Our contributions are as follows.
+(1) We adapt the model of Barbosa et al. so as to capture authentication tokens using key derivation or key wrapping.
+(2) We provide the {first formal definition of privacy for the WebAuthn component of FIDO2}. We then prove the privacy of this component in common FIDO2 token implementations if the underlying building blocks are chosen appropriately.
+(3) We address the unsolved problem of {global key revocation} in FIDO2. 
+To this end, we introduce and analyze a simple revocation procedure that builds on the popular BIP32 standard used in cryptocurrency wallets and can efficiently be implemented with existing FIDO2 servers.
+]]></content:encoded>
+<pubDate>Sun, 23 Jan 2022 13:01:17 +0000</pubDate>
+<pubDate>Sun, 23 Jan 2022 13:01:17 +0000</pubDate>
+</item>
+
+<item>
 <title>Multi-Party Computation in Corporate Data Processing: Legal and Technical Insights</title>
 <link>https://eprint.iacr.org/2025/463</link>
 <guid>https://eprint.iacr.org/2025/463</guid>
@@ -18,19 +57,17 @@ This paper examines the deployment of Multi-Party Computation (MPC) in corporate
 We systematically answer key regulatory questions, demonstrating that a structured legal assessment is indispensable for organizations aiming to adopt MPC while ensuring compliance with privacy laws. In addition, we complement this analysis with a practical implementation of privacy-preserving analytics using Carbyne Stack, a cloud-native open-source platform for scalable MPC applications, which integrates the MP-SPDZ framework as its backend. We benchmark SQL queries under various security models to evaluate scalability and efficiency.
 ]]></content:encoded>
 <pubDate>Wed, 12 Mar 2025 08:19:28 +0000</pubDate>
-<pubDate>Wed, 12 Mar 2025 08:19:28 +0000</pubDate>
 </item>
 <item>
 <title>Achieving Data Reconstruction Hardness and Efficient Computation in Multiparty Minimax Training</title>
 <link>https://eprint.iacr.org/2025/460</link>
 <guid>https://eprint.iacr.org/2025/460</guid>
 <content:encoded><![CDATA[
-<div> 关键词：生成模型、联邦学习、数据重建、多 party 计算、生成对抗网络<br><br>总结: 本文关注在保持训练成本可管理的同时，提高基于生成对抗网络（GAN）训练过程中数据重构的难度。研究了两种使用公共生成器和多方计算（MPC）鉴别器的训练协议：协议1（P1）采用完全私有的鉴别器，而协议2（P2）仅对前三层鉴别器进行隐私保护。我们证明了对于P1和P2，只要鉴别器的前两层是私有的，公共生成器就不能恢复真实的训练数据；并通过ReLU网络存在的已知近似难度结果，证明了至少有三层私有层的鉴别器不能通过多项式时间复杂度的算法来重构真实数据。实验结果显示，与完全MPC训练相比，P1能够将训练时间减少2倍，而P2则能进一步将其减少到4至16倍。 <div>
+<div> 关键词：生成模型、联邦学习、数据重建、多 party 计算、生成对抗网络<br /><br />总结: 本文关注在保持训练成本可管理的同时，提高基于生成对抗网络（GAN）训练过程中数据重构的难度。研究了两种使用公共生成器和多方计算（MPC）鉴别器的训练协议：协议1（P1）采用完全私有的鉴别器，而协议2（P2）仅对前三层鉴别器进行隐私保护。我们证明了对于P1和P2，只要鉴别器的前两层是私有的，公共生成器就不能恢复真实的训练数据；并通过ReLU网络存在的已知近似难度结果，证明了至少有三层私有层的鉴别器不能通过多项式时间复杂度的算法来重构真实数据。实验结果显示，与完全MPC训练相比，P1能够将训练时间减少2倍，而P2则能进一步将其减少到4至16倍。 <div>
 Generative models have achieved remarkable success in a wide range of applications. Training such models using proprietary data from multiple parties has been studied in the realm of federated learning. Yet recent studies showed that reconstruction of authentic training data can be achieved in such settings. 
 On the other hand, multiparty computation (MPC) guarantees standard data privacy, yet scales poorly for training generative models. 
 In this paper, we focus on improving reconstruction hardness during Generative Adversarial Network (GAN) training while keeping the training cost tractable. To this end, we explore two training protocols that use a public generator and an MPC discriminator: Protocol 1 (P1) uses a fully private discriminator, while Protocol 2 (P2) privatizes the first three discriminator layers. We prove reconstruction hardness for P1 and P2 by showing that (1) a public generator does not allow recovery of authentic training data, as long as the first two layers of the discriminator are private; and through an existing approximation hardness result on ReLU networks, (2) a discriminator with at least three private layers does not allow authentic data reconstruction with algorithms polynomial in network depth and size. We show empirically that compared with fully MPC training, P1 reduces the training time by $2\times$ and P2 further by $4-16\times$.
 ]]></content:encoded>
-<pubDate>Tue, 11 Mar 2025 22:39:40 +0000</pubDate>
 <pubDate>Tue, 11 Mar 2025 22:39:40 +0000</pubDate>
 </item>
 <item>
@@ -40,7 +77,7 @@ In this paper, we focus on improving reconstruction hardness during Generative A
 <content:encoded><![CDATA[
 <div> 关键词: FIDO2、隐私安全分析、信任设置假设、安全模型、隐私保证
 
-总结:<br>
+总结:<br />
 本文重新审视了广泛应用于网络无密码认证标准FIDO2的隐私与安全性分析。文中指出了以往工作的局限性，包括不切实际的信任设置假设、针对当前实战攻击的安全模型不足以及未全面分析FIDO2的整体隐私保障。为填补这些空白，文章提出了修订后的隐私和身份验证安全模型，并采用新模型对FIDO2进行模块化分析，重点关注其组件协议WebAuthn和CTAP2，明确了它们的确切安全保障。特别地，本研究首次确立了FIDO2整体的隐私保护承诺。此外，还提出了一些小修改建议，以帮助FIDO2能够达到更强大的隐私和认证定义要求，并抵抗已知和新型攻击。 <div>
 We revisit the privacy and security analyses of FIDO2, a widely deployed standard for passwordless authentication on the Web. 
 We discuss previous works 
@@ -53,9 +90,7 @@ In particular, our results, for the first time, establish privacy guarantees for
 Furthermore, we suggest minor modifications that can help FIDO2 provably meet stronger privacy and authentication definitions and withstand known and novel attacks.
 ]]></content:encoded>
 <pubDate>Tue, 11 Mar 2025 21:09:06 +0000</pubDate>
-<pubDate>Tue, 11 Mar 2025 21:09:06 +0000</pubDate>
 </item>
-
 <item>
 <title>Concretely Efficient Correlated Oblivious Permutation</title>
 <link>https://eprint.iacr.org/2025/449</link>
