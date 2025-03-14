@@ -5,18 +5,95 @@
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
 <item>
+<title>Adaptively Secure Threshold Blind BLS Signatures and Threshold Oblivious PRF</title>
+<link>https://eprint.iacr.org/2025/483</link>
+<guid>https://eprint.iacr.org/2025/483</guid>
+<content:encoded><![CDATA[
+<div> 关键词: 原始文本、首次、阈值盲签名方案、阈值Oblivious PRF (OPRF)、适应性安全性
+
+总结:
+我们首次提出了在适应性对手存在下仍能保持安全性的阈值盲签名方案和阈值Oblivious PRF (OPRF)方案。这些方案允许对手在整个协议生命周期中自适应地选择要腐败的参与者。与仅针对静态对手提供安全性的先前解决方案相比，我们的方案仅增加了少量计算开销，并保持了最小的通信轮数复杂度。我们的阈值盲签名方案基于标准的BLS签名，而阈值OPRF则采用高效的“2HashDH”OPRF。这两个方案都在代数群模型(AGM)中证明了其适应性安全性。此外，我们的适应性安全阈值方案同样具备实用性和与其基础的单服务器BLS盲签名以及2HashDH OPRF相同的效率，可以用于为依赖于盲签名（如匿名凭证和电子现金系统）或Oblivious PRF（如OPAQUE密码认证和Privacy Pass匿名认证方案等）的系统增添加密容错能力和去中心化的信任机制。 <div>
+We show the first threshold blind signature scheme and threshold Oblivious PRF (OPRF) scheme which remain secure in the presence of an adaptive adversary, who can adaptively decide which parties to corrupt throughout the lifetime of the scheme.  Moreover, our adaptively secure schemes preserve the minimal round complexity and add only a small computational overhead over prior solutions that offered security only for a much less realistic static adversary, who must choose the subset of corrupted parties before initializing the protocol.
+
+Our threshold blind signature scheme computes standard BLS signatures while our threshold OPRF computes a very efficient "2HashDH" OPRF [JKK14].  We prove adaptive security of both schemes in the Algebraic Group Model (AGM).  Our adaptively secure threshold schemes are as practical as the underlying standard single-server BLS blind signature and 2HashDH OPRF, and they can be used to add cryptographic fault-tolerance and decentralize trust in any system that relies on blind signatures, like anonymous credentials and e-cash, or on OPRF, like the OPAQUE password authentication and the Privacy Pass anonymous authentication scheme, among many others.
+]]></content:encoded>
+<pubDate>Fri, 14 Mar 2025 00:02:29 +0000</pubDate>
+<pubDate>Fri, 14 Mar 2025 00:02:29 +0000</pubDate>
+</item>
+<item>
+<title>Post Quantum Migration of Tor</title>
+<link>https://eprint.iacr.org/2025/479</link>
+<guid>https://eprint.iacr.org/2025/479</guid>
+<content:encoded><![CDATA[
+<div> 关键词：Shor's算法，Grover's算法，量子计算机，Tor网络，后量子密码学(PQC)
+
+总结:
+本文针对Shor's和Grover's算法以及量子计算机技术进步可能对现有隐私保护加密方式构成的潜在威胁进行了探讨。文章以匿名通信系统Tor为例，首先分析了其中使用的非量子抗性加密方案，并提出了评估本地Tor网络性能的理论方法。研究分为三个阶段进行：一是基准测试局部Tor网络模拟在受限设备上的运行时间，以孤立出古典密码学过程所需的时间；二是结合现有的量子安全算法基准测试结果，对比这些算法在同类设备上的性能表现；最后，通过对传统密码学执行时间替换为在特定Tor环境中记录的PQC执行时间，来估算采用PQC所带来的开销。通过关注可替代的加密组件、运用理论估计并利用现有基准测试数据，本文旨在无需完全实现PQC的情况下，对未来PQC对Tor网络可能产生的影响提供有价值的见解。 <div>
+Shor's and Grover's algorithms' efficiency and the advancement of quantum computers imply that the cryptography used until now to protect one's privacy is potentially vulnerable to retrospective decryption, also known as harvest now, decrypt later attack in the near future. This dissertation proposes an overview of the cryptographic schemes used by Tor, highlighting the non-quantum-resistant ones and introducing theoretical performance assessment methods of a local Tor network. The measurement is divided into three phases. We will start with benchmarking a local Tor network simulation on constrained devices to isolate the time taken by classical cryptography processes. Secondly, the analysis incorporates existing benchmarks of quantum-secure algorithms and compares these performances on the devices. Lastly, the estimation of overhead is calculated by replacing the measured times of traditional cryptography with the times recorded for Post Quantum Cryptography (PQC) execution within the specified Tor environment. By focusing on the replaceable cryptographic components, using theoretical estimations, and leveraging existing benchmarks, valuable insights into the potential impact of PQC can be obtained without needing to implement it fully.
+]]></content:encoded>
+<pubDate>Thu, 13 Mar 2025 10:35:48 +0000</pubDate>
+<pubDate>Thu, 13 Mar 2025 10:35:48 +0000</pubDate>
+</item>
+<item>
+<title>Cross-Platform Benchmarking of the FHE Libraries: Novel Insights into SEAL and OpenFHE</title>
+<link>https://eprint.iacr.org/2025/473</link>
+<guid>https://eprint.iacr.org/2025/473</guid>
+<content:encoded><![CDATA[
+<div> 关键词: 云计算, 隐私保护, 欧同态加密(HE), SEAL, OpenFHE
+
+总结:
+这篇论文评估了两种主流的欧同态加密库——SEAL和OpenFHE，关注其在处理敏感数据的安全计算性能、易用性以及对如BGV和CKKS等著名HE方案的支持。研究分析了它们在Linux和Windows平台上的计算效率、内存使用及可扩展性，强调了其在现实世界场景中的适用性。结果显示，Linux平台在计算效率上优于Windows，而OpenFHE则在各种密码学设定下表现出更优的整体性能。这些发现为研究人员和实践者推进基于HE的隐私保护应用提供了有价值的参考。 <div>
+The rapid growth of cloud computing and data-driven applications has amplified privacy concerns, driven by the increasing demand to process sensitive data securely. Homomorphic encryption (HE) has become a vital solution for addressing these concerns by enabling computations on encrypted data without revealing its contents. This paper provides a comprehensive evaluation of two leading HE libraries, SEAL and OpenFHE, examining their performance, usability, and support for prominent HE schemes such as BGV and CKKS.   Our analysis highlights computational efficiency, memory usage, and scalability across Linux and Windows platforms, emphasizing their applicability in real-world scenarios. Results reveal that Linux outperforms Windows in computation efficiency, with OpenFHE emerging as the optimal choice across diverse cryptographic settings. This paper provides valuable insights for researchers and practitioners to advance privacy-preserving applications using FHE.
+]]></content:encoded>
+<pubDate>Wed, 12 Mar 2025 22:21:53 +0000</pubDate>
+<pubDate>Wed, 12 Mar 2025 22:21:53 +0000</pubDate>
+</item>
+<item>
+<title>Practical Semi-Open Chat Groups for Secure Messaging Applications</title>
+<link>https://eprint.iacr.org/2025/469</link>
+<guid>https://eprint.iacr.org/2025/469</guid>
+<content:encoded><![CDATA[
+<div> 关键词: 实践型、隐私保护、声誉系统、安全即时通讯应用、成员准入自动化
+
+总结:
+设计了一个实用且注重隐私保护的声誉系统，该系统能基于现有成员对新成员的声誉评估自动批准其加入大规模聊天群组，如Signal、Telegram和Whatsapp中的群组。系统在单服务器模型中证明了对恶意敌手的安全性，无需额外的信任假设，并能在大部分成员离线的情况下几乎正常进行任意声誉计算。此外，通过开源实现展示了其实用性。对于人数为50（或200）的群组，对获得40（或80）评分的新成员进行准入过程分别需要通信量1312.2 KiB（或5239.4 KiB），以及单核计算时间3.3秒（或16.3秒）。虽然本协议的设计与现有的安全即时通讯应用相匹配，但我们认为它在分布式声誉计算领域的应用场景超越了这一问题设定。 <div>
+Chat groups in secure messaging applications such as Signal, Telegram, and Whatsapp are nowadays used for rapid and widespread dissemination of information to large groups of people. This is common even in sensitive contexts, associated with the organisation of protests, activist groups, and internal company dialogues. Manual administration of who has access to such groups quickly becomes infeasible, in the presence of hundreds or thousands of members.
+
+We construct a practical, privacy-preserving reputation system, that automates the approval of new group members based on their reputation amongst the existing membership. We demonstrate security against malicious adversaries in a single-server model, with no further trust assumptions required. Furthermore, our protocol supports arbitrary reputation calculations while almost all group members are offline (as is likely). In addition, we demonstrate the practicality of the approach via an open-source implementation. For groups of size 50 (resp. 200), an admission process on a user that received 40 (resp. 80) scores requires 1312.2 KiB (resp. 5239.4 KiB) of communication, and 3.3s (resp. 16.3s) of overall computation on a single core. While our protocol design matches existing secure messaging applications, we believe it can have value in distributed reputation computation beyond this problem setting.
+]]></content:encoded>
+<pubDate>Wed, 12 Mar 2025 11:23:47 +0000</pubDate>
+<pubDate>Wed, 12 Mar 2025 11:23:47 +0000</pubDate>
+</item>
+<item>
+<title>zkAML: Zero-knowledge Anti Money Laundering in Smart Contracts with whitelist approach</title>
+<link>https://eprint.iacr.org/2025/465</link>
+<guid>https://eprint.iacr.org/2025/465</guid>
+<content:encoded><![CDATA[
+<div> 关键词：反洗钱（AML）、打击恐怖主义融资（CFT）、零知识证明（zk-SNARK）、隐私保护、区块链网络
+
+总结：
+本文提出了一种名为\textsf{zkAML}的加密框架，旨在解决传统AML/CFT合规性监管中出现的效率低下、交易延迟和隐私泄露问题。该框架利用zk-SNARK技术，使得用户能够在不透露敏感个人信息的情况下，证明其符合监管要求，从而避免了冗余的身份检查，简化了合规流程，并提升了交易效率。文章进一步阐述了\textsf{zkAML}在区块链网络上的实现与评估结果，显示在公共网络上可达到55笔/秒的交易处理能力，在私有网络上可达324笔/秒。生成发送方和接收方的zk-SNARK证明的时间分别为226.59毫秒和215.76毫秒，每笔交易的验证时间恒定为1.47毫秒。这些实验结果证实了\textsf{zkAML}作为隐私保护与法规遵从解决方案在现代金融系统中的应用潜力。 <div>
+In the interconnected global financial system, anti-money laundering (AML) and combating the financing of terrorism (CFT) regulations are indispensable for safeguarding financial integrity. However, while illicit transactions constitute only a small fraction of overall financial activities, traditional AML/CFT frameworks impose uniform compliance burdens on all users, resulting in inefficiencies, transaction delays, and privacy concerns. 
+These issues stem from the institution-centric model, where financial entities independently conduct compliance checks, resulting in repeated exposure of personally identifiable information (PII) and operational bottlenecks.
+To address these challenges, we introduce \textsf{zkAML}, a cryptographic framework that offers a novel approach to AML/CFT compliance. By leveraging zero-knowledge Succinct Non-Interactive Argument of Knowledge (zk-SNARK) proofs, \textsf{zkAML}~enables users to cryptographically demonstrate their regulatory compliance without revealing sensitive personal information. This approach eliminates redundant identity checks, streamlines compliance procedures, and enhances transaction efficiency while preserving user privacy.
+We implement and evaluate \textsf{zkAML}~on a blockchain network to demonstrate its practicality. Our experimental results show that \textsf{zkAML}~achieves 55 transactions per second (TPS) on a public network and 324 TPS on a private network. The zk-SNARK proof generation times are $226.59$ms for senders and $215.76$ms for receivers, with a constant verification time of $1.47$ms per transaction. These findings highlight \textsf{zkAML}'s potential as a privacy-preserving and regulation-compliant solution for modern financial systems.
+]]></content:encoded>
+<pubDate>Wed, 12 Mar 2025 08:43:03 +0000</pubDate>
+<pubDate>Wed, 12 Mar 2025 08:43:03 +0000</pubDate>
+</item>
+
+<item>
 <title>Leaking Arbitrarily Many Secrets: Any-out-of-Many Proofs and Applications to RingCT Protocols</title>
 <link>https://eprint.iacr.org/2021/1405</link>
 <guid>https://eprint.iacr.org/2021/1405</guid>
 <content:encoded><![CDATA[
-<div> 关键词：Ring Confidential Transaction (RingCT), 任何-out-of-many证明, 零知识证明, 多重秘密, 匿名性<br><br>总结: 本文提出了一种新颖的“任何-out-of-many”证明方案，这是一种对公开列表中任意多的秘密进行知识证明的、对数大小的零知识证明策略。与现有部分知识证明不同，该方法在证明多个秘密的同时不泄露确切的秘密数量。通过采用Bulletproofs压缩技术的通用内积变换，进一步提高了效率，将证明尺寸减少到$2 \lceil \log_2(N) \rceil \! + \! 9$。基于此证明方案，文章构建了一个紧凑型的RingCT协议，用于隐私加密货币，实现了处理具有多个输入交易的对数级通信复杂度，并提供了最高级别的匿名性。相较于如Omniring等其他方法，这是首个从部分知识证明实例化的RingCT协议，同时它也可以适应其他应用，如多重环签名和区块链中的币混服务。文章认为这些技术在更多隐私保护场景中也具有潜在的应用价值。 <div>
+<div> 关键词：Ring Confidential Transaction (RingCT), 任何-out-of-many证明, 零知识证明, 多重秘密, 匿名性<br /><br />总结: 本文提出了一种新颖的“任何-out-of-many”证明方案，这是一种对公开列表中任意多的秘密进行知识证明的、对数大小的零知识证明策略。与现有部分知识证明不同，该方法在证明多个秘密的同时不泄露确切的秘密数量。通过采用Bulletproofs压缩技术的通用内积变换，进一步提高了效率，将证明尺寸减少到$2 \lceil \log_2(N) \rceil \! + \! 9$。基于此证明方案，文章构建了一个紧凑型的RingCT协议，用于隐私加密货币，实现了处理具有多个输入交易的对数级通信复杂度，并提供了最高级别的匿名性。相较于如Omniring等其他方法，这是首个从部分知识证明实例化的RingCT协议，同时它也可以适应其他应用，如多重环签名和区块链中的币混服务。文章认为这些技术在更多隐私保护场景中也具有潜在的应用价值。 <div>
 Ring Confidential Transaction (RingCT) protocol is an effective cryptographic component for preserving the privacy of cryptocurrencies. However, existing RingCT protocols are instantiated from one-out-of-many proofs with only one secret, leading to low efficiency and weak anonymity when handling transactions with multiple inputs. Additionally, current partial knowledge proofs with multiple secrets are neither secure nor efficient to be applied in a RingCT protocol.
     
 In this paper, we propose a novel \emph{any-out-of-many proof}, a logarithmic-sized zero-knowledge proof scheme for showing the knowledge of arbitrarily many secrets out of a public list. Unlike other partial knowledge proofs that have to reveal the number of secrets [ACF21], our approach proves the knowledge of multiple secrets without leaking the exact number of them. Furthermore, we improve the efficiency of our method with a generic inner-product transformation to adopt the Bulletproofs compression [BBB+18], which reduces the proof size to $2 \lceil \log_2(N) \rceil \! + \! 9$.
     
 Based on our proposed proof scheme, we further construct a compact RingCT protocol for privacy cryptocurrencies, which can provide a logarithmic-sized communication complexity for transactions with multiple inputs. More importantly, as the only known RingCT protocol instantiated from the partial knowledge proofs, our protocol can achieve the highest anonymity level compared with other approaches like Omniring [LRR+19]. For other applications, such as multiple ring signatures, our protocol can also be applied with some modifications. We believe our techniques are also applicable in other privacy-preserving scenarios, such as multiple ring signatures and coin-mixing in the blockchain.
 ]]></content:encoded>
-<pubDate>Sun, 24 Oct 2021 07:27:47 +0000</pubDate>
 <pubDate>Sun, 24 Oct 2021 07:27:47 +0000</pubDate>
 </item>
 <item>
@@ -26,7 +103,7 @@ Based on our proposed proof scheme, we further construct a compact RingCT protoc
 <content:encoded><![CDATA[
 <div> 关键词：FIDO2标准、WebAuthn组件、安全模型、隐私保护、全局密钥撤销
 
-总结:<br>
+总结:<br />
 本文针对FIDO2标准中的WebAuthn组件进行了安全性重新审视。首先，改进了Barbosa等人提出的模型，以涵盖使用密钥派生或密钥封装的认证令牌。其次，提出了FIDO2中WebAuthn组件的第一个正式隐私定义，并证明如果选用适当的底层构建模块，则该组件在常见FIDO2令牌实现中可保证用户隐私。最后，解决了FIDO2全局密钥撤销问题，为此引入并分析了一种基于广泛应用于加密货币钱包的BIP32标准的简单撤销程序，该程序能够与现有的FIDO2服务器高效实施。 <div>
 The FIDO2 standard is a widely-used class of challenge-response type protocols that allows to authenticate to an online service using a hardware token.  
 Barbosa et al. (CRYPTO `21) provided the first formal security model and analysis for the FIDO2 standard.
@@ -40,9 +117,7 @@ In this paper, we revisit the security of the WebAuthn component of FIDO2 as imp
 To this end, we introduce and analyze a simple revocation procedure that builds on the popular BIP32 standard used in cryptocurrency wallets and can efficiently be implemented with existing FIDO2 servers.
 ]]></content:encoded>
 <pubDate>Sun, 23 Jan 2022 13:01:17 +0000</pubDate>
-<pubDate>Sun, 23 Jan 2022 13:01:17 +0000</pubDate>
 </item>
-
 <item>
 <title>Multi-Party Computation in Corporate Data Processing: Legal and Technical Insights</title>
 <link>https://eprint.iacr.org/2025/463</link>
