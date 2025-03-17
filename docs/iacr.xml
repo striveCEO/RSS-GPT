@@ -5,18 +5,33 @@
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
 <item>
+<title>Sanitization of FHE Ciphertexts</title>
+<link>https://eprint.iacr.org/2016/164</link>
+<guid>https://eprint.iacr.org/2016/164</guid>
+<content:encoded><![CDATA[
+<div> 关键词：fully homomorphic encryption (FHE)，Somewhat Homomorphic Encryption (SHE)，bootstrapping，ciphertext sanitization，circuit privacy
+
+总结：
+文章介绍了关于全同态加密（FHE）的一种新方法。FHE方案定义中支持同态解密，现有的所有FHE构造都是通过从某种程度上可同态加密（SHE）方案利用bootstrapping技术构建的。文章提出一种算法，利用公钥提供的重随机化操作对密文进行净化，使其分布变得规范，不再依赖于导致该密文生成的电路，从而在诚实但好奇模型下实现了电路隐私。这种方法与基于噪声淹没的先前方法不同，不会显著降低底层FHE的安全性和效率权衡。这项技术可以应用于目前为止提出的全部基于格的FHE方案，而不实质性地影响其具体的参数设置。<br><br> <div>
+By definition, fully homomorphic encryption (FHE) schemes
+support homomorphic decryption, and all known FHE constructions are bootstrapped from a Somewhat Homomorphic Encryption (SHE) scheme via this technique. Additionally, when a public key is provided, ciphertexts are also re-randomizable, e.g., by adding to them fresh encryptions of 0. From those two operations we devise an algorithm to sanitize a ciphertext, by making its distribution canonical. In particular, the distribution of the ciphertext does not depend on the circuit that led to it via homomorphic evaluation, thus providing circuit privacy in the honest-but-curious model. Unlike the previous approach based on noise flooding, our approach does not degrade much the security/efficiency trade-off of the underlying FHE. The technique can be applied to all lattice-based FHE proposed so far, without substantially affecting their concrete parameters.
+]]></content:encoded>
+<pubDate>Fri, 19 Feb 2016 20:16:36 +0000</pubDate>
+<pubDate>Fri, 19 Feb 2016 20:16:36 +0000</pubDate>
+</item>
+
+<item>
 <title>Endorser Peer Anonymization in Hyperledger Fabric for Consortium of Organizations</title>
 <link>https://eprint.iacr.org/2025/492</link>
 <guid>https://eprint.iacr.org/2025/492</guid>
 <content:encoded><![CDATA[
 <div> 关键词: Hyperledger Fabric、隐私保护、背书系统、阈值环签名、Pedersen承诺
 
-总结:<br>
+总结:<br />
 本文针对Hyperledger Fabric区块链平台中的交易流程中存在endorser签名和背书策略暴露导致的安全隐患问题，提出了一种隐私保护的背书系统。该系统通过采用范围关联的阈值环签名方案匿名化背书者，并利用Pedersen承诺和非交互式知识证明来保护背书策略的安全性。同时，通过使用非交互式共根证明方法，实现了计算效率的提升。文章进行了必要的安全性分析，证明了所提方案能够确保匿名性和不可链接性属性。通过对现有框架进行比较分析，显示提出的方案提供了更高级别的安全性和优化的效率。 <div>
 Hyperledger Fabric is a unique permissioned platform for implementing blockchain in a consortium. It has a distinct transaction flow of execute-order-validate. During the execution phase, a pre-determined set of endorsing peers execute a transaction and sign the transaction response. This process is termed endorsement. In the validation phase, peers validate the transaction with reference to an endorsement policy. The identity of the endorsing organizations is obtainable to all the nodes in the network through the endorser signature and endorsement policy. Knowing this has led to serious vulnerabilities in the blockchain network.
 In this paper, we propose a privacy-preserving endorsement system which conceals both endorser signature and endorsement policy. Endorser is anonymized by replacing the signature scheme with a scoped-linkable threshold ring signature scheme. Endorsement policy is secured using Pedersen commitments and non-interactive proof of knowledge of integer vector. We also achieve efficiency in the computation by employing non-interactive proof of co-prime roots. We provide the necessary security analysis to prove that the proposed work guarantees anonymity and unlinkability properties. A comparative analysis of our work with an existing framework is provided which shows that the proposed scheme offers higher level of security and it is optimal in terms of efficiency.
 ]]></content:encoded>
-<pubDate>Sat, 15 Mar 2025 13:18:58 +0000</pubDate>
 <pubDate>Sat, 15 Mar 2025 13:18:58 +0000</pubDate>
 </item>
 <item>
@@ -26,11 +41,10 @@ In this paper, we propose a privacy-preserving endorsement system which conceals
 <content:encoded><![CDATA[
 <div> 关键词: 选择性视频加密(SVE), 细粒度访问控制, ABSVE协议, 区域感兴趣(ROI), 密文策略属性基加密(CP-ABE)
 
-总结:<br>
+总结:<br />
 针对现有选择性视频加密方案存在的粗粒度加密和单一访问级别的局限性，本文提出了一个基于细粒度访问控制的选择性视频加密方案——ABSVE及其应用协议\protocol。该方案通过使用独特的对称密钥加密不同的区域感兴趣(ROI)，并利用CP-ABE方案将这些密钥与特定访问策略绑定，从而实现单个加密视频流的多级访问权限。此外，文章还为ABSVE提供了正式的语法和安全性定义，填补了先前工作中对此类方案严格安全性分析的空白。最后，本文在Kvazaar HEVC编码器上实现了该协议并进行了评估，结果显示，提出的方案在增强安全性和隐私保护的同时，还能实现对视频内容的可控访问，并且效率接近未加密压缩的情况。 <div>
 The emergence of video streams as a primary medium for communication and the demand for high-quality video sharing over the internet have given rise to several security and privacy issues, such as unauthorized access and data breaches. To address these limitations, various Selective Video Encryption (SVE) schemes have been proposed, which encrypt specific portions of a video while leaving others unencrypted. The SVE approach balances security and usability, granting unauthorized users access to certain parts while encrypting sensitive content. However, existing SVE schemes adopt an all-or-nothing coarse-grain encryption approach, where a user with a decryption key can access all the contents of a given video stream. This paper proposes and designs a fine-grained access control-based selective video encryption scheme, ABSVE, and a use-case protocol called \protocol. Our scheme encrypts different identified Regions of Interest (ROI) with a unique symmetric key and applies a Ciphertext Policy Attribute Based Encryption (CP-ABE) scheme to tie these keys to specific access policies. This method provides multiple access levels for a single encrypted video stream. Crucially, we provide a formal syntax and security definitions for ABSVE, allowing for rigorous security analysis of this and similar schemes --  which is absent in prior works. Finally, we provide an implementation and evaluation of our protocol in the Kvazaar HEVC encoder. Overall, our constructions enhance security and privacy while allowing controlled access to video content and achieve comparable efficiency to compression without encryption.
 ]]></content:encoded>
-<pubDate>Sat, 15 Mar 2025 13:13:35 +0000</pubDate>
 <pubDate>Sat, 15 Mar 2025 13:13:35 +0000</pubDate>
 </item>
 <item>
@@ -40,13 +54,12 @@ The emergence of video streams as a primary medium for communication and the dem
 <content:encoded><![CDATA[
 <div> 关键词：secure aggregation、two-server system、Prio、block-sparse vectors、PREAMBLE
 
-总结:<br>
+总结:<br />
 本文关注的是在两服务器系统中高维度向量的安全聚合问题，如Prio系统中用于隐私联邦学习的梯度聚合。现有的方法需要随着维度的增长而增加通信量，从而限制了能有效处理的向量维度。为此，文章提出了PREAMBLE——一种针对块稀疏欧几里得向量的新型分布式点函数扩展，它实现了对块稀疏向量的高效通信和计算聚合。进一步地，PREAMBLE可以与随机采样及采样结果下的隐私增强相结合，实现向量聚合的渐近最优隐私-效用权衡，同时只需很小的通信成本。结合最近在数值隐私会计领域的进展，相比于应用于Prio的高斯机制，本方法在噪声方差上的开销可忽略不计。 <div>
 We revisit the problem of secure aggregation of high-dimensional vectors in a two-server system such as Prio. These systems are typically used to aggregate vectors such as gradients in private federated learning, where the aggregate itself is protected via noise addition to ensure differential privacy. Existing approaches require communication scaling with the dimensionality, and thus limit the dimensionality of vectors one can efficiently process in this setup.
 
 We propose PREAMBLE: Private Efficient Aggregation Mechanism for  Block-sparse Euclidean Vectors. PREAMBLE is a novel extension of distributed point functions that enables communication- and computation-efficient aggregation of block-sparse vectors, which are sparse vectors where the non-zero entries occur in a small number of clusters of consecutive coordinates. We then show that PREAMBLE can be combined with random sampling and privacy amplification by sampling results, to allow asymptotically optimal privacy-utility trade-offs for vector aggregation, at a fraction of the communication cost. When coupled with recent advances in numerical privacy accounting, our approach incurs a negligible overhead in noise variance, compared to the Gaussian mechanism used with Prio.
 ]]></content:encoded>
-<pubDate>Fri, 14 Mar 2025 22:02:42 +0000</pubDate>
 <pubDate>Fri, 14 Mar 2025 22:02:42 +0000</pubDate>
 </item>
 <item>
@@ -67,7 +80,6 @@ $\texttt{webSPDZ}$: Our work brings one of the most performant and versatile gen
 We believe that webSPDZ brings forth many interesting and practically relevant use cases. Thus, webSPDZ pushes the boundaries of practical MPC: making MPC more usable and enabling it for a broader community.
 ]]></content:encoded>
 <pubDate>Fri, 14 Mar 2025 07:30:45 +0000</pubDate>
-<pubDate>Fri, 14 Mar 2025 07:30:45 +0000</pubDate>
 </item>
 <item>
 <title>On One-Shot Signatures, Quantum vs Classical Binding, and Obfuscating Permutations</title>
@@ -83,9 +95,7 @@ One-shot signatures (OSS) were defined by Amos, Georgiou, Kiayias, and Zhandry (
 We give the first standard-model OSS, with provable security assuming (sub-exponential) indistinguishability obfuscation (iO) and LWE. This also gives the first standard-model separation between classical and collapse-binding post-quantum commitments/hashing, solving a decade-old open problem. Along the way, we also give the first construction with unconditional security relative to a classical oracle. To achieve our standard-model construction, we develop a notion of permutable pseudorandom permutations (permutable PRPs), and show how they are useful for translating oracle proofs involving random permutations into obfuscation-based proofs. In particular, obfuscating permutable PRPs gives a trapdoor one-way permutation that is $\textit{full-domain}$, solving another decade-old-problem of constructing this object from (sub-exponential) iO and one-way functions.
 ]]></content:encoded>
 <pubDate>Fri, 14 Mar 2025 06:49:30 +0000</pubDate>
-<pubDate>Fri, 14 Mar 2025 06:49:30 +0000</pubDate>
 </item>
-
 <item>
 <title>Non-Interactive Zero-Knowledge Proofs with Certified Deletion</title>
 <link>https://eprint.iacr.org/2024/1848</link>
