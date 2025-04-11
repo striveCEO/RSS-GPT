@@ -4,6 +4,181 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+<item>
+<title>Towards Scalable YOSO MPC via Packed Secret-Sharing</title>
+<link>https://eprint.iacr.org/2025/635</link>
+<guid>https://eprint.iacr.org/2025/635</guid>
+<content:encoded><![CDATA[
+<div> 关键词: YOSO模型、分布式设置、安全多方计算、通信复杂度、fail-stop敌人
+
+总结:
+本文介绍了YOSO（You Only Speak Once）模型在实现分布式环境如区块链中的强大安全保障方面的应用。针对安全多方计算（MPC）这一核心问题，文章提出首个随参与方数量增加而提高效率（以通信复杂度衡量）的YOSO MPC协议。该协议中，对于$t<\frac{1}{2}$的诚实多数委员会成员，只需略微增加委员会规模，即可显著减少在线通信量。此外，文章还特别考虑了fail-stop类型的敌人（即可能因DoS攻击或软硬件错误而意外失败的诚实参与者），与先前的工作相比，这种情况下协议具有更好的可扩展性。在此前的研究中，这类敌人被视为完全恶意的参与者。 <div>
+The YOSO (You Only Speak Once) model, introduced by Gentry et al. (CRYPTO 2021), helps to achieve strong security guarantees in cryptographic protocols for  distributed settings, like blockchains, with large number of parties. YOSO protocols typically employ smaller anonymous committees to execute individual rounds of the protocol instead of having all parties execute the entire protocol. After completing their tasks, parties encrypt protocol messages for the next anonymous committee and erase their internal state before publishing ciphertexts, thereby enhancing security in dynamically changing environments.
+
+In this work, we consider the problem of secure multi-party computation (MPC), a fundamental problem in cryptography and distributed computing. We assume honest majority among the committee members, and work in the online-offline, i.e., preprocessing, setting.
+   In this context, we present the first YOSO MPC protocol where efficiency---measured as communication complexity---improves as the number of parties increases. Specifically, for $0<\epsilon<1/2$ and an adversary corrupting $t<n(\frac{1}{2}-\epsilon)$ out of $n$ parties, our MPC protocol exhibits enhanced scalability as $n$ increases, where the online phase communication becomes independent of $n$.
+   Prior YOSO MPC protocols considered $t$ as large as $(n-1)/2$, but a significant hurdle persisted in obtaining YOSO MPC with communication that does not scale linearly with the number of committee members, a challenge that is exagerbated when the committee size was large per YOSO's requirements.
+   We show that, by considering a small ``gap'' of $\epsilon>0$, the sizes of the committees are only marginally increased, while online communication is significantly reduced.
+
+
+Furthermore, we explicitly consider fail-stop adversaries, i.e., honest participants who may inadvertently fail due to reasons such as denial of service or software/hardware errors. In prior YOSO work, these adversaries were grouped with fully malicious parties. Adding explicit support for them allows us to achieve even better scalability.
+]]></content:encoded>
+<pubDate>Tue, 08 Apr 2025 05:25:39 +0000</pubDate>
+<pubDate>Tue, 08 Apr 2025 05:25:39 +0000</pubDate>
+</item>
+<item>
+<title>Dyna-hinTS: Silent Threshold Signatures for Dynamic Committees</title>
+<link>https://eprint.iacr.org/2025/631</link>
+<guid>https://eprint.iacr.org/2025/631</guid>
+<content:encoded><![CDATA[
+<div> 关键词：silent threshold signatures (STS), committee-based silent threshold signature (c-STS), hinTS, Dyna-hinTS, Ethereum Altair, Dfinity
+
+总结:
+本文提出了一个新的密码学概念——委员会型沉默阈值签名(c-STS)方案，旨在适应像Ethereum Altair和Dfinity这样的系统，其中只有指定的委员会被授权在特定时间段进行签名。现有的STS方案无法直接应用于委员会设置，因为其仅验证签名者的数量，而不能确认他们所属的委员会。针对这一问题，文章提出了首个c-STS方案——Dyna-hinTS，它是hinTS的升级版，实现了对委员会设置的支持。在一组1024个签名人（其中682个签名人可能被篡改）中，与hinTS相比，Dyna-hinTS在由80个签名人组成的委员会中能够在0.35秒内生成聚合签名，性能提高了4.9倍，但代价是签名验证时间比hinTS增加了4%。此外，Dyna-hinTS还支持一般的访问结构、加权签名，并改进了现有的多宇宙阈值签名技术。 <div>
+The works of Garg et al. [S&amp;P'24] (aka hinTS) and Das et al. [CCS'23] introduced the notion of silent threshold signatures (STS) - where a set of signers silently perform local computation to generate a public verification key. To sign a message, any set of $t$ signers sign the message non-interactively and these are aggregated into a constant-sized signature. This paradigm avoids performing expensive Distributed Key Generation procedure for each set of signers while keeping the public verification key constant-sized. 
+
+In this work, we propose the notion of committee-based silent threshold signature (c-STS) scheme. In a c-STS scheme, a set of signers initially perform a one-time setup to generate the verification key, and then a subset of signers are randomly chosen for an epoch to perform the threshold signing while the other signers are not authorized to sign during that epoch. This captures existing systems like Ethereum Altair and Dfinity where only a specific committee is authorized to sign in a designated epoch. The existing STS schemes cannot be extended to the committee setting because the signature verification only attests to the number of signing parties, not which committee they belong to.
+
+So, we upgrade hinTS to the committee setting by proposing Dyna-hinTS. It is the $first$ c-STS scheme and it requires a one-time silent setup and generates a one-time public verification key that does not vary with the committee. Assuming a set of 1024 signers (with corrupt 682 signers), hinTS generates an aggregated signature in 1.7s whereas Dyna-hinTS generates it in $0.35$s within a committee of $80$ signers. This yields a $4.9\times$ improvement over hinTS for signature generation at the cost of increasing signature verification time by $4\%$ over hinTS. Dyna-hinTS supports general access structure, weighted signatures and improves existing multiverse threshold signatures.
+]]></content:encoded>
+<pubDate>Mon, 07 Apr 2025 15:27:03 +0000</pubDate>
+<pubDate>Mon, 07 Apr 2025 15:27:03 +0000</pubDate>
+</item>
+<item>
+<title>Charge Your Clients: Payable Secure Computation and Its Applications</title>
+<link>https://eprint.iacr.org/2025/630</link>
+<guid>https://eprint.iacr.org/2025/630</guid>
+<content:encoded><![CDATA[
+<div> 关键词：数据市场、隐私保护、恶意客户端行为、安全计算、付费协议
+
+总结:
+针对当前数据市场存在的客户隐私保护不力和易受恶意客户端行为影响的问题，本文提出了“付费安全计算”这一新型安全计算范式，旨在保护客户查询隐私的同时，使服务器能够安全获取定价信息，并防范恶意客户端的行为。为具体应用，文章设计了适用于关键词私有信息检索（KPIR）和私有集合交集（PSI）两种场景的定制化付费协议。实验结果显示，相较于不支持定价功能的基线协议，提出的付费协议并未引入过多开销。付费KPIR协议在线成本与基线相同，但设置时间慢约1.3-1.6倍；付费PSI协议则需要大约2倍的通信成本，运行时间根据网络环境不同，比基线协议慢1.5-3.2倍。 <div>
+The online realm has witnessed a surge in the buying and selling of data, prompting the emergence of dedicated data marketplaces. These platforms cater to servers (sellers), enabling them to set prices for access to their data, and clients (buyers), who can subsequently purchase these data, thereby streamlining and facilitating such transactions. However, the current data market is primarily confronted with the following issues. Firstly, they fail to protect client privacy, presupposing that clients submit their queries in plaintext. Secondly, these models are susceptible to being impacted by malicious client behavior, for example, enabling clients to potentially engage in arbitrage activities.
+
+To address the aforementioned issues, we propose payable secure computation, a novel secure computation paradigm specifically designed for data pricing scenarios. It grants the server the ability to securely procure essential pricing information while protecting the privacy of client queries. Additionally, it fortifies the server's privacy against potential malicious client activities. As specific applications, we have devised customized payable protocols for two distinct secure computation scenarios: Keyword Private Information Retrieval (KPIR) and Private Set Intersection (PSI). 
+
+We implement our two payable protocols and compare them with the state-of-the-art related protocols that do not support pricing as a baseline. Since our payable protocols are more powerful in the data pricing setting, the experiment results show that they do not introduce much overhead over the baseline protocols. 
+Our payable KPIR achieves the same online cost as baseline, while the setup is about $1.3-1.6\times$ slower than it. Our payable PSI needs about $2\times$ more communication cost than that of baseline protocol, while the runtime is $1.5-3.2\times$ slower than it depending on the network setting.
+]]></content:encoded>
+<pubDate>Mon, 07 Apr 2025 13:45:34 +0000</pubDate>
+<pubDate>Mon, 07 Apr 2025 13:45:34 +0000</pubDate>
+</item>
+<item>
+<title>CertainSync: Rateless Set Reconciliation with Certainty</title>
+<link>https://eprint.iacr.org/2025/623</link>
+<guid>https://eprint.iacr.org/2025/623</guid>
+<content:encoded><![CDATA[
+<div> 关键词: Set Reconciliation、Blockchain Networks、CertainSync、Invertible Bloom Lookup Tables (IBLTs)、Universe Reduction
+
+<br><br>总结:
+本文提出了名为 CertainSync 的一种新颖的集合同步框架，该框架首次保证了无需任何参数化或估计器的情况下成功进行集合和解同步。CertainSync 基于可逆布隆查找表 (IBLTs) 的近期构造，能够适应未知对称差集大小并确保当通信开销达到与对称差集和全集大小相关的下限时，完成成功的集合和解同步。理论上对其进行了分析以证明其确定性。通过仿真验证了该方法相对于其他基准集合和解同步方案的优势，同时对于区块链网络中大型全集的情况，扩展了 UniverseReduceSync 技术来进一步降低通信开销。通过对来自 Ethereum 区块链网络的真实交易哈希数据的模拟比较和验证，结果显示了一个改进通信开销与保持和解同步保障之间的权衡，为不同场景下的集合和解同步提供了全面解决方案。 <div>
+Set reconciliation is a fundamental task in distributed systems, particularly in blockchain networks, where it enables the synchronization of transaction pools among peers and facilitates block dissemination. Existing traditional set reconciliation schemes are either statistical, providing success probability as a function of the communication overhead and the size of the symmetric difference, or require parametrization and estimation of the size of the symmetric difference, which can be prone to error. In this paper, we present CertainSync, a novel reconciliation framework that, to the best of our knowledge, is the first to guarantee successful set reconciliation without any parametrization or estimators in use. The framework is rateless and adapts to the unknown symmetric difference size. The set reconciliation is guaranteed to be completed successfully whenever the communication overhead reaches a lower bound derived from the symmetric difference size and the universe size. Our framework is based on recent constructions of Invertible Bloom Lookup Tables (IBLTs) ensuring successful element listing as long as the number of elements is bounded. We provide a theoretical analysis to prove the certainty in the set reconciliation for multiple constructions. The approach is also validated by simulations, showing the ability to synchronize sets with efficient communication costs while maintaining reconciliation guarantees compared to other baseline schemes for set reconciliation. To further improve communication overhead for large universes as blockchain networks, CertainSync is extended with a universe reduction technique to minimize communication overhead. We compare and validate the extended framework UniverseReduceSync against the basic CertainSync framework through simulations using real blockchain transaction hash data from the Ethereum blockchain network. The results illustrate a trade-off between improved communication costs and maintaining reconciliation guarantees without relying on parametrization or estimators, offering a comprehensive solution for set reconciliation in diverse scenarios.
+]]></content:encoded>
+<pubDate>Sun, 06 Apr 2025 20:17:58 +0000</pubDate>
+<pubDate>Sun, 06 Apr 2025 20:17:58 +0000</pubDate>
+</item>
+<item>
+<title>Need for zkSpeed: Accelerating HyperPlonk for Zero-Knowledge Proofs</title>
+<link>https://eprint.iacr.org/2025/620</link>
+<guid>https://eprint.iacr.org/2025/620</guid>
+<content:encoded><![CDATA[
+<div> 关键词：零知识证明 (ZKPs)，隐私保护，可验证计算，GPU加速，ASIC加速，zkSpeed，HyperPlonk，可信设置，证明大小，验证成本，共识系统，SumCheck，多标量乘法 (MSMs)，芯片架构，带宽，性能提升。
+
+<br><br>总结：
+本文介绍了针对零知识证明（ZKPs）技术的一种新型加速器——zkSpeed，该技术正在逐步成为隐私保护和可验证计算领域的关键工具。现有的ZKP协议加速方案存在需要每次应用都建立可信设置或产生较大证明规模、增加验证成本等问题。文章提出的新加速器zkSpeed专注于加速HyperPlonk这一支持一次性、通用设置以及为公共验证和基于共识系统的典型ZKP应用生成小规模证明的先进ZKP协议。文中设计了一个采用366.46 mm²面积和2TB/s带宽的全芯片架构，实现了对整个证明生成过程的加速，相比CPU基线实现了平均801倍的速度提升。 <div>
+(Preprint) Zero-Knowledge Proofs (ZKPs) are rapidly gaining importance in privacy-preserving and verifiable computing. ZKPs enable a proving party to prove the truth of a statement to a verifying party without revealing anything else. ZKPs have applications in blockchain technologies, verifiable machine learning, and electronic voting, but have yet to see widespread adoption due to the computational complexity of the proving process.Recent works have accelerated the key primitives of state-of-the-art ZKP protocols on GPU and ASIC. However, the protocols accelerated thus far face one of two challenges: they either require a trusted setup for each application, or they generate larger proof sizes with higher verification costs, limiting their applicability in scenarios with numerous verifiers or strict verification time constraints. This work presents an accelerator, zkSpeed, for HyperPlonk, a state-of-the-art ZKP protocol that supports both one-time, universal setup and small proof sizes for typical ZKP applications in publicly verifiable, consensus-based systems. We accelerate the entire protocol, including two major primitives: SumCheck and Multi-scalar Multiplications (MSMs). We develop a full-chip architecture using 366.46 mm$^2$ and 2 TB/s of bandwidth to accelerate the entire proof generation process, achieving geometric mean speedups of 801$\times$ over CPU baselines.
+]]></content:encoded>
+<pubDate>Fri, 04 Apr 2025 23:56:21 +0000</pubDate>
+<pubDate>Fri, 04 Apr 2025 23:56:21 +0000</pubDate>
+</item>
+<item>
+<title>Making BBS Anonymous Credentials eIDAS 2.0 Compliant</title>
+<link>https://eprint.iacr.org/2025/619</link>
+<guid>https://eprint.iacr.org/2025/619</guid>
+<content:encoded><![CDATA[
+<div> 关键词: eIDAS 2.0、BBS#、匿名凭证系统、数字身份钱包、隐私保护
+
+总结:
+本文提出了一个名为BBS#的数字身份钱包解决方案，旨在助力实现eIDAS 2.0的目标，为欧洲公民提供高安全性和隐私保护的个人数字身份钱包。BBS#是在BBS和BBS+基础上进行改进的版本，去除了对双线性映射和配对友好曲线的依赖，转而采用传统椭圆曲线上的已知数字签名方案（如ECDSA或ECSchnorr）。这一方案无需改变现有硬件或其所支持的算法，且已在随机预言机模型下被证明安全，同时保持了BBS系系统的不可伪造性以及匿名性等安全属性。
+
+通过在不同智能手机的安全执行环境中实施BBS#，实验证明可以实现高效（约70毫秒在Android StrongBox上）、安全且达到最高等级认证要求的eIDAS 2.0交易，同时为所有欧洲身份证钱包用户提供最优级别的隐私保护。 <div>
+eIDAS 2.0 (electronic IDentification, Authentication and trust Services) is a very ambitious regulation aimed at equipping European citizens with a personal digital identity wallet (EU Digital Identity Wallet) on a mobile phone that not only needs to achieve a high level of security, but also needs to be available as soon as possible for a large number of citizens and respect their privacy (as per GDPR - General Data Protection Regulation).  
+
+In this paper, we introduce the foundations of a digital identity wallet solution that could help move closer to this objective by leveraging the proven anonymous credentials system BBS (Eurocrypt 2023), also known as BBS+, but modifying it to avoid the limitations that have hindered its widespread adoption, especially in certified infrastructures requiring trusted hardware implementation.  
+In particular, the solution we propose, which we call BBS#, does not rely, contrary to BBS/BBS +, on bilinear maps and pairing-friendly curves (which are not supported by existing hardware) and only depends on the hardware implementation of well-known digital signature schemes such as ECDSA (ISO/IEC 14888-3) or ECSDSA (also known as ECSchnorr, ISO/IEC 14888-3) using classical elliptic curves. More precisely, BBS# can be rolled out without requiring any change in existing hardware or the algorithms that hardware supports. 
+BBS# , which is proven secure in the random oracle model, retains the well-known security property (unforgeability of the credentials under the (gap) q-SDH assumption) and anonymity properties (multi-show full unlinkability and statistical anonymity of presentation proofs) of BBS/BBS+. 
+
+By implementing BBS# on several smartphones using different secure execution environments, we show that it is possible to achieve eIDAS 2.0 transactions which are not only efficient (around 70 ms on Android StrongBox), secure and certifiable at the highest level but also provide strong (optimal) privacy protection for all European ID Wallet users.
+]]></content:encoded>
+<pubDate>Fri, 04 Apr 2025 17:44:46 +0000</pubDate>
+<pubDate>Fri, 04 Apr 2025 17:44:46 +0000</pubDate>
+</item>
+<item>
+<title>Anonymous Self-Credentials and their Application to Single-Sign-On</title>
+<link>https://eprint.iacr.org/2025/618</link>
+<guid>https://eprint.iacr.org/2025/618</guid>
+<content:encoded><![CDATA[
+<div> 关键词: 数字身份、隐私保护、Sybil抵抗、匿名自证明（ASC）、用户发行的不可链接单点登录（U2SSO）
+
+总结:
+随着数字身份变得不可或缺，确保用户隐私和实现服务提供者的Sybil抵抗机制至关重要。文章提出了一个新的加密概念——匿名自证明（ASC）及其两种实施方案，该方案允许用户在保持匿名集合内的隐私的同时，使服务提供者能够实现Sybil阻力。基于ASC，文章还介绍了一种用户发行的不可链接单点登录（U2SSO）解决方案，它仅依赖于一个身份注册库来不可变地存储身份，使得用户可以使用一套主凭据为每个服务提供商生成不可链接的子凭据。通过实际的概念验证，文章展示了U2SSO解决方案的实用性和效率。 <div>
+Modern life makes having a digital identity no longer optional, whether one needs to manage a bank account or subscribe to a newspaper. As the number of online services increases, it is fundamental to safeguard user privacy and equip service providers (SP) with mechanisms enforcing Sybil resistance, i.e., preventing a single entity from showing as many. 
+  Current approaches, such as anonymous credentials and self-sovereign identities, typically rely on identity providers or identity registries trusted not to track users' activities. However, this assumption of trust is no longer appropriate in a world where user data is considered a valuable asset. 
+  To address this challenge, we introduce a new cryptographic notion, Anonymous Self-Credentials (ASC) along with two implementations. This approach enables users to maintain their privacy within an anonymity set while allowing SPs to obtain Sybil resistance. Then, we present a User-issued Unlinkable Single Sign-On (U2SSO) implemented from ASC that solely relies on an identity registry to immutably store identities. A U2SSO solution allows users to generate unlinkable child credentials for each SP using only one set of master credentials.
+  We demonstrate the practicality and efficiency of our U2SSO solution by providing a complete proof-of-concept.
+]]></content:encoded>
+<pubDate>Fri, 04 Apr 2025 16:44:58 +0000</pubDate>
+<pubDate>Fri, 04 Apr 2025 16:44:58 +0000</pubDate>
+</item>
+<item>
+<title>State Machine Replication Without Borders</title>
+<link>https://eprint.iacr.org/2025/616</link>
+<guid>https://eprint.iacr.org/2025/616</guid>
+<content:encoded><![CDATA[
+<div> 关键词: 状态机复制(SMR), 不诚实节点, 查询率, 恒定时间, 自我时钟同步
+
+总结:
+本文提出了一种在无权限设置下的状态机复制(SMR)协议，该协议针对具有不可信、不可靠的八卦网络环境中的不诚实节点。协议的目标是在参与节点持续波动及存在控制单位时间内查询率少于一半的拜占庭敌手的情况下，确保各节点对状态机器的公平访问并实时处理诚实节点提交的所有操作符号。与比特币区块链提供的协议（其在对抗拜占庭敌手时能实现多项式轮次的结算，但公平性仅在失败停止模型中成立）不同，新提出的协议首次实现了在该环境中同时具备预期恒定时延的结算和快速公平性。此外，此协议还具备自我时钟同步能力，能在参与者动态变化的情况下仍保持容错运行。 <div>
+A set of unacquainted  parties, some of which may misbehave, communicate with each other over an unauthenticated and unreliable gossip network. They wish to jointly replicate a state machine $\Pi$ so that each one of them has fair access to its operation. Specifically, assuming parties' computational power is measured as queries to an oracle machine $H(\cdot)$, parties can issue symbols to the state machine in proportion to their queries to $H(\cdot)$ at a given fixed rate. Moreover, if such access to the state machine is provided continuously in expected constant time installments we qualify it as fast fairness.
+
+A state machine replication (SMR) protocol in this permissionless setting is expected to offer consistency across parties and reliably process all symbols that honest parties wish to add to it in a timely manner despite  continuously fluctuating participation and in the presence of an adversary who commands less than half of the total queries to $H(\cdot)$ per unit of time.
+
+A number of protocols strive to offer the above guarantee together with fast settlement  — notably, the Bitcoin blockchain offers a protocol that settles against Byzantine adversaries in polylogarithmic rounds, while fairness only holds in a fail-stop adversarial model (due to the fact that Byzantine behavior can bias access to the state machine in the adversary's favor). In this work, we put forth the first Byzantine-resilient protocol solving SMR in this setting with both expected-constant-time settlement and fast fairness. In addition, our protocol is self-sufficient in the sense of performing its own time keeping while tolerating an adaptively fluctuating set of parties.
+]]></content:encoded>
+<pubDate>Fri, 04 Apr 2025 15:50:40 +0000</pubDate>
+<pubDate>Fri, 04 Apr 2025 15:50:40 +0000</pubDate>
+</item>
+<item>
+<title>Highly Efficient Actively Secure Two-Party Computation with One-Bit Advantage Bound</title>
+<link>https://eprint.iacr.org/2025/614</link>
+<guid>https://eprint.iacr.org/2025/614</guid>
+<content:encoded><![CDATA[
+<div> 关键词：两方计算（2PC）、主动安全性、一比特泄漏、公平性、一比特优势界<br><br>总结：<br>
+本文提出了一个新的安全概念——主动安全性带一比特优势界，通过渐进式揭示机制严格限制了敌手的优势不超过诚实方获取信息的一比特。为实现这一目标，文章设计了一种基于标签结构的高效常数轮2PC协议，该协议在双工网络中实现了与被动安全性garbled电路几乎相同的运行时间性能（例如，在LAN环境下对{\tt SHA256}电路，其通信开销仅比后者高$1.033\times$），并且输出渐进揭示的额外开销极低（每释放一位结果仅需通信$80$字节）。由于具备强化的安全保证和较低的额外开销，该协议非常适合实际应用中的两方计算场景。 <div>
+Secure two-party computation (2PC) enables two parties to jointly evaluate a function while maintaining input privacy. Despite recent significant progress, a notable efficiency gap remains between actively secure and passively secure protocols. In S\&amp;P'12, Huang, Katz, and Evans formalized the notion of \emph{active security with one-bit leakage}, providing a promising approach to bridging this gap. Protocols derived from this notion have become foundational in designing highly efficient actively secure 2PC protocols. However, a critical challenge identified by Huang, Katz, and Evans remains unexplored: these protocols face significant weaknesses in ensuring fairness for honest parties when employed in standalone settings rather than as components within larger protocols. While the authors proposed two potential solutions to mitigate this issue, both approaches are prohibitively expensive and lack formalization of security guarantees.
+
+In this paper, we first formally define an enhanced notion called \emph{active security with one-bit-advantage bound}, in which the adversaries' advantages are strictly bounded to at most one bit beyond what honest parties obtain. This bound is enforced through a \emph{progressive revelation} mechanism, where the evaluation result is disclosed incrementally bit by bit. In addition, we propose a novel approach leveraging label structures within garbled circuits to design a highly efficient constant-round 2PC protocol that achieves active security with one-bit advantage bound. Our protocol demonstrates \emph{runtime performance nearly identical to that of passively secure garbled-circuit counterparts} in duplex networks (\eg $1.033\times$ for the {\tt SHA256} circuit in LAN), with \emph{low overhead} for output progressive revelation (only $80$ communicated bytes per bit release).
+
+With its strengthened security guarantees and minimal overhead, our protocol is highly suitable for practical 2PC applications.
+]]></content:encoded>
+<pubDate>Fri, 04 Apr 2025 12:54:09 +0000</pubDate>
+<pubDate>Fri, 04 Apr 2025 12:54:09 +0000</pubDate>
+</item>
+<item>
+<title>Low-Latency Rate-Distortion-Perception Trade-off: A Randomized Distributed Function Computation Application</title>
+<link>https://eprint.iacr.org/2025/613</link>
+<guid>https://eprint.iacr.org/2025/613</guid>
+<content:encoded><![CDATA[
+<div> 关键词: 语义通信系统、率-失真-感知问题、图像压缩、物理层安全、量子攻击
+
+<br><br>
+总结:
+本文针对语义通信系统的应用背景，重点研究了在带宽有限和延迟敏感环境下图像压缩的率-失真-感知（RDP）问题。文章在随机分布式函数计算框架下，建立了非渐近性的RDP区域，明确了在有限块长度条件下率、失真与感知质量之间的权衡关系，符合语义通信的目标。进一步地，将这一区域扩展至包含保密性约束的情况，通过物理层安全方法确保对量子攻击具有抵抗能力。作者的主要贡献包括：(1) 在现实性和失真约束下建立非渐近性RDP区域的可行界；(2) 将这些边界扩展以提供强大的安全性保障；(3) 描述了在严格现实性约束下的渐近安全RDP区域特性；(4) 展示了在引入保密约束及有限块长度条件下的码率显著降低及其影响。这些研究成果为设计低延迟、高保真、安全的图像压缩系统提供了行动指南，尤其适用于隐私关键领域的应用。 <div>
+Semantic communication systems, which focus on transmitting the semantics of data rather than its exact reconstruction, redefine the design of communication networks for transformative efficiency in bandwidth-limited and latency-critical applications. Addressing these goals, we tackle the rate-distortion-perception (RDP) problem for image compression, a critical challenge in achieving perceptually realistic reconstructions under rate constraints. Formulated within the randomized distributed function computation (RDFC) framework, we establish an achievable non-asymptotic RDP region, providing finite blocklength trade-offs between rate, distortion, and perceptual quality, aligning with semantic communication objectives. We extend this region to also include a secrecy constraint, providing strong secrecy guarantees against eavesdroppers via physical-layer security methods, ensuring resilience against quantum attacks. Our contributions include (i) establishing achievable bounds for non-asymptotic RDP regions under realism and distortion constraints; (ii) extending these bounds to provide strong secrecy guarantees; (iii) characterizing the asymptotic secure RDP region under a perfect realism constraint; and (iv) illustrating significant reductions in rates and the effects of secrecy constraints and finite blocklengths. Our results provide actionable insights for designing low-latency, high-fidelity, and secure image compression systems with realistic outputs, advancing applications, e.g., in privacy-critical domains.
+]]></content:encoded>
+<pubDate>Fri, 04 Apr 2025 07:51:58 +0000</pubDate>
+<pubDate>Fri, 04 Apr 2025 07:51:58 +0000</pubDate>
+</item>
 
 <item>
 <title>SCALES: MPC with Small Clients and Larger Ephemeral Servers</title>
