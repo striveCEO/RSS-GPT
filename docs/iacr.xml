@@ -4,6 +4,63 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+<item>
+<title>GIGA Protocol: Unlocking Trustless Parallel Computation in Blockchains</title>
+<link>https://eprint.iacr.org/2025/645</link>
+<guid>https://eprint.iacr.org/2025/645</guid>
+<content:encoded><![CDATA[
+<div> 关键词: 区块链、可扩展性、SNARK协议、并行执行、交易复杂性
+
+总结:
+本文提出了一种名为GIGA的基于SNARK协议的区块链解决方案，旨在解决现代去中心化区块链系统的可扩展性问题。GIGA协议通过将交易组织成非冲突批处理并在多个分布式实体间信任lessly地并行执行和证明，实现了并发处理非冲突操作，同时保持安全性和状态一致性。通过递归聚合批量证明为单个简洁证明，该协议消除了网络中的冗余重执行，显著提升了区块链吞吐量，不影响去中心化特性。
+
+在相同的系统假设下（例如共识、网络和虚拟机架构），当大多数交易作用于状态的不同部分时，与采用顺序执行模型的流行区块链架构相比，GIGA协议的吞吐量提升可达一万倍以上，相较于使用节点内部并行化方案的区块链架构，也有超过五百倍的性能提升。此外，该协议还支持更高的交易计算复杂性，从而解锁了传统区块链架构上因计算能力有限而无法实现的各种应用场景。
+
+另外，文章还提出了一个奖励机制，以确保证明网络的经济可持续性，动态适应计算需求并基于成本效率和可靠性激励竞争。 <div>
+The scalability of modern decentralized blockchain systems is constrained by the requirement that the participating nodes execute the entire chains transactions without the ability to delegate the verification workload across multiple actors trustlessly. This is further limited by the need for sequential transaction execution and repeated block validation, where each node must re-execute all transactions before accepting blocks, also leading to delayed broadcasting in many architectures.
+
+Consequently, throughput is limited by the capacity of individual nodes, significantly preventing scalability.
+
+In this paper, we introduce GIGA, a SNARK-based protocol that enables trustless parallel execution of transactions, processing non-conflicting operations concurrently, while preserving security guarantees and state consistency. The protocol organizes transactions into non-conflicting batches which are executed and proven in parallel, distributing execution across multiple decentralized entities. These batch proofs are recursively aggregated into a single succinct proof that validates the entire block.
+
+As a result, the protocol both distributes the execution workload and removes redundant re-execution from the network, significantly improving blockchain throughput while not affecting decentralization.
+
+Performance estimates demonstrate that, under the same system assumptions (e.g., consensus, networking, and virtual machine architecture) and under high degrees of transaction parallelism (i.e., when most transactions operate on disjoint parts of the state), our protocol may achieve over a 10000x throughput improvement compared to popular blockchain architectures that use sequential execution models, and over a 500x improvement compared to blockchain architectures employing intra-node parallelization schemes. 
+
+Furthermore, our protocol enables a significant increase in transaction computational complexity, unlocking a wide range of use cases that were previously unfeasible on traditional blockchain architectures due to the limited on-chain computational capacity.
+
+Additionally, we propose a reward mechanism that ensures the economic sustainability of the proving network, dynamically adjusting to computational demand while fostering competition among provers based on cost-efficiency and reliability.
+]]></content:encoded>
+<pubDate>Tue, 08 Apr 2025 17:18:19 +0000</pubDate>
+<pubDate>Tue, 08 Apr 2025 17:18:19 +0000</pubDate>
+</item>
+<item>
+<title>Scalable Non-Fungible Tokens on Bitcoin</title>
+<link>https://eprint.iacr.org/2025/641</link>
+<guid>https://eprint.iacr.org/2025/641</guid>
+<content:encoded><![CDATA[
+<div> 关键词: NFT、Bitcoin、桥接式铸造、二级共识系统、OP_RETURN<br><br>总结:
+该文提出了一种协议，用于扩展比特币上的非同质化代币（NFT）的创建、管理和交易。该协议借鉴了其他区块链上使用的无桥接铸造模式，通过利用比特币链上的数据处理所有与代币所有权相关的事宜，包括交易，并结合了一个二级共识系统来实现铸造和可选的元数据修改。为尽可能减小其在比特币主链上的占用空间，该协议使用OP_RETURN机制记录所有权信息，而相关的NFT操作则存储在LAOS区块链上。所有的数据均永久保存在链上，并不依赖于桥梁或第三方运营商。 <div>
+This paper presents a protocol for scaling the creation, management, and trading of non-fungible tokens (NFTs) on Bitcoin by extending bridgeless minting patterns previously used on other blockchains. The protocol leverages on-chain Bitcoin data to handle all aspects of token ownership, including trading, while integrating a secondary consensus system for minting and optionally modifying token metadata. To minimize its on-chain footprint, the protocol utilizes the OP_RETURN mechanism for ownership records, while complementary NFT-related actions are stored on the LAOS blockchain. All data remains permanently on-chain, with no reliance on bridges or third-party operators.
+]]></content:encoded>
+<pubDate>Tue, 08 Apr 2025 11:00:04 +0000</pubDate>
+<pubDate>Tue, 08 Apr 2025 11:00:04 +0000</pubDate>
+</item>
+<item>
+<title>A Study of Blockchain Consensus Protocols</title>
+<link>https://eprint.iacr.org/2025/637</link>
+<guid>https://eprint.iacr.org/2025/637</guid>
+<content:encoded><![CDATA[
+<div> 关键词: 比特币、共识机制、POW、Proof of Stake、区块链应用
+
+总结:
+
+本文介绍了自比特币开创第一代加密货币并采用工作量证明(POW)共识机制以来，为了解决能源消耗大和碳足迹重的问题，出现了一系列创新如空间证明(Proof of Space)、权益证明(POS)等不同的共识机制。随着区块链技术应用场景和类型的扩展，比如物联网(IoT)区块链和互操作性解决方案，对各种优化的共识机制产生了需求，例如拜占庭容错(BFT)算法。文章着重梳理了现有的区块链共识理论成果，整理了设计挑战、权衡以及研究领域，并以互操作性解决方案的案例为例展示了区块链设计空间的多样性和灵活性，旨在为研究人员提供一个全面的专题概述及深入研究每个细节的相关链接资源。 <div>
+When Nakamoto invented Bitcoin, the first generation of cryptocurrencies followed it in applying POW (Proof of Work) consensus mechanism; due to its excessive energy consumption and heavy carbon footprints, new innovations evolved like Proof of Space, POS (Proof of Stake), and a lot more with many variants for each. Furthermore, the emergence of more blockchain applications and kinds beyond just cryptocurrencies needed more consensus mechanisms that is optimized to fit requirements of each application or blockchain kind; examples range from IoT (Internet of Things) blockchains for sustainability applications that often use variants of BFT (Byzantine Fault Tolerance) algorithm, and consensus needed to relay transactions and/or assets between different blockchains in interoperability solutions. Previous studies concentrated on surveying and/or proposing different blockchain consensus rules, on a specific consensus issue like attacks, randomization, or on deriving theoretical results. Starting from discussing most important theoretical results, this paper tries to gather and organize all significant existing material about consensus in the blockchain world explaining design challenges, tradeoffs and research areas. We realize that the topic could fit for a complete textbook, so we summarize the basic concepts and support with tables and appendices. Then we highlight some case examples from interoperability solutions to show how flexible and wide the design space is to fit both general and special purpose systems. The aim is to provide researchers with a comprehensive overview of the topic, along with the links to go deeper into every detail.
+]]></content:encoded>
+<pubDate>Tue, 08 Apr 2025 07:30:27 +0000</pubDate>
+<pubDate>Tue, 08 Apr 2025 07:30:27 +0000</pubDate>
+</item>
 
 <item>
 <title>Towards Scalable YOSO MPC via Packed Secret-Sharing</title>
