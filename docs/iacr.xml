@@ -5,17 +5,47 @@
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
 <item>
+<title>Vector Commitment Design, Analysis, and Applications: A Survey</title>
+<link>https://eprint.iacr.org/2025/667</link>
+<guid>https://eprint.iacr.org/2025/667</guid>
+<content:encoded><![CDATA[
+<div> 关键词: 哈希承诺、矢量承诺、多项式承诺、功能性承诺、分布式应用<br><br>总结:
+本文系统地梳理了哈希承诺以及其中的矢量承诺、多项式承诺和功能性承诺的设计原理、特性、属性及应用场景。文章首先定义并探讨了这些不同类型承诺方案之间的关系，明确了它们的安全性概念及相关性质。接着，对一些主流构造方法进行了对比分析，考虑了各自的特性、证明/更新信息大小以及证明/承诺复杂度。此外，文中还讨论了它们在各种分布式和隐私保护应用中的效率。最后，作者指出了未来可能的研究方向。 <div>
+Due to their widespread applications in decentralized and privacy preserving technologies, commitment schemes have become increasingly important cryptographic primitives. With a wide variety of applications, many new constructions have been proposed, each enjoying different features and security guarantees. In this paper, we systematize the designs, features, properties, and applications of vector commitments (VCs). We define vector, polynomial, and functional commitments and we discuss the relationships shared between these types of commitment schemes. We first provide an overview of the definitions of the commitment schemes we will consider, as well as their security notions and various properties they can have. We proceed to compare popular constructions, taking into account the properties each one enjoys, their proof/update information sizes, and their proof/commitment complexities. We also consider their effectiveness in various decentralized and privacy preserving applications. Finally, we conclude by discussing some potential directions for future work.
+]]></content:encoded>
+<pubDate>Sun, 13 Apr 2025 02:11:13 +0000</pubDate>
+<pubDate>Sun, 13 Apr 2025 02:11:13 +0000</pubDate>
+</item>
+<item>
+<title>MProve-Nova: A Privacy-Preserving Proof of Reserves Protocol for Monero</title>
+<link>https://eprint.iacr.org/2025/665</link>
+<guid>https://eprint.iacr.org/2025/665</guid>
+<content:encoded><![CDATA[
+<div> 关键词: Proof of Reserves (PoR), MProve-Nova, Monero, Nova recursive SNARK, Merkle trees
+
+总结:
+MProve-Nova 是一种针对门罗币（Monero）的无需可信设置的Proof of Reserves (PoR)协议，它利用Nova递归SNARK技术实现了两个创新点。首先，该协议首次仅揭示交易所拥有的输出数量，而不泄露其他关于输出或其密钥图像的信息。其次，它是首个拥有常量证明大小和验证时间的门罗币PoR协议，证明大小和验证时间与门罗区块链上的输出数量及交易所持有的输出数量无关。为了实现常量验证时间，MProve-Nova需要一个预处理步骤，该步骤会从门罗区块链的所有输出和密钥图像构建两棵默克尔树。
+
+MProve-Nova由两个基于Nova的子协议组成：用于生成储备承诺的RCG协议和用于证明两个交易所之间未共谋的非共谋（NC）协议。RCG协议的证明大小约为28 KB，验证时间为4.3秒；而NC协议的证明大小约为24 KB，验证时间为0.2秒。两个协议的证明时间均随交易所持有的输出数量线性增加，但与门罗区块链上的输出数量无关。平均而言，对于RCG协议，每处理1000个输出大约需要42分钟，而对于NC协议，每处理1000个输出大约需要5分钟。 <div>
+A proof of reserves (PoR) protocol enables a cryptocurrency exchange to prove to its users that it owns a certain amount of coins, as a first step towards proving that it is solvent. We present the design, implementation, and security analysis of MProve-Nova, a PoR protocol for Monero that leverages the Nova recursive SNARK to achieve two firsts (without requiring any trusted setup). It is the first Monero PoR protocol that reveals only the number of outputs owned by an exchange; no other information about the outputs or their key images is revealed. It is also the first Monero PoR protocol where the proof size and proof verification time are constant, i.e. they are independent of the number of outputs on the Monero blockchain and the number of outputs owned by the exchange. To achieve constant verification times, MProve-Nova requires a pre-processing step which creates two Merkle trees from all the outputs and key images on the Monero blockchain.
+
+MProve-Nova consists of two Nova-based subprotocols, a reserves commitment generator (RCG) protocol used to compute a commitment to the total reserves owned by an exchange and a non-collusion (NC) protocol used to prove non-collusion between two exchanges. For the RCG protocol, we observed proof sizes of about 28 KB and verification times of 4.3 seconds. For the NC protocol, we observed proof sizes of about 24 KB and verification times of 0.2 seconds. Proving times for both protocols increase linearly with the number of outputs owned by the exchange but remain independent of the number of outputs on the Monero blockchain. On average, the RCG protocol required about 42 minutes per 1000 outputs and the NC protocol required about 5 minutes per 1000 outputs.
+]]></content:encoded>
+<pubDate>Sat, 12 Apr 2025 18:47:40 +0000</pubDate>
+<pubDate>Sat, 12 Apr 2025 18:47:40 +0000</pubDate>
+</item>
+
+<item>
 <title>Publicly Verifiable Generalized Secret Sharing Schemes and Their Applications</title>
 <link>https://eprint.iacr.org/2025/664</link>
 <guid>https://eprint.iacr.org/2025/664</guid>
 <content:encoded><![CDATA[
 <div> 关键词：Generalized Secret Sharing (GSS)，Publicly Verifiable Generalized Secret Sharing (PVGSS)，Distributed Computing，Decentralized Exchange (DEX)，Non-Interactive Zero-Knowledge Proofs (NIZK)
 
-<br><br>总结:
+<br /><br />总结:
 本文提出了一种新的公开可验证广义秘密共享(PVGSS)方案，旨在提升GSS在透明系统中的应用性。PVGSS允许经销商基于细粒度的访问结构分享秘密，并使任何人都能验证经销商和股东是否诚信行事。文章首先介绍了两种实现GSS方案的方法，分别基于递归Shamir秘密共享和线性秘密共享方案(LSSS)。接着，通过将非交互式零知识证明集成到GSS方案中，提出了PVGSS构造方法，并证明该方案在DDH假设下达到了IND1保密性。为了展示PVGSS的实际应用，文章实现了一个支持公平原子交换ERC-20代币的去中心化交易所(DEX)协议，设计了复杂的访问结构以实现正常执行时的公平原子交换以及在出现纠纷时提供可问责仲裁的容错被动观察者。BN128曲线上的基准测试显示了PVGSS方案的计算效率，而Ethereum Gas成本分析证实了DEX实施的可行性。 <div>
 Generalized secret sharing (GSS), which accommodates monotone access structures, has been under-explored in distributed computing over the past decades. In this paper, we propose the publicly verifiable generalized secret sharing (PVGSS) scheme, enhancing the applicability of GSS in transparent systems. PVGSS not only enables a dealer to share a secret with fine-grained access structures, but also allows anyone to verify whether the dealer and shareholders are acting honestly or not. We begin by introducing two approaches to implement GSS schemes: one based on recursive Shamir secret sharing and another utilizing linear secret sharing scheme (LSSS). Then, we present PVGSS constructions by integrating non-interactive zero-knowledge proofs into the GSS schemes. Further, we prove that the proposed PVGSS schemes achieve IND1-secrecy under DDH assumption. To showcase the practical applicability of PVGSS schemes, we implement a decentralized exchange (DEX) protocol that enables fair atomic swaps of ERC-20 tokens. A sophisticated access structure is devised to: (1) enable fair atomic swaps during normal protocol execution, and (2) incorporate fault-tolerant passive watchers to provide accountable arbitration when disputes occur. Our benchmarks on the BN128 curve demonstrate the computational efficiency of PVGSS schemes, while Ethereum gas cost analysis confirms the viability of the DEX implementation.
 ]]></content:encoded>
-<pubDate>Sat, 12 Apr 2025 04:15:51 +0000</pubDate>
 <pubDate>Sat, 12 Apr 2025 04:15:51 +0000</pubDate>
 </item>
 <item>
@@ -29,7 +59,6 @@ Generalized secret sharing (GSS), which accommodates monotone access structures,
 本文提出了一种新的属性基秘密分享(AB-SS)方案，允许经销商根据用户属性而非特定个体分配秘密，只有满足预设访问结构的授权用户才能恢复秘密。进一步地，引入了属性基公开验证秘密分享(AB-PVSS)概念，使得外部用户能验证经销商和股东广播消息的正确性。为了构建AB-PVSS方案，首先实现了一个去中心化的、具有较小密文尺寸和较少计算操作的CP-ABE方案，但作为权衡，该方案并未完全实现。接着，通过整合非交互式零知识证明(NIZK)，实现了CP-ABE密文的公共验证功能。基于CP-ABE和NIZK，构建了AB-PVSS原语。此外，还利用AB-PVSS方案实现了一个直观的乐观公平交换实现。最后，对提出的CP-ABE和AB-PVSS方案进行了安全性分析及全面实验，结果显示这两个方案相比于相关工作均表现出合理的性能。 <div>
 Can a dealer share a secret without knowing the shareholders? We provide a positive answer to this question by introducing the concept of an attribute-based secret sharing (AB-SS) scheme. With AB-SS, a dealer can distribute a secret based on attributes rather than specific individuals or shareholders. Only authorized users whose attributes satisfy a given access structure can recover the secret. Furthermore, we introduce the concept of attribute-based publicly verifiable secret sharing (AB-PVSS). An AB-PVSS scheme allows external users to verify the correctness of all broadcast messages from the dealer and shareholders, similar to a traditional PVSS scheme. Additionally, AB-SS (or AB-PVSS) distinguishes itself from traditional SS (or PVSS) by enabling a dealer to generate shares according to an arbitrary monotone access structure. To construct an AB-PVSS scheme, we first implement a decentralized ciphertext-policy attribute-based encryption (CP-ABE) scheme. The proposed CP-ABE scheme offers a smaller ciphertext size and requires fewer computational operations, although it is not fully-fledged as a trade-off. We then incorporate non-interactive zero-knowledge (NIZK) proofs to enable public verification of the CP-ABE ciphertext. Based on the CP-ABE and NIZK proofs, we construct an AB-PVSS primitive. Furthermore, we present an intuitive implementation of optimistic fair exchange based on the AB-PVSS scheme. Finally, we conduct security analysis and comprehensive experiments on the proposed CP-ABE and AB-PVSS schemes. The results demonstrate that both schemes exhibit plausible performance compared to related works.
 ]]></content:encoded>
-<pubDate>Fri, 11 Apr 2025 13:28:24 +0000</pubDate>
 <pubDate>Fri, 11 Apr 2025 13:28:24 +0000</pubDate>
 </item>
 <item>
@@ -85,7 +114,6 @@ and verification as well as somewhat weaker unlinkability
 guarantees compared to Privacy Pass.
 ]]></content:encoded>
 <pubDate>Thu, 10 Apr 2025 09:50:30 +0000</pubDate>
-<pubDate>Thu, 10 Apr 2025 09:50:30 +0000</pubDate>
 </item>
 <item>
 <title>Efficient Verifiable Mixnets from Lattices, Revisited</title>
@@ -128,7 +156,6 @@ The ciphertexts in our scheme are smaller by approximately a factor of
 zero-knowledge proofs are smaller by a factor of 4X and 2X.
 ]]></content:encoded>
 <pubDate>Thu, 10 Apr 2025 09:35:21 +0000</pubDate>
-<pubDate>Thu, 10 Apr 2025 09:35:21 +0000</pubDate>
 </item>
 <item>
 <title>Unbounded Multi-Hop Proxy Re-Encryption with HRA Security: An LWE-Based Optimization</title>
@@ -137,13 +164,12 @@ zero-knowledge proofs are smaller by a factor of 4X and 2X.
 <content:encoded><![CDATA[
 <div> 关键词: Proxy Re-Encryption, 多跳, 线性代数基, 适应性HRA安全, 高效率
 
-<br><br>总结:
+<br /><br />总结:
 本文提出了一种基于线性代数基的、具有适应性HRA安全级别的新型无界多跳Proxy Re-Encryption（PRE）方案。与此前Zhao等人提出的仅支持选择性CPA安全的无界多跳PRE方案相比，我们的方案提供更强的安全性。我们优化了基于FHEW-like盲旋转的重加密过程，解决了将Fuchsbauer等人框架应用于FHEW-like方案时，噪声泛滥技术与该框架之间的不兼容问题，从而降低了公钥的存储需求并提高了效率。此外，我们的优化无界多跳PRE方案还可以修改为无界同态PRE方案，允许对新鲜、重新加密和评估过的密文进行任意的同态计算，更加适用于实际应用场景。 <div>
 Proxy re-encryption (PRE) schemes enable a semi-honest proxy to transform a ciphertext of one user $i$ to another user $j$ while preserving the privacy of the underlying message. Multi-hop PRE schemes allow a legal ciphertext to undergo multiple transformations, but for lattice-based multi-hop PREs, the number of transformations is typically bounded due to the increase of error terms. Recently, Zhao et al. (Esorics 2024) introduced a lattice-based unbounded multi-hop (homomorphic) PRE scheme that supports an unbounded number of hops. Nevertheless, their scheme only achieves the selective CPA security. In contrast, Fuchsbauer et al. (PKC 2019) proposed a generic framework for constructing HRA-secure unbounded multi-hop PRE schemes from FHE. Despite this, when instantiated with state-of-the-art FHEW-like schemes, the overall key size and efficiency remain unsatisfactory. 
 
 In this paper, we present a lattice-based unbounded multi-hop PRE scheme with the stronger adaptive HRA security (i.e. security against honest re-encryption attacks), which is more suitable for practical applications. Our scheme features an optimized re-encryption process based on the FHEW-like blind rotation, which resolves the incompatibility between the noise flooding technique and Fuchsbauer et al. 's framework when instantiated with FHEW-like schemes. This results in reduced storage requirements for public keys and offers higher efficiency. Moreover, our optimized unbounded multi-hop PRE scheme can be modified to an unbounded homomorphic PRE, a scheme allowing for arbitrary homomorphic computations over fresh, re-encrypted, and evaluated ciphertexts.
 ]]></content:encoded>
-<pubDate>Thu, 10 Apr 2025 07:14:20 +0000</pubDate>
 <pubDate>Thu, 10 Apr 2025 07:14:20 +0000</pubDate>
 </item>
 <item>
@@ -154,10 +180,9 @@ In this paper, we present a lattice-based unbounded multi-hop PRE scheme with th
 <div> 关键词: ECDSA、区块链、数字签名、nonce、安全性
 
 总结:
-ECDSA（椭圆曲线数字签名算法）被许多区块链网络用于生成数字签名，包括比特币和以太坊。然而，其安全性和高效性的同时，对nonce值的使用需要谨慎处理。文章指出了几种可以利用来破解ECDSA签名的方法：一是nonce值泄露，二是弱nonce选择，三是nonce重复使用，四是两个密钥与共享nonce，五是故障攻击。这些情况都可能给ECDSA的安全性带来严重威胁。<br><br> <div>
+ECDSA（椭圆曲线数字签名算法）被许多区块链网络用于生成数字签名，包括比特币和以太坊。然而，其安全性和高效性的同时，对nonce值的使用需要谨慎处理。文章指出了几种可以利用来破解ECDSA签名的方法：一是nonce值泄露，二是弱nonce选择，三是nonce重复使用，四是两个密钥与共享nonce，五是故障攻击。这些情况都可能给ECDSA的安全性带来严重威胁。<br /><br /> <div>
 The ECDSA (Elliptic Curve Digital Signature Algorithm) is used in many blockchain networks for digital signatures. This includes the Bitcoin and the Ethereum blockchains. While it has good performance levels and as strong current security, it should be handled with care. This care typically relates to the usage of the nonce value which is used to create the signature. This paper outlines the methods that can be used to break ECDSA signatures, including revealed nonces, weak nonce choice, nonce reuse, two keys and shared nonces, and fault attack.
 ]]></content:encoded>
-<pubDate>Wed, 09 Apr 2025 20:49:17 +0000</pubDate>
 <pubDate>Wed, 09 Apr 2025 20:49:17 +0000</pubDate>
 </item>
 <item>
@@ -174,7 +199,6 @@ The increased popularity of large language models (LLMs) raises serious privacy 
 We propose Fission, a privacy-preserving framework that improves latency while providing strong privacy guarantees. Fission utilizes an MPC network for linear computations, while nonlinearities are computed on a separate evaluator network that receives shuffled values in the clear and returns nonlinear functions evaluated at these values back to the MPC network. As a result, each evaluator only gets access to parts of the shuffled data, while the model weights remain private. We evaluate fission on a wide set of LLMs and compare it against prior works. Fission results in up to eight times faster inference and eight times reduced bandwidth compared to prior works while retaining high accuracy. Finally, we construct an attack on obfuscation techniques from related works that show significant information leakage, and we demonstrate how Fission enhances privacy.
 ]]></content:encoded>
 <pubDate>Wed, 09 Apr 2025 19:07:20 +0000</pubDate>
-<pubDate>Wed, 09 Apr 2025 19:07:20 +0000</pubDate>
 </item>
 <item>
 <title>Anamorphic Voting: Ballot Freedom Against Dishonest Authorities</title>
@@ -184,7 +208,7 @@ We propose Fission, a privacy-preserving framework that improves latency while p
 <div> 关键词: 电子投票、解密密钥、投票隐私、共谋环境、幻影投票、加密技术
 
 总结:
-文章提出了“幻影投票”这一概念，用于解决电子投票系统在完全不诚实环境下，所有计票机构可能合谋破坏选民投票隐私的问题。幻影投票允许选民在投出看似常规的选票的同时，能够向审计员真实传达其投票意向。文章进一步展示了新的加密技术，证明了若干现有的投票方案可以支持幻影投票的实现。<br><br> <div>
+文章提出了“幻影投票”这一概念，用于解决电子投票系统在完全不诚实环境下，所有计票机构可能合谋破坏选民投票隐私的问题。幻影投票允许选民在投出看似常规的选票的同时，能够向审计员真实传达其投票意向。文章进一步展示了新的加密技术，证明了若干现有的投票方案可以支持幻影投票的实现。<br /><br /> <div>
 Electronic voting schemes typically ensure ballot privacy by
 assuming that the decryption key is distributed among tallying authorities, preventing any single authority from decrypting a voter’s ballot.
 However, this assumption may fail in a fully dishonest environment where
@@ -194,9 +218,7 @@ casting an (apparently) regular ballot. We present new cryptographic
 techniques demonstrating that several existing voting schemes can support anamorphic voting.
 ]]></content:encoded>
 <pubDate>Wed, 09 Apr 2025 08:10:06 +0000</pubDate>
-<pubDate>Wed, 09 Apr 2025 08:10:06 +0000</pubDate>
 </item>
-
 <item>
 <title>GIGA Protocol: Unlocking Trustless Parallel Computation in Blockchains</title>
 <link>https://eprint.iacr.org/2025/645</link>
