@@ -4,6 +4,128 @@
 <title>cs updates on arXiv.org</title>
 <link>http://rss.arxiv.org/rss/cs</link>
 
+<item>
+<title>On Quorum Sizes in DAG-Based BFT Protocols</title>
+<link>https://arxiv.org/abs/2504.08048</link>
+<guid>https://arxiv.org/abs/2504.08048</guid>
+<content:encoded><![CDATA[
+<div> 关键词: DAG、区块链协议、equivocation elimination、committing、节点数量
+
+总结:
+该文研究了基于DAG的区块链协议，如DAG-Rider、Tusk和Bullshark，在不同节点数情况下（特别是$2f+1$和$kf+1$，其中$k>3$）的工作效果。文章指出，尽管DAG-Rider在仅有$2f+1$个节点时仍能保持正确性，但Tusk和Bullshark的异步版本在消除equivocation的情况下也需要至少$3f+1$个节点才能保证其正确性。此外，文中还探讨了增加节点数量对这三个协议预期终止时间的影响。<br><br> <div>
+arXiv:2504.08048v1 Announce Type: new 
+Abstract: Several prominent DAG-based blockchain protocols, such as DAG-Rider, Tusk, and Bullshark, completely separate between equivocation elimination and committing; equivocation is handled through the use of a reliable Byzantine broadcast black-box protocol, while committing is handled by an independent DAG-based protocol. With such an architecture, a natural question that we study in this paper is whether the DAG protocol would work when the number of nodes (or validators) is only $2f+1$ (when equivocation is eliminated), and whether there are benefits in working with larger number of nodes, i.e., a total of $kf+1$ nodes for $k > 3$.
+  We find that while DAG-Rider's correctness is maintained with $2f+1$ nodes, the asynchronous versions of both Tusk and Bullshark inherently depends on having $3f+1$ nodes, regardless of equivocation. We also explore the impact of having larger number of nodes on the expected termination time of these three protocols.
+]]></content:encoded>
+<pubDate>Mon, 14 Apr 2025 00:00:00 -0400</pubDate>
+<pubDate>Mon, 14 Apr 2025 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>CertainSync: Rateless Set Reconciliation with Certainty</title>
+<link>https://arxiv.org/abs/2504.08314</link>
+<guid>https://arxiv.org/abs/2504.08314</guid>
+<content:encoded><![CDATA[
+<div> 关键词: set reconciliation, blockchain networks, CertainSync, Invertible Bloom Lookup Tables (IBLTs), UniverseReduceSync
+
+<br><br>总结:
+本文介绍了 CertainSync，一种新的集合同步框架，尤其适用于区块链网络中的交易池同步和区块传播。与传统方法相比，CertainSync 是首个无需参数化或估算器即可保证成功集合同步的方案，它能够自适应未知的对称差异大小，并基于 Invertible Bloom Lookup Tables (IBLTs) 的近期构造实现元素列表的成功列举。文章提供了理论分析以证明其确定性，并通过模拟验证了该方法在有效通信成本下的同步性能，同时保持了与基线方案的保障水平。为了进一步降低大宇宙（如区块链网络）环境中的通信开销， CertainSync 还扩展了一个宇宙缩减技术——UniverseReduceSync，并使用真实的以太坊交易哈希数据进行对比验证，结果显示了通信成本降低与保障水平之间的权衡，为多样化的集合同步场景提供了一种全面解决方案。 <div>
+arXiv:2504.08314v1 Announce Type: new 
+Abstract: Set reconciliation is a fundamental task in distributed systems, particularly in blockchain networks, where it enables synchronization of transaction pools among peers and facilitates block dissemination. Traditional set reconciliation schemes are either statistical, offering success probability as a function of communication overhead and symmetric difference size, or require parametrization and estimation of that size, which can be error-prone. We present CertainSync, a novel reconciliation framework that, to the best of our knowledge, is the first to guarantee successful set reconciliation without any parametrization or estimators. The framework is rateless and adapts to the unknown symmetric difference size. Reconciliation is guaranteed whenever the communication overhead reaches a lower bound derived from the symmetric difference size and universe size. Our framework builds on recent constructions of Invertible Bloom Lookup Tables (IBLTs), ensuring successful element listing as long as the number of elements is bounded. We provide a theoretical analysis proving the certainty of reconciliation for multiple constructions. Our approach is validated by simulations, showing the ability to synchronize sets with efficient communication costs while maintaining guarantees compared to baseline schemes. To further reduce overhead in large universes such as blockchain networks, CertainSync is extended with a universe reduction technique. We compare and validate this extension, UniverseReduceSync, against the basic framework using real Ethereum transaction hash data. Results show a trade-off between lower communication costs and maintaining guarantees, offering a comprehensive solution for diverse reconciliation scenarios.
+]]></content:encoded>
+<pubDate>Mon, 14 Apr 2025 00:00:00 -0400</pubDate>
+<pubDate>Mon, 14 Apr 2025 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>An Adaptive Clustering Scheme for Client Selections in Communication-Efficient Federated Learning</title>
+<link>https://arxiv.org/abs/2504.08356</link>
+<guid>https://arxiv.org/abs/2504.08356</guid>
+<content:encoded><![CDATA[
+<div> 关键词：联邦学习、通信资源、聚类、动态调整、非IID手写数字识别
+
+总结:
+<br>
+本文提出了一种针对联邦学习的动态调整聚类数目的方法，旨在解决如何确定最佳聚类数量以实现最优训练效果的问题。该方法通过动态调整集群数目，能够在不影响模型性能的前提下，减少参与训练的用户数量，从而将近50%的通信和传输成本得以降低。实验结果在非IID手写数字识别数据集上得到验证，证实了该方法的有效性。 <div>
+arXiv:2504.08356v1 Announce Type: new 
+Abstract: Federated learning is a novel decentralized learning architecture. During the training process, the client and server must continuously upload and receive model parameters, which consumes a lot of network transmission resources. Some methods use clustering to find more representative customers, select only a part of them for training, and at the same time ensure the accuracy of training. However, in federated learning, it is not trivial to know what the number of clusters can bring the best training result. Therefore, we propose to dynamically adjust the number of clusters to find the most ideal grouping results. It may reduce the number of users participating in the training to achieve the effect of reducing communication costs without affecting the model performance. We verify its experimental results on the non-IID handwritten digit recognition dataset and reduce the cost of communication and transmission by almost 50% compared with traditional federated learning without affecting the accuracy of the model.
+]]></content:encoded>
+<pubDate>Mon, 14 Apr 2025 00:00:00 -0400</pubDate>
+<pubDate>Mon, 14 Apr 2025 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Belief States for Cooperative Multi-Agent Reinforcement Learning under Partial Observability</title>
+<link>https://arxiv.org/abs/2504.08417</link>
+<guid>https://arxiv.org/abs/2504.08417</guid>
+<content:encoded><![CDATA[
+<div> 关键词: 强化学习、部分可观测环境、多智能体、信念模型、协同学习
+
+<br><br>总结:
+本文提出了在部分可观测环境下，通过学习系统底层状态的信念估计来克服强化学习挑战的方法。在多智能体环境中，由于各智能体同时学习并相互影响观察与系统状态，这一问题更为复杂。研究者建议使用自监督方式预训练的概率信念模型，以捕获推断出的状态信息及其不确定性。随后将信念状态应用于基于状态的强化学习算法中，构建了一个端到端的合作多智能体强化学习模型。通过分离信念任务和强化学习任务，可以显著简化策略和价值函数的学习任务，提高收敛速度和最终性能。实验在各种展示不同形式的部分可观测性的多智能体任务上验证了该方法的有效性。 <div>
+arXiv:2504.08417v1 Announce Type: new 
+Abstract: Reinforcement learning in partially observable environments is typically challenging, as it requires agents to learn an estimate of the underlying system state. These challenges are exacerbated in multi-agent settings, where agents learn simultaneously and influence the underlying state as well as each others' observations. We propose the use of learned beliefs on the underlying state of the system to overcome these challenges and enable reinforcement learning with fully decentralized training and execution. Our approach leverages state information to pre-train a probabilistic belief model in a self-supervised fashion. The resulting belief states, which capture both inferred state information as well as uncertainty over this information, are then used in a state-based reinforcement learning algorithm to create an end-to-end model for cooperative multi-agent reinforcement learning under partial observability. By separating the belief and reinforcement learning tasks, we are able to significantly simplify the policy and value function learning tasks and improve both the convergence speed and the final performance. We evaluate our proposed method on diverse partially observable multi-agent tasks designed to exhibit different variants of partial observability.
+]]></content:encoded>
+<pubDate>Mon, 14 Apr 2025 00:00:00 -0400</pubDate>
+<pubDate>Mon, 14 Apr 2025 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Boosting multi-demographic federated learning for chest x-ray analysis using general-purpose self-supervised representations</title>
+<link>https://arxiv.org/abs/2504.08584</link>
+<guid>https://arxiv.org/abs/2504.08584</guid>
+<content:encoded><![CDATA[
+<div> 关键词: 人工智能(AI), 医疗图像分析, 联邦学习(FL), 非独立同分布(non-IID), 自监督学习
+
+总结:
+本文探讨了联邦学习在医疗图像分析中的应用，特别是针对非独立同分布数据和儿科图像分析所面临的挑战。研究基于398,523张来自不同国家机构的成人胸部X光片和9,125张儿科图像，利用自监督学习的预训练模型进行肺炎与正常病例分类。结果表明，联邦学习仅对较小规模的成人数据集有性能提升(P<0.001)，但对于大规模成人数据集(P<0.064)及儿科病例(P=0.242)的性能有所下降。然而，结合自监督权重的联邦学习显著改善了儿科病例的性能(P=0.031)以及大多数成人数据集的表现(P<0.008)，尽管对于最大的数据集效果提升不明显(P=0.052)。这些发现强调了使用易于部署的一般目的自监督图像表示解决临床联邦学习应用中非独立同分布问题的潜力，并突显其在提高患者治疗效果和推动儿科医疗保健领域的前景，特别是在应对数据稀缺和变异性等持续性障碍方面具有重要意义。 <div>
+arXiv:2504.08584v1 Announce Type: new 
+Abstract: Reliable artificial intelligence (AI) models for medical image analysis often depend on large and diverse labeled datasets. Federated learning (FL) offers a decentralized and privacy-preserving approach to training but struggles in highly non-independent and identically distributed (non-IID) settings, where institutions with more representative data may experience degraded performance. Moreover, existing large-scale FL studies have been limited to adult datasets, neglecting the unique challenges posed by pediatric data, which introduces additional non-IID variability. To address these limitations, we analyzed n=398,523 adult chest radiographs from diverse institutions across multiple countries and n=9,125 pediatric images, leveraging transfer learning from general-purpose self-supervised image representations to classify pneumonia and cases with no abnormality. Using state-of-the-art vision transformers, we found that FL improved performance only for smaller adult datasets (P<0.001) but degraded performance for larger datasets (P<0.064) and pediatric cases (P=0.242). However, equipping FL with self-supervised weights significantly enhanced outcomes across pediatric cases (P=0.031) and most adult datasets (P<0.008), except the largest dataset (P=0.052). These findings underscore the potential of easily deployable general-purpose self-supervised image representations to address non-IID challenges in clinical FL applications and highlight their promise for enhancing patient outcomes and advancing pediatric healthcare, where data scarcity and variability remain persistent obstacles.
+]]></content:encoded>
+<pubDate>Mon, 14 Apr 2025 00:00:00 -0400</pubDate>
+<pubDate>Mon, 14 Apr 2025 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>mixEEG: Enhancing EEG Federated Learning for Cross-subject EEG Classification with Tailored mixup</title>
+<link>https://arxiv.org/abs/2504.07987</link>
+<guid>https://arxiv.org/abs/2504.07987</guid>
+<content:encoded><![CDATA[
+<div> 关键词：交叉主体脑电图分类、深度学习、联邦学习、mixEEG、隐私保护
+
+总结：<br>
+本文首次探讨了联邦学习环境下跨主体脑电图（EEG）分类问题。针对现代基于神经网络的EEG模型需要大量数据以及EEG数据隐私保护的挑战，文中提出了一种名为mixEEG的新框架。mixEEG对经典的mixup技术进行了适应性改造，考虑到EEG模态的独特属性，它通过共享未见过的主体的未标注平均数据而非原始数据来进行联合训练，同时提供了一个平均标签作为伪标签，从而更好地保护了隐私并提供了更强的泛化能力。实验结果表明，无论是在癫痫检测还是情绪识别任务上，以及在不同的数据集和模型架构下，mixEEG都能显著提升全局模型在跨主体EEG分类任务中的迁移性能。相关代码已发布在GitHub上。 <div>
+arXiv:2504.07987v1 Announce Type: cross 
+Abstract: The cross-subject electroencephalography (EEG) classification exhibits great challenges due to the diversity of cognitive processes and physiological structures between different subjects. Modern EEG models are based on neural networks, demanding a large amount of data to achieve high performance and generalizability. However, privacy concerns associated with EEG pose significant limitations to data sharing between different hospitals and institutions, resulting in the lack of large dataset for most EEG tasks. Federated learning (FL) enables multiple decentralized clients to collaboratively train a global model without direct communication of raw data, thus preserving privacy. For the first time, we investigate the cross-subject EEG classification in the FL setting. In this paper, we propose a simple yet effective framework termed mixEEG. Specifically, we tailor the vanilla mixup considering the unique properties of the EEG modality. mixEEG shares the unlabeled averaged data of the unseen subject rather than simply sharing raw data under the domain adaptation setting, thus better preserving privacy and offering an averaged label as pseudo-label. Extensive experiments are conducted on an epilepsy detection and an emotion recognition dataset. The experimental result demonstrates that our mixEEG enhances the transferability of global model for cross-subject EEG classification consistently across different datasets and model architectures. Code is published at: https://github.com/XuanhaoLiu/mixEEG.
+]]></content:encoded>
+<pubDate>Mon, 14 Apr 2025 00:00:00 -0400</pubDate>
+<pubDate>Mon, 14 Apr 2025 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>AIArena: A Blockchain-Based Decentralized AI Training Platform</title>
+<link>https://arxiv.org/abs/2412.14566</link>
+<guid>https://arxiv.org/abs/2412.14566</guid>
+<content:encoded><![CDATA[
+<div> 关键词: AI、集中化控制、区块链、去中心化、AIArena
+
+总结:
+随着AI技术的快速发展，其面临的挑战日益凸显，主要是由于几家大型企业对AI发展的集中化控制。这种权力集中加剧了AI模型中的偏见问题，源于治理和监督机制的不足，并限制了公众参与，引发了关于模型生成诚信性的担忧。为了解决这些问题，本文提出了一种名为AIArena的基于区块链的去中心化AI训练平台。AIArena旨在通过链上激励机制实现AI开发和对齐的民主化，鼓励参与者贡献模型和计算资源。其链上共识机制确保了参与者根据贡献公平获取奖励。文章将AIArena实现在公开的Base区块链Sepolia测试网上，并通过评估结果证明了AIArena在实际应用中的可行性。 <div>
+arXiv:2412.14566v3 Announce Type: replace 
+Abstract: The rapid advancement of AI has underscored critical challenges in its development and implementation, largely due to centralized control by a few major corporations. This concentration of power intensifies biases within AI models, resulting from inadequate governance and oversight mechanisms. Additionally, it limits public involvement and heightens concerns about the integrity of model generation. Such monopolistic control over data and AI outputs threatens both innovation and fair data usage, as users inadvertently contribute data that primarily benefits these corporations. In this work, we propose AIArena, a blockchain-based decentralized AI training platform designed to democratize AI development and alignment through on-chain incentive mechanisms. AIArena fosters an open and collaborative environment where participants can contribute models and computing resources. Its on-chain consensus mechanism ensures fair rewards for participants based on their contributions. We instantiate and implement AIArena on the public Base blockchain Sepolia testnet, and the evaluation results demonstrate the feasibility of AIArena in real-world applications.
+]]></content:encoded>
+<pubDate>Mon, 14 Apr 2025 00:00:00 -0400</pubDate>
+<pubDate>Mon, 14 Apr 2025 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Copy-and-Paste? Identifying EVM-Inequivalent Code Smells in Multi-chain Reuse Contracts</title>
+<link>https://arxiv.org/abs/2504.07589</link>
+<guid>https://arxiv.org/abs/2504.07589</guid>
+<content:encoded><![CDATA[
+<div> 关键词: EVM-不等价代码臭味、智能合约、以太坊、跨链重用、静态污点分析
+
+<br><br>总结:
+本文针对以太坊智能合约在其他兼容区块链上的跨链重用问题进行了研究，指出由于开发者可能忽视不同区块链系统设计差异（如Gas机制和共识协议），导致相同合约在不同链上无法实现一致执行，将此现象定义为EVM-不等价代码臭味。通过对1,379份安全审计报告和326篇Stack Overflow帖子的分析，研究确定了六种类型的EVM-不等价代码臭味。为自动化检测这类臭味，文章开发了一款名为EquivGuard的工具，该工具采用静态污点分析识别关键路径并使用符号执行验证路径可达性。对六大主要区块链上的905,948份合同进行分析后发现，EVM-不等价代码臭味普遍存在，平均流行率为17.70%。虽然存在此类臭味的合同不一定直接导致财务损失和攻击，但其高流行率和重要资产管理的重要性突显了重复使用这些有问题的以太坊合约为带来的潜在威胁。因此，建议开发者放弃复制粘贴编程习惯并在重用以太坊合同时检测EVM-不等价代码臭味。 <div>
+arXiv:2504.07589v2 Announce Type: replace 
+Abstract: As the development of Solidity contracts on Ethereum, more developers are reusing them on other compatible blockchains. However, developers may overlook the differences between the designs of the blockchain system, such as the Gas Mechanism and Consensus Protocol, leading to the same contracts on different blockchains not being able to achieve consistent execution as on Ethereum. This inconsistency reveals design flaws in reused contracts, exposing code smells that hinder code reusability, and we define this inconsistency as EVM-Inequivalent Code Smells. In this paper, we conducted the first empirical study to reveal the causes and characteristics of EVM-Inequivalent Code Smells. To ensure the identified smells reflect real developer concerns, we collected and analyzed 1,379 security audit reports and 326 Stack Overflow posts related to reused contracts on EVM-compatible blockchains, such as Binance Smart Chain (BSC) and Polygon. Using the open card sorting method, we defined six types of EVM-Inequivalent Code Smells. For automated detection, we developed a tool named EquivGuard. It employs static taint analysis to identify key paths from different patterns and uses symbolic execution to verify path reachability. Our analysis of 905,948 contracts across six major blockchains shows that EVM-Inequivalent Code Smells are widespread, with an average prevalence of 17.70%. While contracts with code smells do not necessarily lead to financial loss and attacks, their high prevalence and significant asset management underscore the potential threats of reusing these smelly Ethereum contracts. Thus, developers are advised to abandon Copy-and-Paste programming practices and detect EVM-Inequivalent Code Smells before reusing Ethereum contracts.
+]]></content:encoded>
+<pubDate>Mon, 14 Apr 2025 00:00:00 -0400</pubDate>
+<pubDate>Mon, 14 Apr 2025 00:00:00 -0400</pubDate>
+</item>
 
 <item>
 <title>Scalable Routing in a City-Scale Wi-Fi Network for Disaster Recovery</title>
