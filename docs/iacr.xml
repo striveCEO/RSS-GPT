@@ -5,6 +5,57 @@
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
 <item>
+<title>Trilithium: Efficient and Universally Composable Distributed ML-DSA Signing</title>
+<link>https://eprint.iacr.org/2025/675</link>
+<guid>https://eprint.iacr.org/2025/675</guid>
+<content:encoded><![CDATA[
+<div> 关键词: Trilithium、分布式密钥生成、签名协议、FIPS 204 (ML-DSA)、恶意安全、通用可组合性(UC)模型、Rust实现、性能基准测试
+
+总结:
+本文介绍了Trilithium协议，这是一项符合FIPS 204（ML-DSA）标准的分布式密钥生成和签名协议。该协议允许“服务器”和“手机”在相关随机数提供者的协助下生成标准的ML-DSA签名。文章证明了在通用可组合性(UC)模型下，即使面对恶意的服务器或手机，Trilithium协议也能确保安全，并引入了一些新的技术来论证针对一方具有活性安全，而对另一方仅具有活性隐私保护的两方安全计算协议的安全性。此外，文中还提供了使用Rust语言实现的Trilithium协议，并对其进行了性能基准测试，证实了该协议的实际可行性。 <div>
+In this paper, we present Trilithium: a protocol for distributed key generation and signing compliant with FIPS 204 (ML-DSA). Our protocol allows two parties, "server" and "phone" with assistance of correlated randomness provider (CRP) to produce a standard ML-DSA signature. We prove our protocol to be secure against a malicious server or phone in the universal composability (UC) model, introducing some novel techniques to argue the security of two-party secure computation protocols with active security against one party, but only active privacy against the other. We provide an implementation of our protocol in Rust and benchmark it, showing the practicality of the protocol.
+]]></content:encoded>
+<pubDate>Mon, 14 Apr 2025 20:36:41 +0000</pubDate>
+<pubDate>Mon, 14 Apr 2025 20:36:41 +0000</pubDate>
+</item>
+<item>
+<title>A Dilithium-like Multisignature in Fully Split Ring and Quantum Random Oracle Model</title>
+<link>https://eprint.iacr.org/2025/671</link>
+<guid>https://eprint.iacr.org/2025/671</guid>
+<content:encoded><![CDATA[
+<div> 关键词：多签名方案、后量子密码学、量子随机oracle模型（QROM）、Dilithium、$\nu$-SelfTargetMSIS
+
+总结:<br>
+本文提出了一种基于Dilithium的新颖多签名方案，该方案旨在保证在量子随机oracle模型（QROM）下的安全性并优化实际应用效率。方案利用了环$\mathbb{Z}_q[X]/(x^n+1)$与$q \equiv 1 \pmod{2n}$的设计，实现了环的完全分割和高效的多项式算术通过数论变换（NTT）。此外，文章还提出了一种新的困难度假设——$\nu$-SelfTargetMSIS，扩展了原有的SelfTargetMSIS（出自Eurocrypt 2018），用于适应多个挑战目标的情况。这一新假设在QROM下被证明安全，并被用来构建一个既安全又高效的多签名方案。相较于先前技术，本文方法避免了局限性，减少了安全性损失，并得出一个更紧凑、更适合部署在后量子密码系统中的实用方案。 <div>
+Multisignature schemes are crucial for secure operations in digital wallets and escrow services within smart contract platforms, particularly in the emerging post-quantum era. Existing post-quantum multisignature constructions either do not address the stringent requirements of the Quantum Random Oracle Model (QROM) or fail to achieve practical efficiency due to suboptimal parameter choices. 
+
+In this paper, we present a novel Dilithium-based multisignature scheme designed to be secure in the QROM and optimized for practical use. Our scheme operates over the polynomial ring  $\mathbb{Z}_q[X]/(x^n+1)$ with $q \equiv 1 \pmod{2n}$, enabling full splitting of the ring and allowing for efficient polynomial arithmetic via the Number Theoretic Transform (NTT). This structure not only ensures post-quantum security but also bridges the gap between theoretical constructs and real-world implementation needs.
+
+We further propose a new hardness assumption, termed 
+$\nu$-SelfTargetMSIS, extending SelfTargetMSIS (Eurocrypt 2018) to accommodate multiple challenge targets. We prove its security in the QROM and leverage it to construct a secure and efficient multisignature scheme. Our approach avoids the limitations of previous techniques, reduces security loss in the reduction, and results in a more compact and practical scheme suitable for deployment in post-quantum cryptographic systems.
+]]></content:encoded>
+<pubDate>Mon, 14 Apr 2025 10:18:41 +0000</pubDate>
+<pubDate>Mon, 14 Apr 2025 10:18:41 +0000</pubDate>
+</item>
+<item>
+<title>SoK: FHE-Friendly Symmetric Ciphers and Transciphering</title>
+<link>https://eprint.iacr.org/2025/669</link>
+<guid>https://eprint.iacr.org/2025/669</guid>
+<content:encoded><![CDATA[
+<div> 关键词: 完全同态加密(FHE), 加密数据计算, 明文-密文扩展比, 变换加密技术, 性能基准测试
+
+总结:
+本文关注了完全同态加密（FHE）中的一个重要挑战，即显著的明文-密文扩展比率导致的高通信开销。为解决此问题，文章探讨了一种有效的变换加密技术，该技术通过首先使用空间高效的对称密码加密数据，然后再将对称密文转换为FHE密文，而无需解密。研究者已经开发了二十多种FHE友好的对称密码和变换加密方法，但选择与比较这些方案需要深入理解对称加密和FHE。为此，本文进行了详尽的调查，并基于安全级别、效率和兼容性等标准对这些方法进行了评估。作者还设计并执行了实验，以基准测试不同应用场景下各种对称密码和变换加密方法组合的性能。研究结果为根据任务上下文定制高效的变换加密提供了见解。此外，作者还将利用最新FHE实现的示例代码开源共享。 <div>
+Fully Homomorphic Encryption (FHE) enables computation on encrypted data without decryption, demonstrating significant potential for privacy-preserving applications.
+However, FHE faces several challenges, one of which is the significant plaintext-to-ciphertext expansion ratio, resulting in high communication overhead between client and server. The transciphering technique can effectively address this problem by first encrypting data with a space-efficient symmetric cipher, then converting symmetric ciphertext to FHE ciphertext without decryption.
+
+Numerous FHE-friendly symmetric ciphers and transciphering methods have been developed by researchers, each with unique advantages and limitations. These often require extensive knowledge of both symmetric cryptography and FHE to fully grasp, making comparison and selection among these schemes challenging. To address this, we conduct a comprehensive survey of over 20 FHE-friendly symmetric ciphers and transciphering methods, evaluating them based on criteria such as security level, efficiency, and compatibility. We have designed and executed experiments to benchmark the performance of the feasible combinations of symmetric ciphers and transciphering methods across various application scenarios. Our findings offer insights into achieving efficient transciphering tailored to different task contexts. Additionally, we make our example code available open-source, leveraging state-of-the-art FHE implementations.
+]]></content:encoded>
+<pubDate>Mon, 14 Apr 2025 01:34:00 +0000</pubDate>
+<pubDate>Mon, 14 Apr 2025 01:34:00 +0000</pubDate>
+</item>
+
+<item>
 <title>SQIAsignHD: SQIsignHD Adaptor Signature</title>
 <link>https://eprint.iacr.org/2024/561</link>
 <guid>https://eprint.iacr.org/2024/561</guid>
@@ -16,9 +67,7 @@
 Adaptor signatures can be viewed as a generalized form of standard digital signature schemes by linking message authentication to the disclosure of a secret value. As a recent cryptographic primitive, they have become essential for blockchain applications, including cryptocurrencies, by reducing on-chain costs, improving fungibility, and enabling off-chain payments in payment-channel networks, payment-channel hubs, and atomic swaps. However, existing adaptor signature constructions are vulnerable to quantum attacks due to Shor's algorithm. In this work, we introduce $\mathsf{SQIAsignHD}$, a new quantum-resistant adaptor signature scheme based on isogenies of supersingular elliptic curves, using SQIsignHD - as the underlying signature scheme - and exploiting the idea of the artificial orientation on the supersingular isogeny Diffie-Hellman key exchange protocol, SIDH, to define the underlying hard relation. We, furthermore, provide a formal security proof for our proposed scheme.
 ]]></content:encoded>
 <pubDate>Thu, 11 Apr 2024 13:31:30 +0000</pubDate>
-<pubDate>Thu, 11 Apr 2024 13:31:30 +0000</pubDate>
 </item>
-
 <item>
 <title>Vector Commitment Design, Analysis, and Applications: A Survey</title>
 <link>https://eprint.iacr.org/2025/667</link>
