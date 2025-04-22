@@ -5,6 +5,262 @@
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
 <item>
+<title>Thunderbolt: A Formally Verified Protocol for Off-Chain Bitcoin Transfers</title>
+<link>https://eprint.iacr.org/2025/709</link>
+<guid>https://eprint.iacr.org/2025/709</guid>
+<content:encoded><![CDATA[
+
+We present Bitcoin Thunderbolt, a novel off-chain protocol for asynchronous, secure transfer of Bitcoin UTXOs between uncoordinated users. Unlike prior solutions such as payment channels or the Lightning Network, Bitcoin Thunderbolt requires no prior trust, direct interaction, or continuous connectivity between sender and receiver. At its core, Bitcoin Thunderbolt employs a Byzantine fault-tolerant committee to manage threshold Schnorr signatures, enabling secure ownership delegation and on-chain finalization.
+
+Our design supports recursive, off-chain UTXO transfers using tweakable, verifiable signature components. The protocol tolerates up to $f$ malicious nodes in a $3f+1$ committee and ensures correctness, consistency, and one-time spendability under asynchronous network conditions.
+
+We formally verify Bitcoin Thunderbolt’s key security properties, namely, unforgeability, ownership soundness, and liveness—using the Tamarin prover. Our results demonstrate that Thunderbolt provides robust, scalable, and non-interactive off-chain Bitcoin transfers, significantly expanding the practical utility of Bitcoin for decentralized applications.
+]]></content:encoded>
+<pubDate>Sat, 19 Apr 2025 01:09:05 +0000</pubDate>
+<pubDate>Sat, 19 Apr 2025 01:09:05 +0000</pubDate>
+</item>
+<item>
+<title>Arbigraph: Verifiable Turing-Complete Execution Delegation</title>
+<link>https://eprint.iacr.org/2025/710</link>
+<guid>https://eprint.iacr.org/2025/710</guid>
+<content:encoded><![CDATA[
+
+Dependence on online infrastructure is rapidly growing as services like online payments and insurance replace traditional options, while others, like social networks, offer new capabilities. 
+The centralized service operators wield unilateral authority over user conflicts, content moderation, and access to essential services.
+In the context of payments, blockchains provide a decentralized alternative. 
+They also enable decentralized execution of stateful programs called smart contracts. 
+But those lack the contextual understanding and interpretative capabilities that would enable reasoning about complex scenarios.
+Advancements in machine learning (ML) are raising interest in actually-smart contracts, but blockchain computation constraints prohibit direct ML inference execution.
+While many projects deploy computation delegation mechanisms, they lack Turing-completeness, prohibit parallel computation, or suffer from high overhead.
+
+We present Arbigraph, a blockchain-based execution delegation protocol.
+Like previous optimistic solutions, the parties submit their computation results, allowing a smart contract to arbitrate in case of dispute.
+But Arbigraph employs a novel dual-graph data structure and takes advantage of the nature of the dispute process to achieve Turing completeness, constant-time memory access, and parallel execution.
+We formalize the problem and show that Arbigraph guarantees completeness, soundness, and progress. 
+Experiments on LLM inference as well as matrix multiplication, which is at the core of ML inference, demonstrate that parallelization speedup grows linearly with matrix dimensions. 
+We demonstrate Arbigraph's practical cost with a deployment on the Avalanche blockchain. 
+Arbigraph thus enables decentralized, context-aware decision-making and unlocks unprecedented use cases for blockchains.
+]]></content:encoded>
+<pubDate>Sat, 19 Apr 2025 10:30:39 +0000</pubDate>
+<pubDate>Sat, 19 Apr 2025 10:30:39 +0000</pubDate>
+</item>
+<item>
+<title>Signature-Free Atomic Broadcast with Optimal $O(n^2)$ Messages and $O(1)$ Expected Time</title>
+<link>https://eprint.iacr.org/2023/1549</link>
+<guid>https://eprint.iacr.org/2023/1549</guid>
+<content:encoded><![CDATA[
+
+Byzantine atomic broadcast (ABC) is at the heart of  permissioned blockchains and various multi-party computation protocols. We resolve a long-standing open problem in ABC, presenting the first information-theoretic (IT) and signature-free asynchronous ABC protocol that achieves optimal $O(n^2)$ messages and $O(1)$ expected time.  Our ABC protocol adopts a new design, relying on a reduction from---perhaps surprisingly---a somewhat neglected  primitive called multivalued Byzantine agreement (MBA).
+]]></content:encoded>
+<pubDate>Mon, 09 Oct 2023 12:26:39 +0000</pubDate>
+<pubDate>Mon, 09 Oct 2023 12:26:39 +0000</pubDate>
+</item>
+<item>
+<title>Updatable Signature with Public Tokens</title>
+<link>https://eprint.iacr.org/2025/715</link>
+<guid>https://eprint.iacr.org/2025/715</guid>
+<content:encoded><![CDATA[
+
+The Updatable Signature (US) allows valid signatures to be updated by an update token without accessing the newly generated signing key. Cini et al. (PKC'21) formally defined this signature and gave several constructions. However, their security model requires the secrecy of the update token, which is only applicable in some specific scenarios, such as software verification in the trusted App Store. In Web3, information is usually shared via a public blockchain, and decentralized private computation is expensive. In addition, one can use the same token to update both the signing key and signatures and all signatures can be updated with a single token. The adversarial signature generated by an adversary might also be updated. Therefore, this work explores the (im)possibility of constructing an Updatable Signature with public tokens (USpt), the tokens of which are signature-dependent. Specifically, we define the updatable signature with public tokens and present its security model. Then, we present a concrete USpt scheme based on the Boneh–Lynn–Shacham signature. This variant introduces a limitation for the signer who must maintain a dataset about its signed messages or hashes of them, which is applicable in our applications.
+]]></content:encoded>
+<pubDate>Mon, 21 Apr 2025 03:03:01 +0000</pubDate>
+<pubDate>Mon, 21 Apr 2025 03:03:01 +0000</pubDate>
+</item>
+<item>
+<title>Fast Plaintext-Ciphertext Matrix Multiplication from Additively Homomorphic Encryption</title>
+<link>https://eprint.iacr.org/2025/711</link>
+<guid>https://eprint.iacr.org/2025/711</guid>
+<content:encoded><![CDATA[
+
+Plaintext-ciphertext matrix multiplication (PC-MM) is an indispensable tool in privacy-preserving computations such as secure machine learning and encrypted signal processing. While there are many established algorithms for plaintext-plaintext matrix multiplication, efficiently computing plaintext-ciphertext (and ciphertext-ciphertext) matrix multiplication is an active area of research which has received a lot of attention. Recent literature have explored various techniques for privacy-preserving matrix multiplication using fully homomorphic encryption (FHE) schemes with ciphertext packing and Single Instruction Multiple Data (SIMD) processing. On the other hand, there hasn't been any attempt to speed up PC-MM using unpacked additively homomorphic encryption (AHE) schemes beyond the schoolbook method and Strassen's algorithm for matrix multiplication. In this work, we propose an efficient PC-MM from unpacked AHE, which applies Cussen's compression-reconstruction algorithm for plaintext-plaintext matrix multiplication in the encrypted setting. We experimentally validate our proposed technique using a concrete instantiation with the additively homomorphic elliptic curve ElGamal encryption scheme and its software implementation on a Raspberry Pi 5 edge computing platform. Our proposed approach achieves up to an order of magnitude speedup compared to state-of-the-art for large matrices with relatively small element bit-widths. Extensive measurement results demonstrate that our fast PC-MM is an excellent candidate for efficient privacy-preserving computation even in resource-constrained environments.
+]]></content:encoded>
+<pubDate>Sun, 20 Apr 2025 05:38:55 +0000</pubDate>
+<pubDate>Sun, 20 Apr 2025 05:38:55 +0000</pubDate>
+</item>
+<item>
+<title>Proofs of Useful Work from Arbitrary Matrix Multiplication</title>
+<link>https://eprint.iacr.org/2025/685</link>
+<guid>https://eprint.iacr.org/2025/685</guid>
+<content:encoded><![CDATA[
+
+We revisit the longstanding open problem of implementing Nakamoto's proof-of-work (PoW) consensus based on a real-world computational task $T(x)$ (as opposed to artificial random hashing), in a truly  permissionless setting where the miner itself chooses the input $x$. The challenge in designing such a Proof-of-Useful-Work (PoUW) protocol, is using the native computation of $T(x)$ to produce a PoW certificate with prescribed hardness and with negligible computational overhead over the worst-case complexity of $T(\cdot)$ -- This  ensures malicious miners cannot ``game the system" by fooling the verifier to accept with higher probability compared to honest miners (while using similar computational resources). Indeed, obtaining a PoUW with $O(1)$-factor overhead is trivial for any task $T$, but also useless. 
+
+Our main result is a PoUW for the task of Matrix Multiplication $\mathsf{MatMul}(A,B)$ of arbitrary matrices with  $1+o(1)$ multiplicative overhead compared to na\"ive $\mathsf{MatMul}$ (even in the presence of Fast Matrix Multiplication-style algorithms, which are currently impractical). We conjecture that our protocol has optimal security in the sense that a malicious prover cannot obtain any significant advantage over an honest prover. This conjecture is based on reducing hardness of our protocol to the task of solving a batch of low-rank random linear equations which is of independent interest.
+
+Since $\mathsf{MatMul}$s are the bottleneck of AI compute as well as countless industry-scale applications, this primitive suggests a concrete design of a new L1 base-layer protocol, which nearly eliminates the energy-waste of Bitcoin mining -- allowing GPU consumers to reduce their AI training and inference costs by ``re-using" it for blockchain consensus, in exchange for block rewards (2-for-1). This blockchain is currently under construction.
+]]></content:encoded>
+<pubDate>Tue, 15 Apr 2025 18:46:53 +0000</pubDate>
+<pubDate>Tue, 15 Apr 2025 18:46:53 +0000</pubDate>
+</item>
+<item>
+<title>Bitcoin-Enhanced Proof-of-Stake Security: Possibilities and Impossibilities</title>
+<link>https://eprint.iacr.org/2022/932</link>
+<guid>https://eprint.iacr.org/2022/932</guid>
+<content:encoded><![CDATA[
+
+Bitcoin is the most secure blockchain in the world, supported by the immense hash power of its Proof-of-Work miners. Proof-of-Stake chains are energy-efficient, have fast finality but face several security issues: susceptibility to non-slashable long-range safety attacks, low liveness resilience and difficulty to bootstrap from low token valuation.  We show that these security issues are inherent in any PoS chain without an external trusted source, and propose a new protocol, Babylon, where an off-the-shelf PoS protocol checkpoints onto Bitcoin to resolve these issues. An impossibility result justifies the optimality of Babylon. A use case of Babylon is to reduce the stake withdrawal delay: our experimental results show that this delay can be reduced from weeks in existing PoS chains to less than 5 hours using Babylon, at a transaction cost of less than 10K USD per annum for posting the checkpoints onto Bitcoin.
+]]></content:encoded>
+<pubDate>Mon, 18 Jul 2022 06:03:55 +0000</pubDate>
+<pubDate>Mon, 18 Jul 2022 06:03:55 +0000</pubDate>
+</item>
+<item>
+<title>Priv-PFL: A Privacy-Preserving and Efficient Personalized Federated Learning Approach</title>
+<link>https://eprint.iacr.org/2025/703</link>
+<guid>https://eprint.iacr.org/2025/703</guid>
+<content:encoded><![CDATA[
+
+Federated Learning (FL) allows clients to engage in learning without revealing their raw data. However, traditional FL focuses on developing a single global model for all clients, limiting their ability to have personalized models tailored to their specific needs. Personalized FL (PFL) enables clients to obtain their customized models, either with or without a central party.  Current PFL research includes mechanisms to detect poisoning attacks, in which a couple of malicious nodes try to manipulate training convergence by submitting misleading data. However, these detection approaches often overlook privacy concerns, as they require clients to share their models with all other clients.
+This paper extends BALANCE, a personalized poisoning detection mechanism based on client models and their expectations. Our method enhances both security and privacy by ensuring clients are not required to share their model data with other clients. By leveraging server-assisted PFL and Fully Homomorphic Encryption (FHE), we enable a central party to identify unpoisoned clients from the perspective of individual clients and train personalized models securely. Additionally, we introduce an efficient personalized client selection algorithm that prevents redundant checks and ensures the inheritance of unpoisoned clients.
+]]></content:encoded>
+<pubDate>Fri, 18 Apr 2025 03:38:22 +0000</pubDate>
+<pubDate>Fri, 18 Apr 2025 03:38:22 +0000</pubDate>
+</item>
+<item>
+<title>Hermes: Efficient and Secure Multi-Writer Encrypted Database</title>
+<link>https://eprint.iacr.org/2025/701</link>
+<guid>https://eprint.iacr.org/2025/701</guid>
+<content:encoded><![CDATA[
+
+Searchable encryption (SE) enables privacy-preserving keyword search on encrypted data. Public-key SE (PKSE) supports multi-user searches but suffers from high search latency due to expensive public-key operations. Symmetric SE (SSE) offers a sublinear search but is mainly limited to single-user settings. Recently, hybrid SE (HSE) has combined SSE and PKSE to achieve the best of both worlds, including multi-writer encrypted search functionalities, forward privacy, and sublinear search with respect to database size. Despite its advantages, HSE inherits critical security limitations, such as susceptibility to dictionary attacks, and still incurs significant overhead for search access control verification, requiring costly public-key operation invocations (i.e., pairing) across all authorized keywords. Additionally, its search access control component must be rebuilt periodically for forward privacy, imposing substantial writer overhead.   
+In this paper, we propose Hermes, a new HSE scheme that addresses the aforementioned security issues in prior HSE designs while maintaining minimal search complexity and user efficiency at the same time. Hermes enables multi-writer encrypted search functionalities and offers forward privacy along with resilience to dictionary attacks. To achieve this, we develop a new identity-based encryption scheme with hidden identity and key-aggregate properties, which could be of independent interest. We also design novel partitioning and epoch encoding techniques in Hermes to minimize search complexity and offer low user overhead in maintaining forward privacy. We conducted intensive experiments to assess and compare the performance of Hermes and its counterpart on commodity hardware. Experimental results showed that Hermes performs search one to two orders of magnitude faster than the state-of-the-art HSE while offering stronger security guarantees to prevent dictionary and injection attacks.
+]]></content:encoded>
+<pubDate>Thu, 17 Apr 2025 20:09:07 +0000</pubDate>
+<pubDate>Thu, 17 Apr 2025 20:09:07 +0000</pubDate>
+</item>
+<item>
+<title>Fherret: Proof of FHE Correct-and-Honest Evaluation with Circuit Privacy from MPCitH</title>
+<link>https://eprint.iacr.org/2025/700</link>
+<guid>https://eprint.iacr.org/2025/700</guid>
+<content:encoded><![CDATA[
+
+The major Fully Homomorphic Encryption (FHE) schemes guarantee the privacy of the encrypted message only in the honest-but-curious setting, when the server follows the protocol without deviating. However, various attacks in the literature show that an actively malicious server can recover sensitive information by executing incorrect functions, tampering with ciphertexts, or observing the client’s reaction during decryption.
+
+Existing integrity solutions for FHE schemes either fail to guarantee circuit privacy, exposing the server's computations to the client, or introduce significant computational overhead on the prover by requiring proofs of FHE operations on ciphertexts.
+
+In this work, we present Fherret, a novel scheme leveraging the MPC-in-the-Head (MPCitH) paradigm to provide a proof of correct-and-honest homomorphic evaluation while preserving circuit privacy. This proof guarantees that the client can safely decrypt the ciphertext obtained from the server without being susceptible to reaction-based attacks, such as verification and decryption oracle attacks. Additionally, this proof guarantees that the server’s evaluation maintains correctness, thereby protecting the client from $\mathsf{IND}\text{-}\mathsf{CPA}^{\mathsf{D}}$-style attacks.
+
+Our solution achieves a prover overhead of $4\lambda$ homomorphic evaluations of random functions from the function space $\mathcal{F}$, while retaining a competitive verifier overhead of $2 \lambda$ homomorphic evaluations and a communication size proportional to $\sqrt{2\lambda}$ times the size of a function from $\mathcal{F}$. 
+
+Furthermore, Fherret is inherently parallelizable, achieving a parallel computation overhead similar to a homomorphic evaluation of a random function from $\mathcal{F}$ for both the prover and the verifier.
+]]></content:encoded>
+<pubDate>Thu, 17 Apr 2025 12:15:18 +0000</pubDate>
+<pubDate>Thu, 17 Apr 2025 12:15:18 +0000</pubDate>
+</item>
+<item>
+<title>Efficient Foreign-Field Arithmetic in PLONK</title>
+<link>https://eprint.iacr.org/2025/695</link>
+<guid>https://eprint.iacr.org/2025/695</guid>
+<content:encoded><![CDATA[
+
+PLONK is a prominent universal and updatable zk-SNARK for general circuit satisfiability, which allows a prover to produce a short certificate of the validity of a certain statement/computation. Its expressive model of computation and its highly efficient verifier complexity make PLONK a powerful tool for a wide range of blockchain applications.
+
+Supporting standard cryptographic primitives (such us ECDSA over SECP256k1) or advanced recursive predicates (e.g. incrementally verifiable computation) on a SNARK presents a significant challenge. It requires so-called foreign-field arithmetic (enforcing constraints over algebraic fields that differ from the SNARK native field) which was previously believed to incur an overhead of two or three orders of magnitude.
+
+We build on the techniques by Lubarov and Baylina and observe that, by considering tight bounds on their encoding of foreign-field multiplication, the number of PLONK constraints can be significantly reduced. We show that these techniques also extend to elliptic curve emulation, with an overhead of just one order of magnitude (with respect to its native counterpart). We validate soundness and completeness of our main results in EasyCrypt. Finally, we implement an open-source library with support for foreign-field arithmetic. Our experimental results showcase the generality of our techniques and confirm their suitability for real-world applications.
+]]></content:encoded>
+<pubDate>Wed, 16 Apr 2025 16:17:52 +0000</pubDate>
+<pubDate>Wed, 16 Apr 2025 16:17:52 +0000</pubDate>
+</item>
+<item>
+<title>A Formal Security Analysis of Hyperledger AnonCreds</title>
+<link>https://eprint.iacr.org/2025/694</link>
+<guid>https://eprint.iacr.org/2025/694</guid>
+<content:encoded><![CDATA[
+
+In an anonymous credential system, users collect credentials from issuers, and can use their credentials to generate privacy-preserving identity proofs that can be shown to third-party verifiers. Since the introduction of anonymous credentials by Chaum in 1985, there has been promising advances with respect to system design, security analysis and real-world implementations of anonymous credential systems.
+
+In this paper, we examine Hyperledger AnonCreds, an anonymous credential system that was introduced in 2017 and is currently undergoing specification. Despite being implemented in deployment-ready identity system platforms, there is no formal security analysis of the Hyperledger AnonCreds protocol. We rectify this, presenting syntax and a security model for, and a first security analysis of, the Hyperledger AnonCreds protocol. In particular, we demonstrate that Hyperledger AnonCreds is correct, and satisfies notions of unforgeability and anonymity. We conclude with a discussion on the implications of our findings, highlighting the importance of rigorous specification efforts to support security evaluation of real-world cryptographic protocols.
+]]></content:encoded>
+<pubDate>Wed, 16 Apr 2025 16:16:57 +0000</pubDate>
+<pubDate>Wed, 16 Apr 2025 16:16:57 +0000</pubDate>
+</item>
+<item>
+<title>Accountable Liveness</title>
+<link>https://eprint.iacr.org/2025/693</link>
+<guid>https://eprint.iacr.org/2025/693</guid>
+<content:encoded><![CDATA[
+
+Safety and liveness are the two classical security properties of consensus protocols. Recent works have strengthened safety with accountability: should any safety violation occur, a sizable fraction of adversary nodes can be proven to be protocol violators. This paper studies to what extent analogous accountability guarantees are achievable for liveness. To reveal the full complexity of this question, we introduce an interpolation between the classical synchronous and partially-synchronous models that we call the $x$-partially-synchronous network model in which, intuitively, at most an $x$ fraction of the time steps in any sufficiently long interval are asynchronous (and, as with a partially-synchronous network, all time steps are synchronous following the passage of an unknown "global stablization time"). We prove a precise characterization of the parameter regime in which accountable liveness is achievable: if and only if $x < 1/2$ and $f < n/2$, where $n$ denotes the number of nodes and $f$ the number of nodes controlled by an adversary. We further refine the problem statement and our analysis by parameterizing by the number of violating nodes identified following a liveness violation, and provide evidence that the guarantees achieved by our protocol are near-optimal (as a function of $x$ and $f$). Our results provide rigorous foundations for liveness-accountability heuristics such as the  "inactivity leaks" employed in Ethereum.
+]]></content:encoded>
+<pubDate>Wed, 16 Apr 2025 15:04:09 +0000</pubDate>
+<pubDate>Wed, 16 Apr 2025 15:04:09 +0000</pubDate>
+</item>
+<item>
+<title>DahLIAS: Discrete Logarithm-Based Interactive Aggregate Signatures</title>
+<link>https://eprint.iacr.org/2025/692</link>
+<guid>https://eprint.iacr.org/2025/692</guid>
+<content:encoded><![CDATA[
+
+An interactive aggregate signature scheme allows $n$ signers, each with their own secret/public key pair $(sk_i, pk_i)$ and message $m_i$, to jointly produce a short signature that simultaneously witnesses that $m_i$ has been signed under $pk_i$ for every $i \in \{1, \dots, n\}$. Despite the large potential for savings in terms of space and verification time, which constitute the two main bottlenecks for large blockchain systems such as Bitcoin, aggregate signatures have received much less attention than the other members of the multi-party signature family, namely multi-signatures such as $\mathsf{MuSig2}$ and threshold signatures such as $\mathsf{FROST}$.
+
+In this paper, we propose $\mathsf{DahLIAS}$, the first aggregate signature scheme with constant-size signatures—a signature has the same shape as a standard Schnorr signature—directly based on discrete logarithms in pairing-free groups. The signing protocol of $\mathsf{DahLIAS}$ consists of two rounds, the first of which can be preprocessed without the message, and verification (for a signature created by $n$ signers) is dominated by one multi-exponentiation of size $n+1$, which is asymptotically twice as fast as batch verification of $n$ individual Schnorr signatures.
+
+$\mathsf{DahLIAS}$ is designed with real-world applications in mind. Besides the aforementioned benefits of space savings and verification speedups, $\mathsf{DahLIAS}$ offers key tweaking, a technique commonly used in Bitcoin to derive keys in hierarchical deterministic wallets and to save space as well as enhance privacy on the blockchain. We prove $\mathsf{DahLIAS}$ secure in the concurrent setting with key tweaking under the (algebraic) one-more discrete logarithm assumption in the random oracle model.
+]]></content:encoded>
+<pubDate>Wed, 16 Apr 2025 12:49:45 +0000</pubDate>
+<pubDate>Wed, 16 Apr 2025 12:49:45 +0000</pubDate>
+</item>
+<item>
+<title>SASTA: Ambushing Hybrid Homomorphic Encryption Schemes with a Single Fault</title>
+<link>https://eprint.iacr.org/2024/041</link>
+<guid>https://eprint.iacr.org/2024/041</guid>
+<content:encoded><![CDATA[
+
+Fully Homomorphic Encryption offers an effective solution for privacy-preserving computation, but its adoption is hindered by substantial computational and communication overheads. To address these, the Hybrid Homomorphic Encryption (HHE) protocol was developed, where the client encrypts data using a symmetric encryption scheme (SE), and the server homomorphically evaluates its decryption. Previous studies have demonstrated that the HHE protocol has no impact on the correctness of applications; however, in this work, we shift the focus to its security resilience  when subjected to Differential Fault Analysis (DFA). While DFA has proven effective against standalone symmetric-key primitives, no DFA study has been proposed that exploits the HHE protocol as a whole. Furthermore, previous DFA approaches on SE rely on strong assumptions such as nonce reuse, which limits their applicability in real-world protocols or practical applications.
+
+In this work, we show that the structure of the HHE protocol itself exposes new avenues for fault exploitation. We introduce Sasta-DFA, which, to our knowledge, is the first DFA targeting HHE protocol in its entirety. Our study demonstrates that an attacker can achieve complete key recovery with a single fault injection. A key feature of this attack is that it does not require nonce reuse, thus adhering to nonce-related specifications. We adapt the IND-CPAD threat model proposed by Li and Micciancio at Eurocrypt’21 for HHE in the context of fault attacks. 
+
+We conduct the first DFA study on the emerging HHE-specific integer-based SE schemes— Rubato, Hera, Pasta, and Masta. Notably, our attack methodology is generalizable and applicable to a broader class of HHE-friendly SE schemes, including boolean schemes like Rasta and even the standard scheme AES. We also present the first experimental validation of fault analysis on these new HHE-enabling schemes. Our attack, mounted on an ATXmega128D4-AU microcontroller, successfully demonstrates full key recovery. Finally, we also extend Sasta-DFA to Authenticated Transciphering protocols under a weaker threat model that removes any functional dependency.
+]]></content:encoded>
+<pubDate>Wed, 10 Jan 2024 13:43:36 +0000</pubDate>
+<pubDate>Wed, 10 Jan 2024 13:43:36 +0000</pubDate>
+</item>
+<item>
+<title>Zero-Knowledge Protocol for Knowledge of Known Discrete Logarithms: Applications to Ring Confidential Transactions and Anonymous Zether</title>
+<link>https://eprint.iacr.org/2025/690</link>
+<guid>https://eprint.iacr.org/2025/690</guid>
+<content:encoded><![CDATA[
+
+The securities of a large fraction of zero-knowledge arguments of knowledge schemes rely on the discrete logarithm (DL) assumption or the discrete logarithm relation assumption, such as Bulletproofs (S&amp;P 18) and compressed $\Sigma$-protocol (CRYPTO 20). At the heart of these protocols is an interactive proof of knowledge between a prover and a verifier showing that a Pedersen vector commitment $P=h^{\rho}\cdot\textbf{g}^{\textbf{x}}$  to a vector $\textbf{x}$  satisfies multi-variate equations, where the DL relations among the vector of generators $\textbf{g}$ are unknown. However, in some circumstances, the prover may know the DL relations among the generators, and the DL relation assumption no longer holds, such as ring signatures, ring confidential transactions (RingCT) and K-out-of-N proofs, which will make the soundness proof of these protocols infeasible.
+This paper is concerned with a problem called knowledge of known discrete logarithms (KKDL) that appears but has not been clearly delineated in the literature.  Namely, it asks to prove a set of multi-exponent equalities, starting with the fact that the prover may know the DL relations among the generators of these equalities.  Our contributions are three-fold:  (1) We propose a special honest-verifier zero-knowledge protocol for the problem.  Using the Fiat-Shamir heuristic and the improved inner-product argument of Bulletproofs,  the proof size of our protocol is logarithmic to the dimension of the vector. (2) As applications, our protocol can be utilized to construct logarithmic-size RingCT securely which fixes the issues of Omniring (CCS 19), ring signatures (with signature size $2\cdot \lceil \log_2(N) \rceil+10$ for ring size $N$) and  $K$-out-of-$N$ proof of knowledge (with proof size $2\cdot \lceil \log_2(N) \rceil+14$) which achieves the most succinct proof size improving on previous results. Meanwhile, we propose the first account-based multi-receiver privacy scheme considering the sender's privacy with logarithmic proof size (to the best of our knowledge). (3) We describe an attack on RingCT-3.0 (FC 20) where an attacker can spend a coin of an arbitrary amount that never existed on the blockchain.
+]]></content:encoded>
+<pubDate>Wed, 16 Apr 2025 09:51:57 +0000</pubDate>
+<pubDate>Wed, 16 Apr 2025 09:51:57 +0000</pubDate>
+</item>
+<item>
+<title>SUMAC: an Efficient Administrated-CGKA Using Multicast Key Agreement</title>
+<link>https://eprint.iacr.org/2025/682</link>
+<guid>https://eprint.iacr.org/2025/682</guid>
+<content:encoded><![CDATA[
+
+Since the standardization of the Secure Group Messaging protocol Messaging Layer Security (MLS) [4 ], whose core subprotocol is a Continuous Group Key Agreement (CGKA) mechanism named TreeKEM, CGKAs have become the norm for group key exchange protocols. However, in order to alleviate the security issue originating from the fact that all users in a CGKA are able to carry out sensitive operations on the member group, an augmented protocol called Administrated-CGKA (A-CGKA) has been recently created [2].
+
+An A-CGKA includes in the cryptographic protocol the management of the administration rights that restrict the set of privileged users, giving strong security guarantees for the group administration. The protocol designed in [2] is a plugin added to a regular (black-box) CGKA, which consequently add some complexity to the underlying CGKA and curtail its performances. Yet, leaving the fully decentralized paradigm of a CGKA offers the perspective of new protocol designs, potentially more efficient.
+
+We propose in this paper an A-CGKA called SUMAC, which offers strongly enhanced communication and storage performances compared to other A-CGKAs and even to TreeKEM. Our protocol is based on a novel design that modularly combines a regular CGKA used by the administrators of the group and a Tree-structured Multicast Key Agreement (TMKA) [9] – which is a centralized group key exchange mechanism administrated by a single group manager – between each administrator and all the standard users. That TMKA gives SUMAC an asymptotic communication cost logarithmic in the number of users, similarly to a CGKA. However, the concrete performances of our protocol are much better than the latter, especially in the post-quantum framework, due to the intensive use of secret-key cryptography that offers a lighter bandwidth than the public-key encryption schemes from a CGKA.
+
+In practice, SUMAC improves the communication cost of TreeKEM by a factor 1.4 to 2.4 for admin operations and a factor 2 to 38 for user operations. Similarly, its storage cost divides that of TreeKEM by a factor 1.3 to 23 for an administrator and 3.9 to 1,070 for a standard user.
+
+Our analysis of SUMAC is provided along with a ready-to-use open-source rust implementation that confirms the feasibility and the performances of our protocol.
+]]></content:encoded>
+<pubDate>Tue, 15 Apr 2025 13:20:26 +0000</pubDate>
+<pubDate>Tue, 15 Apr 2025 13:20:26 +0000</pubDate>
+</item>
+<item>
+<title>Pirouette: Query Efficient Single-Server PIR</title>
+<link>https://eprint.iacr.org/2025/680</link>
+<guid>https://eprint.iacr.org/2025/680</guid>
+<content:encoded><![CDATA[
+
+Private information retrieval (PIR) allows a client to query a public database privately and serves as a key building block for privacy-enhancing applications. Minimizing query size is particularly important in many use cases, for example when clients operate on low-power or bandwidth-constrained devices. However, existing PIR protocols exhibit large query sizes: to query $2^{25}$ records, the smallest query size of 14.8KB is reported in Respire [Burton et al., CCS'24]. Respire is based on fully homomorphic encryption (FHE), where a common approach to lower the client-to-server communication cost is transciphering. When combining the state-of-the-art transciphering [Bon et al., CHES'24] with Respire, the resulting protocol (referred to as T-Respire) has a 336B query size, while incurring a 16.2x times higher server computation cost than Respire.
+
+Our work presents the Pirouette protocol, which achieves a query size of just 36B without transciphering. This represents a 9.3x reduction compared to T-Respire and a 420x reduction to Respire. For queries over $2^{25}$ records, the single-core server computation in Pirouette is only 2x slower than Respire and 8.1x faster than T-Respire, and the server computation is highly parallelizable. Furthermore, Pirouette requires no database-specific hint for clients and naturally extends to support queries over encrypted databases.
+]]></content:encoded>
+<pubDate>Tue, 15 Apr 2025 11:29:04 +0000</pubDate>
+<pubDate>Tue, 15 Apr 2025 11:29:04 +0000</pubDate>
+</item>
+
+<item>
 <title>Trilithium: Efficient and Universally Composable Distributed ML-DSA Signing</title>
 <link>https://eprint.iacr.org/2025/675</link>
 <guid>https://eprint.iacr.org/2025/675</guid>
@@ -16,7 +272,6 @@
 In this paper, we present Trilithium: a protocol for distributed key generation and signing compliant with FIPS 204 (ML-DSA). Our protocol allows two parties, "server" and "phone" with assistance of correlated randomness provider (CRP) to produce a standard ML-DSA signature. We prove our protocol to be secure against a malicious server or phone in the universal composability (UC) model, introducing some novel techniques to argue the security of two-party secure computation protocols with active security against one party, but only active privacy against the other. We provide an implementation of our protocol in Rust and benchmark it, showing the practicality of the protocol.
 ]]></content:encoded>
 <pubDate>Mon, 14 Apr 2025 20:36:41 +0000</pubDate>
-<pubDate>Mon, 14 Apr 2025 20:36:41 +0000</pubDate>
 </item>
 <item>
 <title>A Dilithium-like Multisignature in Fully Split Ring and Quantum Random Oracle Model</title>
@@ -25,7 +280,7 @@ In this paper, we present Trilithium: a protocol for distributed key generation 
 <content:encoded><![CDATA[
 <div> 关键词：多签名方案、后量子密码学、量子随机oracle模型（QROM）、Dilithium、$\nu$-SelfTargetMSIS
 
-总结:<br>
+总结:<br />
 本文提出了一种基于Dilithium的新颖多签名方案，该方案旨在保证在量子随机oracle模型（QROM）下的安全性并优化实际应用效率。方案利用了环$\mathbb{Z}_q[X]/(x^n+1)$与$q \equiv 1 \pmod{2n}$的设计，实现了环的完全分割和高效的多项式算术通过数论变换（NTT）。此外，文章还提出了一种新的困难度假设——$\nu$-SelfTargetMSIS，扩展了原有的SelfTargetMSIS（出自Eurocrypt 2018），用于适应多个挑战目标的情况。这一新假设在QROM下被证明安全，并被用来构建一个既安全又高效的多签名方案。相较于先前技术，本文方法避免了局限性，减少了安全性损失，并得出一个更紧凑、更适合部署在后量子密码系统中的实用方案。 <div>
 Multisignature schemes are crucial for secure operations in digital wallets and escrow services within smart contract platforms, particularly in the emerging post-quantum era. Existing post-quantum multisignature constructions either do not address the stringent requirements of the Quantum Random Oracle Model (QROM) or fail to achieve practical efficiency due to suboptimal parameter choices. 
 
@@ -34,7 +289,6 @@ In this paper, we present a novel Dilithium-based multisignature scheme designed
 We further propose a new hardness assumption, termed 
 $\nu$-SelfTargetMSIS, extending SelfTargetMSIS (Eurocrypt 2018) to accommodate multiple challenge targets. We prove its security in the QROM and leverage it to construct a secure and efficient multisignature scheme. Our approach avoids the limitations of previous techniques, reduces security loss in the reduction, and results in a more compact and practical scheme suitable for deployment in post-quantum cryptographic systems.
 ]]></content:encoded>
-<pubDate>Mon, 14 Apr 2025 10:18:41 +0000</pubDate>
 <pubDate>Mon, 14 Apr 2025 10:18:41 +0000</pubDate>
 </item>
 <item>
@@ -52,9 +306,7 @@ However, FHE faces several challenges, one of which is the significant plaintext
 Numerous FHE-friendly symmetric ciphers and transciphering methods have been developed by researchers, each with unique advantages and limitations. These often require extensive knowledge of both symmetric cryptography and FHE to fully grasp, making comparison and selection among these schemes challenging. To address this, we conduct a comprehensive survey of over 20 FHE-friendly symmetric ciphers and transciphering methods, evaluating them based on criteria such as security level, efficiency, and compatibility. We have designed and executed experiments to benchmark the performance of the feasible combinations of symmetric ciphers and transciphering methods across various application scenarios. Our findings offer insights into achieving efficient transciphering tailored to different task contexts. Additionally, we make our example code available open-source, leveraging state-of-the-art FHE implementations.
 ]]></content:encoded>
 <pubDate>Mon, 14 Apr 2025 01:34:00 +0000</pubDate>
-<pubDate>Mon, 14 Apr 2025 01:34:00 +0000</pubDate>
 </item>
-
 <item>
 <title>SQIAsignHD: SQIsignHD Adaptor Signature</title>
 <link>https://eprint.iacr.org/2024/561</link>
