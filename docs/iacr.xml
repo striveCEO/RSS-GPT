@@ -4,6 +4,125 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+<item>
+<title>Attacking Poseidon via Graeffe-Based Root-Finding over NTT-Friendly Fields</title>
+<link>https://eprint.iacr.org/2025/937</link>
+<guid>https://eprint.iacr.org/2025/937</guid>
+<content:encoded><![CDATA[
+
+This paper explores the algebraic structure of the Poseidon and Poseidon2 permutations
+over NTT-friendly finite fields, with a focus on preimage recovery via root-finding
+techniques. We introduce an algorithm for efficiently identifying single roots of high-degree
+univariate polynomials that emerge from these constructions, based on the Graeffe transform
+and the tangent Graeffe method. Our approach is evaluated on reduced-round bounty
+instances of these permutations at various security levels, as proposed by the Ethereum
+Foundation, demonstrating practical effectiveness. These results yield new insights into the
+security of permutation-based cryptographic primitives instantiated over NTT-friendly prime
+fields.
+]]></content:encoded>
+<pubDate>Fri, 23 May 2025 07:24:02 +0000</pubDate>
+<pubDate>Fri, 23 May 2025 07:24:02 +0000</pubDate>
+</item>
+<item>
+<title>SEEC: Memory Safety Meets Efficiency in Secure Two-Party Computation</title>
+<link>https://eprint.iacr.org/2025/930</link>
+<guid>https://eprint.iacr.org/2025/930</guid>
+<content:encoded><![CDATA[
+
+Secure Multi-Party Computation (MPC) allows multiple parties to perform privacy-preserving computation on their secret data.  MPC protocols based on secret sharing have high throughput which makes them well-suited for batch processing, where multiple instances are evaluated in parallel. 
+So far, practical implementations of secret sharing-based MPC protocols mainly focus on runtime and communication efficiency, so the memory overhead of protocol implementations is often overlooked. Established techniques to reduce the memory overhead for constant-round garbled circuit protocols cannot be directly applied to secret sharing-based protocols because they would increase the round complexity. Additionally, state-of-the-art implementations of secret sharing-based MPC protocols are implemented in C/C++ and may exhibit memory unsafety and memory leaks, which could lead to undefined behavior.
+
+In this paper, we present SEEC: SEEC Executes Enormous Circuits, a framework for secret sharing-based MPC 
+with a novel approach to address memory efficiency and safety without compromising on runtime and communication efficiency. We realize SEEC in Rust, a language known for memory-safety at close-to-native speed. To reduce the memory footprint, we develop an in-memory representation for sub-circuits. Thus, we never inline sub-circuit calls during circuit evaluation, a common issue that blows up memory usage in MPC implementations. 
+We compare SEEC with the state-of-the-art secret sharing-based MPC frameworks ABY (NDSS'15), MP-SPDZ (CCS'20), and MOTION (TOPS'22) w.r.t. runtime, memory, and communication efficiency. Our results show that our reliable and memory-safe implementation has competitive or even better performance.
+]]></content:encoded>
+<pubDate>Thu, 22 May 2025 09:42:45 +0000</pubDate>
+<pubDate>Thu, 22 May 2025 09:42:45 +0000</pubDate>
+</item>
+<item>
+<title>The DROP Protocol: Dispute Resolution via Observation in Public for Verifiable, In-Person Voting</title>
+<link>https://eprint.iacr.org/2025/929</link>
+<guid>https://eprint.iacr.org/2025/929</guid>
+<content:encoded><![CDATA[
+
+Dispute resolution has been a significant challenge in verifiable election protocols since such protocols were first proposed more than forty years ago. This work explores the problem from a new perspective and offers strong dispute resolution for in-person voting by depending on observers.
+
+It proposes a simple definition of dispute resolution as a property of a voting protocol---a definition that is independent of any other security goal. It also presents the DROP protocol, a verifiable, in-person voting protocol that runs in the presence of observers who will always reach a correct conclusion in the case of a dispute without ever being able to compromise privacy or facilitate coercion.
+]]></content:encoded>
+<pubDate>Thu, 22 May 2025 09:01:01 +0000</pubDate>
+<pubDate>Thu, 22 May 2025 09:01:01 +0000</pubDate>
+</item>
+<item>
+<title>Zero-knowledge Authenticator for Blockchain: Policy-private and Obliviously Updateable</title>
+<link>https://eprint.iacr.org/2025/921</link>
+<guid>https://eprint.iacr.org/2025/921</guid>
+<content:encoded><![CDATA[
+
+Transaction details and participant identities on the blockchain are often publicly exposed. In this work, we posit that blockchain's transparency should not come at the cost of privacy. To that end, we introduce zero-knowledge authenticators (zkAt), a new cryptographic primitive for privacy-preserving authentication on public blockchains. zkAt utilizes zero-knowledge proofs to enable users to authenticate transactions, while keeping the underlying authentiction policies private. 
+
+Prior solutions for such {policy-private authentication} required the use of threshold signatures, which can only hide the threshold access structure itself. In comparison, zkAt provides privacy for arbitrarily complex authentication policies, and offers a richer interface even within the threshold access structure by, for instance, allowing for the combination of signatures under distinct signature schemes.
+
+In order to construct zkAt, we design a compiler that transforms the popular Groth16 non-interactive zero knowledge (NIZK) proof system into a NIZK with equivocable verification keys, a property that we define in this work. Then, for any zkAt constructed using proof systems with this new property, we show that all public information must be independent of the policy, thereby achieving policy-privacy.
+
+Next, we give an extension of zkAt, called zkAt+ wherein, assuming a trusted authority, policies can be updated obliviously in the sense that a third-party learns no new information when a policy is updated by the policy issuer. We also give a theoretical construction for zkAt+ using recursive NIZKs, and explore the integration of zkAt into modern blockchains. Finally, to evaluate their feasibility, we implement both our schemes for a specific threshold access structure. Our findings show that zkAt achieves comparable performance to traditional threshold signatures, while also attaining privacy for significantly more complex policies with very little overhead.
+]]></content:encoded>
+<pubDate>Thu, 22 May 2025 05:34:51 +0000</pubDate>
+<pubDate>Thu, 22 May 2025 05:34:51 +0000</pubDate>
+</item>
+<item>
+<title>Rep3 Reloaded: On the Cost of Function-Dependent Preprocessing in Semi-Honest 3PC with Honest Majority</title>
+<link>https://eprint.iacr.org/2025/919</link>
+<guid>https://eprint.iacr.org/2025/919</guid>
+<content:encoded><![CDATA[
+
+Rep3 denotes the implementation of semi-honest three-party computation with an honest majority in MP-SPDZ (CCS'20). It uses replicated secret sharing with one message per multiplication and party as proposed by Araki et al. (CCS'16). This approach is rivaled by Astra (CCSW'19) and Trio (PETS'25), which use function-dependent preprocessing. The latter is more involved than, e.g., Beaver triples which can be used as a commodity.
+
+In this work, we present a full implementation of Astra and Trio in MP-SPDZ, and we evaluate the costs of the different approaches. We show the equivalence of the schemes, which implies that a protocol in any of the schemes can be translated to one in another with the same overall communication cost. We also present an improvement to two important building blocks for privacy-preserving computation, namely secure comparison and probabilistic truncation used in fixed-point arithmetic. To evaluate our implementation, we have benchmarked machine learning training and inference in all three schemes, improving on Keller and Sun (ICML'22) by over 30%. Our implementation also highlights the large storage requirements of function-dependent preprocessing as it runs the two phases separately. To the best of our knowledge, this is the first implementation to do so.
+]]></content:encoded>
+<pubDate>Thu, 22 May 2025 03:02:09 +0000</pubDate>
+<pubDate>Thu, 22 May 2025 03:02:09 +0000</pubDate>
+</item>
+<item>
+<title>The Accidental Computer: Polynomial Commitments from Data Availability</title>
+<link>https://eprint.iacr.org/2025/918</link>
+<guid>https://eprint.iacr.org/2025/918</guid>
+<content:encoded><![CDATA[
+
+In this paper, we show two simple variations of a data availability scheme which enable it to act as a multilinear polynomial commitment scheme over the data in a block. The first variation enables commitments over all of the block's data with zero prover overhead: the data availability construction simply serves both purposes. The second variation allows commitments over subsets of data with nonzero but still concretely small proving costs, since most work is already done during data encoding. This works especially well for blockchains with a high degree of data parallelism, as data-parallel computation is particularly amenable to efficient GKR proofs. Since, in GKR, opening the polynomial commitment contributes significantly to prover costs, our construction enables the prover to reuse work already done by the data availability scheme, reducing—or wholly removing—work associated with the polynomial commitment scheme.
+]]></content:encoded>
+<pubDate>Thu, 22 May 2025 00:46:09 +0000</pubDate>
+<pubDate>Thu, 22 May 2025 00:46:09 +0000</pubDate>
+</item>
+<item>
+<title>Automated Verification of Consistency in Zero-Knowledge Proof Circuits</title>
+<link>https://eprint.iacr.org/2025/916</link>
+<guid>https://eprint.iacr.org/2025/916</guid>
+<content:encoded><![CDATA[
+
+Circuit languages like Circom and Gnark have become essential tools for programmable zero-knowledge cryptography,  allowing developers to build privacy-preserving applications. These domain-specific languages (DSLs) encode both the computation to be verified (as a witness generator) and the corresponding arithmetic circuits, from which the prover and verifier can be automatically generated.   However, for these programs to be correct, the witness generator and the arithmetic circuit need to be mutually consistent in a certain technical sense, and inconsistencies can result in security vulnerabilities. This paper formalizes the consistency requirement for circuit DSLs and proposes the first automated technique for verifying it. We evaluate the method on hundreds of real-world circuits, demonstrating its utility for both automated verification and uncovering errors that existing tools are unable to detect.
+]]></content:encoded>
+<pubDate>Wed, 21 May 2025 22:40:21 +0000</pubDate>
+<pubDate>Wed, 21 May 2025 22:40:21 +0000</pubDate>
+</item>
+<item>
+<title>Enforcing arbitrary constraints on Bitcoin transactions</title>
+<link>https://eprint.iacr.org/2025/912</link>
+<guid>https://eprint.iacr.org/2025/912</guid>
+<content:encoded><![CDATA[
+
+The challenge of enforcing constraints on Bitcoin transac-
+tions has recently gained a lot of attention. The current approach to
+solve this problem falls short in certain aspects, such as privacy and
+programmability. We design a new solution that leverages zkSNARKs
+and allows enforcing arbitrary constraints on Bitcoin transactions while
+maintaining some information private. Our approach also bypasses the
+non-Turing completeness of Bitcoin Script, allowing the enforcement of
+unbounded constraints, namely constraints that repeat a certain opera-
+tion an unbounded number of times.
+]]></content:encoded>
+<pubDate>Wed, 21 May 2025 10:47:25 +0000</pubDate>
+<pubDate>Wed, 21 May 2025 10:47:25 +0000</pubDate>
+</item>
 
 <item>
 <title>Covert Attacks on Machine Learning Training in Passively Secure MPC</title>
