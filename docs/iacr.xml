@@ -4,6 +4,64 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+<item>
+<title>Constrained Verifiable Random Functions Without Obfuscation and Friends</title>
+<link>https://eprint.iacr.org/2025/1045</link>
+<guid>https://eprint.iacr.org/2025/1045</guid>
+<content:encoded><![CDATA[
+
+CVRFs are PRFs that unify the properties of verifiable and constrained PRFs. Since they were introduced concurrently by Fuchsbauer and Chandran-Raghuraman-Vinayagamurthy in 2014, it has been an open problem to construct CVRFs without using heavy machinery such as multilinear maps, obfuscation or functional encryption.
+
+We solve this problem by constructing a prefix-constrained verifiable PRF that does not rely on the aforementioned assumptions. Essentially, our construction is a verifiable version of the Goldreich-Goldwasser-Micali PRF. To achieve verifiability we leverage degree-2 algebraic PRGs and bilinear groups. In short, proofs consist of intermediate values of the Goldreich-Goldwasser-Micali PRF raised to the exponents of group elements. These outputs can be verified using pairings since the underlying PRG is of degree 2.
+
+We prove the selective security of our construction under the Decisional Square Diffie-Hellman (DSDH) assumption and a new assumption, which we dub recursive Decisional Diffie-Hellman (recursive DDH).
+
+We prove the soundness of recursive DDH in the generic group model assuming the hardness of the Multivariate Quadratic (MQ) problem and a new variant thereof, which we call MQ+.
+
+Last, in terms of applications, we observe that our CVRF is also an exponent (C)VRF in the plain model. Exponent VRFs were recently introduced by Boneh et al. (Eurocrypt’25) with various applications to threshold cryptography in mind. In addition to that, we give further applications for prefix-CVRFs in the blockchain setting, namely, stake-pooling and compressible randomness beacons.
+]]></content:encoded>
+<pubDate>Wed, 04 Jun 2025 12:08:42 +0000</pubDate>
+<pubDate>Wed, 04 Jun 2025 12:08:42 +0000</pubDate>
+</item>
+<item>
+<title>When Threshold Meets Anamorphic Signatures: What is Possible and What is Not!</title>
+<link>https://eprint.iacr.org/2025/1044</link>
+<guid>https://eprint.iacr.org/2025/1044</guid>
+<content:encoded><![CDATA[
+
+Anamorphic signatures allow covert communication through signatures in environments where encryption is restricted. They enable trusted recipients with a double key to extract hidden messages while the signature remains indistinguishable from a fresh and regular one. However, the traditional notion of anamorphic signatures suffers from vulnerabilities, particularly when a single recipient or sender is compromised, exposing all hidden messages and providing undeniable proof that citizens are part of the anamorphic exchange.
+
+To address these limitations, we explore a threshold-based approach to distribute trust among multiple recipients, preventing adversaries from decrypting anamorphic messages even if some recipients are compromised. Our first contribution is the formalization of the notion of \emph{threshold-recipient anamorphic signatures}, where decryption is possible only through collaboration among a subset of recipients. 
+
+We then explore a \emph{stronger model} where the dictator controls the key generation process through which it learns all secret keys and how citizens store cryptographic keys. A particular example of this model in the real world is a dictator providing citizens with electronic identity documents (eIDs) and blocking all other usage of cryptography. We demonstrate that anamorphic communication is still possible even in such a scenario. Our construction is secure against post-quantum adversaries and does not rely on any computational assumptions except the random oracle model.
+
+Finally, we show an \emph{impossibility result} for encoding anamorphic messages with a threshold-sender model when using many existing threshold signature schemes and the adversary is part of the signing group. Our work outlines both the possibilities and limitations of extending anamorphic signatures with threshold cryptography, offering new insights into improving the security and privacy of individuals under authoritarian regimes.
+]]></content:encoded>
+<pubDate>Wed, 04 Jun 2025 10:14:06 +0000</pubDate>
+<pubDate>Wed, 04 Jun 2025 10:14:06 +0000</pubDate>
+</item>
+<item>
+<title>Rubato: Provably Post-Quantum Secure and Batched Asynchronous Randomness Beacon</title>
+<link>https://eprint.iacr.org/2025/1041</link>
+<guid>https://eprint.iacr.org/2025/1041</guid>
+<content:encoded><![CDATA[
+
+Distributed Randomness Beacons (DRBs) provide secure, unbiased random numbers for decentralized systems. However, existing protocols face critical limitations. Most rely on cryptographic assumptions which are vulnerable to quantum attacks, risking long-term security in asynchronous networks where unbounded delays may allow attackers time to exploit these weaknesses. Many achieve low beacon generation rates, often below 100 beacons per minute in moderate-scale networks (e.g., Spurt IEEE S&amp;P’22), hindering their use in applications requiring high-throughput randomness. Additionally, traditional Verifiable Secret Sharing (VSS)-based DRBs, using a share-consensus-reconstruct paradigm, are unsuitable for asynchronous networks due to circular dependencies between beacon generation and consensus. Given these limitations, we propose Rubato, the first provably post-quantum secure DRB for asynchronous environments, incorporating a lattice-based batched Asynchronous Verifiable Secret Sharing scheme (bAVSS-PQ). Rubato supports batching of $\mathcal{O}(\lambda^2)$ secrets with communication complexity $\mathcal{O}(\lambda n^3 \log n)$ and tolerates Byzantine faults in up to one-third of the nodes. Integrated with DAG-based consensus protocols like Bullshark or Tusk, its epoch-staggered architecture resolves circular dependencies, enabling efficient and secure randomness generation. Evaluations across 10 to 50 nodes show Rubato generates 5200 to 350 beacons per minute with per-beacon latencies of 11.60 to 96.37 milliseconds, achieving a consensus throughput of 186,088 transactions per second with a latency of 16.78 seconds at 30 nodes. Rubato offers robust post-quantum security and high performance for small-to-medium-scale decentralized systems.
+]]></content:encoded>
+<pubDate>Wed, 04 Jun 2025 03:16:30 +0000</pubDate>
+<pubDate>Wed, 04 Jun 2025 03:16:30 +0000</pubDate>
+</item>
+<item>
+<title>Trusted Hardware-Assisted Leaderless Byzantine Fault Tolerance Consensus</title>
+<link>https://eprint.iacr.org/2025/1033</link>
+<guid>https://eprint.iacr.org/2025/1033</guid>
+<content:encoded><![CDATA[
+
+Byzantine Fault Tolerance (BFT) Consensus protocols with trusted hardware assistance have been extensively explored for their improved resilience to tolerate more faulty processes. Nonetheless, the potential of trust hardware has been scarcely investigated in leaderless BFT protocols. RedBelly is assumed to be the first blockchain network whose consensus is based on a truly leaderless BFT algorithm. This paper proposes a trusted hardware-assisted leaderless BFT consensus protocol by offering a hybrid solution for the set BFT problem defined in the RedBelly blockchain. Drawing on previous studies, we present two crucial trusted services: the counter and the collector. Based on these two services, we introduce two primitives to formulate our leaderless BFT protocol: a hybrid verified broadcast (VRB) protocol and a hybrid binary agreement. The hybrid VRB protocol enhances the hybrid reliable broadcast protocol by integrating a verification function. This addition ensures that a broadcast message is verified not only for authentication but also for the correctness of its content. Our hybrid BFT consensus is integrated with these broadcast protocols to deliver binary decisions on all proposals. We prove the correctness of the proposed hybrid protocol and demonstrate its enhanced performance in comparison to the prior trusted BFT protocol.
+]]></content:encoded>
+<pubDate>Tue, 03 Jun 2025 08:48:21 +0000</pubDate>
+<pubDate>Tue, 03 Jun 2025 08:48:21 +0000</pubDate>
+</item>
 
 <item>
 <title>Rapidash: Atomic Swaps Secure under User-Miner Collusion</title>
