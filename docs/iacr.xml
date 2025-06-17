@@ -5,19 +5,142 @@
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
 <item>
+<title>Succinct Computational Secret Sharing</title>
+<link>https://eprint.iacr.org/2023/955</link>
+<guid>https://eprint.iacr.org/2023/955</guid>
+<content:encoded><![CDATA[
+
+A secret-sharing scheme enables a dealer to share a secret $s$ among $n$ parties such that only authorized subsets of parties, specified by a monotone access structure $f:\{0,1\}^n\to\{0,1\}$, can reconstruct $s$ from their shares. Other subsets of parties learn nothing about $s$.
+
+The question of minimizing the (largest) share size for a given $f$ has been the subject of a large body of work. However, in most existing constructions for general access structures $f$, the share size is not much smaller than the size of some natural computational representation of $f$, a fact that has often been referred to as the ``representation size barrier'' in secret sharing.
+
+In this work, we initiate a systematic study of succinct computational  secret sharing (SCSS), where the secrecy requirement is computational and the goal is to substantially beat the representation size barrier. We obtain the following main results.
+
+(1) SCSS via Projective PRGs. We introduce the notion of a *projective PRG*, a pseudorandom generator for which any subset of the output bits can be revealed while keeping the other output bits hidden, using a *short* projective seed. We construct projective PRGs with different levels of succinctness under a variety of computational assumptions, and apply them towards constructing SCSS for graph access structures, monotone CNF formulas, and (less succinctly) useful subclasses of monotone circuits and branching programs. Most notably, under the sub-exponential RSA assumption, we obtain a SCSS scheme that, given an arbitrary access structure $f$, represented by a truth table of size $N=2^n$, produces shares of size polylog(N)=\poly(n) in time $\tilde O(N)$. For comparison, the share size of the best known information-theoretic schemes is $O(N^{0.58})$.
+
+(2) SCSS via One-way Functions. Under the (minimal) assumption that one-way functions exist, we obtain a near-quadratic separation between the total share size of computational and information-theoretic secret sharing. This is the strongest separation one can hope for, given the state of the art in secret sharing lower bounds. We also construct SCSS schemes from one-way functions for useful classes of access structures, including forbidden graphs and monotone DNF formulas.  This leads to constructions of fully-decomposable conditional disclosure of secrets (also known as privacy-free garbled circuits) for general functions, represented by a truth table of size $N=2^n$, with share size polylog(N) and computation time $\tilde O(N)$, assuming sub-exponentially secure one-way functions.
+]]></content:encoded>
+<pubDate>Sun, 18 Jun 2023 17:33:05 +0000</pubDate>
+<pubDate>Sun, 18 Jun 2023 17:33:05 +0000</pubDate>
+</item>
+<item>
+<title>Reusable Designated Verifier NIZK from Lossy Trapdoor Functions</title>
+<link>https://eprint.iacr.org/2025/1125</link>
+<guid>https://eprint.iacr.org/2025/1125</guid>
+<content:encoded><![CDATA[
+
+Understanding the minimal assumptions necessary for constructing non-interactive zero-knowledge arguments (NIZKs) for NP and placing it within the hierarchy of cryptographic primitives has been a central goal in cryptography. Unfortunately, there are very few examples of ``generic'' constructions of NIZKs or any of its natural relaxations.
+
+In this work, we consider the relaxation of NIZKs to the designated-verifier model (DV-NIZK) and present a new framework for  constructing (reusable) DV-NIZKs for NP generically from  lossy trapdoor functions and PRFs computable by polynomial-size branching programs (a class that includes NC1). Previous ``generic'' constructions  of DV-NIZK for NP from standard primitives relied either on (doubly-enhanced) trapdoor permutations or on a public-key encryption scheme plus a KDM-secure secret key encryption scheme.
+
+Notably, our DV-NIZK framework achieves statistical zero-knowledge. To our knowledge, this is the first DV-NIZK construction from any ``generic" standard assumption with statistical zero-knowledge that does not already yield a NIZK. 
+
+A key technical component of our construction is an efficient, unconditionally secure secret sharing scheme for non-monotone functions with randomness recovery for all polynomial-size branching programs. As an independent contribution we present an incomparable randomness recoverable (monotone) secret sharing for NC1 in a model with trusted setup that guarantees computational privacy assuming one-way functions. We believe that these primitives will be useful in related contexts in the future.
+]]></content:encoded>
+<pubDate>Sat, 14 Jun 2025 17:30:36 +0000</pubDate>
+<pubDate>Sat, 14 Jun 2025 17:30:36 +0000</pubDate>
+</item>
+<item>
+<title>Toxic Decoys: A Path to Scaling Privacy-Preserving Cryptocurrencies</title>
+<link>https://eprint.iacr.org/2025/1124</link>
+<guid>https://eprint.iacr.org/2025/1124</guid>
+<content:encoded><![CDATA[
+
+Anonymous cryptocurrencies attracted much attention over the past decade, yet ensuring both integrity and privacy in an open system remains challenging. Their transactions preserve privacy because they do not reveal on which earlier transaction they depend, specifically which outputs of previous transactions are spent. However, achieving privacy imposes a significant storage overhead due to two current limitations. First, the set of potentially unspent outputs of transactions grows indefinitely because the design hides cryptographically which one have been consumed; and, second, additional data must be stored for each spent output to ensure integrity, that is, to prevent that it can be spent again. We introduce a privacy-preserving payment scheme that mitigates these issues by randomly partitioning unspent outputs into fixed-size bins. Once a bin has been referenced in as many transactions as its size, it is pruned from the ledger. This approach reduces storage overhead while preserving privacy. We first highlight the scalability benefits of using smaller untraceability sets instead of considering the entire set of outputs, as done in several privacy-preserving cryptocurrencies. We then formalize the security and privacy notions required for a scalable, privacy-preserving payment system and analyze how randomized partitioning plays a key role in both untraceability and scalability. To instantiate our approach, we provide constructions based on Merkle trees and one based on cryptographic accumulators. We finally show the storage benefits of our scheme and analyze its resilience against large-scale flooding attacks using empirical transaction data.
+]]></content:encoded>
+<pubDate>Sat, 14 Jun 2025 16:52:16 +0000</pubDate>
+<pubDate>Sat, 14 Jun 2025 16:52:16 +0000</pubDate>
+</item>
+<item>
+<title>Strong Secret Sharing with Snitching</title>
+<link>https://eprint.iacr.org/2025/1119</link>
+<guid>https://eprint.iacr.org/2025/1119</guid>
+<content:encoded><![CDATA[
+
+One of the main shortcomings of classical distributed cryptography is its reliance on a certain fraction of participants remaining honest. Typically, honest parties are assumed to follow the protocol and not leak any information, even if behaving dishonestly would benefit them economically. More realistic models used in blockchain consensus rely on weaker assumptions, namely that no large coalition of corrupt parties exists, although every party can act selfishly. This is feasible since, in a consensus protocol, active misbehavior can be detected and "punished" by other parties. However, "information leakage", where an adversary reveals sensitive information via, e.g., a subliminal channel, is often impossible to detect and, hence, much more challenging to handle.
+
+    A recent approach to address this problem was proposed by Dziembowski, Faust, Lizurej, and Mielniczuk (ACM CCS 2024), who introduced a new notion called secret sharing with snitching. This primitive guarantees that as long as no large coalition of mutually trusting parties exists, every leakage of the shared secret produces a "snitching proof" indicating that some party participated in the illegal secret reconstruction. This holds in a very strong model, where mutually distrusting parties use an MPC protocol to reconstruct any information about the shared secret. Such a "snitching proof" can be sent to a smart contract (modeled as a "judge") deployed on the blockchain, which punishes the aving party financially.
+
+    In this paper, we extend the results from the work of CCS'24  by addressing its two main shortcomings. Firstly, we significantly strengthen the attack model by considering the case when mutually distrusting parties can also rely on a trusted third party (e.g., a smart contract). We call this new primitive strong secret sharing with snitching (SSSS). 
+    We present an SSSS protocol that is secure in this model. Secondly, unlike in the construction from CCS'24, our protocol does not require the honest parties to perform any MPC computations on hash functions. Besides its theoretical interest, this improvement is of practical importance, as it allows the construction of SSSS from any (even very "MPC-unfriendly") hash function.
+]]></content:encoded>
+<pubDate>Fri, 13 Jun 2025 16:06:13 +0000</pubDate>
+<pubDate>Fri, 13 Jun 2025 16:06:13 +0000</pubDate>
+</item>
+<item>
+<title>The Pipes Model for Latency Analysis</title>
+<link>https://eprint.iacr.org/2025/1116</link>
+<guid>https://eprint.iacr.org/2025/1116</guid>
+<content:encoded><![CDATA[
+
+Protocols for State-Machine-Replication (sometimes called 'blockchain' protocols)  generally make use of rotating leaders to drive consensus. In typical protocols (henceforth called 'single-sender' protocols), the leader is a single processor responsible for making and disseminating proposals to others. Since the leader acts as a bottleneck, apparently limiting throughput, a recent line of research has investigated the use of 'multi-sender' protocols in which many processors distribute proposals in parallel. Examples include DAG-based protocols such as DAG-Rider, Bullshark, Sailfish, Cordial Miners, Mysticeti, and variants such as Autobahn. However, existing models do not allow for a formal analysis to determine whether these protocols can actually handle higher throughputs than single-sender protocols such as PBFT, Tendermint, and HotStuff.
+
+In this paper, we describe a very simple model that allows for such an analysis. For any given protocol, the model allows one to calculate latency as a function of  network bandwidth, network delays, the number of processors $n$, and the incoming transaction rate. Each protocol has a latency bottleneck: an incoming transaction rate at which latency becomes unbounded over the protocol execution, i.e., a maximum throughput that the protocol can handle without unbounded latency.  
+
+With the aim of building to an analysis for state-of-the-art State-Machine-Replication (SMR) protocols, we begin by considering protocols for simpler primitives, such as Best-effort Broadcast and Reliable Broadcast. For Best-effort Broadcast, we establish a tight lower bound on latency for single-sender and multi-sender protocols when blocks are distributed without the use of techniques such as erasure coding. Perhaps unsurprisingly, a key difference between the single-sender and multi-sender approaches in this case is a factor $n$ in the point at which the latency bottleneck appears. However, for other primitives such as Reliable Broadcast,  our results may be more surprising: the factor $n$ difference now disappears, and maximum throughput for the two approaches differs by a constant factor, while multi-sender approaches will generally have latency that grows more quickly with $n$. For state-of-the-art SMR protocols, the picture that emerges is one with seemingly inherent trade-offs. If one compares single-sender protocols that use pipelining and erasure coding, such as DispersedSimplex, with DAG-based protocols such as Sailfish or Bullshark, the former are seen to have lower latency for a wide range of throughputs, while the benefit of the latter protocols is that they have  a latency bottleneck which is higher by a constant factor.
+]]></content:encoded>
+<pubDate>Fri, 13 Jun 2025 13:42:36 +0000</pubDate>
+<pubDate>Fri, 13 Jun 2025 13:42:36 +0000</pubDate>
+</item>
+<item>
+<title>High-Throughput Permissionless Blockchain Consensus under   Realistic Network Assumptions</title>
+<link>https://eprint.iacr.org/2025/1115</link>
+<guid>https://eprint.iacr.org/2025/1115</guid>
+<content:encoded><![CDATA[
+
+Throughput, i.e., the amount of payload data processed per unit of
+  time, is a crucial measure of scalability for blockchain consensus
+  mechanisms.  This paper revisits the design of secure,
+  high-throughput proof-of-stake (PoS) protocols in the
+  \emph{permissionless} setting.  Existing high-throughput protocols
+  are either analyzed using overly simplified network models or are
+  designed for permissioned settings, with the task of adapting them
+  to a permissionless environment while maintaining both scalability
+  and adaptive security (which is essential in permissionless
+  environments) remaining an open question. 
+
+  Two particular challenges arise when designing high-throughput
+  protocols in a permissionless setting: \emph{message bursts}, where
+  the adversary simultaneously releases a large volume of withheld
+  protocol messages, and---in the PoS setting---\emph{message
+    equivocations}, where the adversary diffuses arbitrarily many
+  versions of a protocol message.  It is essential for the security of
+  the ultimately deployed protocol that these issues be captured by
+  the network model.
+
+  Therefore, this work first introduces a new, realistic network model
+  based on the operation of real-world gossip networks---the standard
+  means of diffusion in permissionless systems, which may involve
+  many thousands of nodes.  The model specifically addresses challenges
+  such as message bursts and PoS equivocations and is also of
+  independent interest.
+
+  The second and main contribution of this paper is Leios, a
+  blockchain protocol that transforms any underlying low-throughput
+  base protocol into a blockchain achieving a throughput corresponding
+  to a $(1-\delta)$-fraction of the network capacity---while affecting
+  latency only by a related constant.  In particular, if the
+  underlying protocol has constant expected settlement time, this
+  property is retained under the Leios overlay.  Combining Leios with
+  any permissionless protocol yields the first near-optimal throughput
+  permissionless ``layer-1'' blockchain protocol proven secure under
+  realistic network assumptions.
+]]></content:encoded>
+<pubDate>Fri, 13 Jun 2025 12:31:55 +0000</pubDate>
+<pubDate>Fri, 13 Jun 2025 12:31:55 +0000</pubDate>
+</item>
+
+<item>
 <title>Sassafras: Efficient Batch Single Leader Election</title>
 <link>https://eprint.iacr.org/2023/031</link>
 <guid>https://eprint.iacr.org/2023/031</guid>
 <content:encoded><![CDATA[
-
 In a single secret leader election (SSLE), a set of participants elect exactly one leader, who remains anonymous until they announce themselves by providing a proof. SSLE protocols are used in proof-of-stake blockchains to elect the leader who publishes the next block. Anonymity of the leader is an important security property, as the leader makes for an attractive target and may be subject to denial-of-service (DOS) attacks.
 
 In this work, we propose a novel single leader election protocol, called Sassafras. We depart from the common approach of shuffling for constructing SSLE and instead employ a ring verifiable random function, which hides the identity of the leader within a ring of participants. Moreover, Sassafras is designed for batch leader elections, in which a single leader is selected for several elections at once. This allows the rate of leader election to match the rate of block production, an often-sought property not met by most SSLE protocols in the literature. We characterize single leader election with batching in the form of an ideal functionality in the Universal Composability (UC) framework and prove that Sassafras realizes this functionality. Sassafras is secure against an adaptive adversary, while achieving a slightly relaxed notion of anonymity for leaders. Sassafras features exceptionally low communication and computational complexity, outperforming other SSLE protocols by an order of magnitude or more.
 ]]></content:encoded>
 <pubDate>Tue, 10 Jan 2023 11:55:15 +0000</pubDate>
-<pubDate>Tue, 10 Jan 2023 11:55:15 +0000</pubDate>
 </item>
-
 <item>
 <title>SEAF: Secure Evaluation on Activation Functions with Dynamic Precision for Secure Two-Party Inference</title>
 <link>https://eprint.iacr.org/2025/1111</link>
