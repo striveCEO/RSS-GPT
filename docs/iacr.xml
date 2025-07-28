@@ -4,6 +4,60 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+<item>
+<title>Post-Quantum Readiness in EdDSA Chains</title>
+<link>https://eprint.iacr.org/2025/1368</link>
+<guid>https://eprint.iacr.org/2025/1368</guid>
+<content:encoded><![CDATA[
+
+The impending threat posed by large-scale quantum computers necessitates a reevaluation of signature schemes deployed in blockchain protocols. In particular, blockchains relying on ECDSA, such as Bitcoin and Ethereum, exhibit inherent vulnerabilities due to on-chain public key exposure and the lack of post-quantum security guarantees. Although several post-quantum transition proposals have been introduced, including hybrid constructions and zero-knowledge-based key migration protocols, these approaches often fail to protect inactive "sleeping" accounts, are cumbersome, or require address changes, violating core immutability and full backward compatibility assumptions.
+
+In this work, we observe that blockchains employing EdDSA with RFC 8032-compliant key derivation (e.g., Sui, Solana, Near, Stellar, Aptos, Cosmos) possess an underexplored structural advantage. Specifically, EdDSA’s hash-based deterministic secret key generation enables post-quantum zero-knowledge proofs of elliptic curve private key ownership, which can help switching to a quantum-safe algorithm proactively without requiring transfer of assets to new addresses.
+
+We demonstrate how Post-Quantum NIZKs can be constructed to prove knowledge of the "seed" used in EdDSA key derivation, enabling post-quantum-secure transaction authorization without altering addresses or disclosing elliptic curve data. By post-quantum readiness, we mean that with a single user action all future signatures can be made post-quantum secure, even if past transactions used classical elliptic curve cryptography. This allows even users who have previously exposed their public key to seamlessly enter the post-quantum era without transferring assets or changing their account address.
+
+As part of this analysis, we also show that BIP32-based ECDSA wallets are not post-quantum ready without breaking changes, as they rely on direct scalar exposure in derivation, making backward-compatible upgrades infeasible. In contrast, SLIP-0010  hash-chain based EdDSA private key derivation provides a foundation for seamless, backwards-compatible migration to quantum-safe wallets, supporting secure upgrades even for dormant or legacy accounts.
+
+This mechanism affords a quantum-resilient path and is the first of its kind that preserves full backward compatibility, supports account abstraction, and critically secures dormant accounts, whether from users or custodians, that would otherwise be compromised under quantum adversaries.
+]]></content:encoded>
+<pubDate>Sat, 26 Jul 2025 13:48:05 +0000</pubDate>
+<pubDate>Sat, 26 Jul 2025 13:48:05 +0000</pubDate>
+</item>
+<item>
+<title>Randomized Distributed Function Computation (RDFC): Ultra-Efficient Semantic Communication Applications to Privacy</title>
+<link>https://eprint.iacr.org/2025/1370</link>
+<guid>https://eprint.iacr.org/2025/1370</guid>
+<content:encoded><![CDATA[
+
+We establish the randomized distributed function computation (RDFC) framework, in which a sender transmits just enough information for a receiver to generate a randomized function of the input data. Describing RDFC as a form of semantic communication, which can be essentially seen as a generalized remote‑source‑coding problem, we show that security and privacy constraints naturally fit this model, as they generally require a randomization step. Using strong coordination metrics, we ensure (local differential) privacy for every input sequence and prove that such guarantees can be met even when no common randomness is shared between the transmitter and receiver.
+
+This work provides lower bounds on Wyner's common information (WCI), which is the communication cost when common randomness is absent, and proposes numerical techniques to evaluate the other corner point of the RDFC rate region for continuous‑alphabet random variables with unlimited shared randomness. Experiments illustrate that a sufficient amount of common randomness can reduce the semantic communication rate by up to two orders of magnitude compared to the WCI point, while RDFC without any shared randomness still outperforms lossless transmission by a large margin. A finite blocklength analysis further confirms that the privacy parameter gap between the asymptotic and non-asymptotic RDFC methods closes exponentially fast with input length. Our results position RDFC as an energy-efficient semantic communication strategy for privacy‑aware distributed computation systems.
+]]></content:encoded>
+<pubDate>Sun, 27 Jul 2025 14:13:47 +0000</pubDate>
+<pubDate>Sun, 27 Jul 2025 14:13:47 +0000</pubDate>
+</item>
+<item>
+<title>Encrypted Matrix Multiplication Using 3-Dimensional Rotations</title>
+<link>https://eprint.iacr.org/2025/1367</link>
+<guid>https://eprint.iacr.org/2025/1367</guid>
+<content:encoded><![CDATA[
+
+Fully homomorphic encryption (FHE) enables computations over encrypted data without the need for decryption.  Recently there has been an increased interest in developing FHE based algorithms to facilitate encrypted matrix multiplication (EMM) due to rising data security concerns surrounding cyber-physical systems, sensor processing, blockchain, and machine learning.  Presently, FHE operations have a high computational overhead, resulting in an increased need for low operational complexity algorithms to compensate.  We present a novel matrix encoding and EMM algorithm for power-of-2 cyclotomic based rings, utilizing three-dimensional rotations which offer improvements over the one-dimensional rotations used in previous work.  We encode each $d \times d$ matrix as a single, batch-encoded, ciphertext, with minimum ciphertext size $d^3$.  The proposed algorithm improves the number of plaintext-ciphertext multiplications from $O(d)$ to $O(1)$ and the number of rotations from $O(d)$ to $O(\log_2{d})$.  In addition, our work supports rectangular matrix multiplication and matrix packing without incurring additional operations per execution.  Benchmarks were obtained with a Microsoft SEAL implementation and compared against leading EMM algorithm, with our work performing $4$ times faster for $16 \times 16$ matrices on consumer hardware.  Our algorithm is compatible with existing encrypted machine learning frameworks and can be a drop-in replacement for existing matrix multiplication algorithms for increased speed.  The favorable time complexity is well suited for time sensitive encrypted algorithms such as computer vision, controls, and patient health monitoring.
+]]></content:encoded>
+<pubDate>Sat, 26 Jul 2025 03:13:40 +0000</pubDate>
+<pubDate>Sat, 26 Jul 2025 03:13:40 +0000</pubDate>
+</item>
+<item>
+<title>Towards Efficient Privacy-Preserving Machine Learning: A Systematic Review from Protocol, Model, and System Perspectives</title>
+<link>https://eprint.iacr.org/2025/1365</link>
+<guid>https://eprint.iacr.org/2025/1365</guid>
+<content:encoded><![CDATA[
+
+Privacy-preserving machine learning (PPML) based on cryptographic protocols has emerged as a promising paradigm to protect user data privacy in cloud-based machine learning services. While it achieves formal privacy protection, PPML often incurs significant efficiency and scalability costs due to orders of magnitude overhead compared to the plaintext counterpart. Therefore, there has been a considerable focus on mitigating the efficiency gap for PPML. In this survey, we provide a comprehensive and systematic review of recent PPML studies with a focus on cross-level optimizations. Specifically, we categorize existing papers into protocol level, model level, and system level, and review progress at each level. We also provide qualitative and quantitative comparisons of existing works with technical insights, based on which we discuss future research directions and highlight the necessity of integrating optimizations across protocol, model, and system levels. We hope this survey can provide an overarching understanding of existing approaches and potentially inspire future breakthroughs in the PPML field. As the field is evolving fast, we also provide a public GitHub repository to continuously track the developments, which is available at https://github.com/PKU-SEC-Lab/Awesome-PPML-Papers.
+]]></content:encoded>
+<pubDate>Fri, 25 Jul 2025 16:24:56 +0000</pubDate>
+<pubDate>Fri, 25 Jul 2025 16:24:56 +0000</pubDate>
+</item>
 
 <item>
 <title>Universally Composable Adaptor Signatures</title>
