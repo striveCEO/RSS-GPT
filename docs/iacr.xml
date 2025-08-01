@@ -5,20 +5,33 @@
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
 <item>
+<title>Optimizing Backend Verification in zk-Rollup Architectures</title>
+<link>https://eprint.iacr.org/2025/1390</link>
+<guid>https://eprint.iacr.org/2025/1390</guid>
+<content:encoded><![CDATA[
+
+Zero-knowledge rollups represent a critical scaling solution for Ethereum, yet their practical deployment faces significant challenges in on-chain verification costs. This paper presents a comprehensive implementation of the Tokamak zkEVM verifier, specifically optimized for the BLS12-381 elliptic curve operations introduced by EIP-2537. We detail the complete verification architecture, from EVM compatible data formatting for pairing checks, multi-scalar multiplication (MSM), and elliptic curve
+addition, to the non-interactive protocol design between prover and verifier.
+Our key contribution lies in novel optimization techniques that substantially reduce on-chain verification costs. Through strategic polynomial aggregation and scalar factorization, we minimize G1 exponentiations from 40 to 31, achieving gas savings of 108,000 units per verification. Additionally, we introduce a dynamic barycentric interpolation method that replaces computationally intensive FFT operations,
+resulting in 92-95% gas reduction for sparse polynomial evaluations. We further present proof aggregation strategies that minimize precompile calls while maintaining the 128-bit security guarantees of BLS12-381.
+Our implementation demonstrates that careful protocol design and mathematical optimizations can make zk-rollup verification economically viable on Ethereum. The techniques presented are compatible with the upcoming Pectra upgrade and provide a blueprint for efficient on-chain verification of complex zero-knowledge proofs. Experimental results show total gas costs reduced from 857,200 to 748,450 units for complete proof verification, making our approach practical for high-throughput rollup deployments.
+]]></content:encoded>
+<pubDate>Thu, 31 Jul 2025 08:44:05 +0000</pubDate>
+<pubDate>Thu, 31 Jul 2025 08:44:05 +0000</pubDate>
+</item>
+
+<item>
 <title>Collaborative zkSNARKs with Sublinear Prover Time and Constant Proof Size</title>
 <link>https://eprint.iacr.org/2025/1388</link>
 <guid>https://eprint.iacr.org/2025/1388</guid>
 <content:encoded><![CDATA[
-
 Collaborative zkSNARKs, proposed by Ozdemir and Boneh in 2022, allow a prover to delegate the generation of zkSNARK proofs to multiple servers, without compromising the confidentiality of the secret witness. They enable the use of zkSNARK techniques on computational limited devices in critical applications such as blockchains. However, the running time of each server is at least as slow as computing the proof on a single server. Garg et al. attempted to improve the efficiency in their scheme named zkSaaS using packed secret sharing, but the scheme still requires a powerful central server with linear computation, communication and memory usage. 
 
     In this paper, we propose a new collaborative zkSNARK scheme with $O(\frac{C}{n}\log\frac{C}{n})$ prover time and $O(1)$ proof size with $n$ servers for a circuit of size $C$. An adversary compromising less than $\frac{n}{4}$ servers cannot learn any information about the witness. The core of our technique lies in a new zkSNARK scheme for the Plonkish constraint system that is friendly to packed secret sharing. We utilize bivariate polynomials to avoid a large Fast Fourier Transform on the entire witness, which was the major bottleneck in prior work. We also construct permutation constraints based on logarithmic derivatives and univariate sumcheck to avoid the computation of prefix products. Finally, we build a bivariate polynomial commitment scheme that can be computed directly on packed secret shares. 
     Experimental results show that for a circuit of size $2^{20}$, with 128 servers, our scheme can accelerate the proof generation by 36.2$\times$ compared to running the zkSNARK on a single server. The prover time of our system is 25.9$\times$ faster than the prior work of zkSaaS. The proof size of our scheme is only 960 Bytes.
 ]]></content:encoded>
 <pubDate>Wed, 30 Jul 2025 21:55:49 +0000</pubDate>
-<pubDate>Wed, 30 Jul 2025 21:55:49 +0000</pubDate>
 </item>
-
 <item>
 <title>Multi-party Setup Ceremony for Generating Tokamak zk-SNARK Parameters</title>
 <link>https://eprint.iacr.org/2024/1671</link>
