@@ -5,20 +5,32 @@
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
 <item>
+<title>Collaborative zkSNARKs with Sublinear Prover Time and Constant Proof Size</title>
+<link>https://eprint.iacr.org/2025/1388</link>
+<guid>https://eprint.iacr.org/2025/1388</guid>
+<content:encoded><![CDATA[
+
+Collaborative zkSNARKs, proposed by Ozdemir and Boneh in 2022, allow a prover to delegate the generation of zkSNARK proofs to multiple servers, without compromising the confidentiality of the secret witness. They enable the use of zkSNARK techniques on computational limited devices in critical applications such as blockchains. However, the running time of each server is at least as slow as computing the proof on a single server. Garg et al. attempted to improve the efficiency in their scheme named zkSaaS using packed secret sharing, but the scheme still requires a powerful central server with linear computation, communication and memory usage. 
+
+    In this paper, we propose a new collaborative zkSNARK scheme with $O(\frac{C}{n}\log\frac{C}{n})$ prover time and $O(1)$ proof size with $n$ servers for a circuit of size $C$. An adversary compromising less than $\frac{n}{4}$ servers cannot learn any information about the witness. The core of our technique lies in a new zkSNARK scheme for the Plonkish constraint system that is friendly to packed secret sharing. We utilize bivariate polynomials to avoid a large Fast Fourier Transform on the entire witness, which was the major bottleneck in prior work. We also construct permutation constraints based on logarithmic derivatives and univariate sumcheck to avoid the computation of prefix products. Finally, we build a bivariate polynomial commitment scheme that can be computed directly on packed secret shares. 
+    Experimental results show that for a circuit of size $2^{20}$, with 128 servers, our scheme can accelerate the proof generation by 36.2$\times$ compared to running the zkSNARK on a single server. The prover time of our system is 25.9$\times$ faster than the prior work of zkSaaS. The proof size of our scheme is only 960 Bytes.
+]]></content:encoded>
+<pubDate>Wed, 30 Jul 2025 21:55:49 +0000</pubDate>
+<pubDate>Wed, 30 Jul 2025 21:55:49 +0000</pubDate>
+</item>
+
+<item>
 <title>Multi-party Setup Ceremony for Generating Tokamak zk-SNARK Parameters</title>
 <link>https://eprint.iacr.org/2024/1671</link>
 <guid>https://eprint.iacr.org/2024/1671</guid>
 <content:encoded><![CDATA[
-
 The development of succinct non-interactive arguments of knowledge (SNARKs), which maintain a constant proof size regardless of computation complexity, has led to substantial improvements in both the scalability and privacy of verifiable computations. By enabling efficient verification of complex computations without revealing sensitive data, SNARKs have emerged as a fundamental building block for privacy-preserving and resource-efficient cryptographic protocols.
 This document provides a specification guide for the Multi-Party Computation (MPC) setup ceremony for the Tokamak zk-SNARK scheme. Building upon the MMORPG protocol proposed in BGM17 for Groth16 setup generation, a new protocol has been developed. Although the Tokamak zk-SNARK setup parameters share some similarities with Groth16, they also have unique characteristics and certain parameter differences that necessitate distinct generation procedures. By analyzing the MMORPG scheme, an improved and generalized MPC protocol is proposed to support the Tokamak zk-SNARK setup ceremony. In this work, we present the design details of our efficient scheme proposed for the MPC setup ceremony.
 The Tokamak zk-SNARK employs a universal setup based on a subcircuit library, enabling reuse of the common reference string (CRS) across multiple circuit instantiations. This design not only minimizes the need for repeated trustless setups but also enhances verifier preprocessing efficiency by reducing the dimensionality of circuit-specific data. The document further provides comprehensive pseudocode specifications for various parameter generation procedures in the MPC setup phase. In addition, this work presents a detailed construction of the Tokamak zk-SNARK setup ceremony under the assumption that at least one honest participant is present. The ceremony is structured into two distinct phases. In the first phase, parameters independent of the subcircuit configuration are generated. Following this preparation, the second phase proceeds according to the universal circuit paradigm, where circuit-specific parameters are generated. For this phase, detailed descriptions are provided for each participant’s computation and corresponding verification procedures. While the protocol fundamentally assumes the existence of at least one honest participant, the use of a random beacon—as introduced in the MMORPG protocol—remains optional and is supported within the design. The document also includes design specifications for the integration of random beacon
 functionality when desired.
 ]]></content:encoded>
 <pubDate>Tue, 15 Oct 2024 09:30:11 +0000</pubDate>
-<pubDate>Tue, 15 Oct 2024 09:30:11 +0000</pubDate>
 </item>
-
 <item>
 <title>Blockchain-Based Decentralized Domain Name System</title>
 <link>https://eprint.iacr.org/2025/1381</link>
