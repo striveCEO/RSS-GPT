@@ -4,6 +4,102 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+<item>
+<title>$\mathsf{Cirrus}$: Performant and Accountable Distributed SNARK</title>
+<link>https://eprint.iacr.org/2024/1873</link>
+<guid>https://eprint.iacr.org/2024/1873</guid>
+<content:encoded><![CDATA[
+
+Succinct Non-interactive Arguments of Knowledge (SNARKs) can enable efficient verification of computation in many applications. However, generating SNARK proofs for large-scale tasks, such as verifiable machine learning or virtual machines, remains computationally expensive. A promising approach is to distribute the proof generation workload across multiple workers. A practical distributed SNARK protocol should have three properties: horizontal scalability with low overhead (linear computation and logarithmic communication per worker), accountability (efficient detection of malicious workers), and a universal trusted setup independent of circuits and the number of workers. Existing protocols fail to achieve all these properties.
+
+In this paper, we present $\mathsf{Cirrus}$, the first distributed SNARK generation protocol achieving all three desirable properties at once. Our protocol builds on HyperPlonk (EUROCRYPT'23), inheriting its universal trusted setup. It achieves linear computation complexity for both workers and the coordinator, along with low communication overhead. To achieve accountability, we introduce a highly efficient accountability protocol to localize malicious workers. Additionally, we propose a hierarchical aggregation technique to further reduce the coordinator’s workload.
+
+We implemented and evaluated $\mathsf{Cirrus}$ on machines with modest hardware. Our experiments show that $\mathsf{Cirrus}$ is highly scalable: it generates proofs for circuits with $33$M gates in under $40$ seconds using $32$ $8$-core machines. Compared to the state-of-the-art accountable protocol Hekaton (CCS'24), \protname achieves over $7\times$ faster proof generation for PLONK-friendly circuits such as the Pedersen hash. Our accountability protocol also efficiently identifies faulty workers within just $4$ seconds, making $\mathsf{Cirrus}$ particularly suitable for decentralized and outsourced computation scenarios.
+]]></content:encoded>
+<pubDate>Sat, 16 Nov 2024 00:27:53 +0000</pubDate>
+<pubDate>Sat, 16 Nov 2024 00:27:53 +0000</pubDate>
+</item>
+<item>
+<title>Secure Protocols for Best Arm Identification Using Secret Sharing Schemes</title>
+<link>https://eprint.iacr.org/2025/1438</link>
+<guid>https://eprint.iacr.org/2025/1438</guid>
+<content:encoded><![CDATA[
+
+This paper addresses the challenge of best arm identification in stochastic multi-armed bandit (MAB) models under privacy-preserving constraints, such as in dynamic spectrum access networks where secondary users must privately detect underutilized channels. While previous network security research has explored securing MAB algorithms through techniques such as homomorphic encryption or differential privacy, these methods often suffer from high computational overhead or introduce noise that strictly decreases accuracy. In contrast, this work focuses on lightweight  solutions that ensure data confidentiality without compromising the accuracy of best arm identification. We introduce two secure protocols that leverage additive secret sharing and threshold secret sharing. The proposed model, employing aggregation nodes  and a comparator node, securely distributes computations to prevent any entity from accessing complete reward or ranking data. Furthermore, the protocol ensures resistance to collusion  and fault tolerance, while maintaining computational efficiency. These contributions establish a scalable and robust framework for privacy-preserving best arm identification, offering practical and secure solutions that use MAB methods for network security.
+]]></content:encoded>
+<pubDate>Thu, 07 Aug 2025 13:39:14 +0000</pubDate>
+<pubDate>Thu, 07 Aug 2025 13:39:14 +0000</pubDate>
+</item>
+<item>
+<title>TLShare: Private Authenticated MPC and FHE Inputs Over TLS</title>
+<link>https://eprint.iacr.org/2025/1434</link>
+<guid>https://eprint.iacr.org/2025/1434</guid>
+<content:encoded><![CDATA[
+
+Transport Layer Security (TLS) is the backbone of the web, allowing clients to establish secure and private channels with servers. DECO (CCS'20) and follow-up works proposed protocols that enable proving the provenance of a TLS response, i.e., that a payload came from a particular server, without needing server-side modifications. Unfortunately, these works are limited to proving Boolean statements over the payload (e.g., age $\ge$ 18) and cannot combine payloads from multiple clients.
+
+We introduce TLShare, a framework that extracts authenticated data from a TLS connection and imports it into secure multiparty computation (MPC) or fully homomorphic encryption (FHE), without requiring server-side changes or exposing client credentials. Unlike prior work, TLShare allows the payload itself, not just a predicate about it, to serve as private input to secure downstream computation. TLShare supports combining verifiable inputs across multiple clients and servers, enabling new applications such as privacy-preserving financial risk assessment and collaborative analytics. We design three protocols for TLShare: one for MPC using verifiable secret sharing, and two for FHE using interactive and non-interactive zero-knowledge proofs, each ensuring input authenticity, integrity, and end-to-end privacy. We evaluate all three protocols of TLShare over both LAN and WAN settings, comparing their trade-offs and demonstrating their practicality.
+]]></content:encoded>
+<pubDate>Wed, 06 Aug 2025 21:05:21 +0000</pubDate>
+<pubDate>Wed, 06 Aug 2025 21:05:21 +0000</pubDate>
+</item>
+<item>
+<title>A Fully-Adaptive Threshold Partially-Oblivious PRF</title>
+<link>https://eprint.iacr.org/2025/1433</link>
+<guid>https://eprint.iacr.org/2025/1433</guid>
+<content:encoded><![CDATA[
+
+Oblivious Pseudorandom Functions (OPRFs) are fundamental cryptographic primitives essential for privacy-enhancing technologies such as private set intersection, oblivious keyword search, and password-based authentication protocols. We present the first fully adaptive, partially oblivious threshold pseudorandom function that supports proactive key refresh and provides composable security under the One-More Gap Diffie-Hellman assumption in the random oracle model.
+
+Our construction is secure with respect to a new ideal functionality for OPRFs that addresses three critical shortcomings of previous models–specifically, key refresh and non-verifiability issues that rendered them unrealizable. In addition, we identify a gap in a prior work's proof of partial obliviousness and develop a novel proof technique to salvage their scheme.
+]]></content:encoded>
+<pubDate>Wed, 06 Aug 2025 13:01:01 +0000</pubDate>
+<pubDate>Wed, 06 Aug 2025 13:01:01 +0000</pubDate>
+</item>
+<item>
+<title>Strategic Mining in Proof-of-Stake with Practical Random Election</title>
+<link>https://eprint.iacr.org/2025/1428</link>
+<guid>https://eprint.iacr.org/2025/1428</guid>
+<content:encoded><![CDATA[
+
+The security of blockchain systems relies on the honest ma-
+jority assumption. However, strategic mining threatens this assumption,
+because selfish miners can gain more block rewards than honest miners
+by attacks such as withholding blocks. Due to its significant implica-
+tion, blockchain mining games have been studied in PoW and PoS under
+various settings using different methods. Nonetheless, this paper argues
+that the practical limitation of random beacons has not been exploited
+in strategic mining in PoS blockchains.
+Current PoS blockchains use random beacons to randomly select valida-
+tors for each slots. However, the randomness is usually fixed for multiple
+slots, due to the latency of distributed random beacon protocols. This
+indicates that validators actually know some information about the elec-
+tion result in the future, which contrasts with the Markov process models
+in previous analysis. Using this information, this paper presents a close
+to optimal mining strategy based on an optimal interval scheduling algo-
+rithm for each epoch. For proof-of-stake protocols with no propagation
+delay, we show that a validator with arbitrary proportion of stake can
+strictly benefit from strategic mining and get significantly higher block
+rewards than the previous strategies.
+]]></content:encoded>
+<pubDate>Tue, 05 Aug 2025 23:01:54 +0000</pubDate>
+<pubDate>Tue, 05 Aug 2025 23:01:54 +0000</pubDate>
+</item>
+<item>
+<title>Lodia: Towards Optimal Sparse Matrix-Vector Multiplication for Batched Fully Homomorphic Encryption</title>
+<link>https://eprint.iacr.org/2025/1425</link>
+<guid>https://eprint.iacr.org/2025/1425</guid>
+<content:encoded><![CDATA[
+
+Encrypted matrix-vector multiplication is a fundamental component of a variety of applications that involve data privacy concerns. Current algorithms utilizing fully homomorphic encryption (FHE) generally use batching to enhance computational efficiency while neglecting the sparsity of the matrices, a characteristic that exists naturally in many practical situations. Alternatively, porting plaintext algorithms that address sparsity may fail to utilize batching and introduce additional privacy concerns.
+
+We propose Lodia, an efficient outsourced SpMV algorithm for batched FHE schemes without sacrificing privacy. It only requires $\Theta((n+m)\log(n+m)/s)$ FHE operations, where $n$ is the number of rows/columns, $m$ is the number of non-zero elements of the matrix, and $s$ is the batch size of the FHE scheme. This is optimal for $m=\Omega(n)$ and $m=O(n^\rho)$ for some $\rho<2$ (i.e., $an \le m \le bn^\rho$ asymptotically), covering most practical cases. To our knowledge, no method has been published with better than $\Theta(n^2/s)$ FHE operations, suitable for any sparse matrix, and without privacy concerns.
+
+Lodia utilizes a novel low-diagonal decomposition, which decomposes a sparse matrix into a series of special matrices named low-diagonal matrices. Based on a conventional method encoding the matrix in diagonal order, each low-diagonal matrix can be efficiently multiplied by a vector. This results in an efficient SpMV method suitable for any sparse matrix. Experiments show that Lodia practically achieves a speedup of up to $96\times$ compared to baselines that ignore matrix sparsity, and up to $3.6\times$ compared to implementations even with fewer security guarantees. This is the first SpMV solution on encrypted data that can process a substantial matrix with over 8 million rows/columns and 125 million non-zero elements.
+]]></content:encoded>
+<pubDate>Tue, 05 Aug 2025 07:56:35 +0000</pubDate>
+<pubDate>Tue, 05 Aug 2025 07:56:35 +0000</pubDate>
+</item>
 
 <item>
 <title>Efficient randomized strong $2$-source non-malleable extractor for any linear min-entropy</title>
