@@ -5,18 +5,130 @@
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
 <item>
+<title>AUPCH: Auditable Unlinkable Payment Channel Hubs</title>
+<link>https://eprint.iacr.org/2025/1524</link>
+<guid>https://eprint.iacr.org/2025/1524</guid>
+<content:encoded><![CDATA[
+
+Cryptocurrencies, which have gained significant adoption in
+recent years, face ongoing challenges in scalability and privacy. Payment
+Channel Hubs (PCHs) constitute a solution to both issues by shifting
+transactions off the public ledger. Various PCH constructions have been
+proposed, offering different degrees of unlinkability, efficiency, and inter-
+operability. However, regulatory compliance remains a significant con-
+cern, particularly under emerging frameworks like the EU’s Markets in
+Crypto-Assets (MiCA) regulation and FATF Travel Rule requirements.
+This work addresses a gap in existing PCH constructions: the lack of
+regulatory-compliant auditability mechanisms. While concurrent work
+AuditPCH attempts to address this challenge, it suffers from fundamen-
+tal limitations, including reliance on channel closures for auditing, vul-
+nerability to unilateral de-anonymization by the hub, and lack of formal
+security guarantees for the auditing process. Our approach fundamen-
+tally differs by providing targeted, non-disruptive auditability that al-
+lows auditability for high-risk payments while preserving unlinkability
+for the rest. To achieve this, we present Verifiable Linkable Randomiz-
+able Puzzles (VLRP), a new cryptographic primitive that enables a party
+to commit to a secret using two distinct keys: a verifiability key (VK)
+and an auditability key (AK). This primitive provides (i) verifiability
+that the owner of the VK issued the commitment, (ii) the ability to ran-
+domize the commitment to ensure unlinkability, even for the owner of the
+VK, while still allowing traceability using the AK, and (iii) collaborative
+auditing that prevents unilateral de-anonymization.
+We then present Auditable Unlinkable Payment Channel Hubs, AUPCH,
+a PCH built on VLRP that offers auditability guarantees with stronger se-
+curity guarantees than existing approaches. AUPCH provides modular
+integration with existing PCH frameworks (A2L, BlindHub), operates
+without requiring channel closures, and ensures that auditing requires
+collaboration between hub and auditing agent, preventing abuse by ei-
+ther party alone. Crucially, our approach acts as a wrapper around exist-
+ing PCH implementations, requiring only replacing randomizable puzzle
+calls with VLRP calls, a minimal change that dramatically reduces de-
+ployment complexity compared to building new systems from scratch.
+]]></content:encoded>
+<pubDate>Mon, 25 Aug 2025 15:44:56 +0000</pubDate>
+<pubDate>Mon, 25 Aug 2025 15:44:56 +0000</pubDate>
+</item>
+<item>
+<title>Universally Composable Treatment of Multi-Party Isomorphic State Channels</title>
+<link>https://eprint.iacr.org/2025/1517</link>
+<guid>https://eprint.iacr.org/2025/1517</guid>
+<content:encoded><![CDATA[
+
+Layer-2 protocols are pivotal in enhancing the scalability of blockchain systems, enabling faster off-chain transactions while maintaining security. These protocols can bridge consensus-based blockchain systems and advanced applications, such as Multiparty Computation (MPC) protocols, often defined within the Universal Composability (UC) Framework. However, despite the existence of some UC-defined protocols, there is currently no comprehensive UC definition for isomorphic multiparty state channels, in particular that are not dependent on the ledger model: account or UTxO based ledger. These protocols depend heavily on timelock mechanisms and the accurate representation of time, which are challenging to model within the UC Framework. Our work addresses this gap by proposing a UC-based definition, i.e., functionality, for isomorphic multi-party state channels that realistically model timely actions of honest users, a critical feature for the security of the channel protocol. Moreover our definition is agnostic with respect to the ledger model. Additionally, we introduce an extended timelock-aided global ledger functionality and demonstrate the security of existing protocols, namely Hydra proposed by Chakravarty et al. (FC'21), under the UC Framework and our proposed functionalities. This contribution provides a robust foundation for developing secure and scalable off-chain protocols in blockchain ecosystems. Finally, we concretely provide the construction of the extension of the Hydra Protocol, only outlined by the original work, and also prove it secure under our framework.
+]]></content:encoded>
+<pubDate>Sat, 23 Aug 2025 06:24:25 +0000</pubDate>
+<pubDate>Sat, 23 Aug 2025 06:24:25 +0000</pubDate>
+</item>
+<item>
+<title>GoSSamer: Lightweight and Linear-Communication Asynchronous (Dynamic Proactive) Secret Sharing and the Applications</title>
+<link>https://eprint.iacr.org/2025/1516</link>
+<guid>https://eprint.iacr.org/2025/1516</guid>
+<content:encoded><![CDATA[
+
+Asynchronous complete secret sharing (ACSS) and asynchronous dynamic proactive secret sharing (ADPSS) are fundamental primitives for secret sharing and resharing in threshold systems. They serve broad applications in distributed key management (DKM), multi-party computation, and blockchain. However, ACSS constructions that employ homomorphic commitments incur notable computational overhead, especially in batched executions. Conversely, lightweight variants require quadratic per-secret communication, which grows rapidly with the committee size. Building upon instances of ACSS, ADPSS constructions inevitably inherit these inefficiencies. 
+
+To address these limitations, we introduce GoSSamer, a concretely and asymptotically efficient protocol suite, where both GoSSamer-ACSS and GoSSamer-ADPSS achieve (1) lightweight computation with only finite-field arithmetic and hash functions, (2) asymptotically optimal, linear per-secret communication, (3) optimal resilience in asynchronous networks, a nd (4) post-quantum security.Leveraging our proposed share propagation and verification mechanisms, GoSSamer-ACSS reduces the runtime by 97% against the linear-communication scheme hbACSS (NDSS'22), and lowers the bandwidth usage by 75% compared to the lightweight solution SS24 (JoC'24) in a 64-node committee. By decoupling the ADPSS framework from the commitment-based ACSS through a new consistency verification technique, GoSSamer-ADPSS boosts key resharing throughput by 16-22$\times$ compared to LongLive (Usenix Security'23), and reduces its bandwidth by 47.6% in 16-node committees. GoSSamer directly accelerates real-world applications like distributed key management. Specifically, the runtime in GoSSamer-ACSS-based distributed key generation outperforms DXK+23 (Usenix Security'23) by 7-11$\times$, while GoSSamer-ADPSS-based key resharing outperforms LongLive by 9-13$\times$.
+]]></content:encoded>
+<pubDate>Sat, 23 Aug 2025 03:49:07 +0000</pubDate>
+<pubDate>Sat, 23 Aug 2025 03:49:07 +0000</pubDate>
+</item>
+<item>
+<title>Privacy-Preserving Federated Inference for Genomic Analysis with Homomorphic Encryption</title>
+<link>https://eprint.iacr.org/2025/1515</link>
+<guid>https://eprint.iacr.org/2025/1515</guid>
+<content:encoded><![CDATA[
+
+In recent years, federated learning has gained significant momentum as a collaborative machine learning approach, particularly in the field of medicine. While the decentralized nature of federated learning boasts greater security guarantees compared to traditional machine learning methods, it is still susceptible to myriad attacks. Moreover, as federated learning becomes increasingly ubiquitous in medicine, its use for classification tasks is expected to increase; however, maintaining patient data confidentiality remains a significant challenge, especially for genetic data. In this work, we introduce a novel framework for secure federated inference on nucleotide-based genotype data and provide a gateway to private inference through fully homomorphic encryption. A federated model with five local clients was created and trained before being encrypted with the TFHE cryptosystem and placed for inference. This framework successfully identified promoter sequences encoded within given DNA sequences, showing its potential applications in secure genomic data analysis in a federated context. Our work represents a crucial step in privacy-preserving federated inference on nucleotide-based data.
+]]></content:encoded>
+<pubDate>Fri, 22 Aug 2025 23:57:06 +0000</pubDate>
+<pubDate>Fri, 22 Aug 2025 23:57:06 +0000</pubDate>
+</item>
+<item>
+<title>Mosformer: Maliciously Secure Three-Party Inference Framework for Large Transformers</title>
+<link>https://eprint.iacr.org/2025/1510</link>
+<guid>https://eprint.iacr.org/2025/1510</guid>
+<content:encoded><![CDATA[
+
+Transformer-based models like BERT and GPT have achieved state-of-the-art performance across a wide range of AI tasks but raise serious privacy concerns when deployed as cloud inference services. 
+To address this, secure multi-party computation (MPC) is commonly employed, encrypting both user inputs and model parameters to enable inference without revealing any private information.
+However, existing MPC-based secure transformer inference protocols are predominantly designed under the semi-honest security model. Extending these protocols to support malicious security remains a significant challenge, primarily due to the substantial overhead introduced by securely evaluating complex non-linear functions required for adversarial resilience.
+We introduce Mosformer, the first maliciously secure three-party (3PC) inference framework that efficiently supports large transformers such as BERT and GPT. 
+We first design constant-round comparison and lookup table protocols with malicious security, leveraging verifiable distributed point functions (VDPFs). Building on these, we develop a suite of 3PC protocols for efficient and secure evaluation of complex non-linear functions in transformers. Together with optimized modulus conversion, our approach substantially reduces the overhead of secure transformer inference while preserving model accuracy.
+Experimental results on the vanilla transformer block show that Mosformer achieves up to a $5.3\times$ speedup and a $4.3\times$ reduction in communication over prior maliciously secure protocols. 
+Despite offering stronger security guarantees, Mosformer achieves comparable or even superior online performance to state-of-the-art semi-honest 2PC and 3PC frameworks, including BOLT (Oakland 2024), BumbleBee (NDSS 2025), SHAFT (NDSS 2025), and Ditto (ICML 2024), on full-scale models such as BERT and GPT-2.
+]]></content:encoded>
+<pubDate>Fri, 22 Aug 2025 08:58:41 +0000</pubDate>
+<pubDate>Fri, 22 Aug 2025 08:58:41 +0000</pubDate>
+</item>
+<item>
+<title>Data Matching in Unequal Worlds  and Applications to Smart Contracts</title>
+<link>https://eprint.iacr.org/2025/1500</link>
+<guid>https://eprint.iacr.org/2025/1500</guid>
+<content:encoded><![CDATA[
+
+SNARKs enable compact proofs that an NP statement is true and that the prover knows a valid witness. They have become a key building block in modern smart contract applications, including rollups and privacy-focused cryptocurrencies.
+In the widely used Groth16 framework, however, long statements incur high costs.
+A common workaround is to pass the statement’s hash to the SNARK and move the statement into the witness. The smart contract then hashes the statement first, and the circuit that is proven additionally checks consistency of the hash and the statement.
+Unfortunately, virtually any hash function is expensive to call either in a smart contract (in terms of gas) or in the proven circuit (in terms of prover time).
+
+We demonstrate a novel solution to this dilemma, which we call  hybrid compression. Our method allows us to use two different hash functions—one optimized for the proof circuit, and another optimized for on-chain verification—thereby combining the efficiency advantages of both. We prove the security of this approach in the standard model under reasonable assumptions about the two hash functions, and our benchmarks show that it achieves near-optimal performance in both gas usage and prover time. As an example, compressing an 8 KB statement with our approach results in a 10-second prover time and a smart contract spending 270K gas, whereas the existing approaches either need a much longer proof generation (290 seconds for SHA-256 hashing) or a much more expensive contract (5M gas for Poseidon hashing).
+
+Along the way, we develop a two-party protocol of independent interest in communication complexity: an efficient deterministic method for checking input equality when the two parties do not share the same hash function.
+]]></content:encoded>
+<pubDate>Wed, 20 Aug 2025 13:42:44 +0000</pubDate>
+<pubDate>Wed, 20 Aug 2025 13:42:44 +0000</pubDate>
+</item>
+
+<item>
 <title>Lattice Signature with Efficient Protocols, Application to Anonymous Credentials</title>
 <link>https://eprint.iacr.org/2022/509</link>
 <guid>https://eprint.iacr.org/2022/509</guid>
 <content:encoded><![CDATA[
-
 Digital signature is an essential primitive in cryptography, which can be used as the digital analogue of handwritten signatures but also as a building block for more complex systems. In the latter case, signatures with specific features are needed, so as to smoothly interact with the other components of the systems, such as zero-knowledge proofs. This has given rise to so-called signatures with efficient protocols, a versatile tool that has been used in countless applications. Designing such signatures is however quite difficult, in particular if one wishes to withstand quantum computing. We are indeed aware of only one post-quantum construction, proposed by Libert et al. at Asiacrypt'16, yielding very large signatures and proofs.
 In this paper, we propose a new construction that can be instantiated in both standard lattices and structured ones, resulting in each case in dramatic performance improvements. In particular, the size of a proof of message-signature possession, which is one of the main metrics for such schemes, can be brought down to less than 650 KB. As our construction retains all the features expected from signatures with efficient protocols, it can be used as a drop-in replacement in all systems using them, which mechanically improves their own performance, and has thus a direct impact on many applications. It can also be used to easily design new privacy-preserving mechanisms. As an example, we provide the first lattice-based anonymous credentials system.
 ]]></content:encoded>
 <pubDate>Thu, 28 Apr 2022 17:17:27 +0000</pubDate>
-<pubDate>Thu, 28 Apr 2022 17:17:27 +0000</pubDate>
 </item>
-
 <item>
 <title>Homomorphic Secret Sharing with Verifiable Evaluation</title>
 <link>https://eprint.iacr.org/2025/1491</link>
