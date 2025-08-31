@@ -4,6 +4,74 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+<item>
+<title>A Fine-Grained and Real-Time Functional Video Encryption and Sharing Scheme</title>
+<link>https://eprint.iacr.org/2025/1540</link>
+<guid>https://eprint.iacr.org/2025/1540</guid>
+<content:encoded><![CDATA[
+
+In video-centric applications, video objects and backgrounds often contain sensitive information, which raises serious privacy concerns. It is necessary to restrict access to certain objects or backgrounds in the video stream while allowing permitted users to view a specific subset of video content. However, masking the prohibited objects for each user, then encoding and delivering each individually processed video to the target user will generate multiple copies of the same video. This can lead to significant storage, processing, and communication overhead when the number of users is large. In this work, inspired by the idea of functional encryption, we propose a fine-grained and real-time video encryption and sharing scheme, named FVES$^+$. In FVES$^+$, we encode and encrypt the videos only once, and different users can decode and decrypt the encrypted videos to acquire different contents depending on their access authorities. Theoretically, FVES$^+$ achieve IND-CPA security. 
+
+We implement and evaluate FVES$^+$ using PC and mobile devices as end-devices. FVES$^+$ achieves real-time performance, averaging $35.1$ FPS across three public datasets, including the stages of object detection, encoding, and encryption. When there are $n$ different access requirements by end-users, FVES$^+$ improves video sharing speed by $\Theta(n)\times$ compared to the baseline methods. Our experiments validate the effectiveness and efficiency of FVES$^+$.
+]]></content:encoded>
+<pubDate>Wed, 27 Aug 2025 18:03:48 +0000</pubDate>
+<pubDate>Wed, 27 Aug 2025 18:03:48 +0000</pubDate>
+</item>
+<item>
+<title>Privacy-Preserving Two-Party RBF Kernel SVM Training Based on Neat and Accurate Secure Exponentiation</title>
+<link>https://eprint.iacr.org/2025/1537</link>
+<guid>https://eprint.iacr.org/2025/1537</guid>
+<content:encoded><![CDATA[
+
+Privacy-preserving machine learning (PPML) is a powerful tool for multiple parties to collaboratively train a model or perform model inference without exposing their private data in the context of Internet of things. A key challenge in PPML is the efficient evaluation of non-polynomial functions. In this work, we propose NASE, a neat and accurate secure exponentiation protocol for radius basis function (RBF) kernel evaluation. Leveraging the property of the RBF kernel, NASE enjoys a lightweight construction that reduces computation overhead by up to 1.65$\times$ and communication overhead by up to 3.97$\times$ compared to SIRNN, the prior SOTA framework for secure exponentiation published in IEEE S\&amp;P 2021.
+
+Taking NASE as the foundation stone, we propose a privacy-preserving two-party kernel SVM training protocol. Based on BFV scheme and MPC technique, we introduce group-batch sampling for sampling in ciphertext and propose the partial rotation method tailored to our scenario to optimize dot product computation. Additionally, we propose an error-tolerant $DReLU$ protocol for secure sign evaluation of secret sharings over a prime field that reduces the communication cost by around $\frac{1}{3}$ compared to the existing method. Our protocol achieves model accuracy comparable to plaintext training according to experiments on real-world datasets, and an order-of-magnitude reduction in both communication and computation overhead is attained compared to the previous work.
+]]></content:encoded>
+<pubDate>Wed, 27 Aug 2025 09:48:43 +0000</pubDate>
+<pubDate>Wed, 27 Aug 2025 09:48:43 +0000</pubDate>
+</item>
+<item>
+<title>PARSAN-Mix: Packet-Aware Routing and Shuffling with Additional Noise for Latency Optimization in Mix Networks (Extended Version)</title>
+<link>https://eprint.iacr.org/2025/1533</link>
+<guid>https://eprint.iacr.org/2025/1533</guid>
+<content:encoded><![CDATA[
+
+Mix networks (mix-nets) offer strong anonymity by routing client packets through intermediary hops, where they are shuffled with other packets to obscure their origins from a global adversary monitoring all communication exchanges. However, this anonymity is achieved at the expense of increased end-to-end latency, as packets traverse multiple hops (incurring routing delays) and experience additional delays at each hop for shuffling purposes. Consequently, the overall latency for delivering a message—comprising multiple packets—is determined by the packet with the highest combined routing and shuffling delay, which can significantly degrade the client experience, particularly in latency-sensitive applications.
+
+To address this issue, our work \textbf{first} derives the theoretical statistics of the total latency experienced by a message, revealing a clear correlation between latency and the number of packets. \textbf{Second}, we propose two approaches to reduce this total latency. First, we present a method to adjust the shuffling delays at each hop, offsetting potential anonymity loss by integrating client-generated noise, backed by differential privacy guarantees. Next, we introduce packet-aware routing techniques, offering two novel methods that prioritize messages with more packets, forwarding them through faster links. However, this may cause certain nodes to be overloaded with disproportionate traffic. To solve this, we \textbf{third} introduce an efficient load-balancing algorithm to redistribute traffic without compromising the packet-aware nature of the routing. \textbf{Finally}, through comprehensive analytical and simulation experiments, we validate our theoretical latency bounds and evaluate the efficacy of our latency management strategies. The results confirm both methods substantially reduce latency with minimal impact on anonymity, while the strategic routing method remains robust against advanced adversarial attacks.
+
+
+Note that this paper is an extended version of PARSAN-Mix (accepted and presented at ACNS 2025), mainly aimed at providing full proofs of the theorems together with additional empirical analysis.
+]]></content:encoded>
+<pubDate>Wed, 27 Aug 2025 08:06:53 +0000</pubDate>
+<pubDate>Wed, 27 Aug 2025 08:06:53 +0000</pubDate>
+</item>
+<item>
+<title>Breaking the Layer Barrier: Remodeling Private Transformer Inference with Hybrid CKKS and MPC</title>
+<link>https://eprint.iacr.org/2025/1532</link>
+<guid>https://eprint.iacr.org/2025/1532</guid>
+<content:encoded><![CDATA[
+
+This paper presents an efficient framework for private Transformer inference that combines Homomorphic Encryption (HE) and Secure Multi-party Computation (MPC) to protect data privacy. Existing methods often leverage HE for linear layers (e.g., matrix multiplications) and MPC for non-linear layers (e.g., Softmax activation functions), but the conversion between HE and MPC introduces significant communication costs. The proposed framework, dubbed BLB, overcomes this by breaking down layers into fine-grained operators and further fusing adjacent linear operators, reducing the need for HE/MPC conversions. To manage the increased ciphertext bit width from the fused linear operators, BLB proposes the first secure conversion protocol between CKKS and MPC and enables CKKS-based computation of the fused operators. Additionally, BLB proposes an efficient matrix multiplication protocol for fused computation in Transformers. Extensive evaluations on BERT-base, BERT-large, and GPT2-base show that BLB achieves a $21\times$ reduction in communication overhead compared to BOLT (S&amp;P'24) and a $2\times$ reduction compared to Bumblebee (NDSS'25), along with latency reductions of $13\times$ and $1.8\times$, respectively, when leveraging GPU acceleration.
+]]></content:encoded>
+<pubDate>Wed, 27 Aug 2025 02:46:32 +0000</pubDate>
+<pubDate>Wed, 27 Aug 2025 02:46:32 +0000</pubDate>
+</item>
+<item>
+<title>Trustless Delegation of Vector Commitment Construction in Resource-Constrained Settings</title>
+<link>https://eprint.iacr.org/2025/1528</link>
+<guid>https://eprint.iacr.org/2025/1528</guid>
+<content:encoded><![CDATA[
+
+Many data types, such as video and audio, consist of sequential elements where both integrity and order are essential for authenticity. In practice, verifiers often access only partial sequences due to privacy or volume constraints, as in surveillance, journalism, and public records. Vector commitment (VC) schemes that support verifiable partial disclosures address this need, but constructing and maintaining such VCs is challenging for resource-constrained devices such as cameras. For example, in CCTV systems, a trusted module updating the VC for millions of frames must store and process hundreds of megabytes, which is often infeasible.
+
+We propose a proving system that enables trustless reconstruction of VCs from only the chained hash of the sequence. The data source computes and signs a cumulative hash. An untrusted prover then constructs the VC from the raw data and proves that the data used for construction is consistent with the signed hash chain. The constructed VC subsequently enables authentication of partial disclosures. The main challenge is that proving the full VC construction in zero-knowledge is computationally expensive. To address this, we design a folding-based zkSNARK tailored to this task.
+
+We analyze the construction in a realistic setting with a constrained source device (Raspberry Pi Zero) and a consumer-grade prover (midrange laptop). Our results show that even for relatively short sequences (e.g., 30 minutes of video footage), handling the VC within the source device's trusted module is infeasible due to both storage and computational limitations. In contrast, the proposed trustless offloading imposes only a few minutes of local computation on the prover to generate a proof for full VC construction (around 2 minutes for the 30 minutes of footage). Our implementation is available as open source at: https://github.com/zero-savvy/proven-view.
+]]></content:encoded>
+<pubDate>Tue, 26 Aug 2025 12:04:52 +0000</pubDate>
+<pubDate>Tue, 26 Aug 2025 12:04:52 +0000</pubDate>
+</item>
 
 <item>
 <title>AUPCH: Auditable Unlinkable Payment Channel Hubs</title>
