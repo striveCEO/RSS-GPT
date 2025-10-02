@@ -4,6 +4,26 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+<item>
+<title>On Efficient Computations of $y^2=X^3+b/\mathbb{F}_p$ \\for Primes $p\equiv 1 \pmod 3$</title>
+<link>https://eprint.iacr.org/2024/1906</link>
+<guid>https://eprint.iacr.org/2024/1906</guid>
+<content:encoded><![CDATA[
+
+For a prime number $p\equiv 1 \pmod 3$, the family of curves $E_b: y^2=x^3+b/\mathbb{F}_p$  has notable practical significance, e.g., its instance secp256k1 is used in Blockchain platforms such as Bitcoin and Ethereum. With the ring $\mathbb{Z}[\omega]$ of Eisenstein integers being its ring of endomorphisms, the multiplication by 
+a primitive complex cubic root of unity $\omega$ can be realized as the efficient map $(x,y)\mapsto (\beta x,y)$ (and ${\cal O}\mapsto {\cal O}$)  where $\beta$ is a cubic root of unity in $\mathbb{F}_p$. Another interesting fact is that it is easy to compute a prime $\pi = c+d\omega\in \mathbb{Z}[\omega]$ such that $p=N(\pi)$ and $\#E_b(\mathbb{F}_p)=N(\pi -1)$. These provide sufficient ingredients to use the GLV method which has been the state-of-the-art for  scalar multiplication for the family of curves $E_b/\mathbb{F}_p$.  Before the GLV method, a more powerful  scalar multiplication method, the window $\tau$-NAF of Solinas based on the Frobenius map $\tau$, had been designed for the binary Koblitz curves. The creation of GLV method reflects an effort to extend the idea of utilizing the efficient computable endomorphism $\tau$ (viewed as multiplication by complex algebraic integer as opposed to rational integer) to devise faster scalar multiplication algorithms for more classes of curves. However, as indicated in [15], to have a window $\tau$-NAF method for curves over a prime field, one has to get an endomorphism $\tau$ such that (1) its computation is not more expensive than a point doubling; (2) the $\tau$-adic expansion of the scalar is not significantly longer than its binary expansion; and (3) $N(\tau)>1$. Besides, a coefficient set for the $\tau$-adic expansion and a pre-computation must  be carefully chosen.
+
+One of the purposes of this paper is to describe such an endomorphism for the family of curves $E_b/\mathbb{F}_p$. More specifically,  let $\tau =1-\omega$ and $P=(x,y)\in E_b(\mathbb{F}_p)$, we have
+\[
+\tau P  = \left(\frac{x^3+4b}{(1-\beta)^2x^2}, y\frac{x^3-8b}{(1-\beta)^3x^3}\right).
+\]
+Converted to Jacobian projective coordinates, this operation of $\tau$ requires $2\mathbf{S}+4\mathbf{M}$ ( $\mathbf{S}$ and $\mathbf{M}$ denote the costs for field squaring and multiplication, respectively) which is less expensive than a point doubling. The efficient formula of $\tau P$ can be further used to speed up the computation of  $3P$, compared to $10\mathbf{S}+5\mathbf{M}$ , our tripling formula just costs $4\mathbf{S}+6\mathbf{M}$. As a main ingredient for double base chain method for scalar multiplication, this tripling formula will
+contribute to a greater efficiency. We also propose efficient computations of $(2-\omega)P$ and $(3-\omega)P$.  The fast computation of $\tau$ and nice properties of Eisenstein integers enable us to develop a window $\tau$NAF method for curves $E_b/\mathbb{F}_p$. This result is not only of theoretical interest but also of a higher performance due to the facts that (1) the operation $\tau^2$ can be done more efficiently that makes the average cost of $\tau$ to be close to $2.5\mathbf{S}+3\mathbf{M}$; (2)
+the pre-computation for the  window $\tau$NAF method is surprisingly simple in that only about one-sixth of the coefficients need to be processed.   For the curve secp256k1, it achieves more than $11.1\%$ (or $13.4\%$ if constant-time scalar multiplication is required) of improvement over the current state-of-the-art. More improvements can be shown for large underlying fields.
+]]></content:encoded>
+<pubDate>Sat, 23 Nov 2024 13:53:41 +0000</pubDate>
+<pubDate>Sat, 23 Nov 2024 13:53:41 +0000</pubDate>
+</item>
 
 <item>
 <title>Eliminating Exponential Key Growth in PRG-Based Distributed Point Functions</title>
