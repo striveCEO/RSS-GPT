@@ -5,14 +5,24 @@
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
 <item>
+<title>CAPSS: A Framework for SNARK-Friendly Post-Quantum Signatures</title>
+<link>https://eprint.iacr.org/2025/061</link>
+<guid>https://eprint.iacr.org/2025/061</guid>
+<content:encoded><![CDATA[
+
+In this paper, we present a general framework for constructing SNARK-friendly post-quantum signature schemes based on minimal assumptions, specifically the security of an arithmetization-oriented family of permutations. The term "SNARK-friendly" here refers to the efficiency of the signature verification process in terms of SNARK constraints, such as R1CS constraints. Within the CAPSS framework, signature schemes are designed as proofs of knowledge of a secret preimage of a one-way function, where the one-way function is derived from the chosen permutation family. To obtain compact signatures with SNARK-friendly verification, we rely on SmallWood, a recently proposed hash-based zero-knowledge argument scheme well suited for statements arising in this context. From this proof system which we tweak towards SNARK-friendliness, the CAPSS framework offers a generic transformation of any arithmetization-oriented permutation family into a SNARK-friendly post-quantum signature scheme. We provide concrete instances built on permutations such as Rescue-Prime, Poseidon, Griffin, and Anemoi. For the Anemoi family, achieving 128-bit security, our approach produces signatures of sizes ranging from 9.5 to 15.5 KB, with R1CS constraints between 24K and 35K. This represents a 4-6x reduction in signature size and a 5-8x reduction in R1CS constraints compared to Loquat (CRYPTO 2024), a SNARK-friendly post-quantum signature scheme based on the Legendre PRF. We showcase CAPSS through aggregated signatures, achieving sub-kilobyte amortized size for large batches, and anonymous credentials, enabling presentation proofs under 150 KB, thus highlighting the practicality of SNARK-friendly, symmetric-based designs for post-quantum primitives.
+]]></content:encoded>
+<pubDate>Tue, 14 Jan 2025 22:12:41 +0000</pubDate>
+<pubDate>Tue, 14 Jan 2025 22:12:41 +0000</pubDate>
+</item>
+
+<item>
 <title>General Modularity Lemmata about Random Variable Commitment Schemes, and a Certified Laplace Mechanism</title>
 <link>https://eprint.iacr.org/2025/1622</link>
 <guid>https://eprint.iacr.org/2025/1622</guid>
 <content:encoded><![CDATA[
-
 At CRYPTO'24, Bell et al. propose a definition of certified differential privacy (DP) and a quite general blueprint for satisfying it. The core of the blueprint is the new primitive called random variable commitment schemes (RVCS). Bell et al. construct RVCS's for fair coins and binomial distributions. In this work, we prove three lemmata that enable simple modular design of new RVCS's: First, we show that the properties of RVCS's are closed under polynomial sequential composition. Secondly, we show that homomorphically evaluating a function $f$ on the output of an RVCS for distribution $Z$ leads to an RVCS for distribution $f(Z)$.  Thirdly, we show (roughly) that applying a `Commit-and-Prove'-style proof of knowledge for a function $f$ onto the output of an RVCS for distribution $Z$ results in an RVCS for distribution $f(Z)$. These lemmata together imply that there exists RVCS's for any distribution which can be sampled exactly in strict polynomial time, under, for instance, the discrete logarithm assumption. This is, to the best of our knowledge, the first result establishing the existence of RVCS's for arbitrary distributions. We demonstrate the usefulness of these lemmata by constructing RVCS's for arbitrarily biased coins and a discrete Laplace distribution, leading to a certified DP protocol for a discrete Laplace mechanism. Further, we observe that the definitions by Bell et al. do not directly allow sampling algorithms with non-zero honest abort probability, which rules out many practical sampling algorithms, and we propose a slight relaxation of the definitions which enables the use of sampling methods with negligible abort probability. It is with respect to these weakened definitions that we prove our certified Laplace mechanism.
 ]]></content:encoded>
-<pubDate>Tue, 09 Sep 2025 10:54:02 +0000</pubDate>
 <pubDate>Tue, 09 Sep 2025 10:54:02 +0000</pubDate>
 </item>
 <item>
@@ -20,11 +30,9 @@ At CRYPTO'24, Bell et al. propose a definition of certified differential privacy
 <link>https://eprint.iacr.org/2025/1786</link>
 <guid>https://eprint.iacr.org/2025/1786</guid>
 <content:encoded><![CDATA[
-
 The CKKS fully homomorphic encryption (FHE) scheme enables computations on vectors of approximate complex numbers. A moderate precision of $\approx 20$ bits often suffices but, in many applications, a higher precision is required for functionality and/or security. Indeed, to obtain IND-CPA-D security [Li-Micciancio; Eurocrypt'21], secure threshold-FHE [Asharov et al; Eurocrypt'12] and circuit privacy [Gentry; STOC'09], all known approaches require a precision that supports noise flooding. This may lead to a precision of $\approx 80$ bits, or more. High-precision CKKS is hard to achieve, notably because of bootstrapping. The main difficulty is modulus consumption: every homomorphic multiplication consumes some, out of an overall modulus budget. Unfortunately, in high precision, most known bootstrapping algorithms consume so much modulus that one needs to increase the parameters to increase the budget. The state-of-the-art approach, Meta-BTS [Bae et al; CCS'22], performs moderate-precision bootstrapping several times to enable high-precision bootstrapping, with similar modulus consumption as the base bootstrapping it builds upon. It however damages latency. 
 We introduce a new approach for high-precision CKKS bootstrapping, whose cost is almost independent of the precision (as opposed to Meta-BTS) and whose modulus consumption increases significantly more slowly than with classical bootstrapping algorithms.  Our design relies on the EvalRound bootstrapping [Kim et al; Asiacrypt'22], which we improve in the high-precision context by leveraging and improving recent techniques for handling discrete data with CKKS. We obtain for the first time a non-iterative 80-bit precise bootstrapping algorithm which can be run in ring degree $N=2^{16}$, with 494 bits of remaining modulus for computations. In terms of throughput, and for 80-bit precision, our implementation shows an acceleration of 64\% compared to Meta-BTS.
 ]]></content:encoded>
-<pubDate>Tue, 30 Sep 2025 02:30:25 +0000</pubDate>
 <pubDate>Tue, 30 Sep 2025 02:30:25 +0000</pubDate>
 </item>
 <item>
@@ -32,13 +40,11 @@ We introduce a new approach for high-precision CKKS bootstrapping, whose cost is
 <link>https://eprint.iacr.org/2025/1790</link>
 <guid>https://eprint.iacr.org/2025/1790</guid>
 <content:encoded><![CDATA[
-
 We propose CA-MCPQ, a context-aware post-quantum-secure extension of the Model Context Protocol (MCP). Unlike standard MCP, which leaves authentication, encryption, and authorization optional or implementation-specific, CA-MCPQ elevates them to mandatory protocol-level mechanisms. The design incorporates post-quantum mutual authentication, KEM-derived session keys, and authenticated sequencing to ensure session integrity and prevent replay. Role-based access control is enforced, while token-based authentication is eliminated entirely. AI dynamically infers the required security tier from contextual information and negotiates compatible PQC algorithms; each response returns a reliability score that quantifies alignment with the requested security level. 
 
 This architecture addresses critical vulnerabilities of MCP—including token misuse, session hijacking, impersonation, and quantum attack—while preserving interoperability.
 Notably, our evaluation shows that the cryptographic and transport overheads are negligible compared to model computation, confirming that strong post-quantum assurances can be achieved without degrading system performance. Overall, CA-MCPQ provides a practical path toward secure-by-design AI agent ecosystems and lays the groundwork for future extensions such as agent–agent secure coordination.
 ]]></content:encoded>
-<pubDate>Wed, 01 Oct 2025 00:38:03 +0000</pubDate>
 <pubDate>Wed, 01 Oct 2025 00:38:03 +0000</pubDate>
 </item>
 <item>
@@ -46,11 +52,9 @@ Notably, our evaluation shows that the cryptographic and transport overheads are
 <link>https://eprint.iacr.org/2025/1775</link>
 <guid>https://eprint.iacr.org/2025/1775</guid>
 <content:encoded><![CDATA[
-
 Cloud computing has matured into the default substrate for data processing, yet confidentiality demands of- ten force a hard trade-off between the utility of outsourced computation and the privacy of sensitive inputs. Homomorphic encryption (HE)[1] promises to dissolve that trade-off by enabling computation directly on ciphertexts, returning encrypted results that only the data owner can decrypt. Despite remarkable progress in fully homomorphic encryption (FHE) and leveled variants suitable for bounded-depth circuits, deploying HE at cloud scale remains challenging. The cost of ciphertext arithmetic is orders of magnitude higher than plaintext compute; noise growth and rescaling impose algorithmic discipline; vectorization and rotation keys complicate program layout; and the lack of verifiability in bare HE obliges trust in a correct-but-curious cloud[?]. This paper develops a system perspective on how to apply modern HE in cloud environments without reducing it to a boutique feature. We introduce a reference architecture that marries approximate-arithmetic HE for analytics with exact- arithmetic HE for integrity-critical operations, composes HE with succinct proofs for verifiability, and integrates a cost model into the scheduler so that elastically provisioned serverless workers can meet latency objectives under price constraints. The design begins with a compiler that lowers dataflow graphs to operator sequences parameterized by multiplicative depth L and rotation sets; it then chooses schemes and parameters—CKKS for floating-point style analytics and signal processing, BFV/BGV for integer operations and counters, TFHE-style bootstrapping for comparisons—that minimize the total time-to-result under explicit error and security budgets. A cryptographic key service supports threshold issuance and rotation-key escrow without learning plaintexts, while a storage layer packs columns into ciphertext SIMD lanes to amortize cost across tenants. For verifiability, we attach homomorphic message authentication tags to intermediate ciphertexts and wrap end-to-end executions in succinct non-interactive proofs specialized to the bilinear equations that certify correct key switching, rescaling, and boot- strapping. Analytically, we characterize latency by a linear model in the counts of core homomorphic primitives and show how to saturate GPUs or vector units with batched number-theoretic transforms to bend throughput toward practical regimes. Under realistic traces of analytic queries and encrypted inference, the architecture achieves sub-second P95 for circuits of depth six to eight with one or two bootstraps, while sustaining 128-bit security under RLWE. By treating HE not as an exotic afterthought but as a first-class cloud programming and scheduling primitive, the proposed approach demonstrates a path to confidential-by- default services in which the cloud never sees data in the clear
 yet remains efficient, elastic, and auditable.
 ]]></content:encoded>
-<pubDate>Sun, 28 Sep 2025 21:52:04 +0000</pubDate>
 <pubDate>Sun, 28 Sep 2025 21:52:04 +0000</pubDate>
 </item>
 <item>
@@ -58,13 +62,10 @@ yet remains efficient, elastic, and auditable.
 <link>https://eprint.iacr.org/2025/1772</link>
 <guid>https://eprint.iacr.org/2025/1772</guid>
 <content:encoded><![CDATA[
-
 Traditional single-proposer blockchains suffer from miner extractable value (MEV), where validators exploit their serial monopoly on transaction inclusion and ordering to extract rents from users. While there have been many developments at the application layer to reduce the impact of MEV, these approaches largely require auctions as a subcomponent. Running auctions efficiently on chain requires two key properties of the underlying consensus protocol: selective-censorship resistance and hiding. These properties guarantee that an adversary can neither selectively delay transactions nor see their contents before they are confirmed. We propose a multiple concurrent proposer (MCP) protocol offering exactly these properties.
 ]]></content:encoded>
 <pubDate>Sun, 28 Sep 2025 17:17:26 +0000</pubDate>
-<pubDate>Sun, 28 Sep 2025 17:17:26 +0000</pubDate>
 </item>
-
 <item>
 <title>On Efficient Computations of $y^2=X^3+b/\mathbb{F}_p$ \\for Primes $p\equiv 1 \pmod 3$</title>
 <link>https://eprint.iacr.org/2024/1906</link>
