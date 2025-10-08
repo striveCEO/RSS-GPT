@@ -4,6 +4,102 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+<item>
+<title>Revisiting Lattice-based Non-interactive Blind Signature</title>
+<link>https://eprint.iacr.org/2025/1848</link>
+<guid>https://eprint.iacr.org/2025/1848</guid>
+<content:encoded><![CDATA[
+
+Blind signatures (BS) allow a signer to produce a valid signature on a message without learning the message itself. They have niche applications in privacy-preserving protocols such as digital cash and electronic voting. Non-interactive blind signatures (NIBS) remove the need for interaction between the signer and the user. In the post-quantum era, lattice-based NIBS schemes are studied as candidates for long-term security.
+
+In Asiacrypt 2024, Baldimtsi et al. proposed the first lattice-based NIBS construction, whose security relies on the random one-more inhomogeneous short integer solution (rOM-ISIS) assumption. This rOM-ISIS is considered to be a non-standard assumption. Later, Zhang et al. introduced another lattice-based construction in ProvSec 2024, and proved its security under the standard module short integer solution (MSIS) assumption. We analyse the security of the latter scheme. In the random oracle model, we show that it fails to achieve both nonce blindness and receiver blindness. We present explicit attacks where an adversary breaks both properties with probability~1. Our attack is based on a crucial observation that uncovers a flaw in the design. Specifically, this flaw allows an attacker to link a message-signature pair with its presignature-nonce pair. In addition, we also identify a flaw in the unforgeability proof. Finally, we suggest a modification to address the issue, which is similar to Baldimtsi et al. construction, and its security relies again on the non-standard rOM-ISIS assumption. This work again raises the question of the feasibility of achieving NIBS from standard assumptions.
+]]></content:encoded>
+<pubDate>Mon, 06 Oct 2025 15:17:43 +0000</pubDate>
+<pubDate>Mon, 06 Oct 2025 15:17:43 +0000</pubDate>
+</item>
+<item>
+<title>Security Analysis of Privately Verifiable Privacy Pass</title>
+<link>https://eprint.iacr.org/2025/1847</link>
+<guid>https://eprint.iacr.org/2025/1847</guid>
+<content:encoded><![CDATA[
+
+Privacy Pass is an anonymous authentication protocol which was initially designed by Davidson et al. (PETS’18) to reduce the number of CAPTCHAs that TOR users must solve. It issues single-use authentication tokens with anonymous and unlinkable redemption guarantees. The issuer and verifier of the protocol share a symmetric key, and tokens are privately verifiable. The protocol has sparked interest from both academia and industry, which led to an Internet Engineering Task Force (IETF) standard. While Davidson et al. formally analyzed the original protocol, the IETF standard introduces several changes to their protocol. Thus, the standardized version’s formal security remains unexamined. We fill this gap by analyzing the IETF standard’s privately verifiable Privacy Pass protocol.
+
+In particular, there are two main discrepancies between the analyzed and standardized version: First, the IETF version introduces a redemption context, that can be used for blindly embedding a validity period into the Privacy Pass tokens. We show that this variant has significant differences to public metadata extension that has been proposed for the same purpose in the literature. Redemption context offers better privacy and security than public metadata. We capture both stronger guarantees through game-based security definitions and show that the currently considered one-more unforgeability notion for Privacy Pass is insufficient when a redemption context is used. Thus, we propose a new property, targeted context unforgeability, and prove its incomparability to one-more unforgeability. Second, Davidson et al. focused on a concrete Diffie-Hellman based construction, whereas the IETF version is built generically from a verifiable oblivious pseudorandom function (VOPRF). Further, the analyzed protocol omitted the full redemption phase needed to prevent double-spending. We prove that the generic IETF construction satisfies the desired security and privacy guarantees covering the full life-cycle of tokens. Our analysis relies on natural security properties of VOPRFs, providing compatibility with any secure VOPRF instantiation. This enables crypto agility, e.g., allowing to switch to efficient quantum-safe VOPRFs when they become available.
+]]></content:encoded>
+<pubDate>Mon, 06 Oct 2025 14:46:41 +0000</pubDate>
+<pubDate>Mon, 06 Oct 2025 14:46:41 +0000</pubDate>
+</item>
+<item>
+<title>HE-based On-the-Fly MPC, Revisited: Universal Composability, Approximate and Imperfect Computation, Circuit Privacy</title>
+<link>https://eprint.iacr.org/2025/1845</link>
+<guid>https://eprint.iacr.org/2025/1845</guid>
+<content:encoded><![CDATA[
+
+On-the-fly multi-party computation (MPC), introduced by López-Alt, Tromer, and Vaikuntanathan (STOC 2012), enables clients to dynamically join a computation without remaining continuously online. Yet, the original proposal suffers from substantial efficiency and expressivity limitations hindering practical deployments. Even though various techniques have been proposed to mitigate these shortcomings, seeing on-the-fly MPC as a combination of independent building blocks jeopardizes the security of the original model.   
+
+Thus, we revisit on-the-fly MPC in light of recent advances and extend its formal framework to incorporate efficiency and expressivity improvements. Our approach is built around \emph{multi-group homomorphic encryption} (MGHE), which generalizes threshold and multi-key HE and serves as the core primitive for on-the-fly MPC. Our contributions are fourfold:
+i) We propose new security notions for MGHE (e.g., IND-CPA with partial decryption, circuit privacy) and justify their suitability to the on-the-fly MPC.
+ii) We present the first ideal functionality for MGHE in the Universal Composability (UC) framework and characterize the conditions under which it can be realized, via reductions to our proposed security notions. 
+iii) We present a generic protocol that securely realizes our on-the-fly MPC functionality against a semi-malicious adversary from our MGHE functionality.
+iv) Finally, we provide two generic compilers that lift these protocols to withstand a fully malicious adversary by leveraging zero-knowledge arguments. 
+
+Our analysis in the UC framework enables modular protocol analysis, where more efficient schemes can be seamlessly substituted as long as they meet the required security defined by the functionalities, retaining the security guarantees offered by the original construction.
+]]></content:encoded>
+<pubDate>Mon, 06 Oct 2025 14:10:50 +0000</pubDate>
+<pubDate>Mon, 06 Oct 2025 14:10:50 +0000</pubDate>
+</item>
+<item>
+<title>Lattice-Based zk-SNARKs with Hybrid Verification Technique</title>
+<link>https://eprint.iacr.org/2025/1839</link>
+<guid>https://eprint.iacr.org/2025/1839</guid>
+<content:encoded><![CDATA[
+
+Zero-knowledge succinct arguments of knowledge (zkSNARK) provide short privacy-preserving proofs for general NP problems. Public verifiability of zkSNARK protocols is a desirable property, where the proof can be verified by anyone once generated. Designated-verifier zero-knowledge is useful when it is necessary that only one or a few individuals should have access to the verification result. All zkSNARK schemes are either fully publicly verifiable or can be verified by a designated verifier with a secret verification key. 
+
+In this work, we propose a new notion of a hybrid verification mechanism. Here, the prover generates a proof that can be verified by a designated verifier. For this proof, the designated verifier can generate auxiliary information with its secret key. The combination of this proof and the auxiliary information allows any public verifier to verify the proof without any other information. We also introduce necessary security notions and mechanisms to identify a cheating designated verifier or the prover. Our hybrid verification zkSNARK construction is based on module lattices and adapts the zkSNARK construction by Ishai et al. (CCS 2021). In this construction, the designated verifier is required only once after proof generation to create the publicly verifiable proof. Our construction achieves a small constant-size proof and fast verification time, which is linear in the statement size.
+]]></content:encoded>
+<pubDate>Sun, 05 Oct 2025 19:28:29 +0000</pubDate>
+<pubDate>Sun, 05 Oct 2025 19:28:29 +0000</pubDate>
+</item>
+<item>
+<title>On the Limits of Consensus under Dynamic Availability and Reconfiguration</title>
+<link>https://eprint.iacr.org/2025/1829</link>
+<guid>https://eprint.iacr.org/2025/1829</guid>
+<content:encoded><![CDATA[
+
+Proof-of-stake blockchains require consensus protocols that support Dynamic Availability and Reconfiguration (so-called DAR setting), where the former means that the consensus protocol should remain live even if a large number of nodes temporarily crash, and the latter means it should be possible to change the set of operating nodes over time. State-of-the-art protocols for the DAR setting, such as Ethereum, Cardano’s Ouroboros, or Snow White, require unrealistic additional assumptions, such as social consensus, or that key evolution is performed even while nodes are not participating. In this paper, we identify the necessary and sufficient adversarial condition under which consensus can be achieved in the DAR setting without additional assumptions. We then introduce a new and realistic additional assumption: honest nodes dispose of their cryptographic keys the moment they express intent to exit from the set of operating nodes. To add reconfiguration to any dynamically available consensus protocol, we provide a bootstrapping gadget that is particularly simple and efficient in the common optimistic case of few reconfigurations and no double-spending attempts.
+]]></content:encoded>
+<pubDate>Sat, 04 Oct 2025 02:15:14 +0000</pubDate>
+<pubDate>Sat, 04 Oct 2025 02:15:14 +0000</pubDate>
+</item>
+<item>
+<title>Blind ECDSA from the ECDSA Assumption</title>
+<link>https://eprint.iacr.org/2025/1827</link>
+<guid>https://eprint.iacr.org/2025/1827</guid>
+<content:encoded><![CDATA[
+
+Blind signatures have become a cornerstone for privacy-sensitive applications such as digital cash, anonymous credentials, and electronic voting.
+The elliptic curve variant of the Digital Signature Algorithm (ECDSA) is widely adopted due to its efficiency in resource-constrained environments, such as mobile devices and blockchain systems.
+Building blind ECDSA is hence a natural goal.
+One presents the first such construction relying solely on the ECDSA assumption.
+Despite the inherent complexities in integrating blindness with ECDSA, we design a protocol that ensures both unforgeability and blindness without introducing new computational assumptions and ensuring concurrent security.
+It involves zero-knowledge proofs based on the MPC-in-the-head paradigm for complex statements combining relations on encrypted elliptic curve points, their coordinates, and discrete logarithms.
+]]></content:encoded>
+<pubDate>Fri, 03 Oct 2025 21:51:43 +0000</pubDate>
+<pubDate>Fri, 03 Oct 2025 21:51:43 +0000</pubDate>
+</item>
+<item>
+<title>Coppercloud: Blind Server-Supported RSA Signatures</title>
+<link>https://eprint.iacr.org/2025/1824</link>
+<guid>https://eprint.iacr.org/2025/1824</guid>
+<content:encoded><![CDATA[
+
+Privacy-preserving technologies are a well-established area of research for the modern digital systems, driven by the regulatory mandates, such as the GDPR, and growing demand for the users' privacy. One example from the different available technologies are blind signatures: a primitive that supports creation of privacy-sensitive applications, starting from secure e-voting and anonymous digital cash to privacy-preserving credentials and identity management systems. In this work, we introduce Coppercloud, a blind server-supported RSA signature scheme designed to enhance privacy in digital identity systems. Coppercloud enables a user to obtain a signature on a message, without revealing its content to the supporting server, while distributing the signing key between the user's device and the supporting server. We formalize the security requirements for blind server-supported signing by defining an ideal functionality, and prove that Coppercloud securely realizes this functionality in the Universal Composability (UC) model.
+]]></content:encoded>
+<pubDate>Fri, 03 Oct 2025 14:29:30 +0000</pubDate>
+<pubDate>Fri, 03 Oct 2025 14:29:30 +0000</pubDate>
+</item>
 
 <item>
 <title>Amigo: Secure Group Mesh Messaging in Realistic Protest Settings</title>
