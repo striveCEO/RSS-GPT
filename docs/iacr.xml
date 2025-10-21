@@ -4,6 +4,60 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+<item>
+<title>Fast Batch Matrix Multiplication in Ciphertexts</title>
+<link>https://eprint.iacr.org/2025/1957</link>
+<guid>https://eprint.iacr.org/2025/1957</guid>
+<content:encoded><![CDATA[
+
+Encrypted matrix multiplication (MM) is a fundamental primitive in privacy-preserving machine learning and encrypted data search, but it remains a significant performance bottleneck. Recently, Bae et al.~(Crypto’24) and Park~(Eurocrypt’25) introduced novel algorithms for ciphertext–plaintext (CPMM) and ciphertext–ciphertext (CCMM) matrix multiplications. These algorithms reduce encrypted MM operations to plaintext matrix multiplications (PPMM), enabling implementation through highly optimized BLAS libraries.
+While these reduction-based methods offer significant improvements, their applicability is limited to scenarios where the matrix dimension 
+$d$ is comparable to the ring dimension $N$ in RLWE-based CKKS schemes.
+As a result, they fall short for matrix multiplications involving small or medium-sized matrices.
+
+We extend the reduction-based CPMM/CCMM into small-sized matrix operations by batching instances. We use the Slots-in-Coefficient (SinC) encoding where a ring element is represented by a polynomial with coefficients each of which is the Discrete Fourier Transform of matrix entries at the same position. This encoding enables reductions of encrypted batch MM algorithms to a small number of batch PPMMs, which can be efficiently accelerated by BLAS libraries. 
+Our batch encrypted MM flexibly accommodates diverse matrix dimensions and batch sizes independent of the ring dimension $N$, thereby extending its applicability to practical real-world settings.
+
+For two $d \times d$ matrices with $N/d$ batches, our batch CPMM and CCMM algorithms achieve complexity $O(d^2N)$, improving upon Bae et al. at $O(dN^2)$ and Jiang et al~(CCS’18) at $O(d^2 N\log (N))$.
+We further extend our techniques to rectangular matrices, achieving $O(dN^2)$ for multiplying a $d \times N$ and an $N \times N$ matrix, improving previous $O(N^3)$ methods.
+A proof-of-concept implementation validates these improvements: multiplying 128 batches of $64 \times 64$ matrices takes $0.20$s (CPMM) and $0.91$s (CCMM), yielding $205\times$ and $64\times$ speedups over previous methods. For a $64 \times 2048$ by $2048 \times 2048$ multiplication, our CCMM completes in $7.8$s, achieving a $28\times$ speedup compared to Park's algorithm.
+]]></content:encoded>
+<pubDate>Mon, 20 Oct 2025 07:42:39 +0000</pubDate>
+<pubDate>Mon, 20 Oct 2025 07:42:39 +0000</pubDate>
+</item>
+<item>
+<title>Anamorphic Monero Transactions: the Threat of Bypassing Anti-Money Laundering Laws</title>
+<link>https://eprint.iacr.org/2025/1961</link>
+<guid>https://eprint.iacr.org/2025/1961</guid>
+<content:encoded><![CDATA[
+
+In this paper, we analyze the clash between privacy-oriented cryptocurrencies and emerging legal frameworks for combating financial crime, focusing in particular on the recent European Union regulations. We analyze Monero, a leading "privacy coin" and a major point of concern for law enforcement, and study the scope of due diligence that must be exercised under the new law with regard to Monero trading platforms and how it translates to the technical capabilities of the Monero protocol. We both recognize flaws in the legislation and identify technical pitfalls threatening either the effective compliance of, say, Monero exchanges or the anonymity endeavour of Monero itself. Of independent interest is that we turn to anamorphic cryptography (marking one of the first practical applications of the concept) and leverage it to build a hidden transaction layer embedded in the Monero blockchain that obfuscates illegal money flow and circumvents transaction-level attempts at enforcing the EU law.
+]]></content:encoded>
+<pubDate>Mon, 20 Oct 2025 12:28:37 +0000</pubDate>
+<pubDate>Mon, 20 Oct 2025 12:28:37 +0000</pubDate>
+</item>
+<item>
+<title>Generic PVSS Framework with $O(1)$ Complexity Using CCA2-Secure Threshold Encryption</title>
+<link>https://eprint.iacr.org/2025/1964</link>
+<guid>https://eprint.iacr.org/2025/1964</guid>
+<content:encoded><![CDATA[
+
+Existing PVSS schemes suffer from at least $O(n)$ online complexity due to the need to individually encrypt and prove/ verify each of the $n$ shares. In this work, we present a generic framework for constructing PVSS schemes with $O(1)$ complexity for share distribution and (the expected to be repeated numerous times) public verification.  Our key insight lies in establishing a novel connection between PVSS and CCA2-Secure threshold encryption (CCATE), which enables public verifiability enforced by Non-Interactive Zero-Knowledge (NIZK) proofs. We show that a CCATE scheme can be generically transformed into a secure PVSS scheme, eliminating the $O(n)$ bottleneck per on-line operations. We instantiate the framework by presenting two CCATE constructions: 1) A pairing-free scheme based on a committee-based Distributed Key Generation (DKG) protocol and Threshold ElGamal encryption. 2) A silent setup scheme leveraging a non-interactive distributed key generation, relying on Power-of-Tau ceremony. Furthermore, we introduce solutions for dynamic membership updates in both DKG constructions, demonstrating their practicality and adaptability for real-world applications. The scheme is based on an off-line setup stage (before a specific value to share is given) where the $O(n)$ complexity is dealt with. Although our schemes incur higher setup costs, they drastically reduce the complexity of the critical distribution and verification stages to constant time. This trade-off marks a significant advancement in the scalability of PVSS-based systems, especially in the context of blockchain modern transactions. Conceptually, the work points out how variants of the notion of Threshold Encryption can potentially serve as a ``compression mechanism'' for information sharing schemes.
+]]></content:encoded>
+<pubDate>Mon, 20 Oct 2025 13:25:51 +0000</pubDate>
+<pubDate>Mon, 20 Oct 2025 13:25:51 +0000</pubDate>
+</item>
+<item>
+<title>Aggregate Signatures Tightly Secure under Adaptive Corruptions</title>
+<link>https://eprint.iacr.org/2025/1955</link>
+<guid>https://eprint.iacr.org/2025/1955</guid>
+<content:encoded><![CDATA[
+
+Aggregate signatures allow compressing multiple single-signer signatures into a single short aggregate signature. This primitive has attracted new attention due to applications in blockchains and cryptocurrencies. In multisig addresses, which is one of such applications, aggregate signatures reduce the sizes of transactions from multisig addresses. Security of aggregate signatures under adaptive corruptions of signing keys is important, since one of the motivations of multisig addresses was a countermeasure against signing key exposures. We propose the first aggregate signature scheme tightly secure under adaptive corruptions using pairings. An aggregate signature includes two source group elements of bilinear groups plus a bit vector whose length is equal to the number of single-signer signatures being aggregated. To construct a scheme, we employ a technique from quasi-adaptive non-interactive zero-knowledge arguments. Our construction can be seen as modularization and tightness improvement of Libert et al.'s threshold signature scheme supporting signature aggregation (Theoretical Computer Science 645) in a non-threshold setting.
+]]></content:encoded>
+<pubDate>Mon, 20 Oct 2025 06:57:51 +0000</pubDate>
+<pubDate>Mon, 20 Oct 2025 06:57:51 +0000</pubDate>
+</item>
 
 <item>
 <title>KPIR-C: Keyword PIR with Arbitrary Server-side Computation</title>
