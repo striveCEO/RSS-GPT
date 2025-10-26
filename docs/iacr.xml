@@ -4,6 +4,67 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+<item>
+<title>Cryptography with Weak Privacy</title>
+<link>https://eprint.iacr.org/2025/1978</link>
+<guid>https://eprint.iacr.org/2025/1978</guid>
+<content:encoded><![CDATA[
+
+We initiate a systematic study of information-theoretic cryptography with {\em weak privacy}, only requiring that the adversary cannot rule out any possible secret. For a parameter $0<p>0$. We obtain the following main results.
+
+Positive results. We present efficient WP constructions for generalized secret sharing, decomposable randomized encodings, and the related notions of garbling schemes and PSM protocols, as well as interactive secure multiparty computation protocols in the plain model and in the OT-hybrid model. 
+
+For secret sharing, we settle a question of Beimel and Franklin (TCC 2007), showing that every $n$-party access structure admits a WP scheme with per-party share size $O(n)$. When all unauthorized sets have constant size, we get a $p$-WP scheme with constant share size and $p\ge 1/poly(n)$.
+
+Negative result. For decomposable randomized encodings, we show that a previous lower bound technique of Ball et al.\ (ITCS 2020) applies also to the WP notion. Together with our upper bound, this shows that the optimal WP garbling size of the worst-case $f:\{0,1\}^n\to\{0,1\}$ is $\tilde{\Theta}(n^2)$.
+
+Application. While WP may seem like an unrealistically weak security notion, we demonstrate its usefulness towards achieving traditional security guarantees. Concretely, under the standard LPN assumption, we show that any $p$-WP secret-sharing scheme with inverse-polynomial $p$ implies a {\em computationally secure} secret-sharing scheme for a related access structure. Together with our positive results for WP secret sharing, this implies a super-polynomial improvement of the share size for a natural class of access structures.
+]]></content:encoded>
+<pubDate>Wed, 22 Oct 2025 12:37:18 +0000</pubDate>
+<pubDate>Wed, 22 Oct 2025 12:37:18 +0000</pubDate>
+</item>
+<item>
+<title>Taming Iterative Grinding Attacks on Blockchain Beacons</title>
+<link>https://eprint.iacr.org/2025/1974</link>
+<guid>https://eprint.iacr.org/2025/1974</guid>
+<content:encoded><![CDATA[
+
+Random beacons play a critical role in blockchain protocols by providing publicly verifiable, unpredictable randomness essential for secure assignment of protocol roles such as block producers and committee membership. In the interest of efficiency, many deployed blockchains adopt beacon algorithms that suffer from grinding: an adversarial attack in which a party exploits freedom given by the protocol to bias the outcome of the random beacon by resampling it several times and picking the most desirable outcome. To compound the problem, beacons often operate in an iterative manner, where the beacon output produced during one protocol epoch serves as the random seed for the beacon’s invocation in the next epoch. This amplifies the security threat, as such attacks may then aggregate their power over many epochs.
+
+In this article, we formulate a generic framework for information-theoretic analysis of grinding in iterated randomness beacons. We define the natural grinding capacity of a beacon, intuitively corresponding to the amount of grinding it allows with a uniformly random seed. We then prove that sufficiently strong tail bounds on this quantity can be transformed into a guarantee on smooth min-entropy of the iterated beacon’s output, even conditioned on all past outputs and irrespective of the inner workings of the beacon. Such min-entropy guarantees can immediately be translated into corresponding statements about various applications of the beacon to committee selection, incentives, or underlying protocol security.
+
+Our main technical result concerns conventional longest-chain protocols, where we establish that the combinatorial structure of the forest of longest chains can be leveraged to control grinding. Instantiating the generic framework with these grinding upper bounds, we establish that the randomness beacon of the Ouroboros Praos protocol is secure against adversaries controlling up to about 12% of stake—even
+without any assumptions bounding the adversarial computational power invested into grinding. This is a qualitatively new guarantee for the protocol.
+]]></content:encoded>
+<pubDate>Wed, 22 Oct 2025 08:05:51 +0000</pubDate>
+<pubDate>Wed, 22 Oct 2025 08:05:51 +0000</pubDate>
+</item>
+<item>
+<title>Tight Security for BBS Signatures</title>
+<link>https://eprint.iacr.org/2025/1973</link>
+<guid>https://eprint.iacr.org/2025/1973</guid>
+<content:encoded><![CDATA[
+
+This paper studies the concrete security of BBS signatures (Boneh, Boyen, Shacham, CRYPTO '04; Camenisch and Lysyanskaya, CRYPTO '04), a popular algebraic construction of digital signatures which underlies practical privacy-preserving authentication systems and is undergoing standardization by the W3C and IRTF.
+
+Sch\"age (Journal of Cryptology '15) gave a tight standard-model security proof under the $q$-SDH assumption for a less efficient variant of the scheme, called BBS+--here, $q$ is the number of issued signatures. In contrast, the security proof for BBS (Tessaro and Zhu, EUROCRYPT '23), also under the $q$-SDH assumption, is \emph{not} tight. Nonetheless, this recent proof shifted both standardization and industry adoption towards the more efficient BBS, instead of BBS+, and for this reason, it is important to understand whether this tightness gap is inherent. Recent cryptanalysis by Chairattana-Apirom and Tessaro (ASIACRYPT '25) also shows that a tight reduction to $q$-SDH is the best we can hope for.
+
+This paper closes this gap in two different ways. On the positive end, we show a novel tight reduction for BBS in the case where each message is signed at most once--this case covers in particular the common practical use case which derandomizes signing. On the negative end, we use a meta-reduction argument to prove that if we allow generating multiple signatures for the same message, then {\em no} algebraic reduction to $q$-SDH (and its variants) can be tight.
+]]></content:encoded>
+<pubDate>Wed, 22 Oct 2025 02:07:27 +0000</pubDate>
+<pubDate>Wed, 22 Oct 2025 02:07:27 +0000</pubDate>
+</item>
+<item>
+<title>Formalisation of the KZG polynomial commitment schemes in EasyCrypt</title>
+<link>https://eprint.iacr.org/2025/1972</link>
+<guid>https://eprint.iacr.org/2025/1972</guid>
+<content:encoded><![CDATA[
+
+In this paper, we present formally verified proofs of the popular KZG Polynomial Commitment Schemes (PCSs), including the security proofs for the properties of correctness, polynomial binding, evaluation binding and hiding. Polynomial commitment schemes have various applications in cryptography and computer science, including verifiable computation, blockchain and cryptocurrencies, secure multi-party computation as well as in the construction of ZK-SNARKs. To validate security, we utilise EasyCrypt, an interactive theorem prover that allows for formal verification of cryptographic primitives and protocols. This approach enforces correct proofs which cover all required cases and formalising assumptions reducing the risk of overlooked vulnerabilities. This formalisation validates the current understanding of KZG's PCSs as secure while clarifying various issues in the original claims.
+]]></content:encoded>
+<pubDate>Tue, 21 Oct 2025 21:17:36 +0000</pubDate>
+<pubDate>Tue, 21 Oct 2025 21:17:36 +0000</pubDate>
+</item>
 
 <item>
 <title>Unobservable Contracts from Zerocash and Trusted Execution Environments</title>
