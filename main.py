@@ -314,8 +314,8 @@ max_entries = 1000
 OPENAI_API_KEY = os.environ.get('OPENAI_API_KEY')
 U_NAME = os.environ.get('U_NAME')
 OPENAI_PROXY = os.environ.get('OPENAI_PROXY')
-#更改为通义千问的api替代方案
-OPENAI_BASE_URL = os.environ.get('OPENAI_BASE_URL', 'https://dashscope.aliyuncs.com/compatible-mode/v1')
+#更改为硅基流动的替代方案
+OPENAI_BASE_URL = os.environ.get('OPENAI_BASE_URL', 'https://api.siliconflow.cn/v1/chat/completions')
 deployment_url = f'https://{U_NAME}.github.io/RSS-GPT/'
 BASE =get_cfg('cfg', 'BASE')
 keyword_length = int(get_cfg('cfg', 'keyword_length'))
