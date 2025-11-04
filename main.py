@@ -269,16 +269,16 @@ def output(sec, language):
             elif OPENAI_API_KEY:
                 token_length = len(cleaned_article)
                 try:
-                    entry.summary = gpt_summary(cleaned_article,model="qwen-72b-chat", language=language)
+                    entry.summary = gpt_summary(cleaned_article,model="deepseek-ai/DeepSeek-R1-0528-Qwen3-8B", language=language)
                     with open(log_file, 'a') as f:
                         f.write(f"Token length: {token_length}\n")
-                        f.write(f"Summarized using qwen-72b-chat\n")
+                        f.write(f"Summarized using deepseek-ai/DeepSeek-R1-0528-Qwen3-8B\n")
                 except:
                     try:
-                        entry.summary = gpt_summary(cleaned_article,model="qwen-turbo", language=language)
+                        entry.summary = gpt_summary(cleaned_article,model="deepseek-ai/DeepSeek-R1-0528-Qwen3-8B", language=language)
                         with open(log_file, 'a') as f:
                             f.write(f"Token length: {token_length}\n")
-                            f.write(f"Summarized using qwen-turbo\n")
+                            f.write(f"Summarized using deepseek-ai/DeepSeek-R1-0528-Qwen3-8B\n")
                     except Exception as e:
                         entry.summary = None
                         with open(log_file, 'a') as f:
