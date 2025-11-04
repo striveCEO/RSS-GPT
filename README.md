@@ -58,3 +58,4 @@ I will consider hosting more feeds in the future. Email me or submit an issue if
 - https://eprint.iacr.org/rss/rss.xml -> https://striveCEO.github.io/RSS-GPT/iacr.xml
 - https://rss.arxiv.org/rss/cs -> https://striveCEO.github.io/RSS-GPT/arxiv.xml
 - https://rss.arxiv.org/rss/cs -> https://striveCEO.github.io/RSS-GPT/arxivAI.xml
+- https://ethresear.ch/latest.rss -> https://striveCEO.github.io/RSS-GPT/ethResearch.xml
