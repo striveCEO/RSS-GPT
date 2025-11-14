@@ -5,16 +5,84 @@
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
 <item>
+<title>CRA and Cryptography: The Story Thus Far</title>
+<link>https://eprint.iacr.org/2025/2092</link>
+<guid>https://eprint.iacr.org/2025/2092</guid>
+<content:encoded><![CDATA[
+
+We report on our experiences with the ongoing European standardisation efforts related to the EU Cyber Resilience Act (CRA) and provide interim (November 2025) estimates on the direction that European cryptography regulation may take, particularly concerning the algorithm ``allow list'' and PQC transition requirements in products.
+
+We also outline some of the risks associated with the partially closed standardisation process, including active impact minimisation by vendors concerned with engineering costs, a lack of public review leading to lower technical quality, and an increased potential for backdoors.
+
+The Cyber Resilience Act came into effect in December 2024, and its obligations will fully take effect for makers of ``products with digital elements'' from 2027. CRA compliance is a requirement for obtaining the CE mark and a prerequisite for selling products in the European Single Market, which comprises approximately 450 million consumers. The CRA has a wide-ranging set of security requirements, including security patching and the use of cryptography (data integrity, confidentiality for data at rest and data in transit). However, the Cyber Resilience Act itself is a legal text devoid of technical detail -- it does not specify the type of cryptography deemed appropriate to satisfy its requirements.
+
+The technical implications of CRA are being detailed in approximately 40 new standards from the three European standardisation organisations, CEN, CENELEC, and ETSI. While the resulting ETSI standards can be expected to be available for free even in the drafting stage, the CEN and CENELEC standards will probably require a per-reader license fee. This, despite recent legal rulings asserting that product security and safety standards are part of EU law due to their legal effects.
+
+Taking a recent (2024) example of cryptographic requirements in such standards, we observe that the definitions and language in the Radio Equipment Directive (RED DA) harmonised standard (EN 18031 series) may allow vendors to take an approach where weak cryptography is considered ``best practice'' right until exploitation is feasible.
+
+Recognising recent developments such as the EU Post-Quantum Cryptography transition roadmap, many CRA standardisation working groups are moving towards a ``State-of-the-Art Cryptography'' (SOTA Cryptography) model where approved mechanism listings are published by the European Cybersecurity Certification Group (ECCG). CRA-compliant products may still support other cryptographic mechanisms, but only SOTA is permitted as a safe default for Internet-connected products.
+]]></content:encoded>
+<pubDate>Thu, 13 Nov 2025 23:29:25 +0000</pubDate>
+<pubDate>Thu, 13 Nov 2025 23:29:25 +0000</pubDate>
+</item>
+<item>
+<title>Vega: Low-Latency Zero-Knowledge Proofs over Existing Credentials</title>
+<link>https://eprint.iacr.org/2025/2094</link>
+<guid>https://eprint.iacr.org/2025/2094</guid>
+<content:encoded><![CDATA[
+
+As digital identity verification becomes increasingly pervasive, existing privacy-preserving approaches are still limited by complex circuit designs, large proof sizes, trusted setups, or high latency. We present Vega, a practical zero-knowledge proof system that proves statements about existing credentials without revealing anything else. Vega is simple, does not require a trusted setup, and is more efficient than the prior state-of-the-art: for a 1920-byte credential, Vega achieves 212 ms proving time, 51 ms verification time, 150 kB proofs, and a 436 kB proving key. At the heart of Vega are two principles that together enable a lightweight proof system that pays only for what it needs. First, fold-and-reuse proving exploits repetition and folding opportunities (i) across presentations, by pushing repeated work to a rerandomizable precomputation; (ii) across uniform hashing steps, by folding many steps into a single step; and (iii) for zero-knowledge, by folding the public-coin transcript with a random one. Second, lookup-centric arithmetization extracts relevant values from credential bytes, both for extracting relevant fields without full in-circuit parsing, and to enable length-hiding hashing.
+]]></content:encoded>
+<pubDate>Fri, 14 Nov 2025 04:36:08 +0000</pubDate>
+<pubDate>Fri, 14 Nov 2025 04:36:08 +0000</pubDate>
+</item>
+<item>
+<title>Efficient and Proof-of-Useful-Work Friendly Local-Search for Distributed Consensus</title>
+<link>https://eprint.iacr.org/2025/2091</link>
+<guid>https://eprint.iacr.org/2025/2091</guid>
+<content:encoded><![CDATA[
+
+Blockchain protocols based on the popular ``Proof-of-Work'' mechanism
+yield public transaction ledgers maintained by a group of distributed
+participants who solve computationally hard puzzles to earn the right
+to add a block.
+The success and widespread adoption of this mechanism has led to
+staggering energy consumption devoted to solving such (otherwise)
+``useless'' puzzles. While the environmental impacts of the framework have
+been widely criticized, this has been the dominant distributed ledger
+paradigm for years.
+
+The Ofelimos ``Proof-of-Useful-Work'' protocol (Fitzi et al.,
+CRYPTO 2022) addressed this by establishing that useful
+combinatorial problems could replace the conventional hashing puzzles,
+yielding a provably secure blockchain that meaningfully utilizes the
+computational work that underlies the protocol.
+The usefulness to wastefulness ratio of Ofelimos hinges on the properties of its underlying generic distributed local-search algorithm---Doubly Parallel Local Search (DPLS). We observe that this search procedure is particularly wasteful when exploring steep regions of the solution
+space.
+
+
+To address this issue, we introduce Frequently Rerandomized Local
+Search (FRLS), a new generic distributed local search algorithm that
+we show to be consistent with the Ofelimos architecture. While this
+algorithm retains ledger security, we show that it also provides compelling
+performance on benchmark problems arising in practice: Concretely, state-of-art
+local-search algorithms for cumulative scheduling and warehouse
+location can be directly adapted to FRLS and we experimentally
+demonstrate the efficiency of the resulting algorithms.
+]]></content:encoded>
+<pubDate>Thu, 13 Nov 2025 15:42:13 +0000</pubDate>
+<pubDate>Thu, 13 Nov 2025 15:42:13 +0000</pubDate>
+</item>
+
+<item>
 <title>Traceable Bottom-Up Secret Sharing and Law &amp; Order on Community Social Key Recovery (Full Version)</title>
 <link>https://eprint.iacr.org/2025/2089</link>
 <guid>https://eprint.iacr.org/2025/2089</guid>
 <content:encoded><![CDATA[
-
 A recent work by Kate et al. [EPRINT 2025] proposes a community-based social recovery scheme (SKR), where key-owners can use a subset of other community members as guardians, and in exchange, they play guardians to support other participants' key recovery. Their construction relies on a new concept called bottom-up secret sharing (BUSS). However, they do not consider a crucial feature, called traceability, which ensures that if more than a threshold number of the guardians collude, at least some colluders' identities can be traced -- thereby deterring participants from colluding. In this paper, we incorporate traceability into the community social key recovery as an important feature. 
 
 We first introduce the notion of traceable BUSS, which allows tracing colluders by accessing a reconstruction box. Then, extending the work of Boneh et al. [CRYPTO 2024], we propose the first traceable BUSS construction. Finally, we show how to generically use a traceable BUSS scheme to construct a traceable SKR in the aforementioned community setting. Overall, this is the first scheme combining decentralized key management with traceability, marrying BUSS’s scalability with the deterrence of traceable secret sharing.
 ]]></content:encoded>
-<pubDate>Thu, 13 Nov 2025 10:47:51 +0000</pubDate>
 <pubDate>Thu, 13 Nov 2025 10:47:51 +0000</pubDate>
 </item>
 <item>
@@ -22,7 +90,6 @@ We first introduce the notion of traceable BUSS, which allows tracing colluders 
 <link>https://eprint.iacr.org/2025/2087</link>
 <guid>https://eprint.iacr.org/2025/2087</guid>
 <content:encoded><![CDATA[
-
 Private Set Union (PSU) enables two parties to compute the union of their input sets without revealing anything else. Depending on set sizes, PSU is studied in balanced and unbalanced settings. Tu et al. (USENIX Security 2025) presented state-of-the-art enhanced PSU (ePSU) protocols under a unified framework in both settings, achieving enhanced security by preventing during-execution leakage. However, we observe that directly applying hash-to-bin on input sets within their framework introduces potential privacy risks. Moreover, the communication of their unbalanced ePSU still scales with the larger set size, rather than being linear in only the smaller set size. In this work, we address these open problems.
 
  We employ a combination of oblivious pseudorandom function (OPRF) and shuffling to mitigate the potential privacy leakage that arises when directly applying the hash-to-bin within the framework of Tu et al. (USENIX Security 2025). Building upon this, we further optimize their balanced ePSU protocol by leveraging a bidirectional oblivious key-value store (OKVS). Compared with the corrected version of Tu et al.'s balanced ePSU, ours achieves a $1.1-3.0\times$ shrinking in communication and a $1.2-1.6\times$ speedup in runtime.
@@ -30,9 +97,7 @@ Private Set Union (PSU) enables two parties to compute the union of their input 
 We design the first unbalanced ePSU whose communication is linear solely in the smaller set size. Since no hash-to-bin is used, it is inherently free from the associated privacy leakage. With the smaller set size fixed at $2^{10}$, ours reduces communication by $1.5-45.8\times$ compared with  corrected version of Tu et al.'s unbalanced ePSU, while achieving $1.3-6.7\times$ runtime speedups.
 ]]></content:encoded>
 <pubDate>Thu, 13 Nov 2025 09:01:11 +0000</pubDate>
-<pubDate>Thu, 13 Nov 2025 09:01:11 +0000</pubDate>
 </item>
-
 <item>
 <title>Information-Theoretically Secure Distributed Protocols for Two-Party MPC Primitives</title>
 <link>https://eprint.iacr.org/2024/009</link>
