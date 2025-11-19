@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+<title>NDSS.2025</title>
+<link>https://papers.cool/venue/NDSS.2025</link>
+
+<item>
+<title>Dissecting Payload-based Transaction Phishing on Ethereum</title>
+<link>https://papers.cool/venue/dissecting-payload-based-transaction-phishing-on-ethereum@NDSS</link>
+<guid>https://papers.cool/venue/dissecting-payload-based-transaction-phishing-on-ethereum@NDSS</guid>
+<content:encoded><![CDATA[
+
+In recent years, a more advanced form of phishing has arisen on Ethereum, surpassing early-stage, simple transaction phishing. This new form, which we refer to as payload-based transaction phishing (PTXPHISH), manipulates smart contract interactions through the execution of malicious payloads to deceive users. PTXPHISH has rapidly emerged as a significant threat, leading to incidents that caused losses exceeding $70 million in 2023 reports. Despite its substantial impact, no previous studies have systematically explored PTXPHISH. In this paper, we present the first comprehensive study of the PTXPHISH on Ethereum. Firstly, we conduct a long-term data collection and put considerable effort into establishing the first ground-truth PTXPHISH dataset, consisting of 5,000 phishing transactions. Based on the dataset, we dissect PTXPHISH, categorizing phishing tactics into four primary categories and eleven sub-categories. Secondly, we propose a rule-based multi-dimensional detection approach to identify PTXPHISH, achieving an F1-score of over 99% and processing each block in an average of 390 ms. Finally, we conduct a large-scale detection spanning 300 days and discover a total of 130,637 phishing transactions on Ethereum, resulting in losses exceeding $341.9 million. Our in-depth analysis of these phishing transactions yielded valuable and insightful findings. Scammers consume approximately 13.4 ETH daily, which accounts for 12.5% of the total Ethereum gas, to propagate address poisoning scams. Additionally, our analysis reveals patterns in the cash-out process employed by phishing scammers, and we find that the top five phishing organizations are responsible for 40.7% of all losses. Furthermore, our work has made significant contributions to mitigating real-world threats. We have reported 1,726 phishing addresses to the community, accounting for 42.7% of total community contributions during the same period. Additionally, we have sent 2,539 on-chain alert messages, assisting 1,980 victims. This research serves as a valuable reference in combating the emerging PTXPHISH and safeguarding users’ assets.
+]]></content:encoded>
+
+<pubDate>2025-11-19T17:21:20.378122+00:00</pubDate>
+</item>
+<item>
+<title>Horcrux: Synthesize, Split, Shift and Stay Alive; Preventing Channel Depletion via Universal and Enhanced Multi-hop Payments</title>
+<link>https://papers.cool/venue/horcrux-synthesize-split-shift-and-stay-alive-preventing-channel-depletion-via-universal-and-enhanced-multi-hop-payments@NDSS</link>
+<guid>https://papers.cool/venue/horcrux-synthesize-split-shift-and-stay-alive-preventing-channel-depletion-via-universal-and-enhanced-multi-hop-payments@NDSS</guid>
+<content:encoded><![CDATA[
+
+Payment Channel Networks (PCNs) have been highlighted as viable solutions to address the scalability issues in current permissionless blockchains. They facilitate off-chain transactions, significantly reducing the load on the blockchain. However, the extensive reuse of multi-hop routes in the same direction poses a risk of channel depletion, resulting in involved channels becoming unidirectional or even closing, thereby compromising the sustainability and scalability of PCNs. Even more concerning, existing rebalancing protocol solutions heavily rely on trust assumptions and scripting languages, resulting in compromised universality and reliability. In this paper, we present Horcrux, a universal and efficient multi-party virtual channel protocol without relying on extra trust assumptions, scripting languages, or the perpetual online requirement. Horcrux fundamentally addresses the channel depletion problem using a novel approach termed textit{flow neutrality}, which minimizes the impact on channel balance allocations during multi-hop payments (MHPs). Additionally, we formalize the security properties of Horcrux by modeling it within the Global Universal Composability framework and provide a formal security proof. We implement Horcrux on a real Lightning Network dataset, comprising 10,529 nodes and 38,910 channels, and compare it to the state-of-the-art rebalancing schemes such as Shaduf [NDSS'22], Thora [CCS'22], and Revive [CCS'17]. The experimental results demonstrate that (1) the entire process of Horcrux costs less than 1 USD, significantly lower than Shaduf; (2) Horcrux achieves a $12%$-$30%$ increase in payment success ratio and reduces user deposits required for channels by $70%$-$91%$; (3) the performance of Horcrux improves by $1.2x$-$1.5x$ under long-term operation; and (4) Horcrux maintains a nearly zero channel depletion rate, whereas both Revive and Shaduf result in thousands of depleted channels.
+]]></content:encoded>
+
+<pubDate>2025-11-19T17:21:20.378122+00:00</pubDate>
+</item>
+<item>
+<title>Kronos: A Secure and Generic Sharding Blockchain Consensus with Optimized Overhead</title>
+<link>https://papers.cool/venue/kronos-a-secure-and-generic-sharding-blockchain-consensus-with-optimized-overhead@NDSS</link>
+<guid>https://papers.cool/venue/kronos-a-secure-and-generic-sharding-blockchain-consensus-with-optimized-overhead@NDSS</guid>
+<content:encoded><![CDATA[
+
+Sharding enhances blockchain scalability by dividing the network into shards, each managing specific unspent transaction outputs or accounts. As an introduced new transaction type, cross-shard transactions pose a critical challenge to the security and efficiency of sharding blockchains. Currently, there is a lack of a generic sharding blockchain consensus pattern that achieves both security and low overhead. In this paper, we present Kronos, a secure sharding blockchain consensus achieving optimized overhead. In particular, we propose a new textit{secure sharding blockchain consensus pattern}, based on a textit{buffer} managed jointly by shard members. Valid transactions are transferred to the payee via the buffer, while invalid ones are rejected through happy or unhappy paths. Kronos is proved to achieve textit{security} textit{with atomicity} under malicious clients while maintaining textit{optimal intra-shard overhead}. Efficient rejection even requires no Byzantine fault tolerance (BFT) protocol execution in happy paths, and the cost in unhappy paths is still not higher than a two-phase commit. Besides, we propose secure cross-shard certification methods. Handling $b$ transactions, Kronos is proved to achieve cross-shard communication with low textit{cross-shard overhead} $mathcal{O}(n b lambda)$ ($n$ for the shard size and $lambda$ for the security parameter). Notably, Kronos imposes no restrictions on BFT and does not rely on timing assumptions, offering optional constructions in various modules. Kronos could serve as a universal framework for enhancing the performance and scalability of existing BFT protocols. Kronos supports generic models, including asynchronous networks, and can increase the throughput by several orders of magnitude. We implement Kronos using two prominent BFT protocols: asynchronous Speeding Dumbo (NDSS'22) and partially synchronous Hotstuff (PODC'19). Extensive experiments (over up to 1000 AWS EC2 nodes across 4 AWS regions) demonstrate Kronos scales the consensus nodes to thousands, achieving a substantial throughput of 320 ktx/sec with 2.0 sec latency. Compared with the past solutions, Kronos outperforms, achieving up to a 12$times$ improvement in throughput and a 50% reduction in latency when cross-shard transactions dominate the workload.
+]]></content:encoded>
+
+<pubDate>2025-11-19T17:21:20.378122+00:00</pubDate>
+</item>
+<item>
+<title>Manifoldchain: Maximizing Blockchain Throughput via Bandwidth-Clustered Sharding</title>
+<link>https://papers.cool/venue/manifoldchain-maximizing-blockchain-throughput-via-bandwidth-clustered-sharding@NDSS</link>
+<guid>https://papers.cool/venue/manifoldchain-maximizing-blockchain-throughput-via-bandwidth-clustered-sharding@NDSS</guid>
+<content:encoded><![CDATA[
+
+Bandwidth limitation is the major bottleneck that hinders scaling throughput of proof-of-work blockchains. To guarantee security, the mining rate of the blockchain is determined by the miners with the lowest bandwidth, resulting in an inefficient bandwidth utilization among fast miners. We propose Manifoldchain, an innovative blockchain sharding protocol that alleviates the impact of slow miners to maximize blockchain throughput. Manifoldchain utilizes a bandwidth-clustered shard formation mechanism that groups miners with similar bandwidths into the same shard. Consequently, this approach enables us to set an optimal mining rate for each shard based on its bandwidth, effectively reducing the waiting time caused by slow miners. Nevertheless, the adversary could corrupt miners with similar bandwidths, thereby concentrating hashing power and potentially creating an adversarial majority within a single shard. To counter this adversarial strategy, we introduce textit{sharing mining}, allowing the honest mining power of the entire network to participate in the secure ledger formation of each shard, thereby achieving the same level of security as an unsharded blockchain. Additionally, we introduce an asynchronous atomic commitment mechanism to ensure transaction atomicity across shards with various mining rates. Our theoretical analysis demonstrates that Manifoldchain scales linearly in throughput with the increase in shard numbers and inversely with network delay in each shard. We implement a full system prototype of Manifoldchain, comprehensively evaluated on both simulated and real-world testbeds. These experiments validate its vertical scalability with network bandwidth and horizontal scalability with network size, achieving a substantial improvement of 186% in throughput over baseline sharding protocols, for scenarios where bandwidths of miners range from 5Mbps to 60Mbps.
+]]></content:encoded>
+
+<pubDate>2025-11-19T17:21:20.378122+00:00</pubDate>
+</item>
+<item>
+<title>MTZK: Testing and Exploring Bugs in Zero-Knowledge (ZK) Compilers</title>
+<link>https://papers.cool/venue/mtzk-testing-and-exploring-bugs-in-zero-knowledge-zk-compilers@NDSS</link>
+<guid>https://papers.cool/venue/mtzk-testing-and-exploring-bugs-in-zero-knowledge-zk-compilers@NDSS</guid>
+<content:encoded><![CDATA[
+
+Zero-knowledge (ZK) proofs have been increasingly popular in privacy-preserving applications and blockchain systems. To facilitate handy and efficient ZK proof generation for normal users, the industry has designed domain-specific languages (DSLs) and ZK compilers. Given a program in ZK DSL, a ZK compiler compiles it into a circuit, which is then passed to the prover and verifier for ZK checking. However, the correctness of ZK compilers is not well studied, and recent works have shown that de facto ZK compilers are buggy, which can allow malicious users to generate invalid proofs that are accepted by the verifier, causing security breaches and financial losses in cryptocurrency. In this paper, we propose MTZK, a metamorphic testing framework to test ZK compilers and uncover incorrect compilations. Our approach leverages deliberately designed metamorphic relations (MRs) to mutate ZK compiler inputs. This way, ZK compilers can be automatically tested for compilation correctness using inputs and mutated variants. We propose a set of design considerations and optimizations to deliver an efficient and effective testing framework. In the evaluation of four industrial ZK compilers, we successfully uncovered 21 bugs, out of which the developers have promptly patched 15. We also show possible exploitations of the uncovered bugs to demonstrate their severe security implications.
+]]></content:encoded>
+
+<pubDate>2025-11-19T17:21:20.378122+00:00</pubDate>
+</item>
+<item>
+<title>Silence False Alarms: Identifying Anti-Reentrancy Patterns on Ethereum to Refine Smart Contract Reentrancy Detection</title>
+<link>https://papers.cool/venue/silence-false-alarms-identifying-anti-reentrancy-patterns-on-ethereum-to-refine-smart-contract-reentrancy-detection@NDSS</link>
+<guid>https://papers.cool/venue/silence-false-alarms-identifying-anti-reentrancy-patterns-on-ethereum-to-refine-smart-contract-reentrancy-detection@NDSS</guid>
+<content:encoded><![CDATA[
+
+Reentrancy vulnerabilities in Ethereum smart contracts have caused significant financial losses, prompting the creation of several automated reentrancy detectors. However, these detectors frequently yield a high rate of false positives due to coarse detection rules, often misclassifying contracts protected by anti-reentrancy patterns as vulnerable. Thus, there is a critical need for the development of specialized automated tools to assist these detectors in accurately identifying anti-reentrancy patterns. While existing code analysis techniques show promise for this specific task, they still face significant challenges in recognizing anti-reentrancy patterns. These challenges are primarily due to the complex and varied features of anti-reentrancy patterns, compounded by insufficient prior knowledge about these features. This paper introduces AutoAR, an automated recognition system designed to explore and identify prevalent anti-reentrancy patterns in Ethereum contracts. AutoAR utilizes a specialized graph representation, RentPDG, combined with a data filtration approach, to effectively capture anti-reentrancy-related semantics from a large pool of contracts. Based on RentPDGs extracted from these contracts, AutoAR employs a recognition model that integrates a graph auto-encoder with a clustering technique, specifically tailored for precise anti-reentrancy pattern identification. Experimental results show AutoAR can assist existing detectors in identifying 12 prevalent anti-reentrancy patterns with 89% accuracy, and when integrated into the detection workflow, it significantly reduces false positives by over 85%.
+]]></content:encoded>
+
+<pubDate>2025-11-19T17:21:20.378122+00:00</pubDate>
+</item>
+<item>
+<title>Welcome to Jurassic Park: A Comprehensive Study of Security Risks in Deno and its Ecosystem</title>
+<link>https://papers.cool/venue/welcome-to-jurassic-park-a-comprehensive-study-of-security-risks-in-deno-and-its-ecosystem@NDSS</link>
+<guid>https://papers.cool/venue/welcome-to-jurassic-park-a-comprehensive-study-of-security-risks-in-deno-and-its-ecosystem@NDSS</guid>
+<content:encoded><![CDATA[
+
+Node.js and its ecosystem npm are notoriously insecure, enabling the proliferation of supply chain attacks. Deno is an emerging runtime that promises to offer a safer alternative for running untrusted JavaScript code outside of the browser. Learning from Node.js’s mistakes, Deno is written in Rust, a memory-safe programming language, and it includes a strict permission system that checks all accesses to sensitive APIs via static or runtime permissions. Deno also allows the inclusion of third-party code via URLs, which promises a more transparent way of handling dependencies, advocating for a fully decentralized software supply chain. In this paper, we study if Deno delivers on its promise of increased security. We find that indeed Deno has a smaller attack surface than Node.js, but there still are known attacks that are not addressed (ReDoS) or only partially mitigated (prototype pollution). Moreover, we find several weaknesses in Deno’s permission system, which allow sophisticated supply chain attacks. First, coarse-grained permissions allow attackers to abuse the ambient authority of the operating system to sidestep the permission system. Second, we find that URL imports are exempted from the permission checks, allowing attackers to perform unlawful network requests. We also identify time-of-check to time-of-use issues when handling symbolic links, making fine-grained file system access control ineffective. We then perform an empirical study of Deno’s main ecosystem deno.land to understand how developers consume third-party code and how permissions are used and communicated. We identify classical URL-related issues such as expired domains and reliance on insecure transport protocols, but we also find that it is challenging to guarantee uniform immutability and version control when multiple domains are involved in code distribution. We also provide initial evidence that developers poorly document required permissions on deno.land and that they tend to abuse coarse-grained permissions, reducing the benefits of the permission system. Our findings resulted in two security advisories for Deno and a redesign of its import mechanism. We also make concrete recommendations for improving Deno’s security model to further prevent supply chain attacks: add import permissions, additional access control at file system level, support for compartmentalization, and a manifest file that persists fine-grained permissions.
+]]></content:encoded>
+
+<pubDate>2025-11-19T17:21:20.378122+00:00</pubDate>
+</item>
+<item>
+<title>Alba: The Dawn of Scalable Bridges for Blockchains</title>
+<link>https://papers.cool/venue/alba-the-dawn-of-scalable-bridges-for-blockchains@NDSS</link>
+<guid>https://papers.cool/venue/alba-the-dawn-of-scalable-bridges-for-blockchains@NDSS</guid>
+<content:encoded><![CDATA[
+
+Over the past decade, cryptocurrencies have garnered attention from academia and industry alike, fostering a diverse blockchain ecosystem and novel applications. The inception of bridges improved interoperability, enabling asset transfers across different blockchains to capitalize on their unique features. Despite their surge in popularity and the emergence of Decentralized Finance (DeFi), trustless bridge protocols remain inefficient, either relaying too much information (e.g., light-client-based bridges) or demanding expensive computation (e.g., zk-based bridges). These inefficiencies arise because existing bridges securely prove a transaction's on-chain inclusion on another blockchain. Yet this is unnecessary as off-chain solutions, like payment and state channels, permit safe transactions without on-chain publication. However, existing bridges do not support the verification of off-chain payments. This paper fills this gap by introducing the concept of Pay2Chain bridges that leverage the advantages of off-chain solutions like payment channels to overcome current bridges' limitations. Our proposed Pay2Chain bridge, named Alba, facilitates the efficient, secure, and trustless execution of conditional payments or smart contracts on a target blockchain based on off-chain events. Alba, besides its technical advantages, enriches the source blockchain's ecosystem by facilitating DeFi applications, multi-asset payment channels, and optimistic stateful off-chain computation. We formalize the security of Alba against Byzantine adversaries in the UC framework and complement it with a game theoretic analysis. We further introduce formal scalability metrics to demonstrate Alba's efficiency. Our empirical evaluation confirms Alba's efficiency in terms of communication complexity and on-chain costs, with its optimistic case incurring only twice the cost of a standard Ethereum transaction of token ownership transfer.
+]]></content:encoded>
+
+<pubDate>2025-11-19T17:21:20.378122+00:00</pubDate>
+</item>
+<item>
+<title>All your (data)base are belong to us: Characterizing Database Ransom(ware) Attacks</title>
+<link>https://papers.cool/venue/all-your-database-are-belong-to-us-characterizing-database-ransomware-attacks@NDSS</link>
+<guid>https://papers.cool/venue/all-your-database-are-belong-to-us-characterizing-database-ransomware-attacks@NDSS</guid>
+<content:encoded><![CDATA[
+
+We present the first systematic study of database ransom(ware) attacks, a class of attacks where attackers scan for database servers, log in by leveraging the lack of authentication or weak credentials, drop the database contents, and demand a ransom to return the deleted data. We examine 23,736 ransom notes collected from 60,427 compromised database servers over three years, and set up database honeypots to obtain a first-hand view of current attacks. Database ransom(ware) attacks are prevalent with 6K newly infected servers in March 2024, a 60% increase over a year earlier. Our honeypots get infected in 14 hours since they are connected to the Internet. Weak authentication issues are two orders of magnitude more frequent on Elasticsearch servers compared to MySQL servers due to slow adoption of the latest Elasticsearch versions. To analyze who is behind database ransom(ware) attacks we implement a clustering approach that first identifies campaigns using the similarity of the ransom notes text. Then, it determines which campaigns are run by the same group by leveraging indicator reuse and information from the Bitcoin blockchain. For each group, it computes properties such as the number of compromised servers, the lifetime, the revenue, and the indicators used. Our approach identifies that the 60,427 database servers are victims of 91 campaigns run by 32 groups. It uncovers a dominant group responsible for 76% of the infected servers and 90% of the financial impact. We find links between the dominant group, a nation-state, and a previous attack on Git repositories.
+]]></content:encoded>
+
+<pubDate>2025-11-19T17:21:20.378122+00:00</pubDate>
+</item>
+<item>
+<title>Do We Really Need to Design New Byzantine-robust Aggregation Rules?</title>
+<link>https://papers.cool/venue/do-we-really-need-to-design-new-byzantine-robust-aggregation-rules@NDSS</link>
+<guid>https://papers.cool/venue/do-we-really-need-to-design-new-byzantine-robust-aggregation-rules@NDSS</guid>
+<content:encoded><![CDATA[
+
+Federated learning (FL) allows multiple clients to collaboratively train a global machine learning model through a server, without exchanging their private training data. However, the decentralized aspect of FL makes it susceptible to poisoning attacks, where malicious clients can manipulate the global model by sending altered local model updates. To counter these attacks, a variety of aggregation rules designed to be resilient to Byzantine failures have been introduced. Nonetheless, these methods can still be vulnerable to sophisticated attacks or depend on unrealistic assumptions about the server. In this paper, we demonstrate that there is no need to design new Byzantine-robust aggregation rules; instead, FL can be secured by enhancing the robustness of well-established aggregation rules. To this end, we present FoundationFL, a novel defense mechanism against poisoning attacks. FoundationFL involves the server generating synthetic updates after receiving local model updates from clients. It then applies existing Byzantine-robust foundational aggregation rules, such as Trimmed-mean or Median, to combine clients' model updates with the synthetic ones. We theoretically establish the convergence performance of FoundationFL under Byzantine settings. Comprehensive experiments across several real-world datasets validate the efficiency of our FoundationFL method.
+]]></content:encoded>
+
+<pubDate>2025-11-19T17:21:20.378122+00:00</pubDate>
+</item>
+<item>
+<title>Eclipse Attacks on Monero's Peer-to-Peer Network</title>
+<link>https://papers.cool/venue/eclipse-attacks-on-moneros-peer-to-peer-network@NDSS</link>
+<guid>https://papers.cool/venue/eclipse-attacks-on-moneros-peer-to-peer-network@NDSS</guid>
+<content:encoded><![CDATA[
+
+Eclipse attack is a major threat to the blockchain network layer, wherein an attacker isolates a target node by monopolizing all its connections, cutting it off from the rest of the network. Despite the attack's demonstrated effectiveness in Bitcoin (Usenix'15, SP'20, Usenix'21, CCS'21, SP'23) and partially in Ethereum (NDSS'23, SP'23), its applicability to a wider range of blockchain systems remains uncertain. In this paper, we investigate eclipse attacks against Monero, a blockchain system known for its strong anonymity and pioneering the use of Dandelion++ (the state-of-the-art blockchain network layer protocol for transaction privacy protection). Our analysis of Monero's connection management mechanism reveals that existing eclipse attacks are surprisingly ineffective against Monero. We accordingly introduce the first practical eclipse attack against Monero by proposing a connection reset approach, which forces the target node to drop all benign connections and reconnect with malicious nodes. Specifically, we outline two methods for executing such an attack. The first one exploits the private transaction mechanisms, while the second method leverages the differences in propagation between stem transactions and fluff transactions under Dandelion++. Our attack is not only applicable to Monero but to all blockchain systems utilizing Dandelion++ and similar connection management strategies. We conduct experiments on the Monero mainnet. Evaluation results confirm the feasibility of our attack. Unlike existing eclipse attacks, our connection reset-based approach does not require restarting the target node, significantly accelerating the attack process and making it more controllable. We also provide countermeasures to mitigate the proposed eclipse attack while minimizing the impact on Monero. In addition, we have ethically reported our investigation to Monero official team.
+]]></content:encoded>
+
+<pubDate>2025-11-19T17:21:20.378122+00:00</pubDate>
+</item>
+<item>
+<title>Mysticeti: Reaching the Latency Limits with Uncertified DAGs</title>
+<link>https://papers.cool/venue/mysticeti-reaching-the-latency-limits-with-uncertified-dags@NDSS</link>
+<guid>https://papers.cool/venue/mysticeti-reaching-the-latency-limits-with-uncertified-dags@NDSS</guid>
+<content:encoded><![CDATA[
+
+We introduce Mysticeti-C, the first DAG-based Byzantine consensus protocol to achieve the lower bounds of latency of 3 message rounds. Since Mysticeti-C is built over DAGs it also achieves high resource efficiency and censorship resistance. Mysticeti-C achieves this latency improvement by avoiding explicit certification of the DAG blocks and by proposing a novel commit rule such that every block can be committed without delays, resulting in optimal latency in the steady state and under crash failures. We further extend Mysticeti-C to Mysticeti-FPC, which incorporates a fast commit path that achieves even lower latency for transferring assets. Unlike prior fast commit path protocols, Mysticeti-FPC minimizes the number of signatures and messages by weaving the fast path transactions into the DAG. This frees up resources, which subsequently result in better performance. We prove the safety and liveness in a Byzantine context. We evaluate both Mysticeti protocols and compare them with state-of-the-art consensus and fast path protocols to demonstrate their low latency and resource efficiency, as well as their more graceful degradation under crash failures. Mysticeti-C is the first Byzantine consensus protocol to achieve WAN latency of 0.5s for consensus commit while simultaneously maintaining state-of-the-art throughput of over 100k TPS. Finally, we report on integrating Mysticeti-C as the consensus protocol into a major deployed blockchain, resulting in over 4x latency reduction.
+]]></content:encoded>
+
+<pubDate>2025-11-19T17:21:20.378122+00:00</pubDate>
+</item>
+<item>
+<title>PropertyGPT: LLM-driven Formal Verification of Smart Contracts through Retrieval-Augmented Property Generation</title>
+<link>https://papers.cool/venue/propertygpt-llm-driven-formal-verification-of-smart-contracts-through-retrieval-augmented-property-generation@NDSS</link>
+<guid>https://papers.cool/venue/propertygpt-llm-driven-formal-verification-of-smart-contracts-through-retrieval-augmented-property-generation@NDSS</guid>
+<content:encoded><![CDATA[
+
+Formal verification is a technique that can prove the correctness of a system with respect to a certain specification or property. It is especially valuable for security-sensitive smart contracts that manage billions in cryptocurrency assets. Although existing research has developed various static verification tools (or provers) for smart contracts, a key missing component is the automated generation of comprehensive properties, including invariants, pre-/post-conditions, and rules. Hence, industry-leading players like Certora have to rely on their own or crowdsourced experts to manually write properties case by case. With recent advances in large language models (LLMs), this paper explores the potential of leveraging state-of-the-art LLMs, such as GPT-4, to transfer existing human-written properties (e.g., those from Certora auditing reports) and automatically generate customized properties for unknown code. To this end, we embed existing properties into a vector database and retrieve a reference property for LLM-based in-context learning to generate a new property for a given code. While this basic process is relatively straightforward, ensuring that the generated properties are (i) compilable, (ii) appropriate, and (iii) verifiable presents challenges. To address (i), we use the compilation and static analysis feedback as an external oracle to guide LLMs in iteratively revising the generated properties. For (ii), we consider multiple dimensions of similarity to rank the properties and employ a weighted algorithm to identify the top-K properties as the final result. For (iii), we design a dedicated prover to formally verify the correctness of the generated properties. We have implemented these strategies into a novel LLM-based property generation tool called PropertyGPT. Our experiments show that PropertyGPT can generate comprehensive and high-quality properties, achieving an 80% recall compared to the ground truth. It successfully detected 26 CVEs/attack incidents out of 37 tested and also uncovered 12 zero-day vulnerabilities, leading to $8,256 in bug bounty rewards.
+]]></content:encoded>
+
+<pubDate>2025-11-19T17:21:20.378122+00:00</pubDate>
+</item>
+<item>
+<title>Siniel: Distributed Privacy-Preserving zkSNARK</title>
+<link>https://papers.cool/venue/siniel-distributed-privacy-preserving-zksnark@NDSS</link>
+<guid>https://papers.cool/venue/siniel-distributed-privacy-preserving-zksnark@NDSS</guid>
+<content:encoded><![CDATA[
+
+Zero-knowledge Succinct Non-interactive Argument of Knowledge (zkSNARK) is a powerful cryptographic primitive, in which a prover convinces a verifier that a given statement is true without leaking any additional information. However, existing zkSNARKs suffer from high computation overhead in the proof generation. This limits the applications of zkSNARKs, such as private payments, private smart contracts, and anonymous credentials. Private delegation has become a prominent way to accelerate proof generation. In this work, we propose Siniel, an efficient private delegation framework for zkSNARKs constructed from polynomial interactive oracle proof (PIOP) and polynomial commitment scheme (PCS). Our protocol allows a computationally limited prover (a.k.a. delegator) to delegate its expensive prover computation to several workers without leaking any information about the private witness. Most importantly, compared with the recent work EOS (USENIX'23), the state-of-the-art zkSNARK prover delegation framework, a prover in Siniel needs not to engage in the MPC protocol after sending its shares of private witness. This means that a Siniel prover can outsource the entire computation to the workers. We compare Siniel with EOS and show significant performance advantages of the former. The experimental results show that, under low bandwidth conditions (10MBps), Siniel saves about 16% time for delegators than that of EOS, whereas under high bandwidth conditions (1000MBps), Siniel saves about 80% than EOS.
+]]></content:encoded>
+
+<pubDate>2025-11-19T17:21:20.378122+00:00</pubDate>
+</item>
+<item>
+<title>The Forking Way: When TEEs Meet Consensus</title>
+<link>https://papers.cool/venue/the-forking-way-when-tees-meet-consensus@NDSS</link>
+<guid>https://papers.cool/venue/the-forking-way-when-tees-meet-consensus@NDSS</guid>
+<content:encoded><![CDATA[
+
+An increasing number of distributed platforms combine Trusted Execution Environments (TEEs) with blockchains. Indeed, many hail the combination of TEEs and blockchains a good “marriage”: TEEs bring confidential computing to the blockchain while the consensus layer could help defend TEEs from forking attacks. In this paper, we systemize how current blockchain solutions integrate TEEs and to what extent they are secure against forking attacks. To do so, we thoroughly analyze 29 proposals for TEE-based blockchains, ranging from academic proposals to production-ready platforms. We uncover a lack of consensus in the community on how to combine TEEs and blockchains. In particular, we identify four broad means to interconnect TEEs with consensus, analyze their limitations, and discuss possible remedies. Our analysis also reveals previously undocumented forking attacks on three production-ready TEE-based blockchains: Ten, Phala, and the Secret Network. We leverage our analysis to propose effective countermeasures against those vulnerabilities; we responsibly disclosed our findings to the developers of each affected platform.
+]]></content:encoded>
+
+<pubDate>2025-11-19T17:21:20.378122+00:00</pubDate>
+</item>
+
+</channel>
+</rss>
