@@ -57,4 +57,4 @@
 - https://eprint.iacr.org/rss/rss.xml -> https://striveCEO.github.io/RSS-GPT/iacr.xml
 - https://rss.arxiv.org/rss/cs -> https://striveCEO.github.io/RSS-GPT/arxiv.xml
 - https://rss.arxiv.org/rss/cs -> https://striveCEO.github.io/RSS-GPT/arxivAI.xml
-- https://papers.cool/venue/NDSS.2025/feed -> https://striveCEO.github.io/RSS-GPT/NSDD-2025.xml
+- https://papers.cool/venue/NDSS.2025/feed -> https://striveCEO.github.io/RSS-GPT/NDSS-2025-blockchain.xml
