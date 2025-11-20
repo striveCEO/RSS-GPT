@@ -59,3 +59,4 @@ I will consider hosting more feeds in the future. Email me or submit an issue if
 - https://rss.arxiv.org/rss/cs -> https://striveCEO.github.io/RSS-GPT/arxiv.xml
 - https://rss.arxiv.org/rss/cs -> https://striveCEO.github.io/RSS-GPT/arxivAI.xml
 - https://papers.cool/venue/NDSS.2025/feed -> https://striveCEO.github.io/RSS-GPT/NDSS-2025-blockchain.xml
+- https://papers.cool/venue/NDSS.2024/feed -> https://striveCEO.github.io/RSS-GPT/NDSS-2024-blockchain.xml
