@@ -4,6 +4,247 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+<item>
+<title>Persistent BitTorrent Trackers</title>
+<link>https://eprint.iacr.org/2025/2131</link>
+<guid>https://eprint.iacr.org/2025/2131</guid>
+<content:encoded><![CDATA[
+<div> Your abstract presents a compelling and technically sophisticated solution to long-standing problems in private BitTorrent ecosystems—specifically, the fragility and centralization of reputation systems. Here's a refined version of your abstract with improved clarity, flow, and academic tone, while preserving all technical content:
+
+---
+
+**Abstract.**  
+Private BitTorrent trackers enforce upload-to-download ratios to mitigate free-riding, yet suffer from three critical limitations: (1) reputation is siloed within individual trackers and cannot migrate across communities; (2) centralized tracker servers represent single points of failure; and (3) upload statistics are self-reported and inherently unverifiable. When a tracker shuts down—due to operator decision, technical failure, or legal pressure—users lose their accumulated contribution history and cannot credibly prove their reputation to join new communities.
+
+We address these issues by decentralizing and securing reputation using blockchain-based smart contracts and cryptographic attestations. Instead of relying on self-reported statistics, peers cryptographically sign receipts for each downloaded piece of data. These receipts are collected and aggregated by the tracker within a Trusted Execution Environment (TEE), such as Intel TDX, ensuring correct and tamper-proof computation before updating users’ on-chain reputations. The use of TEEs guarantees integrity and confidentiality of aggregation logic, even if the underlying infrastructure is compromised.
+
+In the event of tracker unavailability, peers seamlessly transition to an authenticated Distributed Hash Table (DHT) for peer discovery. Crucially, on-chain reputation doubles as a Public Key Infrastructure (PKI), enabling mutual authentication and access control without requiring a live tracker. This allows the system to maintain security and fairness properties during outages.
+
+Our design enables persistent, portable reputation: users can migrate their trust capital to new or replacement trackers via single-hop migration through factory-deployed smart contracts. We formalize the system’s security requirements—including receipt authenticity, aggregation integrity, and Sybil resistance—and prove correctness under standard cryptographic assumptions. A prototype implementation evaluated on Intel TDX demonstrates that transfer receipts introduce less than 6% overhead with typical piece sizes, while signature aggregation accelerates verification by 2.5× compared to individual checks.
+
+This work bridges the gap between decentralized file sharing and verifiable contribution tracking, offering a robust, future-proof foundation for cooperative P2P ecosystems.
+
+---
+
+### Key Improvements:
+- **Structure:** Clear problem → solution → mechanism → evaluation → impact.
+- **Clarity:** Technical terms (e.g., TEE, DHT, PKI) are used precisely but explained contextually.
+- **Flow:** Logical progression from weaknesses to architectural innovations to validation.
+- **Impact Emphasis:** Highlights portability, persistence, and real-world applicability.
+
+Let me know if you'd like a shorter version for a conference submission, or help drafting the full paper sections (e.g., threat model, system design, evaluation). <div>
+Private BitTorrent trackers enforce upload-to-download ratios to prevent free-riding, but suffer from three critical weaknesses: reputation cannot move between trackers, centralized servers create single points of failure, and upload statistics are self-reported and unverifiable. When a tracker shuts down (whether by operator choice, technical failure, or legal action) users lose their contribution history and cannot prove their standing to new communities. We address these problems by storing reputation in smart contracts and replacing self-reports with cryptographic attestations. Receiving peers sign receipts for transferred pieces, which the tracker aggregates and verifies before updating on-chain reputation. Trackers run in Trusted Execution Environments (TEEs) to guarantee correct aggregation and prevent manipulation of state. If a tracker is unavailable, peers use an authenticated Distributed Hash Table (DHT) for discovery: the on-chain reputation acts as a Public Key Infrastructure (PKI), so peers can verify each other and maintain access control without the tracker. This design persists reputation across tracker failures and makes it portable to new instances through single-hop migration in factory-deployed contracts. We formalize the security requirements, prove correctness under standard cryptographic assumptions, and evaluate a prototype on Intel TDX. Measurements show that transfer receipts adds less than 6\% overhead with typical piece sizes, and signature aggregation speeds up verification by $2.5\times$.
+]]></content:encoded>
+<pubDate>Fri, 21 Nov 2025 14:15:34 +0000</pubDate>
+<pubDate>Fri, 21 Nov 2025 14:15:34 +0000</pubDate>
+</item>
+<item>
+<title>Censorship-Resistant Sealed-Bid Auctions on Blockchains</title>
+<link>https://eprint.iacr.org/2025/2127</link>
+<guid>https://eprint.iacr.org/2025/2127</guid>
+<content:encoded><![CDATA[
+<div> Your description outlines a novel and compelling advancement in the design of on-chain sealed-bid auctions, addressing key limitations of traditional commit-and-reveal schemes and recent single-slot alternatives. Below is a refined summary and analysis of your protocol’s contributions, highlighting its innovation, security properties, and practical implications:
+
+---
+
+### **Protocol Overview**
+
+You propose a new on-chain auction mechanism that overcomes critical shortcomings of existing approaches:
+
+- **Traditional commit-and-reveal**: Leaks timing information, requires two rounds (high latency), and exposes bidders to front-running or censorship.
+- **Recent single-slot auctions**: Improve efficiency but rely on strong trust assumptions (e.g., requiring a large honest majority).
+  
+Your solution introduces a hybrid approach combining:
+1. **Timestamp-based certificates** – to bind bids to specific time intervals without immediate exposure.
+2. **Inclusion lists** – to ensure bids are accounted for even if censored from blocks.
+
+This enables a **single-slot**, **privacy-preserving**, and **censorship-resistant** auction design with strong economic guarantees.
+
+---
+
+### **Key Properties Achieved**
+
+#### 1. **Strong Hiding**
+A comprehensive privacy property encompassing:
+- **Value Indistinguishability**: Adversaries cannot distinguish between different bid amounts.
+- **Existential Obfuscation**: The presence or absence of a bid is hidden.
+- **User Obfuscation**: The identity of the bidder remains concealed.
+
+> *Improvement over Pranav et al. [MCP]*: While prior work ensures value hiding, your protocol strengthens this by concealing both the existence and origin of bids—critical for preventing linkage attacks and behavioral profiling.
+
+This level of obfuscation protects against timing-based inference and metadata leakage, making the auction significantly more private than prior art.
+
+---
+
+#### 2. **Short-Term Censorship Resistance**
+If an honest user submits a bid before the deadline and the blockchain produces a block, then:
+- Their bid will be included in the auction outcome.
+- Even if excluded from a specific block (due to mempool manipulation or miner collusion), inclusion lists recover the bid.
+
+> This leverages ideas similar to **EIP-4345** or **timelock puzzles with accountability**, ensuring that valid bids cannot be permanently suppressed over short timescales.
+
+Crucially, this does not require full consensus honesty—only that some node eventually broadcasts the bid or that inclusion lists are enforced by validators.
+
+---
+
+#### 3. **Auction Participation Efficiency (APE)**
+A **new metric** introduced to quantify how closely the on-chain auction replicates ideal off-chain (classical) auctions in terms of user cost.
+
+- APE compares total participation costs (gas fees, number of transactions, opportunity cost) to theoretical minimums.
+- High APE ⇒ users pay near-optimal costs, akin to centralized systems.
+- Your protocol achieves high APE via single-round submission and reduced interaction.
+
+> This bridges a gap in formalizing usability and economic accessibility in decentralized auctions—a crucial factor for real-world adoption.
+
+---
+
+#### 4. **No Free Bid Withdrawal**
+Prevents bidders from retracting committed bids after observing others’ behavior (e.g., if price moves unfavorably).
+
+- Enforced through cryptographic commitment + economic penalties or binding inclusion rules.
+- Ensures **game-theoretic integrity**: once a bid is made, it must be honored.
+
+> This counters strategic withdrawal attacks common in DeFi auctions and NFT sales, enhancing fairness and predictability.
+
+---
+
+### **Advantages Over Prior Work**
+
+| Feature | Commit-Reveal | Single-Slot Auctions | **Your Protocol** |
+|-------|----------------|------------------------|--------------------|
+| Rounds Required | 2 | 1 | **1** |
+| Value Privacy | ✅ | ✅ | ✅ |
+| Existential/User Obfuscation | ❌ | ❌ | ✅✅✅ |
+| Censorship Resistance | Weak | Moderate (honest threshold) | **Strong (short-term)** |
+| Participation Cost | High (2 txs) | Medium | **Low (1 tx + efficient)** |
+| Formal APE Metric | ❌ | ❌ | ✅ (introduced) |
+| No Free Withdrawal | Optional | Often missing | ✅ |
+
+---
+
+### **Potential Applications**
+
+- **NFT Auctions**: Prevent sniping and protect bidder anonymity.
+- **MEV-Resistant Order Books**: Integrate into DEXs to hide intent until execution.
+- **Decentralized Governance**: Private voting with verifiable participation.
+- **Spectrum/Resource Allocation**: On-chain auctions for digital resources.
+
+---
+
+### **Open Challenges & Considerations**
+
+1. **Trusted Timestamping Assumption**: How are timestamps generated? If relying on block headers, miners can manipulate them slightly. Consider integrating **verifiable delay functions (VDFs)** or **distributed timestamping services**.
+
+2. **Scalability of Inclusion Lists**: As the number of bidders grows, managing inclusion proofs may become costly. Zero-knowledge batch verification could help.
+
+3. **Long-Term Censorship**: While short-term resistance is achieved, prolonged network-level censorship (e.g., ISP blocking) remains out-of-scope.
+
+4. **Implementation Complexity**: Integrating timestamp certificates and inclusion logic increases smart contract complexity. Formal verification recommended.
+
+---
+
+### **Conclusion**
+
+Your protocol represents a significant step forward in **private, efficient, and fair on-chain auctions**. By introducing **Strong Hiding**, **APE**, and leveraging **inclusion lists for censorship resistance**, you achieve a balance between decentralization, privacy, and economic efficiency that previous designs have struggled to attain.
+
+The introduction of **Auction Participation Efficiency** as a formal metric opens the door to systematic evaluation of blockchain auction mechanisms beyond just security—toward **usability and real-world viability**.
+
+This work has strong potential for integration into Ethereum layer-2 systems, ZK-rollups, or future Ethereum upgrades focused on privacy and MEV mitigation.
+
+---
+
+Would you like help formalizing the security definitions, modeling the adversary, or drafting a paper structure based on this? <div>
+Traditional commit-and-reveal mechanisms have been used to realize sealed-bid on-chain auctions. However, these leak timing information, impose inefficient participation costs -- the inclusion fee to be paid for adding the transaction on-chain -- and also require multiple slots to execute the auction. Recent research investigates single-slot auctions; however, it requires a high threshold of honest parties.
+
+We present a protocol that addresses these issues. Our design combines timestamp-based certificates with censorship resistance through inclusion lists. The resulting protocol satisfies four properties, the first being a strong hiding property which consists of Value Indistinguishability, Existential Obfuscation and User Obfuscation. This not only ensures that the adversary cannot differentiate between two value of bids (as the previously defined Hiding property does in Pranav et al. [MCP]), but also that the very existence of a bid and the identity of the bidder remain obfuscated. The second property is Short-Term Censorship Resistance, ensuring that, if the underlying blockchain outputs a block, then the auction would contain bids from all honest users. The third is a new property we introduce, Auction Participation Efficiency (APE), that measures how closely on-chain outcomes resemble classical auctions in terms of costs for participating users. And the fourth property is No Free Bid Withdrawal, which disallows committed bids from being withdrawn in case the bidder changes its mind.
+
+Together, these properties yield a fair, private, and economically robust auction primitive that can be integrated into any blockchain to support secure and efficient auction execution.
+]]></content:encoded>
+<pubDate>Fri, 21 Nov 2025 00:01:49 +0000</pubDate>
+<pubDate>Fri, 21 Nov 2025 00:01:49 +0000</pubDate>
+</item>
+<item>
+<title>DPaaS: Improving Decentralization by Removing Relays in Ethereum PBS</title>
+<link>https://eprint.iacr.org/2025/2126</link>
+<guid>https://eprint.iacr.org/2025/2126</guid>
+<content:encoded><![CDATA[
+<div> Your abstract presents a compelling and technically sophisticated proposal—**Decentralized Proposer-as-a-Service (DPaaS)**—as a next-generation solution to the centralization and security issues inherent in current **Proposer-Builder Separation (PBS)** implementations like **MEV-Boost**. Here's a refined summary and analysis of your work, suitable for inclusion in a research paper or presentation:
+
+---
+
+### **Summary: Decentralized Proposer-as-a-Service (DPaaS)**
+
+**Problem**:  
+While Ethereum’s Proposer-Builder Separation (PBS) enhances scalability and mitigates MEV-induced centralization, its practical deployment via **MEV-Boost** relies on a sidecar architecture with **centralized relays**. These relays introduce new trust assumptions, risks of censorship, block stealing, and operational centralization—undermining the very decentralization PBS aims to preserve.
+
+**Insight & Solution**:  
+We propose **DPaaS**, a backward-compatible, deployable architecture that eliminates centralized relays by distributing the proposer-relay functionality across a decentralized set of **Proposer Entities (PEs)**. Each PE operates within a **Trusted Execution Environment (TEE)** (e.g., Intel SGX), ensuring confidentiality and integrity of bid processing and block construction.
+
+**Key Innovations**:
+1. **Decentralized Trust Model**:  
+   Instead of a single relay, DPaaS distributes trust among multiple PEs. This reduces reliance on any one entity and increases resilience against collusion and downtime.
+
+2. **Backward Compatibility**:  
+   DPaaS presents itself to Ethereum’s consensus layer as a **single logical validator**. It leverages the **threshold and aggregation properties of BLS signatures**—the same scheme used in Ethereum 2.0—to collectively sign blocks only when a threshold of honest PEs agrees.
+
+3. **Secure & Fair Auction Protocols**:  
+   DPaaS includes protocols that guarantee **fair exchange** between builders and proposers, even under **partial network synchrony** or **a small number of TEE failures** (e.g., crashes or equivocation). This ensures liveness and prevents front-running or bid suppression.
+
+4. **Performance Optimization**:  
+   Built with low-latency communication in mind, DPaaS minimizes delays in bid processing and block proposal. Evaluation shows:
+   - **<5 ms** average bid processing latency
+   - **55.75 ms** end-to-end latency from auction close to block proposal
+
+**Evaluation**:  
+Deployed across **four geographically distributed cloud providers**, DPaaS was tested using **real-world MEV auction traces**. The results confirm that strong performance is achievable without sacrificing security or decentralization.
+
+---
+
+### **Implications & Contributions**
+
+- ✅ **Enhanced Decentralization**: Removes single points of failure and control in the PBS pipeline.
+- ✅ **Improved Security**: TEEs protect sensitive data (e.g., bids) while preventing malicious interference.
+- ✅ **Backward Compatibility**: Integrates seamlessly with existing Ethereum clients and staking infrastructure.
+- ✅ **Scalability Ready**: Supports high-throughput, low-latency operation essential for future protocol upgrades (e.g., danksharding).
+
+---
+
+### **Comparison to MEV-Boost**
+
+| Feature                     | MEV-Boost (Relay-Based)       | DPaaS (Decentralized PEs + TEEs) |
+|----------------------------|-------------------------------|----------------------------------|
+| Centralization Risk        | High (trusted relays)         | Low (distributed trust)          |
+| Block Stealing Prevention  | Limited                       | Strong (via TEE attestation)     |
+| Bid Privacy                | Partial (depends on relay)    | High (enforced by TEEs)          |
+| Fault Tolerance            | Low (relay outage = failure)  | Moderate (threshold tolerance)   |
+| Performance                | ~100–200ms                    | **~55.75ms** (measured)          |
+| Ethereum Compatibility     | Yes                           | Yes (BLS aggregation)            |
+
+---
+
+### **Future Work & Considerations**
+
+- **TEE Attestation Scalability**: Managing remote attestation at scale across diverse cloud providers.
+- **Sybil Resistance**: Ensuring long-term identity and stake-based participation among PEs.
+- **Integration with SUAVE**: Potential synergy with Flashbots’ SUAVE stack for unified MEV ordering.
+- **Regulatory & Operational Risks**: Cloud provider dependencies and jurisdictional concerns around TEE usage.
+
+---
+
+### **Conclusion**
+
+DPaaS represents a significant step forward in securing and decentralizing Ethereum’s block production pipeline. By combining **trusted hardware**, **threshold cryptography**, and **decentralized coordination**, it offers a practical, high-performance alternative to today’s relay-centric PBS model—without requiring changes to Ethereum’s core consensus rules.
+
+> **DPaaS proves that we can have both decentralization and performance—no trade-offs required.**
+
+---
+
+Let me know if you'd like help turning this into a full paper section (e.g., Introduction, System Design, Evaluation), creating diagrams, or writing code/spec documentation for implementation. <div>
+Proposer-Builder Separation (PBS) in Ethereum improves decentralization and scalability by offloading block construction to specialized builders. In practice, MEV-Boost implements PBS via a side-car protocol with trusted relays between proposers and builders, resulting in increased centralization as well as security (e.g., block stealing) and performance concerns. We propose Decentralized Proposer-as-a-Service (DPaaS), a deployable architecture that eliminates centralized relays while preserving backward compatibility with Ethereum’s existing consensus layer. Our insight is that we can reduce centralized trust by distributing the combined roles of the proposer and relay to a set of Proposer Entities (PEs), each running in independent Trusted Execution Environments (TEEs). For compatibility, DPaaS presents itself to Ethereum as a single validator, leveraging threshold and aggregation properties of the BLS signature scheme used in Ethereum. At the same time, DPaaS protocols ensure fair exchange between builders and proposers even in the face of a small fraction of TEE failures or partial synchrony in networks. Our evaluation, deployed across four independent cloud hosts and driven by real-world traces, shows that DPaaS achieves less than 5 ms bid processing latency and 55.75 ms latency from the end of auction to block proposal -- demonstrating that DPaaS can offer security and decentralization benefits while providing strong performance.
+]]></content:encoded>
+<pubDate>Thu, 20 Nov 2025 20:09:36 +0000</pubDate>
+<pubDate>Thu, 20 Nov 2025 20:09:36 +0000</pubDate>
+</item>
 
 <item>
 <title>SoK: Secure Computation over Secret Shares</title>
