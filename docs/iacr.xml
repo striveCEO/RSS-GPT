@@ -4,6 +4,336 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+<item>
+<title>The Latency Cost Of Censorship Resistance</title>
+<link>https://eprint.iacr.org/2025/2136</link>
+<guid>https://eprint.iacr.org/2025/2136</guid>
+<content:encoded><![CDATA[
+<div> Yes, the **two additional rounds of latency** are **inherently necessary** for achieving strong censorship resistance in blockchain consensus protocols when using a multiple-includer design — and this is precisely what the **Censorship Resistant Byzantine Broadcast (CRBB)** framework establishes through rigorous theoretical analysis.
+
+### Why the Latency Cost Is Inevitable
+
+The core insight from your description is that **CRBB formalizes a stronger guarantee than traditional Byzantine Broadcast (BB):**
+
+- In **classical BB**, a correct leader proposes a value, and if the leader is honest, the protocol ensures that this value is delivered and agreed upon by all honest parties within minimal rounds (e.g., 2 rounds in synchrony).
+- In **CRBB**, we want to ensure **censorship resistance**: even if the leader is malicious or uncooperative, any **timely submitted transaction** must be included in the next confirmed block — *regardless* of the leader’s actions.
+
+This means the system cannot wait indefinitely on the leader to include transactions. Instead, **other parties (includers)** must proactively propose or attest to transaction inclusion independently of the leader.
+
+---
+
+### Key Trade-off: Independence vs. Coordination
+
+To achieve censorship resistance:
+- Transaction inclusion must be **decentralized** among multiple includers.
+- Honest includers must have the ability to **force inclusion** of valid user requests.
+- But agreement still requires coordination with the leader (or across phases) to maintain consistency and liveness.
+
+Thus, CRBB introduces an **additional phase** where:
+1. Users submit transactions to includers.
+2. Includers collect and attest to pending transactions (**first extra round**).
+3. The leader proposes a block, but now must incorporate all transactions attested by a sufficient number of includers.
+4. A final confirmation phase ensures agreement (**second extra round**).
+
+Each of these steps adds at least one communication round, and crucially, **cannot be collapsed without breaking security or censorship resistance**.
+
+---
+
+### Lower Bound Results (Main Contribution)
+
+Your summary highlights a key technical contribution:
+
+> "**Synchronous CRBB requires 4 rounds whenever BB requires 2. Partial synchronous CRBB requires 5 rounds whenever BB requires 3.**"
+
+This shows that:
+- There is a **tight separation** between BB and CRBB.
+- The **+2 round overhead** is not due to suboptimal protocol design — it's **inherent** to the problem under realistic conditions (i.e., when the leader is correct, which is the common case in practice).
+- Even in best-case executions (correct leader), you still pay the price because the protocol must protect against censorship attempts while maintaining safety and liveness.
+
+This implies that **no matter how cleverly you design the protocol**, you cannot get below 4 rounds in the synchronous setting for CRBB — whereas BB can do it in 2.
+
+---
+
+### Interpretation & Practical Implications
+
+- **Yes, the cost is necessary.** You cannot have strong, predictable censorship resistance (i.e., guaranteed inclusion irrespective of leader behavior) without paying in latency.
+- This matches real-world designs like **Ethereum’s proposer-builder separation (PBS)** or **accountable block production**, where decentralizing block construction improves resilience but increases complexity and delay.
+- However, this cost may be **worthwhile** for high-value applications where censorship resistance is paramount (e.g., decentralized exchanges, voting systems, permissionless finance).
+
+---
+
+### Conclusion
+
+> ✅ **The two-round latency overhead in censorship-resistant consensus is not avoidable — it is inherent.**
+
+By introducing and analyzing the **CRBB problem**, the work provides a foundational understanding of the **price of censorship resistance** in distributed consensus. It proves that moving from centralized block proposal to multi-party inclusion brings significant benefits in robustness, but also imposes a **provable lower bound on performance**: **+2 rounds of latency**, even under ideal network and leadership conditions.
+
+This sets a new benchmark for future blockchain protocols aiming to balance **security, decentralization, and efficiency**. <div>
+On the road to eliminating censorship from modern blockchain protocols, recent work in consensus has explored protocol design choices that delegate the duty of block assembly away from a single consensus leader and instead to multiple parties, referred to as includers. As opposed to the traditional leader-based approach, which guarantees transaction inclusion in a block produced by the next correct leader, the multiple includer approach allows blockchain protocols to provide a strong censorship-resistance property for users: A timely submitted transaction is guaranteed to be included in the next confirmed block, regardless of the leader's behavior. Such a guarantee, however, comes at the cost of 2 additional rounds of latency to block confirmation, compared to the leader-based approach. Is this cost necessary?
+We introduce the Censorship Resistant Byzantine Broadcast (CRBB) problem, a one-shot variant that distills the core functionality underlying the multiple-includer design paradigm. We then provide a full characterization, both in synchrony and partial synchrony, of the achievable latency of CRBB in executions with a correct leader, which is the most relevant case to practice. Our main result is an inherent latency cost of two additional rounds compared to the classic Byzantine Broadcast (BB) problem. For example, synchronous protocols for CRBB require 4 rounds whenever BB requires 2 rounds. Similarly, up to a small constant in the resilience, partial synchrony protocols for CRBB require 5 rounds whenever BB requires 3 rounds.
+]]></content:encoded>
+<pubDate>Fri, 21 Nov 2025 20:20:02 +0000</pubDate>
+<pubDate>Fri, 21 Nov 2025 20:20:02 +0000</pubDate>
+</item>
+<item>
+<title>Robust Elections and More: Fast MPC in the Preprocessing Model</title>
+<link>https://eprint.iacr.org/2025/2135</link>
+<guid>https://eprint.iacr.org/2025/2135</guid>
+<content:encoded><![CDATA[
+<div> This is a well-written and technically rich abstract for a paper on secure multiparty computation (MPC), highlighting several important advances in the preprocessing model. Below is a **refined version** of your paragraph with improved clarity, flow, and precision—while preserving all technical content and emphasis—suitable for inclusion in a formal publication or conference submission:
+
+---
+
+In this paper, we present a multiparty computation (MPC) protocol in the preprocessing model that achieves online communication complexity and round complexity essentially matching those of state-of-the-art protocols such as online-BGW (based on precomputed Beaver triples) for $ t < n/3 $ malicious corruptions. Our protocol, however, provides significantly stronger guarantees: it ensures **robustness and correctness** against up to $ t < n/2 $ actively corrupted parties, while maintaining **privacy** for up to $ t < n/3 $. This combination is particularly valuable in high-stakes applications—such as commodity/stock market auctions, national elections, or IACR board elections—where certifying the correct outcome is paramount, yet low-latency online execution remains critical.
+
+The ability to tolerate an honest majority in correctness enables the use of **optimistic Berlekamp-Welch decoding**, in contrast to the standard BGW approach, leading to more efficient error detection and correction during reconstruction. Like online-BGW, our protocol remains **responsive throughout the online phase**, only requiring a final attestation step at the end.
+
+We further introduce a complementary **verifiable input-sharing scheme** tailored for the multi-client, distributed-server setting, which achieves both robustness and correctness under $ t < n/2 $ malicious servers. A key innovation is that clients participate in only **a single round of interaction**—after which they may disconnect—making the system highly practical for real-world deployments where client availability is limited, such as in electronic voting or sealed-bid auctions. The servers first perform a preprocessing phase without client involvement, enabling lightweight client interaction later.
+
+We prove the security of our construction in the **universally composable (UC) framework**, achieving **statistical security** against static adversaries. Technically, our protocol combines **global authenticators from the SPDZ framework** with a novel application of **augmented Reed-Solomon codes**. This augmentation—commonly known as *robust sharing*—enables efficient decoding under an honest majority, even for polynomials of degree up to $ n/2 $. Importantly, our method allows the preprocessing phase to generate these robust sharings with a **factor-$ n $ improvement in efficiency** over prior information-theoretic approaches, marking a significant step forward in scalable MPC design.
+
+---
+
+### Key Improvements:
+- **Structure**: Separated ideas into logical paragraphs (protocol contributions, input sharing, security, and technical core).
+- **Clarity**: Clarified what "responsive" means and why one-round client interaction matters.
+- **Precision**: Specified that privacy threshold remains $ t < n/3 $, correctness goes up to $ t < n/2 $.
+- **Emphasis**: Highlighted novelty and practical impact without hyperbole.
+
+Let me know if you'd like a shorter version (e.g., for a proceedings abstract), a version suitable for a non-expert audience, or help writing the introduction section based on this. <div>
+In this paper, we present an MPC protocol in the preprocessing model with essentially the same concrete online communication and rounds as the state-of-the-art MPC protocols such as online-BGW (with precomputed Beaver tuples) for $t < n/3$ malicious corruptions. However, our protocol additionally guarantees robustness and correctness against up to $t < n/2$ malicious corruptions while the privacy threshold remains at $n/3$. This is particularly useful in settings (e.g. commodity/stock market auctions, national elections, IACR elections) where it is paramount that the correct outcome is certified, while maintaining the best possible online speed. In addition, this honest-majority correctness allows us to use optimistic Berlekamp-Welch decoding in contrast to BGW. Moreover, just like online-BGW, our protocol is responsive until a final attestation phase. 
+
+We also give a complementary verifiable input-sharing scheme for the multi-client distributed-server setting which satisfies both robustness and correctness against up to $t < n/2$ malicious servers. This is accomplished by having the servers first run a preprocessing phase that does not involve the clients. The novelty of this input-sharing scheme is that a client only interacts for one round, and hence need not be online, which, again, is highly desirable in applications such as elections/auctions.
+
+We prove our results in the universally-composable model with statistical security against static corruptions. Our protocol is achieved by combining global authenticators of SPDZ with an augmented Reed-Solomon code in a novel manner. This augmented code enables honest-majority decoding of degree $n/2$ Reed-Solomon codes. Our particular augmentation (often referred to as robust sharing) has the additional property that the preprocessing phase can generate this augmented sharing with a factor $n$ speedup over prior information-theoretic robust sharing schemes.
+]]></content:encoded>
+<pubDate>Fri, 21 Nov 2025 19:42:03 +0000</pubDate>
+<pubDate>Fri, 21 Nov 2025 19:42:03 +0000</pubDate>
+</item>
+<item>
+<title>Non-Interactive Threshold Mercurial Signatures with Applications to Threshold DAC</title>
+<link>https://eprint.iacr.org/2025/2134</link>
+<guid>https://eprint.iacr.org/2025/2134</guid>
+<content:encoded><![CDATA[
+<div> Your passage provides a high-level overview of an advanced cryptographic construction involving **threshold mercurial signatures (TMS)** and their application to **delegatable anonymous credentials**. Below is a refined, structured version of your text with improved clarity, precision, and flow—suitable for inclusion in a research paper or technical abstract:
+
+---
+
+**Refined Abstract/Introduction:**
+
+*Mercurial signatures* enable a signer to sign a representative $ m $ from an equivalence class of messages under a representative $ \mathsf{pk} $ from an equivalence class of public keys, yielding a signature $ \sigma $. Crucially, $ \sigma $ can be *transformed* into a valid signature $ \sigma' $ on any message $ m' $ equivalent to $ m $, under any public key $ \mathsf{pk}' $ equivalent to $ \mathsf{pk} $. This malleability property makes mercurial signatures particularly useful in constructing *delegatable anonymous credentials*, where they allow for the randomization of credential chains—thereby hiding the identities of intermediate signers while preserving verifiable authenticity across delegation steps.
+
+However, existing constructions of mercurial signatures without trusted setup suffer from a critical limitation: they only achieve a *weak privacy guarantee*. Specifically, any party involved in the delegation chain who knows its own secret key can later recognize its contribution even after the chain has been randomized—thus undermining full anonymity.
+
+To overcome this issue, Abe et al. (Asiacrypt 2024) introduced *interactive threshold mercurial signatures (TMS)*, which distribute the signing power among multiple parties, eliminating reliance on a single trusted signer. In their model, no individual party holds the full signing key; instead, a threshold number of participants must interactively collaborate to produce a signature. While this approach strengthens privacy by preventing individual recognition attacks, it comes at a significant cost to practicality due to the required multi-round interaction during signing.
+
+In this work, we introduce and construct *non-interactive threshold mercurial signatures (NI-TMS)*, where each participant *non-interactively* computes a partial signature, akin to standard threshold signature schemes. Our construction dramatically reduces communication complexity and removes the need for real-time coordination among signers. We build NI-TMS by enhancing the mercurial signature framework of Mir et al. (CCS 2023), leveraging techniques from threshold cryptography and zero-knowledge proofs to ensure unforgeability and strong privacy.
+
+As a primary application, we define *threshold delegatable anonymous credentials (TDAC)*—a credential system where delegation rights are shared among a group via threshold control, and anonymity is preserved even against adversarial participants who know their own secret keys. We instantiate TDAC using our NI-TMS scheme, achieving both scalable delegation and robust privacy without trusted setup.
+
+Our results advance the state-of-the-art in anonymous credential systems, enabling decentralized, efficient, and truly private delegation architectures suitable for real-world deployment.
+
+---
+
+Let me know if you'd like a shorter version (e.g., for a conference abstract), a formal definition set, or a diagram suggestion for illustrating TDAC/NITMS. <div>
+In a mercurial signature, a signer signs a representative $m$ of an equivalence class of messages on behalf of a representative $\mathsf{pk}$ of an equivalence class of public keys, receiving the signature $\sigma$. One can then transform $\sigma$ into a signature $\sigma'$ on an equivalent (to $m$) message $m'$ under an equivalent (to $\mathsf{pk}$) public key $\mathsf{pk}'$. Mercurial signatures are helpful in constructing delegatable anonymous credentials: their privacy properties enable straightforward randomization of a credential chain, hiding the identity of each signer while preserving the authenticity of the overall credential.
+    
+Unfortunately, without trusted setup, known constructions of mercurial signatures satisfy only a weak form of this privacy property. Specifically, an adversary who is responsible for a link in a delegation chain—and thus knows its corresponding secret key—will be able to recognize this link even after the chain has been randomized.
+    
+To address this issue, Abe et al. (Asiacrypt 2024) proposed (interactive) threshold mercurial signatures (TMS), which remove the reliance on a single trusted signer by distributing the signing capability among multiple parties, none of whom knows the signing key. However, this contribution was far from practical, as it required the signers to interact with each other during the signing process.
+
+In this work, we define and realize non-interactive TMS, where each participant non-interactively computes its contribution to the threshold mercurial signature. Our construction also substantially reduces the overall communication complexity. It uses the mercurial signature scheme of Mir et al. (CCS 2023) as a starting point. Further, we introduce threshold delegatable anonymous credentials (TDAC) and use a non-interactive TMS to construct them.
+]]></content:encoded>
+<pubDate>Fri, 21 Nov 2025 16:21:31 +0000</pubDate>
+<pubDate>Fri, 21 Nov 2025 16:21:31 +0000</pubDate>
+</item>
+<item>
+<title>Byzantine Broadcast with Unknown Participants</title>
+<link>https://eprint.iacr.org/2025/2133</link>
+<guid>https://eprint.iacr.org/2025/2133</guid>
+<content:encoded><![CDATA[
+<div> You've provided a detailed and compelling summary of a groundbreaking result in distributed computing and cryptography—specifically, **Byzantine Broadcast (BB) in the Unknown-Participants (UP) setting**, where neither the number of participants nor resource distribution is known or assumed. Let's unpack and refine this narrative into a clear, structured explanation suitable for academic or technical communication.
+
+---
+
+### **The Problem: Byzantine Broadcast with Unknown Participants**
+
+In classical Byzantine fault-tolerant protocols like Dolev-Strong or PBFT, it is assumed that:
+- The set of participants is fixed and known.
+- A bound on the number of faulty (malicious) parties is known (e.g., $ f < n/3 $).
+- Often, some balanced allocation of power exists (as in blockchains via proof-of-work or proof-of-stake).
+
+However, in many real-world decentralized environments—especially on the **dark web** or open peer-to-peer networks—these assumptions fail:
+- Parties join and leave dynamically.
+- There is no central authority to register participants.
+- An adversary can create sybils at will.
+- Honest majority cannot be guaranteed—or even defined—due to unknown total participation.
+
+This leads to the question:
+
+> **Can we achieve consistent broadcast when the sender may be malicious, participants are unknown, and there is no assumption about honest majorities or resource distribution?**
+
+We call this **Unknown-Participants Broadcast (UP Broadcast)**.
+
+---
+
+### **Why Existing Solutions Fail**
+
+Traditional Byzantine Broadcast protocols rely critically on:
+1. Knowing $ n $, the total number of parties, to determine quorum sizes.
+2. Ensuring termination by waiting for messages from all expected participants.
+3. Validity and consistency arguments based on majority thresholds.
+
+Without knowing $ n $, an unbounded number of corrupt parties can:
+- Flood the network with fake identities (sybil attack),
+- Delay or manipulate message delivery,
+- Prevent clean decision-making due to uncertainty over who counts as a "majority".
+
+Thus, **standard BB techniques break down completely** under dynamic, unknown-participant models.
+
+Moreover, defining such a problem formally requires rethinking the execution model itself—since standard simulation-based or state-machine-replication frameworks assume static roles and bounded faults.
+
+---
+
+### **Key Contributions of This Work**
+
+Despite these obstacles, the paper presents a surprising and strong positive answer.
+
+#### ✅ 1. **New Definitions: UP Broadcast & UP Interactive Consistency**
+- Introduces formal definitions for **Unknown-Participants Broadcast (UP-Broadcast)** and its multi-sender counterpart, **UP Interactive Consistency**.
+- Accommodates:
+  - **Static and dynamic participation**: Parties may appear at any round.
+  - **Arbitrary corruption**: Adversary controls any number of parties, including potentially *all* except one.
+  - **No trusted setup or resource assumptions**.
+
+Crucially, correctness guarantees (consistency, validity) are offered only to parties who participate **throughout the entire execution**—a necessary restriction given the adversarial strength.
+
+#### ✅ 2. **Existence Result: Deterministic Polynomial-Time Protocol**
+- Constructs the **first deterministic UP Broadcast protocol** in the synchronous model.
+- Achieves:
+  - **Consistency**: All honest (i.e., continuously participating) parties agree on the same value.
+  - **Validity**: If the sender is honest, everyone agrees on the sender’s input.
+- Runs in **polynomial time** and uses **synchronized rounds**.
+
+This result is **surprising** because it shows that even without bounds on participants or honest majority, agreement is still possible—provided we adjust expectations for latecomers.
+
+#### ✅ 3. **Round Complexity Optimality**
+- Proves that the proposed protocol achieves **optimal round complexity**.
+- The lower bound holds even against **randomized protocols**, showing that randomness does not help overcome the inherent latency barrier in this model.
+- Establishes tightness of the construction.
+
+#### ✅ 4. **Handling Late-Joining Parties**
+- Shows a **negative result**: With unrestricted dynamic join times, **no meaningful consistency guarantee** can be given to parties joining mid-execution.
+  - Reason: They cannot distinguish between conflicting histories created by a persistent adversary.
+- On the positive side:
+  - Proposes **weaker but best-possible guarantees** for late-joining parties (e.g., eventual awareness of consensus, inability to be misled beyond certain bounds).
+  - Provides constructions achieving these optimal guarantees while preserving round optimality for early participants.
+
+---
+
+### **Model Assumptions**
+
+- **Synchronous communication**: Bounded message delays; rounds are well-defined.
+- **Adversary**: Can corrupt arbitrarily many parties, statically or adaptively.
+- **No authentication infrastructure required**, though digital signatures significantly simplify design (assumed in most variants).
+- **Participation is observable**: Messages are signed, so identity/spoofing can be managed cryptographically (but not sybil-resistant IDs).
+
+---
+
+### **Implications and Significance**
+
+This work breaks a long-standing conceptual barrier in distributed computing:
+
+> **Agreement is possible even without knowing who you're agreeing with.**
+
+It opens doors to robust coordination in:
+- Dark web messaging systems,
+- Censorship-resistant publishing,
+- Decentralized anonymous forums,
+- Sybil-vulnerable P2P networks.
+
+Importantly, it separates **agreement** from **identity management** and **resource ownership**, two pillars previously thought essential.
+
+It also highlights a shift in how we define security in open systems:
+- From “guarantees for all” → to “guarantees for those who stay”.
+- Latecomers get weaker assurances—a fundamental trade-off revealed by the impossibility results.
+
+---
+
+### **Conclusion: Yes, It Is Possible!**
+
+Despite four decades of negative intuition suggesting otherwise, this work answers affirmatively:
+
+> **Yes, Byzantine Broadcast is achievable in the unknown-participants setting—even against fully adaptive, unbounded adversaries.**
+
+And more:
+- The solution is **deterministic, efficient, and round-optimal**.
+- The framework extends to **interactive consistency** (multi-sender agreement).
+- Definitions and constructions gracefully handle **dynamic participation**, offering best-possible guarantees.
+
+This represents a foundational advance in the theory of distributed computation in open, adversarial environments.
+
+---
+
+### Suggested Title (for Paper or Talk)
+
+> **"Broadcasting in the Dark: Byzantine Agreement with Unknown Participants"**
+
+Or more technically:
+
+> **"Unknown-Participants Broadcast: Round-Optimal Agreement Without Majority Assumptions"**
+
+---
+
+Let me know if you'd like help turning this into a full paper abstract, presentation slides, or a blog post for broader audiences! <div>
+A sender wishes to consistently broadcast a message on the dark web, so that whoever is around and active will agree on it even when the sender is malicious. No assumptions on the number of honest parties, or blockchain-style ``tricks''---like balanced resource-allocation (e.g., hashing power or stake ownership)---can be made.
+
+The above is an instance of Byzantine broadcast (BB) in the unknown-participants setting (``UP Broadcast'' for short). Despite four decades of extensive research on dishonest-majority BB, all existing approaches (e.g., the well-known Dolev-Strong protocol) fail to solve this problem, as they crucially rely on knowing the number of protocol participants---or the make blockchain-style assumptions on available resources. The challenge, which might appear as an inherent limitation, is that without any such assumption malicious parties can join the protocol at any point during its execution,  making it arduous for other parties to terminate without violating consistency. So one might wonder: Is this even possible?
+
+In this work, we provide the first definitions of UP Broadcast that incorporate both static and dynamic participation and corruption of arbitrary many parties. Interestingly, even formally defining the problem turns out to be non-trivial as one needs to deviate from the model used in classical BB approaches. We then provide the strongest possible (and in our opinion, unexpected) answer to the above question: Yes, it is! We provide a polynomial-time deterministic UP Broadcast protocol. In the process we also solve UP Interactive Consistency, which corresponds to the multi-sender version of the problem. Our constructions are in the standard, synchronous model of protocol execution, and they offer consistency and validity guarantees to every party who is present throughout the protocol execution.
+
+We next turn to the question of round complexity and prove that our protocols are optimal against adversaries who can corrupt arbitrarily many parties; this optimality applies even to randomized protocols. Finally, we ask, what if parties join in the middle of the protocol execution? We provide a negative result for unrestricted dynamic participation; on the positive side, we devise definitions that offer best-possible guarantees (also to such ``late'' parties), and present corresponding constructions that remain round-optimal.
+]]></content:encoded>
+<pubDate>Fri, 21 Nov 2025 15:38:44 +0000</pubDate>
+<pubDate>Fri, 21 Nov 2025 15:38:44 +0000</pubDate>
+</item>
+<item>
+<title>Bandwidth Efficient Partial Authorized PSI</title>
+<link>https://eprint.iacr.org/2025/2132</link>
+<guid>https://eprint.iacr.org/2025/2132</guid>
+<content:encoded><![CDATA[
+<div> Your abstract presents a compelling advancement in the field of **Authorized Private Set Intersection (APSI)**, particularly addressing critical limitations in both security and efficiency. Here's a refined version of your abstract with improved clarity, flow, and academic tone—suitable for submission to a top-tier privacy or security conference such as PETS, CCS, or Eurocrypt:
+
+---
+
+**Abstract.**  
+Recent attacks on Private Set Intersection (PSI) and PSI-like protocols have demonstrated that input privacy can be compromised when adversarial parties maliciously craft their inputs—even in settings where protocols are proven secure against standard malicious adversaries. To mitigate such threats, *Authorized PSI* (APSI) introduces a trusted judge who authorizes each element in the participants’ sets before the intersection is computed, thereby ensuring that only legitimate, pre-approved data is processed.
+
+Falzon and Markatou (PETS 2025) proposed *Partial-APSI*, a privacy-preserving variant of APSI that prevents the judge from learning the full input sets. However, their construction incurs significant bandwidth overhead due to the use of bilinear pairings and the requirement that the judge individually sign every element in each party’s set. This limits scalability and practicality for large-scale applications.
+
+In this work, we present a **bandwidth-efficient Partial-APSI protocol** that significantly outperforms Falzon and Markatou’s design—both asymptotically and in practice. Our construction reduces communication complexity by leveraging succinct cryptographic primitives and batch authorization techniques. For instance, on sets of size $2^{20}$, our protocol achieves approximately **21× less bandwidth consumption** and runs **6× faster** over a LAN compared to prior work.
+
+Beyond efficiency, we model real-world participant behavior through a **game-theoretic framework**, accounting for *rational* (rather than purely malicious or honest) parties. We introduce **payout mechanisms** that penalize detected cheating and derive tight lower bounds on penalty values required to make honest behavior the dominant strategy. This ensures incentive compatibility and strengthens trust in the system even under strategic deviations.
+
+Together, our contributions yield a scalable, efficient, and strategically robust Partial-APSI solution that advances the state-of-the-art in authorized private computation.
+
+---
+
+### Key Strengths Highlighted:
+- **Problem Relevance:** Addresses newly discovered vulnerabilities in PSI due to malicious input crafting.
+- **Efficiency Breakthrough:** Concrete numbers ($21\times$ bandwidth, $6\times$ speedup) make impact clear.
+- **Theoretical + Practical Contribution:** Combines protocol design with game-theoretic security modeling.
+- **Realism:** Introduces rational agents and economic disincentives for cheating—a step toward deployable systems.
+
+Would you like help expanding this into a full paper section (e.g., Introduction, System Model, or Game Theory Analysis)? Or perhaps designing the payout mechanism formally? <div>
+Recent attacks on private set intersection (PSI) and PSI-like protocols have demonstrated that input privacy can be compromised when parties maliciously choose their inputs, even in protocols proven secure against malicious adversaries. To counter such attacks, Authorized PSI (APSI) introduces a judge who authorizes the elements of the parties before the intersection is computed.
+ Falzon and Markatou (PETS 2025) proposed Partial-APSI, a privacy-preserving variant of APSI that prevents revealing the entire set to a judge. Their Partial-APSI protocol requires significant bandwidth overhead due to the use of bilinear pairings and because the judge must sign each element in the input set. In this work, we present a bandwidth-efficient Partial-APSI protocol that outperforms Falzon and Markatou, both asymptotically and empirically. For example, for sets of size $2^{20}$, we require around $21\times$ less bandwidth and are about $6\times$ faster over a LAN network.
+In addition to our protocol, we model the real-world behavior of rational parties through a game-theoretic analysis. 
+We introduce payout mechanisms for detected cheating and establish lower bounds on their values, ensuring that the best strategy for rational parties is to provide honest input.
+]]></content:encoded>
+<pubDate>Fri, 21 Nov 2025 14:51:45 +0000</pubDate>
+<pubDate>Fri, 21 Nov 2025 14:51:45 +0000</pubDate>
+</item>
 
 <item>
 <title>Persistent BitTorrent Trackers</title>
