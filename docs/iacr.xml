@@ -4,19 +4,17 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+
 <item>
 <title>Lattice-Based Linkable Ring Signatures for Anonymous and Accountable Whistleblowing</title>
 <link>https://eprint.iacr.org/2025/2170</link>
 <guid>https://eprint.iacr.org/2025/2170</guid>
 <content:encoded><![CDATA[
-
 Ring signatures allow an individual to sign a message on behalf of a group in such a way that the verifier can only confirm that someone in the group signed it, but cannot identify the actual signer. This strong anonymity, while desirable, may also be exploited for repeated or harmful activities. Linkable ring signatures mitigate this issue by enabling the system to recognise whether two signatures originate from the same signer, while still keeping the signer anonymous. Such constructions are essential in domains like e-voting, e-cash, privacy-preserving blockchain systems, and whistleblowing, where detecting repeated actions—such as double-spending or double-voting—is necessary to maintain system reliability.
 In this paper, we present a lattice-based linkable ring signature scheme designed to withstand quantum-era adversaries. The framework relies on exact and efficient zero-knowledge proofs, and employs a weak pseudorandom function (wPRF) to enable linkability. To demonstrate both ring membership and the generation of a unique tag, we integrate a Merkle tree accumulator, which also streamlines the verification steps. The scheme is instantiated using concrete parameter choices, allowing us to precisely evaluate how the signature size scales with different ring sizes. An important feature of our design is that it eliminates the need for trapdoor techniques, yet still produces a signature of roughly 0.22 MB when the ring contains 2^10 users. We further outline practical application scenarios, such as anonymous but accountable whistleblowing, to highlight the usefulness of the proposed construction.
 ]]></content:encoded>
 <pubDate>Sat, 29 Nov 2025 14:05:00 +0000</pubDate>
-<pubDate>Sat, 29 Nov 2025 14:05:00 +0000</pubDate>
 </item>
-
 <item>
 <title>Multi-Verifier Keyed-Verification Anonymous Credentials</title>
 <link>https://eprint.iacr.org/2025/2156</link>
@@ -15908,23 +15906,6 @@ The reduced key size of the comparison function has practical implications, part
 To demonstrate the effectiveness of our improvements, we design and prototype-implement a scalable privacy-preserving framework for neural networks over distributed models. Specifically, we implement a distributed rectified linear unit (ReLU) activation function using our distributed comparison function, showcasing the efficacy of our proposed scheme.
 ]]></content:encoded>
 <pubDate>Sat, 29 Jun 2024 09:03:44 +0000</pubDate>
-</item>
-<item>
-<title>Insta-Pok3r: Real-time Poker on Blockchain</title>
-<link>https://eprint.iacr.org/2024/1061</link>
-<guid>https://eprint.iacr.org/2024/1061</guid>
-<content:encoded><![CDATA[
-<div> 关键词：分布式服务、多党计算（MPC）、身份-based加密、公开可验证、在线扑克。
-
-总结: <br />
-我们的文章介绍了一种分布式服务，用于为在线扑克玩家生成私密但可公开验证的关联随机性，如洗牌。该服务利用多党计算协议在离线阶段创建一个加密的卡片排列，确保其是卡片的唯一排列。当玩家加入时，他们仅需通过安全渠道获取身份特定的解密密钥并本地解密，简化了在线过程。文章的关键创新在于提出可缩简证明的多身份基加密（SVME），以及一种高效的小集合随机排列的秘密共享生成协议。整个系统在保证实时性和成本效益的同时，提供了信任最小化的在线扑克体验。在实验中，8个MPC参与者为64张牌生成可验证排列仅需3秒，而玩家获取牌只需0.3秒。 <div>
-We develop a distributed service for generating correlated randomness (e.g. permutations) for multiple parties, where each party’s output is private but publicly verifiable. This service provides users with a low-cost way to play online poker in real-time, without a trusted party.
-Our service is backed by a committee of compute providers, who run a multi-party computation (MPC) protocol to produce an (identity-based) encrypted permutation of a deck of cards, in an offline phase well ahead of when the players’ identities are known. When the players join, what we call the online phase, they decrypt their designated cards immediately after deriving the identity-based decryption keys, a much simpler computation. In addition, the MPC protocol also generates a publicly-verifiable proof that the output is a permutation.
-In our construction, we introduce a new notion of succinctly verifiable multi-identity based encryption (SVME), which extends the existing notion of verifiable encryption to a multi-identity-based setting, but with a constant sized proof – this may be of independent interest. We instantiate this for a permutation relation (defined over a small set) along with identity-based encryption, polynomial commitments and succinct proofs – our choices are made to enable a distributed computation when the card deck is always secret shared. Moreover, we design a new protocol to efficiently generate a secret-sharing of random permutation of a small set, which is run prior to distributed SVME.
-Running these protocols offline simplifies the online phase substantially, as parties only derive their identity-specific keys privately via secure channels with the MPC committee, and then decrypt locally to obtain their decks. We provide a rigorous UC-based formalization in a highly modularized fashion.
-Finally, we demonstrate practicality with an implementation that shows that for 8 MPC parties, gen- erating a secret publicly-verifiable permutation of 64 cards takes under 3 seconds, while accessing cards for a player takes under 0.3 seconds.
-]]></content:encoded>
-<pubDate>Sat, 29 Jun 2024 04:27:35 +0000</pubDate>
 </item>
 </channel>
 </rss>
