@@ -4,18 +4,17 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+
 <item>
 <title>Small-field hash-based SNARGs are less sound than conjectured</title>
 <link>https://eprint.iacr.org/2025/2197</link>
 <guid>https://eprint.iacr.org/2025/2197</guid>
 <content:encoded><![CDATA[
-
 Hash-based succinct non-interactive arguments (SNARGs) are a widely studied and deployed class of proof systems. The security of practical hash-based SNARGs relies on two combinatorial parameters of its underlying linear code $\mathcal{C}$: a distance-preservation error $\varepsilon(\mathcal{C},\delta)$ and the list size $|\Lambda(\mathcal{C}, \delta)|$ (both parametrized by a proximity parameter $\delta$). Optimistically, one might hope that these parameters are bounded all the way to the capacity regime: when the proximity parameter $\delta$ approaches the minimum distance of the code $\delta(\mathcal{C})$. Perhaps too optimistically, several deployed hash-based SNARGs indeed operate in this regime, and initiatives such as the Ethereum Proximity Prize investigate to which extent soundness is preserved in this setting.
 
 We present a minimal toy protocol whose analysis captures most of the complexity of state-of-the-art hash-based SNARGs, and present a generic attack whose success probability depends on the list size $|\Lambda(\mathcal{C}, \delta)|$.
 Further, we investigate the common settings when the code $\mathcal{C}$ is an extension code over a field $\mathbb{F}$ of a base code $\mathcal{C}_\mathbb{B}$ over a small base field $\mathbb{B}$. In this setting, we show that classical combinatorial lower bounds on the list-size of the code yields strong attacks that affect the regimes in which hash-based SNARGs operate in practice.
 ]]></content:encoded>
-<pubDate>Wed, 03 Dec 2025 15:24:27 +0000</pubDate>
 <pubDate>Wed, 03 Dec 2025 15:24:27 +0000</pubDate>
 </item>
 <item>
@@ -23,12 +22,10 @@ Further, we investigate the common settings when the code $\mathcal{C}$ is an ex
 <link>https://eprint.iacr.org/2025/2196</link>
 <guid>https://eprint.iacr.org/2025/2196</guid>
 <content:encoded><![CDATA[
-
 Cross-chain bridges have emerged as key components of blockchain infrastructure, enabling digital assets to flow across chains and benefit from non-native features. While early bridge designs were fraught with brittle trust assumptions, more recent designs, even within Bitcoin's script limits, can operate in a trust-minimized setting. Given this ever-increasing expansion of blockchain bridge systems, a critical question regarding custody arises: When a user's coins cross a bridge back and forth, is there a possibility that they are substituted with other coins upon return? Naturally, if cryptocurrencies were truly fungible, this would not be a consequential event. Nevertheless, chain analytics algorithms as applied to Bitcoin, Ethereum, and other popular chains can trace coins' provenance up to their minting event, thereby highlighting the possibility that users may end up with "tainted" coins upon receiving their coins from a peg-out bridge operation. Similarly, this also highlights the possibility that bridges could become an attraction for money laundering.
 
 To address these considerations, we put forward the concept of ownership preservation for blockchain bridges and we observe that existing multi-sig and BitVM bridges fail to satisfy it. We then present a novel BitVM-based bridge that enables Bitcoin to connect bidirectionally with another DeFi supporting chain in an ownership-preserving and trust-minimized manner. We also observe that our ownership-preserving design is the first Bitcoin bridge to facilitate the transfer of Bitcoin NFTs, Ordinals, across chains, extending in this way their potential value and use cases.
 ]]></content:encoded>
-<pubDate>Wed, 03 Dec 2025 14:30:19 +0000</pubDate>
 <pubDate>Wed, 03 Dec 2025 14:30:19 +0000</pubDate>
 </item>
 <item>
@@ -36,7 +33,6 @@ To address these considerations, we put forward the concept of ownership preserv
 <link>https://eprint.iacr.org/2025/2194</link>
 <guid>https://eprint.iacr.org/2025/2194</guid>
 <content:encoded><![CDATA[
-
 Simulation is a fundamental technique in cryptography, central to security proofs, probably most well-known is its use for showing zero-knowledge. In this paper, we consider simulations no longer being merely a proof technique, but to constructively use simulators of non-interactive zero-knowledge proofs (NIZKs) as an integral component of cryptographic designs. We have occasionally seen such a use, e.g., in designated verifier signatures (DVS), deniable encryption, or the recent concept of anamorphic encryption. However, it was never explicity explored as a stand-alone concept, which is the goal of this paper.
 
 By embedding simulated proofs directly into concrete systems, we unlock cryptographic functionalities that were previously out of reach under standard assumptions or required prohibitively complex techniques. In other words, by incorporating simulated proofs into the ``real'' world, rather than the simulated one, we achieve conceptually more elegant primitives. As a primer, we construct a secure signature scheme whose security hinges on a simulated proof of a false statement, i.e., the ludicrous statement $1 = 2$.
@@ -46,18 +42,15 @@ To illustrate the broader potential of this approach, we present new and simple 
 Based on the zero-knowledge guarantees of the underlying NIZKs, the resulting constructions achieve privacy even if the adversary is allowed to choose the random coins to set up the cryptographic material. To model this, we introduce the notion of trapdoor-detectable zero-knowledge, which may be of independent interest.
 ]]></content:encoded>
 <pubDate>Wed, 03 Dec 2025 11:42:10 +0000</pubDate>
-<pubDate>Wed, 03 Dec 2025 11:42:10 +0000</pubDate>
 </item>
 <item>
 <title>Mobius: Enabling Byzantine-Resilient Single Secret Leader Election with Uniquely Verifiable State</title>
 <link>https://eprint.iacr.org/2025/2191</link>
 <guid>https://eprint.iacr.org/2025/2191</guid>
 <content:encoded><![CDATA[
-
 Single Secret Leader Election (SSLE) protocol facilitates the election of a single leader per round among a group of registered nodes while ensuring unpredictability. Ethereum has identified SSLE as an essential component in its development roadmap and has adopted it as a potential solution to counteract potential attacks. However, we identify a new form of attack termed the state uniqueness attack that is caused by malicious leaders proposing multiple publicly verifiable states. This attack undermines the property of uniqueness in subsequent leader elections and, with high probability, leads to violations of fundamental security properties of the over-layer protocol such as liveness. The vulnerability stems inherently from the designs reducing the uniqueness guarantee to a unique state per election, and can be generalized to the existing SSLE constructions. We further quantify the severity of this attack based on theoretical analysis and real-world executions on Ethereum, highlighting the critical challenges in designing provably secure SSLE protocols.
 To address the state uniqueness attack while ensuring both security and practical performance, we present a universal SSLE protocol called Mobius that does not rely on extra trust assumptions. Specifically, Mobius prevents the generation of multiple verifiable states for each election and achieves a unique state across consecutive executions through an innovative approximately-unique randomization mechanism. In addition to providing a comprehensive security analysis in the Universal Composability framework, we develop a proof-of-concept implementation of Mobius, and conduct extensive experiments to evaluate the security and overhead. The experimental results show that Mobius exhibits enhanced security while significantly reducing communication complexity throughout the protocol execution, achieving over 80% reduction in the registration phase.
 ]]></content:encoded>
-<pubDate>Wed, 03 Dec 2025 08:39:01 +0000</pubDate>
 <pubDate>Wed, 03 Dec 2025 08:39:01 +0000</pubDate>
 </item>
 <item>
@@ -65,7 +58,6 @@ To address the state uniqueness attack while ensuring both security and practica
 <link>https://eprint.iacr.org/2025/2176</link>
 <guid>https://eprint.iacr.org/2025/2176</guid>
 <content:encoded><![CDATA[
-
 Verifiable Random Functions (VRFs) play a fundamental role in modern blockchain designs because of their applications in leader election protocols. In such contexts, however, the original definition by Micali, Rabin and Vadhan (FOCS 99), falls short at guaranteeing fairness when keys are sampled maliciously. 
 The elegant notion of unbiasable VRF, recently proposed by Giunta and Stewart (Eurocrypt 24), addresses these concerns while remaining simple to state and easy to realize, at least in the random oracle model. Achieving unbiasability in the standard model is a different story, though: all known constructions rely on compilers that invariably reduce the efficiency of the VRF from which one starts.
 In this paper, we look at the unbiasability of existing VRFs in the standard model. 
@@ -73,14 +65,12 @@ Our findings are mostly negative; we show that, essentially, all known construct
 On the positive side, we show that some concrete schemes (and notably the well-known Dodis-Yampolskiy VRF) can be modified to achieve meaningful notions of unbiasability, while retaining their original efficiency.
 ]]></content:encoded>
 <pubDate>Mon, 01 Dec 2025 11:16:53 +0000</pubDate>
-<pubDate>Mon, 01 Dec 2025 11:16:53 +0000</pubDate>
 </item>
 <item>
 <title>LIME: High-Performance Private Inference with Lightweight Model and Batch Encryption</title>
 <link>https://eprint.iacr.org/2025/2174</link>
 <guid>https://eprint.iacr.org/2025/2174</guid>
 <content:encoded><![CDATA[
-
 The rapid pace of artificial intelligence (AI) and machine learning techniques has necessitated the development of large-scale models that rely on energy-intensive data centers, thereby raising environmental sustainability. Simultaneously, the increasing significance of privacy rights has led to the emergence of Privacy-Preserving Machine Learning (PPML) technologies, which aim to ensure data confidentiality. Although homomorphic encryption (HE) facilitates computations on encrypted data, it entails considerable computational costs and challenges, which impede the effective deployment of privacy-enhancing applications with large models.
 
 To create a more sustainable and secure AI world, we propose LIME, a pure HE-based PPML solution, by integrating two techniques: element-wise channel-to-slot packing (ECSP) and power-of-two channel pruning (PCP). ECSP leverages abundant slots to pack multiple samples within ciphertexts, facilitating batch inference. PCP prunes the channels of convolutional layers by powers of two, thereby reducing computational demands and enhancing the packing capabilities of pruned models. Additionally, we implement the ReLU-before-addition block in ResNet to mitigate accuracy degradation caused by approximations with quadratic polynomials.
@@ -88,14 +78,12 @@ To create a more sustainable and secure AI world, we propose LIME, a pure HE-bas
 We evaluated LIME using ResNet-20 on CIFAR-10, VGG-11 on CIFAR-100, and ResNet-18 on Tiny-ImageNet. Using the original models, LIME attains up to 2.1% and 8.4% accuracy improvements over the methods of Lee et al. (IEEE ACCESS’21) and AESPA (arXiv:2201.06699), which employ high- and low-degree polynomial ReLU approximations, respectively. Even with 75% parameter pruning, LIME retains higher accuracy than AESPA. Using the state-of-the-art ORION (ASPLOS '25) as the convolution backend and evaluating on the original models, LIME achieves speedups of 41.5$\times$ and 8$\times$ over ORION integrated with Lee et al. and AESPA, respectively. For models pruned by 90%, these speedups increase to 202.5$\times$ and 35.1$\times$, respectively.
 ]]></content:encoded>
 <pubDate>Mon, 01 Dec 2025 07:58:58 +0000</pubDate>
-<pubDate>Mon, 01 Dec 2025 07:58:58 +0000</pubDate>
 </item>
 <item>
 <title>Game-Theoretically Fair Distributed Coin Tossing With Private Preferences</title>
 <link>https://eprint.iacr.org/2025/2190</link>
 <guid>https://eprint.iacr.org/2025/2190</guid>
 <content:encoded><![CDATA[
-
 Secure coin-tossing is typically modeled as an input-less functionality, where parties with no private inputs jointly generate a fair coin. In the dishonest majority setting, however, a strongly fair coin-tossing protocol is impossible. To circumvent this barrier, recent work has adopted the weaker notion of game-theoretic fairness, where adversaries are rational parties with preferences for specific outcomes, seeking to bias the coin in their favor.
 Yet these preferences may encode secret information, making prior protocols that assume preferences are public, fundamentally incompatible with privacy.
 
@@ -108,14 +96,12 @@ Within this framework, we construct a protocol realizing our ideal functionality
 Our work is the first to reconcile game-theoretic fairness with preference privacy, offering new definitional tools and efficient protocols for rational multi-party computation in dishonest majority settings.
 ]]></content:encoded>
 <pubDate>Tue, 02 Dec 2025 19:25:56 +0000</pubDate>
-<pubDate>Tue, 02 Dec 2025 19:25:56 +0000</pubDate>
 </item>
 <item>
 <title>ALIOTH: An Efficient and Secure Weight-of-Evidence Framework for Privacy-Preserving Data Processing</title>
 <link>https://eprint.iacr.org/2025/2188</link>
 <guid>https://eprint.iacr.org/2025/2188</guid>
 <content:encoded><![CDATA[
-
 Secure two-party computation (2PC)-based privacy-preserving machine learning (ML) has made remarkable progress in recent years. However, most existing works overlook the privacy challenges that arise during the data preprocessing stage. 
 Although some recent studies have introduced efficient techniques for privacy-preserving feature selection and data alignment on well-structured datasets, they still fail to address the privacy risks involved in transforming raw data features into ML-effective numerical representations.
 
@@ -124,19 +110,16 @@ By incorporating our proposed partition-aware 2PC protocols and vectorization op
 To demonstrate scalability, we conduct experiments on diverse datasets. Notably, ALIOTH can transform 3 million data samples with 100 features securely within half an hour over a wide-area network. Furthermore, ALIOTH can be seamlessly integrated with existing 2PC-based ML frameworks.  Empirical evaluations on real-world financial datasets show ALIOTH improves both the predictive performance of logistic regression and 2PC training efficiency.
 ]]></content:encoded>
 <pubDate>Tue, 02 Dec 2025 14:34:15 +0000</pubDate>
-<pubDate>Tue, 02 Dec 2025 14:34:15 +0000</pubDate>
 </item>
 <item>
 <title>Policy Compliant Secure Messaging</title>
 <link>https://eprint.iacr.org/2025/2179</link>
 <guid>https://eprint.iacr.org/2025/2179</guid>
 <content:encoded><![CDATA[
-
 We initiate the holistic study of Policy Compliant Secure Messaging (PCSM). A content policy is a predicate over messages deciding which messages are considered harmful and which not. A PCSM protocol is a type of end-to-end encrypted (E2EE) messaging system that guarantees E2EE privacy and authenticity for all policy compliant messages but detects and verifiably reports harmful content prior to its delivery. This stands in contrast to prior content moderation systems for E2EE messaging where detection relies on receivers reporting the harmful content themselves which makes them unsuited for most PCSM applications (e.g., for preventing the wilful distribution of harmful content). Our holistic PCSM notion explicitly captures several new roles such as policy creator, auditor and judge, to more accurately separate and model the different goals and security concerns of stakeholders when deploying PCSM. 
 
 We present efficient PCSM constructions for arbitrary policy classes, as well as for hash-based ones, achieving various levels of security, while maintaining the core security properties of the underlying E2EE layer. For hash-based PCSM, we encapsulate Apple’s recent PSI protocol used in their content moderation system, and we properly adapt it to realize the desired PCSM functionality, and analyze the resulting protocol’s security. To our knowledge, our work is the first that rigorously study Apple’s PSI for server-side content moderation within the broader context of secure messaging, addressing the diverse goals and security considerations of stakeholders when deploying larger systems.
 ]]></content:encoded>
-<pubDate>Mon, 01 Dec 2025 19:31:52 +0000</pubDate>
 <pubDate>Mon, 01 Dec 2025 19:31:52 +0000</pubDate>
 </item>
 <item>
@@ -144,13 +127,10 @@ We present efficient PCSM constructions for arbitrary policy classes, as well as
 <link>https://eprint.iacr.org/2025/2173</link>
 <guid>https://eprint.iacr.org/2025/2173</guid>
 <content:encoded><![CDATA[
-
 This paper articulates short- and long-term research problems in AI agent security and privacy, using the lens of computer systems security. This approach examines end-to-end security properties of entire systems, rather than AI models in isolation. While we recognize that hardening a single model is useful, it is important to realize that it is often insufficient. By way of an analogy, creating a model that is always helpful and harmless is akin to creating software that is always helpful and harmless. The collective experience of decades of cybersecurity research and practice shows that this is insufficient. Rather, constructing an informed and realistic attacker model before building a system, applying hard-earned lessons from software security, and continuous improvement of security posture is a tried-and-tested approach to securing real computer systems. A key goal is to examine where research challenges arise when applying traditional security principles in the context of AI agents. A secondary goal of this report is to distill these ideas for AI and ML practitioners and researchers. We discuss the challenges of applying security principles to agentic computing, present 11 case studies of real attacks on agentic systems, and define a series of new research problems specific to the security of agentic systems.
 ]]></content:encoded>
 <pubDate>Mon, 01 Dec 2025 05:43:48 +0000</pubDate>
-<pubDate>Mon, 01 Dec 2025 05:43:48 +0000</pubDate>
 </item>
-
 <item>
 <title>Lattice-Based Linkable Ring Signatures for Anonymous and Accountable Whistleblowing</title>
 <link>https://eprint.iacr.org/2025/2170</link>
@@ -15868,190 +15848,6 @@ The Bitcoin ecosystem has continued to evolve beyond its initial promises of dec
 To address these challenges, we propose a new modular indexer architecture that enables a fully decentralized and user-verified network, mitigating the risks associated with traditional decentralized indexer networks susceptible to Sybil attacks. Our solution, INDECURE, leverages polynomial commitments as checkpoints to streamline the verification process, significantly reducing the overhead associated with integrity checks of state transitions. By implementing a robust data attestation procedure, INDECURE ensures the reliability of state information against malicious alterations, facilitating trustless verifications by users. Our preliminary evaluations of INDECURE across various indexer protocols—BRC20, Bitmap, and satsnames—demonstrate its superiority in reducing computation time and data block size while maintaining high integrity in state transitions. This modular approach not only enhances the security and efficiency of Bitcoin's off-chain executions but also sets a foundational layer for scalable, secure blockchain applications.
 ]]></content:encoded>
 <pubDate>Wed, 06 Mar 2024 18:14:24 +0000</pubDate>
-</item>
-<item>
-<title>MUSEN: Aggregatable Key-Evolving Verifiable Random Functions and Applications</title>
-<link>https://eprint.iacr.org/2024/628</link>
-<guid>https://eprint.iacr.org/2024/628</guid>
-<content:encoded><![CDATA[
-<div> 关键词：Verifiable Random Function (VRF), Aggregatable Key-Evolving VRF (A-KE-VRF), Proof-of-Stake (PoS), Proofs of Proof-of-Stake (PoPoS), Encryption to the Future (EtF)
-
-总结:<br />
-本文提出了一种新的可聚合密钥演进Verifiable Random Function (A-KE-VRF)，它具有聚合和密钥演进的特性。A-KE-VRF有助于提升Proof-of-Stake (PoS)区块链的块大小效率，优化PoPoS，并构建了面向未来的加密和来自过去的认证方案。这些技术对于YOSO MPC框架至关重要，提供了增强的安全性。通过结合这些功能，A-KE-VRF为未来加密协议设计开辟了新路径。 <div>
-A Verifiable Random Function (VRF) can be evaluated on an input by a prover who holds a secret key, generating a pseudorandom output and a proof of output validity that can be verified using the corresponding public key. VRFs are a central building block of committee election mechanisms that sample parties to execute tasks in cryptographic protocols, e.g. generating blocks in a Proof-of-Stake (PoS) blockchain or executing a round of MPC protocols. We propose the notion, and a matching construction, of an Aggregatable Key-Evolving VRF (A-KE-VRF) with the following extra properties: 1. Aggregation: combining proofs for several VRF evaluations of different inputs under different secret keys into a single constant size proof; 2. Key-Evolving: preventing adversaries who corrupt a party (learning their secret key) from ``forging'' proofs of past VRF evaluations. As an immediate application, we improve on the block size of PoS blockchains and on the efficiency of Proofs of Proof-of-Stake (PoPoS). Furthermore, the A-KE-VRF notion allows us to construct Encryption to the Future (EtF) and Authentication from the Past (AfP) schemes with a Key-Evolving property, which provides forward security.  An EtF scheme allows for sending a message to a party who is randomly selected to execute a role in the future, while an AfP scheme allows for this party to authenticate their messages as coming from a past execution of this role. These primitives are essential for realizing the YOSO MPC Framework (CRYPTO'21).
-]]></content:encoded>
-<pubDate>Wed, 24 Apr 2024 07:32:44 +0000</pubDate>
-</item>
-<item>
-<title>"Act natural!": Having a Private Chat on a Public Blockchain</title>
-<link>https://eprint.iacr.org/2021/1073</link>
-<guid>https://eprint.iacr.org/2021/1073</guid>
-<content:encoded><![CDATA[
-<div> 关键词：subliminal channel, blockchain, secret-recoverable splittable signature, public-key, random oracle model
-
-总结:<br />
-本文提出了一种利用区块链上秘密可恢复分割签名方案的公开密钥隐秘通信渠道。这种设计在随机Oracle模型下，在常见加密假设下是不可检测的。方法适用于98种顶级加密货币中使用的98种秘密可恢复分割签名方案，仅增加每条消息一个签名的常量开销。研究还分析了比特币、Monero和RippleNet网络的适用性，并提供了比特币和RippleNet的原型实现。这一创新为匿名但可追踪的通信提供了一种新的可能，增加了信息安全的隐蔽性。 <div>
-Messengers have become an essential means of interpersonal interaction. Yet untraceable private communication remains an elusive goal, as most messengers hide content, but not communication patterns. The knowledge of communication patterns can by itself reveal too much, as happened, e.g., in the context of the Arab Spring. Subliminal channels in cryptographic systems enable untraceable private communication in plain sight. In this context, bulletin boards in the form of blockchains are a natural object for subliminal communication: accessing them is innocuous, as they rely on distributed access for verification and extension. At the same time, blockchain users generate hundreds of thousands of transactions per day that are individually signed and placed on the blockchain. Thus, blockchains may serve as innocuous repository for publicly accessible cryptographic transactions where subliminal channels can be placed. This significantly increases the availability of publicly accessible cryptographic transactions where subliminal channels can be placed.
-In this paper, we propose a public-key subliminal channel using secret-recoverable splittable signature schemes on blockchains and prove that our construction is undetectable in the random oracle model under common cryptographic assumptions. Our approach is applicable to any secret-recoverable splittable signature scheme and introduces a constant overhead of a single signature per message. Such schemes are used by 98 of the top 100 cryptocurrencies. We also analyze the applicability of our approach to the Bitcoin, Monero, and RippleNet networks and present proof of concept implementations for Bitcoin and RippleNet.
-]]></content:encoded>
-<pubDate>Mon, 23 Aug 2021 06:32:15 +0000</pubDate>
-</item>
-<item>
-<title>From Interaction to Independence: zkSNARKs for Transparent and Non-Interactive Remote Attestation</title>
-<link>https://eprint.iacr.org/2024/1068</link>
-<guid>https://eprint.iacr.org/2024/1068</guid>
-<content:encoded><![CDATA[
-<div> 关键词：remote attestation (RA), transparency, zkSNARKs, non-interactive, publicly provable
-
-总结:
-本文介绍了一种新型的远程验证协议(zRA)，它利用零知识 Succinct Non-Interactive Argument of Knowledge (zkSNARKs)技术，解决了现有RA协议的透明度问题。zRA无需预共享密钥或访问敏感数据，实现了无交互、公开可验证的设备验证。它不依赖在线服务，也不增加额外的安全假设，适用于点对点和发布/订阅网络结构。作者还开发了开源实现，并表明zRA适用于公共许可区块链，用于存储和保护免受DoS攻击的认证数据。总的来说，zRA促进了更广泛地采用远程验证技术，保证了系统的可信度和审计性。 <div>
-Remote attestation (RA) protocols have been widely
-used to evaluate the integrity of software on remote devices.
-Currently, the state-of-the-art RA protocols lack a crucial feature: transparency. This means that the details of the final
-attestation verification are not openly accessible or verifiable by
-the public. Furthermore, the interactivity of these protocols often
-limits attestation to trusted parties who possess privileged access
-to confidential device data, such as pre-shared keys and initial
-measurements. These constraints impede the widespread adoption
-of these protocols in various applications.
-In this paper, we introduce zRA, a non-interactive, transparent, and publicly provable RA protocol based on zkSNARKs.
-zRA enables verification of device attestations without the need
-for pre-shared keys or access to confidential data, ensuring a
-trustless and open attestation process. This eliminates the reliance
-on online services or secure storage on the verifier side. Moreover,
-zRA does not impose any additional security assumptions beyond
-the fundamental cryptographic schemes and the essential trust
-anchor components on the prover side (i.e., ROM and MPU).
-The zero-knowledge attestation proofs generated by devices have
-constant size regardless of the network complexity and number
-of attestations. Moreover, these proofs do not reveal sensitive
-information regarding internal states of the device, allowing verification by anyone in a public and auditable manner. We conduct
-an extensive security analysis and demonstrate scalability of zRA
-compared to prior work. Our analysis suggests that zRA excels
-especially in peer-to-peer and Pub/Sub network structures. To
-validate the practicality, we implement an open-source prototype
-of zRA using the Circom language. We show that zRA can be
-securely deployed on public permissionless blockchains, serving
-as an archival platform for attestation data to achieve resilience
-against DoS attacks.
-]]></content:encoded>
-<pubDate>Mon, 01 Jul 2024 12:23:31 +0000</pubDate>
-</item>
-<item>
-<title>Distributional Secure Merge</title>
-<link>https://eprint.iacr.org/2024/1048</link>
-<guid>https://eprint.iacr.org/2024/1048</guid>
-<content:encoded><![CDATA[
-<div> 关键词：secure merge, uniformly random lists, near linear, logarithmic overheads, implementation
-
-总结:<br />
-本文主要探讨了在处理随机列表的 secure merge 问题上，提出了一种新的协议。该协议实现了近乎线性的通信和计算复杂度，每轮运行时间为 $O(\log\log n)$，对于长度为 $2^{20}$ 的列表，运行时间和通信量比现有状态提高了一个数量级。与之前的理论工作相比，虽然在理论上的最优时间复杂度有所差距，但实证表明，新协议在实际应用中更为高效。此外，该协议还扩展到了来自任意分布的列表，尤其是当列表近似同分布时，效率接近于随机列表，从而显著提升了 PSI 和 Secure Join 等关键应用的性能。 <div>
-Secure merge refers to the problem of merging two sorted lists. The problem appears in different settings where each list is held by one of two parties, or the lists are themselves shared among two or more parties. The output of a secure merge protocol is secret shared. Each variant of the problem offers many useful applications.
-
-The difficulty in designing secure merge protocols vis-a-vis insecure merge protocols (which work in linear time with a single pass over the lists) has to do with operations having to be oblivious or data-independent. In particular, the protocol cannot leak the positions of items of each list in the final merged list. On account of this, sorting-based secure merge protocols have been a common solution to the problem. However, as they introduce (poly)logarithmic overheads, there has been active investigation into the task of building (near) linear time secure merge protocols. Most recently, Hemenway et al. put forth a protocol for secure merge that does achieve linear communication and computation and a round complexity of $O({\log\log n})$, where $n$ is the length of the lists being merged. While this shows the feasibility of a linear time secure merge, it still leaves room for the design of a concretely efficient linear time secure merge.
-
-In this work, we consider a relaxation of the problem where the lists are uniformly random. We show a secure merge protocol for uniformly random lists that achieves $O({n\log\log n})$, i.e., near linear communication and computation and a round complexity of $O({\log\log n})$, where $n$ is the length of the lists being merged. Our protocol design is general and can be instantiated in a variety of settings so long as the building blocks (basic ones such as comparisons and shuffles) can be realized in said settings. Although we do not achieve the same asymptotic guarantees as Hemenway et al., our work is concretely efficient. We implement our protocol and compare it to the state of the art sorting protocols and demonstrate an order of magnitude improvement in running times and communication for lists of size of $2^{20}$. 
-
-We also extend our protocol to work for lists sampled from arbitrary distributions. In particular, when the lists are (close to) identically distributed, we achieve the same efficiency as uniform lists. This immediately improve the performance of many crucial applications including PSI & Secure Join, thus illustrating the significance and applicability of our protocol in practice.
-]]></content:encoded>
-<pubDate>Thu, 27 Jun 2024 22:07:39 +0000</pubDate>
-</item>
-<item>
-<title>ammBoost: State Growth Control for AMMs</title>
-<link>https://eprint.iacr.org/2024/1021</link>
-<guid>https://eprint.iacr.org/2024/1021</guid>
-<content:encoded><![CDATA[
-<div> 关键词：Decentralized Finance（去中心化金融）、Automated Market Makers（自动市场 maker，AMM）、Blockchain、Scalability（可扩展性）、ammBoost。
-
-总结: <br />
-文章讨论了去中心化金融（DeFi）中自动市场 makers（AMM）的可扩展性问题，尤其是在区块链上处理大量交易时产生的存储和交易成本问题。为解决这一问题，作者提出了一种名为ammBoost的新型侧链架构，旨在减少链上交易、提高吞吐量并支持区块链修剪。该系统采用多种技术确保AMM的正确性和安全性。通过构建Uniswap启发式用例的原型，实验结果表明ammBoost能将交易气体成本降低94.53%，链增长至少减少80%，并且能够支持比实际Uniswap高出500倍的日流量。总的来说，ammBoost是一种有效的解决方案，旨在优化AMM在DeFi中的性能和可持续性。 <div>
-Automated market makers (AMMs) are a form of decentralized cryptocurrency exchanges and considered a prime example of Decentralized Finance (DeFi) applications. Their popularity and high trading activity have resulted in millions of on-chain transactions leading to serious scalability issues. In this paper, we address the on-chain storage overhead problem of AMMs by utilizing a new sidechain architecture as a layer 2 solution, building a system called ammBoost. Our system reduces the amount of on-chain transactions, boosts throughput, and supports blockchain pruning. We devise several techniques to enable layer 2 processing for AMMs while preserving correctness and security of the underlying AMM. We also build a proof-of-concept of ammBoost for a Uniswap-inspired use case to empirically evaluate its performance. Our experiments show that ammBoost decreases the gas cost by 94.53% and the chain growth by at least 80%, and that it can support up to 500x of the daily traffic volume observed for Uniswap in practice.
-]]></content:encoded>
-<pubDate>Mon, 24 Jun 2024 19:20:08 +0000</pubDate>
-</item>
-<item>
-<title>A Two-Layer Blockchain Sharding Protocol Leveraging Safety and Liveness for Enhanced Performance</title>
-<link>https://eprint.iacr.org/2024/304</link>
-<guid>https://eprint.iacr.org/2024/304</guid>
-<content:encoded><![CDATA[
-<div> 关键词：Reticulum, sharding, blockchain, scalability, adversarial nodes
-
-总结: <br />
-Reticulum是一种创新的分片协议，旨在解决区块链网络中的可扩展性和安全性问题。它采用两阶段设计，分为控制和处理分片，以应对不同类型的攻击。控制分片确保网络的多数诚实节点，而处理分片负责交易处理，通过一致同意减少参与验证的节点，实现高吞吐量。在出现争议时，控制分片作为仲裁者。实验表明，Reticulum在保持高交易速度的同时，具有更强的抗攻击性，相较于现有协议更具优势。 <div>
-Sharding is a critical technique that enhances the scalability of blockchain technology. However, existing protocols often assume adversarial nodes in a general term without considering the different types of attacks, which limits transaction throughput at runtime because attacks on liveness could be mitigated. There have been attempts to increase transaction throughput by separately handling the attacks; however, they have security vulnerabilities. This paper introduces Reticulum, a novel sharding protocol that overcomes these limitations and achieves enhanced scalability in a blockchain network without security vulnerabilities.
-
-Reticulum employs a two-phase design that dynamically adjusts transaction throughput based on runtime adversarial attacks on either or both liveness and safety. It consists of `control' and `process' shards in two layers corresponding to the two phases. Process shards are subsets of control shards, with each process shard expected to contain at least one honest node with high confidence. Conversely, control shards are expected to have a majority of honest nodes with high confidence. Reticulum leverages unanimous voting in the first phase to involve fewer nodes in accepting/rejecting a block, allowing more parallel process shards. The control shard finalizes the decision made in the first phase and serves as a lifeline to resolve disputes when they surface.
-
-Experiments demonstrate that the unique design of Reticulum empowers high transaction throughput and robustness in the face of different types of attacks in the network, making it superior to existing sharding protocols for blockchain networks.
-]]></content:encoded>
-<pubDate>Fri, 23 Feb 2024 00:13:18 +0000</pubDate>
-</item>
-<item>
-<title>Non-interactive VSS using Class Groups and Application to DKG</title>
-<link>https://eprint.iacr.org/2023/451</link>
-<guid>https://eprint.iacr.org/2023/451</guid>
-<content:encoded><![CDATA[
-<div> 关键词：non-interactive verifiable secret sharing (NI-VSS), class groups (cgVSS), range proof, public verifiability, non-interactive distributed key generation (NI-DKG).
-
-总结:
-本文提出了一种基于类群的非交互式可验证秘密共享方案(cgVSS)，它不依赖于范围证明，利用类群的独特结构实现高效的大整数加密。cgVSS简化了NI-VSS过程，相比现有方案有显著性能提升。文章还定义了公共可验证性，并扩展到即使所有接收者可能被攻击也能保持的强公共可验证性。通过通用转换，作者得到了一个基于类群的非交互式分布式密钥生成方案(cgDKG)，适用于阈值系统。安全分析考虑了公共可验证性对DKG的影响。总的来说，这篇论文展示了类群在构建高效、可验证的密码学协议中的潜力。 <div>
-We put forward a non-interactive verifiable secret sharing (NI-VSS) scheme using class groups – we call it cgVSS. Our construction follows the standard framework of encrypting the shares to a set of recipients and generating a non-interactive proof of correct sharing. However, as opposed to prior works, such as Groth’s [Eprint 2021], or Gentry et al.’s [Eurocrypt 2022], we do not require any range proof - this is possible due to the unique structure of class groups, that enables efficient encryption/decryption of large field elements in the exponent of an ElGamal-style encryption scheme. Importantly, this is possible without destroying the additive holomorphic structure, which is required to make the proof-of-correctness highly efficient. This approach not only substantially simplifies the NI-VSS process, but also outperforms the state-of-art schemes significantly. For example, our implementation shows that for a 150 node system cgVSS outperforms (a simplified implementation of) Groth’s protocol in overall communication complexity by 5.6x, about 9.3 − 9.7x in the dealer time and 2.4 − 2.7x in the receiver time per node.
-
-Additionally, we formalize the notion of public verifiability, which enables anyone, possibly outside the participants, to verify the correctness of the dealing. In fact, we re-interpret the notion of public verifiability and extend it to the setting when potentially all recipients may be corrupt and yet can not defy public verifiability – to distinguish from state-of-art, we call this strong public verifiability. Our formalization uses the universal composability framework.
-
-Finally, through a generic transformation, we obtain a non-interactive distributed key generation (NI-DKG) scheme for threshold systems, where the secret key is the discrete log of the public key. Our security analysis in the VSS-hybrid model uses a formalization that considers a (strong) public verifiability notion for DKG, even when more than threshold parties are corrupt. Instantiating with cgVSS we obtain a NI-DKG scheme from class groups – we call it cgDKG.
-]]></content:encoded>
-<pubDate>Tue, 28 Mar 2023 17:30:50 +0000</pubDate>
-</item>
-<item>
-<title>Asynchronous Consensus without Trusted Setup or Public-Key Cryptography</title>
-<link>https://eprint.iacr.org/2024/677</link>
-<guid>https://eprint.iacr.org/2024/677</guid>
-<content:encoded><![CDATA[
-<div> 关键词：Byzantine共识、异步协议、可信设置、公钥加密、随机 oracle。
-
-总结:<br />
-本文研究了无需可信设置和不使用公钥加密的异步拜占庭共识协议。提出了一种基于随机 oracle 的 Asynchronous Common Subset（ACS）协议，具有$O(\kappa n^3)$总通信量和$O(1)$期望轮数。该协议仅依赖于密码哈希函数，因此对量子攻击也安全。与现有实现相比，实验表明该协议更为高效。此外，文中还介绍了新引入的异步秘密密钥共享和覆盖聚集等概念，这些可能独立具有价值。 <div>
-Byzantine consensus is a fundamental building block in distributed cryptographic problems. Despite decades of research, most existing asynchronous consensus protocols require a strong trusted setup and expensive public-key cryptography. In this paper, we study asynchronous Byzantine consensus protocols that do not rely on a trusted setup and do not use public-key cryptography such as digital signatures. We give an Asynchronous Common Subset (ACS) protocol whose security is only based on cryptographic hash functions modeled as a random oracle. Our protocol has $O(\kappa n^3)$ total communication and runs in expected $O(1)$ rounds. The fact that we use only cryptographic hash functions also means that our protocol is post-quantum secure. The minimal use of cryptography and the small number of rounds make our protocol practical. We implement our protocol and evaluate it in a geo-distributed setting with up to 128  machines. Our experimental evaluation shows that our protocol is more efficient than the only other setup-free consensus protocol that has been implemented to date. En route to our asynchronous consensus protocols, we also introduce new primitives called asynchronous secret key sharing and cover gather, which may be of independent interest.
-]]></content:encoded>
-<pubDate>Fri, 03 May 2024 13:40:00 +0000</pubDate>
-</item>
-<item>
-<title>VIMz: Verifiable Image Manipulation using Folding-based zkSNARKs</title>
-<link>https://eprint.iacr.org/2024/1063</link>
-<guid>https://eprint.iacr.org/2024/1063</guid>
-<content:encoded><![CDATA[
-<div> 关键词：generative AI, zero-knowledge proofs (ZKP), folding-based zkSNARKs, VIMz, trustless smart contract system
-
-总结:
-本文探讨了随着生成式AI技术的发展，媒体真实性验证的需求增加。为确保图像来源的可信度，作者提出了一种名为VIMz的高效可验证图像操纵系统，它利用折叠式zkSNARKs技术降低证明者复杂性。与先前方法相比，VIMz在处理高清和4K图像时，实现了时间速度提升3倍，内存消耗减少96倍（从309GB降至3.2GB）。此外，文章还设计了一个无信任智能合约系统，用于自动验证媒体真实性的证明，支持版权和所有权的透明管理，符合内容可追溯性和真实性联盟（C2PA）标准。这一系统为构建去中心化的媒体市场奠定了基础，具有广泛的应用前景。 <div>
-With the rise of generative AI technology, the media's credibility as a source of truth has been significantly compromised. This highlights the need to verify the authenticity of media and its originality.
-Ensuring the integrity of media during capture using the device itself presents a straightforward solution to this challenge.
-However, raw captured media often require certain refinements or redactions before publication. Zero-knowledge proofs (ZKP) offer a solution by allowing attestation of the correctness of specific transformations applied to an authorized image. While shown to be feasible, previous approaches faced challenges in practice due to their high prover complexity.
-
-In this paper, we aim to develop a practical framework for efficiently proving the authenticity of HD and 4K images on commodity hardware. Our goal is to minimize prover complexity by utilizing the folding-based zkSNARKs technique, resulting in VIMz, the first practical verifiable image manipulation system of this kind. VIMz leverages Nova's folding scheme to achieve low complexity recursive zkSNARK proofs of authentic image manipulation. Our implementation results demonstrate a substantial reduction in prover complexity—up to a 3$\times$ speedup in time and a 96$\times$ reduction in memory (from 309 GB in [Kang et al., arXiv 2022] to only 3.2 GB). Moreover, the low memory consumption allows VIMz to prove the correctness of multiple chained transformations simultaneously, further increasing the performance (up to 3.5$\times$).
-Additionally,
-we propose a trustless smart contract system that autonomously verifies the proofs of media authenticity, achieving trustless copyright and ownership management, aligning with the standards of the Coalition for Content Provenance and Authenticity (C2PA).
-Such a system serves as a foundational infrastructure for constructing trustless media marketplaces with diverse applications.
-]]></content:encoded>
-<pubDate>Sat, 29 Jun 2024 13:05:39 +0000</pubDate>
-</item>
-<item>
-<title>Compact Key Function Secret Sharing with Non-linear Decoder</title>
-<link>https://eprint.iacr.org/2024/1062</link>
-<guid>https://eprint.iacr.org/2024/1062</guid>
-<content:encoded><![CDATA[
-<div> 关键词：Function Secret Sharing (FSS), Distributed Point Function (DPF), Comparison Function, Interval Function, Key Size.
-
-总结:<br />
-本文主要探讨了一种针对点、比较和区间函数的变体Function Secret Sharing (FSS)方案，旨在实现更紧凑的$p$- party（$p \geq 3$）密钥大小。相比于现有构造，该方案显著减少了DPF的密钥大小，降低了$2^p$倍，同时对非线性解码器进行了一次额外的比较操作。对于分布式比较函数，作者实现了史上最小的密钥大小，减少了一个$q^{p-1}$因子，对隐私保护机器学习（PPML）中的应用有实际意义。此外，文章还展示了如何将这种改进应用于神经网络的分布式实现，如分布式ReLU激活函数，证实了新方案的有效性。 <div>
-We present a variant of Function Secret Sharing (FSS) schemes tailored for point, comparison, and interval functions, featuring compact key sizes at the expense of additional comparison. While existing FSS constructions are primarily geared towards $2$-party scenarios, exceptions such as the work by Boyle et al. (Eurocrypt 2015) and Riposte (S&amp;P 2015) have introduced FSS schemes for $p$-party scenarios ($p \geq 3$). This paper aims to achieve the most compact $p$-party FSS key size to date. We achieve a noteworthy reduction in key size, a $2^p$-factor decrease compared to state-of-the-art FSS constructions (including computationally efficient constructions using symmetric-key primitives) of distributed point function (DPF). Compared to the previous public-key-based FSS design for DPF, we also get a key size reduction equal to a $2^{n/2}$-sized row vector, where $2^n$ is the domain size of the point function. This reduction in key size comes at the cost of a required comparison operation by the decoder (hence called a non-linear decoder), a departure from prior schemes. In $p$-party scenarios, our construction outperforms existing FSS constructions in key size, remaining on par with Riposte in evaluation time and showing significant improvement over Boyle et al.
-
-In addition to constructing FSS for distributed point functions (DPF), we extend our approach to distributed comparison and interval functions, achieving the most efficient key size to date. Our distributed comparison function exhibits a key-size reduction by a factor of $q^{p-1}$, where $q$ denotes the size of the algebraic group used in the scheme's construction.
-The reduced key size of the comparison function has practical implications, particularly in applications like privacy-preserving machine learning (PPML), where thousands of comparison functions are employed in each neural network layer.
-To demonstrate the effectiveness of our improvements, we design and prototype-implement a scalable privacy-preserving framework for neural networks over distributed models. Specifically, we implement a distributed rectified linear unit (ReLU) activation function using our distributed comparison function, showcasing the efficacy of our proposed scheme.
-]]></content:encoded>
-<pubDate>Sat, 29 Jun 2024 09:03:44 +0000</pubDate>
 </item>
 </channel>
 </rss>
