@@ -4,6 +4,106 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+<item>
+<title>Distributed Broadcast Encryption for Confidential Interoperability across Private Blockchains</title>
+<link>https://eprint.iacr.org/2025/2237</link>
+<guid>https://eprint.iacr.org/2025/2237</guid>
+<content:encoded><![CDATA[
+
+Interoperation across distributed ledger technology (DLT) networks hinges upon the secure transmission of ledger state from one network to another. This is especially challenging for private networks whose ledger access is limited to enrolled members. Existing approaches rely on a trusted centralized proxy that receives encrypted ledger state of a network, decrypts it, and sends it to members of another network. Though effective, this approach goes against the founding principle of DLT, namely avoiding single points of failure (or single sources of trust).
+
+In this paper, we leverage fully-distributed broadcast encryption (FDBE in short) to build a fully decentralized protocol for confidential information-sharing across private networks. Compared to traditional broadcast encryption (BE), FDBE is characterized by distributed setup and key generation, where mutually distrusting parties agree on a BE’s public key without a trusted setup, and securely derive their decryption keys. Given any FDBE, two private networks can securely share information as follows: a sender in one network uses the other network’s FDBE public key to encrypt a message for its members; and the resulting construction is secure in the simplified universal composability framework.
+
+To further demonstrate the practicality of our approach, we present the first instantiation of an FDBE that enjoys constant-sized decryption keys and ciphertexts, and evaluate the resulting performances through a reference implementation that considers two private Hyperledger Fabric networks within the Hyperledger Cacti interoperation framework.
+]]></content:encoded>
+<pubDate>Fri, 12 Dec 2025 09:14:00 +0000</pubDate>
+<pubDate>Fri, 12 Dec 2025 09:14:00 +0000</pubDate>
+</item>
+<item>
+<title>Toward Practical Lattice-based Unbounded Inner Product Functional Encryption: Construction and Implementation</title>
+<link>https://eprint.iacr.org/2025/2232</link>
+<guid>https://eprint.iacr.org/2025/2232</guid>
+<content:encoded><![CDATA[
+
+Cloud computing enables data processing, storing and sharing in untrusted environments whose growing adoption necessitates a focus on data security and privacy. Inner product functional encryption (IPFE) is a promising cryptographic technique that enables fine-grained access control over sensitive data in untrusted cloud environments. Post-quantum cryptography focuses on developing cryptographic protocols resilient to quantum computer attacks, with lattice structures being crucial in designing these protocols.
+This paper aims to implement the lattice-based public key unbounded IPFE (uIPFE) scheme proposed by Dutta et al. (2022) [1] which ensures that no specific vector’s length bound needs to be fixed during public parameter generation.
+Furthermore, we extend the ALS-IPFE scheme of Agrawal et al. (2016) [2] to create a new public key scheme uIPFE #1, achieving adaptive indistinguishability security in the random oracle model under the Learning with Errors assumption, while avoiding trapdoor generation and pre-image sampling algorithms. 
+This work aims to enhance the practical applicability of uIPFE in cloud computing environments. We implement both the schemes uIPFE and uIPFE #1 in C programming language and execute the code on IBM Power 9 server. Moreover, we analyze the running time and discuss the performance of both schemes based on varying message vector lengths.
+]]></content:encoded>
+<pubDate>Thu, 11 Dec 2025 14:27:48 +0000</pubDate>
+<pubDate>Thu, 11 Dec 2025 14:27:48 +0000</pubDate>
+</item>
+<item>
+<title>PIRANHAS: PrIvacy-Preserving Remote Attestation in Non-Hierarchical Asynchronous Swarms</title>
+<link>https://eprint.iacr.org/2025/2228</link>
+<guid>https://eprint.iacr.org/2025/2228</guid>
+<content:encoded><![CDATA[
+
+Remote attestation is a fundamental security mechanism for assessing the integrity of remote devices. In practice, widespread adoption of attestation schemes is hindered by a lack of public verifiability and the requirement for interaction in existing protocols. A recent work by Ebrahimi et al. (NDSS'24) constructs publicly verifiable, non-interactive remote attestation, disregarding another important requirement for attesting sensitive systems: privacy protection.
+Similar needs arise in IoT swarms, where many devices, potentially processing sensitive data, should produce a single attestation.
+
+In this paper, we take on both challenges. We present PIRANHAS, a publicly verifiable, asynchronous, and anonymous attestation scheme for individual devices and swarms. We leverage zk-SNARKs to transform any classical, symmetric remote attestation scheme into a non-interactive, publicly verifiable, and anonymous one. Verifiers only ascertain the validity of the attestation, without learning any identifying information about the involved devices.
+
+For IoT swarms, PIRANHAS aggregates attestation proofs for the entire swarm using recursive zk-SNARKs. Our system supports arbitrary network topologies and allows nodes to dynamically join and leave the network. We provide formal security proofs for the single-device and swarm setting, showing that our construction meets the desired security guarantees. Further, we provide an open-source implementation of our scheme using the Noir and Plonky2 framework, achieving an aggregation runtime of just 356ms.
+]]></content:encoded>
+<pubDate>Wed, 10 Dec 2025 14:09:55 +0000</pubDate>
+<pubDate>Wed, 10 Dec 2025 14:09:55 +0000</pubDate>
+</item>
+<item>
+<title>LifeXP+: Secure, Usable and Reliable Key Recovery for Web3 Applications</title>
+<link>https://eprint.iacr.org/2025/2206</link>
+<guid>https://eprint.iacr.org/2025/2206</guid>
+<content:encoded><![CDATA[
+
+In the Web2 world, users control their accounts using credentials such as usernames and passwords, which can be reset or recovered by centralized servers if the user loses them.
+In the decentralized Web3 world however, users control their accounts through cryptographic private-public key pairs which are much more complex to manage securely. In addition, the decentralized nature of Web3 makes account recovery impossible in the absence of predetermined recovery mechanisms. With the proliferation of blockchains and cryptocurrencies over the last years, it is crucial to provide users secure, usable and reliable ways to recover their accounts and assets. However, up to this day, no Web3 recovery method has adequately achieved all three of the above required properties. For instance, conventional ``mnemonic" backups which can deterministically reconstruct a private key require verbatim recall of a fixed word list, creating an unpleasant usability/security trade-off.
+
+In this work, we present a fully-offline protocol called LifeXP$^{+}$, that allows a user to reconstruct a cryptographically-secure private key from a natural-language story, which a user always remembers, such an memorable life event. To ensure usability of our protocol, key reconstruction can work even when the story is later retold with different wording or grammar, only requiring to preserve the semantics.  
+The protocol combines pre-trained sentence embeddings to capture semantics, locality-sensitive hashing to quantize embeddings into stable bit strings, a cryptographic fuzzy extractor that corrects bit errors caused by paraphrasing, and a biometric factor that is fused with the linguistic factor to boost entropy and enhance security. In our paper we describe the design, show that the protocol achieves the required properties, and provide an evaluation based on publicly-available datasets
+which runs completely offline on commodity hardware, showcasing its feasibility.
+]]></content:encoded>
+<pubDate>Sat, 06 Dec 2025 23:39:53 +0000</pubDate>
+<pubDate>Sat, 06 Dec 2025 23:39:53 +0000</pubDate>
+</item>
+<item>
+<title>AgentCrypt: Advancing Privacy and (Secure) Computation in AI Agent Collaboration</title>
+<link>https://eprint.iacr.org/2025/2216</link>
+<guid>https://eprint.iacr.org/2025/2216</guid>
+<content:encoded><![CDATA[
+
+As AI agents increasingly operate in real-world, multi-agent environments, ensuring reliable and context-aware privacy in agent communication is critical, especially to comply with evolving regulatory requirements. Traditional access controls are insufficient, as privacy risks often arise after access is granted; agents may use information in ways that compromise privacy, such as messaging humans, sharing context with other agents, making tool calls, persisting data, or generating derived private information. Existing approaches often treat privacy as a binary constraint, whether data is shareable or not, overlooking nuanced, role-specific, and computation-dependent privacy needs essential for regulatory compliance.
+
+Agents, including those based on large language models, are inherently probabilistic and heuristic. There is no formal guarantee of how an agent will behave for any query, making them ill-suited for operations critical to security. To address this, we introduce AgentCrypt, a four-tiered framework for fine-grained, encrypted agent communication that adds a protection layer atop any AI agent platform. AgentCrypt spans unrestricted data exchange (Level 1) to fully encrypted computation using techniques such as homomorphic encryption (Level 4). Crucially, it guarantees the privacy of tagged data is always maintained, prioritizing privacy above correctness.
+
+AgentCrypt ensures privacy across diverse interactions and enables computation on otherwise inaccessible data, overcoming barriers such as data silos. We implemented and tested it with Langgraph and Google ADK, demonstrating versatility across platforms. We also introduce a benchmark dataset simulating privacy-critical tasks at all privacy levels, enabling systematic evaluation and fostering the development of regulatable machine learning systems for secure agent communication and computation.
+]]></content:encoded>
+<pubDate>Mon, 08 Dec 2025 23:19:57 +0000</pubDate>
+<pubDate>Mon, 08 Dec 2025 23:19:57 +0000</pubDate>
+</item>
+<item>
+<title>Accelerating TFHE with Sorted Bootstrapping Techniques</title>
+<link>https://eprint.iacr.org/2025/2214</link>
+<guid>https://eprint.iacr.org/2025/2214</guid>
+<content:encoded><![CDATA[
+
+Fully Homomorphic Encryption (FHE) enables secure computation over encrypted data, offering a breakthrough in privacy-preserving computing. Despite its promise, the practical deployment of FHE has been hindered by the significant computational overhead, especially in general-purpose bootstrapping schemes. In this work, we build upon the recent advancements of [LY23] to introduce a variant of the functional/programmable bootstrapping. By carefully sorting the steps of the blind rotation, we reduce the overall number of external products without compromising correctness. To further enhance efficiency, we propose a novel modulus-switching technique that increases the likelihood of satisfying pruning conditions, reducing computational overhead. 
+Extensive benchmarks demonstrate that our method achieves a speedup ranging from 1.75x to 8.28x compared to traditional bootstrapping and from 1.26x to 2.14x compared to [LY23] bootstrapping techniques. 
+Moreover, we show that this technique is better adapted to the IND-CPA-D security model by reducing the performance downgrade it implies.
+]]></content:encoded>
+<pubDate>Mon, 08 Dec 2025 16:43:44 +0000</pubDate>
+<pubDate>Mon, 08 Dec 2025 16:43:44 +0000</pubDate>
+</item>
+<item>
+<title>Privacy-Preserving Identifier Checking in 5G</title>
+<link>https://eprint.iacr.org/2025/2200</link>
+<guid>https://eprint.iacr.org/2025/2200</guid>
+<content:encoded><![CDATA[
+
+Device identifiers like the International Mobile Equipment Identity (IMEI) are crucial for ensuring device integrity and meeting regulations in 4G and 5G networks. However, sharing these identifiers with Mobile Network Operators (MNOs) brings significant privacy risks by enabling long-term tracking and linking of user activities across sessions. In this work, we propose a privacy-preserving identifier checking method in 5G. This paper introduces a protocol for verifying device identifiers without exposing them to the network while maintaining the same functions as the 3GPP-defined Equipment Identity Register (EIR) process. The proposed solution modifies the PEPSI protocol [USENIX, 2024] for a Private Set Membership (PSM) setting using the BFV homomorphic encryption scheme. This lets User Equipment (UE) prove that its identifier is not on an operator’s blacklist or greylist while ensuring that the MNO only learns the outcome of the verification. The protocol allows controlled deanonymization through an authorized Law Enforcement (LE) hook, striking a balance between privacy and accountability. Implementation results show that the system can perform online verification within five seconds and requires about 15 to 16 MB of communication per session. This confirms its practical use under post-quantum security standards. The findings highlight the promise of homomorphic encryption for managing identifiers while preserving privacy in 5G, laying the groundwork for scalable and compliant verification systems in future 6G networks.
+]]></content:encoded>
+<pubDate>Fri, 05 Dec 2025 06:43:43 +0000</pubDate>
+<pubDate>Fri, 05 Dec 2025 06:43:43 +0000</pubDate>
+</item>
 
 <item>
 <title>Small-field hash-based SNARGs are less sound than conjectured</title>
