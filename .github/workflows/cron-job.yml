@@ -42,15 +42,29 @@ jobs:
              
       - name: PUSH
         run: |
-          pwd
+          set -euo pipefail
+
           git config --local user.name "github-actions[bot]"
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
-        
+
           git status -s
-          git add docs/*
-          git add README*
+
+          # 1) 先暂存 docs 和 README（-A 会包含删除/重命名等变化，比 docs/* 更可靠）
+          git add -A docs
+          git add README* 2>/dev/null || true
+
+          # 2) 关键：把所有 .log 从暂存区移除（无论它是否已经被 Git 跟踪）
+          git restore --staged docs/*.log docs/**/*.log 2>/dev/null || true
+
+          # 3) 如果排除 .log 后没有任何变更，就正常退出（避免 git commit 失败）
+          if git diff --cached --quiet; then
+            echo "No changes to commit (after excluding *.log)."
+            exit 0
+          fi
+
           export TZ='Europe/London'
-          git commit -m "Auto Build at `date +"%Y-%m-%d %H:%M"`"
-        
+          git commit -m "Auto Build at $(date +'%Y-%m-%d %H:%M')"
+
           echo "======git push===="
           git push
+
