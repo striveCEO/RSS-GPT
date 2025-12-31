@@ -4,6 +4,278 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+<item>
+<title>Streaming Function Secret Sharing and Its Applications</title>
+<link>https://eprint.iacr.org/2025/2304</link>
+<guid>https://eprint.iacr.org/2025/2304</guid>
+<content:encoded><![CDATA[
+
+Collecting statistics from users of software and online services is crucial to improve service quality, yet obtaining such insights while preserving individual privacy remains a challenge. Function secret sharing (FSS) is a promising tool for this problem. However, FSS-based solutions still face several challenges for streaming analytics, where messages are continuously sent, and secure computation tasks are repeatedly performed over incoming messages. 
+We introduce a new cryptographic primitive called streaming function secret sharing (SFSS), a new variant of FSS that is particularly suitable for secure computation over streaming messages. We formalize SFSS and propose concrete constructions, including SFSS for point functions, predicate functions, and feasibility results for generic functions. SFSS powers several promising applications in a simple and modular fashion, including conditional transciphering, policy-hiding aggregation, and attribute-hiding aggregation. In particular, our SFSS formalization and constructions identify security flaws and efficiency bottlenecks in existing solutions, and SFSS-powered solutions achieve the expected security goal with asymptotically and concretely better efficiency and/or enhanced functionality.
+]]></content:encoded>
+<pubDate>Mon, 22 Dec 2025 12:50:16 +0000</pubDate>
+<pubDate>Mon, 22 Dec 2025 12:50:16 +0000</pubDate>
+</item>
+<item>
+<title>Verifiable Aggregate Receipts with Applications to User Engagement Auditing</title>
+<link>https://eprint.iacr.org/2025/2330</link>
+<guid>https://eprint.iacr.org/2025/2330</guid>
+<content:encoded><![CDATA[
+
+Accurate measurements of user engagement underpin important decisions in various settings, such as determining advertising fees based on viewership of online content, allocating public funding based on a clinic’s reported patient volume, or determining whether a group chat app disseminated a message without censorship. 
+While common, self-reporting is inherently untrustworthy due to misaligned incentives (e.g., to inflate).
+
+Motivated by this problem, we introduce the notion of Verifiable Aggregate Receipts (VAR).
+A VAR system allows an issuer to issue receipts to users and to verify the number of receipts possessed by a prover, who is given receipts upon serving users. An ideal VAR system should satisfy inflation soundness (the prover cannot overstate the count), privacy (the verifier learns only the count), and be performant for large-scale applications involving millions of users.
+
+We formalize VAR using an ideal functionality and present two novel constructions.
+Our first protocol, S-VAR, leverages bottom-up secret-sharing to enable tiered ``fuzzy'' audits, and achieves constant-size receipts regardless of the number of supported thresholds. Our second protocol, P-VAR, uses bilinear pairings to aggregate receipts into a proof verifiable in constant time, enables exact auditing, and can be extended to handle a dynamic user set. We prove both constructions secure with respect to our ideal functionality. 
+
+We implement and benchmark our VAR constructions. For a million users, issuance takes less than $2$ seconds for either scheme, and for audit proving time, P-VAR requires less than $10$ seconds and S-VAR requires less than $35$ seconds. 
+Compared to our schemes, baseline and existing solutions are either at least an order of magnitude slower in proving and verification time, or they do not scale to one million users. 
+Our benchmarks demonstrate that our VAR protocols can be used to enable verifiable and privacy-preserving user engagement auditing at scale. Finally, we showcase how VAR can be integrated with the aforementioned applications.
+]]></content:encoded>
+<pubDate>Sun, 28 Dec 2025 16:46:27 +0000</pubDate>
+<pubDate>Sun, 28 Dec 2025 16:46:27 +0000</pubDate>
+</item>
+<item>
+<title>Efficiently Provable Approximations for Non-Polynomial Functions</title>
+<link>https://eprint.iacr.org/2025/2326</link>
+<guid>https://eprint.iacr.org/2025/2326</guid>
+<content:encoded><![CDATA[
+
+Despite phenomenal advancements in the design and implementation of Zero-knowledge proofs (ZKPs) that have made them the preeminent tool for cryptographically ensuring the correctness of a wide range of computations, existing ZK protocols still incur high prover overhead in applications that entail accurately evaluating non-polynomial functions over floating-point numbers such as machine learning, decentralized finance, orbital mechanics, and geolocation. Current state-of-the-art approaches typically emulate floating-point numbers using fixed-point representations (via quantization), and handle non-polynomial functions using lookup tables, piece-wise or low-degree polynomial approximations, which lead to sub-optimal performance and/or loss in accuracy or generality, thus limiting their potential for adoption in practice.
+
+In this work, we present a general framework for approximating a large class of non-polynomial functions using Gauss-Legendre quadrature which also supports efficient ZKPs of correct computation. We show that increasing the desired precision up to the limits imposed by quantization only increases does not increase the multiplicative circuit depth, which stays a small constant ($\leq4$) -- which is the main factor in the error growth of an approximation. We implement and evaluate our approach in Noir/Barretenberg, and we obtain absolute errors $2-256\times$ lower than comparable baselines for most non-polynomial functions with low prover overhead. We also demonstrate an efficient prover and low errors for high-precision applications in DeFi and astronomy that require non-polynomial functions, again obtaining errors $4-64\times$ lower than the baseline approximations.
+]]></content:encoded>
+<pubDate>Fri, 26 Dec 2025 06:13:42 +0000</pubDate>
+<pubDate>Fri, 26 Dec 2025 06:13:42 +0000</pubDate>
+</item>
+<item>
+<title>InstantOMR: Oblivious Message Retrieval with Low Latency and Optimal Parallelizability</title>
+<link>https://eprint.iacr.org/2025/2317</link>
+<guid>https://eprint.iacr.org/2025/2317</guid>
+<content:encoded><![CDATA[
+
+Anonymous messaging systems, such as privacy-preserving blockchains and private messaging applications, need to protect recipient privacy: ensuring no linkage between the recipient and the message. This raises the question: how can untrusted servers assist in delivering the pertinent messages to each recipient, without requiring the recipient to linearly scan all messages or revealing the intended recipient of each message? Oblivious message retrieval (OMR), a recently proposed primitive, addresses this issue by using homomorphic encryption in the single-server setting.
+
+This work introduces $\mathsf{InstantOMR}$, a novel OMR scheme that combines TFHE functional bootstrapping with standard RLWE operations in a hybrid design, achieving significant improvements in both latency and parallelizability compared to prior BFV-based schemes. We propose a two-layer bootstrapping architecture and hybrid use of TFHE and regular RLWE homomorphic operations for $\mathsf{InstantOMR}$. Our implementation, using the $\mathsf{Primus}$-$\mathsf{fhe}$ library (and estimates based on $\mathsf{TFHE}$-$\mathsf{rs}$), demonstrates that $\mathsf{InstantOMR}$ offers the following key advantages:
+
+    - Low latency: $\mathsf{InstantOMR}$ achieves ${\sim} 860\times$ lower latency than $\mathsf{SophOMR}$, the state-of-the-art single-server OMR construction. This translates directly into reduced recipient waiting time (by the same factor) in the streaming setting, where the detector processes incoming messages on-the-fly and returns a digest immediately upon the recipient becoming online.
+
+    - Optimal parallelizability: $\mathsf{InstantOMR}$ scales near-optimally with available CPU cores (by processing messages independently), so for high core counts, it is faster than SophOMR (whose parallelism is constrained by its reliance on BFV).
+]]></content:encoded>
+<pubDate>Tue, 23 Dec 2025 19:00:49 +0000</pubDate>
+<pubDate>Tue, 23 Dec 2025 19:00:49 +0000</pubDate>
+</item>
+<item>
+<title>Making Sense of Private Advertising: A Principled Approach to a Complex Ecosystem</title>
+<link>https://eprint.iacr.org/2025/2316</link>
+<guid>https://eprint.iacr.org/2025/2316</guid>
+<content:encoded><![CDATA[
+
+In this work, we model the end-to-end pipeline of the advertising ecosystem, allowing us to identify two main issues with the current trajectory of private advertising proposals. First, prior work has largely considered ad targeting and engagement metrics individually rather than in composition. This has resulted in privacy notions that, while reasonable for each protocol in isolation, fail to compose to a natural notion of privacy for the ecosystem as a whole, permitting advertisers to extract new information about the audience of their advertisements. The second issue serves to explain the first: we prove that perfect privacy is impossible for any, even minimally, useful advertising ecosystem, due to the advertisers' expectation of conducting market research on the results.
+
+Having demonstrated that leakage is inherent in advertising, we re-examine what privacy could realistically mean in advertising, building on the well-established notion of sensitive data in a specific context.  We identify that fundamentally new approaches are needed when designing privacy-preserving advertising subsystems in order to ensure that the privacy properties of the end-to-end advertising system are well aligned with people's privacy desires.
+]]></content:encoded>
+<pubDate>Tue, 23 Dec 2025 18:41:01 +0000</pubDate>
+<pubDate>Tue, 23 Dec 2025 18:41:01 +0000</pubDate>
+</item>
+<item>
+<title>Registered Attribute-Based Encryption with Publicly Verifiable Certified Deletion, Everlasting Security, and More</title>
+<link>https://eprint.iacr.org/2025/2314</link>
+<guid>https://eprint.iacr.org/2025/2314</guid>
+<content:encoded><![CDATA[
+
+Certified deletion ensures that encrypted data can be irreversibly deleted, preventing future recovery even if decryption keys are later exposed. Although existing works have achieved certified deletion across various cryptographic primitives, they rely on central authorities, leading to inherent escrow vulnerabilities. This raises the question of whether certified deletion can be achieved in decentralized frameworks such as Registered Attribute-Based Encryption (RABE) that combines fine-grained access control with user-controlled key registration. This paper presents the first RABE schemes supporting certified deletion and certified everlasting security. Specifically, we obtain the following: 
+
+- We first design a privately verifiable RABE with Certified Deletion (RABE-CD) scheme by combining our newly proposed shadow registered ABE (Shad-RABE) with one-time symmetric key encryption with certified deletion. 
+
+- We then construct a publicly verifiable RABE-CD scheme using Shad-RABE, witness encryption, and one-shot signatures, allowing any party to validate deletion certificates without accessing secret keys.  
+
+- We also extend to privately verifiable RABE with Certified Everlasting Deletion (RABE-CED) scheme, integrating quantum-secure RABE with the certified everlasting lemma. Once a certificate is produced, message privacy becomes information-theoretic even against unbounded adversaries.  
+
+- We finally realize a publicly verifiable RABE-CED scheme by employing digital signatures for the BB84 states, allowing universal verification while ensuring that deletion irreversibly destroys information relevant to decryption.
+]]></content:encoded>
+<pubDate>Tue, 23 Dec 2025 17:49:11 +0000</pubDate>
+<pubDate>Tue, 23 Dec 2025 17:49:11 +0000</pubDate>
+</item>
+<item>
+<title>Achieving CPAD security for BFV: a pragmatic approach</title>
+<link>https://eprint.iacr.org/2025/2288</link>
+<guid>https://eprint.iacr.org/2025/2288</guid>
+<content:encoded><![CDATA[
+
+Fully Homomorphic Encryption (FHE) aims at ensuring privacy of sensitive data while taking advantage of external computations and services. However, using FHE in real-world scenarios reveals new kinds of security issues. In particular, following Li&amp;Micciancio Eurocrypt'21 seminal paper, CPAD security has emerged as a fundamental notion for FHE, unveiling a subtle interplay between security and correctness. For correct (F)HE schemes, CPA security already implies CPAD. However, all known practical FHE schemes are (R)LWE-based and, as such, are prone to decryption errors; and even if it is possible to ensure statistical correctness by selecting appropriate parameters, achieving this while maintaining malleability --- the mainspring of FHE --- still remains challenging.  Moreover, practical CPAD attacks have recently been designed against most known FHE schemes. We propose in this paper a complete, simple and rigorous framework to reach CPAD security for one of them, BFV.
+Our approach relies on a combination of alternate average-case/worst-case noise variance monitoring --- based on dependencies tracking during the homomorphic calculations --- and on smudging. It comes with an automated parameters setting methodology, which connects it to the recently proposed Application-Aware HE paradigm while relieving libraries end-users from the burden of enforcing the paradigm's constraints by hand.
+]]></content:encoded>
+<pubDate>Fri, 19 Dec 2025 16:46:40 +0000</pubDate>
+<pubDate>Fri, 19 Dec 2025 16:46:40 +0000</pubDate>
+</item>
+<item>
+<title>Succinct Garbled Circuits with Low-Depth Garbling Algorithms</title>
+<link>https://eprint.iacr.org/2025/2308</link>
+<guid>https://eprint.iacr.org/2025/2308</guid>
+<content:encoded><![CDATA[
+
+We study the problem of constructing Boolean garbling schemes that are both succinct$-$with garbled circuit size significantly smaller than the original circuit$-$and have low-depth garbling algorithms, where the garbling process runs in parallel time logarithmic in the circuit size. Prior schemes achieve one but not the other, unless relying on indistinguishability obfuscation ($\mathsf{iO}$), which is prohibitively inefficient, relies on a combination of multiple assumptions, and achieves only polynomial garbling depth $\mathsf{poly}(\lambda,\log |C|)$.  
+
+We resolve this tension by presenting the first garbling schemes that are both succinct and admit garbling algorithms in $\mathsf{NC}^1$, based only on standard group and lattice assumptions. Our main results include:
+    • $\textbf{One-bit-per-gate garbling}$ with logarithmic garbling depth based on DDH or RLWE and the existence of a local PRG.
+    • $\textbf{Succinct privacy-free garbling}$ of size linear in the circuit depth $D$ (and sublinear in the circuit size $|C|$), based on DDH or RLWE.
+    • $\textbf{Reusable, fully succinct garbling}$ with logarithmic garbling depth, based on decomposable LWE.  
+
+The DDH-based one-bit-per-gate scheme has tunably small inverse polynomial correctness and privacy errors, which can be made negligible at the cost of increasing garbling depth to $\mathsf{poly}(\lambda)$. 
+
+As further extension, we also obtain the first attribute-based encryption schemes with succinct keys and low-depth key generation. 
+
+At a conceptual level, our constructions are derived from a unified framework that subsumes all prior approaches to succinct garbling. It identifies the common source of high-depth garbling, and provides a general methodology for reducing garbling depth without sacrificing succinctness, applicable across different techniques and assumptions.
+]]></content:encoded>
+<pubDate>Tue, 23 Dec 2025 01:20:59 +0000</pubDate>
+<pubDate>Tue, 23 Dec 2025 01:20:59 +0000</pubDate>
+</item>
+<item>
+<title>FRIVail: A Data Availability Scheme based on FRI Binius</title>
+<link>https://eprint.iacr.org/2025/2292</link>
+<guid>https://eprint.iacr.org/2025/2292</guid>
+<content:encoded><![CDATA[
+
+Data Availability Sampling (DAS) has emerged as a key scalability technique for blockchain systems, enabling light clients to verify that block data have been fully published without downloading them in their entirety. We introduce FRIVail, a new DAS construction built on top of the FRI-Binius polynomial commitment scheme, designed for datasets composed of many independent single-row payloads that together form a block’s data blob. FRIVail exploits the intrinsic Reed–Solomon structure of FRI, wherein each commitment naturally encodes a codeword that light clients can sample directly.
+
+Each row of the blob is assigned an independent FRI proof. These row-level proofs are then combined into a global availability certificate using one of three aggregation strategies. The first constructs a succinct zero-knowledge proof attesting to the correct verification of all row-level FRI proofs, yielding a compact ZK proof of proofs that enables succinct global verification while preserving row independence. The second is a fully post-quantum construction that recursively applies FRI-Binius to build a proof of proofs. In this setting, global verification relies on FRI proximity checks, but reconstruction of the aggregated proof polynomial is required to recover embedded row-level information. The third is a hybrid aggregation based on KZG polynomial commitments, where the aggregated polynomial admits direct algebraic openings but relies on pairing-based assumptions and a trusted setup, and is therefore not post-quantum.
+
+In all variants, light clients verify availability via a small number of local opening checks against the header commitment, without downloading entire rows or the full blob. We formalize DAS security in this multi-row, multi-proof setting and show that FRIVail achieves sublinear verification complexity, robustness against adversarial availability equivocation at the row level, and resistance to correlated sampling attacks. FRIVail provides a modular foundation for next-generation blockchain data availability protocols, supporting zero-knowledge-based, fully post-quantum, and hybrid cryptographic deployments.
+]]></content:encoded>
+<pubDate>Fri, 19 Dec 2025 18:46:40 +0000</pubDate>
+<pubDate>Fri, 19 Dec 2025 18:46:40 +0000</pubDate>
+</item>
+<item>
+<title>On Delegation of Verifiable Presentations from mdoc and BBS Credentials</title>
+<link>https://eprint.iacr.org/2025/2306</link>
+<guid>https://eprint.iacr.org/2025/2306</guid>
+<content:encoded><![CDATA[
+
+The interest in verifiable credential systems has gained traction as eIDAS 2.0 Regulation has been published. This regulation instructs EU member states to provide their citizens with digital identity wallets (EUDI Wallet) that must store the credentials and enable privacy-preserving presentation of identity information to relying parties. This new digital identity system requires defining new protocols and procedures to perform tasks involving the disclosure of identity information. One of such procedures is the delegation of attestation, as is reported in the EUDI Wallet Reference Implementation Roadmap.
+
+In this work, we address the problem of constructing secure processes for the delegation of verifiable presentations derived from both verifiable and anonymous credentials. Our goal is to enable a credential holder (the delegator) to securely delegate another party (the delegatee) to present a credential on their behalf.
+We introduce the notion of a verifiable presentation delegation scheme, formalizing the core algorithms, namely delegation issuance, delegated presentation, and presentation verification, and defining the relevant security properties that such a scheme should satisfy: the correctness, the unforgeability, and, when the scheme is built on top of anonymous credentials, even the unlinkability. We present two concrete instantiations of delegation schemes: the first is built on top of mdoc verifiable credentials, the credential format currently supported by the EUDI Wallet Architecture and Reference Framework (EUDI ARF), while the second is built on top of BBS anonymous credentials. Finally, we discuss and analyze the security of our constructions in terms of the security properties we have introduced.
+]]></content:encoded>
+<pubDate>Mon, 22 Dec 2025 19:44:57 +0000</pubDate>
+<pubDate>Mon, 22 Dec 2025 19:44:57 +0000</pubDate>
+</item>
+<item>
+<title>Attacking and Securing Hybrid Homomorphic Encryption Against Power Analysis</title>
+<link>https://eprint.iacr.org/2025/2302</link>
+<guid>https://eprint.iacr.org/2025/2302</guid>
+<content:encoded><![CDATA[
+
+We present the first power side-channel analysis of a Hybrid Homomorphic Encryption (HHE) tailored symmetric encryption scheme. HHE combines lightweight client-side Symmetric Encryption (SE) with server-side homomorphic evaluation, enabling efficient privacy-preserving computation for the client and minimizing the communication overhead. Recent integer-based HHE designs such as PASTA, MASTA, HERA, and Rubato rely on prime-field arithmetic, but their side-channel security has
+not been studied. This gap is critical, as modular arithmetic and large key spaces in integer-based schemes introduce new leakage vectors distinct from those in conventional Boolean symmetric ciphers. In this work, we close this gap by presenting the first power side-channel analysis of an HHE-tailored scheme - HERA.
+
+Our results demonstrate a successful key recovery from as few as 40 power traces using Correlation Power Analysis. In addition to showing that such attacks are feasible, we develop the first masking framework for integer-based SE schemes to mitigate them. Our design integrates PINI-secure gadgets with assembly-level countermeasures to address transition leakage, and we validate its effectiveness using the Test Vector Leakage
+Assessment. Our experiments confirm both the practicality of the attack and the strength of the proposed countermeasures. We also demonstrate that the framework extends to other integer-based HHE schemes, by applying our technique to PASTA. Thus, we provide leakage models, identify relevant attack targets, and define evaluation benchmarks for integer-based HHE-tailored SE schemes, thereby filling a longstanding gap and laying the foundation for side-channel-resilient design in this area.
+]]></content:encoded>
+<pubDate>Mon, 22 Dec 2025 09:44:28 +0000</pubDate>
+<pubDate>Mon, 22 Dec 2025 09:44:28 +0000</pubDate>
+</item>
+<item>
+<title>SoK: Verifiable Federated Learning</title>
+<link>https://eprint.iacr.org/2025/2296</link>
+<guid>https://eprint.iacr.org/2025/2296</guid>
+<content:encoded><![CDATA[
+
+Federated Learning (FL) is an advancement in Machine Learning motivated by the need to preserve the privacy of the data used to train models. While it effectively addresses this issue, the multi-participant paradigm on which it is based introduces several challenges. Among these are the risks that participating entities may behave dishonestly and fail to perform their tasks correctly. Moreover, due to the distributed nature of the architecture, attacks such as Sybil and collusion are possible. Recently, with advances in Verifiable Computation (VC) and Zero-Knowledge Proofs (ZKP), researchers have begun exploring how to apply these technologies to Federated Learning aiming to mitigate such problems. In this Systematization of Knowledge, we analyze the first, very recent works that attempt to integrate verifiability features into classical FL tasks, comparing their approaches and highlighting what is achievable with the current state of VC methods.
+]]></content:encoded>
+<pubDate>Sat, 20 Dec 2025 17:32:16 +0000</pubDate>
+<pubDate>Sat, 20 Dec 2025 17:32:16 +0000</pubDate>
+</item>
+<item>
+<title>MIOPE: A Modular framework for Input and Output Privacy in Ensemble inference</title>
+<link>https://eprint.iacr.org/2025/2287</link>
+<guid>https://eprint.iacr.org/2025/2287</guid>
+<content:encoded><![CDATA[
+
+We introduce a simple yet novel framework for privacy-preserving machine learning inference that allows a client to query multiple models without a trusted third party aggregator by leveraging homomorphically encrypted model evaluation and multi-party computation. This setting allows for dispersed training of models such that a client can query each separately, and aggregate the results of this `ensemble inference'; this avoids the data leakage inherent to techniques that train collectively such as federated learning. Our framework, which we call MIOPE, allows the data providers to keep the training phase local to provide tighter control over these models, and additionally provides the benefit of easily retraining to improve inference of the ensemble. MIOPE uses homomorphic encryption to keep the querying client's data private and multi-party computation to hide the individual model outputs. We illustrate the design and trade-offs of input- and output-hiding ensemble inference as provided by MIOPE and compare performance to a centralized approach.We evaluate our approach with a standard dataset and various regression models and observe that the MIOPE framework can lead to accuracy scores that are only marginally lower than centralized learning. The modular design of our approach allows the system to adapt to new data, better models, or security requirements of the involved parties.
+]]></content:encoded>
+<pubDate>Fri, 19 Dec 2025 14:38:42 +0000</pubDate>
+<pubDate>Fri, 19 Dec 2025 14:38:42 +0000</pubDate>
+</item>
+<item>
+<title>Improving the Efficiency of zkSNARKs for Ballot Validity</title>
+<link>https://eprint.iacr.org/2025/2286</link>
+<guid>https://eprint.iacr.org/2025/2286</guid>
+<content:encoded><![CDATA[
+
+Homomorphic tallying in secure e-voting protocols enables privacy-preserving vote aggregation. For this approach, zero-knowledge proofs (ZKPs) for ensuring the validity of encrypted ballots are an essential component.
+
+While it has been common to construct tailored ZKPs for every kind of ballot and voting method at hand, recently Huber et al. demonstrated that also general-purpose ZKPs (GPZKPs), such as Groth16 zkSNARKs, are suited for checking ballot validity. Unlike tailored solutions, GPZKPs provide a unified, generic, and flexible framework for this task. In this work, we improve on the initial GPZKPs for ballot validity proposed by Huber et al. Specifically, we present several circuit-level optimizations that significantly reduce proving costs for exponential ElGamal-encrypted ballots. We provide an independent, ready-to-use Circom implementation along with concrete benchmarks, demonstrating substantial improvements in performance and practical usability over prior implementations.
+]]></content:encoded>
+<pubDate>Fri, 19 Dec 2025 10:03:40 +0000</pubDate>
+<pubDate>Fri, 19 Dec 2025 10:03:40 +0000</pubDate>
+</item>
+<item>
+<title>Laminate: Succinct SIMD-Friendly Verifiable FHE</title>
+<link>https://eprint.iacr.org/2025/2285</link>
+<guid>https://eprint.iacr.org/2025/2285</guid>
+<content:encoded><![CDATA[
+
+In outsourcing computation to untrusted servers, one can cryptographically ensure privacy using Fully Homomorphic Encryption (FHE) or ensure integrity using Verifiable Computation (VC) such as SNARK proofs. While each is practical for some applications in isolation, efficiently composing FHE and VC into Verifiable Computing on Encrypted Data (VCoED) remains an open problem. 
+
+We introduce Laminate, the first practical method for adding integrity to BGV-style FHE, thereby achieving VCoED. Our approach combines the blind interactive proof framework with a tailored variant of the GKR proof system that avoids committing to intermediate computation states. We further introduce variants employing transcript packing and folding techniques. The resulting encrypted proofs are concretely succinct: 270kB, compared to 1TB in prior work, to evaluate a batch of $B=2^{14}$ instances of size $n=2^{20}$ and depth $d=32$. Asymptotically, the proof size and verifier work is $O(d \log (Bn))$, compared to $\Omega(BN\log n)$ in prior work (for ring dimension $N$).
+
+Unlike prior schemes, Laminate utilizes the full SIMD capabilities of FHE for both the payload circuit evaluation and proof generation; adds only constant multiplicative depth on top of payload evaluation while performing $\tilde{O}(n)$ FHE operations; eliminates the need for witness reduction; and is field-agnostic. The resulting cost of adding integrity to FHE, compared to assuming honest evaluation, is ${\sim}12\times$ to ${\sim}36\times$ overhead (for deep multiplication-heavy circuits of size $2^{20}$), which is $>500\times$ faster than the state-of-the-art.
+]]></content:encoded>
+<pubDate>Fri, 19 Dec 2025 06:47:36 +0000</pubDate>
+<pubDate>Fri, 19 Dec 2025 06:47:36 +0000</pubDate>
+</item>
+<item>
+<title>E2E-AKMA: An End-to-End Secure and Privacy-Enhancing AKMA Protocol Against the Anchor Function Compromise</title>
+<link>https://eprint.iacr.org/2025/2276</link>
+<guid>https://eprint.iacr.org/2025/2276</guid>
+<content:encoded><![CDATA[
+
+The Authentication and Key Management for Applications (AKMA) system represents a recently developed protocol established by 3GPP, which is anticipated to become a pivotal component of the 5G standards. AKMA enables application service providers to delegate user authentication processes to mobile network operators, thereby eliminating the need for these providers to store and manage authentication-related data themselves. This delegation enhances the efficiency of authentication procedures but simultaneously introduces certain security and privacy challenges that warrant thorough analysis and mitigation.
+
+The 5G AKMA service is facilitated by the AKMA Anchor Function (AAnF), which may operate outside the boundaries of the 5G core network. A compromise of the AAnF could potentially allow malicious actors to exploit vulnerabilities, enabling them to monitor user login activities or gain unauthorized access to sensitive communication content. Furthermore, the exposure of the Subscription Permanent Identifier (SUPI) to external Application Functions poses substantial privacy risks, as the SUPI could be utilized to correlate a user's real-world identity with their online activities, thereby undermining user privacy.
+
+To mitigate these vulnerabilities, we propose a novel protocol named E2E-AKMA, which facilitates the establishment of a session key between the User Equipment (UE) and the Application Function (AF) with end-to-end security, even in scenarios where the AAnF has been compromised. Furthermore, the protocol ensures that no entity, aside from the 5G core network, can link account activities to the user's actual identity. This architecture preserves the advantages of the existing AKMA scheme, such as eliminating the need for complex dynamic secret data management and avoiding reliance on specialized hardware (apart from standard SIM cards). Experimental evaluations reveal that the E2E-AKMA framework incurs an overhead of approximately 9.4\% in comparison to the original 5G AKMA scheme, which indicates its potential efficiency and practicality for deployment.
+]]></content:encoded>
+<pubDate>Thu, 18 Dec 2025 06:38:49 +0000</pubDate>
+<pubDate>Thu, 18 Dec 2025 06:38:49 +0000</pubDate>
+</item>
+<item>
+<title>An Efficient Private GPT Never Autoregressively Decodes</title>
+<link>https://eprint.iacr.org/2025/2251</link>
+<guid>https://eprint.iacr.org/2025/2251</guid>
+<content:encoded><![CDATA[
+
+The wide deployment of the generative pre-trained transformer (GPT) has raised privacy concerns for both clients and servers. While cryptographic primitives can be employed for secure GPT inference to protect the privacy of both parties, they introduce considerable performance overhead. To accelerate secure inference, this study proposes a public decoding and secure verification approach that utilizes public GPT models, motivated by the observation that securely decoding one and multiple tokens takes a similar latency. The client uses the public model to generate a set of tokens, which are then securely verified by the private model for acceptance. The efficiency of our approach depends on the acceptance ratio of tokens proposed by the public model, which we improve from two aspects: (1) a private sampling protocol optimized for cryptographic primitives and (2) model alignment using knowledge distillation. Our approach improves the efficiency of secure decoding while maintaining the same level of privacy and generation quality as standard secure decoding. Experiments demonstrate a $2.1\times \sim 6.0\times$ speedup compared to standard decoding across three pairs of public-private models and different network conditions.
+]]></content:encoded>
+<pubDate>Mon, 15 Dec 2025 03:33:17 +0000</pubDate>
+<pubDate>Mon, 15 Dec 2025 03:33:17 +0000</pubDate>
+</item>
+<item>
+<title>Nimbus: Secure and Efficient Two-Party Inference for Transformers</title>
+<link>https://eprint.iacr.org/2025/2250</link>
+<guid>https://eprint.iacr.org/2025/2250</guid>
+<content:encoded><![CDATA[
+
+Transformer models have gained significant attention due to their power in machine learning tasks. Their extensive deployment has raised concerns about the potential leakage of sensitive information during inference. However, when being applied to Transformers, existing approaches based on secure two-party computation (2PC) bring about efficiency limitations in two folds: (1) resource-intensive matrix multiplications in linear layers, and (2) complex non-linear activation functions like $\mathsf{GELU}$ and $\mathsf{Softmax}$. This work presents a new two-party inference framework $\mathsf{Nimbus}$ for Transformer models. For the linear layer, we propose a new 2PC paradigm along with an encoding approach to securely compute matrix multiplications based on an outer-product insight, which achieves $2.9\times \sim 12.5\times$ performance improvements compared to the state-of-the-art (SOTA) protocol. For the non-linear layer, through a new observation of utilizing the input distribution, we propose an approach of low-degree polynomial approximation for $\mathsf{GELU}$ and $\mathsf{Softmax}$, which improves the performance of the SOTA polynomial approximation by $2.9\times \sim 4.0\times$, where the average accuracy loss of our approach is 0.08\% compared to the non-2PC inference without privacy. Compared with the SOTA two-party inference, $\mathsf{Nimbus}$ improves the end-to-end performance of BERT inference by $2.7\times \sim 4.7\times$ across different network settings.
+]]></content:encoded>
+<pubDate>Mon, 15 Dec 2025 03:27:20 +0000</pubDate>
+<pubDate>Mon, 15 Dec 2025 03:27:20 +0000</pubDate>
+</item>
+<item>
+<title>HHGS:  Forward-secure Dynamic Group Signatures from Symmetric Primitives</title>
+<link>https://eprint.iacr.org/2025/2270</link>
+<guid>https://eprint.iacr.org/2025/2270</guid>
+<content:encoded><![CDATA[
+
+Group signatures allow a group member to sign messages on behalf of the group while preserving the signer’s anonymity, making them invaluable for privacy-sensitive applications. As quantum computing advances, post-quantum security in group signatures becomes essential. Symmetric primitives (SP) offer a promising pathway due to their simplicity, efficiency, and well-understood security foundations. In this paper, we introduce the first \textit{forward-secure dynamic group signature} (FSDGS) framework relying solely on SP. We begin with \textit{hierarchical hypertree group signatures} (HHGS), a basic scheme that securely organizes keys of one-time signatures (OTS) in a hypertree using puncturable pseudorandom functions to enable on-demand key generation and forward security, dynamic enrollment, and which provides resilience against attacks that exploit registration patterns by obfuscating the assignment and usage of keys. We then extend this foundation to HHGS^+, which orchestrates multiple HHGS instances in a generic way, significantly extending the total signing capacity to $O(2^{60})$, which outperforms HHGS's closest competitors while keeping signatures below 8 kilobytes. We prove the security of both schemes in the standard model. Our results outline a practical SP-driven pathway toward post-quantum-secure group signatures suitable for resource-constrained client devices.
+]]></content:encoded>
+<pubDate>Thu, 18 Dec 2025 02:00:26 +0000</pubDate>
+<pubDate>Thu, 18 Dec 2025 02:00:26 +0000</pubDate>
+</item>
 
 <item>
 <title>Distributed Broadcast Encryption for Confidential Interoperability across Private Blockchains</title>
