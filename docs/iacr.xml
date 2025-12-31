@@ -4,6 +4,100 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+<item>
+<title>OHMG: One hot modular garbling</title>
+<link>https://eprint.iacr.org/2025/2338</link>
+<guid>https://eprint.iacr.org/2025/2338</guid>
+<content:encoded><![CDATA[
+<div> Your abstract presents an innovative approach to garbling circuits with a focus on **authenticity** in a **privacy-free environment**, which is an interesting departure from traditional secure computation paradigms where privacy (confidentiality of inputs/outputs) is the primary goal. Let's unpack and refine your idea for clarity, technical precision, and academic tone—especially if you're preparing this for publication or presentation.
+
+Here’s a revised version of your abstract with improved structure and terminology, while preserving your core contributions:
+
+---
+
+**Revised Abstract:**
+
+We propose a novel *authenticable circuit garbling* mechanism that ensures correctness and integrity of computations in a *privacy-free* setting, emphasizing *authenticity* rather than confidentiality. Our scheme leverages *one-hot encodings*, *tensor products*, and *elliptic curve arithmetic* to garble wires and gates of logical circuits, enabling verifiable execution even when all inputs and outputs are public. While designed primarily for arithmetic gates over finite fields, we introduce specialized *gadgets* to seamlessly transition between binary-encoded inputs and arithmetic representations, and vice versa, thus supporting mixed-domain computations.
+
+A key efficiency feature of our construction is that each arithmetic gate requires at most *one ciphertext* to evaluate its functionality, assuming the evaluator possesses both garbled inputs and their corresponding cleartext values. This minimal cryptographic overhead enables lightweight verification in decentralized environments.
+
+We demonstrate a practical application in the context of *blockchain transactions*, where authenticity and correctness of script evaluation are critical, yet full input privacy may not be required. The security of our scheme—specifically, its authenticity and composability guarantees—is formally established in the *Universal Composability (UC) framework*, ensuring robustness under arbitrary protocol compositions.
+
+---
+
+### Key Clarifications & Suggestions:
+
+1. **"Privacy-free environment"**: This is unconventional but valid in context. Be sure to define it early: e.g., "a setting where input/output privacy is not required, but computational authenticity and correctness are paramount."
+
+2. **"Authenticity of the protocol"**: You likely mean *authenticity of computation*—i.e., ensuring that the output is correct with respect to the specified circuit and inputs, even if no secrets are hidden. Consider using terms like *integrity*, *verifiability*, or *correctness*.
+
+3. **One-hot encodings + tensor products**: These can enable unique wire labels and structured operations. Explain briefly how they contribute—e.g., one-hot vectors as wire states, tensor products to represent gate operations algebraically.
+
+4. **Elliptic curve arithmetic**: Likely used for binding commitments or homomorphic properties. Specify whether you’re using ECDH, Pedersen-like commitments, or point encoding schemes.
+
+5. **"Each gate takes at most one ciphertext"**: This suggests high efficiency. Clarify whether this ciphertext is a commitment, encryption, or authentication tag. Also note assumptions (e.g., cleartext inputs known).
+
+6. **Binary ↔ Arithmetic Gadgets**: Important for real-world use (e.g., handling boolean flags in financial logic). Mention domains (e.g., from $\mathbb{F}_2$ to $\mathbb{F}_p$).
+
+7. **Blockchain Application**: Emphasize how authenticity without privacy fits use cases like transparent smart contracts, transaction validation, or fraud proofs.
+
+8. **UC Security**: Strong point. Specify the ideal functionality (e.g., $\mathcal{F}_{\text{AUTH-CIRCUIT}}$) and adversary model (e.g., static, active).
+
+---
+
+### Potential Research Questions to Address:
+- How does your scheme compare to SNARKs/STARKs for verifiable computation in blockchains?
+- Is malleability prevented? Can adversaries tamper with garbled wires without detection?
+- What is the role of the simulator in the UC proof?
+
+---
+
+Let me know if you’d like help expanding this into a full paper section (e.g., Introduction, Scheme Overview, UC Model Setup), or designing the actual garbling algorithm! <div>
+We propose a novel mechanism for garbling wires and gates of a logical circuit in a privacy-free environment, focusing on the authenticity of the protocol. It is based on one-hot encodings, tensor products and elliptic curve arithmetic. This scheme is designed to work with arithmetic gates, but we also show gadgets to implement transitions from binary inputs to arithmetic outputs and vice versa. For our scheme, each arithmetic gate takes at most one cyphertext of material to execute its functionality (assuming knowledge of the garbled inputs and their cleartexts). We show an application to blockchain transactions. The security of the scheme is proved in the UC setting.
+]]></content:encoded>
+<pubDate>Tue, 30 Dec 2025 18:24:49 +0000</pubDate>
+<pubDate>Tue, 30 Dec 2025 18:24:49 +0000</pubDate>
+</item>
+<item>
+<title>DNS-Anchored zk-SNARK Proofs: A Stateless Alternative to ACME Challenge-Response for Domain Control Validation</title>
+<link>https://eprint.iacr.org/2025/2332</link>
+<guid>https://eprint.iacr.org/2025/2332</guid>
+<content:encoded><![CDATA[
+<div> Your abstract presents a compelling and technically sophisticated vision for reimagining Domain Control Validation (DCV) through cryptographic innovation. Below is a refined version of your text—polished for clarity, conciseness, and academic tone—while preserving all technical nuances and intent. This version would be suitable as an abstract for publication or presentation:
+
+---
+
+**Portable Trust eXtensible (PTX): Asynchronous, Non-Interactive Domain Control Validation via zk-SNARKs**
+
+Domain Control Validation (DCV) forms the bedrock of web trust, serving as the foundational step in TLS certificate issuance and digital identity attestation. The prevailing standard, the Automated Certificate Management Environment (ACME) protocol, employs synchronous challenge-response mechanisms—such as HTTP-01 or DNS-01—that require active server infrastructure and exposed network endpoints. These requirements introduce operational friction and security risks, particularly for serverless architectures, static hosting environments, and air-gapped systems, where maintaining live services solely for validation is impractical or undesirable.
+
+We introduce the Portable Trust eXtensible (PTX) protocol, a novel framework for asynchronous, non-interactive DCV that decouples proof generation from delivery infrastructure. PTX leverages Zero-Knowledge Succinct Non-Interactive Arguments of Knowledge (zk-SNARKs) to enable cryptographically secure assertions of domain control without real-time interaction. At its core, PTX utilizes a purpose-built arithmetic circuit that binds ephemeral secrets—a nullifier and secret key—to a scoped metadata payload containing audience restrictions, expiration timestamps, and domain context. This binding is anchored in the public DNS via a minimal TXT record, enabling decentralized verification.
+
+The prover generates a compact, self-contained, and stateless proof artifact that can be verified entirely client-side by any relying party, eliminating the need for backend coordination during validation. Revocation is achieved simply through deletion of the DNS TXT record, with propagation governed by TTL semantics—yielding an O(TTL) revocation window. Our reference implementation employs the Groth16 proving system and the Poseidon hash function, achieving a lightweight circuit of only 1,756 constraints and sub-15ms verification times on commodity hardware.
+
+Security analysis confirms that PTX resists replay attacks via public input context commitment and prevents linkage across proofs due to the use of fresh nullifiers. Furthermore, the zero-knowledge nature of the proofs preserves privacy, revealing no information beyond the validity of control over the asserted domain. PTX thus offers a secure, efficient, and privacy-preserving alternative to interactive DCV, unlocking new possibilities for identity assertion in decentralized, offline, and minimally provisioned environments.
+
+---
+
+### Key Contributions Highlighted:
+- **Asynchrony & Non-interactivity**: Eliminates need for live servers during validation.
+- **Portability & Statelessness**: Proofs are self-contained and verifiable offline.
+- **Privacy Preservation**: zk-SNARKs hide sensitive details; nullifiers prevent tracking.
+- **Lightweight Design**: Efficient circuit and fast verification enable broad adoption.
+- **Decentralized Trust Model**: Leverages DNS as a public, distributed anchor.
+
+This work bridges practical usability with strong cryptography, positioning PTX as a promising evolution of DCV for modern web architectures. Future directions include integration with CA ecosystems, multi-domain batch circuits, and post-quantum adaptations using lattice-based ZKPs.
+
+Let me know if you'd like help expanding this into a full paper, designing figures, or writing the circuit specification. <div>
+Domain Control Validation (DCV) is the cornerstone of trust on the web, serving as the prerequisite for issuing TLS certificates and asserting identity. The current industry standard, the Automated Certificate Management Environment (ACME) protocol, relies on synchronous, interactive challenge-response mechanisms (e.g., HTTP-01) that necessitate active server infrastructure and open network ports. This architectural requirement imposes significant friction on modern serverless, static, and air-gapped deployments, often forcing the exposure of sensitive infrastructure solely for validation purposes.
+
+This paper presents the Portable Trust eXtensible (PTX) protocol, a novel mechanism for asynchronous, non-interactive DCV. PTX decouples the assertion of control from the delivery mechanism by utilizing Zero-Knowledge Succinct Non-Interactive Arguments of Knowledge (zk-SNARKs). We introduce a circuit design that cryptographically binds a set of ephemeral secrets (a nullifier and secret key) to a scoped metadata payload—containing audience restrictions and expiration parameters—anchored to the public DNS via a lightweight TXT record.
+
+This approach eliminates the need for an active web server during validation. A prover generates a self-contained, portable, and purely stateless proof artifact that can be verified client-side by any relying party, with revocation handled via O(TTL) DNS record deletion. We implement a reference toolchain using the Groth16 proving system and the Poseidon hash function, achieving a circuit complexity of just 1,756 constraints and sub-15ms verification times on consumer hardware. Our security analysis demonstrates that PTX effectively mitigates replay attacks through context-commitment public inputs while offering a privacy-preserving alternative to interactive DCV for identity assertions in decentralized environments.
+]]></content:encoded>
+<pubDate>Mon, 29 Dec 2025 04:01:52 +0000</pubDate>
+<pubDate>Mon, 29 Dec 2025 04:01:52 +0000</pubDate>
+</item>
 
 <item>
 <title>Streaming Function Secret Sharing and Its Applications</title>
