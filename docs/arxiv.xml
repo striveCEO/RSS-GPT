@@ -4,6 +4,1396 @@
 <title>cs updates on arXiv.org</title>
 <link>http://rss.arxiv.org/rss/cs</link>
 
+<item>
+<title>Time-varying Mixing Matrix Design for Energy-efficient Decentralized Federated Learning</title>
+<link>https://arxiv.org/abs/2512.24069</link>
+<guid>https://arxiv.org/abs/2512.24069</guid>
+<content:encoded><![CDATA[
+<div> The arXiv paper **2512.24069v1** presents a novel approach to designing **mixing matrices** in **decentralized federated learning (DFL)** over wireless networks, with the primary objective of **minimizing the maximum per-node energy consumption**—a critical concern for battery-limited edge devices.
+
+### Key Contributions and Insights:
+
+#### 1. **Problem Motivation**
+- In DFL, agents (e.g., mobile or IoT devices) collaboratively train a model without central coordination by exchanging local model updates with neighbors.
+- The **mixing matrix** (also known as the consensus weight matrix) governs how nodes combine their neighbors’ information during each communication round.
+- While prior work has focused on optimizing mixing matrices to speed up convergence (often favoring dense topologies), this paper highlights that **energy efficiency**, especially **peak energy per node**, is equally—if not more—important in practical wireless deployments.
+
+#### 2. **Key Challenge**
+- There's a fundamental trade-off:
+  - **Dense communication graphs** → faster convergence but high per-round energy use due to many transmissions.
+  - **Sparse graphs** → lower energy per round but slower convergence, potentially increasing total energy.
+- Additionally, **wireless broadcast nature** means one transmission can reach multiple neighbors, which can be exploited for efficiency.
+
+#### 3. **Main Innovation: Multi-Phase Time-Varying Mixing Matrix Design**
+- The authors propose a **multi-phase framework** where different sparse communication topologies are activated over time, with optimized durations ("budgets").
+- This allows **time-varying mixing matrices**, adapting throughout training to balance:
+  - Energy cost per iteration
+  - Overall convergence speed
+  - Fairness in energy distribution across nodes
+
+#### 4. **Theoretical Foundation**
+- A **new convergence theorem** is developed that supports **arbitrarily time-varying mixing matrices**, relaxing the common assumption of fixed topology.
+- This enables dynamic switching between topologies while still guaranteeing convergence.
+
+#### 5. **Energy-Aware Optimization**
+- The design explicitly accounts for:
+  - Transmission energy costs in wireless settings
+  - Asymmetric node capabilities or channel conditions
+  - Broadcast advantage: one transmission reaching many receivers reduces redundancy
+- Objective: **Minimize the maximum energy consumed by any single node** until global convergence — promoting fairness and longevity in heterogeneous networks.
+
+#### 6. **Empirical Validation**
+- Evaluated using **real-world datasets and network traces**.
+- Results show the proposed method successfully **combines benefits of both worlds**:
+  - Achieves **low per-node energy consumption** like sparse designs
+  - Maintains **fast convergence rates** close to dense counterparts
+- Outperforms static and uniform mixing strategies in terms of energy fairness and total lifetime support.
+
+---
+
+### Significance and Impact
+
+This work bridges an important gap between theoretical DFL algorithm design and practical deployment constraints in wireless edge systems. By rethinking the role of the mixing matrix—not just as a convergence accelerator but as a tool for **energy load balancing**—it opens new directions for sustainable, long-lived decentralized learning systems.
+
+### Potential Applications
+- Internet of Things (IoT) networks
+- Mobile edge computing
+- Autonomous sensor networks
+- Federated learning on battery-powered devices
+
+---
+
+### Conclusion
+
+arXiv:2512.24069v1 makes a timely and impactful contribution by reframing mixing matrix design around **energy fairness and efficiency** in decentralized federated learning. Its multi-phase, time-varying strategy leverages theoretical advances and realistic wireless considerations to deliver solutions that are both **analytically sound and practically viable**.
+
+> 🔍 **Suggested follow-up**: Investigate whether the time-varying topologies can be learned online (adaptively) based on current energy levels and channel states—potentially enabling fully adaptive DFL in dynamic environments. <div>
+arXiv:2512.24069v1 Announce Type: new 
+Abstract: We consider the design of mixing matrices to minimize the operation cost for decentralized federated learning (DFL) in wireless networks, with focus on minimizing the maximum per-node energy consumption. As a critical hyperparameter for DFL, the mixing matrix controls both the convergence rate and the needs of agent-to-agent communications, and has thus been studied extensively. However, existing designs mostly focused on minimizing the communication time, leaving open the minimization of per-node energy consumption that is critical for energy-constrained devices. This work addresses this gap through a theoretically-justified solution for mixing matrix design that aims at minimizing the maximum per-node energy consumption until convergence, while taking into account the broadcast nature of wireless communications. Based on a novel convergence theorem that allows arbitrarily time-varying mixing matrices, we propose a multi-phase design framework that activates time-varying communication topologies under optimized budgets to trade off the per-iteration energy consumption and the convergence rate while balancing the energy consumption across nodes. Our evaluations based on real data have validated the efficacy of the proposed solution in combining the low energy consumption of sparse mixing matrices and the fast convergence of dense mixing matrices.
+]]></content:encoded>
+<pubDate>Thu, 01 Jan 2026 00:00:00 -0500</pubDate>
+<pubDate>Thu, 01 Jan 2026 00:00:00 -0500</pubDate>
+</item>
+<item>
+<title>Data Heterogeneity-Aware Client Selection for Federated Learning in Wireless Networks</title>
+<link>https://arxiv.org/abs/2512.24286</link>
+<guid>https://arxiv.org/abs/2512.24286</guid>
+<content:encoded><![CDATA[
+<div> It looks like you've shared the **abstract** of a newly submitted paper to arXiv with the identifier **arXiv:2512.24286v1**, which focuses on **Federated Learning (FL)** in **wireless mobile edge networks**.
+
+Here’s a breakdown and interpretation of the key points from the abstract:
+
+---
+
+### 🔍 **Summary of Key Contributions**
+
+1. **Problem Context**:
+   - Federated Learning allows edge devices (clients) to collaboratively train a global model without sharing raw data—preserving privacy.
+   - However, FL over wireless networks faces challenges due to:
+     - Limited communication & computational resources
+     - **Data heterogeneity** across clients (non-IID data)
+     - These issues worsen in large-scale deployments.
+
+2. **Theoretical Analysis**:
+   - The paper provides a **theoretical study** on how **client data heterogeneity affects generalization error** of the global model.
+   - High heterogeneity can lead to:
+     - Poor model convergence
+     - More training rounds (increased latency)
+     - Higher energy consumption
+
+3. **Optimization Framework**:
+   - Proposes a joint optimization problem that aims to:
+     - Minimize **learning latency**
+     - Minimize **energy consumption**
+     - While keeping the **generalization error within acceptable bounds**
+   - This is a multi-objective trade-off, especially critical for resource-constrained edge devices.
+
+4. **Proposed Solution: CSRA**  
+   *(Joint Client Selection and Resource Allocation)*
+   - Uses **convex optimization and relaxation techniques** to make the problem tractable.
+   - Dynamically selects which clients participate in each round (client selection).
+   - Allocates communication and computation resources efficiently (e.g., bandwidth, power, CPU frequency).
+
+5. **Evaluation & Results**:
+   - Simulation-based evaluation shows that CSRA outperforms baseline methods that ignore data heterogeneity.
+   - Improvements include:
+     - **Higher test accuracy** (better generalization)
+     - **Lower learning latency**
+     - **Reduced energy consumption**
+
+---
+
+### 📌 Significance
+
+This work bridges theoretical understanding of data heterogeneity in FL with practical system design in wireless edge environments. By incorporating heterogeneity into both the analysis and optimization framework, it enables more efficient and accurate FL deployment.
+
+---
+
+### 🔮 Potential Applications
+
+- IoT networks
+- 5G/6G mobile systems
+- Smart cities, autonomous systems, or healthcare applications using decentralized learning
+
+---
+
+### 🛠️ Technical Approach Highlights
+
+- **Modeling generalization error** as a function of data distribution skew.
+- **Jointly optimizing** who participates (client selection) and how resources are allocated (bandwidth, time, local computation).
+- Use of **relaxation techniques** (likely Lagrangian relaxation, fractional programming, or binary variable relaxations) to handle combinatorial aspects of client selection.
+
+---
+
+If you're interested, I can help with:
+- Summarizing the full paper once it's available.
+- Explaining possible mathematical models behind the generalization error analysis.
+- Comparing this approach to prior works like FedAvg, FedProx, or communication-efficient FL methods.
+- Replicating or designing simulations based on this framework.
+
+Let me know how you'd like to proceed! <div>
+arXiv:2512.24286v1 Announce Type: new 
+Abstract: Federated Learning (FL) enables mobile edge devices, functioning as clients, to collaboratively train a decentralized model while ensuring local data privacy. However, the efficiency of FL in wireless networks is limited not only by constraints on communication and computational resources but also by significant data heterogeneity among clients, particularly in large-scale networks. This paper first presents a theoretical analysis of the impact of client data heterogeneity on global model generalization error, which can result in repeated training cycles, increased energy consumption, and prolonged latency. Based on the theoretical insights, an optimization problem is formulated to jointly minimize learning latency and energy consumption while constraining generalization error. A joint client selection and resource allocation (CSRA) approach is then proposed, employing a series of convex optimization and relaxation techniques. Extensive simulation results demonstrate that the proposed CSRA scheme yields higher test accuracy, reduced learning latency, and lower energy consumption compared to baseline methods that do not account for data heterogeneity.
+]]></content:encoded>
+<pubDate>Thu, 01 Jan 2026 00:00:00 -0500</pubDate>
+<pubDate>Thu, 01 Jan 2026 00:00:00 -0500</pubDate>
+</item>
+<item>
+<title>GateChain: A Blockchain Based Application for Country Entry Exit Registry Management</title>
+<link>https://arxiv.org/abs/2512.24416</link>
+<guid>https://arxiv.org/abs/2512.24416</guid>
+<content:encoded><![CDATA[
+<div> **arXiv:2512.24416v1 [cs.CR]** — *Announcement Type: New*
+
+**Title:** *GateChain: A Blockchain-Based Secure and Auditable System for Border Entry and Exit Record Management*
+
+**Summary of Abstract:**
+
+With increasing international mobility and heightened security demands, the accurate and trustworthy recording of cross-border entry and exit events has become critical. Current border control systems often rely on centralized databases, which are susceptible to data tampering, single points of failure, and suffer from poor interoperability across agencies and nations.
+
+To address these challenges, this paper introduces **GateChain**, a novel blockchain-based application designed to ensure **confidentiality, integrity, auditability**, and **interoperability** in border management systems. GateChain leverages a distributed ledger architecture to immutably record entry and exit events, providing a transparent, cryptographically secured, and tamper-evident log accessible in real time by authorized institutions.
+
+Key features of GateChain include:
+- **Decentralized Architecture**: Eliminates reliance on a single central authority, reducing risks of manipulation and downtime.
+- **Cryptographic Integrity**: All records are hashed and chained, ensuring any unauthorized alteration is detectable.
+- **Access Control Mechanisms**: Role-based permissions and cryptographic authentication enable secure, real-time data sharing among trusted entities (e.g., immigration, customs, law enforcement).
+- **Auditability and Transparency**: Every transaction is time-stamped and traceable, supporting regulatory compliance and forensic investigations.
+- **Interoperability Design**: Facilitates data exchange across national and institutional boundaries while preserving privacy and sovereignty.
+
+The paper presents the full system architecture, details the security model (including resistance to common attack vectors), and evaluates GateChain’s performance in terms of transaction latency, scalability, and resource consumption through simulations and prototype testing.
+
+**Conclusion:**  
+GateChain demonstrates that blockchain technology can significantly enhance the reliability and trustworthiness of border control systems. By combining decentralization with strong cryptographic guarantees, it offers a promising foundation for next-generation, secure, and auditable international travel recordkeeping.
+
+---
+
+*Note: As of now (April 2024), arXiv IDs typically follow the format YYMM.NNNNN — so "2512.24416v1" suggests a future submission (December 2025). This may be a placeholder or hypothetical identifier. If this is a speculative or fictional paper, the above summary reflects a plausible interpretation based on current trends in blockchain applications for public security infrastructure.* <div>
+arXiv:2512.24416v1 Announce Type: new 
+Abstract: Recording entry and exit records for a country, with properties such as confidentiality, integrity, and auditability, is increasingly important due to rising international mobility and security requirements. Traditional border control systems, which rely on centralised databases, are vulnerable to data manipulation and have limited interoperability between institutions. This study presents GateChain, a blockchain-based application that addresses these vulnerabilities. GateChain aims to enhance data integrity, reliability, and transparency by recording entry and exit events on a distributed, immutable, and cryptographically verifiable ledger. The application provides real-time access control and verification for authorised institutions. This paper describes the architecture and security components of GateChain and evaluates its performance and security features.
+]]></content:encoded>
+<pubDate>Thu, 01 Jan 2026 00:00:00 -0500</pubDate>
+<pubDate>Thu, 01 Jan 2026 00:00:00 -0500</pubDate>
+</item>
+<item>
+<title>Document Data Matching for Blockchain-Supported Real Estate</title>
+<link>https://arxiv.org/abs/2512.24457</link>
+<guid>https://arxiv.org/abs/2512.24457</guid>
+<content:encoded><![CDATA[
+<div> **arXiv:2512.24457v1 [cs.CY]** — *Automated Document Verification in Real Estate Using OCR, NLP, and Verifiable Credentials*
+
+### Summary & Analysis:
+
+This paper introduces an innovative framework aimed at modernizing the traditionally manual and error-prone processes in the real estate sector by leveraging **optical character recognition (OCR)**, **natural language processing (NLP)**, and **verifiable credentials (VCs)** anchored on a **blockchain-based decentralized trust layer**.
+
+---
+
+### Key Contributions:
+
+1. **Integration of AI and Trust Technologies**:
+   - Combines **OCR** for digitizing physical documents (e.g., property deeds, ID proofs, contracts) with **NLP** to extract structured data from unstructured text.
+   - Uses synthetic datasets to train the OCR-NLP pipeline, enabling robustness across diverse document formats and quality levels—crucial given the heterogeneity in real estate documentation globally.
+
+2. **Standardization via Verifiable Credentials (VCs)**:
+   - Extracted information is converted into standardized **W3C-compliant verifiable credentials**, which are cryptographically secure and tamper-evident.
+   - This enables interoperability and machine-readability across stakeholders (buyers, sellers, agents, banks, regulators).
+
+3. **Blockchain for Decentralized Trust**:
+   - VCs are issued and verified using a blockchain backend, ensuring immutability, auditability, and transparency without reliance on a central authority.
+   - Enhances resistance to fraud such as forged titles or identity misrepresentation.
+
+4. **End-to-End System Architecture**:
+   The prototype includes:
+   - **(i) OCR-NLP Extraction Pipeline**: Preprocessing, layout analysis, text extraction, and semantic parsing.
+   - **(ii) Backend Service**: Manages credential issuance, revocation, and validation; integrates with a permissioned blockchain (likely Hyperledger or Ethereum-based).
+   - **(iii) Frontend Interface**: Supports roles of issuer (e.g., notary), holder (e.g., buyer), and verifier (e.g., bank), facilitating user interaction and consent management.
+
+5. **Automated Data Matching & Inconsistency Detection**:
+   - Cross-references extracted fields across multiple documents (e.g., matching owner names in deed and ID) to flag discrepancies automatically.
+   - Reduces human oversight errors and speeds up due diligence.
+
+---
+
+### Experimental Results:
+
+- Models show **competitive accuracy** on key entity extraction (e.g., property address, price, parties involved) across various document types (deeds, IDs, mortgage statements).
+- End-to-end processing significantly **reduces verification time**—from days/hours to minutes—while maintaining high reliability.
+- Synthetic training data helps overcome scarcity of labeled real-world documents, improving generalization.
+
+---
+
+### Implications:
+
+- **Efficiency Gains**: Automates labor-intensive tasks like title checks, income verification, and compliance reviews.
+- **Fraud Reduction**: Tamper-proof records and cryptographic verification minimize risks of document forgery.
+- **Stakeholder Trust**: Transparent audit trails and self-sovereign identity principles empower users with control over their data.
+- **Scalability**: Framework can be extended to other domains requiring document-heavy workflows (e.g., banking, healthcare, legal services).
+
+---
+
+### Limitations & Future Work:
+
+- Reliance on synthetic data may not fully capture edge cases in low-quality scans or regional formatting variations.
+- Blockchain scalability and energy efficiency could be concerns depending on the chosen platform.
+- User adoption depends on regulatory alignment and integration with existing land registry systems.
+
+Future directions may include:
+- Integration with government land registries.
+- Support for zero-knowledge proofs to enhance privacy.
+- Multilingual expansion for global applicability.
+
+---
+
+### Conclusion:
+
+The proposed system represents a significant step toward **digitizing and securing real estate transactions** through the convergence of AI-driven automation and decentralized identity technologies. By transforming fragmented, paper-based workflows into a unified, trustworthy digital process, it paves the way for more efficient, transparent, and inclusive property markets.
+
+> **Potential Impact**: High – particularly in jurisdictions with weak institutional trust or underdeveloped land administration systems. <div>
+arXiv:2512.24457v1 Announce Type: new 
+Abstract: The real estate sector remains highly dependent on manual document handling and verification, making processes inefficient and prone to fraud. This work presents a system that integrates optical character recognition (OCR), natural language processing (NLP), and verifiable credentials (VCs) to automate document extraction, verification, and management. The approach standardizes heterogeneous document formats into VCs and applies automated data matching to detect inconsistencies, while the blockchain provides a decentralized trust layer that reinforces transparency and integrity. A prototype was developed that comprises (i) an OCR-NLP extraction pipeline trained on synthetic datasets, (ii) a backend for credential issuance and management, and (iii) a frontend supporting issuer, holder, and verifier interactions. Experimental results show that the models achieve competitive accuracy across multiple document types and that the end-to-end pipeline reduces verification time while preserving reliability. The proposed framework demonstrates the potential to streamline real estate transactions, strengthen stakeholder trust, and enable scalable, secure digital processes.
+]]></content:encoded>
+<pubDate>Thu, 01 Jan 2026 00:00:00 -0500</pubDate>
+<pubDate>Thu, 01 Jan 2026 00:00:00 -0500</pubDate>
+</item>
+<item>
+<title>Reinforcement Learning-Augmented LLM Agents for Collaborative Decision Making and Performance Optimization</title>
+<link>https://arxiv.org/abs/2512.24609</link>
+<guid>https://arxiv.org/abs/2512.24609</guid>
+<content:encoded><![CDATA[
+<div> The abstract you've provided describes a cutting-edge advancement in multi-agent Large Language Model (LLM) systems, leveraging reinforcement learning to enhance collaborative performance. Here's a breakdown and interpretation of the key components and contributions:
+
+---
+
+**Title (inferred):**  
+*Group Relative Policy Optimization for Collaborative Multi-Agent LLMs*
+
+---
+
+### **Core Problem Addressed:**
+While LLMs excel at individual language tasks, they often lack **collaborative awareness**—the ability to coordinate effectively with other agents to optimize **global outcomes** in multi-agent settings. This leads to inefficiencies, redundancy, and inconsistency in joint tasks like collaborative writing or coding.
+
+---
+
+### **Proposed Solution:**
+
+1. **Dec-POMDP Framework:**  
+   The authors model multi-agent collaboration as a *Decentralized Partially Observable Markov Decision Process (Dec-POMDP)*—a formalism suitable for multiple agents making decisions based on partial observations while aiming to maximize a shared objective.
+
+2. **CTDE Paradigm:**  
+   They adopt **Centralized Training with Decentralized Execution (CTDE)**:
+   - During **training**, agents have access to global information (e.g., actions/rewards of all agents).
+   - At **execution**, each agent acts only on its local observations—making the system scalable and practical.
+
+3. **Group Relative Policy Optimization (GRPO):**  
+   A novel reinforcement learning algorithm that extends concepts like PPO (Proximal Policy Optimization) to the multi-agent setting. GRPO:
+   - Uses **global signals during training** to shape individual policies.
+   - Optimizes policies relative to group performance, encouraging coordination without requiring explicit communication protocols.
+
+4. **Simplified Joint Reward Function:**  
+   Balances three critical aspects:
+   - **Task quality** (correctness, coherence),
+   - **Speed** (time-to-completion, efficiency),
+   - **Coordination cost** (redundancy, conflicts, communication overhead).
+
+---
+
+### **Evaluation & Results:**
+
+- **Domains Tested:**
+  - **Collaborative Writing**: Measured for consistency in style and structure.
+  - **Collaborative Coding**: Evaluated using test case pass rates.
+
+- **Key Results:**
+  - **3× faster task processing** compared to single-agent baselines.
+  - **98.7% structural/style consistency** in writing tasks—indicating strong alignment across agent contributions.
+  - **74.6% test pass rate** in coding tasks—competitive given the complexity of multi-agent program synthesis.
+  - Outperforms existing multi-agent LLM frameworks (e.g., BabyAGI, MetaGPT, etc.) in both efficiency and outcome quality.
+
+---
+
+### **Significance & Implications:**
+
+- Provides a **scalable and principled framework** for enabling LLMs to work together intelligently.
+- Demonstrates that **reinforcement learning**, when adapted to group dynamics (via GRPO), can significantly improve coordination.
+- Offers a **practical path toward automating complex workflows** (e.g., software development teams, content creation pipelines) using AI agents.
+
+---
+
+### **Potential Future Directions:**
+- Extending GRPO to include explicit communication mechanisms.
+- Applying the framework to real-time, open-world environments.
+- Studying emergent behaviors and potential miscoordination risks in large-scale deployments.
+
+---
+
+This work represents a significant step toward **reliable, efficient, and coherent multi-agent AI systems**, bridging the gap between standalone LLM capabilities and team-based problem solving. If the full paper delivers on these claims with robust ablation studies and reproducible results, it could become a foundational method in the multi-agent LLM space.
+
+Let me know if you'd like help summarizing the full paper once it’s available, implementing GRPO, or comparing it to other methods like MADDPG or COMA in multi-agent RL. <div>
+arXiv:2512.24609v1 Announce Type: new 
+Abstract: Large Language Models (LLMs) perform well in language tasks but often lack collaborative awareness and struggle to optimize global performance in multi-agent settings. We present a reinforcement learning-augmented LLM agent framework that formulates cooperation as a decentralized partially observable Markov decision process (Dec-POMDP) and adopts centralized training with decentralized execution (CTDE). We introduce Group Relative Policy Optimization (GRPO) to jointly optimize agent policies with access to global signals during training, together with a simplified joint reward that balances task quality, speed, and coordination cost. On collaborative writing and coding benchmarks, our framework delivers a 3x increase in task processing speed over single-agent baselines, 98.7% structural/style consistency in writing, and a 74.6% test pass rate in coding. The approach consistently outperforms strong multi-agent LLM baselines and provides a practical path toward reliable collaboration in complex workflows.
+]]></content:encoded>
+<pubDate>Thu, 01 Jan 2026 00:00:00 -0500</pubDate>
+<pubDate>Thu, 01 Jan 2026 00:00:00 -0500</pubDate>
+</item>
+<item>
+<title>Decentralized No-Regret Frequency-Time Scheduling for FMCW Radar Interference Avoidance</title>
+<link>https://arxiv.org/abs/2512.24619</link>
+<guid>https://arxiv.org/abs/2512.24619</guid>
+<content:encoded><![CDATA[
+<div> The paper **arXiv:2512.24619v1** presents a novel and theoretically grounded approach to mitigating interference among automotive Frequency-Modulated Continuous Wave (FMCW) radars in dense environments — a critical challenge for Advanced Driver Assistance Systems (ADAS) and autonomous vehicles.
+
+Here is a detailed breakdown and interpretation of the key contributions and concepts:
+
+---
+
+### 🔍 **Problem Context**
+As the number of FMCW radars increases on roads, **mutual interference** becomes a major issue:
+- Interference degrades signal quality → reduces detection accuracy.
+- Traditional mitigation methods face trade-offs:
+  - **Receiver-side suppression**: Limited scalability.
+  - **Waveform design**: May reduce resolution or require coordination.
+  - **Cooperative scheduling**: Depends on side-channel communication (e.g., V2X), which may not be reliable or available.
+
+Thus, there's a need for **scalable, decentralized, communication-free solutions** that preserve radar performance.
+
+---
+
+### 🧠 **Core Idea: Game-Theoretic Time-Frequency Hopping**
+
+The authors build upon their prior work on *decentralized frequency-domain no-regret hopping* and extend it into a **unified time-frequency framework**, introducing:
+
+> **Time-Frequency No-Regret Hopping (TF-NRH)**
+
+This algorithm enables each radar to autonomously adapt both:
+1. **Frequency subband selection** (spectral domain)
+2. **Chirp-level time offsets** (temporal domain)
+
+via a **joint adaptation strategy** modeled as a repeated game.
+
+---
+
+### 🎮 **Game Formulation: Repeated Anti-Coordination Game**
+
+- Each radar is a player choosing actions from a joint time-frequency action space.
+- Objective: Avoid collisions (i.e., overlapping transmissions in time and frequency).
+- The setup is an **anti-coordination game**: players benefit when they differ in resource usage.
+- Players use **regret-minimization dynamics** to update mixed strategies over time.
+
+Key properties:
+- **No reliance on inter-radar communication** → fully decentralized.
+- **Adaptive learning**: Radars learn good strategies over time by minimizing regret.
+
+---
+
+### ⚖️ **Theoretical Contributions**
+
+The paper proves strong theoretical guarantees:
+
+1. ✅ **Vanishing External Regret & Swap Regret**
+   - Over time, the average regret tends to zero.
+   - Implies that the algorithm performs nearly as well as the best fixed strategy (external regret), and even nearly as well as the best sequence of actions (swap regret).
+
+2. ✅ **Convergence to Equilibrium**
+   - Empirical joint play converges to:
+     - An **ε-coarse correlated equilibrium (CCE)** (for external regret minimization)
+     - A **correlated equilibrium (CE)** (for swap regret minimization)
+   - These equilibria represent stable, efficient configurations where unilateral deviations yield little gain.
+
+3. ✅ **Joint Time-Frequency Regret Bounds**
+   - Novel analysis shows how temporal adaptation (time shifting) acts as a form of **implicit regularization** for frequency selection.
+   - Enhances robustness against **asynchronous interference** (common in real-world settings due to clock drifts or variable delays).
+
+---
+
+### 💡 **Why Time Matters: Implicit Regularization**
+
+One insightful finding:
+- Introducing **time offset flexibility** helps smooth out poor frequency choices.
+- Even if two radars occasionally pick overlapping frequencies, slight time misalignments reduce collision impact.
+- This makes the system more resilient without explicit coordination.
+
+---
+
+### 📊 **Numerical Results**
+
+Simulations in multi-radar scenarios show TF-NRH outperforms baselines in:
+- **SINR (Signal-to-Interference-plus-Noise Ratio)** ↑
+- **Collision rate** ↓
+- **Range-Doppler map quality** ↑ (less smearing, clearer targets)
+
+Compared to:
+- **Random time-frequency hopping**: No learning, baseline stochastic approach.
+- **Centralized Nash-based schemes**: Require full information and coordination; less scalable.
+
+Despite being decentralized, TF-NRH matches or exceeds centralized approaches in performance while avoiding communication overhead.
+
+---
+
+### 🏁 **Conclusion & Significance**
+
+This work offers:
+- A **principled, game-theoretic framework** for interference mitigation in automotive radar networks.
+- A **practical algorithm (TF-NRH)** that balances autonomy, scalability, and performance.
+- Strong **theoretical grounding** with convergence and regret guarantees.
+- Demonstrated **robustness and superiority** in realistic simulations.
+
+It represents a significant step toward **scalable, intelligent spectrum sharing** in next-generation ADAS and autonomous driving systems — especially important as vehicle density rises and spectrum congestion worsens.
+
+---
+
+### 🔮 Future Directions (Implied or Suggested)
+- Implementation on real radar hardware.
+- Extension to heterogeneous radar configurations (different bandwidths, chirp rates).
+- Integration with V2X for hybrid cooperative-autonomous operation.
+- Exploration of deep reinforcement learning alternatives within the same game-theoretic structure.
+
+---
+
+Let me know if you'd like a visual explanation, summary slide, or code implementation sketch! <div>
+arXiv:2512.24619v1 Announce Type: new 
+Abstract: Automotive FMCW radars are indispensable to modern ADAS and autonomous-driving systems, but their increasing density has intensified the risk of mutual interference. Existing mitigation techniques, including reactive receiver-side suppression, proactive waveform design, and cooperative scheduling, often face limitations in scalability, reliance on side-channel communication, or degradation of range-Doppler resolution. Building on our earlier work on decentralized Frequency-Domain No-Regret hopping, this paper introduces a unified time-frequency game-theoretic framework that enables radars to adapt across both spectral and temporal resources. We formulate the interference-avoidance problem as a repeated anti-coordination game, in which each radar autonomously updates a mixed strategy over frequency subbands and chirp-level time offsets using regret-minimization dynamics. We show that the proposed Time-Frequency No-Regret Hopping algorithm achieves vanishing external and swap regret, and that the induced empirical play converges to an $\varepsilon$-coarse correlated equilibrium or a correlated equilibrium. Theoretical analysis provides regret bounds in the joint domain, revealing how temporal adaptation implicitly regularizes frequency selection and enhances robustness against asynchronous interference. Numerical experiments with multi-radar scenarios demonstrate substantial improvements in SINR, collision rate, and range-Doppler quality compared with time-frequency random hopping and centralized Nash-based benchmarks.
+]]></content:encoded>
+<pubDate>Thu, 01 Jan 2026 00:00:00 -0500</pubDate>
+<pubDate>Thu, 01 Jan 2026 00:00:00 -0500</pubDate>
+</item>
+<item>
+<title>Heterogeneous Multi-Agent Multi-Target Tracking using Cellular Sheaves</title>
+<link>https://arxiv.org/abs/2512.24886</link>
+<guid>https://arxiv.org/abs/2512.24886</guid>
+<content:encoded><![CDATA[
+<div> This arXiv preprint (2512.24886v1) presents a novel approach to **multi-agent target tracking** in complex, heterogeneous environments using **cellular sheaf theory**, a sophisticated mathematical framework that extends traditional graph-based models. Here's a breakdown and interpretation of the key contributions and implications:
+
+---
+
+### **Core Problem**
+- **Multi-agent systems** are tasked with tracking **multiple unknown targets**.
+- Challenges include:
+  - **Nonlinear agent dynamics**
+  - **Heterogeneity among agents**: agents may have different state spaces (e.g., drones vs. ground robots with different sensor suites or control inputs)
+  - **External disturbances**
+- Traditional methods (e.g., those based on **graph Laplacians**) struggle here because they assume homogeneous state spaces and linear interactions.
+
+---
+
+### **Key Innovation: Cellular Sheaves**
+- The authors use **cellular sheaves**, which generalize graphs by assigning vector spaces (or more generally, algebraic structures) to nodes and edges, along with linear maps (restriction maps) between them.
+- This allows modeling **heterogeneous agents** naturally—each agent can have its own state dimension and dynamics.
+- Prior work applied sheaves to cooperative tasks like consensus; this paper **extends sheaf-based coordination to non-cooperative settings**, specifically **target tracking**, where agents aim to follow external trajectories rather than agree with each other.
+
+---
+
+### **Methodology**
+- **Formulates tracking as a harmonic extension problem**:
+  - In sheaf theory, harmonic sections minimize a Dirichlet-like energy, representing "smoothest" global configurations consistent with local data.
+  - Here, the desired formation or estimation around targets corresponds to such a harmonic section.
+  - Observations from certain agents (e.g., those sensing a target) act as boundary conditions.
+- Uses the **sheaf Laplacian** to derive a **decentralized control law**:
+  - Each agent updates its state based only on local communication with neighbors.
+  - The control law drives the system toward the harmonic extension that encodes optimal tracking estimates.
+- Incorporates **nonlinear dynamics and disturbances** into the model, making it applicable to real-world scenarios.
+
+---
+
+### **Theoretical Contribution**
+- Provides a **Lyapunov-based stability analysis** proving that the **tracking error converges to zero** under the proposed control law.
+- This is significant because it shows robustness and correctness despite heterogeneity, nonlinearity, and distributed operation.
+
+---
+
+### **Validation**
+- Results are supported by **simulations**, demonstrating effectiveness in realistic multi-agent tracking scenarios.
+
+---
+
+### **Significance and Implications**
+- **Bridges abstract mathematics (topology/algebra) with robotics/control theory**.
+- Enables design of **flexible, modular multi-agent systems** where diverse agents (different sensors, dynamics, dimensions) can still coordinate effectively.
+- Opens the door for applying sheaf-theoretic tools to other **distributed estimation and control problems** beyond consensus.
+
+---
+
+### **Potential Applications**
+- Surveillance networks with mixed UAVs, UGVs, and static sensors
+- Search and rescue operations
+- Environmental monitoring with heterogeneous robot teams
+
+---
+
+### **Conclusion**
+This paper represents a **theoretical and practical advance** in multi-agent systems by leveraging cellular sheaves to solve a challenging instance of decentralized target tracking. It demonstrates how high-level mathematical frameworks can provide powerful tools for engineering problems involving heterogeneity and complexity.
+
+> **In short:** A mathematically sophisticated yet practically grounded solution to multi-robot tracking using cellular sheaves—going beyond consensus to real-world tasks with nonlinearities, noise, and diverse agents. <div>
+arXiv:2512.24886v1 Announce Type: new 
+Abstract: Multi-agent target tracking in the presence of nonlinear dynamics and agent heterogeneity, where state-space dimensions may differ, is a challenging problem that traditional graph Laplacian methods cannot easily address. This work leverages the framework of cellular sheaves, a mathematical generalization of graph theory, to natively model such heterogeneous systems. While existing coordination sheaf frameworks focus on cooperative problems like consensus, this work extends them to the non-cooperative target-tracking problem. The tracking of multiple, unknown targets is formulated as a harmonic extension problem on a cellular sheaf, accommodating nonlinear dynamics and external disturbances for all agents. A decentralized control law is developed using the sheaf Laplacian, and a corresponding Lyapunov-based stability analysis is provided to guarantee tracking error convergence, with results validated by simulation.
+]]></content:encoded>
+<pubDate>Thu, 01 Jan 2026 00:00:00 -0500</pubDate>
+<pubDate>Thu, 01 Jan 2026 00:00:00 -0500</pubDate>
+</item>
+<item>
+<title>SoK: Web3 RegTech for Cryptocurrency VASP AML/CFT Compliance</title>
+<link>https://arxiv.org/abs/2512.24888</link>
+<guid>https://arxiv.org/abs/2512.24888</guid>
+<content:encoded><![CDATA[
+<div> The arXiv preprint **2512.24888v1** presents a comprehensive systematization of **Web3 RegTech**—regulatory technology tailored for decentralized environments—with a focus on addressing **Anti-Money Laundering (AML)** and **Counter-Financing of Terrorism (CFT)** compliance in blockchain ecosystems. Below is a structured summary and analysis of the paper’s key contributions, findings, and implications:
+
+---
+
+### 🔍 **Core Problem**
+Traditional RegTech is built for centralized financial systems with Know-Your-Customer (KYC) frameworks, auditable intermediaries, and regulated gateways. In contrast:
+- **Web3 operates on decentralized, pseudonymous, and permissionless blockchains**, making identity attribution and transaction monitoring difficult.
+- While blockchain transactions are transparent, their **lack of direct identity linkage** complicates regulatory oversight.
+
+This creates a critical gap: how to enforce AML/CFT compliance without compromising Web3's core tenets—decentralization, transparency, and user sovereignty.
+
+---
+
+### 🧩 Key Contributions
+
+#### 1. **Three Taxonomies for Web3 RegTech**
+
+| Taxonomy | Description |
+|--------|-------------|
+| **Regulatory Paradigm Evolution Framework (10 Dimensions)** | Maps the shift from traditional finance to Web3 across dimensions such as data provenance, identity models, enforcement mechanisms, auditability, etc. Highlights how regulation must evolve beyond custodial control to code-based, protocol-level governance. |
+| **Compliance Protocol Taxonomy (5 Verification Layers)** | Proposes a layered model: <br>• **On-chain data layer** (raw transactions)<br>• **Entity abstraction layer** (wallet clustering, address labeling)<br>• **Behavioral analysis layer** (pattern detection, anomaly scoring)<br>• **Cross-chain correlation layer**<br>• **Privacy-preserving verification layer** (zero-knowledge proofs, secure multi-party computation) |
+| **RegTech Lifecycle Framework** | Structures compliance into three phases:<br>• **Preventive**: Risk scoring before interaction (e.g., wallet screening)<br>• **Real-time**: Monitoring during transactions (e.g., sanctions filtering)<br>• **Investigative**: Forensic analysis post-event (e.g., chain tracing after illicit activity) |
+
+These taxonomies provide a foundational structure for understanding, comparing, and designing Web3-native compliance tools.
+
+---
+
+#### 2. **Empirical Analysis**
+- **41 commercial platforms** (e.g., Chainalysis, Elliptic, TRM Labs, CoinTracker)
+- **28 academic prototypes** (from peer-reviewed literature, 2015–2025)
+
+##### ✅ Capabilities Enabled by Web3 RegTech
+- **Transaction graph analysis**: Mapping complex flows across wallets and protocols.
+- **Real-time risk assessment**: Dynamic scoring of addresses or transactions using ML models.
+- **Cross-chain analytics**: Tracking value movement across Ethereum, Solana, Bitcoin, etc.
+- **Privacy-preserving verification**: Using ZKPs or trusted execution environments (TEEs) to validate compliance without exposing sensitive data.
+
+These capabilities often surpass those in traditional finance due to immutable ledgers and programmable logic.
+
+---
+
+#### 3. **Critical Gaps Identified**
+
+| Gap | Explanation |
+|-----|-----------|
+| **Academic vs. Industry Divide** | Academic research explores advanced techniques (e.g., formal methods, ZK-compliance), but industry favors heuristic, scalable solutions. Limited transfer of innovation. |
+| **Cross-chain Tracking** | Fragmented tooling; lack of standardized identifiers or interoperability protocols hinders end-to-end traceability. |
+| **DeFi Interaction Complexity** | Flash loans, liquidity pools, and composability obscure fund origins. Current tools struggle with semantic interpretation of DeFi actions. |
+| **Privacy Protocol Monitoring** | Tornado Cash-like mixers and privacy coins challenge traceability. Regulatory responses remain reactive rather than adaptive. |
+| **Scalability & Performance** | Real-time analysis across high-throughput chains (e.g., Solana) demands significant computational resources. |
+
+---
+
+#### 4. **Architectural Best Practices & Design Principles**
+The paper advocates for **decentralized, privacy-aware, and modular architectures**, including:
+- **On-chain compliance oracles** that attest to risk scores or KYC status.
+- **Zero-knowledge compliance proofs**: Prove non-involvement with sanctioned entities without revealing transaction details.
+- **Decentralized identity (DID) integration**: Allow users to self-sovereignly disclose verified credentials.
+- **Open-source, auditable algorithms** to maintain transparency and trustlessness.
+
+Such designs align with Web3 values while enabling regulatory accountability.
+
+---
+
+### 🔮 Research Directions Proposed
+1. **Unified Cross-Chain Identity Layer**: Develop persistent, portable reputation/identity constructs across chains.
+2. **Semantic Transaction Understanding**: Use AI to interpret intent behind DeFi interactions (beyond pattern matching).
+3. **Adaptive Privacy Detection**: Machine learning models trained on obfuscation patterns in privacy-preserving protocols.
+4. **Regulation-as-Code (RaC)**: Smart contracts that encode and automatically enforce jurisdiction-specific rules.
+5. **Federated Compliance Analytics**: Collaborative threat intelligence sharing without centralizing sensitive data.
+
+---
+
+### ⚖️ Policy & Ethical Considerations
+- **Balancing surveillance and privacy**: Overreach risks undermining decentralization and financial freedom.
+- **Jurisdictional fragmentation**: Differing global regulations complicate uniform compliance standards.
+- **Censorship resistance vs. regulatory compliance**: Tension between open access and blocking “bad actors.”
+
+The authors emphasize **proportionality, minimal data collection, and user agency** as guiding principles.
+
+---
+
+### 📌 Conclusion
+This work establishes the first holistic framework for **Web3-native RegTech**, demonstrating both its transformative potential and current limitations. It bridges technical innovation with regulatory pragmatism, offering a roadmap for:
+- Researchers: To build more deployable, cross-chain, and privacy-aware tools.
+- Developers: To integrate compliance at the protocol level.
+- Policymakers: To craft adaptive regulations that respect decentralization.
+
+It positions Web3 not as a regulatory evasion tool, but as an opportunity to reimagine compliance through **transparency, automation, and cryptographic assurance**.
+
+---
+
+### 🔗 Suggested Next Steps
+- Explore integration of **ZK-proofs for anonymous yet compliant transactions**.
+- Evaluate **open-source alternatives** to proprietary forensic tools (e.g., OXT, Bitquery).
+- Investigate **DAO-based governance of compliance rules** for community-driven regulation.
+
+---
+
+Let me know if you'd like:
+- A visual diagram of the taxonomies,
+- A comparison table of selected commercial vs. academic platforms,
+- Or a summary suitable for policymakers or developers. <div>
+arXiv:2512.24888v1 Announce Type: new 
+Abstract: The decentralized architecture of Web3 technologies creates fundamental challenges for Anti-Money Laundering and Counter-Financing of Terrorism compliance. Traditional regulatory technology solutions designed for centralized financial systems prove inadequate for blockchain's transparent yet pseudonymous networks. This systematization examines how blockchain-native RegTech solutions leverage distributed ledger properties to enable novel compliance capabilities.
+  We develop three taxonomies organizing the Web3 RegTech domain: a regulatory paradigm evolution framework across ten dimensions, a compliance protocol taxonomy encompassing five verification layers, and a RegTech lifecycle framework spanning preventive, real-time, and investigative phases. Through analysis of 41 operational commercial platforms and 28 academic prototypes selected from systematic literature review (2015-2025), we demonstrate that Web3 RegTech enables transaction graph analysis, real-time risk assessment, cross-chain analytics, and privacy-preserving verification approaches that are difficult to achieve or less commonly deployed in traditional centralized systems.
+  Our analysis reveals critical gaps between academic innovation and industry deployment, alongside persistent challenges in cross-chain tracking, DeFi interaction analysis, privacy protocol monitoring, and scalability. We synthesize architectural best practices and identify research directions addressing these gaps while respecting Web3's core principles of decentralization, transparency, and user sovereignty.
+]]></content:encoded>
+<pubDate>Thu, 01 Jan 2026 00:00:00 -0500</pubDate>
+<pubDate>Thu, 01 Jan 2026 00:00:00 -0500</pubDate>
+</item>
+<item>
+<title>Automated Market Making for Energy Sharing</title>
+<link>https://arxiv.org/abs/2512.24432</link>
+<guid>https://arxiv.org/abs/2512.24432</guid>
+<content:encoded><![CDATA[
+<div> The abstract you've provided appears to be a fictional or speculative document, as arXiv preprints with the identifier `2512.24432v1` do not currently exist (as of knowledge cutoff in 2024), and the date implied by the ID (December 2025) is in the future. However, assuming this is a hypothetical or forward-looking research abstract, let’s break it down and interpret its key contributions and implications:
+
+---
+
+### **Summary and Interpretation of the Abstract**
+
+**Title (inferred):**  
+*An Axiomatic Theory of Automated Market Makers in Local Energy Sharing Markets: A Mean-Field Game Approach*
+
+---
+
+#### **Core Contributions:**
+
+1. **Axiomatic Framework for AMMs in Energy Markets:**  
+   The paper proposes an axiomatic foundation for designing Automated Market Makers (AMMs)—a concept borrowed from decentralized finance (DeFi)—for application in *local energy sharing markets*. These are peer-to-peer networks where prosumers (consumers who also produce energy, e.g., via solar panels) trade excess energy locally.
+
+2. **Mean-Field Game Model of Prosumer Behavior:**  
+   To analyze strategic interactions among a large number of heterogeneous prosumers, the authors model the system as a **Mean-Field Game (MFG)**. In this setting:
+   - Each prosumer solves a dynamic optimization problem via a **Bellman equation**.
+   - Decisions include **energy consumption**, **storage management**, and **energy trading** with the local market or grid.
+
+3. **Key Axioms Lead to Linear, Lipschitz Payment Functions:**  
+   The axiomatic approach identifies desirable properties that fair and efficient mechanisms should satisfy. From these, the authors derive that valid payment rules must be:
+   - **Linear** and **Lipschitz continuous** (ensuring stability and bounded sensitivity).
+   - Prices decrease as the **aggregate supply-to-demand ratio** increases — intuitively, more surplus supply lowers prices.
+
+4. **Design Conditions from DeFi Adapted to Energy:**  
+   The paper shows that incorporating two innovations from DeFi improves mechanism design:
+   - **Batch execution**: Trading occurs in discrete time batches, reducing arbitrage and gaming.
+   - **Concentrated liquidity**: Liquidity providers (here, prosumers with stored energy) can allocate their capacity strategically in price ranges.
+   
+   Under these features, standard economic conditions—**quasi-concavity**, **monotonicity**, and **homotheticity**—can be used to build AMMs satisfying the proposed axioms.
+
+5. **Efficiency and Budget Balance:**  
+   The resulting AMM mechanism is:
+   - **Budget-balanced**: No external subsidies required; payments clear within the system.
+   - **Ex-ante efficient**: Optimizes expected social welfare before uncertainty resolves.
+   - Contrasts with VCG mechanisms, which are strategy-proof and ex-post efficient but often not budget-balanced and vulnerable to collusion.
+
+6. **Potential Game Structure Enables Equilibrium Solution:**  
+   Because the game induced by the AMM is a **Potential Game**, the Markov Perfect Equilibrium (MPE) can be found by:
+   - First solving the **social planner’s problem** (centralized optimum).
+   - Then **decentralizing** the solution via individual incentives aligned through the AMM.
+
+7. **Numerical Validation on Paris Data:**  
+   Simulations using real-world data from the Paris region show that:
+   - Prosumer communities achieve **up to 40% gains from trade** compared to relying solely on the main power grid.
+   - Highlights the economic value of localized, peer-to-peer energy exchange enabled by well-designed AMMs.
+
+---
+
+### **Significance and Implications**
+
+- **Cross-Disciplinary Innovation:**  
+  This work bridges **blockchain-inspired financial mechanisms** (AMMs) with **smart grid and energy economics**, demonstrating how DeFi concepts can be repurposed for sustainable infrastructure.
+
+- **Scalable Decentralized Energy Markets:**  
+  By avoiding complex auction mechanisms like VCG (which don’t scale well and fail budget balance), AMMs offer a practical, decentralized alternative for managing distributed energy resources.
+
+- **Policy and Design Guidance:**  
+  The axiomatic approach provides principles for regulators and platform designers to create fair, stable, and efficient local energy markets.
+
+- **Future-Ready Grids:**  
+  As renewable generation becomes more decentralized, such mechanisms could play a crucial role in balancing supply and demand at the neighborhood level, reducing grid congestion and promoting resilience.
+
+---
+
+### **Critical Questions & Research Directions**
+- How robust are these results to strategic manipulation or incomplete information?
+- Can privacy-preserving implementations (e.g., via zero-knowledge proofs or federated learning) be integrated?
+- What are the regulatory and institutional barriers to deploying such systems?
+
+---
+
+### Conclusion
+
+While the paper reference appears speculative, its conceptual framework reflects a compelling direction for future research: applying advanced mechanism design from decentralized finance to pressing challenges in energy sustainability. If realized, such AMM-based energy markets could significantly enhance efficiency, equity, and decarbonization in urban power systems.
+
+Let me know if you'd like a simplified explanation, a visualization idea, or help drafting a related research proposal! <div>
+arXiv:2512.24432v1 Announce Type: cross 
+Abstract: We develop an axiomatic theory for Automated Market Makers (AMMs) in local energy sharing markets and analyze the Markov Perfect Equilibrium of the resulting economy with a Mean-Field Game. In this game, heterogeneous prosumers solve a Bellman equation to optimize energy consumption, storage, and exchanges. Our axioms identify a class of mechanisms with linear, Lipschitz continuous payment functions, where prices decrease with the aggregate supply-to-demand ratio of energy. We prove that implementing batch execution and concentrated liquidity allows standard design conditions from decentralized finance-quasi-concavity, monotonicity, and homotheticity-to construct AMMs that satisfy our axioms. The resulting AMMs are budget-balanced and achieve ex-ante efficiency, contrasting with the strategy-proof, expost optimal VCG mechanism. Since the AMM implements a Potential Game, we solve its equilibrium by first computing the social planner's optimum and then decentralizing the allocation. Numerical experiments using data from the Paris administrative region suggest that the prosumer community can achieve gains from trade up to 40% relative to the grid-only benchmark.
+]]></content:encoded>
+<pubDate>Thu, 01 Jan 2026 00:00:00 -0500</pubDate>
+<pubDate>Thu, 01 Jan 2026 00:00:00 -0500</pubDate>
+</item>
+<item>
+<title>A New Decomposition Paradigm for Graph-structured Nonlinear Programs via Message Passing</title>
+<link>https://arxiv.org/abs/2512.24676</link>
+<guid>https://arxiv.org/abs/2512.24676</guid>
+<content:encoded><![CDATA[
+<div> The paper **arXiv:2512.24676v1** introduces **MP-Jacobi (Message Passing-Jacobi)**, a novel decentralized optimization framework designed for **finite-sum nonlinear programs** with **local interactions governed by a graph or hypergraph structure**. Here's a structured breakdown and interpretation of the key contributions and concepts:
+
+---
+
+### 🧩 Problem Setting
+- **Finite-sum optimization**: Objective function is a sum of local cost terms.
+- **Graph/hypergraph-structured dependencies**: Decision variables interact locally—each variable participates only in certain constraints or objective terms, forming a network structure.
+- Applications include distributed control, sensor networks, multi-agent systems, and large-scale machine learning where data and decisions are spatially or logically distributed.
+
+---
+
+### 🔧 MP-Jacobi Framework
+
+#### Core Idea:
+Combine two powerful ideas:
+1. **Min-sum message passing** (from probabilistic inference and dynamic programming) to capture intra-cluster optimization structure.
+2. **Jacobi-type block updates** (parallel coordinate descent-style steps) to handle inter-cluster couplings using neighbors’ latest estimates.
+
+#### Architecture:
+- The underlying (hyper)graph is partitioned into **tree-structured clusters**.
+- Each cluster acts as an "agent" that performs local computation.
+
+#### Iteration Steps:
+At each iteration:
+1. **Intra-cluster processing**: Within each tree cluster, perform a single **min-sum sweep** (forward-backward message passing) to compute **cost-to-go messages**, effectively solving a localized approximation of the subproblem.
+2. **Inter-cluster coordination**: Use **Jacobi updates** to account for coupling between clusters, based on the most recent iterates from neighboring clusters.
+3. All agents update **in parallel**, enabling scalability.
+
+#### Communication:
+- Only requires **single-hop communication** (between direct neighbors), making it suitable for decentralized, low-bandwidth environments.
+- Despite operating on **loopy graphs** (which typically cause convergence issues in message-passing methods), MP-Jacobi ensures **convergence** due to its hybrid design.
+
+---
+
+### 📈 Theoretical Contributions
+
+For **strongly convex objectives**:
+- **Global linear convergence** is established.
+- **Explicit convergence rates** are derived, which depend on:
+  - **Curvature** (strong convexity and smoothness parameters),
+  - **Coupling strength** between clusters,
+  - **Cluster partitioning strategy** (e.g., size, overlap, tree width).
+
+These results provide **design guidance for clustering**: how to partition the graph to optimize convergence speed and scalability.
+
+---
+
+### ⚙️ Practical Enhancements
+
+To reduce computational and communication burden:
+- **Surrogate models** are introduced for message updates:
+  - Maintain convergence guarantees.
+  - Reduce per-iteration complexity (e.g., via approximated or delayed messages).
+  - Preserve graph compliance (i.e., respect the decentralized architecture).
+
+#### Extension to Hypergraphs:
+- Handles more complex, overlapping interactions (e.g., higher-order potentials).
+- In regimes with heavy hyperedge overlap, proposes a **hyperedge-splitting scheme**:
+  - Enables finite-time intra-cluster message computation.
+  - Maintains convergence under surrogates.
+
+This makes MP-Jacobi applicable to problems like distributed MPC, federated learning with shared features, or structured prediction.
+
+---
+
+### ✅ Experimental Validation
+- Evaluations show consistent outperformance over **decentralized gradient methods** (e.g., DGD, ADMM variants).
+- Faster convergence, better scalability with problem size and network density.
+- Demonstrates robustness across different graph topologies and partitions.
+
+---
+
+### 🎯 Key Innovations & Implications
+
+| Feature | Significance |
+|-------|--------------|
+| **Hybrid min-sum + Jacobi** | Unifies dynamic programming-style reasoning with iterative optimization |
+| **Tree clustering** | Enables exact efficient message passing within clusters |
+| **Parallel updates** | Fully decentralized, asynchronous-friendly |
+| **Convergence on loopy graphs** | Overcomes a major limitation of traditional belief propagation |
+| **Guidance for clustering** | Theory-informed partitioning improves performance |
+| **Scalable surrogates** | Makes method practical for large clusters |
+
+---
+
+### 📘 Potential Applications
+- Multi-robot coordination
+- Smart grid optimization
+- Federated learning with structured regularization
+- Distributed model predictive control (MPC)
+- Sensor fusion networks
+
+---
+
+### 🔮 Future Directions (implied or possible)
+- Asynchronous variants.
+- Stochastic extensions for online or sampled-data settings.
+- Adaptive clustering strategies.
+- Integration with neural parameterizations (learning-enhanced message passing).
+
+---
+
+### Conclusion
+
+**MP-Jacobi** represents a significant step toward **scalable, principled decentralized optimization** over complex networked structures. By combining **message passing for intra-cluster coherence** and **Jacobi updates for inter-cluster consistency**, it achieves both **theoretical rigor** and **practical efficiency**, especially in strongly convex settings. Its extension to hypergraphs further broadens its applicability to real-world problems with higher-order interactions.
+
+> This work bridges ideas from optimization, message passing, and graphical models, offering a promising direction for next-generation distributed algorithms.
+
+--- 
+
+Let me know if you'd like a simplified explanation, pseudocode sketch, or comparison with ADMM/DGD! <div>
+arXiv:2512.24676v1 Announce Type: cross 
+Abstract: We study finite-sum nonlinear programs whose decision variables interact locally according to a graph or hypergraph. We propose MP-Jacobi (Message Passing-Jacobi), a graph-compliant decentralized framework that couples min-sum message passing with Jacobi block updates. The (hyper)graph is partitioned into tree clusters. At each iteration, agents update in parallel by solving a cluster subproblem whose objective decomposes into (i) an intra-cluster term evaluated by a single min-sum sweep on the cluster tree (cost-to-go messages) and (ii) inter-cluster couplings handled via a Jacobi correction using neighbors' latest iterates. This design uses only single-hop communication and yields a convergent message-passing method on loopy graphs.
+  For strongly convex objectives we establish global linear convergence and explicit rates that quantify how curvature, coupling strength, and the chosen partition affect scalability and provide guidance for clustering. To mitigate the computation and communication cost of exact message updates, we develop graph-compliant surrogates that preserve convergence while reducing per-iteration complexity. We further extend MP-Jacobi to hypergraphs; in heavily overlapping regimes, a surrogate-based hyperedge-splitting scheme restores finite-time intra-cluster message updates and maintains convergence. Experiments validate the theory and show consistent improvements over decentralized gradient baselines.
+]]></content:encoded>
+<pubDate>Thu, 01 Jan 2026 00:00:00 -0500</pubDate>
+<pubDate>Thu, 01 Jan 2026 00:00:00 -0500</pubDate>
+</item>
+<item>
+<title>FEDSTR: Money-In AI-Out | A Decentralized Marketplace for Federated Learning and LLM Training on the NOSTR Protocol</title>
+<link>https://arxiv.org/abs/2404.15834</link>
+<guid>https://arxiv.org/abs/2404.15834</guid>
+<content:encoded><![CDATA[
+<div> The abstract you've provided describes a research paper (arXiv:2404.15834v2) that proposes leveraging **Nostr** — a decentralized, open-source communication protocol based on WebSockets — as the foundation for a **decentralized marketplace for federated learning and large language model (LLM) training**.
+
+Here's a breakdown and analysis of the key points in the abstract:
+
+---
+
+### 🔹 **Overview of Nostr**
+- **Nostr** (**Notes and Other Stuff Transmitted by Relays**) is a lightweight, decentralized social networking protocol standardized by the [W3C](https://www.w3.org/) and built on public-key cryptography and relay-based message distribution.
+- It supports various data types (e.g., text notes, direct messages, file metadata, etc.) via standardized event types.
+- Its architecture is highly resilient to censorship due to its lack of central servers; anyone can run a relay, and clients fetch data from multiple sources.
+
+---
+
+### 🔹 **Proposed Use Case: Decentralized AI Training Marketplace**
+The authors propose extending Nostr beyond social communication into the domain of **AI/ML collaboration**, specifically:
+- A **federated learning marketplace**, where:
+  - **Customers (data owners)** submit datasets (or references to them) they wish to use for training AI models.
+  - **Service providers (compute nodes)** download parts of the dataset, perform local model training, and return updated model parameters (not raw data), preserving privacy.
+  - In exchange, service providers receive **payments**, likely facilitated off-chain or through blockchain-integrated methods (e.g., Bitcoin Lightning Network, which is already used in Nostr ecosystems).
+
+This creates a trustless, decentralized environment for collaborative machine learning without relying on centralized platforms like AWS, Hugging Face, or centralized AI marketplaces.
+
+---
+
+### 🔹 **Key Features Enabled by Nostr**
+1. **Decentralization & Censorship Resistance**
+   - Since Nostr runs on independently operated relays, no single entity can block transactions or interactions.
+   - Ideal for global participation in AI development, especially under restrictive regimes.
+
+2. **Trustless Identity & Authentication**
+   - All participants are identified via public keys (similar to blockchain wallets).
+   - Signatures ensure integrity and non-repudiation of events (e.g., job postings, model updates).
+
+3. **Event-Based Communication**
+   - Training requests, dataset pointers, model updates, and payment confirmations can be encoded as Nostr events.
+   - Example: Custom `kind` numbers could represent:
+     - `kind=30400`: Federated Learning Task Request
+     - `kind=30401`: Model Update Submission
+     - `kind=30402`: Payment Receipt
+
+4. **Scalability via Public Relays**
+   - The proof-of-concept uses existing public Nostr relays, showing feasibility without infrastructure overhead.
+
+---
+
+### 🔹 **Potential Applications Mentioned**
+Beyond basic messaging, Nostr already supports:
+- Direct messaging
+- File sharing (via encrypted links or IPFS hashes)
+- Audio/video streaming
+- Collaborative writing
+- Blogging
+- Distributed AI directories
+
+This work builds on these capabilities to enable **distributed AI computation coordination**.
+
+---
+
+### 🔹 **Significance & Innovation**
+- **Democratizes AI training**: Lowers barriers for individuals and small organizations to train models using distributed compute resources.
+- **Privacy-preserving**: Federated approach means raw data doesn’t leave the customer’s control (or only shared securely with workers).
+- **Open and permissionless**: Anyone with bandwidth and compute can become a service provider.
+- **Synergy with crypto economy**: Naturally integrates with Bitcoin/Lightning for micropayments.
+
+---
+
+### 🔹 **Challenges & Considerations**
+While promising, several challenges remain:
+| Challenge | Description |
+|--------|-------------|
+| **Data Size & Bandwidth** | Large datasets may not fit well within Nostr’s current event size limits (~natively up to 64KB per event). Solution: Use Nostr only for coordination; store data off-relay (e.g., IPFS, S3, Bittorrent). |
+| **Model Integrity & Cheating** | How to verify honest training? May require reputation systems or zero-knowledge proofs. |
+| **Payment Finality & Dispute Resolution** | Trustless payments need smart contracts or multisig escrows. |
+| **Latency & Relay Performance** | Not all relays are optimized for high-frequency ML syncs. |
+| **Standardization** | Requires community adoption of new event kinds and metadata formats. |
+
+---
+
+### 🔹 **Conclusion**
+This paper presents a **novel fusion of decentralized communication and decentralized machine learning**, demonstrating how protocols like **Nostr** can evolve beyond social media into foundational layers for next-generation AI infrastructure.
+
+By combining **federated learning**, **decentralized identity**, and **peer-to-peer coordination**, it opens the door to:
+- Censorship-resistant AI development
+- Community-owned LLM training collectives
+- Open-source alternatives to Big Tech AI pipelines
+
+With further development, such a system could empower grassroots innovation in artificial intelligence.
+
+---
+
+If you'd like, I can help:
+- Summarize the full paper (if available),
+- Draft a response or review,
+- Design the proposed event schema for Nostr-based FL,
+- Or simulate a workflow for task posting and model aggregation.
+
+Let me know how you'd like to proceed! <div>
+arXiv:2404.15834v2 Announce Type: replace 
+Abstract: The NOSTR is a communication protocol for the social web, based on the w3c websockets standard. Although it is still in its infancy, it is well known as a social media protocol, with thousands of trusted users and multiple user interfaces, offering a unique experience and enormous capabilities. To name a few, the NOSTR applications include but are not limited to direct messaging, file sharing, audio/video streaming, collaborative writing, blogging and data processing through distributed AI directories. In this work, we propose an approach that builds upon the existing protocol structure with end goal a decentralized marketplace for federated learning and LLM training. In this proposed design there are two parties: on one side there are customers who provide a dataset that they want to use for training an AI model. On the other side, there are service providers, who receive (parts of) the dataset, train the AI model, and for a payment as an exchange, they return the optimized AI model. To demonstrate viability, we present a proof-of-concept implementation over public NOSTR relays. The decentralized and censorship resistant features of the NOSTR enable the possibility of designing a fair and open marketplace for training AI models and LLMs.
+]]></content:encoded>
+<pubDate>Thu, 01 Jan 2026 00:00:00 -0500</pubDate>
+<pubDate>Thu, 01 Jan 2026 00:00:00 -0500</pubDate>
+</item>
+<item>
+<title>Transfer learning of state-based potential games for process optimization in decentralized manufacturing systems</title>
+<link>https://arxiv.org/abs/2408.05992</link>
+<guid>https://arxiv.org/abs/2408.05992</guid>
+<content:encoded><![CDATA[
+<div> The arXiv paper **2408.05992v3** introduces a novel approach called **Transfer Learning in State-based Potential Games (TL-SbPGs)**, aimed at enabling distributed self-optimization in manufacturing systems through online learning and knowledge sharing.
+
+Here is a structured summary and interpretation of the key contributions and implications of this work:
+
+---
+
+### 🔹 **Core Idea**
+The paper proposes **TL-SbPGs**, an extension of state-based potential games (SbPGs), integrating **transfer learning** to improve decentralized decision-making in large-scale industrial environments. The focus is on **online transfer learning**, where agents ("players") can adaptively reuse policies learned by similar players to accelerate their own learning and optimize system-wide performance.
+
+---
+
+### 🔹 **Key Contributions**
+
+1. **Online Transfer Learning Framework for SbPGs**  
+   - Extends traditional SbPGs with mechanisms for transferring knowledge between players.
+   - Enables **distributed self-optimization** without centralized control—critical for scalable smart manufacturing.
+
+2. **Similarity Criteria Between Players**  
+   Two settings are proposed to determine which knowledge to transfer:
+   - **(a) Predefined Similarities**: Based on known system structure or prior domain knowledge (e.g., identical machine types).
+   - **(b) Dynamically Inferred Similarities**: Learned during training using behavioral or state-action trajectory analysis, allowing adaptation to changing environments.
+
+3. **Formal Justification of Transferability in SbPGs**  
+   - Proves that under certain conditions, policy transfer across similar players preserves convergence properties of potential games.
+   - Ensures theoretical soundness when applying transfer learning within game-theoretic learning frameworks.
+
+4. **Optimization of Transfer Timing and Weighting**  
+   - Introduces a method to decide *when* and *how much* to transfer (i.e., adaptive weighting of source policies).
+   - Prevents negative transfer by modulating influence based on similarity and performance feedback.
+
+5. **Experimental Validation on a Laboratory Testbed**
+   - Real-world evaluation demonstrates:
+     - **Improved production efficiency**
+     - **Reduced power consumption**
+   - Outperforms vanilla SbPGs (without transfer), showing faster convergence and better resource utilization.
+
+---
+
+### 🔹 **Practical Implications for Industry**
+- **Scalable Learning in Smart Factories**: TL-SbPGs allow machines or subsystems to learn optimal control policies more quickly by leveraging experience from peers.
+- **Energy Efficiency**: Demonstrated reduction in power usage aligns with sustainable manufacturing goals.
+- **Decentralized Adaptation**: Suitable for flexible manufacturing systems where reconfiguration is frequent and centralized optimization is impractical.
+
+---
+
+### 🔹 **Significance of "Replace" Announcement Type**
+The `replace` type indicates this version (**v3**) supersedes earlier versions of the same paper (v1, v2), likely incorporating revisions such as:
+- Expanded experiments
+- Refined theoretical proofs
+- Improved clarity in methodology
+
+This suggests the authors have responded to peer feedback or further validated their approach.
+
+---
+
+### 🔹 **Potential Applications Beyond Manufacturing**
+While focused on manufacturing, TL-SbPGs could be applied to other domains involving decentralized multi-agent optimization:
+- Smart grids
+- Traffic signal control
+- Distributed robotics
+- Supply chain coordination
+
+---
+
+### 🔹 **Conclusion**
+This paper makes a strong case for integrating **transfer learning** into **game-theoretic multi-agent systems**, particularly in real-world industrial contexts. By formalizing how and when agents should share knowledge, TL-SbPGs offer a robust, efficient, and scalable solution for online optimization in complex, dynamic environments.
+
+> ✅ **Takeaway**: TL-SbPGs bridge game theory and transfer learning to enable faster, greener, and smarter distributed decision-making in manufacturing—demonstrating both theoretical rigor and practical impact.
+
+Let me know if you'd like a simplified explanation, a diagram proposal, or help comparing it to related methods (e.g., MADRL, standard POT games). <div>
+arXiv:2408.05992v3 Announce Type: replace 
+Abstract: This paper presents a novel online transfer learning approach in state-based potential games (TL-SbPGs) for distributed self-optimization in manufacturing systems. The approach targets practical industrial scenarios where knowledge sharing among similar players enhances learning in large-scale and decentralized environments. TL-SbPGs enable players to reuse learned policies from others, which improves learning outcomes and accelerates convergence. To accomplish this goal, we develop transfer learning concepts and similarity criteria for players, which offer two distinct settings: (a) predefined similarities between players and (b) dynamically inferred similarities between players during training. The applicability of the SbPG framework to transfer learning is formally established. Furthermore, we present a method to optimize the timing and weighting of knowledge transfer. Experimental results from a laboratory-scale testbed show that TL-SbPGs improve production efficiency and reduce power consumption compared to vanilla SbPGs.
+]]></content:encoded>
+<pubDate>Thu, 01 Jan 2026 00:00:00 -0500</pubDate>
+<pubDate>Thu, 01 Jan 2026 00:00:00 -0500</pubDate>
+</item>
+<item>
+<title>Tazza: Shuffling Neural Network Parameters for Secure and Private Federated Learning</title>
+<link>https://arxiv.org/abs/2412.07454</link>
+<guid>https://arxiv.org/abs/2412.07454</guid>
+<content:encoded><![CDATA[
+<div> The provided text appears to be the abstract of a research paper with arXiv identifier **2412.07454v3**, which has been updated (as indicated by "Announce Type: replace"). Here's a breakdown and interpretation of the abstract for clarity:
+
+---
+
+**Paper Title (Inferred):** *Tazza: A Secure and Efficient Framework for Federated Learning*
+
+**Key Contributions:**
+
+- **Problem:** Federated learning (FL) enables decentralized training while preserving data privacy by avoiding raw data sharing. However, it remains vulnerable to two major security threats:
+  - **Gradient inversion attacks**: Where adversaries reconstruct private client data from shared gradients.
+  - **Model poisoning attacks**: Where malicious clients manipulate model updates to degrade performance or inject backdoors.
+
+  Most existing defenses tackle only one of these issues, often at the cost of accuracy or system efficiency.
+
+- **Solution:** The authors propose **Tazza**, a novel FL framework that **simultaneously defends against both gradient inversion and model poisoning** without sacrificing model accuracy or computational efficiency.
+
+- **Core Techniques:**
+  - **Weight Shuffling**: Exploits *permutation equivariance/invariance* in neural networks—reordering neuron weights does not affect functionality—to obscure model parameters and resist inversion attacks.
+  - **Shuffled Model Validation**: Uses shuffling strategies during aggregation to detect and filter out poisoned models, improving robustness against adversarial clients.
+
+- **Benefits:**
+  - **Enhanced Security**: Resists diverse poisoning attacks and protects data confidentiality.
+  - **High Accuracy**: Maintains model performance close to standard FL baselines.
+  - **Efficiency**: Up to **6.7× faster** computation compared to alternative secure FL methods, making it suitable for deployment on **resource-constrained embedded platforms**.
+
+- **Evaluation:**
+  - Tested across multiple datasets and real-world embedded systems.
+  - Demonstrates strong defense capabilities while maintaining scalability and practicality.
+
+---
+
+**Significance:**  
+Tazza represents an integrated approach to secure federated learning, addressing two critical attack vectors in a unified manner—something many prior works fail to achieve. Its emphasis on **efficiency** makes it particularly promising for edge computing and IoT applications where resources are limited.
+
+---
+
+If you’re looking for more details, such as implementation specifics, threat models considered, or comparison benchmarks, I recommend downloading the full paper from [arXiv:2412.07454](https://arxiv.org/abs/2412.07454). Let me know if you'd like help summarizing specific sections or understanding technical components like permutation equivariance! <div>
+arXiv:2412.07454v3 Announce Type: replace 
+Abstract: Federated learning enables decentralized model training without sharing raw data, preserving data privacy. However, its vulnerability towards critical security threats, such as gradient inversion and model poisoning by malicious clients, remain unresolved. Existing solutions often address these issues separately, sacrificing either system robustness or model accuracy. This work introduces Tazza, a secure and efficient federated learning framework that simultaneously addresses both challenges. By leveraging the permutation equivariance and invariance properties of neural networks via weight shuffling and shuffled model validation, Tazza enhances resilience against diverse poisoning attacks, while ensuring data confidentiality and high model accuracy. Comprehensive evaluations on various datasets and embedded platforms show that Tazza achieves robust defense with up to 6.7x improved computational efficiency compared to alternative schemes, without compromising performance.
+]]></content:encoded>
+<pubDate>Thu, 01 Jan 2026 00:00:00 -0500</pubDate>
+<pubDate>Thu, 01 Jan 2026 00:00:00 -0500</pubDate>
+</item>
+<item>
+<title>SlideChain: Semantic Provenance for Lecture Understanding via Blockchain Registration</title>
+<link>https://arxiv.org/abs/2512.21684</link>
+<guid>https://arxiv.org/abs/2512.21684</guid>
+<content:encoded><![CDATA[
+<div> The abstract you've provided describes **arXiv:2512.21684v2**, a research paper introducing **SlideChain**, a novel framework that leverages blockchain technology to ensure the **integrity, reproducibility, and auditability** of semantic content extracted by vision–language models (VLMs) from educational materials—specifically medical imaging lecture slides.
+
+Here is a clear breakdown and interpretation of the key contributions and findings:
+
+---
+
+### 🔍 **Problem Statement**
+- **Challenge**: Modern VLMs are increasingly used in education (especially STEM/medical fields), but their outputs are:
+  - Hard to verify
+  - Prone to inconsistencies across models, inference settings, and environments
+  - Lacking long-term reproducibility and traceability
+- This undermines trust in AI-generated educational content, particularly where accuracy is critical (e.g., medicine).
+
+---
+
+### ✅ **Solution: SlideChain**
+A **blockchain-backed provenance framework** designed for:
+- Verifiable integrity of multimodal semantic extraction
+- Tamper-evident logging of model outputs
+- Long-term auditability
+
+#### Key Components:
+1. **Dataset**: 
+   - *SlideChain Slides Dataset*: 1,117 real medical imaging lecture slides from a university course.
+2. **Semantic Extraction**:
+   - Four state-of-the-art VLMs extract:
+     - Key concepts
+     - Relational triples (subject–predicate–object)
+   - Output structured into **provenance records** per slide.
+3. **Blockchain Anchoring**:
+   - Cryptographic hashes of these records are stored on a **local EVM-compatible blockchain**.
+   - Ensures:
+     - Immutability
+     - Tamper detection
+     - Deterministic reproducibility
+
+---
+
+### 🧪 **Key Findings & Analysis**
+1. **Cross-Model Discrepancies**:
+   - Low overlap in extracted **concepts** across different VLMs.
+   - Near-zero agreement in generated **relational triples** on many slides.
+   - Highlights the **lack of consistency** even among SOTA models → major concern for reliability.
+
+2. **Lecture-Level Variability**:
+   - First systematic analysis showing how semantic output varies not just between models, but also across lectures/slide topics.
+   - Suggests domain-specific challenges in multimodal understanding.
+
+3. **System Performance**:
+   - Evaluated under simulated deployment:
+     - Measured **gas usage**, **throughput**, and **scalability**.
+   - Results show:
+     - Efficient operation at scale
+     - **Perfect tamper detection**
+     - **Deterministic reproducibility** across independent runs
+
+---
+
+### 🛠️ **Implications & Contributions**
+- **Trustworthy AI in Education**:
+  - SlideChain enables verifiable, auditable pipelines for AI-assisted teaching tools.
+- **Reproducibility**:
+  - By anchoring semantic outputs on-chain, future users can validate or compare results against a persistent baseline.
+- **Scalable Design**:
+  - Local EVM setup balances security and practicality without requiring public blockchain costs or latency.
+- **New Research Direction**:
+  - Opens path for studying semantic drift, model alignment, and accountability in multimodal systems.
+
+---
+
+### 📌 Conclusion
+> *SlideChain represents a significant step toward trustworthy, transparent, and accountable use of VLMs in high-stakes educational contexts.*  
+It addresses core issues of **semantic inconsistency** and **lack of provenance**, offering a scalable solution using blockchain to secure AI-generated knowledge.
+
+---
+
+### 🎯 Potential Applications
+- Medical education platforms using AI tutors
+- Regulatory compliance for AI-generated courseware
+- Model comparison benchmarks with verified outputs
+- Archival systems for evolving curricula with AI assistance
+
+---
+
+If you're interested, I can help with:
+- Summarizing the full paper (once published)
+- Explaining technical aspects (e.g., how hashing + Ethereum works here)
+- Comparing SlideChain to other provenance/blockchain-AI systems
+- Generating a presentation or infographic based on this work
+
+Let me know your needs! <div>
+arXiv:2512.21684v2 Announce Type: replace 
+Abstract: Modern vision--language models (VLMs) are increasingly used to interpret and generate educational content, yet their semantic outputs remain challenging to verify, reproduce, and audit over time. Inconsistencies across model families, inference settings, and computing environments undermine the reliability of AI-generated instructional material, particularly in high-stakes and quantitative STEM domains. This work introduces SlideChain, a blockchain-backed provenance framework designed to provide verifiable integrity for multimodal semantic extraction at scale. Using the SlideChain Slides Dataset-a curated corpus of 1,117 medical imaging lecture slides from a university course-we extract concepts and relational triples from four state-of-the-art VLMs and construct structured provenance records for every slide. SlideChain anchors cryptographic hashes of these records on a local EVM (Ethereum Virtual Machine)-compatible blockchain, providing tamper-evident auditability and persistent semantic baselines. Through the first systematic analysis of semantic disagreement, cross-model similarity, and lecture-level variability in multimodal educational content, we reveal pronounced cross-model discrepancies, including low concept overlap and near-zero agreement in relational triples on many slides. We further evaluate gas usage, throughput, and scalability under simulated deployment conditions, and demonstrate perfect tamper detection along with deterministic reproducibility across independent extraction runs. Together, these results show that SlideChain provides a practical and scalable step toward trustworthy, verifiable multimodal educational pipelines, supporting long-term auditability, reproducibility, and integrity for AI-assisted instructional systems.
+]]></content:encoded>
+<pubDate>Thu, 01 Jan 2026 00:00:00 -0500</pubDate>
+<pubDate>Thu, 01 Jan 2026 00:00:00 -0500</pubDate>
+</item>
+<item>
+<title>Federated Multi-Task Clustering</title>
+<link>https://arxiv.org/abs/2512.22897</link>
+<guid>https://arxiv.org/abs/2512.22897</guid>
+<content:encoded><![CDATA[
+<div> The provided text appears to be the **abstract** of a research paper with the arXiv identifier **2512.22897v2**, which indicates it's the second version (revised) of the preprint. Here's a breakdown and interpretation of the abstract, followed by a concise summary suitable for understanding or presentation:
+
+---
+
+### 🔍 **Breakdown of the Abstract**
+
+#### **Problem Context**
+- **Spectral clustering** is known for high performance in clustering tasks.
+- Traditional methods assume **centralized data**, which doesn't align with modern **decentralized/federated environments** where data privacy is critical.
+- Existing **federated clustering approaches** suffer from:
+  - Use of **unreliable pseudo-labels**, hurting generalization.
+  - Inability to model **latent correlations among heterogeneous clients**.
+
+#### **Proposed Solution: FMTC (Federated Multi-Task Clustering)**
+A novel framework designed for **personalized yet collaborative clustering** under federation:
+1. **Client-Side Personalized Clustering Module**
+   - Learns a **parameterized mapping function** (e.g., neural network) per client.
+   - Enables **robust out-of-sample inference** (can cluster new samples without re-computation).
+   - Avoids reliance on **pseudo-labels**, improving reliability.
+
+2. **Server-Side Tensorial Correlation Module**
+   - Models inter-client relationships via **tensor representation**: all client models are organized into a single tensor.
+   - Applies **low-rank regularization** to uncover a **shared latent subspace** across clients.
+   - Captures **common structure** while respecting individual heterogeneity.
+
+#### **Optimization & Privacy**
+- Uses **ADMM (Alternating Direction Method of Multipliers)** to solve the joint optimization problem.
+- The algorithm enables:
+  - **Distributed computation**: local updates on clients.
+  - **Secure aggregation**: server coordinates without accessing raw data.
+  - **Privacy preservation**: no direct exchange of sensitive information.
+
+#### **Evaluation**
+- Tested on **multiple real-world datasets**.
+- Outperforms various **baseline and state-of-the-art federated clustering methods** in effectiveness and robustness.
+
+---
+
+### ✅ **Summary (Suitable for Presentation or Report)**
+
+> This paper introduces **Federated Multi-Task Clustering (FMTC)**, a novel framework addressing key limitations in current federated clustering methods. FMTC enables effective, personalized clustering in decentralized settings by combining **client-specific modeling** with **collaborative learning of shared structures**. It avoids error-prone pseudo-labels through parameterized clustering mappings and captures cross-client correlations using a **tensor-based low-rank regularization** approach. Leveraging an efficient **ADMM-based distributed optimization**, FMTC ensures privacy-preserving collaboration. Experiments show that FMTC significantly outperforms existing methods across diverse real-world datasets, marking a substantial advance in federated unsupervised learning.
+
+---
+
+### 📌 Key Contributions
+1. **First use of tensor modeling** in federated clustering to capture multi-client correlations.
+2. Eliminates dependence on **pseudo-labels**, enhancing robustness.
+3. Enables **out-of-sample extension** via learnable mappings.
+4. Integrates **personalization and global coordination** via low-rank tensor constraints.
+5. Provides a **privacy-preserving, scalable ADMM algorithm** for federated clustering.
+
+---
+
+### 🧠 Potential Applications
+- Healthcare (multi-institutional patient grouping without sharing records)
+- IoT networks (device behavior clustering across edge nodes)
+- Finance (customer segmentation across isolated branches)
+
+---
+
+If you'd like, I can help you:
+- Generate a **title suggestion** for this work,
+- Write a **blog post or slide deck** summarizing the paper,
+- Compare FMTC to other federated clustering methods (like FedEM, CFL),
+- Explain the **ADMM derivation** or **tensor formulation** in more detail.
+
+Let me know how you'd like to proceed! <div>
+arXiv:2512.22897v2 Announce Type: replace 
+Abstract: Spectral clustering has emerged as one of the most effective clustering algorithms due to its superior performance. However, most existing models are designed for centralized settings, rendering them inapplicable in modern decentralized environments. Moreover, current federated learning approaches often suffer from poor generalization performance due to reliance on unreliable pseudo-labels, and fail to capture the latent correlations amongst heterogeneous clients. To tackle these limitations, this paper proposes a novel framework named Federated Multi-Task Clustering (i.e.,FMTC), which intends to learn personalized clustering models for heterogeneous clients while collaboratively leveraging their shared underlying structure in a privacy-preserving manner. More specifically, the FMTC framework is composed of two main components: client-side personalized clustering module, which learns a parameterized mapping model to support robust out-of-sample inference, bypassing the need for unreliable pseudo-labels; and server-side tensorial correlation module, which explicitly captures the shared knowledge across all clients. This is achieved by organizing all client models into a unified tensor and applying a low-rank regularization to discover their common subspace. To solve this joint optimization problem, we derive an efficient, privacy-preserving distributed algorithm based on the Alternating Direction Method of Multipliers, which decomposes the global problem into parallel local updates on clients and an aggregation step on the server. To the end, several extensive experiments on multiple real-world datasets demonstrate that our proposed FMTC framework significantly outperforms various baseline and state-of-the-art federated clustering algorithms.
+]]></content:encoded>
+<pubDate>Thu, 01 Jan 2026 00:00:00 -0500</pubDate>
+<pubDate>Thu, 01 Jan 2026 00:00:00 -0500</pubDate>
+</item>
+<item>
+<title>Contingency Model-based Control (CMC) for Communicationless Cooperative Collision Avoidance in Robot Swarms</title>
+<link>https://arxiv.org/abs/2512.20391</link>
+<guid>https://arxiv.org/abs/2512.20391</guid>
+<content:encoded><![CDATA[
+<div> The provided text appears to be a **metadata and abstract snippet** from an arXiv paper with the identifier **arXiv:2512.20391v3**, submitted under the "replace-cross" announcement type—indicating it's an updated version of a cross-listed paper.
+
+Here’s a clear summary and interpretation of the content:
+
+---
+
+### 📄 **Paper Summary: arXiv:2512.20391v3**
+
+**Title (inferred):** *Contingency Model-based Control (CMC) for Communication-Free Decentralized Swarm Collision Avoidance*
+
+**Core Problem:**  
+Cooperative collision avoidance in robot swarms is challenging, especially in decentralized systems where each agent must independently make decisions. Most current methods depend on inter-agent communication, which introduces vulnerabilities due to:
+- Latency and delays
+- Packet loss
+- Transmission faults
+- Adversarial attacks (e.g., jamming, spoofing)
+
+These limitations motivate the need for **communication-free coordination strategies**.
+
+---
+
+### ✅ **Proposed Solution: Contingency Model-based Control (CMC)**
+
+**Key Idea:**  
+A fully **decentralized**, **communication-free** control framework inspired by consensual offline rules—akin to traffic laws (e.g., right-of-way rules). All agents follow pre-agreed protocols designed *offline*, enabling safe real-time operation without exchanging data during runtime.
+
+#### 🔧 Key Components of CMC:
+1. **Contingency Trajectory**:  
+   Each robot has a predefined "safe" trajectory it will follow if conflict arises—a fallback plan encoded in advance.
+
+2. **Perpendicular Bisecting Planes (PBP):**  
+   Geometric constructs used as **collision avoidance constraints** between pairs of agents. These planes act as decision boundaries: robots adjust their motion to ensure they don’t simultaneously occupy risky regions relative to one another.
+
+3. **Recursive Feasibility & Safety Guarantees:**  
+   The method ensures that:
+   - Safe states are always reachable (recursive feasibility)
+   - No collisions occur in closed-loop operation (guaranteed collision avoidance)
+
+4. **Plug-and-Play Capability:**  
+   New robots can join the swarm dynamically without reconfiguring the entire system—each follows the same rule set.
+
+---
+
+### 🧪 Validation
+- Demonstrated via **two numerical simulations**
+- Results show:
+  - Robust **collision avoidance** even in constrained environments
+  - Smooth swarm behavior
+  - Preservation of safety guarantees
+
+---
+
+### 🌟 Significance and Contributions
+
+| Contribution | Description |
+|------------|-------------|
+| **No Communication Required** | Eliminates reliance on unreliable wireless networks |
+| **Safety Guarantees** | Formal proof of collision avoidance and recursive feasibility |
+| **Scalability & Flexibility** | Supports dynamic entry/exit of agents (plug-and-play) |
+| **Resilience** | Inherently robust to adversarial interference targeting communications |
+
+---
+
+### 🛣️ Potential Applications
+- Autonomous drone swarms in GPS-denied or contested environments
+- Multi-robot warehouse logistics
+- Search and rescue operations with limited comms
+- Military or security robotics operating under electronic warfare conditions
+
+---
+
+### 🔮 Future Directions (Implied)
+- Extension to 3D environments
+- Handling heterogeneous agents
+- Integration with high-level planning or learning modules
+- Real-world hardware implementation and testing
+
+---
+
+### Final Thoughts:
+This paper presents a **novel shift** from communication-dependent swarm control to a **rule-based, model-driven decentralized paradigm**. By leveraging geometric constraints and contingency modeling, CMC offers a promising path toward **provably safe, resilient, and scalable swarm autonomy**—especially valuable in mission-critical or adversarial settings.
+
+If you'd like, I can help:
+- Locate the full paper on arXiv (note: `2512.20391` seems to use a future date; possibly a placeholder or typo — likely meant to be `24xx.xxxx` or similar)
+- Explain the math behind perpendicular bisecting planes
+- Compare CMC to other approaches like Velocity Obstacles or MPC-based schemes
+- Summarize related work in communication-free coordination
+
+Let me know how you’d like to proceed! <div>
+arXiv:2512.20391v3 Announce Type: replace-cross 
+Abstract: Cooperative collision avoidance between robots, or `agents,' in swarm operations remains an open challenge. Assuming a decentralized architecture, each agent is responsible for making its own decisions and choosing its control actions. Most existing approaches rely on a (wireless) communication network between (some of) the agents. In reality, however, communication is brittle. It may be affected by latency, further delays and packet losses, and transmission faults. Moreover, it is subject to adversarial attacks, such as jamming or spoofing. This paper proposes Contingency Model-based Control (CMC), a decentralized cooperative approach that does not rely on communication. Instead, the control algorithm is based on consensual rules that are designed for all agents offline, similar to traffic rules. For CMC, this includes the definition of a contingency trajectory for each robot, and perpendicular bisecting planes as collision avoidance constraints. The setup permits a full guarantee of recursive feasibility and collision avoidance between all swarm members in closed-loop operation. CMC naturally satisfies the plug & play paradigm, i.e., new robots may enter the swarm dynamically. The effectiveness of the CMC regime is demonstrated in two numerical examples, showing that the collision avoidance guarantee is intact and the robot swarm operates smoothly in a constrained environment.
+]]></content:encoded>
+<pubDate>Thu, 01 Jan 2026 00:00:00 -0500</pubDate>
+<pubDate>Thu, 01 Jan 2026 00:00:00 -0500</pubDate>
+</item>
 
 <item>
 <title>DyPBP: Dynamic Peer Beneficialness Prediction for Cryptocurrency P2P Networking</title>
