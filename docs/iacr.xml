@@ -4,6 +4,7 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+
 <item>
 <title>OHMG: One hot modular garbling</title>
 <link>https://eprint.iacr.org/2025/2338</link>
@@ -56,7 +57,6 @@ Let me know if you’d like help expanding this into a full paper section (e.g.,
 We propose a novel mechanism for garbling wires and gates of a logical circuit in a privacy-free environment, focusing on the authenticity of the protocol. It is based on one-hot encodings, tensor products and elliptic curve arithmetic. This scheme is designed to work with arithmetic gates, but we also show gadgets to implement transitions from binary inputs to arithmetic outputs and vice versa. For our scheme, each arithmetic gate takes at most one cyphertext of material to execute its functionality (assuming knowledge of the garbled inputs and their cleartexts). We show an application to blockchain transactions. The security of the scheme is proved in the UC setting.
 ]]></content:encoded>
 <pubDate>Tue, 30 Dec 2025 18:24:49 +0000</pubDate>
-<pubDate>Tue, 30 Dec 2025 18:24:49 +0000</pubDate>
 </item>
 <item>
 <title>DNS-Anchored zk-SNARK Proofs: A Stateless Alternative to ACME Challenge-Response for Domain Control Validation</title>
@@ -96,9 +96,7 @@ This paper presents the Portable Trust eXtensible (PTX) protocol, a novel mechan
 This approach eliminates the need for an active web server during validation. A prover generates a self-contained, portable, and purely stateless proof artifact that can be verified client-side by any relying party, with revocation handled via O(TTL) DNS record deletion. We implement a reference toolchain using the Groth16 proving system and the Poseidon hash function, achieving a circuit complexity of just 1,756 constraints and sub-15ms verification times on consumer hardware. Our security analysis demonstrates that PTX effectively mitigates replay attacks through context-commitment public inputs while offering a privacy-preserving alternative to interactive DCV for identity assertions in decentralized environments.
 ]]></content:encoded>
 <pubDate>Mon, 29 Dec 2025 04:01:52 +0000</pubDate>
-<pubDate>Mon, 29 Dec 2025 04:01:52 +0000</pubDate>
 </item>
-
 <item>
 <title>Streaming Function Secret Sharing and Its Applications</title>
 <link>https://eprint.iacr.org/2025/2304</link>
@@ -15826,32 +15824,6 @@ In this paper, we propose $\mathsf{ROTL}$, a secure two-party protocol for LUT e
 To support boolean shares, we further provide an optimization for FLUTE, by reducing its computational complexity from $O(l\cdot n^2)$ to $O(n\log n+l\cdot n)$ and shifting $O(n\log n)$ computation to the preprocessing phase. As a result, compared with FLUTE, it achieves upto 10.8$\times$ speedup in terms of overall performance and 962$\times$ speedup in terms of online performance.
 ]]></content:encoded>
 <pubDate>Thu, 04 Jul 2024 16:43:48 +0000</pubDate>
-</item>
-<item>
-<title>MatcHEd: Privacy-Preserving Set Similarity based on MinHash</title>
-<link>https://eprint.iacr.org/2024/1091</link>
-<guid>https://eprint.iacr.org/2024/1091</guid>
-<content:encoded><![CDATA[
-<div> 关键词：fully homomorphic encryption (FHE), MinHash, Carter-Wegman (CW) hash function, bitwise operations, encrypted set similarity
-
-总结:<br />
-文章提出了一种利用MinHash算法和CGGI FHE方案改进的加密集相似性计算方法。传统的FHE比较操作昂贵，尤其是对大量数据。通过引入高效的位级FHE友好的摘要函数(FFD)，替代Carter-Wegman哈希中的模运算，减少了在FHE环境中的复杂性和低效性。这种方法显著减少与直接计算Jaccard相似度所需的比较次数，并且天然支持多CPU和GPU并行处理，适用于隐私保护的文档抄袭检测等场景。总的来说，新方法提高了加密计算效率，降低了计算成本。 <div>
-Fully homomorphic encryption (FHE) enables arbitrary computation on encrypted data, but certain applications remain prohibitively expensive in the encrypted domain. As a case in point, comparing two encrypted sets of data is extremely computationally expensive due to the large number of comparison operators required. In this work, we propose a novel methodology for encrypted set similarity inspired by the MinHash algorithm and the CGGI FHE scheme. Doing comparisons in FHE requires comparators and multiplexers or an expensive approximation, which further increases the latency, especially when the goal is to compare two sets of data. The MinHash algorithm can significantly reduce the number of comparisons required by employing a special Carter-Wegman (CW) hash function as a key building block. However, the modulus operation in the CW hash becomes another key bottleneck because the encrypted sub-circuits required to perform the modular reduction are very large and inefficient in an FHE setting. Towards that end, we introduce an efficient bitwise FHE-friendly digest function (FFD) to employ as the cornerstone of our proposed encrypted set-similarity. In a Boolean FHE scheme like CGGI, the bitwise operations can be implemented efficiently with Boolean gates, which allows for faster evaluation times relative to standard Carter-Wegman constructions. Overall, our approach drastically reduces the number of comparisons required relative to the baseline approach of directly computing the Jaccard similarity coefficients, and is inherently parallelizable, allowing for efficient encrypted computation on multi-CPU and GPU-based cloud servers. We validate our approach by performing a privacy-preserving plagiarism detection across encrypted documents.
-]]></content:encoded>
-<pubDate>Thu, 04 Jul 2024 02:33:02 +0000</pubDate>
-</item>
-<item>
-<title>PolyFHEmus: Rethinking Multiplication in Fully Homomorphic Encryption</title>
-<link>https://eprint.iacr.org/2024/1090</link>
-<guid>https://eprint.iacr.org/2024/1090</guid>
-<content:encoded><![CDATA[
-<div> 关键词：Homomorphic encryption, Cloud computing, Latency, Polynomial multiplication, Accelerated computing.
-
-总结:
-这篇文章关注的是同态加密技术在云计算中的应用，这种技术允许在加密数据上进行计算以保护隐私。然而，它面临的主要挑战是高延迟问题，尤其是由于多项式乘法运算效率低下。文章的核心内容是识别了这一瓶颈，并探讨了寻找更高效算法的可能性，以期加速加密计算，从而推动同态加密在实际场景中的广泛应用。通过优化多项式运算，有望降低云计算中隐私保护操作的时间成本，促进该技术的普及和发展。 <div>
-Homomorphic encryption is a powerful technology that solves key privacy concerns in cloud computing by enabling computation on encrypted data. However, it has not seen widespread adoption due to prohibitively high latencies. In this article, we identify polynomial multiplication as a bottleneck and investigate alternative algorithms to accelerate encrypted computing.
-]]></content:encoded>
-<pubDate>Thu, 04 Jul 2024 01:56:46 +0000</pubDate>
 </item>
 </channel>
 </rss>
