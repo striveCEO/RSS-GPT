@@ -139,7 +139,6 @@ def truncate_entries(entries, max_entries):
 def gpt_summary(query,model,language):
     if language == "zh":
         messages = [
-            //更改提示词逻辑
             {"role": "system", "content": "你是一个专业的文章摘要助手，擅长提取关键信息并生成简洁的中文摘要。"},
             {"role": "user", "content": f"请用中文总结以下文章，先提取出{keyword_length}个关键词，在同一行内输出，然后换行，用中文在{summary_length}字内写一个包含所有要点的总结，按顺序分要点输出，并按照以下格式输出'<br><br>总结:'，<br>是HTML的换行符，输出时必须保留2个，并且必须在'总结:'二字之前。\n\n文章内容：\n{query}"}
         ]
