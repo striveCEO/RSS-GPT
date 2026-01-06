@@ -4,18 +4,17 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+
 <item>
 <title>Mina: Decentralized Cryptocurrency at Scale</title>
 <link>https://eprint.iacr.org/2020/352</link>
 <guid>https://eprint.iacr.org/2020/352</guid>
 <content:encoded><![CDATA[
-<div> 简洁区块链、状态机、常数时间验证、SNARKs、Mina（Coda）<br><br>总结:<br>1. 提出“简洁区块链”概念，是一种复制状态机，其每个状态转换（区块）均可在常数时间内高效验证，不受历史交易数量影响。<br>2. 传统区块链的验证时间随交易数量线性增长，而简洁区块链显著提升了效率。<br>3. 利用递归组合的简洁非交互式知识证明（SNARKs）构建该区块链。<br>4. 基于此构建了名为Coda（现称Mina）的支付系统，功能类似比特币。<br>5. Mina验证整个链历史仅需约200毫秒，使轻量级客户端和移动设备可实现完整验证。 <div>
+<div> 简洁区块链、状态机、常数时间验证、SNARKs、Mina（Coda）<br /><br />总结:<br />1. 提出“简洁区块链”概念，是一种复制状态机，其每个状态转换（区块）均可在常数时间内高效验证，不受历史交易数量影响。<br />2. 传统区块链的验证时间随交易数量线性增长，而简洁区块链显著提升了效率。<br />3. 利用递归组合的简洁非交互式知识证明（SNARKs）构建该区块链。<br />4. 基于此构建了名为Coda（现称Mina）的支付系统，功能类似比特币。<br />5. Mina验证整个链历史仅需约200毫秒，使轻量级客户端和移动设备可实现完整验证。 <div>
 We introduce the notion of a succinct blockchain, a replicated state machine in which each state transition (block) can be efficiently verified in constant time regardless of the number of prior transitions in the system. Traditional blockchains require verification time linear in the number of transitions. We show how to construct a succinct blockchain using recursively composed succinct non-interactive arguments of knowledge (SNARKs). Finally, we instantiate this construction to implement Coda (now known as Mina), a payment system (cryptocurrency) using a succinct blockchain. Coda offers payment functionality similar to Bitcoin, with a dramatically faster verification time of 200ms making it practical for lightweight clients and mobile devices to perform full verification of the system’s history.
 ]]></content:encoded>
 <pubDate>Thu, 26 Mar 2020 07:49:46 +0000</pubDate>
-<pubDate>Thu, 26 Mar 2020 07:49:46 +0000</pubDate>
 </item>
-
 <item>
 <title>SoK: Approximate Agreement</title>
 <link>https://eprint.iacr.org/2025/2339</link>
@@ -15883,21 +15882,6 @@ HashRand是一种高效、异步的分布式随机信标协议，它仅依赖安
 Regular access to unpredictable and bias-resistant randomness is important for applications such as blockchains, voting, and secure distributed computing. Distributed random beacon protocols address this need by distributing trust across multiple nodes, with the majority of them assumed to be honest. Numerous applications across the blockchain space have led to the proposal of several distributed random beacon protocols, with some already implemented. However, many current random beacon systems rely on threshold cryptographic setups or exhibit high computational costs, while others expect the network to be partial or bounded synchronous. To overcome these limitations, we propose HashRand, a computation and communication-efficient asynchronous random beacon protocol that only demands secure hash and pairwise secure channels to generate beacons. HashRand has a per-node amortized communication complexity of $\mathcal{O}(\lambda n \log(n))$ bits per beacon. The computational efficiency of HashRand is attributed to the two orders of magnitude lower time of a one-way Hash computation compared to discrete log exponentiation. Interestingly, besides reduced overhead,  HashRand achieves Post-Quantum security by leveraging the secure Hash function against quantum adversaries, setting it apart from other random beacon protocols that use discrete log cryptography. In a geo-distributed testbed of $n=136$ nodes, HashRand produces 78 beacons per minute, which is at least 5x higher than Spurt [IEEE S\&amp;P'22]. We also demonstrate the practical utility of HashRand by implementing a Post-Quantum secure Asynchronous SMR protocol, which has a response rate of over 135k transactions per second at a latency of $2.3$ seconds over a WAN for $n=16$ nodes.
 ]]></content:encoded>
 <pubDate>Mon, 13 Nov 2023 16:39:12 +0000</pubDate>
-</item>
-<item>
-<title>A Scalable Coercion-resistant Voting Scheme for Blockchain Decision-making</title>
-<link>https://eprint.iacr.org/2023/1578</link>
-<guid>https://eprint.iacr.org/2023/1578</guid>
-<content:encoded><![CDATA[
-<div> 关键词：blockchain voting, coercion-resistance, scalability, private differential voting power, liquid democracy
-
-总结:
-本文设计了首个可扩展的防胁迫区块链投票方案，支持私人差额投票权和一层液体民主。该方案复杂度为O(n)，其中n为选民数，将球票大小从张等人的Θ(m)减少到Θ(1)，m为专家和/或候选人数量。它保证了球票隐私、可验证性和防胁迫性。实验表明，与VoteAgain相比，该方案在大量选民和高额外球票率选举中的计票速度超过6倍。这项工作有望解决区块链投票中的胁迫问题，并提升系统的效率。 <div>
-Typically, a decentralized collaborative blockchain decision-making mechanism is realized by remote voting. To date, a number of blockchain voting schemes have been proposed; however, to the best of our knowledge, none of these schemes achieve coercion-resistance. In particular, for most blockchain voting schemes, the randomness used by the voting client can be viewed as a witness/proof of the actual vote, which enables improper behaviors such as coercion and vote-buying. Unfortunately, the existing coercion-resistant voting schemes cannot be directly adopted in the blockchain context. In this work, we design the first scalable coercion-resistant blockchain voting scheme that supports private differential voting power and 1-layer liquid democracy as introduced by Zhang et al. (NDSS '19). Its overall complexity is $O(n)$, where $n$ is the number of voters. Moreover, the ballot size is reduced from Zhang et al.'s $\Theta(m)$ to $\Theta(1)$, where $m$ is the number of experts and/or candidates. We formally prove that our scheme has ballot privacy, verifiability, and coercion-resistance. We implement a prototype of the scheme and the evaluation result shows that our scheme's tally procedure is more than 6x faster than VoteAgain (USENIX '20) in an election with over 10,000 voters and over 50\% extra ballot rate.
-
-Note: This work has been submitted to the IEEE for possible publication. Copyright may be transferred without notice, after which this version may no longer be accessible.
-]]></content:encoded>
-<pubDate>Thu, 12 Oct 2023 12:02:44 +0000</pubDate>
 </item>
 </channel>
 </rss>
