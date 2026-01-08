@@ -4,6 +4,203 @@
 <title>cs updates on arXiv.org</title>
 <link>http://rss.arxiv.org/rss/cs</link>
 
+<item>
+<title>Revisiting Speculative Leaderless Protocols for Low-Latency BFT Replication</title>
+<link>https://arxiv.org/abs/2601.03390</link>
+<guid>https://arxiv.org/abs/2601.03390</guid>
+<content:encoded><![CDATA[
+<div> 拜占庭容错、无领导者、低延迟、乐观快速路径、内容竞争<br><br>总结:  
+1. 针对许可链中面向用户的应用（如支付），拜占庭容错（BFT）协议需实现低延迟。  
+2. 现有无领导者乐观快速路径可在无内容竞争时实现2Δ的提交延迟，但并发请求易因接收顺序不同导致副本分歧，触发昂贵恢复流程。  
+3. Aspen协议通过引入基于松散同步时钟和网络延迟估计的最佳努力排序层，消除对“无竞争”条件的依赖，实现近优延迟2Δ+ε。  
+4. Aspen采用n=3f+2p+1的副本数量设计，可容忍f个拜占庭节点，并允许最多p个副本因网络延迟而分歧，仍能维持快速路径。  
+5. 当乐观条件不满足时，Aspen回退至类PBFT协议，在部分同步模型下保障安全性和活性；实验显示其在广域网中平均提交延迟低于75毫秒，吞吐达19,000 TPS，性能优于先前协议1.2至3.3倍。 <div>
+arXiv:2601.03390v1 Announce Type: new 
+Abstract: As Byzantine Fault Tolerant (BFT) protocols begin to be used in permissioned blockchains for user-facing applications such as payments, it is crucial that they provide low latency. In pursuit of low latency, some recently proposed BFT consensus protocols employ a leaderless optimistic fast path, in which clients broadcast their requests directly to replicas without first serializing requests at a leader, resulting in an end-to-end commit latency of 2 message delays ($2\Delta$) during fault-free, synchronous periods. However, such a fast path only works if there is no contention: concurrent contending requests can cause replicas to diverge if they receive conflicting requests in different orders, triggering costly recovery procedures.
+  In this work, we present Aspen, a leaderless BFT protocol that achieves a near-optimal latency of $2\Delta + \varepsilon$, where $\varepsilon$ indicates a short waiting delay. Aspen removes the no-contention condition by utilizing a best-effort sequencing layer based on loosely synchronized clocks and network delay estimates. Aspen requires $n = 3f + 2p + 1$ replicas to cope with up to $f$ Byzantine nodes. The $2p$ extra nodes allow Aspen's fast path to proceed even if up to $p$ replicas diverge due to unpredictable network delays. When its optimistic conditions do not hold, Aspen falls back to PBFT-style protocol, guaranteeing safety and liveness under partial synchrony. In experiments with wide-area distributed replicas, Aspen commits requests in less than 75 ms, a 1.2 to 3.3$\times$ improvement compared to previous protocols, while supporting 19,000 requests per second.
+]]></content:encoded>
+<pubDate>Thu, 08 Jan 2026 00:00:00 -0500</pubDate>
+<pubDate>Thu, 08 Jan 2026 00:00:00 -0500</pubDate>
+</item>
+<item>
+<title>Sensor to Pixels: Decentralized Swarm Gathering via Image-Based Reinforcement Learning</title>
+<link>https://arxiv.org/abs/2601.03413</link>
+<guid>https://arxiv.org/abs/2601.03413</guid>
+<content:encoded><![CDATA[
+<div> 图像强化学习、多智能体系统、去中心化控制、空间特征提取、群体聚合任务<br><br>总结:  
+1. 本文提出一种基于图像的强化学习方法，用于多智能体系统的去中心化控制。  
+2. 该方法将智能体观测编码为结构化视觉输入，利用神经网络提取空间特征，生成新的运动控制规则。  
+3. 在仅具备有限距离和方位感知能力的群体聚合任务中评估该方法，目标是保持群体凝聚性。  
+4. 与Bellaiche和Bruckstein的解析解（收敛慢但稳定）及VariAntNet（收敛快但成功率中等）两个基准对比。  
+5. 所提方法实现高收敛率，速度接近VariAntNet，在某些复杂场景下成为唯一可行方案。 <div>
+arXiv:2601.03413v1 Announce Type: new 
+Abstract: This study highlights the potential of image-based reinforcement learning methods for addressing swarm-related tasks. In multi-agent reinforcement learning, effective policy learning depends on how agents sense, interpret, and process inputs. Traditional approaches often rely on handcrafted feature extraction or raw vector-based representations, which limit the scalability and efficiency of learned policies concerning input order and size. In this work we propose an image-based reinforcement learning method for decentralized control of a multi-agent system, where observations are encoded as structured visual inputs that can be processed by Neural Networks, extracting its spatial features and producing novel decentralized motion control rules. We evaluate our approach on a multi-agent convergence task of agents with limited-range and bearing-only sensing that aim to keep the swarm cohesive during the aggregation. The algorithm's performance is evaluated against two benchmarks: an analytical solution proposed by Bellaiche and Bruckstein, which ensures convergence but progresses slowly, and VariAntNet, a neural network-based framework that converges much faster but shows medium success rates in hard constellations. Our method achieves high convergence, with a pace nearly matching that of VariAntNet. In some scenarios, it serves as the only practical alternative.
+]]></content:encoded>
+<pubDate>Thu, 08 Jan 2026 00:00:00 -0500</pubDate>
+<pubDate>Thu, 08 Jan 2026 00:00:00 -0500</pubDate>
+</item>
+<item>
+<title>Complexity of Perfect and Ideal Resilience Verification in Fast Re-Route Networks</title>
+<link>https://arxiv.org/abs/2601.03934</link>
+<guid>https://arxiv.org/abs/2601.03934</guid>
+<content:encoded><![CDATA[
+<div> 关键词：快速重路由、完美弹性、计算复杂性、coNP完全、静态规则<br><br>总结:  
+1. 现代通信网络采用去中心化的快速重路由机制，依赖节点上预设的静态规则，仅基于本地链路故障信息进行恢复。  
+2. 理想情况下，网络应具备“完美弹性”，即只要源与目的地物理连通，数据包总能成功送达。  
+3. 作者研究了判断给定静态重路由规则是否实现完美弹性的计算复杂性，证明该问题是coNP完全的。  
+4. 同样地，较弱的“理想弹性”判定问题也是coNP完全，且该结论适用于具有特定模式（如“跳过”）的规则。  
+5. 积极方面，当节点不依赖入端口信息时，可在线性时间内完成完美弹性的验证与规则合成。 <div>
+arXiv:2601.03934v1 Announce Type: new 
+Abstract: To achieve fast recovery from link failures, most modern communication networks feature fully decentralized fast re-routing mechanisms. These re-routing mechanisms rely on pre-installed static re-routing rules at the nodes (the routers), which depend only on local failure information, namely on the failed links incident to the node. Ideally, a network is perfectly resilient: the re-routing rules ensure that packets are always successfully routed to their destinations as long as the source and the destination are still physically connected in the underlying network after the failures. Unfortunately, there are examples where achieving perfect resilience is not possible. Surprisingly, only very little is known about the algorithmic aspect of when and how perfect resilience can be achieved.
+  We investigate the computational complexity of analyzing such local fast re-routing mechanisms. Our main result is a negative one: we show that even checking whether a given set of static re-routing rules ensures perfect resilience is coNP-complete. We also show coNP-completeness of the so-called ideal resilience, a weaker notion of resilience often considered in the literature. Additionally, we investigate other fundamental variations of the problem. In particular, we show that our coNP-completeness proof also applies to scenarios where the re-routing rules have specific patterns (known as skipping in the literature).
+  On the positive side, for scenarios where nodes do not have information about the link from which a packet arrived (the so-called in-port), we present linear-time algorithms for both the verification and synthesis problem for perfect resilience.
+]]></content:encoded>
+<pubDate>Thu, 08 Jan 2026 00:00:00 -0500</pubDate>
+<pubDate>Thu, 08 Jan 2026 00:00:00 -0500</pubDate>
+</item>
+<item>
+<title>On-Device Deep Reinforcement Learning for Decentralized Task Offloading Performance trade-offs in the training process</title>
+<link>https://arxiv.org/abs/2601.03976</link>
+<guid>https://arxiv.org/abs/2601.03976</guid>
+<content:encoded><![CDATA[
+<div> 边缘计算 深度强化学习 任务卸载 5G通信 能效权衡<br><br>总结:  
+1. 文章提出一种去中心化的深度强化学习（DRL）智能体，用于在边缘设备、多接入边缘计算（MEC）服务器和云服务器之间智能选择任务执行位置。  
+2. 与多数现有研究不同，该方法在真实测试平台上进行验证，平台包含多种边缘设备并通过5G网络连接MEC与云服务器。  
+3. 研究不仅评估了DRL智能体在满足任务需求方面的性能，还分析了本地运行该智能体的可行性。  
+4. 特别关注了本地训练与远程训练在延迟和能耗方面的权衡，为资源受限设备的任务卸载决策提供实用参考。 <div>
+arXiv:2601.03976v1 Announce Type: new 
+Abstract: Allowing less capable devices to offload computational tasks to more powerful devices or servers enables the development of new applications that may not run correctly on the device itself. Deciding where and why to run each of those applications is a complex task. Therefore, different approaches have been adopted to make offloading decisions. In this work, we propose a decentralized Deep Reinforcement Learning (DRL) agent to address the selection of computing locations. Unlike most existing work, we analyze it in a real testbed composed of various edge devices running the agent to determine where to execute each task. These devices are connected to a Multi-Access Edge Computing (MEC) server and a Cloud server through 5G communications. We evaluate not only the agent's performance in meeting task requirements but also the implications of running this type of agent locally, assessing the trade-offs of training locally versus remotely in terms of latency and energy consumption.
+]]></content:encoded>
+<pubDate>Thu, 08 Jan 2026 00:00:00 -0500</pubDate>
+<pubDate>Thu, 08 Jan 2026 00:00:00 -0500</pubDate>
+</item>
+<item>
+<title>Provably Convergent Decentralized Optimization over Directed Graphs under Generalized Smoothness</title>
+<link>https://arxiv.org/abs/2601.03566</link>
+<guid>https://arxiv.org/abs/2601.03566</guid>
+<content:encoded><![CDATA[
+<div> 关键词：去中心化优化、广义光滑性、梯度追踪、梯度裁剪、异构数据
+
+<br><br>总结:  
+1. 针对传统Lipschitz光滑性假设在梯度快速变化问题中失效的局限，文章引入更通用的$(L_0, L_1)$-光滑性框架。  
+2. 在该框架下，Hessian范数可随梯度范数线性增长，能更好刻画现实中的非平稳目标函数。  
+3. 提出结合梯度追踪与梯度裁剪的新算法，并精心设计裁剪阈值，确保在有向通信图下收敛。  
+4. 与现有方法不同，该方法不要求梯度差异有界，适用于梯度差异无界的异构数据场景。  
+5. 在LIBSVM和CIFAR-10等基准数据集上的实验表明，该方法在稳定性和收敛速度上优于现有算法。 <div>
+arXiv:2601.03566v1 Announce Type: cross 
+Abstract: Decentralized optimization has become a fundamental tool for large-scale learning systems; however, most existing methods rely on the classical Lipschitz smoothness assumption, which is often violated in problems with rapidly varying gradients. Motivated by this limitation, we study decentralized optimization under the generalized $(L_0, L_1)$-smoothness framework, in which the Hessian norm is allowed to grow linearly with the gradient norm, thereby accommodating rapidly varying gradients beyond classical Lipschitz smoothness. We integrate gradient-tracking techniques with gradient clipping and carefully design the clipping threshold to ensure accurate convergence over directed communication graphs under generalized smoothness. In contrast to existing distributed optimization results under generalized smoothness that require a bounded gradient dissimilarity assumption, our results remain valid even when the gradient dissimilarity is unbounded, making the proposed framework more applicable to realistic heterogeneous data environments. We validate our approach via numerical experiments on standard benchmark datasets, including LIBSVM and CIFAR-10, using regularized logistic regression and convolutional neural networks, demonstrating superior stability and faster convergence over existing methods.
+]]></content:encoded>
+<pubDate>Thu, 08 Jan 2026 00:00:00 -0500</pubDate>
+<pubDate>Thu, 08 Jan 2026 00:00:00 -0500</pubDate>
+</item>
+<item>
+<title>Multi-agent Optimization of Non-cooperative Multimodal Mobility Systems</title>
+<link>https://arxiv.org/abs/2601.03777</link>
+<guid>https://arxiv.org/abs/2601.03777</guid>
+<content:encoded><![CDATA[
+<div> 多模态交通、非合作决策者、均衡定价、出行者偏好、空驶里程<br><br>总结:<br>1. 多模态交通系统涉及出行者与网约车司机等非合作决策者，其自利行为可能损害系统整体效率。<br>2. 研究提出一个统一的数学建模框架，通过均衡定价协调供需，分析分散决策对系统效率的影响。<br>3. 模型可凸化以高效计算均衡价格，并用于政策制定。<br>4. 数值实验表明：价格敏感度高的出行者更倾向选择网约车或多模态出行；当公交枢纽较少或司机对价格过于敏感时，需对多模态出行进行补贴。<br>5. 增加公交枢纽虽提升多模态使用率，却因增加司机调度时间而提高空驶里程，需权衡可达性与环境影响。 <div>
+arXiv:2601.03777v1 Announce Type: cross 
+Abstract: While multimodal mobility systems have the potential to bring many benefits to travelers, drivers, the environment, and traffic congestion, such systems typically involve multiple non-cooperative decision-makers who may selfishly optimize their own objectives without considering the overall system benefits. This paper aims to investigate market-based interactions of travelers and ride-sourcing drivers in the context of multimodal mobility systems. We propose a unified mathematical modeling framework to capture the decentralized travelers and drivers' decision-making process and balance the network's demand and supply by equilibrium pricing. Such a model allows analyses of the impact of decentralized decision-making on multimodal mobility efficiencies. The proposed formulation can be further convexified to efficiently compute the equilibrium ride-sourcing prices. We conduct numerical experiments on different settings of transportation networks to gain policy insights. We find that travelers prefer ride-sourcing and multimodal transportation more than the driving option when they are more sensitive to prices. We also find that travelers may need to be subsidized to use multimodal transportation when there is fewer transit hubs in the network or, ride-sourcing drivers become too sensitive to the prices. However, we find that more transit hubs in the network increases the total empty VMT of ride-sourcing drivers by increasing the total relocation time. The proposed model can be used by policymakers and platform operators to design pricing and subsidy schemes that align individual decision-making with system-level efficiency and evaluate the trade-offs between accessibility and environmental impacts in multimodal transportation networks.
+]]></content:encoded>
+<pubDate>Thu, 08 Jan 2026 00:00:00 -0500</pubDate>
+<pubDate>Thu, 08 Jan 2026 00:00:00 -0500</pubDate>
+</item>
+<item>
+<title>Stigmergic optimal transport</title>
+<link>https://arxiv.org/abs/2601.04111</link>
+<guid>https://arxiv.org/abs/2601.04111</guid>
+<content:encoded><![CDATA[
+<div> 关键词：群体导航、随机最优控制、路径优化、环境异质性、费马原理<br><br>总结:  
+1. 研究提出一种基于随机最优控制理论的群体导航框架，利用“痕迹介导”（stigmergy）机制实现去中心化路径优化。  
+2. 个体通过在环境中留下并跟随信息素类轨迹，共同最小化预期穿越时间。  
+3. 模拟与分析揭示两种涌现行为：在均匀环境中路径趋于直线，在不同介质交界处发生路径折射。  
+4. 这些行为与昆虫觅食路径的实验观察一致，体现出类似费马原理的最短时间特性。  
+5. 整个系统无需全局信息或中央协调，依靠局部、含噪的智能体-场交互及快慢动力学机制，即可在异质环境中生成测地线轨迹。 <div>
+arXiv:2601.04111v1 Announce Type: cross 
+Abstract: Efficient navigation in swarms often relies on the emergence of decentralized approaches that minimize traversal time or energy. Stigmergy, where agents modify a shared environment that then modifies their behavior, is a classic mechanism that can encode this strategy. We develop a theoretical framework for stigmergic transport by casting it as a stochastic optimal control problem: agents (collectively) lay and (individually) follow trails while minimizing expected traversal time. Simulations and analysis reveal two emergent behaviors: path straightening in homogeneous environments and path refraction at material interfaces, both consistent with experimental observations of insect trails. While reminiscent of Fermat's principle, our results show how local, noisy agent+field interactions can give rise to geodesic trajectories in heterogeneous environments, without centralized coordination or global knowledge, relying instead on an embodied slow fast dynamical mechanism.
+]]></content:encoded>
+<pubDate>Thu, 08 Jan 2026 00:00:00 -0500</pubDate>
+<pubDate>Thu, 08 Jan 2026 00:00:00 -0500</pubDate>
+</item>
+<item>
+<title>IoTChain: A Three-Tier Blockchain-based IoT Security Architecture</title>
+<link>https://arxiv.org/abs/1806.02008</link>
+<guid>https://arxiv.org/abs/1806.02008</guid>
+<content:encoded><![CDATA[
+<div> 区块链 物联网 安全架构 身份认证 访问控制<br><br>总结:  
+1. 文章提出了一种基于区块链的物联网安全架构IoTchain，旨在提升物联网设备与系统的安全性。  
+2. 该架构采用三层设计，包括认证层、区块链层和应用层。  
+3. 架构支持身份认证、访问控制、隐私保护、轻量化特性、区域节点容错、抗拒绝服务攻击及存储完整性保障。  
+4. 研究还对IoTchain的性能进行了评估，验证其在实际物联网部署中的实用性。 <div>
+arXiv:1806.02008v3 Announce Type: replace 
+Abstract: There has been increasing interest in the potential of blockchain in enhancing the security of devices and systems, such as Internet of Things (IoT). In this paper, we present a blockchain-based IoT security architecture, IoTchain. The three-tier architecture comprises an authentication layer, a blockchain layer and an application layer, and is designed to achieve identity authentication, access control, privacy protection, lightweight feature, regional node fault tolerance, denial-of-service resilience, and storage integrity. We also evaluate the performance of IoTchain to demonstrate its utility in an IoT deployment.
+]]></content:encoded>
+<pubDate>Thu, 08 Jan 2026 00:00:00 -0500</pubDate>
+<pubDate>Thu, 08 Jan 2026 00:00:00 -0500</pubDate>
+</item>
+<item>
+<title>On Game based Distributed Approach for General Multi-agent Optimal Coverage with Application to UAV Networks</title>
+<link>https://arxiv.org/abs/2408.01193</link>
+<guid>https://arxiv.org/abs/2408.01193</guid>
+<content:encoded><![CDATA[
+<div> 最优覆盖问题、多智能体系统、分布式决策、博弈论、无人机网络<br><br>总结:  
+1. 针对多智能体系统的最优覆盖问题（OCP），提出一种基于博弈论的分布式决策方法。  
+2. 该方法采用去中心化优化机制，仅需局部信息即可运行，有效降低大规模系统带来的高计算成本。  
+3. 所设计的分布式算法被证明能收敛至接近全局最优的覆盖效果。  
+4. 方法应用于无人机（UAV）网络，以最大化目标区域的覆盖面积。  
+5. 仿真实验表明，相比其他典型分布式算法，该方法计算时间更少、收敛更快；与集中式优化相比，其结果近似最优且计算效率更高。 <div>
+arXiv:2408.01193v3 Announce Type: replace 
+Abstract: This paper focuses on the optimal coverage problem (OCP) for multi-agent systems with a decentralized optimization mechanism. A game based distributed decision-making method for the multi-agent OCP is proposed to address the high computational costs arising from the large scale of the multi-agent system and to ensure that the game's equilibrium achieves the global performance objective's maximum value. In particular, a distributed algorithm that needs only local information is developed and proved to converge to near-optimal global coverage. Finally, the proposed method is applied to maximize the coverage area of the UAV network for a target region. The simulation results show that our method can require much less computational time than other typical distributed algorithms in related work, while achieving a faster convergence rate. Comparison with centralized optimization also demonstrates that the proposed method has approximate optimization results and high computation efficiency.
+]]></content:encoded>
+<pubDate>Thu, 08 Jan 2026 00:00:00 -0500</pubDate>
+<pubDate>Thu, 08 Jan 2026 00:00:00 -0500</pubDate>
+</item>
+<item>
+<title>Federated Clustering: An Unsupervised Cluster-Wise Training for Decentralized Data Distributions</title>
+<link>https://arxiv.org/abs/2408.10664</link>
+<guid>https://arxiv.org/abs/2408.10664</guid>
+<content:encoded><![CDATA[
+<div> 联邦学习、无监督学习、聚类、数据分布、模型协同训练<br><br>总结:  
+1. 本文提出一种面向无监督场景的联邦学习新方法——FedCRef，用于在无标签、非均匀数据分布下识别全局类别（global K），即联邦聚类。  
+2. 各客户端首先基于本地数据分布（local K）训练模型，生成压缩数据表示，并通过重建误差分析共享模型以形成联邦协作组。  
+3. 在组内，客户端协同训练共享模型以表征各自的数据分布，并持续优化本地聚类，提升数据关联准确性。  
+4. 该迭代机制能有效识别网络中所有潜在数据分布，并为每类构建鲁棒的表示模型。  
+5. 实验在EMNIST和KMNIST数据集上验证了FedCRef优于传统集中式方法，在无监督联邦设定下显著提升数据表示精度。 <div>
+arXiv:2408.10664v2 Announce Type: replace 
+Abstract: Federated Learning (FL) is a pivotal approach in decentralized machine learning, especially when data privacy is crucial and direct data sharing is impractical. While FL is typically associated with supervised learning, its potential in unsupervised scenarios is underexplored. This paper introduces a novel unsupervised federated learning methodology designed to identify the complete set of categories (global K) across multiple clients within label-free, non-uniform data distributions, a process known as Federated Clustering. Our approach, Federated Cluster-Wise Refinement (FedCRef), involves clients that collaboratively train models on clusters with similar data distributions. Initially, clients with diverse local data distributions (local K) train models on their clusters to generate compressed data representations. These local models are then shared across the network, enabling clients to compare them through reconstruction error analysis, leading to the formation of federated groups.In these groups, clients collaboratively train a shared model representing each data distribution, while continuously refining their local clusters to enhance data association accuracy. This iterative process allows our system to identify all potential data distributions across the network and develop robust representation models for each. To validate our approach, we compare it with traditional centralized methods, establishing a performance baseline and showcasing the advantages of our distributed solution. We also conduct experiments on the EMNIST and KMNIST datasets, demonstrating FedCRef's ability to refine and align cluster models with actual data distributions, significantly improving data representation precision in unsupervised federated settings.
+]]></content:encoded>
+<pubDate>Thu, 08 Jan 2026 00:00:00 -0500</pubDate>
+<pubDate>Thu, 08 Jan 2026 00:00:00 -0500</pubDate>
+</item>
+<item>
+<title>Noncooperative Consensus via a Trading-based Auction</title>
+<link>https://arxiv.org/abs/2502.03616</link>
+<guid>https://arxiv.org/abs/2502.03616</guid>
+<content:encoded><![CDATA[
+<div> 非合作多智能体系统、协调挑战、自利行为、去中心化共识、公平资源分配<br><br>总结:  
+1. 非合作多智能体系统中，由于各智能体偏好冲突且追求自利，常导致次优结果或安全隐患。  
+2. 提出名为TACo（Trading Auction for Consensus）的去中心化算法，使智能体无需直接通信或披露私有估值即可达成共识。  
+3. TACo通过结构化的基于交易的拍卖机制，让智能体迭代选择偏好选项，并在预先确定的步数内可证明地达成一致。  
+4. 数值实验验证了TACo在实践中具备可靠的终止性保证。  
+5. 该算法在最小化全体智能体总成本的同时，显著提升了资源分配的公平性，优于基线方法。 <div>
+arXiv:2502.03616v3 Announce Type: replace 
+Abstract: Noncooperative multi-agent systems often face coordination challenges due to conflicting preferences among agents. In particular, when agents act in their own self-interest, they may prefer different choices among multiple feasible outcomes, leading to suboptimal outcomes or even safety concerns. We propose an algorithm named trading auction for consensus (TACo), a decentralized approach that enables noncooperative agents to reach consensus without communicating directly or disclosing private valuations. TACo facilitates coordination through a structured trading-based auction, where agents iteratively select choices of interest and provably reach an agreement within an a priori bounded number of steps. A series of numerical experiments validate that the termination guarantees of TACo hold in practice, and show that TACo achieves a median performance that minimizes the total cost across all agents, while allocating resources significantly more fairly than baseline approaches.
+]]></content:encoded>
+<pubDate>Thu, 08 Jan 2026 00:00:00 -0500</pubDate>
+<pubDate>Thu, 08 Jan 2026 00:00:00 -0500</pubDate>
+</item>
+<item>
+<title>QoS-Aware Load Balancing in the Computing Continuum via Multi-Player Bandits</title>
+<link>https://arxiv.org/abs/2512.18915</link>
+<guid>https://arxiv.org/abs/2512.18915</guid>
+<content:encoded><![CDATA[
+<div> 边缘计算、服务质量（QoS）、负载均衡、多玩家多臂老虎机（MP-MAB）、核密度估计（KDE）<br><br>总结:<br>1. 随着计算从云端向边缘迁移，形成动态的计算连续体（CC），保障每个客户端的服务质量（QoS）变得更具挑战性。<br>2. 现有方法多关注全局指标，忽视了对延迟敏感和可靠性要求高的应用所需的单客户端QoS保障。<br>3. 提出QEdgeProxy——一种去中心化的QoS感知负载均衡器，部署于物联网设备与服务实例之间。<br>4. 将负载均衡建模为具有异构奖励的多玩家多臂老虎机（MP-MAB）问题，利用核密度估计（KDE）估算满足QoS的成功概率，并引入自适应探索机制以应对非平稳环境。<br>5. 在基于K3s集群的真实网络条件下进行实验，结果表明QEdgeProxy在单客户端QoS满足率上显著优于基于邻近性和强化学习的基线方法，并能有效应对负载突增和服务实例变动。 <div>
+arXiv:2512.18915v2 Announce Type: replace 
+Abstract: As computation shifts from the cloud to the edge to reduce processing latency and network traffic, the resulting Computing Continuum (CC) creates a dynamic environment where meeting strict Quality of Service (QoS) requirements and avoiding service instance overload becomes challenging. Existing methods often prioritize global metrics and overlook per-client QoS, which is crucial for latency-sensitive and reliability-critical applications. We propose QEdgeProxy, a decentralized QoS-aware load balancer that acts as a proxy between IoT devices and service instances in the CC. We formulate the load balancing problem as a Multi-Player Multi-Armed Bandit (MP-MAB) with heterogeneous rewards: Each load balancer autonomously selects service instances to maximize the probability of meeting its clients' QoS requirements by using Kernel Density Estimation (KDE) to estimate QoS success probabilities. Our load-balancing algorithm also incorporates an adaptive exploration mechanism to recover rapidly from performance shifts and non-stationary conditions. We present a Kubernetes-native QEdgeProxy implementation and evaluate it on an emulated CC testbed deployed on a K3s cluster with realistic network conditions and a latency-sensitive edge-AI workload. Results show that QEdgeProxy significantly outperforms proximity-based and reinforcement-learning baselines in per-client QoS satisfaction, while adapting effectively to load surges and changes in instance availability.
+]]></content:encoded>
+<pubDate>Thu, 08 Jan 2026 00:00:00 -0500</pubDate>
+<pubDate>Thu, 08 Jan 2026 00:00:00 -0500</pubDate>
+</item>
 
 <item>
 <title>APoW: Auditable Proof-of-Work Against Block Withholding Attacks</title>

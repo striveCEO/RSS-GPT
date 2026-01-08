@@ -4,20 +4,19 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+
 <item>
 <title>A SNARK for (Non-)Subsequences with Text-Sub-Linear Proving Time</title>
 <link>https://eprint.iacr.org/2026/008</link>
 <guid>https://eprint.iacr.org/2026/008</guid>
 <content:encoded><![CDATA[
-<div> 关键词：子序列、非子序列、预处理、证明方案、运行时间<br><br>总结:<br>1. 文章研究如何高效判断一个字符串是否为另一字符串的子序列或非子序列，该问题在基因分析、区块链和自然语言处理等领域有广泛应用。<br>2. 针对现有方法（如Ling等人基于多变量sumcheck的方案）中证明者运行时间较高（至少为$\mathcal{O}(n + N + |\Sigma|)$）的问题，提出一种两阶段证明方案。<br>3. 该方案将证明过程分为预处理阶段和（非）子序列证明阶段，其中预处理仅依赖文本$\mathbf{t}$和字符集$\Sigma$，可提前完成。<br>4. 利用缓存商技术，预处理时间达到关于$N + |\Sigma|$的拟线性复杂度，而（非）子序列证明时间仅为$\mathcal{O}(n \log_2 (N + |\Sigma|))$。<br>5. 在$n \ll N$且$\log_2(N + |\Sigma|)$较小的常见场景下，该方案显著降低证明者运行时间，实现对文本长度的次线性证明效率。 <div>
+<div> 关键词：子序列、非子序列、预处理、证明方案、运行时间<br /><br />总结:<br />1. 文章研究如何高效判断一个字符串是否为另一字符串的子序列或非子序列，该问题在基因分析、区块链和自然语言处理等领域有广泛应用。<br />2. 针对现有方法（如Ling等人基于多变量sumcheck的方案）中证明者运行时间较高（至少为$\mathcal{O}(n + N + |\Sigma|)$）的问题，提出一种两阶段证明方案。<br />3. 该方案将证明过程分为预处理阶段和（非）子序列证明阶段，其中预处理仅依赖文本$\mathbf{t}$和字符集$\Sigma$，可提前完成。<br />4. 利用缓存商技术，预处理时间达到关于$N + |\Sigma|$的拟线性复杂度，而（非）子序列证明时间仅为$\mathcal{O}(n \log_2 (N + |\Sigma|))$。<br />5. 在$n \ll N$且$\log_2(N + |\Sigma|)$较小的常见场景下，该方案显著降低证明者运行时间，实现对文本长度的次线性证明效率。 <div>
 A keyword $\mathbf{s}$ is a subsequence of a text $\mathbf{t}$ if $\mathbf{s}$ can be obtained by deleting some characters of $\mathbf{t}$. Otherwise, $\mathbf{s}$ is considered a non-subsequence of $\mathbf{t}$. Determining (non-)subsequence relationships involves various fields, e.g., genetic analysis, blockchains, natural language processing, etc. Ling et al. (SCN 2024) provided a succinct argument for non-subsequences from multivariate sumcheck (Lund et al., FOCS 1990) whose prover's runtime is at least $\mathcal{O}(n + N + |\Sigma|)$ where $n$, $N$, and $\Sigma$ are respectively the lengths of strings $\mathbf{s}$ and $\mathbf{t}$, and the alphabet $\Sigma$ capturing all characters of $\mathbf{s}$ and $\mathbf{t}$. As indicated by Ling et al., proving non-subsequences is non-trivial since one needs to model such an argument into smaller ones for sumcheck, permutation, and lookup.
 
 We propose a subsequence scheme that separates proving either subsequence or non-subsequence arguments into two phases: (i) proof of preprocessing and (ii) proof of (non-)subsequence argument, assuming $n \ll N$ (i.e., $|\mathbf{s}| \ll |\mathbf{t}|$). Then, we can make a proof of preprocessing with inputs $\mathbf{t}$ and $\Sigma$ in advance, without any knowledge about $\mathbf{s}$. When $\mathbf{s}$ is known, we can determine whether $\mathbf{s}$ is a subsequence of $\mathbf{t}$ and proceed to prove that $\mathbf{s}$ is a (non-)subsequence of $\mathbf{t}$. Employing cached quotients (IACR ePrint 2022/1763), we achieve the running time quasilinear in $N + |\Sigma|$ for preprocessing, while the running time of proving (non-)subsequences is $\mathcal{O}(n \log_2 (N + |\Sigma|))$. Since $n \ll N$ and $\log_2(N + |\Sigma|)$ is small, this saves the prover's runtime, assuming a preprocessing depending only on $\mathbf{t}$ is computed in advance. As $\mathcal{O}(n \log_2 (N + |\Sigma|))$ is sub-linear in $N + |\Sigma|$, we achieve a text-sub-linear proving time.
 ]]></content:encoded>
 <pubDate>Sun, 04 Jan 2026 04:21:01 +0000</pubDate>
-<pubDate>Sun, 04 Jan 2026 04:21:01 +0000</pubDate>
 </item>
-
 <item>
 <title>Mina: Decentralized Cryptocurrency at Scale</title>
 <link>https://eprint.iacr.org/2020/352</link>
@@ -15882,19 +15881,6 @@ In this paper, we show how recent linearly-homomorphic signatures can be exploit
 Privacy will indeed be unconditional, after the publication of the results and the proofs, whereas the soundness of the proofs holds in the algebraic group model and the random oracle model.
 ]]></content:encoded>
 <pubDate>Wed, 15 May 2024 20:08:35 +0000</pubDate>
-</item>
-<item>
-<title>Random Beacons in Monte Carlo: Efficient Asynchronous Random Beacon without Threshold Cryptography</title>
-<link>https://eprint.iacr.org/2023/1755</link>
-<guid>https://eprint.iacr.org/2023/1755</guid>
-<content:encoded><![CDATA[
-<div> 关键词：Distributed random beacon, HashRand, Post-Quantum security, Asynchronous SMR, Communication efficiency.
-
-总结: <br />
-HashRand是一种高效、异步的分布式随机信标协议，它仅依赖安全哈希和对称安全通信，以克服现有系统的局限性。该协议具有每节点的平均通信复杂度为$\mathcal{O}(\lambda n \log(n))$比特/信标，显著降低了计算成本，尤其在量子安全方面，通过使用安全哈希函数对抗量子攻击。在一个包含136个节点的全球分布测试环境中，HashRand每分钟能产生78个信标，比Spurt快至少5倍。此外，HashRand的应用实例包括实现了一个Post-Quantum安全的异步SMR协议，对于16个节点的WAN环境，响应率超过135k交易/秒，延迟仅为2.3秒。 <div>
-Regular access to unpredictable and bias-resistant randomness is important for applications such as blockchains, voting, and secure distributed computing. Distributed random beacon protocols address this need by distributing trust across multiple nodes, with the majority of them assumed to be honest. Numerous applications across the blockchain space have led to the proposal of several distributed random beacon protocols, with some already implemented. However, many current random beacon systems rely on threshold cryptographic setups or exhibit high computational costs, while others expect the network to be partial or bounded synchronous. To overcome these limitations, we propose HashRand, a computation and communication-efficient asynchronous random beacon protocol that only demands secure hash and pairwise secure channels to generate beacons. HashRand has a per-node amortized communication complexity of $\mathcal{O}(\lambda n \log(n))$ bits per beacon. The computational efficiency of HashRand is attributed to the two orders of magnitude lower time of a one-way Hash computation compared to discrete log exponentiation. Interestingly, besides reduced overhead,  HashRand achieves Post-Quantum security by leveraging the secure Hash function against quantum adversaries, setting it apart from other random beacon protocols that use discrete log cryptography. In a geo-distributed testbed of $n=136$ nodes, HashRand produces 78 beacons per minute, which is at least 5x higher than Spurt [IEEE S\&amp;P'22]. We also demonstrate the practical utility of HashRand by implementing a Post-Quantum secure Asynchronous SMR protocol, which has a response rate of over 135k transactions per second at a latency of $2.3$ seconds over a WAN for $n=16$ nodes.
-]]></content:encoded>
-<pubDate>Mon, 13 Nov 2023 16:39:12 +0000</pubDate>
 </item>
 </channel>
 </rss>
