@@ -4,6 +4,19 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+<item>
+<title>A SNARK for (Non-)Subsequences with Text-Sub-Linear Proving Time</title>
+<link>https://eprint.iacr.org/2026/008</link>
+<guid>https://eprint.iacr.org/2026/008</guid>
+<content:encoded><![CDATA[
+<div> 关键词：子序列、非子序列、预处理、证明方案、运行时间<br><br>总结:<br>1. 文章研究如何高效判断一个字符串是否为另一字符串的子序列或非子序列，该问题在基因分析、区块链和自然语言处理等领域有广泛应用。<br>2. 针对现有方法（如Ling等人基于多变量sumcheck的方案）中证明者运行时间较高（至少为$\mathcal{O}(n + N + |\Sigma|)$）的问题，提出一种两阶段证明方案。<br>3. 该方案将证明过程分为预处理阶段和（非）子序列证明阶段，其中预处理仅依赖文本$\mathbf{t}$和字符集$\Sigma$，可提前完成。<br>4. 利用缓存商技术，预处理时间达到关于$N + |\Sigma|$的拟线性复杂度，而（非）子序列证明时间仅为$\mathcal{O}(n \log_2 (N + |\Sigma|))$。<br>5. 在$n \ll N$且$\log_2(N + |\Sigma|)$较小的常见场景下，该方案显著降低证明者运行时间，实现对文本长度的次线性证明效率。 <div>
+A keyword $\mathbf{s}$ is a subsequence of a text $\mathbf{t}$ if $\mathbf{s}$ can be obtained by deleting some characters of $\mathbf{t}$. Otherwise, $\mathbf{s}$ is considered a non-subsequence of $\mathbf{t}$. Determining (non-)subsequence relationships involves various fields, e.g., genetic analysis, blockchains, natural language processing, etc. Ling et al. (SCN 2024) provided a succinct argument for non-subsequences from multivariate sumcheck (Lund et al., FOCS 1990) whose prover's runtime is at least $\mathcal{O}(n + N + |\Sigma|)$ where $n$, $N$, and $\Sigma$ are respectively the lengths of strings $\mathbf{s}$ and $\mathbf{t}$, and the alphabet $\Sigma$ capturing all characters of $\mathbf{s}$ and $\mathbf{t}$. As indicated by Ling et al., proving non-subsequences is non-trivial since one needs to model such an argument into smaller ones for sumcheck, permutation, and lookup.
+
+We propose a subsequence scheme that separates proving either subsequence or non-subsequence arguments into two phases: (i) proof of preprocessing and (ii) proof of (non-)subsequence argument, assuming $n \ll N$ (i.e., $|\mathbf{s}| \ll |\mathbf{t}|$). Then, we can make a proof of preprocessing with inputs $\mathbf{t}$ and $\Sigma$ in advance, without any knowledge about $\mathbf{s}$. When $\mathbf{s}$ is known, we can determine whether $\mathbf{s}$ is a subsequence of $\mathbf{t}$ and proceed to prove that $\mathbf{s}$ is a (non-)subsequence of $\mathbf{t}$. Employing cached quotients (IACR ePrint 2022/1763), we achieve the running time quasilinear in $N + |\Sigma|$ for preprocessing, while the running time of proving (non-)subsequences is $\mathcal{O}(n \log_2 (N + |\Sigma|))$. Since $n \ll N$ and $\log_2(N + |\Sigma|)$ is small, this saves the prover's runtime, assuming a preprocessing depending only on $\mathbf{t}$ is computed in advance. As $\mathcal{O}(n \log_2 (N + |\Sigma|))$ is sub-linear in $N + |\Sigma|$, we achieve a text-sub-linear proving time.
+]]></content:encoded>
+<pubDate>Sun, 04 Jan 2026 04:21:01 +0000</pubDate>
+<pubDate>Sun, 04 Jan 2026 04:21:01 +0000</pubDate>
+</item>
 
 <item>
 <title>Mina: Decentralized Cryptocurrency at Scale</title>
