@@ -4,6 +4,79 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+<item>
+<title>On the design of Survivable Distributed Passwordless Authentication and Single Sign-On</title>
+<link>https://eprint.iacr.org/2026/028</link>
+<guid>https://eprint.iacr.org/2026/028</guid>
+<content:encoded><![CDATA[
+<div> 关键词：单点登录（SSO）、身份提供商、钓鱼攻击、无密码认证、可生存性协议<br><br>总结:  
+1. 现有单点登录（SSO）协议在身份提供商被攻破时，攻击者可伪造身份凭证，冒充用户。  
+2. 当前的可生存SSO协议仅适用于基于密码的认证，难以抵御凭证钓鱼等高级攻击。  
+3. 虽然已有抗钓鱼的无密码认证标准，但缺乏对入侵容忍性的保障。  
+4. 本文首次提出“可生存无密码SSO”（SPS）研究方向，并定义其子协议“可生存无密码挑战-响应”（SPC）。  
+5. 提出了针对SPC和SPS的首个形式化安全框架与博弈式安全定义，涵盖会话注入、克隆认证器检测等新旧攻击模型，并通过模块化设计支持协议组合与扩展应用。 <div>
+Single Sign-On (SSO) protocols allow an identity provider to authenticate users and report the outcome by issuing identity attestations. Recent attacks show that breaching the identity provider infrastructure enables adversaries to issue arbitrary identity attestations and impersonate users. Survivable SSO protocols limit the risks of similar intrusions, but they have only been defined for password-based authentication, inheriting their limitations against powerful attacks such as credential phishing. While phishing-resistant passwordless authentication protocols have been standardized, they are not designed to guarantee intrusion tolerance. We initiate the research for Survivable Passwordless SSO (SPS) and propose a modular approach which includes the novel definition of Survivable Passwordless Challenge-response (SPC) protocols for authentication as a sub-routine of SSO. We give the first frameworks and game-based security definitions both for SPC and SPS which capture both novel attack classes, such as session injection attacks in a decentralized setting, and existing but not yet formalized attack classes, such as detection of cloned authenticators. The design of the models includes novel strategies to capture proactive security in survivable protocols within security definitions and to compose authentication and SSO through a modular approach. Our strategies and models may also be applied with minor modifications to non-survivable protocols, possibly providing a novel approach to assess the security of existing SSO protocols.
+]]></content:encoded>
+<pubDate>Wed, 07 Jan 2026 16:34:31 +0000</pubDate>
+<pubDate>Wed, 07 Jan 2026 16:34:31 +0000</pubDate>
+</item>
+<item>
+<title>Practical SNARGs for Matrix Multiplications over Encrypted Data</title>
+<link>https://eprint.iacr.org/2026/027</link>
+<guid>https://eprint.iacr.org/2026/027</guid>
+<content:encoded><![CDATA[
+<div> 全同态加密、可验证计算、矩阵-向量乘法、隐私保护、恶意安全<br><br>总结:<br>1. 全同态加密（FHE）允许在加密数据上直接计算，保障医疗和金融等敏感领域的隐私。<br>2. FHE在“诚实但好奇”模型下确保机密性，但要实现抵御恶意攻击的完整安全（含完整性和隐私），需引入可验证性。<br>3. 现有将FHE与可验证计算结合的方案（即vFHE）通常计算开销大，难以实用。<br>4. 本文提出一种专用于矩阵–向量乘法的高效可验证同态加密方案，而非通用vFHE。<br>5. 作者提供了开源实现，实验表明该方案效率高，具备实际部署可行性。 <div>
+Fully Homomorphic Encryption (FHE) enables computations to be performed directly on encrypted data, without ever requiring decryption. This capability is particularly crucial for privacy-preserving outsourced computation in sensitive fields such as healthcare and finance. While FHE ensures data confidentiality under the honest-but-curious adversarial model, achieving full malicious security, encompassing both integrity and privacy, requires an additional layer of verifiability.
+
+To address this, a growing body of research has explored combining FHE with techniques from verifiable computation, leading to the notion of verifiable FHE (vFHE). However, the integration of these two paradigms often results in substantial computational overhead, making existing approaches largely impractical for real-world deployment.
+
+In this work, rather than targeting general-purpose verifiable FHE, we design a novel and practical verifiable homomorphic encryption scheme tailored for an important and widely used operation: matrix–vector multiplication. We provide an open-source implementation and our experimental results demonstrate that the proposed scheme achieves high efficiency, making it ready for practical adoption.
+]]></content:encoded>
+<pubDate>Wed, 07 Jan 2026 16:22:19 +0000</pubDate>
+<pubDate>Wed, 07 Jan 2026 16:22:19 +0000</pubDate>
+</item>
+<item>
+<title>EHDSA:  Elliptic  Curve-Based  Homomorphic  Digital  Signature  Algorithm  with  Isomorphic  Message Mapping</title>
+<link>https://eprint.iacr.org/2026/023</link>
+<guid>https://eprint.iacr.org/2026/023</guid>
+<content:encoded><![CDATA[
+<div> 椭圆曲线密码学、同态数字签名、ECDSA、隐私增强、群同构<br><br>总结:<br>1. 本文提出EHDSA（椭圆曲线同态数字签名算法），在经典ECDSA基础上引入新群同构φ，将椭圆曲线群映射到整数环ℤₙ。<br>2. 利用秘密参数t∈ℤₙ*构建标量映射，有效隐藏临时公钥成分，同时保留验证所需的代数与同态性质。<br>3. 该方案增强了签名的不可链接性和不可区分性，显著提升隐私保护能力。<br>4. 在保持ECDSA计算效率的同时，仅引入极小计算开销。<br>5. 文章提供了基于标准密码假设的形式化安全证明，并验证了方案的正确性与计算复杂度。 <div>
+Elliptic curve-based cryptographic systems have established themselves as fundamental components of modern cryptography, providing both efficiency and security guarantees. In this paper, we propose EHDSA (Elliptic Curve Homomorphic Digital Signature Algorithm), which addresses the privacy limitations inherent in classical ECDSA by introducing a novel isomorphism $\phi$ from the elliptic curve group $E(\mathbb{F}_p)$ to the integer ring $\mathbb{Z}_n$. Our approach utilizes a secret parameter $t \in \mathbb{Z}_n^*$ to define a scalar mapping that effectively obfuscates ephemeral public key components while maintaining the algebraic and homomorphic properties essential for signature verification. This transformation provides enhanced unlinkability and signature indistinguishability while preserving the computational efficiency of ECDSA. We provide formal security proofs under standard cryptographic assumptions, demonstrate correctness, and analyze computational complexity, showing that EHDSA achieves security levels equivalent to ECDSA with minimal computational overhead.
+]]></content:encoded>
+<pubDate>Wed, 07 Jan 2026 06:04:23 +0000</pubDate>
+<pubDate>Wed, 07 Jan 2026 06:04:23 +0000</pubDate>
+</item>
+<item>
+<title>Qurrency: a quantum-secure, private, and auditable platform for digital assets</title>
+<link>https://eprint.iacr.org/2026/015</link>
+<guid>https://eprint.iacr.org/2026/015</guid>
+<content:encoded><![CDATA[
+<div> 关键词：央行数字货币（CBDC）、UTXO模型、隐私保护、抗量子安全、可审计性<br><br>总结:  
+1. 央行数字货币（CBDC）及相关数字资产平台虽具变革潜力，但受限于隐私、抗量子安全和可审计性三大问题。  
+2. 本文首次对基于UTXO模型的私有数字资产系统进行形式化建模，填补了该领域研究空白。  
+3. 建模过程中发现并披露了开源项目Hyperledger Zeto中的关键安全漏洞，已获修复。  
+4. 提出名为Qurrency的高效构造方案，兼具隐私保护、可审计性，并能抵御“先存储后解密”类量子攻击。  
+5. Qurrency已在EVM兼容区块链上实现，验证了其实际可行性和部署便捷性。 <div>
+Central bank digital currencies (CBDCs) and other related digital asset platforms have the potential to revolutionize the financial world.  While these platforms have been deployed in test environments by virtually all large financial institutions, including central banks, there are still several limitations of these systems that prevent widespread adoption.  These include (i) privacy, (ii) security against quantum adversaries, and (iii) auditability. In this work, we undertake (to our knowledge) the first formal study of these systems.
+
+While there have been many digital asset platforms implemented, we do not know of any formal model for a fundamentally UTXO-based digital asset platform/CBDC. Our first contribution is a formal modeling of a UTXO-based private digital asset system that meets our requirements listed above.  This model is loosely based upon the open source software that we found came the closest to meeting our requirements, Hyperledger Zeto.  In the course of our formal modeling, we found a critical security bug in Zeto which we responsibly disclosed to the Zeto maintainers and has since been fixed. We then provide an efficient construction of such a system, which we call Qurrency.  Qurrency is an efficient UTXO-based privacy-preserving token system that includes an auditing mechanism and is secure against "harvest now, decrypt later" attacks, which is critically important for several central banks, including the Bank of Brazil. We implemented our construction to show that it is practically efficient and can be used on any EVM-based blockchain system with ease.
+]]></content:encoded>
+<pubDate>Mon, 05 Jan 2026 17:50:33 +0000</pubDate>
+<pubDate>Mon, 05 Jan 2026 17:50:33 +0000</pubDate>
+</item>
+<item>
+<title>Third-Party Moderation of Abuse Reports for End-to-End Encrypted Messaging with Multiple Moderators</title>
+<link>https://eprint.iacr.org/2026/010</link>
+<guid>https://eprint.iacr.org/2026/010</guid>
+<content:encoded><![CDATA[
+<div> 关键词：端到端加密、消息标记、多审核员、可验证举报、隐私保护<br><br>总结:<br>1. 现有消息标记（message franking）机制通常假设平台与审核员为同一实体，且仅支持单一审核员，限制了内容审核策略的灵活性。<br>2. 本文提出支持多个经认证审核员的新技术，允许用户自主选择消息举报所用的审核员。<br>3. 多审核员环境需定义新的安全概念，包括对平台和其他审核员的否认性保障，以及用户选择审核员的隐私保护。<br>4. 作者系统研究了相关需求，并设计了三种适用于不同部署场景的可验证举报协议，在安全性和性能之间提供多种权衡。<br>5. 实验评估表明，新方案在多数情况下性能优于或媲美仅支持单一审核员的现有方案。 <div>
+Abuse reporting tools like message franking allow end-to-end encrypted (E2EE) messaging platforms to verify user-generated abuse reports as part of their platform content moderation policies. While the lightweight message franking protocol deployed by Meta's Messenger is designed with the assumption that the moderator and the platform processing messages are the same entity, proposals for other message franking-style protocols allow for a separation between the platform and moderator, albeit at a higher cost. Unfortunately, all works in this space assume that there exists a single moderator working with a platform who verifies and moderates all reports. This results in a situation where technical limitations limit platforms' moderation policy options.
+
+This paper introduces new techniques that allow E2EE messaging platforms to work with multiple vetted moderators, giving users options in their choice of moderators for messages they send to their friends. Verifiable abuse reporting in a multi-moderator setting requires new security notions to capture deniability requirements with respect to the platform and other moderators, as well as new privacy requirements with respect to users' choice of moderator(s). We comprehensively study these requirements and propose three protocols for verifiable abuse reporting in this setting, offering a range of security and performance tradeoffs for different deployment scenarios. We evaluate the performance of our proposed schemes, showing that in many cases they match or exceed the performance of prior schemes that only support a single moderator.
+]]></content:encoded>
+<pubDate>Sun, 04 Jan 2026 14:03:48 +0000</pubDate>
+<pubDate>Sun, 04 Jan 2026 14:03:48 +0000</pubDate>
+</item>
 
 <item>
 <title>A SNARK for (Non-)Subsequences with Text-Sub-Linear Proving Time</title>
