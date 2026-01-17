@@ -5,13 +5,27 @@
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
 <item>
+<title>\textsc{Npir}: High-Rate PIR for Databases with Moderate-Size Records</title>
+<link>https://eprint.iacr.org/2025/2257</link>
+<guid>https://eprint.iacr.org/2025/2257</guid>
+<content:encoded><![CDATA[
+<div> 隐私信息检索、高率PIR、NTRU编码、服务器吞吐量、NTRU打包<br><br>总结:<br>1. 本文研究高率单服务器隐私信息检索（PIR）方案，旨在提升服务器吞吐量，尤其适用于记录大小为几十KB的数据库（如私有广告系统）。<br>2. 提出新方案\textsc{Npir}，基于NTRU编码，在1GB至32GB数据库中，其服务器吞吐量比Spiral高1.50–2.84倍，比NTRUPIR高1.77–2.55倍。<br>3. 设计了新型“NTRU打包”技术，将多个NTRU编码的常数项压缩至单一编码中，减小服务器响应体积，同时保持高率特性。<br>4. \textsc{Npir}天然支持批量处理中等大小记录，并能灵活处理不同大小的记录查询。 <div>
+Private information retrieval (PIR) is a widely used technique in privacy-preserving applications that enables users to retrieve records from a database without revealing any information about their queries. This study focuses on a type of PIR that has a high ratio between the size of the record retrieved by the client and the server's response. Although significant progress has been made in high-rate PIR in recent years, the computational overhead on the server side remains rather high. This results in low server throughput, particularly for applications involving databases with moderate-size records (i.e. tens of kilobytes), such as private advertising system.
+    In this paper, we present \textsc{Npir}, a high-rate single-server PIR that is based on NTRU encoding and outperforms the state-of-the-art Spiral (Menon \& Wu, S\&amp;P 2022) and NTRUPIR (Xia \& Wang, EuroS\&amp;P 2024) in terms of server throughput for databases with moderate-size records. In specific, for databases ranging from 1 GB to 32 GB with 32 KB records, the server throughput of \textsc{Npir} is 1.50 to 2.84 times greater than that of Spiral and 1.77 to 2.55 times greater than that of NTRUPIR.
+    To improve server throughput without compromising the high-rate feature, we propose a novel tool called NTRU packing, which compresses the constant terms of underlying polynomials of multiple NTRU encodings into a single NTRU encoding, thereby reducing the size of the server's response. Furthermore, \textsc{Npir} naturally supports batch processing for moderate-size records, and can easily handle retrieving for records of varying sizes.tions, we advance secure communication protocols under challenging conditions.
+]]></content:encoded>
+<pubDate>Tue, 16 Dec 2025 06:06:05 +0000</pubDate>
+<pubDate>Tue, 16 Dec 2025 06:06:05 +0000</pubDate>
+</item>
+
+<item>
 <title>BABE: Verifying Proofs on Bitcoin Made 1000x Cheaper</title>
 <link>https://eprint.iacr.org/2026/065</link>
 <guid>https://eprint.iacr.org/2026/065</guid>
 <content:encoded><![CDATA[
 <div> 关键词：比特币、简洁证明、BitVM3、BABE协议、Groth16验证
 
-<br><br>总结:  
+<br /><br />总结:  
 1. 为比特币引入简洁证明验证能力，可实现扩容及跨链信任使用，但受限于脚本语言表达力和区块空间。  
 2. BitVM2虽已部署，但在异常路径下链上交易费用极高（超14,000美元）。  
 3. BitVM3通过混淆SNARK验证器大幅降低链上成本，但其混淆电路体积达42GB，导致高昂的链下存储与设置开销。  
@@ -20,9 +34,7 @@
 Endowing Bitcoin with the ability to verify succinct proofs has been a longstanding problem with important applications such as scaling Bitcoin and allowing the Bitcoin asset to be used in other blockchains trustlessly. It is a challenging problem due to the lack of expressiveness in the Bitcoin scripting language and the small Bitcoin block space. BitVM2 is the state-of-the-art verification protocol for Bitcoin used in several mainnets and testnets, but it suffers from very high on-chain Bitcoin transaction fees in the unhappy path (over $14,000 in a recent experiment). Recent research BitVM3 dramatically reduces this on-chain cost by using a garbled SNARK verifier circuit to shift most of the verification off-chain, but each garbled circuit is 42 Gibytes in size, so the off-chain storage and setup costs are huge. This paper introduces BABE, a new proof verification protocol on Bitcoin, which preserves BitVM3's savings of on-chain costs but reduces its off-chain storage and setup costs by three orders of magnitude. BABE uses a witness encryption scheme for linear pairing relations to verify Groth16 proofs. Since Groth16 verification involves non-linear pairings, this witness encryption scheme is augmented with a secure two-party computation protocol implemented using a very efficient garbled circuit for scalar multiplication on elliptic curves. The design of this garbled circuit builds on a recent work, Argo MAC, which gives an efficient garbling scheme to compute homomorphic MACs on such curves.
 ]]></content:encoded>
 <pubDate>Fri, 16 Jan 2026 03:51:25 +0000</pubDate>
-<pubDate>Fri, 16 Jan 2026 03:51:25 +0000</pubDate>
 </item>
-
 <item>
 <title>Heli: Heavy-Light Private Aggregation</title>
 <link>https://eprint.iacr.org/2026/059</link>
@@ -15865,20 +15877,6 @@ This paper introduces Curl, an easy-to-use MPC framework that evaluates non-line
 Finally, we resolve a long-standing debate regarding the security of widely used probabilistic truncation protocols by proving their security in the stand-alone model. This is of independent interest as many related works rely on this truncation style.
 ]]></content:encoded>
 <pubDate>Wed, 10 Jul 2024 22:22:00 +0000</pubDate>
-</item>
-<item>
-<title>OPPID: Single Sign-On with Oblivious Pairwise Pseudonyms</title>
-<link>https://eprint.iacr.org/2024/1124</link>
-<guid>https://eprint.iacr.org/2024/1124</guid>
-<content:encoded><![CDATA[
-<div> 关键词：Single Sign-On (SSO), Pseudonym, Identity Provider (IdP), Relying Parties (RPs), Security.
-
-总结:<br />文章探讨了现有的单点登录（SSO）系统中用户隐私问题，尤其是当IdP知道用户访问哪个RP时。为了解决这一问题，作者提出了一种新的、无观察、强安全且便利的SSO系统，允许IdP在不暴露RP身份的情况下生成对RP特定的伪匿名标识。该模型强调了RP的身份验证需求，即IdP需要验证令牌和伪匿名是否发给注册的RP。作者构建了一个结合签名、知识证明和盲但可验证的哈希版Diffie-Hellman PRF的方案，并证明其安全性。实验表明，该方案在运行时间上高效，每方耗时2-20ms。 <div>
-Single Sign-On (SSO) allows users to conveniently authenticate to many Relying Parties (RPs) through a central Identity Provider (IdP). SSO supports unlinkable authentication towards the RPs via pairwise pseudonyms, where the IdP assigns the user an RP-specific pseudonym. This feature has been rolled out prominently within Apple's SSO service. While establishing unlinkable identities provides privacy towards RPs, it actually emphasizes the main privacy problem of SSO: with every authentication request, the IdP learns the RP that the user wants to access. Solutions to overcome this limitation exist, but either assume users to behave honestly or require them to manage long-term cryptographic keys.
-
-In this work, we propose the first SSO system that can provide such pseudonymous authentication in an unobservable yet strongly secure and convenient manner. That is, the IdP blindly derives the user's pairwise pseudonym for the targeted RP without learning the RP's identity and without requiring key material handled by the user. We formally define the desired security and privacy properties for such unlinkable, unobservable, and strongly secure SSO. In particular, our model includes the often neglected RP authentication: the IdP typically wants to limit its services to registered RPs only and thus must be able to (blindly) verify that it issues the token and pseudonym to such a registered RP. We propose a simple construction that combines signatures with efficient proofs-of-knowledge with a blind, yet verifiable, evaluation of the Hashed-Diffie-Hellman PRF. We prove the security of our construction and demonstrate its efficiency through a prototypical implementation, which requires a running time of 2-20ms per involved party.
-]]></content:encoded>
-<pubDate>Wed, 10 Jul 2024 13:36:26 +0000</pubDate>
 </item>
 </channel>
 </rss>
