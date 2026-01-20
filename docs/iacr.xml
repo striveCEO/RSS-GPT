@@ -4,6 +4,102 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+<item>
+<title>Formalizing Privacy in Decentralized Identity: A Provably Secure Framework with Minimal Disclosure</title>
+<link>https://eprint.iacr.org/2026/077</link>
+<guid>https://eprint.iacr.org/2026/077</guid>
+<content:encoded><![CDATA[
+<div> 去中心化身份、隐私保护、零知识证明、属性承诺、W3C DID标准<br><br>总结:<br>1. 提出一个形式化框架，解决区块链可验证性与最小数据披露原则之间的冲突。<br>2. 引入基于属性承诺和零知识证明的密码协议，用户可在不泄露敏感信息的前提下证明其属性满足特定条件。<br>3. 在半诚实敌手模型下定义了系统所需的安全与隐私要求，包括一致性及两类不可区分性。<br>4. 构建了一个在标准密码假设下满足上述要求的具体方案，并确保与W3C DID标准完全向后兼容。<br>5. 通过安全性分析和性能评估，验证了方案的可证明安全性和在资源受限环境中的高效性。 <div>
+This paper presents a formal framework for enhancing privacy in decentralized identity (DID) systems, resolving the inherent conflict between blockchain verifiability and the principle of minimal data disclosure. At its core, we introduce a provably secure cryptographic protocol that leverages attribute commitments on-chain and zero-knowledge proofs for off-chain validation. This approach allows users to demonstrably prove the validity of predicates about their attributes without revealing the underlying sensitive values.
+We formally define the security and privacy requirements for such a system—including consistency, attribute-based indistinguishability, and predicate-based indistinguishability—within a semi-honest adversarial model. We then construct a concrete scheme that realizes these properties under standard cryptographic assumptions. The proposed architecture is designed for full backward compatibility with W3C DID standards, ensuring practical deployability. Security analysis provides rigorous, provable guarantees, while performance evaluation confirms the efficiency of the core cryptographic operations, supporting its use in resource-constrained environments. This work establishes a foundational and analyzable basis for building decentralized identity systems where both accountability and user privacy are essential.
+]]></content:encoded>
+<pubDate>Sat, 17 Jan 2026 09:48:55 +0000</pubDate>
+<pubDate>Sat, 17 Jan 2026 09:48:55 +0000</pubDate>
+</item>
+<item>
+<title>Lether: Practical Post-Quantum Account-Based Private Blockchain Payments</title>
+<link>https://eprint.iacr.org/2026/076</link>
+<guid>https://eprint.iacr.org/2026/076</guid>
+<content:encoded><![CDATA[
+<div> Lether、后量子格密码、匿名支付协议、可刷新同态加密、零知识证明<br><br>总结:<br>1. 提出了Lether，首个基于格的实用账户型隐私区块链支付协议，遵循Anonymous Zether范式。<br>2. 针对格密码中缺乏关键组件的问题，设计了可验证可刷新的加法同态多消息多接收者公钥加密（mmPKE）和事件导向的可链接标签方案。<br>3. 引入轻量级“刷新”机制，避免使用FHE中的复杂技术，在保证无界同态计算的同时，将每次刷新的通信与计算开销分别降至交易成本的1.3%和1.5%。<br>4. 优化LNP22零知识证明系统实现，支持高效批处理，典型交易总通信量约68KB，其中证明部分占51KB，生成与验证均在普通PC上耗时不到1秒。<br>5. 提出更贴合实际区块链场景的Anonymous Zether类协议新形式化定义，具有通用性，可推动账户型隐私支付协议的发展。 <div>
+We introduce Lether, the first practical account-based private block-chain payment protocol based on post-quantum lattice assumptions, following the paradigm of Anonymous Zether (FC '19, IEEE S&amp;P '21). The main challenge in building such a protocol from lattices lies in the absence of core building blocks: unbounded-level additively-homomorphic multi-message multi-recipient public key encryption (mmPKE), and event-oriented linkable ring signatures with support for multiple tags (events). To address these issues, we propose a verifiable refreshable additively-homomorphic mmPKE scheme and a plug-and-play event-oriented linkable tag scheme from lattices. We believe both to be of independent interest.
+
+To achieve unbounded-level homomorphic evaluation in the lattice-based setting without relying on heavy techniques such as bootstrapping or large moduli (e.g., over 60 bits) in fully homomorphic encryption (FHE), we introduce a lightweight and blockchain-friendly mechanism called refresh. Namely, each user is required to verifiably refresh their account after a certain number of transactions. With our tailored parameter settings, the amortized per-refresh costs of communication and computation are only about 1.3% and 1.5%, respectively, of the cost of a transaction.
+
+We also optimize the implementations of LNP22 lattice-based zero-knowledge proof system (Crypto '22) in the LaZer library (CCS ’24), to support efficient batching of various proof components. Overall, for a typical transaction, the total communication cost becomes about 68 KB, with the associated zero-knowledge proof accounting for about 51 KB of this total. Each of proof generation and verification take a fraction of a second on a standard PC.
+
+As an additional contribution, we formalize new definitions for Anonymous Zether-like protocols that more accurately capture real-world blockchain settings. These definitions are generic and are expected to benefit the broader development of account-based private blockchain payment protocols, beyond just lattice settings.
+]]></content:encoded>
+<pubDate>Sat, 17 Jan 2026 06:49:44 +0000</pubDate>
+<pubDate>Sat, 17 Jan 2026 06:49:44 +0000</pubDate>
+</item>
+<item>
+<title>From $\textsf{TS-SUF-2}$ to $\textsf{TS-SUF-4}$: Practical Security Enhancements for $\textsf{FROST2}$ Threshold Signatures</title>
+<link>https://eprint.iacr.org/2026/075</link>
+<guid>https://eprint.iacr.org/2026/075</guid>
+<content:encoded><![CDATA[
+<div> 阈值签名、FROST2、TS-SUF-4安全性、预处理令牌验证、分布式密钥生成<br><br>总结:<br>1. FROST2是一种高效的阈值Schnorr签名方案，但在CRYPTO 2022中被证明仅满足TS-SUF-2安全性，易受TS-UF-3攻击。<br>2. 本文提出两种改进方案：FROST2+ 和 FROST2#，均在相同计算假设下实现更强的TS-SUF-4安全性。<br>3. FROST2+ 通过引入额外的预处理令牌验证机制，有效缓解TS-UF-3和TS-UF-4漏洞，并兼容分布式密钥生成协议如PedPoP。<br>4. FROST2# 在FROST2+基础上优化冗余计算，显著提升效率，性能比原FROST2快至少3倍。<br>5. 实验表明，FROST2+ 保持与原方案相当的效率，而FROST2# 在安全性和性能上均有显著提升。 <div>
+Threshold signature schemes play a vital role in securing digital assets within blockchain and distributed systems. $\textsf{FROST2}$ stands out as a practical threshold Schnorr signature scheme, noted for its efficiency and compatibility with standard verification processes. However, under the one-more discrete logarithm assumption, with static corruption and centralized key generation settings, $\textsf{FROST2}$ has been shown by Bellare et al. (in CRYPTO 2022) to achieve only $\textsf{TS-SUF-2}$ security, which is a consequence of its vulnerability to $\textsf{TS-UF-3}$ attacks.
+
+In this paper, we address this security limitation by presenting two enhanced variants of $\textsf{FROST2}$: $\textsf{FROST2}\texttt{+}$ and $\textsf{FROST2}\texttt{#}$, both achieving the $\textsf{TS-SUF-4}$ security level under the same computational assumptions as the original $\textsf{FROST2}$. 
+The first variant, $\textsf{FROST2}\texttt{+}$, strengthens $\textsf{FROST2}$ by integrating additional pre-processing token verifications that help mitigate $\textsf{TS-UF-3}$ and $\textsf{TS-UF-4}$ vulnerabilities while maintaining practical efficiency. 
+We show that $\textsf{FROST2}\texttt{+}$ can achieve $\textsf{TS-SUF-4}$ security not only under the same conditions as the original $\textsf{FROST2}$ analysis, but also when initialized with a distributed key generation protocol such as $\textsf{PedPoP}$. 
+Building on these improvements, we identify optimization opportunities that lead to our second variant, $\textsf{FROST2}\texttt{#}$, which achieves $\textsf{TS-SUF-4}$ security with enhanced computational efficiency by eliminating redundant calculations.
+Our benchmark shows that the performance of $\textsf{FROST2}\texttt{+}$ is comparable to $\textsf{FROST2}$ while $\textsf{FROST2}\texttt{#}$ is at least 3 times faster than $\textsf{FROST2}$.
+]]></content:encoded>
+<pubDate>Sat, 17 Jan 2026 06:11:54 +0000</pubDate>
+<pubDate>Sat, 17 Jan 2026 06:11:54 +0000</pubDate>
+</item>
+<item>
+<title>Noisette: Certifying Differential Privacy Mechanisms Efficiently</title>
+<link>https://eprint.iacr.org/2026/074</link>
+<guid>https://eprint.iacr.org/2026/074</guid>
+<content:encoded><![CDATA[
+<div> 差分隐私、噪声采样认证、Noisette协议、离散与连续机制、高效可扩展<br><br>总结:  
+1. 现有差分隐私实现依赖于对噪声采样方的信任，存在被恶意篡改的风险。  
+2. 本文提出Noisette协议族，首次实现对离散和连续差分隐私噪声采样的高效认证。  
+3. 针对离散分布，采用可认证的查找表评估；针对连续机制，引入阶梯式优化提升效率。  
+4. 在均值估计和联邦学习等应用中验证了协议实用性，运行速度提升最高64倍，通信开销降低24倍。  
+5. Noisette在不牺牲准确性的前提下，提供了首个高效、可扩展、通用的可认证差分隐私解决方案。 <div>
+Differential privacy (DP) has emerged as a rigorous framework for privacy-preserving data analysis, with widespread deployment in industry and government. Yet existing implementations typically assume that the party applying the mechanism can be trusted to sample noise correctly. This trust assumption is overly optimistic: a malicious party may deviate from the protocol to gain accuracy or avoid scrutiny, thereby undermining users’ privacy guarantees.
+
+In this paper, we introduce Noisette, a family of efficient protocols for certifying DP noise sampling across both discrete and continuous settings. We design a protocol that supports any discrete distribution through certifiable lookup table evaluation, and introduce a staircase-based optimization that greatly improves efficiency without compromising privacy or utility. We further extend this framework to continuous mechanisms, providing the first efficient protocol for certifiable continuous noise sampling.
+    
+We demonstrate the practicality of our protocols through concrete DP applications, including mean estimation and federated learning. Our protocols outperform the prior state-of-the-art by up to $64\times$ in runtime and $24\times$ in communication, while preserving the same accuracy as uncertified DP mechanisms. These results establish Noisette as the first efficient, scalable, and general-purpose solution for certifiable DP noise sampling, making certified privacy guarantees practical in high-stakes applications.
+]]></content:encoded>
+<pubDate>Fri, 16 Jan 2026 22:34:21 +0000</pubDate>
+<pubDate>Fri, 16 Jan 2026 22:34:21 +0000</pubDate>
+</item>
+<item>
+<title>Scalable Distributed Key Generation for Blockchains</title>
+<link>https://eprint.iacr.org/2026/072</link>
+<guid>https://eprint.iacr.org/2026/072</guid>
+<content:encoded><![CDATA[
+<div> 分布式密钥生成（DKG）、区块链、阈值密码系统、拜占庭容错、通信复杂度<br><br>总结:<br>1. 本文提出首个面向区块链的离散对数型分布式密钥生成（DKG）协议，利用区块链内置共识机制提升效率。<br>2. 协议支持在非同步环境下容忍高达一半的拜占庭故障，具备异步安全性。<br>3. 通过引入随机信标选取小规模委员会，实现次立方通信复杂度、次平方计算复杂度和极低链上存储开销。<br>4. 仅需一次共识调用，在理想部分同步区块链上最快11轮通信即可完成。<br>5. 实验表明，相比现有独立DKG协议，本方案在带宽开销相当或更低的同时，运行速度显著更快，256节点下乐观场景仅需约6.5秒（32 vCPU）。 <div>
+Distributed key generation (DKG) is a foundational building block for designing efficient threshold cryptosystems, which are crucial components of blockchain ecosystems. Existing DKG protocols address the problem in a standalone setting, focusing on establishing the final DKG public key and individual secret keys among the participating parties. This work focuses on DKG primitives for use over blockchain, where the final DKG public key must be available on-chain, enabling on-chain smart contracts to seamlessly execute threshold cryptographic verifications. We observe that existing standalone DKG designs do {\em not} sufficiently exploit the presence of blockchain, leaving substantial scope for improvement in performance. 
+
+In this work, we design the first discrete-log-based DKG protocol tailored for use over blockchain, leveraging the blockchain's built-in consensus mechanism to realize DKG efficiently. Interestingly, the use of blockchains enables us to solve DKG while tolerating up to one-half Byzantine faults even in non-synchronous settings. Our protocol is asynchronous, allowing it to operate independently of the network's timing assumptions, with the exact network model depending on the destination blockchain.  
+
+Our solution further utilizes an associated random beacon to select smaller committees and achieves a DKG protocol with sub-cubic communication complexity, sub-quadratic computation complexity, and minimal on-chain storage. Notably, our protocol employs a single invocation of consensus and can terminate in just eleven communication rounds in the good case when deployed on an optimal latency partially synchronous blockchain. Our experiments show that our protocol terminates faster than state-of-the-art standalone protocols, with similar bandwidth overhead for committee members and significantly reduced bandwidth for other parties. Additionally, our protocol benefits from higher CPU resources—when deployed on machines with $32$ vCPUs, it completes in approximately $6.5$ seconds in the optimistic case, even for larger systems with $256$ nodes.
+]]></content:encoded>
+<pubDate>Fri, 16 Jan 2026 16:38:12 +0000</pubDate>
+<pubDate>Fri, 16 Jan 2026 16:38:12 +0000</pubDate>
+</item>
+<item>
+<title>Revisiting Polynomial NTRU for FHE: Amortized Bootstrapping with Sparse Keys</title>
+<link>https://eprint.iacr.org/2026/068</link>
+<guid>https://eprint.iacr.org/2026/068</guid>
+<content:encoded><![CDATA[
+<div> 全同态加密、NTRU假设、多项式环、摊销自举、稀疏密钥<br><br>总结:<br>1. 全同态加密（FHE）支持在加密数据上进行计算，对隐私保护机器学习至关重要。<br>2. 现有基于NTRU假设的FHE方案使用矩阵表示，破坏了多项式环结构，阻碍了现代摊销自举技术的应用。<br>3. 本文将NTRU-FHE重构为标准多项式环形式，使解密操作可分解为与FHEW风格累加器兼容的内积形式。<br>4. 基于此，作者将基于单项式-多项式乘法的摊销自举方法适配到NTRU框架，并采用稀疏密钥以保留多项式结构。<br>5. 新方案在密钥汉明重量较低时，显著降低计算开销和自举密钥大小，Python原型验证了其正确性与效率提升。 <div>
+Fully homomorphic encryption (FHE) enables computation over encrypted data, playing a fundamental role in privacy-preserving machine learning. Recent work has demonstrated that FHE schemes can be constructed under the NTRU assumption, leveraging the benefits of compact ciphertexts. However, existing NTRU-based FHE constructions rely on matrix representations, which break the polynomial ring structure and prevent the direct adoption of modern amortized bootstrapping techniques.
+
+In this work, we revisit NTRU-based FHE by reformulating the matrix-based construction into a standard polynomial-ring setting. We show that the NTRU decryption operation can be decomposed into a set of inner products compatible with FHEW-style accumulators, while preserving the polynomial structure required for further optimization. Building on this formulation, we adapt a recent amortized bootstrapping approach based on monomial-by-polynomial multiplication to the NTRU setting using sparse secret keys.
+
+The resulting scheme combines compact ciphertexts with efficient amortized bootstrapping, reducing both computational cost and bootstrapping key size when the secret key has low Hamming weight. A proof-of-concept Python implementation validates the correctness of the proposed scheme and confirms the expected reduction in bootstrapping cost under conservative security parameters.
+]]></content:encoded>
+<pubDate>Fri, 16 Jan 2026 09:41:10 +0000</pubDate>
+<pubDate>Fri, 16 Jan 2026 09:41:10 +0000</pubDate>
+</item>
 
 <item>
 <title>\textsc{Npir}: High-Rate PIR for Databases with Moderate-Size Records</title>
