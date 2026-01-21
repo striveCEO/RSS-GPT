@@ -4,6 +4,352 @@
 <title>cs updates on arXiv.org</title>
 <link>http://rss.arxiv.org/rss/cs</link>
 
+<item>
+<title>ASAS-BridgeAMM: Trust-Minimized Cross-Chain Bridge AMM with Failure Containment</title>
+<link>https://arxiv.org/abs/2601.12434</link>
+<guid>https://arxiv.org/abs/2601.12434</guid>
+<content:encoded><![CDATA[
+<div> 跨链桥、系统性风险、可控降级、自动做市商、安全证明<br><br>总结:<br>1. 跨链桥是DeFi中最大的系统性风险来源，自2021年以来已造成超28亿美元损失。<br>2. 现有桥接模型存在“全有或全无”的安全缺陷，缺乏应对部分故障的中间状态。<br>3. 提出ASAS-BridgeAMM方案，将桥与自动做市商结合，引入“可控降级”机制，在检测到攻击信号时动态调整抵押折扣、滑点和提现限额。<br>4. 历史回测显示，该方案比传统铸币-销毁架构减少73%的最坏情况资不抵债风险，且在压力期维持104.5%的交易量。<br>5. 在多种对抗性模拟中，协议保持>99.99%的偿付能力，每周期坏账低于总抵押的0.2%，并提供Solidity实现及形式化安全、活性与抗操纵证明。 <div>
+arXiv:2601.12434v1 Announce Type: new 
+Abstract: Cross-chain bridges constitute the single largest vector of systemic risk in Decentralized Finance (DeFi), accounting for over \$2.8 billion in losses since 2021. The fundamental vulnerability lies in the binary nature of existing bridge security models: a bridge is either fully operational or catastrophically compromised, with no intermediate state to contain partial failures. We present ASAS-BridgeAMM, a bridge-coupled automated market maker that introduces Contained Degradation: a formally specified operational state where the system gracefully degrades functionality in response to adversarial signals. By treating cross-chain message latency as a quantifiable execution risk, the protocol dynamically adjusts collateral haircuts, slippage bounds, and withdrawal limits. Across 18 months of historical replay on Ethereum and two auxiliary chains, ASAS-BridgeAMM reduces worst-case bridge-induced insolvency by 73% relative to baseline mint-and-burn architectures, while preserving 104.5% of transaction volume during stress periods. In rigorous adversarial simulations involving delayed finality, oracle manipulation, and liquidity griefing, the protocol maintains solvency with probability $>0.9999$ and bounds per-epoch bad debt to $<0.2%$ of total collateral. We provide a reference implementation in Solidity and formally prove safety (bounded debt), liveness (settlement completion), and manipulation resistance under a Byzantine relayer model.
+]]></content:encoded>
+<pubDate>Wed, 21 Jan 2026 00:00:00 -0500</pubDate>
+<pubDate>Wed, 21 Jan 2026 00:00:00 -0500</pubDate>
+</item>
+<item>
+<title>Language-Based Swarm Perception: Decentralized Person Re-Identification via Natural Language Descriptions</title>
+<link>https://arxiv.org/abs/2601.12479</link>
+<guid>https://arxiv.org/abs/2601.12479</guid>
+<content:encoded><![CDATA[
+<div> 关键词：去中心化、行人重识别、自然语言、机器人集群、视觉语言模型<br><br>总结:<br>1. 提出一种基于自然语言的去中心化行人重识别方法，用于机器人集群协作。<br>2. 与传统依赖高维视觉嵌入的方法不同，该方法利用视觉语言模型（VLM）生成人类可读的文本描述代替特征向量。<br>3. 各机器人本地生成描述后，在无中心协调下进行跨机器人描述比对与聚类，实现对同一人的观测归并。<br>4. 每个聚类由语言模型提炼为代表性描述，提升系统透明度与可解释性，并支持自然语言查询。<br>5. 初步实验显示其在身份一致性和可解释性方面表现良好，未来将优化相似度度量、语义导航，并拓展至环境感知。 <div>
+arXiv:2601.12479v1 Announce Type: new 
+Abstract: We introduce a method for decentralized person re-identification in robot swarms that leverages natural language as the primary representational modality. Unlike traditional approaches that rely on opaque visual embeddings -- high-dimensional feature vectors extracted from images -- the proposed method uses human-readable language to represent observations. Each robot locally detects and describes individuals using a vision-language model (VLM), producing textual descriptions of appearance instead of feature vectors. These descriptions are compared and clustered across the swarm without centralized coordination, allowing robots to collaboratively group observations of the same individual. Each cluster is distilled into a representative description by a language model, providing an interpretable, concise summary of the swarm's collective perception. This approach enables natural-language querying, enhances transparency, and supports explainable swarm behavior. Preliminary experiments demonstrate competitive performance in identity consistency and interpretability compared to embedding-based methods, despite current limitations in text similarity and computational load. Ongoing work explores refined similarity metrics, semantic navigation, and the extension of language-based perception to environmental elements. This work prioritizes decentralized perception and communication, while active navigation remains an open direction for future study.
+]]></content:encoded>
+<pubDate>Wed, 21 Jan 2026 00:00:00 -0500</pubDate>
+<pubDate>Wed, 21 Jan 2026 00:00:00 -0500</pubDate>
+</item>
+<item>
+<title>Cooperative Multi-agent RL with Communication Constraints</title>
+<link>https://arxiv.org/abs/2601.12518</link>
+<guid>https://arxiv.org/abs/2601.12518</guid>
+<content:encoded><![CDATA[
+<div> 多智能体强化学习、去中心化、重要性采样、基策略预测、通信效率<br><br>总结:<br>1. 去中心化多智能体强化学习（MARL）中，频繁获取全局信息不现实，因通信成本高。<br>2. 通信受限时，智能体依赖过时信息更新策略，常用重要性采样方法在数据缺失严重时易不稳定。<br>3. 作者提出“基策略预测”技术，利用旧梯度预测策略更新，构建一系列基策略以缩小与当前策略的差距。<br>4. 该方法显著减少通信轮次，在一次通信中即可收集多个预测基策略的样本。<br>5. 理论上，算法在势博弈中以更少通信轮次（$O(\varepsilon^{-3/4})$）和样本复杂度（无联合动作空间指数依赖）收敛至$\varepsilon$-纳什均衡，并可推广至一般马尔可夫合作博弈；实验验证了其在模拟环境和MAPPO中的有效性。 <div>
+arXiv:2601.12518v1 Announce Type: new 
+Abstract: Cooperative MARL often assumes frequent access to global information in a data buffer, such as team rewards or other agents' actions, which is typically unrealistic in decentralized MARL systems due to high communication costs. When communication is limited, agents must rely on outdated information to estimate gradients and update their policies. A common approach to handle missing data is called importance sampling, in which we reweigh old data from a base policy to estimate gradients for the current policy. However, it quickly becomes unstable when the communication is limited (i.e. missing data probability is high), so that the base policy in importance sampling is outdated. To address this issue, we propose a technique called base policy prediction, which utilizes old gradients to predict the policy update and collect samples for a sequence of base policies, which reduces the gap between the base policy and the current policy. This approach enables effective learning with significantly fewer communication rounds, since the samples of predicted base policies could be collected within one communication round. Theoretically, we show that our algorithm converges to an $\varepsilon$-Nash equilibrium in potential games with only $O(\varepsilon^{-3/4})$ communication rounds and $O(poly(\max_i |A_i|)\varepsilon^{-11/4})$ samples, improving existing state-of-the-art results in communication cost, as well as sample complexity without the exponential dependence on the joint action space size. We also extend these results to general Markov Cooperative Games to find an agent-wise local maximum. Empirically, we test the base policy prediction algorithm in both simulated games and MAPPO for complex environments.
+]]></content:encoded>
+<pubDate>Wed, 21 Jan 2026 00:00:00 -0500</pubDate>
+<pubDate>Wed, 21 Jan 2026 00:00:00 -0500</pubDate>
+</item>
+<item>
+<title>SGCP: A Self-Organized Game-Theoretic Framework For Collaborative Perception</title>
+<link>https://arxiv.org/abs/2601.12524</link>
+<guid>https://arxiv.org/abs/2601.12524</guid>
+<content:encoded><![CDATA[
+<div> 协作感知、去中心化、车辆自组织、博弈论、点云传输<br><br>总结:<br>1. 针对自动驾驶中通信带宽受限且无路侧基础设施的挑战，提出一种完全去中心化的协作感知框架。<br>2. 车辆通过车对车通信自组织成协作群组，分为两个基于博弈论的阶段：首先根据感知互补性和运动一致性形成稳定簇并选举协调者；其次由协调者引导成员通过非合作势博弈选择性传输显著区域的点云片段。<br>3. 全局场景理解通过簇间交换紧凑的检测消息实现，而非原始传感器数据，大幅降低通信开销。<br>4. 所设计的分布式算法保证系统级势函数单调提升。<br>5. 在CARLA-OpenCDA-NS3平台上的实验表明，该方法在降低通信负载的同时，提升了感知精度和覆盖范围。 <div>
+arXiv:2601.12524v1 Announce Type: new 
+Abstract: Collaborative perception holds great promise for improving safety in autonomous driving, particularly in dense traffic where vehicles can share sensory information to overcome individual blind spots and extend awareness. However, deploying such collaboration at scale remains difficult when communication bandwidth is limited and no roadside infrastructure is available. To overcome these limitations, we introduce a fully decentralized framework that enables vehicles to self organize into cooperative groups using only vehicle to vehicle communication. The approach decomposes the problem into two sequential game theoretic stages. In the first stage, vehicles form stable clusters by evaluating mutual sensing complementarity and motion coherence, and each cluster elects a coordinator. In the second stage, the coordinator guides its members to selectively transmit point cloud segments from perceptually salient regions through a non cooperative potential game, enabling efficient local fusion. Global scene understanding is then achieved by exchanging compact detection messages across clusters rather than raw sensor data. We design distributed algorithms for both stages that guarantee monotonic improvement of the system wide potential function. Comprehensive experiments on the CARLA-OpenCDA-NS3 co-simulation platform show that our method reduces communication overhead while delivering higher perception accuracy and wider effective coverage compared to existing baselines.
+]]></content:encoded>
+<pubDate>Wed, 21 Jan 2026 00:00:00 -0500</pubDate>
+<pubDate>Wed, 21 Jan 2026 00:00:00 -0500</pubDate>
+</item>
+<item>
+<title>Semantic Fusion: Verifiable Alignment in Decentralized Multi-Agent Systems</title>
+<link>https://arxiv.org/abs/2601.12580</link>
+<guid>https://arxiv.org/abs/2601.12580</guid>
+<content:encoded><![CDATA[
+<div> 语义融合、多智能体系统、去中心化协调、本体验证、行为等价<br><br>总结:<br>1. 提出语义融合（SF）框架，支持多智能体系统在无中心控制和显式消息传递下进行去中心化语义协调。<br>2. 智能体通过局部本体验证与刷新机制，在共享内存的局部视图上提出结构化更新，确保全局一致性。<br>3. 核心理论成果为双模拟定理，证明局部执行与全局语义投影行为等价，适用于确定性和概率性场景。<br>4. 支持由学习或启发式组件生成的多样化更新，只要通过语义验证即可集成，并提供异步或通信降级下的语义对齐保证。<br>5. 通过250智能体仿真验证，展示在概率刷新、有限通信和智能体失效下的收敛性与鲁棒性，证明SF可作为可验证自主性的形式化基础。 <div>
+arXiv:2601.12580v1 Announce Type: new 
+Abstract: We present Semantic Fusion (SF), a formal framework for decentralized semantic coordination in multi-agent systems. SF allows agents to operate over scoped views of shared memory, propose structured updates, and maintain global coherence through local ontology-based validation and refresh without centralized control or explicit message passing. The central theoretical result is a bisimulation theorem showing that each agent's local execution is behaviorally equivalent to its projection of the global semantics, in both deterministic and probabilistic settings. This enables safety, liveness, and temporal properties to be verified locally and soundly lifted to the full system. SF supports agents whose update proposals vary across invocations, including those generated by learned or heuristic components, provided updates pass semantic validation before integration. We establish deterministic and probabilistic guarantees ensuring semantic alignment under asynchronous or degraded communication. To validate the model operationally, we implement a lightweight reference architecture that instantiates its core mechanisms. A 250-agent simulation evaluates these properties across over 11,000 validated updates, demonstrating convergence under probabilistic refresh, bounded communication, and resilience to agent failure. Together, these results show that Semantic Fusion can provide a formal and scalable basis for verifiable autonomy in decentralized systems.
+]]></content:encoded>
+<pubDate>Wed, 21 Jan 2026 00:00:00 -0500</pubDate>
+<pubDate>Wed, 21 Jan 2026 00:00:00 -0500</pubDate>
+</item>
+<item>
+<title>Decentralized Learning Strategies for Estimation Error Minimization with Graph Neural Networks</title>
+<link>https://arxiv.org/abs/2601.12662</link>
+<guid>https://arxiv.org/abs/2601.12662</guid>
+<content:encoded><![CDATA[
+<div> 关键词：多跳无线网络、自回归马尔可夫源、去中心化策略、图神经网络、多智能体强化学习<br><br>总结:  
+1. 研究聚焦于在动态但结构相似的多跳无线网络中，对自回归马尔可夫源进行实时采样与估计。  
+2. 各节点通过缓存样本并在无线冲突信道上通信，目标是通过去中心化策略最小化时间平均估计误差。  
+3. 针对高维动作空间与复杂拓扑难以解析求解的问题，提出基于图结构的多智能体强化学习框架。  
+4. 理论证明所学策略具有可迁移性，可在结构相似的图间有效复用。  
+5. 实验表明该方法优于现有基线，具备良好扩展性、抗非平稳性，且递归机制对提升鲁棒性至关重要。 <div>
+arXiv:2601.12662v1 Announce Type: new 
+Abstract: We address real-time sampling and estimation of autoregressive Markovian sources in dynamic yet structurally similar multi-hop wireless networks. Each node caches samples from others and communicates over wireless collision channels, aiming to minimize time-average estimation error via decentralized policies. Due to the high dimensionality of action spaces and complexity of network topologies, deriving optimal policies analytically is intractable. To address this, we propose a graphical multi-agent reinforcement learning framework for policy optimization. Theoretically, we demonstrate that our proposed policies are transferable, allowing a policy trained on one graph to be effectively applied to structurally similar graphs. Numerical experiments demonstrate that (i) our proposed policy outperforms state-of-the-art baselines; (ii) the trained policies are transferable to larger networks, with performance gains increasing with the number of agents; (iii) the graphical training procedure withstands non-stationarity, even when using independent learning techniques; and (iv) recurrence is pivotal in both independent learning and centralized training and decentralized execution, and improves the resilience to non-stationarity.
+]]></content:encoded>
+<pubDate>Wed, 21 Jan 2026 00:00:00 -0500</pubDate>
+<pubDate>Wed, 21 Jan 2026 00:00:00 -0500</pubDate>
+</item>
+<item>
+<title>BlocksecRT-DETR: Decentralized Privacy-Preserving and Token-Efficient Federated Transformer Learning for Secure Real-Time Object Detection in ITS</title>
+<link>https://arxiv.org/abs/2601.12693</link>
+<guid>https://arxiv.org/abs/2601.12693</guid>
+<content:encoded><![CDATA[
+<div> 联邦学习、实时目标检测、Transformer、区块链安全、非独立同分布数据<br><br>总结:<br>1. 针对智能交通系统中联邦实时目标检测面临的三大挑战——地理差异导致的缺失类别非IID数据、边缘设备上Transformer模型的高延迟，以及不可信客户端更新带来的隐私与安全风险，提出BlockSecRT-DETR框架。<br>2. 该框架结合RT-DETR与Token工程模块（TEM），通过剪枝低效Token降低编码器复杂度和推理延迟（提升17.2%），同时缓解非IID数据异构性，保持89.20% mAP@0.5精度。<br>3. 引入基于区块链的去中心化更新验证机制，实现防篡改、隐私保护且无需信任的模型聚合，每轮增加400ms开销，链上仅存元数据，账本大小控制在12KB以内。 <div>
+arXiv:2601.12693v1 Announce Type: new 
+Abstract: Federated real-time object detection using transformers in Intelligent Transportation Systems (ITS) faces three major challenges: (1) missing-class non-IID data heterogeneity from geographically diverse traffic environments, (2) latency constraints on edge hardware for high-capacity transformer models, and (3) privacy and security risks from untrusted client updates and centralized aggregation. We propose BlockSecRT-DETR, a BLOCKchain-SECured Real-Time Object DEtection TRansformer framework for ITS that provides a decentralized, token-efficient, and privacy-preserving federated training solution using RT-DETR transformer, incorporating a blockchain-secured update validation mechanism for trustworthy aggregation. In this framework, challenges (1) and (2) are jointly addressed through a unified client-side design that integrates RT-DETR training with a Token Engineering Module (TEM). TEM prunes low-utility tokens, reducing encoder complexity and latency on edge hardware, while aggregated updates mitigate non-IID data heterogeneity across clients. To address challenge (3), BlockSecRT-DETR incorporates a decentralized blockchain-secured update validation mechanism that enables tamper-proof, privacy-preserving, and trust-free authenticated model aggregation without relying on a central server. We evaluated the proposed framework under a missing-class Non-IID partition of the KITTI dataset and conducted a blockchain case study to quantify security overhead. TEM improves inference latency by 17.2% and reduces encoder FLOPs by 47.8%, while maintaining global detection accuracy (89.20% mAP@0.5). The blockchain integration adds 400 ms per round, and the ledger size remains under 12 KB due to metadata-only on-chain storage.
+]]></content:encoded>
+<pubDate>Wed, 21 Jan 2026 00:00:00 -0500</pubDate>
+<pubDate>Wed, 21 Jan 2026 00:00:00 -0500</pubDate>
+</item>
+<item>
+<title>SDN-Blockchain Based Security Routing for UAV Communication via Reinforcement Learning</title>
+<link>https://arxiv.org/abs/2601.12774</link>
+<guid>https://arxiv.org/abs/2601.12774</guid>
+<content:encoded><![CDATA[
+<div> 无人机网络、软件定义网络、区块链、安全路由、束搜索-近端策略优化<br><br>总结:  
+1. 针对无人机网络在应急通信中面临的低延迟、能效与安全挑战，提出融合软件定义网络（SDN）与区块链的新型安全路由架构。  
+2. 引入“安全度”指标量化无人机节点的可信度，实现防篡改的信任管理。  
+3. 设计束搜索-近端策略优化（BSPPO）算法：束搜索预筛选高安全性路径，近端策略优化进行逐跳动态路由决策。  
+4. 该机制支持在检测到攻击时快速重路由，提升系统鲁棒性。  
+5. 仿真实验表明，BSPPO在不同攻击密度、数据包大小和重路由场景下，相较其他算法在时延、能耗和传输成功率方面表现更优。 <div>
+arXiv:2601.12774v1 Announce Type: new 
+Abstract: The unmanned aerial vehicle (UAV) network plays important roles in emergency communications. However, it is challenging to design reliable routing strategies that ensure low latency, energy efficiency, and security in the dynamic and attack-prone environments. To this end, we design a secure routing architecture integrating software-defined networking (SDN) for centralized control and blockchain for tamper-proof trust management. In particular, a novel security degree metric is introduced to quantify the UAV trustworthiness. Based on this architecture, we propose a beam search-proximal policy optimization (BSPPO) algorithm, where beam search (BS) pre-screens the high-security candidate paths, and proximal policy optimization (PPO) performs hop-by-hop routing decisions to support dynamic rerouting upon attack detections. Finally, extensive simulations under varying attack densities, packet sizes, and rerouting events demonstrate that BSPPO outperforms PPO, BS-Q learning, and BS-actor critic in terms of delay, energy consumption, and transmission success rate, showing the outstanding robustness and adaptability.
+]]></content:encoded>
+<pubDate>Wed, 21 Jan 2026 00:00:00 -0500</pubDate>
+<pubDate>Wed, 21 Jan 2026 00:00:00 -0500</pubDate>
+</item>
+<item>
+<title>Knowledge-Integrated Representation Learning for Crypto Anomaly Detection under Extreme Label Scarcity; Relational Domain-Logic Integration with Retrieval-Grounded Context and Path-Level Explanations</title>
+<link>https://arxiv.org/abs/2601.12839</link>
+<guid>https://arxiv.org/abs/2601.12839</guid>
+<content:encoded><![CDATA[
+<div> 异常轨迹检测、图神经网络、关系域逻辑集成、反洗钱、上下文感知<br><br>总结:<br>1. 针对去中心化加密网络中异常轨迹检测面临的标签极度稀缺和非法行为者自适应规避策略的挑战，现有图神经网络（GNN）难以捕捉多跳、逻辑驱动的洗钱模式（如资金分散与分层）。<br>2. 提出关系域逻辑集成（RDLI）框架，将专家启发式规则嵌入为可微分、逻辑感知的潜在信号，增强对复杂交易流的识别能力。<br>3. 引入检索引导上下文（RGC）模块，结合监管与宏观经济背景调整异常评分，减少因市场良性波动导致的误报。<br>4. 在仅0.01%标签率下，RDLI在F1分数上超越当前最优GNN基线28.9%。<br>5. 用户研究表明，RDLI提供的路径级解释显著提升可信度、实用性和清晰度，验证了融合领域逻辑与上下文对准确性和可解释性的双重价值。 <div>
+arXiv:2601.12839v1 Announce Type: new 
+Abstract: Detecting anomalous trajectories in decentralized crypto networks is fundamentally challenged by extreme label scarcity and the adaptive evasion strategies of illicit actors. While Graph Neural Networks (GNNs) effectively capture local structural patterns, they struggle to internalize multi hop, logic driven motifs such as fund dispersal and layering that characterize sophisticated money laundering, limiting their forensic accountability under regulations like the FATF Travel Rule. To address this limitation, we propose Relational Domain Logic Integration (RDLI), a framework that embeds expert derived heuristics as differentiable, logic aware latent signals within representation learning. Unlike static rule based approaches, RDLI enables the detection of complex transactional flows that evade standard message passing. To further account for market volatility, we incorporate a Retrieval Grounded Context (RGC) module that conditions anomaly scoring on regulatory and macroeconomic context, mitigating false positives caused by benign regime shifts. Under extreme label scarcity (0.01%), RDLI outperforms state of the art GNN baselines by 28.9% in F1 score. A micro expert user study further confirms that RDLI path level explanations significantly improve trustworthiness, perceived usefulness, and clarity compared to existing methods, highlighting the importance of integrating domain logic with contextual grounding for both accuracy and explainability.
+]]></content:encoded>
+<pubDate>Wed, 21 Jan 2026 00:00:00 -0500</pubDate>
+<pubDate>Wed, 21 Jan 2026 00:00:00 -0500</pubDate>
+</item>
+<item>
+<title>SWORD: A Secure LoW-Latency Offline-First Authentication and Data Sharing Scheme for Resource Constrained Distributed Networks</title>
+<link>https://arxiv.org/abs/2601.12875</link>
+<guid>https://arxiv.org/abs/2601.12875</guid>
+<content:encoded><![CDATA[
+<div> 区块链、物联网、车联网、离线认证、低延迟<br><br>总结:<br>1. 针对资源受限网络（如物联网和车联网）仍依赖中心服务器进行快速认证与数据共享的问题，提出新方案SWORD。<br>2. SWORD采用基于邻近性的聚类方法，支持离线优先的认证与数据共享，适用于间歇性连接场景。<br>3. 该方案在保证低延迟和安全性的同时，性能优于传统区块链方案，且资源效率和认证延迟与中心化方案相当。<br>4. 安全分析表明，SWORD能有效抵御伪装、冒充、重放和中间人攻击。 <div>
+arXiv:2601.12875v1 Announce Type: new 
+Abstract: While many resource-constrained networks, such as Internet of Things (IoT) and Internet of Vehicles (IoV), are inherently distributed, the majority still rely on central servers for fast authentication and data sharing. Blockchain-based solutions offer decentralized alternatives but often struggle to meet the stringent latency requirements of real-time applications. Even with the rollout of 5G, network latency between servers and peers remains a significant challenge. To address this, we introduce SWORD, a novel offline-first authentication and data-sharing scheme designed specifically for resource-constrained networks. SWORD utilizes a proximity-based clustering approach to enable offline authentication and data sharing, ensuring low-latency, secure operations even in intermittently connected scenarios. Our experimental results show that SWORD outperforms traditional blockchain-based solutions while offering similar resource efficiency and authentication latency to central-server-based solutions. Additionally, we provide a comprehensive security analysis, demonstrating that SWORD is resilient against spoofing, impersonation, replay, and man-in-the-middle attacks.
+]]></content:encoded>
+<pubDate>Wed, 21 Jan 2026 00:00:00 -0500</pubDate>
+<pubDate>Wed, 21 Jan 2026 00:00:00 -0500</pubDate>
+</item>
+<item>
+<title>Enshrined Proposer Builder Separation in the presence of Maximal Extractable Value</title>
+<link>https://arxiv.org/abs/2601.12989</link>
+<guid>https://arxiv.org/abs/2601.12989</guid>
+<content:encoded><![CDATA[
+<div> 关键词：权益证明（PoS）、最大可提取价值（MEV）、提议者-构建者分离（PBS）、嵌入式PBS（ePBS）、经济中心化
+
+<br><br>总结:
+1. 在权益证明（PoS）区块链中，公平交易处理对维护去中心化和用户信任至关重要。  
+2. 最大可提取价值（MEV）引发内容操控与经济中心化风险，促使以太坊引入提议者-构建者分离（PBS）机制，并进一步提出嵌入式PBS（ePBS，EIP-7732）。  
+3. 研究通过数学分析与基于代理的仿真发现，ePBS虽分离了区块构建与提议职责，却加剧了利润与内容的中心化。  
+4. 利润基尼系数从无ePBS时的0.1749飙升至ePBS下的0.8358，表明少数高效构建者攫取大部分MEV收益。  
+5. 尽管提议者在区块组装中作用有限，却获得95.4%的区块价值奖励，凸显机制设计的经济偏斜，亟需更平衡的MEV缓解方案。 <div>
+arXiv:2601.12989v1 Announce Type: new 
+Abstract: In blockchain systems operating under the Proof-of-Stake (PoS) consensus mechanism, fairness in transaction processing is essential to preserving decentralization and maintaining user trust. However, with the emergence of Maximal Extractable Value (MEV), concerns about economic centralization and content manipulation have intensified. To address these vulnerabilities, the Ethereum community has introduced Proposer Builder Separation (PBS), which separates block construction from block proposal. Later, enshrined Proposer Builder Separation (ePBS) was also proposed in EIP-7732, which embeds PBS directly into the Ethereum consensus layer.
+  Our work identifies key limitations of ePBS by developing a formal framework that combines mathematical analysis and agent-based simulations to evaluate its auction-based block-building mechanism, with particular emphasis on MEV dynamics. Our results reveal that, although ePBS redistributes responsibilities between builders and proposers, it significantly amplifies profit and content centralization: the Gini coefficient for profits rises from 0.1749 under standard PoS without ePBS to 0.8358 under ePBS. This sharp increase indicates that a small number of efficient builders capture most value via MEV-driven auctions. Moreover, 95.4% of the block value is rewarded to proposers in ePBS, revealing a strong economic bias despite their limited role in block assembly. These findings highlight that ePBS exacerbates incentives for builders to adopt aggressive MEV strategies, suggesting the need for future research into mechanism designs that better balance decentralization, fairness, and MEV mitigation.
+]]></content:encoded>
+<pubDate>Wed, 21 Jan 2026 00:00:00 -0500</pubDate>
+<pubDate>Wed, 21 Jan 2026 00:00:00 -0500</pubDate>
+</item>
+<item>
+<title>OPTIMUM-DERAM: Highly Consistent, Scalable, and Secure Multi-Object Memory using RLNC</title>
+<link>https://arxiv.org/abs/2601.13146</link>
+<guid>https://arxiv.org/abs/2601.13146</guid>
+<content:encoded><![CDATA[
+<div> OPTIMUM-DERAM、去中心化共享内存、随机线性网络编码、一致性哈希环、拜占庭容错<br><br>总结:  
+1. OPTIMUM-DERAM是一种高一致性、可扩展、安全且去中心化的共享内存方案。  
+2. 利用随机线性网络编码（RLNC）提升性能与存储可扩展性。  
+3. 通过基于一致性哈希环的新对象放置与发现机制，支持更多原子对象。  
+4. 借助区块链预言机实现动态节点加入与退出，增强参与者规模的可扩展性。  
+5. 具备拜占庭容错能力，可抵御恶意行为，并在实验中展现出优于ABD算法等传统方案的性能与可扩展性。 <div>
+arXiv:2601.13146v1 Announce Type: new 
+Abstract: This paper introduces OPTIMUM-DERAM, a highly consistent, scalable, secure, and decentralized shared memory solution. Traditional distributed shared memory implementations offer multi-object support by multi-threading a single object memory instance over the same set of data hosts. While theoretically sound, the amount of resources required made such solutions prohibitively expensive in practical systems. OPTIMUM-DERAM proposes a decentralized, reconfigurable, atomic read/write shared memory (DeRAM) that: (i) achieves improved performance and storage scalability by leveraging Random Linear Network Codes (RLNC); (ii) scales in the number of supported atomic objects by introducing a new object placement and discovery approach based on a consistent hashing ring; (iii) scales in the number of participants by allowing dynamic joins and departures leveraging a blockchain oracle to serve as a registry service; and (iv) is secure against malicious behavior by tolerating Byzantine failures.
+  Experimental results over a globally distributed set of nodes, help us realize the performance and scalability gains of OPTIMUM-DERAM over previous distributed shared memory solutions (i.e., the ABD algorithm [3])
+]]></content:encoded>
+<pubDate>Wed, 21 Jan 2026 00:00:00 -0500</pubDate>
+<pubDate>Wed, 21 Jan 2026 00:00:00 -0500</pubDate>
+</item>
+<item>
+<title>Towards Scalable Federated Container Orchestration: The CODECO Approach</title>
+<link>https://arxiv.org/abs/2601.13351</link>
+<guid>https://arxiv.org/abs/2601.13351</guid>
+<content:encoded><![CDATA[
+<div> 联邦编排、Kubernetes、数据-计算-网络协同、AI辅助决策、混合治理模型<br><br>总结:<br>1. CODECO是一个面向Kubernetes的联邦编排框架，旨在克服以云为中心部署的局限性。<br>2. 采用数据-计算-网络协同编排方法，支持异构基础设施、移动性和多提供商操作。<br>3. 通过语义应用模型、基于分区的联邦机制和AI辅助决策，实现上下文感知的应用与微服务部署及自适应管理。<br>4. 引入混合治理模型，在保持全局一致性的同时，保障边缘节点的自主性。<br>5. 提出了CODECO的架构、核心组件、典型编排工作流，并构建了基于软件的可复现实验框架用于评估。 <div>
+arXiv:2601.13351v1 Announce Type: new 
+Abstract: This paper presents CODECO, a federated orchestration framework for Kubernetes that addresses the limitations of cloud-centric deployment. CODECO adopts a data-compute-network co-orchestration approach to support heterogeneous infrastructures, mobility, and multi-provider operation.
+  CODECO extends Kubernetes with semantic application models, partition-based federation, and AI-assisted decision support, enabling context-aware placement and adaptive management of applications and their micro-services across federated environments. A hybrid governance model combines centralized policy enforcement with decentralized execution and learning to preserve global coherence while supporting far Edge autonomy. The paper describes the architecture and core components of CODECO, outlines representative orchestration workflows, and introduces a software-based experimentation framework for reproducible evaluation in federated Edge-Cloud infrastructure environments.
+]]></content:encoded>
+<pubDate>Wed, 21 Jan 2026 00:00:00 -0500</pubDate>
+<pubDate>Wed, 21 Jan 2026 00:00:00 -0500</pubDate>
+</item>
+<item>
+<title>Stochastic Dynamic Pricing of Electric Vehicle Charging with Heterogeneous User Behavior: A Stackelberg Game Framework</title>
+<link>https://arxiv.org/abs/2601.13571</link>
+<guid>https://arxiv.org/abs/2601.13571</guid>
+<content:encoded><![CDATA[
+<div> 关键词：电动汽车、动态定价、行为异质性、随机优化、排队近似<br><br>总结:  
+1. 电动汽车（EV）普及带来充电站时空需求管理挑战，传统动态定价模型因简化用户行为而缺乏可扩展性。  
+2. 研究提出一个基于双层Stackelberg博弈的随机动态定价框架，上层优化时变价格以最大化系统效用，下层采用多项式Logit（MNL）模型刻画用户在价格敏感度、电池老化、风险偏好和路网成本下的分散选择行为。  
+3. 模型摒弃网络均衡约束，通过排队论近似处理拥堵效应，提升可扩展性。  
+4. 采用滚动时域策略，结合动态概率敏感性分析引导的交叉熵法（PSA-CEM）与逐次平均法（MSA）高效求解大规模优化问题。  
+5. 基于墨尔本Clayton地区22个充电站的实证研究表明，该机制显著降低排队惩罚并提升用户效用，优于固定电价和分时电价方案。 <div>
+arXiv:2601.13571v1 Announce Type: new 
+Abstract: The rapid adoption of electric vehicles (EVs) introduces complex spatiotemporal demand management challenges for charging station operators (CSOs), exacerbated by demand imbalances, behavioral heterogeneity, and system uncertainty. Traditional dynamic pricing models, often relying on deterministic EV-CS pairings and network equilibrium assumptions, frequently oversimplify user behavior and lack scalability. This study proposes a stochastic, behaviorally heterogeneous dynamic pricing framework formulated as a bi-level Stackelberg game. The upper level optimizes time-varying pricing to maximize system-wide utility, while the lower level models decentralized EV users via a multinomial logit (MNL) choice model incorporating price sensitivity, battery aging, risk attitudes, and network travel costs. Crucially, the model avoids network equilibrium constraints to enhance scalability, with congestion effects represented via queuing-theoretic approximations. To efficiently solve the resulting large-scale optimization problem, a rolling-horizon approach combining the Dynamic Probabilistic Sensitivity Analysis-guided Cross-Entropy Method (PSA-CEM) with the Method of Successive Averages (MSA) is implemented. A real-world case study in Clayton, Melbourne, validates the framework using 22 charging stations. Simulation results demonstrate that the proposed mechanism substantially reduces queuing penalties and improves user utility compared to fixed and time-of-use pricing. The framework provides a robust, scalable tool for strategic EV charging management, balancing realism with computational efficiency.
+]]></content:encoded>
+<pubDate>Wed, 21 Jan 2026 00:00:00 -0500</pubDate>
+<pubDate>Wed, 21 Jan 2026 00:00:00 -0500</pubDate>
+</item>
+<item>
+<title>A Blockchain-Oriented Software Engineering Architecture for Carbon Credit Certification Systems</title>
+<link>https://arxiv.org/abs/2601.13772</link>
+<guid>https://arxiv.org/abs/2601.13772</guid>
+<content:encoded><![CDATA[
+<div> 碳信用、区块链、物联网、可再生能源、认证体系<br><br>总结:<br>1. 碳信用体系作为激励减排和推动清洁能源转型的政策工具，依赖于将实际可再生能源发电量与可验证的减排记录相连接的机制。<br>2. 现有基于区块链和物联网的技术多聚焦于排放监测与交易，对中小型可再生能源项目的碳信用认证支持不足。<br>3. 本文提出一种基于区块链的碳信用认证架构，通过100 kWp光伏案例验证，整合实时物联网数据采集、边缘层聚合及基于许可链的智能合约安全上链存储。<br>4. 该系统区别于侧重交易机制的方法，符合欧洲法规及自愿碳市场标准，明确光伏运营商在认证过程中的实际要求与约束。<br>5. 所构建架构为生成可验证的碳信用记录和第三方核查提供了结构化路径。 <div>
+arXiv:2601.13772v1 Announce Type: new 
+Abstract: Carbon credit systems have emerged as a policy tool to incentivize emission reductions and support the transition to clean energy. Reliable carbon-credit certification depends on mechanisms that connect actual, measured renewable-energy production to verifiable emission-reduction records. Although blockchain and IoT technologies have been applied to emission monitoring and trading, existing work offers limited support for certification processes, particularly for small and medium-scale renewable installations. This paper introduces a blockchain-based carbon-credit certification architecture, demonstrated through a 100 kWp photovoltaic case study, that integrates real-time IoT data collection, edge-level aggregation, and secure on-chain storage on a permissioned blockchain with smart contracts. Unlike approaches focused on trading mechanisms, the proposed system aligns with European legislation and voluntary carbon-market standards, clarifying the practical requirements and constraints that apply to photovoltaic operators. The resulting architecture provides a structured pathway for generating verifiable carbon-credit records and supporting third-party verification.
+]]></content:encoded>
+<pubDate>Wed, 21 Jan 2026 00:00:00 -0500</pubDate>
+<pubDate>Wed, 21 Jan 2026 00:00:00 -0500</pubDate>
+</item>
+<item>
+<title>Know Your Contract: Extending eIDAS Trust into Public Blockchains</title>
+<link>https://arxiv.org/abs/2601.13903</link>
+<guid>https://arxiv.org/abs/2601.13903</guid>
+<content:encoded><![CDATA[
+<div> 区块链、eIDAS、智能合约、数字身份、合规验证<br><br>总结:  
+1. 公有链缺乏将链上行为归责于法律实体的机制，阻碍了机构采用与监管合规。  
+2. 本文提出一种架构，通过将欧盟eIDAS框架中的合格电子印章（由合格信任服务提供者签发）与智能合约密码学绑定，建立从欧盟可信列表到链上地址的可验证信任链。  
+3. 该机制支持机器可验证的合规证明（如“了解你的合约/对手方/业务”），无需引入新中介。  
+4. 分析了eIDAS、MiCA、PSD2、PSR及欧洲企业钱包等法规要求，并确定采用ECDSA（P-256）与CAdES格式以满足eIDAS规定和EVM执行限制。  
+5. 提出两种信任验证模型：链下用于代理支付协议，链上用于法人实体间的合规DeFi操作，实现首次交互即可自动互验，为机构参与DeFi、现实资产代币化和智能体商业提供合规路径。 <div>
+arXiv:2601.13903v1 Announce Type: new 
+Abstract: Public blockchains lack native mechanisms to attribute on-chain actions to legally accountable entities, creating a fundamental barrier to institutional adoption and regulatory compliance. This paper presents an architecture that extends the European Union eIDAS trust framework into public blockchain ecosystems by cryptographically binding smart contracts to qualified electronic seals issued by Qualified Trust Service Providers. The mechanism establishes a verifiable chain of trust from the European Commission List of Trusted Lists to individual on-chain addresses, enabling machine-verifiable proofs for automated regulatory validation, such as Know Your Contract, Counterparty, and Business checks, without introducing new trusted intermediaries. Regulatory requirements arising from eIDAS, MiCA, PSD2, PSR, and the proposed European Business Wallet are analyzed, and a cryptographic suite meeting both eIDAS implementing regulations and EVM execution constraints following the Ethereum Fusaka upgrade is identified, namely ECDSA with P-256 and CAdES formatting. Two complementary trust validation models are presented: an off-chain workflow for agent-to-agent payment protocols and a fully on-chain workflow enabling regulatory-compliant DeFi operations between legal entities. The on-chain model converts regulatory compliance from a per-counterparty administrative burden into an automated, standardized process, enabling mutual validation at first interaction without prior business relationships. As eIDAS wallets become mandatory across EU member states, the proposed architecture provides a pathway for integrating European digital trust infrastructure into blockchain-based systems, enabling institutional DeFi participation, real-world asset tokenization, and agentic commerce within a trusted, regulatory-compliant framework.
+]]></content:encoded>
+<pubDate>Wed, 21 Jan 2026 00:00:00 -0500</pubDate>
+<pubDate>Wed, 21 Jan 2026 00:00:00 -0500</pubDate>
+</item>
+<item>
+<title>Decentralized Infrastructure for Digital Notarizing, Signing and Sharing Files using Blockchain</title>
+<link>https://arxiv.org/abs/2601.13907</link>
+<guid>https://arxiv.org/abs/2601.13907</guid>
+<content:encoded><![CDATA[
+<div> 区块链、数字公证、去中心化、文档安全、不可篡改<br><br>总结:<br>1. 传统纸质文档管理存在安全性低、易伪造、易丢失及效率低下等问题。<br>2. 尽管数字化有所进展，官方文档仍面临伪造、丢失和未授权访问的风险。<br>3. 本研究提出基于区块链的去中心化基础设施，用于文档的数字公证、签署与共享。<br>4. 通过结合密码学与去中心化存储，构建透明、不可篡改且可行的系统架构。<br>5. 研究表明，该方案可提升文档管理的安全性与效率，简化行政流程并增强用户信任。 <div>
+arXiv:2601.13907v1 Announce Type: new 
+Abstract: Traditional paper-based document management has long posed challenges related to security, authenticity, and efficiency. Despite advances in digitalization, official documents remain vulnerable to forgery, loss, and unauthorized access. This thesis proposes a decentralized infrastructure for digital notarization, signing, and sharing of documents using blockchain technology. The research addresses key issues of transparency, immutability, and feasibility by defining system requirements, evaluating existing solutions, and proposing a novel architecture based on distributed systems.
+  By combining cryptographic techniques with decentralized storage, this research contributes to the development of a more secure and efficient framework for managing official documents. The findings highlight the potential of blockchain-based digital notarization to streamline bureaucratic processes, mitigate security risks, and enhance user trust in digital document management.
+]]></content:encoded>
+<pubDate>Wed, 21 Jan 2026 00:00:00 -0500</pubDate>
+<pubDate>Wed, 21 Jan 2026 00:00:00 -0500</pubDate>
+</item>
+<item>
+<title>Decentralized Cooperative Beamforming for BDRIS-Assisted Cell-Free MIMO OFDM Systems</title>
+<link>https://arxiv.org/abs/2601.13201</link>
+<guid>https://arxiv.org/abs/2601.13201</guid>
+<content:encoded><![CDATA[
+<div> 关键词：BDRIS、去中心化波束成形、多用户MIMO-OFDM、智能无线环境、和速率最大化<br><br>总结:  
+1. 本文研究了一种基于多个超越对角可重构智能表面（BDRIS）的宽带无小区多流多用户MIMO-OFDM系统。  
+2. 提出了一种新颖的去中心化主动与被动波束成形框架，该框架在信道状态信息不完美且基站间仅需最小协作的情况下，仍能有效配置共享BDRIS。  
+3. 该方法显著降低了传统集中式方案对高算力中央处理器的依赖及通信开销。  
+4. 采用动态组连接（DGC）架构的BDRIS，其单元具有频率选择性响应，联合优化BDRIS的可调电容、置换矩阵及基站预编码矩阵以最大化系统和速率。  
+5. 仿真结果表明，所提去中心化协作方案优于非协作基准，且DGC架构性能接近更复杂的全连接BDRIS结构。 <div>
+arXiv:2601.13201v1 Announce Type: cross 
+Abstract: In this paper, a wideband cell-free multi-stream multi-user Multiple-Input Multiple-Output (MIMO) Orthogonal Frequency Division Multiplexing (OFDM) system is considered operating within a smart wireless environment enabled by multiple Beyond Diagonal Reconfigurable Intelligent Surfaces (BDRISs). A novel decentralized active and passive beamforming framework, robust to imperfect channel state availability and with minimal cooperation among the system's multiple Base Stations (BSs) for deciding the final configurations of the shared BDRISs, is proposed, which aims to substantially reduce the overhead inherent in centralized solutions necessitating a central processing unit of high computational power. By considering a Dynamic Group-Connected (DGC) BDRIS architecture with frequency-selective responses per unit element, we formulate the system's sum-rate maximization problem with respect to the tunable capacitances and permutation matrices of the BDRISs as well as the precoding matrices of the BSs, which is solved via successive concave approximation and alternating projections as well as consensus-based updates for the BDRISs' design. Through extensive simulation results, it is showcased that the proposed robust decentralized cooperative approach with diverse BDRIS architectures outperforms non-cooperation benchmarks. It is also demonstrated that the considered DGC BDRIS architecture is able to provide sum-rate performance gains sufficiently close to the more complex fully-connected BDRIS structure.
+]]></content:encoded>
+<pubDate>Wed, 21 Jan 2026 00:00:00 -0500</pubDate>
+<pubDate>Wed, 21 Jan 2026 00:00:00 -0500</pubDate>
+</item>
+<item>
+<title>LinkDID: A Privacy-Preserving, Sybil-Resistant and Key-Recoverable Decentralized Identity Scheme</title>
+<link>https://arxiv.org/abs/2307.14679</link>
+<guid>https://arxiv.org/abs/2307.14679</guid>
+<content:encoded><![CDATA[
+<div> 去中心化身份、Sybil攻击防御、匿名凭证、密钥恢复、区块链绑定<br><br>总结:<br>1. LinkDID是一种新型去中心化身份方案，解决Web3中因任意创建标识符导致的Sybil攻击和密钥丢失风险。<br>2. 通过区块链绑定标识符与用户，并逐步将同一持有者的多个标识符合并为统一关联标识符，实现Sybil攻击的渐进式防御。<br>3. 支持无需信任的密钥恢复机制，用户可通过证明对关联结构的认知来恢复被盗或丢失的标识符。<br>4. 利用区块链上的标识符-密钥绑定和所有权证明，防止未授权资产转移，并支持不可转让的匿名凭证。<br>5. 实验表明，LinkDID在普通设备上实现高效性能，标识符关联和凭证展示分别仅需2.41秒和3.31秒。 <div>
+arXiv:2307.14679v3 Announce Type: replace 
+Abstract: Decentralized identity frameworks grant users full sovereignty over their digital assets in the Web3 ecosystem. However, allowing arbitrary creation of identifiers makes the system susceptible to Sybil attacks and puts assets at risk when keys are lost or compromised. Moreover, the lack of identification prevents anonymous credential schemes from deterring malicious transfers. While existing solutions attempt to address these issues by linking identifiers to entities through trusted intermediaries, these entities are not always accessible and require costly offline interactions.
+  In this work, we introduce LinkDID, a decentralized identity scheme offering Sybil resistance, trustless key recovery, and nontransferable anonymous credentials. LinkDID creates blockchainbased bindings between identifiers and gradually combines identifiers belonging to the same holder into a unified associated identifier. As all identifiers within an association are presumed to belong to one individual, any fraudulent activity can be detected. The association grows larger as interactions increase, substantially reducing the likelihood of successful Sybil attacks. This mechanism allows holders to recover identifiers with lost or stolen keys by proving knowledge of specific association structures. Additionally, LinkDID prevents unauthorized transfers through blockchain-based identifier-key bindings and proofs of ownership for credentials.
+  The evaluation shows that LinkDID effectively achieves progressive Sybil resistance while surpassing state-of-the-art anonymous credential schemes, achieving identifier association and credential presentation times of 2.41s and 3.31s on consumer-grade devices.
+]]></content:encoded>
+<pubDate>Wed, 21 Jan 2026 00:00:00 -0500</pubDate>
+<pubDate>Wed, 21 Jan 2026 00:00:00 -0500</pubDate>
+</item>
+<item>
+<title>JANUS: A Difference-Oriented Analyzer For Financial Centralization Risks in Smart Contracts</title>
+<link>https://arxiv.org/abs/2412.03938</link>
+<guid>https://arxiv.org/abs/2412.03938</guid>
+<content:encoded><![CDATA[
+<div> 智能合约、去中心化、特权账户、金融风险、自动化分析<br><br>总结:<br>1. 某些智能合约通过设置特权账户管理用户资产，违背去中心化原则，带来金融风险。<br>2. 现有检测方法依赖预定义行为模式，难以准确识别多样化的中心化风险。<br>3. 本文提出JANUS，一种不依赖具体行为模式的Solidity智能合约自动化分析工具。<br>4. JANUS通过比较特权账户与普通账户所达状态的差异，判断其是否涉及金融风险，从而提升检测准确性。<br>5. 实验表明，JANUS在540个合约测试集上优于现有工具，并在33,151个真实合约中发现两类未被其他工具识别的风险；其采用的状态遍历与变量摘要技术不会引入误报或漏报。 <div>
+arXiv:2412.03938v2 Announce Type: replace 
+Abstract: Some smart contracts violate decentralization principles by defining privileged accounts that manage other users' assets without permission, introducing centralization risks that have caused financial losses. Existing methods, however, face challenges in accurately detecting diverse centralization risks due to their dependence on predefined behavior patterns. In this paper, we propose JANUS, an automated analyzer for Solidity smart contracts that detects financial centralization risks independently of their specific behaviors. JANUS identifies differences between states reached by privileged and ordinary accounts, and analyzes whether these differences are finance-related. Focusing on the impact of risks rather than behaviors, JANUS achieves improved accuracy compared to existing tools and can uncover centralization risks with unknown patterns.
+  To evaluate JANUS's performance, we compare it with other tools using a dataset of 540 contracts. Our evaluation demonstrates that JANUS outperforms representative tools in terms of detection accuracy for financial centralization risks . Additionally, we evaluate JANUS on a real-world dataset of 33,151 contracts, successfully identifying two types of risks that other tools fail to detect. We also prove that the state traversal method and variable summaries, which are used in JANUS to reduce the number of states to be compared, do not introduce false alarms or omissions in detection.
+]]></content:encoded>
+<pubDate>Wed, 21 Jan 2026 00:00:00 -0500</pubDate>
+<pubDate>Wed, 21 Jan 2026 00:00:00 -0500</pubDate>
+</item>
+<item>
+<title>AI-Based Vulnerability Analysis of NFT Smart Contracts</title>
+<link>https://arxiv.org/abs/2504.16113</link>
+<guid>https://arxiv.org/abs/2504.16113</guid>
+<content:encoded><![CDATA[
+<div> NFT智能合约、漏洞检测、随机森林、CART算法、超参数调优<br><br>总结:<br>1. 针对NFT智能合约安全问题，研究提出一种基于AI的自动化漏洞检测方法。<br>2. 收集16,527份公开合约代码，划分为五类漏洞：Risky Mutable Proxy、ERC-721重入、无限铸造、缺失要求和公开销毁。<br>3. 采用CART算法构建初始决策树进行特征提取，并集成随机森林模型以提升鲁棒性。<br>4. 利用GridSearch进行超参数调优，并通过3D可视化分析参数对检测效果的影响。<br>5. 实验表明该模型在五类漏洞检测中表现优异，有效缓解过拟合，为AI在智能合约安全领域的规模化应用奠定基础。 <div>
+arXiv:2504.16113v3 Announce Type: replace 
+Abstract: With the rapid growth of the NFT market, the security of smart contracts has become crucial. However, existing AI-based detection models for NFT contract vulnerabilities remain limited due to their complexity, while traditional manual methods are time-consuming and costly. This study proposes an AI-driven approach to detect vulnerabilities in NFT smart contracts.
+  We collected 16,527 public smart contract codes, classifying them into five vulnerability categories: Risky Mutable Proxy, ERC-721 Reentrancy, Unlimited Minting, Missing Requirements, and Public Burn. Python-processed data was structured into training/test sets. Using the CART algorithm with Gini coefficient evaluation, we built initial decision trees for feature extraction. A random forest model was implemented to improve robustness through random data/feature sampling and multitree integration. GridSearch hyperparameter tuning further optimized the model, with 3D visualizations demonstrating parameter impacts on vulnerability detection.
+  Results show the random forest model excels in detecting all five vulnerabilities. For example, it identifies Risky Mutable Proxy by analyzing authorization mechanisms and state modifications, while ERC-721 Reentrancy detection relies on external call locations and lock mechanisms. The ensemble approach effectively reduces single-tree overfitting, with stable performance improvements after parameter tuning. This method provides an efficient technical solution for automated NFT contract detection and lays groundwork for scaling AI applications.
+]]></content:encoded>
+<pubDate>Wed, 21 Jan 2026 00:00:00 -0500</pubDate>
+<pubDate>Wed, 21 Jan 2026 00:00:00 -0500</pubDate>
+</item>
+<item>
+<title>Federated Unsupervised Semantic Segmentation</title>
+<link>https://arxiv.org/abs/2505.23292</link>
+<guid>https://arxiv.org/abs/2505.23292</guid>
+<content:encoded><![CDATA[
+<div> 联邦学习、无监督语义分割、特征对齐、聚类中心、去中心化训练<br><br>总结:<br>1. 该研究首次将联邦学习（FL）应用于无监督语义图像分割（USS），提出名为FUSS的新框架。<br>2. FUSS在完全去中心化、无需标签的设定下，通过冻结视觉基础模型提取像素级特征，并利用自监督目标优化语义分组。<br>3. 针对分布式客户端数据异构性带来的特征表示与聚类中心对齐难题，FUSS设计了新颖的联邦策略，联合优化本地分割头与共享语义聚类中心，提升全局一致性。<br>4. 在多个基准和真实世界数据集上的实验表明，FUSS在二分类与多分类任务中均优于仅本地训练及传统FL算法的扩展方法。<br>5. 为保障可复现性，作者公开了代码、数据划分脚本及实现细节。 <div>
+arXiv:2505.23292v2 Announce Type: replace 
+Abstract: This work explores the application of Federated Learning (FL) to Unsupervised Semantic image Segmentation (USS). Recent USS methods extract pixel-level features using frozen visual foundation models and refine them through self-supervised objectives that encourage semantic grouping. These features are then grouped to semantic clusters to produce segmentation masks. Extending these ideas to federated settings requires feature representation and cluster centroid alignment across distributed clients, an inherently difficult task under heterogeneous data distributions in the absence of supervision. To address this, we propose FUSS (Federated Unsupervised image Semantic Segmentation) which is, to our knowledge, the first framework to enable fully decentralized, label-free semantic segmentation training. FUSS introduces novel federation strategies that promote global consistency in feature and prototype space, jointly optimizing local segmentation heads and shared semantic centroids. Experiments on both benchmark and real-world datasets, including binary and multi-class segmentation tasks, show that FUSS consistently outperforms local-only client trainings as well as extensions of classical FL algorithms under varying client data distributions. To fully support reproducibility, the source code, data partitioning scripts, and implementation details are publicly available at: https://github.com/evanchar/FUSS
+]]></content:encoded>
+<pubDate>Wed, 21 Jan 2026 00:00:00 -0500</pubDate>
+<pubDate>Wed, 21 Jan 2026 00:00:00 -0500</pubDate>
+</item>
+<item>
+<title>Quantum Blockchain Survey: Foundations, Trends, and Gaps</title>
+<link>https://arxiv.org/abs/2507.13720</link>
+<guid>https://arxiv.org/abs/2507.13720</guid>
+<content:encoded><![CDATA[
+<div> 量子计算、区块链、后量子密码、量子密钥分发、安全性<br><br>总结:<br>1. 量子计算对经典区块链系统构成根本性威胁，因其可破解广泛使用的密码原语。<br>2. 应对策略主要有两个方向：一是构建后量子区块链，采用抗量子密码算法；二是发展量子区块链，利用量子纠缠和量子密钥分发等特性。<br>3. 该综述分析了两类方案的密码学基础、架构设计及实现挑战。<br>4. 文章比较了不同技术提案，在安全性、可扩展性与部署可行性之间权衡利弊。<br>5. 最后指出在硬件、共识机制和网络设计等方面仍存在开放性研究问题，旨在为量子时代安全区块链的发展提供系统参考。 <div>
+arXiv:2507.13720v2 Announce Type: replace 
+Abstract: Quantum computing poses fundamental risks to classical blockchain systems by undermining widely used cryptographic primitives. In response, two major research directions have emerged: post-quantum blockchains, which integrate quantum-resistant algorithms, and quantum blockchains, which leverage quantum properties such as entanglement and quantum key distribution. This survey reviews key developments in both areas, analyzing their cryptographic foundations, architectural designs, and implementation challenges. This work provides a comparative overview of technical proposals, highlight trade-offs in security, scalability, and deployment, and identify open research problems across hardware, consensus, and network design. The goal is to offer a structured and comprehensive reference for advancing secure blockchain systems in the quantum era.
+]]></content:encoded>
+<pubDate>Wed, 21 Jan 2026 00:00:00 -0500</pubDate>
+<pubDate>Wed, 21 Jan 2026 00:00:00 -0500</pubDate>
+</item>
+<item>
+<title>USCSA: Evolution-Aware Security Analysis for Proxy-Based Upgradeable Smart Contracts</title>
+<link>https://arxiv.org/abs/2512.08372</link>
+<guid>https://arxiv.org/abs/2512.08372</guid>
+<content:encoded><![CDATA[
+<div> 升级智能合约、安全分析、AST差异分析、大语言模型、漏洞检测<br><br>总结:<br>1. 针对区块链中可升级智能合约在升级过程中易引入新漏洞的问题，现有静态分析工具难以捕捉代码变更与风险间的关联。<br>2. 提出USCSA系统，结合抽象语法树（AST）差异分析与大语言模型（LLM）辅助推理，实现对升级引发漏洞的高置信度归因。<br>3. 研究基于3,546个真实升级合约漏洞案例，涵盖重入、访问控制缺陷和整数溢出等常见类型。<br>4. 实验表明，USCSA在检测升级相关漏洞时达到92.26%精确率、89.67%召回率和90.95% F1分数。<br>5. 该方法为区块链应用的安全审计提供了高效、新颖的解决方案，显著提升可升级合约的安全性与完整性。 <div>
+arXiv:2512.08372v3 Announce Type: replace 
+Abstract: In the case of upgrading smart contracts on blockchain systems, it is essential to consider the continuity of upgrades and subsequent maintenance. In practice, upgrade operations often introduce new vulnerabilities. Existing static analysis tools usually only scan a single version and are unable to capture the correlation between code changes and emerging risks. To address this, we propose an Upgradeable Smart Contract Security Analyzer, USCSA, which uses Abstract Syntax Tree (AST) difference analysis to assess risks associated with the upgrade process and utilizes large language models (LLMs) for assisted reasoning to achieve high-confidence vulnerability attribution. We collected and analyzed 3,546 cases of vulnerabilities in upgradeable contracts, covering common vulnerability categories such as reentrancy, access control flaws, and integer overflow. Experimental results show that USCSA achieves a precision of 92.26%, a recall of 89.67%, and an F1-score of 90.95% in detecting upgrade-induced vulnerabilities. As a result, USCSA provides a significant advantage to improve the security and integrity of upgradeable smart contracts, offering a novel and efficient solution for security auditing on blockchain applications.
+]]></content:encoded>
+<pubDate>Wed, 21 Jan 2026 00:00:00 -0500</pubDate>
+<pubDate>Wed, 21 Jan 2026 00:00:00 -0500</pubDate>
+</item>
+<item>
+<title>What You Trust Is Insecure: Demystifying How Developers (Mis)Use Trusted Execution Environments in Practice</title>
+<link>https://arxiv.org/abs/2512.17363</link>
+<guid>https://arxiv.org/abs/2512.17363</guid>
+<content:encoded><![CDATA[
+<div> 可信执行环境（TEE）、Intel SGX、ARM TrustZone、开发者实践、安全编码<br><br>总结:<br>1. 该研究首次对241个使用Intel SGX和ARM TrustZone的开源项目进行了大规模实证分析，涵盖8个应用领域。<br>2. 物联网设备安全是当前TEE最主要的应用场景（30%），远超学术界关注较多的区块链与密码系统（7%），AI模型保护（12%）正快速增长。<br>3. 超三成项目（32.4%）自行重写加密功能，而非使用官方SDK，反映出当前SDK在可用性与可移植性方面存在不足。<br>4. 手动检查发现25.3%的项目存在不安全编码行为，如硬编码密钥和缺失输入验证，削弱了TEE的安全保障。<br>5. 研究结果对改进TEE开发工具链和提升开发者安全实践具有重要指导意义。 <div>
+arXiv:2512.17363v3 Announce Type: replace 
+Abstract: Trusted Execution Environments (TEEs), such as Intel SGX and ARM TrustZone, provide isolated regions of CPU and memory for secure computation and are increasingly used to protect sensitive data and code across diverse application domains. However, little is known about how developers actually use TEEs in practice. This paper presents the first large-scale empirical study of real-world TEE applications. We collected and analyzed 241 open-source projects from GitHub that utilize the two most widely-adopted TEEs, Intel SGX and ARM TrustZone. By combining manual inspection with customized static analysis scripts, we examined their adoption contexts, usage patterns, and development practices across three phases. First, we categorized the projects into 8 application domains and identified trends in TEE adoption over time. We found that the dominant use case is IoT device security (30%), which contrasts sharply with prior academic focus on blockchain and cryptographic systems (7%), while AI model protection (12%) is rapidly emerging as a growing domain. Second, we analyzed how TEEs are integrated into software and observed that 32.4% of the projects reimplement cryptographic functionalities instead of using official SDK APIs, suggesting that current SDKs may have limited usability and portability to meet developers' practical needs. Third, we examined security practices through manual inspection and found that 25.3% (61 of 241) of the projects exhibit insecure coding behaviors when using TEEs, such as hardcoded secrets and missing input validation, which undermine their intended security guarantees. Our findings have important implications for improving the usability of TEE SDKs and supporting developers in trusted software development.
+]]></content:encoded>
+<pubDate>Wed, 21 Jan 2026 00:00:00 -0500</pubDate>
+<pubDate>Wed, 21 Jan 2026 00:00:00 -0500</pubDate>
+</item>
 
 <item>
 <title>Pruning as Evolution: Emergent Sparsity Through Selection Dynamics in Neural Networks</title>
