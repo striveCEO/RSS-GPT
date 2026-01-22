@@ -4,12 +4,13 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+
 <item>
 <title>Automatically Detecting Compromised Secrets: Foundations, Design Principles, and Applications</title>
 <link>https://eprint.iacr.org/2017/234</link>
 <guid>https://eprint.iacr.org/2017/234</guid>
 <content:encoded><![CDATA[
-<div> 自动检测、密钥泄露、安全协议、自动响应、统一框架<br><br>总结:<br>1. 文章提出一种能自动检测密钥或密码等秘密信息是否泄露的安全协议框架，且无误报。<br>2. 该框架支持自动响应机制，如自动撤销密钥或关闭受攻击服务，以最小化泄露影响。<br>3. 威胁模型涵盖恶意代理、被临时或永久攻陷的代理以及克隆设备。<br>4. 与以往依赖特定领域设计且需人工干预的方案（如证书透明度、RFID克隆检测）不同，本文提供通用、可自动执行的解决方案。<br>5. 通过多个案例（如Web登录、支付系统、电子门锁）验证其机制有效性，并改进并形式化验证了Cloudflare的Keyless SSL协议。 <div>
+<div> 自动检测、密钥泄露、安全协议、自动响应、统一框架<br /><br />总结:<br />1. 文章提出一种能自动检测密钥或密码等秘密信息是否泄露的安全协议框架，且无误报。<br />2. 该框架支持自动响应机制，如自动撤销密钥或关闭受攻击服务，以最小化泄露影响。<br />3. 威胁模型涵盖恶意代理、被临时或永久攻陷的代理以及克隆设备。<br />4. 与以往依赖特定领域设计且需人工干预的方案（如证书透明度、RFID克隆检测）不同，本文提供通用、可自动执行的解决方案。<br />5. 通过多个案例（如Web登录、支付系统、电子门锁）验证其机制有效性，并改进并形式化验证了Cloudflare的Keyless SSL协议。 <div>
 We develop foundations and several constructions for security protocols that can automatically detect, without false positives, if a secret (such as a key or password) has been compromised. Such constructions can be used, e.g., to automatically shut down compromised services, or to automatically revoke compromised secrets to minimize the effects of compromise. Our threat model includes malicious agents, (temporarily or permanently) compromised agents, and clones. 
 
 Previous works have studied domain-specific partial solutions to this problem. For example, Google's Certificate Transparency aims to provide infrastructure to detect the compromise of a certificate authority's signing key, logs have been used for detecting endpoint compromise, and protocols have been proposed to detect cloned RFID/smart cards. Contrary to these existing approaches, for which the designs are interwoven with domain-specific considerations and which usually do not enable fully automatic response (i.e., they need human assessment), our approach shows where automatic action is possible. Our results unify, provide design rationales, and suggest improvements for the existing domain-specific solutions.
@@ -19,9 +20,7 @@ Based on our analysis, we construct several mechanisms for the detection of comp
 In several case studies, we show how our mechanisms can be used to substantially increase the security guarantees of a wide range of systems, such as web logins, payment systems, or electronic door locks. For example, we propose and formally verify an improved version of Cloudflare's Keyless SSL protocol that enables key compromise detection.
 ]]></content:encoded>
 <pubDate>Sat, 11 Mar 2017 14:37:51 +0000</pubDate>
-<pubDate>Sat, 11 Mar 2017 14:37:51 +0000</pubDate>
 </item>
-
 <item>
 <title>Formalizing Privacy in Decentralized Identity: A Provably Secure Framework with Minimal Disclosure</title>
 <link>https://eprint.iacr.org/2026/077</link>
@@ -15852,19 +15851,6 @@ Positive Result: We present the first protocol for BA with expected constant rou
 Negative Result: We give the first lower bound on the communication complexity of BA in a model where parties have restricted computational resources. Concretely, we show that a multicast complexity of $O(\sqrt{n})$ is necessary even if the parties have access to a VDF oracle.
 ]]></content:encoded>
 <pubDate>Thu, 23 Jun 2022 09:58:37 +0000</pubDate>
-</item>
-<item>
-<title>Optimized Privacy-Preserving Clustering with Fully Homomorphic Encryption</title>
-<link>https://eprint.iacr.org/2024/1141</link>
-<guid>https://eprint.iacr.org/2024/1141</guid>
-<content:encoded><![CDATA[
-<div> 关键词：fully homomorphic encryption (FHE), k-means clustering, one-hot vector, minimum evaluation, bootstrapping
-
-总结:<br />
-文章提出了一种新的基于FHE的k-means聚类方法，旨在克服现有FHE聚类方案的高计算开销问题。该方法通过利用FHE的单指令多数据(SIMD)特性，设计了一个高效的加密环境下最小值评估算法，结合FHE的bootstrap技术，实现了单轮交互的FHE k-means，能够在一次迭代中完成整个加密数据聚类过程。实验表明，新方法在多种公开数据集上性能优于现有方案，且保持与明文结果相当的准确性。此外，还扩展了协议以支持大规模数据的mini-batch k-means，展示了其在大型数据集上的性能。 <div>
-Clustering is a crucial unsupervised learning method extensively used in the field of data analysis. For analyzing big data, outsourced computation is an effective solution but privacy concerns arise when involving sensitive information. Fully homomorphic encryption (FHE) enables computations on encrypted data, making it ideal for such scenarios. However, existing privacy-preserving clustering based on FHE are often constrained by the high computational overhead incurred from FHE, typically requiring decryption and interactions after only one iteration of the clustering algorithm. In this work, we propose a more efficient approach to evaluate the one-hot vector for the index of the minimum in an array with FHE, which fully exploits the parallelism of single-instruction-multiple-data of FHE schemes. By combining this with FHE bootstrapping, we present a practical FHE-based k-means clustering protocol whose required round of interactions between the data owner and the server is optimal, i.e., accomplishing the entire clustering process on encrypted data in a single round. We implement this protocol using the CKKS FHE scheme. Experiments show that our protocol significantly outperforms the state-of-the-art FHE-based k-means clustering protocols on various public datasets and achieves comparable accuracy to plaintext result. Additionally, We adapt our protocol to support mini-batch k-means for large-scale datasets and report its performance.
-]]></content:encoded>
-<pubDate>Sat, 13 Jul 2024 11:18:13 +0000</pubDate>
 </item>
 </channel>
 </rss>
