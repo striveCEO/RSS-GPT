@@ -4,6 +4,58 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+<item>
+<title>2PC Memory-Manipulating Programs with Constant Overhead</title>
+<link>https://eprint.iacr.org/2026/086</link>
+<guid>https://eprint.iacr.org/2026/086</guid>
+<content:encoded><![CDATA[
+<div> 安全多方计算　随机存取内存　分布式点函数　单次访问机模型　隐私保护图遍历<br><br>总结:  
+1. 文章提出一种基于分布式点函数（DPF）的高效两方安全计算（2PC）随机存取内存（RAM）方案，仅需不经意传输（OT）和黑盒伪随机生成器（PRG）。  
+2. 该方案在处理大字长数据时，每次内存访问的通信开销为常数级，尽管计算开销仍为线性。  
+3. 方案构建于新型“单次访问机模型”（SAM），其中每个内存单元最多被读取一次，每次操作在线通信仅为 $2w + 2\lg n$ 比特。  
+4. RAM操作通过非加密方式编译为少量（至多对数级）SAM操作，大字长下效率更高。  
+5. 该2PC SAM可直接高效实现隐私保护图遍历（如DFS/BFS），在线通信达 $O(n \lg n)$ 比特，与明文遍历渐近匹配，且仅泄露运行时间。 <div>
+General-purpose secure multiparty computation (MPC) remains bottlenecked in large part by a lack of efficient techniques for handling memory access. We demonstrate a remarkably simple and efficient 2PC instantiation of random access memory (RAM), based on distributed point functions (DPFs, Gilboa and Ishai, Eurocrypt'14). Our semi-honest 2PC protocol can be achieved from oblivious transfer (OT) and a black-box pseudorandom generator (PRG).
+
+For a memory that stores large enough data words, our 2PC RAM incurs constant communication overhead per access. Like prior works that leverage DPFs to achieve memory access, our work incurs linear computation per access, but our per-access communication is lean.
+
+Our 2PC RAM is built on top of an obliviousness-friendly model of computation called the single access machine model (SAM, Appan et al., CCS'24).  In the SAM model, each memory slot can be read at most once. We present a simple 2PC SAM protocol, where each single-access memory operation incurs at most $2w + O(\lambda \lg n)$ bits of communication, where $w$ is the word size, $n$ is the number of memory words, and $\lambda$ is a security parameter. Of this cost, only $2w + 2\lg n$ bits are incurred in the online phase.
+
+Our RAM operations are (non-cryptographically) compiled to SAM operations.  At most a logarithmic number of SAM operations are needed per RAM operation; if word size is large, even fewer SAM operations are required.  Alternatively, there are now many oblivious algorithms that compile directly  to SAM more efficiently than via a compilation to RAM, and our 2PC SAM can  instantiate these algorithms.  As one example, we can use our 2PC SAM to implement privacy-preserving  graph traversal (DFS or BFS) over a secret-shared size-$n$ graph while  revealing nothing beyond the runtime of the SAM program.  Our construction achieves online communication $O(n \lg n)$ bits, asymptotically matching the number of  bits touched in a corresponding cleartext graph traversal.
+]]></content:encoded>
+<pubDate>Mon, 19 Jan 2026 21:33:21 +0000</pubDate>
+<pubDate>Mon, 19 Jan 2026 21:33:21 +0000</pubDate>
+</item>
+<item>
+<title>Tag-Friendly Lattice Sampler and Applications</title>
+<link>https://eprint.iacr.org/2026/083</link>
+<guid>https://eprint.iacr.org/2026/083</guid>
+<content:encoded><![CDATA[
+<div> 关键词：NIST、格密码、匿名认证、采样器、标签管理<br><br>总结:<br>1. NIST的格密码标准即将广泛应用，主要解决密钥协商与签名认证问题。<br>2. 随着基础应用落地，研究焦点转向更复杂的原语，如门限密码和隐私增强技术，尤其在后量子匿名认证中面临性能挑战。<br>3. 格采样器是提升性能的关键组件，但现有方案忽视了“标签”（tag）的作用。<br>4. 本文提出一种新型采样器，改进标签管理，保持现有采样器特性，可直接替换使用。<br>5. 新采样器生成的预像更小、更快，相比Jeudy和Sanders的最新方案，在多个高级认证机制中实现最高30%的尺寸缩减和35%的速度提升。 <div>
+The NIST lattice-based cryptographic standards are set to be widely adopted, offering solutions to the most common cryptographic needs, namely key establishment and authentication (signature). This shifted the attention to more advanced primitives such as threshold cryptography as well as privacy-enhanced technologies, where the transition is expected to be more complex. This is particularly true in the context of post-quantum anonymous authentication where the existing mechanisms may not match the performance requirements of industrial applications. An important avenue for improvement of said performances is the lattice sampler, which is at the center of these mechanisms. Despite recent progress, prior samplers neglected one component: the tag. The latter is not only necessary for security, but it also impacts the efficiency of the subsequent constructions if not handled properly.
+In this paper, we introduce a new sampler with an enhanced tag management that yet retain the main features of current samplers, and can thus be used as a plug-in replacement. It offers a sampling quality independent of the tag, allowing for producing preimages that are both smaller and faster to generate than those from the very recent sampler of Jeudy and Sanders (Asiacrypt'25). Far from being anecdotal, plugging it into several advanced authentication mechanisms results in size improvements of up to 30%, while being 35% faster.
+]]></content:encoded>
+<pubDate>Mon, 19 Jan 2026 10:23:12 +0000</pubDate>
+<pubDate>Mon, 19 Jan 2026 10:23:12 +0000</pubDate>
+</item>
+<item>
+<title>SoK: Outsourced Private Set Intersection</title>
+<link>https://eprint.iacr.org/2026/080</link>
+<guid>https://eprint.iacr.org/2026/080</guid>
+<content:encoded><![CDATA[
+<div> 隐私增强技术、私有集合交集（PSI）、外包计算、云服务器、协议评估框架<br><br>总结:  
+1. 私有集合交集（PSI）是多种实际应用场景中的关键隐私增强技术，但直接在参与方之间执行会导致性能开销过大。  
+2. 为此，研究转向外包PSI，即客户端将繁重的计算任务委托给不受信任的云服务器。  
+3. 本文提出一个包含12项属性的评估框架，从安全性、功能性和效率三方面对现有外包PSI协议进行系统化分类。  
+4. 作者通过该框架分析了20个协议，为研究人员和实践者提供选型参考及交互式工具。  
+5. 文章还指出了常规PSI与外包PSI之间的研究差距，并提出了未来值得探索的方向。 <div>
+Private set intersection (PSI) protocols are an essential privacy-enhancing technology for many real-world use cases, ranging from mobile contact discovery to fraud detection. However, PSI executed directly between input parties can result in unreasonable performance overhead. This motivates the study of outsourced PSI, where clients delegate the heavy PSI operations to an untrusted (cloud) server.
+
+In this SoK, we introduce a framework of 12 distinct properties that characterize outsourced PSI protocols based on security, functionality, and efficiency. By analyzing 20 protocols through this framework, we provide a valuable resource and an interactive tool for researchers and practitioners to select the most suitable protocols for their specific requirements. Finally, we discuss research gaps between trends in regular PSI and the current state of outsourced PSI, identifying promising avenues for future work.
+]]></content:encoded>
+<pubDate>Sun, 18 Jan 2026 14:15:18 +0000</pubDate>
+<pubDate>Sun, 18 Jan 2026 14:15:18 +0000</pubDate>
+</item>
 
 <item>
 <title>Automatically Detecting Compromised Secrets: Foundations, Design Principles, and Applications</title>
