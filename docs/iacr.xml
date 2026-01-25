@@ -4,17 +4,17 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+
 <item>
 <title>PETCHA: Post-quantum Efficient Transciphering with ChaCha</title>
 <link>https://eprint.iacr.org/2026/112</link>
 <guid>https://eprint.iacr.org/2026/112</guid>
 <content:encoded><![CDATA[
-<div> 全同态加密、转密计算、后量子安全、ChaCha、AES<br><br>总结:<br>1. 全同态加密（FHE）允许弱客户端将计算外包给强服务器并保护隐私，但存在密文膨胀问题。<br>2. 转密计算通过结合对称加密与FHE缓解该问题，常用AES作为基准，但现有方案仅使用AES-128，缺乏后量子安全性。<br>3. 本文提出基于标准密码的后量子安全转密计算协议，选用具有256位经典安全强度（即128位量子安全）的ChaCha密码。<br>4. 设计了高效在FHE下评估ChaCha的算法。<br>5. 实验表明，相比当前最先进的基于AES的方案（如Hippogryph），新方案在单核环境下运行速度最高快11.7倍，吞吐量提升超50倍。 <div>
+<div> 全同态加密、转密计算、后量子安全、ChaCha、AES<br /><br />总结:<br />1. 全同态加密（FHE）允许弱客户端将计算外包给强服务器并保护隐私，但存在密文膨胀问题。<br />2. 转密计算通过结合对称加密与FHE缓解该问题，常用AES作为基准，但现有方案仅使用AES-128，缺乏后量子安全性。<br />3. 本文提出基于标准密码的后量子安全转密计算协议，选用具有256位经典安全强度（即128位量子安全）的ChaCha密码。<br />4. 设计了高效在FHE下评估ChaCha的算法。<br />5. 实验表明，相比当前最先进的基于AES的方案（如Hippogryph），新方案在单核环境下运行速度最高快11.7倍，吞吐量提升超50倍。 <div>
 Fully Homomorphic Encryption (FHE) is a powerful primitive which allows a computationally weak client to outsource computation to a powerful server while maintaining privacy. However, FHE typically suffers from high ciphertext expansion, meaning that the amount of data the client has to send to the server increases by many orders of magnitude after it is encrypted. To solve this problem, the approach known as transciphering consists in combining symmetric encryption with FHE. The most common choice of cipher in this context is the AES, which has been used as a benchmark for transciphering. However, although FHE is typically post-quantum secure, existing transciphering protocols only use AES-128, failing thus to offer security against quantum adversaries.
 In this work, we construct transciphering protocols based on standard ciphers that offer post-quantum security. For this, we propose algorithms to efficiently evaluate the ChaCha cipher with FHE. We notice that ChaCha is a well-established cipher which even has a standardized version in TLS offering 256 bits of security against classic attackers, thus, 128 bits of security in the quantum world.
 We show that our solutions have both better latency and throughput than the state-of-the-art transciphering protocol based on AES. Namely, compared with an extended (128-bit PQ secure) version of Hippogryph  (Belaïd et al., IACR CiC 2025), in single-core experiments, our running times are up to 11.7 times faster while our throughput is more than 50 times higher.
 ]]></content:encoded>
-<pubDate>Fri, 23 Jan 2026 20:22:16 +0000</pubDate>
 <pubDate>Fri, 23 Jan 2026 20:22:16 +0000</pubDate>
 </item>
 <item>
@@ -22,12 +22,11 @@ We show that our solutions have both better latency and throughput than the stat
 <link>https://eprint.iacr.org/2026/109</link>
 <guid>https://eprint.iacr.org/2026/109</guid>
 <content:encoded><![CDATA[
-<div> 盲签名、后量子密码、格密码、VOLE-in-the-head、MAYO签名<br><br>总结:<br>1. 盲签名是匿名凭证和电子现金等隐私保护应用的关键组件。<br>2. 现有基于格的后量子盲签名方案在通信开销（至少20KB）和计算效率（超过100ms）方面仍不实用。<br>3. 本文提出新方案PoMFRIT，结合VOLE-in-the-head零知识证明系统与MAYO数字签名，实现更高效的后量子盲签名。<br>4. PoMFRIT在128位安全强度下，签名展示耗时低于76ms，签发通信量仅0.45KB，签名大小为6.7KB。<br>5. 该工作还首次实现了适用于SHA-3哈希函数族的VOLE-in-the-head证明，具有独立研究价值。 <div>
+<div> 盲签名、后量子密码、格密码、VOLE-in-the-head、MAYO签名<br /><br />总结:<br />1. 盲签名是匿名凭证和电子现金等隐私保护应用的关键组件。<br />2. 现有基于格的后量子盲签名方案在通信开销（至少20KB）和计算效率（超过100ms）方面仍不实用。<br />3. 本文提出新方案PoMFRIT，结合VOLE-in-the-head零知识证明系统与MAYO数字签名，实现更高效的后量子盲签名。<br />4. PoMFRIT在128位安全强度下，签名展示耗时低于76ms，签发通信量仅0.45KB，签名大小为6.7KB。<br />5. 该工作还首次实现了适用于SHA-3哈希函数族的VOLE-in-the-head证明，具有独立研究价值。 <div>
 Blind signatures (Chaum, CRYPTO 82) are important building blocks in many privacy-preserving applications, such as anonymous credentials or e-cash schemes. Recent years saw a strong interest in building Blind signatures from post-quantum assumptions, primarily from lattices. While performance has improved, no construction has reached practical efficiency in terms of computation and communication. The state of the art requires at least $20$ KB size of communication for each showing of a lattice-based Blind signature to a verifier, and more than $100$ ms in prover time.
 
 In this work, we propose an alternative direction with a plausibly post-quantum Blind signature scheme called PoMFRIT. It builds on top of the VOLE-in-the-head Zero-Knowledge proof system (Baum et al. CRYPTO 2023), which we combine with the MAYO digital signature scheme (Beullens, SAC 2021). We implement multiple versions of PoMFRIT to demonstrate security and performance trade-offs, and provide detailed benchmarks of our constructions. Signature issuance requires \(0.45\) KB communication for Blind signatures of size \(6.7\) KB. Showing a Blind signature can be done in $<76$ ms even for a conservative construction with $128$ bit security. As a building block for our Blind signature scheme, we implement the first VOLE-in-the-head proof for hash functions in the SHA-3 family, which we consider of independent interest.
 ]]></content:encoded>
-<pubDate>Fri, 23 Jan 2026 16:02:01 +0000</pubDate>
 <pubDate>Fri, 23 Jan 2026 16:02:01 +0000</pubDate>
 </item>
 <item>
@@ -35,10 +34,9 @@ In this work, we propose an alternative direction with a plausibly post-quantum 
 <link>https://eprint.iacr.org/2026/105</link>
 <guid>https://eprint.iacr.org/2026/105</guid>
 <content:encoded><![CDATA[
-<div> 大语言模型、隐私保护、Transformer、隐私增强技术、可信执行环境<br><br>总结:<br>1. 文章聚焦于大语言模型（LLM）作为云服务部署时的用户提示与生成内容保密问题。<br>2. 提出端到端隐私目标：仅客户端可读取提示与生成结果。<br>3. 围绕隐私增强技术（PETs）的主要类别，分析代表性系统如何应对非线性层和自回归解码等关键瓶颈。<br>4. 从信任假设、可扩展性和部署成熟度三方面比较不同方案。<br>5. 建议一条信任最小化的部署路径：从当前基于可信执行环境（TEE）的大规模方案，过渡到结合密码学以降低硬件依赖的方案，最终迈向全同态加密（FHE）实现非交互式长期保密。 <div>
+<div> 大语言模型、隐私保护、Transformer、隐私增强技术、可信执行环境<br /><br />总结:<br />1. 文章聚焦于大语言模型（LLM）作为云服务部署时的用户提示与生成内容保密问题。<br />2. 提出端到端隐私目标：仅客户端可读取提示与生成结果。<br />3. 围绕隐私增强技术（PETs）的主要类别，分析代表性系统如何应对非线性层和自回归解码等关键瓶颈。<br />4. 从信任假设、可扩展性和部署成熟度三方面比较不同方案。<br />5. 建议一条信任最小化的部署路径：从当前基于可信执行环境（TEE）的大规模方案，过渡到结合密码学以降低硬件依赖的方案，最终迈向全同态加密（FHE）实现非交互式长期保密。 <div>
 Large Language Models (LLMs) are increasingly deployed as cloud services, raising practical concerns about the confidentiality of user prompts and generated completions. In this paper, we survey privacy-preserving inference solutions for Transformer-based LLMs with the explicit goal of supporting operational choices in real-world deployments. We adopt a strong operational notion of privacy: only the client can read the prompt and the corresponding completion, end to end. The review is organised around the main families of Privacy-Enhancing Technologies (PETs). For each family, we examine representative systems and how they address key bottlenecks in confidential LLM inference, such as non-linear layers and autoregressive decoding. We then compare these approaches in terms of trust assumptions, scalability, and deployment maturity. This comparison characterises the current practical landscape of privacy-preserving LLM inference and motivates a trust-minimising deployment trajectory: from TEE-based solutions that enable large-scale confidential inference today; through crypto-augmented designs that reduce reliance on hardware trust at higher computational cost; toward Fully Homomorphic Encryption as a principled long-term endpoint for non-interactive confidentiality.
 ]]></content:encoded>
-<pubDate>Thu, 22 Jan 2026 17:27:35 +0000</pubDate>
 <pubDate>Thu, 22 Jan 2026 17:27:35 +0000</pubDate>
 </item>
 <item>
@@ -46,7 +44,7 @@ Large Language Models (LLMs) are increasingly deployed as cloud services, raisin
 <link>https://eprint.iacr.org/2026/103</link>
 <guid>https://eprint.iacr.org/2026/103</guid>
 <content:encoded><![CDATA[
-<div> 关键词：全同态加密、区域选择性加密、数据机密性、云计算、隐私保护计算<br><br>总结:  
+<div> 关键词：全同态加密、区域选择性加密、数据机密性、云计算、隐私保护计算<br /><br />总结:  
 1. 针对云环境中数据密集型应用的数据机密性问题，提出了一种混合隐私保护计算协议 $\Pi_{ROI}$。  
 2. 该协议仅对敏感的“感兴趣区域”（ROI）使用全同态加密（FHE），非敏感部分保留明文，兼顾安全性与效率。  
 3. 在标准密码学假设（如IND-CPA、IND-CCA2等）下，协议被证明能安全实现理想功能 $\mathcal{F}_{\text{proc}}$，可抵御半诚实云服务商攻击。  
@@ -55,9 +53,7 @@ Large Language Models (LLMs) are increasingly deployed as cloud services, raisin
 The increasing reliance on cloud-based computation for data-intensive applications raises critical concerns about data confidentiality. Fully Homomorphic Encryption (FHE) provides strong theoretical guarantees by allowing computations over encrypted data, but its high computational cost limits its practicality in large-scale scenarios such as image analysis or matrix-based workloads. In this work, we introduce $\Pi_{ROI}$, a hybrid privacy-preserving computation protocol that leverages region-based selective encryption. The core idea is to encrypt only the sensitive Regions of Interest (ROIs) under an FHE scheme, while keeping the remaining, non-sensitive parts of the data in plaintext. This approach achieves end-to-end confidentiality for sensitive regions while significantly improving computational efficiency. We formally define the security of $\Pi_{ROI}$ through an ideal functionality $\mathcal{F}_{\text{proc}}$ and prove that it securely realizes $\mathcal{F}_{\text{proc}}$ against a semi-honest cloud service provider under standard cryptographic assumptions (IND-CPA, IND-CCA2, EUF-CMA, and collision-resistance). Experimental evaluation demonstrates that $\Pi_{ROI}$ offers substantial performance gains in mixed-sensitivity workloads.
 ]]></content:encoded>
 <pubDate>Thu, 22 Jan 2026 11:12:52 +0000</pubDate>
-<pubDate>Thu, 22 Jan 2026 11:12:52 +0000</pubDate>
 </item>
-
 <item>
 <title>On the Impossibility of Round-Optimal Pairing-Free Blind Signatures in the ROM</title>
 <link>https://eprint.iacr.org/2026/090</link>
@@ -15848,61 +15844,6 @@ Location tracking accessories (or "tracking tags") such as those sold by Apple, 
 We put forth the notion of $\textit{abuse-resistant offline finding protocols}$ that aim to achieve a better balance between user privacy and stalker detection. We present an efficient protocol that achieves stalker detection under realistic conditions without sacrificing honest user privacy. At the heart of our result, and of independent interest, is a new notion of $\textit{multi-dealer secret sharing}$ which strengthens standard secret sharing with novel privacy and correctness guarantees. We show that this primitive can be instantiated efficiently on edge devices using variants of Interleaved Reed-Solomon codes combined with new lattice-based decoding algorithms.
 ]]></content:encoded>
 <pubDate>Thu, 07 Sep 2023 03:50:56 +0000</pubDate>
-</item>
-<item>
-<title>Respire: High-Rate PIR for Databases with Small Records</title>
-<link>https://eprint.iacr.org/2024/1165</link>
-<guid>https://eprint.iacr.org/2024/1165</guid>
-<content:encoded><![CDATA[
-<div> 关键词：Private Information Retrieval（PIR）、Communication Overhead、Database、Small Records、Lattice-Based Scheme。
-
-总结:<br />本文介绍了一种名为Respire的新型基于 lattice 的隐私信息检索（PIR）方案，特别针对小记录数据库设计。与现有最高效方案相比，Respire在下载单个记录时的在线通信量减少了5.9倍，仅需6.1KB。此外，Respire支持批量查询，相比先前高效通信的批处理PIR方案，它在总通信上降低了3.4-7.1倍，同时保持了相近的吞吐量（200-400MB/s）。其设计创新之处在于运用了新的查询压缩和响应打包技术，这些技术基于同态加密中的环切换。 <div>
-Private information retrieval (PIR) is a key building block in many privacy-preserving systems, and recent works have made significant progress on reducing the concrete computational costs of single-server PIR. However, existing constructions have high communication overhead, especially for databases with small records. In this work, we introduce Respire, a lattice-based PIR scheme tailored for databases of small records. To retrieve a single record from a database with over a million 256-byte records, the Respire protocol requires just 6.1 KB of online communication; this is a 5.9x reduction compared to the best previous lattice-based scheme. Moreover, Respire naturally extends to support batch queries. Compared to previous communication-efficient batch PIR schemes, Respire achieves a 3.4-7.1x reduction in total communication while maintaining comparable throughput (200-400 MB/s). The design of Respire relies on new query compression and response packing techniques based on ring switching in homomorphic encryption.
-]]></content:encoded>
-<pubDate>Thu, 18 Jul 2024 17:26:24 +0000</pubDate>
-</item>
-<item>
-<title>Cross Ledger Transaction Consistency for Financial Auditing</title>
-<link>https://eprint.iacr.org/2024/1155</link>
-<guid>https://eprint.iacr.org/2024/1155</guid>
-<content:encoded><![CDATA[
-<div> 关键词：Auditing, Organizations, Ledgers, Security, Scalability
-
-总结:<br />本文主要探讨了审计在财政年度对交易活跃组织的重要性，以及当前审计过程中存在的挑战。为解决大量组织数据核查的计算问题，作者提出CLOSC和CLOLC两种协议，旨在确保不同账本之间的交易一致性，同时保护交易金额、组织与审计者之间的匿名性和交易组织间的隐私。这两种协议基于两层账本架构和加密工具，实现了高效安全的审计。文章通过性能评估显示，即使处理百万级交易，计算和验证时间也能保持在秒级别，而单个审计周期的链上存储成本也非常合理。 <div>
-Auditing throughout a fiscal year is integral to organizations with transactional activity. Organizations transact with each other and record the details for all their economical activities so that a regulatory committee can verify the lawfulness and legitimacy of their activity. However, it is computationally infeasible for the committee to perform all necessary checks for each organization. To overcome this, auditors assist in this process: organizations give access to all their internal data to their auditors, who then produce reports regarding the consistency of the organization's data, alerting the committee to any inconsistencies. Despite this, numerous issues that result in fines annually revolve around such inconsistencies in bookkeeping across organizations. Notably, committees wishing to verify the correctness of auditor-provided reports need to redo all their calculations; a process which is computationally proportional to the number of organizations. In fact, it becomes prohibitive when considering real-world settings with thousands of organizations. In this work, we propose two protocols, CLOSC and CLOLC, whose goals are to enable auditors and a committee to verify the consistency of transactions across different ledgers. Both protocols ensure that for every transaction recorded in an organization's ledger, there exists a dual one in the ledger of another organization while safeguarding against other potential attacks. Importantly, we minimize the information leakage to auditors and other organizations and guarantee three crucial security and privacy properties that we propose: (i) transaction amount privacy, (ii) organization-auditor unlinkability, and (iii) transacting organizations unlinkability. At the core of our protocols lies a two-tier ledger architecture alongside a suite of cryptographic tools. To demonstrate the practicality and scalability of our designs, we provide extensive performance evaluation for both CLOSC and CLOLC. Our numbers are promising, i.e., all computation and verification times lie in the range of seconds, even for millions of transactions, while the on-chain storage costs for an auditing epoch are encouraging i.e. in the range of GB for millions of transactions and thousands of organizations.
-]]></content:encoded>
-<pubDate>Tue, 16 Jul 2024 12:41:36 +0000</pubDate>
-</item>
-<item>
-<title>Blockchain Space Tokenization</title>
-<link>https://eprint.iacr.org/2024/1154</link>
-<guid>https://eprint.iacr.org/2024/1154</guid>
-<content:encoded><![CDATA[
-<div> 关键词：blockchain systems, transaction inclusion policy, fee predictability, delay predictability, incentive compatibility
-
-总结: 
-本文关注区块链系统的交易拥堵问题，特别是如何在保证安全性和去中心化的同时实现交易费用和延迟的可预测性。传统方法如拍卖或动态调整费用存在矛盾。为此，作者提出区块链空间令牌化（BST）的概念，允许用户预付费锁定一段时间内的交易能力，以提高交易的确定性和抗攻击性。文章通过安全游戏模型分析了BST机制，证明它能提供可预测的最优延迟、费用以及激励兼容性，从而正面回答了研究中的问题。 <div>
-Handling congestion in blockchain systems is a fundamental problem given that the security and decentralization objectives of such systems lead to designs that compromise on (horizontal) scalability (what sometimes is referred to as the ``blockchain trilemma''). Motivated by this, we focus on the question whether it is possible to design a  transaction inclusion policy for block producers  that facilitates  fee and delay predictability while being incentive compatible at the same time. 
-
-
-Reconciling these three properties is seemingly paradoxical given that the dominant approach to transaction processing is based on first-price auctions (e.g., as in Bitcoin) or dynamic adjustment of the minimum admissible fee (e.g. as in Ethereum EIP-1559) something that breaks fee predictability. At the same time, in fixed fee mechanisms (e.g., as in Cardano),  fees are trivially predictable but are subject to  relatively inexpensive bribing or denial of service attacks where transactions may be delayed indefinitely by a well funded attacker, hence breaking delay predictability.  
-
-In this work, we set out to address this problem by putting forward blockchain space tokenization (BST), namely a new capability of a blockchain system to tokenize its capacity for transactions and allocate it to interested users who are willing to pay ahead of time for the ability to post transactions regularly for a period of time. We analyze our system in the face of  worst-case transaction-processing attacks by introducing a security game played between the mempool mechanism and an adversary.  Leveraging this framework, we prove that BST offers predictable and asymptotically optimal delays, predictable fees, and is incentive compatible, thus answering the question posed in the affirmative.
-]]></content:encoded>
-<pubDate>Tue, 16 Jul 2024 11:26:44 +0000</pubDate>
-</item>
-<item>
-<title>Privacy-Preserving Data Deduplication for Enhancing Federated Learning of Language Models</title>
-<link>https://eprint.iacr.org/2024/1151</link>
-<guid>https://eprint.iacr.org/2024/1151</guid>
-<content:encoded><![CDATA[
-<div> 关键词：Federated Learning, Deduplication, Privacy-Preserving, Efficient Privacy-MPD, Performance Improvement.
-
-总结: <br />
-文章探讨了在联邦学习中进行数据去重（deduplication）的重要性和挑战。为解决这一问题，作者提出了一种创新协议：高效隐私保护多方去重（EP-MPD）。EP-MPD通过两个新型的私密集合交集协议模块构建，实现了在保护数据隐私的同时，从多个客户端数据集中高效去除重复项。实验结果表明，去重显著提高了大型语言模型的联邦学习性能，如降低 perplexity 达19.61%，并减少运行时间高达27.95%。EP-MPD在联邦学习中兼顾了隐私和效率，为大规模应用提供了有价值解决方案。 <div>
-Deduplication is a vital preprocessing step that enhances machine learning model performance and saves training time and energy. However, enhancing federated learning through deduplication poses challenges, especially regarding scalability and potential privacy violations if deduplication involves sharing all clients’ data. In this paper, we address the problem of deduplication in a federated setup by introducing a pioneering protocol, Efficient Privacy-Preserving Multi-Party Deduplication (EP-MPD). It efficiently removes duplicates from multiple clients’ datasets without compromising data privacy. EP-MPD is constructed in a modular fashion, utilizing two novel variants of the Private Set Intersection protocol. Our extensive experiments demonstrate the significant benefits of deduplication in federated learning of large language models. For instance, we observe up to 19.61% improvement in perplexity and up to 27.95% reduction in running time. EP-MPD effectively balances privacy and performance in federated learning, making it a valuable solution for large-scale applications.
-]]></content:encoded>
-<pubDate>Mon, 15 Jul 2024 20:53:24 +0000</pubDate>
 </item>
 </channel>
 </rss>
