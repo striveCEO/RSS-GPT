@@ -4,6 +4,43 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+<item>
+<title>Homomorphic Signatures : A Systematization of Knowledge</title>
+<link>https://eprint.iacr.org/2026/133</link>
+<guid>https://eprint.iacr.org/2026/133</guid>
+<content:encoded><![CDATA[
+<div> 同态签名、功能性表达能力、密码学原语、安全模型、多密钥同态签名<br><br>总结:<br>1. 同态签名（HS）允许验证者在不接触原始签名输入的情况下，验证由不可信方处理后的数据计算正确性。<br>2. HS已从早期代数受限的线性方案发展为支持非线性和全同态签名（FHS）的高表达性构造。<br>3. 本文系统化梳理了现有HS方案，按功能性表达能力、底层密码学原语、安全模型（选择性/自适应、单密钥/多密钥）及上下文隐藏等隐私保障进行分类。<br>4. 研究趋势显示，HS正从代数构造转向基于证明和抗量子的设计，并日益重视适用于去中心化场景的多密钥同态签名（MKHS）。<br>5. 文章最后指出需解决若干开放问题，以缩小理论构造与实际可验证计算应用之间的差距。 <div>
+Homomorphic Signatures (HS) enable the authentication of data that has been processed by an untrusted party, allowing a verifier to check the correctness of a computation without access to the original signed inputs. Since their introduction, HS have evolved from algebraically restricted linear schemes to expressive non-linear and Fully Homomorphic Signature (FHS) constructions, spanning diverse cryptographic assumptions and security models.
+
+This paper presents a Systematization of Knowledge (SoK) on homomorphic signatures. We organize existing schemes along key dimensions including functional expressiveness, underlying cryptographic primitives, security notions (selective vs. adaptive, single-key vs. multi-key), and privacy guarantees such as context hiding. This unified perspective highlights a fundamental shift from algebraic constructions toward proof-based and post-quantum designs, as well as the growing importance of Multi-Key Homomorphic Signatures (MKHS) for decentralized settings. We conclude by identifying open problems and emerging directions that must be addressed to bridge the gap between theoretical HS constructions and practical verifiable computation.
+]]></content:encoded>
+<pubDate>Tue, 27 Jan 2026 18:47:09 +0000</pubDate>
+<pubDate>Tue, 27 Jan 2026 18:47:09 +0000</pubDate>
+</item>
+<item>
+<title>Online-Friendly Robust Threshold ECDSA with Constant Amortized Communication</title>
+<link>https://eprint.iacr.org/2026/130</link>
+<guid>https://eprint.iacr.org/2026/130</guid>
+<content:encoded><![CDATA[
+<div> 阈值ECDSA、MtA范式、打包秘密共享、通信复杂度、区块链应用<br><br>总结:<br>1. 阈值ECDSA在区块链等领域应用广泛，现有方案主要分为基于阈值线性同态加密（TLHE）和基于乘法转加法（MtA）两类。<br>2. TLHE方案通信开销低但在线阶段昂贵且需广播信道；MtA方案在线效率高但每方通信复杂度为O(n)。<br>3. 本文提出一种基于MtA的新方案，利用打包秘密共享技术，在恶意多数设定下实现常数级摊销通信复杂度，可同时生成ℓ=εn个签名。<br>4. 进一步扩展该技术，在诚实多数设定下构建了具备鲁棒性的阈值ECDSA方案，保证有效签名输出，且通信复杂度为常数。<br>5. 实验表明，所提方案在摊销效率上优于DKLs24，鲁棒版本优于TX25，在线效率显著提升，整体复杂度与WMC24相当。 <div>
+Threshold ECDSA has been an active research topic in recent years, driven by its wide-ranging applications, particularly in blockchain domains. Existing constructions of threshold ECDSA generally fall into two categories: those based on threshold linearly homomorphic encryption (TLHE) and those leveraging the Multiplicative-to-Additive (MtA) paradigm. The TLHE-based approach (e.g., WMC24 in NDSS'24) achieves constant communication per party but incurs an expensive online phase and requires a broadcast channel. In contrast, the MtA-based approach (e.g., DKLs24 in S\&amp;P'24) offers an optimal online phase and avoids the use of a broadcast channel. However, it has the drawback of requiring linear (i.e., $O(n)$) communication per party when $n$ parties are involved.
+
+In this work, we propose an MtA-based threshold ECDSA scheme with constant amortized communication. At the core of our approach is the use of packed secret sharing, which enables the same MtA operations to generate $\ell = \epsilon n$ signatures. With a constant $\epsilon$, the communication complexity per signature is amortized to a constant in dishonest-majority settings. Furthermore,  we extend this packing technique to design a robust threshold ECDSA with constant communication under honest-majority settings, which ensures the delivery of valid signatures as long as a sufficient number of parties are honest. In contrast, the state-of-the-art robust MtA-based construction (TX25 in S\&amp;P’25) requires linear communication per party. We implement our packed constructions using both CL-based and OT-based MtA protocols. Benchmark results show that our amortized efficiency surpasses that of DKLs24. Moreover, our robust scheme outperforms TX25 and has significantly better online efficiency with comparable overall complexity to WMC24.
+]]></content:encoded>
+<pubDate>Tue, 27 Jan 2026 08:54:40 +0000</pubDate>
+<pubDate>Tue, 27 Jan 2026 08:54:40 +0000</pubDate>
+</item>
+<item>
+<title>Toward Verifiable Privacy in Decentralized Identity: A Formal Framework for Minimal Disclosure and Unlinkability</title>
+<link>https://eprint.iacr.org/2026/127</link>
+<guid>https://eprint.iacr.org/2026/127</guid>
+<content:encoded><![CDATA[
+<div> 去中心化身份、最小披露、会话不可关联性、环签名、W3C合规<br><br>总结:<br>1. 该文提出一个去中心化身份（DID）的形式化框架，实现最小披露与会话不可关联性，并支持公开可验证性。<br>2. 框架实例化为PrivDID，用户通过单个环签名证明关于承诺属性的谓词，隐藏于从公共账本动态选择的匿名集中。<br>3. PrivDID基于Pedersen承诺和二进制范围编码，在随机预言机模型下被证明安全。<br>4. 系统完全符合W3C标准，且无需可信设置。<br>5. 实验表明其在存储、通信和计算方面具有实用效率，具备现实可行性。 <div>
+This paper presents a formal framework for decentralized identity (DID), which achieves both minimal disclosure and session unlinkability under public verifiability. We instantiate this framework as PrivDID. In PrivDID,  a user can prove a predicate about a committed attribute via a single ring signature, thereby hiding in an anonymity set dynamically selected from the public ledger. PrivDID builds on Pedersen commitments and binary-range encodings, and is proven secure in the random oracle model. It is fully W3C-compliant and requires no trusted setup. Implementation shows practical efficiency in storage, communication, and computation, confirming real-world feasibility.
+]]></content:encoded>
+<pubDate>Tue, 27 Jan 2026 05:54:30 +0000</pubDate>
+<pubDate>Tue, 27 Jan 2026 05:54:30 +0000</pubDate>
+</item>
 
 <item>
 <title>Re2creds: Reusable Anonymous Credentials from Malleable NIZK and Legacy Signatures</title>
