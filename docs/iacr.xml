@@ -4,12 +4,13 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+
 <item>
 <title>Private Proofs of When and Where</title>
 <link>https://eprint.iacr.org/2026/136</link>
 <guid>https://eprint.iacr.org/2026/136</guid>
 <content:encoded><![CDATA[
-<div> 位置验证、零知识、量子协议、位置承诺、后量子单向函数<br><br>总结:  
+<div> 位置验证、零知识、量子协议、位置承诺、后量子单向函数<br /><br />总结:  
 1. 位置验证是一种交互式协议，允许实体向他人证明其物理位置，经典协议无法实现安全的位置验证，但量子协议可以。  
 2. 本文提出“零知识位置验证”概念，扩展了传统位置验证：一是可证明更复杂的时空位置陈述（如“昨天中午我不在某地”），二是保护除所证声明外的其他真实位置信息隐私。  
 3. 该方案基于标准位置验证和后量子单向函数构建，核心工具是“位置承诺”，即实体可在某一时刻对其物理位置进行私密承诺，并在之后揭示。 <div>
@@ -20,22 +21,19 @@ In this paper we introduce the notion of zero-knowledge position verification, w
 We construct zero-knowledge position verification from standard position verification and post-quantum one-way functions. The central tool in our construction is a primitive we call position commitments, which allow entities to privately commit to their physical position in a particular moment, which is then revealed at some later time.
 ]]></content:encoded>
 <pubDate>Wed, 28 Jan 2026 14:30:39 +0000</pubDate>
-<pubDate>Wed, 28 Jan 2026 14:30:39 +0000</pubDate>
 </item>
 <item>
 <title>Randomness-Recovery Trapdoors: a new methodology for enhancing anamorphic encryption</title>
 <link>https://eprint.iacr.org/2026/135</link>
 <guid>https://eprint.iacr.org/2026/135</guid>
 <content:encoded><![CDATA[
-<div> Anamorphic加密、Trapdoor-Aided随机性恢复、公钥AE、对抗性独裁者、格密码<br><br>总结:<br>1. Anamorphic加密（AE）旨在在极端对抗环境下（如独裁者强制交出密钥或胁迫发送特定消息）保障通信双方的隐私。<br>2. 提出一种基于“Trapdoor-Aided随机性恢复”的新方法，通过生成含特殊陷门的密钥对，在不泄露解密能力的前提下从密文中提取隐藏消息所用的随机性。<br>3. 该陷门与传统解密陷门计算上独立，首次实现通用的公钥AE构造，无需通信双方预先共享私密信息。<br>4. 新方法还能抵御独裁者索要加密随机性的攻击，增强安全性。<br>5. 基于格密码，具体实例化了Dual Regev和Lindner-Peikert方案，并通过定义“随机性查找（RFinding）”问题，将LWE假设归约至其困难性，证明方案安全。 <div>
+<div> Anamorphic加密、Trapdoor-Aided随机性恢复、公钥AE、对抗性独裁者、格密码<br /><br />总结:<br />1. Anamorphic加密（AE）旨在在极端对抗环境下（如独裁者强制交出密钥或胁迫发送特定消息）保障通信双方的隐私。<br />2. 提出一种基于“Trapdoor-Aided随机性恢复”的新方法，通过生成含特殊陷门的密钥对，在不泄露解密能力的前提下从密文中提取隐藏消息所用的随机性。<br />3. 该陷门与传统解密陷门计算上独立，首次实现通用的公钥AE构造，无需通信双方预先共享私密信息。<br />4. 新方法还能抵御独裁者索要加密随机性的攻击，增强安全性。<br />5. 基于格密码，具体实例化了Dual Regev和Lindner-Peikert方案，并通过定义“随机性查找（RFinding）”问题，将LWE假设归约至其困难性，证明方案安全。 <div>
 The primary goal of Anamorphic encryption ($\mathsf{AE}$), introduced at Eurocrypt 2022, is to enable private communication even in highly adversarial settings, such as when an adversarial  $\textit {dictator}$ "legally" confiscates a user's secret keys (compromising the receiver's privacy) and/or coerces users into sending specific messages (compromising the sender's privacy).  To achieve this, $\mathsf{AE}$ embeds hidden additional messages within seemingly innocuous ciphertexts where the sender and receiver comply with the dictator's demands and, in doing so, $\mathsf{AE}$ uncovers novel structural properties of encryption mechanisms. One methodology that extends the capability of a ciphertext is to embed the hidden anamorphic message in the randomness used in encryption. However, not all schemes reveal this randomness as part of the decryption process! Here, we unveil a conceptually simple yet general new methodology that achieves $\mathsf{AE}$. It is based on the concept of $\textit {Trapdoor-Aided Randomness Recovery}$ by which one can generate special key pairs $(\mathsf{pk},\mathsf{sk})$  that are still indistinguishable from honestly generated key pairs but possess an associated trapdoor $\mathsf{td}$ that first allows for randomness extraction from a ciphertext (and nothing more). Secondly, importantly and differently from prior proposals, the new trapdoor should be different from and computationally independent of "the decryption trapdoor key." Primarily, this new methodology allows for a generic construction of $\textit{public-key}~\mathsf{AE}$ which is a notion introduced at Crypto 24, where, to date, the only known public-key anamorphism relied on a specific CCA encryption scheme. Note that public-key $\mathsf{AE}$ eliminates the need for a preliminary private interaction between the receiver and the sender, thus greatly extending the applicability of anamorphism. In addition to obtaining public-key anamorphism, the new methodology, in turn, generically allows for extended anamorphic properties: Specifically and significantly, the methodology allows protections against a dictator that may ask for the randomness employed by the sender.
 
  We then show concrete instantiations of the above methodology based on known lattice-based schemes. Specifically, due to the new methodology, we give efficient anamorphic versions of the Dual Regev scheme and the Lindner-Peikert scheme. Technically, we first define a new problem, called $\textit{randomness finding}~(\mathsf{RFinding})$, which requires that even if the adversary obtains the receiver's secret key, then, while it can decrypt, it cannot fully recover the randomness from the ciphertext.  Secondly, we reduce the standard LWE assumptions to the hardness of $\mathsf{RFinding}$  for both schemes.  Notably, in both schemes we achieve public-key anamorphism utilizing the "trapdoor techniques for lattices" introduced by Micciancio and Peikert at Eurocrypt 2012.
 ]]></content:encoded>
 <pubDate>Wed, 28 Jan 2026 08:27:31 +0000</pubDate>
-<pubDate>Wed, 28 Jan 2026 08:27:31 +0000</pubDate>
 </item>
-
 <item>
 <title>Homomorphic Signatures : A Systematization of Knowledge</title>
 <link>https://eprint.iacr.org/2026/133</link>
@@ -15810,61 +15808,6 @@ We introduce Wizard-IOP, a cryptographic tool for handling a wide class of queri
 At this point, we employ Vortex, a list polynomial commitment (LPC) scheme to convert the resulting PIOP into an argument of knowledge. The argument of knowledge is then made succinct by applying different techniques such as self-recursion, standard recursion, and proof aggregations.
 ]]></content:encoded>
 <pubDate>Thu, 24 Nov 2022 11:00:59 +0000</pubDate>
-</item>
-<item>
-<title>Towards Quantum-Safe Blockchain: Exploration of PQC and Public-key Recovery on Embedded Systems</title>
-<link>https://eprint.iacr.org/2024/1178</link>
-<guid>https://eprint.iacr.org/2024/1178</guid>
-<content:encoded><![CDATA[
-<div> 关键词：Post-Quantum Cryptography (PQC), Blockchain, IoT, Embedded Systems, Quantum-Safe
-
-总结: <br />
-文章探讨了区块链技术在依赖公钥加密的背景下对量子计算威胁的脆弱性。为解决这一问题，作者提出将后量子密码学(PQC)融入区块链框架，以增强安全性与韧性，特别针对物联网(IoT)和嵌入式系统。研究着重于PQC在嵌入式环境中的实现，如NIST标准中的算法。通过优化交易大小，如使用Falcon的公钥恢复技术，可减少交易体积高达17%。Falcon-512和XMSS被推荐为量子安全区块链的合适选项，但Dilithium在嵌入式设备上的TPS更高。此外，文章还讨论了智能合约功能与PQC结合的影响。总的来说，研究证实了在嵌入式系统中部署量子安全区块链的可行性，为构建未来-proof的IoT应用提供了坚实基础。 <div>
-Blockchain technology ensures accountability,
-transparency, and redundancy in critical applications, includ-
-ing IoT with embedded systems. However, the reliance on
-public-key cryptography (PKC) makes blockchain vulnerable to
-quantum computing threats. This paper addresses the urgent
-need for quantum-safe blockchain solutions by integrating Post-
-Quantum Cryptography (PQC) into blockchain frameworks.
-Utilizing algorithms from the NIST PQC standardization pro-
-cess, we aim to fortify blockchain security and resilience, partic-
-ularly for IoT and embedded systems. Despite the importance
-of PQC, its implementation in blockchain systems tailored for
-embedded environments remains underexplored. We propose
-a quantum-secure blockchain architecture, evaluating various
-PQC primitives and optimizing transaction sizes through tech-
-niques such as public-key recovery for Falcon, achieving up
-to 17% reduction in transaction size. Our analysis identifies
-Falcon-512 as the most suitable algorithm for quantum-secure
-blockchains in embedded environments, with XMSS as a viable
-stateful alternative. However, for embedded devices, Dilithium
-demonstrates a higher transactions-per-second (TPS) rate
-compared to Falcon, primarily due to Falcon’s slower sign-
-ing performance on ARM CPUs. This highlights the signing
-time as a critical limiting factor in the integration of PQC
-within embedded blockchains. Additionally, we integrate smart
-contract functionality into the quantum-secure blockchain,
-assessing the impact of PQC on smart contract authentication.
-Our findings demonstrate the feasibility and practicality of
-deploying quantum-secure blockchain solutions in embedded
-systems, paving the way for robust and future-proof IoT
-applications.
-]]></content:encoded>
-<pubDate>Sun, 21 Jul 2024 13:51:38 +0000</pubDate>
-</item>
-<item>
-<title>AVeCQ: Anonymous Verifiable Crowdsourcing with Worker Qualities</title>
-<link>https://eprint.iacr.org/2024/1175</link>
-<guid>https://eprint.iacr.org/2024/1175</guid>
-<content:encoded><![CDATA[
-<div> 关键词：Crowdsourcing, Anonymity, Unlinkability, Worker Quality, Cryptographic Tools.
-
-总结:<br />
-AVeCQ是一个创新的去中心化、隐私保护的众包系统，它结合了增强匿名性和可验证的工人质量更新。该系统利用零知识证明等密码学工具来保障工人隐私，验证答案和评分的准确性，以及公平支付。AVeCQ模块化设计，允许请求者和工人通过支持匿名性、信息记录和支付的平台交互。与现有方案相比，如在图像注解、平均评价和盖洛普民意调查等任务中，AVeCQ表现出更高的效率，包括减少计算和验证证明，以及区块链交易处理的开销，例如在128名工人参与的平均评价任务中，AVeCQ比现有系统快40%，同时请求者的交易消耗降低87%。 <div>
-In crowdsourcing systems, requesters publish tasks, and interested workers provide answers to get rewards. Worker anonymity motivates participation since it protects their privacy. Anonymity with unlinkability is an enhanced version of anonymity because it makes it impossible to ``link'' workers across the tasks they participate in. Another core feature of crowdsourcing systems is worker quality which expresses a worker's trustworthiness and quantifies their historical performance. In this work, we present AVeCQ, the first crowdsourcing system that reconciles these properties, achieving enhanced anonymity and verifiable worker quality updates. AVeCQ relies on a suite of cryptographic tools, such as zero-knowledge proofs, to (i) guarantee workers' privacy, (ii) prove the correctness of worker quality scores and task answers, and (iii) commensurate payments. AVeCQ is developed modularly, where requesters and workers communicate over a platform that supports pseudonymity, information logging, and payments. To compare AVeCQ with the state-of-the-art, we prototype it over Ethereum. AVeCQ outperforms the state-of-the-art in three popular crowdsourcing tasks (image annotation, average review, and Gallup polls). E.g., for an Average Review task with 5 choices and 128 workers AVeCQ is 40% faster (including computing and verifying necessary proofs, and blockchain transaction processing overheads) with the task's requester consuming 87% fewer gas.
-]]></content:encoded>
-<pubDate>Sat, 20 Jul 2024 15:54:15 +0000</pubDate>
 </item>
 </channel>
 </rss>
