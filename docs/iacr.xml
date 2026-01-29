@@ -5,16 +5,47 @@
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
 <item>
+<title>Private Proofs of When and Where</title>
+<link>https://eprint.iacr.org/2026/136</link>
+<guid>https://eprint.iacr.org/2026/136</guid>
+<content:encoded><![CDATA[
+<div> 位置验证、零知识、量子协议、位置承诺、后量子单向函数<br><br>总结:  
+1. 位置验证是一种交互式协议，允许实体向他人证明其物理位置，经典协议无法实现安全的位置验证，但量子协议可以。  
+2. 本文提出“零知识位置验证”概念，扩展了传统位置验证：一是可证明更复杂的时空位置陈述（如“昨天中午我不在某地”），二是保护除所证声明外的其他真实位置信息隐私。  
+3. 该方案基于标准位置验证和后量子单向函数构建，核心工具是“位置承诺”，即实体可在某一时刻对其物理位置进行私密承诺，并在之后揭示。 <div>
+Position verification schemes are interactive protocols where entities prove their physical location to others; this enables interactive proofs for statements of the form "I am at a location L." Although secure position verification cannot be achieved with classical protocols (even with computational assumptions), they are feasible with quantum protocols.
+In this paper we introduce the notion of zero-knowledge position verification, which generalizes position verification in two ways:
+1. enabling entities to prove more sophisticated statements about their locations at different times (for example, "I was NOT near location L at noon yesterday").
+2. maintaining privacy for any other detail about their true location besides the statement they are proving.
+We construct zero-knowledge position verification from standard position verification and post-quantum one-way functions. The central tool in our construction is a primitive we call position commitments, which allow entities to privately commit to their physical position in a particular moment, which is then revealed at some later time.
+]]></content:encoded>
+<pubDate>Wed, 28 Jan 2026 14:30:39 +0000</pubDate>
+<pubDate>Wed, 28 Jan 2026 14:30:39 +0000</pubDate>
+</item>
+<item>
+<title>Randomness-Recovery Trapdoors: a new methodology for enhancing anamorphic encryption</title>
+<link>https://eprint.iacr.org/2026/135</link>
+<guid>https://eprint.iacr.org/2026/135</guid>
+<content:encoded><![CDATA[
+<div> Anamorphic加密、Trapdoor-Aided随机性恢复、公钥AE、对抗性独裁者、格密码<br><br>总结:<br>1. Anamorphic加密（AE）旨在在极端对抗环境下（如独裁者强制交出密钥或胁迫发送特定消息）保障通信双方的隐私。<br>2. 提出一种基于“Trapdoor-Aided随机性恢复”的新方法，通过生成含特殊陷门的密钥对，在不泄露解密能力的前提下从密文中提取隐藏消息所用的随机性。<br>3. 该陷门与传统解密陷门计算上独立，首次实现通用的公钥AE构造，无需通信双方预先共享私密信息。<br>4. 新方法还能抵御独裁者索要加密随机性的攻击，增强安全性。<br>5. 基于格密码，具体实例化了Dual Regev和Lindner-Peikert方案，并通过定义“随机性查找（RFinding）”问题，将LWE假设归约至其困难性，证明方案安全。 <div>
+The primary goal of Anamorphic encryption ($\mathsf{AE}$), introduced at Eurocrypt 2022, is to enable private communication even in highly adversarial settings, such as when an adversarial  $\textit {dictator}$ "legally" confiscates a user's secret keys (compromising the receiver's privacy) and/or coerces users into sending specific messages (compromising the sender's privacy).  To achieve this, $\mathsf{AE}$ embeds hidden additional messages within seemingly innocuous ciphertexts where the sender and receiver comply with the dictator's demands and, in doing so, $\mathsf{AE}$ uncovers novel structural properties of encryption mechanisms. One methodology that extends the capability of a ciphertext is to embed the hidden anamorphic message in the randomness used in encryption. However, not all schemes reveal this randomness as part of the decryption process! Here, we unveil a conceptually simple yet general new methodology that achieves $\mathsf{AE}$. It is based on the concept of $\textit {Trapdoor-Aided Randomness Recovery}$ by which one can generate special key pairs $(\mathsf{pk},\mathsf{sk})$  that are still indistinguishable from honestly generated key pairs but possess an associated trapdoor $\mathsf{td}$ that first allows for randomness extraction from a ciphertext (and nothing more). Secondly, importantly and differently from prior proposals, the new trapdoor should be different from and computationally independent of "the decryption trapdoor key." Primarily, this new methodology allows for a generic construction of $\textit{public-key}~\mathsf{AE}$ which is a notion introduced at Crypto 24, where, to date, the only known public-key anamorphism relied on a specific CCA encryption scheme. Note that public-key $\mathsf{AE}$ eliminates the need for a preliminary private interaction between the receiver and the sender, thus greatly extending the applicability of anamorphism. In addition to obtaining public-key anamorphism, the new methodology, in turn, generically allows for extended anamorphic properties: Specifically and significantly, the methodology allows protections against a dictator that may ask for the randomness employed by the sender.
+
+ We then show concrete instantiations of the above methodology based on known lattice-based schemes. Specifically, due to the new methodology, we give efficient anamorphic versions of the Dual Regev scheme and the Lindner-Peikert scheme. Technically, we first define a new problem, called $\textit{randomness finding}~(\mathsf{RFinding})$, which requires that even if the adversary obtains the receiver's secret key, then, while it can decrypt, it cannot fully recover the randomness from the ciphertext.  Secondly, we reduce the standard LWE assumptions to the hardness of $\mathsf{RFinding}$  for both schemes.  Notably, in both schemes we achieve public-key anamorphism utilizing the "trapdoor techniques for lattices" introduced by Micciancio and Peikert at Eurocrypt 2012.
+]]></content:encoded>
+<pubDate>Wed, 28 Jan 2026 08:27:31 +0000</pubDate>
+<pubDate>Wed, 28 Jan 2026 08:27:31 +0000</pubDate>
+</item>
+
+<item>
 <title>Homomorphic Signatures : A Systematization of Knowledge</title>
 <link>https://eprint.iacr.org/2026/133</link>
 <guid>https://eprint.iacr.org/2026/133</guid>
 <content:encoded><![CDATA[
-<div> 同态签名、功能性表达能力、密码学原语、安全模型、多密钥同态签名<br><br>总结:<br>1. 同态签名（HS）允许验证者在不接触原始签名输入的情况下，验证由不可信方处理后的数据计算正确性。<br>2. HS已从早期代数受限的线性方案发展为支持非线性和全同态签名（FHS）的高表达性构造。<br>3. 本文系统化梳理了现有HS方案，按功能性表达能力、底层密码学原语、安全模型（选择性/自适应、单密钥/多密钥）及上下文隐藏等隐私保障进行分类。<br>4. 研究趋势显示，HS正从代数构造转向基于证明和抗量子的设计，并日益重视适用于去中心化场景的多密钥同态签名（MKHS）。<br>5. 文章最后指出需解决若干开放问题，以缩小理论构造与实际可验证计算应用之间的差距。 <div>
+<div> 同态签名、功能性表达能力、密码学原语、安全模型、多密钥同态签名<br /><br />总结:<br />1. 同态签名（HS）允许验证者在不接触原始签名输入的情况下，验证由不可信方处理后的数据计算正确性。<br />2. HS已从早期代数受限的线性方案发展为支持非线性和全同态签名（FHS）的高表达性构造。<br />3. 本文系统化梳理了现有HS方案，按功能性表达能力、底层密码学原语、安全模型（选择性/自适应、单密钥/多密钥）及上下文隐藏等隐私保障进行分类。<br />4. 研究趋势显示，HS正从代数构造转向基于证明和抗量子的设计，并日益重视适用于去中心化场景的多密钥同态签名（MKHS）。<br />5. 文章最后指出需解决若干开放问题，以缩小理论构造与实际可验证计算应用之间的差距。 <div>
 Homomorphic Signatures (HS) enable the authentication of data that has been processed by an untrusted party, allowing a verifier to check the correctness of a computation without access to the original signed inputs. Since their introduction, HS have evolved from algebraically restricted linear schemes to expressive non-linear and Fully Homomorphic Signature (FHS) constructions, spanning diverse cryptographic assumptions and security models.
 
 This paper presents a Systematization of Knowledge (SoK) on homomorphic signatures. We organize existing schemes along key dimensions including functional expressiveness, underlying cryptographic primitives, security notions (selective vs. adaptive, single-key vs. multi-key), and privacy guarantees such as context hiding. This unified perspective highlights a fundamental shift from algebraic constructions toward proof-based and post-quantum designs, as well as the growing importance of Multi-Key Homomorphic Signatures (MKHS) for decentralized settings. We conclude by identifying open problems and emerging directions that must be addressed to bridge the gap between theoretical HS constructions and practical verifiable computation.
 ]]></content:encoded>
-<pubDate>Tue, 27 Jan 2026 18:47:09 +0000</pubDate>
 <pubDate>Tue, 27 Jan 2026 18:47:09 +0000</pubDate>
 </item>
 <item>
@@ -22,12 +53,11 @@ This paper presents a Systematization of Knowledge (SoK) on homomorphic signatur
 <link>https://eprint.iacr.org/2026/130</link>
 <guid>https://eprint.iacr.org/2026/130</guid>
 <content:encoded><![CDATA[
-<div> 阈值ECDSA、MtA范式、打包秘密共享、通信复杂度、区块链应用<br><br>总结:<br>1. 阈值ECDSA在区块链等领域应用广泛，现有方案主要分为基于阈值线性同态加密（TLHE）和基于乘法转加法（MtA）两类。<br>2. TLHE方案通信开销低但在线阶段昂贵且需广播信道；MtA方案在线效率高但每方通信复杂度为O(n)。<br>3. 本文提出一种基于MtA的新方案，利用打包秘密共享技术，在恶意多数设定下实现常数级摊销通信复杂度，可同时生成ℓ=εn个签名。<br>4. 进一步扩展该技术，在诚实多数设定下构建了具备鲁棒性的阈值ECDSA方案，保证有效签名输出，且通信复杂度为常数。<br>5. 实验表明，所提方案在摊销效率上优于DKLs24，鲁棒版本优于TX25，在线效率显著提升，整体复杂度与WMC24相当。 <div>
+<div> 阈值ECDSA、MtA范式、打包秘密共享、通信复杂度、区块链应用<br /><br />总结:<br />1. 阈值ECDSA在区块链等领域应用广泛，现有方案主要分为基于阈值线性同态加密（TLHE）和基于乘法转加法（MtA）两类。<br />2. TLHE方案通信开销低但在线阶段昂贵且需广播信道；MtA方案在线效率高但每方通信复杂度为O(n)。<br />3. 本文提出一种基于MtA的新方案，利用打包秘密共享技术，在恶意多数设定下实现常数级摊销通信复杂度，可同时生成ℓ=εn个签名。<br />4. 进一步扩展该技术，在诚实多数设定下构建了具备鲁棒性的阈值ECDSA方案，保证有效签名输出，且通信复杂度为常数。<br />5. 实验表明，所提方案在摊销效率上优于DKLs24，鲁棒版本优于TX25，在线效率显著提升，整体复杂度与WMC24相当。 <div>
 Threshold ECDSA has been an active research topic in recent years, driven by its wide-ranging applications, particularly in blockchain domains. Existing constructions of threshold ECDSA generally fall into two categories: those based on threshold linearly homomorphic encryption (TLHE) and those leveraging the Multiplicative-to-Additive (MtA) paradigm. The TLHE-based approach (e.g., WMC24 in NDSS'24) achieves constant communication per party but incurs an expensive online phase and requires a broadcast channel. In contrast, the MtA-based approach (e.g., DKLs24 in S\&amp;P'24) offers an optimal online phase and avoids the use of a broadcast channel. However, it has the drawback of requiring linear (i.e., $O(n)$) communication per party when $n$ parties are involved.
 
 In this work, we propose an MtA-based threshold ECDSA scheme with constant amortized communication. At the core of our approach is the use of packed secret sharing, which enables the same MtA operations to generate $\ell = \epsilon n$ signatures. With a constant $\epsilon$, the communication complexity per signature is amortized to a constant in dishonest-majority settings. Furthermore,  we extend this packing technique to design a robust threshold ECDSA with constant communication under honest-majority settings, which ensures the delivery of valid signatures as long as a sufficient number of parties are honest. In contrast, the state-of-the-art robust MtA-based construction (TX25 in S\&amp;P’25) requires linear communication per party. We implement our packed constructions using both CL-based and OT-based MtA protocols. Benchmark results show that our amortized efficiency surpasses that of DKLs24. Moreover, our robust scheme outperforms TX25 and has significantly better online efficiency with comparable overall complexity to WMC24.
 ]]></content:encoded>
-<pubDate>Tue, 27 Jan 2026 08:54:40 +0000</pubDate>
 <pubDate>Tue, 27 Jan 2026 08:54:40 +0000</pubDate>
 </item>
 <item>
@@ -35,13 +65,11 @@ In this work, we propose an MtA-based threshold ECDSA scheme with constant amort
 <link>https://eprint.iacr.org/2026/127</link>
 <guid>https://eprint.iacr.org/2026/127</guid>
 <content:encoded><![CDATA[
-<div> 去中心化身份、最小披露、会话不可关联性、环签名、W3C合规<br><br>总结:<br>1. 该文提出一个去中心化身份（DID）的形式化框架，实现最小披露与会话不可关联性，并支持公开可验证性。<br>2. 框架实例化为PrivDID，用户通过单个环签名证明关于承诺属性的谓词，隐藏于从公共账本动态选择的匿名集中。<br>3. PrivDID基于Pedersen承诺和二进制范围编码，在随机预言机模型下被证明安全。<br>4. 系统完全符合W3C标准，且无需可信设置。<br>5. 实验表明其在存储、通信和计算方面具有实用效率，具备现实可行性。 <div>
+<div> 去中心化身份、最小披露、会话不可关联性、环签名、W3C合规<br /><br />总结:<br />1. 该文提出一个去中心化身份（DID）的形式化框架，实现最小披露与会话不可关联性，并支持公开可验证性。<br />2. 框架实例化为PrivDID，用户通过单个环签名证明关于承诺属性的谓词，隐藏于从公共账本动态选择的匿名集中。<br />3. PrivDID基于Pedersen承诺和二进制范围编码，在随机预言机模型下被证明安全。<br />4. 系统完全符合W3C标准，且无需可信设置。<br />5. 实验表明其在存储、通信和计算方面具有实用效率，具备现实可行性。 <div>
 This paper presents a formal framework for decentralized identity (DID), which achieves both minimal disclosure and session unlinkability under public verifiability. We instantiate this framework as PrivDID. In PrivDID,  a user can prove a predicate about a committed attribute via a single ring signature, thereby hiding in an anonymity set dynamically selected from the public ledger. PrivDID builds on Pedersen commitments and binary-range encodings, and is proven secure in the random oracle model. It is fully W3C-compliant and requires no trusted setup. Implementation shows practical efficiency in storage, communication, and computation, confirming real-world feasibility.
 ]]></content:encoded>
 <pubDate>Tue, 27 Jan 2026 05:54:30 +0000</pubDate>
-<pubDate>Tue, 27 Jan 2026 05:54:30 +0000</pubDate>
 </item>
-
 <item>
 <title>Re2creds: Reusable Anonymous Credentials from Malleable NIZK and Legacy Signatures</title>
 <link>https://eprint.iacr.org/2026/119</link>
@@ -15837,50 +15865,6 @@ AVeCQ是一个创新的去中心化、隐私保护的众包系统，它结合了
 In crowdsourcing systems, requesters publish tasks, and interested workers provide answers to get rewards. Worker anonymity motivates participation since it protects their privacy. Anonymity with unlinkability is an enhanced version of anonymity because it makes it impossible to ``link'' workers across the tasks they participate in. Another core feature of crowdsourcing systems is worker quality which expresses a worker's trustworthiness and quantifies their historical performance. In this work, we present AVeCQ, the first crowdsourcing system that reconciles these properties, achieving enhanced anonymity and verifiable worker quality updates. AVeCQ relies on a suite of cryptographic tools, such as zero-knowledge proofs, to (i) guarantee workers' privacy, (ii) prove the correctness of worker quality scores and task answers, and (iii) commensurate payments. AVeCQ is developed modularly, where requesters and workers communicate over a platform that supports pseudonymity, information logging, and payments. To compare AVeCQ with the state-of-the-art, we prototype it over Ethereum. AVeCQ outperforms the state-of-the-art in three popular crowdsourcing tasks (image annotation, average review, and Gallup polls). E.g., for an Average Review task with 5 choices and 128 workers AVeCQ is 40% faster (including computing and verifying necessary proofs, and blockchain transaction processing overheads) with the task's requester consuming 87% fewer gas.
 ]]></content:encoded>
 <pubDate>Sat, 20 Jul 2024 15:54:15 +0000</pubDate>
-</item>
-<item>
-<title>Rudraksh: A compact and lightweight post-quantum key-encapsulation mechanism</title>
-<link>https://eprint.iacr.org/2024/1170</link>
-<guid>https://eprint.iacr.org/2024/1170</guid>
-<content:encoded><![CDATA[
-<div> 关键词：Post-quantum cryptography (PQC), lightweight implementation, resource-constrained devices, lattice-based KEM, area optimization.
-
-总结:<br />
-本文关注的是在资源受限的设备中集成后量子密码学（PQC）的挑战。首先，作者提出了一种基于硬晶格问题的轻量级选择密钥封装机制（KEM），以应对这些设备的低内存和低功耗需求。通过精心分析和优化设计元素，如多项式大小、域模结构、还原算法等，新设计在保持100位PQ安全的同时，相比当前标准Kyber KEM，实现了约3倍的面积效率提升。这项工作为PQC在物联网和无线传感器等设备中的应用开辟了新的可能性。 <div>
-Resource-constrained devices such as wireless sensors and Internet of Things (IoT) devices have become ubiquitous in our digital ecosystem. These devices generate and handle a major part of our digital data.  In the face of the impending threat of quantum computers on our public-key infrastructure, it is impossible to imagine the security and privacy of our digital world without integrating post-quantum cryptography (PQC) into these devices. Usually, due to the resource constraints of these devices, the cryptographic schemes in these devices have to operate with very small memory and consume very little power. Therefore, we must provide a lightweight implementation of existing PQC schemes by possibly trading off the efficiency. The other option that can potentially provide the most optimal result is by designing PQC schemes suitable for lightweight and low-power-consuming implementation.  Unfortunately, the latter method has been largely ignored in PQC research.
-
-In this work, we first provide a lightweight CCA-secure PQ key-encapsulation mechanism (KEM) design based on hard lattice problems. We have done a scrupulous and extensive analysis and evaluation of different design elements, such as polynomial size, field modulus structure, reduction algorithm, secret and error distribution, etc., of a lattice-based KEM. We have optimized each of them to obtain a lightweight design. Our design provides a $100$ bit of PQ security and shows $\sim3$x improvement in terms of area with respect to the state-of-the-art Kyber KEM, a PQ standard.
-]]></content:encoded>
-<pubDate>Fri, 19 Jul 2024 15:39:16 +0000</pubDate>
-</item>
-<item>
-<title>Expanding the Toolbox: Coercion and Vote-Selling at Vote-Casting Revisited</title>
-<link>https://eprint.iacr.org/2024/1167</link>
-<guid>https://eprint.iacr.org/2024/1167</guid>
-<content:encoded><![CDATA[
-<div> 关键词：coercion, vote-buying, electronic voting, remote, blockchain
-
-总结:<br />
-本文探讨了电子投票，特别是远程电子投票中面临的胁迫（coercion）和贿赂选票（vote-buying）问题。作者指出，尽管已有抵抗措施，但现有的技术工具如区块链、延迟加密和隐私保护智能合约可能被恶意行为者利用加强这些攻击。文章强调，现有的胁迫模型需要重新评估，提出新的胁迫定义和无收据自由（receipt-freeness）概念。研究者建议在设计新的选举系统时考虑这些新定义，以确保更安全的民主投票环境。 <div>
-Coercion is a challenging and multi-faceted threat that prevents people from expressing their will freely. Similarly, vote-buying does to undermine the foundation of free democratic elections. These threats are especially dire for remote electronic voting, which relies on voters to express their political will freely but happens in an uncontrolled environment outside the polling station and the protection of the ballot booth. However, electronic voting in general, both in-booth and remote, faces a major challenge, namely to ensure that voters can verify that their intent is captured correctly without providing a receipt of the cast vote to the coercer or vote buyer.
-
-Even though there are known techniques to resist or partially mitigate coercion and vote-buying, we explicitly demonstrate that they generally underestimate the power of malicious actors by not accounting for current technological tools that could support coercion and vote-selling. 
-
-In this paper, we give several examples of how a coercer can force voters to comply with his demands or how voters can prove how they voted. To do so, we use tools like blockchains, delay encryption, privacy-preserving smart contracts, or trusted hardware. Since some of the successful coercion attacks occur on voting schemes that were supposed/claimed/proven to be coercion-resistant or receipt-free, the main conclusion of this work is that the coercion models should be re-evaluated, and new definitions of coercion and receipt-freeness are necessary. We propose such new definitions as part of this paper and investigate their implications.
-]]></content:encoded>
-<pubDate>Fri, 19 Jul 2024 07:08:37 +0000</pubDate>
-</item>
-<item>
-<title>Key-and-Signature  Compact Multi-Signatures for Blockchain: A Compiler with  Realizations</title>
-<link>https://eprint.iacr.org/2023/061</link>
-<guid>https://eprint.iacr.org/2023/061</guid>
-<content:encoded><![CDATA[
-<div> 关键词：multi-signature, linear ID, public-key, signature, lattice-based ID
-
-总结: 这篇论文介绍了一种新的方法，将线性标识（linear ID）方案转换为多签名协议，以实现短小的聚合公钥和签名。这种转换器解决了去中心化环境下防止恶意攻击的问题，并优化了区块链上的存储需求。研究者利用两种身份验证方案——Schnorr ID和基于 lattice 的新方案，实现了这一编译器。通过这种方式，他们得到了第一个无需重启签名人过程的常规 lattice 基础多签名方案，同时保持了关键和签名的紧凑性。这种方法简化了多方问题，转而依赖于弱式两方安全问题的解决方案。 <div>
-Multi-signature is a protocol where a set of signatures jointly sign a message so that the final signature is significantly shorter than concatenating individual  signatures together. Recently, it finds applications in blockchain, where several users want to jointly authorize a payment through a multi-signature.  However, in this setting, there is no centralized authority and it could suffer from a rogue key attack where the attacker can generate his own keys arbitrarily. Further, to minimize the storage on blockchain, it is desired that the aggregated  public-key and the aggregated signature are both as short as possible. In this paper,  we find a compiler that converts a kind  of identification (ID) scheme (which we call a linear ID) to a multi-signature so that both the aggregated  public-key and the aggregated signature have a  size independent of the number of signers. Our compiler is provably secure. The advantage of our results is that we reduce a multi-party problem to a weakly secure two-party problem.  We realize our compiler with two ID schemes. The first is  Schnorr ID. The second is a new lattice-based ID scheme,  which via our compiler gives the first regular lattice-based multi-signature scheme with  key-and-signature compact without a restart during signing process.
-]]></content:encoded>
-<pubDate>Thu, 19 Jan 2023 22:29:39 +0000</pubDate>
 </item>
 </channel>
 </rss>
