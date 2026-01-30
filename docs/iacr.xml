@@ -4,6 +4,39 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+<item>
+<title>OptiBridge: A Trustless, Cost-Efficient Bridge Between the Lightning Network and Ethereum</title>
+<link>https://eprint.iacr.org/2026/147</link>
+<guid>https://eprint.iacr.org/2026/147</guid>
+<content:encoded><![CDATA[
+<div> OptiBridge、跨链桥、支付通道、乐观机制、智能合约<br><br>总结:<br>1. 传统跨链桥假设源账本事件公开可见，但Layer-2支付通道（如闪电网络）的状态更新是链下且不可见的，导致现有设计失效。<br>2. 本文提出OptiBridge，一种连接支付通道与智能合约区块链（如以太坊）的新桥接方案，无需新增信任假设且兼容现有协议栈。<br>3. OptiBridge在正常情况下采用乐观机制：诚实双方通过揭示预共享密钥在目标链上确认状态，大幅降低Gas成本（相比Alba节省约73%）。<br>4. 针对故障或恶意行为，OptiBridge提供按需部署的争议解决合约，虽争议路径成本较高，但能有效防止资产被盗。<br>5. 理性用户会优先选择低成本的乐观路径，而偏离者将面临更高费用和延迟，从而保障系统安全与活性。 <div>
+Bridges, protocols that enforce a state transition on a destination ledger conditioned on an event on a source ledger, are central to modern DeFi.
+Conventional designs implicitly assume the source ledger event is publicly observable, an assumption that breaks with Layer-2 payment channels such as the Lightning Network, where state updates occur off-chain between counterparties and are invisible to others. This state of affairs advocates for new bridge designs for this setting.
+
+This paper introduces OptiBridge, a bridge between a payment channel (e.g., Lightning Network) and a smart-contract blockchain (e.g., Ethereum) that preserves safety and liveness without adding trust assumptions and remains fully compatible with existing Lightning and Ethereum stacks. OptiBridge follows an optimistic path in the common case: two honest channel peers materialize the intended state on the destination chain by revealing a pre-agreed secret.
+To handle faults and adversarial behavior, OptiBridge provides a dispute path orchestrated by a more expressive contract that is deployed {only on demand}. An implementation demonstrates substantial cost savings in the optimistic case: compared to Alba (NDSS’25), the optimistic contract deployment uses $\sim 73\%$ less gas ($1.22$M vs. $4.51$M), and proof submission costs $40{,}107$ vs. $253{,}566$ gas; when disputes arise, the dispute contract deployment costs $2{,}785{,}514$ gas and the core dispute call is cheaper ($196{,}438$ vs.$515{,}860$). Our analysis shows that rational users strictly prefer the optimistic path, whereas the dispute mechanism prevents coin theft and imposes higher fees and delays on the deviator.
+]]></content:encoded>
+<pubDate>Fri, 30 Jan 2026 01:42:10 +0000</pubDate>
+<pubDate>Fri, 30 Jan 2026 01:42:10 +0000</pubDate>
+</item>
+<item>
+<title>Minimizing Mempool Dependency in PoW Mining on Blockchain: A Paradigm Shift with Compressed Block Representation for Enhanced Scalability, Decentralization and Security.</title>
+<link>https://eprint.iacr.org/2026/141</link>
+<guid>https://eprint.iacr.org/2026/141</guid>
+<content:encoded><![CDATA[
+<div> 关键词：工作量证明（PoW）、区块传播、内存池不一致、延迟验证、可扩展性
+
+<br><br>总结:  
+1. 现有基于PoW的区块链在可扩展性、效率和去中心化方面存在固有局限。  
+2. 紧凑区块传播方法虽能减少带宽和延迟，但受节点间内存池不一致影响，性能下降。  
+3. 论文提出新协议，降低对内存池同步的依赖，通过在紧凑区块中包含压缩交易输入ID列表，使节点无需完整验证即可立即开始挖矿。  
+4. 采用“延迟验证”机制，在挖矿同时并行完成交易的完整验证。  
+5. 该方案在保持比特币安全性和去中心化前提下，显著提升吞吐量（如10MB区块达约66.7 TPS）。 <div>
+While existing Proof-of-Work (PoW) based blockchain protocols have demonstrated innovative potential, they face inherent limitations regarding scalability, efficiency, and decentralization. The compact block propagation method, though effective in reducing network bandwidth and propagation delay in ideal environments, suffers from performance degradation due to mempool inconsistencies among nodes. This paper proposes a novel block propagation and consensus protocol that mitigates the blockchain's dependency on mempool synchronization. The proposed approach redefines the PoW process to shorten the time to consensus despite increased block sizes. Specifically, it includes a compressed transaction input ID list within the compact block to induce nodes to immediately begin mining without full verification. The full verification of transactions adopts a 'delayed verification' method, performed in parallel with the mining operation. This study enables the processing of more transactions quickly while maintaining the decentralization and security of Bitcoin (e.g., achieving approximately 66.7 TPS with 10MB blocks).
+]]></content:encoded>
+<pubDate>Thu, 29 Jan 2026 09:47:02 +0000</pubDate>
+<pubDate>Thu, 29 Jan 2026 09:47:02 +0000</pubDate>
+</item>
 
 <item>
 <title>Private Proofs of When and Where</title>
