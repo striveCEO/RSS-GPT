@@ -4,6 +4,92 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+<item>
+<title>Leveraging ASIC AI Chips for Homomorphic Encryption</title>
+<link>https://eprint.iacr.org/2026/160</link>
+<guid>https://eprint.iacr.org/2026/160</guid>
+<content:encoded><![CDATA[
+<div> 同态加密、TPU、AI加速器、能效优化、编译器框架<br><br>总结:<br>1. 同态加密（HE）虽保障云服务数据隐私，但计算开销大；GPU可加速HE，但能效远低于专用ASIC。<br>2. 现有AI加速器（如TPU）具备高能效潜力，但其低精度矩阵引擎（MXU）和粗粒度内存架构与当前面向GPU设计的HE算法不兼容。<br>3. GPU优化的HE算法依赖高精度整数运算和细粒度数据重排，在TPU上导致资源利用率低、性能下降。<br>4. 为此提出CROSS编译器框架，包含两项关键技术：Basis-Aligned Transformation（BAT）将高精度模运算转为INT8矩阵乘法以激活MXU；Memory-Aligned Transformation（MAT）通过离线参数转换将数据重排嵌入计算核，避免运行时开销。<br>5. 实验表明，CROSS在TPU v6e上对NTT和HE算子的能效优于现有方案，确立AI ASIC为HE高效执行的新标杆。 <div>
+Homomorphic Encryption (HE) provides strong data privacy for cloud services but at the cost of prohibitive computational overhead. While GPUs have emerged as a practical platform for accelerating HE, there remains an order-of-magnitude energy-efficiency gap compared to specialized (but expensive) HE ASICs. This paper explores an alternate direction: leveraging existing AI accelerators, like Google's TPUs with coarse-grained compute and memory architectures, to offer a path toward ASIC-level energy efficiency for HE. However, this architectural paradigm creates a fundamental mismatch with SoTA HE algorithms designed for GPUs. These algorithms rely heavily on: (1) high-precision (32-bit) integer arithmetic to now run on a TPU's low-throughput vector unit, leaving its high-throughput low-precision (8-bit) matrix engine (MXU) idle, and (2) fine-grained data permutations that are inefficient on the TPU's coarse-grained memory subsystem. Consequently, porting GPU-optimized HE libraries to TPUs results in severe resource under-utilization and performance degradation. To tackle above challenges, we introduce CROSS, a compiler framework that systematically transforms HE workloads to align with the TPU's architecture. CROSS makes two key contributions: (1) Basis-Aligned Transformation (BAT), a novel technique that converts high-precision modular arithmetic into dense, low-precision (INT8) matrix multiplications, unlocking and improving the utilization of TPU's MXU for HE, and (2) Memory-Aligned Transformation (MAT), which eliminates costly runtime data reordering by embedding reordering into compute kernels through offline parameter transformation. CROSS (TPU v6e) achieves higher throughput per watt on NTT and HE operators than WarpDrive, FIDESlib, FAB, HEAP, and Cheddar, establishing AI ASIC as the SotA efficient platform for HE operators. Code: https://github.com/EfficientPPML/CROSS
+]]></content:encoded>
+<pubDate>Sat, 31 Jan 2026 03:58:20 +0000</pubDate>
+<pubDate>Sat, 31 Jan 2026 03:58:20 +0000</pubDate>
+</item>
+<item>
+<title>Setup Protocols for Sender Anonymity</title>
+<link>https://eprint.iacr.org/2026/158</link>
+<guid>https://eprint.iacr.org/2026/158</guid>
+<content:encoded><![CDATA[
+<div> 匿名通信、简单I/O设置、增强拨号协议、发送者匿名性、隐私与正确性权衡<br><br>总结:  
+1. 匿名通信在公共网络中至关重要，现有方案依赖“简单I/O设置”来隐藏真实通信模式。  
+2. 当前唯一实现该设置的方法是拨号协议，但会泄露发送者身份，破坏发送者匿名性。  
+3. 本文提出“增强拨号协议”概念，并首次对其发送者匿名性进行形式化研究。  
+4. 构建了一个包含安全性、正确性和公平性的分析框架。  
+5. 提出Fusion协议，在保证完美正确性与公平性的同时仅泄露不可避免的信息；其变体Fusion+通过引入差分隐私进一步减少泄露，但牺牲部分正确性，揭示了隐私与正确性之间的基本权衡。 <div>
+Anonymous communication is essential for secure and private interactions over public networks. Existing solutions that provide provable anonymity rely on the so-called simple I/O setting, where every participant sends and receives the same number of messages, masking their true communication pattern. The only known way to enforce this setting is through dialing protocols. Such protocols establish pairwise conversations, but each recipient inevitably learns who attempted to contact them, violating sender anonymity, the guaranty that even the recipient cannot determine who attempted to contact them.
+
+In this work, we introduce the notion of enhanced dialing protocols, a broad class of protocols that enforce the simple I/O setting. We also initiate the first formal study of such protocols with respect to sender anonymity. We introduce a framework that captures three key properties: security, correctness, and fairness. Within this framework, we present Fusion, a protocol that achieves perfect correctness and fairness while incurring only unavoidable leakage, and Fusion+, a differentially private variant that reduces this leakage at the cost of some correctness. Through theoretical analysis, we quantify the fundamental trade-off between privacy and correctness in Fusion+.
+]]></content:encoded>
+<pubDate>Fri, 30 Jan 2026 19:58:02 +0000</pubDate>
+<pubDate>Fri, 30 Jan 2026 19:58:02 +0000</pubDate>
+</item>
+<item>
+<title>Claiming bounties on small scale Poseidon and Poseidon2 instances using resultant-based algebraic attacks</title>
+<link>https://eprint.iacr.org/2026/150</link>
+<guid>https://eprint.iacr.org/2026/150</guid>
+<content:encoded><![CDATA[
+<div> 以太坊基金会、Poseidon、Poseidon2、CICO挑战、赏金计划<br><br>总结:  
+1. 2024年11月，以太坊基金会发起针对Poseidon和Poseidon2哈希函数的CICO挑战赏金计划。  
+2. 挑战目标是在不同素数域上对轮数缩减的Poseidon-256、Poseidon2-64、Poseidon2-31m和Poseidon2-31k实例求解CICO问题（前两者为CICO-1，后两者为CICO-2）。  
+3. 研究团队成功找到Poseidon2-31m和Poseidon2-31k前三个实例及Poseidon-256前两个实例的CICO解。  
+4. 除Poseidon-256首个实例被其他团队抢先提交外，其余解均获以太坊基金会确认并符合赏金资格。  
+5. 团队对Poseidon2-31m/k采用新型基于结式（resultant-based）的方法，而对Poseidon-256则仅使用已知的一元根查找技术。 <div>
+In november 2024, the Ethereum foundation (EF) issued a bounty program with challenges on Poseidon and Poseidon2. The goal of these challenges is to find CICO solutions on different round-reduced instances of Poseidon and Poseidon2, defined on different prime fields. We denote the four main instances Poseidon-256, Poseidon2-64, Poseidon2-31m and Poseidon2-31k. In the challenges, the goal is to solve CICO-1 for Poseidon-256 and Poseidon-64, and CICO-2 for Poseidon-31m and Poseidon-31k.
+
+We found CICO solutions to the first 3 proposed instances of Poseidon2-31m and Poseidon2-31k, along with solutions for the first two Poseidon-256 instances. These solutions have been confirmed to be correct and eligible for bounty by the Ethereum fundation, except for the first instance of Poseidon-256, which was claimed by another team before us. In order to solve the instances of Poseidon2-31m and Poseidon2-31k, we used a new resultant-based approach, whereas our attacks on Poseidon-256 only relies on already-known univariate root finding.
+]]></content:encoded>
+<pubDate>Fri, 30 Jan 2026 10:34:00 +0000</pubDate>
+<pubDate>Fri, 30 Jan 2026 10:34:00 +0000</pubDate>
+</item>
+<item>
+<title>Private IP Address Inference in NAT Networks via Off-Path TCP Control-Plane Attack</title>
+<link>https://eprint.iacr.org/2026/149</link>
+<guid>https://eprint.iacr.org/2026/149</guid>
+<content:encoded><![CDATA[
+<div> NAT、TCP劫持、隐私泄露、私有IP地址、Wi-Fi路由器<br><br>总结:<br>1. 研究发现，广泛部署的Wi-Fi路由器NAT行为（如端口保留、反向路径验证不足、缺乏TCP窗口跟踪）存在设计缺陷，可被远程攻击者利用实施TCP劫持。<br>2. 攻击者不仅能中断或操控NAT后客户端与目标服务器的活跃TCP连接，还能准确推断出该客户端的私有IP地址。<br>3. 该攻击基于现实假设，通过利用NAT状态管理和TCP控制平面交互中的未被探索行为，重构完整的客户端连接元组。<br>4. 实验在实验室和真实Wi-Fi网络中验证：对SSH连接可可靠识别私有IP并强制断开；对HTTPS连接虽会快速重建，但仍能泄露私有IP。<br>5. 此类攻击不仅造成连接中断，更导致内部主机去匿名化，构成严重且此前未被认知的隐私威胁。 <div>
+Recent work at NDSS 2024 demonstrated that widely deployed NAT
+behaviors in Wi-Fi routers - including port preservation, insufficient
+reverse-path validation, and the absence of TCP window tracking
+enable off-path TCP hijacking attacks in NATed wireless networks.
+These attacks exploit design weaknesses in NAT gateway routers to
+detect whether some internal client behind the NAT maintains an
+active TCP connection with a target server and, upon detection, to
+disrupt or manipulate that connection. In this paper, we show that
+these behaviors have significantly broader privacy implications. We
+demonstrate that an off-path attacker can not only hijack active
+TCP connections but also accurately infer the private IP addresses
+of individual clients behind a NAT that are engaged in TCP commu-
+nication with a target server. Our attack operates under the same
+realistic assumptions as prior work, yet leverages previously unex-
+plored behaviors in NAT state management and TCP control-plane
+interactions to reconstruct the full client-side connection tuple. We
+evaluate our attack both in a controlled laboratory testbed and
+in a real-world Wi-Fi network. For SSH connections, our method
+reliably identifies the private IP addresses of connected clients and
+enables forcible termination of their TCP sessions. For HTTPS
+connections, although the attacker successfully terminates the un-
+derlying TCP connection, modern browsers rapidly re-establish
+a new connection using new ephemeral ports; nevertheless, our
+attack reveals the private IP addresses of the originating clients, ex-
+posing a persistent privacy leakage. Our findings demonstrate that
+off-path TCP hijacking attacks in NATed Wi-Fi networks pose a seri-
+ous and previously unrecognized threat to client privacy, extending
+well beyond connection disruption to enable deanonymization of
+internal hosts.
+]]></content:encoded>
+<pubDate>Fri, 30 Jan 2026 10:28:18 +0000</pubDate>
+<pubDate>Fri, 30 Jan 2026 10:28:18 +0000</pubDate>
+</item>
 
 <item>
 <title>OptiBridge: A Trustless, Cost-Efficient Bridge Between the Lightning Network and Ethereum</title>
