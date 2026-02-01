@@ -4,15 +4,15 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+
 <item>
 <title>Leveraging ASIC AI Chips for Homomorphic Encryption</title>
 <link>https://eprint.iacr.org/2026/160</link>
 <guid>https://eprint.iacr.org/2026/160</guid>
 <content:encoded><![CDATA[
-<div> 同态加密、TPU、AI加速器、能效优化、编译器框架<br><br>总结:<br>1. 同态加密（HE）虽保障云服务数据隐私，但计算开销大；GPU可加速HE，但能效远低于专用ASIC。<br>2. 现有AI加速器（如TPU）具备高能效潜力，但其低精度矩阵引擎（MXU）和粗粒度内存架构与当前面向GPU设计的HE算法不兼容。<br>3. GPU优化的HE算法依赖高精度整数运算和细粒度数据重排，在TPU上导致资源利用率低、性能下降。<br>4. 为此提出CROSS编译器框架，包含两项关键技术：Basis-Aligned Transformation（BAT）将高精度模运算转为INT8矩阵乘法以激活MXU；Memory-Aligned Transformation（MAT）通过离线参数转换将数据重排嵌入计算核，避免运行时开销。<br>5. 实验表明，CROSS在TPU v6e上对NTT和HE算子的能效优于现有方案，确立AI ASIC为HE高效执行的新标杆。 <div>
+<div> 同态加密、TPU、AI加速器、能效优化、编译器框架<br /><br />总结:<br />1. 同态加密（HE）虽保障云服务数据隐私，但计算开销大；GPU可加速HE，但能效远低于专用ASIC。<br />2. 现有AI加速器（如TPU）具备高能效潜力，但其低精度矩阵引擎（MXU）和粗粒度内存架构与当前面向GPU设计的HE算法不兼容。<br />3. GPU优化的HE算法依赖高精度整数运算和细粒度数据重排，在TPU上导致资源利用率低、性能下降。<br />4. 为此提出CROSS编译器框架，包含两项关键技术：Basis-Aligned Transformation（BAT）将高精度模运算转为INT8矩阵乘法以激活MXU；Memory-Aligned Transformation（MAT）通过离线参数转换将数据重排嵌入计算核，避免运行时开销。<br />5. 实验表明，CROSS在TPU v6e上对NTT和HE算子的能效优于现有方案，确立AI ASIC为HE高效执行的新标杆。 <div>
 Homomorphic Encryption (HE) provides strong data privacy for cloud services but at the cost of prohibitive computational overhead. While GPUs have emerged as a practical platform for accelerating HE, there remains an order-of-magnitude energy-efficiency gap compared to specialized (but expensive) HE ASICs. This paper explores an alternate direction: leveraging existing AI accelerators, like Google's TPUs with coarse-grained compute and memory architectures, to offer a path toward ASIC-level energy efficiency for HE. However, this architectural paradigm creates a fundamental mismatch with SoTA HE algorithms designed for GPUs. These algorithms rely heavily on: (1) high-precision (32-bit) integer arithmetic to now run on a TPU's low-throughput vector unit, leaving its high-throughput low-precision (8-bit) matrix engine (MXU) idle, and (2) fine-grained data permutations that are inefficient on the TPU's coarse-grained memory subsystem. Consequently, porting GPU-optimized HE libraries to TPUs results in severe resource under-utilization and performance degradation. To tackle above challenges, we introduce CROSS, a compiler framework that systematically transforms HE workloads to align with the TPU's architecture. CROSS makes two key contributions: (1) Basis-Aligned Transformation (BAT), a novel technique that converts high-precision modular arithmetic into dense, low-precision (INT8) matrix multiplications, unlocking and improving the utilization of TPU's MXU for HE, and (2) Memory-Aligned Transformation (MAT), which eliminates costly runtime data reordering by embedding reordering into compute kernels through offline parameter transformation. CROSS (TPU v6e) achieves higher throughput per watt on NTT and HE operators than WarpDrive, FIDESlib, FAB, HEAP, and Cheddar, establishing AI ASIC as the SotA efficient platform for HE operators. Code: https://github.com/EfficientPPML/CROSS
 ]]></content:encoded>
-<pubDate>Sat, 31 Jan 2026 03:58:20 +0000</pubDate>
 <pubDate>Sat, 31 Jan 2026 03:58:20 +0000</pubDate>
 </item>
 <item>
@@ -20,7 +20,7 @@ Homomorphic Encryption (HE) provides strong data privacy for cloud services but 
 <link>https://eprint.iacr.org/2026/158</link>
 <guid>https://eprint.iacr.org/2026/158</guid>
 <content:encoded><![CDATA[
-<div> 匿名通信、简单I/O设置、增强拨号协议、发送者匿名性、隐私与正确性权衡<br><br>总结:  
+<div> 匿名通信、简单I/O设置、增强拨号协议、发送者匿名性、隐私与正确性权衡<br /><br />总结:  
 1. 匿名通信在公共网络中至关重要，现有方案依赖“简单I/O设置”来隐藏真实通信模式。  
 2. 当前唯一实现该设置的方法是拨号协议，但会泄露发送者身份，破坏发送者匿名性。  
 3. 本文提出“增强拨号协议”概念，并首次对其发送者匿名性进行形式化研究。  
@@ -31,14 +31,13 @@ Anonymous communication is essential for secure and private interactions over pu
 In this work, we introduce the notion of enhanced dialing protocols, a broad class of protocols that enforce the simple I/O setting. We also initiate the first formal study of such protocols with respect to sender anonymity. We introduce a framework that captures three key properties: security, correctness, and fairness. Within this framework, we present Fusion, a protocol that achieves perfect correctness and fairness while incurring only unavoidable leakage, and Fusion+, a differentially private variant that reduces this leakage at the cost of some correctness. Through theoretical analysis, we quantify the fundamental trade-off between privacy and correctness in Fusion+.
 ]]></content:encoded>
 <pubDate>Fri, 30 Jan 2026 19:58:02 +0000</pubDate>
-<pubDate>Fri, 30 Jan 2026 19:58:02 +0000</pubDate>
 </item>
 <item>
 <title>Claiming bounties on small scale Poseidon and Poseidon2 instances using resultant-based algebraic attacks</title>
 <link>https://eprint.iacr.org/2026/150</link>
 <guid>https://eprint.iacr.org/2026/150</guid>
 <content:encoded><![CDATA[
-<div> 以太坊基金会、Poseidon、Poseidon2、CICO挑战、赏金计划<br><br>总结:  
+<div> 以太坊基金会、Poseidon、Poseidon2、CICO挑战、赏金计划<br /><br />总结:  
 1. 2024年11月，以太坊基金会发起针对Poseidon和Poseidon2哈希函数的CICO挑战赏金计划。  
 2. 挑战目标是在不同素数域上对轮数缩减的Poseidon-256、Poseidon2-64、Poseidon2-31m和Poseidon2-31k实例求解CICO问题（前两者为CICO-1，后两者为CICO-2）。  
 3. 研究团队成功找到Poseidon2-31m和Poseidon2-31k前三个实例及Poseidon-256前两个实例的CICO解。  
@@ -49,14 +48,13 @@ In november 2024, the Ethereum foundation (EF) issued a bounty program with chal
 We found CICO solutions to the first 3 proposed instances of Poseidon2-31m and Poseidon2-31k, along with solutions for the first two Poseidon-256 instances. These solutions have been confirmed to be correct and eligible for bounty by the Ethereum fundation, except for the first instance of Poseidon-256, which was claimed by another team before us. In order to solve the instances of Poseidon2-31m and Poseidon2-31k, we used a new resultant-based approach, whereas our attacks on Poseidon-256 only relies on already-known univariate root finding.
 ]]></content:encoded>
 <pubDate>Fri, 30 Jan 2026 10:34:00 +0000</pubDate>
-<pubDate>Fri, 30 Jan 2026 10:34:00 +0000</pubDate>
 </item>
 <item>
 <title>Private IP Address Inference in NAT Networks via Off-Path TCP Control-Plane Attack</title>
 <link>https://eprint.iacr.org/2026/149</link>
 <guid>https://eprint.iacr.org/2026/149</guid>
 <content:encoded><![CDATA[
-<div> NAT、TCP劫持、隐私泄露、私有IP地址、Wi-Fi路由器<br><br>总结:<br>1. 研究发现，广泛部署的Wi-Fi路由器NAT行为（如端口保留、反向路径验证不足、缺乏TCP窗口跟踪）存在设计缺陷，可被远程攻击者利用实施TCP劫持。<br>2. 攻击者不仅能中断或操控NAT后客户端与目标服务器的活跃TCP连接，还能准确推断出该客户端的私有IP地址。<br>3. 该攻击基于现实假设，通过利用NAT状态管理和TCP控制平面交互中的未被探索行为，重构完整的客户端连接元组。<br>4. 实验在实验室和真实Wi-Fi网络中验证：对SSH连接可可靠识别私有IP并强制断开；对HTTPS连接虽会快速重建，但仍能泄露私有IP。<br>5. 此类攻击不仅造成连接中断，更导致内部主机去匿名化，构成严重且此前未被认知的隐私威胁。 <div>
+<div> NAT、TCP劫持、隐私泄露、私有IP地址、Wi-Fi路由器<br /><br />总结:<br />1. 研究发现，广泛部署的Wi-Fi路由器NAT行为（如端口保留、反向路径验证不足、缺乏TCP窗口跟踪）存在设计缺陷，可被远程攻击者利用实施TCP劫持。<br />2. 攻击者不仅能中断或操控NAT后客户端与目标服务器的活跃TCP连接，还能准确推断出该客户端的私有IP地址。<br />3. 该攻击基于现实假设，通过利用NAT状态管理和TCP控制平面交互中的未被探索行为，重构完整的客户端连接元组。<br />4. 实验在实验室和真实Wi-Fi网络中验证：对SSH连接可可靠识别私有IP并强制断开；对HTTPS连接虽会快速重建，但仍能泄露私有IP。<br />5. 此类攻击不仅造成连接中断，更导致内部主机去匿名化，构成严重且此前未被认知的隐私威胁。 <div>
 Recent work at NDSS 2024 demonstrated that widely deployed NAT
 behaviors in Wi-Fi routers - including port preservation, insufficient
 reverse-path validation, and the absence of TCP window tracking
@@ -88,9 +86,7 @@ well beyond connection disruption to enable deanonymization of
 internal hosts.
 ]]></content:encoded>
 <pubDate>Fri, 30 Jan 2026 10:28:18 +0000</pubDate>
-<pubDate>Fri, 30 Jan 2026 10:28:18 +0000</pubDate>
 </item>
-
 <item>
 <title>OptiBridge: A Trustless, Cost-Efficient Bridge Between the Lightning Network and Ethereum</title>
 <link>https://eprint.iacr.org/2026/147</link>
@@ -15855,50 +15851,6 @@ In this work, we introduce a communication-efficient secure two-party neural net
 We provide formal security proofs and evaluate the performance of FssNN on various models and datasets. Experimental results show that compared to the state-of-the-art framework AriaNN, our framework reduces the total communication costs of secure training and inference by approximately $25.4\%$ and $26.4\%$ respectively.
 ]]></content:encoded>
 <pubDate>Sun, 22 Jan 2023 16:28:47 +0000</pubDate>
-</item>
-<item>
-<title>The Espresso Sequencing Network: HotShot Consensus, Tiramisu Data-Availability, and Builder-Exchange</title>
-<link>https://eprint.iacr.org/2024/1189</link>
-<guid>https://eprint.iacr.org/2024/1189</guid>
-<content:encoded><![CDATA[
-Building a Consensus platform for shared sequencing can power an ecosystem of layer-2 solutions such as rollups which are crucial for scaling blockchains (e.g.,Ethereum). However, it drastically differs from conventional Consensus for blockchains in two key considerations:
-• (No) Execution: A shared sequencing platform is not responsible for pre-validating blocks nor for processing state updates. Therefore, agreement is formed on a sequence of certificates of block data-availability (DA) without persisting them or obtaining blocks in full. At the same time, the platform must stream block data with very high efficiency to layer-2 entities for execution, or (in the case of rollups) for proof generation.
-• Builder-Exchange: A shared sequencing platform delegates to external entities to build blocks and separates it from the role of a consensus proposer. This allows an ecosystem of specialized builders to pre-validate transactions for diversified rollups, languages, and MEV exploits. However, separating the task of block-building from proposing brings a new challenge. Builders want assurances that their blocks would commit in exchange for revealing their contents, whereas validators/proposers want assurance that the data in committed blocks will be available and fees paid. Neither one trusts the other, hence the shared sequencing platform should facilitate a “fair-exchange”  between builders and the sequencing network. The Espresso Sequencing Network is purpose-built to address these unique considerations.
-Among the main novelties of the design are (i) a three-layered DA system called Tiramisu, coupled with (ii) a costless integration of the DA with the platform’s consensus core, and (iii) a Builder-Exchange mechanism between builders and the consensus core.
-Note that this paper relies substantially on and can be seen as an extension of The Espresso Sequencer: HotShot Consensus and Tiramisu Data Availability [84].
-]]></content:encoded>
-<pubDate>Tue, 23 Jul 2024 19:57:45 +0000</pubDate>
-</item>
-<item>
-<title>Hyperion: Transparent End-to-End Verifiable Voting with Coercion Mitigation</title>
-<link>https://eprint.iacr.org/2024/1182</link>
-<guid>https://eprint.iacr.org/2024/1182</guid>
-<content:encoded><![CDATA[
-We present Hyperion, an end-to-end verifiable e-voting scheme that allows the voters to identify their votes in cleartext in the final tally. In contrast to schemes like Selene or sElect, identification is not via (private) tracker numbers but via cryptographic commitment terms. After publishing the tally, the Election Authority provides each voter with an individual dual key. Voters identify their votes by raising their dual key to their secret trapdoor key and finding the matching commitment term in the tally. 
-The dual keys are self-certifying in that, without the voter's trapdoor key, it is intractable to forge a dual key that, when raised to the trapdoor key, will match an alternative commitment. On the other hand, a voter can use their own trapdoor key to forge a dual key to fool any would-be coercer.
-Additionally, we propose a variant of Hyperion that counters the tracker collision threat present in Selene. We introduce individual verifiable views: each voter gets their own independently shuffled view of the master Bulletin Board. 
-We provide new improved definitions of privacy and verifiability for e-voting schemes and prove the scheme secure against these, as well as proving security with respect to earlier definitions in the literature.
-Finally, we provide a prototype implementation and provide measurements which demonstrate that our scheme is practical for large scale elections.
-]]></content:encoded>
-<pubDate>Mon, 22 Jul 2024 17:26:10 +0000</pubDate>
-</item>
-<item>
-<title>AQQUA: Augmenting Quisquis with Auditability</title>
-<link>https://eprint.iacr.org/2024/1181</link>
-<guid>https://eprint.iacr.org/2024/1181</guid>
-<content:encoded><![CDATA[
-We propose AQQUA: a digital payment system that combines auditability and privacy. AQQUA extends Quisquis by adding two authorities; one for registration and one for auditing. These authorities do not intervene in the everyday transaction processing; as a consequence, the decentralized nature of the cryptocurrency is not disturbed. Our construction is account-based. An account consists of an updatable public key which functions as a cryptographically unlinkable pseudonym, and of commitments to the balance, the total amount of coins spent, and the total amount of coins received. In order to participate in the system a user creates an initial account with the registration authority. To protect their privacy, whenever the user wants to transact they create unlinkable new accounts by updating their public key and the total number of accounts they own (maintained in committed form). The audit authority may request an audit at will. The user must prove in zero-knowledge that all their accounts are compliant to  specific policies. We formally define a security model capturing the properties that a private and auditable digital payment system should possess and we analyze the security of AQQUA under this model.
-]]></content:encoded>
-<pubDate>Mon, 22 Jul 2024 16:04:13 +0000</pubDate>
-</item>
-<item>
-<title>Post-quantum XML and SAML Single Sign-On</title>
-<link>https://eprint.iacr.org/2024/828</link>
-<guid>https://eprint.iacr.org/2024/828</guid>
-<content:encoded><![CDATA[
-Extensible Markup Language (XML) is one of the most popular serialization languages. Since many security protocols are built using XML, it also provides cryptographic functionality. A central framework in this area is the Security Assertion Markup Language (SAML). This standard is one of the most widely used options for implementing Single Sign-On (SSO), which allows users to authenticate to different service providers using the credentials from a single identity provider. Like all other security protocols currently in use, the security and privacy of XML-based frameworks such as SAML is threatened by the development of increasingly powerful quantum computers. In fact, future attackers with access to scalable quantum computers will be able to break the currently used cryptographic building blocks and thus undermine the security of the SAML SSO to illegally access sensitive private information. Post-quantum cryptography algorithms have been developed to protect against such quantum attackers. While many security protocols have been migrated into the quantum age by using post-quantum cryptography, no such solutions for XML and the security protocols based on it have been developed, let alone tested. We make the following contributions to fill this gap. We have designed post-quantum solutions for the cryptographic building blocks in XML and integrated them into the SAML SSO protocol. We implemented our solutions in the OpenSAML, Apache Santuario, and BouncyCastle libraries and extensively tested their performance for various post-quantum instantiations. As a result, we have created a comprehensive and solid foundation for post-quantum XML and post-quantum SAML SSO migration.
-]]></content:encoded>
-<pubDate>Mon, 27 May 2024 15:52:37 +0000</pubDate>
 </item>
 </channel>
 </rss>
