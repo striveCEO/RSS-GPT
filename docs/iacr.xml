@@ -4,6 +4,35 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+<item>
+<title>zkAgent: Verifiable Agent Execution via One-Shot Complete LLM Inference Proof</title>
+<link>https://eprint.iacr.org/2026/199</link>
+<guid>https://eprint.iacr.org/2026/199</guid>
+<content:encoded><![CDATA[
+
+Recent advances in large language models have enabled LLM-based agents to move beyond text generation toward long-term execution involving tool use, multi-step interactions, and autonomous decision-making. However, the agent provider may be compromised and return malicious outputs. As agents increasingly manage sensitive data and financial assets, such misbehavior can cause severe real-world harm. Recent work leverages zero-knowledge proofs to verify the correctness of LLM inference, ensuring that the provider can only return outputs consistent with the claimed model. Nevertheless, these approaches are limited to standalone transformer computations and fail to support agent executions.
+
+We present zkAgent, an efficient SNARK system for agent execution. Beyond prior Transformer-only proofs, zkAgent proves the entire agent execution, including end-to-end LLM inference and tool interactions.
+Furthermore, zkAgent achieves scalable proof generation by proving multi-step agent interactions through a single, one-shot inference proof, eliminating the need to prove each intermediate token generation. To our knowledge, zkAgent is the first system to provide practical verifiable agent execution that simultaneously attests to complete LLM inference and tool interactions.
+
+Our evaluation shows that, for a 512-token agent inference with GPT-2, zkAgent achieves an amortized proving time of 1.05s/token, a $294\times$ speedup over the state of the art, zkGPT (USENIX Security~’25) which requires $309$s/token with step-by-step generation. 
+zkAgent also reduces verification time by $9{,}690\times$ (0.45s vs. 4361.09s).
+Moreover, for end-to-end agent executions, such as a weather agent and a coding assistant, zkAgent completes proving in 240s and verification in about 0.5s, with proof size of $42$MB, making verifiable agent execution practical in real-world deployments.
+]]></content:encoded>
+<pubDate>Sat, 07 Feb 2026 16:15:22 +0000</pubDate>
+<pubDate>Sat, 07 Feb 2026 16:15:22 +0000</pubDate>
+</item>
+<item>
+<title>ELLMo: Packing- and Depth-Aware Encrypted Transformer Inference</title>
+<link>https://eprint.iacr.org/2026/198</link>
+<guid>https://eprint.iacr.org/2026/198</guid>
+<content:encoded><![CDATA[
+
+Cloud-based Large Language Model (LLM) inference processes sensitive user inputs, yet current deployments offer limited confidentiality guarantees. Fully Homomorphic Encryption (FHE) can provide strong privacy, but it clashes with transformer architectures, where rigid ciphertext packing demands expensive rotations, and deep polynomial circuits for nonlinearities necessitate costly bootstrapping. Although recent work has reported promising speed-ups, maintaining model accuracy is a challenge. We address these issues with ELLMo, a packing- and depth-aware encrypted transformer design. ELLMo introduces a novel matrix multiplication algorithm to reduce the ciphertext rotations. Further, head-split and merge steps are fused into this new algorithm at no additional cost. To reduce the depth of nonlinear layers, our contributions, Statistical-max Softmax and DelayNorm, help bypass deep comparison trees and homomorphic divisions to reduce bootstrapping by up to 46%. On encrypted BERT-Tiny, ELLMo achieves a $1.4\times$ speedup over state-of-the-art baselines with 0-1.5% accuracy loss across SST-2, MRPC, and RTE downstream tasks.
+]]></content:encoded>
+<pubDate>Sat, 07 Feb 2026 02:28:23 +0000</pubDate>
+<pubDate>Sat, 07 Feb 2026 02:28:23 +0000</pubDate>
+</item>
 
 <item>
 <title>Identity-Based Matchmaking Encryption with Enhanced Privacy Against Chosen-Ciphertext Attacks</title>
