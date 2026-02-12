@@ -5,11 +5,52 @@
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
 <item>
+<title>Cavefish: Communication-Optimal Light Client Protocol for UTxO Ledgers</title>
+<link>https://eprint.iacr.org/2026/217</link>
+<guid>https://eprint.iacr.org/2026/217</guid>
+<content:encoded><![CDATA[
+
+Blockchain light clients (LCs) are agents with limited resources that are not able or not willing to maintain a fully validated copy of the ledger. They rely on service providers (SPs), typically full nodes, to access data required for tasks such as constructing transactions or interacting with off-chain applications.
+We introduce Cavefish, a novel protocol for UTxO-based platforms that enables LCs to submit transactions with minimal trust, storage, and computation overheads. Cavefish defines a two-party computation protocol between an LC and an SP, in which the LC specifies a transaction and the SP constructs it. The LC only receives a blinded version of the transaction, preventing modification and reuse, but allowing the LC to verify the transaction against the original intent. The SP is compensated inside the constructed transaction, eliminating the need for a separate protocol or exchange.
+To support this, we propose a variant of the predicate blind signature (PBS) scheme of Fuchsbauer and Wolf (Eurocrypt 2024), letting the SP obtain a valid signature on the unblinded transaction, which can then be posted on chain as the resulting signatures verify as standard Schnorr signatures. When combined with hierarchical deterministic (HD) wallets, the LC can provide a single public key and chain code to the SP, reducing communication footprint to a minimum. To further reduce overheads, our PBS variant relaxes the unlinkability requirements of traditional blind signatures in favor of efficiency as transactions only need to stay private until posted.
+On top of this, we define a multi-SP version of Cavefish that provides strong liveness and optimality guarantees. We benchmark the Non-interactive Argument of Knowledge (NArg) component of Cavefish on two major UTxO-based blockchains. Our results show that proving and verification times, as well as circuit sizes, are practical for real-world deployment.
+]]></content:encoded>
+<pubDate>Tue, 10 Feb 2026 09:13:40 +0000</pubDate>
+<pubDate>Tue, 10 Feb 2026 09:13:40 +0000</pubDate>
+</item>
+<item>
+<title>ECHO: Efficient Covertly-Secure Three-party Computation with Applications to Private Machine Learning</title>
+<link>https://eprint.iacr.org/2026/216</link>
+<guid>https://eprint.iacr.org/2026/216</guid>
+<content:encoded><![CDATA[
+
+Secure three-party computation with an honest majority is one of the most efficient settings in secure computation, and has been widely adopted in practical applications. However, achieving malicious security in this setting incurs significant concrete efficiency penalties, which could be an order of magnitude worse than that of their semi-honest counterparts. Covert security offers a potential security-efficiency trade-off by detecting malicious behavior with a certain probability (such as $50\%$), deterring rational adversaries through the risk of detection and loss of credibility. Yet, existing covert security research primarily focuses on two-party or general $n$-party protocols in the dishonest-majority setting, with limited progress toward efficient three-party solutions. 
+
+
+This work presents the first comprehensive framework, $\mathsf{ECHO}$, for covertly secure, honest-majority three-party computation with applications to privacy-preserving machine learning. We systematically explore the design space of cheating detection and cheater identification techniques, and propose a suite of novel protocols for both arithmetic and Boolean circuits. Each protocol is engineered for a distinct performance goal: minimal online latency, high end-to-end efficiency, or low communication. Notably, for arithmetic circuits over rings, we introduce a protocol leveraging asymmetric message authentication codes, achieving an online phase that is only $1.26\times$ slower than the semi-honest baseline, over three times faster than its maliciously secure counterpart. For Boolean circuits, our novel cut-and-choose-based method outperforms the best previous maliciously secure protocol by a factor of five. In practical PPML benchmarks, our framework achieves near semi-honest performance while delivering up to $8\times$ speedup over maliciously secure protocols on real-world tasks.
+]]></content:encoded>
+<pubDate>Tue, 10 Feb 2026 08:40:58 +0000</pubDate>
+<pubDate>Tue, 10 Feb 2026 08:40:58 +0000</pubDate>
+</item>
+<item>
+<title>Orbit: Optimizing Rescale and Bootstrap Placement with Integer Linear Programming Techniques for Secure Inference</title>
+<link>https://eprint.iacr.org/2026/213</link>
+<guid>https://eprint.iacr.org/2026/213</guid>
+<content:encoded><![CDATA[
+
+Fully Homomorphic Encryption (FHE) allows computation on encrypted data without decrypting it. In theory, FHE makes privacy-preserving machine learning possible. In practice, however, it remains impractically slow for real workloads. A major source of slowdown is bootstrap operations; in CKKS, a popular FHE scheme for tensor workloads, the slowdown is compounded by scale management and rescale operations.  
+
+FHE compilers aim to make bootstrap placement and scale management efficient and easy by compiling high-level programs into low-level, optimized FHE computations. Unfortunately, existing approaches miss crucial optimization opportunities because they overlook a key property of CKKS programs: bootstrap and rescale placement are fundamentally coupled through the level budget. In this paper, we present Orbit, an FHE compiler that jointly optimizes bootstrap and rescale placement through a novel Integer Linear Programming (ILP) formulation that reasons about both ciphertext level and scale constraints. To make this formulation tractable for end-to-end programs, we introduce three techniques that reduce ILP complexity while preserving optimality. Across five convolutional neural networks and multiple cryptographic parameter configurations, Orbit achieves a geometric mean speedup up to 1.19× over DaCapo, 1.73× over Orion, and 1.52× over ReSBM, keeps compilation under 6 minutes, and retains model accuracy within 0.3% of plaintext execution.
+]]></content:encoded>
+<pubDate>Tue, 10 Feb 2026 03:24:47 +0000</pubDate>
+<pubDate>Tue, 10 Feb 2026 03:24:47 +0000</pubDate>
+</item>
+
+<item>
 <title>zkAgent: Verifiable Agent Execution via One-Shot Complete LLM Inference Proof</title>
 <link>https://eprint.iacr.org/2026/199</link>
 <guid>https://eprint.iacr.org/2026/199</guid>
 <content:encoded><![CDATA[
-
 Recent advances in large language models have enabled LLM-based agents to move beyond text generation toward long-term execution involving tool use, multi-step interactions, and autonomous decision-making. However, the agent provider may be compromised and return malicious outputs. As agents increasingly manage sensitive data and financial assets, such misbehavior can cause severe real-world harm. Recent work leverages zero-knowledge proofs to verify the correctness of LLM inference, ensuring that the provider can only return outputs consistent with the claimed model. Nevertheless, these approaches are limited to standalone transformer computations and fail to support agent executions.
 
 We present zkAgent, an efficient SNARK system for agent execution. Beyond prior Transformer-only proofs, zkAgent proves the entire agent execution, including end-to-end LLM inference and tool interactions.
@@ -20,20 +61,16 @@ zkAgent also reduces verification time by $9{,}690\times$ (0.45s vs. 4361.09s).
 Moreover, for end-to-end agent executions, such as a weather agent and a coding assistant, zkAgent completes proving in 240s and verification in about 0.5s, with proof size of $42$MB, making verifiable agent execution practical in real-world deployments.
 ]]></content:encoded>
 <pubDate>Sat, 07 Feb 2026 16:15:22 +0000</pubDate>
-<pubDate>Sat, 07 Feb 2026 16:15:22 +0000</pubDate>
 </item>
 <item>
 <title>ELLMo: Packing- and Depth-Aware Encrypted Transformer Inference</title>
 <link>https://eprint.iacr.org/2026/198</link>
 <guid>https://eprint.iacr.org/2026/198</guid>
 <content:encoded><![CDATA[
-
 Cloud-based Large Language Model (LLM) inference processes sensitive user inputs, yet current deployments offer limited confidentiality guarantees. Fully Homomorphic Encryption (FHE) can provide strong privacy, but it clashes with transformer architectures, where rigid ciphertext packing demands expensive rotations, and deep polynomial circuits for nonlinearities necessitate costly bootstrapping. Although recent work has reported promising speed-ups, maintaining model accuracy is a challenge. We address these issues with ELLMo, a packing- and depth-aware encrypted transformer design. ELLMo introduces a novel matrix multiplication algorithm to reduce the ciphertext rotations. Further, head-split and merge steps are fused into this new algorithm at no additional cost. To reduce the depth of nonlinear layers, our contributions, Statistical-max Softmax and DelayNorm, help bypass deep comparison trees and homomorphic divisions to reduce bootstrapping by up to 46%. On encrypted BERT-Tiny, ELLMo achieves a $1.4\times$ speedup over state-of-the-art baselines with 0-1.5% accuracy loss across SST-2, MRPC, and RTE downstream tasks.
 ]]></content:encoded>
 <pubDate>Sat, 07 Feb 2026 02:28:23 +0000</pubDate>
-<pubDate>Sat, 07 Feb 2026 02:28:23 +0000</pubDate>
 </item>
-
 <item>
 <title>Identity-Based Matchmaking Encryption with Enhanced Privacy Against Chosen-Ciphertext Attacks</title>
 <link>https://eprint.iacr.org/2023/1435</link>
@@ -15779,77 +15816,6 @@ Anonymous Broadcast Channels (ABCs) allow a group of clients to announce message
 In this paper, we describe the design, implementation, and evaluation of ZIPNet, an anonymous broadcast channel that 1) scales to hundreds of anytrust servers by minimizing the computational costs of each server, 2) substantially reduces the servers’ bandwidth costs by outsourcing the aggregation of client messages to untrusted (for privacy) infrastructure, and 3) supports cover traffic that is both cheap for clients to produce and for servers to handle.
 ]]></content:encoded>
 <pubDate>Wed, 31 Jul 2024 14:12:32 +0000</pubDate>
-</item>
-<item>
-<title>A short-list of pairing-friendly curves resistant to the Special TNFS algorithm at the 192-bit security level</title>
-<link>https://eprint.iacr.org/2024/1223</link>
-<guid>https://eprint.iacr.org/2024/1223</guid>
-<content:encoded><![CDATA[
-<div> 关键词：量子安全、公钥加密、后量子密码学、配对、192位安全级别
-
-文章概述：
-
-本文旨在提供192位安全级别的配对综合研究。首先，通过文献回顾，作者筛选出所有可能的配对构造推荐，并从中提取出在效率和安全性方面最优秀的候选者。特别关注了针对高级特殊TNFS攻击的分析。研究不仅聚焦于配对计算本身，还考虑了在基于配对的应用中相关的额外操作，如配对组的哈希、因子清除和子群成员测试。
-
-研究方法包括使用RELIC密码工具库实现所有功能，以识别在192位安全级别下最高效的配对实现，并提供了详细的实验结果。
-
-总结：
-
-本文进行了一项深入的研究，旨在确定192位安全级别的最佳配对方案。通过广泛的文献回顾，作者筛选并评估了一系列配对构造，着重于它们的效率和安全性。研究不仅局限于配对计算，还涵盖了与配对应用相关的其他关键操作，如哈希到配对组、因子清除和子群成员测试。通过实施RELIC工具库中的所有功能，研究最终确定了在192位安全级别下最为高效的一系列配对实现，并提供了详尽的实验数据，为未来基于配对的加密技术提供了重要的参考。 <div>
-For more than two decades, pairings have been a fundamental tool for designing elegant cryptosystems, varying from digital signature schemes to more complex privacy-preserving constructions. However, the advancement of quantum computing threatens to undermine public-key cryptography. Concretely, it is widely accepted that a future large-scale quantum computer would be capable to break any public-key cryptosystem used today, rendering today's public-key cryptography obsolete and mandating the transition to quantum-safe cryptographic solutions. This necessity is enforced by numerous recognized government bodies around the world, including NIST which initiated the first open competition in standardizing post-quantum (PQ) cryptographic schemes, focusing primarily on digital signatures and key encapsulation/public-key encryption schemes. Despite the current efforts in standardizing PQ primitives, the landscape of complex, privacy-preserving cryptographic protocols, e.g., zkSNARKs/zkSTARKs, is at an early stage. Existing solutions suffer from various disadvantages in terms of efficiency and compactness and in addition, they need to undergo the required scrutiny to gain the necessary trust in the academic and industrial domains. Therefore, it is believed that the migration to purely  quantum-safe cryptography would require an intermediate step where current classically secure protocols and quantum-safe solutions will co-exist. This is enforced by the report of the Commercial National Security Algorithm Suite version 2.0, mandating transition to quantum-safe cryptographic algorithms by 2033 and suggesting to incorporate ECC at 192-bit security in the meantime. To this end, the present paper aims at providing a comprehensive study on pairings at 192-bit security level. We start with an exhaustive review in the literature to search for all possible recommendations of such pairing constructions, from which we extract the most promising candidates in terms of efficiency and security, with respect to the advanced Special TNFS attacks. Our analysis is focused, not only on the pairing computation itself, but on additional operations that are relevant in pairing-based applications, such as hashing to pairing groups, cofactor clearing and subgroup membership testing. We implement all functionalities of the most promising candidates within the RELIC cryptographic toolkit in order to identify the most efficient pairing implementation at 192-bit security and provide extensive experimental results.
-]]></content:encoded>
-<pubDate>Wed, 31 Jul 2024 07:56:18 +0000</pubDate>
-</item>
-<item>
-<title>Delegatable Anonymous Credentials From Mercurial Signatures With Stronger Privacy</title>
-<link>https://eprint.iacr.org/2024/1216</link>
-<guid>https://eprint.iacr.org/2024/1216</guid>
-<content:encoded><![CDATA[
-<div> 关键词：匿名凭证、可委派、隐私保护、梅尔库里亚尔签名、撤销机制
-
-文章主要探讨了可委派匿名凭证（Delegatable Anonymous Credentials，DACs）的隐私问题及解决方案。作者首先指出了现有基于梅尔库里亚尔签名的DACs设计中存在隐私缺陷，即如果恶意发行者参与了诚实用户的委托链，该恶意发行者能够检测到这一事实并识别具体参与者的身份。为解决这一问题，作者提出了一种新的梅尔库里亚尔签名方案，该方案提供了敌对手公共密钥类隐藏特性，使得即使敌对手签发者参与了委托链，也无法识别这一事实。这一特性通过引入结构化公共参数实现，每个层级的参数都包含强隐私功能。同时，为了克服设置这些参数产生的陷阱门对隐私应用的负面影响，作者利用零知识证明系统中的可更新结构化参考字符串技术进行了改进。
-
-此外，文章还提出了一个简化的方法来实现基于Crites和Lysyanskaya（CL型）DACs的撤销机制，即使用撤销令牌的概念。这种方法不仅适用于本文提出的DAC方案，而且可以通用地应用于任何CL型DAC系统。撤销机制是匿名凭证系统中被忽视但极其重要的功能之一，它的实现有助于使DAC方案更加吸引实际应用。
-
-总结:
-本文首先揭示了现有基于梅尔库里亚尔签名的可委派匿名凭证设计中存在的隐私问题，即恶意发行者能够检测其参与了诚实用户的委托链。为解决这一问题，作者提出了一种新的梅尔库里亚尔签名方案，通过引入结构化公共参数和利用零知识证明系统的可更新结构化参考字符串技术，实现了敌对手公共密钥类隐藏特性，有效防止了恶意发行者的检测。此外，文章还提出了一个简化的方法来实现撤销机制，该方法不仅适用于本文的DAC方案，而且可以通用地应用于任何基于Crites和Lysyanskaya的DAC系统。这一撤销机制的实现是匿名凭证系统中不可或缺的功能，有助于提高DAC方案的实际应用价值。 <div>
-Delegatable anonymous credentials (DACs) are anonymous credentials that allow a
-root issuer to delegate their credential-issuing power to secondary issuers
-who, in turn, can delegate further. This delegation, as well as credential
-showing, is carried out in a privacy-preserving manner, so that credential
-recipients and verifiers learn nothing about the issuers on the delegation
-chain.  One particularly efficient approach to constructing DACs is due to
-Crites and Lysyanskaya (CT-RSA'19), based on mercurial signatures, which is a
-type of equivalence-class signatures. In contrast to previous approaches, this
-design is conceptually simple and does not require extensive use of
-non-interactive zero-knowledge proofs. Unfortunately, the ``CL-type'' DAC
-schemes proposed so far have a privacy limitation: if an adversarial issuer
-(even an honest-but-curious one) was part of an honest user's delegation chain,
-the adversary will be able to detect this fact (and identify the specific
-adversarial issuer) when an honest user shows its credential.  This is because
-underlying mercurial signature schemes allow the owner of a secret key to
-detect when his key was used in a delegation chain.
-
-In this paper we show that it is possible to construct CL-type DACs that does
-not suffer from this privacy issue.  We give a new mercurial signature scheme
-that provides adversarial public key class hiding; i.e. even if an adversarial
-signer participated in the delegation chain, the adversary won't be able to
-identify this fact. This is achieved by introducing structured public
-parameters which for each delegation level, enabling strong privacy features in
-DAC. Since the setup of these parameters also produces trapdoors that are
-problematic in privacy applications, we show how to overcome this problem by
-using techniques from updatable structured reference string in zero-knowledge
-proof systems (Groth et al. CRYPTO'18).
-
-In addition, we propose a simple way to realize revocation for CL-type DACs via
-the concept of revocation tokens. While we showcase this approach to revocation
-using our DAC scheme, it is generic and can be applied to any CL-type DAC
-system. Revocation is a feature that is largely unexplored and notoriously hard
-to achieve for DACs. However as it is  a vital feature for any anonymous
-credential system, this can help to make DAC schemes more attractive for
-practical applications.
-]]></content:encoded>
-<pubDate>Mon, 29 Jul 2024 17:07:57 +0000</pubDate>
 </item>
 </channel>
 </rss>
