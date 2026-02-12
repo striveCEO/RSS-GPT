@@ -5,17 +5,55 @@
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
 <item>
+<title>RAGtime-PIANO: Efficient Secure Remote RAG</title>
+<link>https://eprint.iacr.org/2026/231</link>
+<guid>https://eprint.iacr.org/2026/231</guid>
+<content:encoded><![CDATA[
+
+Retrieval Augmented Generation (RAG) can enhance the performance of Large Language Models (LLMs) when used in conjunction with a comprehensive knowledge database. However, the space required to store the necessary information can be taxing when RAG is used locally. As such, the concept of RAG-as-a-Service (RaaS) has emerged, in which third-party servers can be used to process client queries via an external database. Unfortunately, using such a service would expose the client's query to a third party, making the product unsuitable for processing sensitive queries. Our scheme ensures that throughout the entire RAG processing, neither the query, any distances, nor retrieval information is known to the database hosting server. Using a two-pronged approach, we employ Fully Homomorphic Encryption (FHE) and Private Information Retrieval (PIR) to ensure complete security during RAG processing. FHE is used to maintain privacy during initial query processing, during which the query embedding is encrypted and sent to the server for k-means centroid scoring to obtain a similarity ranking. Then, a series of PIR queries is used to privately retrieve the centroid-associated embeddings and the top-ranked documents. A first-of-its-kind, lightweight, fully secure RAG protocol, RAGtime-PIANO, enables efficient secure RAG.
+]]></content:encoded>
+<pubDate>Wed, 11 Feb 2026 19:53:40 +0000</pubDate>
+<pubDate>Wed, 11 Feb 2026 19:53:40 +0000</pubDate>
+</item>
+<item>
+<title>Analysis and Vulnerabilities in zkLogin</title>
+<link>https://eprint.iacr.org/2026/227</link>
+<guid>https://eprint.iacr.org/2026/227</guid>
+<content:encoded><![CDATA[
+
+Zero-Knowledge Authorization (ZKA) systems allow users to prove possession of externally issued credentials (e.g., JSON Web Tokens) without revealing the credentials in full via the usage of Zero-Knowledge Proofs (ZKP). They are increasingly promoted as privacy-preserving and decentralized alternatives for authorization, and are already deployed in practice, with proposals for higher-stakes settings such as government access-control frameworks. In this work, we show that the security and privacy of zkLogin—the most widely deployed ZKA system—cannot only be reduced to the underlying ZKP. Instead, zkLogin critically depends on non-cryptographic assumptions about JWT/JSON parsing, issuer trust policy, architectural binding, and execution-environment integrity: none of which are specified or enforced as protocol-level properties.
+
+Via an analysis of the public documentation, source code and surveys on wallets and public endpoints, we identify three broad classes of vulnerabilities in zkLogin: (i) permissive, non-canonical claim extraction that admits malformed JWTs; (ii) transformation of short-lived authentication artifacts into durable authorization credentials without enforcing their issuance context (issuer, audience, subject and temporal validity binding), which enables cross-application impersonation and misuse—particularly in browser-based deployments that expose system’s material; and (iii) systemic centralization and privacy risks arising from reliance on a small set of issuers and outsourced proving infrastructure, including disclosure of user identity attributes to third-party services without consent. We note that none of the vulnerabilities identified are cryptographic in nature. Overall, our findings demonstrate that zkLogin inherits, and in some cases amplifies, fragilities of web-based authentication ecosystems, and that the security of the system cannot be reduced only to the ZKPs
+]]></content:encoded>
+<pubDate>Wed, 11 Feb 2026 11:13:10 +0000</pubDate>
+<pubDate>Wed, 11 Feb 2026 11:13:10 +0000</pubDate>
+</item>
+<item>
+<title>Optimizing Differential Privacy in Federated Analytics under Known Input Distributions</title>
+<link>https://eprint.iacr.org/2026/220</link>
+<guid>https://eprint.iacr.org/2026/220</guid>
+<content:encoded><![CDATA[
+
+Differential privacy (DP) is one of the most efficient tools for protecting the privacy of individual data holders under computation. This property guarantees that the computation outputs for every pair of adjacent input sets are statistically indistinguishable with respect to a given parameter ε, which is independent of the likelihood that specific inputs occur or not. While the distribution of input sets is generally unknown, in some use cases (approximate) information about it might be available. If the latter is the case, two adjacent inputs of one individual are sometimes already obfuscated by other inputs and the computation itself (i.e., without any additional noise). For example, if the sum of n independent and identically distributed uniformly random bits outputs approximately n/2, both values for the first bit remain (almost) equally likely for large n.
+
+Based on this observation, we present a new DP mechanism that uses an estimate of the input distribution to reduce the noise addition (compared to standard DP) and hence improves the accuracy of the output. We first explore this idea in the central model, where a single central party collects all data. Then, we provide a new technique (possibly of independent interest) that allows multiple entities to jointly generate reduced noise, using the property of infinite divisibility. This allows each party to individually add noise to their respective inputs, e.g., in Federated Analytics applications.
+
+We apply our theoretical results, both for the single and multi-party setups, to perform data analysis over human resources data from different subsidiaries within a corporate group. Our benchmarks show that our new DP mechanism provides more accurate outputs while retaining the same privacy level as state-of-the-art DP approaches using the geometric mechanism.
+]]></content:encoded>
+<pubDate>Tue, 10 Feb 2026 11:44:15 +0000</pubDate>
+<pubDate>Tue, 10 Feb 2026 11:44:15 +0000</pubDate>
+</item>
+
+<item>
 <title>Cavefish: Communication-Optimal Light Client Protocol for UTxO Ledgers</title>
 <link>https://eprint.iacr.org/2026/217</link>
 <guid>https://eprint.iacr.org/2026/217</guid>
 <content:encoded><![CDATA[
-
 Blockchain light clients (LCs) are agents with limited resources that are not able or not willing to maintain a fully validated copy of the ledger. They rely on service providers (SPs), typically full nodes, to access data required for tasks such as constructing transactions or interacting with off-chain applications.
 We introduce Cavefish, a novel protocol for UTxO-based platforms that enables LCs to submit transactions with minimal trust, storage, and computation overheads. Cavefish defines a two-party computation protocol between an LC and an SP, in which the LC specifies a transaction and the SP constructs it. The LC only receives a blinded version of the transaction, preventing modification and reuse, but allowing the LC to verify the transaction against the original intent. The SP is compensated inside the constructed transaction, eliminating the need for a separate protocol or exchange.
 To support this, we propose a variant of the predicate blind signature (PBS) scheme of Fuchsbauer and Wolf (Eurocrypt 2024), letting the SP obtain a valid signature on the unblinded transaction, which can then be posted on chain as the resulting signatures verify as standard Schnorr signatures. When combined with hierarchical deterministic (HD) wallets, the LC can provide a single public key and chain code to the SP, reducing communication footprint to a minimum. To further reduce overheads, our PBS variant relaxes the unlinkability requirements of traditional blind signatures in favor of efficiency as transactions only need to stay private until posted.
 On top of this, we define a multi-SP version of Cavefish that provides strong liveness and optimality guarantees. We benchmark the Non-interactive Argument of Knowledge (NArg) component of Cavefish on two major UTxO-based blockchains. Our results show that proving and verification times, as well as circuit sizes, are practical for real-world deployment.
 ]]></content:encoded>
-<pubDate>Tue, 10 Feb 2026 09:13:40 +0000</pubDate>
 <pubDate>Tue, 10 Feb 2026 09:13:40 +0000</pubDate>
 </item>
 <item>
@@ -23,13 +61,11 @@ On top of this, we define a multi-SP version of Cavefish that provides strong li
 <link>https://eprint.iacr.org/2026/216</link>
 <guid>https://eprint.iacr.org/2026/216</guid>
 <content:encoded><![CDATA[
-
 Secure three-party computation with an honest majority is one of the most efficient settings in secure computation, and has been widely adopted in practical applications. However, achieving malicious security in this setting incurs significant concrete efficiency penalties, which could be an order of magnitude worse than that of their semi-honest counterparts. Covert security offers a potential security-efficiency trade-off by detecting malicious behavior with a certain probability (such as $50\%$), deterring rational adversaries through the risk of detection and loss of credibility. Yet, existing covert security research primarily focuses on two-party or general $n$-party protocols in the dishonest-majority setting, with limited progress toward efficient three-party solutions. 
 
 
 This work presents the first comprehensive framework, $\mathsf{ECHO}$, for covertly secure, honest-majority three-party computation with applications to privacy-preserving machine learning. We systematically explore the design space of cheating detection and cheater identification techniques, and propose a suite of novel protocols for both arithmetic and Boolean circuits. Each protocol is engineered for a distinct performance goal: minimal online latency, high end-to-end efficiency, or low communication. Notably, for arithmetic circuits over rings, we introduce a protocol leveraging asymmetric message authentication codes, achieving an online phase that is only $1.26\times$ slower than the semi-honest baseline, over three times faster than its maliciously secure counterpart. For Boolean circuits, our novel cut-and-choose-based method outperforms the best previous maliciously secure protocol by a factor of five. In practical PPML benchmarks, our framework achieves near semi-honest performance while delivering up to $8\times$ speedup over maliciously secure protocols on real-world tasks.
 ]]></content:encoded>
-<pubDate>Tue, 10 Feb 2026 08:40:58 +0000</pubDate>
 <pubDate>Tue, 10 Feb 2026 08:40:58 +0000</pubDate>
 </item>
 <item>
@@ -37,15 +73,12 @@ This work presents the first comprehensive framework, $\mathsf{ECHO}$, for cover
 <link>https://eprint.iacr.org/2026/213</link>
 <guid>https://eprint.iacr.org/2026/213</guid>
 <content:encoded><![CDATA[
-
 Fully Homomorphic Encryption (FHE) allows computation on encrypted data without decrypting it. In theory, FHE makes privacy-preserving machine learning possible. In practice, however, it remains impractically slow for real workloads. A major source of slowdown is bootstrap operations; in CKKS, a popular FHE scheme for tensor workloads, the slowdown is compounded by scale management and rescale operations.  
 
 FHE compilers aim to make bootstrap placement and scale management efficient and easy by compiling high-level programs into low-level, optimized FHE computations. Unfortunately, existing approaches miss crucial optimization opportunities because they overlook a key property of CKKS programs: bootstrap and rescale placement are fundamentally coupled through the level budget. In this paper, we present Orbit, an FHE compiler that jointly optimizes bootstrap and rescale placement through a novel Integer Linear Programming (ILP) formulation that reasons about both ciphertext level and scale constraints. To make this formulation tractable for end-to-end programs, we introduce three techniques that reduce ILP complexity while preserving optimality. Across five convolutional neural networks and multiple cryptographic parameter configurations, Orbit achieves a geometric mean speedup up to 1.19× over DaCapo, 1.73× over Orion, and 1.52× over ReSBM, keeps compilation under 6 minutes, and retains model accuracy within 0.3% of plaintext execution.
 ]]></content:encoded>
 <pubDate>Tue, 10 Feb 2026 03:24:47 +0000</pubDate>
-<pubDate>Tue, 10 Feb 2026 03:24:47 +0000</pubDate>
 </item>
-
 <item>
 <title>zkAgent: Verifiable Agent Execution via One-Shot Complete LLM Inference Proof</title>
 <link>https://eprint.iacr.org/2026/199</link>
@@ -15758,64 +15791,6 @@ Biometric authentication eliminates the need for users to remember secrets and s
 Our solutions employ a helper server and use strong threat models, where a client is always assumed to be malicious, while the helper server can be semi-honest or malicious. We also determined that standard secure multi-party computation security definitions are insufficient to properly demonstrate security in the two-phase (enrollment and authentication) entity authentication application. We thus extend the model and formally show security in the multi-phase setting, where information can flow from one phase to another and the set of participants can change between the phases. We implement our constructions and show that they exhibit practical performance for authentication in real time.
 ]]></content:encoded>
 <pubDate>Thu, 04 Apr 2024 01:43:02 +0000</pubDate>
-</item>
-<item>
-<title>Competitive Policies for Online Collateral Maintenance</title>
-<link>https://eprint.iacr.org/2024/1022</link>
-<guid>https://eprint.iacr.org/2024/1022</guid>
-<content:encoded><![CDATA[
-<div> 关键词：区块链、层二协议、扩容、在线策略、竞对性分析
-
-总结:
-本文探讨了在区块链技术中层二协议的挑战与解决方案。主要关注如何优化层二协议中的抵押品和钱包管理，以提高交易效率并确保安全性。研究首先提出了一个通用模型，描述了一个实体在链上持有抵押品C的情况下，决定是否结算或放弃每笔新进交易的策略，以及何时补充C的政策。随后，研究引入了一个离散模型，将C分为k个等额的钱包，当某个钱包满载无法处理更多交易时，将自动补充。
-
-文章设计了多种在线策略来处理上述模型中的问题，并通过与具有完整未来交易流知识的理想（离线）策略进行比较，评估这些在线策略的性能。这是首次在区块链背景下研究和制定针对抵押品和钱包管理的在线竞争性策略，对于提升层二协议的效率和用户体验具有重要意义。通过优化策略，可以实现更高的价值结算，减少交易费用，并增强整体网络的安全性。 <div>
-Layer-two blockchain protocols emerged to address scalability issues related to fees, storage cost, and confirmation delay of on-chain transactions. They aggregate off-chain transactions into a fewer on-chain ones, thus offering immediate settlement and reduced transaction fees. To preserve security of the underlying ledger, layer-two protocols often work in a collateralized model; resources are committed on-chain to backup off-chain activities. A fundamental challenge that arises in this setup is determining a policy for establishing, committing, and replenishing the collateral in a way that maximizes the value of settled transactions.
-
-In this paper, we study this problem under two settings that model collateralized layer-two protocols. The first is a general model in which a party has an on-chain collateral $C$ with a policy to decide on whether to settle or discard each incoming transaction. The policy also specifies when to replenish $C$ based on the remaining collateral value. The second model considers a discrete setup in which $C$ is divided among $k$ wallets, each of which is of size $C/k$, such that when a wallet is full, and so cannot settle any incoming transactions, it will be replenished. We devise several online policies for these models, and show how competitive they are compared to optimal (offline) policies that have full knowledge of the incoming transaction stream. To the best of our knowledge, we are the first to study and formulate online competitive policies for collateral and wallet management in the blockchain setting.
-]]></content:encoded>
-<pubDate>Mon, 24 Jun 2024 20:06:41 +0000</pubDate>
-</item>
-<item>
-<title>PEReDi: Privacy-Enhanced, Regulated and Distributed Central Bank Digital Currencies</title>
-<link>https://eprint.iacr.org/2022/974</link>
-<guid>https://eprint.iacr.org/2022/974</guid>
-<content:encoded><![CDATA[
-<div> 关键词：中央银行数字货币（CBDCs）、异步模型、分布式构造、隐私保护、监管友好
-
-总结:
-
-本文探讨了中央银行数字货币（CBDCs）在同时满足隐私性和监管友好性两个需求上的挑战。CBDCs旨在提供物理现金的数字替代品，但其设计需要在保护用户隐私与满足反洗钱（AML）、反恐融资（CFT）等法规要求之间找到平衡。为解决这一难题，文章提出了一种新的异步模型和高效构建方案，首次实现了同时满足这两方面需求的目标。
-
-该方案不仅确保了CBDC的隐私性，避免了金融监控问题，还提供了必要的功能以辅助遵守各种金融法规，如客户识别（KYC）、反洗钱（AML）和恐怖主义融资（CFT）。此外，该方案采用分布式架构，提高了系统的健壮性，即使部分节点被恶意控制，系统整体性能也能保持稳定。
-
-文章还详细介绍了如何使用合适的加密工具防止中间人攻击，展示了一种新型的追踪机制，相比已知技术显著提升了性能。令人意外的是，该方案能够通过乐观执行路径实现支付过程中的拜占庭一致性或广播，从而优化通信模式和开销。
-
-最后，该CBDC概念在通用组合（UC）框架下得以表达和实现，为CBDC嵌入更大的金融生态系统提供了模块化和安全的方法。这种设计不仅确保了CBDC的安全性，还提高了其在复杂金融环境中的适应性，为未来的数字货币发展提供了重要的理论和技术支撑。 <div>
-Central Bank Digital Currencies (CBDCs) aspire to offer a digital replacement for physical cash and as such need to tackle two fundamental requirements that are in conflict. On the one hand, it is desired they are private so that a financial “panopticon” is avoided, while on the other, they should be regulation friendly in the sense of facilitating any threshold-limiting, tracing, and counterparty auditing functionality that is necessary to comply with regulations such as Know Your Customer (KYC), Anti Money Laundering (AML) and Combating Financing of Terrorism (CFT) as well as financial stability considerations. 
-In this work, we put forth a new asynchronous model for CBDCs and an efficient construction that, for the first time, fully addresses these issues simultaneously. Moreover, recognizing the importance of avoiding a single point of failure, our construction is distributed so that all its properties can withstand a suitably bounded entities getting corrupted by an adversary. Achieving all the above properties efficiently is technically involved; among others, our construction uses suitable cryptographic tools to thwart man-in-the-middle attacks, it showcases a novel traceability mechanism with significant performance gains compared to previously known techniques and, perhaps surprisingly, shows how to obviate Byzantine agreement or broadcast from the optimistic execution path of a payment, something that results in an essentially optimal communication pattern and communication overhead. We demonstrate the efficiency of our payment system by presenting detailed computation and communication costs. Going beyond “simple” payments, we also discuss how our scheme can facilitate one-off large transfers complying with Know Your Transaction (KYT) disclosure requirements. Our CBDC concept is expressed and realized in the Universal Composition (UC) framework providing in this way a modular and secure way to embed it within a larger financial ecosystem.
-]]></content:encoded>
-<pubDate>Fri, 29 Jul 2022 23:15:35 +0000</pubDate>
-</item>
-<item>
-<title>ZIPNet: Low-bandwidth anonymous broadcast from (dis)Trusted Execution Environments</title>
-<link>https://eprint.iacr.org/2024/1227</link>
-<guid>https://eprint.iacr.org/2024/1227</guid>
-<content:encoded><![CDATA[
-<div> 关键词：ZIPNet、匿名广播通道（ABCs）、服务器计算成本、服务器带宽成本、盖流量成本
-
-总结: 
-本文介绍了ZIPNet的设计、实现与评估，它是一个针对任何信任服务器的可扩展匿名广播通道。主要创新点包括：
-1. **优化服务器计算成本**：通过减少每个服务器的计算负担，ZIPNet允许其支持成百上千的服务器节点，从而提高了系统的整体效率和可扩展性。
-2. **降低服务器带宽成本**：通过将客户端消息的聚合任务外包给非受信任的基础设施，ZIPNet显著减少了服务器端的带宽消耗。这种策略既保障了隐私性，又提高了系统性能。
-3. **支持经济的盖流量**：ZIPNet设计了机制，使得生成和处理盖流量的成本对客户端和服务器来说都相对较低，这有助于增强匿名广播通道的实用性和吸引力。
-
-综上所述，ZIPNet通过一系列技术手段，成功地解决了当前匿名广播通道中面临的关键问题，如服务器计算与带宽成本高、盖流量成本高昂等，为低带宽环境下的应用提供了更为高效、经济和私密的解决方案。 <div>
-Anonymous Broadcast Channels (ABCs) allow a group of clients to announce messages without revealing the exact author. Modern ABCs operate in a client-server model, where anonymity depends on some threshold (e.g., 1 of 2) of servers being honest. ABCs are an important application in their own right, e.g., for activism and whistleblowing. Recent work on ABCs (Riposte, Blinder) has focused on minimizing the bandwidth cost to clients and servers when supporting large broadcast channels for such applications. But, particularly for low bandwidth settings, they impose large costs on servers, make cover traffic costly, and make volunteer operators unlikely.
-
-In this paper, we describe the design, implementation, and evaluation of ZIPNet, an anonymous broadcast channel that 1) scales to hundreds of anytrust servers by minimizing the computational costs of each server, 2) substantially reduces the servers’ bandwidth costs by outsourcing the aggregation of client messages to untrusted (for privacy) infrastructure, and 3) supports cover traffic that is both cheap for clients to produce and for servers to handle.
-]]></content:encoded>
-<pubDate>Wed, 31 Jul 2024 14:12:32 +0000</pubDate>
 </item>
 </channel>
 </rss>
