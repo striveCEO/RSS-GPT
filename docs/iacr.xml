@@ -4,12 +4,12 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+
 <item>
 <title>Perfect 2-Party Computation from Additive Somewhat Homomorphic Encryption</title>
 <link>https://eprint.iacr.org/2024/273</link>
 <guid>https://eprint.iacr.org/2024/273</guid>
 <content:encoded><![CDATA[
-
 We present protocols where one entity, the server, evaluates a circuit with encrypted inputs from the second party, the client.
 We give secret key somewhat homomorphic additive schemes where the client has perfect privacy (server is computationally unbounded). 
 Our scheme is somewhat homomorphic additive and we extend it to support multiplication. The server handles circuit multiplication gates by sending the multiplicands to the client which does the multiplication and updates the decryption key so that the original ciphertext vector includes the encrypted multiplication gate outputs. The key idea for client privacy is the permutation table which consists of rows of vectors modulo a prime integer
@@ -22,14 +22,12 @@ We give a 2-party computation (2PC) protocol that also incorporates server input
 Server privacy only holds against a computationally bounded adversary since it depends on the hardness of the HSSP and the DDH (Decisional Diffie Hellman Assumption). We leverage the Castagnos Laguillaumie linear homomorrphic public key encryption for setup. The 2PC protocol maintains circuit privacy except for leaking the number of multiplication gates to the client. Scaling the 2PC protocol via separate encryption parameters for smaller subcircuits allows the ciphertext size to remain constant as circuit size grows.
 ]]></content:encoded>
 <pubDate>Sun, 18 Feb 2024 23:20:46 +0000</pubDate>
-<pubDate>Sun, 18 Feb 2024 23:20:46 +0000</pubDate>
 </item>
 <item>
 <title>PAC-Private Databases</title>
 <link>https://eprint.iacr.org/2026/238</link>
 <guid>https://eprint.iacr.org/2026/238</guid>
 <content:encoded><![CDATA[
-
 As data collection and sharing becomes more prevalent, quantifying leakage about released data is an increasingly crucial privacy issue. Prior work in private database analytics demonstrates how to provide strong theoretical privacy guarantees through differential privacy (DP). However, these techniques are often limited to specific queries; to the best of our knowledge, among the 19 queries in the TPC-H benchmark which do not directly leak customer information, prior work in DP can handle at most 9 queries, without additional analyst effort.
 
 In this work, we apply the recently-proposed Probably Approximately Correct (PAC)  Privacy mechanism in order to provide a black-box technique to privatize general SQL queries against membership inference attacks. Naively applying PAC Privacy would allow us to privatize any individual query. However, databases are an interactive process: a user queries the database, views the response, and then chooses their next query. Prior work in PAC Privacy cannot provide any theoretical guarantees in this setting; instead, users would be required to provide all the queries a priori, which is a fundamental usability limitation. We construct the first algorithm to allow users to query the database adaptively and prove that algorithmic modifications via independent randomness provide automatic privatization guarantees.
@@ -37,9 +35,7 @@ In this work, we apply the recently-proposed Probably Approximately Correct (PAC
 Our privatization layer, PAC-DB, does not require any human analysis in order to privately return a response for a general SQL query. PAC-DB is compatible with any database management system and does not require a trusted data curator. We provide an open-source implementation, where we privatize all of the 19 queries in consideration from the TPC-H benchmark with customers as our privacy concern. We provide both relative errors and initial performance estimates.
 ]]></content:encoded>
 <pubDate>Thu, 12 Feb 2026 19:55:36 +0000</pubDate>
-<pubDate>Thu, 12 Feb 2026 19:55:36 +0000</pubDate>
 </item>
-
 <item>
 <title>RAGtime-PIANO: Efficient Secure Remote RAG</title>
 <link>https://eprint.iacr.org/2026/231</link>
@@ -15664,83 +15660,6 @@ Private Set Intersection (PSI) enables a sender and a receiver to jointly comput
 In this paper, we revisit the DPSI definition and formalize its ideal functionality. We identify the key desiderata required by PSI-related tools to construct DPSI and propose two frameworks to construct efficient DPSI protocols. The first one generalizes the idea of existing DPSI, showing that any circuit-PSI can be used to construct DPSI. We obtain a more efficient DPSI protocol by plugging the SOTA circuit-PSI protocol in the framework. The second one helps to obtain a more efficient DPSI protocol based on the multi-query Reverse Private Membership Test (mqRPMT) that was previously used to construct Private Set Operation (PSO). However, mqRPMT additionally leaks the intersection size to the sender. We bound such leakage using differential privacy by padding random dummy items in input sets. We implement numerous constructions based on our frameworks. Experiments show that our protocols significantly outperform the existing DPSI construction, 2.5-22.6$\times$ more communication efficient and up to 110.5-151.8$\times$ faster. Our work also shows a new use case for mqRPMT besides obtaining PSO.
 ]]></content:encoded>
 <pubDate>Mon, 05 Aug 2024 02:44:49 +0000</pubDate>
-</item>
-<item>
-<title>XHash: Efficient STARK-friendly Hash Function</title>
-<link>https://eprint.iacr.org/2023/1045</link>
-<guid>https://eprint.iacr.org/2023/1045</guid>
-<content:encoded><![CDATA[
-<div> 关键词：零知识证明、哈希函数、ZK-STARK、Marvellous设计策略、XHash
-
-总结:
-
-本文提出了一种名为XHash的高性能哈希函数，专为ZK-STARKs设计，其性能超越了Rescue和Poseidon，成为STARKs中最有效的ZK友好哈希函数。XHash在CPU架构上的平均速度约为3μs，比Marvellous家族中最快的RPO快约2.5倍。从安全性角度看，XHash继承了Marvellous设计策略的安全性，并分析了其对当前代数攻击的抵抗能力。此外，文章还提出了针对代数攻击的新安全论证类型，基于一个合理且明确的新假设。最后，XHash为Polygon Miden VM提供了标准版本，其AIR复杂度为504，相比Rescue的672和Poseidon的1176，更具竞争力。
-
-文章详细探讨了XHash的设计与性能优化，强调了其在零知识证明系统中的应用潜力，特别是在ZK-STARKs环境下的高效能表现。同时，XHash的安全性分析表明，它能够抵御当前的代数攻击手段，进一步增强了其在实际应用中的可靠性。此外，通过引入新的安全论证方法，文章为评估哈希函数的安全性提供了一种创新途径，这在提升整个零知识证明系统的安全性方面具有重要意义。最后，针对特定虚拟机环境的优化设计，使得XHash不仅在理论上表现出色，而且在具体应用中也具有较高的实用性。 <div>
-Zero-knowledge proofs are widely used in real-world applications
-for authentication, access control, blockchains, and cryptocurren-
-cies, to name a few. A core element in zero-knowledge proof systems
-is the underlying hash function, which plays a vital role in the effi-
-ciency of the proof system. While the traditional hash functions,
-such as SHA3 or BLAKE3 are efficient on CPU architectures, they
-perform poorly within zero-knowledge proof systems. This is pri-
-marily due to the requirement of these systems for hash functions
-that operate efficiently over finite fields of large prime order as well
-as binary fields. To address this challenge, a new paradigm called
-Arithmetization-Orientation has emerged. These designs are tai-
-lored to improve the efficiency of hashing within zero-knowledge
-proof systems while providing reliable security guarantees.
-In this work, we propose XHash, which is a high-performance
-hash function designed for ZK-STARKs and is inspired by the Mar-
-vellous design strategy. When using Algebraic Intermediate Repre-
-sentation, XHash outperforms Rescue and Poseidon as the most im-
-portant ZK-friendly hash functions for STARKs. Moreover, XHash
-has a competitive performance on CPU architectures with an av-
-erage speed of ≈ 3𝜇𝑠 for 2-to-1 hashing. Compared to RPO, which
-is the fastest hash function of the Marvellous family, XHash per-
-forms ≈ 2.5 times faster on CPU. From the security perspective,
-XHash inherits the security of the Marvellous design strategy, and
-we analyze its security against state-of-the-art algebraic attacks.
-Additionally, we propose a new type of security argument against
-algebraic attacks that relies on a single well-defined and reasonable
-conjecture of a novel type. Finally, we specify a standard version of
-XHash designed for Polygon Miden VM, with its AIR complexity
-being 504, compared to Rescue with an AIR complexity of 672, and
-Poseidon with an AIR complexity of 1176.
-]]></content:encoded>
-<pubDate>Tue, 04 Jul 2023 14:23:33 +0000</pubDate>
-</item>
-<item>
-<title>Route Discovery in Private Payment Channel Networks</title>
-<link>https://eprint.iacr.org/2021/1539</link>
-<guid>https://eprint.iacr.org/2021/1539</guid>
-<content:encoded><![CDATA[
-<div> 关键词：私有信道网络、路由发现、隐私保护、多党计算、效率
-
-总结:
-
-本文研究了私有信道网络中的路由发现问题。首先，文章定义了在此环境下理想的隐私标准，并指出通过多党计算实现这一标准的协议存在，但其效率低下，因为整个网络都参与路径发现过程。
-
-接着，文章提出了一种具有较弱隐私保证但更高效性的路由协议。这些协议允许路由发现主要由网络中一小部分节点完成，同时泄露了一些关于拓扑结构和平衡的信息，而这些信息超出交易执行所需。
-
-核心理念是，发送者和接收者同时广播消息，这些消息逐渐在整个网络中传播。一旦网络中的任何节点接收到两个消息，路径就被找到。第一种协议总是将消息发送给所有相邻节点，延迟与边费用成正比。第二种协议仅随机选择一个邻居发送消息，概率与其度数成正比。尽管第一种协议总能找到最便宜的路径，但第二种可能无法做到这一点，但涉及的网络节点数量较少。
-
-此外，文章讨论了使用双线性映射来重新随机化广播消息的扩展，以提高隐私性。还提出了进一步改进隐私性的方法，如使用双线性映射。
-
-通过模拟研究，文章发现第一种协议通常涉及约12%的6376个节点，而第二种则仅触及约18个节点（不到0.3%），找到的路径成本大约是最佳路径成本的两倍。 <div>
-In this work, we are the first to explore route discovery in private channel networks.
-We first determine what ``ideal" privacy for a routing protocol means in this setting.  We observe that protocols achieving this strong privacy definition exist by leveraging (topology hiding) Multi-Party Computation but they are (inherently) inefficient as route discovery must involve the entire network.
-
-We then present protocols with weaker privacy guarantees but much better efficiency. In particular, route discovery typically only involves small fraction of the nodes but some information on the topology and balances -- beyond what is necessary for performing the transaction -- is leaked.
-
-The core idea is that both  sender and receiver gossip a message which then slowly propagates through the network, and the moment any node in the network receives both messages, a path is found. In our first protocol the message is always sent to all neighbouring nodes with a delay proportional to the fees of that edge. In our second protocol the message is only sent to one neighbour chosen randomly with a probability proportional to its degree. While the first instantiation always finds the cheapest path, the second might not, but it involves a smaller fraction of the network.
-
-% We discuss some extensions like employing bilinear maps so the gossiped messages can be re-randomized, making them unlikeable and thus improving privacy.
-We also discuss some extensions to further improve privacy by employing bilinear maps.
-
-Simulations of our protocols on the Lightning network topology (for random transactions and uniform fees) show that our first protocol (which finds the cheapest path) typically involves around 12\%  of the 6376 nodes, while the second only touches  around 18 nodes $(<0.3\%)$,  and the cost of the path that is found  is around twice the cost of  the optimal one.
-]]></content:encoded>
-<pubDate>Mon, 22 Nov 2021 11:36:25 +0000</pubDate>
 </item>
 </channel>
 </rss>
