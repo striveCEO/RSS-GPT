@@ -4,17 +4,16 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+
 <item>
 <title>Blockchain Stacking Fraud and Deterrence</title>
 <link>https://eprint.iacr.org/2026/259</link>
 <guid>https://eprint.iacr.org/2026/259</guid>
 <content:encoded><![CDATA[
-
 As crypto-assets become increasingly integrated into global financial systems, they are now employed to demonstrate solvency, establish creditworthiness, and satisfy wealth verification requirements for various financial and regulatory purposes. A fundamental challenge in these applications is proving that a given wallet address is controlled exclusively by a single legal entity, as fraudulent multiple claims can undermine the integrity of asset-based verification systems. 
 
 In this paper, we propose a binding of wallet address to legal identity that makes conflicting claims cryptographically inconsistent. In the main design, claimants post to a public, privacy-preserving bulletin board a zkSNARK that proves knowledge of both the private key and the address–identity binding without revealing either; proofs are structured so that duplicate claims for the same address are publicly detectable. When a shared bulletin board is not available, we introduce a self-deterrence proof: a zero-knowledge protocol in which producing two valid proofs for the same address under different legal identities would enable efficient extraction of the private key, creating a strong economic disincentive against double claiming. These cryptographic primitives provide effective countermeasures against blockchain stacking fraud attacks and enhance the reliability of crypto-assets in traditional financial applications, contributing to the broader integration of digital assets into established economic systems.
 ]]></content:encoded>
-<pubDate>Sat, 14 Feb 2026 08:46:08 +0000</pubDate>
 <pubDate>Sat, 14 Feb 2026 08:46:08 +0000</pubDate>
 </item>
 <item>
@@ -22,7 +21,6 @@ In this paper, we propose a binding of wallet address to legal identity that mak
 <link>https://eprint.iacr.org/2026/251</link>
 <guid>https://eprint.iacr.org/2026/251</guid>
 <content:encoded><![CDATA[
-
 Digital identity systems require mechanisms for verifiable, privacy-preserving presentations of user attestations. The trivial approach of utilizing selective disclosure by presenting individually signed attestations introduces persistent linkability that compromises user anonymity. Existing anonymous credential systems  come with practical drawbacks. Some depend on trusted setups, others require substantial modifications to an issuer’s established issuance flow.
 
 We propose an open, transparent, and lightweight anonymous credential design that addresses these limitations with the use of zero-knowledge proofs. Our construction is modular, requires no trusted setup and integrates with existing workflows without the need for substantial changes to existing cryptographic mechanisms, procedure overhauls, or hardware devices. It delivers unlinkability while maintaining broad applicability across heterogeneous digital-identity ecosystems and current verifiable credential standards.
@@ -32,9 +30,7 @@ To demonstrate practicality, we provide a proof-of-concept implementation and be
 OpenAC was purposely constructed to be compatible with the European Digital Identity Architecture and Reference Framework (EUDI ARF). In the appendix, we map EUDI ARF’s functional, privacy, and interoperability requirements, illustrating how OpenAC satisfies regulatory constraints while preserving strong user privacy.
 ]]></content:encoded>
 <pubDate>Fri, 13 Feb 2026 12:27:28 +0000</pubDate>
-<pubDate>Fri, 13 Feb 2026 12:27:28 +0000</pubDate>
 </item>
-
 <item>
 <title>Perfect 2-Party Computation from Additive Somewhat Homomorphic Encryption</title>
 <link>https://eprint.iacr.org/2024/273</link>
@@ -15647,49 +15643,6 @@ Unfortunately, existing  proof-of-knowledge protocols fail to demonstrate that a
 We introduce two practical CK schemes that use special-purpose hardware, specifically TEEs and off-the-shelf mining ASICs. We prove the security of these schemes and explore their practical deployment with a complete, end-to-end prototype with smart-contract verification that supports both. We show how CK can address encumbrance attacks identified in previous work. Finally, we introduce two new applications enabled by CK that involve proving ownership of blockchain assets.
 ]]></content:encoded>
 <pubDate>Sun, 15 Jan 2023 08:50:38 +0000</pubDate>
-</item>
-<item>
-<title>PROF: Protected Order Flow in a Profit-Seeking World</title>
-<link>https://eprint.iacr.org/2024/1241</link>
-<guid>https://eprint.iacr.org/2024/1241</guid>
-<content:encoded><![CDATA[
-<div> 关键词：PROF、分散式金融（DeFi）、Proposer-Builder Separation (PBS)、最大可提取价值（MEV）、交易顺序操纵
-
-总结:
-
-本文介绍了针对分散式金融(DeFi)应用中面临的由交易顺序操纵导致的最大可提取价值(MEV)风险的一种解决方案——PROF系统。PROF旨在通过两个关键策略限制有害形式的MEV：
-
-1. **交易流保护**：PROF对一组私有输入的交易进行排序，并确保这一排序在整个区块生成过程中得以执行，防止交易顺序被操纵。
-
-2. **盈利性区块生产**：创建的交易组对于区块生产者来说具有利润性，确保这些交易能及时被包含在区块中。
-
-PROF系统具备与现有和未来PBS设计的兼容性，不增加额外的信任假设，执行效率高，延迟低。通过量化和定性分析，比较了PROF系统与现有解决方案的激励结构以及用户效益。此外，还报告了PROF交易的纳入可能性及其端到端实现的具体延迟时间。整体而言，PROF提供了一种在不牺牲系统性能的前提下，有效对抗MEV风险、保护用户利益的解决方案。 <div>
-Users of decentralized finance (DeFi) applications face significant risks from adversarial actions that manipulate the order of transactions to extract value from users. Such actions---an adversarial form of what is called maximal-extractable value (MEV)---impact both individual outcomes and the stability of the DeFi ecosystem. MEV exploitation, moreover, is being institutionalized through an architectural paradigm known Proposer-Builder Separation (PBS).
-
-This work introduces a system called PROF (PRotected Order Flow) that is designed to limit harmful forms of MEV in existing PBS systems. PROF aims at this goal using two ideas. First, PROF imposes an ordering on a set ("bundle") of privately input transactions and enforces that ordering all the way through to block production-preventing transaction-order manipulation. Second, PROF creates bundles whose inclusion is profitable to block producers, thereby ensuring that bundles see timely inclusion in blocks.
-
-PROF is backward-compatible, meaning that it works with existing and future PBS designs. PROF is also compatible with any desired algorithm for ordering transactions within a PROF bundle (e.g., first-come, first-serve, fee-based, etc.). It executes efficiently, i.e., with low latency, and requires no additional trust assumptions among PBS entities. We quantitatively and qualitatively analyze PROF’s incentive structure, and its utility to users compared with existing solutions. We also report on inclusion likelihood of PROF transactions, and concrete latency numbers through our end-to-end implementation.
-]]></content:encoded>
-<pubDate>Tue, 06 Aug 2024 01:14:16 +0000</pubDate>
-</item>
-<item>
-<title>Efficient Differentially Private Set Intersection</title>
-<link>https://eprint.iacr.org/2024/1239</link>
-<guid>https://eprint.iacr.org/2024/1239</guid>
-<content:encoded><![CDATA[
-<div> 关键词：Private Set Intersection (PSI), Differentially Private (DPSI), Fully Homomorphic Encryption (FHE), Reverse Private Membership Test (RPMT), Private Set Operation (PSO)
-
-<br />
-<br />总结:
-
-本文研究了如何在保护敏感信息的同时进行数据集交集的计算。首先，文章回顾并重新定义了差分隐私条件下的私有集合交集（DPSI），识别出构建高效DPSI协议所需的关键需求，并提出了两种构建高效DPSI协议的方法框架。第一种方法将现有的DPSI概念进行了扩展，表明任何电路PSI都可以用于构建DPSI，并通过插入当前最先进的电路PSI协议来获得更高效的DPSI协议。第二种方法利用多查询逆私密成员测试（mqRPMT）来构建私有集合操作（PSO），但mqRPMT会额外泄露交集大小给发送方。为解决此问题，文章通过在输入集中填充随机占位符项目以限制泄露，利用差分隐私原则对这种泄露进行了控制。
-
-实验结果显示，基于这两种方法构建的DPSI协议在通信效率和执行速度上都显著优于现有技术，分别是现有技术的2.5至22.6倍和110.5至151.8倍。此外，文章还展示了mqRPMT的新应用场景，除了用于获取PSO之外，还可以用于构建DPSI。这一工作不仅提高了DPSI协议的效率，还扩展了私有集合操作的使用场景，为数据安全与隐私保护提供了新的解决方案。 <div>
-Private Set Intersection (PSI) enables a sender and a receiver to jointly compute the intersection of their sets without disclosing other information about items not in the intersection. However, in many cases of joint data analysis, it is not just the items outside the intersection that are sensitive but the items within it. To protect such sensitive information, prior work presents a Differentially Private version of PSI (DPSI) based on a circuit-PSI using Fully Homomorphic Encryption. However, their concrete protocol is somewhat inefficient compared with the state-of-the-art (SOTA) circuit-PSI.
-
-In this paper, we revisit the DPSI definition and formalize its ideal functionality. We identify the key desiderata required by PSI-related tools to construct DPSI and propose two frameworks to construct efficient DPSI protocols. The first one generalizes the idea of existing DPSI, showing that any circuit-PSI can be used to construct DPSI. We obtain a more efficient DPSI protocol by plugging the SOTA circuit-PSI protocol in the framework. The second one helps to obtain a more efficient DPSI protocol based on the multi-query Reverse Private Membership Test (mqRPMT) that was previously used to construct Private Set Operation (PSO). However, mqRPMT additionally leaks the intersection size to the sender. We bound such leakage using differential privacy by padding random dummy items in input sets. We implement numerous constructions based on our frameworks. Experiments show that our protocols significantly outperform the existing DPSI construction, 2.5-22.6$\times$ more communication efficient and up to 110.5-151.8$\times$ faster. Our work also shows a new use case for mqRPMT besides obtaining PSO.
-]]></content:encoded>
-<pubDate>Mon, 05 Aug 2024 02:44:49 +0000</pubDate>
 </item>
 </channel>
 </rss>
