@@ -4,6 +4,54 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+<item>
+<title>Plug-and-play sanitization for TFHE</title>
+<link>https://eprint.iacr.org/2022/1438</link>
+<guid>https://eprint.iacr.org/2022/1438</guid>
+<content:encoded><![CDATA[
+
+Fully Homomorphic encryption allows the evaluation of any circuits over encrypted data while preserving the privacy of the data. However, without any additional properties, no guarantee is provided for the privacy of the circuits which are evaluated. 
+
+A sanitization algorithm allows to destroy all previous information about how a ciphertext was obtained, ensuring that the circuit which was evaluated remains secret. In this paper, we present two new techniques to randomize RLWE ciphertexts, and show how they can be used to achieve ciphertext sanitization for the TFHE scheme proposed by Chillotti et al. (Asiacrypt 2016), by modifying the bootstrapping procedure internally.
+
+Our first technique relies on a generalization of the strategy proposed by Bourse et al. (Crypto 2016) to the ring setting. Using a backward induction over the circuit size, we also improve on their proof technique to avoid randomization at each step of the computation, enabling faster randomization and smaller noise growth. While this first approach adapts well in theory, we show evidence that it fails to provide a practical solution and propose a second solution with more realistic parameters at the cost of using an additional public key.
+
+As an additional contribution, we improve on the prohibitive size of the public key by relaxing the circuit privacy property to its computational counterpart, and build an efficient public randomizer composed of an RLWE-based public key encryption with additional properties on the ciphertexts distribution. We show that this randomizer can be used in the soak-and-spin paradigm of Ducas and Stehlé (Eurocrypt 2016) as well, and that it yields a significant improvement, mainly in the size of the public key.
+
+As a proof of concept, we provide a C implementation of our sanitization strategy, which shows
+that a sanitized LWE ciphertext can be obtained almost for free compared to a bootstrapped LWE ciphertext assuming many discrete Gaussian samples at hand.
+]]></content:encoded>
+<pubDate>Fri, 21 Oct 2022 18:48:29 +0000</pubDate>
+<pubDate>Fri, 21 Oct 2022 18:48:29 +0000</pubDate>
+</item>
+<item>
+<title>Collusion-Minimized TLS Attestation Protocol for Decentralized Applications</title>
+<link>https://eprint.iacr.org/2026/277</link>
+<guid>https://eprint.iacr.org/2026/277</guid>
+<content:encoded><![CDATA[
+
+Transport Layer Security (TLS) attestation protocols are a key building block for decentralized applications that require authenticated off-chain data. However, existing Designed Commitment TLS (DCTLS) constructions rely on designated verifiers, which prevents public verifiability and enables prover–verifier collusion in on-chain settings.
+To address these limitations, we propose a collusion-minimized TLS attestation framework $\Pi_{\textsf{coll-min}}$ that enables jointly verifiable attestations with distributed verifiers. The framework combines two complementary components: a modified and exportable variant of DCTLS, denoted as dx-DCTLS, which enables third-party verification by replacing non-verifiable components with verifiable counterparts, and a decentralized validation layer based on distributed verifiable random functions (DVRF) and a threshold signature scheme (TSS). Together, these two components allow multiple verifiers to jointly validate TLS attestations while minimizing prover–verifier collusion. In this study, we formalize a threshold attestation unforgeability notion capturing adversarial behaviors in multi-verifier environments and prove security under standard assumptions. Specifically, by transitioning from independent multi-session validations, as commonly employed in decentralized oracle networks (DONs), to a unified and exportable attestation framework, we achieve a reduction in the prover complexity from $O(n)$ to $O(1)$. To evaluate practicality, we provide a prototype implementation of the DVRF–TSS component and a performance analysis of dx-DCTLS. The results show that the proposed framework remains efficient at high threshold sizes and introduces only modest additional overhead, demonstrating the feasibility of collusion-minimized and jointly verifiable TLS attestations for smart contract environments.
+]]></content:encoded>
+<pubDate>Mon, 16 Feb 2026 18:00:50 +0000</pubDate>
+<pubDate>Mon, 16 Feb 2026 18:00:50 +0000</pubDate>
+</item>
+<item>
+<title>Beyond the Linear Barrier: Secret Sharing for Evolving (Weighted) Threshold Access Structures with Poly-logarithmic Share Size</title>
+<link>https://eprint.iacr.org/2026/267</link>
+<guid>https://eprint.iacr.org/2026/267</guid>
+<content:encoded><![CDATA[
+
+Evolving secret sharing allows a dealer to share a secret message between a growing number of $n$ parties. Crucially, the dealer does not know an upper bound on $n$, neither it knows the access structure before party $n$ arrives; furthermore, the dealer is not allowed to update the shares of old parties.
+We construct new secret sharing schemes for so-called evolving (weighted) threshold access, in which the arrival of party $n$ determines the number of parties $t_n \le n$ that are required in order to reconstruct the secret. We also consider the more general case in which party $n$ has associated a weight $w_n$ with logarithmic size, and the authorized subsets of parties are those for which the sum of the corresponding weights exceeds the current threshold $t_n$. In particular, we obtain:
+- A secret sharing scheme for evolving threshold access structures with adaptive privacy in the plain model, and with share size $\mathsf{poly}(\lambda,\log n)$. This construction requires one-way functions (OWFs) and indistinguishability obfuscation (iO) for Turing machines.    
+- A secret sharing scheme for evolving weighted threshold access structures with adaptive privacy in the plain model, and with share size $\mathsf{poly}(\lambda,\log W_n)$ where $W_n$ is the sum of the weights up to party $n$. This construction requires OWFs and iO for Turing machines, and additionally assumes that the weights are fixed (i.e., cannot change over time).
+- A secret sharing scheme for evolving weighted threshold access structures with static privacy in the plain model, and with share size $\mathsf{poly}(\lambda,\log W_n)$. This construction allows the weight of old parties to change over time, but it requires somewhere statistically binding hash functions and achieves only static privacy.
+Previous constructions of secret sharing schemes for evolving (weighted) threshold access structures achieved (much worse) share sizes linear in $W_n$ (and in the security parameter) and, when considering adaptive privacy, they require the random oracle model.
+]]></content:encoded>
+<pubDate>Mon, 16 Feb 2026 07:44:12 +0000</pubDate>
+<pubDate>Mon, 16 Feb 2026 07:44:12 +0000</pubDate>
+</item>
 
 <item>
 <title>Blockchain Stacking Fraud and Deterrence</title>
