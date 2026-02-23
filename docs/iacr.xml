@@ -5,11 +5,56 @@
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
 <item>
+<title>Revisiting Beimel-Weinreb Weighted Threshold Secret Sharing Schemes</title>
+<link>https://eprint.iacr.org/2025/168</link>
+<guid>https://eprint.iacr.org/2025/168</guid>
+<content:encoded><![CDATA[
+
+A secret sharing scheme is a cryptographic primitive that allows a dealer to share a secret among a set of parties, so that only authorized subsets of them can recover it. In a weighted threshold secret sharing scheme, each party is assigned a weight according to its importance, and the authorized subsets are those in which the sum of their weights is at least the threshold value. 
+
+For those schemes, Beimel and Weinreb [IPL 2006] presented the best general constructions: The scheme with computational security has a total share size polynomial in $n$, while the scheme with perfect security has a total share size $n^{O(\log n)}$. However, these constructions require the use of shallow monotone sorting networks, which limits their practical use.
+
+In this work, we revisit weighted threshold secret sharing from a circuit-based perspective. By considering alternative circuits and formulas that avoid monotone sorting networks, we obtain substantial improvements in two directions.
+
+First, in the computational setting, we provide a computational scheme that is feasible in practice. Assuming the existence of one-way functions with security parameter $\lambda$, we show that any weighted threshold access structure over $n$ parties with threshold $\sigma$ admits a computational secret sharing scheme with share size $\lambda$, public information of size $O(\lambda n^2 \log \sigma)$, and a reconstruction procedure in which any authorized subset needs to download only $O(\lambda n \log \sigma)$ bits of public information. Notably, for weight distributions that arise in the most widely deployed blockchain networks, our construction reduces the total share size ranging from $300\times$ to $6700\times$ compared to the best previously known schemes.
+
+Second, extending these techniques, we obtain improved information-theoretic ramp weighted threshold secret sharing schemes. For any weights, threshold $\sigma$, and $\epsilon < 1$, we construct a $(\sigma,(1+\epsilon)\sigma)$-ramp weighted threshold scheme with share size $O\left((n/\epsilon) \log n\right)$, reducing the share size with respect to the state-of-the-art solutions.
+]]></content:encoded>
+<pubDate>Tue, 04 Feb 2025 15:31:08 +0000</pubDate>
+<pubDate>Tue, 04 Feb 2025 15:31:08 +0000</pubDate>
+</item>
+<item>
+<title>DualRing-PRF: Post-Quantum (Linkable) Ring Signatures from Legendre and Power Residue PRFs</title>
+<link>https://eprint.iacr.org/2024/985</link>
+<guid>https://eprint.iacr.org/2024/985</guid>
+<content:encoded><![CDATA[
+
+Ring signatures are one of the crucial cryptographic primitives used in the design of privacy-preserving systems. Such a signature scheme allows a signer to anonymously sign a message on behalf of a spontaneously formed group. It not only ensures the authenticity of the message but also conceals the true signer within the group. An important extension of ring signatures is linkable ring signatures, which prevent a signer from signing twice without being detected (under some constraints). Linkable ring signatures offer advantages in applications where full anonymity might jeopardise the intended purpose, such as privacy-oriented cryptocurrencies like Monero. 
+
+In this work, we introduce post-quantum ring signature (DualRing-PRF) and linkable ring signature (DualRingL-PRF) schemes whose security solely rely on symmetric-key primitives (namely, Legendre PRF and power residue PRF). Our construction of the ring signature departs from previous approaches with similar security assumptions, offering the most competitive signature sizes for small and medium-sized rings. In particular, for a ring size of 16, DualRing-PRF has a communication overhead 1.4 times smaller than the state-of-the-art scheme proposed by Goel et al. (PETS’21). Furthermore, we demonstrate the extension of DualRing-PRF to incorporate linkability and non-slanderability. Compared to the existing one-time traceable ring signature (a variant of linkable ring signature) by Scafuro and Zhang (ESORICS’21), our construction supports many-time signing and achieves significantly smaller signature sizes when ring size exceeds 16. This advantage becomes more pronounced as the ring size increases.
+]]></content:encoded>
+<pubDate>Tue, 18 Jun 2024 12:20:45 +0000</pubDate>
+<pubDate>Tue, 18 Jun 2024 12:20:45 +0000</pubDate>
+</item>
+<item>
+<title>Migrating Bitcoin and Ethereum Addresses to the Quantum Blockchain Era</title>
+<link>https://eprint.iacr.org/2026/352</link>
+<guid>https://eprint.iacr.org/2026/352</guid>
+<content:encoded><![CDATA[
+
+Recent advances in quantum computing threaten the cryptographic foundations of blockchain systems, including Bitcoin and Ethereum, which rely on elliptic-curve cryptography (ECC) for security. Algorithms such as Shor's algorithm can efficiently solve the discrete logarithm problem (DLP), enabling recovery of private keys from public keys. Existing funds, especially those tied to long-lived addresses or unspent coinbase outputs (such as Satoshi Nakamoto's bitcoins), and Ethereum externally owned accounts become vulnerable once large-scale quantum computers become available. While previous work has suggested various post-quantum signature schemes and migration strategies, no widely deployed, end-to-end, backward-compatible, and privacy-preserving migration mechanism has been presented for migrating legacy funds without revealing the corresponding classical public keys on-chain.
+
+In this paper, we present a complete framework that enables secure migration of both spent and unspent funds to a post-quantum security model, using a hybrid approach based on post-quantum signatures and quantum-resistant zero-knowledge proofs (ZKPs). By integrating classical and post-quantum cryptography with quantum-safe proofs, we protect blockchain systems against quantum-era adversaries while preserving asset security, protocol compatibility, and operational continuity. Our method supports two distinct migration scenarios (depending on whether public keys have been revealed) and applies uniformly to both Bitcoin's UTXO model and Ethereum's account-based model. We design zkSTARK circuits that prove knowledge of a witness linking a legacy address to a fresh PQ public key without disclosing the legacy private key. To enable decentralized and verifiable on-chain transitions, we propose new primitives (\texttt{OP\_CHECKQUANTUMSIG}, \texttt{OP\_CHECKSTARKPROOF}) for Bitcoin and Ethereum, enabling verification of quantum-safe proofs and signatures. Our work and implementation \footnote{\href{https://github.com/skardas/pq_bitcoin}{\texttt{github.com/skardas/pq\_bitcoin}}} provides a practical and efficient framework for securing legacy blockchain assets against quantum-era threats, while preserving backward compatibility and availability.
+]]></content:encoded>
+<pubDate>Sat, 21 Feb 2026 21:58:03 +0000</pubDate>
+<pubDate>Sat, 21 Feb 2026 21:58:03 +0000</pubDate>
+</item>
+
+<item>
 <title>Provable Security and Privacy Analysis of WPA3's SAE and SAE-PK Protocols</title>
 <link>https://eprint.iacr.org/2026/348</link>
 <guid>https://eprint.iacr.org/2026/348</guid>
 <content:encoded><![CDATA[
-
 SAE and SAE-PK are the core security protocols introduced in the latest Wi-Fi security standard, WPA3, to protect personal networks. SAE-PK extends SAE to prevent the so-called evil twin attacks, where an attacker with the knowledge of the password attempts to impersonate a legitimate access point. In this work, we present the first provable security and privacy analysis of SAE and SAE-PK. We introduce formal models that capture their intended properties and use these models to analyze the guarantees these protocols provide.
 
 First, we identify an attack that prevents SAE from fulfilling its intended authentication guarantees. As a result, SAE can only be proven secure within a weaker security model, which we also formalize and show the proof in. To achieve the desired level of security, we propose two simple fixes, resulting in two efficient SAE protocols that we call SAEv2 and SAEv3. We prove that both protocols meet the intended security guarantees, with SAEv3 providing greater robustness.
@@ -19,19 +64,16 @@ Next, we prove that SAE-PK is indeed secure against evil twin attacks, but its c
 Finally, we analyze the privacy guarantees of SAE, SAE-PK, and our proposed enhanced variants. We prove that their cryptographic core preserves the unlinkability of client devices across distinct Wi-Fi networks, if MAC address randomization is properly applied.
 ]]></content:encoded>
 <pubDate>Sat, 21 Feb 2026 01:32:27 +0000</pubDate>
-<pubDate>Sat, 21 Feb 2026 01:32:27 +0000</pubDate>
 </item>
 <item>
 <title>Lighthouse: Single-Server Secure Aggregation with $O(1)$ Server-Committee Communication at Scale</title>
 <link>https://eprint.iacr.org/2026/346</link>
 <guid>https://eprint.iacr.org/2026/346</guid>
 <content:encoded><![CDATA[
-
 Secure aggregation is a core primitive for privacy-preserving federated learning, enabling a server to compute aggregates of client updates without learning individual inputs. Recent protocols have explored committee-based designs to reduce client overhead and tolerate weakly connected participants. However, existing approaches still incur communication and computation costs that scale with the number of clients and/or the size of model updates. This becomes a serious bottleneck in interaction between the server and the committee, given that model updates are high-dimensional and committee is a small set of clients.
 
 We present Lighthouse, a new secure aggregation protocol that supports one-shot client communication and achieves constant committee computation and communication overhead with server, independent of both the number of clients and the size of the input vector. Our protocol attains the best-known round complexity of two rounds, matching OPA (CRYPTO 2025) and TACITA (ePrint 2025) and improving upon Flamingo (IEEE S&amp;P 2023) and Willow (CRYPTO 2025).  Our core technical contribution is a novel application of recent advances in batched threshold encryption, which enables succinct server–committee interaction while preserving security and correctness. Beyond asymptotic improvements over prior works, Lighthouse yields substantial concrete efficiency gains: For an aggregation with 1024 clients, we reduce server-to-committee communication by over 100× and committee-to-server communication by over 300× compared to Flamingo and Willow. Also, we present an extension that supports dynamic client participation, a critical requirement for practical deployments at scale, while preserving the asymptotic and concrete efficiency of the static protocol for clients.
 ]]></content:encoded>
-<pubDate>Fri, 20 Feb 2026 19:35:37 +0000</pubDate>
 <pubDate>Fri, 20 Feb 2026 19:35:37 +0000</pubDate>
 </item>
 <item>
@@ -39,15 +81,12 @@ We present Lighthouse, a new secure aggregation protocol that supports one-shot 
 <link>https://eprint.iacr.org/2026/333</link>
 <guid>https://eprint.iacr.org/2026/333</guid>
 <content:encoded><![CDATA[
-
 We initiate study on how to build a rigorous, cryptographic foundation for *proofs of personhood* - convincing, privacy-preserving evidence that a digital participant is a real, unique, and reputable human, optionally with authenticated attributes such as age or institutional affiliation. Towards this goal, we introduce a framework based on two types of credentials: *personhood credentials* (PHCs), issued by trusted authorities to attest to uniqueness and basic attributes, and *verifiable relationship credentials* (VRCs), issued peer-to-peer to capture reputation and real-world interactions.
 
     We formalize ideal functionalities that capture desirable security and privacy notions for proofs of personhood, including Sybil-resistance, authenticated personhood, and unlinkability across contexts. Finally, we then give efficient cryptographic constructions that realize these functionalities by combining PHCs, VRCs, and zero-knowledge proofs. Our results suggest that a scalable, Sybil-resistant, and decentralized proof-of-personhood layer can serve as a reusable trust substrate for a wide range of online economic, social, and civic applications.
 ]]></content:encoded>
 <pubDate>Fri, 20 Feb 2026 00:01:15 +0000</pubDate>
-<pubDate>Fri, 20 Feb 2026 00:01:15 +0000</pubDate>
 </item>
-
 <item>
 <title>SoK: Anonymous Credentials for Digital Identity Wallets</title>
 <link>https://eprint.iacr.org/2026/330</link>
@@ -15505,53 +15544,6 @@ In this work, we introduce the Merkle Pyramid Builder approach, to incrementally
 The proliferation of attacks to cloud computing, coupled with the vast amounts of data outsourced to online services, continues to raise major concerns about the privacy for end users. Traditional cryptography can help secure data transmission and storage on cloud servers, but falls short when the already encrypted data needs to be processed by the cloud provider. An emerging solution to this challenge is fully homomorphic encryption (FHE), which enables computations directly on encrypted data, and recent works have focused on developing new processor designs tailored for native processing of FHE data. In this work, we introduce PulpFHE, an optimized instruction set extension tailored for the next generation of FHE processors. Our proposed FHE instructions offer native support for non-linear operations on encrypted data, and enable significantly faster homomorphic computations for a broad range of realistic applications.
 ]]></content:encoded>
 <pubDate>Thu, 22 Aug 2024 17:06:23 +0000</pubDate>
-</item>
-<item>
-<title>Dynamic Threshold Key Encapsulation with a Transparent Setup</title>
-<link>https://eprint.iacr.org/2024/1311</link>
-<guid>https://eprint.iacr.org/2024/1311</guid>
-<content:encoded><![CDATA[
-<div> 关键词：动态TKEM、透明设置、配对操作、决策性Diffie-Hellman假设、安全性证明
-
-总结: 文章提出了一种动态阈值密钥封装机制（TKEM），旨在解决现有构建依赖于可信设置的问题。这种机制允许在不依赖第三方的情况下，灵活选择接收者和阈值，从而提高了系统的安全性和鲁棒性。它不使用配对运算，而是基于决策性Diffie-Hellman假设来确保选择性选择-密文安全性和解封装一致性。通过安全证明和概念验证实现，该方法不仅提高了阈值加密领域的实践可行性，也显著提升了效率，为分布式系统提供了更安全、灵活的密钥分发方案。 <div>
-A threshold key encapsulation mechanism (TKEM) facilitates the secure distribution of session keys among multiple participants, allowing key recovery through a threshold number of shares. TKEM has gained significant attention, especially for decentralized systems, including blockchains. However, existing constructions often rely on trusted setups, which pose security risks such as a single point of failure, and are limited by fixed participant numbers and thresholds. To overcome this, we propose a dynamic TKEM with a transparent setup, allowing for a flexible selection of recipients and thresholds without relying on trusted third parties in the setup phase. In addition, our construction does not rely on pairing operations. We prove the security of our TKEM under the decisional Diffie-Hellman assumption, ensuring selective chosen-ciphertext security and decapsulation consistency. Our proof-of-concept implementation highlights the practicality and efficiency of this approach, advancing the field of threshold cryptography.
-]]></content:encoded>
-<pubDate>Thu, 22 Aug 2024 07:09:30 +0000</pubDate>
-</item>
-<item>
-<title>Kalos: Hierarchical-auditable and Human-binding Authentication Scheme for Clinical Trial</title>
-<link>https://eprint.iacr.org/2024/1301</link>
-<guid>https://eprint.iacr.org/2024/1301</guid>
-<content:encoded><![CDATA[
-<div> 关键词：Kalos、临床试验、隐私保护、数据可靠性、信任鸿沟
-
-文章主要介绍了一种名为Kalos的新颖认证方案，旨在解决临床试验中数据收集和处理过程中面临的数据隐私保护与可靠性之间的权衡问题。该方案利用了多样化的加密工具，如基于卡片的匿名凭证和零知识证明，实现了可视化验证和属性选择性披露，从而支持层次审计和数据去重，以提高临床试验的可靠性。Kalos具有不可伪造性、盲性、隐私保护和人性绑定等特性，有助于解决物理世界与数字世界之间的信任差距。
-
-总结:
-Kalos认证方案为临床试验提供了一种创新的解决方案，通过结合多种加密技术，实现了在确保数据隐私的同时，增强数据可靠性和可审计性。它解决了传统方法在处理大量参与者数据时面临的信任鸿沟问题，通过提供可视化的验证过程和对属性的选择性披露，Kalos不仅提高了数据的可信度，还有效防止了数据重复录入的问题。该方案的计算成本不依赖于认证属性的数量，且在常见属性数量下，总计算时间保持在毫秒级范围内，这使得Kalos具有在医疗消费电子产品场景中部署的潜力。 <div>
-Clinical trials are crucial in the development of new medical treatment methods. To ensure the correctness of clinical trial results, medical institutes need to collect and process large volumes of participant data, which has prompted research on privacy preservation and data reliability. However, existing solutions struggle to resolve the trade-off between them due to the trust gap between the physical and digital worlds, limiting their practicality. To tackle the issues above, we present Kalos, a novel authentication scheme for clinical trials. Kalos leverages diversified cryptographic tools, such as card-based anonymous credential and zero-knowledge proof to achieve authentication with visual verification and selective disclosure of attributes. It has properties such as unforgeability, blindness, privacy preservation, and human-binding that support hierarchical auditability and data de-duplication to enhance the reliability of clinical trials. We then provide the security and performance analysis of Kalos to show its potential to be deployed in the medical consumer electronics scenario. The computational cost of the smartcard is irrespective of the number of certified attributes, and the total computational cost of Kalos is within tens of milliseconds with the commonly used number of attributes.
-]]></content:encoded>
-<pubDate>Tue, 20 Aug 2024 09:35:32 +0000</pubDate>
-</item>
-<item>
-<title>Lattice-Based Succinct Mercurial Functional Commitment for Boolean Circuits: Definitions and Constructions</title>
-<link>https://eprint.iacr.org/2024/617</link>
-<guid>https://eprint.iacr.org/2024/617</guid>
-<content:encoded><![CDATA[
-<div> 关键词：Vector Commitments（VC）、Mercurial Vector Commitments（MVC）、Mercurial Functional Commitments（MFC）、Zero-Knowledge Sets、Lattice-Based Cryptography
-
-总结:
-
-文章首先提出了梅尔库里矢量承诺（MVC）和梅尔库里功能承诺（MFC）的系统和安全性模型，以支持布尔电路。这解决了现有MFC仅支持线性函数的问题，扩大了其在构建具有线性函数查询能力的零知识集合和零知识功能基础数据库（ZK-FEDB）中的应用范围。然而，当前的MFC和ZK-FEDB主要基于群假设，无法抵抗量子计算机攻击。
-
-为解决这一问题，作者引入了一种新的可验证假设——Wee和Wu在EUROCRYPT '23中提出的BASIS假设，以此为基础构建了第一个基于格的简洁梅尔库里功能承诺，用于布尔电路。这种承诺机制不仅克服了现有方法的局限性，还确保了安全性和抗量子攻击的能力。
-
-通过将此承诺机制应用于构建第一个基于格的ZK-FEDB，文章展示了其在现有通用框架下的应用潜力，显著扩展了零知识技术在复杂查询场景中的适用性。这一创新不仅丰富了密码学领域的理论研究，也为实际应用提供了更安全、更高效的解决方案。 <div>
-Vector commitments (VC) have gained significant attention due to their extensive use in applications such as blockchain and accumulators. Mercurial vector commitments (MVC) and mercurial functional commitments (MFC), as variants of VC, are central techniques for constructing more advanced cryptographic primitives, such as zero-knowledge sets and zero-knowledge functional elementary databases (ZK-FEDB). However, existing MFCs $\textit{only support linear functions}$, which limits their applicability—for instance, in building ZK-FEDBs that support only linear function queries. Moreover, to the best of our knowledge, the current MFCs and ZK-FEDBs, including the state-of-the-art proposed by Zhang and Deng (ASIACRYPT '23) using RSA accumulators, are all based on group-based assumptions and $\textit{cannot resist quantum computer attacks}$.
-
-To address these limitations, we $\textit{first}$ formalize the system and security models of MFC to support Boolean circuits. Then, we target specific properties of a new falsifiable assumption, namely the $\mathsf{BASIS}$ assumption proposed by Wee and Wu (EUROCRYPT '23), to construct the $\textit{first}$ lattice-based succinct mercurial functional commitment for Boolean circuits. As an application of our construction, we demonstrate how it can be used to build the $\textit{first}$ lattice-based ZK-FEDB within the existing generic framework.
-]]></content:encoded>
-<pubDate>Mon, 22 Apr 2024 09:29:41 +0000</pubDate>
 </item>
 </channel>
 </rss>
