@@ -5,11 +5,22 @@
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
 <item>
+<title>LazyArc: Dynamic Out-of-Order Engine for High-Throughput FHE</title>
+<link>https://eprint.iacr.org/2026/363</link>
+<guid>https://eprint.iacr.org/2026/363</guid>
+<content:encoded><![CDATA[
+
+Fully Homomorphic Encryption (FHE) is a modern cryptographic technique that allows performing computations directly over encrypted data. This makes FHE an indispensable method for privacy-preserving applications, where users' data are encrypted and processed by a potentially untrusted third party. Nevertheless, FHE computations are computationally expensive, often rendering them less practical for realistic scenarios. Notably, a major performance bottleneck for FHE is an operation called bootstrapping that allows refreshing the inherent noise of an FHE ciphertext so it could support more computations. In this work, we introduce LazyArc, a versatile lightweight dynamic Out-of-Order (OoO) engine that supports higher-throughput FHE computations expressed as a sequence of instructions. Notably, LazyArc encapsulates a hybrid engine capable of evaluating both arithmetic and Boolean instructions in the same program. Moreover, our proposed OoO paradigm improves the runtime performance by masking the latency of bootstrapping by executing of independent instructions in an FHE application. To enable LazyArc, we introduce a novel data structure, dubbed RegisterMap, which performs static analysis on FHE arithmetic circuits and tracks the noise of each ciphertext to allow proactive bootstrapping scheduling. Our approach is evaluated using linear algebra benchmarks and can achieve about 10% performance improvement over baselines.
+]]></content:encoded>
+<pubDate>Mon, 23 Feb 2026 01:05:42 +0000</pubDate>
+<pubDate>Mon, 23 Feb 2026 01:05:42 +0000</pubDate>
+</item>
+
+<item>
 <title>Revisiting Beimel-Weinreb Weighted Threshold Secret Sharing Schemes</title>
 <link>https://eprint.iacr.org/2025/168</link>
 <guid>https://eprint.iacr.org/2025/168</guid>
 <content:encoded><![CDATA[
-
 A secret sharing scheme is a cryptographic primitive that allows a dealer to share a secret among a set of parties, so that only authorized subsets of them can recover it. In a weighted threshold secret sharing scheme, each party is assigned a weight according to its importance, and the authorized subsets are those in which the sum of their weights is at least the threshold value. 
 
 For those schemes, Beimel and Weinreb [IPL 2006] presented the best general constructions: The scheme with computational security has a total share size polynomial in $n$, while the scheme with perfect security has a total share size $n^{O(\log n)}$. However, these constructions require the use of shallow monotone sorting networks, which limits their practical use.
@@ -21,19 +32,16 @@ First, in the computational setting, we provide a computational scheme that is f
 Second, extending these techniques, we obtain improved information-theoretic ramp weighted threshold secret sharing schemes. For any weights, threshold $\sigma$, and $\epsilon < 1$, we construct a $(\sigma,(1+\epsilon)\sigma)$-ramp weighted threshold scheme with share size $O\left((n/\epsilon) \log n\right)$, reducing the share size with respect to the state-of-the-art solutions.
 ]]></content:encoded>
 <pubDate>Tue, 04 Feb 2025 15:31:08 +0000</pubDate>
-<pubDate>Tue, 04 Feb 2025 15:31:08 +0000</pubDate>
 </item>
 <item>
 <title>DualRing-PRF: Post-Quantum (Linkable) Ring Signatures from Legendre and Power Residue PRFs</title>
 <link>https://eprint.iacr.org/2024/985</link>
 <guid>https://eprint.iacr.org/2024/985</guid>
 <content:encoded><![CDATA[
-
 Ring signatures are one of the crucial cryptographic primitives used in the design of privacy-preserving systems. Such a signature scheme allows a signer to anonymously sign a message on behalf of a spontaneously formed group. It not only ensures the authenticity of the message but also conceals the true signer within the group. An important extension of ring signatures is linkable ring signatures, which prevent a signer from signing twice without being detected (under some constraints). Linkable ring signatures offer advantages in applications where full anonymity might jeopardise the intended purpose, such as privacy-oriented cryptocurrencies like Monero. 
 
 In this work, we introduce post-quantum ring signature (DualRing-PRF) and linkable ring signature (DualRingL-PRF) schemes whose security solely rely on symmetric-key primitives (namely, Legendre PRF and power residue PRF). Our construction of the ring signature departs from previous approaches with similar security assumptions, offering the most competitive signature sizes for small and medium-sized rings. In particular, for a ring size of 16, DualRing-PRF has a communication overhead 1.4 times smaller than the state-of-the-art scheme proposed by Goel et al. (PETS’21). Furthermore, we demonstrate the extension of DualRing-PRF to incorporate linkability and non-slanderability. Compared to the existing one-time traceable ring signature (a variant of linkable ring signature) by Scafuro and Zhang (ESORICS’21), our construction supports many-time signing and achieves significantly smaller signature sizes when ring size exceeds 16. This advantage becomes more pronounced as the ring size increases.
 ]]></content:encoded>
-<pubDate>Tue, 18 Jun 2024 12:20:45 +0000</pubDate>
 <pubDate>Tue, 18 Jun 2024 12:20:45 +0000</pubDate>
 </item>
 <item>
@@ -41,15 +49,12 @@ In this work, we introduce post-quantum ring signature (DualRing-PRF) and linkab
 <link>https://eprint.iacr.org/2026/352</link>
 <guid>https://eprint.iacr.org/2026/352</guid>
 <content:encoded><![CDATA[
-
 Recent advances in quantum computing threaten the cryptographic foundations of blockchain systems, including Bitcoin and Ethereum, which rely on elliptic-curve cryptography (ECC) for security. Algorithms such as Shor's algorithm can efficiently solve the discrete logarithm problem (DLP), enabling recovery of private keys from public keys. Existing funds, especially those tied to long-lived addresses or unspent coinbase outputs (such as Satoshi Nakamoto's bitcoins), and Ethereum externally owned accounts become vulnerable once large-scale quantum computers become available. While previous work has suggested various post-quantum signature schemes and migration strategies, no widely deployed, end-to-end, backward-compatible, and privacy-preserving migration mechanism has been presented for migrating legacy funds without revealing the corresponding classical public keys on-chain.
 
 In this paper, we present a complete framework that enables secure migration of both spent and unspent funds to a post-quantum security model, using a hybrid approach based on post-quantum signatures and quantum-resistant zero-knowledge proofs (ZKPs). By integrating classical and post-quantum cryptography with quantum-safe proofs, we protect blockchain systems against quantum-era adversaries while preserving asset security, protocol compatibility, and operational continuity. Our method supports two distinct migration scenarios (depending on whether public keys have been revealed) and applies uniformly to both Bitcoin's UTXO model and Ethereum's account-based model. We design zkSTARK circuits that prove knowledge of a witness linking a legacy address to a fresh PQ public key without disclosing the legacy private key. To enable decentralized and verifiable on-chain transitions, we propose new primitives (\texttt{OP\_CHECKQUANTUMSIG}, \texttt{OP\_CHECKSTARKPROOF}) for Bitcoin and Ethereum, enabling verification of quantum-safe proofs and signatures. Our work and implementation \footnote{\href{https://github.com/skardas/pq_bitcoin}{\texttt{github.com/skardas/pq\_bitcoin}}} provides a practical and efficient framework for securing legacy blockchain assets against quantum-era threats, while preserving backward compatibility and availability.
 ]]></content:encoded>
 <pubDate>Sat, 21 Feb 2026 21:58:03 +0000</pubDate>
-<pubDate>Sat, 21 Feb 2026 21:58:03 +0000</pubDate>
 </item>
-
 <item>
 <title>Provable Security and Privacy Analysis of WPA3's SAE and SAE-PK Protocols</title>
 <link>https://eprint.iacr.org/2026/348</link>
@@ -15496,54 +15501,6 @@ TandaPay还采用了一种创新的方法，利用财务激励来防止合谋行
 Abstract—Corporate sexual harassment policies often prioritize liability mitigation over the creation of a corporate culture free of harassment. Victims of sexual harassment are often required to report claims individually to HR. This can create an environment of self-censorship when employees feel that they cannot trust HR to act as an unbiased mediator. This problem is compounded when corporations have a culture that is tolerant of certain types of harassment. Forcing employees to report incidents to HR does nothing to address employees’ fear of bias and uncertainty. This paper presents TandaPay, a decentralized grievance reporting protocol designed to address sexual harassment. TandaPay empowers whistleblowing communities to collectively approve their own harassment claims. TandaPay reduces self-censorship by allowing employees to take ownership of the reporting process, as employees no longer need to rely on HR to act as an intermediary. The protocol employs a novel method of using financial incentives to guard against collusion. This provides corporations with a guarantee that employees can only approve valid claims. Using TandaPay, corporations can give employees greater autonomy with the goal of minimizing self-censorship. This increases the reporting of incidents, enabling workers to change the corporate culture to one of respect and accountability.
 ]]></content:encoded>
 <pubDate>Tue, 09 May 2023 15:10:32 +0000</pubDate>
-</item>
-<item>
-<title>Improved Reductions from Noisy to Bounded and Probing Leakages via Hockey-Stick Divergences</title>
-<link>https://eprint.iacr.org/2024/1009</link>
-<guid>https://eprint.iacr.org/2024/1009</guid>
-<content:encoded><![CDATA[
-<div> 关键词：理论与实践、侧信道攻击、模糊泄漏模型、Hockey-stick偏移、安全性证明
-
-总结:本文深入探讨了理论与实践在密码学领域中的不一致性，特别是在面对泄漏时。理论研究中，提出了方便分析多种设计安全性的模型，如有界泄漏模型和随机探针模型。然而，在实践中，侧信道攻击产生的长记录通常带有噪声，提供有关内部计算的全面信息，这与理论模型有所偏差。文章进一步引入了基于Hockey-stick偏移的模糊泄漏模型，这是一种综合统计距离和差分隐私基础的新模型。作者通过实验展示了理论模型中对有界泄漏和随机探针的抵抗能力，能够有效转化为对模糊泄漏的抵抗力，相较于基于统计距离或互信息的模型，参数有所优化。此外，研究还提供了关于多泄漏组成的定理，揭示了这些连接在处理多个泄漏情况时的扩展性。值得注意的是，该研究不仅在理论上为安全性证明提供了新视角，还讨论了其在实际应用中的相关性和局限性。具体而言，研究结果适用于现实世界中具有噪声水平显著降低的实用泄漏函数，同时，对随机探针的减小也有助于推广先前的工作，尽管在某些情况下，当操作掩码的域大小增加时，仍存在限制。 <div>
-There exists a mismatch between the theory and practice of cryptography in the presence of leakage. On the theoretical front, the bounded leakage model, where the adversary learns bounded-length but noiseless information about secret components, and the random probing model, where the adversary learns some internal values of a leaking implementation with some probability, are convenient abstractions to analyze the security of numerous designs. On the practical front, side-channel attacks produce long transcripts which are inherently noisy but provide information about all internal computations, and this noisiness is usually evaluated with closely related metrics like the mutual information or statistical distance. Ideally, we would like to claim that resilience to bounded leakage or random probing implies resilience to noisy leakage evaluated according to these metrics. However, prior work (Duc, Dziembowski and Faust, Eurocrypt 2014; Brian et al., Eurocrypt 2021) has shown that proving such reductions with useful parameters is challenging.    
-
-In this work, we study noisy leakage models stemming from hockey-stick divergences, which generalize statistical distance and are also the basis of differential privacy. First, we show that resilience to bounded leakage and random probing implies resilience to our new noisy leakage model with improved parameters compared to models based on the statistical distance or mutual information. Second, we establish composition theorems for our model, showing that these connections extend to a setting where multiple leakages are obtained from a leaking  implementation. We complement our theoretical results with a discussion of practical relevance, highlighting that (i) the reduction to bounded leakage applies to realistic leakage functions with noise levels that are decreased by several orders of magnitude compared to Brian et al., and (ii) the reduction to random probing usefully generalizes the seminal work of Duc, Dziembowski, and Faust, although it remains limited when the field size in which masking operates grows (i.e., hockey-stick divergences can better hide the field size dependency of the noise requirements, but do not annihilate it).
-]]></content:encoded>
-<pubDate>Fri, 21 Jun 2024 11:45:22 +0000</pubDate>
-</item>
-<item>
-<title>Pay Less for Your Privacy: Towards Cost-Effective On-Chain Mixers</title>
-<link>https://eprint.iacr.org/2023/1222</link>
-<guid>https://eprint.iacr.org/2023/1222</guid>
-<content:encoded><![CDATA[
-<div> 关键词：Tornado Cash, Merkle Pyramid Builder, Verifiable Computations, 隐私保护, 成本降低
-
-总结:
-本文提出了Merkle金字塔构建者方法，旨在通过在链上混合器中逐步构建Merkle树并根据每批存款更新树，从而降低使用混合器的整体成本。这种方法在减少存款平均成本方面表现出显著效果，与现有链上混合器相比，最高可减少7倍的成本。重要的是，这些改进不会损害用户的隐私。
-
-此外，文章还提议利用可验证计算将Merkle树更新的责任从链上智能合约转移到离链客户端，进一步降低存款成本。分析显示，我们的设计确保了公平性，通过时间分布将Merkle树更新费用均匀分配给客户端。这为非隐私保护区块链用户提供了更经济、更私密的交易解决方案。 <div>
-On-chain mixers, such as Tornado Cash (TC), have become a popular privacy solution for many non-privacy-preserving blockchain users. These mixers enable users to deposit a fixed amount of coins and withdraw them to another address, while effectively reducing the linkability between these addresses and securely obscuring their transaction history. However, the high cost of interacting with existing on-chain mixer smart contracts prohibits standard users from using the mixer, mainly due to the use of computationally expensive cryptographic primitives. For instance, the deposit cost of TC on Ethereum is approximately $1.1m$ gas (i.e., $66$ USD in June 2023), which is $53\times$ higher than issuing a base transfer transaction.
-
-
-In this work, we introduce the Merkle Pyramid Builder approach, to incrementally build the Merkle tree in an on-chain mixer and update the tree per batch of deposits, which can therefore decrease the overall cost of using the mixer. Our evaluation results highlight the effectiveness of this approach, showcasing a significant reduction of up to $7\times$ in the amortized cost of depositing compared to state-of-the-art on-chain mixers. Importantly, these improvements are achieved without compromising users' privacy. Furthermore, we propose the utilization of verifiable computations to shift the responsibility of Merkle tree updates from on-chain smart contracts to off-chain clients, which can further reduce deposit costs. Additionally, our analysis demonstrates that our designs ensure fairness by distributing Merkle tree update costs among clients over time.
-]]></content:encoded>
-<pubDate>Fri, 11 Aug 2023 19:30:10 +0000</pubDate>
-</item>
-<item>
-<title>PulpFHE: Complex Instruction Set Extensions for FHE Processors</title>
-<link>https://eprint.iacr.org/2024/1315</link>
-<guid>https://eprint.iacr.org/2024/1315</guid>
-<content:encoded><![CDATA[
-<div> 关键词：云计算、隐私保护、传统加密、全同态加密（FHE）、PulpFHE
-
-总结:
-
-本文探讨了云计算环境下数据隐私保护的挑战，尤其是数据在云服务器上的传输和存储安全。传统的加密方法虽然能保护数据不被窃取，但在加密数据需要云服务提供商进行处理时却显得力不从心。为解决这一问题，全同态加密(FHE)技术应运而生，它允许在数据保持加密状态下进行运算。近年来，研究人员致力于开发专门针对FHE数据处理的处理器设计。
-
-在此背景下，作者提出了PulpFHE，这是一种面向下一代FHE处理器优化的指令集扩展。PulpFHE提供对加密数据非线性操作的原生支持，显著提升了各种实际应用中的同态计算速度。通过引入这些定制化的FHE指令，不仅增强了数据处理效率，还提高了隐私保护水平，确保了数据在云环境下的安全性和有效性。这一创新成果为云计算领域提供了更安全、高效的解决方案，对于促进云计算的广泛应用具有重要意义。 <div>
-The proliferation of attacks to cloud computing, coupled with the vast amounts of data outsourced to online services, continues to raise major concerns about the privacy for end users. Traditional cryptography can help secure data transmission and storage on cloud servers, but falls short when the already encrypted data needs to be processed by the cloud provider. An emerging solution to this challenge is fully homomorphic encryption (FHE), which enables computations directly on encrypted data, and recent works have focused on developing new processor designs tailored for native processing of FHE data. In this work, we introduce PulpFHE, an optimized instruction set extension tailored for the next generation of FHE processors. Our proposed FHE instructions offer native support for non-linear operations on encrypted data, and enable significantly faster homomorphic computations for a broad range of realistic applications.
-]]></content:encoded>
-<pubDate>Thu, 22 Aug 2024 17:06:23 +0000</pubDate>
 </item>
 </channel>
 </rss>
