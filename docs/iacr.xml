@@ -4,6 +4,71 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+<item>
+<title>Trace: Complete Client-Side Account Access Logging</title>
+<link>https://eprint.iacr.org/2026/447</link>
+<guid>https://eprint.iacr.org/2026/447</guid>
+<content:encoded><![CDATA[
+
+Despite improvements to authentication mechanisms, account compromise remains frequent and users need a trustworthy way to determine what devices have accessed their accounts.  Doing so, however, is in tension with privacy goals on the modern web, which mandate that web services not learn static device identifiers.
+Recent work aims to address this tension via client-side encrypted access logging (CSAL), but their approach does not allow retrieving all log entries and users may miss information about adversarial accesses. 
+
+We present Trace, a new CSAL system that achieves complete logging while preserving privacy.  Trace records verifiable evidence of each authentication in an encrypted log stored by an independent logging service, ensuring that only the user can inspect it. The web service remains unaware of the logging, preserving backward compatibility with existing authentication infrastructures.  Unlike prior approaches, Trace simultaneously achieves verifiable device attribution, backward compatibility, and formally-analyzed security against malicious adversaries.  Our prototype implementation reaches over 10 K authentications per second on a single core, suggesting it can scale efficiently for large services.
+]]></content:encoded>
+<pubDate>Wed, 04 Mar 2026 11:38:53 +0000</pubDate>
+<pubDate>Wed, 04 Mar 2026 11:38:53 +0000</pubDate>
+</item>
+<item>
+<title>Fuzzy Private Set Intersection for Real-World Datasets</title>
+<link>https://eprint.iacr.org/2026/441</link>
+<guid>https://eprint.iacr.org/2026/441</guid>
+<content:encoded><![CDATA[
+
+Private Set Intersection (PSI) allows two mutually distrusting parties to compute the intersection of their private sets without revealing any additional information. Fuzzy PSI, an approximate variant of PSI, allows the receiver to learn points of the sender that are ``close" to its points. More formally, the receiver learns all $y$ in the sender's set that satisfy $dist(x,y)< \delta$ for some element $x$ in the receiver's set and threshold parameter $\delta$. Recently, there has been significant progress on Fuzzy PSI, as it allows us to realize several important applications such as password matching, facial recognition, and contact tracing in a privacy-preserving manner. However, existing Fuzzy PSI constructions make strong assumptions on the input sets, such as receiver set disjointedness or projected disjointedness. In this work, we analyze those strong assumptions from a practical viewpoint and observe a gap between theory and practice, i.e., real-world data sets do not abide to those assumptions. 
+    
+    To bridge the gap, we first define a new relaxed and weaker assumption based on the low density of sets, demonstrate the assumption to be practical, and build a compiler that converts constructions under the strong assumption to those under the new, practical assumption. At the core of our transformation is a novel idea involving higher-dimensional lifting and coloring. Combining our transformation with current Fuzzy PSI protocols under the strong assumption yields efficient and practical Fuzzy PSI protocols. We also concretely analyze the run-time and overhead of our transformed protocols for parameters for illustrative applications, such as password matching.
+]]></content:encoded>
+<pubDate>Wed, 04 Mar 2026 06:43:02 +0000</pubDate>
+<pubDate>Wed, 04 Mar 2026 06:43:02 +0000</pubDate>
+</item>
+<item>
+<title>The OCH Authenticated Encryption Scheme</title>
+<link>https://eprint.iacr.org/2026/439</link>
+<guid>https://eprint.iacr.org/2026/439</guid>
+<content:encoded><![CDATA[
+
+We specify OCH, the first authenticated encryption with associated data scheme built to provide 128-bit multi-user AE security, 128-bit context commitment security, and 256-bit nonces with optional nonce privacy. It therefore addresses pressing limitations of currently widely-deployed schemes. We construct and formally analyze the security of OCH in a modular fashion, with transforms that are of broader applicability. On Intel Raptor Lake CPUs, OCH using the Areion permutation family has a peak encryption speed of 0.62 cycles per byte (cpb), not far off from AES128-GCM (0.38cpb) and outperforming both ChaCha20/Poly1305 (1.63cpb) and TurboSHAKE128-Wrap (3.52cpb).
+]]></content:encoded>
+<pubDate>Wed, 04 Mar 2026 05:46:12 +0000</pubDate>
+<pubDate>Wed, 04 Mar 2026 05:46:12 +0000</pubDate>
+</item>
+<item>
+<title>Efficient Private Range Queries on Public Data</title>
+<link>https://eprint.iacr.org/2026/429</link>
+<guid>https://eprint.iacr.org/2026/429</guid>
+<content:encoded><![CDATA[
+
+Range queries can filter, aggregate, and retrieve database entries that lie in a specified multi-dimensional rectangle. 
+Private range queries allow a client to query a server's public database while keeping the client's multi-dimensional rectangle hidden.
+
+We construct RangeR, a constant-round private range query scheme that supports any associative aggregation function (e.g., SUM, MAX, TOP-K) and works with any number of servers. In the single-server setting, RangeR is orders of magnitude faster and uses 50%-90% less communication than HADES (VLDB 2025), a prior single-server private range query scheme that only supports linear aggregation functions. 
+
+We describe how RangeR can be used to implement a privacy-preserving map application that can return the highest-rated restaurants near a user. Using data from $\mathtt{OpenStreetMaps}$, we estimate that a user can find the highest-rated restaurants within one kilometer of their location within $2$ seconds, while revealing only that the user is somewhere in the USA.
+]]></content:encoded>
+<pubDate>Tue, 03 Mar 2026 02:59:48 +0000</pubDate>
+<pubDate>Tue, 03 Mar 2026 02:59:48 +0000</pubDate>
+</item>
+<item>
+<title>Defending Against Backdoor Attacks in Homomorphically Encrypted Federated Learning</title>
+<link>https://eprint.iacr.org/2026/428</link>
+<guid>https://eprint.iacr.org/2026/428</guid>
+<content:encoded><![CDATA[
+
+The distributed nature of federated learning systems makes them vulnerable to backdoor attacks in which malicious clients manipulate local training data using trigger-dependent behaviors to cause targeted misclassification. Although homomorphic encryption preserves the privacy of model updates during aggregation, it limits the application of conventional defenses that require access to plaintext updates. Moreover, distinguishing poisoned models from benign variations becomes more challenging under non-independent and identically distributed (non-IID) data distributions.To address this challenge, we introduce a defense strategy that operates at inference time by identifying abnormal internal activation patterns within the aggregated global model, rather than filtering encrypted individual updates during training. The proposed approach analyzes neurons that exhibit low activation on clean inputs, referred to as "dormant" neurons, but become disproportionately active in the presence of trigger patterns. By constructing a statistical activation baseline using a small clean dataset, we derive class-specific thresholds that serve as decision boundaries to detect and reject suspicious predictions. Since the proposed method relies on global model behavior at inference time instead of inspecting individual client updates, it does not introduce additional training overhead and remains robust under non-IID data settings. Our approach maintains a strong balance between privacy, security, and accuracy by defending against backdoor attacks without requiring access to client updates. Experimental results demonstrate that even with a 99% attack success rate and 90% main-task accuracy, the proposed defense method successfully detects 100% poisoned images.
+]]></content:encoded>
+<pubDate>Tue, 03 Mar 2026 00:44:23 +0000</pubDate>
+<pubDate>Tue, 03 Mar 2026 00:44:23 +0000</pubDate>
+</item>
 
 <item>
 <title>CRISP: Circuit-pRivate Single-Image Steganography with Permutations</title>
