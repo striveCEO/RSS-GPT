@@ -4,18 +4,17 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+
 <item>
 <title>Trace: Complete Client-Side Account Access Logging</title>
 <link>https://eprint.iacr.org/2026/447</link>
 <guid>https://eprint.iacr.org/2026/447</guid>
 <content:encoded><![CDATA[
-
 Despite improvements to authentication mechanisms, account compromise remains frequent and users need a trustworthy way to determine what devices have accessed their accounts.  Doing so, however, is in tension with privacy goals on the modern web, which mandate that web services not learn static device identifiers.
 Recent work aims to address this tension via client-side encrypted access logging (CSAL), but their approach does not allow retrieving all log entries and users may miss information about adversarial accesses. 
 
 We present Trace, a new CSAL system that achieves complete logging while preserving privacy.  Trace records verifiable evidence of each authentication in an encrypted log stored by an independent logging service, ensuring that only the user can inspect it. The web service remains unaware of the logging, preserving backward compatibility with existing authentication infrastructures.  Unlike prior approaches, Trace simultaneously achieves verifiable device attribution, backward compatibility, and formally-analyzed security against malicious adversaries.  Our prototype implementation reaches over 10 K authentications per second on a single core, suggesting it can scale efficiently for large services.
 ]]></content:encoded>
-<pubDate>Wed, 04 Mar 2026 11:38:53 +0000</pubDate>
 <pubDate>Wed, 04 Mar 2026 11:38:53 +0000</pubDate>
 </item>
 <item>
@@ -23,12 +22,10 @@ We present Trace, a new CSAL system that achieves complete logging while preserv
 <link>https://eprint.iacr.org/2026/441</link>
 <guid>https://eprint.iacr.org/2026/441</guid>
 <content:encoded><![CDATA[
-
 Private Set Intersection (PSI) allows two mutually distrusting parties to compute the intersection of their private sets without revealing any additional information. Fuzzy PSI, an approximate variant of PSI, allows the receiver to learn points of the sender that are ``close" to its points. More formally, the receiver learns all $y$ in the sender's set that satisfy $dist(x,y)< \delta$ for some element $x$ in the receiver's set and threshold parameter $\delta$. Recently, there has been significant progress on Fuzzy PSI, as it allows us to realize several important applications such as password matching, facial recognition, and contact tracing in a privacy-preserving manner. However, existing Fuzzy PSI constructions make strong assumptions on the input sets, such as receiver set disjointedness or projected disjointedness. In this work, we analyze those strong assumptions from a practical viewpoint and observe a gap between theory and practice, i.e., real-world data sets do not abide to those assumptions. 
     
     To bridge the gap, we first define a new relaxed and weaker assumption based on the low density of sets, demonstrate the assumption to be practical, and build a compiler that converts constructions under the strong assumption to those under the new, practical assumption. At the core of our transformation is a novel idea involving higher-dimensional lifting and coloring. Combining our transformation with current Fuzzy PSI protocols under the strong assumption yields efficient and practical Fuzzy PSI protocols. We also concretely analyze the run-time and overhead of our transformed protocols for parameters for illustrative applications, such as password matching.
 ]]></content:encoded>
-<pubDate>Wed, 04 Mar 2026 06:43:02 +0000</pubDate>
 <pubDate>Wed, 04 Mar 2026 06:43:02 +0000</pubDate>
 </item>
 <item>
@@ -36,10 +33,8 @@ Private Set Intersection (PSI) allows two mutually distrusting parties to comput
 <link>https://eprint.iacr.org/2026/439</link>
 <guid>https://eprint.iacr.org/2026/439</guid>
 <content:encoded><![CDATA[
-
 We specify OCH, the first authenticated encryption with associated data scheme built to provide 128-bit multi-user AE security, 128-bit context commitment security, and 256-bit nonces with optional nonce privacy. It therefore addresses pressing limitations of currently widely-deployed schemes. We construct and formally analyze the security of OCH in a modular fashion, with transforms that are of broader applicability. On Intel Raptor Lake CPUs, OCH using the Areion permutation family has a peak encryption speed of 0.62 cycles per byte (cpb), not far off from AES128-GCM (0.38cpb) and outperforming both ChaCha20/Poly1305 (1.63cpb) and TurboSHAKE128-Wrap (3.52cpb).
 ]]></content:encoded>
-<pubDate>Wed, 04 Mar 2026 05:46:12 +0000</pubDate>
 <pubDate>Wed, 04 Mar 2026 05:46:12 +0000</pubDate>
 </item>
 <item>
@@ -47,7 +42,6 @@ We specify OCH, the first authenticated encryption with associated data scheme b
 <link>https://eprint.iacr.org/2026/429</link>
 <guid>https://eprint.iacr.org/2026/429</guid>
 <content:encoded><![CDATA[
-
 Range queries can filter, aggregate, and retrieve database entries that lie in a specified multi-dimensional rectangle. 
 Private range queries allow a client to query a server's public database while keeping the client's multi-dimensional rectangle hidden.
 
@@ -56,20 +50,16 @@ We construct RangeR, a constant-round private range query scheme that supports a
 We describe how RangeR can be used to implement a privacy-preserving map application that can return the highest-rated restaurants near a user. Using data from $\mathtt{OpenStreetMaps}$, we estimate that a user can find the highest-rated restaurants within one kilometer of their location within $2$ seconds, while revealing only that the user is somewhere in the USA.
 ]]></content:encoded>
 <pubDate>Tue, 03 Mar 2026 02:59:48 +0000</pubDate>
-<pubDate>Tue, 03 Mar 2026 02:59:48 +0000</pubDate>
 </item>
 <item>
 <title>Defending Against Backdoor Attacks in Homomorphically Encrypted Federated Learning</title>
 <link>https://eprint.iacr.org/2026/428</link>
 <guid>https://eprint.iacr.org/2026/428</guid>
 <content:encoded><![CDATA[
-
 The distributed nature of federated learning systems makes them vulnerable to backdoor attacks in which malicious clients manipulate local training data using trigger-dependent behaviors to cause targeted misclassification. Although homomorphic encryption preserves the privacy of model updates during aggregation, it limits the application of conventional defenses that require access to plaintext updates. Moreover, distinguishing poisoned models from benign variations becomes more challenging under non-independent and identically distributed (non-IID) data distributions.To address this challenge, we introduce a defense strategy that operates at inference time by identifying abnormal internal activation patterns within the aggregated global model, rather than filtering encrypted individual updates during training. The proposed approach analyzes neurons that exhibit low activation on clean inputs, referred to as "dormant" neurons, but become disproportionately active in the presence of trigger patterns. By constructing a statistical activation baseline using a small clean dataset, we derive class-specific thresholds that serve as decision boundaries to detect and reject suspicious predictions. Since the proposed method relies on global model behavior at inference time instead of inspecting individual client updates, it does not introduce additional training overhead and remains robust under non-IID data settings. Our approach maintains a strong balance between privacy, security, and accuracy by defending against backdoor attacks without requiring access to client updates. Experimental results demonstrate that even with a 99% attack success rate and 90% main-task accuracy, the proposed defense method successfully detects 100% poisoned images.
 ]]></content:encoded>
 <pubDate>Tue, 03 Mar 2026 00:44:23 +0000</pubDate>
-<pubDate>Tue, 03 Mar 2026 00:44:23 +0000</pubDate>
 </item>
-
 <item>
 <title>CRISP: Circuit-pRivate Single-Image Steganography with Permutations</title>
 <link>https://eprint.iacr.org/2026/424</link>
@@ -15318,89 +15308,6 @@ Our schemes SLAMP-FSS and SLAMPR-FSS are more efficient in the evaluation phase 
 Payment channel networks (PCNs) are a leading method to scale the transaction throughput in cryptocurrencies. Two participants can use a bidirectional payment channel for making multiple mutual payments without committing them to the blockchain. Opening a payment channel is a slow operation that involves an on-chain transaction locking a certain amount of funds. These aspects limit the number of channels that can be opened or maintained. Users may route payments through a multi-hop path and thus avoid opening and maintaining a channel for each new destination. Unlike regular networks, in PCNs capacity depends on the usage patterns and, moreover, channels may become unidirectional. Since payments often fail due to channel depletion, a protection scheme to overcome failures is of interest. We define the stopping time of a payment channel as the time at which the channel becomes depleted. We analyze the mean stopping time of a channel as well as that of a network with a set of channels and examine the stopping time of channels in particular topologies. We then propose a scheme for optimizing the capacity distribution among the channels in order to increase the minimal stopping time in the network. We conduct experiments and demonstrate the accuracy of our model and the efficiency of the proposed optimization scheme.
 ]]></content:encoded>
 <pubDate>Thu, 05 Sep 2024 08:32:20 +0000</pubDate>
-</item>
-<item>
-<title>Haze and Daze: Compliant Privacy Mixers</title>
-<link>https://eprint.iacr.org/2023/1152</link>
-<guid>https://eprint.iacr.org/2023/1152</guid>
-<content:encoded><![CDATA[
-<div> 关键词：区块链、隐私混币器、合规性、去中心化、智能合约
-
-总结:本文提出了两种隐私混币器协议:Haze和Daze，旨在解决非法活动者滥用隐私混币器的问题。Haze协议确保用户隐私与合规性相结合，即只有非受限地址的资金才能提取，且不透露任何匹配存款信息。一旦用户被标记为违规，其资金将无法退出混币器。然而，这可能导致坏分子在被列入受限地址名单前尝试提取资金。为了解决这个问题，引入了Daze协议，它不仅支持合规性，还允许对违规用户的交易进行追溯匿名识别，使混币器对它们失去效用。同时，Haze和Daze提供了一个可选功能，让违规资金可以被释放到预设实体。实验结果显示，对于合规用户，这两种协议的Gas消耗与Tornado Cash相当。这是首次在区块链上实现智能合约的合规性和隐私保证。 <div>
-Blockchains enable mutually distrustful parties to perform financial operations in a trustless, decentralized, publicly-verifiable environment. Blockchains typically offer little privacy, and thus motivated the construction of privacy mixers, a solution to make funds untraceable. Privacy mixers concern regulators due to their increasing use by bad actors to illegally conceal the origin of funds. Consequently, Tornado Cash, the largest privacy mixer to date, is sanctioned by large portions of the Ethereum network.
-
-In this work, we propose Haze and Daze, two privacy mixers that mitigate the undesired abuse of privacy mixers for illicit activities. Haze guarantees users’ privacy together with compliance, i.e., funds can be withdrawn as long as they were deposited from a non-banned address, without revealing any information on the matching deposit. This means that once a user is flagged as non-compliant, their funds can no longer exit the mixer. However, this leads to a race condition for bad actors to withdraw funds before becoming flagged as unlawful in the banned-addresses list. Thus, we introduce Daze, a second mixer protocol that, in addition to compliance, enables retroactive de-anonymization of transactions of non-compliant users, making the mixer fruitless for them. To maintain privacy of compliant users, the de-anonymization procedure is performed by a committee, with privacy guaranteed as long as at least one of the committee members is honest. Moreover, Haze and Daze have an optional feature for non-compliant funds to be released from the mixer to some predetermined entity.
-
-We empirically evaluate our solution in a proof-of-concept system, demonstrating gas consumption for each deposit and withdrawal that is comparable to Tornado Cash for compliant users, both for Haze and Daze. To the best of our knowledge, our solution is the first to guarantee compliance and privacy on the blockchain (on-chain) that is implemented via a smart contract.
-]]></content:encoded>
-<pubDate>Tue, 25 Jul 2023 12:29:28 +0000</pubDate>
-</item>
-<item>
-<title>Practical Two-party Computational Differential Privacy with Active Security</title>
-<link>https://eprint.iacr.org/2024/004</link>
-<guid>https://eprint.iacr.org/2024/004</guid>
-<content:encoded><![CDATA[
-<div> 关键词：差分隐私、主动安全、多方计算、模拟基础差分隐私、几何噪声采样
-
-总结:
-
-本文重新探讨了利用通用型模型预测控制（MPC）方案模拟可信数据持有者以实现差分隐私（DP）的方法，旨在无需信任单一数据持有者即可达到相同精度。文章特别关注了双方模型，即两个计算实体（或数据持有者），各自拥有数据集，希望共同计算其结合数据的典型DP机制，并且使用主动安全性。
-
-首先，文章指出现有定义的计算DP（CDP）协议在用于此类场景时存在缺陷，要么未能充分捕捉到通用型MPC协议通常提供的强大安全保证，要么要求过于严格，需要对常见DP和MPC技术进行重大调整才能满足。因此，文章提出了一种新的基于模拟的CDP版本，称为SIM* CDP，并证明它比IND-CDP和SIM CDP更强，与SIM+ CDP不可比较。通过使用现有分布式协议进行截断几何噪声采样，文章展示了如何满足SIM* CDP定义。进一步地，该协议被用来在具有CDP和主动安全性的条件下计算双方内积，且准确性与中心模型相等，这是首次实现此功能。最后，文章提供了开源实现并对其实际性能进行了基准测试。实现生成截断几何样本的时间范围大约在0.035至3.5秒之间（平均化后），根据网络和参数设置而变化，与现有实现相比表现出色。 <div>
-In this work we revisit the problem of using general-purpose MPC schemes to emulate the trusted dataholder in differential privacy (DP), to achieve the same accuracy but without the need to trust one single dataholder. In particular, we consider the two-party model where two computational parties (or dataholders), each with their own dataset, wish to compute a canonical DP mechanism on their combined data and to do so with active security. We start by remarking that available definitions of computational DP (CDP) for protocols are somewhat ill-suited for such a use-case, due to them either poorly capturing some strong security guarantees commonly given by general-purpose MPC protocols, or having too strict requirements in the sense that they need significant adjustment in order to be satisfiable by using common DP and MPC techniques. With this in mind, we propose a new version of simulation-based CDP, called SIM$^*$-CDP, and prove it to be stronger than the IND-CDP and SIM-CDP and incomparable to SIM$^+$-CDP. We demonstrate the usability of the SIM$^*$-CDP definition by showing how to satisfy it by the use of an available distributed protocol for sampling truncated geometric noise. Further, we use the protocol to compute two-party inner-products with CDP and active security, and with accuracy equal to that of the central model, being the first to do so. Finally, we provide an open-sourced implementation and benchmark its practical performance. Our implementation generates a truncated geometric sample in between about 0.035 and 3.5 seconds (amortized), depending on network and parameter settings, comparing favourably to existing implementations.
-]]></content:encoded>
-<pubDate>Tue, 02 Jan 2024 09:29:54 +0000</pubDate>
-</item>
-<item>
-<title>ASOZ: a decentralized payment system with privacy preserving and auditing on public blockchain</title>
-<link>https://eprint.iacr.org/2023/1816</link>
-<guid>https://eprint.iacr.org/2023/1816</guid>
-<content:encoded><![CDATA[
-<div> 关键词：ASOZ、积木化账户、Merkle树、隐私保护、审计方案
-
-<br />
-总结:
-
-本文提出了一种名为ASOZ的去中心化支付系统设计。该系统利用基于Merkle树的积木化账户进行记账，同时结合Twisted ElGamal、非交互式零知识证明（NIZK）、Bulletproofs和zk-SNARKs等技术来实现隐私保护与审计功能。通过这种方式，ASOZ方案能够在全局混合中实现全面交易审计，尽管增加了约8%的证明生成时间和23%的验证时间，但总体成本保持在可接受范围内。
-
-ASOZ设计特别适用于大型交易场景，如指定合约市场，并提供在硬币混币方案中最强的隐私保护能力。该系统不仅确保了资产的私密性，还实现了有效的审计机制，平衡了隐私与安全之间的需求，为去中心化支付系统的未来发展提供了新的思路和解决方案。 <div>
-Decentralized payment systems have gradually received more attention in recent years. By removing the trusted intermediary used for accounting ledgers, those payment systems fundamentally empower users to control their assets. As privacy concerns grow, some cryptocurrencies are proposed to preserve the privacy of users. However, those cryptocurrencies also inadvertently facilitate illicit activities such as money laundering, fraudulent trading, etc. So it is necessary to design an auditing scheme. To solve this problem, many privacy-preserving and auditing schemes have been proposed. However, there exists no scheme that effectively solves the issue of privacy-preserving and auditing on both user identity and transaction value. 
-In this paper, we propose a design for a decentralized payment system named ASOZ. We use cryptographic accumulators based on Merkle trees for accounting and use a combination of Twisted ElGamal, Non-Interactive Zero-Knowledge(NIZK), Bulletproofs, and zk-SNARKs for privacy-preserving and auditing. Our scheme achieves full transaction audit in global mixing, while the additional cost introduced remains within an acceptable range, specifically an 8% increment in proof generation time and a 23% rise in verification time. Our scheme is capable of handling large-scale transaction scenarios such as designated contract markets, and offers the strongest privacy protection capabilities in coin mixer schemes.
-]]></content:encoded>
-<pubDate>Fri, 24 Nov 2023 09:17:18 +0000</pubDate>
-</item>
-<item>
-<title>Improved Circuit Synthesis with Multi-Value Bootstrapping for FHEW-like Schemes</title>
-<link>https://eprint.iacr.org/2023/1223</link>
-<guid>https://eprint.iacr.org/2023/1223</guid>
-<content:encoded><![CDATA[
-<div> 关键词：多值补码、简化方法、FHE-Deck库、优化技术、隐私计算
-
-总结:
-
-本文主要探讨了在隐私保护计算领域，特别是在布尔型全同态加密(FHE)方案上的进步与挑战。通过显著简化Carpov、Izabachène和Mollimard提出的多值补码方法，本文为基于布尔的FHE方案如FHEW或TFHE的实用性提供了基础。简化后的多值补码概念被集成到开源库FHE-Deck中，该库提供了一个易于使用的接口，并生成了具有最高安全性的多比特加密参数集。此外，作者提出并整合了首个针对FHE特定优化的技术，包括查找表（LUT）分组和加法器替换，以提高电路合成效率。
-
-通过LUT分组，平均减少了40%的补码操作，而加法器替换则在某些情况下将所需补码操作减少了高达85%。整体而言，当启用所有优化时，执行时间比之前的最优电路合成技术快了4.2倍。这一系列改进旨在解决隐私保护计算中的关键问题——性能和易用性，从而加速这些技术的实际应用。 <div>
-In recent years, the research community has made great progress in improving techniques for privacy-preserving computation, such as fully homomorphic encryption (FHE). Despite the progress, there remain open challenges, mainly in performance and usability, to further advance the adoption of these technologies. This work provides multiple contributions that improve the current state-of-the-art in both areas. More specifically, we significantly simplify the multi-value bootstrapping by Carpov, Izabachène, and Mollimard [CIM19] for Boolean-based FHE schemes such as FHEW or TFHE, making the concept usable in practice. Based on our simplifications, we implement an easy-to-use interface for multi-value bootstrapping in the open-source library FHE-Deck [fhe23], derive new parameter sets for multi-bit encryptions with state-of-the-art security, and build a toolset that translates high-level code to multi-bit operations on encrypted data using circuit synthesis. We propose and integrate the first non-trivial FHE-specific optimizations for privacy-preserving circuit synthesis: look-up table (LUT) grouping and adder substitution. Using LUT grouping, we reduce the number of bootstrapping operations by almost 40% on average, while for adder substitution, we reduce the number of required bootstrappings by up to 85% for certain use cases. Overall, the execution time is up to 4.2x faster with all optimizations enabled compared to previous state-of-the-art circuit synthesis.
-]]></content:encoded>
-<pubDate>Fri, 11 Aug 2023 20:22:21 +0000</pubDate>
-</item>
-<item>
-<title>Practical Post-Quantum Signatures for Privacy</title>
-<link>https://eprint.iacr.org/2024/131</link>
-<guid>https://eprint.iacr.org/2024/131</guid>
-<content:encoded><![CDATA[
-<div> 关键词：后量子密码学、隐私保护应用、盲签名、团体签名、匿名凭证
-
-总结:
-本文研究了后量子密码学背景下隐私保护应用中的关键组件，如盲签名、团体签名和匿名凭证。当前的挑战在于寻找高效且在标准假设下安全的后量子算法来替代现有技术。作者通过重新审视Jeudy等人的工作，提出了一种高效协议（SEP）的构建方法，成功实现了短元素长度与无安全妥协的理想平衡。这一创新被应用于匿名凭证系统中，显著减少了凭证大小至不足80KB，这在同类系统中是前所未有的。
-
-此外，文章还详细介绍了复杂零知识框架的实现，这是迄今为止未见于公开文献中的工作。通过这一实证研究，不仅提高了隐私保护解决方案的效率和现实部署的理解，而且为整个领域带来了新的进展。这种结合理论创新与实践验证的方法，不仅推动了后量子密码学在隐私保护领域的应用，也为未来标准的制定提供了有价值的参考。 <div>
-The transition to post-quantum cryptography has been an enormous challenge and effort for cryptographers over the last decade, with impressive results such as the future NIST standards. However, the latter has so far only considered central cryptographic mechanisms (signatures or KEM) and not more advanced ones, e.g., targeting privacy-preserving applications. Of particular interest is the family of solutions called blind signatures, group signatures and anonymous credentials, for which standards already exist, and which are deployed in billions of devices. Such a family does not have, at this stage, an efficient post-quantum counterpart although very recent works  improved this state of affairs by offering two different alternatives: either one gets a system with rather large elements but a security proved under standard assumptions or one gets a more efficient system at the cost of ad-hoc interactive assumptions or weaker security models. Moreover, all these works have only considered size complexity without implementing the quite complex building blocks their systems are composed of. In other words, the practicality of such systems is still very hard to assess, which is a problem if one envisions a post-quantum transition for the corresponding systems/standards.
-
-In this work, we propose a construction of so-called signature with efficient protocols (SEP), which is the core of such privacy-preserving solutions. By revisiting the approach by Jeudy et al. (Crypto 2023) we manage to get the best of the two alternatives mentioned above, namely short sizes with no compromise on security. To demonstrate this, we plug our SEP in an anonymous credential system, achieving credentials of less than 80 KB. In parallel, we fully implemented our system, and in particular the complex zero-knowledge framework of Lyubashevsky et al. (Crypto'22), which has, to our knowledge, not be done so far. Our work thus not only improves the state-of-the-art on privacy-preserving solutions, but also significantly improves the understanding of efficiency and implications for deployment in real-world systems.
-]]></content:encoded>
-<pubDate>Tue, 30 Jan 2024 10:37:10 +0000</pubDate>
 </item>
 </channel>
 </rss>
