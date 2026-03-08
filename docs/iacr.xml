@@ -4,12 +4,12 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+
 <item>
 <title>Duty-Free Bits: Projectivizing Garbling Schemes</title>
 <link>https://eprint.iacr.org/2026/476</link>
 <guid>https://eprint.iacr.org/2026/476</guid>
 <content:encoded><![CDATA[
-
 Garbling schemes are powerful primitives that enable secure computation between a mutually untrusting garbler and evaluator. A projective garbling scheme is one that encodes the evaluator's input in a simple bit-by-bit manner. Projective schemes, such as the seminal scheme of Yao, are versatile, as they are naturally compatible with other simple tools, such as $1$-out-of-$2$ oblivious transfer (OT). There exist garbling schemes that naturally operate over large finite fields, some of which require only efficient information-theoretic (IT) techniques. However, here the evaluator's input is encoded via an affine function over a large field, so these schemes are not naturally projective, reducing their versatility.
 
 We provide a transformation that efficiently projectivizes such schemes.
@@ -20,19 +20,16 @@ We apply our technique to two problems.
 (2) Our technique implies a non-interactive reduction from vector oblivious linear evaluations (VOLEs) over $\mathbb{F}_p$ to $1$-out-of-$2$ OTs. To our knowledge, ours is the state-of-the-art Minicrypt (plus base OTs) protocol for large field VOLE secure against a malicious receiver. It costs only $O((\lambda + n) \lg p)$ bits.
 ]]></content:encoded>
 <pubDate>Sun, 08 Mar 2026 00:27:03 +0000</pubDate>
-<pubDate>Sun, 08 Mar 2026 00:27:03 +0000</pubDate>
 </item>
 <item>
 <title>Scalable Compliant Privacy on Starknet</title>
 <link>https://eprint.iacr.org/2026/474</link>
 <guid>https://eprint.iacr.org/2026/474</guid>
 <content:encoded><![CDATA[
-
 We present a privacy protocol implemented on Starknet that enables confidential transactions while maintaining regulatory compliance. Transfers hide the sender, receiver, and amount from external observers, with validity enforced by zero-knowledge proofs generated on the client side using the Stwo STARK prover.
 
 The protocol introduces three key innovations: (1) an efficient note discovery mechanism, (2) a practical compliance framework that enables an auditing entity to selectively unshield transactions upon legitimate regulatory request, and (3) anonymous integration with existing Starknet DeFi contracts. The system supports multiple token types in a single pool and leverages Starknet's native account abstraction for transaction authorization. All proof logic and contract code are written in Cairo, providing a unified codebase that simplifies auditing and development.
 ]]></content:encoded>
-<pubDate>Sat, 07 Mar 2026 17:47:08 +0000</pubDate>
 <pubDate>Sat, 07 Mar 2026 17:47:08 +0000</pubDate>
 </item>
 <item>
@@ -40,7 +37,6 @@ The protocol introduces three key innovations: (1) an efficient note discovery m
 <link>https://eprint.iacr.org/2026/470</link>
 <guid>https://eprint.iacr.org/2026/470</guid>
 <content:encoded><![CDATA[
-
 Byzantine Agreement and Broadcast are traditionally studied in one of two extremes: the authenticated setting, where a public key infrastructure (PKI) enables universally verifiable signatures and yields higher fault tolerance, and the unauthenticated setting, where no PKI is available and resilience necessarily drops.
 Motivated by Proof-of-Stake blockchains, where only a stable subset of participants (e.g., validators) have registered long-term keys while others do not, we initiate a systematic study of consensus in the \emph{partially authenticated} setting, where a subset of parties are \emph{registered} in a PKI and the remaining parties are \emph{unregistered}.
 
@@ -50,9 +46,7 @@ Second, when the sender is registered, we give a deterministic synchronous broad
 We complement this with a matching lower bound in a strengthened leakage model in which the adversary learns each party's private state at the end of every round, ruling out both deterministic protocols and randomized protocols that rely only on short-lived secrets and the basic signing/verification interface.
 ]]></content:encoded>
 <pubDate>Fri, 06 Mar 2026 15:35:12 +0000</pubDate>
-<pubDate>Fri, 06 Mar 2026 15:35:12 +0000</pubDate>
 </item>
-
 <item>
 <title>A Quantum-Safe Private Group System for Signal from Key Re-Randomizable Signatures</title>
 <link>https://eprint.iacr.org/2026/453</link>
@@ -15280,80 +15274,6 @@ This work introduces Cryptobazaar, a novel scalable, private, and decentralized 
 Nowadays, the problem of point-to-point encryption is solved by the wide adaptation of protocols like TLS. However, challenges persist for End-to-End Encryption (E2EE). Current E2EE solutions, such as PGP and secure messengers like Signal, suffer from issues like 1) low usability, 2) small user base, 3) dependence on central service providers, and 4) susceptibility to backdoors. Concerns over legally mandated backdoors are rising as the US and EU are proposing new surveillance regulations requiring chat monitoring. We present a new E2EE solution called Encrypted MultiChannel Communication, based on n-out-of-n secret sharing. EMC2 splits messages into multiple secret shares and sends them through independent channels. We show that multiple independent channels exist between users and EMC2 provides E2EE with no single point of trust, no setup, and is understandable by the general public. Our solution complements existing tools and aims to strengthen the argument against legally enforced backdoors by demonstrating their ineffectiveness.
 ]]></content:encoded>
 <pubDate>Mon, 09 Sep 2024 09:33:15 +0000</pubDate>
-</item>
-<item>
-<title>Lego-DLC: batching module for commit-carrying SNARK under Pedersen Engines</title>
-<link>https://eprint.iacr.org/2024/1405</link>
-<guid>https://eprint.iacr.org/2024/1405</guid>
-<content:encoded><![CDATA[
-<div> 关键词：LegoSNARK、cc-SNARK、CP-SNARK、Groth16、Lego-DLC
-
-总结:
-
-文章主要讨论了如何优化zk-SNARK系统在处理大量承诺证明时的效率问题。首先，文章引入了cc-SNARK（commit-carrying SNARK）这一新型概念，它是CP-SNARK（commit-and-prove SNARK）的一种特殊形式，用于构建承诺与证明SNARK系统。通过cc-SNARK，文章展示了改进后的Groth16版本，其证明时间提高了约5000倍。
-
-然而，当需要同时证明l个承诺时，使用上述方法会遇到性能瓶颈，因为LegoSNARK的链接系统在验证器侧需要进行O(l)次配对操作。为解决这一问题，文章提出了一种新的批处理模块——Lego-DLC，它结合了Σ协议与基于Pedersen引擎的承诺携带SNARK，旨在高效处理多个承诺。通过具体实例化Groth16和Plonk，该方法在验证时间上表现出了显著的效率提升，对于2^16个承诺，验证时间仅需0.064秒，比LegoSNARK的1.972秒快了超过30倍。尽管这导致了约8倍的证明时间增加（从0.177秒增加到1.413秒），但整体来看，这种性能提升是值得的。
-
-文章通过对比实验展示了Lego-DLC在处理大规模承诺证明场景中的优势，为zk-SNARK系统的实际应用提供了有效的解决方案。 <div>
-The synergy of commitments and zk-SNARKs is
-widely used in various applications, particularly in fields like
-blockchain, to ensure data privacy and integrity without revealing
-secret information. However, proving multiple commitments in
-a batch imposes a large overhead on a zk-SNARK system. One
-solution to alleviate the burden is the use of commit-and-prove
-SNARK (CP-SNARK) approach. LegoSNARK defines a new
-notion called commit-carrying SNARK (cc-SNARK), a special-
-ized form of CP-SNARK, and introduces a compiler to build
-commit-carrying SNARKs into commit-and-prove SNARKs. Us-
-ing this compiler, the paper shows a commit-and-prove version
-of Groth16 that improves the proving time (about 5,000×).
-However, proving $l$-multiple commitments simultaneously with
-this compiler faces a performance issue, as the linking system in
-LegoSNARK requires $O(l)$ pairings on the verifier side.
-To enhance efficiency, we propose a new batching module
-called Lego-DLC, designed for handling multiple commitments. This
-module is built by combining a $\Sigma$-protocol with commitment-
-carrying SNARKs under Pedersen engines in which our mod-
-ule can support all commit-carrying SNARKs under Pedersen
-engines. In this paper, we provide the concrete instantiations
-for Groth16 and Plonk. In the performance comparison, for
-$2^{16}$ commitments, with a verification time of just 0.064s—over
-30x faster than LegoSNARK’s 1.972s—our approach shows
-remarkable efficiency. The slightly longer prover time of 1.413s
-(compared to LegoSNARK’s 0.177s), around 8x is a small trade-
-off for this performance gain.
-]]></content:encoded>
-<pubDate>Mon, 09 Sep 2024 07:44:03 +0000</pubDate>
-</item>
-<item>
-<title>A Recursive zk-based State Update System</title>
-<link>https://eprint.iacr.org/2024/1402</link>
-<guid>https://eprint.iacr.org/2024/1402</guid>
-<content:encoded><![CDATA[
-<div> 关键词：ZKP、SNARK证明、zkVM、递归证明系统、区块链
-
-总结: 这篇论文提出了一种基于零知识证明（ZKP）的区块更新系统，其中每个区块包含一个由用户生成的zkVM证明聚合而成的SNARK证明。该系统允许用户在其本地机器上生成状态更新证明，从而促进了一个安全、分散的验证过程。论文的主要贡献是递归证明系统，它通过将用户证明进行层级化树结构验证并最终形成根证明来解决可扩展性问题，该根证明作为区块证明用于验证。该解决方案改进了当前区块链范式，通过ZKP提供高效递归验证，增强了安全性并减少了计算负载。 <div>
-This paper introduces a ZKP (zero-knowledge proof) based state update system, where each block contains a SNARK proof aggregated from the user generated zkVM (zero knowledge virtual machine) proofs. It enables users to generate state update proofs in their local machines, contributing to a secure, decentralized verification process. Our main contribution in this paper, the recursive proofs system, addresses scalability by recursively verifying user proofs and aggregating them in a hierarchical tree structure up to a root proof, serving as a block proof. The proposed solution advances current blockchain paradigms by offering efficient recursive verification through ZKP, enhancing security and reducing computational load.
-]]></content:encoded>
-<pubDate>Sat, 07 Sep 2024 17:04:51 +0000</pubDate>
-</item>
-<item>
-<title>SLAMP-FSS: Two-Party Multi-Point Function Secret Sharing from Simple Linear Algebra</title>
-<link>https://eprint.iacr.org/2024/1394</link>
-<guid>https://eprint.iacr.org/2024/1394</guid>
-<content:encoded><![CDATA[
-<div> 关键词：多党计算（MPC）、随机性关联、多点函数秘密共享（FSS）、伪随机关联生成器、树结构
-
-总结:
-本文探讨了多党计算(MPC)中随机性关联的重要性及其在提高计算和通信效率的同时保护数据隐私的应用。文章首先介绍了几种常见的随机性关联形式，如盲化一对一转移(OT)、盲化线性函数评估(OLE)、乘法三元组以及一次性真值表。随后指出，多点函数秘密共享(FSS)是构建伪随机关联生成器的有效工具。
-
-研究提出了一种基于Boyle等人的方案的自然扩展，通过引入树结构、伪随机生成器和线性方程系统来构建新的多点FSS方案——SLAMP-FSS和SLAMPR-FSS。这些新方案在评估阶段展现出更高的效率，相比先前的多点FSS方案，它们更灵活，并在其他效率指标上与之相似。
-
-总的来说，本文通过改进多点FSS方案，旨在提供一种既能提高MPC中计算和通信效率，又能在保护数据隐私方面发挥关键作用的新技术。通过利用树结构和伪随机生成器，新方案实现了在保持灵活性的同时，优化了评估阶段的性能，为MPC领域带来了创新性的解决方案。 <div>
-Multiparty computation (MPC) is an important field of cryptography that deals with protecting the privacy of data, while allowing to do computation on that data. A key part of MPC is the parties involved having correlated randomness that they can use to make the computation or the communication between themselves more efficient, while still preserving the privacy of the data. Examples of these correlations include random oblivious transfer (OT) correlations, oblivious linear-function evaluation (OLE) correlations, multiplication triples (also known as Beaver triples) and one-time truth tables. Multi-point function secret sharing (FSS) has been shown to be a great building block for pseudo-random correlation generators. The main question is how to construct fast and efficient multi-point FSS schemes. Here we propose a natural generalization of the scheme of Boyle et al 2016 using a tree structure, a pseudorandom generator and systems of linear equations. 
-Our schemes SLAMP-FSS and SLAMPR-FSS are more efficient in the evaluation phase than other previously proposed multi-point FSS schemes while being also more flexible and being similar in other efficiency parameters.
-]]></content:encoded>
-<pubDate>Thu, 05 Sep 2024 08:38:24 +0000</pubDate>
 </item>
 </channel>
 </rss>
