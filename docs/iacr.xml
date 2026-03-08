@@ -5,11 +5,59 @@
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
 <item>
+<title>Duty-Free Bits: Projectivizing Garbling Schemes</title>
+<link>https://eprint.iacr.org/2026/476</link>
+<guid>https://eprint.iacr.org/2026/476</guid>
+<content:encoded><![CDATA[
+
+Garbling schemes are powerful primitives that enable secure computation between a mutually untrusting garbler and evaluator. A projective garbling scheme is one that encodes the evaluator's input in a simple bit-by-bit manner. Projective schemes, such as the seminal scheme of Yao, are versatile, as they are naturally compatible with other simple tools, such as $1$-out-of-$2$ oblivious transfer (OT). There exist garbling schemes that naturally operate over large finite fields, some of which require only efficient information-theoretic (IT) techniques. However, here the evaluator's input is encoded via an affine function over a large field, so these schemes are not naturally projective, reducing their versatility.
+
+We provide a transformation that efficiently projectivizes such schemes.
+Consider an arithmetic garbling scheme where the evaluator's input consists of elements from a large prime field. Our symmetric-key-based garbling techniques give a mechanism to translate from Yao-style garbled labels to IT-style garbled labels at cost proportional to the input and output labels: crossing the border is duty-free!
+
+We apply our technique to two problems.
+(1) Recent works show that projective garbling schemes solve a problem central to trust-minimized bridges for the Bitcoin blockchain. BABE (Garg et al., 2026) and Argo MAC (Eagen and Lai, 2026) give two different approaches. Both works implicitly construct an efficient IT garbling scheme, then use naive bit-decomposition to achieve projectivity. We construct drop-in replacements for both; we improve BABE's encoding size by $45\times$, and Argo MAC's by $20\times$.
+(2) Our technique implies a non-interactive reduction from vector oblivious linear evaluations (VOLEs) over $\mathbb{F}_p$ to $1$-out-of-$2$ OTs. To our knowledge, ours is the state-of-the-art Minicrypt (plus base OTs) protocol for large field VOLE secure against a malicious receiver. It costs only $O((\lambda + n) \lg p)$ bits.
+]]></content:encoded>
+<pubDate>Sun, 08 Mar 2026 00:27:03 +0000</pubDate>
+<pubDate>Sun, 08 Mar 2026 00:27:03 +0000</pubDate>
+</item>
+<item>
+<title>Scalable Compliant Privacy on Starknet</title>
+<link>https://eprint.iacr.org/2026/474</link>
+<guid>https://eprint.iacr.org/2026/474</guid>
+<content:encoded><![CDATA[
+
+We present a privacy protocol implemented on Starknet that enables confidential transactions while maintaining regulatory compliance. Transfers hide the sender, receiver, and amount from external observers, with validity enforced by zero-knowledge proofs generated on the client side using the Stwo STARK prover.
+
+The protocol introduces three key innovations: (1) an efficient note discovery mechanism, (2) a practical compliance framework that enables an auditing entity to selectively unshield transactions upon legitimate regulatory request, and (3) anonymous integration with existing Starknet DeFi contracts. The system supports multiple token types in a single pool and leverages Starknet's native account abstraction for transaction authorization. All proof logic and contract code are written in Cairo, providing a unified codebase that simplifies auditing and development.
+]]></content:encoded>
+<pubDate>Sat, 07 Mar 2026 17:47:08 +0000</pubDate>
+<pubDate>Sat, 07 Mar 2026 17:47:08 +0000</pubDate>
+</item>
+<item>
+<title>Byzantine Consensus in the Partially Authenticated Setting</title>
+<link>https://eprint.iacr.org/2026/470</link>
+<guid>https://eprint.iacr.org/2026/470</guid>
+<content:encoded><![CDATA[
+
+Byzantine Agreement and Broadcast are traditionally studied in one of two extremes: the authenticated setting, where a public key infrastructure (PKI) enables universally verifiable signatures and yields higher fault tolerance, and the unauthenticated setting, where no PKI is available and resilience necessarily drops.
+Motivated by Proof-of-Stake blockchains, where only a stable subset of participants (e.g., validators) have registered long-term keys while others do not, we initiate a systematic study of consensus in the \emph{partially authenticated} setting, where a subset of parties are \emph{registered} in a PKI and the remaining parties are \emph{unregistered}.
+
+We provide a nearly complete feasibility characterization of the resilience as a function of the number $s$ of registered parties among $n$ total parties.
+First, when the sender is not registered, we show that Byzantine Agreement and Broadcast are possible if and only if $t \le \max\{\lceil s/2\rceil,\lceil n/3\rceil\}-1$, matching a simple protocol and an impossibility bound.
+Second, when the sender is registered, we give a deterministic synchronous broadcast protocol tolerating up to $t \le s + \lceil (n-s)/3\rceil - 1$ Byzantine faults (equivalently, $3t<n+2s$); while we present the binary case in the main body for clarity, our techniques extend to an efficient multivalued protocol.
+We complement this with a matching lower bound in a strengthened leakage model in which the adversary learns each party's private state at the end of every round, ruling out both deterministic protocols and randomized protocols that rely only on short-lived secrets and the basic signing/verification interface.
+]]></content:encoded>
+<pubDate>Fri, 06 Mar 2026 15:35:12 +0000</pubDate>
+<pubDate>Fri, 06 Mar 2026 15:35:12 +0000</pubDate>
+</item>
+
+<item>
 <title>A Quantum-Safe Private Group System for Signal from Key Re-Randomizable Signatures</title>
 <link>https://eprint.iacr.org/2026/453</link>
 <guid>https://eprint.iacr.org/2026/453</guid>
 <content:encoded><![CDATA[
-
 Instant messaging services are an integral part of today's communication and their privacy has wide societal implications. Major messengers deploy end-to-end encryption, hiding message contents from the service provider. Group messaging, however, creates the challenge of also keeping the group membership list private.
 
 The Signal messenger currently implements private group management using techniques inspired by Chase, Perrin, and Zaverucha (CCS 2020). Transitioning this system to quantum-safe turns out to be challenging: While one-to-one messaging can often adopt the newly standardized KEMs and signatures in a relatively direct way, private group management is more complex. Signal’s existing design heavily relies on the discrete-log structure to combine anonymous credentials, verifiable encryption, and oblivious PRFs for privacy and functionality. Quantum-safe versions of these components are unfortunately, typically far less efficient, requiring heavy zero-knowledge proofs and large communication per group operation. As a result, simply "swapping in" quantum-safe primitives is unlikely to yield an optimal protocol.
@@ -18,9 +66,7 @@ This paper reconsiders the design of the entire group system from the ground-up.
 We prove our design secure in an extended security model that more comprehensively captures the rich feature set of Signal's group messaging system.
 ]]></content:encoded>
 <pubDate>Wed, 04 Mar 2026 16:34:19 +0000</pubDate>
-<pubDate>Wed, 04 Mar 2026 16:34:19 +0000</pubDate>
 </item>
-
 <item>
 <title>Trace: Complete Client-Side Account Access Logging</title>
 <link>https://eprint.iacr.org/2026/447</link>
@@ -15308,22 +15354,6 @@ Multiparty computation (MPC) is an important field of cryptography that deals wi
 Our schemes SLAMP-FSS and SLAMPR-FSS are more efficient in the evaluation phase than other previously proposed multi-point FSS schemes while being also more flexible and being similar in other efficiency parameters.
 ]]></content:encoded>
 <pubDate>Thu, 05 Sep 2024 08:38:24 +0000</pubDate>
-</item>
-<item>
-<title>Survivable Payment Channel Networks</title>
-<link>https://eprint.iacr.org/2024/1393</link>
-<guid>https://eprint.iacr.org/2024/1393</guid>
-<content:encoded><![CDATA[
-<div> 关键词：支付通道网络、交易吞吐量、多跳路径、保护方案、容量分配优化
-
-<br />
-<br />
-总结: 文章主要探讨了支付通道网络（PCN）在加密货币中作为提高交易吞吐量的主要方法。PCN允许两个参与者通过锁定一定资金的链上交易来建立双向支付通道，进行多次互付而不需提交到区块链。然而，打开或维护通道需要较长时间和资源，限制了其数量。为了解决这个问题，用户可以利用多跳路径绕过为每个新目的地开设和维护通道的需求。
-
-文章还分析了支付通道的停止时间（即通道耗尽的时间），并研究了网络中一组通道的平均停止时间和特定拓扑结构下通道的停止时间。为了提高网络的最小停止时间，提出了优化通道容量分布的方案。实验结果验证了模型的准确性和优化方案的有效性。总体而言，文章旨在通过优化支付通道网络中的容量分配策略，提升系统整体的稳定性和效率，减少由于通道耗尽导致的支付失败情况。 <div>
-Payment channel networks (PCNs) are a leading method to scale the transaction throughput in cryptocurrencies. Two participants can use a bidirectional payment channel for making multiple mutual payments without committing them to the blockchain. Opening a payment channel is a slow operation that involves an on-chain transaction locking a certain amount of funds. These aspects limit the number of channels that can be opened or maintained. Users may route payments through a multi-hop path and thus avoid opening and maintaining a channel for each new destination. Unlike regular networks, in PCNs capacity depends on the usage patterns and, moreover, channels may become unidirectional. Since payments often fail due to channel depletion, a protection scheme to overcome failures is of interest. We define the stopping time of a payment channel as the time at which the channel becomes depleted. We analyze the mean stopping time of a channel as well as that of a network with a set of channels and examine the stopping time of channels in particular topologies. We then propose a scheme for optimizing the capacity distribution among the channels in order to increase the minimal stopping time in the network. We conduct experiments and demonstrate the accuracy of our model and the efficiency of the proposed optimization scheme.
-]]></content:encoded>
-<pubDate>Thu, 05 Sep 2024 08:32:20 +0000</pubDate>
 </item>
 </channel>
 </rss>
