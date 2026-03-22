@@ -4,6 +4,71 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+<item>
+<title>TP-NTT: Batch NTT Hardware with Application to Relinearization</title>
+<link>https://eprint.iacr.org/2026/556</link>
+<guid>https://eprint.iacr.org/2026/556</guid>
+<content:encoded><![CDATA[
+
+Fully Homomorphic Encryption (FHE) enables arbitrary computation on encrypted data without decryption, providing strong privacy guarantees for secure cloud computing, encrypted analytics, and privacy-preserving machine learning. However, practical deployment of FHE remains limited by the high computational cost of polynomial arithmetic over large modular rings. In particular, Number Theoretic Transform (NTT)–based polynomial multiplication dominates the execution time of modern lattice-based FHE schemes. In this work, we present TP-NTT, a scalable, throughput-optimized NTT architecture supporting a wide range of ring dimensions used in FHE, from $2^{10}$ to $2^{16}$. Our design applies optimizations at multiple levels, from modular arithmetic to the NTT algorithm itself, including multi-dimensional decomposition without requiring additional multiplication blocks. The decomposition dimensionality is configurable at design time, supporting 2-D, 3-D, and 4-D decompositions, each advantageous in specific scenarios. Furthermore, TP-NTT provides design-time configurable throughput. Combined with its scalable architecture, this enables significant advantages for batch NTT operations compared to other works in the literature. At $n=2^{16}$, it outperforms the best-performing prior design by $8.03\times$ in average latency while achieving $1.26\times$ better area–time-product (ATP). To demonstrate its efficiency, we present a case-study on FHE relinearization, focusing on the BFV scheme. We propose a relinearization accelerator that leverages TP-NTT’s fast batch NTT capability, achieving a $34.65\times$ speed-up over state-of-the-art software implementations and highlighting TP-NTT’s effectiveness in real-world FHE applications.
+]]></content:encoded>
+<pubDate>Fri, 20 Mar 2026 11:06:21 +0000</pubDate>
+<pubDate>Fri, 20 Mar 2026 11:06:21 +0000</pubDate>
+</item>
+<item>
+<title>Improved Issuer Hiding for BBS-based Anonymous Credentials</title>
+<link>https://eprint.iacr.org/2026/555</link>
+<guid>https://eprint.iacr.org/2026/555</guid>
+<content:encoded><![CDATA[
+
+Attribute-based anonymous credential systems often fail to hide the issuer’s identity. Recent attempts to address this issue either suffer from efficiency problems or contain critical policy vulnerabilities (where a policy is defined as the set of issuers that relying parties are willing to accept). More precisely, we present several attacks that exploit these vulnerabilities. These attacks allow a malicious user to collaborate with a single authorized issuer and forge credentials for arbitrary attributes. This enables the malicious user to usurp the powers of any trusted issuer.  
+To address these security and architectural gaps, we propose a novel BBS-based issuer-hiding credential system that adopts a signed-policy approach.
+Our construction resolves several open challenges: (1) it is proven secure in the Algebraic Group Model (AGM) rather than the Generic Group Model (GGM), (2) it eliminates the requirement for \textit{secret policy} keys, allowing verification to be performed without secret values; and (3) it enables policy generation to be delegated to a trusted certification authority rather than requiring each relying party to maintain individual policy keys.
+Furthermore, we introduce the first pairing-free variant of an issuer-hiding anonymous credential based on algebraic MACs.
+The implementation results and formal security proofs confirm that our scheme achieves unforgeability and everlasting issuer-hiding anonymity and establishes our protocol as a practical, secure solution for privacy-preserving credential systems that is suitable for real-world deployment.
+]]></content:encoded>
+<pubDate>Fri, 20 Mar 2026 10:42:58 +0000</pubDate>
+<pubDate>Fri, 20 Mar 2026 10:42:58 +0000</pubDate>
+</item>
+<item>
+<title>NI-DKG: Non-Interactive Distributed Key Generation Using Blockchain and Zero-Knowledge Proofs</title>
+<link>https://eprint.iacr.org/2026/552</link>
+<guid>https://eprint.iacr.org/2026/552</guid>
+<content:encoded><![CDATA[
+
+We present a non-interactive DKG protocol that eliminates complaint procedures through the systematic use of ZK proofs. The protocol requires a timed public bulletin board with adjoined computing capacity as its coordination layer, a capability realized in practice by smart-contract-enabled blockchains. Existing smart-contract DKGs detect invalid contributions only after submission, requiring dispute phases that introduce timing constraints and attack surfaces. In our protocol, each participant submits a single zk-SNARK proving the correctness of their contribution: polynomial commitment consistency, Feldman verification equations, and correct share encryption. The smart contract rejects any invalid proof, simplifying the protocol to non-interactive phases delimited by block numbers. The protocol relies on standard primitives: Shamir's secret sharing, Feldman commitments, hashed ElGamal encryption, and Chaum-Pedersen discrete-log equality proofs, with on-chain verification via zk-SNARKs. We provide an implementation outline for EVM-compatible chains, including circuit specifications for key generation, threshold decryption, and optional secret key disclosure. We also discuss EVM verifier constraints on the number of public inputs and sketch approaches to address them.
+]]></content:encoded>
+<pubDate>Thu, 19 Mar 2026 23:41:45 +0000</pubDate>
+<pubDate>Thu, 19 Mar 2026 23:41:45 +0000</pubDate>
+</item>
+<item>
+<title>Aggregator-Based Voting using proof of Partition</title>
+<link>https://eprint.iacr.org/2026/545</link>
+<guid>https://eprint.iacr.org/2026/545</guid>
+<content:encoded><![CDATA[
+
+We present Aggios, a scalable and privacy preserving proxy voting system designed for frequent and large-scale elections such as Decentralized Autonomous Organizations (DAO), when storing votes on the bulletin board is expensive. To this end, Aggios introduces `aggregators': entities to which voters delegate their votes, and who then post their batched proofs on the public ledger. Aggios achieves strong integrity guarantees: only authorized voters can vote, votes are counted correctly, voters are assured their vote is counted.
+
+At the core of Aggios, lies a novel zero-knowledge argument, which we call the Extended Partition Argument (EPA), that allows a prover to demonstrate that a committed vector can be decomposed into multiple disjoint ``subvectors'' forming a partition, each subvector of public (or not) sizes. The argument is compatible with a universal SRS, does not require precomputation, and offers efficient proving and verification complexity. We prove security of the EPA in the algebraic group model. 
+Our implementation of EPA shows suitability of the argument even for very large vectors. 
+
+Using the EPA as the central block to Aggios, we show that our voting scheme is at least 512 times more compact than naive casting of $N$ votes, and can even be size-independent of the number of voters in the optimal case, thus offering a practical route to frequent and privacy-preserving voting at scale.
+]]></content:encoded>
+<pubDate>Thu, 19 Mar 2026 13:06:35 +0000</pubDate>
+<pubDate>Thu, 19 Mar 2026 13:06:35 +0000</pubDate>
+</item>
+<item>
+<title>VERIDP: Verifiable Differentially Private Training</title>
+<link>https://eprint.iacr.org/2026/542</link>
+<guid>https://eprint.iacr.org/2026/542</guid>
+<content:encoded><![CDATA[
+
+Stochastic Gradient Descent (SGD) is the foundation of modern machine learning (ML). In privacy-sensitive settings, gradients can reveal details about individual data points. Differential Privacy (DP) protects sensitive data during ML training by clipping gradients and adding calibrated Gaussian noise. However, existing frameworks assume semi-honest participants, which fails in adversarial or federated environments where malicious actors can bypass or alter the noise addition process, breaking privacy guarantees. 
+We present VERIDP, a framework for verifiable differentially private training that cryptographically enforces and proves the correct execution of differentially private stochastic gradient descent (DP-SGD) in zero knowledge. VERIDP integrates Zero-Knowledge Proofs (ZKPs) with polynomial commitments, sumcheck and GKR-based proofs, and incrementally verifiable computation (IVC) to generate compact proofs of correct gradient computation, clipping, averaging, and Gaussian noise generation—without revealing private data or randomness. Unlike previous systems that only verify the final privacy budget, VERIDP enables per-iteration verifiability of each model update, providing strong privacy assurances even in adversarial settings. This establishes a novel and complete Zero-Knowledge Proof of Differentially Private Stochastic Gradient Descent (ZK-DPSGD), uniting differential privacy and verifiable computation for secure and auditable ML. Our evaluation shows that prover time increases linearly with the number of input samples, while both verifier time (2–5 ms) and proof size (3–4 KB) remain compact and effectively constant.
+]]></content:encoded>
+<pubDate>Tue, 17 Mar 2026 21:04:03 +0000</pubDate>
+<pubDate>Tue, 17 Mar 2026 21:04:03 +0000</pubDate>
+</item>
 
 <item>
 <title>ROTL: Faster Lookup Table Evaluation</title>
