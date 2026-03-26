@@ -5,18 +5,32 @@
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
 <item>
+<title>Efficient Compilers for Verifiable Dynamic Searchable Symmetric Encryption</title>
+<link>https://eprint.iacr.org/2026/594</link>
+<guid>https://eprint.iacr.org/2026/594</guid>
+<content:encoded><![CDATA[
+
+We construct compilers to generically transform any dynamic Searchable Symmetric Encryption (DSSE) scheme that is secure against a semi-honest server into one that is secure against a malicious servers, thus yielding a Verifiable dynamic SSE (VDSSE). Our compilers achieve optimal overheads while preserving forward and backward privacy, which are the standard and widely accepted security notions for DSSE.
+
+We focus on optimizing communication overheads and client storage requirements. Our first compiler $\mathsf{FLASH}$ incurs $O(1)$ communication overhead between the client and the server, which is optimal, while incurring mild storage overhead at the client. Our second compiler $\mathsf{BOLT}$ incurs $O(1)$ storage overhead at the client while incurring mild communication overhead. 
+Towards this, we define a new authenticated data structure called a set commitment and we provide an efficient instantiation of this primitive. 
+
+We prototype implement our compilers and report on their performance over real-world databases. Our experiments validate that our compilers incur concretely low overheads on top of existing semi-honest DSSE schemes, and yield practically efficient VDSSE schemes that scale to very large databases.
+]]></content:encoded>
+<pubDate>Wed, 25 Mar 2026 05:30:27 +0000</pubDate>
+<pubDate>Wed, 25 Mar 2026 05:30:27 +0000</pubDate>
+</item>
+
+<item>
 <title>Format-Preserving Compression-Tolerating Authenticated Encryption for Images</title>
 <link>https://eprint.iacr.org/2026/585</link>
 <guid>https://eprint.iacr.org/2026/585</guid>
 <content:encoded><![CDATA[
-
 We study the problem of provably-secure format-preserving authenticated encryption scheme for images, where decryption is successful even when ciphertexts undergo compression. This novel primitive offers users more control and privacy when sharing and storing images on social media and other photo-centric, compressing platforms like Facebook and Google Photos. Since compression is usually lossy, we cannot expect the decrypted image to be identical to the original. But we want the decrypted image to be visually as close to the original image as possible. 
 There is a vast number of works on image encryption, mostly in the signal processing community, but they do not provide formal security analyses. We formally define security, covering the goals of image confidentiality and integrity. While we first treat the problem generically, we are particularly interested in the construction for the most common compression format, JPEG. We design a scheme for JPEG compression using the standard symmetric cryptographic tools and special pre- and post-processing.  We formally assess the security guarantees provided by the construction, discuss how to select the parameters using empirical experiments, and study performance of our scheme in terms of computational efficiency and decryption quality. We also build a browser plug-in that helps users store and share photos privately.
 ]]></content:encoded>
 <pubDate>Tue, 24 Mar 2026 14:00:10 +0000</pubDate>
-<pubDate>Tue, 24 Mar 2026 14:00:10 +0000</pubDate>
 </item>
-
 <item>
 <title>PRIVADA: Private user-centric Data Aggregation</title>
 <link>https://eprint.iacr.org/2026/579</link>
@@ -15039,24 +15053,6 @@ multiparty computation and differential privacy, especially in the
 context of ML training.
 ]]></content:encoded>
 <pubDate>Fri, 20 Sep 2024 04:51:34 +0000</pubDate>
-</item>
-<item>
-<title>P2C2T: Preserving the Privacy of Cross-Chain Transfer</title>
-<link>https://eprint.iacr.org/2024/1467</link>
-<guid>https://eprint.iacr.org/2024/1467</guid>
-<content:encoded><![CDATA[
-<div> 关键词：区块链、数字货币、隐私保护、跨链传输、原子性
-
-总结: 
-
-本文主要探讨了区块链技术在数字货币系统中的应用及其挑战。首先指出，当前的区块链数字货币系统在互操作性方面存在不足，这导致资产跨系统转移变得复杂且不安全。为解决这一问题，作者提出了一种名为P2C2T（Peer-to-Chain-to-Target）的隐私保护跨链传输方案。该方案基于“阈值匿名原子锁”（TA²L），能够确保跨链交易的原子性、不可链接性、不可区分性和无需抵押，同时对底层区块链的要求较低。
-
-P2C2T通过结合“可验证时间离散对数”方案，使得跨链交易在安全性和性能上与常规的链内交易相匹配。特别地，它消除了发送方的抵押要求，并仅需要底层区块链具备签名验证能力。为了证明TA²L的安全性，作者引入了“阈值盲条件签名”的概念，并通过必要的证明展示了P2C2T的整体安全性。
-
-此外，作者还对比了P2C2T与现有最接近的方案，在运行时间、通信成本和存储成本上，P2C2T至少降低了85.488%，并提供了实际案例来展示其隐私性和实用性。通过使用比特币测试网和Litecoin测试网进行的跨链和链内转账实验，证实了P2C2T的有效性和高效性。 <div>
-Blockchain-enabled digital currency systems have typically operated in isolation, lacking necessary mechanisms for seamless interconnection. Consequently, transferring assets across distinct currency systems remains a complex challenge, with existing schemes often falling short in ensuring security, privacy, and practicality. This paper proposes P2C2T -- a privacy-preserving cross-chain transfer scheme. It is the first scheme to address atomicity, unlinkability, indistinguishability, non-collateralization, and required functionalities across diverse currency systems. P2C2T is based on \textit{threshold anonymous atomic locks} (TA$^2$L), also proposed by us, serving as the cornerstone for guaranteeing atomic cross-chain transfer while obscuring the payment relationships between users. By combining TA$^2$L with \textit{verifiable timed discrete logarithm} schemes, P2C2T renders cross-chain transactions indistinguishable from regular intra-chain ones. Notably, P2C2T eliminates the collateralization of senders and imposes minimal requirements on underlying blockchains, specifically on the ability to verify signatures. We substantiate the security of TA$^2$L based on a proposed cryptographic notion called \textit{threshold blind conditional signatures} and demonstrate the security of P2C2T through necessary proofs. Additionally, we compare the performance of P2C2T with an existing scheme that has properties closest to P2C2T. The comparison reveals that P2C2T reduces overhead by at least $85.488\%$ in terms of running time, communication cost, and storage cost when completing a cross-chain transfer. We further conduct cross-chain transfers and intra-chain payments using the Bitcoin testnet and Litecoin testnet to illustrate the privacy and practicality of P2C2T.
-]]></content:encoded>
-<pubDate>Thu, 19 Sep 2024 13:21:42 +0000</pubDate>
 </item>
 </channel>
 </rss>
