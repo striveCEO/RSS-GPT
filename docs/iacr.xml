@@ -4,6 +4,43 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+<item>
+<title>Oblivious SpaceSaving: Heavy-Hitter Detection over Fully Homomorphic Encryption</title>
+<link>https://eprint.iacr.org/2026/603</link>
+<guid>https://eprint.iacr.org/2026/603</guid>
+<content:encoded><![CDATA[
+
+Heavy-hitter detection is a fundamental primitive in stream analytics, with applications in network monitoring, telemetry, and large-scale data systems. In many practical deployments, this computation must be maintained continuously on remote infrastructure that offers higher availability and centralized operational control, even when the underlying streams contain sensitive identifiers or proprietary activity patterns. Existing privacy-preserving approaches either incur substantial statistical noise or rely on multi-server trust assumptions. Fully Homomorphic Encryption (FHE) offers an attractive alternative by enabling exact computation over encrypted data on a single untrusted server, but the high cost of encrypted comparisons has historically made stateful stream processing impractical.
+
+We present Oblivious SpaceSaving, a privacy-preserving reformulation of the classical Space-Saving algorithm for fully encrypted execution. Our central idea is the Moving Floor abstraction, which exploits a monotonicity invariant in the summary state to replace repeated magnitude comparisons with equality-based selection against a tracked encrypted floor. We further combine this with parallel victim selection and a hierarchical asynchronous ingestion pipeline, yielding an end-to-end encrypted heavy-hitter architecture that preserves the deterministic accuracy guarantees of the original algorithm.
+
+Our design reduces the cost of encrypted updates by up to $2.74\times$ over a naive oblivious baseline and sustains end-to-end encrypted ingestion throughputs of up to 4.30 items/s with sub-second amortized latency. These results show that, with the right algorithmic reformulation, classical streaming summaries can be made practically viable under fully encrypted execution, bringing privacy-preserving stream analytics significantly closer to deployment.
+]]></content:encoded>
+<pubDate>Thu, 26 Mar 2026 19:39:19 +0000</pubDate>
+<pubDate>Thu, 26 Mar 2026 19:39:19 +0000</pubDate>
+</item>
+<item>
+<title>Hadal: Centralized Label DP Training without a Trusted Party</title>
+<link>https://eprint.iacr.org/2026/600</link>
+<guid>https://eprint.iacr.org/2026/600</guid>
+<content:encoded><![CDATA[
+
+We explore distributed training in a setting where features are held by one party and labels are held by another. In this context, we focus on label Differential Privacy (DP), where the labels require privacy protection from the other party who learns the trained model. Previous approaches struggle to train accurate models in high-privacy settings (i.e. when $\epsilon \leq 1$), or typically require a trusted third party. To eliminate this trusted party while preserving model utility, we present PostScale, a novel Homomorphic Encryption (HE)-based protocol suited for high-privacy regimes with ciphertext multiplicative depth of two. Our protocol is suitable for a wide variety of models in the semi-honest setting and avoids leaking the model architecture as well as costly ciphertext operations like bootstrapping and rotations. We also present a multi-party sampling protocol for generating DP noise, and Hadal, a general-purpose dataflow-based framework for encrypted computation implementing our protocols. Hadal repurposes existing tools for use with HE, including comprehensive performance profiling capabilities, dual execution modes (eager and deferred), graph compiler-based optimization, and hyperparameter tuning. Our techniques achieve model utility similar to centralized DP while reducing communication by over 90% (from 1 TB to 8 GB per batch) and training time by 99% (from 54 minutes to 33 seconds) compared to related work that protects both features and labels. These improvements unlock larger models; we train Bert-tiny of Devlin et al. (2019), with 6.5 MB of parameters, in 20 ms per example in a LAN setting.
+]]></content:encoded>
+<pubDate>Thu, 26 Mar 2026 12:46:00 +0000</pubDate>
+<pubDate>Thu, 26 Mar 2026 12:46:00 +0000</pubDate>
+</item>
+<item>
+<title>Efficiency Improvement of Deniable FHE: Tighter Deniability Analysis and TFHE-based Construction</title>
+<link>https://eprint.iacr.org/2026/597</link>
+<guid>https://eprint.iacr.org/2026/597</guid>
+<content:encoded><![CDATA[
+
+Fully homomorphic encryption (FHE) is a cryptographic scheme that can take ciphertexts as inputs and compute a new ciphertext of a function of the underlying messages without decryption. FHE has been attracting attention along with the growing interest in privacy-preserving technologies. In terms of privacy-preserving technology, deniable encryption is also important. Deniable encryption enables a user, who may be forced to reveal the messages corresponding to the user's public ciphertexts, to lie about which messages the user encrypted. Agrawal et al. (CRYPTO 2021) introduced deniable FHE (DFHE) that combines FHE with deniable encryption, and proposed a transformation from an FHE scheme that satisfies specific special requirements, called special FHE, to a DFHE scheme. They also showed a construction of a special FHE scheme based on the BGV (Brakerski--Gentry--Vaikuntanathan) scheme. However, in the construction by Agrawal et al., one must store all the extensive randomness used for encryption in order to lie, and a bootstrapping operation, which takes a long time to execute, is a bottleneck in execution speed. In this paper, we show that by providing a tighter upper bound on deniability, we can reduce the size of the stored randomness and the required number of bootstrapping in the construction by Agrawal et al. In addition, we show that TFHE (Chillotti et al., J. Cryptol., 2020; Joye, CT-RSA 2024), which is known as a FHE scheme with fast bootstrapping, satisfies the requirements of special FHE, and thus can realize a faster DFHE scheme than the BGV-based construction.
+]]></content:encoded>
+<pubDate>Thu, 26 Mar 2026 05:52:56 +0000</pubDate>
+<pubDate>Thu, 26 Mar 2026 05:52:56 +0000</pubDate>
+</item>
 
 <item>
 <title>Efficient Compilers for Verifiable Dynamic Searchable Symmetric Encryption</title>
