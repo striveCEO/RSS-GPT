@@ -5,11 +5,24 @@
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
 <item>
+<title>Post-Quantum Blockchains with Agility in Mind</title>
+<link>https://eprint.iacr.org/2026/609</link>
+<guid>https://eprint.iacr.org/2026/609</guid>
+<content:encoded><![CDATA[
+
+Blockchains intend to provide long-term integrity guarantees through cryptographic primitives that may become vulnerable over time due to algorithmic advances or paradigm shifts such as quantum computation. While cryptographic agility, the ability to transition between algorithms without disrupting operation, is recognized as essential, existing blockchain systems lack comprehensive support for such transitions. We address this gap by designing an Ethereum virtual machine (EVM) compatible blockchain that introduces support for cryptographic agility from genesis.
+    
+We first propose a flexibility framework that characterizes how algorithm choice can be distributed across blockchain components.  We then present two technical contributions aligned with this framework: (1) cryptographically agile transactions (CATX), a new transaction format that decouples body and signature to enable user-selected signature schemes; and (2) a consensus-layer key registration mechanism that allows validators to migrate between signature schemes as operational upgrades without hard forks. We exemplify the agility of our design with ECDSA, Falcon-512, and ML-DSA signatures by conducting experimental evaluations over 30,000 blocks and 11 million transactions, showing that the CATX format introduces no measurable overhead.
+]]></content:encoded>
+<pubDate>Fri, 27 Mar 2026 14:56:46 +0000</pubDate>
+<pubDate>Fri, 27 Mar 2026 14:56:46 +0000</pubDate>
+</item>
+
+<item>
 <title>Oblivious SpaceSaving: Heavy-Hitter Detection over Fully Homomorphic Encryption</title>
 <link>https://eprint.iacr.org/2026/603</link>
 <guid>https://eprint.iacr.org/2026/603</guid>
 <content:encoded><![CDATA[
-
 Heavy-hitter detection is a fundamental primitive in stream analytics, with applications in network monitoring, telemetry, and large-scale data systems. In many practical deployments, this computation must be maintained continuously on remote infrastructure that offers higher availability and centralized operational control, even when the underlying streams contain sensitive identifiers or proprietary activity patterns. Existing privacy-preserving approaches either incur substantial statistical noise or rely on multi-server trust assumptions. Fully Homomorphic Encryption (FHE) offers an attractive alternative by enabling exact computation over encrypted data on a single untrusted server, but the high cost of encrypted comparisons has historically made stateful stream processing impractical.
 
 We present Oblivious SpaceSaving, a privacy-preserving reformulation of the classical Space-Saving algorithm for fully encrypted execution. Our central idea is the Moving Floor abstraction, which exploits a monotonicity invariant in the summary state to replace repeated magnitude comparisons with equality-based selection against a tracked encrypted floor. We further combine this with parallel victim selection and a hierarchical asynchronous ingestion pipeline, yielding an end-to-end encrypted heavy-hitter architecture that preserves the deterministic accuracy guarantees of the original algorithm.
@@ -17,17 +30,14 @@ We present Oblivious SpaceSaving, a privacy-preserving reformulation of the clas
 Our design reduces the cost of encrypted updates by up to $2.74\times$ over a naive oblivious baseline and sustains end-to-end encrypted ingestion throughputs of up to 4.30 items/s with sub-second amortized latency. These results show that, with the right algorithmic reformulation, classical streaming summaries can be made practically viable under fully encrypted execution, bringing privacy-preserving stream analytics significantly closer to deployment.
 ]]></content:encoded>
 <pubDate>Thu, 26 Mar 2026 19:39:19 +0000</pubDate>
-<pubDate>Thu, 26 Mar 2026 19:39:19 +0000</pubDate>
 </item>
 <item>
 <title>Hadal: Centralized Label DP Training without a Trusted Party</title>
 <link>https://eprint.iacr.org/2026/600</link>
 <guid>https://eprint.iacr.org/2026/600</guid>
 <content:encoded><![CDATA[
-
 We explore distributed training in a setting where features are held by one party and labels are held by another. In this context, we focus on label Differential Privacy (DP), where the labels require privacy protection from the other party who learns the trained model. Previous approaches struggle to train accurate models in high-privacy settings (i.e. when $\epsilon \leq 1$), or typically require a trusted third party. To eliminate this trusted party while preserving model utility, we present PostScale, a novel Homomorphic Encryption (HE)-based protocol suited for high-privacy regimes with ciphertext multiplicative depth of two. Our protocol is suitable for a wide variety of models in the semi-honest setting and avoids leaking the model architecture as well as costly ciphertext operations like bootstrapping and rotations. We also present a multi-party sampling protocol for generating DP noise, and Hadal, a general-purpose dataflow-based framework for encrypted computation implementing our protocols. Hadal repurposes existing tools for use with HE, including comprehensive performance profiling capabilities, dual execution modes (eager and deferred), graph compiler-based optimization, and hyperparameter tuning. Our techniques achieve model utility similar to centralized DP while reducing communication by over 90% (from 1 TB to 8 GB per batch) and training time by 99% (from 54 minutes to 33 seconds) compared to related work that protects both features and labels. These improvements unlock larger models; we train Bert-tiny of Devlin et al. (2019), with 6.5 MB of parameters, in 20 ms per example in a LAN setting.
 ]]></content:encoded>
-<pubDate>Thu, 26 Mar 2026 12:46:00 +0000</pubDate>
 <pubDate>Thu, 26 Mar 2026 12:46:00 +0000</pubDate>
 </item>
 <item>
@@ -35,13 +45,10 @@ We explore distributed training in a setting where features are held by one part
 <link>https://eprint.iacr.org/2026/597</link>
 <guid>https://eprint.iacr.org/2026/597</guid>
 <content:encoded><![CDATA[
-
 Fully homomorphic encryption (FHE) is a cryptographic scheme that can take ciphertexts as inputs and compute a new ciphertext of a function of the underlying messages without decryption. FHE has been attracting attention along with the growing interest in privacy-preserving technologies. In terms of privacy-preserving technology, deniable encryption is also important. Deniable encryption enables a user, who may be forced to reveal the messages corresponding to the user's public ciphertexts, to lie about which messages the user encrypted. Agrawal et al. (CRYPTO 2021) introduced deniable FHE (DFHE) that combines FHE with deniable encryption, and proposed a transformation from an FHE scheme that satisfies specific special requirements, called special FHE, to a DFHE scheme. They also showed a construction of a special FHE scheme based on the BGV (Brakerski--Gentry--Vaikuntanathan) scheme. However, in the construction by Agrawal et al., one must store all the extensive randomness used for encryption in order to lie, and a bootstrapping operation, which takes a long time to execute, is a bottleneck in execution speed. In this paper, we show that by providing a tighter upper bound on deniability, we can reduce the size of the stored randomness and the required number of bootstrapping in the construction by Agrawal et al. In addition, we show that TFHE (Chillotti et al., J. Cryptol., 2020; Joye, CT-RSA 2024), which is known as a FHE scheme with fast bootstrapping, satisfies the requirements of special FHE, and thus can realize a faster DFHE scheme than the BGV-based construction.
 ]]></content:encoded>
 <pubDate>Thu, 26 Mar 2026 05:52:56 +0000</pubDate>
-<pubDate>Thu, 26 Mar 2026 05:52:56 +0000</pubDate>
 </item>
-
 <item>
 <title>Efficient Compilers for Verifiable Dynamic Searchable Symmetric Encryption</title>
 <link>https://eprint.iacr.org/2026/594</link>
@@ -15007,56 +15014,6 @@ In this paper, we study the communication complexity of DSG and DKG. Motivated b
 Our protocol works in the near-threshold setting. Given arbitrary privacy/correctness parameters $0<\tau_p<\tau_c<1$, the protocol tolerates up to $\tau_p n$ actively corrupted parties and delivers shares of a random secret according to some $\tau_p n$-private $\tau_c n$-correct secret sharing scheme, such that the adversary cannot bias the secret or learn anything about it. The protocol is based on non-interactive zero-knowledge proofs, non-interactive commitments and a novel secret-sharing scheme with special robustness properties that is based on Low-Density Parity-Check codes. As a secondary contribution, we extend the formal MPC-based treatment of DKG/DSG, and study new aspects of Affine Secret Sharing Schemes.
 ]]></content:encoded>
 <pubDate>Sun, 02 Jun 2024 08:36:48 +0000</pubDate>
-</item>
-<item>
-<title>On Security Proofs of Existing Equivalence Class Signature Schemes</title>
-<link>https://eprint.iacr.org/2024/183</link>
-<guid>https://eprint.iacr.org/2024/183</guid>
-<content:encoded><![CDATA[
-<div> 关键词：Equivalence class signatures, 原始构造, 安全性证明, 通用组模型, 参数化非交互式困难假设
-
-总结:
-文章探讨了等价类签名(EQS)的安全性及其在不同模型下的适用性。等价类签名是一种独特的公钥加密技术，允许任何实体将对向量元素的签名转换为该向量任何倍数的签名，从而认证等价类。文章指出，原始的EQS构造在通用组模型下具有安全性，而第一个基于标准假设的方案则仅满足较弱的安全模型，不适用于大多数应用。后续研究提出了适用于实际应用的方案，但其安全性证明存在瑕疵。
-
-文章的关键发现是，这些被质疑的方案可能在代数组模型下证明安全，但作者通过引入参数化的非交互式困难假设，展示了原始的更高效、已广泛应用于多个领域的EQS构造实际上在代数组模型下也是安全的。这一发现对于理解等价类签名的安全性及其在不同模型下的适用性提供了新的见解，对于未来的研究和应用具有重要意义。 <div>
-Equivalence class signatures (EQS; Asiacrypt '14), sign vectors of elements from a bilinear group.   Anyone can transform a signature on a vector to a signature on any multiple of that vector; signatures thus authenticate equivalence classes.  A transformed signature/message pair is indistinguishable from a random signature on a random message.  EQS have been used to efficiently instantiate (delegatable) anonymous credentials, (round-optimal) blind signatures, ring and group signatures, anonymous tokens and contact-tracing schemes, to name a few.
-
-The original EQS construction (J. Crypto '19) is proven secure in the generic group model, and the first scheme from standard assumptions (PKC '18) satisfies a weaker model insufficient for most applications.  Two works (Asiacrypt '19, PKC '22) propose applicable schemes that assume trusted parameters.  Their unforgeability is argued via a security proof from standard (or non-interactive) assumptions.
-   
-We show that their security proofs are flawed and explain the subtle issue.  While the schemes might be provable in the algebraic group model (AGM), we instead show that the original construction, which is more efficient and has found applications in many works, is secure in the AGM under a parametrized non-interactive hardness assumption.
-]]></content:encoded>
-<pubDate>Wed, 07 Feb 2024 08:24:24 +0000</pubDate>
-</item>
-<item>
-<title>Signature-based Witness Encryption with Compact Ciphertext</title>
-<link>https://eprint.iacr.org/2024/1477</link>
-<guid>https://eprint.iacr.org/2024/1477</guid>
-<content:encoded><![CDATA[
-<div> 关键词：Signature-based witness encryption (SWE), 拆解, indistinguishability obfuscation (iO), strongly puncturable signatures (SPS), 指数级增长
-
-总结: 文章探讨了签名基于见证加密(Signature-based witness encryption, SWE)这一新颖概念及其在分布式系统中的潜在应用。SWE允许将消息加密为特定标签和一组验证密钥集，只有持有至少k个有效签名和k个不同验证密钥的实体才能解密。然而，现有的无可信设置的SWE方案存在一个关键问题——其密文大小与验证密钥数量呈线性关系，这在系统变得更加分布化且参与方数量增加时成为瓶颈。
-
-针对这一挑战，文章提出了一种基于图灵机不可区分混淆化(Indistinguishability Obfuscation, iO)和强可中断签名(Strongly Puncturable Signatures, SPS)的SWE构造方法。这种方法旨在实现密文大小与验证密钥数量之间的关系为次线性，从而解决指数级增长的问题，为分布式系统如区块链等提供更高效、灵活的安全加密解决方案。通过引入这些高级安全工具，该方案不仅能够维持安全性，还能显著减少密文大小，提高系统的可扩展性和性能。 <div>
-Signature-based witness encryption (SWE) is a recently proposed notion that allows to encrypt a message with respect to a tag $T$ and a set of signature verification keys. The resulting ciphertext can only be decrypted by a party who holds at least $k$ different valid signatures w.r.t. $T$ and $k$ different verification keys out of the $n$ keys specified at encryption time. Natural applications of this primitive involve distributed settings (e.g., blockchains), where multiple parties sign predictable messages, such as polling or randomness beacons. However, known SWE schemes without trusted setup have ciphertexts that scale linearly in the number of verification keys. This quickly becomes a major bottleneck as the system gets more distributed and the number of parties increases.
-    
-    Towards showing the feasibility of SWE with ciphertext size sub-linear in the number of keys, we give a construction based on indistinguishability obfuscation (iO) for Turing machines and strongly puncturable signatures (SPS).
-]]></content:encoded>
-<pubDate>Sat, 21 Sep 2024 00:31:24 +0000</pubDate>
-</item>
-<item>
-<title>Isogeny-Based Secure Voting Systems for Large-Scale Elections</title>
-<link>https://eprint.iacr.org/2024/1472</link>
-<guid>https://eprint.iacr.org/2024/1472</guid>
-<content:encoded><![CDATA[
-<div> 关键词：是生成法、电子投票系统、量子攻击、隐私保护、安全性证明
-
-总结:
-本文深入研究了基于是生成法的加密方法，旨在开发既安全又可扩展的电子投票系统。文章着重解决关键挑战，包括选民隐私、投票完整性以及对量子攻击的抵抗能力。通过引入利用是生成法的新型加密协议，建立了适用于大规模选举的后量子安全电子投票框架。
-
-数学基础、协议设计和安全性证明的详细说明，展示了所提议系统的有效性和可扩展性。这些措施确保了在大型选举中的应用，同时保证了选民隐私和投票的完整性，同时也为抵御潜在的量子计算威胁提供了坚实的基础。通过这些创新，文章为电子投票系统的未来发展提供了重要的理论和技术支撑，为未来的选举提供了一种更加安全、可靠和私密的解决方案。 <div>
-This article presents an in-depth study of isogeny-based cryptographic methods for the development of secure and scalable electronic voting systems. We address critical challenges such as voter privacy, vote integrity, and resistance to quantum attacks. Our work introduces novel cryptographic protocols leveraging isogenies, establishing a robust framework for post-quantum secure electronic voting. We provide detailed mathematical foundations, protocol designs, and security proofs, demonstrating the efficacy and scalability of our proposed system in large-scale elections.
-]]></content:encoded>
-<pubDate>Fri, 20 Sep 2024 13:26:02 +0000</pubDate>
 </item>
 </channel>
 </rss>
