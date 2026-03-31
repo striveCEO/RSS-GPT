@@ -5,11 +5,24 @@
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
 <item>
+<title>Haechi: Simple Commitment-based Keyless In-person Verifiable Elections</title>
+<link>https://eprint.iacr.org/2026/613</link>
+<guid>https://eprint.iacr.org/2026/613</guid>
+<content:encoded><![CDATA[
+
+For decades, verifiable election systems have typically relied on encrypting ballots to maintain voter privacy. Encryption requires keys, and the management of these keys is usually one of the most cumbersome and error-prone components of the system. But in-person elections—where one or more devices are used to each collect many votes—can use cryptographic commitments rather than encryption and completely obviate the need for cryptographic keys, leading to solutions that are much simpler and more robust than the encryption-based approaches.
+
+Currently deployed E2E-verifiable voting systems also produce large election records, which can sometimes become an obstacle to election verification, by increasing the cost of hosting, distributing, and verifying election data. Using modern techniques for compact ZK proofs, Haechi improves on past commitment-based and encryption-based solutions by drastically reducing the size of the election records, leading to improvements of over an order of magnitude compared to several real-world deployments.
+]]></content:encoded>
+<pubDate>Fri, 27 Mar 2026 21:31:22 +0000</pubDate>
+<pubDate>Fri, 27 Mar 2026 21:31:22 +0000</pubDate>
+</item>
+
+<item>
 <title>Threshold Blind Signatures from CDH</title>
 <link>https://eprint.iacr.org/2025/1798</link>
 <guid>https://eprint.iacr.org/2025/1798</guid>
 <content:encoded><![CDATA[
-
 Blind signatures are a versatile cryptographic primitive with many applications, especially in privacy-preserving technologies. Threshold blind signature schemes (TBS) enhance blind signatures with a signing procedure distributed among up to n signers to reduce the risk attached to the compromise of the secret key. So far, TBS constructions over groups rely on strong assumptions, e.g., the algebraic group model (AGM) or interactive assumptions. In this work, we propose two TBS based on the computational Diffie-Hellman assumption (CDH) in the ROM:
 – The first TBS over pairing-free groups without the AGM.
 – The first round-optimal TBS over pairing-based groups that does not rely on interactive assumptions.
@@ -17,9 +30,7 @@ The starting point for both constructions is the pairing-based signature scheme 
 We first remove the reliance on DDH in their schemes, then provide careful adaptations to the threshold setting.
 ]]></content:encoded>
 <pubDate>Wed, 01 Oct 2025 21:02:44 +0000</pubDate>
-<pubDate>Wed, 01 Oct 2025 21:02:44 +0000</pubDate>
 </item>
-
 <item>
 <title>Post-Quantum Blockchains with Agility in Mind</title>
 <link>https://eprint.iacr.org/2026/609</link>
@@ -14979,30 +14990,6 @@ Threshold signatures are one of the most important cryptographic primitives in d
 Peer-to-peer communication systems can provide many functions, including anonymized routing of network traffic, massive parallel computing environments, and distributed storage. Anonymity refers to the state of being completely nameless, with no attached identifiers. Pseudonymity involves the use of a fictitious name that can be consistently linked to a particular user, though not necessarily to the real identity. Both  provide a layer of privacy, shielding the user's true identity from public view. But we find their significations are often misunderstood. In this note, we clarify the differences between anonymity and pseudonymity. We also find the Zhong et al.'s key agreement scheme [IEEE TCC, 2022, 10(3), 1592-1603] fails to keep anonymity, not as claimed.
 ]]></content:encoded>
 <pubDate>Tue, 24 Sep 2024 01:48:22 +0000</pubDate>
-</item>
-<item>
-<title>Adaptive Security, Erasures, and Network Assumptions in Communication-Local MPC</title>
-<link>https://eprint.iacr.org/2024/1489</link>
-<guid>https://eprint.iacr.org/2024/1489</guid>
-<content:encoded><![CDATA[
-<div> 关键词：可靠通信、安全通信、多对多通信、适应性安全、多方计算
-
-<br /><br />总结:
-
-本文主要探讨了低度网络环境下可靠和安全的全对全通信问题，这一问题对于基于本地通信的多方计算(MPC)和区块链协议中的点对点网络通信至关重要。文章首先揭示了一类称为存储转发协议的通信协议存在强不可实现性结果，这类协议包括了当前已知的所有基于标准密码假设的MPC协议。接着，在假设仅存在公钥基础设施(PKI)的情况下，文章证明了在多数诚实设置下，即使不假设多发消息的能力，也可以通过安全擦除机制构建具有多项式对数局部性的全对全通信协议。然而，在少数欺诈设置下，这一结果并不成立。
-
-最后，文章在更加强大的假设条件下，即使用具有反向域采样的陷阱门置换、紧凑型恶意电路私有FHE等，构建了一个具有多项式对数局部性的全对一通信协议，该协议能够适应性地抵抗任意常数比例的破坏，无需假设安全擦除或多发消息能力。这一结果通过创新地结合了适应性安全加密与静态FHE来绕过Katz等人提出的关于紧凑型适应性安全FHE的不可能性，这一发现可能对独立研究者具有重要意义。
-
-此外，文章还提出了子线性输出集全对全通信(SOS-RMT)，并展示了如何利用标准MPC的已知界限，通过额外的匿名PKI假设，将SOS-RMT应用于子线性输出集MPC(SOS-MPC)。这一系列发现丰富了全对全通信和适应性安全MPC的研究领域，并为构建更加高效、安全的网络通信和计算协议提供了理论基础。 <div>
-The problem of reliable/secure all-to-all communication over low-degree networks has been essential for communication-local (CL) n-party MPC (i.e., MPC protocols where every party directly communicates only with a few, typically polylogarithmic in n, parties) and more recently for communication over ad hoc networks, which are used in blockchain protocols. However, a limited number of adaptively secure solutions exist, and they all make relatively strong assumptions on the ability of parties to act in some specific manner before the adversary can corrupt them. Two such assumptions were made in the work of Chandran et al. [ITCS ’15]---parties can (a) multisend messages to several receivers simultaneously; and (b) securely erase the message and the identities of the receivers, before the adversary gets a chance to corrupt the sender (even if a receiver is corrupted). A natural question to ask is: Are these assumptions necessary for adaptively secure CL MPC? In this paper, we characterize the feasibility landscape for all-to-all reliable message transmission (RMT) under these two assumptions, and use this characterization to obtain (asymptotically) tight feasibility results for CL MPC.
-
-– First, we prove a strong impossibility result for a broad class of RMT protocols, termed here store-and-forward protocols, which includes all known communication protocols for CL MPC from standard cryptographic assumptions. Concretely, we show that no such protocol with a certain expansion rate can tolerate a constant fraction of parties being corrupted.
-
-– Next, under the assumption of only a PKI, we show that assuming secure erasures, we can obtain an RMT protocol between all pairs of parties with polylogarithmic locality (even without assuming multisend) for the honest majority setting. We complement this result by showing a negative result for the setting of dishonest majority.
-
-– Finally, and somewhat surprisingly, under stronger assumptions (i.e., trapdoor permutations with a reverse domain sampler, and compact and malicious circuit-private FHE), we construct a polylogarithmic-locality all-to-one RMT protocol, which is adaptively secure and tolerates any constant fraction of corruptions, without assuming either secure erasures or multisend. This last result uses a novel combination of adaptively secure (e.g., non-committing) encryption and (static) FHE to bypass the impossibility of compact adaptively secure FHE by Katz et al. [PKC’13], which we believe may be of independent interest. Intriguingly, even such assumptions do not allow reducing all-to-all RMT to all-to-one RMT (a reduction which is trivial in the non-CL setting). Still, we can implement what we call sublinear output-set RMT (SOS-RMT for short). We show how SOS-RMT can be used for SOS-MPC under the known bounds for feasibility of MPC in the standard (i.e., non-CL) setting assuming, in addition to SOS-RMT, an anonymous PKI.
-]]></content:encoded>
-<pubDate>Mon, 23 Sep 2024 21:45:57 +0000</pubDate>
 </item>
 </channel>
 </rss>
