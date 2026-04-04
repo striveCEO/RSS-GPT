@@ -4,6 +4,102 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+<item>
+<title>HyperVerITAS: Verifying Image Transformations at Scale on Boolean Hypercubes</title>
+<link>https://eprint.iacr.org/2026/641</link>
+<guid>https://eprint.iacr.org/2026/641</guid>
+<content:encoded><![CDATA[
+
+We present $\mathsf{HyperVerITAS}$, a new zero-knowledge proof (ZKP) system for image provenance that enables scalable, efficient, and privacy-preserving verification of image transformations. $\mathsf{HyperVerITAS}$ builds upon the same minimal trust model as $\mathsf{VerITAS}$ (IEEE S&amp;P '25), requiring trust only in the image source device, while treating the editing software as untrusted. Unlike $\mathsf{VerITAS}$, which relies on FFT-intensive SNARKs and suffers from high memory overhead (up to 120 GB), $\mathsf{HyperVerITAS}$ leverages multilinear polynomial encodings over the Boolean hypercube to dramatically reduce both proving time and memory usage. Our design cleanly separates signature verification from image transformation, supports modular integration of multiple polynomial commitment schemes (including post-quantum constructions) and naturally extends to a wide range of affine image transformations.
+
+We implement $\mathsf{HyperVerITAS}$ with two distinct commitment schemes (Brakedown and multilinear KZG) and evaluate it on full-system pipelines involving cropping and grayscaling. On commodity hardware (Apple M3, 36 GB RAM), $\mathsf{HyperVerITAS}$ generates proofs for 33 MP images using only 27 GB of RAM and 6.6 minutes of proving time, whereas $\mathsf{VerITAS}$ fails to scale beyond 4 MP. These results establish $\mathsf{HyperVerITAS}$ as a practical and scalable ZKP system for secure and efficient image provenance.
+]]></content:encoded>
+<pubDate>Wed, 01 Apr 2026 19:07:03 +0000</pubDate>
+<pubDate>Wed, 01 Apr 2026 19:07:03 +0000</pubDate>
+</item>
+<item>
+<title>SSLE-DAG: A High-Throughput Proof-of-Stake Consensus Protocol Combining an Adaptive DAG with a Single Secret Leader Election</title>
+<link>https://eprint.iacr.org/2026/647</link>
+<guid>https://eprint.iacr.org/2026/647</guid>
+<content:encoded><![CDATA[
+
+SSLE-DAG Proof-of-Stake (PoS) blockchains with publicly visible leader schedules expose future proposers to targeted Denial-of-Service (DoS) attacks. Single Secret Leader Election (SSLE) techniques address this problem by hiding the leader's identity until block publication. However, existing SSLE techniques are difficult to integrate with high-throughput Directed Acyclic Graph (DAG)-based Proof-of-Stake consensus protocols. We introduce SSLE-DAG, a PoS consensus protocol that combines a zk-SNARK-based SSLE commitment scheme with the adaptive DAG-based consensus protocol that splits or merges parallel chains (and thus regulates throughput) upon transaction demand. The commitment scheme uses EdDSA signatures, MiMC hashing, and Merkle proofs to guarantee uniqueness, fairness, and unpredictability while keeping leader identities private. We implement SSLE-DAG in Go (gnark) and evaluate it in a geo-distributed simulation using real-world latency traces. In a 60-node network, we achieve about 990 TPS, and in a 40-node network with shorter rounds, we reach about 1,600 TPS with low variance in block rewards.
+]]></content:encoded>
+<pubDate>Thu, 02 Apr 2026 13:40:47 +0000</pubDate>
+<pubDate>Thu, 02 Apr 2026 13:40:47 +0000</pubDate>
+</item>
+<item>
+<title>FOVA: Fast One-Shot Verifiable Aggregation for Federated Learning</title>
+<link>https://eprint.iacr.org/2026/643</link>
+<guid>https://eprint.iacr.org/2026/643</guid>
+<content:encoded><![CDATA[
+
+In federated learning (FL), secure aggregation (SA) allows a server to compute aggregate model updates (gradients) without accessing individual client gradients. SA is intended to protect clients’ local dataset from being inferred through individual gradients. However, recent NDSS 2025 work shows that even state-of-the-art SA protocols can be vulnerable, as a malicious server may reconstruct clients’ datasets from aggregated gradients. This demonstrates that protecting dataset privacy requires not only gradient confidentiality but also aggregation hiding. Moreover, a malicious server may deviate from the protocol and return manipulated results, making authenticity an additional critical security goal. Supporting one-shot clients, which send a single message per iteration to reduce synchronization overhead, further increases design complexity.
+
+
+To address these challenges, we propose FOVA, a fast one-shot verifiable aggregation protocol that simultaneously achieves aggregation hiding and authenticity against an actively malicious server. Notably, authenticity, defined under full participation, must be relaxed for dropout robustness due to the indistinguishability between adversarial omissions and legitimate dropout. FOVA is built upon the verifiable linearly homomorphic encryption scheme, for which we give a new construction based solely on the Paillier cryptosystem. This design enables high efficiency and allows FOVA to be integrated into existing Paillier-based FL frameworks with minimal modifications. We implement FOVA on top of an industrial FL framework. Experimental results show that, compared to the most relevant prior protocols, FOVA achieves up to three orders-of-magnitude speedup while providing stronger security guarantees.
+]]></content:encoded>
+<pubDate>Thu, 02 Apr 2026 02:47:53 +0000</pubDate>
+<pubDate>Thu, 02 Apr 2026 02:47:53 +0000</pubDate>
+</item>
+<item>
+<title>SoK: The Weakest-Link Principle in Public Key Infrastructures and Modern Mitigation Strategies</title>
+<link>https://eprint.iacr.org/2026/642</link>
+<guid>https://eprint.iacr.org/2026/642</guid>
+<content:encoded><![CDATA[
+
+As digital transformation accelerates, securing communication through hierarchical Public Key Infrastructures (PKIs) is increasingly critical. Yet, this centralized trust architecture remains inherently vulnerable. As a Systematization of Knowledge (SoK), this paper maps the threat landscape of hierarchical PKIs, demonstrating how a compromise at any single node from a Root CA breach to an operational revocation failure can trigger a cascading loss of global trust. Grounded in the Weakest-Link Principle, our analysis reveals that a PKI ecosystem is only as resilient as its least protected vector. Traditional revocation mechanisms, particularly CRLs and OCSP, exhibit significant operational and privacy flaws, and are often rendered ineffective by client-side "soft-fail" policies. To address these vulnerabilities, we advocate for a shift: replacing unconditional trust in individual entities with decentralized,verifiable protocols. We evaluate Certificate Transparency (CT) as a core mitigation strategy, illustrating how append-only Merkle trees make misissuance publicly visible and cryptographically auditable. Finally, we synthesize essential operational hardening measures such as strict key cryptoperiods and procedural policies to ensure long-term ecosystem resilience.
+]]></content:encoded>
+<pubDate>Wed, 01 Apr 2026 22:02:25 +0000</pubDate>
+<pubDate>Wed, 01 Apr 2026 22:02:25 +0000</pubDate>
+</item>
+<item>
+<title>Synchronous BFT with Provability and Fast Path for the Age of Blockchains</title>
+<link>https://eprint.iacr.org/2026/639</link>
+<guid>https://eprint.iacr.org/2026/639</guid>
+<content:encoded><![CDATA[
+
+Synchronous Byzantine fault tolerant (BFT) protocols offer stronger security guarantees, increasing resilience from one third to one half. However, existing constructions suffer from three drawbacks that are critical in blockchain settings.
+
+First, blockchain systems require rotating leaders, but the existing constructions are not optimized for low latency under leader rotation. Second, blockchain systems require provable commitments that can be forwarded to clients or offchain entities. Third, modern blockchains optimize for low latency in the good case, and often further optimize for a fast path under even milder adversarial conditions. 
+
+In this work, we formalize and study fast paths in the context of provable synchronous BFT. Our first result is that for $n \le  2t + 2p + c -1$, it is impossible to obtain a provable synchronous BFT protocol that tolerates $t$ Byzantine and $c$ crash faults while also achieving a two round fast path resilient to $p$ Byzantine faults. Guided by this bound, we then present four provable synchronous protocols tailored to two deployment paradigms: optimistic responsivness and fixed view schedules.
+
+For optimistic responsiveness, we present $\Delta$-Sync Simplex and $2\Delta$-Sync Simplex, which for $n = 2t + 2p + c + 1$, produce provable commit certificates in time $2\delta$ under a correct leader when the number of faulty parties $f$ satisfies $f \le p$. $2\Delta$-Sync Simplex also achieves $3\delta$ commit latency when the total number of faulty parties is $f \le \lfloor (p + t)/2 \rfloor$ with Byzantine faults $f_b \le t$ and crash faults $f_c \le c$. Outside these optimistic regimes, the protocols remain safe and live for $t$ Byzantine and $c$ crash faults, and output provable commitments within $2\Delta + 2\delta$ and $1\Delta + 3\delta$, respectively. Under faulty leaders, the protocols guarantee a worst case view length of $6\Delta + \delta$ and $5\Delta + \delta$ respectively.
+
+For fixed view schedules, we present two additional protocols, TenderSync and SyncMint, that trade off commit latency and view duration. They achieve either $3\Delta$ provable commit with $4\Delta$ views, or $4\Delta$ provable commit with $3\Delta$ views. Both protocols obtain a provable commit in $2\delta$ under a correct leader when $f \le p$.
+]]></content:encoded>
+<pubDate>Wed, 01 Apr 2026 14:41:55 +0000</pubDate>
+<pubDate>Wed, 01 Apr 2026 14:41:55 +0000</pubDate>
+</item>
+<item>
+<title>VeriRAG: Efficient Zero-Knowledge Proofs for Verifiable Retrieval-Augmented Generation</title>
+<link>https://eprint.iacr.org/2026/637</link>
+<guid>https://eprint.iacr.org/2026/637</guid>
+<content:encoded><![CDATA[
+
+Retrieval-Augmented Generation (RAG) is widely used to enhance Large Language Models (LLMs), yet the "hallucination" characteristic allows malicious providers to bypass retrieval or claim non-existent data quality. To address these challenges, we present VeriRAG, a framework that leverages Zero-Knowledge Proofs (ZKP) to provide efficient integrity guarantees for RAG systems without compromising dataset privacy. Leveraging the robustness of AI inference, our framework supports Approximate Nearest Neighbor Search (ANNS)-based retrieval to avoid exhaustive searches. For the verification of top-$k$ sorting, we propose an innovative protocol that bypasses the intricate verification of sorting processes. To further enhance performance, we introduce a joint optimization leveraging vector lookup and chunk-merging strategies, which collectively drive down verification overhead while maintaining high generation accuracy. Experimental results demonstrate that VeriRAG scales efficiently to a 37GB dataset, achieving a prover time of 96s and a verifier time of 3s.
+]]></content:encoded>
+<pubDate>Wed, 01 Apr 2026 11:08:38 +0000</pubDate>
+<pubDate>Wed, 01 Apr 2026 11:08:38 +0000</pubDate>
+</item>
+<item>
+<title>PlasmaBlind: A Private Layer 2 With Instant Client-Side Proving</title>
+<link>https://eprint.iacr.org/2026/634</link>
+<guid>https://eprint.iacr.org/2026/634</guid>
+<content:encoded><![CDATA[
+
+In this technical note, we discuss a new direction in the design of privacy-preserving and scalable Layer-2 (L2) protocols by presenting a concrete construction, PlasmaBlind.
+
+To minimize the L2 users’ overhead for achieving privacy while enabling efficient creation of compact blocks, PlasmaBlind is built upon a novel architecture that leverages folding schemes’ powerful and flexible properties. On the user side, we utilize their blinding property to shield and prove transaction data without expensive succinct zero-knowledge proofs. On the aggregator side, their low accumulation cost allows efficient aggregation of user instances into a constant size proof of block validity.
+
+We further improve our proof aggregation performance by proposing an optimization technique that efficiently links two different verification tasks with shared input while eliminating the need for cumbersome proof composition of non-uniform circuits, which could be of independent interest.
+
+The practicality of PlasmaBlind is validated by our preliminary benchmarks, which demonstrate that, with consumer hardware, PlasmaBlind achieves sub-100ms proving time on the client side and sub-300ms per-transaction time on the aggregator side.
+]]></content:encoded>
+<pubDate>Wed, 01 Apr 2026 07:51:08 +0000</pubDate>
+<pubDate>Wed, 01 Apr 2026 07:51:08 +0000</pubDate>
+</item>
 
 <item>
 <title>Securing Elliptic Curve Cryptocurrencies against Quantum Vulnerabilities: Resource Estimates and Mitigations</title>
