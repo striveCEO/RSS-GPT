@@ -4,17 +4,16 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+
 <item>
 <title>HyperVerITAS: Verifying Image Transformations at Scale on Boolean Hypercubes</title>
 <link>https://eprint.iacr.org/2026/641</link>
 <guid>https://eprint.iacr.org/2026/641</guid>
 <content:encoded><![CDATA[
-
 We present $\mathsf{HyperVerITAS}$, a new zero-knowledge proof (ZKP) system for image provenance that enables scalable, efficient, and privacy-preserving verification of image transformations. $\mathsf{HyperVerITAS}$ builds upon the same minimal trust model as $\mathsf{VerITAS}$ (IEEE S&amp;P '25), requiring trust only in the image source device, while treating the editing software as untrusted. Unlike $\mathsf{VerITAS}$, which relies on FFT-intensive SNARKs and suffers from high memory overhead (up to 120 GB), $\mathsf{HyperVerITAS}$ leverages multilinear polynomial encodings over the Boolean hypercube to dramatically reduce both proving time and memory usage. Our design cleanly separates signature verification from image transformation, supports modular integration of multiple polynomial commitment schemes (including post-quantum constructions) and naturally extends to a wide range of affine image transformations.
 
 We implement $\mathsf{HyperVerITAS}$ with two distinct commitment schemes (Brakedown and multilinear KZG) and evaluate it on full-system pipelines involving cropping and grayscaling. On commodity hardware (Apple M3, 36 GB RAM), $\mathsf{HyperVerITAS}$ generates proofs for 33 MP images using only 27 GB of RAM and 6.6 minutes of proving time, whereas $\mathsf{VerITAS}$ fails to scale beyond 4 MP. These results establish $\mathsf{HyperVerITAS}$ as a practical and scalable ZKP system for secure and efficient image provenance.
 ]]></content:encoded>
-<pubDate>Wed, 01 Apr 2026 19:07:03 +0000</pubDate>
 <pubDate>Wed, 01 Apr 2026 19:07:03 +0000</pubDate>
 </item>
 <item>
@@ -22,10 +21,8 @@ We implement $\mathsf{HyperVerITAS}$ with two distinct commitment schemes (Brake
 <link>https://eprint.iacr.org/2026/647</link>
 <guid>https://eprint.iacr.org/2026/647</guid>
 <content:encoded><![CDATA[
-
 SSLE-DAG Proof-of-Stake (PoS) blockchains with publicly visible leader schedules expose future proposers to targeted Denial-of-Service (DoS) attacks. Single Secret Leader Election (SSLE) techniques address this problem by hiding the leader's identity until block publication. However, existing SSLE techniques are difficult to integrate with high-throughput Directed Acyclic Graph (DAG)-based Proof-of-Stake consensus protocols. We introduce SSLE-DAG, a PoS consensus protocol that combines a zk-SNARK-based SSLE commitment scheme with the adaptive DAG-based consensus protocol that splits or merges parallel chains (and thus regulates throughput) upon transaction demand. The commitment scheme uses EdDSA signatures, MiMC hashing, and Merkle proofs to guarantee uniqueness, fairness, and unpredictability while keeping leader identities private. We implement SSLE-DAG in Go (gnark) and evaluate it in a geo-distributed simulation using real-world latency traces. In a 60-node network, we achieve about 990 TPS, and in a 40-node network with shorter rounds, we reach about 1,600 TPS with low variance in block rewards.
 ]]></content:encoded>
-<pubDate>Thu, 02 Apr 2026 13:40:47 +0000</pubDate>
 <pubDate>Thu, 02 Apr 2026 13:40:47 +0000</pubDate>
 </item>
 <item>
@@ -33,13 +30,11 @@ SSLE-DAG Proof-of-Stake (PoS) blockchains with publicly visible leader schedules
 <link>https://eprint.iacr.org/2026/643</link>
 <guid>https://eprint.iacr.org/2026/643</guid>
 <content:encoded><![CDATA[
-
 In federated learning (FL), secure aggregation (SA) allows a server to compute aggregate model updates (gradients) without accessing individual client gradients. SA is intended to protect clients’ local dataset from being inferred through individual gradients. However, recent NDSS 2025 work shows that even state-of-the-art SA protocols can be vulnerable, as a malicious server may reconstruct clients’ datasets from aggregated gradients. This demonstrates that protecting dataset privacy requires not only gradient confidentiality but also aggregation hiding. Moreover, a malicious server may deviate from the protocol and return manipulated results, making authenticity an additional critical security goal. Supporting one-shot clients, which send a single message per iteration to reduce synchronization overhead, further increases design complexity.
 
 
 To address these challenges, we propose FOVA, a fast one-shot verifiable aggregation protocol that simultaneously achieves aggregation hiding and authenticity against an actively malicious server. Notably, authenticity, defined under full participation, must be relaxed for dropout robustness due to the indistinguishability between adversarial omissions and legitimate dropout. FOVA is built upon the verifiable linearly homomorphic encryption scheme, for which we give a new construction based solely on the Paillier cryptosystem. This design enables high efficiency and allows FOVA to be integrated into existing Paillier-based FL frameworks with minimal modifications. We implement FOVA on top of an industrial FL framework. Experimental results show that, compared to the most relevant prior protocols, FOVA achieves up to three orders-of-magnitude speedup while providing stronger security guarantees.
 ]]></content:encoded>
-<pubDate>Thu, 02 Apr 2026 02:47:53 +0000</pubDate>
 <pubDate>Thu, 02 Apr 2026 02:47:53 +0000</pubDate>
 </item>
 <item>
@@ -47,10 +42,8 @@ To address these challenges, we propose FOVA, a fast one-shot verifiable aggrega
 <link>https://eprint.iacr.org/2026/642</link>
 <guid>https://eprint.iacr.org/2026/642</guid>
 <content:encoded><![CDATA[
-
 As digital transformation accelerates, securing communication through hierarchical Public Key Infrastructures (PKIs) is increasingly critical. Yet, this centralized trust architecture remains inherently vulnerable. As a Systematization of Knowledge (SoK), this paper maps the threat landscape of hierarchical PKIs, demonstrating how a compromise at any single node from a Root CA breach to an operational revocation failure can trigger a cascading loss of global trust. Grounded in the Weakest-Link Principle, our analysis reveals that a PKI ecosystem is only as resilient as its least protected vector. Traditional revocation mechanisms, particularly CRLs and OCSP, exhibit significant operational and privacy flaws, and are often rendered ineffective by client-side "soft-fail" policies. To address these vulnerabilities, we advocate for a shift: replacing unconditional trust in individual entities with decentralized,verifiable protocols. We evaluate Certificate Transparency (CT) as a core mitigation strategy, illustrating how append-only Merkle trees make misissuance publicly visible and cryptographically auditable. Finally, we synthesize essential operational hardening measures such as strict key cryptoperiods and procedural policies to ensure long-term ecosystem resilience.
 ]]></content:encoded>
-<pubDate>Wed, 01 Apr 2026 22:02:25 +0000</pubDate>
 <pubDate>Wed, 01 Apr 2026 22:02:25 +0000</pubDate>
 </item>
 <item>
@@ -58,7 +51,6 @@ As digital transformation accelerates, securing communication through hierarchic
 <link>https://eprint.iacr.org/2026/639</link>
 <guid>https://eprint.iacr.org/2026/639</guid>
 <content:encoded><![CDATA[
-
 Synchronous Byzantine fault tolerant (BFT) protocols offer stronger security guarantees, increasing resilience from one third to one half. However, existing constructions suffer from three drawbacks that are critical in blockchain settings.
 
 First, blockchain systems require rotating leaders, but the existing constructions are not optimized for low latency under leader rotation. Second, blockchain systems require provable commitments that can be forwarded to clients or offchain entities. Third, modern blockchains optimize for low latency in the good case, and often further optimize for a fast path under even milder adversarial conditions. 
@@ -70,17 +62,14 @@ For optimistic responsiveness, we present $\Delta$-Sync Simplex and $2\Delta$-Sy
 For fixed view schedules, we present two additional protocols, TenderSync and SyncMint, that trade off commit latency and view duration. They achieve either $3\Delta$ provable commit with $4\Delta$ views, or $4\Delta$ provable commit with $3\Delta$ views. Both protocols obtain a provable commit in $2\delta$ under a correct leader when $f \le p$.
 ]]></content:encoded>
 <pubDate>Wed, 01 Apr 2026 14:41:55 +0000</pubDate>
-<pubDate>Wed, 01 Apr 2026 14:41:55 +0000</pubDate>
 </item>
 <item>
 <title>VeriRAG: Efficient Zero-Knowledge Proofs for Verifiable Retrieval-Augmented Generation</title>
 <link>https://eprint.iacr.org/2026/637</link>
 <guid>https://eprint.iacr.org/2026/637</guid>
 <content:encoded><![CDATA[
-
 Retrieval-Augmented Generation (RAG) is widely used to enhance Large Language Models (LLMs), yet the "hallucination" characteristic allows malicious providers to bypass retrieval or claim non-existent data quality. To address these challenges, we present VeriRAG, a framework that leverages Zero-Knowledge Proofs (ZKP) to provide efficient integrity guarantees for RAG systems without compromising dataset privacy. Leveraging the robustness of AI inference, our framework supports Approximate Nearest Neighbor Search (ANNS)-based retrieval to avoid exhaustive searches. For the verification of top-$k$ sorting, we propose an innovative protocol that bypasses the intricate verification of sorting processes. To further enhance performance, we introduce a joint optimization leveraging vector lookup and chunk-merging strategies, which collectively drive down verification overhead while maintaining high generation accuracy. Experimental results demonstrate that VeriRAG scales efficiently to a 37GB dataset, achieving a prover time of 96s and a verifier time of 3s.
 ]]></content:encoded>
-<pubDate>Wed, 01 Apr 2026 11:08:38 +0000</pubDate>
 <pubDate>Wed, 01 Apr 2026 11:08:38 +0000</pubDate>
 </item>
 <item>
@@ -88,7 +77,6 @@ Retrieval-Augmented Generation (RAG) is widely used to enhance Large Language Mo
 <link>https://eprint.iacr.org/2026/634</link>
 <guid>https://eprint.iacr.org/2026/634</guid>
 <content:encoded><![CDATA[
-
 In this technical note, we discuss a new direction in the design of privacy-preserving and scalable Layer-2 (L2) protocols by presenting a concrete construction, PlasmaBlind.
 
 To minimize the L2 users’ overhead for achieving privacy while enabling efficient creation of compact blocks, PlasmaBlind is built upon a novel architecture that leverages folding schemes’ powerful and flexible properties. On the user side, we utilize their blinding property to shield and prove transaction data without expensive succinct zero-knowledge proofs. On the aggregator side, their low accumulation cost allows efficient aggregation of user instances into a constant size proof of block validity.
@@ -98,9 +86,7 @@ We further improve our proof aggregation performance by proposing an optimizatio
 The practicality of PlasmaBlind is validated by our preliminary benchmarks, which demonstrate that, with consumer hardware, PlasmaBlind achieves sub-100ms proving time on the client side and sub-300ms per-transaction time on the aggregator side.
 ]]></content:encoded>
 <pubDate>Wed, 01 Apr 2026 07:51:08 +0000</pubDate>
-<pubDate>Wed, 01 Apr 2026 07:51:08 +0000</pubDate>
 </item>
-
 <item>
 <title>Securing Elliptic Curve Cryptocurrencies against Quantum Vulnerabilities: Resource Estimates and Mitigations</title>
 <link>https://eprint.iacr.org/2026/625</link>
@@ -14907,152 +14893,6 @@ An important consideration with the growth of the DeFi ecosystem is the protecti
 In August 2021, Liu et al. (IEEE TIFS'21) proposed a privacy-enhanced framework named PEFL  to efficiently detect poisoning behaviours in Federated Learning (FL) using homomorphic encryption. In this article, we show that PEFL does not preserve privacy. In particular, we illustrate that PEFL reveals the entire gradient vector of all users in clear to one of the participating entities, thereby violating privacy. Furthermore, we clearly show that an immediate fix for this issue is still insufficient to achieve privacy by pointing out multiple flaws in the proposed system.
 ]]></content:encoded>
 <pubDate>Wed, 25 Sep 2024 10:52:18 +0000</pubDate>
-</item>
-<item>
-<title>Practical Implementation of Pairing-Based zkSNARK in Bitcoin Script</title>
-<link>https://eprint.iacr.org/2024/1498</link>
-<guid>https://eprint.iacr.org/2024/1498</guid>
-<content:encoded><![CDATA[
-<div> 关键词：Groth16、零知识证明、比特币脚本、主网、可验证计算
-
-总结:
-
-本文介绍了在BSV主网上实现Groth16验证器的实践性方法。Groth16是一个基于配对的零知识证明方案，其证明大小固定，验证算法高效。通过将Groth16验证器集成到比特币脚本中，可以在区块链上进行链上验证，从而实现离链计算的验证。这种解决方案不仅提供了隐私保护，还提升了区块链的扩展性。此外，它还为比特币引入了智能合约功能，这在过去被认为是非常有限或不存在的。通过生成Groth16证明来验证离链计算的正确性，再使用比特币脚本在链上进行验证，这种方式不仅保证了数据的机密性，而且提高了交易处理能力，为比特币生态系统带来了新的可能性和灵活性。 <div>
-Groth16 is a pairing-based zero-knowledge proof scheme that has a constant proof size and an efficient verification algorithm. Bitcoin Script is a stack-based low-level programming language that is used to lock and unlock bitcoins. In this paper, we present a practical implementation of the Groth16 verifier in Bitcoin Script deployable on the mainnet of a Bitcoin blockchain called BSV. Our result paves the way for a framework of verifiable computation on Bitcoin: a Groth16 proof is generated for the correctness of an off-chain computation and is verified in Bitcoin Script on-chain. This approach not only offers privacy but also scalability. Moreover, this approach enables smart contract capability on Bitcoin which was previously thought rather limited if not non-existent.
-]]></content:encoded>
-<pubDate>Tue, 24 Sep 2024 16:56:05 +0000</pubDate>
-</item>
-<item>
-<title>No Fish Is Too Big for Flash Boys! Frontrunning on DAG-based Blockchains</title>
-<link>https://eprint.iacr.org/2024/1496</link>
-<guid>https://eprint.iacr.org/2024/1496</guid>
-<content:encoded><![CDATA[
-<div> 关键词：区块链、Frontrunning攻击、DAG、区块优先级、对策
-
-总结:
-
-本文深入分析了针对基于有向无环图(DAG)的区块链系统的Frontrunning攻击策略。主要发现和讨论如下：
-
-1. **新型攻击策略**：提出了一种新颖的跨区块Frontrunning攻击方法，允许攻击者在其交易在不同区块中优先于受害者交易。
-
-2. **攻击策略介绍**：介绍了三种攻击策略——裂缝攻击（通过断开受害者区块来推迟受害者交易的排序）、投机攻击（预先构建具有优先排序的交易块）以及迟缓攻击（通过故意创建低轮次但高优先级的区块来影响排序）。
-
-3. **实验验证**：通过在AWS和本地环境中使用开源DAG区块链Bullshark和Tusk进行了实验，结果显示攻击的有效性极高，尤其是投机攻击在Bullshark和Tusk上的成功率分别达到92.86%和86.27%。
-
-4. **对策探讨**：提出了随机排序区块和基于交易费用全局重排序的对策以抵御攻击，但发现这些措施可能损害系统性能或增加现有Frontrunning策略的脆弱性。
-
-5. **结论与展望**：强调了对DAG区块链系统中Frontrunning攻击的深入理解和防御的重要性，指出需要进一步研究更有效的防御机制以保护此类区块链系统的安全性和公平性。 <div>
-Frontrunning is rampant in blockchain ecosystems, yielding attackers profits that have already soared into several million. Most existing frontrunning attacks focus on manipulating transaction order (namely, prioritizing attackers' transactions before victims' transactions) $\textit{within}$ a block. However, for the emerging directed acyclic graph (DAG)-based blockchains, these intra-block frontrunning attacks may not fully reveal the frontrunning vulnerabilities as they introduce block ordering rules to order transactions belonging to distinct blocks. 
-
-This work performs the first in-depth analysis of frontrunning attacks toward DAG-based blockchains. We observe that the current block ordering rule is vulnerable to a novel $\textit{inter-block}$ frontrunning attack, which enables the attacker to prioritize ordering its transactions before the victim transactions across blocks. We introduce three attacking strategies: $\textit{(i)}$ Fissure attack, where attackers render the victim transactions ordered later by disconnecting the victim's blocks. $\textit{(ii)}$ Speculative attack, where attackers speculatively construct order-priority blocks. $\textit{(iii)}$ Sluggish attack, where attackers deliberately create low-round blocks assigned a higher ordering priority by the block ordering rule.
-
-We implement our attacks on two open-source DAG-based blockchains, Bullshark and Tusk. We extensively evaluate our attacks in geo-distributed AWS and local environments by running up to $n=100$ nodes. Our experiments show remarkable attack effectiveness. For instance, with the speculative attack, the attackers can achieve a $92.86\%$ attack success rate (ASR) on Bullshark and an $86.27\%$ ASR on Tusk. Using the fissure attack, the attackers can achieve a $94.81\%$ ASR on Bullshark and an $87.31\%$ ASR on Tusk. 
-
-We also discuss potential countermeasures for the proposed attack, such as ordering blocks randomly and reordering transactions globally based on transaction fees. However, we find that they either compromise the performance of the system or make the protocol more vulnerable to frontrunning using the existing frontrunning strategies.
-]]></content:encoded>
-<pubDate>Tue, 24 Sep 2024 13:34:03 +0000</pubDate>
-</item>
-<item>
-<title>Concretely Efficient Private Set Union via Circuit-based PSI</title>
-<link>https://eprint.iacr.org/2024/1494</link>
-<guid>https://eprint.iacr.org/2024/1494</guid>
-<content:encoded><![CDATA[
-<div> 关键词：Private Set Intersection (PSI), Private Set Union (PSU), Public-key operations, Communication overhead, Symmetric-key primitives
-
-总结:
-
-本文提出了一种新型的私有集合并集（PSU）协议，该协议主要基于高效对称密钥机制，同时保持与公钥基础替代方案相当的通信效率。PSU协议的核心创新在于利用先进的电路基PSI技术实现多查询反向私有成员测试（mq-RPMT），这一技术对于构建PSU至关重要。文章揭示了电路基PSI中常见哈希方法导致的隐私泄露问题，并通过盲化伪随机函数（OPRF）和新设计的洗牌子协议来缓解这一问题。
-
-该协议采用模块化设计，各个组成部分可以方便地替换为更高效的版本，这将直接提升整体性能。实验结果显示，与Chen等人在PKC'24上提出的公钥基础PSU协议相比，本文的PSU协议在输入集大小为$2^{20}$时运行时间提高了10%。此外，与Zhang等人在USENIX Sec'23上提出的基于对称密钥的PSU协议相比，本文的协议在通信方面改善了1.6倍。
-
-通过这些改进，本文的PSU协议不仅优化了计算效率，还降低了通信开销，为私有集合操作提供了更为高效、实用的解决方案。 <div>
-Private set intersection (PSI) is a type of private set operation (PSO) for which concretely efficient linear-complexity protocols do exist.
-However, the situation is currently less satisfactory for other relevant PSO problems such as private set union (PSU):
-For PSU, the most promising protocols either rely entirely on computationally expensive public-key operations or suffer from substantial communication overhead.
-
-In this work, we present the first PSU protocol that is mainly based on efficient symmetric-key primitives yet enjoys comparable communication as public-key-based alternatives.
-Our core idea is to re-purpose state-of-the-art circuit-based PSI to realize a multi-query reverse private membership test (mq-RPMT), which is instrumental for building PSU.
-We carefully analyze a privacy leakage issue resulting from the hashing paradigm commonly utilized in circuit-based PSI and show how to mitigate this via oblivious pseudorandom function (OPRF) and new shuffle sub-protocols.
-Our protocol is modularly designed as a sequential execution of different building blocks that can be easily replaced by more efficient variants in the future, which will directly benefit the overall performance.
-
-We implement our resulting PSU protocol, showing a run-time improvement of 10% over the state-of-the-art public-key-based protocol of Chen et al. (PKC'24) for input sets of size $2^{20}$.
-Furthermore, we improve communication by $1.6\times$ over the state-of-the-art symmetric-key-based protocol of Zhang et al. (USENIX Sec'23).
-]]></content:encoded>
-<pubDate>Tue, 24 Sep 2024 11:57:38 +0000</pubDate>
-</item>
-<item>
-<title>Simple and Practical Amortized Sublinear Private Information Retrieval using Dummy Subsets</title>
-<link>https://eprint.iacr.org/2023/1072</link>
-<guid>https://eprint.iacr.org/2023/1072</guid>
-<content:encoded><![CDATA[
-<div> 关键词：私有信息检索、子线性时间、多轮交互、状态依赖、效率优化
-
-总结:
-
-本文探讨了私有信息检索（Private Information Retrieval，简称PIR）领域中的一种新型方法——基于预处理和状态依赖的子线性时间PIR方案。主要贡献在于提出了一种使用新技巧构建和利用提示（hints）的方法，以解决现有PIR方案中面临的一系列挑战，包括客户端存储量大、通信成本高、实用性低、服务器需非共谋以及客户端查询序列受限等问题。
-
-通过引入“假集”到客户端请求中，该方案成功地消除了任何泄露或正确性失败的可能性。这意味着即使在非共谋的服务器环境下，或者单个服务器场景下，也能实现高效和隐私保护的检索操作。在数据库规模为2^28个32字节条目的情况下，对于双服务器方案，每个查询仅需消耗34KB的通信量和2.7毫秒的计算时间；而单服务器方案则消耗约47KB的通信量和4.5毫秒的计算时间。这些性能指标显著优于先前的研究成果，实现了在保持隐私的同时，极大提升了实际应用中的效率。 <div>
-Recent works in amortized sublinear Private Information Retrieval (PIR) have demonstrated great potential. Despite the inspiring progress, existing schemes in this new paradigm are still faced with various challenges and bottlenecks, including large client storage, high communication, poor practical efficiency, need for non-colluding servers, or restricted client query sequences. We present simple and practical amortized sublinear stateful private information retrieval schemes without these drawbacks using new techniques in hint construction and usage. In particular, we introduce a dummy set to the client's request to eliminate any leakage or correctness failures. Our techniques can work with two non-colluding servers or a single server. The resulting PIR schemes achieve practical efficiency. The online response overhead is only twice that of simply fetching the desired entry without privacy. For a database with $2^{28}$ entries of 32-byte, each query of our two-server scheme consumes 34 KB of communication and 2.7 milliseconds of computation, and each query of our single-server scheme consumes amortized 47 KB of communication and 4.5 milliseconds of computation. These results are one or more orders of magnitude better than prior works.
-]]></content:encoded>
-<pubDate>Mon, 10 Jul 2023 02:16:25 +0000</pubDate>
-</item>
-<item>
-<title>Towards Practical Transciphering for FHE with Setup Independent of the Plaintext Space</title>
-<link>https://eprint.iacr.org/2023/1531</link>
-<guid>https://eprint.iacr.org/2023/1531</guid>
-<content:encoded><![CDATA[
-<div> 关键词：全同态加密、非交互式协议、带宽优化、混合同态加密、自适应精度
-
-总结: 文章提出了一种新的方法来解决全同态加密（FHE）在实际应用中带宽需求过高的问题。通过结合任何FHE兼容的对称加密算法与自适应精度的转换过程，该方法允许服务器根据具体应用需求动态选择加密精度，从而显著减少了通信成本。文章以使用FiLIP密钥作为示例，结合了最实用的同态计算技术，成功实现了从2^2到2^8的不同精度范围内的加密操作，每项操作仅需13ms至137ms的时间。这种方法不仅优化了带宽使用，而且保持了操作的高效性，为FHE的应用提供了更灵活和高效的解决方案。
-
-文章的核心贡献在于引入了一种无需预先确定消息精度的方法，解决了现有技术中对于消息大小或应用底层结构的约束问题。通过将原始数据逐位加密并随后根据需要转换为整数域上的FHE密文，这种方法使得FHE的非交互式隐私保护协议能够在保持计算和通信效率的同时，适应各种不同的应用场景。这种创新的策略极大地扩展了FHE在实际应用中的潜力，尤其是在需要处理大量数据和高精度要求的场景下。 <div>
-Fully Homomorphic Encryption (FHE) is a powerful tool to achieve non-interactive privacy preserving protocols with optimal computation/communication complexity. However, the main disadvantage is that the actual communication cost (bandwidth) is high due to the large size of FHE ciphertexts. As a solution, a technique called transciphering (also known as Hybrid Homomorphic Encryption) was introduced to achieve almost optimal bandwidth for such protocols. However, all of existing works require clients to fix a  precision for the messages or a mathematical structure for the message space beforehand. It results in unwanted constraints on the plaintext size or underlying structure of FHE based applications.
-
-In this article, we introduce a new approach for transciphering which does not require fixed message precision decided by the client, for the first time. In more detail, a client uses any kind of FHE-friendly symmetric cipher  for $\{0,1\}$ to send its input data encrypted bit-by-bit, then the server can choose a precision $p$ depending on the application and homomorphically transforms the encrypted bits into FHE ciphertexts encrypting integers in $\mathbb{Z}_p$. To illustrate our new technique, we evaluate a transciphering using FiLIP cipher and adapt the most practical homomorphic evaluation technique [CCS'22] to keep the practical latency.  As a result, our proof-of-concept implementation for $p$ from $2^2$ to $2^8$ takes only from $13$ ms to $137$ ms.
-]]></content:encoded>
-<pubDate>Fri, 06 Oct 2023 21:43:10 +0000</pubDate>
-</item>
-<item>
-<title>Mastic: Private Weighted Heavy-Hitters and Attribute-Based Metrics</title>
-<link>https://eprint.iacr.org/2024/221</link>
-<guid>https://eprint.iacr.org/2024/221</guid>
-<content:encoded><![CDATA[
-<div> 关键词：多党计算、用户隐私、Mastic协议、重头项、属性基度量
-
-总结:
-
-本文讨论了在保护用户隐私的前提下，通过多党计算技术获取大型软件系统和网络服务中用户行为和体验的洞察。文章介绍了Prio和Poplar两种基于多党计算的协议，它们分别用于通用统计和热门输入的计算。然而，这两种协议并未覆盖所有IETF识别的应用场景。
-
-为填补这一空白，文章提出了一种名为Mastic的新协议，用于处理每个客户端持有输入及其权重的情况（例如，URL及其页面加载时间）。对于给定的候选输入或前缀，一小部分非共谋服务器可以安全地聚合持有该输入（或具有相同前缀的输入）的客户端的权重，而无需学习这些权重或哪个客户端持有哪个输入。这种功能开辟了两个新应用领域：一是对传统热门输入概念的扩展——加权热门输入；二是对Prio风格指标的增强——属性基指标，其中聚合结果根据用户的层级属性进行分类（如地理位置或软件版本）。
-
-文章还通过实际案例展示了Mastic在实现这两个新应用方面的可行性，并与Prio和Poplar进行了性能比较。结果显示，对于简单的热门输入计算，Mastic的表现优于Poplar至少一个数量级；而对于属性基指标，其性能提升幅度约为1.5到2倍。 <div>
-Insight into user experience and behavior is critical to the success of large software systems and web services. Gaining such insights, while preserving user privacy, is a significant challenge. Recent advancements in multi-party computation have made it practical to securely compute aggregates over secret shared data. Two such protocols have emerged as candidates for standardization at the IETF: Prio (NSDI 2017) for general-purpose statistics; and Poplar (IEEE S&amp;P 2021) for heavy hitters, where the goal is to compute the most popular inputs held by users without learning the inputs themselves. While each of these protocols is well-suited to certain applications, there remain a number of use cases identified by IETF for which neither Prio nor Poplar is practical.
-
-We introduce Mastic, a protocol for the following functionality: each of a large number of clients holds an input (e.g., a URL) and its corresponding weight (e.g., page load time); for a given candidate input (or prefix), a small number of non-colluding servers wish to securely aggregate the weights of clients that hold that input (or some input with that prefix), without learning the weights or which client holds which input. This functionality makes two new classes of applications possible. The first is a natural generalization of heavy hitters we call weighted heavy-hitters. The second is an enhancement of Prio-style metrics we call attribute-based metrics in which aggregates are grouped by hierarchical user attributes (e.g., their geographic location or software version). We demonstrate Mastic's practicality for these applications with a real-world example of each. We also compare our protocol with Prio and Poplar on a wide area network. Overall, we report over one order of magnitude performance improvement over Poplar for plain heavy-hitters and $1.5-2\times$ improvement over Prio for attribute-based metrics.
-]]></content:encoded>
-<pubDate>Tue, 13 Feb 2024 16:41:06 +0000</pubDate>
-</item>
-<item>
-<title>PipeSwap: Forcing the Timely Release of a Secret for Atomic Swaps Across All Blockchains</title>
-<link>https://eprint.iacr.org/2024/881</link>
-<guid>https://eprint.iacr.org/2024/881</guid>
-<content:encoded><![CDATA[
-<div> 关键词：原子跨链交换、双声称攻击、管道交换、普适性、理想功能
-
-总结:
-
-本文针对原子跨链交换领域存在的问题进行了深入研究与创新。首先，作者揭示了一种名为“双声称攻击”的新形式，这种攻击会导致诚实用户以压倒性的概率损失硬币，并直接破坏原子性。此外，这种攻击易于实施，并可以自然地应用于其他跨链交换协议以及支付通道网络中，这凸显了设计普适性原子交换的普遍挑战。
-
-为了克服这些挑战，作者提出了“管道交换”(pipeSwap)协议，旨在同时满足安全性和实用性。该协议通过使用两跳交换和两跳退款技术来设计一种新颖的硬币流模式，以避免相同冻结硬币的重复声称，从而违反原子性属性。pipeSwap实现了普适性，无需依赖特定的脚本语言（除了基本的签名验证能力），进一步证明了其不依赖于任何特定脚本语言的能力。
-
-文章还分析了现有理想功能在捕捉原子性属性方面的不足，并首次定义了确保原子性的理想功能。在通用可组合性框架下，对pipeSwap进行了详细的安全分析，并开发了一个基于Schnorr/ECDSA签名的原型实现。实验结果显示，pipeSwap可以在不到1.7秒的时间内完成，并且通信开销小于7kb，证明了其高效性。
-
-总的来说，本文通过揭示双声称攻击，提出管道交换协议，解决了原子跨链交换中的安全性与普适性问题，并通过实验验证了其高效性，为原子跨链交换领域的研究提供了新的视角和解决方案。 <div>
-Atomic cross-chain swap, which allows users to exchange coins securely, is critical functionality to facilitate inter-currency exchange and trading. Although most classic atomic swap protocols based on Hash Timelock Contracts have been applied and deployed in practice, they are substantially far from universality due to the inherent dependence of rich scripting language supported by the underlying blockchains. The recently proposed Universal Atomic Swaps protocol [IEEE S\&amp;P'22] takes a novel path to scriptless cross-chain swap, and it ingeniously delegates scripting functionality to cryptographic lock mechanisms, particularly the adaptor signature and timed commitment schemes designed to guarantee atomicity. However, in this work, we discover a new form of attack called double-claiming attack, such that the honest user would lose coins with overwhelming probability and atomicity is directly broken. Moreover, this attack is easy to carry out and can be naturally generalized to other cross-chain swap protocols as well as the payment channel networks, highlighting a general difficulty in designing universal atomic swap.
-
-We present pipeSwap, a cross-chain swap protocol that satisfies both security and practical universality. To avoid transactions of the same frozen coins being double-claimed to violate the atomicity property, pipeSwap proposes a novelly designed paradigm of pipelined coins flow by using two-hop swap and two-hop refund techniques. pipeSwap achieves universality by not relying on any specific script language, aside from the basic ability to verify signatures. Furthermore, we analyze why existing ideal functionality falls short in capturing the atomicity property of Universal Atomic Swaps, and define for the first time ideal functionality to guarantee atomicity. In addition to a detailed security analysis in the Universal Composability framework, we develop a proof-of-concept implementation of pipeSwap with Schnorr/ECDSA signatures, and conduct extensive experiments to evaluate the overhead. The experimental results show that pipeSwap can be performed in less than 1.7 seconds and requires less than 7 kb of communication overhead on commodity machines, which demonstrates its high efficiency.
-]]></content:encoded>
-<pubDate>Mon, 03 Jun 2024 01:21:19 +0000</pubDate>
 </item>
 </channel>
 </rss>
