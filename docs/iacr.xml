@@ -5,20 +5,51 @@
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
 <item>
+<title>Batch Verification of Modified ECDSA Signatures</title>
+<link>https://eprint.iacr.org/2026/663</link>
+<guid>https://eprint.iacr.org/2026/663</guid>
+<content:encoded><![CDATA[
+
+ECDSA is a widely deployed digital signature scheme used in securing communications and distributed systems but its structure prevents efficient batch verification. This limitation is impactful in high-throughput applications such as blockchain transaction validation. In this paper, we consider two modified versions of standard ECDSA, namely ECDSA_rec and ECDSA_ast, which embed additional bits in the signature, that enable efficient batch verification. We contribute the first publicly available C implementations of ECDSA_ast on secp256k1 and of both ECDSA_ast and ECDSA_rec on secp256r1, built on top of Bitcoin and OpenSSL codebases, respectively. We evaluate both variants on the two curves and demonstrate batch verification using the two established randomization techniques, NMVR-rand and HSS-rand. The results of our software implementation indicate that batch verification of modified ECDSA signatures usingHSS-rand generally outperforms individual verification of standard ECDSA. Furthermore, the HSS-rand technique provides more efficient batch verification than NMVR-rand in the majority of cases. For a batch of 32 ECDSA_ast (ECDSA_rec resp.) signatures on secp256k1, HSS-rand batch verification improves individual verification by approximately 30.9% (17.2% for ECDSA_rec) and outperforms NMVR_rand batch verification, which achieves improvements of 10.6% (9.8% for ECDSA_rec). The improvements achieved by HSS-rand on secp256r1 are even more pronounced, reaching  53.9% for ECDSA_ast and 40.5% for ECDSA_rec over individual verification of standard ECDSA signatures. In comparison, HSS-rand yields improvements of 27.6% for ECDSA_ast and 22.9% for ECDSA_rec over NMVR-rand, respectively.
+]]></content:encoded>
+<pubDate>Sun, 05 Apr 2026 17:05:40 +0000</pubDate>
+<pubDate>Sun, 05 Apr 2026 17:05:40 +0000</pubDate>
+</item>
+<item>
+<title>Delegate: Coalition Proof Incentivized Outsourced Computation with Smart Contracts</title>
+<link>https://eprint.iacr.org/2026/658</link>
+<guid>https://eprint.iacr.org/2026/658</guid>
+<content:encoded><![CDATA[
+
+In incentivized outsourced computation,an outsourcer hands a computation to multiple contractors, and in return expects the same computation output from each. The state-of-the-art proposals succeed in incentivizing all contractors for honest computation by setting this behavior as the unique Nash equilibrium of the system. Yet, they are either limited to the two-contractor case or the multi-contractor case without security proof against fully collaborating coalitions. Further, employing a smart contract for managing submissions from the contractors has been a non-trivial task due to the copy attack. In this work, we target this issue and propose a smart contract based multi-contractor incentivized outsourced computation protocol Delegate, which is provably secure against coalitions. We further mitigate the copy attack by a universally composable response submission protocol based on commitments, in contrast to previous solutions which only disincentivize it.
+]]></content:encoded>
+<pubDate>Sat, 04 Apr 2026 15:32:07 +0000</pubDate>
+<pubDate>Sat, 04 Apr 2026 15:32:07 +0000</pubDate>
+</item>
+<item>
+<title>Random Robust Secret Sharing with Perfect Privacy and its Applications</title>
+<link>https://eprint.iacr.org/2026/653</link>
+<guid>https://eprint.iacr.org/2026/653</guid>
+<content:encoded><![CDATA[
+
+Secret Sharing schemes allows a dealer to distribute $n$ shares $s_1,\ldots, s_n$ of a secret $s$ so that any $t$ shares suffice to reconstruct the secret, while any $t-1$ shares reveal no information about $s$. In fact, schemes such as Shamir Secret Sharing satisfy a stronger guarantee called  $(t\!-\!1)$-perfect privacy, meaning that for any subset $S \subseteq [n]$ with $|S| \le t-1$, the joint distribution $(s_i)_{i \in S}$ is uniformly distributed over its domain. This strong guarantee is essential for applications such as fuzzy password-authenticated key exchange (fPAKE) and conditional encryption --- a recent cryptographic primitive introduced to  enable secure personalized password typo correction. Unfortunately, Shamir secret sharing is not robust: corrupted shares can prevent correct reconstruction or cause reconstruction of an incorrect secret. Existing robust secret sharing schemes address this issue but necessarily sacrifice perfect privacy. We introduce and construct \emph{Random Robust Secret Sharing with Perfect Privacy} (RRSS), a new notion that preserves $(t\!-\!1)$-perfect privacy while providing robustness against random share corruptions. In our schemes, the secret is recovered with high probability even if an arbitrary subset of up to $n-t$ shares is independently corrupted at random. We demonstrate the utility of RRSS through two applications. First, we present the first practically efficient fPAKE construction that tolerates Hamming errors. Second, we obtain the first efficient conditional encryption scheme for arbitrary Hamming distances, improving upon prior work that achieved efficiency only for constant distances. We implement both constructions and empirically demonstrate their practicality.
+]]></content:encoded>
+<pubDate>Fri, 03 Apr 2026 13:00:08 +0000</pubDate>
+<pubDate>Fri, 03 Apr 2026 13:00:08 +0000</pubDate>
+</item>
+
+<item>
 <title>Perils of Parallelism: Transaction Fee Mechanisms under Execution Uncertainty</title>
 <link>https://eprint.iacr.org/2026/649</link>
 <guid>https://eprint.iacr.org/2026/649</guid>
 <content:encoded><![CDATA[
-
 Modern blockchains increasingly rely on parallel execution to improve throughput. We show several industry and academic transaction fee mechanisms (TFMs) struggle to simultaneously account for execution parallelism while remaining performant and fair. First, if parallelism affects fees, adversarial protocol manipulations that offset possible benefits to throughput by introducing fake transactions become rational: users can insert functionally useless parallel transactions solely to reduce fees, and schedulers can create useless sequential transactions to increase revenue. Execution contingency, a core feature of expressive programming languages, both exacerbates the aforementioned threats and introduces new ones:
 (1) users may overpay for unused resources, and 
 (2) scheduler revenue is harmed when reserved scheduling slots go unused due to contingency.
 We introduce a framework for this challenging setting, and prove an impossibility, highlighting an inherent tension: both parallelism and contingency involve a trade-off between minimizing risks for users and schedulers, as favoring one comes at the expense of the other. To complete the picture, we introduce a fee mechanisms and prove that they achieve the boundaries of this trade-off. Our results provide rigorous foundations for evaluating designs advanced by notable blockchains, such as Sui and Monad.
 ]]></content:encoded>
 <pubDate>Thu, 02 Apr 2026 22:45:30 +0000</pubDate>
-<pubDate>Thu, 02 Apr 2026 22:45:30 +0000</pubDate>
 </item>
-
 <item>
 <title>HyperVerITAS: Verifying Image Transformations at Scale on Boolean Hypercubes</title>
 <link>https://eprint.iacr.org/2026/641</link>
@@ -14891,22 +14922,6 @@ An important consideration with the growth of the DeFi ecosystem is the protecti
     We implement our scheme and find that transactions can be encrypted in approximately 8.5 ms, independent of committee size, and the communication required to decrypt an entire batch of transactions is 48 bytes per party, independent of the number of transactions. If deployed on Ethereum, which processes close to 500 transactions per block, it takes close to 3.2 s for each committee member to compute a partial decryption and 3.0 s to decrypt all transactions for a block in single-threaded mode. Compared to prior work, which had an expensive setup phase per epoch, we incur $<2\times$ overhead in the worst case. On some metrics such as partial decryptions size, we actually fare better.
 ]]></content:encoded>
 <pubDate>Thu, 26 Sep 2024 16:47:03 +0000</pubDate>
-</item>
-<item>
-<title>Comments on "Privacy-Enhanced Federated Learning Against Poisoning Adversaries"</title>
-<link>https://eprint.iacr.org/2024/1504</link>
-<guid>https://eprint.iacr.org/2024/1504</guid>
-<content:encoded><![CDATA[
-<div> 关键词：Liu et al., IEEE TIFS'21, PEFL, 恶意行为检测, 同态加密
-
-<br /><br />总结:
-
-在2021年8月发表于IEEE TIFS期刊的Liu等人的文章中，提出了一种名为PEFL的隐私增强框架。该框架旨在通过同态加密技术高效检测联邦学习（FL）中的恶意行为。然而，本文揭示了PEFL并未真正保护隐私。具体来说，文章指出PEFL实际上暴露了所有参与实体的完整梯度向量，这违反了隐私原则。
-
-文章进一步分析指出，即使对PEFL进行立即修复，也无法确保隐私安全。这是因为系统中存在多个漏洞，这些漏洞仍然允许敏感信息泄露。因此，虽然PEFL最初的目标是提高联邦学习环境的安全性，但其实际实现却未能达到预期的隐私保护效果。这一发现强调了在设计和部署用于保护敏感数据的加密技术时，需要仔细考虑潜在的弱点和漏洞。 <div>
-In August 2021, Liu et al. (IEEE TIFS'21) proposed a privacy-enhanced framework named PEFL  to efficiently detect poisoning behaviours in Federated Learning (FL) using homomorphic encryption. In this article, we show that PEFL does not preserve privacy. In particular, we illustrate that PEFL reveals the entire gradient vector of all users in clear to one of the participating entities, thereby violating privacy. Furthermore, we clearly show that an immediate fix for this issue is still insufficient to achieve privacy by pointing out multiple flaws in the proposed system.
-]]></content:encoded>
-<pubDate>Wed, 25 Sep 2024 10:52:18 +0000</pubDate>
 </item>
 </channel>
 </rss>
