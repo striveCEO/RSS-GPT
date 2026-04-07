@@ -4,6 +4,78 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+<item>
+<title>Improved Circuit Synthesis with Multi-Value Bootstrapping for FHEW-like Schemes</title>
+<link>https://eprint.iacr.org/2023/1223</link>
+<guid>https://eprint.iacr.org/2023/1223</guid>
+<content:encoded><![CDATA[
+
+In recent years, the research community has made great progress in improving techniques for privacy-preserving computation, such as fully homomorphic encryption (FHE). Despite the progress, there remain open challenges, mainly in performance and usability, to further advance the adoption of these technologies. This work provides multiple contributions that improve the current state-of-the-art in both areas. More specifically, we significantly simplify the multi-value bootstrapping by Carpov, Izabachène, and Mollimard [CIM19] for Boolean-based FHE schemes such as FHEW or TFHE, making the concept usable in practice. Based on our simplifications, we implement an easy-to-use interface for multi-value bootstrapping in the open-source library FHE-Deck [fhe23], derive new parameter sets for multi-bit encryptions with state-of-the-art security, and build a toolset that translates high-level code to multi-bit operations on encrypted data using circuit synthesis. We propose and integrate the first non-trivial FHE-specific optimizations for privacy-preserving circuit synthesis: look-up table (LUT) grouping and adder substitution. Using LUT grouping, we reduce the number of bootstrapping operations by almost 40% on average, while for adder substitution, we reduce the number of required bootstrappings by up to 85% for certain use cases. Overall, the execution time is up to 4.2x faster with all optimizations enabled compared to previous state-of-the-art circuit synthesis.
+]]></content:encoded>
+<pubDate>Fri, 11 Aug 2023 20:22:21 +0000</pubDate>
+<pubDate>Fri, 11 Aug 2023 20:22:21 +0000</pubDate>
+</item>
+<item>
+<title>Efficient Merkle-Tree Consistent Accumulator</title>
+<link>https://eprint.iacr.org/2026/673</link>
+<guid>https://eprint.iacr.org/2026/673</guid>
+<content:encoded><![CDATA[
+
+A consistent accumulator computes a digest for a
+dynamically-growing set of elements, with a proof of consistency of
+the new digest with the previous digests. Consistent accumulators
+are in wide use, in particular, by Certificate Transparency (CT),
+which is part of the Web PKI, and in blockchains.
+
+We present a significantly more efficient design for a consistent
+accumulator. Our design is compatible with the CT specifications;
+similarly to the widely-used, open-source CT implementation,
+it uses a Merkle tree, but much more efficiently. We provide
+open source implementation, security analysis and experimental
+evaluation showing the performance improvements.
+]]></content:encoded>
+<pubDate>Mon, 06 Apr 2026 21:35:59 +0000</pubDate>
+<pubDate>Mon, 06 Apr 2026 21:35:59 +0000</pubDate>
+</item>
+<item>
+<title>FLOSS: Fast Linear Online Secret-Shared Shuffling</title>
+<link>https://eprint.iacr.org/2026/672</link>
+<guid>https://eprint.iacr.org/2026/672</guid>
+<content:encoded><![CDATA[
+
+Randomly permuting secret data vectors is a core building block in many privacy-preserving protocols, including those for analytics, advertising, and communication.
+Existing approaches either rely on computation-heavy public key cryptography and zero-knowledge proofs or scale poorly for large vectors due to use of a quasilinear-sized permutation network. This work presents a preprocessing approach to enable fast linear-time online shuffles in the malicious-secure two-party computation (2PC) setting. We propose FLOSS, a 2PC protocol for securely computing any interactive arithmetic permutation circuit, a notion we introduce to capture how higher level protocols are built on secret-shared field arithmetic and permutations. We show how secret-shared sorting (a subprotocol in data analytics) can be described as an arithmetic permutation circuit, and can thus be compiled to an efficient online 2PC protocol using FLOSS. Our implementation and evaluation confirm FLOSS performs online shuffles fast: shuffling $2^{20}$ elements in under 500ms, greater than $800\times$ faster than state-of-the-art alternatives.
+]]></content:encoded>
+<pubDate>Mon, 06 Apr 2026 20:24:30 +0000</pubDate>
+<pubDate>Mon, 06 Apr 2026 20:24:30 +0000</pubDate>
+</item>
+<item>
+<title>Braess Paradox in Layer-2 Blockchain Payment Networks</title>
+<link>https://eprint.iacr.org/2026/669</link>
+<guid>https://eprint.iacr.org/2026/669</guid>
+<content:encoded><![CDATA[
+
+Payment channel networks (PCNs) are a leading method to deal with the scalability limitations of blockchain networks. PCNs allow users to execute transactions without committing them to the blockchain by relying on predefined payment channels. Transactions between pairs of users without a connecting channel are also supported through a path of multiple channels. Serving such transactions involves fees paid to intermediate users. In this paper, we uncover the potential existence of the Braess paradox in payment networks: Sometimes, establishing a new payment channel can increase the fees paid for serving some fixed transactions. We study conditions for the paradox to appear under two different models of fees: Liquidity-based fees as a function of the transaction value jointly with the channel liquidity values and proportional fees which are based only on the transaction value. We also provide indications for the appearance of the paradox based on real data from Lightning, a popular payment channel network of Bitcoin. Last, we discuss methods to mitigate the paradox upon establishing a new payment channel.
+]]></content:encoded>
+<pubDate>Mon, 06 Apr 2026 14:58:13 +0000</pubDate>
+<pubDate>Mon, 06 Apr 2026 14:58:13 +0000</pubDate>
+</item>
+<item>
+<title>Which Privacy Blanket is Optimal in the Shuffle Model?</title>
+<link>https://eprint.iacr.org/2026/667</link>
+<guid>https://eprint.iacr.org/2026/667</guid>
+<content:encoded><![CDATA[
+
+In recent years, the shuffle model has emerged as a prevalent paradigm in privacy-preserving data analysis, centered on the principle of \textit{privacy amplification via shuffling}: an individual user's report is obscured by the ``background noise'' of other users' messages, a phenomenon intuitively known as the \textit{privacy blanket}. This paper initiates a foundational and systematic study of this mechanism from an information-theoretic perspective. We investigate the following optimal noise-design problem: 
+given that a target user's message $Y_1$ follows a distribution $P$, what is the optimal blanket noise distribution $Q$ that maximizes privacy? Specifically, when $Y_1 \sim P$ and the remaining messages $Y_2, \dots, Y_n \stackrel{\text{i.i.d.}}{\sim} Q$ are shuffled to produce an output $\boldsymbol{Z} = (Y_{\sigma(i)})_{i=1}^n$, we seek the $Q$ that affords the strongest protection for $Y_1$ under various metrics, including mutual information $I(Y_1; \mathbf{Z})$, total-variation-information $I_{\mathrm{TV}}(Y_1; \mathbf{Z})$, message recovery advantage, and expected posterior variance. 
+
+Our analysis reveals a series of non-intuitive results that challenge the conventional heuristic of setting $Q=P$. First, we prove that the optimal noise distribution $Q$ generally \textit{deviates} from the target distribution $P$. For binary alphabets, we show that the (near-)uniform distribution is optimal in a strong sense. For general finite alphabets, we derive an explicit analytical form $Q \propto \sqrt{P(1-P)}$ that achieves asymptotic optimality for mutual information. Furthermore, we demonstrate that our analytical framework transcends the shuffle model, yielding new security insights into broader cryptographic primitives such as the \textit{ideal cipher model} and \textit{honey encryption}.
+
+Finally, we extend our results to the shuffle-DP paradigm, where messages $Y_i = \mathcal{R}(X_i)$ are outputs of $\varepsilon_0$-locally differentially private mechanisms. We establish a new, tight information-theoretic upper bound $I(X_1; \mathbf{Z} \mid (X_i)_{i=2}^n) \le \frac{(e^{\varepsilon_0/2}-1)^2}{2n} + \mathcal{O}(n^{-3/2})$. This result provides a sharp characterization that matches the optimal privacy-amplification parameters known in the literature, while offering a novel interpretation of the shuffling gain.
+]]></content:encoded>
+<pubDate>Mon, 06 Apr 2026 09:42:31 +0000</pubDate>
+<pubDate>Mon, 06 Apr 2026 09:42:31 +0000</pubDate>
+</item>
 
 <item>
 <title>Batch Verification of Modified ECDSA Signatures</title>
