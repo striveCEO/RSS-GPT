@@ -4,15 +4,14 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+
 <item>
 <title>Batch Verification of Modified ECDSA Signatures</title>
 <link>https://eprint.iacr.org/2026/663</link>
 <guid>https://eprint.iacr.org/2026/663</guid>
 <content:encoded><![CDATA[
-
 ECDSA is a widely deployed digital signature scheme used in securing communications and distributed systems but its structure prevents efficient batch verification. This limitation is impactful in high-throughput applications such as blockchain transaction validation. In this paper, we consider two modified versions of standard ECDSA, namely ECDSA_rec and ECDSA_ast, which embed additional bits in the signature, that enable efficient batch verification. We contribute the first publicly available C implementations of ECDSA_ast on secp256k1 and of both ECDSA_ast and ECDSA_rec on secp256r1, built on top of Bitcoin and OpenSSL codebases, respectively. We evaluate both variants on the two curves and demonstrate batch verification using the two established randomization techniques, NMVR-rand and HSS-rand. The results of our software implementation indicate that batch verification of modified ECDSA signatures usingHSS-rand generally outperforms individual verification of standard ECDSA. Furthermore, the HSS-rand technique provides more efficient batch verification than NMVR-rand in the majority of cases. For a batch of 32 ECDSA_ast (ECDSA_rec resp.) signatures on secp256k1, HSS-rand batch verification improves individual verification by approximately 30.9% (17.2% for ECDSA_rec) and outperforms NMVR_rand batch verification, which achieves improvements of 10.6% (9.8% for ECDSA_rec). The improvements achieved by HSS-rand on secp256r1 are even more pronounced, reaching  53.9% for ECDSA_ast and 40.5% for ECDSA_rec over individual verification of standard ECDSA signatures. In comparison, HSS-rand yields improvements of 27.6% for ECDSA_ast and 22.9% for ECDSA_rec over NMVR-rand, respectively.
 ]]></content:encoded>
-<pubDate>Sun, 05 Apr 2026 17:05:40 +0000</pubDate>
 <pubDate>Sun, 05 Apr 2026 17:05:40 +0000</pubDate>
 </item>
 <item>
@@ -20,10 +19,8 @@ ECDSA is a widely deployed digital signature scheme used in securing communicati
 <link>https://eprint.iacr.org/2026/658</link>
 <guid>https://eprint.iacr.org/2026/658</guid>
 <content:encoded><![CDATA[
-
 In incentivized outsourced computation,an outsourcer hands a computation to multiple contractors, and in return expects the same computation output from each. The state-of-the-art proposals succeed in incentivizing all contractors for honest computation by setting this behavior as the unique Nash equilibrium of the system. Yet, they are either limited to the two-contractor case or the multi-contractor case without security proof against fully collaborating coalitions. Further, employing a smart contract for managing submissions from the contractors has been a non-trivial task due to the copy attack. In this work, we target this issue and propose a smart contract based multi-contractor incentivized outsourced computation protocol Delegate, which is provably secure against coalitions. We further mitigate the copy attack by a universally composable response submission protocol based on commitments, in contrast to previous solutions which only disincentivize it.
 ]]></content:encoded>
-<pubDate>Sat, 04 Apr 2026 15:32:07 +0000</pubDate>
 <pubDate>Sat, 04 Apr 2026 15:32:07 +0000</pubDate>
 </item>
 <item>
@@ -31,13 +28,10 @@ In incentivized outsourced computation,an outsourcer hands a computation to mult
 <link>https://eprint.iacr.org/2026/653</link>
 <guid>https://eprint.iacr.org/2026/653</guid>
 <content:encoded><![CDATA[
-
 Secret Sharing schemes allows a dealer to distribute $n$ shares $s_1,\ldots, s_n$ of a secret $s$ so that any $t$ shares suffice to reconstruct the secret, while any $t-1$ shares reveal no information about $s$. In fact, schemes such as Shamir Secret Sharing satisfy a stronger guarantee called  $(t\!-\!1)$-perfect privacy, meaning that for any subset $S \subseteq [n]$ with $|S| \le t-1$, the joint distribution $(s_i)_{i \in S}$ is uniformly distributed over its domain. This strong guarantee is essential for applications such as fuzzy password-authenticated key exchange (fPAKE) and conditional encryption --- a recent cryptographic primitive introduced to  enable secure personalized password typo correction. Unfortunately, Shamir secret sharing is not robust: corrupted shares can prevent correct reconstruction or cause reconstruction of an incorrect secret. Existing robust secret sharing schemes address this issue but necessarily sacrifice perfect privacy. We introduce and construct \emph{Random Robust Secret Sharing with Perfect Privacy} (RRSS), a new notion that preserves $(t\!-\!1)$-perfect privacy while providing robustness against random share corruptions. In our schemes, the secret is recovered with high probability even if an arbitrary subset of up to $n-t$ shares is independently corrupted at random. We demonstrate the utility of RRSS through two applications. First, we present the first practically efficient fPAKE construction that tolerates Hamming errors. Second, we obtain the first efficient conditional encryption scheme for arbitrary Hamming distances, improving upon prior work that achieved efficiency only for constant distances. We implement both constructions and empirically demonstrate their practicality.
 ]]></content:encoded>
 <pubDate>Fri, 03 Apr 2026 13:00:08 +0000</pubDate>
-<pubDate>Fri, 03 Apr 2026 13:00:08 +0000</pubDate>
 </item>
-
 <item>
 <title>Perils of Parallelism: Transaction Fee Mechanisms under Execution Uncertainty</title>
 <link>https://eprint.iacr.org/2026/649</link>
@@ -14847,81 +14841,6 @@ In this paper, we introduce $\duplex$, a scalable zero-knowledge lookup argument
 We implemented and empirically evaluated $\duplex$, comparing it with the state-of-the-art zero-knowledge lookup argument Caulk [CCS'22]. Our experimental results demonstrate that $\duplex$ significantly outperforms Caulk in proving time for both single and batched lookup arguments, while maintaining practical proof size and verification time.
 ]]></content:encoded>
 <pubDate>Thu, 26 Sep 2024 04:48:02 +0000</pubDate>
-</item>
-<item>
-<title>Evaluating Leakage Attacks Against Relational Encrypted Search</title>
-<link>https://eprint.iacr.org/2024/1525</link>
-<guid>https://eprint.iacr.org/2024/1525</guid>
-<content:encoded><![CDATA[
-<div> 关键词：加密搜索算法、数据泄漏、隐私保护、安全存储、查询执行
-
-总结:
-
-本文探讨了加密搜索算法（ESAs）在关系数据库场景中的适用性，以及主要的数据泄漏攻击在这一背景下的应用。ESAs允许用户对敏感数据进行加密存储并远程访问，同时保持对关键词或查询的搜索能力，从而保护隐私和确保数据安全。
-
-1. **数据泄漏与攻击**: 原有ESAs在文档和关键词搜索中应用时，存在一定程度的信息泄露问题。这些信息泄露被用于辅助攻击者获取关于明文的额外信息。然而，大多数针对泄漏攻击的研究集中在关键词ESAs上，而非关系型ESAs。
-
-2. **攻击适应性**: 作者对主要的泄漏攻击进行了重新评估，以适应关系型ESAs环境，并在不同特性的关系型数据集上进行了广泛测试。
-
-3. **攻击效果差异**: 实验结果表明，这些主要的攻击方法在已知数据设置下确实可以有效作用于关系型ESAs。但攻击性能在不同的数据集、利用的模式和攻击方法之间存在显著差异。
-
-4. **数据集特性影响**: 不同属性的数据集对攻击效果产生了显著影响，说明了在实际应用中需要考虑数据集的具体特性来评估安全性和隐私保护水平。
-
-5. **结论与展望**: 该研究揭示了关系型ESAs面临的数据泄漏风险，并强调了对这类系统进行针对性安全性评估的重要性。未来工作可能包括开发更有效的防御策略、改进ESAs设计以减少泄漏，以及进一步探索针对关系型数据的新型攻击和防御机制。 <div>
-Encrypted Search Algorithms (ESAs) are a technique to encrypt data while the user can still search over it. ESAs can protect privacy and ensure security of sensitive data stored on a remote storage. Originally, ESAs were used in the context of documents that consist of keywords. The user encrypts the documents, sends them to a remote server and is still able to search for keywords, without exposing information about the plaintext. The idea of ESAs has also been applied to relational databases, where queries (similar to SQL statements) can be privately executed on an encrypted database.But just as traditional schemes for Keyword-ESAs, also Relational-ESAs have the drawback of exposing some information, called leakage. Leakage attacks have been proposed in the literature that use this information together with auxiliary information to learn details about the plaintext. However, these leakage attacks have overwhelmingly been designed for and applied to Keyword-ESAs and not Relational-ESAs.
-In this work, we review the suitability of major leakage attacks against ESAs in the relational setting by adapting them accordingly. We perform extensive re-evaluations of the attacks on various relational datasets with different properties.
-Our evaluations show that major attacks can work against Relational-ESAs in the known-data setting. However, the attack performance differs between datasets, exploited patterns, and attacks.
-]]></content:encoded>
-<pubDate>Sat, 28 Sep 2024 13:36:29 +0000</pubDate>
-</item>
-<item>
-<title>Functional Adaptor Signatures: Beyond All-or-Nothing Blockchain-based Payments</title>
-<link>https://eprint.iacr.org/2024/1523</link>
-<guid>https://eprint.iacr.org/2024/1523</guid>
-<content:encoded><![CDATA[
-<div> 关键词：Web3系统、智能合约、适配签名、功能加密、公平信息销售
-
-总结:
-本文聚焦于在Web3系统的信任无界环境中，如何实现敏感数据的公平功能性销售。主要讨论了两种解决方案：基于智能合约的方法和依赖适配签名的技术。前者提供了原子交易，允许买家仅获取函数$f(x)$的结果而无法完全访问原始数据$x$，但存在效率低、成本高、隐私保护不足和与非智能合约系统兼容性差的问题。后者解决了上述问题，但买家可以完全提取$x$，不支持对敏感数据的功能性提取。
-
-为解决这些局限，文章提出了一种新的加密原语——功能适配签名（FAS）。FAS允许卖家发布承诺$x$的广告，买家预签支付交易关于函数$f$，并将该预签发送给卖家。卖家将预签适应为有效的买家签名，然后在区块链上发布支付和适应后的签名以获得付款。最后，买家使用预签和发布的签名高效提取$f(x)$，完成交易。
-
-文章详细阐述了FAS的安全属性，包括一种名为见证隐私的新概念，旨在保护卖家的隐私，确保买家仅学习到$f(x)$，而不会了解更多关于$x$的信息。文章提出了不同级别的见证隐私概念，如见证隐藏、见证不可区分性和零知识，以捕捉恶意买家可能获取的关于$x$的额外信息量。
-
-文章还介绍了两种支持线性函数（如统计/聚合、机器学习中的核等）的FAS高效构造，这些构造满足最强的见证隐私概念。一种基于素数阶群的构造兼容Schnorr签名用于支付，另一种基于格的构造兼容Lyubashevsky签名方案的变体。文章的主要理论贡献在于揭示了功能加密与适配签名之间意想不到的联系，以及通过使用特定安全增强技术的内积功能加密（IPFE）的黑盒方式来避免复杂的加密工具，从而实现改进的效率。文章还展示了FAS构造在Schnorr签名上的实现，证明即使对于大小适度的卖家证词，不同操作也相当高效，即使是普通硬件也能胜任。 <div>
-In scenarios where a seller holds sensitive data $x$, like employee / patient records or ecological data, and a buyer seeks to obtain an evaluation of specific function $f$ on this data, solutions in trustless digital environments like blockchain-based Web3 systems typically fall into two categories: (1) Smart contract-powered solutions and (2) cryptographic solutions leveraging tools such as adaptor signatures. The former approach offers atomic transactions where the buyer learns the function evaluation $f(x)$ (and not $x$ entirely) upon payment. However, this approach is often inefficient, costly, lacks privacy for the seller's data, and is incompatible with systems that do not support smart contracts with required functionalities. In contrast, the adaptor signature-based approach addresses all of the above issues but comes with an "all-or-nothing" guarantee, where the buyer fully extracts $x$ and does not support functional extraction of the sensitive data. In this work, we aim to bridge the gap between these approaches, developing a solution that enables fair functional sales of information while offering improved efficiency, privacy, and compatibility similar to adaptor signatures.
-
-Towards this, we propose functional adaptor signatures (FAS) a novel cryptographic primitive that achieves all the desired properties as listed above. Using FAS, the seller can publish an advertisement committing to $x$. The buyer can pre-sign the payment transaction w.r.t. a function $f$, and send it along with the transaction to the seller.
-The seller adapts the pre-signature into a valid (buyer's) signature and posts the payment and the adapted signature on the blockchain to get paid. Finally, using the pre-signature and the posted signature, the buyer efficiently extracts $f(x)$, and completes the sale. We formalize the security properties of FAS, among which is a new notion called witness privacy to capture seller's privacy, which ensures the buyer does not learn anything beyond $f(x)$.
-We present multiple variants of witness privacy, namely, witness hiding, witness indistinguishability, and zero-knowledge, to capture varying levels of leakage about $x$ beyond $f(x)$ to a malicious buyer.
-
-We introduce two efficient constructions of FAS supporting linear functions (like statistics/aggregates, kernels in machine learning, etc.), that satisfy the strongest notion of witness privacy. One construction is based on prime-order groups and compatible with Schnorr signatures for payments, and the other is based on lattices and compatible with a variant of Lyubashevsky's signature scheme. A central conceptual contribution of our work lies in revealing a surprising connection between functional encryption, a well-explored concept over the past decade, and adaptor signatures, a relatively new primitive in the cryptographic landscape. On a technical level, we avoid heavy cryptographic machinery and achieve improved efficiency, by making black-box use of building blocks like inner product functional encryption (IPFE) while relying on certain security-enhancing techniques for the IPFE in a non-black-box manner. We implement our FAS construction for Schnorr signatures and show that for reasonably sized seller witnesses, the different operations are quite efficient even for commodity hardware.
-]]></content:encoded>
-<pubDate>Fri, 27 Sep 2024 18:54:54 +0000</pubDate>
-</item>
-<item>
-<title>Practical Mempool Privacy via One-time Setup Batched Threshold Encryption</title>
-<link>https://eprint.iacr.org/2024/1516</link>
-<guid>https://eprint.iacr.org/2024/1516</guid>
-<content:encoded><![CDATA[
-<div> 关键词：DeFi、mempool隐私、DKG、一次性设置、效率优化
-
-总结:
-
-文章探讨了在去中心化金融（DeFi）生态系统中保护交易隐私的重要性，特别是关于在内存池（mempool）中的交易可能遭受市场操纵的问题。文章提出了一种实用的、基于一次性分布式密钥生成（DKG）方案的mempool隐私解决方案，以确保交易隐私，并且在每个区块周期内仅需进行一次初始化设置。该方案通过让客户端加密交易，直到选定一定数量（B个）交易进入区块后，这些交易可以被解密服务器以极低的信息通信量解密。
-
-相比先前的工作，该方案在不增加初始设置开销的同时，降低了通信需求，提高了处理效率，并保证了未被选中的交易的隐私性。实证研究表明，这种加密过程几乎不受参与节点数量的影响，而批量解密所需的通信量则与每个节点无关。当应用于以太坊这样的区块链平台时，计算和解密时间也相对较低，使得整体性能优化明显。
-
-文章的贡献在于提供了一个既能有效保护交易隐私，又能保持高效运行的mempool隐私方案，这对于推动DeFi应用的安全性和用户数据保护具有重要意义。 <div>
-An important consideration with the growth of the DeFi ecosystem is the protection of clients who submit transactions to the system. As it currently stands, the public visibility of these transactions in the memory pool (mempool) makes them susceptible to market manipulations such as frontrunning and backrunning. More broadly, for various reasons—ranging from avoiding market manipulation to including time-sensitive information in their transactions—clients may want the contents of their transactions to remain private until they are executed, i.e. they have *pending transaction privacy*. Therefore, *mempool privacy* is becoming an increasingly important feature as DeFi applications continue to spread.
-
-    We construct the first *practical* mempool privacy scheme that uses a *one-time* DKG setup for $n$ decryption servers. Our scheme ensures the strong privacy requirement by not only hiding the transactions until they are decrypted but also guaranteeing privacy for transactions that were not selected in the epoch (*pending transaction privacy*). For each epoch (or block), clients can encrypt their transactions so that, once $B$ (encrypted) transactions are selected for the epoch, they can be decrypted by each decryption server while communicating only $O(1)$ information. 
-
-    Our result improves upon the best-known prior works, which either: (i) require an expensive initial setup involving a (special purpose) multiparty computation protocol executed by the $n$ decryption servers, along with an additional *per-epoch* setup; (ii) require each decryption server to communicate $O(B)$ information; or (iii) do not guarantee pending transaction privacy.
-
-    We implement our scheme and find that transactions can be encrypted in approximately 8.5 ms, independent of committee size, and the communication required to decrypt an entire batch of transactions is 48 bytes per party, independent of the number of transactions. If deployed on Ethereum, which processes close to 500 transactions per block, it takes close to 3.2 s for each committee member to compute a partial decryption and 3.0 s to decrypt all transactions for a block in single-threaded mode. Compared to prior work, which had an expensive setup phase per epoch, we incur $<2\times$ overhead in the worst case. On some metrics such as partial decryptions size, we actually fare better.
-]]></content:encoded>
-<pubDate>Thu, 26 Sep 2024 16:47:03 +0000</pubDate>
 </item>
 </channel>
 </rss>
