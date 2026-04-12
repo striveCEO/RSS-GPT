@@ -4,12 +4,12 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+
 <item>
 <title>Efficient Partially Blind Signatures from Isogenies</title>
 <link>https://eprint.iacr.org/2026/692</link>
 <guid>https://eprint.iacr.org/2026/692</guid>
 <content:encoded><![CDATA[
-
 (Partially) blind signatures are foundational cryptographic primitives that enable privacy-preserving authentication in digital systems. Blind signatures allow a user to obtain a signature on a message without revealing its content, while partially blind signatures permit the controlled inclusion of agreed-upon public information into the signed message. These primitives are central to applications such as electronic voting, anonymous credentials, and digital cash. 
 
 The first isogeny-based construction of (partially) blind signatures, CSIOtter, were proposed by Katsumata et al. at CRYPTO'23. However, its concurrent security was later broken by Katsumata et al. (CRYPTO'24) and Do et al. (EUROCRYPT'24). These findings imply that CSI-Otter is secure only in sequential settings. Recently, Hanzlik et al. (ASIACRYPT'25) has proposed a novel framework for concurrently secure blind signatures which can be instantiated from isogenies with smaller signature size (but larger public key and secret key size). It is not known yet whether their construction can be extended to partially blind signatures.
@@ -17,20 +17,16 @@ The first isogeny-based construction of (partially) blind signatures, CSIOtter, 
 In this paper, we present a new and efficient construction of partially blind signatures based on isogenies with substantially smaller signature and public key sizes than CSI-Otter. This makes our construction the most compact post-quantum partially blind signature scheme known to date. As similar to CSIOtter, our scheme uses small challenge space resulting in only achieving sequential concurrent security. Our design follows the Abe-Okamoto paradigm in the group action setting, building upon the framework introduced by Tessaro and Zhu (EUROCRYPT'22), whose security is based on the Discrete Logarithm Problem. We rigorously prove the security of our scheme in the Algebraic Group Action Model and the Random Oracle Model, under the hardness assumption of the Group Action Discrete Logarithm Problem.
 ]]></content:encoded>
 <pubDate>Wed, 08 Apr 2026 13:17:38 +0000</pubDate>
-<pubDate>Wed, 08 Apr 2026 13:17:38 +0000</pubDate>
 </item>
 <item>
 <title>Multivariate Witness-Hiding Adaptor Signatures</title>
 <link>https://eprint.iacr.org/2026/690</link>
 <guid>https://eprint.iacr.org/2026/690</guid>
 <content:encoded><![CDATA[
-
 Adaptor signatures extend digital signatures with conditional disclosure capabilities, enabling atomic swaps, payment channels, and other advanced blockchain protocols. Although post-quantum adaptor signatures have been explored under lattice, isogeny, and coding-theoretic assumptions, no constructions have yet been realised from the multivariate quadratic (MQ) family of signatures. Classical algebraic adaptor techniques rely on embedding the witness into signing randomness, which is natural for discrete-log-based schemes but does not apply to MQ signatures such as UOV and MAYO: to the best of our knowledge, MQ signing randomness lacks the algebraic structure needed for witness embedding, and no such algebraic adaptor construction is currently known. This motivates a different approach. We propose MWAS, the first commitment-based adaptor-style construction for MQ signatures, specifically UOV and MAYO from the NIST PQC process, implemented via the Open Quantum Safe library. Our construction uses a lightweight HMAC-SHA256 commitment and a concatenation-based adaptation, supporting a hash-preimage witness relation. We prove correctness, witness hiding, and witness extractability in the ROM under MQ-hardness and PRF assumptions. A prototype implementation on a Raspberry Pi~5 shows pre-signature generation under 0.4~ms for UOV and 0.5--3.3~ms for MAYO across 128--256-bit security levels, with throughput up to 710~ops/s and public key sizes of 1.4~KB (MAYO) to 1.2~MB (UOV). These results indicate that commitment-based MQ adaptor signatures are a viable post-quantum option for settings where hash-preimage witness relations are appropriate.
 ]]></content:encoded>
 <pubDate>Wed, 08 Apr 2026 11:01:36 +0000</pubDate>
-<pubDate>Wed, 08 Apr 2026 11:01:36 +0000</pubDate>
 </item>
-
 <item>
 <title>Secure MSM Outsourcing Computation for Zero-knowledge Proof Generation</title>
 <link>https://eprint.iacr.org/2026/686</link>
@@ -14717,46 +14713,6 @@ We evaluate the performance of our framework in terms of communication and runti
 Searchable encryption, or more generally, structured encryption, permits search over encrypted data. It is  an important cryptographic tool for securing cloud storage. The standard security notion for structured encryption mandates that a protocol leaks nothing about the data or queries, except for some allowed leakage, defined by the leakage function. This is due to the fact that some leakage  is unavoidable for efficient  schemes. Unfortunately, it was shown by numerous  works that even innocuous-looking leakage can often be exploited by attackers to undermine users' privacy and recover their queries and/or data, despite the structured encryption schemes being provably secure. Nevertheless, the standard security remains the go-to notion used to show the "security" of structured encryption schemes. While it is not likely that researchers will design practical structured encryption schemes with no leakage, it is not satisfactory that very few works study ways to assess leakage. This work proposes  a novel framework to quantify leakage. Our methodology is inspired by the quantitative information flow, and we call our method  $q$-leakage analysis. We show how $q$-leakage analysis is related to the standard security. We also demonstrate the usefulness of $q$-leakage analysis by analyzing the security of two existing schemes with complex leakage functions.
 ]]></content:encoded>
 <pubDate>Thu, 03 Oct 2024 18:46:39 +0000</pubDate>
-</item>
-<item>
-<title>Private Laconic Oblivious Transfer with Preprocessing</title>
-<link>https://eprint.iacr.org/2024/1555</link>
-<guid>https://eprint.iacr.org/2024/1555</guid>
-<content:encoded><![CDATA[
-<div> 关键词：Laconic Cryptography、Laconic Oblivious Transfer、Preprocessing、Symmetric-key Assumptions、Online Computational Complexity
-
-文章主要探讨了名为“Laconic Cryptography”的加密技术，该技术旨在通过两个消息协议在大量数据上进行安全计算，同时将通信成本降至最低。其中的核心概念是“Laconic Oblivious Transfer”，它允许接收方学习由选择位决定的消息，而发送方的输入包括两条消息和一个索引，这个模型在安全计算中更为实用。然而，现有的实现方法往往依赖于复杂的加密技术以及非黑盒技术，效率不高。
-
-文章提出了一种基于对称密钥假设的私有Laconic OT（PLaOT）协议，其特点在于能够隐藏发送者的索引信息，并在预处理阶段生成所需的关联，后续的在线阶段则非常轻量级，接收方的在线计算复杂度呈亚线性增长。此外，该协议还具备可更新性和接收方隐私特性。
-
-最后，作者展示了如何利用PLaOT协议实现RAM程序的Laconic函数评估与预处理的私有集合交集，这表明了Laconic Cryptography在实际应用中的潜力和效率提升。
-
-总结: 这篇文章研究了一种新的加密技术Laconic Cryptography，特别关注于Laconic Oblivious Transfer的实现及其在实际应用中的潜力。通过基于对称密钥假设的方法，实现了高效、私有的Laconic OT协议，同时保持了在线阶段的计算效率，并引入了预处理功能。此外，该协议还具有可更新性和接收方隐私特性。文章还讨论了该协议在RAM程序评估和私有集合交集中的应用，展现了其在安全计算领域的广泛应用前景。 <div>
-Laconic cryptography studies two-message protocols that securely compute on large amounts of data with minimal communication cost. Laconic oblivious transfer (OT) is a central primitive where the receiver's input is a large database $\mathsf{DB}$ and the sender's inputs are two messages $m_0$, $m_1$ along with an index $i$, such that the receiver learns the message determined by the choice bit $\mathsf{DB}_i$. OT becomes even more useful for secure computation when considering its laconic variants, which offer succinctness and round optimality. However, existing constructions are not practically efficient because they rely on heavy cryptographic machinery and non-black-box techniques. 
-
-In this work, we initiate the study of laconic OT correlations, where the model allows an offline phase to generate the correlations later used in a lightweight online phase. Our correlation is conceptually simple, captured by an inner product computation, and enables us to achieve a private laconic OT protocol where the sender's index $i$ is also hidden from the receiver. Our construction is the first private laconic OT with database-dependent preprocessing based solely on symmetric-key assumptions, achieving sublinear online computational complexity for the receiver. Furthermore, we enhance our construction with updatability and receiver privacy. Finally, we demonstrate the applications of private laconic OT to laconic function evaluation for RAM programs and laconic private set intersection with preprocessing.
-]]></content:encoded>
-<pubDate>Thu, 03 Oct 2024 17:07:53 +0000</pubDate>
-</item>
-<item>
-<title>Application-Aware Approximate Homomorphic Encryption: Configuring FHE for Practical Use</title>
-<link>https://eprint.iacr.org/2024/203</link>
-<guid>https://eprint.iacr.org/2024/203</guid>
-<content:encoded><![CDATA[
-<div> 关键词：全同态加密、Cheon-Kim-Kim-Song（CKKS）方案、隐私保护机器学习、应用感知同态加密、安全性定义
-
-总结：
-
-文章主要讨论了全同态加密（FHE）中的一个具体实现——基于Cheon-Kim-Kim-Song（CKKS）方案的同态加密技术，特别是在处理实数和复数时的应用。该方案为许多隐私保护机器学习应用提供了高效计算能力。然而，随着Li和Micciancio在EUROCRYPT'21中发现的针对$IND-CPA^D$设置的秘密密钥恢复攻击，现有关于如何安全地为特定应用实例化该方案的理解变得模糊。
-
-为了澄清这一混乱，文章引入了“应用感知同态加密”概念，并提出相关安全定义，这些定义更符合同态加密方案的实际实施和应用方式。同时，文章还制定了实施应用感知同态加密模型以达到$IND-CPA^D$安全性的指导原则，适用于CKKS的实际应用。此外，文章表明应用感知模型不仅适用于CKKS方案，还能用于安全、高效地实例化精确同态加密方案。
-
-通过上述措施，文章旨在提供一个更为明确和实用的框架，以确保在实际应用中正确和安全地使用FHE技术，特别是在面对复杂的安全挑战时。 <div>
-Fully Homomorphic Encryption (FHE) is a powerful tool for performing privacy-preserving analytics over encrypted data. A promising method for FHE over real and complex numbers is approximate homomorphic encryption, instantiated with the Cheon-Kim-Kim-Song (CKKS) scheme. The CKKS scheme enables efficient evaluation for many privacy-preserving machine learning applications. While the efficiency advantages of CKKS are clear, there is currently a lot of confusion on how to securely instantiate the scheme for any given application, especially after secret-key recovery attacks were discovered by Li and Micciancio (EUROCRYPT'21) for the $IND-CPA^D$ setting, i.e., where decryption results are shared with other parties. On the one hand, the generic definition of $IND-CPA^D$ is application-agnostic and often requires impractically large parameters. On the other hand, practical CKKS implementations target specific applications and use tighter parameters. A good illustration are the recent secret-key recovery attacks against a CKKS implementation in the OpenFHE library by Guo et al. (USENIX Security'24). These attacks misuse the library by employing different circuits during parameter estimation and run-time computation, yet they do not violate the generic (application-agnostic) $IND-CPA^D$ definition.
-
-To address this confusion, we introduce the notion of application-aware homomorphic encryption and devise related security definitions, which correspond more closely to how homomorphic encryption schemes are implemented and used in practice. We then formulate the guidelines for implementing the application-aware homomorphic encryption model to achieve $IND-CPA^D$ security for practical applications of CKKS. We also show that our application-aware model can be used for secure, efficient instantiation of exact homomorphic encryption schemes.
-]]></content:encoded>
-<pubDate>Fri, 09 Feb 2024 20:24:14 +0000</pubDate>
 </item>
 </channel>
 </rss>
