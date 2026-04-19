@@ -4,6 +4,58 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+<item>
+<title>SecDTD: Dynamic Token Drop for Secure Transformers Inference</title>
+<link>https://eprint.iacr.org/2026/731</link>
+<guid>https://eprint.iacr.org/2026/731</guid>
+<content:encoded><![CDATA[
+
+The rapid adoption of Transformer-based AI has been driven by accessible models such as ChatGPT, which provide API-based services for developers and businesses. However, as these online inference services increasingly handle sensitive inputs, privacy concerns have emerged as a significant challenge. To address this, secure inference frameworks have been proposed, but their high computational and communication overhead often limit practical deployment. In plaintext settings, token drop is an effective technique for reducing inference cost; however, our analysis reveals that directly applying such methods to ciphertext scenarios is suboptimal due to distinct cost distributions in secure computation. We propose SecDTD, a dynamic token drop scheme tailored for secure Transformer inference. SecDTD advances token drop by shifting the dropping to earlier inference stages, effectively reducing the cost of key components such as Softmax. To support this, we introduce two core techniques. Max-Centric Normalization (MCN): A novel, Softmax-independent scoring method that enables early token drop with minimal overhead and improved normalization, supporting more aggressive dropping without accuracy loss. OMSel: A faster, oblivious median selection protocol that securely identifies the median of importance scores to support token drop. Compared to existing sorting-based methods, OMSel achieves a 16.9 times speedup while maintaining security, obliviousness and randomness. We evaluate SecDTD through 48 experiments across eight GLUE datasets under various network settings using the BOLT and BumbleBee frameworks. SecDTD achieves 4.47 times end-to-end inference acceleration without degradation in accuracy.
+]]></content:encoded>
+<pubDate>Tue, 14 Apr 2026 19:35:17 +0000</pubDate>
+<pubDate>Tue, 14 Apr 2026 19:35:17 +0000</pubDate>
+</item>
+<item>
+<title>Towards Zero Rotation and Beyond: Architecting Neural Networks for Fast Secure Inference with Homomorphic Encryption</title>
+<link>https://eprint.iacr.org/2026/730</link>
+<guid>https://eprint.iacr.org/2026/730</guid>
+<content:encoded><![CDATA[
+
+Privacy-preserving deep learning addresses privacy concerns in Machine Learning as a Service (MLaaS) using Homomorphic Encryption (HE) for linear computations. Nevertheless, the high computational cost remains a challenge.  While prior work has attempted to improve the efficiency, most are built upon models originally designed for plaintext inference. These models are inherently limited by architectural inefficiencies when adapted to HE settings. We argue that substantial efficiency improvements can be achieved by designing networks specifically tailored to the unique computational characteristics of HE, rather than retrofitting existing plaintext models. Our design comprises two main components: the building block and the overall architecture.  The first, StriaBlock, targets the most expensive HE operation—Rotation. It integrates ExRot-Free Convolution and a novel Cross Kernel, completely eliminating the need for external Rotation and requiring only 19% of the internal Rotation operations compared to plaintext models. The second component, the architectural principle, includes the Focused Constraint Principle, which limits cost-sensitive factors while preserving flexibility in others, and the Channel Packing-Aware Scaling Principle, which dynamically adapts bottleneck ratios based on ciphertext channel capacity that varies with network depth. These strategies efficiently control the local and overall HE cost, enabling a balanced architecture for HE settings. The resulting network, StriaNet, is comprehensively evaluated. While prior works primarily focus on small-scale datasets such as CIFAR-10, we conduct an extensive evaluation of StriaNet across datasets of varying scales, including large-scale (ImageNet), medium-scale (Tiny ImageNet), and small-scale (CIFAR-10) benchmarks. At comparable accuracy levels, StriaNet achieves speedups of 9.78 times, 6.01 times, and 9.24 times on ImageNet, Tiny ImageNet, and CIFAR-10, respectively.
+]]></content:encoded>
+<pubDate>Tue, 14 Apr 2026 19:24:19 +0000</pubDate>
+<pubDate>Tue, 14 Apr 2026 19:24:19 +0000</pubDate>
+</item>
+<item>
+<title>Hint-Free Multi-Signatures</title>
+<link>https://eprint.iacr.org/2026/723</link>
+<guid>https://eprint.iacr.org/2026/723</guid>
+<content:encoded><![CDATA[
+
+In a (non-interactive) multi-signature scheme, parties independently generate keys and produce signatures on a common message, which can be aggregated into a single signature verifiable with respect to the set of public keys. Existing multi-signature constructions, however, suffer from at least one of two limitations: either (1) aggregate signatures cannot be further aggregated, or (2) verification requires auxiliary information beyond the set of public keys, such as the aggregation topology.
+
+We argue that these limitations significantly restrict the applicability of multi-signatures in large-scale distributed systems, such as proof-of-stake blockchains. To address this gap, we initiate the formal study of hint-free multi-signatures, which support multi-hop aggregation while allowing verification using only the set of public keys.
+
+To the best of our knowledge, the only previously known (folklore) construction that is fully hint-free relies on recursive SNARKs, which introduces unclear heuristics for security (e.g., proving statements about random oracle relations) or inherently limits the depth of the aggregation topology.
+
+We show that hint-free multi-signatures can be realized without proof recursion, in the standard model. At a high level, we show how to publicly normalize BLS multi-signatures so that verification depends only on the set of public keys rather than a multi-set. While our scheme is not practical (it uses indistinguishability obfuscation), it establishes the feasibility of the primitive provides a foundation for future work on practical constructions.
+]]></content:encoded>
+<pubDate>Tue, 14 Apr 2026 09:15:15 +0000</pubDate>
+<pubDate>Tue, 14 Apr 2026 09:15:15 +0000</pubDate>
+</item>
+<item>
+<title>Scalable Registration-Based Encryption from Lattices</title>
+<link>https://eprint.iacr.org/2026/717</link>
+<guid>https://eprint.iacr.org/2026/717</guid>
+<content:encoded><![CDATA[
+
+Registration-Based Encryption (RBE) is a public-key encryption mechanism which allows a user to register their identity (e.g. email address) and self-generated public key with a key curator (e.g. an organisation). The key curator aggregates these keys into a compact digest. Using only this digest and the recipient’s identity, anyone can encrypt messages to any registered user. As the key curator is not entrusted with any secrets, RBE presents a solution to the key escrow problem, which impedes the adoption of Identity-Based Encryption. This makes RBE an attractive solution for secure communication with and among members of an organisation while preserving user privacy. Despite recent advances [Döttling-Kolonelos-Lai-Lin-Malavolta-Rahimi, EUROCRYPT’23; Fiore-Kolonelos-de-Perthuis, ASIACRYPT’23], practical constructions of RBE are still limited to a small number of registered users (e.g. 1024), lack post-quantum security, or have ciphertext sizes scaling in the order of GB.
+
+The predominant way towards constructing practical RBE is a generic transformation from Laconic Encryption (LE). In this work, we identify an efficiency bottleneck in this transformation and present a new primitive called Batched Laconic Encryption (BLE) which admits a more succinct transformation to RBE. Our resulting RBE scheme is the first post-quantum construction that simultaneously supports a large number of registered users and asymptotically outperforms all comparable RBE schemes. Concretely, for at most $2^{30}$ registered users at 128-bit security, our scheme achieves a ciphertext size of 7 MB, improving on previously reported results by three orders of magnitude. We confirm our results through an open-source prototype implementation demonstrating that all algorithms execute within a few milliseconds. The post-quantum security of our construction is based on the standard Learning with Errors assumption, and our analysis enables several tweaks to significantly reduce ciphertext sizes in practical deployments.
+]]></content:encoded>
+<pubDate>Mon, 13 Apr 2026 09:33:41 +0000</pubDate>
+<pubDate>Mon, 13 Apr 2026 09:33:41 +0000</pubDate>
+</item>
 
 <item>
 <title>Chorus: Secret Recovery with Ephemeral Client Committees</title>
