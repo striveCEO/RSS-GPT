@@ -5,11 +5,37 @@
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
 <item>
+<title>Practical Attacks on Session Messenger and Oxen Blockchain</title>
+<link>https://eprint.iacr.org/2026/773</link>
+<guid>https://eprint.iacr.org/2026/773</guid>
+<content:encoded><![CDATA[
+
+Session is a decentralised secure (anonymous) messenger that combines onion routing with the Oxen Proof-of-Stake blockchain to provide metadata-private communication. Our study presents the first comprehensive analysis of Session's messaging protocol and its integration with the Oxen blockchain. In analysing Session and the underlying Oxen blockchain, we uncovered seven vulnerabilities.
+
+Most notably we discovered flaws in the Oxen consensus protocol which could allow network takeover in a realistic setting, thereby undermining the integrity guarantees on which Session's anonymity layer depends. We also discovered serious vulnerabilities in Version 1 of Session's group chat protocol. We conducted extensive simulations to analyse the impact of these vulnerabilities and provide recommendations to reinforce both the Oxen protocol and the Session client to mitigate these attacks.
+]]></content:encoded>
+<pubDate>Mon, 20 Apr 2026 03:30:25 +0000</pubDate>
+<pubDate>Mon, 20 Apr 2026 03:30:25 +0000</pubDate>
+</item>
+<item>
+<title>Lattice-based Ring Verifiable Random Functions</title>
+<link>https://eprint.iacr.org/2026/772</link>
+<guid>https://eprint.iacr.org/2026/772</guid>
+<content:encoded><![CDATA[
+
+Verifiable Random Functions (VRFs) provide publicly verifiable pseudorandomness uniquely determined by a secret key and an input. While widely used in decentralized protocols, standard VRF verification reveals the signer's identity, exposing them to targeted adversarial disruption once their eligibility is known.
+
+We study Ring VRFs(RVRFs), which allow a member of a public key set (a ring) to publish a VRF value along with a proof of correct generation while hiding the signer's index within the set. We formalize an algorithmic RVRF interface that binds the ring into the evaluated input to prevent cross-ring reuse and ring grinding (i.e., the malicious selection of a specific ring configuration to manipulate the pseudorandom outcome). Diverging from existing UC-based treatments, we propose a comprehensive suite of game-based security notions tailored to verifiable randomness under anonymity: correctness, anonymity, pseudorandomness, and a novel corruption-aware uniqueness notion called $T$-uniqueness. Our main technical result is a modular compiler that transforms any provable VRF into an RVRF by proving a one-out-of-many statement for the induced ring relation. We instantiate the OR layer via an optimized Fiat--Shamir OR (FS-OR) composition in the random oracle model, where the prover utilizes prover-side simulation for all non-witness branches and completes the witness branch only after a global consistency constraint is fixed. Focusing on post-quantum resilience, we provide concrete instantiations of our RVRF framework based on two state-of-the-art lattice VRFs: the long-term lattice VRF $\mathsf{LaV}$ by Esgin et al. (Crypto'23) and the few-time lattice VRF $\mathsf{LB}\text{-}\mathsf{VRF}$ by Esgin et al. (FC'19). We provide a detailed analysis of concrete parameters across various ring sizes for both constructions and perform a comprehensive side-by-side comparison of their communication costs and security trade-offs. Our instantiations are modular, with their security reducing cleanly to (i) the base VRF's correctness, pseudorandomness, and per-key uniqueness, and (ii) standard FS-OR properties (simulatability and extractability).
+]]></content:encoded>
+<pubDate>Mon, 20 Apr 2026 02:38:45 +0000</pubDate>
+<pubDate>Mon, 20 Apr 2026 02:38:45 +0000</pubDate>
+</item>
+
+<item>
 <title>MBU:  Scalable and Constant-Round  Evaluation of Non-linear Functions in Standard MPC Setting</title>
 <link>https://eprint.iacr.org/2026/765</link>
 <guid>https://eprint.iacr.org/2026/765</guid>
 <content:encoded><![CDATA[
-
 After more than four decades of research, multi-party computation (MPC) has achieved remarkable success in handling 2-variable multiplication and comparison-based functions (e.g., ReLU) with practical efficiency. However, for general non-linear functions—such as multiplication of many variables, power, exponential, trigonometric functions, sigmoid, softmax, and GeLU—no native  MPC algorithm  exists  as Beaver-based mutiplication that is constant-round, scalable and exact. Existing solutions rely on either polynomial approximations (trading precision for efficiency), iterative multi-round protocols like Multiplication-to-Addition (M2A) conversion (requiring \(\log_2 k\) rounds for \(k\) parties), or Function Secret Sharing (FSS) with lookup tables (introducing quantization errors and large storage, mainly limited to 2-4 parties). These approaches suffer from fundamental trade-offs among accuracy, communication rounds, and scalability.
 
 In this work, we propose a unified \emph{mask-broadcast-unmask} design pattern that enables constant-round, scalable and \emph{approximation-free} evaluation of a wide range of non-linear functions. Our contributions include:
@@ -22,17 +48,14 @@ In this work, we propose a unified \emph{mask-broadcast-unmask} design pattern t
 All these protocols are provably secure in the semi-honest model, support arbitrary number of parties, introduce \textbf{no approximation error} beyond plaintext floating-point rounding, and require only constant communication rounds (1–6) independent of function complexity.  Furthermore, by restricting the random mask to a suitable range (e.g., $0 \le r <2^l-2^{l_x}$), we  can reduce the rounds  from 1-6 to 1-3. This work fills the long-standing gap for general non-linear functions in standard MPC settings, making privacy-preserving machine learning more practical for modern DNNs.
 ]]></content:encoded>
 <pubDate>Sat, 18 Apr 2026 06:02:30 +0000</pubDate>
-<pubDate>Sat, 18 Apr 2026 06:02:30 +0000</pubDate>
 </item>
 <item>
 <title>Incentivizing Geographic Diversity for Decentralized Systems</title>
 <link>https://eprint.iacr.org/2026/758</link>
 <guid>https://eprint.iacr.org/2026/758</guid>
 <content:encoded><![CDATA[
-
 Permissionless Decentralized networks, such as blockchains, are typified by self-determined participation. Unfortunately, this has resulted in lack of geographic diversity in several blockchains due to benefits emanating from network proximity between nodes and the higher availability of computing infrastructure in certain areas. Lack of diversity in the resulting network can make it susceptible to eopolitical events, blockchain or cryptocurrency-adverse law-making, and natural disasters. While there exists a growing body of work in verifiable localization in distributed systems, very little exists on mechanisms promoting geographic diversity in distributed systems. Our work sets out to initiate the study of the incentivization of geographic diversity in permissionless distributed systems. We design a family of mechanisms that incentivize network nodes to truthfully declare and diversify their locations. In particular, we provide a game theoretic analysis to derive the conditions under which truthful location reporting is an equilibrium. The conditions relate the offered rewards (for geo-diversity) and the success probability of the underlying localization protocol to detect falsely claimed locations. Our proposed mechanisms assume an underlying secure node localization protocol based solely on round-trip times (RTT) measurements from participants of the protocol. We initiate a formal model to reason about such localization protocols and identify network topologies that are ideal for resisting location spoofing attempts. We evaluate effectiveness of our incentive mechanisms in different scenarios of node placement and underlying network structure. Our validation is based on two RTT data sets we use to derive maximal spoofing distance and attack success rates that adversarial nodes can achieve when operating alone or in collusion with other nodes.
 ]]></content:encoded>
-<pubDate>Fri, 17 Apr 2026 12:58:01 +0000</pubDate>
 <pubDate>Fri, 17 Apr 2026 12:58:01 +0000</pubDate>
 </item>
 <item>
@@ -40,12 +63,10 @@ Permissionless Decentralized networks, such as blockchains, are typified by self
 <link>https://eprint.iacr.org/2026/750</link>
 <guid>https://eprint.iacr.org/2026/750</guid>
 <content:encoded><![CDATA[
-
 The rapid proliferation of artificial intelligence (AI) applications—from large language models to deep neural networks—has led to an unprecedented demand for massive training data. This, in turn, has intensified privacy concerns, as sensitive information may be exposed during collaborative model training and inference. Privacy-preserving computing, particularly secure multi-party computation (MPC), offers a rigorous technical solution. Since Yao’s garbled circuits, nearly four decades of research have brought significant progress, yet MPC still faces fundamental challenges in efficiency and scalability. A handful of efficient and scalable MPC systems exist, but they almost invariably require heavy offline preprocessing—a burden that becomes prohibitive for modern Transformer‑based architectures with hundreds of billions of parameters. Conversely, the few approaches that eliminate preprocessing cover only a limited set of nonlinear functions, leaving a critical gap for real‑world machine learning.
 
 In this paper, we propose MCU (Mask‑Compute‑Unmask), a novel MPC architecture that directly supports a broad spectrum of nonlinear functions without any offline preprocessing. MCU introduces a semi‑honest, non‑colluding helper party (HP) that acts as an active computational engine: parties additively mask their inputs, the HP computes the exact target function on the aggregated masked data, and the parties then unmask using locally known masks. This simple yet powerful paradigm enables a suite of constant‑round, scalable protocols, including general multiplication (2 rounds), power functions (2 rounds), exponentials and trigonometric functions (4 rounds), and sigmoid and softmax (6 rounds). All protocols achieve simulation‑based security and rely solely on additive masks and synchronized pseudorandom generators—no preprocessing, no polynomial approximations, and no accuracy loss. MCU effectively overcomes long‑standing efficiency and scalability barriers in privacy‑preserving machine learning, offering a practical solution for deploying large models such as Transformers in privacy‑sensitive environments.
 ]]></content:encoded>
-<pubDate>Thu, 16 Apr 2026 12:22:18 +0000</pubDate>
 <pubDate>Thu, 16 Apr 2026 12:22:18 +0000</pubDate>
 </item>
 <item>
@@ -53,10 +74,8 @@ In this paper, we propose MCU (Mask‑Compute‑Unmask), a novel MPC architectur
 <link>https://eprint.iacr.org/2026/747</link>
 <guid>https://eprint.iacr.org/2026/747</guid>
 <content:encoded><![CDATA[
-
 We propose a new private telemetry system for computing t-heavy hitters in the STAR (Davidson et al., CCS 2022) and POPSTAR (Li et al., USENIX 2024) model. In this setting, each client generates a report with the assistance of a lightweight Randomness Server and submits it to a central Aggregation Server, which can then locally compute only the heavy hitters. As compared to STAR and POPSTAR---which reveal either the full (pseudonymized) frequency histogram or a complex function of it---our protocol reduces leakage: the Aggregation Server learns non-heavy-hitter values only if their frequency exceeds a well-defined threshold. Additionally, while STAR and POPSTAR are insecure in the face of an Aggregation Server that colludes with clients, our protocol provides optimal security against such a colluding server. To achieve these privacy guarantees, our protocol efficiently adapts multi-dealer secret sharing (Eldridge et al., USENIX 2024) to the STAR/POPSTAR model and introduces a novel oblivious secret-share sampling protocol to ensure security against a colluding Aggregation Server. We implement and benchmark the performance of our protocol and find that it is practical for a number of use cases. Moreover, we show that it supports a tunable three-way tradeoff between correctness, efficiency and privacy.
 ]]></content:encoded>
-<pubDate>Wed, 15 Apr 2026 22:30:50 +0000</pubDate>
 <pubDate>Wed, 15 Apr 2026 22:30:50 +0000</pubDate>
 </item>
 <item>
@@ -64,12 +83,10 @@ We propose a new private telemetry system for computing t-heavy hitters in the S
 <link>https://eprint.iacr.org/2026/746</link>
 <guid>https://eprint.iacr.org/2026/746</guid>
 <content:encoded><![CDATA[
-
 Atomic swaps allow two parties to exchange coins across blockchains without trust. Most existing solutions support a 1-to-1 transaction; however, the value ratio of two cryptocurrencies is usually not 1-to-1. In addition, these solutions often rely on blockchains with explicit support structures for atomic swaps, typically hashed timelocks (HTLCs) or smart-contract scripting. Thyagarajan et al. (SP'22) provide a solution for n-to-m swaps utilizing adaptor signatures instead, which offer better privacy for the participants. Significantly, all these approaches need timed transactions or a similar substitute on both sides, but not every blockchain supports timed transactions. Hoenisch et al. (ESORICS'22) demonstrate a concrete swap procedure between Bitcoin and Monero, where only one side needs timed transactions. We build upon both of these ideas to provide a generic solution for any blockchain, where only one side needs timed transactions.
 
 We introduce a generic adaptor-signature protocol for n-to-m swaps. In doing so, we minimize assumptions compared to current solutions. Both sides lock their coins in shared (two-party signature) addresses, where they can only access the coins together. To prevent deadlocks, both parties are able to refund their coins from these addresses with pre-signed transactions. Our solution works with all relevant blockchains because it needs only standard signatures and a joint public key. Further, only one side needs timed transactions, and if each party acts in its best interest, there are two possible outcomes: If progress stalls, the side with timelocks refunds after a certain time, and the other side refunds immediately. Otherwise, one party redeems the other party's coins with pre-signed transactions, and the other party completes the swap after a timeout to prevent race conditions. We prove security in the universal composability framework and show privacy preservation via unlinkability and fungibility.
 ]]></content:encoded>
-<pubDate>Wed, 15 Apr 2026 15:55:25 +0000</pubDate>
 <pubDate>Wed, 15 Apr 2026 15:55:25 +0000</pubDate>
 </item>
 <item>
@@ -77,10 +94,8 @@ We introduce a generic adaptor-signature protocol for n-to-m swaps. In doing so,
 <link>https://eprint.iacr.org/2026/745</link>
 <guid>https://eprint.iacr.org/2026/745</guid>
 <content:encoded><![CDATA[
-
 Several modern applications, such as Signal or WireGuard, use efficient Noise-like implicit authentication key exchanges that  require only a small number of exponentiations and two interactions. These protocols have been proven to be secure under the 'strong Diffie–Hellman' (SDH) assumption in the random oracle model (ROM). At ESORICS 2021, Ramacher, Slamanig and Weninger presented an extension to the implicit authenticated key exchange security model, which enables strong privacy properties to be captured in addition to key-secrecy, including man-in-the-middle privacy (ensuring privacy even if a session is interrupted) and forward privacy. They also proposed a protocol to instantiate their model. In this paper, we present an efficient Noise-like protocol that achieve privacy in this model. Our protocol is as efficient as Noise-like protocols that do not guarantee privacy in terms of exponentiations. Moreover, our protocol requires three interactions, which is optimal for this privacy model. It is also more efficient than the ESORICS 2021 protocol in terms of both exponentiations and interactions. Finally, we propose another round-optimal protocol, slightly less efficient in terms of exponentiations, but secure under the CDH assumption in the ROM.
 ]]></content:encoded>
-<pubDate>Wed, 15 Apr 2026 15:29:35 +0000</pubDate>
 <pubDate>Wed, 15 Apr 2026 15:29:35 +0000</pubDate>
 </item>
 <item>
@@ -88,7 +103,6 @@ Several modern applications, such as Signal or WireGuard, use efficient Noise-li
 <link>https://eprint.iacr.org/2026/742</link>
 <guid>https://eprint.iacr.org/2026/742</guid>
 <content:encoded><![CDATA[
-
 Designing dynamic searchable symmetric encryption (DSSE) supporting conjunctive keyword queries over encrypted document collections is an important research area. Unfortunately, state-of-the-art conjunctive DSSE schemes such as ODXT (Patranabis et al., NDSS '21), and SDSSE-CQ and its variants (Zuo et al., PoPETS '25) either fail to achieve the desired levels of security (in particular, forward and/or backward privacy), or incur prohibitively large communication requirements and client-side computational overheads, which is undesirable for practical applications. In addition, all known conjunctive DSSE schemes that are both forward and backward private are quantum-broken due to their inherent reliance on discrete log-hard, prime-order cyclic groups. 
 
 In this paper, we address the open question of designing practically efficient, low-leakage, forward and backward private conjunctive DSSE with small communication requirements and small client-side overheads. Towards this goal, we introduce the first systematic and rigorously formal notions of backward privacy for conjunctive queries that naturally extend the corresponding notions of backward privacy for single-keyword DSSE. Next, as our main contribution, we propose a new framework for conjunctive DSSE called fp-GA-ODXT that improves upon both ODXT and SDSSE-CQ-variants by achieving full-fledged forward privacy and strong backward privacy guarantees, while incurring small client-side computation and low communication overheads. We then demonstrate two instantiations of our fp-GA-ODXT framework: 
@@ -96,9 +110,7 @@ In this paper, we address the open question of designing practically efficient, 
     2) A post-quantum instantiation based on lattices and isogenies of supersingular elliptic curves, thus solving the longstanding open question of designing asymptotically efficient, forward and backward private conjunctive DSSE schemes with post-quantum security.
 ]]></content:encoded>
 <pubDate>Wed, 15 Apr 2026 13:16:40 +0000</pubDate>
-<pubDate>Wed, 15 Apr 2026 13:16:40 +0000</pubDate>
 </item>
-
 <item>
 <title>SecDTD: Dynamic Token Drop for Secure Transformers Inference</title>
 <link>https://eprint.iacr.org/2026/731</link>
@@ -14589,146 +14601,6 @@ A key feature of Chat Sessions is modularity: we extend Chat Sessions to capture
 We use Chat Sessions to construct UatChat: a simple and equally modular messaging application. Since UatChat preserves each of the guarantees mentioned above, this means we give the first fully Off-The-Record messaging application: parties can plausibly deny not only having sent any messages but even of being aware of a chat's existence.
 ]]></content:encoded>
 <pubDate>Tue, 08 Oct 2024 10:20:30 +0000</pubDate>
-</item>
-<item>
-<title>DART: Distributed argument of knowledge for rough terrains</title>
-<link>https://eprint.iacr.org/2024/1592</link>
-<guid>https://eprint.iacr.org/2024/1592</guid>
-<content:encoded><![CDATA[
-<div> 关键词：KZG、Snark、Cocks-Pinch、Brezing-Weng、pairing-friendly曲线
-
-文章主要介绍了使用KZG（KZG多值承诺方案）为基础的全分布式零知识证明系统，该系统适用于任何具有足够大标量域的配对友好曲线。特别地，此证明系统与Cocks-Pinch或Brezing-Weng外曲线兼容，如secp256k1, ED25519, BLS12-381和BN254等广泛使用的曲线。
-
-文章提到，通过使用双变量KZG多项式承诺方案，可以实现线性于电路大小的通用可更新共通参考系(CRS)，使得证明系统的规模、验证时间和通信复杂度保持常数。对于特定的曲线（如Ed25519），当使用9位配对友好外曲线时，证明的大小为5KB，每台工作节点的通信复杂度也是5KB，主节点的通信复杂度同样为每台机器5KB。
-
-对于电路大小为T·M的电路在M台机器上的有效验证时间，公式为O(T·log(T)+M·log(M))。每台验证器机器的工作主要由长度为T的G1组的MSMs（复数乘法序列）主导，以及通过多模快速傅里叶变换计算的单个多变元多项式产品的求和。主节点的工作则主要由长度为M的G1组的MSMs和通过多模快速傅里叶变换计算的单个多变元多项式产品的求和主导。
-
-总结:
-本文提出了一种基于KZG的全分布式零知识证明系统，该系统适用于各种配对友好曲线，包括Cocks-Pinch和Brezing-Weng外曲线，如secp256k1, ED25519, BLS12-381和BN254。通过使用双变量KZG多项式承诺方案，实现了线性于电路大小的通用可更新共通参考系，保证了证明系统的规模、验证时间和通信复杂度保持常数。对于特定曲线（如Ed25519），在使用9位配对友好外曲线时，证明的大小为5KB，每台工作节点的通信复杂度也是5KB，主节点的通信复杂度为每台机器5KB。同时，详细描述了验证时间、每台验证器机器和主节点的工作流程，显示了该系统的高效性和可扩展性。 <div>
-We describe a fully distributed KZG-based Snark instantiable with any pairing-friendly curve with a sufficiently large scalar field. In particular, the proof system is compatible with Cocks-Pinch
-or Brezing-Weng outer curves to the the widely used curves such as secp256k1, ED25519, BLS12-381 and BN254.
-
-This allows us to retain the fully parallelizable nature and the O(1) communication complexity of Pianist ([LXZ+23]) in conjunction with circumventing the huge overhead of non-native arithmetic for
-prominent use cases such as scalar multiplications and/or pairings for Bitcoin (secp256k1), Cosmos (Ed25519) and Ethereum PoS (BLS12-381) signatures.
-
-As in [LXZ+23], we use a bivariate KZG polynomial commitment scheme, which entails a universal updatable CRS linear in the circuit size. The proof size is constant, as are the verification time -
-dominated by three pairings - and the communication complexity between the Prover machines. With a 9-limb pairing-friendly outer curve to Ed25519, the proof size is 5 KB. With the same curve, the communication complexity for each worker node is 5 KB and that of the master node is 5 KB per machine.
-
-The effective Prover time for a circuit of size T ·M on M machines is O(T · log(T)+M · log(M)). The work of each Prover machine is dominated by the MSMs of length T in the group G1 and a single sum of univariate polynomial products computed via multimodular FFTs1 of size 2T. Likewise, the work of the master node is dominated by the MSMs of length M in the group G1 and a single sum of univariate polynomial products via multimodular FFTs of size 2M.
-]]></content:encoded>
-<pubDate>Tue, 08 Oct 2024 09:29:20 +0000</pubDate>
-</item>
-<item>
-<title>Mutable Batch Arguments and Applications</title>
-<link>https://eprint.iacr.org/2024/737</link>
-<guid>https://eprint.iacr.org/2024/737</guid>
-<content:encoded><![CDATA[
-<div> 关键词: 可变批参数、可变批论证系统、强隐私概念、实用应用、标准假设
-
-总结:
-
-本文提出了一种新型的批参数（BARG）概念——可变批参数（mutable BARGs），旨在重新思考和使用BARG的方式。传统上，BARG证明π是一个不可变的原始见证ω1到ωk的编码。而可变BARG系统则将每个证明字符串π视为原始见证的可变编码，关注于对证明的可变性操作。
-
-研究了可变BARG的强隐私概念，旨在隐藏所有非显而易见的见证信息。这种可变BARG非常适合许多敏感隐私的应用场景。主要贡献包括引入可变BARG的概念，识别可行的可变类，设计满足不同能力的可变BARG构造，以及从标准加密假设出发设计新的构造，从而在多种高级签名（同态/可删除/聚合签名）中启用新应用。这些成果显著提升了当前已知的签名系统状态。
-
-具体而言，本文提供了首个基于标准假设的多密钥同态签名，其签名简洁；首次实现了真正紧凑的可删除签名，预/后删除签名保持固定大小；首次从标准假设出发提供了满足消息隐私的本地验证多签者聚合签名。这些贡献极大地推动了密码学领域，尤其是签名技术的发展。 <div>
-We put forth a new concept of mutability for batch arguments (BARGs), called mutable batch arguments. Our goal is to re-envision how we think about and use BARGs. Traditionally, a BARG proof $\pi$ is an immutable encoding of $k$ $\mathbf{NP}$ witness $\omega_1, \ldots, \omega_{k}$. A mutable BARG system captures the notion of computations over BARGs, where each proof string $\pi$ is treated as a mutable encoding of original witnesses. We also study strong privacy notions for mutable BARGs, with the goal of hiding all non-trivial information about witnesses from a mutated proof. Such mutable BARGs are a naturally good fit for many privacy sensitive applications.
-
-Our main contributions include introducing the concept of mutable BARGs, identifying non-trivial classes of feasible mutations, designing new constructions for mutable BARGs with varying capabilities satisfying mutation privacy from standard cryptographic assumptions, and enabling new applications to many advanced signatures (homomorphic/ redactable/ aggregate signatures). Our results improve state-of-the-art known for many signature systems. E.g., we provide the first multi-key homomorphic signature with succinct signatures from standard assumptions, and we provide the first truly compact redactable signature where pre/post-redaction signatures are of fixed size, and we provide the first locally verifiable multi-signer aggregate signature satisfying message privacy from standard assumptions.
-]]></content:encoded>
-<pubDate>Mon, 13 May 2024 19:45:35 +0000</pubDate>
-</item>
-<item>
-<title>Matching radar signals and fingerprints with MPC</title>
-<link>https://eprint.iacr.org/2024/1590</link>
-<guid>https://eprint.iacr.org/2024/1590</guid>
-<content:encoded><![CDATA[
-<div> 关键词：Vessels、Navigation radar、Radar fingerprint、Secure multiparty computation、Information exchange agreement
-
-总结:
-
-本文主要讨论了通过雷达信号识别船只的技术及其背后的安全机制。船只可以通过其导航雷达被识别，这有助于建立情境意识，而无需暴露自身存在。各国维护着雷达指纹数据库，但出于国家安全考虑，不愿轻易共享这些信息。为了促进合作，正确的身份识别变得尤为重要。文中提出使用安全多方计算（Secure multiparty computation）技术，该技术可以匹配雷达信号测量与秘密数据库中的信息，并输出可能的匹配结果及其概率。此外，还提供了一个基于MP-SPDZ的演示实例，展示这一技术的应用。这种合作机制不仅能够提升海上航行的安全性，还能增强各国在信息安全方面的互信与协作。通过安全的多方计算，可以在不泄露敏感数据的情况下实现信息共享，为国际间的合作提供了新的可能。 <div>
-Vessels can be recognised by their navigation radar due to the characteristics of the emitted radar signal. This is particularly useful if one wants to build situational awareness without revealing one's own presence. Most countries maintain databases of radar fingerprints but will not readily share these due to national security regulations. Sharing of such information will generally require some form of information exchange agreement.
-
-However, all parties in a coalition benefit from correct identification. We use secure multiparty computation to match a radar signal measurement against secret databases and output plausible matches with their likelihoods. We also provide a demonstrator using MP-SPDZ.
-]]></content:encoded>
-<pubDate>Tue, 08 Oct 2024 06:39:10 +0000</pubDate>
-</item>
-<item>
-<title>A Note on ``Privacy-Preserving and Secure Cloud Computing: A Case of Large-Scale Nonlinear Programming''</title>
-<link>https://eprint.iacr.org/2024/1588</link>
-<guid>https://eprint.iacr.org/2024/1588</guid>
-<content:encoded><![CDATA[
-<div> 关键词：外包算法、线性约束、输出隐私、翻译变换、混合变换
-
-<br />
-<br />总结:
-
-本文针对《IEEE Transactions on Cloud Computing》中2023年第11卷第1期，第484至498页的一篇文章进行了深入分析。文章指出，对于线性约束条件下的外包算法，其输出隐私可能无法得到保障，主要原因是简单翻译变换的存在。这种情况下，通过对手中数据进行处理，可以轻易地推断出原始数据的信息，从而破坏了隐私保护。
-
-为解决这一问题，作者提出了一种补救方法——采用混合变换策略。该策略结合了传统的翻译变换和缩放变换，旨在增强数据处理过程中的隐私保护能力。通过这种混合变换，可以在不显著影响数据处理效果的前提下，有效地防止对原始数据信息的推断，从而实现更好的输出隐私保护。
-
-综上所述，文章揭示了现有外包算法在处理线性约束问题时存在的隐私泄露风险，并提供了一种改进方案以增强算法的安全性和隐私保护性能。这不仅为相关研究提供了理论依据，也为实际应用中的数据安全与隐私保护提供了新的思路和方法。 <div>
-We show that the outsourcing algorithm for the case of linear constraints  [IEEE Trans. Cloud Comput., 2023, 11(1), 484-498] cannot keep output privacy, due to the simple  translation transformation. We also suggest a remedy method by adopting a hybrid transformation which combines the usual  translation transformation and resizing transformation so as to protect the output privacy.
-]]></content:encoded>
-<pubDate>Tue, 08 Oct 2024 00:24:43 +0000</pubDate>
-</item>
-<item>
-<title>Efficient Pairing-Free Adaptable k-out-of-N Oblivious Transfer Protocols</title>
-<link>https://eprint.iacr.org/2024/1583</link>
-<guid>https://eprint.iacr.org/2024/1583</guid>
-<content:encoded><![CDATA[
-<div> 关键词：Oblivious Transfer、Efficient Two-Round、Pairing-Free、k-out-of-N、Standard Security
-
-<br />
-总结:
-
-这篇论文介绍了三种基于最小通信模式的、无配对操作的、两轮k-out-of-N Oblivious Transfer（OT）协议，具有标准安全性。这些协议遵循接收方发送k条消息给发送方，后者响应n+k条消息的模式，实现了无配对操作的k-out-of-n OT方案中最低的数据传输量。此外，它们支持适应性，并允许发送方离线加密n条消息，无需依赖接收方的变量，特别适合于单发送者多接收者的场景。
-
-论文提供的安全证明基于计算Diffie-Hellman（CDH）假设和RSA假设，无需随机预言机模型。这些协议通过结合最少通信轮数、适应性、离线加密能力以及可验证安全性，为需要高效OT的隐私保护应用提供了理想的解决方案。尤其对于资源受限设备而言，前两个提出的方案只需要一次操作，极大地提高了效率。 <div>
-Oblivious Transfer (OT) is one of the fundamental building blocks in cryptography that enables various privacy-preserving applications. Constructing efficient OT schemes has been an active research area. This paper presents three efficient two-round pairing-free k-out-of-N oblivious transfer protocols with standard security. Our constructions follow the minimal communication pattern: the receiver sends k messages to the sender, who responds with n+k messages, achieving the lowest data transmission among pairing-free k-out-of-n OT schemes. Furthermore, our protocols support adaptivity and also, enable the sender to encrypt the n messages offline, independent of the receiver's variables, offering significant performance advantages in one-sender-multiple-receiver scenarios. We provide security proofs under the Computational Diffie-Hellman (CDH) and RSA assumptions, without relying on the Random Oracle Model. Our protocols combine minimal communication rounds, adaptivity, offline encryption capability, and provable security, making them well-suited for privacy-preserving applications requiring efficient oblivious transfer. Furthermore, the first two proposed schemes require only one operation, making them ideal for resource-constrained devices.
-]]></content:encoded>
-<pubDate>Mon, 07 Oct 2024 14:01:27 +0000</pubDate>
-</item>
-<item>
-<title>Re-visiting Authorized Private Set Intersection: A New Privacy-Preserving Variant and Two Protocols</title>
-<link>https://eprint.iacr.org/2024/1579</link>
-<guid>https://eprint.iacr.org/2024/1579</guid>
-<content:encoded><![CDATA[
-<div> 关键词：APSI、Partial-APSI、Bilinear Pairings、Parallelizability、Commodity Hardware
-
-总结:
-
-本文探讨了授权私密集合交集（APSI）问题以及其在生物基因匹配、广告转化和GDPR等隐私政策合规中的应用。APSI允许不信任的双方通过可信第三方裁判授权他们的项目，然后进行私密交集计算。为了解决这一问题，作者提出了两个基于双线性对的协议，均具有线性通信量。第一个协议实现了APSI功能，安全对抗恶意客户端，仅需一次在线阶段的通信。第二个协议则实现了Partial-APSI功能，适用于客户端可能恶意注入元素但遵循半诚实协议的情况。这两个协议均被证明是正确的并且具有安全性。实验结果显示，这些协议可以在普通硬件上高效运行，并且可以并行化执行，实验在50个核心的计算网格上进行了验证。
-
-通过这两个协议，作者不仅解决了APSI和Partial-APSI的问题，而且展示了其实现的高效性和可扩展性，为实际应用提供了有力的支持。特别是对于需要处理大量数据和高并发请求的场景，如在线广告和生物信息分析，这些协议提供了安全、高效且易于扩展的解决方案。 <div>
-We revisit the problem of Authorized Private Set Intersection (APSI), which allows mutually untrusting parties to authorize their items using a trusted third-party judge before privately computing the intersection. We also initiate the study of Partial-APSI, a novel privacy-preserving generalization of APSI in which the client only reveals a subset of their items to a third-party semi-honest judge for authorization. Partial-APSI allows for partial verification of the set, preserving the privacy of the party whose items are being verified. Both APSI and Partial-APSI have a number of applications, including genome matching, ad conversion, and compliance with privacy policies such as the GDPR.
-    
-We present two protocols based on bilinear pairings with linear communication. The first realizes the APSI functionality, is secure against a malicious client, and requires only one round of communication during the online phase. Our second protocol realizes the Partial-APSI functionality and is secure against a client that may maliciously inject elements into its input set, but who follows the protocol semi-honestly otherwise. We formally prove correctness and security of these protocols and provide an experimental evaluation to demonstrate their practicality. Our protocols can be efficiently run on commodity hardware. We also show that our protocols are massively parallelizable by running our experiments on a compute grid across 50 cores.
-]]></content:encoded>
-<pubDate>Mon, 07 Oct 2024 08:24:25 +0000</pubDate>
-</item>
-<item>
-<title>Efficiently-Thresholdizable Selective Batched Identity Based Encryption, with Applications</title>
-<link>https://eprint.iacr.org/2024/1575</link>
-<guid>https://eprint.iacr.org/2024/1575</guid>
-<content:encoded><![CDATA[
-<div> 关键词：Selective Batched IBE、Thresholdized Version、Identity-Based Encryption、Blockchain、Decryption Key
-
-总结:
-
-本文提出了一种新的加密原语——选择性批处理身份基加密（Selective Batched IBE）及其阈值化版本。这种加密技术允许加密具有特定身份和批次标签的消息，其中批次标签可以代表区块链上的块编号。对于某个批次中任意子集的身份，该技术能够高效地发行一个单个解密密钥，用于解密所有包含在子集中身份的密文，同时保持不在子集中的密文的隐私。核心创新在于一种能够在不使用任何秘密知识的情况下对任意子集身份进行公共聚合的新技术，生成一个精简摘要。这个摘要被用来通过主密钥来推导一个适用于该批次中所有身份的单个精简解密密钥。在阈值系统中，主密钥被分散为多个权威机构的秘密共享，这种方法显著降低了这些机构在密钥发行过程中的通信（有时还有计算）开销。
-
-具体实例基于Kate等人在Asiacrypt'10提出的KZG多项式承诺方案和Boneh等人在Asiacrypt'01修改后的BLS签名方案构建。构造在通用群模型下证明了安全性。
-
-在区块链背景下，该新构造可用于实现交易池隐私，通过将交易加密到区块中，仅公开包含在特定区块中的交易并隐藏未包含的交易。阈值化版本允许多个权威（验证者）协作管理解密过程。其他可能的应用包括基于区块链的欺诈多数MPC公平性支持的可扩展性增强，以及条件批量阈值解密，可用于实现安全的荷兰拍卖和隐私保护期权交易。 <div>
-We propose a new cryptographic primitive called ``selective batched identity-based encryption'' (Selective Batched IBE) and its thresholdized version. The new primitive allows encrypting messages with specific identities and batch labels, where the latter can represent, for example, a block number on a blockchain. Given an arbitrary subset of identities for a particular batch, our primitive enables efficient issuance of a single decryption key that can be used to decrypt all ciphertexts having identities that are included in the subset while preserving the privacy of all ciphertexts having identities that are excluded from the subset. At the heart of our construction is a new technique that enables public aggregation (i.e. without knowledge of any secrets) of any subset of identities, into a succinct digest. This digest is used to derive, via a master secret key, a single succinct decryption key for all the identities that were digested in this batch. In a threshold system, where the master key is distributed as secret shares among multiple authorities, our method significantly reduces the communication (and in some cases, computation) overhead for the authorities. It achieves this by making their costs for key issuance independent of the batch size.
-
-We present a concrete instantiation of a Selective Batched IBE scheme based on the KZG polynomial commitment scheme by Kate et al. (Asiacrypt'10) and a modified form of the BLS signature scheme by Boneh et al. (Asiacrypt'01). The construction is proven secure in the generic group model (GGM).
-
-In a blockchain setting, the new construction can be used for achieving mempool privacy by encrypting transactions to a block, opening only the transactions included in a given block and hiding the transactions that are not included in it.  With the thresholdized version,  multiple authorities (validators) can collaboratively manage the decryption process.  Other possible applications include scalable support via blockchain for fairness of dishonest majority MPC, and conditional batched threshold decryption that can be used for implementing secure Dutch auctions and privacy preserving options trading.
-]]></content:encoded>
-<pubDate>Sun, 06 Oct 2024 10:19:44 +0000</pubDate>
 </item>
 </channel>
 </rss>
