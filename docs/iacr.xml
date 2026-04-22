@@ -4,6 +4,100 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+<item>
+<title>MBU:  Scalable and Constant-Round  Evaluation of Non-linear Functions in Standard MPC Setting</title>
+<link>https://eprint.iacr.org/2026/765</link>
+<guid>https://eprint.iacr.org/2026/765</guid>
+<content:encoded><![CDATA[
+
+After more than four decades of research, multi-party computation (MPC) has achieved remarkable success in handling 2-variable multiplication and comparison-based functions (e.g., ReLU) with practical efficiency. However, for general non-linear functions—such as multiplication of many variables, power, exponential, trigonometric functions, sigmoid, softmax, and GeLU—no native  MPC algorithm  exists  as Beaver-based mutiplication that is constant-round, scalable and exact. Existing solutions rely on either polynomial approximations (trading precision for efficiency), iterative multi-round protocols like Multiplication-to-Addition (M2A) conversion (requiring \(\log_2 k\) rounds for \(k\) parties), or Function Secret Sharing (FSS) with lookup tables (introducing quantization errors and large storage, mainly limited to 2-4 parties). These approaches suffer from fundamental trade-offs among accuracy, communication rounds, and scalability.
+
+In this work, we propose a unified \emph{mask-broadcast-unmask} design pattern that enables constant-round, scalable and \emph{approximation-free} evaluation of a wide range of non-linear functions. Our contributions include:
+\begin{itemize}
+    \item A \textbf{general multiplication} protocol for \(k\) variables in \emph{one round} with optimal \(O(kn)\) communication. When \(k=2\), it reduces to the classic Beaver triple multiplication; when each secret has only one non-zero share and \(k=2\), it becomes the well-known M2A protocol.
+    \item \textbf{Power functions} (\(x^k\)) in one round.
+    \item \textbf{Trigonometric functions} (\(\sin x, \cos x\)) and \textbf{exponential functions} (\(a^x\)) in 4 rounds.
+    \item \textbf{Sigmoid, softmax} in 6 rounds.
+\end{itemize}
+All these protocols are provably secure in the semi-honest model, support arbitrary number of parties, introduce \textbf{no approximation error} beyond plaintext floating-point rounding, and require only constant communication rounds (1–6) independent of function complexity.  Furthermore, by restricting the random mask to a suitable range (e.g., $0 \le r <2^l-2^{l_x}$), we  can reduce the rounds  from 1-6 to 1-3. This work fills the long-standing gap for general non-linear functions in standard MPC settings, making privacy-preserving machine learning more practical for modern DNNs.
+]]></content:encoded>
+<pubDate>Sat, 18 Apr 2026 06:02:30 +0000</pubDate>
+<pubDate>Sat, 18 Apr 2026 06:02:30 +0000</pubDate>
+</item>
+<item>
+<title>Incentivizing Geographic Diversity for Decentralized Systems</title>
+<link>https://eprint.iacr.org/2026/758</link>
+<guid>https://eprint.iacr.org/2026/758</guid>
+<content:encoded><![CDATA[
+
+Permissionless Decentralized networks, such as blockchains, are typified by self-determined participation. Unfortunately, this has resulted in lack of geographic diversity in several blockchains due to benefits emanating from network proximity between nodes and the higher availability of computing infrastructure in certain areas. Lack of diversity in the resulting network can make it susceptible to eopolitical events, blockchain or cryptocurrency-adverse law-making, and natural disasters. While there exists a growing body of work in verifiable localization in distributed systems, very little exists on mechanisms promoting geographic diversity in distributed systems. Our work sets out to initiate the study of the incentivization of geographic diversity in permissionless distributed systems. We design a family of mechanisms that incentivize network nodes to truthfully declare and diversify their locations. In particular, we provide a game theoretic analysis to derive the conditions under which truthful location reporting is an equilibrium. The conditions relate the offered rewards (for geo-diversity) and the success probability of the underlying localization protocol to detect falsely claimed locations. Our proposed mechanisms assume an underlying secure node localization protocol based solely on round-trip times (RTT) measurements from participants of the protocol. We initiate a formal model to reason about such localization protocols and identify network topologies that are ideal for resisting location spoofing attempts. We evaluate effectiveness of our incentive mechanisms in different scenarios of node placement and underlying network structure. Our validation is based on two RTT data sets we use to derive maximal spoofing distance and attack success rates that adversarial nodes can achieve when operating alone or in collusion with other nodes.
+]]></content:encoded>
+<pubDate>Fri, 17 Apr 2026 12:58:01 +0000</pubDate>
+<pubDate>Fri, 17 Apr 2026 12:58:01 +0000</pubDate>
+</item>
+<item>
+<title>MCU: Exact and Constant-Round Nonlinear Function Evaluation in MPC without Preprocessing</title>
+<link>https://eprint.iacr.org/2026/750</link>
+<guid>https://eprint.iacr.org/2026/750</guid>
+<content:encoded><![CDATA[
+
+The rapid proliferation of artificial intelligence (AI) applications—from large language models to deep neural networks—has led to an unprecedented demand for massive training data. This, in turn, has intensified privacy concerns, as sensitive information may be exposed during collaborative model training and inference. Privacy-preserving computing, particularly secure multi-party computation (MPC), offers a rigorous technical solution. Since Yao’s garbled circuits, nearly four decades of research have brought significant progress, yet MPC still faces fundamental challenges in efficiency and scalability. A handful of efficient and scalable MPC systems exist, but they almost invariably require heavy offline preprocessing—a burden that becomes prohibitive for modern Transformer‑based architectures with hundreds of billions of parameters. Conversely, the few approaches that eliminate preprocessing cover only a limited set of nonlinear functions, leaving a critical gap for real‑world machine learning.
+
+In this paper, we propose MCU (Mask‑Compute‑Unmask), a novel MPC architecture that directly supports a broad spectrum of nonlinear functions without any offline preprocessing. MCU introduces a semi‑honest, non‑colluding helper party (HP) that acts as an active computational engine: parties additively mask their inputs, the HP computes the exact target function on the aggregated masked data, and the parties then unmask using locally known masks. This simple yet powerful paradigm enables a suite of constant‑round, scalable protocols, including general multiplication (2 rounds), power functions (2 rounds), exponentials and trigonometric functions (4 rounds), and sigmoid and softmax (6 rounds). All protocols achieve simulation‑based security and rely solely on additive masks and synchronized pseudorandom generators—no preprocessing, no polynomial approximations, and no accuracy loss. MCU effectively overcomes long‑standing efficiency and scalability barriers in privacy‑preserving machine learning, offering a practical solution for deploying large models such as Transformers in privacy‑sensitive environments.
+]]></content:encoded>
+<pubDate>Thu, 16 Apr 2026 12:22:18 +0000</pubDate>
+<pubDate>Thu, 16 Apr 2026 12:22:18 +0000</pubDate>
+</item>
+<item>
+<title>MDSS-STAR: Private Heavy-Hitters through Multi-Dealer Secret Sharing</title>
+<link>https://eprint.iacr.org/2026/747</link>
+<guid>https://eprint.iacr.org/2026/747</guid>
+<content:encoded><![CDATA[
+
+We propose a new private telemetry system for computing t-heavy hitters in the STAR (Davidson et al., CCS 2022) and POPSTAR (Li et al., USENIX 2024) model. In this setting, each client generates a report with the assistance of a lightweight Randomness Server and submits it to a central Aggregation Server, which can then locally compute only the heavy hitters. As compared to STAR and POPSTAR---which reveal either the full (pseudonymized) frequency histogram or a complex function of it---our protocol reduces leakage: the Aggregation Server learns non-heavy-hitter values only if their frequency exceeds a well-defined threshold. Additionally, while STAR and POPSTAR are insecure in the face of an Aggregation Server that colludes with clients, our protocol provides optimal security against such a colluding server. To achieve these privacy guarantees, our protocol efficiently adapts multi-dealer secret sharing (Eldridge et al., USENIX 2024) to the STAR/POPSTAR model and introduces a novel oblivious secret-share sampling protocol to ensure security against a colluding Aggregation Server. We implement and benchmark the performance of our protocol and find that it is practical for a number of use cases. Moreover, we show that it supports a tunable three-way tradeoff between correctness, efficiency and privacy.
+]]></content:encoded>
+<pubDate>Wed, 15 Apr 2026 22:30:50 +0000</pubDate>
+<pubDate>Wed, 15 Apr 2026 22:30:50 +0000</pubDate>
+</item>
+<item>
+<title>Atomic Swaps with Relaxed Assumptions</title>
+<link>https://eprint.iacr.org/2026/746</link>
+<guid>https://eprint.iacr.org/2026/746</guid>
+<content:encoded><![CDATA[
+
+Atomic swaps allow two parties to exchange coins across blockchains without trust. Most existing solutions support a 1-to-1 transaction; however, the value ratio of two cryptocurrencies is usually not 1-to-1. In addition, these solutions often rely on blockchains with explicit support structures for atomic swaps, typically hashed timelocks (HTLCs) or smart-contract scripting. Thyagarajan et al. (SP'22) provide a solution for n-to-m swaps utilizing adaptor signatures instead, which offer better privacy for the participants. Significantly, all these approaches need timed transactions or a similar substitute on both sides, but not every blockchain supports timed transactions. Hoenisch et al. (ESORICS'22) demonstrate a concrete swap procedure between Bitcoin and Monero, where only one side needs timed transactions. We build upon both of these ideas to provide a generic solution for any blockchain, where only one side needs timed transactions.
+
+We introduce a generic adaptor-signature protocol for n-to-m swaps. In doing so, we minimize assumptions compared to current solutions. Both sides lock their coins in shared (two-party signature) addresses, where they can only access the coins together. To prevent deadlocks, both parties are able to refund their coins from these addresses with pre-signed transactions. Our solution works with all relevant blockchains because it needs only standard signatures and a joint public key. Further, only one side needs timed transactions, and if each party acts in its best interest, there are two possible outcomes: If progress stalls, the side with timelocks refunds after a certain time, and the other side refunds immediately. Otherwise, one party redeems the other party's coins with pre-signed transactions, and the other party completes the swap after a timeout to prevent race conditions. We prove security in the universal composability framework and show privacy preservation via unlinkability and fungibility.
+]]></content:encoded>
+<pubDate>Wed, 15 Apr 2026 15:55:25 +0000</pubDate>
+<pubDate>Wed, 15 Apr 2026 15:55:25 +0000</pubDate>
+</item>
+<item>
+<title>Round-Optimal Privacy Preserving Authenticated Key Exchange Even for Incomplete Sessions</title>
+<link>https://eprint.iacr.org/2026/745</link>
+<guid>https://eprint.iacr.org/2026/745</guid>
+<content:encoded><![CDATA[
+
+Several modern applications, such as Signal or WireGuard, use efficient Noise-like implicit authentication key exchanges that  require only a small number of exponentiations and two interactions. These protocols have been proven to be secure under the 'strong Diffie–Hellman' (SDH) assumption in the random oracle model (ROM). At ESORICS 2021, Ramacher, Slamanig and Weninger presented an extension to the implicit authenticated key exchange security model, which enables strong privacy properties to be captured in addition to key-secrecy, including man-in-the-middle privacy (ensuring privacy even if a session is interrupted) and forward privacy. They also proposed a protocol to instantiate their model. In this paper, we present an efficient Noise-like protocol that achieve privacy in this model. Our protocol is as efficient as Noise-like protocols that do not guarantee privacy in terms of exponentiations. Moreover, our protocol requires three interactions, which is optimal for this privacy model. It is also more efficient than the ESORICS 2021 protocol in terms of both exponentiations and interactions. Finally, we propose another round-optimal protocol, slightly less efficient in terms of exponentiations, but secure under the CDH assumption in the ROM.
+]]></content:encoded>
+<pubDate>Wed, 15 Apr 2026 15:29:35 +0000</pubDate>
+<pubDate>Wed, 15 Apr 2026 15:29:35 +0000</pubDate>
+</item>
+<item>
+<title>Efficient and Post-Quantum Conjunctive Dynamic SSE with Strong Privacy Guarantees</title>
+<link>https://eprint.iacr.org/2026/742</link>
+<guid>https://eprint.iacr.org/2026/742</guid>
+<content:encoded><![CDATA[
+
+Designing dynamic searchable symmetric encryption (DSSE) supporting conjunctive keyword queries over encrypted document collections is an important research area. Unfortunately, state-of-the-art conjunctive DSSE schemes such as ODXT (Patranabis et al., NDSS '21), and SDSSE-CQ and its variants (Zuo et al., PoPETS '25) either fail to achieve the desired levels of security (in particular, forward and/or backward privacy), or incur prohibitively large communication requirements and client-side computational overheads, which is undesirable for practical applications. In addition, all known conjunctive DSSE schemes that are both forward and backward private are quantum-broken due to their inherent reliance on discrete log-hard, prime-order cyclic groups. 
+
+In this paper, we address the open question of designing practically efficient, low-leakage, forward and backward private conjunctive DSSE with small communication requirements and small client-side overheads. Towards this goal, we introduce the first systematic and rigorously formal notions of backward privacy for conjunctive queries that naturally extend the corresponding notions of backward privacy for single-keyword DSSE. Next, as our main contribution, we propose a new framework for conjunctive DSSE called fp-GA-ODXT that improves upon both ODXT and SDSSE-CQ-variants by achieving full-fledged forward privacy and strong backward privacy guarantees, while incurring small client-side computation and low communication overheads. We then demonstrate two instantiations of our fp-GA-ODXT framework: 
+    1) A concretely efficient, classically secure instance based on discrete log-hard groups and an RSA-based trapdoor permutation, which we implement and benchmark. Our experiments demonstrate that we achieve smaller communication overheads and client-side computation for both updates and conjunctive searches as compared to both ODXT and SDSSE-CQ-variants. These come at the cost of a mild increase in server computation (which we view as an acceptable tradeoff in practice). 
+    2) A post-quantum instantiation based on lattices and isogenies of supersingular elliptic curves, thus solving the longstanding open question of designing asymptotically efficient, forward and backward private conjunctive DSSE schemes with post-quantum security.
+]]></content:encoded>
+<pubDate>Wed, 15 Apr 2026 13:16:40 +0000</pubDate>
+<pubDate>Wed, 15 Apr 2026 13:16:40 +0000</pubDate>
+</item>
 
 <item>
 <title>SecDTD: Dynamic Token Drop for Secure Transformers Inference</title>
