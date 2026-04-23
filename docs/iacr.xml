@@ -4,17 +4,16 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+
 <item>
 <title>Practical Attacks on Session Messenger and Oxen Blockchain</title>
 <link>https://eprint.iacr.org/2026/773</link>
 <guid>https://eprint.iacr.org/2026/773</guid>
 <content:encoded><![CDATA[
-
 Session is a decentralised secure (anonymous) messenger that combines onion routing with the Oxen Proof-of-Stake blockchain to provide metadata-private communication. Our study presents the first comprehensive analysis of Session's messaging protocol and its integration with the Oxen blockchain. In analysing Session and the underlying Oxen blockchain, we uncovered seven vulnerabilities.
 
 Most notably we discovered flaws in the Oxen consensus protocol which could allow network takeover in a realistic setting, thereby undermining the integrity guarantees on which Session's anonymity layer depends. We also discovered serious vulnerabilities in Version 1 of Session's group chat protocol. We conducted extensive simulations to analyse the impact of these vulnerabilities and provide recommendations to reinforce both the Oxen protocol and the Session client to mitigate these attacks.
 ]]></content:encoded>
-<pubDate>Mon, 20 Apr 2026 03:30:25 +0000</pubDate>
 <pubDate>Mon, 20 Apr 2026 03:30:25 +0000</pubDate>
 </item>
 <item>
@@ -22,15 +21,12 @@ Most notably we discovered flaws in the Oxen consensus protocol which could allo
 <link>https://eprint.iacr.org/2026/772</link>
 <guid>https://eprint.iacr.org/2026/772</guid>
 <content:encoded><![CDATA[
-
 Verifiable Random Functions (VRFs) provide publicly verifiable pseudorandomness uniquely determined by a secret key and an input. While widely used in decentralized protocols, standard VRF verification reveals the signer's identity, exposing them to targeted adversarial disruption once their eligibility is known.
 
 We study Ring VRFs(RVRFs), which allow a member of a public key set (a ring) to publish a VRF value along with a proof of correct generation while hiding the signer's index within the set. We formalize an algorithmic RVRF interface that binds the ring into the evaluated input to prevent cross-ring reuse and ring grinding (i.e., the malicious selection of a specific ring configuration to manipulate the pseudorandom outcome). Diverging from existing UC-based treatments, we propose a comprehensive suite of game-based security notions tailored to verifiable randomness under anonymity: correctness, anonymity, pseudorandomness, and a novel corruption-aware uniqueness notion called $T$-uniqueness. Our main technical result is a modular compiler that transforms any provable VRF into an RVRF by proving a one-out-of-many statement for the induced ring relation. We instantiate the OR layer via an optimized Fiat--Shamir OR (FS-OR) composition in the random oracle model, where the prover utilizes prover-side simulation for all non-witness branches and completes the witness branch only after a global consistency constraint is fixed. Focusing on post-quantum resilience, we provide concrete instantiations of our RVRF framework based on two state-of-the-art lattice VRFs: the long-term lattice VRF $\mathsf{LaV}$ by Esgin et al. (Crypto'23) and the few-time lattice VRF $\mathsf{LB}\text{-}\mathsf{VRF}$ by Esgin et al. (FC'19). We provide a detailed analysis of concrete parameters across various ring sizes for both constructions and perform a comprehensive side-by-side comparison of their communication costs and security trade-offs. Our instantiations are modular, with their security reducing cleanly to (i) the base VRF's correctness, pseudorandomness, and per-key uniqueness, and (ii) standard FS-OR properties (simulatability and extractability).
 ]]></content:encoded>
 <pubDate>Mon, 20 Apr 2026 02:38:45 +0000</pubDate>
-<pubDate>Mon, 20 Apr 2026 02:38:45 +0000</pubDate>
 </item>
-
 <item>
 <title>MBU:  Scalable and Constant-Round  Evaluation of Non-linear Functions in Standard MPC Setting</title>
 <link>https://eprint.iacr.org/2026/765</link>
@@ -14548,59 +14544,6 @@ We propose Reckle trees, a new vector commitment based on succinct RECursive arg
 We present and experimentally evaluate two applications of Reckle+ trees, dynamic digest translation and updatable BLS aggregation. In dynamic digest translation we are maintaining a proof of equivalence between Merkle digests computed with different hash functions, e.g., one with a SNARK-friendly Poseidon and the other with a SNARK-unfriendly Keccak. In updatable BLS aggregation we maintain a proof for the correct aggregation of a $t$-aggregate BLS key, derived from a $t$-subset of a Merkle-committed set of individual BLS keys. Our evaluation using Plonky2 shows that Reckle trees and Reckle+ trees have small memory footprint, significantly outperform previous approaches in terms of updates ($10\times$ to $15\times$) and verification  ($4.78\times$ to $1485\times$) time, enable applications that were not possible before due to huge costs involved (Reckle trees are up to 200 times faster), and have similar aggregation performance with previous implementations of batch proofs.
 ]]></content:encoded>
 <pubDate>Wed, 27 Mar 2024 19:01:01 +0000</pubDate>
-</item>
-<item>
-<title>Nebula: Efficient read-write memory and switchboard circuits for folding schemes</title>
-<link>https://eprint.iacr.org/2024/1605</link>
-<guid>https://eprint.iacr.org/2024/1605</guid>
-<content:encoded><![CDATA[
-<div> 关键词：Folding schemes、增量验证计算（IVC）、承诺携带、高效读写内存、开关板电路构造
-
-总结:
-文章主要探讨了通过使用新的技术方法来优化基于折叠方案的增量验证计算（Incrementally Verifiable Computation, IVC）的性能，特别是针对长时间运行的机器执行场景，如zkVMs（零知识虚拟机）。文章提出的关键技术包括承诺携带IVC、高效读写内存和开关板电路构造。
-
-1. **承诺携带IVC**：文章引入了一种名为“承诺携带”的增量验证计算机制，该机制允许证明者在不同步骤中提供非确定性建议，并通过证明携带增量承诺来确保其一致性。这种机制有助于提高证明效率和空间效率。
-
-2. **高效读写内存**：结合承诺携带IVC，文章展示了如何实现高效读写内存，这不仅支持索引查找等操作，而且在成本方面与非递归论证具有相同的效率。这一改进对于处理复杂数据结构和频繁访问的数据尤为重要。
-
-3. **开关板电路构造**：文章提出了一种新颖的“开关板”电路构建方法，通过将不同指令的电路组合在一起，并在执行过程中动态关闭未调用的电路元素和约束，实现了按需付费的证明者成本模型。这种方法能够显著降低证明系统的规模，从而加速证明生成过程。
-
-4. **原型实现与性能评估**：为了验证这些理论和技术的有效性，文章实施了一个基于Nebula的zkVM原型，用于Ethereum虚拟机（EVM）。实验结果表明，与传统的内存检查技术相比，Nebula技术能显著减少约束系统的规模，并使标准ERC20代币转账交易的证明生成速度提升至约260倍。
-
-5. **整体贡献**：综上所述，文章通过提出和实施承诺携带IVC、高效读写内存和开关板电路构造等创新技术，显著提高了基于折叠方案的增量验证计算的性能，特别是在处理大规模和长时间运行的机器执行任务时。这些改进不仅优化了证明系统的效率和成本，还为zkVMs等零知识证明应用提供了更强大的支持。 <div>
-Folding schemes enable prover-efficient incrementally verifiable computation (IVC), where a proof is generated step-by-step, resulting in a space-efficient prover that naturally supports continuations. These attributes make them a promising choice for proving long-running machine executions (popularly, "zkVMs"). A major problem is designing an efficient read-write memory. Another challenge is overheads incurred by unused machine instructions when incrementally proving a program execution step.
-
-Nebula addresses these with new techniques that can paired with modern folding schemes. First, we introduce commitment-carrying IVC, where a proof carries an incremental commitment to the prover’s non-deterministic advice provided at different steps. Second, we show how this unlocks efficient read-write memory (which implies indexed lookups) with a cost-profile identical to that of non-recursive arguments. Third, we provide a new universal "switchboard" circuit construction that combines circuits of different instructions such that one can "turn off" uninvoked circuit elements and constraints, offering a new way to achieve pay-per-use prover costs.
-
-We implement a prototype of a Nebula-based zkVM for the Ethereum virtual machine (EVM). We find that Nebula’s techniques qualitatively provide a $30\times$ smaller constraint system to represent the EVM over standard memory-checking techniques, and lead to over $260\times$ faster proof generation for the standard ERC20 token transfer transaction.
-]]></content:encoded>
-<pubDate>Wed, 09 Oct 2024 00:36:09 +0000</pubDate>
-</item>
-<item>
-<title>Stateful Communication with Malicious Parties</title>
-<link>https://eprint.iacr.org/2024/1593</link>
-<guid>https://eprint.iacr.org/2024/1593</guid>
-<content:encoded><![CDATA[
-<div> 关键词：Chat Sessions、模块化抽象、状态化群通信、安全保证、UatChat
-
-总结:
-
-文章主要介绍了一种名为“Chat Sessions”的模块化抽象模型，用于实现状态化的群通信。这种模型能够提供全异步环境下的安全性保障，无需假设任何参与方的诚实性。其核心在于通过参数化的权限策略来定义不同参与者在特定聊天状态下的操作权利。
-
-Chat Sessions模型具备高度的模块性，能够方便地扩展以涵盖诸如消息的真实性、机密性、匿名性以及离线记录等额外的安全需求。作者展示了如何利用Maurer等人提出的Multi-Designated Receiver Public Key Encryption方案构建具有上述所有安全特性的通信通道。
-
-基于Chat Sessions模型和上述安全通道，作者进一步开发了名为UatChat的即时通讯应用。UatChat不仅继承了上述所有安全特性，还实现了全新的“离线记录”功能，使得用户可以否认发送的消息，甚至否认自己参与过某次聊天，从而提供了首个完全意义上的离线记录（Off-The-Record）即时通讯应用。这一创新为用户隐私保护带来了革命性的提升，同时体现了Chat Sessions模型的灵活性和实用性。 <div>
-Cryptography's most common use is secure communication---e.g. Alice can use encryption to hide the contents of the messages she sends to Bob (confidentiality) and can use signatures to assure Bob she sent these messages (authenticity). While one typically considers stateless security guarantees---for example a channel that Alice can use to send messages securely to Bob---one can also consider stateful ones---e.g. an interactive conversation between Alice, Bob and their friends where participation is dynamic: new parties can join the conversation and existing ones can leave. A natural application of such stateful guarantees are messengers.
-
-We introduce a modular abstraction for stateful group communication, called Chat Sessions, which captures security guarantees that are achievable in fully asynchronous settings when one makes no party-honesty assumptions: anyone (including group members themselves) can be fully dishonest. Our abstraction is parameterized by (and enforces) a permissions policy that defines what operations parties have the right to perform in a given chat state. We show how to construct, use and extend Chat Sessions.
-
-Our construction is fully decentralized (in particular, it need not a delivery service), does not incur additional interaction between chat participants (other than what is inherent from chat operations like sending a message) and liveness depends solely on messages being delivered.
-
-A key feature of Chat Sessions is modularity: we extend Chat Sessions to capture authenticity, confidentiality, anonymity and off-the-record, and show our construction provides these guarantees if the underlying communication channels do too. We complement this by proving Maurer et al.'s Multi-Designated Receiver Public Key Encryption scheme (Eurocrypt '22) constructs matching communication channels (i.e. with all these guarantees).
-
-We use Chat Sessions to construct UatChat: a simple and equally modular messaging application. Since UatChat preserves each of the guarantees mentioned above, this means we give the first fully Off-The-Record messaging application: parties can plausibly deny not only having sent any messages but even of being aware of a chat's existence.
-]]></content:encoded>
-<pubDate>Tue, 08 Oct 2024 10:20:30 +0000</pubDate>
 </item>
 </channel>
 </rss>
