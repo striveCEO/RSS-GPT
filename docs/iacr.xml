@@ -4,18 +4,17 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+
 <item>
 <title>Efficient Bootstrapping of Matrices in FHE</title>
 <link>https://eprint.iacr.org/2026/811</link>
 <guid>https://eprint.iacr.org/2026/811</guid>
 <content:encoded><![CDATA[
-
 In recent years, Fully Homomorphic encryption (FHE) has proven to be a practical solution to various privacy preserving applications such as neural network inference, private information retrieval, and genome analysis. Industries have started to utilize FHE to enable private computation of user's sensitive data, to protect user privacy. 
 Out of all FHE applications, deep learning inference has been the most popular field of research among FHE researchers and practitioners, as it is incredibly challenging to do encrypted inference under FHE. 
 
 Matrix multiplication is the fundamental operation that is used in deep learning, and is notoriously challenging to implement efficiently in FHE. Many works utilize CKKS, SotA FHE scheme for deep learning. They introduce novel encoding strategies to enable matrix multiplication, but they require very large evaluation keys, high execution time, and matrix dimension limitations. Fortunately, a recent FHE scheme proposed by Gentry and Lee, called the GL scheme, supports matrix multiplication as a native operation, whilst supporting every operation in CKKS. While very promising, the unique ring structure of the scheme requires prime NTT transforms, 3D DFT encoding of the message, which are not researched enough. Additionally, there is no efficient bootstrapping algorithm introduced by this scheme, as bootstrapping is needed to enable deep computations that is required by large deep learning models. In this work, we introduce the first unique and efficient bootstrapping algorithm of the GL scheme.
 ]]></content:encoded>
-<pubDate>Fri, 24 Apr 2026 18:56:00 +0000</pubDate>
 <pubDate>Fri, 24 Apr 2026 18:56:00 +0000</pubDate>
 </item>
 <item>
@@ -23,7 +22,6 @@ Matrix multiplication is the fundamental operation that is used in deep learning
 <link>https://eprint.iacr.org/2026/805</link>
 <guid>https://eprint.iacr.org/2026/805</guid>
 <content:encoded><![CDATA[
-
 A verifiable shuffle proves that a list of output ciphertexts is a rerandomized permutation of a list of input ciphertexts, without revealing either the permutation or the rerandomization factors. Verifiable shuffles are a core primitive in mix-nets and are deployed in national electronic voting systems and blockchain-based anonymization protocols.  Existing deployed verifiable shuffles typically have proof size $O(N)$ or $O(\sqrt{N})$ in the number of ciphertexts $N$, making shuffle proofs a primary bandwidth cost. The only prior construction with $O(\log N)$ proof size (Hoffmann et al., CCS 2019) requires roughly $30N$ prover and $10N$ verifier group exponentiations, with a proof consisting of $6\log N + 8$ group elements and 4 field elements.
 
 In this paper, we present a new verifiable shuffle for ElGamal ciphertexts whose proof consists of $2\log N + 8$ group elements and 8 field elements, reducing the prover and verifier costs of Hoffmann et al. to $15N$ and $6N$ group exponentiations, respectively.
@@ -33,9 +31,7 @@ We implement the protocol and, to the best of our knowledge, provide the first b
 At \(N = 2^{20}\) (about one million ciphertexts), the proof is only \(2.5\,\mathrm{KB}\), compared with hundreds of kilobytes for the best \(O(\sqrt{N})\)-size scheme and hundreds of megabytes for representative  \(O(N)\)-size schemes.
 ]]></content:encoded>
 <pubDate>Thu, 23 Apr 2026 16:12:48 +0000</pubDate>
-<pubDate>Thu, 23 Apr 2026 16:12:48 +0000</pubDate>
 </item>
-
 <item>
 <title>Outsourced Private Set Intersection for Pairwise Analytics</title>
 <link>https://eprint.iacr.org/2026/801</link>
@@ -14511,43 +14507,6 @@ Finally, as an additional contribution, we provide a novel, and arguably simpler
 This paper studies transaction execution mechanisms (TEMs) for blockchains, as the efficient resource allocation across multiple parallel executions queues or "local fee markets." We present a model considering capacity constraints, user valuations, and delay costs in a multi-queue system with an aggregate capacity constraint due to global consensus. We show that revenue maximization tends to allocate capacity to the highest-paying queue, while welfare maximization generally serves all queues. Optimal relative pricing of different queues depends on factors such as market size, demand elasticity, and the balance between local and global congestion.  Our results have implications for evolving blockchain architectures, including parallel execution, DAG-based systems, and multiple concurrent proposers, and can help design more efficient TEMs.
 ]]></content:encoded>
 <pubDate>Sat, 12 Oct 2024 15:16:32 +0000</pubDate>
-</item>
-<item>
-<title>Optimizing Liveness for Blockchain-Based Sealed-Bid Auctions in Rational Settings</title>
-<link>https://eprint.iacr.org/2024/1643</link>
-<guid>https://eprint.iacr.org/2024/1643</guid>
-<content:encoded><![CDATA[
-<div> 关键词：区块链、拍卖市场、公平性、透明度、分布式匿名出价
-
-总结:
-
-本文研究了基于区块链的拍卖市场，与传统中心化拍卖相比，其在公平性和透明度上具有显著优势。文章主要贡献在于提出了一种去中心化的匿名存入出价（DADB）方案，为该机制提供了正式的语法和安全性定义。不同于依赖智能合约的传统方法，该方案采用了主链-侧链架构，兼容扩展的UTXO模型。这种设计使得能够构建一个专门用于安全记录投标并进行分配的共识机制在侧链上。
-
-文章通过游戏理论视角证明，即使没有明确的激励（如费用）来包括投标，我们的设计也能优化理性参与者加入拍卖的存活延迟时间。最后，实施结果表明，缺乏块资格机制可能导致性能下降。
-
-综上所述，本文通过提出DADB方案，不仅增强了区块链拍卖市场的公平性和透明度，还通过理论分析和实证研究验证了其在提高效率方面的潜力，为区块链技术在拍卖领域的应用提供了新的思路和方法。 <div>
-Blockchain-based auction markets offer stronger fairness and transparency compared to their centralized counterparts. Deposits and sealed bid formats are usually applied to enhance security and privacy. However, to our best knowledge, the formal treatment of deposit-enabled sealed-bid auctions remains lacking in the cryptographic literature. To address this gap, we first propose a decentralized anonymous deposited-bidding (DADB) scheme, providing formal syntax and security definitions. Unlike existing approaches that rely on smart contracts, our construction utilizes a mainchain-sidechain structure that is also compatible with the extended UTXO model. This design further allows us to develop a consensus mechanism on the sidechain dedicated to securely recording bids for allocation. Specifically, we build atop an Algorand-style protocol and integrate a novel block qualification mechanism into the block selection. Consequently, we prove, from a game-theoretical perspective, that our design optimizes liveness latency for rational users who want to join the auction, even without explicit incentives (e.g., fees) for including bids. Finally, our implementation results demonstrate the potential performance degradation without the block qualification mechanism.
-]]></content:encoded>
-<pubDate>Sat, 12 Oct 2024 04:24:11 +0000</pubDate>
-</item>
-<item>
-<title>Fully Secure Searchable Encryption from PRFs, Pairings, and Lattices</title>
-<link>https://eprint.iacr.org/2024/1632</link>
-<guid>https://eprint.iacr.org/2024/1632</guid>
-<content:encoded><![CDATA[
-<div> 关键词：搜索加密、全安全、查询限制、普适、假随机函数
-
-本文主要探讨了搜索加密领域中的全安全性概念及其实现。全安全包括了密文隐私和陷阱门隐私两个方面，确保在进行搜索操作时，既不泄露密文内容也不泄露陷阱门信息。文章首先指出，由于理论限制，目前仅能构建查询限制的全安全方案，而实现普适的全安全方案较为困难。
-
-接着，作者提出了一种基于伪随机函数的查询限制全安全方案，并进一步设计了两种基于双线性对和格的高效（无限制）全安全方案。这些方案在保证全安全性的前提下，提高了搜索效率和实用性。
-
-同时，文章还对已有的全安全方案进行了深入分析。通过简化前人的工作并提供正式证明，澄清了某方案关于安全性的错误宣传。这不仅增强了对现有方案的理解，也为后续研究提供了宝贵的反馈。
-
-总结: 本文通过构建新的全安全搜索加密方案，以及对现有方案的深入分析与优化，推动了搜索加密领域的理论与实践发展。其中，基于伪随机函数的方案为查询限制场景提供了安全保证；基于双线性和格的方案则在保持全安全性的同时，提升了方案的适用性和效率；此外，通过修正前人关于安全性的错误表述，为学术界提供了更为准确的安全性评估标准。这些贡献共同推进了搜索加密技术在隐私保护与数据检索领域的应用。 <div>
-Searchable encryption is a cryptographic primitive that allows us to perform searches on encrypted data. Searchable encryption schemes require that ciphertexts do not leak information about keywords. However, most of the existing schemes do not achieve the security notion that trapdoors do not leak information. Shen et al. (TCC 2009) proposed a security notion called full security, which includes both ciphertext privacy and trapdoor privacy, but there are few fully secure constructions. Full security is defined for the secret key settings since it is known that public key schemes cannot achieve the trapdoor privacy in principle.
-In this paper, we construct a query-bounded fully secure scheme from pseudorandom functions. In addition, we propose two types of efficient (unbounded) fully secure schemes, each of which is based on bilinear groups and lattices respectively. We then analyze the existing constructions. First, we simplify the Cheng et al. scheme (Information Sciences 2023) and prove its security. This scheme had not been proved to be secure. Second, we show that the Li-Boyen pairing-based scheme (IACR CiC 2024) does not achieve the trapdoor privacy, not as claimed.
-]]></content:encoded>
-<pubDate>Fri, 11 Oct 2024 12:31:16 +0000</pubDate>
 </item>
 </channel>
 </rss>
