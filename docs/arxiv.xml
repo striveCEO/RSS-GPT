@@ -4,6 +4,151 @@
 <title>cs updates on arXiv.org</title>
 <link>http://rss.arxiv.org/rss/cs</link>
 
+<item>
+<title>On Coded Caching Systems with Decentralized Linear Coding Placement</title>
+<link>https://arxiv.org/abs/2604.27073</link>
+<guid>https://arxiv.org/abs/2604.27073</guid>
+<content:encoded><![CDATA[
+
+arXiv:2604.27073v1 Announce Type: new 
+Abstract: Coded caching is a technique that leverages locally cached contents at the end users to reduce the network's peak-time communication load. Coded caching has been shown to achieve significant performance gains with a centralized placement orchestrated by the server and is thus considered a promising technique to boost performance in future networks by effectively trading off bandwidth for storage. To tackle issues caused by the synchronized placement, previous works focused on decentralized placement and found the exact worst-case load with uncoded placement. In this paper, we focus on a decentralized coded caching system with random linear coding placement, and investigate the fundamental limits of a linear coding placement where each user independently and uniformly caches random linear coding symbols of a single file. We propose achievable and converse bounds on the worst-case load, which are shown to meet under certain conditions.
+]]></content:encoded>
+<pubDate>Fri, 01 May 2026 00:00:00 -0400</pubDate>
+<pubDate>Fri, 01 May 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>TRUST: A Framework for Decentralized AI Service v.0.1</title>
+<link>https://arxiv.org/abs/2604.27132</link>
+<guid>https://arxiv.org/abs/2604.27132</guid>
+<content:encoded><![CDATA[
+
+arXiv:2604.27132v1 Announce Type: new 
+Abstract: Large Reasoning Models (LRMs) and Multi-Agent Systems (MAS) in high-stakes domains demand reliable verification, yet centralized approaches suffer four limitations: (1) Robustness, with single points of failure vulnerable to attacks and bias; (2) Scalability, as reasoning complexity creates bottlenecks; (3) Opacity, as hidden auditing erodes trust; and (4) Privacy, as exposed reasoning traces risk model theft. We introduce TRUST (Transparent, Robust, and Unified Services for Trustworthy AI), a decentralized framework with three innovations: (i) Hierarchical Directed Acyclic Graphs (HDAGs) that decompose Chain-of-Thought reasoning into five abstraction levels for parallel distributed auditing; (ii) the DAAN protocol, which projects multi-agent interactions into Causal Interaction Graphs (CIGs) for deterministic root-cause attribution; and (iii) a multi-tier consensus mechanism among computational checkers, LLM evaluators, and human experts with stake-weighted voting that guarantees correctness under 30% adversarial participation. We prove a Safety-Profitability Theorem ensuring honest auditors profit while malicious actors incur losses. All decisions are recorded on-chain, while privacy-by-design segmentation prevents reconstruction of proprietary logic. Across multiple LLMs and benchmarks, TRUST attains 72.4% accuracy (4-18% above baselines) and remains resilient against 20% corruption. DAAN reaches 70% root-cause attribution (vs. 54-63% for standard methods) with 60% token savings. Human studies validate the design (F1 = 0.89, Brier = 0.074). The framework supports (A1) decentralized auditing, (A2) tamper-proof leaderboards, (A3) trustless data annotation, and (A4) governed autonomous agents, pioneering decentralized AI auditing for safe, accountable deployment of reasoning-capable systems.
+]]></content:encoded>
+<pubDate>Fri, 01 May 2026 00:00:00 -0400</pubDate>
+<pubDate>Fri, 01 May 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>A High-Throughput Compute-Efficient POMDP Hide-And-Seek-Engine (HASE) for Multi-Agent Operations</title>
+<link>https://arxiv.org/abs/2604.27162</link>
+<guid>https://arxiv.org/abs/2604.27162</guid>
+<content:encoded><![CDATA[
+
+arXiv:2604.27162v1 Announce Type: new 
+Abstract: Reinforcement Learning (RL) algorithms exhibit high sample complexity, particularly when applied to Decentralized Partially Observable Markov Decision Processes (Dec-POMDPs). As a response, projects such as SampleFactory, EnvPool, Brax, and IsaacLab migrate parallel execution of classic environments such as MuJoCo and Atari into C++ thread pools or the GPU to decrease the computational cost of environment steps. We are interested in optimizing the decision-level of human-AI joint operations, so we introduce a compute-efficient Dec-POMDP engine natively architected in C++ called Hide-And-Seek-Engine. By employing Data-Oriented Design (DOD) principles, explicit 64-byte cache-line alignment to remove false sharing, and a zero-copy PyTorch memory bridge using pinned memory and Direct Memory Access (DMA), our engine sustains throughput of up to 33,000,000 steps per second (SPS) in a single-agent, 1024-environment, decentralized observations on an AMD Ryzen 9950X (16 cores). Ten agents reduces FPS to 7M SPS with generating random actions contributing 1/3rd the total runtime for reference. The engine achieves a throughput increase of approximately 3,500$\times$ over the baseline single threaded vectorized NumPy implementation and successfully trains cooperative multi-agent policies via PPO, DQN, and SAC in minutes, validating both its performance and generality.
+]]></content:encoded>
+<pubDate>Fri, 01 May 2026 00:00:00 -0400</pubDate>
+<pubDate>Fri, 01 May 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>End-to-End and Phase-Level Performance Optimization for Hyperledger Fabric</title>
+<link>https://arxiv.org/abs/2604.27174</link>
+<guid>https://arxiv.org/abs/2604.27174</guid>
+<content:encoded><![CDATA[
+
+arXiv:2604.27174v1 Announce Type: new 
+Abstract: Hyperledger Fabric (HLF) is a modular, permissioned blockchain widely adopted in enterprise settings. Enhancing its throughput and latency remains challenging, as optimization decisions made in one phase of the transaction lifecycle can adversely affect other phases. In this work, we present a systematic, phase-level and end-to-end study of HLF optimizations along three fronts, combining production-grade testbed experiments with calibrated SimPy simulations. First, we introduce two novel optimization techniques that target commit-phase bottlenecks: block-level pipelining and strategic waiting. In pipelining, we overlap validation and private-data acquisition of successive blocks with state-consistency checks and ledger updates improving commit throughput by up to 1.9x. Strategic waiting coordinates commit progress by temporarily pausing fast leaders and boosting laggers to sustain endorsement parallelism, yielding up to a 1.2x higher throughput. Second, we conduct micro-benchmarking of three configuration levers: private-data dissemination, block-size selection, and endorsement peer selection. Our results reveal that: (i) Relaxed quorums for private-data dissemination significantly reduce latency in both endorsement and commit phases; (ii) Under light workloads, smaller blocks yield lower end-to-end latency, whereas, under heavy workloads, larger blocks are necessary to improve throughput and reduce latency; and (iii) Relaxed leader selection dramatically reduces dropped transactions and boosts endorsement throughput, with a modest increase in MVCC invalidations. Finally, we analyze the interplay among private-data dissemination, VSCC parallelization, and pipelined commits. Interestingly, the throughput gains over a serial commit path are maximized at a moderate level of parallelization. Together, our findings provide phase-aware and protocol-level refinements for optimizing HLF.
+]]></content:encoded>
+<pubDate>Fri, 01 May 2026 00:00:00 -0400</pubDate>
+<pubDate>Fri, 01 May 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>AdaBFL: Multi-Layer Defensive Adaptive Aggregation for Bzantine-Robust Federated Learning</title>
+<link>https://arxiv.org/abs/2604.27434</link>
+<guid>https://arxiv.org/abs/2604.27434</guid>
+<content:encoded><![CDATA[
+
+arXiv:2604.27434v1 Announce Type: new 
+Abstract: Federated learning (FL) is a popular distributed learning paradigm in machine learning, which enables multiple clients to collaboratively train models under the guidance of a server without exposing private client data. However, FL's decentralized nature makes it vulnerable to poisoning attacks, where malicious clients can submit corrupted models to manipulate the system. To counter such attacks, although various Byzantine-robust methods have been proposed, these methods struggle to provide balanced defense against multiple types of attacks or rely on possessing the dataset in the server. To deal with these drawbacks, thus, we propose an effective multi-layer defensive adaptive aggregation for Bzantine-robust federated learning (AdaBFL) based on a novel three-layer defensive mechanism, which can adaptively adjust the weights of defense algorithms to counter complex attacks. Moreover, we provide convergence properties of our AdaBFL method under the non-convex setting on non-iid data. Comprehensive experiments across multiple datasets validate the superiority of our AdaBFL over the comparable algorithms.
+]]></content:encoded>
+<pubDate>Fri, 01 May 2026 00:00:00 -0400</pubDate>
+<pubDate>Fri, 01 May 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Back to the Future: Rethinking Endorsement in Order-Execute Blockchains</title>
+<link>https://arxiv.org/abs/2604.27659</link>
+<guid>https://arxiv.org/abs/2604.27659</guid>
+<content:encoded><![CDATA[
+
+arXiv:2604.27659v1 Announce Type: new 
+Abstract: Due to regulatory compliance and governance management, modern (permissioned) blockchains require flexible endorsement, which allows the endorsement policy for each contract or state object to be individually defined. To enable flexible endorsement, Hyperledger Fabric employs an execute-order-validate (EOV) paradigm, in which transactions first undergo speculative execution and endorsement, and are only then ordered and validated. Meanwhile, most blockchain systems, including the platform targeted in this work (i.e., ChainMaker), still follow a conflict-free order-execute framework. We argue that the EOV paradigm still faces several limitations, notably high abort rates in high-contention workloads such as those in Decentralized Finance (DeFi).
+  To avoid refactoring our system and better suit DeFi applications, we try to integrate flexible endorsement into the classical order-execute architecture and accordingly propose a new framework. The key challenge is to deterministically remove problematic transactions from an ordered list, while preserving censorship resistance and decentralization for the remaining ones. We instantiate this framework on top of Tendermint, a seminal Byzantine fault-tolerant (BFT) protocol adopted in our system, and thereby propose FlexTender. By elegantly embedding endorsements into consensus, FlexTender incurs no additional messaging overhead in the normal case. Empirical evaluation using an Ethereum USDT workload demonstrates that FlexTender achieves up to $10.6\times$ speedup in throughput over an EOV simulation on the same platform.
+]]></content:encoded>
+<pubDate>Fri, 01 May 2026 00:00:00 -0400</pubDate>
+<pubDate>Fri, 01 May 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Intent2Tx: Benchmarking LLMs for Translating Natural Language Intents into Ethereum Transactions</title>
+<link>https://arxiv.org/abs/2604.27763</link>
+<guid>https://arxiv.org/abs/2604.27763</guid>
+<content:encoded><![CDATA[
+
+arXiv:2604.27763v1 Announce Type: new 
+Abstract: The emergence of Large Language Models (LLMs) offers a transformative interface for Web3, yet existing benchmarks fail to capture the complexity of translating high-level user intents into functionally correct, state-dependent on-chain transactions. We present \textsc{Intent2Tx}, a high-fidelity benchmark featuring 29,921 single-step and 1,575 multi-step instances meticulously derived from 300 days of real-world Ethereum mainnet traces. Unlike prior works that rely on synthetic instructions, \textsc{Intent2Tx} grounds natural language intents in real-world protocol interactions across 11 categories, including diverse long-tail Decentralized Finance (DeFi) primitives. To enable rigorous evaluation, we propose an execution-aware framework that transcends surface-level text matching by employing differential state analysis on forked mainnet environments. Our extensive evaluation of 16 state-of-the-art LLMs reveals that while scaling and retrieval-augmentation enhance logical consistency and parameter precision, current models struggle with out-of-distribution generalization and multi-step planning. Crucially, our execution-based analysis demonstrates that syntactically valid outputs often fail to achieve intended state transitions, highlighting a significant gap in current "reasoning-to-execution" capabilities. \textsc{Intent2Tx} serves as a critical foundation for developing autonomous, reliable agents in intent-centric Web3 ecosystems. Code and data: https://anonymous.4open.science/r/Intent2Tx_Bench-97FF .
+]]></content:encoded>
+<pubDate>Fri, 01 May 2026 00:00:00 -0400</pubDate>
+<pubDate>Fri, 01 May 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Feature-Centric Methodology for Analyzing Cross-Chain NFT Migration Compatibility</title>
+<link>https://arxiv.org/abs/2604.27805</link>
+<guid>https://arxiv.org/abs/2604.27805</guid>
+<content:encoded><![CDATA[
+
+arXiv:2604.27805v1 Announce Type: new 
+Abstract: Cross-chain NFT migration refers to the process of transferring digital assets along with their associated functionalities and guarantees between distinct blockchain platforms. However, architectural divergences among these platforms introduce critical challenges, often resulting in features that fail to behave as intended. While protocol-level mechanisms can coordinate data transfer, they are insufficient to resolve deeper compatibility issues arising from fundamental differences in state organization, transaction execution, and ownership representation. Thus, the critical challenge lies in predicting which NFT features can be preserved, which require redesign, and which are fundamentally incompatible, prior to undertaking costly migration attempts. To address this challenge, we first derive a tailored four-layer NFT architecture based on standard blockchain stacks, distinguishing cryptographic, state-management, transaction-processing, and ownership primitives, with explicit upward dependencies. Building on this architecture, we conceptualize an NFT as a bundle of features and define successful cross-chain NFT migration as the preservation of these features. Grounded in this model, we propose a four-phase migration analysis methodology comprising source feature specification, primitive-level dependency mapping, target platform profiling, and compatibility assessment, which classifies each feature as natively preserved, partially mismatched, or completely mismatched. We evaluate this methodology through a proof-of-concept analysis of Ethereum-to-Solana NFT migration, identifying several incompatibility issues that hinder seamless NFT migration.
+]]></content:encoded>
+<pubDate>Fri, 01 May 2026 00:00:00 -0400</pubDate>
+<pubDate>Fri, 01 May 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>The Origins of MEV: Systematic Attribution of Arbitrage Opportunity Creation at Scale</title>
+<link>https://arxiv.org/abs/2604.27979</link>
+<guid>https://arxiv.org/abs/2604.27979</guid>
+<content:encoded><![CDATA[
+
+arXiv:2604.27979v1 Announce Type: new 
+Abstract: Maximal Extractable Value (MEV) represents billions of dollars in extracted value that fundamentally shapes blockchain network dynamics and participant incentives. While research has focused on MEV extraction and mitigation, we lack systematic methods to attribute MEV opportunities to their on-chain origins. This paper formalizes the MEV opportunity attribution problem and introduces a systems framework for identifying which transactions create arbitrage opportunities and quantifying their contributions. We design and evaluate four attribution methods for atomic arbitrage on EVM-compatible networks: bot-data-driven, simulation-based, coefficient-based, and Shapley-based approaches. Through large-scale retrospective analysis spanning over one million blocks on Polygon, we demonstrate that the majority of atomic arbitrage opportunities can be traced to single source transactions, validating our central hypothesis about competitive MEV markets. We quantify a highly concentrated distribution of MEV creation, where a small subset of protocols generates most opportunities, and provide comparative analysis of method trade-offs in accuracy, cost, and scalability. Our findings offer insights for protocol designers reducing MEV leakage, validators optimizing transaction ordering, and analysts measuring ecosystem health through opportunity creation.
+]]></content:encoded>
+<pubDate>Fri, 01 May 2026 00:00:00 -0400</pubDate>
+<pubDate>Fri, 01 May 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>From Impermanent Loss to Sustainable Gain: Quantifying Profitability Zones for Liquidity Providers on DEX</title>
+<link>https://arxiv.org/abs/2604.28014</link>
+<guid>https://arxiv.org/abs/2604.28014</guid>
+<content:encoded><![CDATA[
+
+arXiv:2604.28014v1 Announce Type: new 
+Abstract: Decentralized Finance (DeFi) is a rapidly evolving segment of blockchain technology that enables a transformative approach to financial services through Web3 applications. By leveraging smart contracts, DeFi allows developers to build flexible and innovative financial instruments. Among the most prominent DeFi primitives by liquidity are decentralized exchange~(DEX) swap protocols~(such as Uniswap, Curve, and Balancer) that facilitate fast token-to-token exchanges. However, new exchange mechanisms also introduce new market inefficiencies that can be systematically exploited by arbitrageurs. This paper focuses on swap protocols based on the Automated Market Maker~(AMM), where the product of reserves is preserved as an invariant. We analyze the interaction between arbitrageurs and AMM liquidity pools and develop a mathematical model grounded in empirical pool configurations. Using this model, we derive bounds on the joint revenue of liquidity providers~(LPs) and arbitrageurs, propose a method to estimate the expected number of blocks until the occurrence of Impermanent Loss~(IL), and obtain a lower bound on the pool fee required to achieve a fixed target probability of staying in the Impermanent Gain (IG) zone within a block. The proposed framework extends existing LP risk-assessment methodologies by quantifying symbiotic profitability zones, providing a principled basis for fee selection that aligns LP-arbitrageur incentives and enhances market stability.
+]]></content:encoded>
+<pubDate>Fri, 01 May 2026 00:00:00 -0400</pubDate>
+<pubDate>Fri, 01 May 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Framework for Collaborative Operation of Autonomous Delivery Vehicles Within a Marshaling Yard</title>
+<link>https://arxiv.org/abs/2604.28057</link>
+<guid>https://arxiv.org/abs/2604.28057</guid>
+<content:encoded><![CDATA[
+
+arXiv:2604.28057v1 Announce Type: new 
+Abstract: As autonomous vehicles slowly deploy into urban roads for limited use cases with significant edge case issues, closed facilities like marshaling yards provide a ripe case for combining lower-level vehicle autonomy with fixed infrastructure to create full autonomy without similar edge case concerns. Within a delivery marshaling yard, electric fleet vehicles complete a set of sequential tasks (charging, inspection, cleaning, and loading) before exiting the yard with their new load of deliveries. Hybrid automation of the vehicles and infrastructure can allow these vehicles to reach full autonomy and navigate the facility without the need of a driver, allowing for quicker movement between tasks increasing vehicle throughput. However, isolated autonomous operations based on static rules are prone to gridlock causing facility failures that temporarily shut down operations. Our orchestrated autonomy solution uses decentralized, dynamic priority scoring of vehicles based on the current status of the marshaling yard to optimally assign vehicles to tasks to increase vehicle throughput. Using a simulated facility with three marshaling yard sizes (small, medium, and large) and three demand levels (low, medium, high), we demonstrated that our orchestration solution increases vehicle throughput above static, isolated autonomy for all combinations of yard size and demand, while reducing facility failures at high demand levels.
+]]></content:encoded>
+<pubDate>Fri, 01 May 2026 00:00:00 -0400</pubDate>
+<pubDate>Fri, 01 May 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>AID: Agent Intent from Diffusion for Multi-Agent Informative Path Planning</title>
+<link>https://arxiv.org/abs/2512.02535</link>
+<guid>https://arxiv.org/abs/2512.02535</guid>
+<content:encoded><![CDATA[
+
+arXiv:2512.02535v2 Announce Type: replace 
+Abstract: Information gathering in large-scale or time-critical scenarios (e.g., environmental monitoring, search and rescue) requires broad coverage within limited time budgets, motivating the use of multi-agent systems. These scenarios are commonly formulated as multi-agent informative path planning (MAIPP), where multiple agents must coordinate to maximize information gain while operating under budget constraints. A central challenge in MAIPP is ensuring effective coordination while the belief over the environment evolves with incoming measurements. Recent learning-based approaches address this by using distributions over future positions as "intent" to support coordination. However, these autoregressive intent predictors are computationally expensive and prone to compounding errors. Inspired by the effectiveness of diffusion models as expressive, long-horizon policies, we propose AID, a fully decentralized MAIPP framework that leverages diffusion models to generate long-term trajectories in a non-autoregressive manner. AID first performs behavior cloning on trajectories produced by existing MAIPP planners and then fine-tunes the policy using reinforcement learning via Diffusion Policy Policy Optimization (DPPO). This two-stage pipeline enables the policy to inherit expert behavior while learning improved coordination through online reward feedback. Experiments demonstrate that AID consistently improves upon the MAIPP planners it is trained from, achieving 4x faster execution and up to 17% increased information gain, while scaling effectively to larger numbers of agents. Our implementation is publicly available at https://github.com/marmotlab/AID.
+]]></content:encoded>
+<pubDate>Fri, 01 May 2026 00:00:00 -0400</pubDate>
+<pubDate>Fri, 01 May 2026 00:00:00 -0400</pubDate>
+</item>
 
 <item>
 <title>On the Centralization of Governance Power in Decentralized Autonomous Organizations</title>
