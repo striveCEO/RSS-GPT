@@ -4,6 +4,114 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+<item>
+<title>Your Loss is My Gain: Low Stake Attacks on Liquid Staking Pools</title>
+<link>https://eprint.iacr.org/2026/860</link>
+<guid>https://eprint.iacr.org/2026/860</guid>
+<content:encoded><![CDATA[
+
+Permissionless Proof-of-Stake (PoS) economic security is predicated on the high cost of violating consensus safety or liveness.
+We show that liquid staking introduces additional risks that are not captured by standard PoS economic security arguments.
+Through an empirical study of Ethereum data, we find that the operational performance of liquid staking pools is positively associated with subsequent normalized liquid staking token (LST) returns.
+Motivated by this, we present a cross-layer attack: a low-stake adversary can manipulate the consensus protocol to degrade a target pool's performance and take application-layer positions that profit if the market reprices the corresponding LST in-line with the historically observed association.
+
+To make the consensus layer manipulation concrete, we develop a deep reinforcement learning (DRL) framework to automatically discover attack strategies.
+Our evaluation shows that the learned strategies can recover near-optimal theoretical attacks and uncover new manipulation behaviors that significantly degrade target pool performance.
+We further characterize feasible application-layer monetization channels and analyze leveraged shorting in detail using Monte Carlo simulations, showing that such attacks can be profitable with over one-half probability for LSTs of major staking pools.
+Our findings reveal a previously overlooked attack surface in PoS systems with liquid staking and expose a gap between consensus and economic security.
+]]></content:encoded>
+<pubDate>Fri, 01 May 2026 18:53:36 +0000</pubDate>
+<pubDate>Fri, 01 May 2026 18:53:36 +0000</pubDate>
+</item>
+<item>
+<title>FRI Soundness Above the Johnson Bound via Threshold Halving</title>
+<link>https://eprint.iacr.org/2026/858</link>
+<guid>https://eprint.iacr.org/2026/858</guid>
+<content:encoded><![CDATA[
+
+We prove the first unconditional soundness theorem above the Johnson bound for FRI, STIR, and WHIR — the proximity-testing protocols underlying every deployed STARK, zkVM, and FRI-based system on Ethereum's roadmap. For $\mathrm{RS}[F, L, k]$ with $k = 2^m$ and $L$ admitting a fixed-point-free involution (standard for deployed FRI, in either characteristic), for every $\delta \in (\delta_J,\, 1-\rho)$: $$\varepsilon_{\mathrm{FRI}} \;\leq\; \frac{nR}{|F|} \;+\; \left(1 - \frac{\delta}{2}\right)^{\!q}.$$
+
+Three results.
+
+(A) The bound above, via threshold halving from Rothblum–Vadhan–Wigderson (STOC 2013); the protocol, prover messages, and verifier checks are unchanged — only the query parameter is recalibrated. The argument enters the unique-decoding regime after one round, where BCIKS locks the distance, making it immune to any open-zone counterexample.
+
+(B) The ${\sim}2{\times}$ query overhead is optimal within the correlated-agreement (CA) framework: $\varepsilon_{\mathrm{ca}}(C, \delta, \delta) = \binom{n}{w}/|F|$, tight for large fields, exponential in the code length, and vacuous at FRI scale.
+
+(C) First $p$-dependent list-size bounds: $\mathbb{E}[M] = \binom{n}{w}/p^c$ at all codimension excesses $c \geq 1$; a sub-Poisson Bernstein tail at $c = 2$; and a phase-diagram conjecture at $c \geq 3$ (the deployment regime) predicting a linear $M_{\mathrm{true}} \leq \lfloor (2D-1)/c \rfloor$.
+
+Impact for Ethereum. Every deployed and proposed FRI-based system — SP1, RISC Zero, Plonky3, the ${\sim}30$ zkVMs on EthProofs, Stwo (Mersenne31 / circle FRI), the planned post-quantum signature aggregation layer — now has a positive proven soundness floor in the open zone above Johnson, replacing a conjecture whose up-to-capacity form was disproved in late 2025 by Crites–Stewart and independently by Kambiré. The cost is a factor ${\sim}2$ in queries; the bound holds in characteristic 2 via additive folding, on the unit circle via the Stwo coupling, and compiles to non-interactive knowledge soundness via Fiat–Shamir and DEEP. The half-threshold CA bound is formally verified in Lean 4 with Mathlib.
+]]></content:encoded>
+<pubDate>Fri, 01 May 2026 13:27:56 +0000</pubDate>
+<pubDate>Fri, 01 May 2026 13:27:56 +0000</pubDate>
+</item>
+<item>
+<title>MRFHE: Mixed-Radix Fully Homomorphic Encryption with Better Batch Bootstrapping</title>
+<link>https://eprint.iacr.org/2026/853</link>
+<guid>https://eprint.iacr.org/2026/853</guid>
+<content:encoded><![CDATA[
+
+Fully homomorphic encryption is a promising cryptographic primitive for privacy-preserving computation, yet bootstrapping remains the primary bottleneck for its practical deployment. For the CKKS scheme, the dominant cost of bootstrapping arises from the homomorphic evaluation of the Discrete Fourier Transform (DFT) and its inverse. Existing approaches realize these operations as matrix-vector products, thereby relying heavily on a large number of homomorphic rotations, a type of key-switching operation. 
+Despite substantial efforts to reduce the rotation count, these transforms remain fundamentally rotation-heavy -- requiring $O(r \cdot N^{1/2r})$ rotations per ciphertext at the cost of $r$ multiplicative levels, where $N$ is the ring degree --  and still account for a major portion of the overall bootstrapping latency.
+
+In this paper, we resolve this dependency in a batched manner, yielding a novel batch bootstrapping algorithm. We propose \emph{MRFHE}, an FHE scheme over a mixed-radix cyclotomic ring, which inherently decomposes the DFT into two layers -- a radix-$2$ DFT and a radix-$3$ DFT. This structure allows the homomorphic linear transformations during bootstrapping to be realized as two smaller, independent DFT evaluations. 
+By batching ciphertexts, each smaller DFT can be reduced to a batch matrix multiplication over cleartexts, requiring only $O(1)$ key-switching operations per ciphertext and admitting efficient acceleration by highly optimized libraries such as BLAS and FLINT.
+We implement MRFHE on top of the Lattigo library, demonstrating significant efficiency gains in batch bootstrapping and general ciphertext operations.
+]]></content:encoded>
+<pubDate>Fri, 01 May 2026 04:00:06 +0000</pubDate>
+<pubDate>Fri, 01 May 2026 04:00:06 +0000</pubDate>
+</item>
+<item>
+<title>Merces: Confidential Token Transfers via MPC and CoSNARKs</title>
+<link>https://eprint.iacr.org/2026/850</link>
+<guid>https://eprint.iacr.org/2026/850</guid>
+<content:encoded><![CDATA[
+
+Fungible tokens on public blockchains expose all balances and transfer amounts in the clear, which is incompatible with the financial privacy required by many real-world applications. We present Merces a confidential token contract that hides user balances and transaction amounts while preserving on-chain verifiability. The core idea is to store secret shares of balances within a decentralized MPC network, while only commitments are published to a smart contract. Thereby, Merces is capable of translating any existing token (e.g., any ERC20 token) into a confidential version. Deposits, withdrawals, and transfers are computed privately within the MPC network, which generates a collaborative SNARK (CoSNARK) to prove the validity of each state transition. In particular, the proof ensures that on-chain commitments are updated consistently and that the sender has sufficient funds. In this paper we give a full formalization of our construction in the Universal Composability (UC) framework, provide rigorous security proofs, and describe a concrete instantiation using Groth16 over BN254 with Poseidon2-based commitments. We further provide a complete end-to-end implementation, accompanied by extensive benchmarks and discussion of a working demo: our system achieves over 300 transactions per second, including proof generation, while requiring only minimal client-side computation.
+]]></content:encoded>
+<pubDate>Thu, 30 Apr 2026 15:11:49 +0000</pubDate>
+<pubDate>Thu, 30 Apr 2026 15:11:49 +0000</pubDate>
+</item>
+<item>
+<title>PPML Is More Vulnerable to Cryptanalytic Extraction Attacks</title>
+<link>https://eprint.iacr.org/2026/848</link>
+<guid>https://eprint.iacr.org/2026/848</guid>
+<content:encoded><![CDATA[
+
+With the expansion of Machine Learning as a Service (MLaaS), Secure Multi-Party Computation (MPC) is widely used to protect the privacy of both proprietary models and client data during inference.
+To achieve practical performance, these protocols typically rely on fixed-point arithmetic over finite rings. However, this design choice introduces a unique arithmetic vulnerability: silent modular wraparound.
+In this paper, we propose a novel model extraction attack that actively exploits this behavior to accurately recover neural network parameters. 
+Unlike existing methods that heavily rely on the non-differentiable points of piecewise linear activation functions (e.g., ReLU [CRYPTO 20, EUROCRYPT 25]), our attack leverages the discontinuous jumps triggered by modular wraparound. We successfully extract parameters from networks employing smooth activation functions (e.g., Swish, GELU) and effectively handle expansive network architectures where previous differential attacks fail. 
+We present polynomial-time algorithms for recovering neuron signatures, norms, and signs, demonstrating that our approach remains highly robust even in restricted black-box scenarios where only top-1 label and probability are available to the attacker. 
+Rigorous theoretical proofs and signal-to-interference ratio (SIR) analyses confirm that our sign recovery method significantly outperforms existing neuron wiggle techniques [EUROCRYPT24].
+]]></content:encoded>
+<pubDate>Thu, 30 Apr 2026 13:12:53 +0000</pubDate>
+<pubDate>Thu, 30 Apr 2026 13:12:53 +0000</pubDate>
+</item>
+<item>
+<title>Lattice Group Signatures, Revisited</title>
+<link>https://eprint.iacr.org/2026/847</link>
+<guid>https://eprint.iacr.org/2026/847</guid>
+<content:encoded><![CDATA[
+
+Group signatures are one of the central privacy-preserving authentication mechanisms, offering an interesting trade-off between accountability and anonymity. Their versatility has led to many applications and even standardization at ISO/IEC. Unfortunately, they lack so far efficient quantum-safe constructions, despite several works implementing the seminal framework by Bellare, Micciancio and Warinschi (BMW) in the lattice setting.
+In this work, we propose an alternative lattice-based construction that departs from the BMW blueprint by trying to minimize the number of elements to conceal in zero-knowledge proofs, the latter being quite complex in this setting. Concretely, it relies on delegated lattice bases, while avoiding the complex OR-proofs of some previous attempts in that direction. Combined with some tricks leveraging the peculiarities of a recent lattice sampler, it results in an efficient scheme that yet retains all the BMW security properties while only relying on standard lattice assumptions.
+]]></content:encoded>
+<pubDate>Thu, 30 Apr 2026 12:12:33 +0000</pubDate>
+<pubDate>Thu, 30 Apr 2026 12:12:33 +0000</pubDate>
+</item>
+<item>
+<title>MPlookup: A Quasilinear Multi-Party Lookup Argument in Collaborative zkSNARKs via Four Sorts and a Multi-Point Evaluation</title>
+<link>https://eprint.iacr.org/2026/844</link>
+<guid>https://eprint.iacr.org/2026/844</guid>
+<content:encoded><![CDATA[
+
+A lookup argument is a cryptographic primitive that allows a prover to convince verifiers that every element of a private query vector belongs to a public table vector without disclosing the underlying data. It can enforce correct instruction execution in zero-knowledge virtual machines and serve as an important supplement to zero-knowledge succinct non-interactive arguments of knowledge (zkSNARKs). However, existing lookup argument protocols operate exclusively in the single-prover setting and do not address the requirements of collaborative zkSNARKs, in which multiple parties jointly generate proofs over additively secret-shared data while preserving privacy from both other provers and verifiers.
+
+This work presents MPlookup, the first multi-party lookup argument protocol for collaborative zkSNARKs. MPlookup achieves quasilinear $O(N \log^2 N)$ complexity through four oblivious sorting operations together with a multi-point polynomial evaluation performed entirely over secret shares. We introduce a multi-point evaluation protocol in the distributed oblivious polynomial evaluation setting, constructed via oblivious subproduct tree construction and oblivious polynomial division with private divisors. We prove that the protocol satisfies obliviousness, completeness, soundness, and zero-knowledge. We implement MPlookup as an open-source Rust library, built upon the collaborative zkSNARKs framework and the CompatCircuit arithmetic black box. Our evaluation confirms a performance improvement over an $O(N^2)$ baseline while remaining competitive given the obliviousness requirement.
+]]></content:encoded>
+<pubDate>Thu, 30 Apr 2026 08:57:44 +0000</pubDate>
+<pubDate>Thu, 30 Apr 2026 08:57:44 +0000</pubDate>
+</item>
 
 <item>
 <title>Secure Integrated Sensing and Communication: Information Theory Offers Insights</title>
