@@ -5,19 +5,43 @@
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
 <item>
+<title>Adaptive Distributed Key Generation for Discrete-Log Cryptosystems</title>
+<link>https://eprint.iacr.org/2026/892</link>
+<guid>https://eprint.iacr.org/2026/892</guid>
+<content:encoded><![CDATA[
+
+The security of decentralized asset custody and blockchain consensus increasingly relies on threshold signatures to eliminate single points of failure. In these high-stakes environments, static security models are an insufficient theoretical abstraction. Real-world blockchain deployments demand adaptive security to ensure protocols remain secure against adversaries who reactively compromise participants based on observed network traffic and protocol state.
+
+While the NIST standardization effort and Bitcoin’s Taproot (BIP340) upgrade have accelerated interest in adaptively secure threshold Schnorr signatures, a threshold system is only as secure as its setup phase. In decentralized settings, this necessitates a Distributed Key Generation (DKG) protocol to eliminate reliance on a trusted dealer. However, a critical gap remains: current DKG protocols are incompatible with the specific key structures required by promising schemes (EUROCRYPT'26). Furthermore, a result from CRYPTO'25 demonstrated that unique key commitments necessitate a non-falsifiable assumption for adaptive security. To avoid non-standard assumptions, DKG protocols must be key-share hiding, a property existing DKGs fail to provide.
+
+We close this gap by proposing two novel DKG protocols that support identifiable abort and tolerate a dishonest majority and prove them secure under new ideal functionalities in the UC framework. Our first protocol achieves optimal round complexity via a single broadcast round at the cost of allowing adversarial bias, while our second protocol eliminates the bias in two rounds. In addition, the protocols provide a proactive key refresh mechanism that allows long-lived decentralized networks to refresh internal key material periodically. This enables the system to recover from transient node compromises without the operational burden of rotating the underlying public key. Our evaluation demonstrates that these constructions are practically efficient, incurring minimal communication and computation overhead for modern high-throughput architectures.
+]]></content:encoded>
+<pubDate>Wed, 06 May 2026 22:17:49 +0000</pubDate>
+<pubDate>Wed, 06 May 2026 22:17:49 +0000</pubDate>
+</item>
+<item>
+<title>BlindReview: Anonymous and End-to-End Verifiable Peer Review</title>
+<link>https://eprint.iacr.org/2026/888</link>
+<guid>https://eprint.iacr.org/2026/888</guid>
+<content:encoded><![CDATA[
+
+We introduce BlindReview, an anonymous and end-to-end verifiable peer review system that cryptographically guarantees both privacy and auditability throughout the reviewing process. We formally define these security properties and provide rigorous proofs that BlindReview satisfies them. We also present an implementation demonstrating our protocol’s practicality. This work serves as a foundation for verifiable and privacy-preserving peer review, offering a concrete solution to enhance transparency and reduce bias in the academic peer review process.
+]]></content:encoded>
+<pubDate>Wed, 06 May 2026 08:54:50 +0000</pubDate>
+<pubDate>Wed, 06 May 2026 08:54:50 +0000</pubDate>
+</item>
+
+<item>
 <title>Sunfish: Reading Ledgers with Sparse Nodes</title>
 <link>https://eprint.iacr.org/2024/1680</link>
 <guid>https://eprint.iacr.org/2024/1680</guid>
 <content:encoded><![CDATA[
-
 Users who wish to interact with blockchains typically engage with only a small number of decentralized applications (dApps) whose state they need to monitor. However, securely and trustlessly tracking the state of even a single dApp currently requires running a full client, which independently downloads and verifies the entire blockchain, re-executes all transactions, and reconstructs the global state. Operating a full client contrasts sharply with the traditional client–server paradigm, where clients retrieve only the data they need, and becomes increasingly difficult to sustain as blockchains' throughput increases. Light clients do not offer a viable alternative: while they are more resource-efficient thanks to their use of succinct proofs, they can verify only limited information about the ledger and its state and rely on additional trust assumptions for this. As a result, a gap emerges in the blockchain client design space: enabling secure and verifiable monitoring of dApp state, isolating the workload of a given dApp from the workload of the entire chain.
 
 To bridge this gap, we introduce a sparse client, a new type of blockchain client that only downloads the transactions that modify the state of a specific dApp and only computes and stores the dApp state, isolating the dApp's workload from the one of the entire chain. We also present Sunfish, a secure sparse client protocol available in two variants: one off-the-shelf compatible with Ethereum Virtual Machine (EVM)-based blockchains and one virtually compatible with any chain. We also introduce an event client, a special case of sparse clients that only tracks a particular stream of events emitted by a dApp. We benchmark sparse and event clients against a full client by implementing prototypes for Ethereum. Our results show that our sparse and event clients respectively save 66% and 85% operating cost when compared to a full node.
 ]]></content:encoded>
 <pubDate>Wed, 16 Oct 2024 13:36:17 +0000</pubDate>
-<pubDate>Wed, 16 Oct 2024 13:36:17 +0000</pubDate>
 </item>
-
 <item>
 <title>Probabilistic Atomic Swaps for Bitcoin and Friends</title>
 <link>https://eprint.iacr.org/2026/887</link>
@@ -14439,25 +14463,6 @@ Building on the prior work, we leverage recent advances in equivalence class sig
 To assess scalability, we compare our approach to other scalable mixnet solutions, implement our protocols, and provide concrete performance benchmarks. Our results show that our mixnet significantly outperforms existing alternatives in both computation and communication efficiency. Specifically, verifying the mixing process for 50,000 ciphertexts takes just 135 seconds on a commodity laptop using ten mixers, illustrating the practical viability of our approach.
 ]]></content:encoded>
 <pubDate>Wed, 25 Sep 2024 08:05:18 +0000</pubDate>
-</item>
-<item>
-<title>Dumbo-MPC: Efficient Fully Asynchronous MPC with Optimal Resilience</title>
-<link>https://eprint.iacr.org/2024/1705</link>
-<guid>https://eprint.iacr.org/2024/1705</guid>
-<content:encoded><![CDATA[
-<div> 关键词: 完全异步多 party 计算 (AMPC), 隐私保护, 保证输出交付 (G.O.D.), Dumbo-MPC, HoneyBadgerMPC, 抗恶意攻击
-
-总结:
-本文提出了一种名为 Dumbo-MPC 的全新完全异步多 party 计算 (AMPC) 设计方案，旨在解决现有 AMPC 协议在实际应用中的局限性，如非最优鲁棒性、高通信成本和额外的在线加密开销。Dumbo-MPC 提供了全面的 G.O.D. 和对 $t3$ 恶意参与者的最优鲁棒性保障（总参与者数为 $n$）。其在线阶段与 HoneyBadgerMPC 类似，具有稳健的、几乎信息理论级别的安全性，但不同的是，Dumbo-MPC 设计了一个创新的双模式离线协议，能在异步环境中鲁棒地预处理乘法三元组。该协议在乐观情况下每三元组通信复杂度为 $O(n)$，并在出现故障时无缝切换到悲观路径以保持 G.O.D. 安全性。为了优化悲观路径的实现效率，文章设计了一种基于紧凑型 KZG 多项式承诺的、针对秘密份额产品关系的高效零知识证明，将两个秘密份额乘积的次数从 $2t$ 减少到 $t$，具有独立的研究价值。
-
-此外，研究者实现了 Dumbo-MPC 并在最多 31 台 AWS 服务器的不同网络设置下进行了详尽评估。据所知，这是首个实现所有阶段 G.O.D. 的 AMPC 实例。文章还将 Dumbo-MPC 与近期由 Groth 和 Shoup 提出的异步三元生成协议 (GS23) 进行了实测对比。当 $n=31$ 时，Dumbo-MPC 在悲观情况下的三元生成速度达到了 94 个/秒（几乎是 GS23 的两倍），而在良好条件下达到了 349 个/秒（比 GS23 快六倍）。这使得 31 个参与者仅需 2-8 分钟即可准备好涉及 100 名竞标者的私人 Vickrey 拍卖的预处理工作，或者只需 10-36 分钟完成包含 $2^{10}$ 输入的混合网络的预处理任务。 <div>
-Fully asynchronous multi-party computation (AMPC) has superior robustness in realizing privacy and guaranteed output delivery (G.O.D.) against asynchronous adversaries that can arbitrarily delay communications. However, none of these protocols are truly practical, as they either have sub-optimal resilience, incur cumbersome communication cost, or suffer from an online phase with extra cryptographic overhead. The only attempting implementation---HoneyBadgerMPC (hbMPC)---merely ensures G.O.D. in some implausible optimistic cases due to a non-robust offline pre-processing phase.
-
-We propose Dumbo-MPC a concretely efficient  AMPC-as-a-service design with all phases G.O.D. and optimal resilience against  $t3$ malicious parties (where $n$ is the total number of parties). Same to hbMPC, Dumbo-MPC has a robust (almost) information-theoretic online phase that can efficiently perform online computations, given pre-processed multiplication triples. While for achieving all phases G.O.D., we design a novel dual-mode offline protocol that can robustly pre-process multiplication triples in asynchrony. The offline phase features $O(n)$ per-triple communication in the optimistic case, followed by a fully asynchronous fallback to a pessimistic path to securely restore G.O.D. in the bad case. To efficiently implement the pessimistic path, we devise a concretely efficient zk-proof for product relationship of secret shares over compact KZG polynomial commitments, which enables us to reduce the degree of two secret shares' product from $2t$ to  $t$ and could be of independent interest.
-
-We also implement and extensively evaluate Dumbo-MPC (particularly its offline phase) in varying network settings with up to 31 AWS servers. To our knowledge, we provide the first implementation of AMPC with all-phase G.O.D. A recent asynchronous triple generation protocol from Groth and Shoup (GS23) is also implemented and experimentally compared. When $n = 31$, Dumbo-MPC generates 94 triplessec (almost twice of GS23) in the pessimistic case and 349 triples/sec (6X of GS23) in the good case, such that 31 parties require only 2-8 min to prepare a private Vickrey auction of 100 bidders or 10-36 min for a mixing network of $2^{10}$ inputs.
-]]></content:encoded>
-<pubDate>Fri, 18 Oct 2024 12:14:10 +0000</pubDate>
 </item>
 </channel>
 </rss>
