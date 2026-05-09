@@ -5,11 +5,24 @@
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
 <item>
+<title>Sunfish: Reading Ledgers with Sparse Nodes</title>
+<link>https://eprint.iacr.org/2024/1680</link>
+<guid>https://eprint.iacr.org/2024/1680</guid>
+<content:encoded><![CDATA[
+
+Users who wish to interact with blockchains typically engage with only a small number of decentralized applications (dApps) whose state they need to monitor. However, securely and trustlessly tracking the state of even a single dApp currently requires running a full client, which independently downloads and verifies the entire blockchain, re-executes all transactions, and reconstructs the global state. Operating a full client contrasts sharply with the traditional client–server paradigm, where clients retrieve only the data they need, and becomes increasingly difficult to sustain as blockchains' throughput increases. Light clients do not offer a viable alternative: while they are more resource-efficient thanks to their use of succinct proofs, they can verify only limited information about the ledger and its state and rely on additional trust assumptions for this. As a result, a gap emerges in the blockchain client design space: enabling secure and verifiable monitoring of dApp state, isolating the workload of a given dApp from the workload of the entire chain.
+
+To bridge this gap, we introduce a sparse client, a new type of blockchain client that only downloads the transactions that modify the state of a specific dApp and only computes and stores the dApp state, isolating the dApp's workload from the one of the entire chain. We also present Sunfish, a secure sparse client protocol available in two variants: one off-the-shelf compatible with Ethereum Virtual Machine (EVM)-based blockchains and one virtually compatible with any chain. We also introduce an event client, a special case of sparse clients that only tracks a particular stream of events emitted by a dApp. We benchmark sparse and event clients against a full client by implementing prototypes for Ethereum. Our results show that our sparse and event clients respectively save 66% and 85% operating cost when compared to a full node.
+]]></content:encoded>
+<pubDate>Wed, 16 Oct 2024 13:36:17 +0000</pubDate>
+<pubDate>Wed, 16 Oct 2024 13:36:17 +0000</pubDate>
+</item>
+
+<item>
 <title>Probabilistic Atomic Swaps for Bitcoin and Friends</title>
 <link>https://eprint.iacr.org/2026/887</link>
 <guid>https://eprint.iacr.org/2026/887</guid>
 <content:encoded><![CDATA[
-
 Atomic swaps are a fundamental primitive for the trustless exchange of digital assets across blockchains: they guarantee that either both parties receive the agreed assets or neither party transfers. While this all-or-nothing guarantee is powerful, it also imposes an inherent determinism that rules out exchanges whose intended outcome is probabilistic. As a result, existing atomic swaps cannot realize trustless exchanges in which one party pays for a fixed chance of receiving a larger asset or reward, as in lotteries, randomized allocation mechanisms, and probabilistic cross-chain trades.
 
 We introduce probabilistic swaps, a new cryptographic primitive that extends atomic swaps to the probabilistic setting. 
@@ -21,14 +34,12 @@ A key feature of our approach is that it preserves the minimal on-chain footprin
 We provide formal security foundations and demonstrate practicality through a probabilistic swap between the Bitcoin and Litecoin testnets, as well as in the Lightning Network.
 ]]></content:encoded>
 <pubDate>Wed, 06 May 2026 07:33:29 +0000</pubDate>
-<pubDate>Wed, 06 May 2026 07:33:29 +0000</pubDate>
 </item>
 <item>
 <title>Accountable Fair Exchange Protocols on Blockchain</title>
 <link>https://eprint.iacr.org/2026/879</link>
 <guid>https://eprint.iacr.org/2026/879</guid>
 <content:encoded><![CDATA[
-
 Fair exchange protocols on blockchain enable atomic exchange of digital goods and cryptocurrency between untrusted parties.
 Two prominent protocols, Zero-Knowledge Contingent Payment (ZKCP) and FairSwap, guarantee fairness: either both parties receive the expected items (digital goods and cryptocurrency) or neither does.
 However, both protocols lack accountability: when an exchange terminates abnormally, the protocol cannot identify which party caused the failure.
@@ -37,17 +48,14 @@ To fill this gap, we identify the common accountability issue in both protocols 
 We formally define the revised protocols in the universal composability framework and provide a proof sketch, and measure the computational overhead of the revised protocols in our implementation and experiment.
 ]]></content:encoded>
 <pubDate>Tue, 05 May 2026 15:17:41 +0000</pubDate>
-<pubDate>Tue, 05 May 2026 15:17:41 +0000</pubDate>
 </item>
 <item>
 <title>Verifiable Anomaly and Similarity Detection Using Matrix Profile in Private Time-series</title>
 <link>https://eprint.iacr.org/2026/878</link>
 <guid>https://eprint.iacr.org/2026/878</guid>
 <content:encoded><![CDATA[
-
 Analyzing time-series databases in a privacy-preserving manner has gained significant attention, especially when the data contains sensitive personal information such as medical records or spatio-temporal data such as trajectories. Motivated by scenarios where a user must show whether an anomaly (or similarity) is detected in a time series containing sensitive data, we propose a toolkit for proving these properties on (committed) private time series. We leverage Matrix Profile (MP), a state-of-the-art data-mining structure, to detect subsequence anomalies and similarities in time series, in contrast to many works that only detect anomalies and similarities on complete time series. As recent findings have shown, the aggregated data used by MP (such as subsequence distances or MP values) leak critical information about the time series. It is therefore crucial to consider a strong adversary model where all information other than the presence or absence of anomalies/similarities remains protected. To guarantee this, we propose a combination of commitment and zero-knowledge proof systems that ensure both the validity of the proven result and the (unconditional) protection of the time series. The proposed schemes maintain reasonable execution times, even for large real-time time series.
 ]]></content:encoded>
-<pubDate>Tue, 05 May 2026 14:45:16 +0000</pubDate>
 <pubDate>Tue, 05 May 2026 14:45:16 +0000</pubDate>
 </item>
 <item>
@@ -55,10 +63,8 @@ Analyzing time-series databases in a privacy-preserving manner has gained signif
 <link>https://eprint.iacr.org/2026/876</link>
 <guid>https://eprint.iacr.org/2026/876</guid>
 <content:encoded><![CDATA[
-
 Credit scoring plays a critical role in the financial industry, allowing institutions to evaluate the creditworthiness of potential borrowers. Typically, a model is estimated from repositories of attributes of past borrowers linked to their loan and payments performance. The model is then used to compute an applicant's score. The training and customer data are subject to regulations that require privacy of financial records. This creates a tension between the full utilization of available data and the prevention of leakage. Recently, the tension has intensified from, on one hand, improvement in AI methods to utilize data from nontraditional sources to develop prediction models and, on the other hand, increased concern over the vulnerability of encrypted data to penetration from quantum computers. We present a credit score workflow that addresses both issues by using AI methods to estimate a credit score model in a collaborative setting, combined with post-quantum cryptographic methods to protect data. We develop a  ``toy'' workflow which can form a base for more complex ``real world'' implementations. We provide links to a code-base.
 ]]></content:encoded>
-<pubDate>Tue, 05 May 2026 13:54:04 +0000</pubDate>
 <pubDate>Tue, 05 May 2026 13:54:04 +0000</pubDate>
 </item>
 <item>
@@ -66,10 +72,8 @@ Credit scoring plays a critical role in the financial industry, allowing institu
 <link>https://eprint.iacr.org/2026/874</link>
 <guid>https://eprint.iacr.org/2026/874</guid>
 <content:encoded><![CDATA[
-
 Proof of Assets (PoA) protocols enable custodians to prove ownership of digital assets without revealing their account addresses or corresponding balances. While existing PoA protocols focused on either private or public balances, hybrid-state blockchains such as the Aztec Network involve both. In these systems, private balances are managed by encrypted notes that work similarly to the UTXO model, with only commitments stored on-chain. We present a PoA protocol that supports hybrid balances by combining public-state membership proofs with proofs of ownership over private notes. Since a custodian may control multiple accounts and numerous notes, we employ hierarchical proof-carrying data via recursive zk-SNARK, enabling scalable proving and efficient batch verification. We implement our system using the Noir DSL with the UltraHonk proving backend, and evaluate the performance.
 ]]></content:encoded>
-<pubDate>Tue, 05 May 2026 08:48:01 +0000</pubDate>
 <pubDate>Tue, 05 May 2026 08:48:01 +0000</pubDate>
 </item>
 <item>
@@ -77,10 +81,8 @@ Proof of Assets (PoA) protocols enable custodians to prove ownership of digital 
 <link>https://eprint.iacr.org/2026/873</link>
 <guid>https://eprint.iacr.org/2026/873</guid>
 <content:encoded><![CDATA[
-
 An adaptor signature scheme can be seen as committing to a signature using an NP statement, in such a way that (1) the commitment, called a presignature, is verifiable, (2) the corresponding witness enables opening the commitment (adapting the presignature), and (3) seeing a valid commitment-opening (presignature-signature) pair leaks the witness. In the blockchain space, where signatures (signed transactions) must be broadcast to the public to take effect, this last property allows "forcing" a party to leak a witness for possibly multiple presignatures issued for the same NP statement. This then gives rise to many applications such as atomic swaps or payment channels. Importantly, in prevailing adaptor signature schemes, presignatures are already technically signatures, in that they are non-interactive zero-knowledge proofs of knowledge of the signing key. This has a number of consequences, most important being that the presignature constitutes evidence of intent to participate in a protocol based on adaptor signatures. Perhaps surprisingly, however, for practical applications, this strong "binding" of presignatures turns out to be non-essential. In this work, we revisit the definitions of adaptor signature schemes, demonstrating that prevailing security requirements are too strict for practical applications. To this end, we formally define fair signature exchange (FSE) and abandon the assumption implicit in prior work that adaptor-based FSE must be "symmetric" with both parties using the same adaptor signature scheme. The resulting relaxation of security requirements leads us to the notion of presignature deniability, an extension to adaptor signature schemes that we define formally and construct from various assumptions.
 ]]></content:encoded>
-<pubDate>Tue, 05 May 2026 06:18:03 +0000</pubDate>
 <pubDate>Tue, 05 May 2026 06:18:03 +0000</pubDate>
 </item>
 <item>
@@ -88,10 +90,8 @@ An adaptor signature scheme can be seen as committing to a signature using an NP
 <link>https://eprint.iacr.org/2026/872</link>
 <guid>https://eprint.iacr.org/2026/872</guid>
 <content:encoded><![CDATA[
-
 Anonymity guarantees of privacy-oriented cryptocurrencies are garnering negative attention from lawmakers who view them as antinomic to accountability. Having recognized their potential for innovation, however, regulators may not want to outright ban privacy coins but instead seek a middle ground where financial oversight is effective, and still a modicum of privacy is maintained. Mature designs, such as Zcash, Monero, or Firo, facilitate this through so-called viewing keys that can be disclosed to third parties for the purpose of supervision. This paper initiates the study of the issues of security, privacy, and fungibility that privacy coins face in the non-custodial setting with the legal obligation on users to surrender their viewing keys to the authorities. In doing so, it fills the gap in provable anonymity guarantees for Zcash and, at the same time, exposes non-trivial gaps for Monero and Firo. Of independent interest is that the naturally defined notion of spend indistinguishability is shown to imply practical anamorphic spending as introduced by Cinal et al. (ESORICS'25), and a novel perspective is presented, framing UTXO-based privacy coins under viewing key compromise as transparent account-based cryptocurrencies instead.
 ]]></content:encoded>
-<pubDate>Tue, 05 May 2026 06:02:58 +0000</pubDate>
 <pubDate>Tue, 05 May 2026 06:02:58 +0000</pubDate>
 </item>
 <item>
@@ -99,10 +99,8 @@ Anonymity guarantees of privacy-oriented cryptocurrencies are garnering negative
 <link>https://eprint.iacr.org/2026/871</link>
 <guid>https://eprint.iacr.org/2026/871</guid>
 <content:encoded><![CDATA[
-
 The rapid adoption of blockchain-based financial systems has been accompanied by a surge in illicit activities, including money laundering, ransomware payments, phishing scams, and terrorist financing, necessitating robust anomalous transaction detection mechanisms. Detecting anomalies in cryptocurrency transactions is critical, as undetected illicit activity can result in significant economic losses and undermine trust in digital financial systems. This systematic review examines the state-of-the-art in cryptocurrency anomaly detection, with particular focus on methodological developments between 2008 and December 2025. A PRISMA-guided systematic literature search was conducted across IEEE Xplore, Scopus, Web of Science, ACM Digital Library, Google Scholar, and SpringerLink. From an initial set of 450 records, 32 empirical studies were selected after rigorous screening and eligibility assessment and included in the qualitative synthesis. Unlike prior surveys, this review provides a focused synthesis of empirical cryptocurrency transaction studies, a taxonomy of anomaly types, and a critical assessment of dataset bias and evaluation practices. The literature reveals a clear methodological shift from traditional feature-engineered machine learning approaches (e.g., Random Forest, XGBoost, and Support Vector Machines) toward graph-based deep learning architectures. Graph Neural Networks (GNNs), particularly Graph Convolutional Networks (GCNs) and Graph Attention Networks (GATs), demonstrate competitive performance by capturing relational dependencies among blockchain addresses, while temporal graph models and hybrid GNN–transformer architectures enhance the detection of evolving, multi-hop laundering schemes. Unsupervised and semi-supervised approaches address the challenge of limited labeled data but introduce trade-offs in interpretability. Emerging research directions include privacy-preserving federated learning and cross-chain detection frameworks. Despite some studies reporting accuracies exceeding 90%, the field faces several limitations, including dataset bias, lack of standardized multi-chain benchmarks, inconsistency in evaluation metrics, limited adversarial robustness testing, scalability constraints, and insufficient explainability for regulatory compliance. This review aims to provide researchers and practitioners with a structured synthesis of current methodologies, a comprehensive taxonomy of anomalies, and a detailed roadmap for transitioning from experimental validation to real-world, scalable deployment.
 ]]></content:encoded>
-<pubDate>Mon, 04 May 2026 23:52:01 +0000</pubDate>
 <pubDate>Mon, 04 May 2026 23:52:01 +0000</pubDate>
 </item>
 <item>
@@ -110,7 +108,6 @@ The rapid adoption of blockchain-based financial systems has been accompanied by
 <link>https://eprint.iacr.org/2026/870</link>
 <guid>https://eprint.iacr.org/2026/870</guid>
 <content:encoded><![CDATA[
-
 Anonymous-credential (AC) schemes equip users with credentials on attested attributes such that users can later prove possession of a credential certifying (a subset of) those attributes without revealing anything else. In standard AC schemes, such proofs reveal the issuer of the credential, which may be more information than intended or necessary. Lately, there has been significant interest in designing stronger issuer-hiding anonymous-credential schemes that only reveal that the user has a credential from an issuer in a certain policy set.
 
 Katz and Sefranek recently showed how to add issuer hiding to BBS-based anonymous credentials. However, their scheme requires per-verifier policy keys with corresponding secret keys needed for verification; this means proofs are no longer publicly verifiable, and may pose a barrier to practical deployment. As another drawback, security of their scheme relies on the generic group model (GGM).
@@ -118,17 +115,14 @@ Katz and Sefranek recently showed how to add issuer hiding to BBS-based anonymou
 In this work, we propose a template for constructing issuer-hiding, BBS-based anonymous credentials that does not require policy keys and whose security can be reduced to security of the BBS signature scheme (in particular, without relying on the GGM). At the core of our template is a technique to randomize BBS public keys and adapt signatures accordingly, which we show also has applications to tight multi-user security of BBS signatures. We design, implement, optimize, and experimentally compare various instantiations of our template that offer tradeoffs in proving time, verification time, and proof size. All instantiations offer good performance for policy sets of up to 64 issuers.
 ]]></content:encoded>
 <pubDate>Mon, 04 May 2026 20:22:21 +0000</pubDate>
-<pubDate>Mon, 04 May 2026 20:22:21 +0000</pubDate>
 </item>
 <item>
 <title>SealAgg: A Lightweight Auditing Framework for One-Shot Secure Aggregation against Malicious Servers</title>
 <link>https://eprint.iacr.org/2026/869</link>
 <guid>https://eprint.iacr.org/2026/869</guid>
 <content:encoded><![CDATA[
-
 Trustworthy federated learning requires both update privacy and aggregate integrity. While secure aggregation protects the confidentiality of client updates, it does not prevent a malicious server from tampering with the final aggregate. Existing verifiable schemes typically address this limitation by introducing separate integrity-verification layers, such as zero-knowledge proofs, homomorphic hashes, and commitmentbased mechanisms. However, these approaches either require clients to remain online after uploading their updates for additional verification or recovery procedures, or incur substantial computation overhead that scales linearly with the model dimension. To address these limitations, we propose SealAgg, a one-shot verifiable secure aggregation framework that simultaneously guarantees update confidentiality and aggregate integrity against a malicious server. SealAgg allows clients to disconnect immediately after uploading their updates and introduces an aggregatenative auditing mechanism that enables lightweight integrity verification without a separate costly verification pipeline. Specifically, each client embeds dual hidden finite-field linear projections and a context-binding heartbeat value into its update before encryption, so that the audit material is co-aggregated with the gradients along the same path. Moreover, we design an asymmetric three-server architecture that confines integrity validation entirely to the server side, thereby fully supporting one-shot client participation. We provide formal analyses of the correctness and security of SealAgg. Extensive experiments show that SealAgg achieves practical end-to-end efficiency, incurs only a small auditing overhead relative to the total cost, and outperforms state-of-the-art schemes.
 ]]></content:encoded>
-<pubDate>Mon, 04 May 2026 12:26:51 +0000</pubDate>
 <pubDate>Mon, 04 May 2026 12:26:51 +0000</pubDate>
 </item>
 <item>
@@ -136,7 +130,6 @@ Trustworthy federated learning requires both update privacy and aggregate integr
 <link>https://eprint.iacr.org/2026/868</link>
 <guid>https://eprint.iacr.org/2026/868</guid>
 <content:encoded><![CDATA[
-
 We address the question of realizing privacy preserving analysis of user data. The abstract scenario considered is that an analyst aims to evaluate a function $f$ on some user data $X$. To achieve comprehensive privacy, it is necessary to protect the input $X$ directly. However, it is known that $f(X)$ may leak too much information about $X$ as well. A common approach to mitigate such risks is to make the computation differentially private. In practice, this is often accomplished by replacing $f$ by a noisy variant $f^*$.
 
 We investigate the use of multi-input functional encryption (MIFE) for achieving input and output privacy in one cryptographic mechanism. In an MIFE scheme, a setup authority can generate restricted decryption keys which enable to learn specific functions of encrypted messages, without revealing any additional information. To achieve differential privacy in this process, we introduce as a new cryptographic primitive: noisy multi-input functional encryption (NMIFE). It extends the concept of MIFE such that the decryption key may also encode a noisy function where the noise value is secret.
@@ -146,20 +139,16 @@ While the change from MIFE to NMIFE is rather straightforward, the challenge is 
 Moreover, we make use of the fact that the proposed security definition is less restrictive and present a new concrete NMIFE scheme for evaluating the inner product. It is dubbed DiffPIPE (short for DIFFerentially Private Inner Product Evaluation).  DiffPIPE is not the result from the transformation and outperforms all from existing full-hiding MIFE schemes constructed NMIFE schemes.  In experiments, we demonstrate its applicability for realizing privacy preserving counting queries on data sets.
 ]]></content:encoded>
 <pubDate>Mon, 04 May 2026 11:52:57 +0000</pubDate>
-<pubDate>Mon, 04 May 2026 11:52:57 +0000</pubDate>
 </item>
 <item>
 <title>On the (Privacy) Harms of the European Digital Identity Framework</title>
 <link>https://eprint.iacr.org/2026/867</link>
 <guid>https://eprint.iacr.org/2026/867</guid>
 <content:encoded><![CDATA[
-
 As digital identity systems gain traction around the world, many see privacy-enhancing technologies (PETs) as the key to ensuring safe deployment. We critically examine whether this is the case using the European Digital Identity Framework (EUDIF) as an example. We leverage techniques from cryptographic modeling to formally capture the necessary leakage of the functionality of the EUDIF and its proposed applications. Then, we develop a harm analysis methodology that illustrates, using harm trees, how this leakage — and other constraints stemming from design decisions or the context of deployment — lead to harms. Moreover, our harm modeling enables us to distinguish between which pathways to harm are inherent to the core functionality, and which pathways can be prevented with PETs. Our analysis shows that, while PETs can reduce information flows, they fall short in mitigating the harms that deploying digital identity can bring to individuals and society.
 ]]></content:encoded>
 <pubDate>Mon, 04 May 2026 10:16:36 +0000</pubDate>
-<pubDate>Mon, 04 May 2026 10:16:36 +0000</pubDate>
 </item>
-
 <item>
 <title>Game Theoretical Analysis of DAG-Ledgers Backbone</title>
 <link>https://eprint.iacr.org/2023/407</link>
@@ -14469,172 +14458,6 @@ We propose Dumbo-MPC a concretely efficient  AMPC-as-a-service design with all p
 We also implement and extensively evaluate Dumbo-MPC (particularly its offline phase) in varying network settings with up to 31 AWS servers. To our knowledge, we provide the first implementation of AMPC with all-phase G.O.D. A recent asynchronous triple generation protocol from Groth and Shoup (GS23) is also implemented and experimentally compared. When $n = 31$, Dumbo-MPC generates 94 triplessec (almost twice of GS23) in the pessimistic case and 349 triples/sec (6X of GS23) in the good case, such that 31 parties require only 2-8 min to prepare a private Vickrey auction of 100 bidders or 10-36 min for a mixing network of $2^{10}$ inputs.
 ]]></content:encoded>
 <pubDate>Fri, 18 Oct 2024 12:14:10 +0000</pubDate>
-</item>
-<item>
-<title>From One-Time to Two-Round Reusable Multi-Signatures without Nested Forking</title>
-<link>https://eprint.iacr.org/2024/1704</link>
-<guid>https://eprint.iacr.org/2024/1704</guid>
-<content:encoded><![CDATA[
-<div> 关键词: 多重签名方案、两轮方案、DLOG问题、安全性证明、应用
-
-总结:
-本文关注了基于DLOG难题安全性的两轮多重签名方案，特别是那些具有键聚合功能并在明文公钥模型中运行的方案。针对现有方案的安全性证明提供的具体保证不足的问题，文章提出了两种放松的安全性概念。首先，定义了一次性不可伪造性，扩展了单签署者情况下的类似概念，允许攻击者获取一条特定消息和一组选定签署者的签名。文章构造了一个基于环同态一维函数的非交互式一次性方案，并提供了基于DLOG和RSA假设的有效实例。其次，提出了单集合不可伪造性，限制攻击者只能使用一组选定的签署者来获取多项签名。通过将任何非交互式一次性方案转换为两轮单集合方案的新颖无分支构造方法，该方法将经典的Naor-Yung树形方法扩展到多签署者场景。文章中的多重签名方案在保持安全性的同时，优化了验证密钥和签名的长度，使其独立于签署者数量。 <div>
-Multi-signature schemes are gaining significant interest due to their blockchain applications. Of particular interest are two-round schemes in the plain public-key model that offer key aggregation, and whose security is based on the hardness of the DLOG problem. Unfortunately, despite substantial recent progress, the security proofs of the proposed schemes provide rather insufficient concrete guarantees (especially for 256-bit groups). This frustrating situation has so far been approached either by relying on the security of seemingly stronger assumptions or by considering restricted classes of attackers (e.g., algebraic attackers, which are assumed to provide an algebraic justification of each group element that they produce).
-
-We present a complementing approach by constructing multi-signature schemes that satisfy two relaxed notions of security, whose applicability nevertheless ranges from serving as drop-in replacements to enabling expressive smart contract validation procedures. Our first notion, one-time unforgeability, extends the analogous single-signer notion by considering attackers that obtain a single signature for some message and set of signers of their choice. We construct a non-interactive one-time scheme based on any ring-homomorphic one-way function, admitting efficient instantiations based on the DLOG and RSA assumptions. Aggregated verification keys and signatures consist of two group elements and a single group element, respectively, and our security proof consists of a single application of the forking lemma (thus avoiding the substantial security loss exhibited by the proposed two-round schemes). Additionally, we demonstrate that our scheme naturally extends to a $t$-time scheme, where aggregated verification keys consist of $t+1$ group elements, while aggregated signatures still consist of a single group element.
-
-Our second notion, single-set unforgeability, considers attackers that obtain any polynomial number of signatures but are restricted to a single set of signers of their choice. We transform any non-interactive one-time scheme into a two-round single-set scheme via a novel forking-free construction that extends the seminal Naor-Yung tree-based approach to the multi-signer setting. Aggregated verification keys are essentially identical to those of the underlying one-time scheme, and the length of aggregated signatures is determined by that of the underlying scheme while scaling linearly with the length of messages (noting that long messages can always be hashed using a collision-resistant function). Instantiated with our one-time scheme, we obtain aggregated verification keys and signatures whose lengths are completely independent of the number of signers.
-]]></content:encoded>
-<pubDate>Fri, 18 Oct 2024 11:55:05 +0000</pubDate>
-</item>
-<item>
-<title>Secure Computation with Parallel Calls to 2-ary Functions</title>
-<link>https://eprint.iacr.org/2024/1701</link>
-<guid>https://eprint.iacr.org/2024/1701</guid>
-<content:encoded><![CDATA[
-<div> 关键词：加密算法、简化的函数、二元函数、安全计算、协议
-
-<br /><br />总结:
-
-本文研究了将任意函数的安全计算简化为仅使用二元函数进行安全计算的问题。首先，文章指出存在一个次数为2的多项式$p$，表明没有任何利用并行调用二元函数的协议可以以统计安全性（带有abort）来计算它。接着，文章给出了两种绕过这一不可能性结果的方法：一是通过弱化安全定义，证明所有次数为2的多项式可以通过并行调用二元函数实现具有统计隐私和已知输出的知识（PwKO）；二是借助计算安全性，证明对于任何函数$f$，都存在一种依赖于半诚实安全盲转移假设的协议，该协议可并行调用二元函数并实现对计算受限敌手的安全性（带有abort）。此外，文章还将此问题与减少多党派随机编码（MPRE）的编码复杂性的任务联系起来，展示在标准计算假设下，存在一种可通过常数扇出的$\mathrm{NC}^0$电路实现编码器的MPRE。最后，文章还探讨了在诚实多数设置和具有三元函数情况下的问题，并分别给出了类似的结果，其中后者在恶意多数设置中假设了一次性函数的存在。 <div>
-Reductions are the workhorses of cryptography. They allow constructions of complex cryptographic primitives from simple building blocks. A prominent example is the non-interactive reduction from securely computing a ``complex" function $f$ to securely computing a ``simple" function $g$ via randomized encodings.
-
-    Prior work equated simplicity with functions of small degree. In this work, we consider a different notion of simplicity where we require $g$ to only take inputs from a small number of parties. In other words, we want the arity of $g$ to be as small as possible. 
-
-    In more detail, we consider the problem of reducing secure computation of arbitrary functions to secure computation of functions with arity two (two is the minimal arity required to compute non-trivial functions). Specifically, we want to compute a function $f$ via a protocol that makes parallel calls to 2-ary functions. We want this protocol to be secure against malicious adversaries that could corrupt an arbitrary number of parties. We obtain the following results:
-    
-- Negative Result: We show that there exists a degree-2 polynomial $p$ such that no protocol that makes parallel calls to 2-ary functions can compute $p$ with statistical security with abort.
-            
-- Positive Results: We give two ways to bypass the above impossibility result.
-             
-  1. Weakening the Security Notion. We show that every degree-2 polynomial can be computed with statistical privacy with knowledge of outputs (PwKO) by making parallel calls to 2-ary functions. Privacy with knowledge of outputs is weaker than security with abort.
-                        
-  2. Computational Security. We prove that for every function $f$, there exists a protocol for computing $f$ that makes parallel calls to 2-ary functions and achieves security with abort against computationally-bounded adversaries. The security of this protocol relies on the existence of semi-honest secure oblivious transfer.
-              
-- Applications: We give connections between this problem and the task of reducing the encoding complexity of Multiparty Randomized Encodings (MPRE) (Applebaum, Brakerski, and Tsabary, TCC 2018). Specifically, we show that under standard computational assumptions, there exists an MPRE where the encoder can be implemented by an $\mathrm{NC}^0$ circuit with constant fan-out.
-  
-- Extensions: We explore this problem in the honest majority setting and give similar results assuming one-way functions. We also show that if the parties have access to 3-ary functions then we can construct a computationally secure protocol in the dishonest majority setting assuming one-way functions.
-]]></content:encoded>
-<pubDate>Fri, 18 Oct 2024 04:58:31 +0000</pubDate>
-</item>
-<item>
-<title>Updatable Privacy-Preserving Blueprints</title>
-<link>https://eprint.iacr.org/2023/1787</link>
-<guid>https://eprint.iacr.org/2023/1787</guid>
-<content:encoded><![CDATA[
-<div> 隐私保护蓝图方案 更新 零知识证明 同态加密 蓝图大小<br /><br />总结:<br />本文介绍了一种新的隐私保护蓝图方案（UPPB），该方案允许多个用户非交互式地更新其私人输入，同时保持更新过程的隐私性。与原始方案相比，UPPB引入了对累积输入进行验证的能力，而无需泄露用户的私人信息。本文提出了UBlu方案，专门用于比较用户累计输入和审计员提供的固定值，适用于反洗钱等场景。技术上，通过引入一种新颖的可塑性表征方法，有效控制了蓝图的大小，使其不依赖于更新次数，从而适用于实际应用。这一方案基于全同态加密和非交互式零知识证明构建。 <div>
-Privacy-preserving blueprint schemes (Kohlweiss et al., EUROCRYPT'23) offer a mechanism for safeguarding user's privacy while allowing for specific legitimate controls by a designated auditor agent. 
-
-These schemes enable users to create escrows encrypting the result of evaluating a function $y=P(t,x)$, with $P$ being publicly known, $t$ a secret used during the auditor's key generation, and $x$ the user's private input.  Crucially, escrows only disclose the blueprinting result $y=P(t,x)$ to the designated auditor, even in cases where the auditor is fully compromised. The original definition and construction only support the evaluation of functions $P$ on an input $x$ provided by a single user. 
-    
-We address this limitation by introducing updatable privacy-preserving blueprint schemes (UPPB), which enhance the original notion with the ability for multiple users to non-interactively update the private user input $x$ while blueprinting. Moreover, UPPBs contain a proof that $y$ is the result of a sequence of valid updates, while revealing nothing else about the private inputs $\{x_i\}$ of updates. As in the case of privacy-preserving blueprints, we first observe that UPPBs can be realized via a generic construction for arbitrary predicates $P$ based on FHE and NIZKs. Our main result is UBlu, an efficient instantiation for a specific predicate comparing the values $x$ and $t$, where $x$ is the cumulative sum of users' private inputs and $t$ is a fixed private value provided by the auditor in the setup phase. This rather specific setting already finds interesting applications such as privacy-preserving anti-money laundering and location tracking, and can be extended to support more generic predicates.
-    
-From the technical perspective, we devise a novel technique to keep the escrow size concise, independent of the number of updates, and reasonable for practical applications. We achieve this via a novel characterization of malleability for the algebraic NIZK by Couteau and Hartmann (CRYPTO’20) that allows for an additive update function.
-]]></content:encoded>
-<pubDate>Sun, 19 Nov 2023 17:36:23 +0000</pubDate>
-</item>
-<item>
-<title>Computational Attestations of Polynomial Integrity Towards Verifiable Machine Learning</title>
-<link>https://eprint.iacr.org/2024/639</link>
-<guid>https://eprint.iacr.org/2024/639</guid>
-<content:encoded><![CDATA[
-<div> 零知识证明 差分隐私 线性回归 MLaaS 计算效率<br /><br />总结: 本文展示了使用零知识证明技术验证差分隐私线性回归训练的过程。实验在单机上对50,000样本数据集进行训练，耗时不到6分钟，并且验证整个计算过程仅需0.17秒。据我们所知，这是目前文献中已知的针对如此大规模数据集的最快可证明差分隐私实例。这一结果被认为是构建端到端隐私机器学习即服务（MLaaS）的关键步骤。 <div>
-Machine-learning systems continue to advance at a rapid pace, demonstrating remarkable utility in various fields and disciplines. As these systems continue to grow in size and complexity, a nascent industry is emerging which aims to bring machine-learning-as-a-service (MLaaS) to market. Outsourcing the operation and training of these systems to powerful hardware carries numerous advantages, but challenges arise when privacy and the correctness of work carried out must be ensured. Recent advancements in the field of zero-knowledge cryptography have led to a means of generating arguments of integrity for any computation, which in turn can be efficiently verified by any party, in any place, at any time. In this work we prove the correct training of a differentially-private (DP) linear regression over a dataset of 50,000 samples on a single machine in less than 6 minutes, verifying the entire computation in 0.17 seconds. To our knowledge, this result represents the fastest known instance in the literature of provable-DP over a dataset of this size. We believe this result constitutes a key stepping-stone towards end-to-end private MLaaS.
-]]></content:encoded>
-<pubDate>Fri, 26 Apr 2024 02:17:26 +0000</pubDate>
-</item>
-<item>
-<title>Non-Interactive Threshold BBS+ From Pseudorandom Correlations</title>
-<link>https://eprint.iacr.org/2023/1076</link>
-<guid>https://eprint.iacr.org/2023/1076</guid>
-<content:encoded><![CDATA[
-<div> 阈值签名 非交互式签名 子线性通信 多方计算 普遍组合模型<br /><br />总结: 本文提出了一种新的$t$-out-of-$n$门限BBS+协议，以解决单点故障问题。该协议支持任意安全阈值$t \leq n$，并在预处理设置中实现了非交互式签名和子线性通信复杂度。文中设计了专门的预签名，可以直接从伪随机相关性计算得到，使得服务器可以在没有跨服务器通信的情况下创建签名份额。该协议在主动安全性的普遍组合模型中有效。实验结果表明，对于$t \leq 30$的情况，在线协议执行时间少于15毫秒，且在线签名过程中$t$的影响小于6%，大部分开销发生在离线阶段。此外，本文实现的PCG扩展是首个考虑多于3方之间相关性的实现，显示了即使在10个服务器组成的委员会中，每个服务器也可以在大约600毫秒内扩展多达$2^{16}$个预签名。 <div>
-The BBS+ signature scheme is one of the most prominent solutions for realizing anonymous credentials. Its prominence is due to properties like selective disclosure and efficient protocols for creating and showing possession of credentials. Traditionally, a single credential issuer produces BBS+ signatures, which poses significant risks due to a single point of failure.
-
-In this work, we address this threat via a novel $t$-out-of-$n$ threshold BBS+ protocol. Our protocol supports an arbitrary security threshold $t \leq n$ and works in the so-called preprocessing setting. In this setting, we achieve non-interactive signing in the online phase and sublinear communication complexity in the number of signatures in the offline phase, which, as we show in this work, are important features from a practical point of view. As it stands today, none of the widely studied signature schemes, such as threshold ECDSA and threshold Schnorr, achieve both properties simultaneously. To this end, we design specifically tailored presignatures that can be directly computed from pseudorandom correlations and allow servers to create signature shares without additional cross-server communication. Both our offline and online protocols are actively secure in the Universal Composability model. Finally, we evaluate the concrete efficiency of our protocol, including an implementation of the online phase and the expansion algorithm of the pseudorandom correlation generator (PCG) used during the offline phase. The online protocol without network latency takes less than $15 ms$ for $t \leq 30$ and credentials sizes up to $10$. Further, our results indicate that the influence of $t$ on the online signing is insignificant, $< 6 \%$ for $t \leq 30$, and the overhead of the thresholdization occurs almost exclusively in the offline phase. Our implementation of the PCG expansion is the first considering correlations between more than $3$ parties and shows that even for a committee size of $10$ servers, each server can expand a correlation of up to $2^{16}$ presignatures in about $600$ ms per presignature.
-]]></content:encoded>
-<pubDate>Tue, 11 Jul 2023 05:09:29 +0000</pubDate>
-</item>
-<item>
-<title>Overlapped Bootstrapping for FHEW/TFHE and Its Application to SHA3</title>
-<link>https://eprint.iacr.org/2024/1667</link>
-<guid>https://eprint.iacr.org/2024/1667</guid>
-<content:encoded><![CDATA[
-<div> bootstrapping, FHEW/TFHE, 加密数据, Keccak, 性能提升<br /><br />总结: 本文提出了一种针对FHEW和TFHE方案的新颖高效引导方法，该方法利用加密数据的可变缩放因子，尤其适用于连续异或门电路。实验结果显示，这种方法将基于FHEW/TFHE的Keccak函数的运行时间减少了42%。新方法无需额外密钥或参数集，由计算方直接采用，无需额外信息。文章指出，尽管FHEW和TFHE因其轻量级特性和对任意逻辑门的支持而适合用于智能合约，但它们需要在每次执行二进制门后进行引导操作，这成为性能瓶颈。本文提出的引导方法旨在解决这一问题。 <div>
-Homomorphic Encryption (HE) enables operations on encrypted data without requiring decryption, thus allowing for secure handling of confidential data within smart contracts.  Among the known HE schemes, FHEW and TFHE are particularly notable for use in smart contracts due to their lightweight nature and support for arbitrary logical gates. In contrast, other HE schemes often require several gigabytes of keys and are limited to supporting only addition and multiplication.  As a result, there has been significant work implementing smart contract functionalities over HE, broadening the potential applications of blockchain technology.  However, a significant drawback of the FHEW/TFHE schemes is the need for bootstrapping after the execution of each binary gate. While bootstrapping reduces noise in the ciphertext, it also becomes a performance bottleneck due to its computational complexity.
-
-In this work, we propose an efficient new bootstrapping method for FHEW/TFHE that takes advantage of the flexible scaling factors of encrypted data.  The proposed method is particularly beneficial in circuits with consecutive XOR gates.  Moreover, we implement Keccak using FHEW/TFHE, as it is one of the most important functions in smart contracts.  Our experimental results demonstrate that the proposed method reduces the runtime of Keccak over HE by 42%. Additionally, the proposed method does not require additional keys or parameter sets from the key-generating party and can be adopted by the computing party without need for any extra information.
-]]></content:encoded>
-<pubDate>Tue, 15 Oct 2024 03:43:52 +0000</pubDate>
-</item>
-<item>
-<title>HADES: Range-Filtered Private Aggregation on Public Data</title>
-<link>https://eprint.iacr.org/2024/1699</link>
-<guid>https://eprint.iacr.org/2024/1699</guid>
-<content:encoded><![CDATA[
-<div> 隐私保护 聚合查询 全同态加密 范围谓词 布尔组合<br /><br />总结: 本文介绍了一种名为HADES的全同态加密（FHE）基础的私有聚合系统，旨在处理公共数据中的隐私保护问题。现有解决方案要么需要额外设置，要么效率低下，尤其是不支持范围谓词和布尔组合。HADES系统支持点、范围谓词及布尔组合，并通过利用公有数据记录的明文形式，高效生成谓词指示器。该系统引入了元素级映射操作和优化的缩减算法，实现了在有限噪声预算内的低延迟。实验结果显示，HADES在端到端TPC-H查询中性能提升了204至6574倍，将100万条记录的聚合时间从15小时缩短到了38秒。这一改进使得HADES在实际应用中具有更高的可扩展性和效率。 <div>
-In aggregation queries, predicate parameters often reveal user intent. Protecting these parameters is critical for user privacy, regardless of whether the database is public or private. While most existing works focus on private data settings, we address a public data setting where the server has access to the database. Current solutions for this setting either require additional setups (e.g., noncolluding servers, hardware enclaves) or are inefficient for practical workloads. Furthermore, they often do not support range predicates or boolean combinations commonly seen in real-world use cases. 
-
-To address these limitations, we built HADES, a fully homomorphic encryption (FHE) based private aggregation system for public data that supports point, range predicates, and boolean combinations. Our one-round HADES protocol efficiently generates predicate indicators by leveraging the plaintext form of public data records. It introduces a novel elementwise-mapping operation and an optimized reduction algorithm, achieving latency efficiency within a limited noise budget. Our highly scalable, multi-threaded implementation improves performance over previous one-round FHE solutions by 204x to 6574x on end-to-end TPC-H queries, reducing aggregation time on 1M records from 15 hours to 38 seconds
-]]></content:encoded>
-<pubDate>Fri, 18 Oct 2024 00:07:06 +0000</pubDate>
-</item>
-<item>
-<title>Homomorphic Encryption with Authority</title>
-<link>https://eprint.iacr.org/2024/1689</link>
-<guid>https://eprint.iacr.org/2024/1689</guid>
-<content:encoded><![CDATA[
-<div> 关键词：同态加密，隐私保护，公共安全，权威机构，法律授权<br /><br />总结:<br />本文介绍了一种名为HEwA（具有权威的同态加密）的新框架，旨在平衡数据隐私与公共安全。HEwA在正常阶段保护客户数据隐私，在调查阶段允许政府等合法授权机构恢复可疑客户的加密数据。文章提出了HEwA的安全模型，并以CKKS同态加密方案为基础设计了一个高效系统，适用于AI领域如安全基因分析。该方法解决了云计算服务中隐私与公共安全之间的紧张关系，为实际应用中的同态加密负责任使用铺平了道路。 <div>
-Fully homomorphic encryption enables computations over encrypted data, which allows privacy-preserving services to be held between a server and a client. However, real-world applications demand practical considerations, especially concerning public safety and legal investigations. Existing FHE schemes focus solely on privacy, neglecting the societal risks posed by criminal activities utilizing privacy-preserving services. This paper introduces Homomorphic Encryption with Authority (HEwA), a novel framework that balances data privacy with public safety by incorporating an "authority" party. The proposed HEwA system operates in two phases: a normal phase, where client data privacy is protected, and an investigative phase, where the authority referring to a legally authorized entity such as government agencies exerts the right to recover suspicious client’s data. We formalize the security model for HEwA, ensuring that client privacy is protected during the normal phase while enabling authorities to recover encrypted data in the investigative phase. As a concrete example, we design an efficient HEwA system solely based on the CKKS homomorphic encryption scheme, which supports approximate computations over real-number data, making it highly suitable for fruitful applications in AI such as secure genomic analysis. We further provide rigorous security proofs. This new approach addresses the tension between privacy and public safety in cloud services, paving the way for responsible use of homomorphic encryption in practice.
-]]></content:encoded>
-<pubDate>Thu, 17 Oct 2024 05:59:21 +0000</pubDate>
-</item>
-<item>
-<title>Sunfish: Reading Ledgers with Sparse Nodes</title>
-<link>https://eprint.iacr.org/2024/1680</link>
-<guid>https://eprint.iacr.org/2024/1680</guid>
-<content:encoded><![CDATA[
-<div> sparse node, light node, full node, throughput, Sunfish<br /><br />总结:<br />文章提出了区块链中的一种新型节点——稀疏节点（sparse node），以解决高吞吐量区块链中全节点和轻节点存在的问题。稀疏节点只跟踪区块链的一部分状态，验证与其子状态相关的交易集是否完整并重新执行这些交易来评估其有效性。这种节点即使在恶意多数情况下也保持重要的安全属性，并且资源需求与子状态中的交易数量和子状态大小成比例。文中还介绍了Sunfish，一种稀疏节点协议的实现，分析表明Sunfish相比全节点可将带宽消耗降低几个数量级。这为提高区块链应用效率提供了一种新方法。 <div>
-The increased throughput offered by modern blockchains, such as Sui, Aptos, and Solana, enables processing thousands of transactions per second, but it also introduces higher costs for decentralized application (dApp) developers who need to track and verify changes in the state of their application. This is true because dApp developers run full nodes, which download and re-execute every transaction to track the global state of the chain. However, this becomes prohibitively expensive for high-throughput chains due to high bandwidth, computational, and storage requirements. A common alternative is to use light nodes. However, light nodes only verify the inclusion of a set of transactions and have no guarantees that the set is complete, i.e., that includes all relevant transactions. Under a dishonest majority, light nodes can also be tricked into accepting invalid transactions.
-
-To bridge the gap between full and light nodes, we propose and formalize a new type of blockchain node: the sparse node. A sparse node tracks only a subset of the blockchain’s state: it verifies that the received set of transactions touching the substate is complete, and re-executes those transactions to assess their validity. A sparse node retains important security properties even under adversarial majorities, and requires an amount of resources proportional to the number of transactions in the substate and to the size of the substate itself. 
-
-We further present Sunfish, an instantiation of a sparse node protocol. Our analysis and evaluation show that Sunfish reduces the bandwidth consumption of real blockchain applications by several orders of magnitude when compared to a full node.
-]]></content:encoded>
-<pubDate>Wed, 16 Oct 2024 13:36:17 +0000</pubDate>
-</item>
-<item>
-<title>Testing Robustness of Homomorphically Encrypted Split Model LLMs</title>
-<link>https://eprint.iacr.org/2024/1675</link>
-<guid>https://eprint.iacr.org/2024/1675</guid>
-<content:encoded><![CDATA[
-<div> 关键词：大语言模型, 全同态加密, 模型保护, 攻击向量, 本地计算<br /><br />总结: 本文探讨了使用全同态加密（FHE）技术在大语言模型（LLMs）中保护神经网络模型知识产权的方法。由于LLMs规模庞大及FHE计算开销高，实际应用中采用了一种分割模型的方法，即将加密数据发送到服务器进行部分计算，其余计算则在用户端完成。然而，研究发现这种做法存在缺陷，即用户可以通过新的攻击手段轻易提取服务器上的模型知识产权，从而削弱了加密计算所宣称的保护效果。文章分析了这一攻击的可行性，并讨论了可能的缓解措施。 <div>
-Large language models (LLMs) have recently transformed many industries, enhancing content generation, customer service agents, data analysis and even software generation. These applications are often hosted on remote servers to protect the neural-network model IP; however, this raises concerns about the privacy of input queries. Fully Homomorphic Encryption (FHE), an encryption technique that allows for computations on private data, has been proposed as a solution to the challenge. Nevertheless, due to the increased size of LLMs and the computational overheads of FHE, today's practical FHE LLMs are implemented using a split model approach. Here, a user sends their FHE encrypted data to the server to run an encrypted attention head layer; then the server returns the result of the layer for the user to run the rest of the model locally. By employing this method, the server maintains part of their model IP, and the user still gets to perform private LLM inference. In this work, we evaluate the neural-network model IP protections of single layer split model LLMs, and demonstrate a novel attack vector that makes it easy for a user to extract the neural network model IP from the server, bypassing the claimed protections for encrypted computation. In our analysis, we demonstrate the feasibility of this attack, and discuss potential mitigations.
-]]></content:encoded>
-<pubDate>Tue, 15 Oct 2024 16:50:31 +0000</pubDate>
-</item>
-<item>
-<title>Provable Security Analysis of Butterfly Key Mechanism Protocol in IEEE 1609.2.1 Standard</title>
-<link>https://eprint.iacr.org/2024/1674</link>
-<guid>https://eprint.iacr.org/2024/1674</guid>
-<content:encoded><![CDATA[
-<div> 关键词：Butterfly Key Mechanism, V2X通信, 安全性分析, 隐私保护, 通信真实性<br /><br />总结: 本文对IEEE 1609.2.1标准中的Butterfly Key Mechanism（BKM）协议进行了首次安全性分析。BKM协议旨在高效地为车辆到一切（V2X）通信请求多个证书。我们定义了BKM的主要安全目标，包括车辆隐私和通信真实性。研究证明，通过少量修改，BKM协议能够满足这些安全目标。此外，还提出了一种显著提高协议效率的方法，同时不牺牲安全性。 <div>
-The paper provides the first provable security analysis of the Butterfly Key Mechanism (BKM) protocol from IEEE 1609.2.1 standard. The BKM protocol specifies a novel approach for efficiently requesting multiple certificates for use in vehicle-to-everything (V2X)  communication. We define the main security goals of BKM, such as vehicle privacy and communication authenticity. We prove that the BKM protocol, with small modifications, meets those security goals. We also propose a way to significantly improve the protocol's efficiency without sacrificing security.
-]]></content:encoded>
-<pubDate>Tue, 15 Oct 2024 16:47:48 +0000</pubDate>
-</item>
-<item>
-<title>Proteus: A Fully Homomorphic Authenticated Transciphering Protocol</title>
-<link>https://eprint.iacr.org/2024/1673</link>
-<guid>https://eprint.iacr.org/2024/1673</guid>
-<content:encoded><![CDATA[
-<div> 关键词：全同态加密, 超_cipher转换, 认证, 轻量级加密, 应用
-
-<br /><br />总结:<br />
-文章介绍了Proteus，一种新的认证超_cipher转换方法，用于全同态加密（FHE），以实现防篡改的数据处理。Proteus采用NIST推荐的轻量级加密标准ASCON进行同态哈希和认证转换，与TFHE加密方案结合使用。该方法解决了现有FHE超_cipher转换方案中存在的未认证和可篡改问题，通过防止用户下载未认证或恶意数据来提供安全保护。文中还展示了Proteus在实际隐私保护应用中的效果，包括URL钓鱼检测、私人内容仇恨言论审查以及生物特征认证等。 <div>
-Fully Homomorphic Encryption (FHE) is a powerful technology that allows a cloud server to perform computations directly on ciphertexts. To overcome the overhead of sending and storing large FHE ciphertexts, the concept of FHE transciphering was introduced, allowing symmetric key encrypted ciphertexts to be transformed into FHE ciphertexts by deploying symmetric key decryption homomorphically. However, existing FHE transciphering schemes remain unauthenticated and malleable, allowing attackers to manipulate data and remain undetected. This work introduces Proteus, a new methodology for authenticated transciphering, which enables oblivious access control, preventing users from downloading unauthenticated or malicious data. Our protocol implementation adopts ASCON, NIST's new standard for lightweight cryptography, to enable homomorphic hashing and authenticated transciphering. Our ASCON transcipher is paired with the TFHE encryption scheme, which is well suited to perform encrypted rotation and bitwise operations. We evaluate our approach with a variety of real-life privacy-preserving applications, including URL phishing detection, private content moderation of hate speech, and biometric authentication.
-]]></content:encoded>
-<pubDate>Tue, 15 Oct 2024 16:15:36 +0000</pubDate>
 </item>
 </channel>
 </rss>
