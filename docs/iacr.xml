@@ -5,11 +5,24 @@
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
 <item>
+<title>Improved TensorPIR: Single-Server PIR with Lower Communication Cost</title>
+<link>https://eprint.iacr.org/2026/912</link>
+<guid>https://eprint.iacr.org/2026/912</guid>
+<content:encoded><![CDATA[
+
+Private Information Retrieval (PIR) is of growing importance in privacy-preserving data access, as it enables users to retrieve information from databases without revealing their query content, thereby aligning with modern data protection and regulatory standards. State-of-the-art schemes, such as HintlessPIR and TensorPIR proposed by Li et al. at CRYPTO 2024, leverage lattice-based cryptography for efficient and privacy-preserving data retrieval. HintlessPIR achieves a communication complexity of $O(N^{1/2})$, which remains suboptimal for large databases. To further reduce communication overhead, the same work introduces TensorPIR, lowering the asymptotic complexity to $O(N^{1/3})$. However, this improvement requires larger parameters and more CRT moduli, leading to a practical communication cost that is not significantly smaller than that of HintlessPIR.
+
+In this work, we propose a new framework that rethinks the encryption strategy for the index, reducing both communication and computation costs through fewer CRT moduli. In experiments on 16 GB, 32 GB, 64 GB, and 128 GB databases, our total communication cost drops to as low as 45.5% of TensorPIR's. Theoretically, as $N$ grows, our query and answer sizes are reduced to 36.9% and 22.2% of TensorPIR's, respectively. Compared with HintlessPIR, our scheme achieves lower theoretical communication complexity, leading to substantially smaller practical communication for large $N$. Moreover, our total online time is reduced to 28.9% to 56.1% of HintlessPIR's.
+]]></content:encoded>
+<pubDate>Sat, 09 May 2026 04:36:31 +0000</pubDate>
+<pubDate>Sat, 09 May 2026 04:36:31 +0000</pubDate>
+</item>
+
+<item>
 <title>VCVio: Verified Cryptography in Lean via Oracle Effects and Handlers</title>
 <link>https://eprint.iacr.org/2026/899</link>
 <guid>https://eprint.iacr.org/2026/899</guid>
 <content:encoded><![CDATA[
-
 Mechanized cryptographic proofs face a long-standing trade-off between assurance and expressiveness. Existing foundational frameworks, which reduce every proof step to the kernel of a general-purpose proof assistant, offer a small, auditable trusted base, but struggle to model the oracle manipulations and rewinding arguments pervasive in modern cryptography. They also tend to lack the tactic infrastructure of specialized, non-foundational tools like EasyCrypt.
 
 We present VCVio, a foundational framework in Lean 4 that closes both gaps with established ideas from programming-language theory: algebraic effects and handlers on the oracle side, and a modular relational program logic on the tactic side. Concretely, a computation with oracle access is the free monad over the polynomial functor determined by the oracle specification, exposing its interaction history as an explicit syntax tree. Caching, logging, reprogramming, and seed pre-sampling become handler combinators; rewinding reduces to deterministic transcript replay without any internal adversary state.
@@ -19,17 +32,14 @@ On top of the oracle core, VCVio provides two reusable layers. We extend the rec
 We exercise this stack on three case studies: a random-oracle commitment scheme; the Bellare--Neven forking lemma, mechanized without the rewindability axioms used in the recent EasyCrypt formalization by Firsov and Janků; and the Schnorr signature scheme establishing EUF-CMA security. A significant share of our development used LLM coding agents and external automated proof-search systems; we report on the workflows, successes, and failure modes as a data point in LLM-assisted theorem proving.
 ]]></content:encoded>
 <pubDate>Thu, 07 May 2026 14:12:01 +0000</pubDate>
-<pubDate>Thu, 07 May 2026 14:12:01 +0000</pubDate>
 </item>
 <item>
 <title>Sponsored Fair Exchange (Extended Abstract)</title>
 <link>https://eprint.iacr.org/2026/904</link>
 <guid>https://eprint.iacr.org/2026/904</guid>
 <content:encoded><![CDATA[
-
 We propose a costless platform for fair exchange based on smart contracts to favor economic inclusion. Our smart contract is minimal, as most of communication is done offchain. The smart contract costs are covered by incentivized sponsors. Our protocol is a knowledge-coin exchange: it allows to exchange a digital item, characterized by an automatically verifiable description, against a payment in cryptocurrency. The exchange is fair in the sense that either both parties receive what they expect (the exchange completes) or both parties lose nothing (the exchange is canceled). We ensure a costless transaction in cancelation cases, and a transaction with pre-determined fee if it completes. We also ensure privacy of the transaction. Our protocol offers an improvement compared to OptiSwap: we can work with any description function. The complexity is never higher and sometimes significantly smaller. Namely, the worst case complexity is logarithmic instead of being linear. Furthermore, we introduce sponsoring as an enabler for economic inclusion.
 ]]></content:encoded>
-<pubDate>Fri, 08 May 2026 08:02:44 +0000</pubDate>
 <pubDate>Fri, 08 May 2026 08:02:44 +0000</pubDate>
 </item>
 <item>
@@ -37,15 +47,12 @@ We propose a costless platform for fair exchange based on smart contracts to fav
 <link>https://eprint.iacr.org/2026/894</link>
 <guid>https://eprint.iacr.org/2026/894</guid>
 <content:encoded><![CDATA[
-
 Rotating leader Byzantine fault-tolerant (BFT) protocols, also known as protocols in the leader-speaks-once (LSO) model, have become a topic of interest with the rise of blockchains. Many recent efforts have been made to lower the latency and simplify the design. However, existing works often sacrifice expected latency (latency when failures might occur) to enjoy higher good-case latency. 
 
 In this work, we present a generic approach to building rotating leader BFT protocols that are both simple and fast. We present two variants: HumBird-1, a synchronous BFT under the $f2$ assumption; HumBird-2, a partially synchronous BFT under the $f3$ assumption, where $n$ is the number of replicas in the system and $f$ is the number of Byzantine failures. We show that by relaxing LSO to the leader-speaks-twice (LST) model and introducing a special uncle block field, we can significantly reduce both good-case latency and expected latency. Our experimental results show that compared to the state-of-the-art rotating leader BFT, HumBird-1 and HumBird-2 achieve up to 32% lower latency and 70% higher throughput, and 95% lower latency and 140% higher throughput, respectively.
 ]]></content:encoded>
 <pubDate>Thu, 07 May 2026 03:51:06 +0000</pubDate>
-<pubDate>Thu, 07 May 2026 03:51:06 +0000</pubDate>
 </item>
-
 <item>
 <title>Adaptive Distributed Key Generation for Discrete-Log Cryptosystems</title>
 <link>https://eprint.iacr.org/2026/892</link>
@@ -14419,52 +14426,6 @@ Homomorphically encrypted matrix operations are extensively  used in various pri
 Homomorphic Encryption (HE) technology allows for processing encrypted data, breaking through data isolation barriers and providing a promising solution for privacy-preserving computation. The integration of HE technology into Convolutional Neural Network (CNN) inference shows potential in addressing privacy issues in identity verification, medical imaging diagnosis, and various other applications. The CKKS HE algorithm stands out as a popular option for homomorphic CNN inference due to its capability to handle real number computations. However, challenges such as computational delays and resource overhead present significant obstacles to the practical implementation of homomorphic CNN inference, largely due to the complex nature of HE operations. In addition, current methods for speeding up homomorphic CNN inference primarily address individual images or large batches of input images, lacking a solution for efficiently processing a moderate number of input images with fast homomorphic inference capabilities, which is more suitable for edge computing applications. In response to these challenges, we introduce a novel leveled homomorphic CNN inference scheme aimed at reducing latency and improving throughput using the CKKS scheme. Our proposed inference strategy involves mapping multiple inputs to a set of ciphertext by exploiting the sliding window properties of convolutions to utilize CKKS's inherent Single-Instruction-Multiple-Data (SIMD) capability. To mitigate the delay associated with homomorphic CNN inference, we introduce optimization techniques, including mask-weight merging, rotation multiplexing, stride convolution segmentation, and folding rotations. The efficacy of our homomorphic inference scheme is demonstrated through evaluations carried out on the MNIST and CIFAR-10 datasets. Specifically, results from the MNIST dataset on a single CPU thread show that inference for 163 images can be completed in 10.4 seconds with an accuracy of 98.9%, which is a 6.9 times throughput improvement over state-of-the-art works. Comparative analysis with existing methodologies highlights the superior performance of our proposed inference scheme in terms of latency, throughput, communication overhead, and memory utilization.
 ]]></content:encoded>
 <pubDate>Mon, 28 Oct 2024 03:32:21 +0000</pubDate>
-</item>
-<item>
-<title>Secure and Privacy-preserving CBDC Offline Payments using a Secure Element</title>
-<link>https://eprint.iacr.org/2024/1746</link>
-<guid>https://eprint.iacr.org/2024/1746</guid>
-<content:encoded><![CDATA[
-<div> 关键词: 中央银行数字货币、离线支付、双花攻击、安全元素、移动设备
-
-总结:
-本文探讨了中央银行数字货帀如何利用离线支付解决现有数字支付方案中的金融包容性不足问题。然而，离线支付的安全设计非常复杂，特别是在网络连接缺失的情况下，双花攻击变得容易发生。为防范这类攻击，文章提出采用安全元素作为预防措施，但鉴于其计算和存储能力有限，难以保证与实体现金相当的隐私保障。因此，文中提出一种协议，将大部分支付计算任务交给用户的移动设备处理，而仅在安全元素上执行删除已使用代币及生成等效于ECDSA签名的计算。该文主张对于消费者之间的安全支付，需要使用移动设备或增强型智能卡设备。为了进一步强化协议安全性，还实现了对成功实施双花攻击的攻击者进行高效识别的功能。最后，通过理想/现实世界范式证明了协议的安全性，并对其性能进行了评估，证实其实用性。 <div>
-Offline payments present an opportunity for central bank digital currency to address the lack of digital financial inclusion plaguing existing digital payment solutions. However, the design of secure offline payments is a complex undertaking; for example, the lack of connectivity during the payments renders double spending attacks trivial. While the identification of double spenders and penal sanctions may curb attacks by individuals, they may not be sufficient against concerted efforts by states or well-funded institutions. It is hence important to also rely on preventive measures that reduce the scale of such attacks. An example of such a measure is secure elements. These however are limited in compute and storage, making the design of solutions that offer comparable privacy guarantees to those of physical cash challenging.
-We address this with a protocol that offloads most of the payment computation to the user’s mobile device and restricts the computation on the secure element to deleting spent tokens, and generating a signature with a computation equivalent to that of ECDSA. We claim that the use of mobile devices or enhanced smart card-based devices are required for secure consumer-to-consumer payments. To further harden the protocol, we enable the efficient identification of double spenders on the off-chance an attacker successfully double spends. Finally, we prove its security in the ideal/real world paradigm, and evaluate its performance to demonstrate its practicality.
-]]></content:encoded>
-<pubDate>Fri, 25 Oct 2024 11:44:06 +0000</pubDate>
-</item>
-<item>
-<title>Secure and Efficient Outsourced Matrix Multiplication with Homomorphic Encryption</title>
-<link>https://eprint.iacr.org/2024/1730</link>
-<guid>https://eprint.iacr.org/2024/1730</guid>
-<content:encoded><![CDATA[
-<div> 关键词：全同态加密（FHE）、神经网络、矩阵乘法、 SIMD、KeySwitch操作
-
-总结：<br />
-本文主要关注全同态加密（FHE）下神经网络评估的优化问题。研究重点在于改进矩阵乘法这一关键操作，通过利用FHE中的Single Instruction Multiple Data（SIMD）特性，提高数据打包效率并降低昂贵的KeySwitch操作次数，从而使多级乘法深度降至仅两层。当前最佳的两层深度下的矩阵乘法复杂度为$\mathcal{O}(d)$，而本方法将其降低到$\mathcal{O}(\log{d})$，同时保持了相同级别的数据打包效率。此外，该技术还被推广至支持任意打包大小和矩形矩阵的情况，从而显著提升了隐私保护环境下神经网络应用的矩阵乘法性能。 <div>
-Fully Homomorphic Encryption (FHE) is a promising privacy-enhancing technique that enables secure and private data processing on untrusted servers, such as privacy-preserving neural network (NN) evaluations. However, its practical application presents significant challenges. Limitations in how data is stored within homomorphic ciphertexts and restrictions on the types of operations that can be performed create computational bottlenecks. As a result, a growing body of research focuses on optimizing existing evaluation techniques for efficient execution in the homomorphic domain.
-
-One key operation in this space is matrix multiplication, which forms the foundation of most neural networks. Several studies have even proposed new FHE schemes specifically to accelerate this operation. The optimization of matrix multiplication is also the primary goal of our work. We leverage the Single Instruction Multiple Data (SIMD) capabilities of FHE to increase data packing and significantly reduce the KeySwitch operation count— an expensive low-level routine in homomorphic encryption. By minimizing KeySwitching, we surpass current state-of-the-art solutions, requiring only a minimal multiplicative depth of two.
-
-The best-known complexity for matrix multiplication at this depth is $\mathcal{O}(d)$ for matrices of size  $d\times d$. Remarkably, even the leading techniques that require a multiplicative depth of three still incur a KeySwitch complexity of $\mathcal{O}(d)$. In contrast, our method reduces this complexity to $\mathcal{O}(\log{d})$ while maintaining the same level of data packing. Our solution broadly applies to all FHE schemes supporting Single Instruction Multiple Data (SIMD) operations.
-We further generalize the technique in two directions: allowing arbitrary packing availability and extending it to rectangular matrices. This versatile approach offers significant improvements in matrix multiplication performance and enables faster evaluation of privacy-preserving neural network applications.
-]]></content:encoded>
-<pubDate>Tue, 22 Oct 2024 12:34:34 +0000</pubDate>
-</item>
-<item>
-<title>PISA: Privacy-Preserving Smart Parking</title>
-<link>https://eprint.iacr.org/2024/1725</link>
-<guid>https://eprint.iacr.org/2024/1725</guid>
-<content:encoded><![CDATA[
-<div> 关键词: 城市停车、私人停车位共享、PISA、隐私保护、安全协议
-
-<br /><br />总结:
-随着城市车辆数量急剧增加和停车场供应量相对固定，造成了严重的停车难问题。为了解决这一问题并帮助车主创收，文章提出了一个名为PISA的创新性隐私保护智能停车方案。PISA通过一种加密安全协议，实现了私人停车位在业主不在时的临时匿名共享，使得驾驶员可以在不泄露个人身份信息的情况下停车。该方案的核心贡献包括构建了一个全面的双向匿名框架，确保双方彼此无法识别，同时利用形式化验证方法证明了其安全措施的健全性和可靠性。与现有解决方案相比，PISA在保障安全性的同时也注重效率。 <div>
-In recent years, urban areas have experienced a rapid increase in vehicle numbers, while the availability of parking spaces has remained largely static, leading to a significant shortage of parking spots. This shortage creates considerable inconvenience for drivers and contributes to traffic congestion. A viable solution is the temporary use of private parking spaces by homeowners during their absence, providing a means to alleviate the parking problem and generate additional income for the owners. However, current systems for sharing parking spaces often neglect security and privacy concerns, exposing users to potential risks.
-This paper presents PISA, a novel Privacy-Preserving Smart Parking scheme designed to address these issues through a cryptographically secure protocol. PISA enables the anonymous sharing of parking spots and allows vehicle owners to park without revealing any personal identifiers. Our primary contributions include the development of a comprehensive bi-directional anonymity framework that ensures neither party can identify the other, and the use of formal verification methods to substantiate the soundness and reliability of our security measures. Unlike existing solutions, which often lack a security focus, fail to provide formal validation, or are computationally intensive, PISA is designed to be both secure and efficient.
-]]></content:encoded>
-<pubDate>Mon, 21 Oct 2024 20:36:00 +0000</pubDate>
 </item>
 </channel>
 </rss>
