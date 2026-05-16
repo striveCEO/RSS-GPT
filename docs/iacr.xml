@@ -4,6 +4,57 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+<item>
+<title>rBFT: a Revamped Two-Stage BFT from Delegated Committee</title>
+<link>https://eprint.iacr.org/2026/962</link>
+<guid>https://eprint.iacr.org/2026/962</guid>
+<content:encoded><![CDATA[
+
+Byzantine fault-tolerant (BFT) protocol from delegated committee is an approach in improving the performance and scalability of blockchains. Notable industrial examples include Delegated Proof-of-Stake (DPoS) by Tron, Polkadot, and Solana, and Proof-of-Staked-Authority (PoSA) by Binance. In these protocols, a subset of nodes is first selected to form a committee, then the committee members reach an agreement and disseminate the results to all nodes. Although these approaches allow the committee members to be rotated periodically, the security of the system is built upon a strong assumption that no committee can have more than certain fraction of faulty nodes (e.g., one-third in a partially synchronous network).
+
+In this paper, we provide a revamped two-stage design to model BFT from delegated committee without making the strong assumption. Namely, the only assumption is that in a partially synchronous network, the entire system does not have more than one-third faulty nodes. We propose rBFT, a practical BFT protocol that has a fast path where only committee members participate and a slow path where all nodes in the system are involved. We show that, not surprisingly, the fast path is extremely fast, and under reasonable assumptions such as alive-but-corrupt nodes and rational nodes, only fast path can be triggered. Meanwhile, even under conventional Byzantine failures where the slow path is triggered, our protocol is still practical enough.
+]]></content:encoded>
+<pubDate>Fri, 15 May 2026 08:55:10 +0000</pubDate>
+<pubDate>Fri, 15 May 2026 08:55:10 +0000</pubDate>
+</item>
+<item>
+<title>Enhancing Blockchain Proof of Stake with Active Weighted Signatures: The ADAPT Framework</title>
+<link>https://eprint.iacr.org/2026/958</link>
+<guid>https://eprint.iacr.org/2026/958</guid>
+<content:encoded><![CDATA[
+
+Proof of Stake (PoS) blockchain systems require weighted threshold signatures where participants’ voting powers reflect their stakes. As stakes change dynamically through deposits and withdrawals, efficient weight and threshold adjustments are essential for maintaining system security and availability without downtime. However, existing approaches face critical limitations: (1) virtualization-based schemes require $O(w)$ operations (signatures) per participant with weight w; (2) dynamic threshold / paricipants schemes do not support weighted participants; (3) schemes with both properties require trusted dealers or $O(n^2)$ re-setup, causing temporary unavailability.
+ This paper introduces Active Weighted Signature (AWS), enabling dynamic adjustments without trusted dealers or re-setup. We propose Generalized Lagrange Interpolation (GLI), encoding weights as polynomial derivatives rather than virtualized participants, and instantiate AWS through ADAPT by applying GLI to the Schnorr-based threshold signature FROST. Our implementation shows that ADAPT achieves comparable efficiency to FROST for key generation, while weight and threshold adjustments complete in 4.1-22.3% of re-setup time. For uneven weight distributions, ADAPT achieves sub-linear scaling: 49× weight difference requires only 3.29× computation versus 49× in virtualization.
+]]></content:encoded>
+<pubDate>Thu, 14 May 2026 07:35:56 +0000</pubDate>
+<pubDate>Thu, 14 May 2026 07:35:56 +0000</pubDate>
+</item>
+<item>
+<title>Formalizing Blockchain PQC Signature Transition: How to Outpace Quantum Adversaries</title>
+<link>https://eprint.iacr.org/2026/952</link>
+<guid>https://eprint.iacr.org/2026/952</guid>
+<content:encoded><![CDATA[
+
+It is getting widely recognized that quantum computers pose a fundamental threat to blockchain security. The transaction signature transition to Post-quantum cryptography (PQC) is therefore an urgent challenge. However, it remains unclear how much quantum computing power would be sufficient to compromise blockchain security and, consequently, by when the transition should be completed. To address these questions theoretically, we first formalize the signature transition process and the quantum adversary based on the well-known Bitcoin backbone protocol framework. We then establish a threshold for the chain's tolerable quantum adversary capability. Specifically, we prove that a security property migration liveness holds with overwhelming probability if and only if
+  $$
+    \Delta_{\mathrm{eff}} \;\geq\; \left\lceil \frac{4}{(1 - \epsilon)f} \right\rceil,
+  $$
+where $\Delta_{\mathrm{eff}}$ is the number of rounds the quantum adversary needs to produce a forged transaction after the broadcast of a migration transaction, $f$ is the honest mining success probability, and $\epsilon$ is the concentration quality of the underlying random variables. We further generalize the analysis to derive a relationship between the transition process and the tolerable quantum adversary capability, providing a theoretical basis for designing secure signature transition plans.
+]]></content:encoded>
+<pubDate>Wed, 13 May 2026 18:21:25 +0000</pubDate>
+<pubDate>Wed, 13 May 2026 18:21:25 +0000</pubDate>
+</item>
+<item>
+<title>Efficient SIMD Implementation of the BLS Signature Scheme Using Intel AVX-512</title>
+<link>https://eprint.iacr.org/2026/947</link>
+<guid>https://eprint.iacr.org/2026/947</guid>
+<content:encoded><![CDATA[
+
+The BLS digital signature scheme, in particular its instantiation with the BLS12-381 curve, has become a cornerstone of modern blockchain protocols such as Ethereum Proof-of-Stake, due to its unique and attractive characteristics (e.g., support for non-interactive signature aggregation). Recently, Cheng et al. (CHES 2025) demonstrated that the enormous Single-Instruction-Multiple-Data (SIMD) computing power of the Intel AVX-512 extensions, when combined with carefully-designed vectorization strategies, can be effectively leveraged to speed up the computation of the optimal ate pairing on BLS12-381, a major component of BLS. This naturally raises the question of whether such SIMD-parallel processing can be exploited more extensively to benefit the entire BLS signature scheme. The present paper answers this question positively by presenting a highly SIMD-optimized BLS implementation using Intel AVX-512, especially the AVX-512IFMA instructions. In order to harness AVX-512 more efficiently for the performance-critical operations of BLS, we explored a wide range of optimization options, including various formulas and vectorization granularities for elliptic curve arithmetic operations, scalar multiplication, and hash-to-curve, as well as the fine-tuning and flexible use of different implementations of the finite-field arithmetic. Benchmarking results collected on an Intel Core i3-1005G1 ("Ice Lake") CPU show that our vectorized BLS software using AVX-512 is at least 1.57 times faster than an x64 assembly implementation of the widely-used blst library.
+]]></content:encoded>
+<pubDate>Wed, 13 May 2026 13:19:19 +0000</pubDate>
+<pubDate>Wed, 13 May 2026 13:19:19 +0000</pubDate>
+</item>
 
 <item>
 <title>Pseudonymization and reporters’ protection by design in the EU whistleblower directive</title>
