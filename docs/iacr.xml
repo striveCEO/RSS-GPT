@@ -4,12 +4,12 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+
 <item>
 <title>Nebula: Efficient read-write memory and switchboard circuits for folding schemes</title>
 <link>https://eprint.iacr.org/2024/1605</link>
 <guid>https://eprint.iacr.org/2024/1605</guid>
 <content:encoded><![CDATA[
-
 A zero-knowledge virtual machine (zkVM) is a
 versatile, developer-friendly primitive that proves the correct
 execution of programs on a fixed machine architecture. A
@@ -46,18 +46,15 @@ faster proof generation for the standard ERC-20 token transfer
 transaction when compared to our baseli
 ]]></content:encoded>
 <pubDate>Wed, 09 Oct 2024 00:36:09 +0000</pubDate>
-<pubDate>Wed, 09 Oct 2024 00:36:09 +0000</pubDate>
 </item>
 <item>
 <title>Security Analysis on a Blockchain-based Public-Key Authenticated Searchable Encryption Scheme</title>
 <link>https://eprint.iacr.org/2026/970</link>
 <guid>https://eprint.iacr.org/2026/970</guid>
 <content:encoded><![CDATA[
-
 Du et al. (Security and Communication Networks, 2022) proposed a public-key authenticated searchable encryption scheme that employs Bloom filters and blockchain. In their scheme, Bloom filters are used to search encrypted keywords, while blockchain is used to ensure the integrity of search results that guarantees the search result is correct. 
 In this paper, we demonstrate that Du et al.'s scheme leaks keyword information from ciphertexts. Our analysis focuses on the fact that the Bloom filter is uniquely determined by the keyword to be encrypted and is directly embedded in each ciphertext. We show that the proposed attack succeeds with the probability that no false positives occur in the Bloom filter, and we evaluate the false-positive probability to confirm that the attack achieves a sufficiently high success rate. Furthermore, we examine Du et al.'s security model and their assumed usage scenarios, and we discuss the validity of our attack under those conditions. We also consider a simple modification intended to prevent our attack and demonstrate that our attack, with a slight adaptation, remains effective against the modified scheme. In addition, we show that even when the search results differ, previously generated ciphertexts can still pass verification, indicating that the integrity verification mechanism based on blockchain is insufficient.
 ]]></content:encoded>
-<pubDate>Sat, 16 May 2026 02:40:06 +0000</pubDate>
 <pubDate>Sat, 16 May 2026 02:40:06 +0000</pubDate>
 </item>
 <item>
@@ -65,15 +62,12 @@ In this paper, we demonstrate that Du et al.'s scheme leaks keyword information 
 <link>https://eprint.iacr.org/2026/965</link>
 <guid>https://eprint.iacr.org/2026/965</guid>
 <content:encoded><![CDATA[
-
 Digital identity systems are currently build around the globe, aiming to enable secure, usable, but also privacy-preserving user authentication. Concretely, the EUDI Wallet developed in Europe requires to ensure selective attribute disclosure and unlinkable authentication. This essentially mandates the use of anonymous credentials, that have been developed for this exact purpose over the last 20 years. However, they are not integrated in the current solutions as they lack an essential feature: device binding. That is, binding credentials stored on the users' phones to a secure hardware element therein, in order to prevent credential cloning or sharing. Device binding is typically done through encoding a device public key into the user's credential and requiring a fresh signature  under the corresponding and hardware-protected secret key - the proof-of-possession (PoP) - when presenting the credential.  While academic solutions exist that realize efficient device binding for anonymous credentials, they are not compatible with the secure hardware currently available in consumer phones. The main challenge lies in the underlying curves: all efficient anonymous credentials, (and their native device binding protocols) require the use of pairing-friendly curves, whereas existing phones are essentially restricted to ECDSA signatures and classic P256 curves.
 
 In this work, we show how to bridge these two systems, enabling device-binding for pairing-based credentials on legacy phones, i.e., relying solely on standard ECDSA signatures for the PoP. We present three different constructions with different trade-offs in efficiency and in protocol complexity. Our most efficient solution generates unlinkable bridging proofs of size ~1.5KB in less than ~500ms by relying on a (very simple) arithmetic circuit, whereas the most conservative approach (without circuits) takes as well ~500ms and comes with proof size of ~175KB. All our solutions share a common blueprint, and we express them in the reductions of knowledge framework (Crypto 2023) to reflect this is in our protocols' design. This framework allows to modularly construct  complex zero-knowledge proofs in an elegant and intuitive manner, greatly facilitating the security analysis and the implementation. This framework has previously been mainly used in a theoretical context, and our work demonstrates that it is a powerful tool to design, analyze and implement complex real-world systems.
 ]]></content:encoded>
 <pubDate>Fri, 15 May 2026 15:28:02 +0000</pubDate>
-<pubDate>Fri, 15 May 2026 15:28:02 +0000</pubDate>
 </item>
-
 <item>
 <title>rBFT: a Revamped Two-Stage BFT from Delegated Committee</title>
 <link>https://eprint.iacr.org/2026/962</link>
@@ -14386,60 +14380,6 @@ In this work, we propose a new OMR scheme that substantially improves upon the p
 At the core of these improvements is a new homomorphic compression mechanism, where ciphertexts of length proportional to the number of total payloads are compressed into a digest whose length is proportional to the upper bound on the number of pertinent payloads. Unlike previous approaches, our scheme fully exploits the native homomorphic SIMD structure of the underlying HE scheme, significantly enhancing efficiency. In the setting described above, our compression scheme achieves 7.4x speedup compared to PerfOMR.
 ]]></content:encoded>
 <pubDate>Wed, 06 Nov 2024 00:39:25 +0000</pubDate>
-</item>
-<item>
-<title>Revisiting Leakage-Resilient MACs and Succinctly-Committing AEAD: More Applications of Pseudo-Random Injections</title>
-<link>https://eprint.iacr.org/2024/1813</link>
-<guid>https://eprint.iacr.org/2024/1813</guid>
-<content:encoded><![CDATA[
-<div> 关键词: Pseudo-Random Injections (PRIs), Message Authentication Codes (MACs), Authenticated Encryption with Associated Data (AEAD), Collision Resistance, UnForgeability
-
-总结:
-本文重新探讨了伪随机注入（PRIs）在构建消息认证码（MACs）和Authenticated Encryption with Associated Data（AEAD）方案中的应用。首先，文章分析了在不同泄漏模型下，PRIs作为具有小明文空间的MAC时所具有的碰撞抵抗性和不可伪造性等性质。接着，展示了如何将PRIs与抗碰撞哈希函数结合，构建针对长明文的MAC，根据PRI和相等性检查的实现方式提供灵活的安全性。若两者都无泄漏，则MAC提供接近最优安全性；即使仅相等性检查具有泄漏抵抗力，安全性能也只会轻微下降；而在相等性检查有无界泄漏的情况下，安全性降低至基线水平而非完全不安全。
-
-此外，文章提出了使用PRIs从头开始构建一个名为scoAE的简洁承诺在线AEAD方案，该方案实现了简洁的CMT4安全、隐私以及Ciphertext Integrity with Misuse and Leakage (CIML2) 安全性。最后，通过结合SIV范式与基于PRI的加密（例如Encode-then-Encipher (EtE)框架），文章展示了一个简洁的nonce耐滥用（MRAE）AEAD方案——scMRAE。 <div>
-Pseudo-Random Injections (PRIs) have had several applications in symmetric-key cryptography, such as in the idealization of Authenticated Encryption with Associated Data (AEAD) schemes, building robust AEAD, and, recently, in converting a committing AEAD scheme into a succinctly committing AEAD scheme. In Crypto 2024, Bellare and Hoang showed that if an AEAD scheme is already committing, it can be transformed into a succinctly committed scheme by encrypting part of the plaintext using a PRI. In this paper, we revisit the applications of PRIs in building Message Authentication Codes (MACs) and AEAD schemes. 
-
-First, we look at some of the properties and definitions PRIs, such as collision resistance and unforgeability when used as a MAC with small plaintext space, under different leakage models. Next, we show how they can be combined with collision-resistant hash functions to build a MAC for long plaintexts, offering flexible security depending on how the PRI and equality check are implemented. If both the PRI and equality check are leak-free, the MAC provides almost optimal security, but the security 
-only degrades a little if the equality check is only leakage-resilient (rather than leak-free). If the equality check has unbounded leakage, the security drops to a baseline security, rather than being completely insecure. Next, we show how to use PRIs to build a succinctly committing online AEAD scheme dubbed as scoAE from scratch that achieves succinct CMT4 security, privacy, and Ciphertext Integrity with Misuse and Leakage (CIML2) security. Last but not least, we show how to build a succinct nonce Misuse-Resistant (MRAE) AEAD scheme, dubbed as scMRAE. The construction combines the SIV paradigm with PRI-based encryption (e.g. the Encode-then-Encipher (EtE) framework).
-]]></content:encoded>
-<pubDate>Tue, 05 Nov 2024 21:43:34 +0000</pubDate>
-</item>
-<item>
-<title>Foundations of Adaptor Signatures</title>
-<link>https://eprint.iacr.org/2024/1809</link>
-<guid>https://eprint.iacr.org/2024/1809</guid>
-<content:encoded><![CDATA[
-<div> 关键词：adaptor签名、安全性、预签名、应用、安全模型<br /><br />总结:
-本文针对adaptor签名的安全性和构建进行了重新审视。首先，作者指出了Aumayr等人在ASIACRYPT'21中提出的adaptor签名安全模型存在的缺陷，这些缺陷导致已知的一些应用于私人币混洗和基于oracle支付的协议不安全，并通过实例说明了根据原有定义仍被认为是安全的adaptor签名可能在实际应用中引发不安全性。为填补这一空白，作者提出了适应这些实际应用场景的最小化模块化定义。其次，鉴于所有已知构造要么源自识别方案并通过Fiat-Shamir变换在随机预言机模型中构建，要么需要修改基础签名验证算法而不适用于加密货币场景，而且它们都只是基于Aumayr等人的不足定义证明了安全性，因此目前没有可用于实际应用的可证明安全的adaptor签名方案。对此，本文证明了广泛使用的Schnorr adaptor签名在新提议的定义下是安全的，并提供了新的构造，包括首次为Camenisch-Lysyanskaya（CL）、Boneh-Boyen-Shacham（BBS+）和Waters签名设计的adaptor签名方案，且所有这些都在标准模型中被证明安全。新构造依赖于名为dichotomic签名的新颖数字签名抽象，以及一种用于证明所有构造（包括基于识别的方案）安全性的新型非黑盒证明技术。同时，作者提出的新数字签名抽象和证明技术对于社区来说具有独立的研究价值。 <div>
-Adaptor signatures extend the functionality of regular signatures through the computation of pre-signatures on messages for statements of NP relations. Pre-signatures are publicly verifiable; they simultaneously hide and commit to a signature of an underlying signature scheme on that message. Anybody possessing a corresponding witness for the statement can adapt the pre-signature to obtain the "regular" signature. Adaptor signatures have found numerous applications for conditional payments in blockchain systems, like payment channels (CCS'20, CCS'21), private coin mixing (CCS'22, SP'23), and oracle-based payments (NDSS'23). 
-
-In our work, we revisit the state of the security of adaptor signatures and their constructions. In particular, our two main contributions are:
-
-- Security Gaps and Definitions: We review the widely-used security model of adaptor signatures due to Aumayr et al. (ASIACRYPT'21) and identify gaps in their definitions that render known protocols for private coin-mixing and oracle-based payments insecure. We give simple counterexamples of adaptor signatures that are secure w.r.t. their definitions but result in insecure instantiations of these protocols. To fill these gaps, we identify a minimal set of modular definitions that align with these practical applications.
- 
-- Secure Constructions: Despite their popularity, all known constructions are (1) derived from identification schemes via the Fiat-Shamir transform in the random oracle model or (2) require modifications to the underlying signature verification algorithm, thus making the construction useless in the setting of cryptocurrencies. More concerningly, all known constructions were proven secure w.r.t. the insufficient definitions of Aumayr et al., leaving us with no provably secure adaptor signature scheme to use in applications.
-    
-    Firstly, in this work, we salvage all current applications by proving the security of the widely-used Schnorr adaptor signatures under our proposed definitions. We then provide several new constructions, including presenting the first adaptor signature schemes for Camenisch-Lysyanskaya (CL), Boneh-Boyen-Shacham (BBS+), and Waters signatures, all of which are proven secure in the standard model. Our new constructions rely on a new abstraction of digital signatures, called dichotomic signatures, which covers the essential properties we need to build adaptor signatures. Proving the security of all constructions (including identification-based schemes) relies on a novel non-black-box proof technique. Both our digital signature abstraction and the proof technique could be of independent interest to the community.
-]]></content:encoded>
-<pubDate>Tue, 05 Nov 2024 10:37:42 +0000</pubDate>
-</item>
-<item>
-<title>Siniel: Distributed Privacy-Preserving zkSNARK</title>
-<link>https://eprint.iacr.org/2024/1803</link>
-<guid>https://eprint.iacr.org/2024/1803</guid>
-<content:encoded><![CDATA[
-<div> 关键词：zkSNARK、计算开销、私有委托、Siniel、EOS
-
-<br /><br />总结：
-
-本文提出了一种名为Siniel的高效私有委托框架，用于优化zkSNARK（零知识简洁非交互式知识论证）。Siniel通过结合多项式交互式预言机证明（PIOP）和多项式承诺方案（PCS），使得计算能力有限的证明者（即委托人）能够将昂贵的证明计算任务安全地委托给多个工作者，同时不泄露任何关于私有见证的信息。与当前最先进的zkSNARK证明者委托框架EOS相比，Siniel的独特之处在于，证明者在发送私有见证的份额后无需参与多 party 计算（MPC）协议，这意味着证明者可以完全将计算过程外包给工作者。实验结果显示，在低带宽（10Mbps）条件下，Siniel相较于EOS为委托者节省约65%的时间；而在高带宽（1000Mbps）条件下，这一比例提高到约95%，显示了Siniel在性能上的显著优势。 <div>
-Zero-knowledge Succinct Non-interactive Argument of Knowledge (zkSNARK) is a powerful cryptographic primitive, in which a prover convinces a verifier that a given statement is true without leaking any additional information. However, existing zkSNARKs suffer from high computation overhead in the proof generation. This limits the applications of zkSNARKs, such as private payments, private smart contracts, and anonymous credentials. Private delegation has become a prominent way to accelerate proof generation.
-In this work, we propose Siniel, an efficient private delegation framework for zkSNARKs constructed from polynomial interactive oracle proof (PIOP) and polynomial commitment scheme (PCS). Our protocol allows a computationally limited prover (a.k.a. delegator) to delegate its expensive prover computation to several workers without leaking any information about the private witness. Most importantly, compared with the recent work EOS (USENIX’23), the state-of-the-art zkSNARK prover delegation framework, a prover in Siniel needs not to engage in the MPC protocol after sending its shares of private witness. This means that a Siniel prover can outsource the entire computation to the workers.
-We compare Siniel with EOS and show significant performance advantages of the former. The experimental results show that, under low bandwidth conditions (10MBps),
-Siniel saves about 65% time for delegators than that of EOS, whereas under high bandwidth conditions (1000MBps), Siniel saves about 95% than EOS.
-]]></content:encoded>
-<pubDate>Mon, 04 Nov 2024 13:08:31 +0000</pubDate>
 </item>
 </channel>
 </rss>
