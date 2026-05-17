@@ -5,16 +5,84 @@
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
 <item>
+<title>Nebula: Efficient read-write memory and switchboard circuits for folding schemes</title>
+<link>https://eprint.iacr.org/2024/1605</link>
+<guid>https://eprint.iacr.org/2024/1605</guid>
+<content:encoded><![CDATA[
+
+A zero-knowledge virtual machine (zkVM) is a
+versatile, developer-friendly primitive that proves the correct
+execution of programs on a fixed machine architecture. A
+major bottleneck for these protocols is the prover’s space
+complexity, which grows linearly with the number of program
+steps and makes it impractical to produce proofs for long-
+running computations. To overcome this, we propose generating
+these proofs incrementally, using folding schemes. However,
+realizing this requires new tools in the folding setting: (1)
+an efficient read-write memory argument for proving the
+correctness of memory operations; and (2) a method to eliminate
+the overheads incurred by unused machine instructions when
+incrementally proving a program execution step.
+
+We address these with new techniques. First, we introduce
+commitment-carrying IVC, where a proof carries an incremental
+commitment to the prover’s non-deterministic advice provided
+at different steps. Second, we show how this unlocks efficient
+read-write memory arguments (which implies indexed lookups
+arguments), with a cost profile identical to that of memory
+arguments in the context of non-recursive arguments. Third, we
+provide a new universal “switchboard” circuit construction that
+combines circuits of different instructions such that one can
+“turn off” uninvoked circuit elements and constraints, offering
+a new way to achieve pay-per-use prover costs.
+
+We design an IVC scheme, which we refer to as Nebula,
+that incorporates these techniques. We implement a prototype
+of a Nebula-based zkVM for the Ethereum Virtual Machine
+(EVM). We find that our techniques qualitatively provide a
+30×smaller constraint system to represent the EVM over
+standard memory-checking techniques, and lead to over 260×
+faster proof generation for the standard ERC-20 token transfer
+transaction when compared to our baseli
+]]></content:encoded>
+<pubDate>Wed, 09 Oct 2024 00:36:09 +0000</pubDate>
+<pubDate>Wed, 09 Oct 2024 00:36:09 +0000</pubDate>
+</item>
+<item>
+<title>Security Analysis on a Blockchain-based Public-Key Authenticated Searchable Encryption Scheme</title>
+<link>https://eprint.iacr.org/2026/970</link>
+<guid>https://eprint.iacr.org/2026/970</guid>
+<content:encoded><![CDATA[
+
+Du et al. (Security and Communication Networks, 2022) proposed a public-key authenticated searchable encryption scheme that employs Bloom filters and blockchain. In their scheme, Bloom filters are used to search encrypted keywords, while blockchain is used to ensure the integrity of search results that guarantees the search result is correct. 
+In this paper, we demonstrate that Du et al.'s scheme leaks keyword information from ciphertexts. Our analysis focuses on the fact that the Bloom filter is uniquely determined by the keyword to be encrypted and is directly embedded in each ciphertext. We show that the proposed attack succeeds with the probability that no false positives occur in the Bloom filter, and we evaluate the false-positive probability to confirm that the attack achieves a sufficiently high success rate. Furthermore, we examine Du et al.'s security model and their assumed usage scenarios, and we discuss the validity of our attack under those conditions. We also consider a simple modification intended to prevent our attack and demonstrate that our attack, with a slight adaptation, remains effective against the modified scheme. In addition, we show that even when the search results differ, previously generated ciphertexts can still pass verification, indicating that the integrity verification mechanism based on blockchain is insufficient.
+]]></content:encoded>
+<pubDate>Sat, 16 May 2026 02:40:06 +0000</pubDate>
+<pubDate>Sat, 16 May 2026 02:40:06 +0000</pubDate>
+</item>
+<item>
+<title>Device Binding for Anonymous Credentials on Legacy Phones</title>
+<link>https://eprint.iacr.org/2026/965</link>
+<guid>https://eprint.iacr.org/2026/965</guid>
+<content:encoded><![CDATA[
+
+Digital identity systems are currently build around the globe, aiming to enable secure, usable, but also privacy-preserving user authentication. Concretely, the EUDI Wallet developed in Europe requires to ensure selective attribute disclosure and unlinkable authentication. This essentially mandates the use of anonymous credentials, that have been developed for this exact purpose over the last 20 years. However, they are not integrated in the current solutions as they lack an essential feature: device binding. That is, binding credentials stored on the users' phones to a secure hardware element therein, in order to prevent credential cloning or sharing. Device binding is typically done through encoding a device public key into the user's credential and requiring a fresh signature  under the corresponding and hardware-protected secret key - the proof-of-possession (PoP) - when presenting the credential.  While academic solutions exist that realize efficient device binding for anonymous credentials, they are not compatible with the secure hardware currently available in consumer phones. The main challenge lies in the underlying curves: all efficient anonymous credentials, (and their native device binding protocols) require the use of pairing-friendly curves, whereas existing phones are essentially restricted to ECDSA signatures and classic P256 curves.
+
+In this work, we show how to bridge these two systems, enabling device-binding for pairing-based credentials on legacy phones, i.e., relying solely on standard ECDSA signatures for the PoP. We present three different constructions with different trade-offs in efficiency and in protocol complexity. Our most efficient solution generates unlinkable bridging proofs of size ~1.5KB in less than ~500ms by relying on a (very simple) arithmetic circuit, whereas the most conservative approach (without circuits) takes as well ~500ms and comes with proof size of ~175KB. All our solutions share a common blueprint, and we express them in the reductions of knowledge framework (Crypto 2023) to reflect this is in our protocols' design. This framework allows to modularly construct  complex zero-knowledge proofs in an elegant and intuitive manner, greatly facilitating the security analysis and the implementation. This framework has previously been mainly used in a theoretical context, and our work demonstrates that it is a powerful tool to design, analyze and implement complex real-world systems.
+]]></content:encoded>
+<pubDate>Fri, 15 May 2026 15:28:02 +0000</pubDate>
+<pubDate>Fri, 15 May 2026 15:28:02 +0000</pubDate>
+</item>
+
+<item>
 <title>rBFT: a Revamped Two-Stage BFT from Delegated Committee</title>
 <link>https://eprint.iacr.org/2026/962</link>
 <guid>https://eprint.iacr.org/2026/962</guid>
 <content:encoded><![CDATA[
-
 Byzantine fault-tolerant (BFT) protocol from delegated committee is an approach in improving the performance and scalability of blockchains. Notable industrial examples include Delegated Proof-of-Stake (DPoS) by Tron, Polkadot, and Solana, and Proof-of-Staked-Authority (PoSA) by Binance. In these protocols, a subset of nodes is first selected to form a committee, then the committee members reach an agreement and disseminate the results to all nodes. Although these approaches allow the committee members to be rotated periodically, the security of the system is built upon a strong assumption that no committee can have more than certain fraction of faulty nodes (e.g., one-third in a partially synchronous network).
 
 In this paper, we provide a revamped two-stage design to model BFT from delegated committee without making the strong assumption. Namely, the only assumption is that in a partially synchronous network, the entire system does not have more than one-third faulty nodes. We propose rBFT, a practical BFT protocol that has a fast path where only committee members participate and a slow path where all nodes in the system are involved. We show that, not surprisingly, the fast path is extremely fast, and under reasonable assumptions such as alive-but-corrupt nodes and rational nodes, only fast path can be triggered. Meanwhile, even under conventional Byzantine failures where the slow path is triggered, our protocol is still practical enough.
 ]]></content:encoded>
-<pubDate>Fri, 15 May 2026 08:55:10 +0000</pubDate>
 <pubDate>Fri, 15 May 2026 08:55:10 +0000</pubDate>
 </item>
 <item>
@@ -22,11 +90,9 @@ In this paper, we provide a revamped two-stage design to model BFT from delegate
 <link>https://eprint.iacr.org/2026/958</link>
 <guid>https://eprint.iacr.org/2026/958</guid>
 <content:encoded><![CDATA[
-
 Proof of Stake (PoS) blockchain systems require weighted threshold signatures where participants’ voting powers reflect their stakes. As stakes change dynamically through deposits and withdrawals, efficient weight and threshold adjustments are essential for maintaining system security and availability without downtime. However, existing approaches face critical limitations: (1) virtualization-based schemes require $O(w)$ operations (signatures) per participant with weight w; (2) dynamic threshold / paricipants schemes do not support weighted participants; (3) schemes with both properties require trusted dealers or $O(n^2)$ re-setup, causing temporary unavailability.
  This paper introduces Active Weighted Signature (AWS), enabling dynamic adjustments without trusted dealers or re-setup. We propose Generalized Lagrange Interpolation (GLI), encoding weights as polynomial derivatives rather than virtualized participants, and instantiate AWS through ADAPT by applying GLI to the Schnorr-based threshold signature FROST. Our implementation shows that ADAPT achieves comparable efficiency to FROST for key generation, while weight and threshold adjustments complete in 4.1-22.3% of re-setup time. For uneven weight distributions, ADAPT achieves sub-linear scaling: 49× weight difference requires only 3.29× computation versus 49× in virtualization.
 ]]></content:encoded>
-<pubDate>Thu, 14 May 2026 07:35:56 +0000</pubDate>
 <pubDate>Thu, 14 May 2026 07:35:56 +0000</pubDate>
 </item>
 <item>
@@ -34,7 +100,6 @@ Proof of Stake (PoS) blockchain systems require weighted threshold signatures wh
 <link>https://eprint.iacr.org/2026/952</link>
 <guid>https://eprint.iacr.org/2026/952</guid>
 <content:encoded><![CDATA[
-
 It is getting widely recognized that quantum computers pose a fundamental threat to blockchain security. The transaction signature transition to Post-quantum cryptography (PQC) is therefore an urgent challenge. However, it remains unclear how much quantum computing power would be sufficient to compromise blockchain security and, consequently, by when the transition should be completed. To address these questions theoretically, we first formalize the signature transition process and the quantum adversary based on the well-known Bitcoin backbone protocol framework. We then establish a threshold for the chain's tolerable quantum adversary capability. Specifically, we prove that a security property migration liveness holds with overwhelming probability if and only if
   $$
     \Delta_{\mathrm{eff}} \;\geq\; \left\lceil \frac{4}{(1 - \epsilon)f} \right\rceil,
@@ -42,20 +107,16 @@ It is getting widely recognized that quantum computers pose a fundamental threat
 where $\Delta_{\mathrm{eff}}$ is the number of rounds the quantum adversary needs to produce a forged transaction after the broadcast of a migration transaction, $f$ is the honest mining success probability, and $\epsilon$ is the concentration quality of the underlying random variables. We further generalize the analysis to derive a relationship between the transition process and the tolerable quantum adversary capability, providing a theoretical basis for designing secure signature transition plans.
 ]]></content:encoded>
 <pubDate>Wed, 13 May 2026 18:21:25 +0000</pubDate>
-<pubDate>Wed, 13 May 2026 18:21:25 +0000</pubDate>
 </item>
 <item>
 <title>Efficient SIMD Implementation of the BLS Signature Scheme Using Intel AVX-512</title>
 <link>https://eprint.iacr.org/2026/947</link>
 <guid>https://eprint.iacr.org/2026/947</guid>
 <content:encoded><![CDATA[
-
 The BLS digital signature scheme, in particular its instantiation with the BLS12-381 curve, has become a cornerstone of modern blockchain protocols such as Ethereum Proof-of-Stake, due to its unique and attractive characteristics (e.g., support for non-interactive signature aggregation). Recently, Cheng et al. (CHES 2025) demonstrated that the enormous Single-Instruction-Multiple-Data (SIMD) computing power of the Intel AVX-512 extensions, when combined with carefully-designed vectorization strategies, can be effectively leveraged to speed up the computation of the optimal ate pairing on BLS12-381, a major component of BLS. This naturally raises the question of whether such SIMD-parallel processing can be exploited more extensively to benefit the entire BLS signature scheme. The present paper answers this question positively by presenting a highly SIMD-optimized BLS implementation using Intel AVX-512, especially the AVX-512IFMA instructions. In order to harness AVX-512 more efficiently for the performance-critical operations of BLS, we explored a wide range of optimization options, including various formulas and vectorization granularities for elliptic curve arithmetic operations, scalar multiplication, and hash-to-curve, as well as the fine-tuning and flexible use of different implementations of the finite-field arithmetic. Benchmarking results collected on an Intel Core i3-1005G1 ("Ice Lake") CPU show that our vectorized BLS software using AVX-512 is at least 1.57 times faster than an x64 assembly implementation of the widely-used blst library.
 ]]></content:encoded>
 <pubDate>Wed, 13 May 2026 13:19:19 +0000</pubDate>
-<pubDate>Wed, 13 May 2026 13:19:19 +0000</pubDate>
 </item>
-
 <item>
 <title>Pseudonymization and reporters’ protection by design in the EU whistleblower directive</title>
 <link>https://eprint.iacr.org/2026/937</link>
@@ -14379,90 +14440,6 @@ We compare Siniel with EOS and show significant performance advantages of the fo
 Siniel saves about 65% time for delegators than that of EOS, whereas under high bandwidth conditions (1000MBps), Siniel saves about 95% than EOS.
 ]]></content:encoded>
 <pubDate>Mon, 04 Nov 2024 13:08:31 +0000</pubDate>
-</item>
-<item>
-<title>Privacy-Preserving Multi-Party Search via Homomorphic Encryption with Constant Multiplicative Depth</title>
-<link>https://eprint.iacr.org/2024/1800</link>
-<guid>https://eprint.iacr.org/2024/1800</guid>
-<content:encoded><![CDATA[
-<div> 关键词：隐私保护、多方搜索协议、阈值级同态加密、电路深度常数、动态数据库
-
-总结:
-我们的研究提出了一种采用阈值级同态加密技术的隐私保护多方搜索协议。我们证明了该协议在诚实但好奇的对手面前是正确且安全的。与现有方法不同的是，我们的协议保持了恒定的电路深度，这使得它更适用于涉及动态底层数据库的实际应用场景。<br /><br /> <div>
-We propose a privacy-preserving multiparty search protocol
-using threshold-level homomorphic encryption, which we prove correct
-and secure to honest but curious adversaries. Unlike existing approaches,
-our protocol maintains a constant circuit depth. This feature enhances
-its suitability for practical applications involving dynamic underlying
-databases.
-]]></content:encoded>
-<pubDate>Mon, 04 Nov 2024 08:14:14 +0000</pubDate>
-</item>
-<item>
-<title>IrisLock: Iris Biometric Key Derivation with 42 bits of security</title>
-<link>https://eprint.iacr.org/2024/100</link>
-<guid>https://eprint.iacr.org/2024/100</guid>
-<content:encoded><![CDATA[
-<div> 关键词：生物特征认证、模糊提取器、安全、独立性假设、IrisLock
-
-总结:
-
-本文介绍了IrisLock，一种基于虹膜的密钥衍生系统，该系统结合了虹膜特征提取技术与改进后的模糊提取器，旨在解决生物特征认证领域的理论与实践之间的鸿沟。传统的生物特征认证算法依赖于泄露私人信息的数据和外部的安全措施，而模糊提取器理论上可以实现安全且保护隐私的生物特征认证。然而，现有模糊提取器系统要么基于未经统计验证或已被证明为错误的独立性假设，要么使用了错误的密码学分析。
-
-IrisLock系统纠正了sample-then-lock方法的证明，并指出子集最小最小熵是相关安全性度量标准。它提供$42$位安全性以及$45\%$的真实接受率(TAR)，与现有系统相比，其定量安全性水平相当甚至更高。通过添加密码，安全性可提升至$64$位。在评估TAR和安全性时，所使用的虹膜数据与训练和收集统计数据的数据类互不重叠（开放式数据集方案）。IrisLock唯一必要的统计假设是对最小熵估计的准确性。 <div>
-Despite decades of effort, a chasm exists between the theory and practice of device-level biometric authentication. Deployed authentication algorithms rely on data that overtly leaks private information about the biometric; thus systems rely on externalized security measures such as trusted execution environments. The authentication algorithms have no cryptographic guarantees.
-  
-This is  frustrating given the research that has developed theoretical tools, known as fuzzy extractors, that enable secure, privacy-preserving biometric authentication with public enrollment data (Dodis et al., SIAM JoC 2008). Unfortunately, fuzzy extractor systems either:
--Make strong independence assumptions, such as:
--- Bits of biometrics are i.i.d. (or that all correlation is pairwise between features (Hine et al., TIFS 2023)), or
--- For an error-correcting code, the nearest codeword and the coset of biometric readings are independent (Zhang, Cui, and Yu, ePrint 2021/1559).
-  These assumptions either have not been statistically checked or 
-  statistical analysis indicates they are false.
-- Or use incorrect cryptographic analysis.  Simhadri et al. (ISC, 2019) assume the security of sample-then-lock (Canetti et al., Journal of Cryptology 2021) is captured by the average min-entropy of subsets.  Zhang et al. (ICPR, 2022) show an attack on this incorrect analysis. 
-
-This work introduces IrisLock, an iris key derivation system powered by technical advances in both
-1) feature extraction from the iris  and
-2) the fuzzy extractor used to secure authentication keys.  The fuzzy extractor builds on sample-then-lock (Canetti et al., Journal of Cryptology 2021). We correct a proof in Canetti et al. and show the minimum of min-entropy of subsets is the relevant security measure.  Our primary parameters are $42$ bits of security at $45\%$ true accept rate (TAR).  Our quantitive level of security is as good as the above systems, Simhadri et al's incorrect analysis yields an estimate of $32$ bits, while Zhang et al.'s system on the face estimates $45$ bits (with the independence condition). One can easily incorporate a password, boosting security to $64$ bits.
-
-Irises used to evaluate TAR and security are class disjoint from those used for training and collecting statistics (the open dataset regime).
-The only statistical assumption made is necessary: the accuracy of min-entropy estimation.
-]]></content:encoded>
-<pubDate>Mon, 22 Jan 2024 18:21:35 +0000</pubDate>
-</item>
-<item>
-<title>Amun: Securing E-Voting Against Over-the-Shoulder Coercion</title>
-<link>https://eprint.iacr.org/2021/851</link>
-<guid>https://eprint.iacr.org/2021/851</guid>
-<content:encoded><![CDATA[
-<div> 关键词：Amun协议、选举、投票隐私、防肩窥、安全性证明<br /><br />总结:
-Amun协议是在一场允许每个选民对M个可能选项表达P个偏好级别的选举中，确保投票安全性的方案。它防范了过肩窥视攻击，保护了投票隐私，同时保持了公平性、端到端可验证性和正确性。在选举前，每位选民会收到含有有效和干扰代币的选票，只有有效代币会对最终计票产生影响，但它们与干扰代币无法区分，从而防止了肩窥攻击的发生。我们依据随机预言模型下标准的决策Diffie-Hellman假设证明了该构造的安全性。 <div>
-In an election where each voter may express $P$ preferences among $M$ possible choices, the Amun protocol allows to secure vote casting against over-the-shoulder adversaries, retaining privacy, fairness, end-to-end verifiability, and correctness.
-
-Before the election, each voter receives a ballot containing valid and decoy tokens: only valid tokens contribute in the final tally, but they remain indistinguishable from the decoys.
-Since the voter is the only one who knows which tokens are valid (without being able to prove it to a coercer), over-the-shoulder attacks are thwarted.
-
-We prove the security of the construction under the standard Decisional Diffie Hellman assumption in the random oracle model.
-]]></content:encoded>
-<pubDate>Tue, 22 Jun 2021 14:37:01 +0000</pubDate>
-</item>
-<item>
-<title>Is Periodic Pseudo-randomization Sufficient for Beacon Privacy?</title>
-<link>https://eprint.iacr.org/2024/1782</link>
-<guid>https://eprint.iacr.org/2024/1782</guid>
-<content:encoded><![CDATA[
-<div> 关键词: 蓝牙低功耗(BLE)、隐私机制、定时序列不可区分性、计时器操纵攻击、随机化调度
-
-总结:
-本文研究了蓝牙低功耗(BLE)信标周期性更换伪随机身份的隐私机制是否足以确保隐私。文章提出了一个新的自然隐私概念，称为“定时序列不可区分性”，它不仅关注广播内容，还考虑了可从物理世界中观察到的广播时间，这一定义比传统的不可区分性更强。接着，文章证明周期性更换身份的BLE信标无法实现定时序列不可区分性，并提出了一种名为“计时器操纵攻击”的新颖隐私攻击方法，该攻击只需在对手选择的时间插入或重新插入信标的电池即可实施。作者们对一个实际部署的信标执行了此攻击。为了对抗这种基于周期信号的攻击，他们提出了一种新的随机化调度身份变化的对策，证明此对策可以确保信标的定时序列不可区分性，从而增强其隐私性。此外，文中还展示了如何在被攻击系统中集成这一对策，同时基本上保持其实现可行性和实用性，这对于实际工业应用至关重要。 <div>
-In this paper, we investigate whether the privacy mechanism of periodically changing the pseudorandom identities of Bluetooth Low Energy (BLE) beacons is sufficient to ensure privacy.
-
-We consider a new natural privacy notion for BLE broadcasting beacons which we call ``Timed-sequence- indistinguishability'' of beacons. This new privacy definition is stronger than the well-known indistinguishability, since it considers not just the advertisements' content, but also the advertisements' broadcasting times which are observable in the physical world. 
-
-We then prove that beacons with periodically changing pseudorandom identities do not achieve timed-sequence- indistinguishability. We do this by presenting a novel privacy attack against BLE beacons, which we call the ``Timer Manipulation Attack.'' This new time-based privacy attack can be executed by merely inserting or reinserting the beacon's battery at the adversary's chosen time. We performed this attack against an actually deployed beacon.
-
-To mitigate the ``Timer Manipulation Attack'' and other attacks associated with periodic signaling, we propose a new countermeasure involving quasi-periodic randomized scheduling of identity changes. We prove that our countermeasure ensures timed-sequence indistinguishability for beacons, thereby enhancing the beacon's privacy. Additionally, we show how to integrate this countermeasure in the attacked system while essentially preserving its feasibility and utility, which is crucial for practical industrial adoption.
-]]></content:encoded>
-<pubDate>Fri, 01 Nov 2024 07:41:25 +0000</pubDate>
 </item>
 </channel>
 </rss>
