@@ -4,6 +4,35 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+<item>
+<title>LoTRS: Practical Post-Quantum Structured Threshold Ring Signatures from Lattices</title>
+<link>https://eprint.iacr.org/2026/974</link>
+<guid>https://eprint.iacr.org/2026/974</guid>
+<content:encoded><![CDATA[
+
+Threshold ring signatures (TRS) enable a quorum of $T$ users to jointly sign a message while hiding which $T$ of the $N$ ring members participated, supporting privacy-preserving endorsement in ad-hoc settings. That said, many deployments do not need anonymity over every $T$-subset of a ring: when the approval pattern is already public, a structured ring can be sufficient. In this work, we first formalize this setting as a structured threshold ring signature (sTRS) and introduce $\mathsf{LoTRS}$, a lattice-based sTRS that avoids a dedicated leader and keeps interaction to the optimal number of two rounds by separating the threshold signing relation from the anonymity mechanism. 
+To the best of our knowledge, $\mathsf{LoTRS}$ is the first construction in which a TRS variant is obtained by
+combining: (i) an aggregated signing layer: a two-round lattice-based multisignature protocol producing an aggregated signature relation, with (ii) a selection-hiding layer: a $1$-out-of-$N$ proof that hides the chosen ring element supporting that relation.
+While it is natural to use a $T$-out-of-$N$ proof to build a TRS, our $\mathsf{LoTRS}$ exploits a $1$-out-of-$N$ proof to significantly improve efficiency.
+$\mathsf{LoTRS}$ concretely instantiates the aggregated signing layer using $\mathsf{DualMS}$ (Crypto'23) and the selection-hiding layer arising from Esgin et al.'s lattice-based one-out-of-many proof (IEEE S&amp;P'22).
+
+Our $(T, N\!\cdot\!T)$-$\mathsf{LoTRS}$ construction achieves $\mathsf{polylog}(N, T)$ signature size and outperforms $(T, N)$-TRS schemes significantly. For example, for $N=100$ and $T=50$, our signature size is only $36$ KB, which is $\approx3.5 \times$ smaller than the previously best performing lattice-based scheme $\mathsf{LastRings}$ by Jeon et al (ISC'25).
+Our Rust reference implementation further supports practicality: for $T=16$ and $N=32$, i.e., structured ring size $T\cdot N = 512$, it produces $25$ KB signatures, with mean signing time $149$ ms and verification time $43$ ms in a release build on a Ryzen AI 9 HX 370 laptop.
+]]></content:encoded>
+<pubDate>Sun, 17 May 2026 12:13:59 +0000</pubDate>
+<pubDate>Sun, 17 May 2026 12:13:59 +0000</pubDate>
+</item>
+<item>
+<title>ThriftyMPC: Reducing the Cost of Large-Scale MPC in the Cloud</title>
+<link>https://eprint.iacr.org/2026/977</link>
+<guid>https://eprint.iacr.org/2026/977</guid>
+<content:encoded><![CDATA[
+
+Cloud computing has become the standard for large-scale computation, offering elastic scalability and on-demand resources that exceed typical on-premise capabilities. However, many large-scale computations over sensitive data -- such as genome-wide association studies (GWAS) -- face significant barriers to cloud adoption due to privacy concerns and regulatory constraints. While cryptographic primitives like multi-party computation can alleviate these concerns through provable privacy guaranties, their substantial communication and computational overhead can make cloud deployment cost-prohibitive.  To address both privacy and cost constraints, we present ThriftyMPC.  ThriftyMPC is a framework that leverages spot instances (ephemeral cloud compute at reduced rates) to enable cost-effective, privacy-preserving computation at scale by combining secure multi-party computation with preemption-tolerant execution. We introduce a formal model for multi-party execution under ephemeral compute conditions, demonstrate how ThriftyMPC handles spot instance preemptions while maintaining cryptographic security guaranties, and provide a formal discussion of these guaranties. Our evaluations on realistic GWAS-inspired workloads over the Google Cloud Platform demonstrate robust execution despite spot instance churn, and show significant cost reduction compared to the state-of-the-art multi-party computation framework (MP-SPDZ) run traditionally using on-demand instances.  We show that leveraging multi-party computation on spot instances makes privacy-preserving computation economically viable, enabling organizations to harness the cloud for sensitive workloads previously confined to isolated, on-premise deployments.
+]]></content:encoded>
+<pubDate>Sun, 17 May 2026 22:12:43 +0000</pubDate>
+<pubDate>Sun, 17 May 2026 22:12:43 +0000</pubDate>
+</item>
 
 <item>
 <title>Nebula: Efficient read-write memory and switchboard circuits for folding schemes</title>
