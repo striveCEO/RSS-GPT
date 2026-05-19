@@ -4,12 +4,12 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+
 <item>
 <title>LoTRS: Practical Post-Quantum Structured Threshold Ring Signatures from Lattices</title>
 <link>https://eprint.iacr.org/2026/974</link>
 <guid>https://eprint.iacr.org/2026/974</guid>
 <content:encoded><![CDATA[
-
 Threshold ring signatures (TRS) enable a quorum of $T$ users to jointly sign a message while hiding which $T$ of the $N$ ring members participated, supporting privacy-preserving endorsement in ad-hoc settings. That said, many deployments do not need anonymity over every $T$-subset of a ring: when the approval pattern is already public, a structured ring can be sufficient. In this work, we first formalize this setting as a structured threshold ring signature (sTRS) and introduce $\mathsf{LoTRS}$, a lattice-based sTRS that avoids a dedicated leader and keeps interaction to the optimal number of two rounds by separating the threshold signing relation from the anonymity mechanism. 
 To the best of our knowledge, $\mathsf{LoTRS}$ is the first construction in which a TRS variant is obtained by
 combining: (i) an aggregated signing layer: a two-round lattice-based multisignature protocol producing an aggregated signature relation, with (ii) a selection-hiding layer: a $1$-out-of-$N$ proof that hides the chosen ring element supporting that relation.
@@ -20,20 +20,16 @@ Our $(T, N\!\cdot\!T)$-$\mathsf{LoTRS}$ construction achieves $\mathsf{polylog}(
 Our Rust reference implementation further supports practicality: for $T=16$ and $N=32$, i.e., structured ring size $T\cdot N = 512$, it produces $25$ KB signatures, with mean signing time $149$ ms and verification time $43$ ms in a release build on a Ryzen AI 9 HX 370 laptop.
 ]]></content:encoded>
 <pubDate>Sun, 17 May 2026 12:13:59 +0000</pubDate>
-<pubDate>Sun, 17 May 2026 12:13:59 +0000</pubDate>
 </item>
 <item>
 <title>ThriftyMPC: Reducing the Cost of Large-Scale MPC in the Cloud</title>
 <link>https://eprint.iacr.org/2026/977</link>
 <guid>https://eprint.iacr.org/2026/977</guid>
 <content:encoded><![CDATA[
-
 Cloud computing has become the standard for large-scale computation, offering elastic scalability and on-demand resources that exceed typical on-premise capabilities. However, many large-scale computations over sensitive data -- such as genome-wide association studies (GWAS) -- face significant barriers to cloud adoption due to privacy concerns and regulatory constraints. While cryptographic primitives like multi-party computation can alleviate these concerns through provable privacy guaranties, their substantial communication and computational overhead can make cloud deployment cost-prohibitive.  To address both privacy and cost constraints, we present ThriftyMPC.  ThriftyMPC is a framework that leverages spot instances (ephemeral cloud compute at reduced rates) to enable cost-effective, privacy-preserving computation at scale by combining secure multi-party computation with preemption-tolerant execution. We introduce a formal model for multi-party execution under ephemeral compute conditions, demonstrate how ThriftyMPC handles spot instance preemptions while maintaining cryptographic security guaranties, and provide a formal discussion of these guaranties. Our evaluations on realistic GWAS-inspired workloads over the Google Cloud Platform demonstrate robust execution despite spot instance churn, and show significant cost reduction compared to the state-of-the-art multi-party computation framework (MP-SPDZ) run traditionally using on-demand instances.  We show that leveraging multi-party computation on spot instances makes privacy-preserving computation economically viable, enabling organizations to harness the cloud for sensitive workloads previously confined to isolated, on-premise deployments.
 ]]></content:encoded>
 <pubDate>Sun, 17 May 2026 22:12:43 +0000</pubDate>
-<pubDate>Sun, 17 May 2026 22:12:43 +0000</pubDate>
 </item>
-
 <item>
 <title>Nebula: Efficient read-write memory and switchboard circuits for folding schemes</title>
 <link>https://eprint.iacr.org/2024/1605</link>
@@ -14378,37 +14374,6 @@ Further, we show that the no-cloning principle, a result of quantum mechanics, a
 Finally, as a technical tool, we introduce the notion of publicly rerandomizable encryption with strong correctness, where no adversary is able to produce a malicious ciphertext and a malicious random tape such that the ciphertext before and after rerandomization (with the malicious tape) decrypts to different values! We believe this might be of independent interest. • Assuming the (quantum) hardness of Learning with Errors, we construct a (post-quantum) classical publicly rerandomizable encryption scheme with strong correctness
 ]]></content:encoded>
 <pubDate>Thu, 07 Nov 2024 07:25:38 +0000</pubDate>
-</item>
-<item>
-<title>SCIF: Privacy-Preserving Statistics Collection with Input Validation and Full Security</title>
-<link>https://eprint.iacr.org/2024/1821</link>
-<guid>https://eprint.iacr.org/2024/1821</guid>
-<content:encoded><![CDATA[
-<div> 关键词: 安全聚合、SCIF、输入验证、恶意服务器、拒绝服务攻击
-
-<br /><br />总结:
-本文介绍了一种名为SCIF的新颖多服务器安全聚合协议，该协议带有输入验证功能，并能在存在少于三分之一恶意服务器的情况下确保安全性。与现有协议（如Prio、Prio+、Elsa和Whisper）相比，SCIF具有两大优势：(1) 确保输出交付，即恶意参与者无法阻止协议完成，从而增强了对拒绝服务攻击的抵抗能力；(2) 确保输入包含，意味着恶意参与者无法阻止诚实参与者的输入被纳入计算。同时，SCIF在不增加客户端成本的同时保持了服务器成本的适度。文章还展示了SCIF的强大可实施性，通过将其集成到模拟的Tor网络中，实现了隐私保护测量的便捷部署。 <div>
-Secure aggregation is the distributed task of securely computing a sum of values (or a vector of values) held by a set of parties, revealing only the output (i.e., the sum) in the computation. Existing protocols, such as Prio (NDSI’17), Prio+ (SCN’22), Elsa (S&amp;P’23), and Whisper (S&amp;P’24), support secure aggregation with input validation to ensure inputs belong to a specified domain. However, when malicious servers are present, these protocols primarily guarantee privacy but not input validity. Also, malicious server(s) can cause the protocol to abort. We introduce SCIF, a novel multi-server secure aggregation protocol with input validation, that remains secure even in the presence of malicious actors, provided fewer than one-third of the servers are malicious. Our protocol overcomes previous limitations by providing two key properties: (1) guaranteed output delivery, ensuring malicious parties cannot prevent the protocol from completing, and (2) guaranteed input inclusion, ensuring no malicious party can prevent an honest party’s input from being included in the computation. Together, these guarantees provide strong resilience against denial-of-service attacks. Moreover, SCIF offers these guarantees without increasing client costs over Prio and keeps server costs moderate. We present a robust end-to-end implementation of SCIF and demonstrate the ease with which it can be instrumented by integrating it in a simulated Tor network for privacy-preserving measurement.
-]]></content:encoded>
-<pubDate>Wed, 06 Nov 2024 21:12:04 +0000</pubDate>
-</item>
-<item>
-<title>SophOMR: Improved Oblivious Message Retrieval from SIMD-Aware Homomorphic Compression</title>
-<link>https://eprint.iacr.org/2024/1814</link>
-<guid>https://eprint.iacr.org/2024/1814</guid>
-<content:encoded><![CDATA[
-<div> 关键词：隐私保护区块链、私密消息服务、Oblivious Message Retrieval (OMR)、Homomorphic Encryption (HE)、性能优化
-
-总结:
-
-我们提出了一种新的Oblivious Message Retrieval (OMR)方案，旨在解决隐私保护区块链和私密消息服务中客户端需逐个扫描大量公开载荷以避免漏收消息的用户体验问题。该方案通过使用Homomorphic Encryption (HE)将昂贵的扫描过程安全地外包给服务提供商。相比于之前的最优方案PerfOMR，我们的实现显示出了显著的改进：运行时间减少了3.3倍，摘要大小减小了2.2倍，密钥大小减小了1.3倍。这些提升的核心在于我们创新的同态压缩机制，它能够将长度与总载荷数成比例的密文压缩为长度与相关载荷数上限成比例的摘要。不同于以往的方法，我们的方案充分利用了底层HE方案固有的同态SIMD结构，从而大幅提高了效率。在描述的场景（65536个每个612字节的载荷，其中最多50个相关）下，我们的压缩方案相比PerfOMR实现了7.4倍的速度提升。 <div>
-Privacy-preserving blockchains and private messaging services that ensure receiver-privacy face a significant UX challenge: each client must scan every payload posted on the public bulletin board individually to avoid missing messages intended for them. Oblivious Message Retrieval (OMR) addresses this issue by securely outsourcing this expensive scanning process to a service provider using Homomorphic Encryption (HE).
-
-In this work, we propose a new OMR scheme that substantially improves upon the previous state-of-the-art, PerfOMR (USENIX Security'24). Our implementation demonstrates reductions of 3.3x in runtime, 2.2x in digest size, and 1.3x in key size, in a scenario with 65536 payloads (each 612 bytes), of which up to 50 are pertinent.
-
-At the core of these improvements is a new homomorphic compression mechanism, where ciphertexts of length proportional to the number of total payloads are compressed into a digest whose length is proportional to the upper bound on the number of pertinent payloads. Unlike previous approaches, our scheme fully exploits the native homomorphic SIMD structure of the underlying HE scheme, significantly enhancing efficiency. In the setting described above, our compression scheme achieves 7.4x speedup compared to PerfOMR.
-]]></content:encoded>
-<pubDate>Wed, 06 Nov 2024 00:39:25 +0000</pubDate>
 </item>
 </channel>
 </rss>
