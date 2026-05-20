@@ -5,17 +5,114 @@
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
 <item>
+<title>Constant-Online PVSS from CCA2-Secure Threshold Encryption: A Generic Framework</title>
+<link>https://eprint.iacr.org/2026/1009</link>
+<guid>https://eprint.iacr.org/2026/1009</guid>
+<content:encoded><![CDATA[
+
+Publicly Verifiable Secret Sharing (PVSS) is widely used in distributed systems. Existing schemes usually incur at least $O(n)$ online cost: the dealer encrypts, proves, and publishes $n$ shareholder-dependent objects, which public verification must process. In this work, we present a generic framework that transforms publicly verifiable CCA2-secure threshold encryption (CCATE) into \emph{constant-online} PVSS, with distribution and public- verification costs independent of the number of shareholders. The framework moves the share-generation work into a reusable setup phase: once threshold keys and public verification material are fixed, online sharing amounts to a single publicly verifiable threshold encryption. We instantiate the framework with two CCATE constructions: 
+1) a pairing-free instantiation using standard Threshold ElGamal encryption under a committee-based setup assumption; and
+2) a silent-setup scheme leveraging non-interactive key generation via a Power-of-Tau ceremony, eliminating inter-party coordination during setup.
+Furthermore, we discuss epoch-based membership updates under the corresponding setup assumptions, clarifying the security boundary of reconfiguration. The resulting schemes incur higher setup costs, but the critical online distribution and public-verification phases are constant-size and constant-time. This trade-off is particularly useful when setup can be amortized over many PVSS instances, as in blockchain and distributed-system deployments.
+]]></content:encoded>
+<pubDate>Wed, 20 May 2026 12:38:29 +0000</pubDate>
+<pubDate>Wed, 20 May 2026 12:38:29 +0000</pubDate>
+</item>
+<item>
+<title>PQKryvos: Post-Quantum Secure E-Voting With Flexible Ballot Formats and Public Tally-Hiding</title>
+<link>https://eprint.iacr.org/2026/1004</link>
+<guid>https://eprint.iacr.org/2026/1004</guid>
+<content:encoded><![CDATA[
+
+Fair and free elections are the foundation of democracies and democratic processes. They require voting protocols that guarantee the integrity and verifiability of the result, as well as the private choice of each voter. 
+Currently deployed e-voting protocols rely on traditional hardness assumptions, like the discrete logarithm problem, to provide these security guarantees.
+They are not post-quantum secure (pq-secure).
+While first proposals for pq-secure protocols exist, they are limited in the variety of voting scenarios they can support and/or in terms of efficiency.
+
+In this work, we therefore propose PQKryvos, an efficient and flexible pq-secure homomorphic e-voting protocol that can be instantiated for a wide variety of election methods and ballot formats. 
+Our construction efficiently combines homomorphic lattice-based commitments with hash-based general-purpose proofs (GPZKPs) to ensure ballot correctness.
+As a pq-secure instantiation of the Kryvos framework introduced by Huber et al. (CCS 2022), PQKryvos not only provides voter privacy and (public) verifiability of the result, but additionally allows for the stronger privacy notion of public tally-hiding. Public tally-hiding ensures that only the intended election result (such as the full vote count or only the winner) is publicly revealed, while no additional information is leaked. This further improves the privacy for both voters and election candidates.
+
+PQKryvos is the first homomorphic pq-secure e-voting protocol to generically support arbitrary ballot formats and the first to provide public tally-hiding.
+Our implementation and evaluation of PQKryvos demonstrate that it achieves practical performance for diverse election schemes and outperforms the original pre-quantum Kryvos instantiation in some settings. 
+Moreover, we demonstrate that by utilizing GPZKPs, existing pq-secure e-voting protocols can support additional ballot formats, can be enhanced in their tallying phase, and can be extended to publicly tally-hiding protocols.
+]]></content:encoded>
+<pubDate>Wed, 20 May 2026 08:43:41 +0000</pubDate>
+<pubDate>Wed, 20 May 2026 08:43:41 +0000</pubDate>
+</item>
+<item>
+<title>A Blockchain-Based Pre-Verification Access Control Scheme with Vector Commitments and Bulletproofs</title>
+<link>https://eprint.iacr.org/2026/1003</link>
+<guid>https://eprint.iacr.org/2026/1003</guid>
+<content:encoded><![CDATA[
+
+Blockchain-enabled data sharing provides public verifiability and auditability for access control in Internet of Things environments. However, before formal authorization is granted, efficiently verifying whether a data requester satisfies a hidden access policy remains challenging. Existing schemes may expose user attributes, access policies, or matching relationships during on-chain verification, while pairing-based operations, decryption tests, or general zero-knowledge circuits often introduce high verification overhead or strong trust assumptions.
+
+To address these issues, this paper proposes a privacy-preserving pre-verification access control scheme based on attribute vector commitments and Bulletproofs. The proposed scheme encodes user attributes and access policies into vector forms and uses vector commitments to hide authenticated user attributes. Access eligibility verification is then transformed into a hidden inner-product relation, allowing a data requester to prove policy satisfaction without revealing its real attributes or the policy contents. The pre-verification process is pairing-free and does not require trusted setup, making it suitable for smart-contract-based public verification. In addition, proxy re-encryption is integrated to support controlled data access after successful pre-verification.
+
+Security analysis shows that the proposed scheme achieves pre-verification completeness, knowledge soundness, zero-knowledge, attribute privacy, policy privacy, and collusion resistance. Performance analysis and experimental results demonstrate that the proposed scheme reduces on-chain verification overhead, communication cost, and deployment complexity compared with existing access control schemes, making it practical for privacy-preserving data sharing in blockchain-assisted Internet of Things environments.
+]]></content:encoded>
+<pubDate>Wed, 20 May 2026 08:31:41 +0000</pubDate>
+<pubDate>Wed, 20 May 2026 08:31:41 +0000</pubDate>
+</item>
+<item>
+<title>Modern Portfolio Theory in the Crypto-Wilderness</title>
+<link>https://eprint.iacr.org/2026/999</link>
+<guid>https://eprint.iacr.org/2026/999</guid>
+<content:encoded><![CDATA[
+
+Modern portfolio theory (MPT) prescribes how to maximise the return of an asset portfolio for a given level of risk. The optimal trade-off between return and variance defines the efficient frontier. Whether actual cryptoasset portfolios approximate this prescription and whether proximity to the frontier translates into realised performance remain difficult to test at large scale in traditional markets due to their opaque nature and the inaccessibility of data. As we show, public blockchains make these questions measurable: every token transfer is recorded, thus enabling complete portfolio reconstruction for every account at any point in time. We leverage this transparency to reconstruct cryptoasset portfolios for over 116 M Ethereum accounts across the full chain history (2015-2025), measure their distance to the constrained efficient frontier, and quantify how deviations translate into realised performance. Here we show that market entry timing, not allocation choice, is the dominant predictor of realised cryptoasset returns. On-chain wealth is highly concentrated and portfolios are pervasively under-diversified, with single-asset holdings accounting for 83.35% of accounts. Two-asset portfolios sit closest to the efficient frontier defined by their held assets, a proximity that reflects the narrowness of their opportunity set rather than deliberate optimisation. Passive market-capitalisation weighting outperforms every MPT optimisation strategy in median realised return, and entry month alone explains 70-79% of the variance in returns, far exceeding the contribution of allocation choice. Mean-variance optimisation therefore appears neither descriptive of observed behaviour nor prescriptively useful in the cryptoasset domain, even if MPT retains its value as a normative benchmark.
+]]></content:encoded>
+<pubDate>Tue, 19 May 2026 22:26:35 +0000</pubDate>
+<pubDate>Tue, 19 May 2026 22:26:35 +0000</pubDate>
+</item>
+<item>
+<title>Topology-Hiding Computation From Key Agreement in Diameter-Two Graphs</title>
+<link>https://eprint.iacr.org/2026/996</link>
+<guid>https://eprint.iacr.org/2026/996</guid>
+<content:encoded><![CDATA[
+
+Topology-hiding computation (THC) enables a set of parties, communicating over an incomplete network, to execute a secure multiparty computation (MPC) protocol for securely computing a function, while also hiding the network topology from within a given class of graphs. Semi-honest THC can be achieved over arbitrary graph classes, facing an arbitrary number of corruptions, from various assumptions implying oblivious transfer (OT). These assumptions are justified by strong lower bounds, indicating that $2$-secure topology-hiding broadcast (THB) over certain diameter-$3$ graph classes requires OT, as well as $1$-secure THC over certain diameter-$2$ graph classes of variable size.
+
+While THC from weaker assumptions, such as key agreement (KA), is achievable for $t=1$ over fixed-size graphs, the case of multiple corruptions remains unclear, with no known candidate constructions. Even in the simpler, privacy-free case of THB, tolerating $t>1$ corruptions without assuming OT is only known for "friendship" graphs (which are diameter-$2$ graphs of a certain form): in fact, the latter holds information theoretically and for $t1$, where given a graph class, THB either holds unconditionally or requires OT?
+
+In this work we study these questions over graphs of diameter $2$ (in which the lower bounds requiring OT do not hold) and provide THC protocols for various graph classes supporting many corruptions assuming KA. For some of these results we obtain optimal resilience assuming KA: $t<n/2$ for THC. We also present new lower bounds, showing that in certain graph classes that support information-theoretic THB for $t=1$, KA is necessary for $t=2$.
+]]></content:encoded>
+<pubDate>Tue, 19 May 2026 21:12:14 +0000</pubDate>
+<pubDate>Tue, 19 May 2026 21:12:14 +0000</pubDate>
+</item>
+<item>
+<title>Super-intelligence Survival Guide: Verification via Proof-Carrying Output</title>
+<link>https://eprint.iacr.org/2026/994</link>
+<guid>https://eprint.iacr.org/2026/994</guid>
+<content:encoded><![CDATA[
+
+The increasing deployment of large language models (LLMs) in high-stakes domains demands infrastructure to ensure trust in artificial intelligence (AI)-generated outputs and actions. Users often struggle to validate results from LLMs because their reasoning is opaque and possibly beyond human comprehension. This paper introduces proof-carrying output (PCO), a framework in which an AI system returns an answer accompanied by a machine-checkable proof. We define φ-compliance formally (see the compliance definition in the paper): given a decidable predicate φ over signed inputs and AI outputs published by a named authority, a pair (x, y) is φ-compliant iff φ(x, y) = 1. "Compliance" in the rest of the paper refers to this binary, machine-checkable relation, not to organizational assurance practice. The framework is an instance of the producer-verifier-with-audit pattern previously introduced for game-theoretic rational behavior, applied here to regulatory compliance for AI-mediated decisions. Our primary security contribution is a cryptographic accountability layer that binds an AI output, its formal proof, the verifying validator's version, and a trusted timestamp into a non-repudiable commitment recorded on an append-only ledger before the output is acted upon. This layer provides four properties—binding, hiding, temporal ordering, and audit correctness—which jointly yield non-repudiation of AI-mediated decisions, a property neither LLM outputs nor formal proofs provide in isolation. These proofs rely on established proof assistants such as Rocq (Coq) (the Coq proof assistant was recently renamed to Rocq; we use "Rocq" throughout the paper, with "Coq" appearing where the historical name is more recognizable) for symbolic reasoning and (linear temporal logic (LTL), signal temporal logic (STL)) for temporal logics prior to output usage. A legal entity—whether a human subject to law or an AI agent bound by smart contracts—must employ independent proof validators to confirm that the inputs (multiple-choice selections and signed documents) correctly lead to the output under published specifications and regulations. After validation and before acting on the output, the legal entity cryptographically commits the query, specification, output, validator version, timestamp, and proof to an append-only ledger. The entity then proceeds based on the output and reveals the proof only during the audit. We demonstrate PCO through three case studies with working Rocq/STL implementations: tax computation, autonomous-vehicle compliance, and recommendation transparency, extending proof-carrying code (PCC) from static programs to dynamic AI outputs. To enable reliable proof generation as an enabling substrate, we propose that regulatory authorities publish specification-coupled small language models (SLMs) trained on canonical scenario-proof pairs; we view this as supporting infrastructure rather than the core security contribution. We explicitly delimit PCO's scope to compliance predicates expressible as decidable first-order logic with bounded quantification or STL over finite-horizon signals; free-form prose, input authenticity, and specification correctness are out of scope and treated as orthogonal problems. PCO complements existing approaches to interpretable and explainable AI by providing machine-verifiable certificates of compliance rather than human-readable rationalizations.
+]]></content:encoded>
+<pubDate>Tue, 19 May 2026 14:41:26 +0000</pubDate>
+<pubDate>Tue, 19 May 2026 14:41:26 +0000</pubDate>
+</item>
+<item>
+<title>VeinoCert: Binding an Object to an Owner</title>
+<link>https://eprint.iacr.org/2026/986</link>
+<guid>https://eprint.iacr.org/2026/986</guid>
+<content:encoded><![CDATA[
+
+We define a protocol by which we can recognize if a person is the owner of an object. The object can, for instance, be an official document such as a diploma. In our model, the object has an attached RFID chip. The owner is enrolled when the document is created and the chip is attached. Later on, public verifying terminals can verify if a person is the enrolled owner by means of biometric recognition. Hence, the terminal must scan both the chip and the person. As an implementation demonstrator, we use fingervein biometry. Our system can also be used for access control to an online repository to get more information and services related to the object. We require strong security and privacy levels such as: a secure owner recognition and access limited to the legitimate owner holding the right document, the principle of least privilege, and no storage of biometric data at rest. Our solution relies on an inexpensive off-the-shelf RFID chip.
+]]></content:encoded>
+<pubDate>Mon, 18 May 2026 15:12:00 +0000</pubDate>
+<pubDate>Mon, 18 May 2026 15:12:00 +0000</pubDate>
+</item>
+
+<item>
 <title>An Efficient and Secure Boolean Function Evaluation Protocol</title>
 <link>https://eprint.iacr.org/2024/1787</link>
 <guid>https://eprint.iacr.org/2024/1787</guid>
 <content:encoded><![CDATA[
-
 The secure evaluation of Boolean functions or  Secure Boolean Evaluation (SBE) is a fundamental component in this area of research. SBE allows parties to jointly compute Boolean functions without exposing their private inputs. SBE finds applications in privacy-preserving protocols and secure multi-party computations. The existing schemes need at least $(1.5\lambda+5)$-bit strings to garble an AND gate with security parameter $\lambda$, where $\lambda$ is the length of arbitrary bit strings associated with inputs $0$ and $1$. In this manuscript, we discuss how we circumvent the communication cost of non-input gates independent of $\lambda$. We present an efficient and generic two-party protocol (namely $\mathsf{BooleanEval}$) for the secure evaluation of Boolean functions by utilizing a 1-out-of-2 Oblivious Transfer (OT) as a building block. We introduce randomized Bloom filter (namely, $\mathsf{ RBF}_S$) associated with a set $S$ to compute non-input $\mathsf{AND}$ gates. Moreover,  $\mathsf{BooleanEval}$ only employs hash evaluations and XOR operations as the core computational step, making it lightweight and fast. Unlike other lightweight state-of-the-art designs of SBE,  $\mathsf{BooleanEval}$ avoids the use of additional cryptographic primitives, such as commitment schemes, to reduce the computational overhead.
 ]]></content:encoded>
 <pubDate>Fri, 01 Nov 2024 14:02:24 +0000</pubDate>
-<pubDate>Fri, 01 Nov 2024 14:02:24 +0000</pubDate>
 </item>
-
 <item>
 <title>A formal analysis of FLEX and FLEX2</title>
 <link>https://eprint.iacr.org/2026/983</link>
@@ -14359,21 +14456,6 @@ We establish an exact characterization of the security region of the GHOST proto
 Our results conclude that the security region of GHOST can be strictly improved by incorporating a tiebreaking mechanism; in either case, however, the final region of security is inferior to the region of Nakamoto consensus.
 ]]></content:encoded>
 <pubDate>Thu, 07 Nov 2024 19:37:02 +0000</pubDate>
-</item>
-<item>
-<title>A Composability Treatment of Bitcoin's Transaction Ledger with Variable Difficulty</title>
-<link>https://eprint.iacr.org/2024/1823</link>
-<guid>https://eprint.iacr.org/2024/1823</guid>
-<content:encoded><![CDATA[
-<div> 关键词: Bitcoin、proof-of-work (PoW)、动态参与、安全性分析、模拟-based 分析
-
-总结:<br />
-本文首次（据作者所知）针对运行于动态环境中的比特币区块链进行了基于模拟的分析。文章指出，现有的关于比特币的安全性分析是基于属性的，仅保证了协议在孤立运行时的安全性。研究中，提出了比特币背骨协议的抽象模型，该模型在特定参与限制条件下，能够体现出比特币预期的设计规范。此外，本文扩展了固定难度设置下的普适组合性处理方式，并发展出了可能具有更广泛适用性的技术，特别是对于依赖难度调整的其他可组合区块链协议的分析形式。 <div>
-As the first proof-of-work (PoW) permissionless blockchain, Bitcoin aims at maintaining a decentralized yet consistent transaction ledger as protocol participants (“miners”) join and leave as they please. This is achieved by means of a subtle PoW difficulty adjustment mechanism that adapts to the perceived block generation rate, and important steps have been taken in previous work to provide a rigorous analysis of the conditions (such as bounds on dynamic participation) that are sufficient for Bitcoin’s security properties to be ascertained.
-
-Such existing analysis, however, is property-based, and as such only guarantees security when the protocol is run $\textbf{in isolation}$. In this paper we present the first (to our knowledge) simulation-based analysis of the Bitcoin ledger in the dynamic setting where it operates, and show that the protocol abstraction known as the Bitcoin backbone protocol emulates, under certain participation restrictions, Bitcoin’s intended specification. Our formulation and analysis extend the existing Universally Composable treatment for the fixed-difficulty setting, and develop techniques that might be of broader applicability, in particular to other composable formulations of blockchain protocols that rely on difficulty adjustment.
-]]></content:encoded>
-<pubDate>Thu, 07 Nov 2024 09:30:47 +0000</pubDate>
 </item>
 </channel>
 </rss>
