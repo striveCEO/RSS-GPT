@@ -4,16 +4,15 @@
 <title>cs updates on arXiv.org</title>
 <link>http://rss.arxiv.org/rss/cs</link>
 
+
 <item>
 <title>SolarChain: Bridging Physical Law, Verifiable Trust, and Sustainable Markets for Urban Energy Resilience</title>
 <link>https://arxiv.org/abs/2605.23162</link>
 <guid>https://arxiv.org/abs/2605.23162</guid>
 <content:encoded><![CDATA[
-
 arXiv:2605.23162v1 Announce Type: new 
 Abstract: Urban decarbonization requires scaling rooftop solar across millions of fragmented producers, yet cities face a fundamental tension: energy data is easily manipulated, and economic incentives often reward speculation rather than actual infrastructure deployment. We present SolarChain, a platform that resolves both problems by anchoring digital accountability to the thermodynamic limits of solar energy conversion. Using real-time meteorological data, geospatial coordinates, and first-principles calculations of solar yield, the system establishes a hard physical boundary for every panel's maximum possible output; any reported generation exceeding this limit is automatically rejected before entering the shared ledger. This trustless verification enables a peer-to-peer marketplace with programmatic reward structures that continuously reinvest value into equipment maintenance and market liquidity, preventing the speculative hoarding that typically destabilizes blockchain-based marketplaces. When electricity is consumed, the corresponding digital credits are permanently retired in direct proportion to physical energy dissipation, creating an auditable one-to-one mapping between urban consumption and carbon accounting. Deployed across heterogeneous city nodes, the prototype demonstrates resilience against data injection attacks while lowering capital barriers for community-level solar expansion. Beyond energy, the framework offers a general model for coordinating economic activity with physical law in any domain where distributed infrastructure demands both data integrity and sustainable investment. We release the data and code as open-access on GitHub.
 ]]></content:encoded>
-<pubDate>Mon, 25 May 2026 00:00:00 -0400</pubDate>
 <pubDate>Mon, 25 May 2026 00:00:00 -0400</pubDate>
 </item>
 <item>
@@ -21,11 +20,9 @@ Abstract: Urban decarbonization requires scaling rooftop solar across millions o
 <link>https://arxiv.org/abs/2605.23280</link>
 <guid>https://arxiv.org/abs/2605.23280</guid>
 <content:encoded><![CDATA[
-
 arXiv:2605.23280v1 Announce Type: new 
 Abstract: Knob tuning plays a critical role in improving the performance of permissioned blockchains. However, efficient tuning remains challenging due to the architectural complexity of blockchains and the semantic gap between knob-specific logic and the numerical optimization requirements of tuning tools. In addition, configuration changes are often coupled across different stages of the transaction pipeline, making their performance impact difficult to isolate and predict. Since each trial requires deployment and distributed benchmarking, ineffective exploration incurs substantial cost. These challenges motivate BCTuner, a Large Language Model (LLM)-guided framework that combines knowledge-guided reasoning with structured search. BCTuner organizes multi-source tuning knowledge to support LLM-based reasoning over knob semantics, constraints, and deployment context. It formulates tuning as a Monte Carlo Tree Search (MCTS) process over structured action trajectories, where configurations are incrementally constructed, validated, evaluated, and refined rather than generated in one step. BCTuner further applies adaptive pruning to discard infeasible or low-potential branches before system evaluation. We evaluate BCTuner on Hyperledger Fabric and ChainMaker under diverse workloads and network settings. Experimental results show that BCTuner achieves up to 211.38% throughput improvement over default configurations and outperforms the state-of-the-art blockchain tuning method by up to 20% in performance, while requiring up to 8x fewer interactions with the blockchain system.
 ]]></content:encoded>
-<pubDate>Mon, 25 May 2026 00:00:00 -0400</pubDate>
 <pubDate>Mon, 25 May 2026 00:00:00 -0400</pubDate>
 </item>
 <item>
@@ -33,11 +30,9 @@ Abstract: Knob tuning plays a critical role in improving the performance of perm
 <link>https://arxiv.org/abs/2605.23464</link>
 <guid>https://arxiv.org/abs/2605.23464</guid>
 <content:encoded><![CDATA[
-
 arXiv:2605.23464v1 Announce Type: new 
 Abstract: We consider a decentralized setup in which the participants collaboratively train and serve a large neural network, and where each participant only processes a subset of the model. In this setup, we explore the possibility of unmaterializable weights, where a full weight set is never available to any one participant. We introduce Unextractable Protocol Models (UPMs): a training and inference framework that leverages the sharded model setup to ensure model shards (i.e., subsets) held by participants are incompatible at different time steps. UPMs periodically inject time-varying, random, invertible transforms at participant boundaries; preserving the overall network function yet rendering cross-time assemblies incoherent. On Qwen-2.5-0.5B and Llama-3.2-1B, 10,000 transforms leave FP32 perplexity unchanged ($\Delta$PPL $< 0.01$; Jensen-Shannon drift $< 4 \times 10^{-5}$), and we show how to control growth for lower precision datatypes. Applying a transform every 30s adds 3% latency, 0.1% bandwidth, and 10% GPU-memory overhead at inference, while training overhead falls to 1.6% time and $< 1$% memory. We consider several attacks, showing that the requirements of direct attacks are impractical and easy to defend against, and that gradient-based fine-tuning of stitched partitions consumes $\geq 60$% of the tokens required to train from scratch. By enabling models to be collaboratively trained yet not extracted, UPMs make it practical to embed programmatic incentive mechanisms in community-driven decentralized training.
 ]]></content:encoded>
-<pubDate>Mon, 25 May 2026 00:00:00 -0400</pubDate>
 <pubDate>Mon, 25 May 2026 00:00:00 -0400</pubDate>
 </item>
 <item>
@@ -45,13 +40,11 @@ Abstract: We consider a decentralized setup in which the participants collaborat
 <link>https://arxiv.org/abs/2605.23648</link>
 <guid>https://arxiv.org/abs/2605.23648</guid>
 <content:encoded><![CDATA[
-
 arXiv:2605.23648v1 Announce Type: new 
 Abstract: Transaction ordering attacks extract billions of dollars annually from decentralized finance users in the form of Maximal Extractable Value (MEV). Byzantine Fault-Tolerant (BFT) consensus protocols guarantee total order but place no constraint on how that order is chosen, leaving the door open for adversarial reordering. Batch-order-fairness (batch-OF) protocols close this gap, but existing designs pay a steep performance price for this guarantee. Leader-based protocols such as Themis concentrate all fairness decisions at a single replica, while recent DAG-based proposals FairDAG and DAG of DAGs (DoD) force their fairness layer into strictly serial execution despite running on multi-proposer DAGs.
   We present Herring, the first $\gamma$-batch-OF DAG BFT protocol whose fairness layer parallelizes the dominant graph construction cost across committed subdags. Herring combines post-consensus graph construction with explicit missing edge resolution piggybacked on the DAG's reliable broadcast layer, a pairing that turns fair ordering from a per-round serial bottleneck into a CPU-bound task. We also uncover previously unreported liveness vulnerabilities in both FairDAG-RL and DoD that a malicious client can trigger to halt the fairness layer indefinitely, and propose patches that we integrate into our reimplementations.
   We implement Herring on top of the Rust implementation of Narwhal \& Tusk and evaluate it against FairDAG-RL, DoD-W, and Themis. Herring tracks the throughput of Narwhal \& Tusk closely up to roughly $10{,}000$\,tx/s, achieves roughly $90\%$ higher saturation throughput than FairDAG-RL and $100\%$ higher than DoD-W, and substantially reduces execution latency at saturation.
 ]]></content:encoded>
-<pubDate>Mon, 25 May 2026 00:00:00 -0400</pubDate>
 <pubDate>Mon, 25 May 2026 00:00:00 -0400</pubDate>
 </item>
 <item>
@@ -59,11 +52,9 @@ Abstract: Transaction ordering attacks extract billions of dollars annually from
 <link>https://arxiv.org/abs/2605.23677</link>
 <guid>https://arxiv.org/abs/2605.23677</guid>
 <content:encoded><![CDATA[
-
 arXiv:2605.23677v1 Announce Type: new 
 Abstract: Blockchain systems that settle financial transactions face a structural tension: the single validator that assembles each block holds unilateral power over transaction inclusion and ordering. Traditional markets curb this very power through front-running and market-manipulation laws. Regulators have flagged the absence of such rules as a first-order concern for blockchain-based financial infrastructure. In response, we introduce AMP, a multi-proposer protocol, on top of the Tendermint consensus algorithm, where no validator can control the flow of transactions into blocks. Instead, dedicated nodes called proposers sit between users and validators. They collect user transactions, group them into payloads, and broadcast the payloads to all validators. Consequently, there is no mempool, and AMP applies the design principle of separating dissemination from agreement, which can lead to higher throughput. Validators publicly attest to receiving payloads and run consensus to decide the set of payloads to include in the next block. When all correct validators attest to a given payload, AMP guarantees that payload will be included in the next block; a block thus contains payloads from multiple proposers, allowing for bulk finalization. This bounded inclusion guarantee along with a deterministic ordering algorithm which is run over all payloads included in a block, curbs the power of any single validator. Validators no longer control what is included in a block, nor can they arbitrarily order the contents of blocks.
 ]]></content:encoded>
-<pubDate>Mon, 25 May 2026 00:00:00 -0400</pubDate>
 <pubDate>Mon, 25 May 2026 00:00:00 -0400</pubDate>
 </item>
 <item>
@@ -71,11 +62,9 @@ Abstract: Blockchain systems that settle financial transactions face a structura
 <link>https://arxiv.org/abs/2605.23774</link>
 <guid>https://arxiv.org/abs/2605.23774</guid>
 <content:encoded><![CDATA[
-
 arXiv:2605.23774v1 Announce Type: new 
 Abstract: Swarical, a Swarm-based hierarchical localization technique, enables miniature drones, known as Flying Light Specks (FLSs), to accurately and efficiently localize and illuminate complex 2D and 3D shapes. Its accuracy depends on the physical hardware (sensors) of FLSs, which are used to track neighboring FLSs in order to localize themselves. It uses the hardware specification to convert mesh files into point clouds that enable a swarm of FLSs to localize at the highest accuracy afforded by their hardware. Swarical considers a heterogeneous mix of FLSs with different orientations for their tracking sensors, ensuring a line of sight between a localizing FLS and its anchor FLS. We present an implementation using Raspberry cameras and ArUco markers. A comparison of Swarical with a state of the art decentralized localization technique shows that it is as accurate and more than 2x faster.
 ]]></content:encoded>
-<pubDate>Mon, 25 May 2026 00:00:00 -0400</pubDate>
 <pubDate>Mon, 25 May 2026 00:00:00 -0400</pubDate>
 </item>
 <item>
@@ -83,11 +72,9 @@ Abstract: Swarical, a Swarm-based hierarchical localization technique, enables m
 <link>https://arxiv.org/abs/2605.23782</link>
 <guid>https://arxiv.org/abs/2605.23782</guid>
 <content:encoded><![CDATA[
-
 arXiv:2605.23782v1 Announce Type: new 
 Abstract: Recent advancements in vehicle autonomy have drawn interest in understanding the impact of autonomous vehicles on traffic systems. In this paper, we study a traffic assignment problem in a mixed-autonomy setting where both human-driven and autonomous vehicles coexist. We model the interaction as a simultaneous routing game where human drivers are self-interested and aim to minimize their own travel times, while autonomous agents are altruistic and aim to minimize the total social cost. The standard nonatomic congestion game analysis establishes the existence of equilibrium to this game under convex cost functions, and does not have any implication of its uniqueness. In this work, we formulate the equilibrium as a variational inequality (VI), which enables us to establish the equilibrium existence without convexity assumption, and guarantees the uniqueness of the aggregated link flow and social cost at equilibrium under a specific class of cost functions. Leveraging this VI framework, we provide sufficient conditions under which including autonomous agents improves, deteriorates, or has no effect on social cost. While the possibility of deterioration has been established in prior work, our results complement existing worst-case bounds by explicitly characterizing sufficient conditions under which each outcome occurs, thereby providing a deeper understanding of mixed-autonomy traffic systems. Furthermore, we consider a centralized scenario where a social planner optimizes the routing of autonomous agents, and show that the same equilibrium is achieved as in the decentralized scenario when assuming convex costs.Finally, we conduct numerical experiments that illustrate how social cost changes with the amount of autonomous vehicles under different system parameters.
 ]]></content:encoded>
-<pubDate>Mon, 25 May 2026 00:00:00 -0400</pubDate>
 <pubDate>Mon, 25 May 2026 00:00:00 -0400</pubDate>
 </item>
 <item>
@@ -95,15 +82,12 @@ Abstract: Recent advancements in vehicle autonomy have drawn interest in underst
 <link>https://arxiv.org/abs/2605.23816</link>
 <guid>https://arxiv.org/abs/2605.23816</guid>
 <content:encoded><![CDATA[
-
 arXiv:2605.23816v1 Announce Type: new 
 Abstract: An SDN-like centralized control architecture is increasingly popular and has been widely explored in cyber-physical systems (CPS) such as manufacturing, internet-of-things, and autonomous vehicle systems for higher flexibility, programmability and scalability. However, no existing frameworks can offer domain-agnostic, easily extensible support for data-driven CPS applications. In this work, we design, implement, and open-source \textit{SDNator}, the first framework to enable extensible, data-driven control in CPS. SDNator embraces an application- and data-driven design where applications function as data consumers and producers to collectively define the workflows of the controller. SDNator also incorporates two data store backends to support both event-driven and data-driven programming patterns. Benchmarks show that SDNator is highly scalable, and delivers comparable performance to Ryu, a widely used SDN controller.
   Moreover, we demonstrate the capabilities and usability of SDNator through our case studies of manufacturing and networking systems. By integrating applications from respective domains, we build different ``controllers'' for different scenarios. Most notably, we leverage SDNator to implement the first digital-twin-equipped central controller for additive manufacturing fleets. We show through extensive and realistic simulations that SDNator-based scheduling can (1) significantly shorten production time and improve reliability in the presence of anomalies compared to decentralized approaches, and (2) flexibly adjust and optimize production plans upon urgent requests such as producing Personal Protective Equipment during the COVID-19 pandemic.
 ]]></content:encoded>
 <pubDate>Mon, 25 May 2026 00:00:00 -0400</pubDate>
-<pubDate>Mon, 25 May 2026 00:00:00 -0400</pubDate>
 </item>
-
 <item>
 <title>Chain Reactions: How Nonce Collisions in ECDSA Compromise Polygon MEV Searchers</title>
 <link>https://arxiv.org/abs/2605.21498</link>
@@ -10734,119 +10718,6 @@ Abstract: While many resource-constrained networks, such as Internet of Things (
 arXiv:2601.12989v1 Announce Type: new 
 Abstract: In blockchain systems operating under the Proof-of-Stake (PoS) consensus mechanism, fairness in transaction processing is essential to preserving decentralization and maintaining user trust. However, with the emergence of Maximal Extractable Value (MEV), concerns about economic centralization and content manipulation have intensified. To address these vulnerabilities, the Ethereum community has introduced Proposer Builder Separation (PBS), which separates block construction from block proposal. Later, enshrined Proposer Builder Separation (ePBS) was also proposed in EIP-7732, which embeds PBS directly into the Ethereum consensus layer.
   Our work identifies key limitations of ePBS by developing a formal framework that combines mathematical analysis and agent-based simulations to evaluate its auction-based block-building mechanism, with particular emphasis on MEV dynamics. Our results reveal that, although ePBS redistributes responsibilities between builders and proposers, it significantly amplifies profit and content centralization: the Gini coefficient for profits rises from 0.1749 under standard PoS without ePBS to 0.8358 under ePBS. This sharp increase indicates that a small number of efficient builders capture most value via MEV-driven auctions. Moreover, 95.4% of the block value is rewarded to proposers in ePBS, revealing a strong economic bias despite their limited role in block assembly. These findings highlight that ePBS exacerbates incentives for builders to adopt aggressive MEV strategies, suggesting the need for future research into mechanism designs that better balance decentralization, fairness, and MEV mitigation.
-]]></content:encoded>
-<pubDate>Wed, 21 Jan 2026 00:00:00 -0500</pubDate>
-</item>
-<item>
-<title>OPTIMUM-DERAM: Highly Consistent, Scalable, and Secure Multi-Object Memory using RLNC</title>
-<link>https://arxiv.org/abs/2601.13146</link>
-<guid>https://arxiv.org/abs/2601.13146</guid>
-<content:encoded><![CDATA[
-<div> OPTIMUM-DERAM、去中心化共享内存、随机线性网络编码、一致性哈希环、拜占庭容错<br /><br />总结:  
-1. OPTIMUM-DERAM是一种高一致性、可扩展、安全且去中心化的共享内存方案。  
-2. 利用随机线性网络编码（RLNC）提升性能与存储可扩展性。  
-3. 通过基于一致性哈希环的新对象放置与发现机制，支持更多原子对象。  
-4. 借助区块链预言机实现动态节点加入与退出，增强参与者规模的可扩展性。  
-5. 具备拜占庭容错能力，可抵御恶意行为，并在实验中展现出优于ABD算法等传统方案的性能与可扩展性。 <div>
-arXiv:2601.13146v1 Announce Type: new 
-Abstract: This paper introduces OPTIMUM-DERAM, a highly consistent, scalable, secure, and decentralized shared memory solution. Traditional distributed shared memory implementations offer multi-object support by multi-threading a single object memory instance over the same set of data hosts. While theoretically sound, the amount of resources required made such solutions prohibitively expensive in practical systems. OPTIMUM-DERAM proposes a decentralized, reconfigurable, atomic read/write shared memory (DeRAM) that: (i) achieves improved performance and storage scalability by leveraging Random Linear Network Codes (RLNC); (ii) scales in the number of supported atomic objects by introducing a new object placement and discovery approach based on a consistent hashing ring; (iii) scales in the number of participants by allowing dynamic joins and departures leveraging a blockchain oracle to serve as a registry service; and (iv) is secure against malicious behavior by tolerating Byzantine failures.
-  Experimental results over a globally distributed set of nodes, help us realize the performance and scalability gains of OPTIMUM-DERAM over previous distributed shared memory solutions (i.e., the ABD algorithm [3])
-]]></content:encoded>
-<pubDate>Wed, 21 Jan 2026 00:00:00 -0500</pubDate>
-</item>
-<item>
-<title>Towards Scalable Federated Container Orchestration: The CODECO Approach</title>
-<link>https://arxiv.org/abs/2601.13351</link>
-<guid>https://arxiv.org/abs/2601.13351</guid>
-<content:encoded><![CDATA[
-<div> 联邦编排、Kubernetes、数据-计算-网络协同、AI辅助决策、混合治理模型<br /><br />总结:<br />1. CODECO是一个面向Kubernetes的联邦编排框架，旨在克服以云为中心部署的局限性。<br />2. 采用数据-计算-网络协同编排方法，支持异构基础设施、移动性和多提供商操作。<br />3. 通过语义应用模型、基于分区的联邦机制和AI辅助决策，实现上下文感知的应用与微服务部署及自适应管理。<br />4. 引入混合治理模型，在保持全局一致性的同时，保障边缘节点的自主性。<br />5. 提出了CODECO的架构、核心组件、典型编排工作流，并构建了基于软件的可复现实验框架用于评估。 <div>
-arXiv:2601.13351v1 Announce Type: new 
-Abstract: This paper presents CODECO, a federated orchestration framework for Kubernetes that addresses the limitations of cloud-centric deployment. CODECO adopts a data-compute-network co-orchestration approach to support heterogeneous infrastructures, mobility, and multi-provider operation.
-  CODECO extends Kubernetes with semantic application models, partition-based federation, and AI-assisted decision support, enabling context-aware placement and adaptive management of applications and their micro-services across federated environments. A hybrid governance model combines centralized policy enforcement with decentralized execution and learning to preserve global coherence while supporting far Edge autonomy. The paper describes the architecture and core components of CODECO, outlines representative orchestration workflows, and introduces a software-based experimentation framework for reproducible evaluation in federated Edge-Cloud infrastructure environments.
-]]></content:encoded>
-<pubDate>Wed, 21 Jan 2026 00:00:00 -0500</pubDate>
-</item>
-<item>
-<title>Stochastic Dynamic Pricing of Electric Vehicle Charging with Heterogeneous User Behavior: A Stackelberg Game Framework</title>
-<link>https://arxiv.org/abs/2601.13571</link>
-<guid>https://arxiv.org/abs/2601.13571</guid>
-<content:encoded><![CDATA[
-<div> 关键词：电动汽车、动态定价、行为异质性、随机优化、排队近似<br /><br />总结:  
-1. 电动汽车（EV）普及带来充电站时空需求管理挑战，传统动态定价模型因简化用户行为而缺乏可扩展性。  
-2. 研究提出一个基于双层Stackelberg博弈的随机动态定价框架，上层优化时变价格以最大化系统效用，下层采用多项式Logit（MNL）模型刻画用户在价格敏感度、电池老化、风险偏好和路网成本下的分散选择行为。  
-3. 模型摒弃网络均衡约束，通过排队论近似处理拥堵效应，提升可扩展性。  
-4. 采用滚动时域策略，结合动态概率敏感性分析引导的交叉熵法（PSA-CEM）与逐次平均法（MSA）高效求解大规模优化问题。  
-5. 基于墨尔本Clayton地区22个充电站的实证研究表明，该机制显著降低排队惩罚并提升用户效用，优于固定电价和分时电价方案。 <div>
-arXiv:2601.13571v1 Announce Type: new 
-Abstract: The rapid adoption of electric vehicles (EVs) introduces complex spatiotemporal demand management challenges for charging station operators (CSOs), exacerbated by demand imbalances, behavioral heterogeneity, and system uncertainty. Traditional dynamic pricing models, often relying on deterministic EV-CS pairings and network equilibrium assumptions, frequently oversimplify user behavior and lack scalability. This study proposes a stochastic, behaviorally heterogeneous dynamic pricing framework formulated as a bi-level Stackelberg game. The upper level optimizes time-varying pricing to maximize system-wide utility, while the lower level models decentralized EV users via a multinomial logit (MNL) choice model incorporating price sensitivity, battery aging, risk attitudes, and network travel costs. Crucially, the model avoids network equilibrium constraints to enhance scalability, with congestion effects represented via queuing-theoretic approximations. To efficiently solve the resulting large-scale optimization problem, a rolling-horizon approach combining the Dynamic Probabilistic Sensitivity Analysis-guided Cross-Entropy Method (PSA-CEM) with the Method of Successive Averages (MSA) is implemented. A real-world case study in Clayton, Melbourne, validates the framework using 22 charging stations. Simulation results demonstrate that the proposed mechanism substantially reduces queuing penalties and improves user utility compared to fixed and time-of-use pricing. The framework provides a robust, scalable tool for strategic EV charging management, balancing realism with computational efficiency.
-]]></content:encoded>
-<pubDate>Wed, 21 Jan 2026 00:00:00 -0500</pubDate>
-</item>
-<item>
-<title>A Blockchain-Oriented Software Engineering Architecture for Carbon Credit Certification Systems</title>
-<link>https://arxiv.org/abs/2601.13772</link>
-<guid>https://arxiv.org/abs/2601.13772</guid>
-<content:encoded><![CDATA[
-<div> 碳信用、区块链、物联网、可再生能源、认证体系<br /><br />总结:<br />1. 碳信用体系作为激励减排和推动清洁能源转型的政策工具，依赖于将实际可再生能源发电量与可验证的减排记录相连接的机制。<br />2. 现有基于区块链和物联网的技术多聚焦于排放监测与交易，对中小型可再生能源项目的碳信用认证支持不足。<br />3. 本文提出一种基于区块链的碳信用认证架构，通过100 kWp光伏案例验证，整合实时物联网数据采集、边缘层聚合及基于许可链的智能合约安全上链存储。<br />4. 该系统区别于侧重交易机制的方法，符合欧洲法规及自愿碳市场标准，明确光伏运营商在认证过程中的实际要求与约束。<br />5. 所构建架构为生成可验证的碳信用记录和第三方核查提供了结构化路径。 <div>
-arXiv:2601.13772v1 Announce Type: new 
-Abstract: Carbon credit systems have emerged as a policy tool to incentivize emission reductions and support the transition to clean energy. Reliable carbon-credit certification depends on mechanisms that connect actual, measured renewable-energy production to verifiable emission-reduction records. Although blockchain and IoT technologies have been applied to emission monitoring and trading, existing work offers limited support for certification processes, particularly for small and medium-scale renewable installations. This paper introduces a blockchain-based carbon-credit certification architecture, demonstrated through a 100 kWp photovoltaic case study, that integrates real-time IoT data collection, edge-level aggregation, and secure on-chain storage on a permissioned blockchain with smart contracts. Unlike approaches focused on trading mechanisms, the proposed system aligns with European legislation and voluntary carbon-market standards, clarifying the practical requirements and constraints that apply to photovoltaic operators. The resulting architecture provides a structured pathway for generating verifiable carbon-credit records and supporting third-party verification.
-]]></content:encoded>
-<pubDate>Wed, 21 Jan 2026 00:00:00 -0500</pubDate>
-</item>
-<item>
-<title>Know Your Contract: Extending eIDAS Trust into Public Blockchains</title>
-<link>https://arxiv.org/abs/2601.13903</link>
-<guid>https://arxiv.org/abs/2601.13903</guid>
-<content:encoded><![CDATA[
-<div> 区块链、eIDAS、智能合约、数字身份、合规验证<br /><br />总结:  
-1. 公有链缺乏将链上行为归责于法律实体的机制，阻碍了机构采用与监管合规。  
-2. 本文提出一种架构，通过将欧盟eIDAS框架中的合格电子印章（由合格信任服务提供者签发）与智能合约密码学绑定，建立从欧盟可信列表到链上地址的可验证信任链。  
-3. 该机制支持机器可验证的合规证明（如“了解你的合约/对手方/业务”），无需引入新中介。  
-4. 分析了eIDAS、MiCA、PSD2、PSR及欧洲企业钱包等法规要求，并确定采用ECDSA（P-256）与CAdES格式以满足eIDAS规定和EVM执行限制。  
-5. 提出两种信任验证模型：链下用于代理支付协议，链上用于法人实体间的合规DeFi操作，实现首次交互即可自动互验，为机构参与DeFi、现实资产代币化和智能体商业提供合规路径。 <div>
-arXiv:2601.13903v1 Announce Type: new 
-Abstract: Public blockchains lack native mechanisms to attribute on-chain actions to legally accountable entities, creating a fundamental barrier to institutional adoption and regulatory compliance. This paper presents an architecture that extends the European Union eIDAS trust framework into public blockchain ecosystems by cryptographically binding smart contracts to qualified electronic seals issued by Qualified Trust Service Providers. The mechanism establishes a verifiable chain of trust from the European Commission List of Trusted Lists to individual on-chain addresses, enabling machine-verifiable proofs for automated regulatory validation, such as Know Your Contract, Counterparty, and Business checks, without introducing new trusted intermediaries. Regulatory requirements arising from eIDAS, MiCA, PSD2, PSR, and the proposed European Business Wallet are analyzed, and a cryptographic suite meeting both eIDAS implementing regulations and EVM execution constraints following the Ethereum Fusaka upgrade is identified, namely ECDSA with P-256 and CAdES formatting. Two complementary trust validation models are presented: an off-chain workflow for agent-to-agent payment protocols and a fully on-chain workflow enabling regulatory-compliant DeFi operations between legal entities. The on-chain model converts regulatory compliance from a per-counterparty administrative burden into an automated, standardized process, enabling mutual validation at first interaction without prior business relationships. As eIDAS wallets become mandatory across EU member states, the proposed architecture provides a pathway for integrating European digital trust infrastructure into blockchain-based systems, enabling institutional DeFi participation, real-world asset tokenization, and agentic commerce within a trusted, regulatory-compliant framework.
-]]></content:encoded>
-<pubDate>Wed, 21 Jan 2026 00:00:00 -0500</pubDate>
-</item>
-<item>
-<title>Decentralized Infrastructure for Digital Notarizing, Signing and Sharing Files using Blockchain</title>
-<link>https://arxiv.org/abs/2601.13907</link>
-<guid>https://arxiv.org/abs/2601.13907</guid>
-<content:encoded><![CDATA[
-<div> 区块链、数字公证、去中心化、文档安全、不可篡改<br /><br />总结:<br />1. 传统纸质文档管理存在安全性低、易伪造、易丢失及效率低下等问题。<br />2. 尽管数字化有所进展，官方文档仍面临伪造、丢失和未授权访问的风险。<br />3. 本研究提出基于区块链的去中心化基础设施，用于文档的数字公证、签署与共享。<br />4. 通过结合密码学与去中心化存储，构建透明、不可篡改且可行的系统架构。<br />5. 研究表明，该方案可提升文档管理的安全性与效率，简化行政流程并增强用户信任。 <div>
-arXiv:2601.13907v1 Announce Type: new 
-Abstract: Traditional paper-based document management has long posed challenges related to security, authenticity, and efficiency. Despite advances in digitalization, official documents remain vulnerable to forgery, loss, and unauthorized access. This thesis proposes a decentralized infrastructure for digital notarization, signing, and sharing of documents using blockchain technology. The research addresses key issues of transparency, immutability, and feasibility by defining system requirements, evaluating existing solutions, and proposing a novel architecture based on distributed systems.
-  By combining cryptographic techniques with decentralized storage, this research contributes to the development of a more secure and efficient framework for managing official documents. The findings highlight the potential of blockchain-based digital notarization to streamline bureaucratic processes, mitigate security risks, and enhance user trust in digital document management.
-]]></content:encoded>
-<pubDate>Wed, 21 Jan 2026 00:00:00 -0500</pubDate>
-</item>
-<item>
-<title>Decentralized Cooperative Beamforming for BDRIS-Assisted Cell-Free MIMO OFDM Systems</title>
-<link>https://arxiv.org/abs/2601.13201</link>
-<guid>https://arxiv.org/abs/2601.13201</guid>
-<content:encoded><![CDATA[
-<div> 关键词：BDRIS、去中心化波束成形、多用户MIMO-OFDM、智能无线环境、和速率最大化<br /><br />总结:  
-1. 本文研究了一种基于多个超越对角可重构智能表面（BDRIS）的宽带无小区多流多用户MIMO-OFDM系统。  
-2. 提出了一种新颖的去中心化主动与被动波束成形框架，该框架在信道状态信息不完美且基站间仅需最小协作的情况下，仍能有效配置共享BDRIS。  
-3. 该方法显著降低了传统集中式方案对高算力中央处理器的依赖及通信开销。  
-4. 采用动态组连接（DGC）架构的BDRIS，其单元具有频率选择性响应，联合优化BDRIS的可调电容、置换矩阵及基站预编码矩阵以最大化系统和速率。  
-5. 仿真结果表明，所提去中心化协作方案优于非协作基准，且DGC架构性能接近更复杂的全连接BDRIS结构。 <div>
-arXiv:2601.13201v1 Announce Type: cross 
-Abstract: In this paper, a wideband cell-free multi-stream multi-user Multiple-Input Multiple-Output (MIMO) Orthogonal Frequency Division Multiplexing (OFDM) system is considered operating within a smart wireless environment enabled by multiple Beyond Diagonal Reconfigurable Intelligent Surfaces (BDRISs). A novel decentralized active and passive beamforming framework, robust to imperfect channel state availability and with minimal cooperation among the system's multiple Base Stations (BSs) for deciding the final configurations of the shared BDRISs, is proposed, which aims to substantially reduce the overhead inherent in centralized solutions necessitating a central processing unit of high computational power. By considering a Dynamic Group-Connected (DGC) BDRIS architecture with frequency-selective responses per unit element, we formulate the system's sum-rate maximization problem with respect to the tunable capacitances and permutation matrices of the BDRISs as well as the precoding matrices of the BSs, which is solved via successive concave approximation and alternating projections as well as consensus-based updates for the BDRISs' design. Through extensive simulation results, it is showcased that the proposed robust decentralized cooperative approach with diverse BDRIS architectures outperforms non-cooperation benchmarks. It is also demonstrated that the considered DGC BDRIS architecture is able to provide sum-rate performance gains sufficiently close to the more complex fully-connected BDRIS structure.
-]]></content:encoded>
-<pubDate>Wed, 21 Jan 2026 00:00:00 -0500</pubDate>
-</item>
-<item>
-<title>LinkDID: A Privacy-Preserving, Sybil-Resistant and Key-Recoverable Decentralized Identity Scheme</title>
-<link>https://arxiv.org/abs/2307.14679</link>
-<guid>https://arxiv.org/abs/2307.14679</guid>
-<content:encoded><![CDATA[
-<div> 去中心化身份、Sybil攻击防御、匿名凭证、密钥恢复、区块链绑定<br /><br />总结:<br />1. LinkDID是一种新型去中心化身份方案，解决Web3中因任意创建标识符导致的Sybil攻击和密钥丢失风险。<br />2. 通过区块链绑定标识符与用户，并逐步将同一持有者的多个标识符合并为统一关联标识符，实现Sybil攻击的渐进式防御。<br />3. 支持无需信任的密钥恢复机制，用户可通过证明对关联结构的认知来恢复被盗或丢失的标识符。<br />4. 利用区块链上的标识符-密钥绑定和所有权证明，防止未授权资产转移，并支持不可转让的匿名凭证。<br />5. 实验表明，LinkDID在普通设备上实现高效性能，标识符关联和凭证展示分别仅需2.41秒和3.31秒。 <div>
-arXiv:2307.14679v3 Announce Type: replace 
-Abstract: Decentralized identity frameworks grant users full sovereignty over their digital assets in the Web3 ecosystem. However, allowing arbitrary creation of identifiers makes the system susceptible to Sybil attacks and puts assets at risk when keys are lost or compromised. Moreover, the lack of identification prevents anonymous credential schemes from deterring malicious transfers. While existing solutions attempt to address these issues by linking identifiers to entities through trusted intermediaries, these entities are not always accessible and require costly offline interactions.
-  In this work, we introduce LinkDID, a decentralized identity scheme offering Sybil resistance, trustless key recovery, and nontransferable anonymous credentials. LinkDID creates blockchainbased bindings between identifiers and gradually combines identifiers belonging to the same holder into a unified associated identifier. As all identifiers within an association are presumed to belong to one individual, any fraudulent activity can be detected. The association grows larger as interactions increase, substantially reducing the likelihood of successful Sybil attacks. This mechanism allows holders to recover identifiers with lost or stolen keys by proving knowledge of specific association structures. Additionally, LinkDID prevents unauthorized transfers through blockchain-based identifier-key bindings and proofs of ownership for credentials.
-  The evaluation shows that LinkDID effectively achieves progressive Sybil resistance while surpassing state-of-the-art anonymous credential schemes, achieving identifier association and credential presentation times of 2.41s and 3.31s on consumer-grade devices.
 ]]></content:encoded>
 <pubDate>Wed, 21 Jan 2026 00:00:00 -0500</pubDate>
 </item>
