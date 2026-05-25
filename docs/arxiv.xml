@@ -4,6 +4,105 @@
 <title>cs updates on arXiv.org</title>
 <link>http://rss.arxiv.org/rss/cs</link>
 
+<item>
+<title>SolarChain: Bridging Physical Law, Verifiable Trust, and Sustainable Markets for Urban Energy Resilience</title>
+<link>https://arxiv.org/abs/2605.23162</link>
+<guid>https://arxiv.org/abs/2605.23162</guid>
+<content:encoded><![CDATA[
+
+arXiv:2605.23162v1 Announce Type: new 
+Abstract: Urban decarbonization requires scaling rooftop solar across millions of fragmented producers, yet cities face a fundamental tension: energy data is easily manipulated, and economic incentives often reward speculation rather than actual infrastructure deployment. We present SolarChain, a platform that resolves both problems by anchoring digital accountability to the thermodynamic limits of solar energy conversion. Using real-time meteorological data, geospatial coordinates, and first-principles calculations of solar yield, the system establishes a hard physical boundary for every panel's maximum possible output; any reported generation exceeding this limit is automatically rejected before entering the shared ledger. This trustless verification enables a peer-to-peer marketplace with programmatic reward structures that continuously reinvest value into equipment maintenance and market liquidity, preventing the speculative hoarding that typically destabilizes blockchain-based marketplaces. When electricity is consumed, the corresponding digital credits are permanently retired in direct proportion to physical energy dissipation, creating an auditable one-to-one mapping between urban consumption and carbon accounting. Deployed across heterogeneous city nodes, the prototype demonstrates resilience against data injection attacks while lowering capital barriers for community-level solar expansion. Beyond energy, the framework offers a general model for coordinating economic activity with physical law in any domain where distributed infrastructure demands both data integrity and sustainable investment. We release the data and code as open-access on GitHub.
+]]></content:encoded>
+<pubDate>Mon, 25 May 2026 00:00:00 -0400</pubDate>
+<pubDate>Mon, 25 May 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>BCTuner: LLM-Guided Monte Carlo Tree Search for Efficient Blockchain Knob Tuning</title>
+<link>https://arxiv.org/abs/2605.23280</link>
+<guid>https://arxiv.org/abs/2605.23280</guid>
+<content:encoded><![CDATA[
+
+arXiv:2605.23280v1 Announce Type: new 
+Abstract: Knob tuning plays a critical role in improving the performance of permissioned blockchains. However, efficient tuning remains challenging due to the architectural complexity of blockchains and the semantic gap between knob-specific logic and the numerical optimization requirements of tuning tools. In addition, configuration changes are often coupled across different stages of the transaction pipeline, making their performance impact difficult to isolate and predict. Since each trial requires deployment and distributed benchmarking, ineffective exploration incurs substantial cost. These challenges motivate BCTuner, a Large Language Model (LLM)-guided framework that combines knowledge-guided reasoning with structured search. BCTuner organizes multi-source tuning knowledge to support LLM-based reasoning over knob semantics, constraints, and deployment context. It formulates tuning as a Monte Carlo Tree Search (MCTS) process over structured action trajectories, where configurations are incrementally constructed, validated, evaluated, and refined rather than generated in one step. BCTuner further applies adaptive pruning to discard infeasible or low-potential branches before system evaluation. We evaluate BCTuner on Hyperledger Fabric and ChainMaker under diverse workloads and network settings. Experimental results show that BCTuner achieves up to 211.38% throughput improvement over default configurations and outperforms the state-of-the-art blockchain tuning method by up to 20% in performance, while requiring up to 8x fewer interactions with the blockchain system.
+]]></content:encoded>
+<pubDate>Mon, 25 May 2026 00:00:00 -0400</pubDate>
+<pubDate>Mon, 25 May 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Unextractable Protocol Models: Collaborative Training and Inference without Weight Materialization</title>
+<link>https://arxiv.org/abs/2605.23464</link>
+<guid>https://arxiv.org/abs/2605.23464</guid>
+<content:encoded><![CDATA[
+
+arXiv:2605.23464v1 Announce Type: new 
+Abstract: We consider a decentralized setup in which the participants collaboratively train and serve a large neural network, and where each participant only processes a subset of the model. In this setup, we explore the possibility of unmaterializable weights, where a full weight set is never available to any one participant. We introduce Unextractable Protocol Models (UPMs): a training and inference framework that leverages the sharded model setup to ensure model shards (i.e., subsets) held by participants are incompatible at different time steps. UPMs periodically inject time-varying, random, invertible transforms at participant boundaries; preserving the overall network function yet rendering cross-time assemblies incoherent. On Qwen-2.5-0.5B and Llama-3.2-1B, 10,000 transforms leave FP32 perplexity unchanged ($\Delta$PPL $< 0.01$; Jensen-Shannon drift $< 4 \times 10^{-5}$), and we show how to control growth for lower precision datatypes. Applying a transform every 30s adds 3% latency, 0.1% bandwidth, and 10% GPU-memory overhead at inference, while training overhead falls to 1.6% time and $< 1$% memory. We consider several attacks, showing that the requirements of direct attacks are impractical and easy to defend against, and that gradient-based fine-tuning of stitched partitions consumes $\geq 60$% of the tokens required to train from scratch. By enabling models to be collaboratively trained yet not extracted, UPMs make it practical to embed programmatic incentive mechanisms in community-driven decentralized training.
+]]></content:encoded>
+<pubDate>Mon, 25 May 2026 00:00:00 -0400</pubDate>
+<pubDate>Mon, 25 May 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Herring: Parallel Batch-Order-Fairness on DAG-based Blockchain Consensus</title>
+<link>https://arxiv.org/abs/2605.23648</link>
+<guid>https://arxiv.org/abs/2605.23648</guid>
+<content:encoded><![CDATA[
+
+arXiv:2605.23648v1 Announce Type: new 
+Abstract: Transaction ordering attacks extract billions of dollars annually from decentralized finance users in the form of Maximal Extractable Value (MEV). Byzantine Fault-Tolerant (BFT) consensus protocols guarantee total order but place no constraint on how that order is chosen, leaving the door open for adversarial reordering. Batch-order-fairness (batch-OF) protocols close this gap, but existing designs pay a steep performance price for this guarantee. Leader-based protocols such as Themis concentrate all fairness decisions at a single replica, while recent DAG-based proposals FairDAG and DAG of DAGs (DoD) force their fairness layer into strictly serial execution despite running on multi-proposer DAGs.
+  We present Herring, the first $\gamma$-batch-OF DAG BFT protocol whose fairness layer parallelizes the dominant graph construction cost across committed subdags. Herring combines post-consensus graph construction with explicit missing edge resolution piggybacked on the DAG's reliable broadcast layer, a pairing that turns fair ordering from a per-round serial bottleneck into a CPU-bound task. We also uncover previously unreported liveness vulnerabilities in both FairDAG-RL and DoD that a malicious client can trigger to halt the fairness layer indefinitely, and propose patches that we integrate into our reimplementations.
+  We implement Herring on top of the Rust implementation of Narwhal \& Tusk and evaluate it against FairDAG-RL, DoD-W, and Themis. Herring tracks the throughput of Narwhal \& Tusk closely up to roughly $10{,}000$\,tx/s, achieves roughly $90\%$ higher saturation throughput than FairDAG-RL and $100\%$ higher than DoD-W, and substantially reduces execution latency at saturation.
+]]></content:encoded>
+<pubDate>Mon, 25 May 2026 00:00:00 -0400</pubDate>
+<pubDate>Mon, 25 May 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>AMP: Arc Multi-Proposer Protocol with Bounded Inclusion Guarantees</title>
+<link>https://arxiv.org/abs/2605.23677</link>
+<guid>https://arxiv.org/abs/2605.23677</guid>
+<content:encoded><![CDATA[
+
+arXiv:2605.23677v1 Announce Type: new 
+Abstract: Blockchain systems that settle financial transactions face a structural tension: the single validator that assembles each block holds unilateral power over transaction inclusion and ordering. Traditional markets curb this very power through front-running and market-manipulation laws. Regulators have flagged the absence of such rules as a first-order concern for blockchain-based financial infrastructure. In response, we introduce AMP, a multi-proposer protocol, on top of the Tendermint consensus algorithm, where no validator can control the flow of transactions into blocks. Instead, dedicated nodes called proposers sit between users and validators. They collect user transactions, group them into payloads, and broadcast the payloads to all validators. Consequently, there is no mempool, and AMP applies the design principle of separating dissemination from agreement, which can lead to higher throughput. Validators publicly attest to receiving payloads and run consensus to decide the set of payloads to include in the next block. When all correct validators attest to a given payload, AMP guarantees that payload will be included in the next block; a block thus contains payloads from multiple proposers, allowing for bulk finalization. This bounded inclusion guarantee along with a deterministic ordering algorithm which is run over all payloads included in a block, curbs the power of any single validator. Validators no longer control what is included in a block, nor can they arbitrarily order the contents of blocks.
+]]></content:encoded>
+<pubDate>Mon, 25 May 2026 00:00:00 -0400</pubDate>
+<pubDate>Mon, 25 May 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Swarical: An Integrated Hierarchical Approach to Localizing Flying Light Specks</title>
+<link>https://arxiv.org/abs/2605.23774</link>
+<guid>https://arxiv.org/abs/2605.23774</guid>
+<content:encoded><![CDATA[
+
+arXiv:2605.23774v1 Announce Type: new 
+Abstract: Swarical, a Swarm-based hierarchical localization technique, enables miniature drones, known as Flying Light Specks (FLSs), to accurately and efficiently localize and illuminate complex 2D and 3D shapes. Its accuracy depends on the physical hardware (sensors) of FLSs, which are used to track neighboring FLSs in order to localize themselves. It uses the hardware specification to convert mesh files into point clouds that enable a swarm of FLSs to localize at the highest accuracy afforded by their hardware. Swarical considers a heterogeneous mix of FLSs with different orientations for their tracking sensors, ensuring a line of sight between a localizing FLS and its anchor FLS. We present an implementation using Raspberry cameras and ArUco markers. A comparison of Swarical with a state of the art decentralized localization technique shows that it is as accurate and more than 2x faster.
+]]></content:encoded>
+<pubDate>Mon, 25 May 2026 00:00:00 -0400</pubDate>
+<pubDate>Mon, 25 May 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Routing Equilibrium in Mixed-Autonomy Traffic Networks with Altruistic Autonomous Agents</title>
+<link>https://arxiv.org/abs/2605.23782</link>
+<guid>https://arxiv.org/abs/2605.23782</guid>
+<content:encoded><![CDATA[
+
+arXiv:2605.23782v1 Announce Type: new 
+Abstract: Recent advancements in vehicle autonomy have drawn interest in understanding the impact of autonomous vehicles on traffic systems. In this paper, we study a traffic assignment problem in a mixed-autonomy setting where both human-driven and autonomous vehicles coexist. We model the interaction as a simultaneous routing game where human drivers are self-interested and aim to minimize their own travel times, while autonomous agents are altruistic and aim to minimize the total social cost. The standard nonatomic congestion game analysis establishes the existence of equilibrium to this game under convex cost functions, and does not have any implication of its uniqueness. In this work, we formulate the equilibrium as a variational inequality (VI), which enables us to establish the equilibrium existence without convexity assumption, and guarantees the uniqueness of the aggregated link flow and social cost at equilibrium under a specific class of cost functions. Leveraging this VI framework, we provide sufficient conditions under which including autonomous agents improves, deteriorates, or has no effect on social cost. While the possibility of deterioration has been established in prior work, our results complement existing worst-case bounds by explicitly characterizing sufficient conditions under which each outcome occurs, thereby providing a deeper understanding of mixed-autonomy traffic systems. Furthermore, we consider a centralized scenario where a social planner optimizes the routing of autonomous agents, and show that the same equilibrium is achieved as in the decentralized scenario when assuming convex costs.Finally, we conduct numerical experiments that illustrate how social cost changes with the amount of autonomous vehicles under different system parameters.
+]]></content:encoded>
+<pubDate>Mon, 25 May 2026 00:00:00 -0400</pubDate>
+<pubDate>Mon, 25 May 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>SDNator is Not Another SDN Controller: Enabling Extensible Data-Driven Control in Cyber-Physical Systems</title>
+<link>https://arxiv.org/abs/2605.23816</link>
+<guid>https://arxiv.org/abs/2605.23816</guid>
+<content:encoded><![CDATA[
+
+arXiv:2605.23816v1 Announce Type: new 
+Abstract: An SDN-like centralized control architecture is increasingly popular and has been widely explored in cyber-physical systems (CPS) such as manufacturing, internet-of-things, and autonomous vehicle systems for higher flexibility, programmability and scalability. However, no existing frameworks can offer domain-agnostic, easily extensible support for data-driven CPS applications. In this work, we design, implement, and open-source \textit{SDNator}, the first framework to enable extensible, data-driven control in CPS. SDNator embraces an application- and data-driven design where applications function as data consumers and producers to collectively define the workflows of the controller. SDNator also incorporates two data store backends to support both event-driven and data-driven programming patterns. Benchmarks show that SDNator is highly scalable, and delivers comparable performance to Ryu, a widely used SDN controller.
+  Moreover, we demonstrate the capabilities and usability of SDNator through our case studies of manufacturing and networking systems. By integrating applications from respective domains, we build different ``controllers'' for different scenarios. Most notably, we leverage SDNator to implement the first digital-twin-equipped central controller for additive manufacturing fleets. We show through extensive and realistic simulations that SDNator-based scheduling can (1) significantly shorten production time and improve reliability in the presence of anomalies compared to decentralized approaches, and (2) flexibly adjust and optimize production plans upon urgent requests such as producing Personal Protective Equipment during the COVID-19 pandemic.
+]]></content:encoded>
+<pubDate>Mon, 25 May 2026 00:00:00 -0400</pubDate>
+<pubDate>Mon, 25 May 2026 00:00:00 -0400</pubDate>
+</item>
 
 <item>
 <title>Chain Reactions: How Nonce Collisions in ECDSA Compromise Polygon MEV Searchers</title>
