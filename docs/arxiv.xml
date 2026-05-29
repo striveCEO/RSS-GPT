@@ -4,6 +4,164 @@
 <title>cs updates on arXiv.org</title>
 <link>http://rss.arxiv.org/rss/cs</link>
 
+<item>
+<title>FedQHD: Closed-Form Function-Space Federated Reinforcement Learning</title>
+<link>https://arxiv.org/abs/2605.29002</link>
+<guid>https://arxiv.org/abs/2605.29002</guid>
+<content:encoded><![CDATA[
+
+arXiv:2605.29002v1 Announce Type: new 
+Abstract: Federated reinforcement learning enables decentralized agents to collaboratively improve policies or value estimates without exchanging raw trajectories. However, FedAvg-style parameter averaging is not function-space consistent: when clients use heterogeneous encoders or even identical nonlinear networks, averaged parameters need not correspond to the weighted average of client value functions in any common function space. We propose FedQHD, a federated Q-learning method using hyperdimensional (random-feature) state encoders with a linear readout, so that Q-functions are nonlinear in state yet linear in trainable parameters. This linear structure enables closed-form aggregation. With a shared encoder, the function-space consensus update coincides exactly with weighted averaging of local readout matrices. With heterogeneous encoders, the server constructs a global teacher by averaging client Q-values on a shared anchor-state set, and each client compiles this teacher into its local representation via a single ridge projection. We formalize the federation gap -- the error incurred when compiling a federated teacher into a heterogeneous client representation -- relative to a client-specific oracle projection. We show that this gap decomposes into subspace misalignment, anchor-set conditioning, and regularization bias. We further identify the anchor-to-dimension ratio $m \geq D_i$ as the well-conditioned regime in which the gap reduces to a multiple of the encoder heterogeneity floor. On four continuous-state, discrete-action control benchmarks, FedQHD matches or outperforms FedAvg-style baselines and distillation-based alternatives while requiring substantially less computation, and the empirical dependence of the federation gap on encoder dimension matches our theoretical analysis.
+]]></content:encoded>
+<pubDate>Fri, 29 May 2026 00:00:00 -0400</pubDate>
+<pubDate>Fri, 29 May 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>SCDBench: A Benchmark for LLM-Based Smart Contract Decompilers</title>
+<link>https://arxiv.org/abs/2605.29059</link>
+<guid>https://arxiv.org/abs/2605.29059</guid>
+<content:encoded><![CDATA[
+
+arXiv:2605.29059v1 Announce Type: new 
+Abstract: Smart contract decompilation aims to recover high-level source code from bytecode, but evaluating decompilers remains difficult because existing studies use narrow datasets, inconsistent metrics, and limited semantic consistency checks. This gap is increasingly important as large language models (LLMs) begin to generate source-like Solidity that may compile and appear plausible, even when its semantics diverge from the original contract. We introduce SCDBench, a dataset and benchmark methodology for LLM-based smart contract decompilation. The dataset contains 600 real-world Solidity contracts with paired bytecode inputs, ground-truth source code, and replayable semantic checkpoints. SCDBench evaluates decompiler outputs through four cumulative stages: format completeness, compilability, Application Binary Interface (ABI) recovery, and semantic consistency via differential replay. We evaluate Claude Opus 4.7, GPT-5.3-Codex, and GLM-5 in a zero-shot decompilation setting, including GLM-5 variants with and without extended reasoning and a zero-shot compilation-repair setting. The results show that frontier LLMs can often produce structured and compilable Solidity, but achieving semantic consistency remains far from solved: the best-performing frontier model perfectly decompiles only 42/600 contracts. We further show that introducing same-model compilation repair substantially improves performance at modest additional cost. SCDBench establishes a common ground for rigorous, reproducible evaluation and aims to accelerate the development of reliable smart contract decompilers for blockchain security and transparency.
+]]></content:encoded>
+<pubDate>Fri, 29 May 2026 00:00:00 -0400</pubDate>
+<pubDate>Fri, 29 May 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Techreport: Evaluating Tor-based Location Privacy for Ethereum Validators</title>
+<link>https://arxiv.org/abs/2605.29131</link>
+<guid>https://arxiv.org/abs/2605.29131</guid>
+<content:encoded><![CDATA[
+
+arXiv:2605.29131v1 Announce Type: new 
+Abstract: Privacy and anonymity of validators, especially regarding IP address linkability, are essential to protect the Ethereum network from various attacks. Network-level attacks, such as DoS, can interrupt validators and affect the overall security of the Ethereum network. Correlating the IP addresses of validators with their identities, along with knowledge about their action slots can be exploited by attackers to cause network delays, MEV exploitation, and finality risks. Therefore, ensuring the unlinkability of a validator's IP and identity is crucial for maintaining the network's trust and resilience. In this techreport, we first provide a review of the existing network and consensus layer techniques that have been proposed for maintaining validator privacy in the Ethereum blockchain. Secondly, we evaluate a Tor-based protocol named Tor push that helps unlink validator identities (IDs) from their nodes' IP addresses, thereby making it difficult to determine any end-to-end correlation between validator IDs and IP addresses of validators' beacon nodes. To evaluate the effectiveness of Tor push, we present a working, deployed proof-of-concept (PoC) implementation in the Nimbus Ethereum client. Our PoC deployment pushes attestations, aggregations, and block proposals over Tor to the Goerli testnet. Furthermore, we also analyse the security and latency of Tor push. Our experimental results suggest that Tor can be incorporated into the existing Ethereum network with a tolerable latency overhead of 613.82 ms on average and without compromising the overall network performance while enhancing the location privacy of validators in the Ethereum network.
+]]></content:encoded>
+<pubDate>Fri, 29 May 2026 00:00:00 -0400</pubDate>
+<pubDate>Fri, 29 May 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>DeepFake Forensics AI: A Multi-Modal Detection and Blockchain-Anchored Evidence Management Platform</title>
+<link>https://arxiv.org/abs/2605.29353</link>
+<guid>https://arxiv.org/abs/2605.29353</guid>
+<content:encoded><![CDATA[
+
+arXiv:2605.29353v1 Announce Type: new 
+Abstract: The proliferation of AI-generated synthetic media poses a critical threat to the integrity of digital evidence in legal and forensic contexts. Existing deepfake detection systems typically address a single modality and provide no mechanism for tamper-proof evidence preservation. We present DeepFake Forensics AI, a unified platform that detects synthetic media across image, video, and audio modalities, identifies generative architecture fingerprints, and anchors forensic evidence immutably on the Ethereum blockchain. Our system trains four independent neural networks from scratch: an EfficientNet-B4 image detector (AUC = 0.9868), a Bidirectional LSTM video detector (AUC= 0.9628), an ECAPA-TDNN audio detector (EER = 18.63%), and a novel GAN fingerprinting module (accuracy = 99.88%) that identifies the generative architecture behind a fake image. Evidence files are hashed with SHA-256, stored on IPFS via Pinata, and registered on-chain via a Solidity smart contract with role-based access control. The platform provides a React frontend and FastAPI backend suitable for deployment in forensic and legal workflows. To our knowledge, this is the first system to unify multi-modal deepfake detection with blockchain-based chain-of custody management.
+]]></content:encoded>
+<pubDate>Fri, 29 May 2026 00:00:00 -0400</pubDate>
+<pubDate>Fri, 29 May 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Decentralized LLM-Driven Coordination of Acoustic Robots for Contactless Object Manipulation</title>
+<link>https://arxiv.org/abs/2605.29378</link>
+<guid>https://arxiv.org/abs/2605.29378</guid>
+<content:encoded><![CDATA[
+
+arXiv:2605.29378v1 Announce Type: new 
+Abstract: Natural language interfaces can simplify interaction with multi-robot systems, especially when non-expert users need to issue high-level commands. Acoustic manipulation using ultrasonic phased arrays also enables contactless object handling for applications such as healthcare, laboratory automation, and precision transport. However, combining large language models (LLMs) with distributed acoustic mobile robots remains underexplored. This paper presents a decentralized framework for natural language-driven coordination of acoustic robots for contactless object manipulation. The system converts spoken instructions into executable multi-robot task plans using Whisper-based speech recognition, LLM-based semantic parsing, structured JSON task representation, and distributed scheduling. The JSON schema encodes robot assignments, temporal dependencies, spatial constraints, and synchronization requirements for sequential, parallel, and synchronized execution. The system is implemented on two TurtleBot3-based acoustic robots, each equipped with an ultrasonic phased array for contactless object transport. Experiments were conducted in three scenarios: sequential execution, parallel multi-robot transport, and synchronized cooperative manipulation. The system achieved task success rates of 96 percent for sequential tasks, 86 percent for parallel execution, and 70 percent for synchronized collaborative transport. These results show that natural language commands can be transformed into distributed robot actions for contactless manipulation, highlighting the potential of LLM-driven automation for human-robot interaction in distributed robotic systems.
+]]></content:encoded>
+<pubDate>Fri, 29 May 2026 00:00:00 -0400</pubDate>
+<pubDate>Fri, 29 May 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Temporal Motif-aware Graph Test-time Adaptation for OOD Blockchain Anomaly Detection</title>
+<link>https://arxiv.org/abs/2605.29526</link>
+<guid>https://arxiv.org/abs/2605.29526</guid>
+<content:encoded><![CDATA[
+
+arXiv:2605.29526v1 Announce Type: new 
+Abstract: Ever-evolving transaction patterns have significantly hindered anomaly detection on emerging cryptocurrency blockchains due to the vast number of addresses and diverse anomalous behaviors. Recently, advanced Graph Anomaly Detection (GAD) approaches applied to blockchains have faced two critical challenges: \textit{adversarial pattern evolution by malicious actors} and \textit{the out-of-distribution (OOD) problem caused by varied transaction semantics on blockchains}. To address these challenges, we propose a novel framework termed \textbf{TE}mporal \textbf{M}otif-aware \textbf{G}raph \textbf{T}est-\textbf{T}ime \textbf{A}daptation (\textbf{TEMG-TTA}). First, we comprehensively capture the 3-node temporal motif distribution of each active address using an efficient computational mechanism, enabling downstream temporal motif-aware graph learning. Second, we design a simple yet effective test-time adaptation strategy to facilitate the sharing of common patterns between training and testing graphs. Extensive experiments on 5 real-world datasets demonstrate that our proposed \textbf{TEMG-TTA} outperforms \textit{state-of-the-art} GAD approaches by an average of 54.88\%. A further case study on interpretable motif patterns reveals that \textbf{TEMG-TTA} explicitly characterizes the complex transaction patterns of anomalous addresses, thereby verifying the effectiveness of our technical designs. Our code will be made publicly available https://github.com/LuoXishuang0712/TEMG-TTA/.
+]]></content:encoded>
+<pubDate>Fri, 29 May 2026 00:00:00 -0400</pubDate>
+<pubDate>Fri, 29 May 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Distributed Nonlinear Model Predictive Control for District Heating Networks</title>
+<link>https://arxiv.org/abs/2605.29841</link>
+<guid>https://arxiv.org/abs/2605.29841</guid>
+<content:encoded><![CDATA[
+
+arXiv:2605.29841v1 Announce Type: new 
+Abstract: This paper presents a distributed nonlinear model predictive control that uses alternating direction method of mul tipliers for district heating networks. Exploiting a graph-based modeling of the thermal dynamics, our controller optimizes the mass flow absorption of buildings in a distributed cooperative scheme that mediates between the superior performance of the centralized control and the privacy preservation of the decentralized schemes. A benchmark three-building network simulation is used to compare the performance of the proposed solution with a decentralized model predictive control scheme.
+]]></content:encoded>
+<pubDate>Fri, 29 May 2026 00:00:00 -0400</pubDate>
+<pubDate>Fri, 29 May 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Ciphera: A Decentralised Biometric Identity Framework</title>
+<link>https://arxiv.org/abs/2605.29868</link>
+<guid>https://arxiv.org/abs/2605.29868</guid>
+<content:encoded><![CDATA[
+
+arXiv:2605.29868v1 Announce Type: new 
+Abstract: Centralised biometric identity systems expose users to single points of failure, opaque verification processes, and irreversible biometric compromise. Decentralised Identifiers (DIDs) and Verifiable Credentials (VCs) offer stronger privacy guarantees, yet their integration with biometric authentication and distributed verification remains insufficiently explored. This paper presents Ciphera, a decentralised biometric identity framework combining privacy-preserving facial recognition, multi-node verification, IPFS-based credential metadata storage, and blockchain-anchored revocation. Evaluated across functional, performance, security, and distributed consistency dimensions, Ciphera achieved an 81% functional success rate, with stable enrolment and authentication but measurable revocation propagation delays and occasional audit-log inconsistencies. Performance testing demonstrated sub-second p95 verification latency of approximately 820ms under concurrent multi-node conditions. Security analysis confirmed strong confidentiality and integrity guarantees, though incomplete liveness detection leaves susceptibility to deepfake and replay attacks. The results demonstrate the feasibility of decentralised biometric identity while identifying key engineering challenges for production-grade deployment.
+]]></content:encoded>
+<pubDate>Fri, 29 May 2026 00:00:00 -0400</pubDate>
+<pubDate>Fri, 29 May 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Agora: Toward Autonomous Bug Detection in Production-Level Consensus Protocols with LLM Agents</title>
+<link>https://arxiv.org/abs/2605.29910</link>
+<guid>https://arxiv.org/abs/2605.29910</guid>
+<content:encoded><![CDATA[
+
+arXiv:2605.29910v1 Announce Type: new 
+Abstract: Consensus protocols form the backbone of distributed systems and blockchains, where implementation bugs can cause data corruption and financial losses. While LLM-based approaches show promise in code analysis, they struggle with deep protocol-level logic bugs involving complex state-dependent behaviors across multiple execution stages. We present Agora, a domain-aware multi-agent framework that integrates hypothesis-driven testing with LLM capabilities for systematic protocol verification. Agora employs specialized agents that collaboratively explore protocol state spaces, synthesize attack scenarios using domain-specific constraints, and validate findings through iterative refinement. This explicit role separation enables reasoning about global protocol invariants beyond single-function code analysis. We evaluate Agora on four consensus implementations (Raft, EPaxos, HotStuff, BullShark) using four state-of-the-art LLMs. Agora discovers 15 previously unknown protocol-level logic bugs that violate safety properties, while existing LLM-based agents fail to detect any such protocol-level logic bugs. Our results demonstrate that domain-aware multi-agent collaboration is essential for detecting deep logic bugs in complex protocols.
+]]></content:encoded>
+<pubDate>Fri, 29 May 2026 00:00:00 -0400</pubDate>
+<pubDate>Fri, 29 May 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>A Rust-to-Lean Verification Pipeline with AI Provers: An Experience Report</title>
+<link>https://arxiv.org/abs/2605.30106</link>
+<guid>https://arxiv.org/abs/2605.30106</guid>
+<content:encoded><![CDATA[
+
+arXiv:2605.30106v1 Announce Type: new 
+Abstract: We describe a verification pipeline that takes production Rust cryptographic code and produces machine-checked correctness proofs in Lean 4. The pipeline combines three components: symbolic extraction tools (Charon and Aeneas, or Hax) that lift Rust into Lean 4; formal cryptographic specification libraries (ArkLib and CompPoly, from the Verified zkEVM project) that provide the mathematical targets; and AI provers (Aristotle from Harmonic AI and Aleph from Logical Intelligence) that close the resulting proof obligations. Every proof is checked by the Lean kernel, so AI output cannot compromise soundness.
+  Within the scope of the Ethereum Foundation's zkEVM Verification Project, we applied the pipeline to cryptographic primitives in Plonky3 (FRI folding, Mersenne31 and KoalaBear field arithmetic, Horner polynomial evaluation) and RISC Zero (Merkle inclusion verification). In addition, Aleph authored proofs of two bounds-style theorems in Plonky3's compute_log_arity_for_round that previously stood as sorry.
+  The paper describes the architecture, walks through a running example based on Aleph's two proofs, reports which classes of proof obligations AI closed and which required manual work, and discusses the engineering gaps we encountered: Lean 4 toolchain drift across tools and specific Aeneas/Hax extraction limits. We also document concrete missing lemmas, tactic gaps, and code-generation friction points discovered during proof development. We hope this contribution lowers the barrier to adoption of formal verification and facilitates more effective use of AI in this pipeline. The result is a working pipeline for formal verification of Rust, with kernel-checked proofs and reproducible artefacts.
+]]></content:encoded>
+<pubDate>Fri, 29 May 2026 00:00:00 -0400</pubDate>
+<pubDate>Fri, 29 May 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>CLVR Ordering of Transactions on AMMs</title>
+<link>https://arxiv.org/abs/2408.02634</link>
+<guid>https://arxiv.org/abs/2408.02634</guid>
+<content:encoded><![CDATA[
+
+arXiv:2408.02634v3 Announce Type: replace 
+Abstract: This paper introduces a trade ordering rule that aims to reduce intra-block price volatility in Automated Market Maker (AMM) powered decentralized exchanges. The ordering rule introduced here, Clever Look-ahead Volatility Reduction (CLVR), operates under the (common) framework in decentralized finance that allows some entities to observe trade requests before they are settled, assemble them into "blocks", and order them as they like. On AMM exchanges, asset prices are continuously and transparently updated as a result of each trade and therefore, transaction order has high financial value. CLVR aims to order transactions for traders' benefit. Our primary focus is intra-block price stability (minimizing volatility), which has two main benefits for traders: it reduces transaction failure rate and allows traders to receive closer prices to the reference price at which they submit their transactions accordingly. We show that CLVR constructs an ordering which approximately minimizes price volatility with a small computation cost and can be trivially verified externally.
+]]></content:encoded>
+<pubDate>Fri, 29 May 2026 00:00:00 -0400</pubDate>
+<pubDate>Fri, 29 May 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Offline Multi-agent Reinforcement Learning via Sequential Score Decomposition</title>
+<link>https://arxiv.org/abs/2505.05968</link>
+<guid>https://arxiv.org/abs/2505.05968</guid>
+<content:encoded><![CDATA[
+
+arXiv:2505.05968v3 Announce Type: replace 
+Abstract: Offline cooperative multi-agent reinforcement learning (MARL) faces unique challenges due to distributional shifts, particularly stemming from the high dimensionality of joint action spaces and the presence of out-of-distribution joint action selections. In this work, we highlight that a fundamental challenge in offline MARL arises from the multi-equilibrium nature of cooperative tasks, which induces a highly multimodal joint behavior policy space coupled with heterogeneous-quality behavior data. This makes it difficult for individual policy regularization to align with a consistent coordination pattern, leading to the policy distribution shift problems. To tackle this challenge, we design a sequential score function decomposition method that distills per-agent regularization signals from the joint behavior policy, which induces coordinated modality selection under decentralized execution constraints. Then we leverage a flexible diffusion-based generative model to learn these score functions from multimodal offline data, and integrate them into joint-action critics to guide policy updates toward high-reward, in-distribution regions under a shared team reward. Our approach achieves state-of-the-art performance across multiple particle environments and Multi-agent MuJoCo benchmarks consistently. To the best of our knowledge, this is the first work to explicitly address the distributional gap between offline and online MARL, paving the way for more generalizable offline policy-based MARL methods.
+]]></content:encoded>
+<pubDate>Fri, 29 May 2026 00:00:00 -0400</pubDate>
+<pubDate>Fri, 29 May 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Simulation-based planning of Motion Sequences for Automated Procedure Optimization in Multi-Robot Assembly Cells</title>
+<link>https://arxiv.org/abs/2507.23270</link>
+<guid>https://arxiv.org/abs/2507.23270</guid>
+<content:encoded><![CDATA[
+
+arXiv:2507.23270v2 Announce Type: replace 
+Abstract: Reconfigurable multi-robot cells offer a promising approach to meet fluctuating assembly demands. However, the recurrent planning of their configurations introduces new challenges, particularly in generating optimized, coordinated multi-robot motion sequences that minimize the assembly duration. This work presents a simulation-based method for generating such optimized sequences. The approach separates assembly steps into task-related core operations and connecting traverse operations. While core operations are constrained and predetermined, traverse operations offer substantial optimization potential. Scheduling the core operations is formulated as an optimization problem, requiring feasible traverse operations to be integrated using a decomposition-based motion planning strategy. Several solution techniques are explored, including a sampling heuristic, tree-based search and gradient-free optimization. For motion planning, a decomposition method is proposed that identifies specific areas in the schedule, which can be solved independently with modified centralized path planning algorithms. The proposed method generates efficient and collision-free multi-robot assembly procedures that outperform a baseline relying on decentralized, robot-individual motion planning. Its effectiveness is demonstrated through simulation experiments.
+]]></content:encoded>
+<pubDate>Fri, 29 May 2026 00:00:00 -0400</pubDate>
+<pubDate>Fri, 29 May 2026 00:00:00 -0400</pubDate>
+</item>
 
 <item>
 <title>On the Push-Based Asynchronous Federated Learning: A Bias-Correction Aggregation Approach</title>
