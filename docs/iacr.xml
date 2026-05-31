@@ -4,6 +4,224 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+<item>
+<title>Dishonest Majority Multi-Party Arithmetic Garbling with Constant Rate</title>
+<link>https://eprint.iacr.org/2026/1105</link>
+<guid>https://eprint.iacr.org/2026/1105</guid>
+<content:encoded><![CDATA[
+
+Minimizing round complexity is a central goal in secure Multi-Party Computation (MPC), particularly for deployment on high-latency networks. While constant-round protocols with concrete efficiency have been constructed, they are typically designed for Boolean circuits and each gate incurs a bandwidth cost linear in the security parameter. Moreover, for arithmetic-heavy applications such as privacy-preserving machine learning and statistical analysis, compiling arithmetic operations into Boolean gates incurs another substantial overhead in circuit size and communication. Conversely, existing arithmetic MPC protocols, such as SPDZ, require interaction rounds proportional to the circuit depth, imposing significant latency.
+
+In this work, we bridge this gap by presenting the first concretely-efficient maliciously-secure MPC protocol that achieves both constant-round and constant-rate communication, where the rate is defined as the bandwidth cost per party divided by the number of gates and the size of the values each gate operates on. Our protocol computes over bounded integers and is secure against a static, malicious adversary corrupting up to $n-1$ parties. The protocol is built upon the arithmetic garbling framework of Ball et al. (Eurocrypt 2023) and follows the BMR template, assuming the Decisional Composite Residuosity for the garbling phase and Learning Parity with Noise for preprocessing.
+
+We evaluate our protocol on matrix-vector multiplication, a fundamental operation for data analysis. For standard computation parameters, we reduce communication bandwidth by $101\times$ to $247\times$ and improves end-to-end runtime by $4.4\times$ to $10.7\times$ compared to state-of-the-art constant-round Boolean MPC baselines, even when accounting for the overhead of a full bit-decomposition on the output vector.
+]]></content:encoded>
+<pubDate>Fri, 29 May 2026 18:34:59 +0000</pubDate>
+<pubDate>Fri, 29 May 2026 18:34:59 +0000</pubDate>
+</item>
+<item>
+<title>Toward zkSNARK-assisted Isogeny-based Cryptography</title>
+<link>https://eprint.iacr.org/2026/1096</link>
+<guid>https://eprint.iacr.org/2026/1096</guid>
+<content:encoded><![CDATA[
+
+Zero-knowledge proofs are a fundamental building block of modern privacy-preserving systems. In isogeny-based cryptography, existing zero-knowledge proof constructions are either limited to chains of small-degree isogenies or are quite inefficient. As a result, many relations used in recent cryptosystems lack support in generic proof systems.
+
+    In this work, we take a step toward making zkSNARKs practically usable for a broader set of isogeny relations beyond the classical isogeny path knowledge language. Leveraging optimized Vélu-style formulas, we provide an efficient R1CS encoding for $3^m$- and $4^n$-isogenies, along with their masked evaluations. We also present an R1CS for non-smooth isogenies of special degree $q(2^e - q)$, where $q$ is an odd integer, together with their evaluation. This latter encoding is based on the efficient formulas for $(2,2)$-isogenies in the theta model.
+
+    Finally, we demonstrate several concrete applications of our tools. We present a compiler that removes the ``one-more'' evaluation assumption in the signature based on DeuringVRF. We also discuss how to eliminate the hint-based assumption in SQISign and explain how to construct a key-validation mechanism for recent public-key encryption designs, such as POKÉ on the concept level. 
+    We provide the experimental results with respect to the constraint numbers under various isogeny NIST-1 primes for reference. 
+    Under the setting, the proof sizes considered in this work are bounded by 400 KB by the default setting. 
+    We hope our results will inspire further advances in isogeny-based constructions.
+]]></content:encoded>
+<pubDate>Fri, 29 May 2026 12:06:53 +0000</pubDate>
+<pubDate>Fri, 29 May 2026 12:06:53 +0000</pubDate>
+</item>
+<item>
+<title>Asymmetric Message Franking in the Plain Model: Generic and Efficient Constructions</title>
+<link>https://eprint.iacr.org/2026/1094</link>
+<guid>https://eprint.iacr.org/2026/1094</guid>
+<content:encoded><![CDATA[
+
+Asymmetric Message Franking (AMF), proposed by Tyagi et al. at Crypto’19, is a sort of signature scheme that aims to provide privacy-preserving content moderation in secure messaging applications. In this work, we present the first generic construction of AMF using a public-key encryption scheme, a signature scheme, and a ZAP proof system for NP languages. This construction yields the first AMF scheme provably secure in the plain model from standard assumptions, and has tight security. To improve the efficiency of AMF in the plain model, we build a concrete scheme from asymmetric pairing groups based on our idea for the generic construction. It achieves a signature size of 47 group elements, which is significantly smaller than an instantiation of the generic construction. Also, we provide a variant of the generic construction that yields a post-quantum secure AMF scheme in the plain model from a polynomially hard LWE assumption, demonstrating its feasibility.
+]]></content:encoded>
+<pubDate>Fri, 29 May 2026 10:36:55 +0000</pubDate>
+<pubDate>Fri, 29 May 2026 10:36:55 +0000</pubDate>
+</item>
+<item>
+<title>Anonymous yet Verifiable Privacy-preserving Demand Response</title>
+<link>https://eprint.iacr.org/2026/1093</link>
+<guid>https://eprint.iacr.org/2026/1093</guid>
+<content:encoded><![CDATA[
+
+Demand Response (DR) in energy systems is a flexibility mechanism enabling consumers to modify their electricity demand in response to signals from network operators, designed to ensure power grid reliability. 
+In particular, incentive-based DR programs, in which consumers provide load reduction in exchange for financial remuneration, have proven more effective than alternative approaches such as price-based programs. However, incentive-based approaches have taken only partial account of privacy considerations, mainly because they require smart meters to disclose user energy baselines and consumption patterns to aggregators in order to determine rewards. 
+
+In this paper, we propose a privacy-preserving scheme that supports incentive-based DR programs while ensuring the confidentiality of user data and identities. 
+We prove that our scheme provides data privacy, participation privacy, and public verifiability, and we present a prototype implementation together with a performance evaluation. Our results show that our construction is practical for real-world DR deployments with considerably large user populations.
+]]></content:encoded>
+<pubDate>Fri, 29 May 2026 08:39:05 +0000</pubDate>
+<pubDate>Fri, 29 May 2026 08:39:05 +0000</pubDate>
+</item>
+<item>
+<title>Practical Homomorphic LSTM via Programmable Bootstrapping</title>
+<link>https://eprint.iacr.org/2026/1091</link>
+<guid>https://eprint.iacr.org/2026/1091</guid>
+<content:encoded><![CDATA[
+
+While deep learning is ubiquitous, centralized pro-
+cessing exposes sensitive sequential data—such as natural lan-
+guage—to untrusted servers, forcing an unacceptable privacy-
+utility trade-off. Fully Homomorphic Encryption (FHE) re-
+solves this by computing directly on encrypted data. However,
+standard neural networks ported to FHE suffer from severe
+latency bottlenecks, particularly because continuous non-linear
+activations dominate the computational budget.
+To overcome this, we introduce the Blind Spiking LSTM
+(BSLSTM), a TFHE-optimized recurrent architecture for
+privacy-preserving sequential inference. By co-designing the
+network with the cryptographic framework, we replace expen-
+sive continuous non-linearities with an efficient multi-threshold
+programmable bootstrapping paradigm. Evaluated on stan-
+dard NLP tasks, BSLSTM achieves an inference latency of 5.2
+seconds for a 128-token sequence, significantly outperform-
+ing traditional homomorphic approaches while maintaining
+competitive accuracy. Operating at an amortized cost of 211
+microseconds per bootstrapping operation, our work demon-
+strates the practical viability of low-latency, fully homomorphic
+inference for real-world applications.
+]]></content:encoded>
+<pubDate>Fri, 29 May 2026 06:34:56 +0000</pubDate>
+<pubDate>Fri, 29 May 2026 06:34:56 +0000</pubDate>
+</item>
+<item>
+<title>Autonomous LLM-Orchestrated Side-Channel Extraction Against Fully Unrolled and Masked Architectures</title>
+<link>https://eprint.iacr.org/2026/1085</link>
+<guid>https://eprint.iacr.org/2026/1085</guid>
+<content:encoded><![CDATA[
+
+Unrolled cryptographic hardware architectures are
+increasingly deployed to maximize throughput, inherently intro-
+ducing massive algorithmic noise floors that frequently thwart
+traditional temporal Side-Channel Analysis (SCA). However, the
+reliance on structural combinational noise as a standalone coun-
+termeasure remains underexplored against adaptive, AI-driven
+profiling. This work presents a novel autonomous framework uti-
+lizing a Large Language Model (LLM) agent to orchestrate and
+execute differential power evaluations against a 161,000-gate fully
+unrolled AES-128 core on a target CW305 FPGA. We first estab-
+lish a baseline, demonstrating that standard Correlation Power
+Analysis (CPA) systematically fails to penetrate the unrolled noise
+floor, yielding statistically insignificant correlations (r ≈ 0.11).
+In response to this heuristic failure, the autonomous agent
+dynamically pivots to a Zero-State Differential Power Isolation
+methodology. By leveraging single-channel baseline subtraction,
+the agent mathematically cancels multi-round algorithmic noise
+from the global power trace, successfully isolating the target
+combinational leakage and achieving peak correlations exceeding
+r = 0.318 across all 16 state bytes. Furthermore, by comparing
+the extracted physical signatures to the logical target state, the
+framework autonomously extracts 16 unique physical-to-logical
+routing maps. This demonstrates that while automated Electronic
+Design Automation (EDA) synthesis inadvertently introduces
+physical bit-level obfuscation, these synthesis optimizations can be
+systematically reverse-engineered by agentic profiling. Ultimately,
+this work proves that unrolled combinational architectures can-
+not serve as a robust defense against adaptive, autonomous side-
+channel characterization.
+]]></content:encoded>
+<pubDate>Thu, 28 May 2026 18:01:25 +0000</pubDate>
+<pubDate>Thu, 28 May 2026 18:01:25 +0000</pubDate>
+</item>
+<item>
+<title>BRaccoon: Concurrently Secure Blind Lattice Signatures from Raccoon</title>
+<link>https://eprint.iacr.org/2026/1084</link>
+<guid>https://eprint.iacr.org/2026/1084</guid>
+<content:encoded><![CDATA[
+
+Blind signatures are a central primitive for privacy-preserving applications such as e-cash, anonymous credentials, and e-voting. In the post-quantum setting, existing constructions typically follow one of two paradigms: either signatures are realized as non-interactive zero-knowledge ($\mathsf{NIZK}$) proofs of valid underlying signatures, or they are obtained from identification schemes via the Fiat--Shamir transform. In both approaches, the resulting signatures deviate syntactically from standard signatures, incurring additional verification overhead and limiting compatibility with existing infrastructures. In contrast, classical constructions such as blind Schnorr yield signatures that are indistinguishable from ordinary ones. Achieving this property in the lattice setting has remained an open problem.
+
+We present $\mathsf{BRaccoon}$, the first lattice-based blind signature scheme that achieves concurrent security while producing signatures that are syntactically identical to those of a standard signature scheme. Our construction builds on the rejection-free lattice signature scheme $\mathsf{Raccoon}$, and extends the ``blind signatures from a signature assumption'' paradigm of Fuchsbauer and Wolf (EUROCRYPT~2024) to lattices. At a high level, we introduce blinding at the commitment stage and enforce correct challenge and response generation via linearly homomorphic encryption combined with $\mathsf{NIZK}$ proofs. As a result, $\mathsf{BRaccoon}$ signatures preserve the algebraic structure of $\mathsf{Raccoon}$ signatures while remaining compact: in an optimized instantiation, signatures are $32$ KB, public keys are $10$ KB, and total communication is $847$ KB for up to $2^{32}$ signatures.
+
+A central technical challenge stems from discrete Gaussian sampling, where blinding induces a non-trivial distributional shift that precludes direct security reductions. To overcome this, we introduce a modified scheme $\mathsf{Raccoon}^\star$ that explicitly captures this shift. We prove that one-more unforgeability of $\mathsf{BRaccoon}$ tightly reduces to the unforgeability of $\mathsf{Raccoon}^\star$, which in turn reduces to that of $\mathsf{Raccoon}$.
+
+For a concrete instantiation, we develop a hybrid proof framework that combines lattice-based zero-knowledge arguments for linear relations with arithmetic zk-SNARKs for hash computations, linked via structured commitments. Our work demonstrates that concurrently secure blind signatures with standard-signature syntax can be achieved in the lattice setting, providing a viable path toward practical and interoperable post-quantum privacy-preserving systems.
+]]></content:encoded>
+<pubDate>Thu, 28 May 2026 15:24:45 +0000</pubDate>
+<pubDate>Thu, 28 May 2026 15:24:45 +0000</pubDate>
+</item>
+<item>
+<title>Decentralizing Traitor Tracing: A Multi-Authority Approach</title>
+<link>https://eprint.iacr.org/2026/1076</link>
+<guid>https://eprint.iacr.org/2026/1076</guid>
+<content:encoded><![CDATA[
+
+Traitor tracing [Chor-Fiat-Naor; CRYPTO'94] has historically been formalized through the lens of a $\textit{single}$ trusted authority that samples the master keys and that, therefore, can read every ciphertext on its own. This $\textit{key escrow}$ problem makes traditional traitor tracing fundamentally incompatible with end-to-end encrypted broadcast networks. In this work, we study introduce $\textit{multi-authority traitor tracing}$ (MA-TT) [Goyal-Yadugiri; ePrint] a new decentralized model for traitor tracing in which the setup is split across $K$ asynchronous and non-interacting authorities, and a user can decrypt only by combining partial keys from $\textit{every}$ authority. We require that semantic security holds even when an arbitrary set of authorities is corrupted (as long as some honest partial key remains hidden for every user), and that traceability never accuses a user for whom an honest partial key remains hidden.
+
+We design MA-TT by combining any multi-authority attribute-based encryption (MA-ABE) scheme with a new primitive that we introduce, distributed mixed functional encryption (DMFE), a careful decentralization of the mixed functional encryption notion [Goyal-Koppula-Waters; STOC'18]. We construct DMFE from LWE via single-key key-homomorphic private constrained PRFs. Plugging in known MA-ABE schemes, we obtain MA-TT from LWE plus pairings with ciphertext size $K \cdot \mathsf{poly}(\lambda, \log N)$. As feasibility, we also give MA-TT from any PKE (with ciphertexts of size $K \cdot N \cdot \mathsf{poly}(\lambda)$) and from any multi-authority functional encryption (with fully succinct parameters).
+]]></content:encoded>
+<pubDate>Thu, 28 May 2026 02:18:45 +0000</pubDate>
+<pubDate>Thu, 28 May 2026 02:18:45 +0000</pubDate>
+</item>
+<item>
+<title>Cryptocurrency-Backed Trustless Anonymous Tokens and Their Applications</title>
+<link>https://eprint.iacr.org/2026/1074</link>
+<guid>https://eprint.iacr.org/2026/1074</guid>
+<content:encoded><![CDATA[
+
+Public blockchains like Ethereum deliver transparency, but adding anonymity remains a fundamental challenge. Existing proposals either offer limited anonymity guarantees or rely on heavy cryptographic machinery, e.g., zero-knowledge proofs. 
+
+We introduce \emph{Blockchain Anonymous Tokens} (BAT), a system for efficient \emph{sender}-anonymous transactions on transparent blockchains. Building on the observation that \emph{one-time-spendable tokens suffice for many applications}, BAT has a lightweight design using classic anonymous tokens due to Chaum (1983).
+Unlike such tokens, though, BAT is designed to work in a transparent decentralized setting, where issuers are untrusted (i.e., any single potentially malicious entity can be the issuer) and spends happen publicly. BAT issuance is compact: A client can receive $\ell$ tokens with just $\mathcal{O}(1)$ on-chain communication and computation. 
+
+We formalize the notion for BAT, and provide a concretely efficient construction. Our BAT construction requires no on-chain verification of expensive zero-knowledge proofs; just a signature verification during spends and a single exponentiation on-chain during issuance. We present several applications of BAT in various blockchain contexts.
+
+We prove the security of our BAT scheme assuming hardness of the one-more computational Diffie-Hellman assumption in a bilinear pairing group in the random oracle model and with any secure digital signature scheme.
+We implement and evaluate BAT and show that compared to the closest baseline, Zcash transactions, BAT tokens are more than 50$\times$ shorter, 9$\times$ faster to verify, and 7,000$\times$ faster to generate.
+]]></content:encoded>
+<pubDate>Wed, 27 May 2026 17:04:08 +0000</pubDate>
+<pubDate>Wed, 27 May 2026 17:04:08 +0000</pubDate>
+</item>
+<item>
+<title>SoK: Impermanent Loss, An Unavoidable Fee or a Controlled Phenomenon?</title>
+<link>https://eprint.iacr.org/2026/1073</link>
+<guid>https://eprint.iacr.org/2026/1073</guid>
+<content:encoded><![CDATA[
+
+Decentralized exchanges built on Automated Market Maker (AMM) protocols have become a cornerstone of Decentralized Finance (DeFi), offering token swaps without conventional order-book matching. However, supplying liquidity to these AMM pools exposes participants to distinctive market risks, most notably impermanent loss (IL) - the potential underperformance of a liquidity-provider portfolio relative to simply holding the underlying tokens. This paper presents a comprehensive overview of IL, unifying its main theoretical models, empirical evidence, and mitigation strategies. Our survey spans constant-function and concentrated liquidity market makers, synthesizes findings from leading DeFi protocols, and reviews mitigation methods that include both protocol-level adaptations and financial-engineering approaches. Across these perspectives, we highlight recurring trade-offs, cost, complexity, and security. Finally, we outline open questions for managing IL's systemic effects, keeping decentralized liquidity provision both profitable for participants and sustainable for the broader ecosystem.
+]]></content:encoded>
+<pubDate>Wed, 27 May 2026 15:59:43 +0000</pubDate>
+<pubDate>Wed, 27 May 2026 15:59:43 +0000</pubDate>
+</item>
+<item>
+<title>ISAC Privacy: Challenges and Solutions for 6G</title>
+<link>https://eprint.iacr.org/2026/1069</link>
+<guid>https://eprint.iacr.org/2026/1069</guid>
+<content:encoded><![CDATA[
+
+Integrated sensing and communication (ISAC) is a promising feature of future communication networks. While spatial sensing can improve network performance and enable external services, it also creates privacy challenges that go beyond the confidentiality of communication content. Future networks using millimeter-wave (mmWave) and sub-terahertz (THz) frequencies may collect or infer detailed information about people, devices, bystanders, passive objects, and environments in a sixth-generation (6G) deployment area. Such sensing can reveal location and environment data, support behavioral profiling such as movement or activity recognition, and, in advanced cases, expose physiological information such as breathing frequency or heart-rate-related data. Thus, the capabilities of spatial sensing must be controlled to satisfy privacy requirements. In this work, we organize privacy-sensitive ISAC data into three sensing levels: location and environment data, behavioral data, and physiological data, and use this classification as the organizing principle throughout the paper. Based on this classification, we discuss internal and external ISAC applications, identify privacy challenges related to consent, transparency, data ownership, profiling, bystander exposure, and sensitive sensing data, review representative solution directions, and outline future research directions for privacy-preserving ISAC.
+]]></content:encoded>
+<pubDate>Wed, 27 May 2026 13:18:52 +0000</pubDate>
+<pubDate>Wed, 27 May 2026 13:18:52 +0000</pubDate>
+</item>
+<item>
+<title>GATOR: Group Action AdapTOR Signatures via MPC-in-the-Head</title>
+<link>https://eprint.iacr.org/2026/1067</link>
+<guid>https://eprint.iacr.org/2026/1067</guid>
+<content:encoded><![CDATA[
+
+Adaptor signatures are a foundational fairness primitive for blockchain applications. They enhance blockchain functionality by enabling applications such as atomic swaps, payment channels, and other fair-exchange protocols. At a high level, they allow a buyer to produce a pre-signature tied to a public statement, which a seller holding a corresponding witness can adapt into a valid signature. Once this signature is posted on-chain, the seller obtains payment, while the buyer can extract the witness from the finalized signature.
+
+Existing practical adaptor signature constructions are predominantly tied to discrete-logarithm-based signatures, such as ECDSA and Schnorr, reflecting their widespread use in current blockchain deployments. However, the threat of Shor's algorithm and the broader transition toward post-quantum cryptography raise the question of whether adaptor functionality can also be realized efficiently for post-quantum signature schemes.
+
+In this work, we answer this question for a broad class of signatures based on cryptographic group actions. Building on efficient MPC-in-the-Head-style group-action signatures, we obtain adaptor functionality through small modifications, yielding a general framework for adaptor signatures from arbitrary group actions.
+In particular, our construction supports selling group-action discrete logarithms, which in certain parameter regimes correspond to the secret keys of the underlying signature scheme.
+
+We further discuss concrete instantiations from several group-action families, including those underlying schemes such as CSI-FiSh, LESS, MEDS, and ALTEQ, and present a modular proof-of-concept implementation. We obtain a ~25kB pre-signature with ~100ms pre-signing time for LESS, MEDS and ALTEQ, while a ~4kB pre-signature with ~3.6s pre-signing time for CSI-FiSh.
+]]></content:encoded>
+<pubDate>Wed, 27 May 2026 09:15:53 +0000</pubDate>
+<pubDate>Wed, 27 May 2026 09:15:53 +0000</pubDate>
+</item>
 
 <item>
 <title>Payment Splitting in Lightning Network as a Mitigation Against Balance Discovery Attacks</title>
