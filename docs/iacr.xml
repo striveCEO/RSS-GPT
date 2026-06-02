@@ -4,6 +4,101 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+<item>
+<title>Identity-Based Revocable and Linkable Ring Signature</title>
+<link>https://eprint.iacr.org/2026/1111</link>
+<guid>https://eprint.iacr.org/2026/1111</guid>
+<content:encoded><![CDATA[
+
+Revocable and linkable ring signatures ($\mathsf{RLRS}$) provide a practical mechanism for controllable anonymity, enabling a revocation authority (RA) to mandatorily revoke the anonymity of the real signer. However, existing constructions often rely on the assumption of a fully trusted RA, where the correctness of the revocation is not publicly verifiable rendering honest users vulnerable to undetected framing by a compromised RA. Furthermore, the concrete deployment of these schemes is hindered by the certificate management burden of PKI and computation or communication overheads that scale linearly with the ring size, limiting their real-world applicability.
+In this paper, we formalize the notion of Identity-Based Revocable and Linkable Ring Signatures ($\mathsf{IB\text{-}RLRS}$), inherently eliminating cumbersome PKI management. Our primary contribution is the enhancement of \textit{revocability} alongside a newly adapted property termed \textit{revocation soundness}, guaranteeing that the real signer's identity can always be extracted, and that a malicious RA cannot frame honest users who did not participate in the signature generation. We present an efficient instantiation of $\mathsf{IB\text{-}RLRS}$ scheme, and prove its security in the random oracle model. Specifically, a novel ring signature construction is proposed, which features a transparent setup and achieves a logarithmic signature size, demonstrating its feasibility for large-scale, privacy-preserving applications.
+]]></content:encoded>
+<pubDate>Sat, 30 May 2026 13:41:19 +0000</pubDate>
+<pubDate>Sat, 30 May 2026 13:41:19 +0000</pubDate>
+</item>
+<item>
+<title>New Constructions of Functional Adaptor Signatures: Broader Functions and Improved Efficiency</title>
+<link>https://eprint.iacr.org/2026/1124</link>
+<guid>https://eprint.iacr.org/2026/1124</guid>
+<content:encoded><![CDATA[
+
+Functional adaptor signatures (FAS) are a novel cryptographic primitive introduced at CCS'24 that enable privacy-preserving, fine-grained data-payment exchanges between a seller and a buyer in a trustless and atomic manner. In this setup, the seller holds sensitive data \(x\) (e.g., patient records, climate data), and the buyer specifies a function \(f\) (e.g., aggregate, sum). FAS guarantees that the buyer learns \(f(x)\) (and nothing beyond) if and only if the seller receives payment in blockchain-based tokens. Unlike generic smart contracts, FAS-powered solutions excel in privacy, efficiency, and compatibility with diverse blockchain systems. However, prior FAS constructions were limited to linear functions (where $f$ was linear in $x$), restricting their applicability to more complex and prevalent applications including data analytics and ML model evaluations.
+
+In this work, we extend the capabilities of FAS to support higher-degree functions \((\textit{deg} \geq 2)\), significantly broadening its range of applications. Our core contribution is a novel FAS design leveraging homomorphic encryption, which simultaneously achieves enhanced efficiency and compatibility for general functions. This approach diverges fundamentally from the restricted design in CCS'24 which relied on connections to functional encryption. We implement our homomorphic encryption-based FAS for functions arising in applications such as data analytics and machine learning inference. Remarkably, even for linear functions, our new design achieves an order-of-magnitude improvement in performance compared to CCS'24 constructions. Furthermore, our solutions seamlessly integrate with prominent blockchain systems, requiring only a basic signature verification script on standard transactions, thus ensuring practical deployability. As a conceptual contribution, we introduce the general paradigm of a blockchain-based functional fair exchange (FFE) protocol, rigorously define buyer and seller fairness, and show that FAS implies the general goal of FFE.
+]]></content:encoded>
+<pubDate>Mon, 01 Jun 2026 09:07:35 +0000</pubDate>
+<pubDate>Mon, 01 Jun 2026 09:07:35 +0000</pubDate>
+</item>
+<item>
+<title>Cryptographic Collateralized Loan without Smart Contracts</title>
+<link>https://eprint.iacr.org/2026/1123</link>
+<guid>https://eprint.iacr.org/2026/1123</guid>
+<content:encoded><![CDATA[
+
+Cryptocurrency lending is growing rapidly, and smart-contract-based loans are expected to grow further. However, existing systems are fundamentally limited: they only operate on smart-contract-enabled blockchains, and assets from other blockchains can be used only via tokenized representations.
+
+In this work, we propose an oracle-aided cryptographic protocol that implements the logic of collateralized loans without smart contracts, instead only requiring basic transactions from the underlying blockchain and hence, being  compatible with limited-scripting blockchains, including Bitcoin. 
+
+For that, we introduce verifiable graph encryption for signatures (VGES), a new cryptographic primitive that, on input a graph modeling the correspondence between transactions for collateral distribution (vertices) and loan repayments (edges), permits to encrypt the signatures on collateral-distribution transactions ensuring: (1) a signature can only be decrypted after completing loan repayments corresponding to a valid path in the graph from the root (graph enforcement); and (2) anyone can verify that encrypted signatures are valid and can be decrypted after doing the required loan repayments according to the graph (verifiability). 
+
+We present two provably secure constructions of VGES and the evaluation of our implementation shows that they offer a tradeoff between the number of required on-chain transactions and off-chain computation, while  both  remain efficient on commodity hardware.
+]]></content:encoded>
+<pubDate>Mon, 01 Jun 2026 09:01:08 +0000</pubDate>
+<pubDate>Mon, 01 Jun 2026 09:01:08 +0000</pubDate>
+</item>
+<item>
+<title>AuditPay: Anonymous Payments with Controlled Oversight</title>
+<link>https://eprint.iacr.org/2026/1118</link>
+<guid>https://eprint.iacr.org/2026/1118</guid>
+<content:encoded><![CDATA[
+
+This paper introduces AuditPay, a novel mechanism for blockchain mixers that enables
+controlled oversight through an ``auditing budget.’’ Auditors may monitor up to a
+budgeted number of addresses per epoch (e.g., an hour or a day), without revealing
+to users which addresses are monitored. Unlike traditional approaches that require
+users to voluntarily disclose viewing keys to trusted gatekeepers, AuditPay
+cryptographically enforces auditing compliance while preserving privacy for
+non-monitored user addresses and without introducing additional trust assumptions.
+
+At the core of AuditPay’s design is a selective encryption mechanism coupled with an
+efficient audit-key encoding scheme, enforced by a lightweight zero-knowledge
+proof. Users encrypt audit-relevant information under an audit key, which permits
+decryption only if the payment is to (or, alternatively, from) an address selected
+by the auditor for monitoring.
+
+We implement AuditPay as an Ethereum-based payment mixer and show through experiments
+on our prototype that its performance and gas-cost overheads are modest, providing
+a practical solution for balancing payment oversight with user privacy.
+]]></content:encoded>
+<pubDate>Sun, 31 May 2026 13:40:55 +0000</pubDate>
+<pubDate>Sun, 31 May 2026 13:40:55 +0000</pubDate>
+</item>
+<item>
+<title>Fast Difficulty Adjustment in Proof-of-Work Consensus</title>
+<link>https://eprint.iacr.org/2026/1116</link>
+<guid>https://eprint.iacr.org/2026/1116</guid>
+<content:encoded><![CDATA[
+
+One of the main hallmarks of proof-of-work (PoW) consensus protocols is their ability to adjust the difficulty of the PoW, so that it accurately reflects the level of participation and hence maintains security in a setting where protocol participation is unknown and may over time change dramatically. Importantly, this enables the protocol to retain its fundamental characteristics (such as the regularity of dispensing new tokens) irrespectively of the number of parties running the protocol (also known as ``miners'') at any given time.
+
+The speed with which difficulty can be adjusted is a fundamental feature of a blockchain protocol: The faster the rate with which the difficulty is adjusted, the more agile the protocol is in the face of fluctuating participation. In this work, we put forward, for the first time, a blockchain protocol that performs difficulty adjustment in constant time; prior provably secure designs only offered  protocols with, at best, poly-logarithmic overhead for difficulty adjustment. Our construction is based on the parallel-chain approach and a new target recalculation function that adjusts mining difficulty making use of information from all chains in the past epoch via a novel application of approximate-agreement techniques that may be of independent interest.
+]]></content:encoded>
+<pubDate>Sun, 31 May 2026 12:10:51 +0000</pubDate>
+<pubDate>Sun, 31 May 2026 12:10:51 +0000</pubDate>
+</item>
+<item>
+<title>SoK: Cryptographic Erasure on Public Ledgers: Application-Layer Architectures, Key-Lifecycle Adversaries, and GDPR Art. 17 Equivalence</title>
+<link>https://eprint.iacr.org/2026/1109</link>
+<guid>https://eprint.iacr.org/2026/1109</guid>
+<content:encoded><![CDATA[
+
+Public permissionless ledgers are append-only by design, yet are increasingly asked to host data subject to statutory erasure obligations (GDPR Art. 17, EDPB Guidelines 02/2025). The prevailing cryptographic response, rewriting the chain via chameleon hashes and redactable-blockchain constructions, is structurally unavailable on Bitcoin and Ethereum mainnet. This SoK systematizes the orthogonal application-layer design space, in which the ledger is left untouched and erasure is achieved by destroying the key material required to read the on-chain bytes. We organise the literature along two axes, data locus (on-chain ciphertext, anchor-only, or hybrid) and key custody (single-custodian, threshold, time-lock, or witness-encryption), into a twelve-cell grid with canonical constructions from 2006 to 2026. We extend standard IND-CCA security with a key-lifecycle adversary model parametrised by HSM side-channel leakage, coercion fraction over the custody committee, and algorithmic-break horizon, and establish an equivalence proposition between the resulting Destruction-IND notion and the EDPB "render unrecoverable" criterion.
+
+Evaluating seven reference architectures against eleven engineering, cryptographic, and regulatory criteria, including a production RegTech engine processing more than 10^4 events per second, we find that the literature has concentrated on chain-rewriting while the application-layer branch lacks a common threat-model vocabulary. We close this gap and identify five open problems: post-quantum equivalence, forward-secure destruction under leakage, decentralised lifecycle audit (with a multi-custody extension covering encrypted mempools), composition with ZKP selective disclosure, and erasure under multi-regime retention conflict.
+]]></content:encoded>
+<pubDate>Sat, 30 May 2026 10:56:55 +0000</pubDate>
+<pubDate>Sat, 30 May 2026 10:56:55 +0000</pubDate>
+</item>
 
 <item>
 <title>Dishonest Majority Multi-Party Arithmetic Garbling with Constant Rate</title>
