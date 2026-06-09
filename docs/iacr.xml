@@ -5,14 +5,87 @@
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
 <item>
+<title>Sensing Censorship and Censuring Censors with Censorship-Evident Publishing Systems</title>
+<link>https://eprint.iacr.org/2026/1178</link>
+<guid>https://eprint.iacr.org/2026/1178</guid>
+<content:encoded><![CDATA[
+
+Censorship has always existed, serving both to prevent harms and to inflict them by chilling speech, suppressing organizing, and withholding inconvenient facts and ideas; most technical work aims to prevent all forms of censorship --- the "good", the "bad", and everything in between. We study the complementary, rarely explored goal of making any censorship attempt transparent. We formalize censorship-evident publishing systems (CEPS), protocols that force both overt and covert takedowns to yield transferable evidence. We also provide a CEPS instantiation with Streisand, a proof-of-concept deployment that combines a blockchain-backed timestamp oracle, private information retrieval (PIR)-based anonymous queries to prevent extraction attempts from being conspicuous, and probabilistic Merkle-witness retrieval to produce compact censorship proofs. We present performance evaluations on a 1.3 GiB Enron-derived dataset with regex-based PII redaction to model realistic censorship, and demonstrate that a background daemon can detect heavy censorship after a small number of post-censorship queries, making Streisand an effective auditing mechanism rather than interactive file retrieval. We also discuss design trade-offs (proof size vs. computation, PIR sufficiency vs. necessity), scalability limits, and how CEPS complements existing transparency practices, with Streisand as a starting point for CEPS deployments.
+]]></content:encoded>
+<pubDate>Fri, 05 Jun 2026 00:44:46 +0000</pubDate>
+<pubDate>Fri, 05 Jun 2026 00:44:46 +0000</pubDate>
+</item>
+<item>
+<title>Anonymous E-Voting on Hyperledger Fabric: Practical Mitigation of the Verification Paradox and Coercion Resistance</title>
+<link>https://eprint.iacr.org/2026/1176</link>
+<guid>https://eprint.iacr.org/2026/1176</guid>
+<content:encoded><![CDATA[
+
+Electronic voting systems inherently encompass a structural tension among ballot secrecy, verifiability, and coercion resistance. Voters must be able to verify whether their votes have been included; however, if such verification information can serve as evidence presentable to a third party, it becomes a basis for post-election intimidation.
+
+Existing studies have focused primarily on performance evaluation or data separation, and have not comprehensively addressed the structural tension between verifiability and coercion resistance. This study defines this tension as the verification paradox and designs and implements an electronic voting prototype on a three-organization consortium based on Hyperledger Fabric 2.5, combining a 2-of-3 endorsement policy, nullifier-based anonymity, Exponential ElGamal homomorphic tallying, zero-knowledge proof (ZKP)-based ballot validity verification, panic password-based deniable verification, and Private Data Collection (PDC)-based coerced vote separation.
+
+Quantitative evaluation results confirm a server latency overhead of +0.9% for ElGamal relative to the AES performance baseline, statistical indistinguishability between normal and panic responses (p > 0.05), and a peak throughput of approximately 40.7 TPS (with an error rate of 0%) under 1,000 concurrent voters.
+
+This study demonstrates that permissioned blockchains can provide practical mitigation of the verification paradox through implementation and quantitative evaluation.
+]]></content:encoded>
+<pubDate>Thu, 04 Jun 2026 20:53:37 +0000</pubDate>
+<pubDate>Thu, 04 Jun 2026 20:53:37 +0000</pubDate>
+</item>
+<item>
+<title>Isogeny-based Signatures with Randomizable Keys</title>
+<link>https://eprint.iacr.org/2026/1169</link>
+<guid>https://eprint.iacr.org/2026/1169</guid>
+<content:encoded><![CDATA[
+
+Digital signature schemes based on isogenies are among the most compact signatures achieving post-quantum security.  Recent advances, especially those leveraging higher-dimensional isogenies, have also made such schemes practically efficient.  However, comparatively little attention has been devoted to endowing these signatures with additional privacy-enhancing properties, such as the re-randomization of keys and the adaptation of signatures to new public keys.  Although some results exist in the isogeny group action setting, these signatures suffer from a subexponential quantum attack which renders them rather inefficient.
+
+In this work, we initiate the first systematic study of privacy-enhancing isogeny-based signatures outside the group-action framework. We base our exploration on the notion of signatures with randomizable keys developed by Celi et al. (FC'24), which aims to unify privacy notions related to key updatability and signature adaptation.  In particular, we analyze which of their privacy notions can be achieved from the state-of-the-art signatures SQIsign, PRISM and the hash-and-sign signature scheme derived from the Deuring verifiable unpredictable function (DeuringVUF). 
+
+To this end, we naturally extend SQIsign to an SWRK scheme that allows key randomization, and enhance both PRISM and the DeuringVUF signature to additionally allow for message adaptation. We show that, due to the deterministic nature of the signatures, the DeuringVUF signature achieves  perfect adaptability.
+We formally prove all three of our modifications achieve unlinkability against unbounded  adversaries, and remain unforgeable under the same assumptions as the original schemes.
+]]></content:encoded>
+<pubDate>Thu, 04 Jun 2026 11:07:18 +0000</pubDate>
+<pubDate>Thu, 04 Jun 2026 11:07:18 +0000</pubDate>
+</item>
+<item>
+<title>Lemur: Scalable Post-Quantum Synchronized Multi-Signatures</title>
+<link>https://eprint.iacr.org/2026/1161</link>
+<guid>https://eprint.iacr.org/2026/1161</guid>
+<content:encoded><![CDATA[
+
+Synchronized multi-signatures allow for non-interactive aggregation of signatures generated within the same time step. This primitive is particularly well-suited for high-throughput blockchain protocols like Ethereum, where many distributed signers must validate the same block within a synchronized slot. In this work, we present Lemur, a post-quantum synchronized multi-signature from (module) lattices that improves upon the state-of-the-art in efficiency, scalability, and flexibility. Lemur follows the blueprint of Squirrel/Chipmunk (CCS 2022/2023) but introduces a fundamental redesign of the foundations of the overall framework. Our revisit of the framework is also motivated by the fact that our evaluation of Chipmunk's parameter sets, using the state-of-the-art lattice security estimation methods, suggests a substantially lower concrete security level (approximately 30 bits rather than the claimed 112 bits).
+    
+First, we revisit the underlying building block of key-homomorphic one-time signature (KOTS) and introduce a novel security reduction based on a new lattice problem: the Dual Hint-MLWE assumption, which may be of independent interest. We then provide a formal reduction from the standard Module-LWE problem to Dual Hint-MLWE, which overall enables us to base the security of Lemur on the standard Module-LWE and Module-SIS assumptions. By shifting from a statistical security argument to a computational one, our KOTS design enjoys much better compactness and scalability. 
+    
+Second, we optimize the underlying homomorphic vector commitment (HVC) by transitioning from Ring-SIS to the Module-SIS setting and extending the commitment domain from vectors to matrices. This generalization reduces opening size and improves aggregation efficiency. 
+    
+After rectifying the parameters of Chipmunk for a fair comparison, our results show that Lemur's KOTS size achieves up to an order of magnitude improvement over Chipmunk's KOTS. In particular, aggregating 1 million one-time signatures requires under 8 KB. For the total multi-signature size, Lemur demonstrates around $2\times$ improvement over Chipmunk. To showcase our design, we provide a full-fledged Rust implementation. Our benchmarks demonstrate an aggregate signature size of 380 KB for $2^{20}$ signers. Stateful signing takes roughly 4.2 ms for a Merkle tree of height 20, while batch verification for an aggregate of 1024 signers completes in 15.0 ms ($\approx$ 14.6 $\mu$s per signer).
+]]></content:encoded>
+<pubDate>Wed, 03 Jun 2026 13:50:56 +0000</pubDate>
+<pubDate>Wed, 03 Jun 2026 13:50:56 +0000</pubDate>
+</item>
+<item>
+<title>Privacy-preserving Proximity Testing from Geometric Fuzzy Matching</title>
+<link>https://eprint.iacr.org/2026/1155</link>
+<guid>https://eprint.iacr.org/2026/1155</guid>
+<content:encoded><![CDATA[
+
+Proximity testing is crucial to location-privacy applications, from discovering nearby friends to enabling UAV collision avoidance. In such settings, users must determine proximity without revealing their exact locations. This motivates privacy-preserving proximity testing (PPPT) protocols revealing only if the proximity condition holds, while hiding both parties’ inputs. However, most existing PPPT protocols rely on strong assumptions (e.g., non-colluding servers) or require simultaneous interaction, limiting their practicality. Moreover, they typically define proximity using metric distances (e.g., Euclidean distance), failing to support richer membership queries for complex regions like buildings or parks.
+    To address these, we introduce a new primitive called Geometric Fuzzy Matching (GFM), which generalizes fuzzy matching to arbitrary $n$-dimensional regions. In GFM, the receiver specifies a region and learns only whether the sender’s location lies within it, without revealing either party’s input. This approach captures both classical distance-based proximity checks (for any Minkowski $\ell_p$ norm, $1 \leq p \leq \infty$), as well as membership tests for complex regions, providing a unified framework for diverse proximity queries.
+    In low-dimensional settings, our protocol improves on distance-based checks compared to state-of-the-art van Baarsen et al. (EUROCRYPT 2024) for $\ell_\infty$ and maintains stable practical efficiency for $\ell_p$ norms under large distance thresholds or for $p \geq 4$, where previous approaches quickly become computationally prohibitive. It is also the first to support fuzzy matching over arbitrary geometric regions, enabling proximity queries in complex spaces. Our implementation confirms these results and demonstrates the protocol’s efficiency and applicability across diverse PPPT scenarios.
+]]></content:encoded>
+<pubDate>Wed, 03 Jun 2026 04:35:23 +0000</pubDate>
+<pubDate>Wed, 03 Jun 2026 04:35:23 +0000</pubDate>
+</item>
+
+<item>
 <title>Search-Efficient Public-Key Authenticated Encryption with Keyword Search Made Easy</title>
 <link>https://eprint.iacr.org/2026/1153</link>
 <guid>https://eprint.iacr.org/2026/1153</guid>
 <content:encoded><![CDATA[
-
 Public-key authenticated encryption with keyword search (PAEKS), introduced by Huang and Li (Information Sciences 2017), was proposed to provide trapdoor privacy, whereby keyword information is protected from being revealed through trapdoors. To prevent the keyword guessing attack, however, a trapdoor needs to be generated separately for each sender, and the search complexity grows with the number of senders even when searching for a single keyword. To address this inefficiency, we propose a generic construction of search-efficient PAEKS. We revisit the approach of Wang et al. (IEEE Transactions on Information Forensics and Security 2024), in which senders are organized into sender groups. Our construction is simple yet effective where all senders belonging to the same group share a single public-secret key pair, and the search complexity depends only on the number of sender groups rather than the number of individual senders. We further introduce ciphertext indistinguishability against insiders, which ensures that no keyword information is revealed from ciphertexts, even if they are generated by other members of the same sender group. We also take into account an impossibility result by Yoshida and Emura (IEICE Transactions, 2026), which shows that trapdoor privacy against sender-group members cannot be achieved in the scheme of Wang et al. To address this limitation, we introduce trapdoor indistinguishability against outsiders, which guarantees that no keyword information is revealed from trapdoors generated for non-group members. Our generic construction yields search-efficient group-oriented PAEKS schemes from pairings and lattices.
 ]]></content:encoded>
-<pubDate>Wed, 03 Jun 2026 03:26:21 +0000</pubDate>
 <pubDate>Wed, 03 Jun 2026 03:26:21 +0000</pubDate>
 </item>
 <item>
@@ -20,12 +93,10 @@ Public-key authenticated encryption with keyword search (PAEKS), introduced by H
 <link>https://eprint.iacr.org/2026/1152</link>
 <guid>https://eprint.iacr.org/2026/1152</guid>
 <content:encoded><![CDATA[
-
 Malicious-secure multiparty computation protocols protect against an adversary's arbitrary misbehavior. In the honest-majority four-party setting, one common technique relies on all communication between parties being duplicated. Under this approach, all correct messages are sent twice, while corrupted messages are only sent by the adversary and will not match concurrent correct messages. When a receiver observes that inconsistency, it announces cheating has occurred (and possibly aborts). Existing implementations often optimize this procedure by batching many such checks into a single hash and running a final consistency check just before revealing the result of a computation.
 
 Brüggemann and Schneider (Eurocrypt 2026) recently showed that these delayed consistency checks in honest-majority, malicious-secure protocols can violate privacy. Adversaries can introduce errors such that subsequent incorrect hashes reveal their missing secret share and allow plaintext secrets to be recovered just before the honest parties abort. Their suggested fix evaluates the hash comparison under multiparty computation, rather than in plaintext. In this report, we detail our fix for the Fantastic Four protocol in ORQ, a recent system for secure analytics that is vulnerable to the attack. The new implementation has a modest overhead that amortizes with larger inputs. The complexity of the modified protocol highlights the difficulty of implementing malicious-secure systems in practice; even seemingly harmless optimizations can break privacy.
 ]]></content:encoded>
-<pubDate>Wed, 03 Jun 2026 03:00:39 +0000</pubDate>
 <pubDate>Wed, 03 Jun 2026 03:00:39 +0000</pubDate>
 </item>
 <item>
@@ -33,7 +104,6 @@ Brüggemann and Schneider (Eurocrypt 2026) recently showed that these delayed co
 <link>https://eprint.iacr.org/2026/1141</link>
 <guid>https://eprint.iacr.org/2026/1141</guid>
 <content:encoded><![CDATA[
-
 We introduce DASTE, a decentralized encryption primitive for auditable access control in settings where users independently generate public keys, register them on an immutable ledger, and decrypt only through collaboration.
 In DASTE, a sender encrypts under an access structure (e.g., an access tree / LSSS) whose leaves are concrete registered public keys selected at encryption time.
 A ciphertext can therefore be opened only by a qualifying coalition of registered key holders that jointly reconstructs the masking secret.
@@ -44,22 +114,18 @@ We give two instantiations: a classical discrete-log-based construction, include
 Together, these results yield a ledger-anchored, access-structured, post-quantum threshold encryption framework suitable for decentralized key management and governance-oriented decryption workflows.
 ]]></content:encoded>
 <pubDate>Tue, 02 Jun 2026 14:41:08 +0000</pubDate>
-<pubDate>Tue, 02 Jun 2026 14:41:08 +0000</pubDate>
 </item>
 <item>
 <title>IcyVeil: An Output-Private DVRF Based on Icy-DVRF</title>
 <link>https://eprint.iacr.org/2026/1138</link>
 <guid>https://eprint.iacr.org/2026/1138</guid>
 <content:encoded><![CDATA[
-
 Unbiased and unpredictable randomness is a backbone of Web3 security, yet current Distributed Verifiable Random Function designs often entail a trade-off between performance and privacy. While established protocols like GLOW-DVRF achieve constant-size proofs, they rely on computationally expensive bilinear pairings that impose significant gas overhead in on-chain environments. Existing output-privacy frameworks, such as FlexiRand, are currently limited by the same expensive pairing-based operations that have high on-chain verification costs.
 
 In this paper, we present IcyVeil, an output-private DVRF that conjoins the architecture of FlexiRand with the pairing-free efficiency of Icy-DVRF. By integrating a blinding/unblinding mechanism directly into a FROST-inspired preprocessing scheme, IcyVeil enables users to mask inputs with a private nonce while the distributed committee generates partial evaluations and NIZK proofs over the veiled values. This approach eliminates the high cost of bilinear pairings during verification and maintains constant-size proofs. By adopting the pairing-free architecture of Icy-DVRF, IcyVeil inherits a 43% reduction in on-chain gas costs compared to conventional pairing-based protocols, establishing a scalable and cost-effective primitive for latency-sensitive applications such as decentralized gaming and asynchronous reward distribution.
 ]]></content:encoded>
 <pubDate>Tue, 02 Jun 2026 11:51:47 +0000</pubDate>
-<pubDate>Tue, 02 Jun 2026 11:51:47 +0000</pubDate>
 </item>
-
 <item>
 <title>Private Information Retrieval: A Tutorial and Survey</title>
 <link>https://eprint.iacr.org/2026/1135</link>
@@ -14258,56 +14324,6 @@ The concept of a decentralized computer is a powerful and transformative idea th
 In this work, we introduce a model for a Fully Homomorphic Encryption (FHE) decentralized computer. Our approach leverages recent advancements in FHE technology to enable secure computations on encrypted data while preserving privacy. By integrating this model into the decentralized ecosystem, we address the long-standing challenge of privacy in public blockchain environments. The proposed FHE computer supports a wide range of use cases, is scalable, and offers a robust framework for incentivizing developer contributions.
 ]]></content:encoded>
 <pubDate>Mon, 25 Nov 2024 19:11:00 +0000</pubDate>
-</item>
-<item>
-<title>Sublinear-Round Broadcast without Trusted Setup</title>
-<link>https://eprint.iacr.org/2024/770</link>
-<guid>https://eprint.iacr.org/2024/770</guid>
-<content:encoded><![CDATA[
-<div> 关键词: Byzantine广播、分布式计算、信任假设、可扩展性、子线性轮次<br /><br />总结:
-本文提出了一种针对不诚实多数环境下的首个无需信任设置、子线性轮次的拜占庭广播协议。该协议不再依赖于线性数量级的通信轮次或对可信设置的要求，也不需要存在一个诚实的密钥发放者和相关随机字符串的经销商，以及随机预言机。协议的设置仅限于无结构的均匀参考字符串和平凡公钥基础设施（即公告板PKI）。协议的核心是一个“有调解的梯度广播”协议，用于达成共享随机字符串的弱一致性。利用这些字符串，可以公正地运行基于委员会的拜占庭协议，实现子线性轮次的终止。为此，文章提出了一个新的委员会选举构造，它既不依赖随机预言机，也不依赖可信经销商，而是使用了NIZK证明和时间锁谜题。此协议能抵抗任意常数比例的动态敌手攻击。 <div>
-Byzantine broadcast is one of the fundamental problems in distributed computing. Many of its practical applications, from multiparty computation to consensus mechanisms for blockchains,  require increasingly weaker trust assumptions, as well as scalability for an ever-growing number of users $n$. This rules out existing solutions which run in a linear number of rounds in $n$ or rely on trusted setup requirements. In this paper, we propose the first sublinear-round and trustless Byzantine broadcast protocol for the dishonest majority setting. Unlike previous sublinear-round protocols, our protocol assumes neither the existence of a trusted dealer who honestly issues keys and correlated random strings to the parties nor random oracles. Instead, we present a solution whose setup is limited to an unstructured uniform reference string and a plain public key infrastructure (a.k.a. bulletin-board PKI).
-
-    Our broadcast protocol builds on top of a \emph{moderated gradecast} protocol which parties can use to reach weak agreement on shared random strings. Using these strings, we can then run in an unbiased fashion a committee-based Byzantine protocol, similar to that of Chan et al. (PKC 2020), which terminates in a sublinear number of rounds. To this end, we propose a novel construction for committee election, which does not rely either on random oracles or on a trusted dealer, and uses NIZKs and time-lock puzzles. Our protocol is resilient against an adaptive adversary who corrupts any constant fraction of parties.
-]]></content:encoded>
-<pubDate>Mon, 20 May 2024 08:30:07 +0000</pubDate>
-</item>
-<item>
-<title>DiStefano: Decentralized Infrastructure for Sharing Trusted Encrypted Facts and Nothing More</title>
-<link>https://eprint.iacr.org/2023/1063</link>
-<guid>https://eprint.iacr.org/2023/1063</guid>
-<content:encoded><![CDATA[
-<div> 关键词：DiStefano、TLS加密、私人承诺、第三方验证、性能优化
-
-总结:
-DiStefano 是一个高效且针对恶意攻击安全的框架，用于在使用 TLS-1.3 加密的网络流量上生成私有承诺，以便由指定的第三方进行验证。相较于之前的 TLS 承诺系统，DiStefano 提供了多项改进，包括：针对 TLS 1.3 的模块化协议、对加密数据上任意可验证声明的支持、客户端浏览历史在预批准 TLS 服务器之间的隐私保护，以及确保 TLS 1.3 会话快速在线性能的各种优化。DiStefano 的一个开源实现已经集成到 BoringSSL 密码学库（被基于 Chromium 的互联网浏览器使用）中。实验表明，无论是在局域网还是广域网环境中，DiStefano 在对任意 TLS 流量中的事实进行承诺时都具有实用性，完成整个在线阶段协议的执行所需时间少于 1 秒且数据传输量不超过 80 KiB。 <div>
-We design DiStefano: an efficient, maliciously-secure framework for generating private commitments over TLS-encrypted web traffic, for verification by a designated third-party. DiStefano provides many improvements over previous TLS commitment systems, including: a modular protocol specific to TLS 1.3, support for arbitrary verifiable claims over encrypted data, client browsing history privacy amongst pre-approved TLS servers, and various optimisations to ensure fast online performance of the TLS 1.3 session. We build a permissive open-source implementation of DiStefano integrated into the BoringSSL cryptographic library (used by Chromium-based Internet browsers). We show that DiStefano is practical in both LAN and WAN settings for committing to facts in arbitrary TLS traffic, requiring \(<\) 1 s and \(≤\) 80 KiB to execute the complete online phase of the protocol.
-]]></content:encoded>
-<pubDate>Fri, 07 Jul 2023 17:56:08 +0000</pubDate>
-</item>
-<item>
-<title>A Better Proof-of-Work Fork Choice Rule</title>
-<link>https://eprint.iacr.org/2024/200</link>
-<guid>https://eprint.iacr.org/2024/200</guid>
-<content:encoded><![CDATA[
-<div> 关键词: 修改、工作量证明、选择规则、内在工作、确认延迟<br /><br />总结:<br />
-我们提出了一种针对工作量证明区块链的共识机制修改方案，即不再选择最长链，而是选择具有最多内在工作量的链。内在工作量是指区块哈希值前部的零数量。这一改动使得协议运行速度得以安全提升，相较于比特币，在面对近10%的恶意节点情况下，确认延迟可以大约减少40%。该修改是在工作量证明不等式层面进行的，因此可以与文献中提出的其他提高延迟的方法（如GHOST）结合使用。我们通过模拟执行了长达3,000年的系统仿真，获取了详细的证据。同时，我们在比特币骨干模型下正式证明了新协议的安全性，并在证明过程中引入了一个新的技术工具：实值随机Oracle，这可能具有独立的研究价值。 <div>
-We propose a modification to the fork choice rule of proof-of-work blockchains. Instead of choosing the heaviest chain, we choose the chain with the most intrinsic work. The intrinsic work of a block is roughly the number of zeroes at the front of its hash. This modification allows us to safely speed up the protocol, yielding a roughly 40% improvement in confirmation delay as compared to Bitcoin for adversaries close to 10%. Our modification is at the level of the proof-of-work inequality, and thus can be composed with any other methods to improve latency proposed in the literature (e.g., GHOST). We compile detailed simulation evidence from 3,000 years of simulated executions of our system across different parameters. We formally prove the security of our new protocol in the Bitcoin Backbone model. These proofs use a new technical tool, the real-valued Random Oracle which may be of independent interest.
-]]></content:encoded>
-<pubDate>Fri, 09 Feb 2024 16:50:17 +0000</pubDate>
-</item>
-<item>
-<title>Double Auction Meets Blockchain: Consensus from Scored Bid-Assignment</title>
-<link>https://eprint.iacr.org/2022/1471</link>
-<guid>https://eprint.iacr.org/2022/1471</guid>
-<content:encoded><![CDATA[
-<div> 关键词: 双重拍卖系统、区块链、持久性、活性、proof-of-work (PoW)
-
-总结:
-本文提出了一种针对双重拍卖系统的新型区块链协议设计，该设计直接从竞标分配计算中构建，确保了透明度和不可变性。文章创新点在于采用一种基于得分的广义多分配问题（SGMAP）的替代proof-of-work (PoW)方案，并将其整合到定制的区块链协议中。与传统PoW协议不同，该方案的领导者选择由与SGMAP评分函数相关的区块分数驱动，该函数具有足够的灵活性以定义难度级别并适应双重拍卖系统的实际需求。文中证明了设计方案的持久性和修改后的活性属性，并通过实施结果验证了其实用性和鲁棒性。 <div>
-A double auction system, where buyers and sellers trade through bids, requires a transparent and immutable mechanism to record allocation results. This demand can be met with robust ledgers that ensure persistence and liveness, as exemplified by the Bitcoin blockchain (EuroCrypt '15). While existing blockchain-aided auction systems often rely on secure smart contracts or layer-$2$ techniques, this work proposes a more fundamental approach by constructing a provably secure blockchain protocol directly from the computation of bid allocations. The core component is an alternative proof-of-work (PoW) scheme based on a scored generalized multiple assignment problem (SGMAP), integrated into a tailored blockchain protocol. Unlike conventional PoW-based protocols, our leader selection is driven by block scores derived from the SGMAP scoring function, which is designed to be flexible enough to define the difficulty level and accommodate real-life requirements of the underlying double auction system. We prove persistence and a modified liveness property for our design, and present implementation results to validate its robustness and practicality.
-]]></content:encoded>
-<pubDate>Thu, 27 Oct 2022 03:19:10 +0000</pubDate>
 </item>
 </channel>
 </rss>
