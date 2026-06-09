@@ -4,15 +4,14 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+
 <item>
 <title>Sensing Censorship and Censuring Censors with Censorship-Evident Publishing Systems</title>
 <link>https://eprint.iacr.org/2026/1178</link>
 <guid>https://eprint.iacr.org/2026/1178</guid>
 <content:encoded><![CDATA[
-
 Censorship has always existed, serving both to prevent harms and to inflict them by chilling speech, suppressing organizing, and withholding inconvenient facts and ideas; most technical work aims to prevent all forms of censorship --- the "good", the "bad", and everything in between. We study the complementary, rarely explored goal of making any censorship attempt transparent. We formalize censorship-evident publishing systems (CEPS), protocols that force both overt and covert takedowns to yield transferable evidence. We also provide a CEPS instantiation with Streisand, a proof-of-concept deployment that combines a blockchain-backed timestamp oracle, private information retrieval (PIR)-based anonymous queries to prevent extraction attempts from being conspicuous, and probabilistic Merkle-witness retrieval to produce compact censorship proofs. We present performance evaluations on a 1.3 GiB Enron-derived dataset with regex-based PII redaction to model realistic censorship, and demonstrate that a background daemon can detect heavy censorship after a small number of post-censorship queries, making Streisand an effective auditing mechanism rather than interactive file retrieval. We also discuss design trade-offs (proof size vs. computation, PIR sufficiency vs. necessity), scalability limits, and how CEPS complements existing transparency practices, with Streisand as a starting point for CEPS deployments.
 ]]></content:encoded>
-<pubDate>Fri, 05 Jun 2026 00:44:46 +0000</pubDate>
 <pubDate>Fri, 05 Jun 2026 00:44:46 +0000</pubDate>
 </item>
 <item>
@@ -20,7 +19,6 @@ Censorship has always existed, serving both to prevent harms and to inflict them
 <link>https://eprint.iacr.org/2026/1176</link>
 <guid>https://eprint.iacr.org/2026/1176</guid>
 <content:encoded><![CDATA[
-
 Electronic voting systems inherently encompass a structural tension among ballot secrecy, verifiability, and coercion resistance. Voters must be able to verify whether their votes have been included; however, if such verification information can serve as evidence presentable to a third party, it becomes a basis for post-election intimidation.
 
 Existing studies have focused primarily on performance evaluation or data separation, and have not comprehensively addressed the structural tension between verifiability and coercion resistance. This study defines this tension as the verification paradox and designs and implements an electronic voting prototype on a three-organization consortium based on Hyperledger Fabric 2.5, combining a 2-of-3 endorsement policy, nullifier-based anonymity, Exponential ElGamal homomorphic tallying, zero-knowledge proof (ZKP)-based ballot validity verification, panic password-based deniable verification, and Private Data Collection (PDC)-based coerced vote separation.
@@ -30,14 +28,12 @@ Quantitative evaluation results confirm a server latency overhead of +0.9% for E
 This study demonstrates that permissioned blockchains can provide practical mitigation of the verification paradox through implementation and quantitative evaluation.
 ]]></content:encoded>
 <pubDate>Thu, 04 Jun 2026 20:53:37 +0000</pubDate>
-<pubDate>Thu, 04 Jun 2026 20:53:37 +0000</pubDate>
 </item>
 <item>
 <title>Isogeny-based Signatures with Randomizable Keys</title>
 <link>https://eprint.iacr.org/2026/1169</link>
 <guid>https://eprint.iacr.org/2026/1169</guid>
 <content:encoded><![CDATA[
-
 Digital signature schemes based on isogenies are among the most compact signatures achieving post-quantum security.  Recent advances, especially those leveraging higher-dimensional isogenies, have also made such schemes practically efficient.  However, comparatively little attention has been devoted to endowing these signatures with additional privacy-enhancing properties, such as the re-randomization of keys and the adaptation of signatures to new public keys.  Although some results exist in the isogeny group action setting, these signatures suffer from a subexponential quantum attack which renders them rather inefficient.
 
 In this work, we initiate the first systematic study of privacy-enhancing isogeny-based signatures outside the group-action framework. We base our exploration on the notion of signatures with randomizable keys developed by Celi et al. (FC'24), which aims to unify privacy notions related to key updatability and signature adaptation.  In particular, we analyze which of their privacy notions can be achieved from the state-of-the-art signatures SQIsign, PRISM and the hash-and-sign signature scheme derived from the Deuring verifiable unpredictable function (DeuringVUF). 
@@ -46,14 +42,12 @@ To this end, we naturally extend SQIsign to an SWRK scheme that allows key rando
 We formally prove all three of our modifications achieve unlinkability against unbounded  adversaries, and remain unforgeable under the same assumptions as the original schemes.
 ]]></content:encoded>
 <pubDate>Thu, 04 Jun 2026 11:07:18 +0000</pubDate>
-<pubDate>Thu, 04 Jun 2026 11:07:18 +0000</pubDate>
 </item>
 <item>
 <title>Lemur: Scalable Post-Quantum Synchronized Multi-Signatures</title>
 <link>https://eprint.iacr.org/2026/1161</link>
 <guid>https://eprint.iacr.org/2026/1161</guid>
 <content:encoded><![CDATA[
-
 Synchronized multi-signatures allow for non-interactive aggregation of signatures generated within the same time step. This primitive is particularly well-suited for high-throughput blockchain protocols like Ethereum, where many distributed signers must validate the same block within a synchronized slot. In this work, we present Lemur, a post-quantum synchronized multi-signature from (module) lattices that improves upon the state-of-the-art in efficiency, scalability, and flexibility. Lemur follows the blueprint of Squirrel/Chipmunk (CCS 2022/2023) but introduces a fundamental redesign of the foundations of the overall framework. Our revisit of the framework is also motivated by the fact that our evaluation of Chipmunk's parameter sets, using the state-of-the-art lattice security estimation methods, suggests a substantially lower concrete security level (approximately 30 bits rather than the claimed 112 bits).
     
 First, we revisit the underlying building block of key-homomorphic one-time signature (KOTS) and introduce a novel security reduction based on a new lattice problem: the Dual Hint-MLWE assumption, which may be of independent interest. We then provide a formal reduction from the standard Module-LWE problem to Dual Hint-MLWE, which overall enables us to base the security of Lemur on the standard Module-LWE and Module-SIS assumptions. By shifting from a statistical security argument to a computational one, our KOTS design enjoys much better compactness and scalability. 
@@ -63,22 +57,18 @@ Second, we optimize the underlying homomorphic vector commitment (HVC) by transi
 After rectifying the parameters of Chipmunk for a fair comparison, our results show that Lemur's KOTS size achieves up to an order of magnitude improvement over Chipmunk's KOTS. In particular, aggregating 1 million one-time signatures requires under 8 KB. For the total multi-signature size, Lemur demonstrates around $2\times$ improvement over Chipmunk. To showcase our design, we provide a full-fledged Rust implementation. Our benchmarks demonstrate an aggregate signature size of 380 KB for $2^{20}$ signers. Stateful signing takes roughly 4.2 ms for a Merkle tree of height 20, while batch verification for an aggregate of 1024 signers completes in 15.0 ms ($\approx$ 14.6 $\mu$s per signer).
 ]]></content:encoded>
 <pubDate>Wed, 03 Jun 2026 13:50:56 +0000</pubDate>
-<pubDate>Wed, 03 Jun 2026 13:50:56 +0000</pubDate>
 </item>
 <item>
 <title>Privacy-preserving Proximity Testing from Geometric Fuzzy Matching</title>
 <link>https://eprint.iacr.org/2026/1155</link>
 <guid>https://eprint.iacr.org/2026/1155</guid>
 <content:encoded><![CDATA[
-
 Proximity testing is crucial to location-privacy applications, from discovering nearby friends to enabling UAV collision avoidance. In such settings, users must determine proximity without revealing their exact locations. This motivates privacy-preserving proximity testing (PPPT) protocols revealing only if the proximity condition holds, while hiding both parties’ inputs. However, most existing PPPT protocols rely on strong assumptions (e.g., non-colluding servers) or require simultaneous interaction, limiting their practicality. Moreover, they typically define proximity using metric distances (e.g., Euclidean distance), failing to support richer membership queries for complex regions like buildings or parks.
     To address these, we introduce a new primitive called Geometric Fuzzy Matching (GFM), which generalizes fuzzy matching to arbitrary $n$-dimensional regions. In GFM, the receiver specifies a region and learns only whether the sender’s location lies within it, without revealing either party’s input. This approach captures both classical distance-based proximity checks (for any Minkowski $\ell_p$ norm, $1 \leq p \leq \infty$), as well as membership tests for complex regions, providing a unified framework for diverse proximity queries.
     In low-dimensional settings, our protocol improves on distance-based checks compared to state-of-the-art van Baarsen et al. (EUROCRYPT 2024) for $\ell_\infty$ and maintains stable practical efficiency for $\ell_p$ norms under large distance thresholds or for $p \geq 4$, where previous approaches quickly become computationally prohibitive. It is also the first to support fuzzy matching over arbitrary geometric regions, enabling proximity queries in complex spaces. Our implementation confirms these results and demonstrates the protocol’s efficiency and applicability across diverse PPPT scenarios.
 ]]></content:encoded>
 <pubDate>Wed, 03 Jun 2026 04:35:23 +0000</pubDate>
-<pubDate>Wed, 03 Jun 2026 04:35:23 +0000</pubDate>
 </item>
-
 <item>
 <title>Search-Efficient Public-Key Authenticated Encryption with Keyword Search Made Easy</title>
 <link>https://eprint.iacr.org/2026/1153</link>
@@ -14249,81 +14239,6 @@ In the realm of privacy-preserving blockchain applications such as Zcash, oblivi
 HomeRun stands out by providing unlinkability across multiple requests for the same recipient's address. Moreover, it does not impose a limit on the number of pertinent messages that can be received by a recipient, which thwarts ``message balance exhaustion'' attacks and enhances system usability. HomeRun also empowers servers to regularly delete the retrieved messages and the associated auxiliary data, which mitigates the constantly increasing computation costs and storage costs incurred by servers. Remarkably, none of the existing solutions offer all of these features collectively. Finally, thanks to its judicious use of highly efficient cryptographic building blocks, HomeRun is highly performant: Specifically, the total runtime of servers in HomeRun is $3830 \times$ less than that in the work by Liu et al. (CRYPTO '22) based on fully-homomorphic encryption, and at least $1459 \times$ less than that in the design by Madathil et al. (USENIX Security '22) based on two semi-honest and non-colluding servers, using a single thread in a WAN setting.
 ]]></content:encoded>
 <pubDate>Wed, 07 Feb 2024 20:50:20 +0000</pubDate>
-</item>
-<item>
-<title>EndGame: Field-Agnostic Succinct Blockchain with Arc</title>
-<link>https://eprint.iacr.org/2024/1925</link>
-<guid>https://eprint.iacr.org/2024/1925</guid>
-<content:encoded><![CDATA[
-<div> 关键词：EndGame、区块链架构、Reed-Solomon积累方案、常量时间验证、安全属性、编码、状态转换、Reed-Solomon码、ARC框架、轻客户端验证成本、无信任设置、状态管理。
-
-<br /><br />总结:  
-EndGame是一种新颖的区块链架构，它利用Reed-Solomon积累方案实现了简洁性。该构造允许在保持强大安全属性的同时，实现对区块链状态的常量时间验证。通过有效地使用Reed-Solomon码对区块链状态转移进行编码，并借助ARC框架累积证明状态的有效性，EndGame协议达成了轻客户端最优的验证成本，并支持了无需信任设置的高效状态管理。 <div>
-We present EndGame, a novel blockchain architecture that achieves succinctness through Reed-Solomon accumulation schemes. Our construction enables constant-time verification of blockchain state while maintaining strong security properties. We demonstrate how to efficiently encode blockchain state transitions using Reed-Solomon codes and accumulate proofs of state validity using the ARC framework. Our protocol achieves optimal light client verification costs and supports efficient state management without trusted setup.
-]]></content:encoded>
-<pubDate>Wed, 27 Nov 2024 10:47:51 +0000</pubDate>
-</item>
-<item>
-<title>Algebraic Zero Knowledge Contingent Payment</title>
-<link>https://eprint.iacr.org/2024/1930</link>
-<guid>https://eprint.iacr.org/2024/1930</guid>
-<content:encoded><![CDATA[
-<div> 关键词: Modular Algebraic Proof Contingent Payment (MAPCP), zero-knowledge contingent payment (ZKCP), zk-SNARKs, Hash Time-Locked Contracts (HTLC), fungibility
-
-总结:
-本文介绍了Modular Algebraic Proof Contingent Payment (MAPCP)，这是一种新颖的零知识条件支付方案。MAPCP首次实现了无需依赖zk-SNARKs作为零知识证明工具以及不使用Hash Time-Locked Contracts (HTLC)进行原子化交换秘密和支付的方式。因此，它避免了公共参考字符串(crs)创建问题，并能与几乎任何具有有限或无智能合约支持的加密货币兼容，同时提高了支付的可互换性，使其能够与标准加密货币支付无缝融合。
-
-文章分析了MAPCP的安全性并证明其具备原子性：(i) 买家在支付记录上链后可以获取数字产品（保障买家安全）；(ii) 若买家已获得数字产品的访问权，则卖家将收到付款（保障卖家安全）。此外，文中还展示了一个具体应用案例，即客户通过MAPCP向公证人付费以获取文档签名。 <div>
-In this work, we introduce Modular Algebraic Proof Contingent Payment (MAPCP), a novel zero-knowledge contingent payment (ZKCP) construction. Unlike previous approaches, MAPCP is the first that simultaneously avoids using zk-SNARKs as the tool for zero-knowledge proofs and HTLC contracts to atomically exchange a secret for a payment. As a result, MAPCP sidesteps the common reference string (crs) creation problem and is compatible with virtually any cryptocurrency, even those with limited or no smart contract support. Moreover, MAPCP contributes to fungibility, as its payment transactions blend seamlessly with standard cryptocurrency payments.
-We analyze the security of MAPCP and demonstrate its atomicity, meaning that, (i) the buyer gets the digital product after the payment is published in the blockchain (buyer security); and (ii) the seller receives the payment if the buyer gets access to the digital product (seller security). Moreover, we present a construction of MAPCP in a use case where a customer pays a notary in exchange for a document signature.
-]]></content:encoded>
-<pubDate>Thu, 28 Nov 2024 11:01:29 +0000</pubDate>
-</item>
-<item>
-<title>PASTA on Edge: Cryptoprocessor for Hybrid Homomorphic Encryption</title>
-<link>https://eprint.iacr.org/2024/1919</link>
-<guid>https://eprint.iacr.org/2024/1919</guid>
-<content:encoded><![CDATA[
-<div> 关键词: Fully Homomorphic Encryption (FHE), Hybrid Homomorphic Encryption (HHE), PASTA, FPGA, ASIC
-
-总结:<br />
-本文首次实现了名为PASTA的Hybrid Homomorphic Encryption (HHE)方案，这是一种针对整数设计的对称加密方案，旨在加速客户端加密和服务器端的同态解密。研究中对比了FPGA和ASIC平台上的性能结果，其中在低功耗的130nm ASIC技术上的RISC-V SoC实现相比CPU实现了43-171倍的速度提升；而在高端的7nm和28nm ASIC平台上，相较于之前的FHE公钥客户端加速器，其速度提升了97倍。此外，该设计已公开并应用于支持未来的相关研究。 <div>
-Fully Homomorphic Encryption (FHE) enables privacy-preserving computation but imposes significant computational and communication overhead on the client for the public-key encryption. To alleviate this burden, previous works have introduced the Hybrid Homomorphic Encryption (HHE) paradigm, which combines symmetric encryption with homomorphic decryption to enhance performance for the FHE client. While early HHE schemes focused on binary data, modern versions now support integer prime fields, improving their efficiency for practical applications such as secure machine learning.
-
-Despite several HHE schemes proposed in the literature, there has been no comprehensive study evaluating their performance or area advantages over FHE for encryption tasks. This paper addresses this gap by presenting the first implementation of an HHE scheme- PASTA. It is a symmetric encryption scheme over integers designed to facilitate fast client encryption and homomorphic symmetric decryption on the server. We provide performance results for both FPGA and ASIC platforms, including a RISC-V System-on-Chip (SoC) implementation on a low-end 130nm ASIC technology, which achieves a 43–171$\times$ speedup compared to a CPU. Additionally, on high-end 7nm and 28nm ASIC platforms, our design demonstrates a 97$\times$ speedup over prior public-key client accelerators for FHE. We have made our design public and benchmarked an application to support future research.
-]]></content:encoded>
-<pubDate>Tue, 26 Nov 2024 14:24:23 +0000</pubDate>
-</item>
-<item>
-<title>Orion's Ascent: Accelerating Hash-Based Zero Knowledge Proof on Hardware Platforms</title>
-<link>https://eprint.iacr.org/2024/1918</link>
-<guid>https://eprint.iacr.org/2024/1918</guid>
-<content:encoded><![CDATA[
-<div> 关键词: 零知识证明、Orion、优化、硬件加速、FPGA
-
-总结:
-针对零知识证明（ZKP）方案Orion中存在的承诺阶段性能瓶颈问题，本文提出了多项算法和硬件层面的优化措施。首先，将递归编码构造替换为迭代方法，并设计了面向硬件优化的新型扩增图策略，以提高并行性和减少外部内存访问。其次，实现了动态生成扩增图的技术，大幅降低内存使用量。此外，对Merkle树生成过程中的SHA3哈希操作进行了优化，显著加快了多项式承诺阶段的速度。文中通过FPGA实现，利用高效的内存访问策略对高带宽内存（HBM）进行深度优化，相较于高性能CPU上的软件实现，线性编码速度提升最高可达381倍，哈希操作速度提升高达2,390倍。在实际应用中，如基于ZKP的深度神经网络训练验证场景下，这些技术可使多项式承诺阶段的速度提升至241倍。 <div>
-Zero-knowledge proofs (ZKPs) are cryptographic protocols that enable one party to prove the validity of a statement without revealing the underlying data. Such proofs have applications in privacy-preserving technologies and verifiable computations. However, slow proof generation poses a significant challenge in the wide-scale adoption of ZKP. Orion is a recent ZKP scheme with linear prover time. It leverages coding theory, expander graphs, and Merkle hash trees to improve computational efficiency. However, the polynomial commitment phase in Orion is yet a primary performance bottleneck due to the memory-intensive nature of expander graph-based encoding and the data-heavy hashing required for Merkle Tree generation.
-
-This work introduces several algorithmic and hardware-level optimizations aimed at accelerating Orion’s commitment phase. We replace the recursive encoding construction with an iterative approach and propose novel expander graph strategies optimized for hardware to enable more parallelism and reduce off-chip memory access. Additionally, we implement an on-the-fly expander graph generation technique, reducing memory usage by gigabytes. Further optimizations in Merkle Tree generation reduce the cost of SHA3 hashing, resulting in significant speedups of the polynomial commitment phase. Our FPGA implementation heavily optimizes access to the off-chip high-bandwidth memory (HBM) utilizing memory-efficient computational strategies. The accelerator demonstrates speedups of up to 381$\times$ for linear encoding and up to 2,390$\times$ for the hashing operations over a software implementation on a high-end CPU. In the context of real-world applications, such as zero-knowledge proof-of-training of deep neural networks (DNNs), our techniques show up to 241$\times$ speed up for the polynomial commitment.
-]]></content:encoded>
-<pubDate>Tue, 26 Nov 2024 11:02:32 +0000</pubDate>
-</item>
-<item>
-<title>Decentralized FHE Computer</title>
-<link>https://eprint.iacr.org/2024/1917</link>
-<guid>https://eprint.iacr.org/2024/1917</guid>
-<content:encoded><![CDATA[
-<div> 关键词: 分布式计算机、隐私保护、全同态加密、区块链环境、开发者激励
-
-<br />
-总结:
-本文提出了一个基于全同态加密（FHE）技术的去中心化计算机模型，旨在解决现有区块链系统中处理私密数据能力不足的问题。通过利用FHE技术，该模型能在保证数据加密状态下的安全计算与隐私保护。将此模型融入到去中心化生态系统中，可以有效扩展应用场景，特别是在对保密性要求高的领域。此外，该方案还具有可扩展性和为开发者贡献提供激励机制的特点，从而为构建一个支持隐私计算的去中心化计算机提供了有力框架。 <div>
-The concept of a decentralized computer is a powerful and transformative idea that has proven its significance in enabling trustless, distributed computations. However, its application has been severely constrained by an inability to handle private data due to the inherent transparency of blockchain systems. This limitation restricts the scope of use cases, particularly in domains where confidentiality is critical.
-
-In this work, we introduce a model for a Fully Homomorphic Encryption (FHE) decentralized computer. Our approach leverages recent advancements in FHE technology to enable secure computations on encrypted data while preserving privacy. By integrating this model into the decentralized ecosystem, we address the long-standing challenge of privacy in public blockchain environments. The proposed FHE computer supports a wide range of use cases, is scalable, and offers a robust framework for incentivizing developer contributions.
-]]></content:encoded>
-<pubDate>Mon, 25 Nov 2024 19:11:00 +0000</pubDate>
 </item>
 </channel>
 </rss>
