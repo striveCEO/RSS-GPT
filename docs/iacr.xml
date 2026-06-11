@@ -4,6 +4,116 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+<item>
+<title>PoW Micronomics: A Fine-Grained Model for the Economic Analysis of Proof-of-Work Blockchains</title>
+<link>https://eprint.iacr.org/2026/1241</link>
+<guid>https://eprint.iacr.org/2026/1241</guid>
+<content:encoded><![CDATA[
+
+Following the cryptographic security analyses of proof-of-work (PoW) blockchain protocols, a line of research has focused on their economic robustness. The two core questions asked are: How resilient is the system to rational attacks, and how profitable it is for miners to execute it. However, to our knowledge, no work to date has attempted to address them considering the full complexity of the blockchain protocol, including difficulty readjustment, which is needed to handle dynamic participation, price fluctuations, and the impact of risk.
+
+In this work, we provide a fine-grained game-theoretic analysis for Nakamoto-style PoW blockchains, which takes into account both incentives of parties to deviate and complications introduced by difficulty readjustment. Our results employ the Rational Protocol Design framework of Garay et al. [FOCS’13] and extend recent works on the economic robustness of the Bitcoin backbone protocol to the variable difficulty setting.
+
+Notably, our fine-grained specification of miners’ utility incorporates variable difficulty adjustment alongside factors like the average cost of mining and the depreciation factor, which, despite being common in economics, are typically either abstracted as exogenous parameters or ignored in the blockchain literature. We showcase the expressivity and usefulness of our formulation of utilities by using it to provide estimates and trends for such factors across several real-world cryptocurrencies.
+]]></content:encoded>
+<pubDate>Thu, 11 Jun 2026 05:39:21 +0000</pubDate>
+<pubDate>Thu, 11 Jun 2026 05:39:21 +0000</pubDate>
+</item>
+<item>
+<title>Balanced Additive Randomized Encodings for Shuffle Differential Privacy</title>
+<link>https://eprint.iacr.org/2026/1239</link>
+<guid>https://eprint.iacr.org/2026/1239</guid>
+<content:encoded><![CDATA[
+
+Shuffle differential privacy (shuffle DP) offers an attractive distributed alternative to standard differential privacy. It uses a secure shuffler to permute users' randomized encodings, providing individual data privacy without a central trusted entity. A key challenge, however, is to achieve both generality and client efficiency. Under information-theoretic shuffle-DP guarantees, protocols that nearly match central-model utility are restricted to statistical tasks such as summation and histograms. In contrast, in the computational setting, additive randomized encodings (ARE), introduced by Halevi et al. (CRYPTO 2023), yield a generic compiler that achieves central-model utility for arbitrary mechanisms. However, their construction incurs prohibitive worst-case computation and communication costs for clients, making it impractical for resource-constrained devices such as mobile phones, IoT sensors, and web browsers.
+
+In this work, we present a client-efficient one-round compiler from central DP to non-robust computational shuffle DP. To achieve this, we first construct a new balanced ARE scheme, where all the clients almost equally share the computational burden in the protocol. For a mechanism $M$ over $n$ clients, this reduces the worst-case per-client computation from $O(|M|)$ in prior work to $O(|M|/n)$, where $|M|$ denotes the circuit complexity of the mechanism. The key technical ingredient is a new permute-XOR ARE primitive that enables wire splicing across independently generated garbled subcircuits. Secondly we design a more efficient ARE-to-shuffle compiler, whose client bandwidth scales with the sparsity and cross-partition structure parameter of the ARE encoding - a quantity that is always  sublinear in $n$. This is an improvement over Halevi et al. (CRYPTO 2023) where each client bandwidth is $\Omega(n)$. At a high level, the first contribution improves client computation while the second improves client bandwidth.
+
+We provide an implementation of our generic compiler for differentially private tasks including selection, distinct elements, and linear contextual bandits. We obtain shuffle protocols that match the utility of their central-model counterparts with reasonable client overhead. We evaluate our method across a range of practical settings, and observe substantial gains over the compiler of Halevi et al., with per-client computational and bandwidth speedups increasing linearly in the number of clients.
+]]></content:encoded>
+<pubDate>Wed, 10 Jun 2026 21:26:59 +0000</pubDate>
+<pubDate>Wed, 10 Jun 2026 21:26:59 +0000</pubDate>
+</item>
+<item>
+<title>On the Additive Sensitivity of LZ77 Under Consecutive Edits</title>
+<link>https://eprint.iacr.org/2026/1238</link>
+<guid>https://eprint.iacr.org/2026/1238</guid>
+<content:encoded><![CDATA[
+
+We revisit the problem of mitigating information leakage in the widely used but insecure compress-then-encrypt paradigm. While encryption hides message contents, the ciphertext length is directly related to the length of the compressed message, which may, in turn, leak information about the {\em content} of the message itself. Recent work of Blocki et al. (TCC 2025) proposed an $(\varepsilon,\delta)$-differentially private approach that adds randomized padding calibrated to the global sensitivity of the compression algorithm, and showed that the global sensitivity of LZ77 is $O(W^{2/3}\log n)$, where $n$ is the input length and $W$ is the sliding
+window size. 
+
+However, prior analysis focused only on sensitivity with respect to single-character edits, which leads to limited privacy guarantees when protecting longer substrings such as passwords, passphrases, cookies, or confidential user records.  A natural attempt to handle longer secrets is to appeal to group privacy, but for approximate differential privacy, this leads to very poor parameter degradation: in particular, the effective value of $\delta$ can grow exponentially with the group size $g$.  In this work, we introduce and study the sensitivity of compression schemes under block edits. Specifically, we define two strings to be $g$-neighbors if they differ only within a contiguous interval of length $g$. 
+
+Our main technical contribution is a nearly tight characterization of the $g$-consecutive sensitivity of LZ77. We show that the $g$-consecutive sensitivity of both LZ77 variants (with and without self-referencing) is at most $O((W^{2/3}+g+\sqrt{Wg})\log n)$. In particular, when $g \leq W^{1/3}$, the bound simplifies to $O(W^{2/3}\log n)$, matching the known bound for single-character edits. Thus, calibrating noise to the single-character sensitivity of LZ77 already suffices to protect much longer contiguous substrings. We provide matching lower bounds to demonstrate that our upper bound is tight, e.g., when $n=W=O(g^2)$, the $g$-consecutive sensitivity of LZ77 is at least $\tilde{\Omega}(g^{1.5})$, matching the $\sqrt{Wg}=O(g^{1.5})$ term from our upper bound up to a logarithmic factor.
+]]></content:encoded>
+<pubDate>Wed, 10 Jun 2026 21:00:10 +0000</pubDate>
+<pubDate>Wed, 10 Jun 2026 21:00:10 +0000</pubDate>
+</item>
+<item>
+<title>New bounds on private simultaneous quantum message passing</title>
+<link>https://eprint.iacr.org/2026/1236</link>
+<guid>https://eprint.iacr.org/2026/1236</guid>
+<content:encoded><![CDATA[
+
+In the private simultaneous message (PSM) setting, $k$ players obtain inputs $x_i\in\{0,1\}^n$ and then independently send messages to a referee, who should learn $f(x_1,...,x_k)$ but no other information about $(x_1,...,x_k)$. The PSM setting was introduced as a minimal model for secure multiparty computation. In the quantum setting, PSM has been related to non-local quantum computation (NLQC), and has several connections to the complexity of Boolean functions. The communication and correlation cost of implementing private simultaneous message passing may be much larger than the cost without privacy, and the cost of privacy in this setting remains poorly understood.  Here, we give new upper and lower bounds on the PSM model, in both the quantum and classical settings. Concretely, we prove two lower bounds:
+
+1) Nečiporuk's measure lower bounds the entanglement required for $k$-player quantum PSM with perfect correctness. This can be evaluated to give quadratic lower bounds for some explicit functions.
+2) The rank of the communication matrix of $f(x_1,x_2)$ lower bounds 2-player quantum PSM with perfect privacy but imperfect correctness. This implies a previously unknown lower bound on classical PSM with imperfect correctness.
+
+When allowing both quantum communication and shared entanglement, these two bounds are the first lower bounds on quantum PSM that make use of the privacy condition. Regarding upper bounds, we show:
+
+1) Letting $s$ be the size of a quantum circuit computing $f$, $d_f$ be the circuit depth, $k$ the number of players, $n$ the number of bits received by each player, and $\epsilon$ the correctness parameter of the PSM protocol, we obtain the upper bound $\mathsf{PSM}_k^*(f) \leq (kn +s) \cdot \log^{O( d_f)}(s/\epsilon)$. 
+2) The square of the Fourier 1 norm of $f$, $\Vert \hat{f}\Vert_1^2$, upper bounds the classical PSM complexity, $\mathsf{PSM}(f)\leq O(\Vert \hat{f} \Vert^2_1)$.
+
+In proving the first upper bound, we also generalize existing $T$-depth based techniques for NLQC from $2$ to $k\geq 2$ parties, and consider cases where the Clifford layers are restricted to having small light cones. These generalizations may be of independent interest.
+]]></content:encoded>
+<pubDate>Wed, 10 Jun 2026 17:15:39 +0000</pubDate>
+<pubDate>Wed, 10 Jun 2026 17:15:39 +0000</pubDate>
+</item>
+<item>
+<title>Authenticated Data Structures for Dynamic Workloads</title>
+<link>https://eprint.iacr.org/2026/1235</link>
+<guid>https://eprint.iacr.org/2026/1235</guid>
+<content:encoded><![CDATA[
+
+We introduce the Huffman-Merkle Tree (HMT), an authenticated data structure (ADS) optimized for dynamic workloads where some items may be more frequently accessed than others, and access frequencies change over time. An ADS allows proving item membership against a short commitment to a large mutable state, with applications including verifiable storage, Internet transparency services, and blockchains. Optimizing ADS performance under continuously changing access frequencies has not been fully addressed before, neither in theory nor in practice. HMT tackles access skew via tiering: "hot" items are stored according to a Huffman coding layout where frequently accessed items are closer to the root and thus contribute less to overall costs, while a binary Merkle Tree (MT) is used for cold and new elements to lower their update overhead. To efficiently handle dynamic workloads, we incrementally apply and batch layout changes, track access frequencies via count-min sketch, use a tier promotion cache, and consider various tier migration policies. We implement HMT and compare it on real-world data against Ethereum's Merkle Patricia Trie (MPT) ADS and its proposed replacement, the Unified Binary Tree (UBT). Our evaluation considers two metrics: the amount of hashing per ADS update and access-weighted membership-proof size. The latter metric captures both the cost of accessing each item and its access frequency. We find that the best HMT policy uses about 2.4x and 0.34x less average hash operations than MPT and UBT respectively, while featuring proofs shorter by 0.18x than MPT and 0.55x than UBT.
+]]></content:encoded>
+<pubDate>Wed, 10 Jun 2026 16:35:58 +0000</pubDate>
+<pubDate>Wed, 10 Jun 2026 16:35:58 +0000</pubDate>
+</item>
+<item>
+<title>Designing Incentives for Responsive Consensus Protocols</title>
+<link>https://eprint.iacr.org/2026/1234</link>
+<guid>https://eprint.iacr.org/2026/1234</guid>
+<content:encoded><![CDATA[
+
+Modern consensus protocols often aspire to be responsive---that is, to confirm transactions in time proportional to the actual network delays as opposed to a (typically much larger) worst-case bound on network delays. 
+Responsiveness can yield substantial practical improvements in both protocol latency and throughput.
+
+In blockchain settings, however, block proposers commonly have economic incentives (most notably MEV) to delay their blocks, a phenomenon repeatedly observed in practice, e.g., in the block production supply chains for Ethereum and Solana. Such incentives clash with responsiveness in existing protocol designs.
+
+This paper develops a rigorous framework for designing incentive-compatible responsive consensus protocols. We first consider the canonical case of single-leader protocols and establish feasibility results characterizing the conditions on the distribution of network latency under which responsiveness can be incentivized through a suitable reward function. We further quantify the amount of stake required from the leader to deter dishonest delays.
+
+We then show strong positive results for protocols with multiple leaders, demonstrating that the multi-leader approach is fundamentally superior to single-leader designs for resolving the tension between responsiveness and incentive-compatibility: by forcing leaders to compete for rewards, much of the burden otherwise placed on the incentive mechanism is alleviated. Notably, this results in simpler reward mechanisms with no stake requirements that also remain feasible in parameter regimes which are provably impossible under a single leader.
+]]></content:encoded>
+<pubDate>Wed, 10 Jun 2026 15:30:00 +0000</pubDate>
+<pubDate>Wed, 10 Jun 2026 15:30:00 +0000</pubDate>
+</item>
+<item>
+<title>Invisible Traces: Subversion Attacks on Batch-Issued Credentials</title>
+<link>https://eprint.iacr.org/2026/1229</link>
+<guid>https://eprint.iacr.org/2026/1229</guid>
+<content:encoded><![CDATA[
+
+All EU member states are required to roll out a digital identity system - the European Digital Identity (EUDI) wallet - by the end of 2026. Strong privacy is at the core of the underlying regulation, which mandates the EUDI wallet to support selective disclosure and unlinkability. The wallet currently being developed relies on the batch issuance of one-time ECDSA credentials that sign attributes through individually salted hashes for selective disclosure. This solution is known to achieve only a weak form of unlinkability, where the credential issuer must be honest: a malicious issuer could trace users through the salted hashes it signs and the signature value itself. But such a tracing attack requires the issuer to store all signed data and communicate with the verifying parties for tracing, which can be argued to be too cumbersome or obvious to happen in reality. In this work, we therefore initiate the study of a more subtle type of subversion attacks. Therein, the issuer can deviate from the issuance protocol, with two goals:
+(i) enabling verifiers in possession of a short tracing key to de-anonymize users and
+(ii) keeping this deviation undetectable from users.
+We formalize unlinkability against such subversion attacks, and show that batch-issued credentials with salted hashes do not achieve that form of privacy. We present several undetectable subversion attacks against batch-issued ECDSA credentials and suggest lightweight mechanisms to provably mediate them.
+]]></content:encoded>
+<pubDate>Wed, 10 Jun 2026 12:22:36 +0000</pubDate>
+<pubDate>Wed, 10 Jun 2026 12:22:36 +0000</pubDate>
+</item>
 
 <item>
 <title>Private Information Retrieval: Share Conversions vs. Decoding Polynomials</title>
