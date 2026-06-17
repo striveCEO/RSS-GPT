@@ -4,20 +4,18 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+
 <item>
 <title>GumSwap: Griefing-Free Universal Multi-Party Atomic Swaps</title>
 <link>https://eprint.iacr.org/2026/1253</link>
 <guid>https://eprint.iacr.org/2026/1253</guid>
 <content:encoded><![CDATA[
-
 Universal multi-party swaps were proposed for secure cross-chain cryptocurrency exchanges across multiple blockchains that require only signature verification from the underlying blockchains. However, existing universal swap protocols remain vulnerable to griefing attacks, where a deviating party aborts the swap to lock a compliant party’s assets for a long period, potentially causing indirect economic losses. A natural approach is to lift existing griefing-free solutions to the universal setting; however, we observe that this direct approach still faces three key challenges: (i) a timeout race attack, which arises from the absence of an upper bound on the transaction validity; (ii) a premium escape attack, which results from multiple refund transactions for the same assets being simultaneously valid; and (iii) a topological limitation, which implies that universal multi-party swaps can support only a special class of strongly connected digraphs, called reuniclus graphs.
 
 In this paper, we propose GumSwap, a Griefing-free universal multi-party atomic Swap, which guarantees that a compliant party receives a premium if its asset is locked but not redeemed. To mitigate the timeout race attack and the premium escape attack, we impose minimum timeout intervals for the principal and premium timeouts, respectively, and introduce an asset migration mechanism that ensures that, during any time interval, at most one refund transaction is valid.  Given the topological limitations of universal swap protocols, we further design a novel premium distribution mechanism that accommodates two classes of leaders in reuniclus graphs. Our experimental results demonstrate that GumSwap can be performed in less than 0.5 seconds per party, while reducing gas costs by 10.3X compared with existing contract-based solutions.
 ]]></content:encoded>
 <pubDate>Sun, 14 Jun 2026 04:12:06 +0000</pubDate>
-<pubDate>Sun, 14 Jun 2026 04:12:06 +0000</pubDate>
 </item>
-
 <item>
 <title>HedgeSwap: Universal Hedged Atomic Swaps Against Griefing Attacks</title>
 <link>https://eprint.iacr.org/2026/1252</link>
@@ -14204,27 +14202,6 @@ We first propose an FHE-friendly graph structure with a novel index encoding met
 We implemented GraSS with an open-source FHE library and estimated the performance on a million-scale dataset. GraSS identifies (approximate) top-16 in about $83$ hours achieving search accuracy of $0.918$, making it over $28\times$ faster than the previous best-known FHE-based solution.
 ]]></content:encoded>
 <pubDate>Fri, 13 Dec 2024 00:11:45 +0000</pubDate>
-</item>
-<item>
-<title>Anonymous credentials from ECDSA</title>
-<link>https://eprint.iacr.org/2024/2010</link>
-<guid>https://eprint.iacr.org/2024/2010</guid>
-<content:encoded><![CDATA[
-<div> 关键词：匿名数字凭证、大规模部署、BBS+、ECDSA、零知识证明
-
-总结:<br />
-本文提出了一种新的匿名数字凭证方案，该方案针对广泛应用且具有大量历史部署的椭圆曲线数字签名算法（ECDSA）进行设计。此方案无需改变身份发行者的现有流程，不需对移动设备进行硬件安全元素和操作系统的更新，也不依赖非标准的密码学假设，从而解决了大规模部署匿名凭证体系面临的困难。为了实现这一目标，文章通过采用基于sumcheck和Ligero论证系统的零知识证明方法，设计了适用于ECDSA所需的有限域上的高效Reed-Solomon编码方法以及专门的电路。生成ECDSA的零知识证明只需60毫秒，在结合ISO标准化的身份协议如MDOC标准后，可在移动设备上根据凭证大小在1.2秒内生成MDOC展示流程的零知识证明。因此，该方案被认为是隐私保护型数字身份应用的一个有前景的候选方案。 <div>
-Anonymous digital credentials allow a user to prove possession of an attribute that has been asserted by an identity issuer without revealing any extra information about themselves.  For example, a user who has received a digital passport credential can prove their “age is $>18$” without revealing any other attributes such as their name or date of birth.
-
-    Despite inherent value for privacy-preserving authentication, anonymous credential schemes have been difficult to deploy at scale.  Part of the difficulty arises because schemes in the literature, such as BBS+, use new cryptographic assumptions that require system-wide changes to existing issuer infrastructure.  In addition,  issuers often require digital identity credentials to be *device-bound* by incorporating the device’s secure element into the presentation flow.  As a result, schemes like BBS+ require updates to the hardware secure elements and OS on every user's device.
-    
-    In this paper, we propose a new anonymous credential scheme for the popular and legacy-deployed Elliptic Curve Digital Signature Algorithm (ECDSA) signature scheme.  By adding efficient zk arguments for statements about SHA256 and document parsing for ISO-standardized identity formats, our anonymous credential scheme is that first one that can be deployed *without* changing any issuer processes, *without* requiring changes to mobile devices, and *without* requiring non-standard cryptographic assumptions.
-
-    Producing ZK proofs about ECDSA signatures has been a bottleneck for other ZK proof systems because standardized curves such as P256 use finite fields which do not support efficient number theoretic transforms.  We overcome this bottleneck by designing a ZK proof system around sumcheck and the Ligero argument system, by designing efficient methods for Reed-Solomon encoding over the required fields, and by designing specialized circuits for ECDSA.
-        
-    Our proofs for ECDSA can be generated in 60ms.  When incorporated into a fully standardized identity protocol such as the ISO MDOC standard, we can generate a zero-knowledge proof for the MDOC presentation flow in 1.2 seconds on mobile devices depending on the credential size. These advantages make our scheme a promising candidate for privacy-preserving digital identity applications.
-]]></content:encoded>
-<pubDate>Thu, 12 Dec 2024 18:49:06 +0000</pubDate>
 </item>
 </channel>
 </rss>
