@@ -5,16 +5,69 @@
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
 <item>
+<title>Oblivious Priority Queue and Single-Source Shortest Path in the External Memory Setting</title>
+<link>https://eprint.iacr.org/2026/1285</link>
+<guid>https://eprint.iacr.org/2026/1285</guid>
+<content:encoded><![CDATA[
+
+The study of oblivious algorithms is concerned with designing privacy-preserving algorithms whose memory access patterns reveal nothing about the secret inputs. Such algorithms have been deployed at scale in production systems, most notably in Signal's private contact discovery service. So far, all practical implementations of oblivious algorithms (e.g., those by Signal and Meta) rely on trusted hardware and operate within the external-memory model of computation. While it is known how to generically compile an arbitrary program to execute obliviously on an external-memory target machine, such generic oblivious simulations trade asymptotical efficiency for generality and therefore are rarely used in practice. Instead, customized oblivious algorithms tailored for the computational tasks of interest are almost always favored. 
+
+In this paper, we explore the single-source shortest path (SSSP) problem, a fundamental algorithmic building block with broad applications in scheduling, routing, graph mining, resource allocation and flow optimization. We present an external-memory oblivious SSSP algorithm for undirected graphs that achieves I/O efficiency $O(V + \frac{E}{B}\log\frac{E}{M})$ and total work $O(E\log E)$ assuming $E = \Omega(V)$, where $V$ denotes the number of vertices, $E$ denotes the number of edges, and $M$ and $B$ represent the target machine's cache size and block size, respectively. Our algorithm almost matches the best known non-private external-memory algorithm for SSSP, up to a $\log \log E$ factor in the second term of the I/O bound. The remaining $\log \log E$ gap is conjectured to be an inherent barrier, since making the underlying priority queue oblivious requires an $\Omega(\log \log n)$ blowup in I/O cost, which is known to be inherent. 
+
+As a by-product, we develop an improved external-memory oblivious priority queue that supports DecrKey operations. Specifically, while the construction of Jafargholi et al. attains optimal I/O efficiency, it is suboptimal in total work under a strong notion of obliviousness—where the adversary can observe both block-level and word-level accesses. This stronger security guarantee is the current industry norm and explicitly required by companies such as Signal. We present a new oblivious priority queue that achieves optimality in both dimensions. Specifically, we achieve an I/O cost of $O(\frac{1}{B}\log\frac{n}{M})$ and total work $O(\log n)$ per query where $n$ is the capacity of the priority queue.
+]]></content:encoded>
+<pubDate>Thu, 18 Jun 2026 22:26:08 +0000</pubDate>
+<pubDate>Thu, 18 Jun 2026 22:26:08 +0000</pubDate>
+</item>
+<item>
+<title>Zero-Knowledge Proofs of Generalized Regular Expression Matching for Anonymized Email Verification</title>
+<link>https://eprint.iacr.org/2026/1284</link>
+<guid>https://eprint.iacr.org/2026/1284</guid>
+<content:encoded><![CDATA[
+
+Digital communication increasingly underpins identity, financial transactions, and regulatory compliance. In many settings, possession of a DKIM-signed email serves as evidence of account control, transaction confirmation, or institutional affiliation. Yet demonstrating such properties typically requires revealing the full email or relying on centralized intermediaries, introducing privacy risks and additional trust assumptions. A framework called ZK Email addresses this limitation by applying zero-knowledge proofs (ZKPs)  to email verification, enabling publicly verifiable proofs of authenticity while preserving message confidentiality. However, its existing implementations struggle to support complex, real-world messages due to the inefficiency of regular-expression verification over structured formats and rich alphabets.
+
+We address this limitation with a new ZKP system for regex matching based on path verification over $\varepsilon$-free NFAs, yielding prover complexity linear in the captured path and independent of the original email's size. This approach enables practical validation of expressive standard structures required for full DKIM-signed email verification. To fully integrate our constructions into ZK Email, we design complete end-to-end ZK circuits that combine (i) DKIM signature verification, (ii) an arbitrary-length SHA-256 circuit with partial precomputation for $\texttt{rsa-sha256}$ under RFC 6376, and (iii) a general-purpose regex primitive enforcing structural constraints over email headers and body. We formalize the associated zero-knowledge relations and analyze their security under realistic adversary models. We implement the system (fully integrated with ZK Email and released under the MIT license) in $\texttt{Circom}$ and $\texttt{Noir}$, targeting $\texttt{Groth16}$ and $\texttt{UltraHonk}$ backends, and evaluate it in both client-side and zkVM (SP1) deployment settings.  Experimental results on commodity hardware demonstrate substantial efficiency improvements over prior DFA-based approaches, achieving a $2$-$6\times$ speedup in proving time using the $\texttt{UltraHonk}$ backend, while supporting a significantly richer class of regex languages.
+]]></content:encoded>
+<pubDate>Thu, 18 Jun 2026 19:42:10 +0000</pubDate>
+<pubDate>Thu, 18 Jun 2026 19:42:10 +0000</pubDate>
+</item>
+<item>
+<title>Privacy-Preserving Outsourced Witness Updates for Append-Only RSA Accumulators</title>
+<link>https://eprint.iacr.org/2026/1283</link>
+<guid>https://eprint.iacr.org/2026/1283</guid>
+<content:encoded><![CDATA[
+
+Append-only accumulators are a natural way to realize compact public-state registries, but under high-frequency updates, witness maintenance becomes a severe challenge because each insertion typically invalidates most existing witnesses. This challenge is particularly acute for intermittently online users in anonymous credential systems, who cannot continuously synchronize update information, while directly outsourcing witness updates may make repeated requests linkable. In this paper, we present a privacy-preserving outsourced witness-update protocol for append-only RSA accumulators. The protocol combines witness updates with Linear Integer Secret Sharing (LISS), enabling on-demand, client-stateless witness updates while preserving witness privacy and unlinkability against coalitions of update servers below the threshold, and providing accountability for malicious or malformed server responses. We formalize the system and threat models and analyze the security of the protocol. We further develop server-side optimizations for long catch-up windows and implement the full end-to-end protocol in Rust. Evaluation under multiple threshold settings and offline windows shows that the protocol supports practical one-shot witness updates after long offline periods, with client-side cost remaining independent of the number of missed updates and server-side cost being mainly determined by the catch-up span and the LISS distribution matrix.
+]]></content:encoded>
+<pubDate>Thu, 18 Jun 2026 15:03:21 +0000</pubDate>
+<pubDate>Thu, 18 Jun 2026 15:03:21 +0000</pubDate>
+</item>
+<item>
+<title>BootNet: Homomorphic CNN Inference with Convolution and ReLU Fused in Bootstrapping</title>
+<link>https://eprint.iacr.org/2026/1279</link>
+<guid>https://eprint.iacr.org/2026/1279</guid>
+<content:encoded><![CDATA[
+
+Fully homomorphic encryption (FHE) enables privacy-preserving neural network inference but suffers from high overhead from homomorphic convolutions, polynomial activation approximations, and CKKS bootstrapping. This paper presents BootNet, a unified framework that fuses all three operations into a single bootstrapping invocation per CNN layer, achieving convolution, ReLU, and noise refresh simultaneously.
+
+Prior works are able to fuse convolution into bootstrapping using CinS encoding (NeuJeans, CCS 2024) or ReLU into functional bootstrapping (RBOOT, USENIX Security 2026), but combining both for end-to-end ImageNet inference introduces numerous undocumented challenges. BootNet resolves these through a suite of co‑design techniques and optimizations, including four representative solutions: (1) a split‑and‑merge bootstrapping schedule that halves bootstrapping calls for ResNet shortcuts; (2) an improved RBOOT configuration paired with a model quantization method that complete the activation function with fewer multiplication depth; (3) a fusion of NeuJeans' masking layer with RBOOT's arcsin step that yields additional depth reduction; (4) tailoring EvalRound+ (IEEE Access 2025) to fit slim bootstrapping and RBOOT for further depth reduction.
+
+We evaluate BootNet on multiple ResNet models on the ImageNet dataset. Compared to the state-of-the-art Orion (ASPLOS 2025), BootNet reduces end-to-end latency by 67-73% and storage by 76-90% while preserving plaintext accuracy. We also introduce BootNet-mini, enabling full ImageNet inference at ring degree $N=2^{15}$ (with over $120$-bit security via sparse-secret encapsulation) for the first time, while all previous works have to use $N=2^{16}$ or larger. BootNet-mini performs similarly in latency but reduces 30-55% storage requirement than BootNet,  making it potentially more friendly for hardware acceleration.
+]]></content:encoded>
+<pubDate>Thu, 18 Jun 2026 07:51:18 +0000</pubDate>
+<pubDate>Thu, 18 Jun 2026 07:51:18 +0000</pubDate>
+</item>
+
+<item>
 <title>Gatling: Rapid-Fire Consensus from Parallel Composition</title>
 <link>https://eprint.iacr.org/2026/1269</link>
 <guid>https://eprint.iacr.org/2026/1269</guid>
 <content:encoded><![CDATA[
-
 Consensus protocols form the core of blockchains and other replicated state machines, ensuring that all correct nodes process the same totally ordered log of input transactions. In fault-free executions, performance is driven by the good-case transaction latency -- the time between a transaction becoming known to all nodes and its confirmation by the consensus protocol -- which depends on both how frequently proposals are made and, once made, how quickly they are confirmed. While prior work has established tight lower bounds on confirmation latency that modern protocols already achieve, it remains open whether the inter-proposal time can be further reduced below the state-of-the-art of one network delay.
 
 We introduce Gatling, an atomic broadcast protocol that achieves arbitrarily small inter-proposal times under rotating leader schedules; in particular, smaller than the network delay. Gatling runs multiple parallel instances of a black-box atomic broadcast protocol and staggers their proposal schedules to generate proposals in faster succession than state-of-the-art protocols. A deterministic interleaving rule merges the outputs of these instances into a single global log. We analyze the effects of head-of-line blocking caused by crashed leaders, and derive Gatling's optimal number of parallel instances. We further study the impact of Gatling on predictable validity and present two variants that retain this property. Finally, our experiments confirm that Gatling can be used with off-the-shelf component protocols to achieve low latency without fine-tuning the component protocol for minimum latency.
 ]]></content:encoded>
-<pubDate>Tue, 16 Jun 2026 19:43:06 +0000</pubDate>
 <pubDate>Tue, 16 Jun 2026 19:43:06 +0000</pubDate>
 </item>
 <item>
@@ -22,7 +75,6 @@ We introduce Gatling, an atomic broadcast protocol that achieves arbitrarily sma
 <link>https://eprint.iacr.org/2026/1268</link>
 <guid>https://eprint.iacr.org/2026/1268</guid>
 <content:encoded><![CDATA[
-
 We initiate the study of multi-authority traitor tracing (MA-TT), a decentralized variant of traitor tracing in which tracing capabilities are distributed across multiple independent authorities rather than concentrated in a single trusted entity. Ciphertexts are associated with tracing policies over a collection of authorities, specifying which subsets of authorities are authorized to jointly accuse a user of contributing to a pirate decoder. This enables fine-grained control over tracing capabilities, prevents unilateral accusations, and reduces the surveillance risks inherent in centralized tracing systems. Our scheme naturally supports conjunction, disjunction, threshold, and more general monotone tracing policies.
 
 We further introduce multi-authority attribute-based traitor tracing (MA-AB-TT), which combines distributed tracing in MA-TT with decentralized access control from multi-authority attribute-based encryption (MA-ABE). Ciphertexts are therefore equipped with two orthogonal policies: an attribute policy governing decryption and a tracing policy governing which tracing authorities may jointly identify traitors.
@@ -34,19 +86,16 @@ Technically, we extend the blueprint for pairing-based traitor tracing based on 
 Our techniques also yield a new modular construction of adaptively secure MA-ABE under static corruptions from sIPFE, improving on a prior construction by Ambrona and Gay [PKC 2023]. Finally, when specialized to a single authority, our framework gives the first ciphertext-policy attribute-based traitor tracing scheme with asymptotically optimal parameters and exponentially large user spaces.
 ]]></content:encoded>
 <pubDate>Tue, 16 Jun 2026 17:36:40 +0000</pubDate>
-<pubDate>Tue, 16 Jun 2026 17:36:40 +0000</pubDate>
 </item>
 <item>
 <title>Collaborative RLN Signaling</title>
 <link>https://eprint.iacr.org/2026/1259</link>
 <guid>https://eprint.iacr.org/2026/1259</guid>
 <content:encoded><![CDATA[
-
 Rate Limiting Nullifier (RLN) is a privacy-preserving and decentralized spam-prevention mechanism for anonymous broadcast networks: each member can emit at most $r$ signals per epoch, and any violation reveals a secret that enables the member's stake to be slashed. The standard construction binds each membership to a single secret key $\mathsf{sk}_G$, so the unit of identity, the unit of authorization, and the unit of slashing all coincide with one party. This rules out settings in which a group should speak with one voice, share one rate budget, and stand behind one collective bond without any single member being able to act unilaterally.
 We introduce Collaborative RLN Signaling (coRLN), a protocol that lets $n$ parties register as a single RLN member and signal only by acting jointly. The group secret $\mathsf{sk}_G$ is held as additive shares under SPDZ and never reconstructed; the identity (or rate) commitment, the per-epoch RLN evaluation, and the broadcast proof are produced inside an MPC network using collaborative zk-SNARKs. The group occupies one leaf in the membership Merkle tree, locks one aggregated stake $\mathsf{stake}_G$, and is bound by one rate limit. We present the construction in both the rate-limit-1 and the general $r \geq 1$ settings, and we extend the protocol with a collaborative withdrawal procedure that lets the group exit without ever reconstructing $\mathsf{sk}_G$.
 We prove three security properties of coRLN by reduction to the collaborative-SNARK composition and the standard primitives underneath: (i) no PPT adversary corrupting up to $n-1$ parties recovers $\mathsf{sk}_G$ as long as one party is honest; (ii) two signals in the same epoch with the same $\mathsf{messageId}$ yield an efficient extractor that recovers $\mathsf{sk}_G$ and triggers forfeiture of $\mathsf{stake}_G$; and (iii) no strict subset of $G$ can produce a verifying signal. The verifier interface and signal shape match classical RLN at the byte level, so coRLN deploys on existing RLN-aware infrastructure with only the verification key updated.
 ]]></content:encoded>
-<pubDate>Mon, 15 Jun 2026 15:37:21 +0000</pubDate>
 <pubDate>Mon, 15 Jun 2026 15:37:21 +0000</pubDate>
 </item>
 <item>
@@ -54,7 +103,6 @@ We prove three security properties of coRLN by reduction to the collaborative-SN
 <link>https://eprint.iacr.org/2026/1258</link>
 <guid>https://eprint.iacr.org/2026/1258</guid>
 <content:encoded><![CDATA[
-
 Distributed shuffling is a core primitive underlying mix-nets, electronic voting, and, more recently, single secret leader election (SSLE) protocols for proof-of-stake blockchains. In these settings, a collection of resource-constrained parties jointly permutes a list of ciphertexts or commitments in order to conceal the correspondence between inputs and outputs. Existing security analyzes of such protocols typically rely on heuristic anonymity measures or implicitly assume honest behavior; therefore, they fail to capture statistical dependencies that arise when shuffling is partial and some participants are corrupted.
 
 In this work, we introduce a new security model for distributed shuffling that explicitly accounts for adversarial corruption and information leakage. Our model allows an adversary to corrupt a subset of shufflers and to track selected elements throughout the execution, and defines anonymity in terms of statistical distance from the uniform distribution over permutations. This yields a quantitative, composable notion of security that subsumes commonly used anonymity-set arguments and aligns with standard cryptographic indistinguishability frameworks.
@@ -62,9 +110,7 @@ In this work, we introduce a new security model for distributed shuffling that e
 Using this model, we analyze Whisk, the shuffle-based SSLE mechanism proposed for Ethereum. We show that, under realistic protocol parameters and even in the absence of adaptive attacks, the induced distribution over permutations deviates significantly from the uniform distribution. Consequently, the resulting anonymity guaranties are substantially weaker than what is suggested by heuristic analyzes.  We show how to modify the scheme parameters to meet the security requirements.
 ]]></content:encoded>
 <pubDate>Mon, 15 Jun 2026 14:07:49 +0000</pubDate>
-<pubDate>Mon, 15 Jun 2026 14:07:49 +0000</pubDate>
 </item>
-
 <item>
 <title>GumSwap: Griefing-Free Universal Multi-Party Atomic Swaps</title>
 <link>https://eprint.iacr.org/2026/1253</link>
@@ -14198,70 +14244,6 @@ Differentially private (DP) heavy-hitter detection is an important primitive for
 Private deep neural network (DNN) inference based on secure two-party computation (2PC) enables secure privacy protection for both the server and the client. However, existing secure 2PC frameworks suffer from a high inference latency due to enormous communication. As the communication of both linear and non-linear DNN layers reduces with the bit widths of weight and activation, in this paper, we propose PrivQuant, a framework that jointly optimizes the 2PC-based quantized inference protocols and the network quantization algorithm, enabling communication-efficient private inference. PrivQuant proposes DNN architecture-aware optimizations for the 2PC protocols for communication-intensive quantized operators and conducts graph-level operator fusion for communication reduction. Moreover, PrivQuant also develops a communication-aware mixed precision quantization algorithm to improve the inference efficiency while maintaining high accuracy. The network/protocol co-optimization enables PrivQuant to outperform prior-art 2PC frameworks. With extensive experiments, we demonstrate PrivQuant reduces communication by $11\times, 2.5\times \mathrm{and}~  2.8\times$, which results in $8.7\times, 1.8\times ~ \mathrm{and}~ 2.4\times$ latency reduction compared with SiRNN, COINN, and CoPriv, respectively.
 ]]></content:encoded>
 <pubDate>Fri, 13 Dec 2024 13:51:36 +0000</pubDate>
-</item>
-<item>
-<title>On the BUFF Security of ECDSA with Key Recovery</title>
-<link>https://eprint.iacr.org/2024/2018</link>
-<guid>https://eprint.iacr.org/2024/2018</guid>
-<content:encoded><![CDATA[
-<div> 关键词: ECDSA，key recovery，BUFF安全，弱非重签性，Ethereum地址
-
-总结:
-本文探讨了使用密钥恢复的椭圆曲线数字签名算法（KR-ECDSA）的安全性，特别是在Ethereum环境下的Beyond UnForgeability Features（BUFF）安全。研究结果显示，KR-ECDSA提供了BUFF安全性，但存在弱非重签性（wNR）问题。文中指出，KR-ECDSA验证算法需要输入以太坊地址addr，该地址由对应的ECDSA验证密钥通过Keccak-256哈希计算得到的右起160位组成，并检查恢复的验证密钥的哈希值是否等于addr，这是保证BUFF安全性的必要条件。此外，文章分析表明原始ECDSA不提供任何BUFF安全性，并揭示了一个针对Aumayr等人提出的基于ECDSA的适配器签名方案的攻击，此攻击超出了其安全模型范围。 <div>
-In the usual syntax of digital signatures, the verification algorithm takes a verification key in addition to a signature and a message, whereas in ECDSA with key recovery, which is used in Ethereum,  no verification key is input to the verification algorithm. Instead, a verification key is recovered from a signature and a message. In this paper, we explore BUFF security of ECDSA with key recovery (KR-ECDSA), where BUFF stands for Beyond UnForgeability Features (Cremers et al., IEEE S&amp;P 2021).  As a result, we show that KR-ECDSA provides BUFF security, except weak non-resignability (wNR). We pay attention to that the verification algorithm of KR-ECDSA takes an Ethereum address addr as input, which is defined as the rightmost 160-bits of the Keccak-256 hash of the corresponding ECDSA verification key, and checks the hash value of the recovered verification key is equal to addr.  Our security analysis shows that this procedure is mandatory to provide BUFF security. We also discuss whether wNR is mandatory in Ethereum or not.  To clarify the above equality check is mandatory to provide BUFF security in KR-ECDSA, we show that the original ECDSA does not provide any BUFF security. As a by-product of the analysis, we show that one of our BUFF attacks also works against the Aumayr et al.'s ECDSA-based adaptor signature scheme (ASIACRYPT 2021). We emphasize that the attack is positioned outside of their security model.
-]]></content:encoded>
-<pubDate>Fri, 13 Dec 2024 05:56:52 +0000</pubDate>
-</item>
-<item>
-<title>Byzantine Consensus in Wireless Networks</title>
-<link>https://eprint.iacr.org/2024/2017</link>
-<guid>https://eprint.iacr.org/2024/2017</guid>
-<content:encoded><![CDATA[
-<div> 关键词: Byzantine共识协议、无线网络、分布式系统、可靠广播协议、部分同步
-
-总结:
-本文提出了一种新的可靠广播协议，该协议在故障容忍度方面超过了当前最先进的技术(PODC '05)。在此基础上，文章进一步开发了首个适用于无线网络的部分同步环境下的拜占庭共识协议。这个新的共识协议不再需要领导者和故障转移机制。作者对新提出的广播协议和共识协议的正确性进行了正式证明。这表明，在无线网络中实现高容错性的共识同样重要，并为该领域的研究带来了创新突破。 <div>
-A Byzantine consensus protocol is essential in decentralized systems as the protocol ensures system consistency despite node failures.
-Research on consensus in wireless networks receives relatively less attention, while significant advancements in wired networks.
-However, consensus in wireless networks has equal significance as in wired networks.
-
-In this paper, we propose a new reliable broadcast protocol that can achieve reliability with high fault tolerance over than the SOTA (PODC '05). With the new protocol, we further develop the first wireless network Byzantine consensus protocol under the assumption of partial synchrony. Notably, this consensus protocol removes the requirement of leaders and fail-over mechanism in prior works. We formally prove the correctness of both our new broadcast protocol and consensus protocol.
-]]></content:encoded>
-<pubDate>Fri, 13 Dec 2024 04:46:33 +0000</pubDate>
-</item>
-<item>
-<title>Crescent: Stronger Privacy for Existing Credentials</title>
-<link>https://eprint.iacr.org/2024/2013</link>
-<guid>https://eprint.iacr.org/2024/2013</guid>
-<content:encoded><![CDATA[
-<div> 关键词: Crescent、隐私保护凭证、零知识证明、选择性披露、unlinkability
-
-总结:
-Crescent是一个旨在提升现有凭证（如JSON Web Tokens (JWTs)和Mobile Driver's License (mDL)）隐私特性的系统实现。该系统无需新的发证方即可通过使用零知识证明技术来实现凭证的选择性披露和不可链接性等功能。Crescent具备实际应用性能，能在一次性的凭证设置阶段后提供快速的证明生成和验证时间（数十毫秒）。文中展示了两个实用场景的演示：基于雇主颁发JWT的福利资格证明以及基于mDL的在线年龄验证。此外，他们提供了开源实现以促进进一步的研究与实验，相关代码库可在https://github.com/microsoft/crescent-credentials找到。 <div>
-We describe Crescent, a construction and implementation of privacy-preserving credentials. The system works by upgrading the privacy features of existing credentials, such as JSON Web Tokens (JWTs) and Mobile Driver’s License (mDL) and as such does not require a new party to issue credentials. By using zero-knowledge proofs of possession of these credentials, we can add privacy features such as selective disclosure and unlinkability, without help from credential issuers. The system has practical performance, offering fast proof generation and verification times (tens of milliseconds) after a once-per-credential setup phase. We give demos for two practical scenarios, proof of employment for benefits eligibility (based on an employer-issued JWT), and online age verification (based on an mDL). We provide an open-source implementation to enable further research and experimentation.
-
-This paper is an early draft describing our work, aiming to include enough material to describe the functionality, and some details of the internals of our new library, available at https://github.com/microsoft/crescent-credentials.
-]]></content:encoded>
-<pubDate>Fri, 13 Dec 2024 01:42:20 +0000</pubDate>
-</item>
-<item>
-<title>GraSS: Graph-based Similarity Search on Encrypted Query</title>
-<link>https://eprint.iacr.org/2024/2012</link>
-<guid>https://eprint.iacr.org/2024/2012</guid>
-<content:encoded><![CDATA[
-<div> 关键词：相似性搜索、图基方法、全同态加密（FHE）、客户端隐私、服务器隐私
-
-总结:
-我们提出了一种名为GraSS的安全协议，用于基于全同态加密（FHE）实现客户端（查询拥有者）和服务器端（数据集拥有者）之间的图基相似性搜索。该协议能够在基于FHE的安全假设下保证客户端输入对服务器的隐私以及服务器输入对客户端的隐私。为了提高可扩展性和降低计算复杂度，我们设计了一个对FHE友好的图结构及新颖的索引编码方法，将邻域检索过程的时间复杂度从$O(n^2)$降低到$\tilde{O}(n)$，其中n为总节点数。同时，我们还提出了几项核心的FHE算法，用于在新的图结构下执行图操作。最后，我们实现了完整的GraSS解决方案，这是首个基于FHE的安全图基数据库搜索方案。经过实测，GraSS在百万规模的数据集上可以在约83小时内找到近似的前16名结果，准确率达到0.918，比此前已知的最佳FHE方案快了超过28倍。 <div>
-Similarity search, i.e., retrieving vectors in a database that are similar to a query, is the backbone of many applications. Especially, graph-based methods show state-of-the-art performance. For sensitive applications, it is critical to ensure the privacy of the query and the dataset.
-
-In this work, we introduce GraSS, a secure protocol between client (query owner) and server (dataset owner) for graph-based similarity search based on fully homomorphic encryption (FHE).  Both the client-input privacy against the server and the server-input privacy against the client are achievable based on underlying security assumptions on FHE.
-
-We first propose an FHE-friendly graph structure with a novel index encoding method that makes our protocol highly scalable in terms of data size, reducing the computational complexity of neighborhood retrieval process from $O(n^2)$ to $\tilde{O}(n)$ for the total number of nodes $n$. We also propose several core FHE algorithms to perform graph operations under the new graph structure. Finally, we introduce GraSS, an end-to-end solution of secure graph-based similarity search based on FHE. To the best of our knowledge, it is the first FHE-based solution for secure graph-based database search.
-
-We implemented GraSS with an open-source FHE library and estimated the performance on a million-scale dataset. GraSS identifies (approximate) top-16 in about $83$ hours achieving search accuracy of $0.918$, making it over $28\times$ faster than the previous best-known FHE-based solution.
-]]></content:encoded>
-<pubDate>Fri, 13 Dec 2024 00:11:45 +0000</pubDate>
 </item>
 </channel>
 </rss>
