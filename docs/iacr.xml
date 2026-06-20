@@ -4,6 +4,66 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+<item>
+<title>Gatling: Rapid-Fire Consensus from Parallel Composition</title>
+<link>https://eprint.iacr.org/2026/1269</link>
+<guid>https://eprint.iacr.org/2026/1269</guid>
+<content:encoded><![CDATA[
+
+Consensus protocols form the core of blockchains and other replicated state machines, ensuring that all correct nodes process the same totally ordered log of input transactions. In fault-free executions, performance is driven by the good-case transaction latency -- the time between a transaction becoming known to all nodes and its confirmation by the consensus protocol -- which depends on both how frequently proposals are made and, once made, how quickly they are confirmed. While prior work has established tight lower bounds on confirmation latency that modern protocols already achieve, it remains open whether the inter-proposal time can be further reduced below the state-of-the-art of one network delay.
+
+We introduce Gatling, an atomic broadcast protocol that achieves arbitrarily small inter-proposal times under rotating leader schedules; in particular, smaller than the network delay. Gatling runs multiple parallel instances of a black-box atomic broadcast protocol and staggers their proposal schedules to generate proposals in faster succession than state-of-the-art protocols. A deterministic interleaving rule merges the outputs of these instances into a single global log. We analyze the effects of head-of-line blocking caused by crashed leaders, and derive Gatling's optimal number of parallel instances. We further study the impact of Gatling on predictable validity and present two variants that retain this property. Finally, our experiments confirm that Gatling can be used with off-the-shelf component protocols to achieve low latency without fine-tuning the component protocol for minimum latency.
+]]></content:encoded>
+<pubDate>Tue, 16 Jun 2026 19:43:06 +0000</pubDate>
+<pubDate>Tue, 16 Jun 2026 19:43:06 +0000</pubDate>
+</item>
+<item>
+<title>Decentralized Multi-Authority (Attribute-Based) Traitor Tracing</title>
+<link>https://eprint.iacr.org/2026/1268</link>
+<guid>https://eprint.iacr.org/2026/1268</guid>
+<content:encoded><![CDATA[
+
+We initiate the study of multi-authority traitor tracing (MA-TT), a decentralized variant of traitor tracing in which tracing capabilities are distributed across multiple independent authorities rather than concentrated in a single trusted entity. Ciphertexts are associated with tracing policies over a collection of authorities, specifying which subsets of authorities are authorized to jointly accuse a user of contributing to a pirate decoder. This enables fine-grained control over tracing capabilities, prevents unilateral accusations, and reduces the surveillance risks inherent in centralized tracing systems. Our scheme naturally supports conjunction, disjunction, threshold, and more general monotone tracing policies.
+
+We further introduce multi-authority attribute-based traitor tracing (MA-AB-TT), which combines distributed tracing in MA-TT with decentralized access control from multi-authority attribute-based encryption (MA-ABE). Ciphertexts are therefore equipped with two orthogonal policies: an attribute policy governing decryption and a tracing policy governing which tracing authorities may jointly identify traitors.
+
+Our main contribution is a construction of MA-AB-TT for arbitrary monotone access structures from the standard matrix decisional Diffie-Hellman (MDDH) assumption in prime-order pairing groups. Our construction achieves adaptive security under static corruption of authorities in the random oracle model. All system parameters are independent of the number of authorities and users in the system, while ciphertexts grow linearly with the size of the associated policies. Our framework also yields a publicly traceable variant, in which tracing can be performed using only the authorities' public keys, albeit with weaker asymptotic efficiency guarantees.
+
+Technically, we extend the blueprint for pairing-based traitor tracing based on private linear broadcast encryption (PLBE) [Boneh et al., Eurocrypt 2006] to the multi-authority setting. The key technical ingredient is a new multi-authority PLBE construction, which we instantiate from slotted inner-product function encryption (sIPFE) [Lin and Luo, Eurocrypt 2020]. As an intermediate step, we provide a new attribute-based sIPFE scheme supporting arithmetic branching programs, which may be of independent interest.
+
+Our techniques also yield a new modular construction of adaptively secure MA-ABE under static corruptions from sIPFE, improving on a prior construction by Ambrona and Gay [PKC 2023]. Finally, when specialized to a single authority, our framework gives the first ciphertext-policy attribute-based traitor tracing scheme with asymptotically optimal parameters and exponentially large user spaces.
+]]></content:encoded>
+<pubDate>Tue, 16 Jun 2026 17:36:40 +0000</pubDate>
+<pubDate>Tue, 16 Jun 2026 17:36:40 +0000</pubDate>
+</item>
+<item>
+<title>Collaborative RLN Signaling</title>
+<link>https://eprint.iacr.org/2026/1259</link>
+<guid>https://eprint.iacr.org/2026/1259</guid>
+<content:encoded><![CDATA[
+
+Rate Limiting Nullifier (RLN) is a privacy-preserving and decentralized spam-prevention mechanism for anonymous broadcast networks: each member can emit at most $r$ signals per epoch, and any violation reveals a secret that enables the member's stake to be slashed. The standard construction binds each membership to a single secret key $\mathsf{sk}_G$, so the unit of identity, the unit of authorization, and the unit of slashing all coincide with one party. This rules out settings in which a group should speak with one voice, share one rate budget, and stand behind one collective bond without any single member being able to act unilaterally.
+We introduce Collaborative RLN Signaling (coRLN), a protocol that lets $n$ parties register as a single RLN member and signal only by acting jointly. The group secret $\mathsf{sk}_G$ is held as additive shares under SPDZ and never reconstructed; the identity (or rate) commitment, the per-epoch RLN evaluation, and the broadcast proof are produced inside an MPC network using collaborative zk-SNARKs. The group occupies one leaf in the membership Merkle tree, locks one aggregated stake $\mathsf{stake}_G$, and is bound by one rate limit. We present the construction in both the rate-limit-1 and the general $r \geq 1$ settings, and we extend the protocol with a collaborative withdrawal procedure that lets the group exit without ever reconstructing $\mathsf{sk}_G$.
+We prove three security properties of coRLN by reduction to the collaborative-SNARK composition and the standard primitives underneath: (i) no PPT adversary corrupting up to $n-1$ parties recovers $\mathsf{sk}_G$ as long as one party is honest; (ii) two signals in the same epoch with the same $\mathsf{messageId}$ yield an efficient extractor that recovers $\mathsf{sk}_G$ and triggers forfeiture of $\mathsf{stake}_G$; and (iii) no strict subset of $G$ can produce a verifying signal. The verifier interface and signal shape match classical RLN at the byte level, so coRLN deploys on existing RLN-aware infrastructure with only the verification key updated.
+]]></content:encoded>
+<pubDate>Mon, 15 Jun 2026 15:37:21 +0000</pubDate>
+<pubDate>Mon, 15 Jun 2026 15:37:21 +0000</pubDate>
+</item>
+<item>
+<title>Beyond Anonymity Sets: A Security Model for Distributed Shuffling in Adversarial Environments</title>
+<link>https://eprint.iacr.org/2026/1258</link>
+<guid>https://eprint.iacr.org/2026/1258</guid>
+<content:encoded><![CDATA[
+
+Distributed shuffling is a core primitive underlying mix-nets, electronic voting, and, more recently, single secret leader election (SSLE) protocols for proof-of-stake blockchains. In these settings, a collection of resource-constrained parties jointly permutes a list of ciphertexts or commitments in order to conceal the correspondence between inputs and outputs. Existing security analyzes of such protocols typically rely on heuristic anonymity measures or implicitly assume honest behavior; therefore, they fail to capture statistical dependencies that arise when shuffling is partial and some participants are corrupted.
+
+In this work, we introduce a new security model for distributed shuffling that explicitly accounts for adversarial corruption and information leakage. Our model allows an adversary to corrupt a subset of shufflers and to track selected elements throughout the execution, and defines anonymity in terms of statistical distance from the uniform distribution over permutations. This yields a quantitative, composable notion of security that subsumes commonly used anonymity-set arguments and aligns with standard cryptographic indistinguishability frameworks.
+
+Using this model, we analyze Whisk, the shuffle-based SSLE mechanism proposed for Ethereum. We show that, under realistic protocol parameters and even in the absence of adaptive attacks, the induced distribution over permutations deviates significantly from the uniform distribution. Consequently, the resulting anonymity guaranties are substantially weaker than what is suggested by heuristic analyzes.  We show how to modify the scheme parameters to meet the security requirements.
+]]></content:encoded>
+<pubDate>Mon, 15 Jun 2026 14:07:49 +0000</pubDate>
+<pubDate>Mon, 15 Jun 2026 14:07:49 +0000</pubDate>
+</item>
 
 <item>
 <title>GumSwap: Griefing-Free Universal Multi-Party Atomic Swaps</title>
