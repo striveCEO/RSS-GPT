@@ -4,12 +4,12 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+
 <item>
 <title>Oblivious Priority Queue and Single-Source Shortest Path in the External Memory Setting</title>
 <link>https://eprint.iacr.org/2026/1285</link>
 <guid>https://eprint.iacr.org/2026/1285</guid>
 <content:encoded><![CDATA[
-
 The study of oblivious algorithms is concerned with designing privacy-preserving algorithms whose memory access patterns reveal nothing about the secret inputs. Such algorithms have been deployed at scale in production systems, most notably in Signal's private contact discovery service. So far, all practical implementations of oblivious algorithms (e.g., those by Signal and Meta) rely on trusted hardware and operate within the external-memory model of computation. While it is known how to generically compile an arbitrary program to execute obliviously on an external-memory target machine, such generic oblivious simulations trade asymptotical efficiency for generality and therefore are rarely used in practice. Instead, customized oblivious algorithms tailored for the computational tasks of interest are almost always favored. 
 
 In this paper, we explore the single-source shortest path (SSSP) problem, a fundamental algorithmic building block with broad applications in scheduling, routing, graph mining, resource allocation and flow optimization. We present an external-memory oblivious SSSP algorithm for undirected graphs that achieves I/O efficiency $O(V + \frac{E}{B}\log\frac{E}{M})$ and total work $O(E\log E)$ assuming $E = \Omega(V)$, where $V$ denotes the number of vertices, $E$ denotes the number of edges, and $M$ and $B$ represent the target machine's cache size and block size, respectively. Our algorithm almost matches the best known non-private external-memory algorithm for SSSP, up to a $\log \log E$ factor in the second term of the I/O bound. The remaining $\log \log E$ gap is conjectured to be an inherent barrier, since making the underlying priority queue oblivious requires an $\Omega(\log \log n)$ blowup in I/O cost, which is known to be inherent. 
@@ -17,19 +17,16 @@ In this paper, we explore the single-source shortest path (SSSP) problem, a fund
 As a by-product, we develop an improved external-memory oblivious priority queue that supports DecrKey operations. Specifically, while the construction of Jafargholi et al. attains optimal I/O efficiency, it is suboptimal in total work under a strong notion of obliviousness—where the adversary can observe both block-level and word-level accesses. This stronger security guarantee is the current industry norm and explicitly required by companies such as Signal. We present a new oblivious priority queue that achieves optimality in both dimensions. Specifically, we achieve an I/O cost of $O(\frac{1}{B}\log\frac{n}{M})$ and total work $O(\log n)$ per query where $n$ is the capacity of the priority queue.
 ]]></content:encoded>
 <pubDate>Thu, 18 Jun 2026 22:26:08 +0000</pubDate>
-<pubDate>Thu, 18 Jun 2026 22:26:08 +0000</pubDate>
 </item>
 <item>
 <title>Zero-Knowledge Proofs of Generalized Regular Expression Matching for Anonymized Email Verification</title>
 <link>https://eprint.iacr.org/2026/1284</link>
 <guid>https://eprint.iacr.org/2026/1284</guid>
 <content:encoded><![CDATA[
-
 Digital communication increasingly underpins identity, financial transactions, and regulatory compliance. In many settings, possession of a DKIM-signed email serves as evidence of account control, transaction confirmation, or institutional affiliation. Yet demonstrating such properties typically requires revealing the full email or relying on centralized intermediaries, introducing privacy risks and additional trust assumptions. A framework called ZK Email addresses this limitation by applying zero-knowledge proofs (ZKPs)  to email verification, enabling publicly verifiable proofs of authenticity while preserving message confidentiality. However, its existing implementations struggle to support complex, real-world messages due to the inefficiency of regular-expression verification over structured formats and rich alphabets.
 
 We address this limitation with a new ZKP system for regex matching based on path verification over $\varepsilon$-free NFAs, yielding prover complexity linear in the captured path and independent of the original email's size. This approach enables practical validation of expressive standard structures required for full DKIM-signed email verification. To fully integrate our constructions into ZK Email, we design complete end-to-end ZK circuits that combine (i) DKIM signature verification, (ii) an arbitrary-length SHA-256 circuit with partial precomputation for $\texttt{rsa-sha256}$ under RFC 6376, and (iii) a general-purpose regex primitive enforcing structural constraints over email headers and body. We formalize the associated zero-knowledge relations and analyze their security under realistic adversary models. We implement the system (fully integrated with ZK Email and released under the MIT license) in $\texttt{Circom}$ and $\texttt{Noir}$, targeting $\texttt{Groth16}$ and $\texttt{UltraHonk}$ backends, and evaluate it in both client-side and zkVM (SP1) deployment settings.  Experimental results on commodity hardware demonstrate substantial efficiency improvements over prior DFA-based approaches, achieving a $2$-$6\times$ speedup in proving time using the $\texttt{UltraHonk}$ backend, while supporting a significantly richer class of regex languages.
 ]]></content:encoded>
-<pubDate>Thu, 18 Jun 2026 19:42:10 +0000</pubDate>
 <pubDate>Thu, 18 Jun 2026 19:42:10 +0000</pubDate>
 </item>
 <item>
@@ -37,10 +34,8 @@ We address this limitation with a new ZKP system for regex matching based on pat
 <link>https://eprint.iacr.org/2026/1283</link>
 <guid>https://eprint.iacr.org/2026/1283</guid>
 <content:encoded><![CDATA[
-
 Append-only accumulators are a natural way to realize compact public-state registries, but under high-frequency updates, witness maintenance becomes a severe challenge because each insertion typically invalidates most existing witnesses. This challenge is particularly acute for intermittently online users in anonymous credential systems, who cannot continuously synchronize update information, while directly outsourcing witness updates may make repeated requests linkable. In this paper, we present a privacy-preserving outsourced witness-update protocol for append-only RSA accumulators. The protocol combines witness updates with Linear Integer Secret Sharing (LISS), enabling on-demand, client-stateless witness updates while preserving witness privacy and unlinkability against coalitions of update servers below the threshold, and providing accountability for malicious or malformed server responses. We formalize the system and threat models and analyze the security of the protocol. We further develop server-side optimizations for long catch-up windows and implement the full end-to-end protocol in Rust. Evaluation under multiple threshold settings and offline windows shows that the protocol supports practical one-shot witness updates after long offline periods, with client-side cost remaining independent of the number of missed updates and server-side cost being mainly determined by the catch-up span and the LISS distribution matrix.
 ]]></content:encoded>
-<pubDate>Thu, 18 Jun 2026 15:03:21 +0000</pubDate>
 <pubDate>Thu, 18 Jun 2026 15:03:21 +0000</pubDate>
 </item>
 <item>
@@ -48,7 +43,6 @@ Append-only accumulators are a natural way to realize compact public-state regis
 <link>https://eprint.iacr.org/2026/1279</link>
 <guid>https://eprint.iacr.org/2026/1279</guid>
 <content:encoded><![CDATA[
-
 Fully homomorphic encryption (FHE) enables privacy-preserving neural network inference but suffers from high overhead from homomorphic convolutions, polynomial activation approximations, and CKKS bootstrapping. This paper presents BootNet, a unified framework that fuses all three operations into a single bootstrapping invocation per CNN layer, achieving convolution, ReLU, and noise refresh simultaneously.
 
 Prior works are able to fuse convolution into bootstrapping using CinS encoding (NeuJeans, CCS 2024) or ReLU into functional bootstrapping (RBOOT, USENIX Security 2026), but combining both for end-to-end ImageNet inference introduces numerous undocumented challenges. BootNet resolves these through a suite of co‑design techniques and optimizations, including four representative solutions: (1) a split‑and‑merge bootstrapping schedule that halves bootstrapping calls for ResNet shortcuts; (2) an improved RBOOT configuration paired with a model quantization method that complete the activation function with fewer multiplication depth; (3) a fusion of NeuJeans' masking layer with RBOOT's arcsin step that yields additional depth reduction; (4) tailoring EvalRound+ (IEEE Access 2025) to fit slim bootstrapping and RBOOT for further depth reduction.
@@ -56,9 +50,7 @@ Prior works are able to fuse convolution into bootstrapping using CinS encoding 
 We evaluate BootNet on multiple ResNet models on the ImageNet dataset. Compared to the state-of-the-art Orion (ASPLOS 2025), BootNet reduces end-to-end latency by 67-73% and storage by 76-90% while preserving plaintext accuracy. We also introduce BootNet-mini, enabling full ImageNet inference at ring degree $N=2^{15}$ (with over $120$-bit security via sparse-secret encapsulation) for the first time, while all previous works have to use $N=2^{16}$ or larger. BootNet-mini performs similarly in latency but reduces 30-55% storage requirement than BootNet,  making it potentially more friendly for hardware acceleration.
 ]]></content:encoded>
 <pubDate>Thu, 18 Jun 2026 07:51:18 +0000</pubDate>
-<pubDate>Thu, 18 Jun 2026 07:51:18 +0000</pubDate>
 </item>
-
 <item>
 <title>Gatling: Rapid-Fire Consensus from Parallel Composition</title>
 <link>https://eprint.iacr.org/2026/1269</link>
@@ -14187,63 +14179,6 @@ Encrypted messaging systems obstruct content moderation, although they provide e
 In this paper, we initiate the study of impact tracing. Intuitively, impact tracing traces influential spreaders central to disseminating misinformation while providing privacy protection for non-influential users. We introduce noises to hide non-influential users and demonstrate that these noises do not hinder the identification of influential spreaders. Then, we formally prove our scheme's security and show it achieves differential privacy protection for non-influential users. Additionally, we define three metrics to evaluate its traceability, correctness, and privacy using real-world datasets. The experimental results show that our scheme identifies the most influential spreaders with accuracy from 82% to 99% as the amount of noise varies. Meanwhile, our scheme requires only a 6-byte platform storage overhead for each message while maintaining a low messaging latency (< 0.25ms).
 ]]></content:encoded>
 <pubDate>Sat, 14 Dec 2024 07:20:05 +0000</pubDate>
-</item>
-<item>
-<title>Mira: Efficient Folding for Pairing-based Arguments</title>
-<link>https://eprint.iacr.org/2024/2025</link>
-<guid>https://eprint.iacr.org/2024/2025</guid>
-<content:encoded><![CDATA[
-<div> 关键词：pairing-based arguments、Groth16 SNARKs、KZG polynomial commitments、folding scheme、Mira
-
-总结:
-本文介绍了Mira，一种针对配对基础论证的新型折叠方案，旨在解决证明聚合的成本问题。现有的构造方法将配对操作编码到通用约束系统中，导致证明者开销较高。Mira通过扩展Protostar框架以支持更广泛的特殊声学协议类来实现这一目标。应用示例表明，Mira在Groth16证明聚合和可验证机器学习推理方面展现出高效性和灵活性，其相比于现有最先进的证明聚合系统实现了5.8倍的更快prove时间以及9.7倍的更低内存使用量，同时保持了常数大小的证明。此外，为了提高可验证机器学习推理的效率，文章还提出了一种新的lincheck协议，其验证器度独立于矩阵顺序，使得Mira能够有效地扩展到更大的模型，克服了当前方案中的内存瓶颈。 <div>
-Pairing-based arguments offer remarkably small proofs and space-efficient provers, but aggregating such proofs remains costly. Groth16 SNARKs and KZG polynomial commitments are prominent examples of this class of arguments. These arguments are widely deployed in decentralized systems, with millions of proofs generated per day. Recent folding schemes have greatly reduced the cost of proving incremental computations, such as batch proof verification. However, existing constructions require encoding pairing operations in generic constraint systems, leading to high prover overhead. In this work, we introduce Mira, a folding scheme that directly supports pairing-based arguments. We construct this folding scheme by generalizing the framework in Protostar to support a broader class of special-sound protocols. We demonstrate the versatility and efficiency of this framework through two key applications: Groth16 proof aggregation and verifiable ML inference. Mira achieves 5.8x faster prover time and 9.7x lower memory usage than the state-of-the-art proof aggregation system while maintaining a constant-size proof. To improve the efficiency of verifiable ML inference, we provide a new lincheck protocol with a verifier degree that is independent of the matrix order. We show that Mira scales effectively to larger models, overcoming the memory bottlenecks of current schemes.
-]]></content:encoded>
-<pubDate>Fri, 13 Dec 2024 21:58:09 +0000</pubDate>
-</item>
-<item>
-<title>Derecho: Privacy Pools with Proof-Carrying Disclosures</title>
-<link>https://eprint.iacr.org/2023/273</link>
-<guid>https://eprint.iacr.org/2023/273</guid>
-<content:encoded><![CDATA[
-<div> 关键词: 隐私池、Tornado Cash、美国财政部、Derecho、证明携带数据
-
-总结:<br />
-本文介绍了隐私池的概念及其可能被用于隐藏资金来源的问题，特别是在美国财政部制裁了最大的以太坊隐私池Tornado Cash之后，该池被指控为朝鲜支持的Lazarus集团洗钱超过4.55亿美元。这一裁决使得美国个人和机构接收或使用经过Tornado Cash的资金成为非法行为。针对此背景，文章提出了名为Derecho的新系统。Derecho利用证明携带数据技术，使用户能够在隐私池的交易图中传播允许列表成员资格的证明，从而让机构可以请求基金来源的加密证明而非简单地拒绝来自隐私池的所有资金。Derecho系统与现有的以太坊隐私池设计向后兼容，不会增加gas成本，并且用户生成证明仅需花费几秒钟时间。 <div>
-A privacy pool enables clients to deposit units of a cryptocurrency into a shared pool where ownership of deposited currency is tracked via a system of cryptographically hidden records. Clients may later withdraw from the pool without linkage to previous deposits. Some privacy pools also support hidden transfer of currency ownership within the pool. In August 2022, the U.S. Department of Treasury sanctioned Tornado Cash, the largest Ethereum privacy pool, on the premise that it enables illicit actors to hide the origin of funds, citing its usage by the DPRK-sponsored Lazarus Group to launder over \$455 million dollars worth of stolen cryptocurrency. This ruling effectively made it illegal for U.S. persons/institutions to use or accept funds that went through Tornado Cash, sparking a global debate among privacy rights activists and lawmakers. Against this backdrop, we present Derecho, a system that institutions could use to request cryptographic attestations of fund origins rather than naively rejecting all funds coming from privacy pools. Derecho is a novel application of proof-carrying data, which allows users to propagate allowlist membership proofs through a privacy pool's transaction graph. Derecho is backwards-compatible with existing Ethereum privacy pool designs, adds no overhead in gas costs, and costs users only a few seconds to produce attestations.
-]]></content:encoded>
-<pubDate>Thu, 23 Feb 2023 20:59:36 +0000</pubDate>
-</item>
-<item>
-<title>Hash-Prune-Invert: Improved Differentially Private Heavy-Hitter Detection in the Two-Server Model</title>
-<link>https://eprint.iacr.org/2024/2024</link>
-<guid>https://eprint.iacr.org/2024/2024</guid>
-<content:encoded><![CDATA[
-<div> 关键词：差分隐私(DP)，重 hitter 检测，错误边际(Δ)，服务器协同计算，hash-prune-invert (HPI)
-
-总结:
-文章介绍了一种针对大规模数据域(d)下的差分隐私重 hitter 检测新方法——hash-prune-invert (HPI) 技术。现有的多服务器协同计算协议在效率（计算、通信和轮复杂度）与准确性（即错误边际）上对 log(d) 有依赖性，不适合处理大型数据域。而 HPI 技术可以将具有上述问题的重 hitter 协议转化为一个新的协议，使得计算、通信和轮复杂度大致依赖于 log(n) 而非 log(d)，并且错误边际不再依赖于数据域大小 d。此外，该转换还保持了在最多一个服务器被恶意攻击者篡改以及任意数量客户端的情况下，依然能保证隐私安全。文中还将 HPI 应用于改进版的 Poplar 算法，使 Poplar 的错误边际提高了大约 n 的平方根倍（与 d 无关）。实验结果显示，由此产生的新协议在大 d 情况下显著提升了效率和准确性。 <div>
-Differentially private (DP) heavy-hitter detection is an important primitive for  data analysis. Given a threshold $t$ and a dataset of $n$ items from a domain of size $d$, such detection algorithms ignore items occurring fewer than $t$ times while identifying items occurring more than $t+\Delta$ times; we call $\Delta$ the error margin. In the central model where a curator holds the entire dataset, $(\varepsilon,\delta)$-DP algorithms can achieve error margin $\Theta(\frac 1 \varepsilon \log \frac 1 \delta)$, which is optimal when $d \gg 1/\delta$.
-    
-    Several works, e.g., Poplar (S&amp;P 2021), have proposed protocols in which two or more non-colluding servers jointly compute the heavy hitters from inputs held by $n$ clients. Unfortunately, existing protocols suffer from an undesirable dependence on $\log d$ in terms of both server efficiency (computation, communication, and round complexity) and accuracy (i.e., error margin), making them unsuitable for large domains (e.g., when items are kB-long strings, $\log d \approx 10^4$).
-    
-    We present hash-prune-invert (HPI), a technique for compiling any heavy-hitter protocol with the $\log d$ dependencies mentioned above into a new protocol with improvements across the board: computation, communication, and round complexity depend (roughly) on $\log n$ rather than $\log d$, and the error margin is independent of $d$. Our transformation preserves privacy against an active adversary corrupting at most one of the servers and any number of clients. We apply HPI to an improved version of Poplar, also introduced in this work, that improves Poplar's error margin by roughly a factor of $\sqrt{n}$ (regardless of $d$). Our experiments confirm that the resulting protocol improves efficiency and accuracy for large $d$.
-]]></content:encoded>
-<pubDate>Fri, 13 Dec 2024 20:56:38 +0000</pubDate>
-</item>
-<item>
-<title>PrivQuant: Communication-Efficient Private Inference with Quantized Network/Protocol Co-Optimization</title>
-<link>https://eprint.iacr.org/2024/2021</link>
-<guid>https://eprint.iacr.org/2024/2021</guid>
-<content:encoded><![CDATA[
-<div> 关键词: 私有深度神经网络、安全两方计算、通信效率、 PrivQuant、协议优化
-
-总结:
-
- PrivQuant是一个针对私有深度神经网络(DNN)推理的安全两方计算(2PC)框架，旨在提升隐私保护的同时降低高延迟问题。该框架通过同时优化基于2PC的量化推理协议和网络量化算法，实现更高效的通信私密推断。具体来说，PrivQuant针对通信密集型量化运算符提出了DNN架构感知的优化方案，并进行了图级操作器融合以减少通信量。此外，它还开发了一种通信感知的混合精度量化算法，旨在提高推断效率并保持高准确性。通过网络/协议协同优化，PrivQuant相比于现有2PC框架如SiRNN、COINN和CoPriv，显著降低了通信量（分别减少了11倍、2.5倍和2.8倍），进而将延迟减少了8.7倍、1.8倍和2.4倍。 <div>
-Private deep neural network (DNN) inference based on secure two-party computation (2PC) enables secure privacy protection for both the server and the client. However, existing secure 2PC frameworks suffer from a high inference latency due to enormous communication. As the communication of both linear and non-linear DNN layers reduces with the bit widths of weight and activation, in this paper, we propose PrivQuant, a framework that jointly optimizes the 2PC-based quantized inference protocols and the network quantization algorithm, enabling communication-efficient private inference. PrivQuant proposes DNN architecture-aware optimizations for the 2PC protocols for communication-intensive quantized operators and conducts graph-level operator fusion for communication reduction. Moreover, PrivQuant also develops a communication-aware mixed precision quantization algorithm to improve the inference efficiency while maintaining high accuracy. The network/protocol co-optimization enables PrivQuant to outperform prior-art 2PC frameworks. With extensive experiments, we demonstrate PrivQuant reduces communication by $11\times, 2.5\times \mathrm{and}~  2.8\times$, which results in $8.7\times, 1.8\times ~ \mathrm{and}~ 2.4\times$ latency reduction compared with SiRNN, COINN, and CoPriv, respectively.
-]]></content:encoded>
-<pubDate>Fri, 13 Dec 2024 13:51:36 +0000</pubDate>
 </item>
 </channel>
 </rss>
