@@ -4,12 +4,12 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+
 <item>
 <title>A Toolkit for Succinct Lattice-Based Zero Knowledge Proofs</title>
 <link>https://eprint.iacr.org/2026/1289</link>
 <guid>https://eprint.iacr.org/2026/1289</guid>
 <content:encoded><![CDATA[
-
 The development of proof systems whose security relies on the hardness of lattice problems has been a fruitful research area in recent years. By leveraging the techniques introduced in LaBRADOR (Beullens, Seiler, Crypto 2023), the state-of-the-art lattice-based schemes have very fast provers and have output sizes under 100KB for arbitrarily large statements. These proofs are in fact the smallest, and often have the fastest provers, out of all post-quantum schemes.
 
 In addition to succinctness, many applications also require witness privacy. Achieving this can, in theory, be done by combining LaBRADOR with a linear-size zero-knowledge proof. While such a combination has already been described in the LaBRADOR paper itself, as well as in the works of Albrecht et al. (Eurocrypt 2024) and del Pino et al. (Crypto 2025), its concrete costs remained unexplored.
@@ -17,22 +17,18 @@ In addition to succinctness, many applications also require witness privacy. Ach
 In this work, we provide the first concrete construction and implementation that adds zero-knowledge proofs to LaBRADOR by integrating the linear-size zero-knowledge proof from (Lyubashevsky, Nguyen, Plançon, Crypto 2022) into the protocol. We describe the non-trivial challenges that this entails and show practicality of the construction by benchmarking several use-cases. We make the proof system and primitives accessible by extending the LaZer library (Lyubashevsky, Seiler, Steuer, CCS 2024) in a way that they can easily be used in other applications.
 ]]></content:encoded>
 <pubDate>Fri, 19 Jun 2026 09:18:07 +0000</pubDate>
-<pubDate>Fri, 19 Jun 2026 09:18:07 +0000</pubDate>
 </item>
 <item>
 <title>SuccinCT: Succinct Confidential Transaction for Miner Privacy</title>
 <link>https://eprint.iacr.org/2026/1288</link>
 <guid>https://eprint.iacr.org/2026/1288</guid>
 <content:encoded><![CDATA[
-
 Confidential transaction (CT) protocols are widely used to protect the privacy of blockchain-based cryptocurrency transactions. However, existing CT schemes primarily focus on ordinary users' anonymity and amount confidentiality, while overlooking miner privacy as a native objective. In particular, the privacy of miners' coinbase-receiving addresses has not been systematically considered in security models. In this paper, we identify two novel attacks against miner privacy in existing CT protocols, called miner privacy attacks and anonymity reduction attacks. These attacks arise from the transparency of the mining coinbase amounts and transaction fees in the underlying blockchain systems. When miners' accounts are included in a CT, our general solutions compatible with all schemes can prevent adversaries from identifying miners as the real spenders or excluding miners from the possible spender sets.
 
 We propose SuccinCT, the first CT protocol based on the DualRing structure to address the aforementioned attacks. Compared with existing schemes, SuccinCT achieves the smallest overall transaction size while protecting miner privacy. Specifically, the proof size of SuccinCT is about 20% smaller than the latest BulletCT (USENIX SEC'25). We implement SuccinCT and evaluate its performance for ring sizes from 128 to 1024. The results show that signature generation takes about 2-3 ms and verification takes about 1-2 ms. These results demonstrate that SuccinCT provides stronger privacy guarantees, novel construction, and practical efficiency for real-world deployment.
 ]]></content:encoded>
 <pubDate>Fri, 19 Jun 2026 05:38:53 +0000</pubDate>
-<pubDate>Fri, 19 Jun 2026 05:38:53 +0000</pubDate>
 </item>
-
 <item>
 <title>Oblivious Priority Queue and Single-Source Shortest Path in the External Memory Setting</title>
 <link>https://eprint.iacr.org/2026/1285</link>
@@ -14182,31 +14178,6 @@ theorems in Fourier analysis, measure and probability theory, number theory, and
 Multilateral Trade Credit Set-off (MTCS) is a process run by a service provider that collects trade credit data (i.e. obligations from a firm to pay another firm) from a network of firms and detects cycles of debts that can be removed from the system. The process yields liquidity savings for the participants, who can discharge their debts without relying on expensive loans. We propose an MTCS protocol that protects firms' sensitive data, such as the obligation amount or the identity of the firms they trade with. Mathematically, this is analogous to solving the Minimum Cost Flow (MCF) problem over a graph of $n$ firms, where the $m$ edges are the obligations. State-of-the-art techniques for Secure MCF have an overall complexity of $O(n^{10} \log n)$ communication rounds, making it barely applicable even to small-scale instances. Our solution leverages novel secure techniques such as Graph Anonymization and Network Simplex to reduce the complexity of the MCF problem to $O(max(n, \log\log{n+m}))$ rounds of interaction per pivot operations in which $O(max(n^2, nm))$ comparisons and multiplications are performed. Experimental results show the tradeoff between privacy and optimality.
 ]]></content:encoded>
 <pubDate>Tue, 17 Dec 2024 15:59:02 +0000</pubDate>
-</item>
-<item>
-<title>Janus: Fast Privacy-Preserving Data Provenance For TLS</title>
-<link>https://eprint.iacr.org/2023/1377</link>
-<guid>https://eprint.iacr.org/2023/1377</guid>
-<content:encoded><![CDATA[
-<div> 关键词: 数据收集、隐私保护、TLS或acles、零知识证明、TLS 1.3
-
-总结:
-本文提出了一种新的隐私保护TLS预言机协议，该协议能够在大规模上选择性地验证敏感网络数据的来源。文章创新点在于采用诚实验证者零知识证明系统，在不对称隐私环境中确保安全性，同时对抗恶意对手。针对TLS 1.3，文章优化了“混淆后证明”的范式，在处理恶意敌手的安全设置中，展示了TLS 1.3的一种特殊操作模式，允许在混淆阶段的大多数计算中使用半诚实安全计算而不需认证混淆。通过这些性能改进，新方案达到了验证私人数据源的新效率水平，从而促进了隐私保护TLS预言机在web浏览器中的实际部署。<br /><br /> <div>
-Web users can gather data from secure endpoints and demonstrate the provenance of sensitive data to any third party by using privacy-preserving TLS oracles. In practice, privacy-preserving TLS oracles remain limited and cannot selectively verify larger sensitive data sets. In this work, we introduce a new oracle protocol, which reaches new scales in selectively verifying the provenance of confidential web data. The novelty of our work is a construction which deploys an honest verifier zero-knowledge proof system in the asymmetric privacy setting while retaining security against malicious adversaries. Concerning TLS 1.3, we optimize the garble-then-prove paradigm in a security setting with malicious adversaries. Here, we show that a specific operation mode of TLS 1.3 allows to use semi-honest secure computations without authentic garbling for the majority of computations in the garble phase. Our performance improvements reach new efficiency scales in verifying private data provenance and facilitate the practical deployment of privacy-preserving TLS oracles in web browsers.
-]]></content:encoded>
-<pubDate>Thu, 14 Sep 2023 12:04:35 +0000</pubDate>
-</item>
-<item>
-<title>Impact Tracing: Identifying the Culprit of  Misinformation in Encrypted Messaging Systems</title>
-<link>https://eprint.iacr.org/2024/2027</link>
-<guid>https://eprint.iacr.org/2024/2027</guid>
-<content:encoded><![CDATA[
-<div> 关键词：加密消息系统、内容审核、影响追踪、隐私保护、非影响力用户<br /><br />总结: 这篇文章主要探讨了加密消息系统中如何在保障用户隐私的同时有效抵制错误信息传播的问题。文章提出了“影响追踪”的新方法，旨在追踪对错误信息传播有重大影响的用户，同时为非影响力用户提供隐私保护。文中描述了一种添加噪声的技术手段来隐藏非影响力用户的身份，证明这种方法不会妨碍识别影响力传播者，并确保了非影响力用户的差分隐私保护。通过定义三个评估指标并在真实数据集上进行实验，结果显示该方案能以高达82%至99%的准确率识别最具影响力的传播者，而且每条消息仅需平台存储额外的6字节空间，同时保持低延迟（＜0.25毫秒）。 <div>
-Encrypted messaging systems obstruct content moderation, although they provide end-to-end security. As a result, misinformation proliferates in these systems, thereby exacerbating online hate and harassment. The paradigm of ``Reporting-then-Tracing" shows great potential in mitigating the spread of misinformation. For instance, message traceback (CCS'19) traces all the dissemination paths of a message, while source tracing (CCS'21) traces its originator. However, message traceback lacks privacy preservation for non-influential users (e.g., users who only receive the message once), while source tracing maintains privacy but only provides limited traceability.
-
-In this paper, we initiate the study of impact tracing. Intuitively, impact tracing traces influential spreaders central to disseminating misinformation while providing privacy protection for non-influential users. We introduce noises to hide non-influential users and demonstrate that these noises do not hinder the identification of influential spreaders. Then, we formally prove our scheme's security and show it achieves differential privacy protection for non-influential users. Additionally, we define three metrics to evaluate its traceability, correctness, and privacy using real-world datasets. The experimental results show that our scheme identifies the most influential spreaders with accuracy from 82% to 99% as the amount of noise varies. Meanwhile, our scheme requires only a 6-byte platform storage overhead for each message while maintaining a low messaging latency (< 0.25ms).
-]]></content:encoded>
-<pubDate>Sat, 14 Dec 2024 07:20:05 +0000</pubDate>
 </item>
 </channel>
 </rss>
