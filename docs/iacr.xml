@@ -5,16 +5,42 @@
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
 <item>
+<title>Trust the Voice, Hide the Source: Anonymous Provenance for Verifiably Edited Audio</title>
+<link>https://eprint.iacr.org/2026/1308</link>
+<guid>https://eprint.iacr.org/2026/1308</guid>
+<content:encoded><![CDATA[
+
+Audio recordings are often used as evidence, but modern forgery tools make their origin harder to verify. Existing authentication methods require releasing the original signed recording, which exposes sensitive source content as well as provenance information. Redacting the audio avoids that disclosure, but doing so also invalidates the original signature. Revealing the edit operations to prove edit compliance can also disclose the redacted content. This creates a conflict for existing approaches: authenticating a released audio file requires disclosing the original audio, edit operations, or identity of the recording device, but preserving privacy requires keeping all three hidden.
+
+In this work, we propose $\textit{Privacy-Preserving Audio Authentication Systems}$ (PPAAS). PPAAS uses a single relation that binds source provenance and edit correctness to the same hidden witness. This witness includes both the attested source recording and device attestation, so the verifier can be convinced that the released audio came from an authorized device and was obtained through allowed edits, without learning the source recording, the edit operations, or which enrolled device produced it. We formalize this notion and provide two constructions adapted to different editing scenarios. The first is a $\textit{segmentation-based}$ construction that requires zero-knowledge proofs only for actively edited segments and is therefore well-suited to sparse edits. The second is an $\textit{iteration-based}$ construction that uses Incrementally Verifiable Computation (IVC) with zero-knowledge compression to fold repeated checks into a single proof, which is efficient for dense edits. Our evaluations show the practicality of both constructions: the segmentation-based approach minimizes cost for sparse edits, whereas the iteration-based approach becomes preferable as edit density increases.
+]]></content:encoded>
+<pubDate>Tue, 23 Jun 2026 10:51:50 +0000</pubDate>
+<pubDate>Tue, 23 Jun 2026 10:51:50 +0000</pubDate>
+</item>
+<item>
+<title>TRIP: Thresholding in Regression with Input Privacy</title>
+<link>https://eprint.iacr.org/2026/1302</link>
+<guid>https://eprint.iacr.org/2026/1302</guid>
+<content:encoded><![CDATA[
+
+Secure computation allows multiple parties to jointly evaluate a function without leaking their individual inputs. An intrinsic issue with these techniques  is that they do not offer any protection against parties which may contribute bad quality or even maliciously crafted data. 
+    We introduce TRIP, a protocol which protects against malicious manipulations of the input in secure computation of linear regression tasks. Linear regression is the cornerstone in many machine learning tasks, and hence creating secure protocols for this task is a crucial step towards secure machine learning. 
+    Our protocol utilizes a novel combination of techniques from secure computation, robust statistics, and differential privacy.
+    On synthetic data, TRIP recovers the planted ground truth; on real-world datasets, its model remains close to the clean OLS baseline under up to 40\% target corruption. In terms of efficiency, our protocol runs up to $250\times$ faster than an MPC-only baseline for $10^6$ samples. Even in the smallest parameter setting, TRIP is $10\times$ faster than our baseline.
+]]></content:encoded>
+<pubDate>Mon, 22 Jun 2026 20:58:14 +0000</pubDate>
+<pubDate>Mon, 22 Jun 2026 20:58:14 +0000</pubDate>
+</item>
+
+<item>
 <title>SPADE: Digging into Selective and PArtial DEcryption using Functional Encryption</title>
 <link>https://eprint.iacr.org/2024/1387</link>
 <guid>https://eprint.iacr.org/2024/1387</guid>
 <content:encoded><![CDATA[
-
 Functional Encryption (FE) is a cryptographic technique established to guarantee data privacy while allowing the retrieval of specific results from the data.
 While traditional decryption methods rely on a secret key disclosing all the data, FE introduces a more subtle approach. The key generation algorithm generates function-specific decryption keys that can be adaptively provided based on policies. Adaptive access control is a good feature for privacy-preserving techniques. Generic schemes have been designed to run basic functions, such as linear regression. However, they often provide a narrow set of outputs, resulting in a lack of thorough analysis. The bottom line is that despite significant research, FE still requires appropriate constructions to unleash its full potential in securely analyzing data and providing more insights. In this article, we introduce SPADE, a novel FE scheme that features multiple users and offers fine-grained access control through partial decryption of the ciphertexts. Unlike existing FE schemes, our construction also supports qualitative data, such as genomics, expanding the applications of privacy-preserving analysis to enable a comprehensive study of the data. SPADE is a significant advancement that balances privacy and data analysis with clear implications in healthcare and finance.
 To verify its applicability, we conducted extensive experiments on datasets used in sleep medicine (hypnogram data) and DNA analysis (genomic records).
 ]]></content:encoded>
-<pubDate>Wed, 04 Sep 2024 12:11:23 +0000</pubDate>
 <pubDate>Wed, 04 Sep 2024 12:11:23 +0000</pubDate>
 </item>
 <item>
@@ -22,12 +48,10 @@ To verify its applicability, we conducted extensive experiments on datasets used
 <link>https://eprint.iacr.org/2026/1293</link>
 <guid>https://eprint.iacr.org/2026/1293</guid>
 <content:encoded><![CDATA[
-
 Non-committing encryption (NCE) is a key primitive for proving security against adaptive corruptions, enabling simulators to generate ciphertexts before the encrypted message is known. Existing non-committing constructions for attribute-based encryption primitives [Hiroka et al., ASIACRYPT 2021; Goyal et al., PKC 2025] typically rely on centralized trust that generate users' secret keys. However, modern cryptographic systems increasingly aim to eliminate such trust assumptions through decentralized frameworks such as registered encryption, where users independently generate and register their own keys.
 
 In this work, we initiate the study of non-committing registered functional encryption (NC-RFE) as a generalization of non-committing attribute-based encryption in the decentralized framework. We formalize the notion of NC-RFE by adapting classical non-committing security to the registered setting. We then present a generic construction based on indistinguishability obfuscation and zero-knowledge arguments, and prove its security assuming a secure underlying registered functional encryption (RFE) scheme. We further provide a lattice-based instantiation, yielding a post-quantum secure NC-RFE scheme based on the hardness of the plain LWE and equivocal LWE assumptions.
 ]]></content:encoded>
-<pubDate>Sat, 20 Jun 2026 08:12:06 +0000</pubDate>
 <pubDate>Sat, 20 Jun 2026 08:12:06 +0000</pubDate>
 </item>
 <item>
@@ -35,13 +59,10 @@ In this work, we initiate the study of non-committing registered functional encr
 <link>https://eprint.iacr.org/2026/1292</link>
 <guid>https://eprint.iacr.org/2026/1292</guid>
 <content:encoded><![CDATA[
-
 Transformer models have recently emerged as a game-changing technology for applications in content generation. However, severe privacy concerns and the scalability bottlenecks of existing secure protocols limit their large-scale deployment. To address these challenges, we present CRAfT, an innovative system designed for high-scalability and low-latency secure Transformer inference. The core contributions of CRAfT are threefold: First, we propose a novel ciphertext packing strategy tailored for multiple mutually distrustful users. This approach completely eliminates the need for ciphertext rotations in linear projections layer and effectively offloads massive communication traffic to the high-speed P2P network. Second, we introduce a novel branch-free iterative fitting strategy based on trigonometric functions, which accurately approximates sigmoid-like functions (e.g., Tanh, Sigmoid, and erf in GELU). In the interval $[-3, 3]$, its approximation accuracy exceeds that of the plaintext Tanh-based GELU, while requiring only 4 communication rounds without relying on polynomial approximations. Finally, for complex operations like Softmax that exhibit partial sigmoid-like characteristics, we transform them into standard sigmoid-like functions, allowing us to directly apply our fitting strategy to minimize cryptographic costs while maintaining model accuracy. Comprehensive evaluations on BERT-base demonstrate that CRAfT increases multi-client inference throughput by up to $8.5\times$ and reduces per-client WAN communication volume by 38.4% compared to the highly optimized baseline (BumbleBee).
 ]]></content:encoded>
 <pubDate>Fri, 19 Jun 2026 15:48:44 +0000</pubDate>
-<pubDate>Fri, 19 Jun 2026 15:48:44 +0000</pubDate>
 </item>
-
 <item>
 <title>A Toolkit for Succinct Lattice-Based Zero Knowledge Proofs</title>
 <link>https://eprint.iacr.org/2026/1289</link>
@@ -14151,70 +14172,6 @@ In this work we propose the first secret-key multi-input quadratic functional en
 Local Differential Privacy (LDP) mechanisms consist of (locally) adding controlled noise to data in order to protect the privacy of their owner. In this paper, we introduce a new cryptographic primitive called LDP commitment. Usually, a commitment ensures that the committed value cannot be modified before it is revealed. In the case of an LDP commitment, however, the value is revealed after being perturbed by an LDP mechanism. Opening an LDP commitment therefore requires a proof that the mechanism has been correctly applied to the value, to ensure that the value is still usable for statistical purposes. We also present a security model for this primitive, in which we define the hiding and binding properties. Finally, we present a concrete scheme for an LDP staircase mechanism (generalizing the randomized response technique), based on classical cryptographic tools and standard assumptions. We provide an implementation in Rust that demonstrates its practical efficiency (the generation of a commitment requires just a few milliseconds). On the application side, we show how our primitive can be used to ensure simultaneously privacy, usability and traceability of medical data when it is used for statistical studies in an open science context. We consider a scenario where a hospital provides sensitive patients data signed by doctors to a research center after it has been anonymized, so that the research center can verify both the provenance of the data (i.e. verify the doctors’ signatures even though the data has been noised) and that the data has been correctly anonymized (i.e. is usable even though it has been anonymized).
 ]]></content:encoded>
 <pubDate>Wed, 18 Dec 2024 08:49:54 +0000</pubDate>
-</item>
-<item>
-<title>Distributed Asynchronous Remote Key Generation</title>
-<link>https://eprint.iacr.org/2024/846</link>
-<guid>https://eprint.iacr.org/2024/846</guid>
-<content:encoded><![CDATA[
-<div> 关键词: 异步远程密钥生成(ARKG), 分布式ARVG(dARKG), 公开验证非对称密钥协议(1PVAKA), 双线性群, BLS12-381曲线
-
-总结:<br />
-本文提出了分布式异步远程密钥生成(dARKG)，它扩展了ARKG的安全属性至分布式环境。在dARKG中，发送者可以为一组n个接收者生成公钥$pk'$，对应的私钥$sk'$只能由其中任意大小为t≤n的子集共同计算，实现了基于阈值的访问保护。文章通过新提出的、一轮公开验证的非对称密钥协议(1PVAKA)来构建dARKG，该协议异步且允许第三方从用户输出验证并生成公钥。文章还讨论了针对双线性群的1PVAKA和dARKG的具体实现方案，并使用BLS12-381曲线进行了实现与性能分析，证明其实用性。 <div>
-Asynchronous Remote Key Generation (ARKG) is a primitive introduced by Frymann et al. at ACM CCS 2020. It enables a sender to generate a new public key $pk'$ for a receiver ensuring only it can, at a later time, compute the corresponding private key $sk'$. These key pairs are indistinguishable from freshly generated ones and can be used in various public-key cryptosystems such as digital signatures and public-key encryption. ARKG has been explored for applications in WebAuthn credential backup and delegation, as well as for enhancing receiver privacy via stealth addresses.
-
-In this paper, we introduce distributed ARKG (dARKG) aiming to provide similar security properties in a distributed setting. Here, a sender generates $pk'$ for a group of $n$ receivers and the corresponding $sk'$ can only be computed by any sub-group of size $t\leq n$. This introduces threshold-based access protection for $sk'$, enabling for instance a set of proxies to jointly access a WebAuthn account or claim blockchain funds.
-
-We construct dARKG using one-round publicly verifiable asymmetric key agreement, called 1PVAKA, a new primitive formalized in this work. Unlike traditional distributed key generation protocols where users interact with one another, 1PVAKA is asynchronous and allows a third party to verify and generate a public key from users' outputs.
-
-We discuss 1PVAKA and dARKG instantiations tailored for use with bilinear groups and demonstrate practicality with implementation and performance analysis for the BLS12-381 curve.
-]]></content:encoded>
-<pubDate>Wed, 29 May 2024 12:50:55 +0000</pubDate>
-</item>
-<item>
-<title>Verified Foundations for Differential Privacy</title>
-<link>https://eprint.iacr.org/2024/2040</link>
-<guid>https://eprint.iacr.org/2024/2040</guid>
-<content:encoded><![CDATA[
-<div> 关键词：差分隐私（DP）、SampCert、机械验证、Laplace采样、Gaussian采样
-
-总结:
-SampCert 是首个针对差分隐私的全面且机械化基础，它使用 Lean 编写了超过 12,000 行的证明代码。该框架提供了一个可针对不同DP定义（如纯DP、集中DP、Rényi DP）进行实例化的通用DP概念，以及用于构建和组合DP机制的框架。此外，SampCert还包含了经过形式化验证的离散Laplace和高斯采样算法，避免了浮点实现中的陷阱。其创新之处包括：(1) 支持多种DP定义的通用DP基础；(2) 正式验证的离散Laplace和Gaussian采样算法；(3) 简单的概率Monad及新颖的证明技术，简化了形式化过程。为了证明DP和随机数生成的复杂正确性属性，SampCert充分利用了Lean的广泛Mathlib库，利用傅里叶分析、测度与概率论、数论和拓扑等领域的定理。实际上，SampCert的经验证明算法已被应用于亚马逊网络服务(AWS)的DP产品中，显示出了其实际应用的影响。 <div>
-Differential privacy (DP) has become the gold standard for privacy-preserving data analysis, but implementing
-it correctly has proven challenging. Prior work has focused on verifying DP at a high level, assuming the
-foundations are correct and a perfect source of randomness is available. However, the underlying theory of
-differential privacy can be very complex and subtle. Flaws in basic mechanisms and random number generation
-have been a critical source of vulnerabilities in real-world DP systems.
-
-In this paper, we present SampCert, the first comprehensive, mechanized foundation for differential privacy.
-SampCert is written in Lean with over 12,000 lines of proof. It offers a generic and extensible notion of DP, a
-framework for constructing and composing DP mechanisms, and formally verified implementations of Laplace
-and Gaussian sampling algorithms. SampCert provides (1) a mechanized foundation for developing the next
-generation of differentially private algorithms, and (2) mechanically verified primitives that can be deployed in
-production systems. Indeed, SampCert’s verified algorithms power the DP offerings of Amazon Web Services
-(AWS), demonstrating its real-world impact.
-
-SampCert’s key innovations include: (1) A generic DP foundation that can be instantiated for various DP
-definitions (e.g., pure, concentrated, Rényi DP); (2) formally verified discrete Laplace and Gaussian sampling
-algorithms that avoid the pitfalls of floating-point implementations; and (3) a simple probability monad and
-novel proof techniques that streamline the formalization. To enable proving complex correctness properties of
-DP and random number generation, SampCert makes heavy use of Lean’s extensive Mathlib library, leveraging
-theorems in Fourier analysis, measure and probability theory, number theory, and topology.
-]]></content:encoded>
-<pubDate>Wed, 18 Dec 2024 02:45:39 +0000</pubDate>
-</item>
-<item>
-<title>Multilateral Trade Credit Set-off in MPC via Graph Anonymization and Network Simplex</title>
-<link>https://eprint.iacr.org/2024/2037</link>
-<guid>https://eprint.iacr.org/2024/2037</guid>
-<content:encoded><![CDATA[
-<div> 关键词: 多边贸易信用对冲 (MTCS), 隐私保护, 最小成本流问题 (MCF), 图匿名化, 网络单纯形算法
-
-总结:
-本文提出了一种针对多边贸易信用对冲(MTCS)的协议，该协议旨在保护参与公司的敏感数据，如债务金额和交易伙伴身份。传统的方法，即安全最小成本流问题(MCF)，其通信复杂度为$O(n^{10}\log n)$，不适用于大规模实例。我们的解决方案利用了新颖的安全技术，包括图匿名化和网络单纯形算法，将MCF问题的复杂度降低到$O(max(n,\ log\log{n+m}))$轮交互每执行一次枢轴操作，并在此过程中执行$O(max(n^2,\ nm))$次比较和乘法运算。实验结果表明了隐私保护与最优解之间的权衡关系。 <div>
-Multilateral Trade Credit Set-off (MTCS) is a process run by a service provider that collects trade credit data (i.e. obligations from a firm to pay another firm) from a network of firms and detects cycles of debts that can be removed from the system. The process yields liquidity savings for the participants, who can discharge their debts without relying on expensive loans. We propose an MTCS protocol that protects firms' sensitive data, such as the obligation amount or the identity of the firms they trade with. Mathematically, this is analogous to solving the Minimum Cost Flow (MCF) problem over a graph of $n$ firms, where the $m$ edges are the obligations. State-of-the-art techniques for Secure MCF have an overall complexity of $O(n^{10} \log n)$ communication rounds, making it barely applicable even to small-scale instances. Our solution leverages novel secure techniques such as Graph Anonymization and Network Simplex to reduce the complexity of the MCF problem to $O(max(n, \log\log{n+m}))$ rounds of interaction per pivot operations in which $O(max(n^2, nm))$ comparisons and multiplications are performed. Experimental results show the tradeoff between privacy and optimality.
-]]></content:encoded>
-<pubDate>Tue, 17 Dec 2024 15:59:02 +0000</pubDate>
 </item>
 </channel>
 </rss>
