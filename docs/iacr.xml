@@ -4,17 +4,16 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+
 <item>
 <title>Trust the Voice, Hide the Source: Anonymous Provenance for Verifiably Edited Audio</title>
 <link>https://eprint.iacr.org/2026/1308</link>
 <guid>https://eprint.iacr.org/2026/1308</guid>
 <content:encoded><![CDATA[
-
 Audio recordings are often used as evidence, but modern forgery tools make their origin harder to verify. Existing authentication methods require releasing the original signed recording, which exposes sensitive source content as well as provenance information. Redacting the audio avoids that disclosure, but doing so also invalidates the original signature. Revealing the edit operations to prove edit compliance can also disclose the redacted content. This creates a conflict for existing approaches: authenticating a released audio file requires disclosing the original audio, edit operations, or identity of the recording device, but preserving privacy requires keeping all three hidden.
 
 In this work, we propose $\textit{Privacy-Preserving Audio Authentication Systems}$ (PPAAS). PPAAS uses a single relation that binds source provenance and edit correctness to the same hidden witness. This witness includes both the attested source recording and device attestation, so the verifier can be convinced that the released audio came from an authorized device and was obtained through allowed edits, without learning the source recording, the edit operations, or which enrolled device produced it. We formalize this notion and provide two constructions adapted to different editing scenarios. The first is a $\textit{segmentation-based}$ construction that requires zero-knowledge proofs only for actively edited segments and is therefore well-suited to sparse edits. The second is an $\textit{iteration-based}$ construction that uses Incrementally Verifiable Computation (IVC) with zero-knowledge compression to fold repeated checks into a single proof, which is efficient for dense edits. Our evaluations show the practicality of both constructions: the segmentation-based approach minimizes cost for sparse edits, whereas the iteration-based approach becomes preferable as edit density increases.
 ]]></content:encoded>
-<pubDate>Tue, 23 Jun 2026 10:51:50 +0000</pubDate>
 <pubDate>Tue, 23 Jun 2026 10:51:50 +0000</pubDate>
 </item>
 <item>
@@ -22,16 +21,13 @@ In this work, we propose $\textit{Privacy-Preserving Audio Authentication System
 <link>https://eprint.iacr.org/2026/1302</link>
 <guid>https://eprint.iacr.org/2026/1302</guid>
 <content:encoded><![CDATA[
-
 Secure computation allows multiple parties to jointly evaluate a function without leaking their individual inputs. An intrinsic issue with these techniques  is that they do not offer any protection against parties which may contribute bad quality or even maliciously crafted data. 
     We introduce TRIP, a protocol which protects against malicious manipulations of the input in secure computation of linear regression tasks. Linear regression is the cornerstone in many machine learning tasks, and hence creating secure protocols for this task is a crucial step towards secure machine learning. 
     Our protocol utilizes a novel combination of techniques from secure computation, robust statistics, and differential privacy.
     On synthetic data, TRIP recovers the planted ground truth; on real-world datasets, its model remains close to the clean OLS baseline under up to 40\% target corruption. In terms of efficiency, our protocol runs up to $250\times$ faster than an MPC-only baseline for $10^6$ samples. Even in the smallest parameter setting, TRIP is $10\times$ faster than our baseline.
 ]]></content:encoded>
 <pubDate>Mon, 22 Jun 2026 20:58:14 +0000</pubDate>
-<pubDate>Mon, 22 Jun 2026 20:58:14 +0000</pubDate>
 </item>
-
 <item>
 <title>SPADE: Digging into Selective and PArtial DEcryption using Functional Encryption</title>
 <link>https://eprint.iacr.org/2024/1387</link>
@@ -14144,34 +14140,6 @@ As a building block of independent interest, we introduce \emph{public computati
 Sensitive pictures such as passport photos and nudes are commonly shared through mobile chat applications. One popular strategy for the privacy protection of this material is to use ephemeral messaging features, such as the view once snaps in Snapchat. However, design limitations and implementation bugs in messaging apps may allow attackers to bypass the restrictions imposed by those features on the received material. One way by which attackers may accomplish so is by tampering with the software stack on their own devices. In this paper, we propose and test a protection strategy based on a multiplatform system that encrypts and decrypts sensitive pictures on top of messaging apps and performs remote attestation with available app integrity APIs to safeguard its security. Our analysis and experiments show that, compared to previous proposals for image encryption in a middleware, remote attestation offers increased security, adds privacy benefits, simplifies integration, and improves usability by not requiring users to exchange key material a priori. In our experiments, it incurs an added average latency of 3.8 and 4.5 seconds when sending and receiving private pictures, respectively.
 ]]></content:encoded>
 <pubDate>Fri, 20 Dec 2024 17:11:28 +0000</pubDate>
-</item>
-<item>
-<title>Simulation Secure Multi-Input Quadratic Functional Encryption: Applications to Differential Privacy</title>
-<link>https://eprint.iacr.org/2024/2050</link>
-<guid>https://eprint.iacr.org/2024/2050</guid>
-<content:encoded><![CDATA[
-<div> 关键词: 多输入功能性加密、秘密钥、二次功能性加密、模拟安全性、数据隐私保护
-
-<br /><br />总结:
-本文提出了首个满足模拟安全性的秘密钥多输入二次功能性加密方案。现有的二次功能支持构造仅达到基于不可区分性的安全性。文中构建了一个新的函数隐藏型内积功能性加密方案，该方案在标准模型下被证明对一个挑战密文具有模拟安全性，这本身具有独立的研究价值。利用这两个结果，作者构建了一个高效的随机化二次功能性加密方案，从而实现对支持二次查询的加密数据库进行不同ially 私有数据分析。最后，文章提供了所提随机化方案的完整实现与基准测试。这一工作是在SAC '24会议论文的基础上扩展的，首次提出了多输入二次功能性加密方案和函数隐藏型内积功能性加密方案。 <div>
-Multi-input functional encryption is a primitive that allows for the evaluation of an $\ell$-ary function over multiple ciphertexts, without learning any information about the underlying plaintexts. This type of computation is useful in many cases where one has to compute over encrypted data, such as privacy-preserving cloud services, federated learning, or more generally delegation of computation from multiple clients. It has recently been shown by Alborch et al. in PETS '24 to be useful to construct a randomized functional encryption scheme for obtaining differentially private data analysis over an encrypted database supporting linear queries.
-
-In this work we propose the first secret-key multi-input quadratic functional encryption scheme satisfying simulation security. Current constructions supporting quadratic functionalities, proposed by Agrawal et al. in CRYPTO '21 and TCC '22, only reach indistinguishibility-based security. Our proposed construction is generic, and for a concrete instantiation, we propose a new function-hiding inner-product functional encryption scheme proven simulation secure against one challenge ciphertext in the standard model, which is of independent interest. We then use these two results to construct an efficient randomized quadratic functional encryption scheme, from which we obtain differentially private data analysis over an encrypted database supporting quadratic queries. Finally, we give and fully benchmark an implementation of the randomized scheme. This work is an extended version of the paper "Simulation Secure Multi-Input Quadratic Functional Encryption" at SAC '24, where the multi-input quadratic functional encryption scheme and function-hiding inner-product functional encryption schemes were first presented (Section 3 and Seciton 4).
-]]></content:encoded>
-<pubDate>Thu, 19 Dec 2024 14:36:56 +0000</pubDate>
-</item>
-<item>
-<title>Cryptographic Commitments on Anonymizable Data</title>
-<link>https://eprint.iacr.org/2024/2044</link>
-<guid>https://eprint.iacr.org/2024/2044</guid>
-<content:encoded><![CDATA[
-<div> 关键词: Local Differential Privacy (LDP), LDP commitment, cryptographic primitive, privacy, usability
-
-<br /><br />总结:
-本文提出了一种新的密码学原语——LDP承诺机制，该机制结合了局部差分隐私技术，使得数据拥有者可以在保护隐私的同时，将添加了可控噪声的数据公开。LDP承诺要求在揭示值之前需证明已正确应用了LDP机制，以确保数据仍可用于统计目的。文中还定义了该原语的安全模型以及隐藏性和绑定性这两个性质。接着，文章给出了一种基于经典密码学工具和标准假设的、适用于LDP阶梯机制的具体方案，并实现了Rust版本的高效代码（生成承诺只需几毫秒）。在应用场景中，该机制可同时保障医疗数据在开放科学背景下的隐私、可用性和可追溯性。具体场景为：一家医院在对敏感患者数据进行匿名处理并由医生签名后，将其提供给研究机构；研究机构可以验证数据来源（即验证医生签名），同时也能确认数据已被正确匿名处理（即数据虽被匿名但仍具有使用价值）。 <div>
-Local Differential Privacy (LDP) mechanisms consist of (locally) adding controlled noise to data in order to protect the privacy of their owner. In this paper, we introduce a new cryptographic primitive called LDP commitment. Usually, a commitment ensures that the committed value cannot be modified before it is revealed. In the case of an LDP commitment, however, the value is revealed after being perturbed by an LDP mechanism. Opening an LDP commitment therefore requires a proof that the mechanism has been correctly applied to the value, to ensure that the value is still usable for statistical purposes. We also present a security model for this primitive, in which we define the hiding and binding properties. Finally, we present a concrete scheme for an LDP staircase mechanism (generalizing the randomized response technique), based on classical cryptographic tools and standard assumptions. We provide an implementation in Rust that demonstrates its practical efficiency (the generation of a commitment requires just a few milliseconds). On the application side, we show how our primitive can be used to ensure simultaneously privacy, usability and traceability of medical data when it is used for statistical studies in an open science context. We consider a scenario where a hospital provides sensitive patients data signed by doctors to a research center after it has been anonymized, so that the research center can verify both the provenance of the data (i.e. verify the doctors’ signatures even though the data has been noised) and that the data has been correctly anonymized (i.e. is usable even though it has been anonymized).
-]]></content:encoded>
-<pubDate>Wed, 18 Dec 2024 08:49:54 +0000</pubDate>
 </item>
 </channel>
 </rss>
