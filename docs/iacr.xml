@@ -4,6 +4,62 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+<item>
+<title>Almost Scriptless Adaptor Signatures from any Signature Scheme</title>
+<link>https://eprint.iacr.org/2026/1346</link>
+<guid>https://eprint.iacr.org/2026/1346</guid>
+<content:encoded><![CDATA[
+
+An adaptor signature (AS) scheme extends a digital signature by tying together message authentication with the exchange of a secret. Such atomic exchange of a secret for a signature has key applications in blockchain protocols, e.g., payment channels, atomic swaps or coin-mixing. To ensure compatibility with the environments, AS schemes should be scriptless -- that is, their signatures should be verifiable using the same procedure used to validate transactions' signatures, without auxiliary logic or scripts.
+
+As shown by Erwig et al. (PKC'21), it is impossible to construct scriptless AS for standard signature schemes with unique signatures. In contrast, Liu et al.  (ASIACRYPT'24) demonstrated that dropping the scriptless requirement entirely makes AS construction for any EUF-CMA secure signature scheme straightforward.This raises a fundamental question: must we abandon scriptlessness entirely to construct AS for any signature scheme?
+
+We answer this question in the negative by introducing the notion of almost scriptless AS. Here, the only relaxation is that the signature is applied to an extended message -- specifically, the concatenation of the original message and a random string (i.e., signing $m \| r$ instead of $m$). We argue that this mild extension preserves the core benefits of scriptlessness in blockchain applications.
+
+We present a generic compiler that transforms any functional signature scheme into an AS, almost preserving the signature verification. In turn, show how indistinguishability obfuscation (in the CRS model) or witness encryption (in the ROM) allow turning any signature into a functional signature in a scriptless fashion. Both constructions  ultimately yield almost scriptless AS for unique-witness (hard) relations and for any base signature.
+]]></content:encoded>
+<pubDate>Tue, 30 Jun 2026 09:55:22 +0000</pubDate>
+<pubDate>Tue, 30 Jun 2026 09:55:22 +0000</pubDate>
+</item>
+<item>
+<title>BiSON: Billion-Scale Oblivious Nearest-Neighbor Search in Milliseconds</title>
+<link>https://eprint.iacr.org/2026/1343</link>
+<guid>https://eprint.iacr.org/2026/1343</guid>
+<content:encoded><![CDATA[
+
+Semantic search over vector databases is a fundamental problem in both theory and practice, with large-scale systems relying on approximate nearest-neighbor (ANN) algorithms to retrieve semantically similar results efficiently. Achieving this capability securely while keeping both data and queries hidden remains a major challenge. Existing secure semantic search systems incur high latency and fail to scale to realistic database sizes.
+
+We present $\mathsf{BiSON}$, the first secure nearest-neighbor search protocol capable of supporting billion-scale encrypted vector databases. Even at this scale, $\mathsf{BiSON}$ answers queries in mere milliseconds and maintains search accuracy comparable to state-of-the-art insecure ANN algorithms, demonstrating that secure semantic search can be both private and truly high-performance. Compared to Compass, the prior state-of-the-art system, $\mathsf{BiSON}$ reduces communication up to $28\times$, improves end-to-end latency by up to $23.5\times$, and scales to datasets that are two orders of magnitude larger.
+
+A central contribution of $\mathsf{BiSON}$ is a new disk-compatible Oblivious RAM (ORAM) architecture that enables seamless scaling to billion-point datasets without compromising latency or privacy. Together, these innovations make $\mathsf{BiSON}$ the first practical and scalable solution for secure semantic search at cloud scale.
+]]></content:encoded>
+<pubDate>Tue, 30 Jun 2026 05:56:09 +0000</pubDate>
+<pubDate>Tue, 30 Jun 2026 05:56:09 +0000</pubDate>
+</item>
+<item>
+<title>Accountable Anonymous Cross-Chain Atomic Swaps via Threshold-Openable Linkable Ring Adaptor Signatures</title>
+<link>https://eprint.iacr.org/2026/1342</link>
+<guid>https://eprint.iacr.org/2026/1342</guid>
+<content:encoded><![CDATA[
+
+Cross-chain atomic swaps enable decentralized asset exchange across independent ledgers, but their public transcripts may expose transaction flows, signer identities, and business relationships. Existing scriptless swap mechanisms based on adaptor signatures provide witness-coupled execution, yet the signer is public. Linkable ring adaptor signatures further hide the signer within a ring, but they do not support controlled opening when a completed swap becomes disputed. In this paper, we put forward ALRAS, an accountable anonymous cross-chain atomic-swap mechanism based on Pair-Consistent Threshold-Openable Linkable Ring Adaptor Signatures. We design a pair-consistent opening mechanism that binds a ring-adaptor pre-signature, an opening ciphertext, a scoped link tag, and the completed full signature to the same hidden signer. This mechanism prevents false-opening, ciphertext-substitution, and transcript-splicing attacks while requiring a threshold-governed and publicly verifiable opening in the dispute path. We construct a generic compiler from a NIZK-compatible, index-hiding LRAS using threshold ElGamal opening, consistency proofs, and public pair verification. We further formalize the signing-layer interface and security goals and analyze signer anonymity, scoped linkability, witness extractability, non-frameability, and pair-consistent opening soundness. A reproducible Python artifact provides reference modules, attack-oriented sanity tests, and operation-count benchmarks. The results show the expected linear scaling with ring size and isolate the accountability overhead introduced by threshold opening and transcript binding.
+]]></content:encoded>
+<pubDate>Tue, 30 Jun 2026 03:09:59 +0000</pubDate>
+<pubDate>Tue, 30 Jun 2026 03:09:59 +0000</pubDate>
+</item>
+<item>
+<title>RotPIR: Sublinear Single-Server PIR with Efficient Pre-Processing via Oblivious Homomorphic Rotation</title>
+<link>https://eprint.iacr.org/2026/1336</link>
+<guid>https://eprint.iacr.org/2026/1336</guid>
+<content:encoded><![CDATA[
+
+Single-server PIR is a powerful cryptographic primitive that allows a client to retrieve public data from a remote server without revealing which item it accessed. Its privacy guarantee, however, inherently forces the server to do work linear in the database size, which is impractical at a large scale. Client-Preprocessing PIR (CP-PIR)~[Patel et al., CCS 2018] suggests to push linear computation to an offline preprocessing phase, enabling online queries with sublinear server computation and communication. While CP-PIR has since attracted considerable attention, designing an efficient preprocessing phase remains challenging. The original construction, along with much subsequent work~(e.g.,~[Zhou et al., S\&amp;P 2024]), streams the entire database, which incurs linear communication that scales only to moderately sized data. A different approach consists of implementing the preprocessing using Fully Homomorphic Encryption (FHE) (e.g.,~[Corrigan-Gibbs et al., Eurocrypt 2022]), but the current best proposal (ThorPIR [Fisch et al., CCS 2024]) still imposes prohibitively expensive homomorphic computation on the server.
+
+In this paper, we tackle the problem of designing a practical preprocessing phase for CP-PIR. We introduce RotPIR, a novel CP-PIR with a preprocessing that is simultaneously sublinear-communication (i.e., no database streaming) and computation-efficient, while keeping online communication and computation sublinear. RotPIR is obtained by co-designing our PIR protocol with the underlying FHE operations. Specifically, we propose an innovative preprocessing framework with an advanced homomorphic operator, {\em oblivious homomorphic rotation}, which enables the database to be rotated according to an encrypted offset, and significantly accelerates the offline server-side computation. Our experimental results show that RotPIR can achieve up to $1000\times$ speedup in offline server-side computation when compared to the state-of-the-art CP-PIR protocols that do not stream the entire database during the preprocessing.
+]]></content:encoded>
+<pubDate>Mon, 29 Jun 2026 13:11:50 +0000</pubDate>
+<pubDate>Mon, 29 Jun 2026 13:11:50 +0000</pubDate>
+</item>
 
 <item>
 <title>Real-world Qualification Proof: A Protocol for Supporting Real-world Assets in DeFi</title>
