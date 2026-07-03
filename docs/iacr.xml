@@ -4,12 +4,12 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+
 <item>
 <title>Almost Scriptless Adaptor Signatures from any Signature Scheme</title>
 <link>https://eprint.iacr.org/2026/1346</link>
 <guid>https://eprint.iacr.org/2026/1346</guid>
 <content:encoded><![CDATA[
-
 An adaptor signature (AS) scheme extends a digital signature by tying together message authentication with the exchange of a secret. Such atomic exchange of a secret for a signature has key applications in blockchain protocols, e.g., payment channels, atomic swaps or coin-mixing. To ensure compatibility with the environments, AS schemes should be scriptless -- that is, their signatures should be verifiable using the same procedure used to validate transactions' signatures, without auxiliary logic or scripts.
 
 As shown by Erwig et al. (PKC'21), it is impossible to construct scriptless AS for standard signature schemes with unique signatures. In contrast, Liu et al.  (ASIACRYPT'24) demonstrated that dropping the scriptless requirement entirely makes AS construction for any EUF-CMA secure signature scheme straightforward.This raises a fundamental question: must we abandon scriptlessness entirely to construct AS for any signature scheme?
@@ -19,14 +19,12 @@ We answer this question in the negative by introducing the notion of almost scri
 We present a generic compiler that transforms any functional signature scheme into an AS, almost preserving the signature verification. In turn, show how indistinguishability obfuscation (in the CRS model) or witness encryption (in the ROM) allow turning any signature into a functional signature in a scriptless fashion. Both constructions  ultimately yield almost scriptless AS for unique-witness (hard) relations and for any base signature.
 ]]></content:encoded>
 <pubDate>Tue, 30 Jun 2026 09:55:22 +0000</pubDate>
-<pubDate>Tue, 30 Jun 2026 09:55:22 +0000</pubDate>
 </item>
 <item>
 <title>BiSON: Billion-Scale Oblivious Nearest-Neighbor Search in Milliseconds</title>
 <link>https://eprint.iacr.org/2026/1343</link>
 <guid>https://eprint.iacr.org/2026/1343</guid>
 <content:encoded><![CDATA[
-
 Semantic search over vector databases is a fundamental problem in both theory and practice, with large-scale systems relying on approximate nearest-neighbor (ANN) algorithms to retrieve semantically similar results efficiently. Achieving this capability securely while keeping both data and queries hidden remains a major challenge. Existing secure semantic search systems incur high latency and fail to scale to realistic database sizes.
 
 We present $\mathsf{BiSON}$, the first secure nearest-neighbor search protocol capable of supporting billion-scale encrypted vector databases. Even at this scale, $\mathsf{BiSON}$ answers queries in mere milliseconds and maintains search accuracy comparable to state-of-the-art insecure ANN algorithms, demonstrating that secure semantic search can be both private and truly high-performance. Compared to Compass, the prior state-of-the-art system, $\mathsf{BiSON}$ reduces communication up to $28\times$, improves end-to-end latency by up to $23.5\times$, and scales to datasets that are two orders of magnitude larger.
@@ -34,17 +32,14 @@ We present $\mathsf{BiSON}$, the first secure nearest-neighbor search protocol c
 A central contribution of $\mathsf{BiSON}$ is a new disk-compatible Oblivious RAM (ORAM) architecture that enables seamless scaling to billion-point datasets without compromising latency or privacy. Together, these innovations make $\mathsf{BiSON}$ the first practical and scalable solution for secure semantic search at cloud scale.
 ]]></content:encoded>
 <pubDate>Tue, 30 Jun 2026 05:56:09 +0000</pubDate>
-<pubDate>Tue, 30 Jun 2026 05:56:09 +0000</pubDate>
 </item>
 <item>
 <title>Accountable Anonymous Cross-Chain Atomic Swaps via Threshold-Openable Linkable Ring Adaptor Signatures</title>
 <link>https://eprint.iacr.org/2026/1342</link>
 <guid>https://eprint.iacr.org/2026/1342</guid>
 <content:encoded><![CDATA[
-
 Cross-chain atomic swaps enable decentralized asset exchange across independent ledgers, but their public transcripts may expose transaction flows, signer identities, and business relationships. Existing scriptless swap mechanisms based on adaptor signatures provide witness-coupled execution, yet the signer is public. Linkable ring adaptor signatures further hide the signer within a ring, but they do not support controlled opening when a completed swap becomes disputed. In this paper, we put forward ALRAS, an accountable anonymous cross-chain atomic-swap mechanism based on Pair-Consistent Threshold-Openable Linkable Ring Adaptor Signatures. We design a pair-consistent opening mechanism that binds a ring-adaptor pre-signature, an opening ciphertext, a scoped link tag, and the completed full signature to the same hidden signer. This mechanism prevents false-opening, ciphertext-substitution, and transcript-splicing attacks while requiring a threshold-governed and publicly verifiable opening in the dispute path. We construct a generic compiler from a NIZK-compatible, index-hiding LRAS using threshold ElGamal opening, consistency proofs, and public pair verification. We further formalize the signing-layer interface and security goals and analyze signer anonymity, scoped linkability, witness extractability, non-frameability, and pair-consistent opening soundness. A reproducible Python artifact provides reference modules, attack-oriented sanity tests, and operation-count benchmarks. The results show the expected linear scaling with ring size and isolate the accountability overhead introduced by threshold opening and transcript binding.
 ]]></content:encoded>
-<pubDate>Tue, 30 Jun 2026 03:09:59 +0000</pubDate>
 <pubDate>Tue, 30 Jun 2026 03:09:59 +0000</pubDate>
 </item>
 <item>
@@ -52,15 +47,12 @@ Cross-chain atomic swaps enable decentralized asset exchange across independent 
 <link>https://eprint.iacr.org/2026/1336</link>
 <guid>https://eprint.iacr.org/2026/1336</guid>
 <content:encoded><![CDATA[
-
 Single-server PIR is a powerful cryptographic primitive that allows a client to retrieve public data from a remote server without revealing which item it accessed. Its privacy guarantee, however, inherently forces the server to do work linear in the database size, which is impractical at a large scale. Client-Preprocessing PIR (CP-PIR)~[Patel et al., CCS 2018] suggests to push linear computation to an offline preprocessing phase, enabling online queries with sublinear server computation and communication. While CP-PIR has since attracted considerable attention, designing an efficient preprocessing phase remains challenging. The original construction, along with much subsequent work~(e.g.,~[Zhou et al., S\&amp;P 2024]), streams the entire database, which incurs linear communication that scales only to moderately sized data. A different approach consists of implementing the preprocessing using Fully Homomorphic Encryption (FHE) (e.g.,~[Corrigan-Gibbs et al., Eurocrypt 2022]), but the current best proposal (ThorPIR [Fisch et al., CCS 2024]) still imposes prohibitively expensive homomorphic computation on the server.
 
 In this paper, we tackle the problem of designing a practical preprocessing phase for CP-PIR. We introduce RotPIR, a novel CP-PIR with a preprocessing that is simultaneously sublinear-communication (i.e., no database streaming) and computation-efficient, while keeping online communication and computation sublinear. RotPIR is obtained by co-designing our PIR protocol with the underlying FHE operations. Specifically, we propose an innovative preprocessing framework with an advanced homomorphic operator, {\em oblivious homomorphic rotation}, which enables the database to be rotated according to an encrypted offset, and significantly accelerates the offline server-side computation. Our experimental results show that RotPIR can achieve up to $1000\times$ speedup in offline server-side computation when compared to the state-of-the-art CP-PIR protocols that do not stream the entire database during the preprocessing.
 ]]></content:encoded>
 <pubDate>Mon, 29 Jun 2026 13:11:50 +0000</pubDate>
-<pubDate>Mon, 29 Jun 2026 13:11:50 +0000</pubDate>
 </item>
-
 <item>
 <title>Real-world Qualification Proof: A Protocol for Supporting Real-world Assets in DeFi</title>
 <link>https://eprint.iacr.org/2026/1330</link>
@@ -14135,74 +14127,6 @@ We analyze the potential security implications of each, and identify conflicts w
 This document provides a definition of end-to-end encryption (E2EE). End-to-end encryption is an application of cryptographic mechanisms to provide security and privacy to communication between endpoints. Such communication can include messages, email, video, audio, and other forms of media. E2EE provides security and privacy through confidentiality, integrity, authenticity and forward secrecy for communication amongst people.
 ]]></content:encoded>
 <pubDate>Fri, 27 Dec 2024 20:03:19 +0000</pubDate>
-</item>
-<item>
-<title>Zero Knowledge Memory-Checking Techniques for Stacks and Queues</title>
-<link>https://eprint.iacr.org/2024/2084</link>
-<guid>https://eprint.iacr.org/2024/2084</guid>
-<content:encoded><![CDATA[
-<div> 关键词：零知识证明、内存技术、队列、栈、多项式评估
-
-总结:<br />
-本文提出了适用于特殊数据结构——队列和栈的内存技术。针对队列，文章介绍了一种基于算术电路的实现方法，该方法在每次读取时需要3个多项式乘法门和1个建议值，每次写入时需要2个多项式乘法门。该方法利用Horner规则来验证队列中读取和写入值的一致性。对于栈，文章提出一种优化版的RAM方案，基于Yang和Heath的方法，读取操作需要5个多项式乘法门和4个建议值，而写入仍为2个多项式乘法门。该优化方案利用栈的特性避免了对每个访问插入哑操作的需求。此外，文中还引入了一种更适合栈和队列应用场景的“多路复用”或“操作隐私”的新概念，所有的技术都是基于在随机点上评估多项式并使用随机评估的多项式作为通用哈希函数来检查集合/向量的等价性。 <div>
-There are a variety of techniques for implementing read/write memory inside of zero-knowledge proofs and validating consistency of memory accesses. These techniques are generally implemented with the goal of implementing a RAM or ROM. In this paper, we present memory techniques for more specialized data structures: queues and stacks. We first demonstrate a technique for implementing queues in arithmetic circuits that requires 3 multiplication gates and 1 advice value per read and 2 multiplication gates per write. This is based on using Horner's Rule to evaluate 2 polynomials at random points and check that the values read from the queue are equal to the values written to the queue as vectors. Next, we present a stack scheme based on an optimized version of the RAM scheme of Yang and Heath that requires 5 multiplication gates and 4 advice values per read and 2 multiplication gates per write. This optimizes the RAM scheme by observing that reads and writes to a stack are already "paired" which avoids the need for inserting dummy operations for each access as in a stack.
-    We also introduce a different notion of "multiplexing" or "operation privacy" that is better suited to the use case of stacks and queues. All of the techniques we provide are based on evaluating polynomials at random points and using randomly evaluated polynomials as universal hash functions to check set/vector equality.
-]]></content:encoded>
-<pubDate>Fri, 27 Dec 2024 18:57:30 +0000</pubDate>
-</item>
-<item>
-<title>ClusterGuard: Secure Clustered Aggregation for Federated Learning with Robustness</title>
-<link>https://eprint.iacr.org/2024/2082</link>
-<guid>https://eprint.iacr.org/2024/2082</guid>
-<content:encoded><![CDATA[
-<div> 关键词: 联邦学习、安全聚合、dropout处理、中毒攻击、ClusterGuard
-
-总结:
-联邦学习中，为了保护数据隐私并实现模型协同训练，安全聚合与dropout处理是关键挑战。现有的先进方法如Liu等人（UAI'22）和Li等人（ASIACRYPT'23）方案存在通信开销大、实施复杂以及易受中毒攻击的问题。部分连接图结构的方法虽能降低通信成本（如Bell等人，CCS'20和ACORN, USENIX Sec'23），但在图构建过程中可能遭受恶意操纵。为此，我们提出了ClusterGuard，一种用于联邦学习的安全聚类聚合方案。ClusterGuard利用可验证随机函数（VRF）确保公平透明的聚类选择，并结合轻量级密钥同态掩码机制及高效的dropout处理实现安全聚类聚合。此外，ClusterGuard还引入基于余弦相似性和范数的双重过滤机制来有效检测和缓解中毒攻击。实验表明，ClusterGuard相比于先进的安全聚合方法在效率上提升了超过2倍，即使在有20%的客户端恶意的情况下，训练出的模型仍能保持与原模型相当的准确性，优于现有鲁棒性解决方案。因此，ClusterGuard为实际应用中的联邦学习提供了更为高效、安全和鲁棒的解决方案。 <div>
-Federated Learning (FL) enables collaborative model training while preserving data privacy by avoiding the sharing of raw data. However, in large-scale FL systems, efficient secure aggregation and dropout handling remain critical challenges. Existing state-of-the-art methods, such as those proposed by Liu et al. (UAI'22) and Li et al. (ASIACRYPT'23), suffer from prohibitive communication overhead, implementation complexity, and vulnerability to poisoning attacks. Alternative approaches that utilize partially connected graph structures (resembling client grouping) to reduce communication costs, such as Bell et al. (CCS'20) and ACORN (USENIX Sec'23), face the risk of adversarial manipulation during the graph construction process.
-
-To address these issues, we propose ClusterGuard, a secure clustered aggregation scheme for federated learning. ClusterGuard leverages Verifiable Random Functions (VRF) to ensure fair and transparent cluster selection and employs a lightweight key-homomorphic masking mechanism, combined with efficient dropout handling, to achieve secure clustered aggregation. Furthermore, ClusterGuard incorporates a dual filtering mechanism based on cosine similarity and norm to effectively detect and mitigate poisoning attacks.
-
-Extensive experiments on standard datasets demonstrate that ClusterGuard achieves over 2x efficiency improvement compared to advanced secure aggregation methods. Even with 20% of clients being malicious, the trained model maintains accuracy comparable to the original model, outperforming state-of-the-art robustness solutions. ClusterGuard provides a more efficient, secure, and robust solution for practical federated learning.
-]]></content:encoded>
-<pubDate>Fri, 27 Dec 2024 15:12:04 +0000</pubDate>
-</item>
-<item>
-<title>Blind Signatures from Proofs of Inequality</title>
-<link>https://eprint.iacr.org/2024/2076</link>
-<guid>https://eprint.iacr.org/2024/2076</guid>
-<content:encoded><![CDATA[
-<div> 关键词: Blind signatures、pairing-free、random oracle模型、DDH假设、效率提升
-
-总结:
-这篇文章介绍了新的盲签名构造方法，该方法旨在缩小效率上的差距，特别是在不需要配对的情况下。与最高效的基于配对的AGM盲签名方案相比，新方案在通信和签名大小上分别只有3倍和2倍的相对开销，并在随机预言机模型下基于DDH假设可证明安全性。此外，通过增加一步操作和一个$\mathbb{Z}_p$元素，该方案还实现了更强的防伪造性。这一成果受到了Chairattana-Apirom, Tessaro, 和 Zhu (Crypto 2024)以及Klooß, Reichle, 和Wagner (Asiacrypt 2024)近期工作的启发，并针对这些工作中的效率瓶颈开发了定制化技术。具体来说，新方案实现了192字节的签名大小和608字节的通信大小。 <div>
-Blind signatures are an important primitive for privacy-preserving technologies. To date, highly efficient pairing-free constructions rely on the random oracle model, and additionally, a strong assumption, such as interactive assumptions or the algebraic group model.
-
-In contrast, for signatures we know many efficient constructions that rely on the random oracle model and standard assumptions. In this work, we develop techniques to close this gap. Compared to the most efficient pairing-free AGM-based blind signature by Crites et. al. (Crypto 2023), our construction has a relative overhead of only a factor $3\times$ and $2\times$ in terms of communication and signature size, and it is provable in the random oracle model under the DDH assumption. With one additional move and $\mathbb{Z}_p$ element, we also achieve one-more strong unforgeability.
-
-Our construction is inspired by the recent works by Chairattana-Apirom, Tessaro, and Zhu (Crypto 2024) and Klooß, Reichle, and Wagner (Asiacrypt 2024), and we develop a tailored technique to circumvent the sources of inefficiency in their constructions. Concretely, we achieve signature and communication size of $192$ B and $608$ B, respectively.
-]]></content:encoded>
-<pubDate>Wed, 25 Dec 2024 20:28:26 +0000</pubDate>
-</item>
-<item>
-<title>Advancements in Distributed RSA Key Generation: Enhanced Biprimality Tests</title>
-<link>https://eprint.iacr.org/2024/2072</link>
-<guid>https://eprint.iacr.org/2024/2072</guid>
-<content:encoded><![CDATA[
-<div> 关键词：RSA、安全多方计算、Boneh-Franklin测试、Lucas双素性测试、分布式RSA模数生成
-
-总结:
-
-本文针对RSA密码学实践中广泛使用的 Boneh-Franklin 双素性测试进行了深入研究。首先，证明了该测试在接受概率上的上限其实为1/4，而非原先假设的1/2，除非$p=q=3$，这意味着在实际应用中执行相同安全性检验所需的迭代次数可以减半。随后，文章提出了两种类型的Lucas双素性测试。其中一种测试在最坏情况下的接受率不超过$1/4 + 1.25/(p_{\min}-3)$，其中$p_{\min}$为$N$的最小质因数，模拟研究表明它通常比Boneh-Franklin测试更高效地检测$N$是否为RSA模数。另一种Lucas测试可应用于任意RSA模数$p$和$q$，但其效率较低。当生成RSA模数的安全性错误设定约为$2^{-80}$时，该测试最多泄露46个二次符号值。此外，文章还设计了对应于这两种测试的协议，并验证了它们对于半诚实敌手的鲁棒性，这些协议可以应用于已知的大多数分布式RSA模数生成协议。通过对包括Burkhardt等人在CCS 2023上提出的Miller-Rabin测试变种、Boneh-Franklin测试以及所提Lucas型测试在内的多种知名协议进行详尽分析和比较后，发现所提Lucas测试在验证$N$是否为RSA模数方面具有高度竞争力。 <div>
-RSA is widely used in modern cryptographic practice, with certain RSA-based protocols relying on the secrecy of $p$ and $q$. A common approach is to use secure multiparty computation to address the privacy concerns of 
-$p$ and $q$.
-Specifically constrained to distributed RSA modulus generation protocols, the biprimality test for Blum integers $N=pq$, where $p\equiv q\equiv 3 \mod 4$ are two primes, proposed by Boneh and Franklin in $2001$ is the most commonly used. Over the past $20 $ years, the worst-case acceptance rate of this test has been consistently assumed to be $1/2$ under the condition $\gcd(pq,p+q-1)=1$.
-In this paper, we show that for the Boneh-Franklin test, its acceptance probability is at most $1/4$ rather than $1/2$,
-except in the case where $p = q = 3$.  At the same time, $1/4$ is also the tightest upper bound. Enhance the effectiveness of applying the Boneh-Franklin test in this result: achieving the same soundness for the RSA modulus requires only half the number of iterations commonly recognized. 
-Furthermore, we propose two types of Lucas biprimality tests. In the worst case, one of proposed tests acceptance rate is at most $1/4 +  1.25/(p_{\min} -3)$, where $p_{\min}$ is the smallest prime factors of $N$. However, simulation study suggests that this test is generally more efficient than the Boneh-Franklin test for detecting when $N$ is not an RSA modulus.
-The second type of Lucas test, though less efficient, can be applied to arbitrary RSA moduli $p$ and $q$. Nevertheless, if the soundness error for generating an RSA modulus is set at approximately $2^{-80}$, it leaks at most $46$ quadratic symbol values, regardless of the public key length. We also design corresponding protocols for both tests and validate their resilience against semi-honest adversaries, which can be applied to most known distributed RSA modulus generation protocols. After thoroughly analyzing and comparing well-known protocols, including the variant Miller-Rabin test used by Burkhardt et al. (CCS 2023), the Boneh-Franklin test, and our proposed Lucas-type tests, our proposed Lucas test is also highly competitive in verifying whether $N$ is an RSA modulus.
-]]></content:encoded>
-<pubDate>Tue, 24 Dec 2024 16:44:46 +0000</pubDate>
 </item>
 </channel>
 </rss>
