@@ -4,15 +4,14 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+
 <item>
 <title>Efficient Privacy-Preserving Blueprints for Threshold Comparison</title>
 <link>https://eprint.iacr.org/2025/2253</link>
 <guid>https://eprint.iacr.org/2025/2253</guid>
 <content:encoded><![CDATA[
-
 Privacy-Preserving Blueprints (PPBs), introduced by Kohlweiss et al. in in EUROCRYPT 2023, offer a method for balancing user privacy and bad-actor detection in private cryptocurrencies. A PPB scheme allows a user to append a verifiable escrow to their transactions which reveals some identifying information to an authority in the case that the user misbehaved. A natural PPB functionality is for escrows to reveal user information if the user sends an amount of currency over a certain threshold. However, prior works constructing PPBs for such a functionality have severe limitations when it comes to efficiency: escrows are either computationally infeasible to compute, or too large to be plausibly stored on a large-scale distributed ledger. We address these gaps by constructing a space and computation-efficient PPB for threshold comparison, producing escrows under 2kb that can be computed in seconds. The scheme can be instantiated using well-known cryptographic primitives, namely variants of the ElGamal encryption scheme and generic non-interactive zero-knowledge proofs. As an additional contribution, we implement one of the theoretical generic PPB constructions originally proposed by Kohlweiss et al. and find that it performs surprisingly well in practice. For the threshold comparison functionality it requires approximately 14kb escrows, and can be computed in around 12 seconds.
 ]]></content:encoded>
-<pubDate>Mon, 15 Dec 2025 20:31:35 +0000</pubDate>
 <pubDate>Mon, 15 Dec 2025 20:31:35 +0000</pubDate>
 </item>
 <item>
@@ -20,10 +19,8 @@ Privacy-Preserving Blueprints (PPBs), introduced by Kohlweiss et al. in in EUROC
 <link>https://eprint.iacr.org/2026/1443</link>
 <guid>https://eprint.iacr.org/2026/1443</guid>
 <content:encoded><![CDATA[
-
 Training machine learning models in untrusted clouds requires strong guarantees of confidentiality, integrity, and correctness, while remaining scalable and resilient to node churn. These challenges are further amplified in emerging agentic AI systems, where autonomous and distributed learning components require trustworthy coordination and secure state management across heterogeneous cloud environments. Existing Trusted Execution Environments (TEEs) lack scalability and remain vulnerable to side-channel attacks for large workloads, while pure secure multi-party computation (MPC) approaches incur prohibitive overhead in practice. SENTRA (Secure ENclave-based TRaining Architecture) addresses these challenges through a hybrid architecture that combines TEEs, secret sharing, and communication-efficient MPC with system level mechanisms that secure the entire training lifecycle. SENTRA introduces a scalable collective attestation protocol that verifies all participating enclaves and enforces hardware exclusivity before any node may store or process secret shares. Training data and model parameters are stored as secret shares in a versioned enclave-backed key–value store (KVS), providing rollback protection and consistent state under adversarial conditions. SENTRA further supports dynamic, fault tolerant membership through Dynamic Proactive Secret Sharing (DPSS)-based resharing, safe packed-MPC computation under degree bounds, and adaptive handling of node failures. Evaluation of a prototype implementation shows that SENTRA achieves up to 8.89 samples/s throughput and 1.29× faster training than the CrypTen baseline in software-only mode. In hardware-enclave mode, SENTRA incurs only an 8.3% performance overhead while providing memory-isolated confidentiality, fault-tolerant membership management, rollback protection, and recovery from node failures in approximately 8 seconds.
 ]]></content:encoded>
-<pubDate>Wed, 15 Jul 2026 11:27:30 +0000</pubDate>
 <pubDate>Wed, 15 Jul 2026 11:27:30 +0000</pubDate>
 </item>
 <item>
@@ -31,10 +28,8 @@ Training machine learning models in untrusted clouds requires strong guarantees 
 <link>https://eprint.iacr.org/2026/1442</link>
 <guid>https://eprint.iacr.org/2026/1442</guid>
 <content:encoded><![CDATA[
-
 Retrieval-augmented generation (RAG) grounds large language models on external knowledge, but its retrieval stage creates privacy risks: user queries may reveal sensitive intents, while retrieval atabases may contain proprietary or confidential records. To address this challenge, we present CoSecRAG, an efficient two-server private retrieval protocol for RAG that protects database and query embeddings under additive secret sharing. CoSecRAG has two core techniques. First, Inner Product Preserving Query Mask (IPQ-Mask) uses one-time correlated masking to transform secure inner-product computation over secret-shared vectors into local linear computation with a public masked-query difference, eliminating online secure multiplications in score computation. Second, Post-Scoring Cluster Pruning (PSCP) reverses the conventional prune-before-score pipeline: it computes secret-shared scores before pruning and privately prunes candidates at the score level, avoiding secure extraction of high-dimensional document vectors and reducing the input size of secure top-\(K\) selection. We implement CoSecRAG and evaluate it on BEIR datasets and large-scale synthetic benchmarks. CoSecRAG preserves retrieval quality while reducing retrieval cost. Compared with the latest two-server private RAG retrieval baseline, it achieves up to \(202\times\) score-computation speedup, \(107\times\) secure top-\(K\) speedup, and \(123\times\) end-to-end online speedup, while reducing communication by up to \(43\times\).
 ]]></content:encoded>
-<pubDate>Wed, 15 Jul 2026 07:51:52 +0000</pubDate>
 <pubDate>Wed, 15 Jul 2026 07:51:52 +0000</pubDate>
 </item>
 <item>
@@ -42,7 +37,6 @@ Retrieval-augmented generation (RAG) grounds large language models on external k
 <link>https://eprint.iacr.org/2026/1440</link>
 <guid>https://eprint.iacr.org/2026/1440</guid>
 <content:encoded><![CDATA[
-
 Range proofs enable a prover to convince a verifier that a committed value lies within a specific interval without revealing additional information. They are fundamental to privacy-preserving systems including anonymous credentials, e-voting, e-cash, and cryptocurrencies like Monero and Grin. A critical challenge is efficiently proving that multiple committed values simultaneously satisfy range constraints while minimizing communication overhead.
 
 Vector commitment schemes provide a promising approach to this problem. Missileproof (CCS'24) recently proposed a range proof for vector commitments achieving $O(1)$ proof size and verifier time, but with prover complexity of $O(N\ell \log(N\ell))$ for proving $\ell$ values in $[0, 2^N)$. 
@@ -50,17 +44,14 @@ Vector commitment schemes provide a promising approach to this problem. Missilep
 We present \textbf{Rarus}, an efficient range proof for polynomial-based vector commitments that achieves optimal asymptotic complexity across all metrics. Our key innovation is replacing binary decomposition with optimized $b$-ary decomposition, coupled with Bi-variate Zero-Test and accelerated Uni-variate Sum-Check protocols. Rarus achieves $O(1)$ proof size and verifier time, while reducing prover time to $O\left(\frac{N\ell}{\log(N\ell)}\right)\mathbb{G} + O(N\ell)\mathbb{F}$, where $\mathbb{G}$ and $\mathbb{F}$ denote group and field operations respectively. In addition, our protocol supports arbitrary ranges $[0,R)$ beyond powers of two. Experimental results demonstrate that Rarus achieves a $20\times$ speedup over both Bulletproofs and Missileproof when proving 16,384 values in $[0, 2^{64})$.
 ]]></content:encoded>
 <pubDate>Wed, 15 Jul 2026 03:10:33 +0000</pubDate>
-<pubDate>Wed, 15 Jul 2026 03:10:33 +0000</pubDate>
 </item>
 <item>
 <title>SoK: On the Design of Secure Ranking-based E-voting Systems</title>
 <link>https://eprint.iacr.org/2026/1437</link>
 <guid>https://eprint.iacr.org/2026/1437</guid>
 <content:encoded><![CDATA[
-
 Vote privacy and verifiability are two fundamental properties which must be maintained for elections. Studies in e-voting technology have demonstrated how elections may be secured through cryptographic techniques including mix-nets, homomorphic encryption, and Zero Knowledge Proofs (ZKPs). The implications and trade-offs that must be considered when designing an e-voting system using multiple cryptographic techniques for simple majority or plurality voting are well understood in the literature. However, it is less clear how these techniques affect the design process for complex e-voting systems such as those based on ranked voting. Examples include Borda count, Condorcet voting, Instant Runoff Voting (IRV), and Single Transferable Vote (STV). In this paper, we systematically analyse the cryptographic design of ranking-based e-voting systems in the literature and explore how  the cryptographic techniques utilised by such systems affect the strength of their security guarantees including vote privacy and verifiability. In addition, we explore how their cryptographic designs impact social choice properties including support for various counting functions as well as flexibility in vote casting. Our findings demonstrate that ranked e-voting systems may be largely classified according to the degree of information leakage present in each solution, and that systems belonging to each of these categories share similar properties and usage of cryptographic techniques. We then discuss an overview of our findings and identify a number of open problems following our analysis. Overall, this paper serves as a comprehensive study on the state-of-the-art for secure ranked e-voting systems in the literature.
 ]]></content:encoded>
-<pubDate>Tue, 14 Jul 2026 11:56:23 +0000</pubDate>
 <pubDate>Tue, 14 Jul 2026 11:56:23 +0000</pubDate>
 </item>
 <item>
@@ -68,10 +59,8 @@ Vote privacy and verifiability are two fundamental properties which must be main
 <link>https://eprint.iacr.org/2026/1436</link>
 <guid>https://eprint.iacr.org/2026/1436</guid>
 <content:encoded><![CDATA[
-
 Private set intersection (PSI) and, more broadly, private set operations (PSO) are fundamental primitives for secure multiparty computation (SMC), enabling participants to jointly compute set relations while revealing no information beyond the prescribed output. As quantum technologies advance, PSI have correspondingly evolved toward quantum secure phase. Existing quantum PSI (QPSI) solutions are limited in their threat models and collusion behavior between third party (TP) and participants. In this work, we present a multi-party QPSI (MP-QPSI) protocol that integrates verifiable quantum fully homomorphic encryption (vQFHE) as the verifiable outsourced quantum-evaluation layer and threshold fully homomorphic encryption (TFHE) as the threshold key-management mechanism. We instantiate the intersection computation via a \(C^{\mathsf{AND}}\) circuit accompanied by simulations on IBM Quantum Platform. We analyze correctness and participant privacy against TP, external eavesdroppers, and collusive behaviors, and we further prove verifiability against a malicious TP under the semantic security model. Finally, we present a modular framework perspective with several realizations, show how to extend the construction to quantum private set union (QPSU) via open-controlled operations. Compared with prior schemes, our protocol provides flexible set operations and stronger resilience under the TP model, including TP-participant collusion, thereby offering enhanced security and broader applicability.
 ]]></content:encoded>
-<pubDate>Tue, 14 Jul 2026 10:30:08 +0000</pubDate>
 <pubDate>Tue, 14 Jul 2026 10:30:08 +0000</pubDate>
 </item>
 <item>
@@ -79,12 +68,10 @@ Private set intersection (PSI) and, more broadly, private set operations (PSO) a
 <link>https://eprint.iacr.org/2026/1434</link>
 <guid>https://eprint.iacr.org/2026/1434</guid>
 <content:encoded><![CDATA[
-
 Group key agreement protocols are essential for modern secure messaging. Most existing group key agreement protocols assume a centralized model with a semi-trusted service that mediates the communication. This is efficient, but problematic for some important applications, since a central service can be a choke point for surveillance and censorship. There is a nascent literature on decentralized group key agreement that avoids such reliance, but existing proposals either do not scale, with update costs linear or quadratic in the group size, or lack proofs of security. Centralized protocols can offer much lower (logarithmic) cost.
 
 We present BeeKEM, the first decentralized group key agreement protocol with logarithmic update cost in the common case (degrading to linear in the worst case) and proofs of security. We provide an open-source implementation and demonstrate that it is competitive with OpenMLS. BeeKEM opens the door for a range of communication and collaboration applications offering not only end-to-end encryption, but also metadata privacy and censorship resistance.
 ]]></content:encoded>
-<pubDate>Mon, 13 Jul 2026 18:19:03 +0000</pubDate>
 <pubDate>Mon, 13 Jul 2026 18:19:03 +0000</pubDate>
 </item>
 <item>
@@ -92,7 +79,6 @@ We present BeeKEM, the first decentralized group key agreement protocol with log
 <link>https://eprint.iacr.org/2026/1427</link>
 <guid>https://eprint.iacr.org/2026/1427</guid>
 <content:encoded><![CDATA[
-
 Digital contact tracing systems play a pivotal role in mitigating the spread of infectious diseases during pandemics by identifying individuals exposed to confirmed cases. In decentralized privacy-preserving contact tracing protocols, users broadcast pseudo-random IDs and, upon infection, upload the relevant IDs to a cloud server. Other users can then download these IDs to determine if they have been in proximity to infected individuals. 
 However, existing protocols often lack verifiability, implicitly assuming honest user behavior when uploading data to the server. This gap creates vulnerabilities, including false positives and false negatives, which hinder the widespread adoption crucial for the effectiveness of contact tracing apps. 
 This paper introduces SPiRiT, a secure and privacy-preserving verifiable contact tracing protocol, designed to address these shortcomings by introducing verifiability, ensuring the legitimacy of uploaded IDs, while still maintaining user privacy.
@@ -101,14 +87,12 @@ The goal of our design is to maintain a balance between the competing objectives
 Through rigorous evaluation using a face-to-face individual interaction dataset, we demonstrate that SPiRiT not only reduces false alarms but also can be on par with or even outperform existing protocols in detecting high-risk contacts.
 ]]></content:encoded>
 <pubDate>Mon, 13 Jul 2026 09:40:13 +0000</pubDate>
-<pubDate>Mon, 13 Jul 2026 09:40:13 +0000</pubDate>
 </item>
 <item>
 <title>A Cryptographic Perspective on California's Delete Request and Opt-out Platform</title>
 <link>https://eprint.iacr.org/2026/1421</link>
 <guid>https://eprint.iacr.org/2026/1421</guid>
 <content:encoded><![CDATA[
-
 The California Consumer Privacy Act (CCPA) grants consumers the right to request deletion of personal data held by registered data brokers. California’s 2023 Delete Act provides a new mechanism through which consumers can exercise this right by leveraging a centralized Delete Request and Opt-out Platform (DROP), enabling users to submit a single request that must be periodically processed by all registered data brokers. Since this platform aggregates sensitive user information, it is intentionally designed with safeguards against information leakage and unauthorized disclosure.  This legislation, and the system it introduces, are positioned to serve as a template for wider deployment, with copy-cat legislation already introduced in many US states.
 
 In this document, we evaluate the privacy architecture of the first-generation DROP system from a cryptographic perspective. The proposed design relies on hash-based record linkage---a widely used technique that offers heuristic rather than rigorous privacy guarantees. We begin by analyzing the inherent risks of this approach and identifying simple, lightweight modifications that can modestly improve its privacy guarantees by making it more difficult for malicious actors to exploit these vulnerabilities.
@@ -118,9 +102,7 @@ We then contrast this approach with Private Set Intersection (PSI), a class of p
 We hope this document serves as a common starting point for the cryptography and policy communities working to design future data deletion systems.
 ]]></content:encoded>
 <pubDate>Sat, 11 Jul 2026 01:02:29 +0000</pubDate>
-<pubDate>Sat, 11 Jul 2026 01:02:29 +0000</pubDate>
 </item>
-
 <item>
 <title>Attribute-Based Threshold Issuance Anonymous Counting Tokens and Its Application to Sybil-Resistant Self-Sovereign Identity</title>
 <link>https://eprint.iacr.org/2024/1024</link>
@@ -14095,143 +14077,6 @@ Implementing a publicly verifiable distributed oblivious RAM (VDORAM) presents s
 To address these challenges, we introduce CompatCircuit, the first multi-prover ZKP front-end implementation to our knowledge. CompatCircuit integrates collaborative zkSNARKs to implement publicly verifiable MPC protocols with rich functionalities beyond those of an arithmetic circuit, enabling the development of multi-prover ZKP applications. Building upon CompatCircuit, we present VDORAM, the first publicly verifiable distributed oblivious RAM. By combining distributed oblivious architectures with verifiable RAM, VDORAM achieves an efficient RAM design that balances communication overhead and proof generation time. We have implemented CompatCircuit and VDORAM in approximately 15,000 lines of code, demonstrating usability by providing a practical and efficient implementation. Our performance evaluation result reveals that the system still provides moderate performance with distributed obliviousness.
 ]]></content:encoded>
 <pubDate>Fri, 10 Jan 2025 10:50:58 +0000</pubDate>
-</item>
-<item>
-<title>Cauchyproofs: Batch-Updatable Vector Commitment with Easy Aggregation and Application to Stateless Blockchains</title>
-<link>https://eprint.iacr.org/2025/038</link>
-<guid>https://eprint.iacr.org/2025/038</guid>
-<content:encoded><![CDATA[
-<div> 关键词: Stateless区块链、Cauchyproofs、批量可更新向量承诺、KZG方案、历史证明查询算法
-
-总结:
-
-本文介绍了Cauchyproofs，这是一种用于状态less区块链设计的批量可更新向量承诺方案，旨在解决随着用户和交易数量增加而带来的证明更新计算资源需求大的问题。Cauchyproofs利用优化的KZG方案，将更新证明的时间复杂度降低至$O\left(\left(\left|\vec{\alpha}\right| + \left|\vec{\beta}\right|\right) \log^2 (\left|\vec{\alpha}\right| + \left|\vec{\beta}\right|)\right)$，相比之前的$O\left(\left|\vec{\alpha}\right|\cdot|\vec{\beta}|\right)$方法有显著提升，从而减轻了证明服务节点的计算负担并提高了大用户群体中证明维护的效率。实验表明，这种方法在以太坊级别的区块大小下，比原始方法快约五倍。此外，文章还提出了一种基于Cauchy矩阵的KZG证明新型矩阵表示法，能够减少椭圆曲线操作，加速所有证明的计算。最后，文中还提供了一个历史证明查询算法，支持高效的历史证明生成。这些贡献极大地提升了状态less区块链框架中证明服务节点的可扩展性和实用性。 <div>
-Stateless blockchain designs have emerged to address the challenge of growing blockchain size by utilizing succinct global states. Previous works have developed vector commitments that support proof updates and aggregation to be used as such states. However, maintaining proofs for multiple users still demands significant computational resources, particularly in updating proofs with every transaction.  This paper introduces Cauchyproofs, a batch-updatable vector commitment enabling proof-serving nodes to efficiently update proofs in quasi-linear time relative to the number of users and transactions, utilizing an optimized KZG scheme to achieve complexity $O\left(\left(\left|\vec{\alpha}\right| + \left|\vec{\beta}\right|\right) \log^2 (\left|\vec{\alpha}\right| + \left|\vec{\beta}\right|)\right)$, compared to previous $O\left(\left|\vec{\alpha}\right|\cdot|\vec{\beta}|\right)$ approaches. This advancement reduces the computational burden on proof-serving nodes, allowing for efficient proof maintenance across large user groups. We demonstrate that our approach is approximately five times faster than the naive approach at the Ethereum-level block size. Additionally, we present a novel matrix representation for KZG proofs utilizing Cauchy matrices, enabling faster all-proof computations with reduced elliptic curve operations. Finally, we propose an algorithm for history proof query, supporting retrospective proof generation with high efficiency. Our contributions substantially enhance the scalability and practicality of proof-serving nodes in stateless blockchain frameworks.
-]]></content:encoded>
-<pubDate>Fri, 10 Jan 2025 02:15:53 +0000</pubDate>
-</item>
-<item>
-<title>Blink: An Optimal Proof of Proof-of-Work</title>
-<link>https://eprint.iacr.org/2024/692</link>
-<guid>https://eprint.iacr.org/2024/692</guid>
-<content:encoded><![CDATA[
-<div> 关键词：轻客户端、Proof-of-Work、区块链、Blink、安全性、资源消耗、零知识证明、可信设置、Bitcoin Backbone模型、评估、下载量
-
-总结:<br />
-本文介绍了Blink，这是首个无需可信设置的交互式、安全的$\mathcal{O}(1)$ PoW轻客户端。Blink可以应用于支付验证、启动引导以及跨链桥接等多个场景。相比于传统的线性资源消耗，近年来轻客户端的资源需求已逐步降低至$\mathcal{O}(\text{polylog}( \mathcal{C}))$和$\mathcal{O}(1)$，但后者的实现往往依赖于可信设置。而Blink则在不需可信设置的前提下实现了$\mathcal{O}(1)$的资源效率。文章证明了Blink在比特币背骨模型中的安全性，并对其证明大小进行了评估，结果显示，使用Blink只需下载1.6KB即可获取到比特币当前状态的承诺，相较于SPV（需要67.3MB）和基于零知识的轻客户端（需要197KB）显著降低了资源消耗。 <div>
-Designing light clients to securely and efficiently read Proof-of-Work blockchains has been a foundational problem since the inception of blockchains. Nakamoto themselves, in the original Bitcoin paper, presented the first client protocol, i.e., the Simplified Payment Verification, which consumes an amount of bandwidth, computational, and storage resources that grows linearly in the system's lifetime $\mathcal{C}$.
-
-Today, the blockchain ecosystem is more mature and presents a variety of applications and protocols deployed on-chain and, often, cross-chain. In this landscape, light clients have become the cornerstone of decentralized bridges, playing a pivotal role in the security and efficiency of cross-chain operations. 
-These new use cases, combined with the growth of blockchains over time, raise the need for more minimalist clients, which further reduce the resource requirements and, when applicable, on-chain costs. 
-Over the years, the light client resource consumption has been reduced from $\mathcal{O}( \mathcal{C})$ to $\mathcal{O}(\text{polylog}( \mathcal{C}))$, and then down to $\mathcal{O}(1)$ with zero-knowledge techniques at the cost of often assuming a trusted setup. 
-
-In this paper, we present Blink, the first interactive provably secure $\mathcal{O}(1)$ PoW light client without trusted setup. Blink can be used for a variety of applications ranging from payment verification and bootstrapping, to bridges. 
-We prove Blink secure in the Bitcoin Backbone model, and we evaluate its proof size demonstrating that, at the moment of writing, Blink obtains a commitment to the current state of Bitcoin by downloading only 1.6KB, instead of 67.3MB and 197KB for SPV and zk-based clients, respectively.
-]]></content:encoded>
-<pubDate>Mon, 06 May 2024 08:32:01 +0000</pubDate>
-</item>
-<item>
-<title>Forking the RANDAO: Manipulating Ethereum's Distributed Randomness Beacon</title>
-<link>https://eprint.iacr.org/2025/037</link>
-<guid>https://eprint.iacr.org/2025/037</guid>
-<content:encoded><![CDATA[
-<div> 关键词：proof-of-stake、distributed randomness beacons (DRBs)、RANDAO、forking attack、selfish mining
-
-总结:
-本文分析了以太坊共识机制中当前使用的分布式随机数生成器（RANDAO）的操纵性。尽管RANDAO具有高效率，但仍存在通过故意省略区块来操纵随机数生成的漏洞，即所谓的自私挖矿攻击。文章提出并评估了一种新的操纵策略——RANDAO分叉攻击，与自私挖矿不同的是，这种策略依赖于选择性地分叉诚实提议者的区块以最大化交易费收入和区块奖励。文章指出，分叉攻击比自私挖矿更具危害性，因为它加剧了验证者之间的不公平，并严重损害了区块链对普通用户的可靠性，导致已发布的区块频繁被分叉出去。同时，研究发现攻击者可以发起分叉而不损失槽位，并且这些损失会在后期得到充分补偿。实证测量表明，在以太坊主网上目前尚未发现这类攻击的统计显著痕迹。 <div>
-Proof-of-stake consensus protocols often rely on distributed randomness beacons (DRBs) to generate randomness for leader selection. This work analyses the manipulability of Ethereum's DRB implementation, RANDAO, in its current consensus mechanism. Even with its efficiency, RANDAO remains vulnerable to manipulation through the deliberate omission of blocks from the canonical chain. Previous research has shown that economically rational players can withhold blocks --~known as a block withholding attack or selfish mixing~-- when the manipulated RANDAO outcome yields greater financial rewards.
-
-We introduce and evaluate a new manipulation strategy, the RANDAO forking attack. Unlike block withholding, whereby validators opt to hide a block, this strategy relies on selectively forking out an honest proposer's block to maximize transaction fee revenues and block rewards. 
-In this paper, we draw attention to the fact that the forking attack is significantly more harmful than selfish mixing for two reasons. Firstly, it exacerbates the unfairness among validators. More importantly, it significantly undermines the reliability of the blockchain for the average user by frequently causing already published blocks to be forked out. By doing so, the attacker can fork the chain without losing slots, and we demonstrate that these are later fully compensated for. Our empirical measurements, investigating such manipulations on Ethereum mainnet, revealed no statistically significant traces of these attacks to date.
-]]></content:encoded>
-<pubDate>Thu, 09 Jan 2025 19:24:20 +0000</pubDate>
-</item>
-<item>
-<title>Scalable Post-Quantum Oblivious Transfers for Resource-Constrained Receivers</title>
-<link>https://eprint.iacr.org/2025/036</link>
-<guid>https://eprint.iacr.org/2025/036</guid>
-<content:encoded><![CDATA[
-<div> 关键词: 原子转移、现代化、低功耗设备、Helix OT、Priority OT
-
-总结:
-本文提出两种可扩展的原子转移方案以适应现代数字时代对隐私保护计算的需求，尤其是在低功耗设备上的应用。这两种方案分别是：1-out-of-n 的 Helix OT 和 t-out-of-n 的 Priority OT，两者均具有无条件安全性，能抵抗量子攻击。Helix OT 实现了接收端下载复杂度为 O(1)，优化了大规模数据场景下的效率。针对有紧急或重要性区分的数据传输需求，Priority OT 则通过 O(t) 的接收端下载复杂度实现数据优先级传输，确保最重要数据优先接收，从而更有效地利用带宽、存储和处理资源。实验结果显示，Helix OT 在1秒内完成从 n=16,777,216 消息中选择1条的消息传输，而 Priority OT 可在30秒内处理 t=1,048,576 项选择任务，性能优于现有 t-out-of-n OT（当 t≥1 时）。据作者所知，Helix OT 和 Priority OT 均具备与以往方案不同的独特优势，适用于大规模应用场景。 <div>
-It is imperative to modernize traditional core cryptographic primitives, such as Oblivious Transfer (OT), to address the demands of the new digital era, where privacy-preserving computations are executed on low-power devices. This modernization is not merely an enhancement but a necessity to ensure security, efficiency, and continued relevance in an ever-evolving technological landscape. 
-
-This work introduces two scalable OT schemes: (1) Helix OT, a $1$-out-of-$n$ OT, and (2) Priority OT, a $t$-out-of-$n$ OT. Both schemes provide unconditional security, ensuring resilience against quantum adversaries. Helix OT achieves a receiver-side download complexity of $O(1)$. In big data scenarios, where certain data may be more urgent or valuable, we propose Priority OT. With a receiver-side download complexity of $O(t)$, this scheme allows data to be received based on specified priorities. By prioritizing data transmission, Priority OT ensures that the most important data is received first, optimizing bandwidth, storage, and processing resources.  Performance evaluations indicate that Helix OT completes the transfer of 1 out of $n=$ 16,777,216 messages in 9 seconds, and Priority OT handles $t=$ 1,048,576 out of $n$ selections in 30 seconds. Both outperform existing $t$-out-of-$n$ OTs (when $t\geq 1$), underscoring their suitability for large-scale applications. To the best of our knowledge, Helix OT and Priority OT introduce unique advancements that distinguish them from previous schemes.
-]]></content:encoded>
-<pubDate>Thu, 09 Jan 2025 14:44:28 +0000</pubDate>
-</item>
-<item>
-<title>A New Paradigm for Server-Aided MPC</title>
-<link>https://eprint.iacr.org/2025/032</link>
-<guid>https://eprint.iacr.org/2025/032</guid>
-<content:encoded><![CDATA[
-<div> 关键词：server-aided MPC、多党计算、安全性保证、信任假设、效率
-
-总结:
-该文提出了一个新的服务器辅助多党计算（MPC）模型，挑战了原有假设，即所有客户端必须选择相同的服务器和接受相同的腐败阈值。在这个新模型中，每个客户端可以选择自己的服务器集和自己的腐败阈值，并且只要满足其自身的阈值，就能保证其隐私安全，这一特性被称为“每党私有”服务器辅助MPC，兼顾了安全性和效率两方面保障：(1) 每党隐私，意味着每个参与方根据自身选择的服务器得到独立的隐私保护；(2) 每党复杂度，意味着每个参与方只需与其选定的服务器进行通信。文章的主要贡献是一个新的服务器辅助MPC理论框架，并给出了两个可行性协议，但将追求具体效率的协议留作未来工作。 <div>
-The server-aided model for multiparty computation (MPC) was introduced to capture a real-world scenario where clients wish to off-load the heavy computation of MPC protocols to dedicated servers. A rich body of work has studied various trade-offs between security guarantees (e.g., semi-honest vs malicious),  trust assumptions (e.g., the threshold on corrupted servers), and efficiency. 
-
-However, all existing works make the assumption that all clients must agree on employing the same servers, and accept the same corruption threshold. In this paper, we challenge this assumption and introduce a new paradigm for server-aided MPC, where each client can choose their own set of servers and their own threshold of corrupted servers. In this new model, the privacy of each client is guaranteed as long as their own threshold is satisfied, regardless of the other servers/clients. We call this paradigm per-party private server-aided MPC to highlight both a security and efficiency guarantee: (1) per-party privacy, which means that each party gets their own privacy guarantees that depend on their own choice of the servers; (2) per-party complexity, which means that each party only needs to communicate with their chosen servers. Our primary contribution is a new theoretical framework for server-aided MPC. We provide two protocols to show feasibility, but leave it as a future work to investigate protocols that focus on concrete efficiency.
-]]></content:encoded>
-<pubDate>Wed, 08 Jan 2025 20:17:40 +0000</pubDate>
-</item>
-<item>
-<title>Delegated Multi-party Private Set Intersection from Secret Sharing</title>
-<link>https://eprint.iacr.org/2025/030</link>
-<guid>https://eprint.iacr.org/2025/030</guid>
-<content:encoded><![CDATA[
-<div> 关键词: Delegated PSI (D-PSI)、云服务器、多党设置、安全、计算复杂性
-
-总结:
-本文探讨了委托私有集合交集(D-PSI)问题，其中引入云服务器处理大部分计算和通信任务。D-PSI允许用户安全地将私人集合委托给云端，同时保证数据隐私并有效计算交集。该云服务器在严格的安全要求下运行，不获取个体集合或交集结果的任何信息。此外，D-PSI减少了用户间的通信并支持“静默”处理，即除了集合委托和结果检索外，云可以独立执行计算。文章形式化定义了D-PSI问题，并提出一种创新构建方案，不仅适用于两方场景，还可扩展到多方设置。该方案满足对半诚实敌手的安全性要求，并实现了接近理想“完美”D-PSI协议的计算和通信复杂度。通过基准实现和优化版本，作者展示了其方法的实用性，进一步降低了计算开销，为现实世界云计算场景中安全高效的PSI奠定了坚实基础。 <div>
-In this work, we address the problem of Delegated PSI (D-PSI), where a cloud server is introduced to handle most computational and communication tasks. D-PSI enables users to securely delegate their private sets to the cloud, ensuring the privacy of their data while allowing efficient computation of the intersection. The cloud operates under strict security requirements, learning nothing about the individual sets or the intersection result. Moreover, D-PSI minimizes user-to-user communication and supports "silent" processing, where the cloud can perform computations independently without user interaction, apart from set delegation and result retrieval.
-
-We formally define the D-PSI problem and propose a novel construction that extends beyond two-party scenarios to support multi-party settings. Our construction adheres to the D-PSI requirements, including security against semi-honest adversaries, and achieves computational and communication complexities close to the ideal "perfect" D-PSI protocol. Additionally, we demonstrate the practicality of our approach through a baseline implementation and an optimized version that further reduces computational overhead. Our results establish a strong foundation for secure and efficient PSI in real-world cloud computing scenarios.
-]]></content:encoded>
-<pubDate>Wed, 08 Jan 2025 11:35:17 +0000</pubDate>
-</item>
-<item>
-<title>Highly Efficient Server-Aided Multiparty Subfield VOLE Distribution Protocol</title>
-<link>https://eprint.iacr.org/2025/029</link>
-<guid>https://eprint.iacr.org/2025/029</guid>
-<content:encoded><![CDATA[
-<div> 关键词：secure multi-party computation, pseudorandom correlations, subfield vector oblivious linear evaluation (sVOLE), three-party, four-party honest majority settings, trusted server, communication cost, memory storage, arbitrary length, utility rate, precomputability.
-
-<br /><br />总结：
-本文介绍了一种新的子域向量无意识线性评估（sVOLE）分布方法，该方法应用于三 party 和四 party 诚实多数设置中，借助可信服务器的帮助。新方法显著降低了随机 sVOLE 实例的通信成本和内存存储需求。同时，它还实现了一个流畅的分布流程，能够生成任意长度的 sVOLE 实例，从而在多维度的隐私保护计算协议中实现了随机 sVOLE 的100%效用率，同时保持了完整的预计算能力。 <div>
-In recent development of secure multi-party computation (MPC), pseudorandom correlations of subfield vector oblivious linear evaluation (sVOLE) type become popular due to their amazing applicability in multi-dimensional MPC protocols such as privacy-preserving biometric identification and privacy-preserving machine learning protocols. In this paper, we introduce a novel way of VOLE distribution in three-party and four-party honest majority settings with the aid of a trusted server. This new method significantly decreases the communication cost and the memory storage of random sVOLE instances. On the other hand, it also enables a streamline distribution process that can generate a sVOLE instance of an arbitrary length, which results in 100 percent of utility rate of random sVOLE in multi-dimensional MPC protocols while preserving complete precomputability.
-]]></content:encoded>
-<pubDate>Wed, 08 Jan 2025 09:01:56 +0000</pubDate>
-</item>
-<item>
-<title>Zero-Knowledge Proofs for Set Membership: Efficient, Succinct, Modular</title>
-<link>https://eprint.iacr.org/2019/1255</link>
-<guid>https://eprint.iacr.org/2019/1255</guid>
-<content:encoded><![CDATA[
-<div> 关键词: 零知识证明、集合成员资格、隐私保护、非成员资格证明、Pedersen承诺
-
-总结:
-本文关注的是在不泄露元素本身的情况下，利用零知识证明技术证明某个元素属于公开集合且满足特定属性的问题。文章设计了一种新的模块化和高效的方法，构建了基于承诺的集合并验证零知识系统，用于证明某值 $u$ 在公共承诺 $c_u$ 中属于集合 $S$。同时，该方法还支持非成员资格证明，即证明 $u$ 不属于集合 $S$。由于采用的是基于 Pedersen 承诺的方案，这些解决方案与诸如 Bulletproofs 或 Groth16 等流行系统兼容，可作为“$u \in S$ 并且 $P(u)$ 成立”这类复合声明中的即插即用模块。相较于之前的类似工作（如结合 zkSNARKs 和默克尔树的 Zcash 技术），实验表明，该方案提供了更高的灵活性，更短的公共参数以及对于大小为 $2^{64}$ 的集合，证明时间提升了 3.7 倍至 30 倍之多。此外，作者已将这些方案实现为软件库，并进行了性能测试。 <div>
-We consider the problem of proving in zero knowledge that an element of a public set satisfies a given property without disclosing the element, i.e., for some $u$, ``$u \in S$ and $P(u)$ holds''. This problem arises in many applications (anonymous cryptocurrencies, credentials or whitelists) where, for privacy or anonymity reasons, it is crucial to hide certain data while ensuring properties of such data.
-We design new \textit{modular} and \textit{efficient} constructions for this problem through new \textit{commit-and-prove zero-knowledge systems for set membership}, i.e. schemes proving  $u \in S$ for a value $u$ that is in a public commitment $c_u$. We also extend our results to support {\em non-membership proofs}, i.e. proving $u \notin S$.
-Being commit-and-prove, our solutions can act as plug-and-play modules in statements of the form ``$u \in S$ and $P(u)$ holds'' by combining our set (non-)membership systems with any other commit-and-prove scheme for $P(u)$. Also, they work with Pedersen commitments over prime order groups which makes them compatible with popular systems such as Bulletproofs or Groth16.
-We implemented our schemes as a software library, and tested experimentally their performance. Compared to previous work that achieves similar properties---the clever techniques combining zkSNARKs and Merkle Trees in Zcash---our solutions offer more flexibility, shorter public parameters and $3.7 \times$--$30\times$ faster proving time for a set of size $2^{64}$.
-]]></content:encoded>
-<pubDate>Mon, 28 Oct 2019 08:28:02 +0000</pubDate>
-</item>
-<item>
-<title>Blind accumulators for e-voting</title>
-<link>https://eprint.iacr.org/2022/373</link>
-<guid>https://eprint.iacr.org/2022/373</guid>
-<content:encoded><![CDATA[
-<div> 关键词: blind accumulator、电子投票系统、加密原语、匿名性、验证性
-
-总结:
-本文提出了一种新型加密原语——盲累积器，旨在构建电子投票系统。盲累积器能够以去中心化的方式收集合格选民的私钥，同时不获取这些私钥的信息。完成累积后，选民可以处理得到的累积器并导出与其先前添加的私钥对应的公钥。公钥的生成是确定性的，因此可以作为固定的选民伪名使用。选民利用所积累的私钥对选票进行签名，而对应的公钥则用于验证签名。由于公钥固定不变，易于实现可验证性，保护选民免受重复投票的影响，或者允许重复投票但仅计算最后一次提交的选票。文章提出了盲累积器的语法和安全要求，并将其嵌入到Pseudonymous Key Generation（PKG）协议中，详细描述了在接近实际电子投票场景中的应用。此外，文章还提出了一种类似于Diffie-Hellman协议的盲累积器方案实例，并证明了该实例的安全性。 <div>
-We present a novel cryptographic primitive, blind accumulator, aimed at constructing e-voting systems. Blind accumulators collect private keys of eligible voters in a decentralized manner not getting information about the keys. Once the accumulation is complete, a voter processes the resulting accumulator and derives a public key which refers to a private key previously added by this voter. Public keys are derived deterministically and can therefore stand as fixed voter pseudonyms. The voter can prove that the derived key refers to some accumulated private key without revealing neither that key nor the voter itself. The voter uses the accumulated private key to sign a ballot. The corresponding public key is used to verify the signature. Since the public key is fixed, it is easy to achieve verifiability, to protect against multiple submissions of ballots by the same voter or, conversely, to allow multiple submissions but count only the last one. We suggest a syntax of blind accumulators and security requirements for them. We embed blind accumulators in the Pseudonymous Key Generation (PKG) protocol which details the use of accumulators in practical settings close to e-voting. We propose an instantiation of the blind accumulator scheme whose main computations resemble the Diffie-Hellman protocol. We justify the security of the proposed instantiation.
-]]></content:encoded>
-<pubDate>Tue, 22 Mar 2022 13:27:26 +0000</pubDate>
 </item>
 </channel>
 </rss>
