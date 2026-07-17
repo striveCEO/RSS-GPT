@@ -4,6 +4,122 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+<item>
+<title>Efficient Privacy-Preserving Blueprints for Threshold Comparison</title>
+<link>https://eprint.iacr.org/2025/2253</link>
+<guid>https://eprint.iacr.org/2025/2253</guid>
+<content:encoded><![CDATA[
+
+Privacy-Preserving Blueprints (PPBs), introduced by Kohlweiss et al. in in EUROCRYPT 2023, offer a method for balancing user privacy and bad-actor detection in private cryptocurrencies. A PPB scheme allows a user to append a verifiable escrow to their transactions which reveals some identifying information to an authority in the case that the user misbehaved. A natural PPB functionality is for escrows to reveal user information if the user sends an amount of currency over a certain threshold. However, prior works constructing PPBs for such a functionality have severe limitations when it comes to efficiency: escrows are either computationally infeasible to compute, or too large to be plausibly stored on a large-scale distributed ledger. We address these gaps by constructing a space and computation-efficient PPB for threshold comparison, producing escrows under 2kb that can be computed in seconds. The scheme can be instantiated using well-known cryptographic primitives, namely variants of the ElGamal encryption scheme and generic non-interactive zero-knowledge proofs. As an additional contribution, we implement one of the theoretical generic PPB constructions originally proposed by Kohlweiss et al. and find that it performs surprisingly well in practice. For the threshold comparison functionality it requires approximately 14kb escrows, and can be computed in around 12 seconds.
+]]></content:encoded>
+<pubDate>Mon, 15 Dec 2025 20:31:35 +0000</pubDate>
+<pubDate>Mon, 15 Dec 2025 20:31:35 +0000</pubDate>
+</item>
+<item>
+<title>SENTRA:Privacy-Preserving Training in Outsourced Cloud Environments</title>
+<link>https://eprint.iacr.org/2026/1443</link>
+<guid>https://eprint.iacr.org/2026/1443</guid>
+<content:encoded><![CDATA[
+
+Training machine learning models in untrusted clouds requires strong guarantees of confidentiality, integrity, and correctness, while remaining scalable and resilient to node churn. These challenges are further amplified in emerging agentic AI systems, where autonomous and distributed learning components require trustworthy coordination and secure state management across heterogeneous cloud environments. Existing Trusted Execution Environments (TEEs) lack scalability and remain vulnerable to side-channel attacks for large workloads, while pure secure multi-party computation (MPC) approaches incur prohibitive overhead in practice. SENTRA (Secure ENclave-based TRaining Architecture) addresses these challenges through a hybrid architecture that combines TEEs, secret sharing, and communication-efficient MPC with system level mechanisms that secure the entire training lifecycle. SENTRA introduces a scalable collective attestation protocol that verifies all participating enclaves and enforces hardware exclusivity before any node may store or process secret shares. Training data and model parameters are stored as secret shares in a versioned enclave-backed key–value store (KVS), providing rollback protection and consistent state under adversarial conditions. SENTRA further supports dynamic, fault tolerant membership through Dynamic Proactive Secret Sharing (DPSS)-based resharing, safe packed-MPC computation under degree bounds, and adaptive handling of node failures. Evaluation of a prototype implementation shows that SENTRA achieves up to 8.89 samples/s throughput and 1.29× faster training than the CrypTen baseline in software-only mode. In hardware-enclave mode, SENTRA incurs only an 8.3% performance overhead while providing memory-isolated confidentiality, fault-tolerant membership management, rollback protection, and recovery from node failures in approximately 8 seconds.
+]]></content:encoded>
+<pubDate>Wed, 15 Jul 2026 11:27:30 +0000</pubDate>
+<pubDate>Wed, 15 Jul 2026 11:27:30 +0000</pubDate>
+</item>
+<item>
+<title>CoSecRAG: Efficient Private Retrieval with Database and Query Privacy for RAG</title>
+<link>https://eprint.iacr.org/2026/1442</link>
+<guid>https://eprint.iacr.org/2026/1442</guid>
+<content:encoded><![CDATA[
+
+Retrieval-augmented generation (RAG) grounds large language models on external knowledge, but its retrieval stage creates privacy risks: user queries may reveal sensitive intents, while retrieval atabases may contain proprietary or confidential records. To address this challenge, we present CoSecRAG, an efficient two-server private retrieval protocol for RAG that protects database and query embeddings under additive secret sharing. CoSecRAG has two core techniques. First, Inner Product Preserving Query Mask (IPQ-Mask) uses one-time correlated masking to transform secure inner-product computation over secret-shared vectors into local linear computation with a public masked-query difference, eliminating online secure multiplications in score computation. Second, Post-Scoring Cluster Pruning (PSCP) reverses the conventional prune-before-score pipeline: it computes secret-shared scores before pruning and privately prunes candidates at the score level, avoiding secure extraction of high-dimensional document vectors and reducing the input size of secure top-\(K\) selection. We implement CoSecRAG and evaluate it on BEIR datasets and large-scale synthetic benchmarks. CoSecRAG preserves retrieval quality while reducing retrieval cost. Compared with the latest two-server private RAG retrieval baseline, it achieves up to \(202\times\) score-computation speedup, \(107\times\) secure top-\(K\) speedup, and \(123\times\) end-to-end online speedup, while reducing communication by up to \(43\times\).
+]]></content:encoded>
+<pubDate>Wed, 15 Jul 2026 07:51:52 +0000</pubDate>
+<pubDate>Wed, 15 Jul 2026 07:51:52 +0000</pubDate>
+</item>
+<item>
+<title>Rarus: A Succinct and Efficient Range Proof for Polynomial-based Vector Commitment</title>
+<link>https://eprint.iacr.org/2026/1440</link>
+<guid>https://eprint.iacr.org/2026/1440</guid>
+<content:encoded><![CDATA[
+
+Range proofs enable a prover to convince a verifier that a committed value lies within a specific interval without revealing additional information. They are fundamental to privacy-preserving systems including anonymous credentials, e-voting, e-cash, and cryptocurrencies like Monero and Grin. A critical challenge is efficiently proving that multiple committed values simultaneously satisfy range constraints while minimizing communication overhead.
+
+Vector commitment schemes provide a promising approach to this problem. Missileproof (CCS'24) recently proposed a range proof for vector commitments achieving $O(1)$ proof size and verifier time, but with prover complexity of $O(N\ell \log(N\ell))$ for proving $\ell$ values in $[0, 2^N)$. 
+
+We present \textbf{Rarus}, an efficient range proof for polynomial-based vector commitments that achieves optimal asymptotic complexity across all metrics. Our key innovation is replacing binary decomposition with optimized $b$-ary decomposition, coupled with Bi-variate Zero-Test and accelerated Uni-variate Sum-Check protocols. Rarus achieves $O(1)$ proof size and verifier time, while reducing prover time to $O\left(\frac{N\ell}{\log(N\ell)}\right)\mathbb{G} + O(N\ell)\mathbb{F}$, where $\mathbb{G}$ and $\mathbb{F}$ denote group and field operations respectively. In addition, our protocol supports arbitrary ranges $[0,R)$ beyond powers of two. Experimental results demonstrate that Rarus achieves a $20\times$ speedup over both Bulletproofs and Missileproof when proving 16,384 values in $[0, 2^{64})$.
+]]></content:encoded>
+<pubDate>Wed, 15 Jul 2026 03:10:33 +0000</pubDate>
+<pubDate>Wed, 15 Jul 2026 03:10:33 +0000</pubDate>
+</item>
+<item>
+<title>SoK: On the Design of Secure Ranking-based E-voting Systems</title>
+<link>https://eprint.iacr.org/2026/1437</link>
+<guid>https://eprint.iacr.org/2026/1437</guid>
+<content:encoded><![CDATA[
+
+Vote privacy and verifiability are two fundamental properties which must be maintained for elections. Studies in e-voting technology have demonstrated how elections may be secured through cryptographic techniques including mix-nets, homomorphic encryption, and Zero Knowledge Proofs (ZKPs). The implications and trade-offs that must be considered when designing an e-voting system using multiple cryptographic techniques for simple majority or plurality voting are well understood in the literature. However, it is less clear how these techniques affect the design process for complex e-voting systems such as those based on ranked voting. Examples include Borda count, Condorcet voting, Instant Runoff Voting (IRV), and Single Transferable Vote (STV). In this paper, we systematically analyse the cryptographic design of ranking-based e-voting systems in the literature and explore how  the cryptographic techniques utilised by such systems affect the strength of their security guarantees including vote privacy and verifiability. In addition, we explore how their cryptographic designs impact social choice properties including support for various counting functions as well as flexibility in vote casting. Our findings demonstrate that ranked e-voting systems may be largely classified according to the degree of information leakage present in each solution, and that systems belonging to each of these categories share similar properties and usage of cryptographic techniques. We then discuss an overview of our findings and identify a number of open problems following our analysis. Overall, this paper serves as a comprehensive study on the state-of-the-art for secure ranked e-voting systems in the literature.
+]]></content:encoded>
+<pubDate>Tue, 14 Jul 2026 11:56:23 +0000</pubDate>
+<pubDate>Tue, 14 Jul 2026 11:56:23 +0000</pubDate>
+</item>
+<item>
+<title>Verifiable and Collusion-Resistant Multi-Party Quantum Private Set Operations</title>
+<link>https://eprint.iacr.org/2026/1436</link>
+<guid>https://eprint.iacr.org/2026/1436</guid>
+<content:encoded><![CDATA[
+
+Private set intersection (PSI) and, more broadly, private set operations (PSO) are fundamental primitives for secure multiparty computation (SMC), enabling participants to jointly compute set relations while revealing no information beyond the prescribed output. As quantum technologies advance, PSI have correspondingly evolved toward quantum secure phase. Existing quantum PSI (QPSI) solutions are limited in their threat models and collusion behavior between third party (TP) and participants. In this work, we present a multi-party QPSI (MP-QPSI) protocol that integrates verifiable quantum fully homomorphic encryption (vQFHE) as the verifiable outsourced quantum-evaluation layer and threshold fully homomorphic encryption (TFHE) as the threshold key-management mechanism. We instantiate the intersection computation via a \(C^{\mathsf{AND}}\) circuit accompanied by simulations on IBM Quantum Platform. We analyze correctness and participant privacy against TP, external eavesdroppers, and collusive behaviors, and we further prove verifiability against a malicious TP under the semantic security model. Finally, we present a modular framework perspective with several realizations, show how to extend the construction to quantum private set union (QPSU) via open-controlled operations. Compared with prior schemes, our protocol provides flexible set operations and stronger resilience under the TP model, including TP-participant collusion, thereby offering enhanced security and broader applicability.
+]]></content:encoded>
+<pubDate>Tue, 14 Jul 2026 10:30:08 +0000</pubDate>
+<pubDate>Tue, 14 Jul 2026 10:30:08 +0000</pubDate>
+</item>
+<item>
+<title>BeeKEM: Decentralized, Secure and Efficient Group Key Agreement</title>
+<link>https://eprint.iacr.org/2026/1434</link>
+<guid>https://eprint.iacr.org/2026/1434</guid>
+<content:encoded><![CDATA[
+
+Group key agreement protocols are essential for modern secure messaging. Most existing group key agreement protocols assume a centralized model with a semi-trusted service that mediates the communication. This is efficient, but problematic for some important applications, since a central service can be a choke point for surveillance and censorship. There is a nascent literature on decentralized group key agreement that avoids such reliance, but existing proposals either do not scale, with update costs linear or quadratic in the group size, or lack proofs of security. Centralized protocols can offer much lower (logarithmic) cost.
+
+We present BeeKEM, the first decentralized group key agreement protocol with logarithmic update cost in the common case (degrading to linear in the worst case) and proofs of security. We provide an open-source implementation and demonstrate that it is competitive with OpenMLS. BeeKEM opens the door for a range of communication and collaboration applications offering not only end-to-end encryption, but also metadata privacy and censorship resistance.
+]]></content:encoded>
+<pubDate>Mon, 13 Jul 2026 18:19:03 +0000</pubDate>
+<pubDate>Mon, 13 Jul 2026 18:19:03 +0000</pubDate>
+</item>
+<item>
+<title>SPiRiT: Verifiable Contact Tracing for Balanced Security, Privacy, and Safety</title>
+<link>https://eprint.iacr.org/2026/1427</link>
+<guid>https://eprint.iacr.org/2026/1427</guid>
+<content:encoded><![CDATA[
+
+Digital contact tracing systems play a pivotal role in mitigating the spread of infectious diseases during pandemics by identifying individuals exposed to confirmed cases. In decentralized privacy-preserving contact tracing protocols, users broadcast pseudo-random IDs and, upon infection, upload the relevant IDs to a cloud server. Other users can then download these IDs to determine if they have been in proximity to infected individuals. 
+However, existing protocols often lack verifiability, implicitly assuming honest user behavior when uploading data to the server. This gap creates vulnerabilities, including false positives and false negatives, which hinder the widespread adoption crucial for the effectiveness of contact tracing apps. 
+This paper introduces SPiRiT, a secure and privacy-preserving verifiable contact tracing protocol, designed to address these shortcomings by introducing verifiability, ensuring the legitimacy of uploaded IDs, while still maintaining user privacy.
+ Verifiability ensures whether an upload contains a valid set of pseudo-random IDs with respect to the contagious period of the infected individual, and that the individual claiming those IDs is the legitimate owner, in a privacy-preserving manner.
+The goal of our design is to maintain a balance between the competing objectives of privacy, security, and decentralization while fostering greater public trust and adoption by addressing the aforementioned vulnerabilities.
+Through rigorous evaluation using a face-to-face individual interaction dataset, we demonstrate that SPiRiT not only reduces false alarms but also can be on par with or even outperform existing protocols in detecting high-risk contacts.
+]]></content:encoded>
+<pubDate>Mon, 13 Jul 2026 09:40:13 +0000</pubDate>
+<pubDate>Mon, 13 Jul 2026 09:40:13 +0000</pubDate>
+</item>
+<item>
+<title>A Cryptographic Perspective on California's Delete Request and Opt-out Platform</title>
+<link>https://eprint.iacr.org/2026/1421</link>
+<guid>https://eprint.iacr.org/2026/1421</guid>
+<content:encoded><![CDATA[
+
+The California Consumer Privacy Act (CCPA) grants consumers the right to request deletion of personal data held by registered data brokers. California’s 2023 Delete Act provides a new mechanism through which consumers can exercise this right by leveraging a centralized Delete Request and Opt-out Platform (DROP), enabling users to submit a single request that must be periodically processed by all registered data brokers. Since this platform aggregates sensitive user information, it is intentionally designed with safeguards against information leakage and unauthorized disclosure.  This legislation, and the system it introduces, are positioned to serve as a template for wider deployment, with copy-cat legislation already introduced in many US states.
+
+In this document, we evaluate the privacy architecture of the first-generation DROP system from a cryptographic perspective. The proposed design relies on hash-based record linkage---a widely used technique that offers heuristic rather than rigorous privacy guarantees. We begin by analyzing the inherent risks of this approach and identifying simple, lightweight modifications that can modestly improve its privacy guarantees by making it more difficult for malicious actors to exploit these vulnerabilities.
+
+We then contrast this approach with Private Set Intersection (PSI), a class of provably secure cryptographic protocols that only reveal the intended matching records and nothing more. For future iterations of DROP, we propose a comprehensive PSI-based redesign, arguing that it would substantially reduce the risk of accidental information leakage while incurring only moderate additional computational overhead. Next, we highlight how DROP presents a compelling application for advanced variants of PSI with extended functionalities and stronger security guarantees, and we outline several research directions for the cryptography community, motivated by the unique requirements of such systems. Finally, we identify systemic risks that cannot be mitigated by PSI alone and discuss potential complementary approaches for addressing these broader challenges.
+
+We hope this document serves as a common starting point for the cryptography and policy communities working to design future data deletion systems.
+]]></content:encoded>
+<pubDate>Sat, 11 Jul 2026 01:02:29 +0000</pubDate>
+<pubDate>Sat, 11 Jul 2026 01:02:29 +0000</pubDate>
+</item>
 
 <item>
 <title>Attribute-Based Threshold Issuance Anonymous Counting Tokens and Its Application to Sybil-Resistant Self-Sovereign Identity</title>
