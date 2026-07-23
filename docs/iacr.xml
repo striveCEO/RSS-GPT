@@ -4,19 +4,17 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+
 <item>
 <title>Efficient Single-Round Obfuscation of Search and Result Patterns in Searchable Encryption</title>
 <link>https://eprint.iacr.org/2026/1471</link>
 <guid>https://eprint.iacr.org/2026/1471</guid>
 <content:encoded><![CDATA[
-
 Searchable Symmetric Encryption (SSE) enables data owners to securely store encrypted data on untrusted cloud servers while retaining the ability to perform secure searches and retrieve relevant documents. However, standard SSE schemes expose search patterns (whether two queries are identical), and result patterns (which documents are returned), making them susceptible to leakage-abuse attacks that can infer sensitive information such as the queried keywords and/or document contents. While Oblivious RAM (ORAM) and Private Information Retrieval (PIR) can hide these patterns, their high computation and communication overhead often render them impractical for real-world search workloads. A more efficient alternative is to obfuscate search and result patterns using Differential Privacy (DP). Unfortunately, existing DP-based SSE schemes either provide insufficient query privacy protection, or still incur substantial performance overhead.
 In this paper, we propose FROST, a novel differentially private SSE scheme that efficiently obfuscates both search and result patterns, while providing strong resilience against all known statistical leakage-abuse attacks. The core component of FROST is our new rerandomized PIR (RePIR) scheme designed for private databases, which allows server-side rerandomization of encrypted PIR query responses. In FROST, we also introduce a novel method for applying DP noises to SSE for search result obfuscation using only simple arithmetic operations. An important property of FROST is that it requires only a single round of communication, with small user-side storage as an additional benefit. We fully implemented FROST and conducted extensive experiments over real-world datasets to rigorously assess its practical performance and resilience. Our experiments showed that FROST not only effectively mitigates pattern-leakage attacks while maintaining reasonable utility, but also achieves up to four orders of magnitude faster keyword search and three orders of magnitude lower bandwidth overhead than prior DP-based SSE schemes.
 ]]></content:encoded>
 <pubDate>Sat, 18 Jul 2026 19:00:43 +0000</pubDate>
-<pubDate>Sat, 18 Jul 2026 19:00:43 +0000</pubDate>
 </item>
-
 <item>
 <title>How To Think About End-To-End Encryption and AI: Training, Processing, Disclosure, and Consent</title>
 <link>https://eprint.iacr.org/2024/2086</link>
@@ -14068,21 +14066,6 @@ We present an e-voting scheme from quantum-safe assumptions based on the hardnes
 Our scheme makes use of non-ternary NTRU secrets to achieve optimal parameters. In order to compute the security of our design, we extend the ternary-NTRU work of Ducas and van Woerden (ASIACRYPT 2021) by determining the concrete fatigue point (for general secrets) of NTRU to be $q = 0.0058 \cdot \sigma^2 \cdot d^{2.484}$ (above which parameters become overstretched) for modulus $q$, ring dimension $d$, and secrets drawn from a Gaussian of parameter $\sigma$. We consider this relation to be of independent interest and demonstrate its significance by improving the efficiency of the (partially) blind signature scheme by del Pino and Katsumata (CRYPTO 2022).
 ]]></content:encoded>
 <pubDate>Wed, 14 Jun 2023 21:23:33 +0000</pubDate>
-</item>
-<item>
-<title>Keyed-Verification Anonymous Credentials with Highly Efficient Partial Disclosure</title>
-<link>https://eprint.iacr.org/2025/041</link>
-<guid>https://eprint.iacr.org/2025/041</guid>
-<content:encoded><![CDATA[
-<div> 关键词：匿名凭证（AC）、部分披露、键控验证AC（KVAC）、零知识证明、常量大小
-
-总结:
-本文提出两种高效的关键控验证匿名凭证（KVAC）系统构造方案，这两个方案消除了凭证展示阶段对计算昂贵的零知识证明的需求，并实现了常量大小的展示。第一个方案基于Fuchsbauer等人在公开可验证设置中实现常量大小凭证展示的工作，引入了结构保持的消息认证码在等价类（SP-MAC-EQ）和指定验签者集合承诺（DVSC），从而得到一种具有常量大小凭证（2组元素）和展示（4组元素）的KVAC系统。第二个方案采用同态MAC和简化DVSC，虽牺牲了常量大小的凭证（$n+2$组元素，其中$n$为属性数量），但保持了常量大小的展示（2组元素），并适应于无配对环境。文章对两个构造的安全性进行了正式证明，并提供了开源实现结果以证明其实用性。此外，还对所提出的SP-MAC-EQ方案与原始的SPS-EQ方案进行了效率基准测试，显示出显著的性能提升。 <div>
-An anonymous credential (AC) system with partial disclosure allows users to prove possession of a credential issued by an issuer while selectively disclosing a subset of their attributes to a verifier in a privacy-preserving manner. In keyed-verification AC (KVAC) systems, the issuer and verifier share a secret key. Existing KVAC schemes rely on computationally expensive zero-knowledge proofs during credential presentation, with the presentation size growing linearly with the number of attributes. In this work, we propose two highly efficient KVAC constructions that eliminate the need for zero-knowledge proofs during the credential presentation and achieve constant-size presentations.
-    Our first construction adapts the approach of Fuchsbauer et al. (JoC'19), which achieved constant-size credential presentation in a publicly verifiable setting using their proposed structure-preserving signatures on equivalence classes (SPS-EQ) and set commitment schemes, to the KVAC setting. We introduce structure-preserving message authentication codes on equivalence classes (SP-MAC-EQ) and designated-verifier set commitments (DVSC), resulting in a KVAC system with constant-size credentials (2 group elements) and presentations (4 group elements). To avoid the bilinear groups and pairing operations required by SP-MAC-EQ, our second construction uses a homomorphic MAC with a simplified DVSC. While this sacrifices constant-size credentials ($n+2$ group elements, where $n$ is the number of attributes), it retains constant-size presentations (2 group elements) in a pairingless setting. 
-    We formally prove the security of both constructions and provide open-source implementation results demonstrating their practicality. We extensively benchmarked our KVAC protocols and, additionally, bechmarked the efficiency of our SP-MAC-EQ scheme against the original SPS-EQ scheme, showcasing significant performance improvements.
-]]></content:encoded>
-<pubDate>Fri, 10 Jan 2025 18:08:39 +0000</pubDate>
 </item>
 </channel>
 </rss>
