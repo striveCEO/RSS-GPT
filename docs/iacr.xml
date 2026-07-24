@@ -4,15 +4,14 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+
 <item>
 <title>Privacy-Preserving Counterfactual Explanations for Federated AI</title>
 <link>https://eprint.iacr.org/2026/1488</link>
 <guid>https://eprint.iacr.org/2026/1488</guid>
 <content:encoded><![CDATA[
-
 As the usage of Artificial Intelligence (AI) for sensitive purposes increases, there is a growing need for privacy-aware explainable AI (XAI) tools. In this paper, we present a privacy-preserving counterfactual explanation algorithm. Our starting point is a decision-support model that is able to operate on vertically partitioned datasets, meaning that each party holds a different subset of datapoint attributes. The goal of a counterfactual algorithm is to find, given an observation, a datapoint from the (virtual) dataset that is closest to the observation but has a different label. Our algorithm fully preserves the privacy of the n datapoints belonging to the different parties by combining the strengths of homomorphic encryption and secret sharing. Through a number of experiments, we demonstrate the added value of combining multiple datasets in a realistic scenario and show that the privacy-preserving solution does not affect the accuracy. We fully implement our solution and demonstrate that it scales as to thousands of datapoints.
 ]]></content:encoded>
-<pubDate>Tue, 21 Jul 2026 08:22:04 +0000</pubDate>
 <pubDate>Tue, 21 Jul 2026 08:22:04 +0000</pubDate>
 </item>
 <item>
@@ -20,15 +19,12 @@ As the usage of Artificial Intelligence (AI) for sensitive purposes increases, t
 <link>https://eprint.iacr.org/2026/1484</link>
 <guid>https://eprint.iacr.org/2026/1484</guid>
 <content:encoded><![CDATA[
-
 Confidential sources are vital for investigative journalism and thus for holding those in power to account. However, sources often face great risks to their privacy and safety. SecureDrop is a system that enables sources to anonymously contact journalists, including at major news organisations around the world. Despite its widespread use, the current design requires physical servers hosted on premises. While cloud-based deployment would alleviate this burdensome requirement and improve SecureDrop's usability and accessibility, it would also introduce new threats to security that are not addressed by the current design. In particular, a lack of end-to-end encryption presents serious risks in the event that a cloud service provider is coerced into revealing information.
 
 In this work, we present and formally analyse a new protocol for SecureDrop which addresses the challenges of off-premises deployment. Our protocol composes an encryption scheme with hybrid post-quantum guarantees and an identity-hiding message-fetching mechanism to provide strong anonymity guarantees. In contrast to existing systems, we minimise incriminating evidence against whistleblowers by providing message-level deniability and by having sources remain stateless. Our formal security analysis combines the Tamarin prover for symbolic analysis and game-based proofs for computational analysis. Finally, our benchmarks demonstrate that the protocol achieves practical levels of performance in a browser context. The Freedom of the Press Foundation plans to deploy the new protocol, with integration efforts beginning in 2026.
 ]]></content:encoded>
 <pubDate>Mon, 20 Jul 2026 19:09:40 +0000</pubDate>
-<pubDate>Mon, 20 Jul 2026 19:09:40 +0000</pubDate>
 </item>
-
 <item>
 <title>Efficient Single-Round Obfuscation of Search and Result Patterns in Searchable Encryption</title>
 <link>https://eprint.iacr.org/2026/1471</link>
@@ -14058,38 +14054,6 @@ With the threat posed by quantum computers on the horizon, systems like Ethereum
 In this work, we introduce a family of hash-based signature schemes as post-quantum alternatives to BLS. We consider the folklore method of aggregating signatures via (hash-based) succinct arguments, and our work is focused on instantiating the underlying signature scheme. The proposed schemes are variants of the XMSS signature scheme, analyzed within a novel and unified framework. While being generic, this framework is designed to minimize security loss, facilitating efficient parameter selection. A key feature of our work is the avoidance of random oracles in the security proof. Instead, we define explicit standard model requirements for the underlying hash functions. This eliminates the paradox of simultaneously treating hash functions as random oracles and as explicit circuits for aggregation. Furthermore, this provides cryptanalysts with clearly defined targets for evaluating the security of hash functions. Finally, we provide recommendations for practical instantiations of hash functions and concrete parameter settings, supported by known and novel heuristic bounds on the standard model properties.
 ]]></content:encoded>
 <pubDate>Tue, 14 Jan 2025 09:35:50 +0000</pubDate>
-</item>
-<item>
-<title>Doubly Efficient Fuzzy Private Set Intersection  for High-dimensional Data with Cosine Similarity</title>
-<link>https://eprint.iacr.org/2025/054</link>
-<guid>https://eprint.iacr.org/2025/054</guid>
-<content:encoded><![CDATA[
-<div> 关键词: Fuzzy PSI、高维数据、通信成本、计算复杂性、余弦相似性
-
-总结:
-本文提出了一种新的模糊私人集合交集(Fuzzy PSI)协议——FPHE，该协议针对余弦相似性的隐私保护匹配问题进行了优化。FPHE克服了现有方法在处理高维数据时面临的通信和计算成本指数级增加的问题，实现了线性的时间和通信复杂度。此外，FPHE不再依赖于特定的数据分布假设，并引入了一种创新的证明技术，平衡了近似比较函数中的误差与噪声填充，确保了协议在半诚实模型下的安全性。FPHE还可以扩展支持如标签或电路模糊PSI等不同功能。实验结果显示，FPHE能够在几分钟内对512维数据执行模糊PSI操作，这是此前同类方案难以实现的。 <div>
-Fuzzy private set intersection (Fuzzy PSI) is a cryptographic protocol for privacy-preserving similarity matching, which is one of the essential operations in various real-world applications such as facial authentication, information retrieval, or recommendation systems. Despite recent advancements in fuzzy PSI protocols, still a huge barrier remains in deploying them for these applications. The main obstacle is the high dimensionality, e.g., from 128 to 512, of data; lots of existing methods, Garimella et al. (CRYPTO’23, CRYPTO’24) or van Baarsen et al. (EUROCRYPT’24), suffer from exponential overhead on communication and/or computation cost. In addition, the dominant similarity metric in these applications is cosine similarity, which disables several optimization tricks based on assumptions for the distribution of data, e.g., techniques by Gao et al. (ASIACRYPT’24). In this paper, we propose a novel fuzzy PSI protocol for cosine similarity, called FPHE, that overcomes these limitations at the same time. FPHE features linear complexity on both computation and communication with respect to the dimension of set elements, only requiring much weaker assumption than prior works. The basic strategy of ours is to homomorphically compute cosine similarity and run an approximated comparison function, with a clever packing method for efficiency. In addition, we introduce a novel proof technique to harmonize the approximation error from the sign function with the noise flooding, proving the security of FPHE under the semi-honest model. Moreover, we show that our construction can be extended to support various functionalities, such as labeled or circuit fuzzy PSI. Through experiments, we show that FPHE can perform fuzzy PSI over 512-dimensional data in a few minutes, which was computationally infeasible for all previous proposals under the same assumption as ours.
-]]></content:encoded>
-<pubDate>Tue, 14 Jan 2025 05:49:19 +0000</pubDate>
-</item>
-<item>
-<title>More Efficient Lattice-Based Electronic Voting from NTRU</title>
-<link>https://eprint.iacr.org/2023/933</link>
-<guid>https://eprint.iacr.org/2023/933</guid>
-<content:encoded><![CDATA[
-<div> 关键词：量子安全、lattice假设、电子投票、RLWE、NTRU
-
-总结：
-本文提出了一种基于量子安全的lattice问题（RLWE和NTRU）的电子投票方案，该方案在实现上更为高效，与现有最佳的lattice基投票方案相比，实现了5.3倍的密文大小减小、2.5倍的总通信成本降低以及2倍的总计算时间减少。本设计特别关注了加密隐私性和过程可验证性，以确保在面对量子计算机威胁时的安全性。此外，通过使用非三元NTRU秘密来优化参数，文中还扩展了Ducas和van Woerden关于NTRU的工作，确定了对于任意秘密的NTRU具体疲劳点公式，这对于理解参数安全性及改进del Pino和Katsumata提出的部分盲签名方案具有重要意义。 <div>
-In recent years, there has been much focus on developing core cryptographic primitives based on lattice assumptions, driven by the NIST call for post-quantum key encapsulation and digital signature algorithms. However, more work must be conducted on efficient privacy-preserving protocols based on quantum-safe assumptions.
-
-Electronic voting is one such privacy-preserving protocol whose adoption is increasing across the democratic world. E-voting offers both a fast and convenient alternative to postal voting whilst further ensuring cryptographic privacy of votes and offering full verifiability of the process. Owing to the sensitivity of voting and its infrastructure challenges, it is crucial to ensure security against quantum computers is baked into e-voting solutions.
-
-We present an e-voting scheme from quantum-safe assumptions based on the hardness of the RLWE and NTRU lattice problems, providing concrete parameters and an efficient implementation. Our design achieves a factor $5.3 \times$ reduction in ciphertext size, $2.5 \times$ reduction in total communication cost, and $2 \times$ reduction in total computation time compared to the state-of-the-art lattice-based voting scheme by Aranha et al. (ACM CCS 2023). We argue that the efficiency of this scheme makes it suitable for real-world elections.
-
-Our scheme makes use of non-ternary NTRU secrets to achieve optimal parameters. In order to compute the security of our design, we extend the ternary-NTRU work of Ducas and van Woerden (ASIACRYPT 2021) by determining the concrete fatigue point (for general secrets) of NTRU to be $q = 0.0058 \cdot \sigma^2 \cdot d^{2.484}$ (above which parameters become overstretched) for modulus $q$, ring dimension $d$, and secrets drawn from a Gaussian of parameter $\sigma$. We consider this relation to be of independent interest and demonstrate its significance by improving the efficiency of the (partially) blind signature scheme by del Pino and Katsumata (CRYPTO 2022).
-]]></content:encoded>
-<pubDate>Wed, 14 Jun 2023 21:23:33 +0000</pubDate>
 </item>
 </channel>
 </rss>
