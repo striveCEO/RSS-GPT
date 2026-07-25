@@ -4,12 +4,12 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+
 <item>
 <title>ZKPoSP: Post-Quantum Zero-Knowledge Proofs for Hierarchical Deterministic Wallets</title>
 <link>https://eprint.iacr.org/2026/1508</link>
 <guid>https://eprint.iacr.org/2026/1508</guid>
 <content:encoded><![CDATA[
-
 Recent advances in quantum hardware, including Google's Willow processor, have substantially narrowed the timeline to cryptographically relevant quantum computers. In the blockchain setting, where addresses and key derivation standards such as BIP32, BIP44, and SLIP-10 are the dominant infrastructure for wallet management, a quantum computer running Shor's algorithm can recover any elliptic-curve private key from the corresponding public key, threatening every wallet in production today. Migrating to post-quantum signature schemes requires changing the public key format and forcing address migration across all participating networks, a significant problem for blockchain communities.
 We present an orthogonal approach: keep the existing address format entirely unchanged and instead replace the classical signing step with a NIZK proof of knowledge of the seed underlying the existing address, where security against quantum adversaries reduces to the conjectured quantum hardness of the underlying hash functions and the soundness of the NIZK against quantum adversaries, requiring no address migration or key registration.
 
@@ -24,19 +24,16 @@ Before Q-day, separating the derivation and signing proofs already reduces per-t
 We implement all constructions in Rust using RISC Zero as the NIZK backend, instantiate HASH768 with KMAC256, and report benchmarks for monolithic proofs, ZKPoSP across full BIP44 paths, and the post-Q-day variant. Signing proving time is constant at approximately 12-13 seconds and verification time is constant at approximately 9-10 ms across all variants and depths.
 ]]></content:encoded>
 <pubDate>Thu, 23 Jul 2026 19:28:41 +0000</pubDate>
-<pubDate>Thu, 23 Jul 2026 19:28:41 +0000</pubDate>
 </item>
 <item>
 <title>Encifher: A Trusted-Execution Coprocessor for Confidential Computation on Solana</title>
 <link>https://eprint.iacr.org/2026/1504</link>
 <guid>https://eprint.iacr.org/2026/1504</guid>
 <content:encoded><![CDATA[
-
 Public blockchains expose all state and computation by default, which is incompatible with financial applications that require confidentiality. Solana achieves high throughput and sub-second confirmation, making it an attractive settlement layer, yet it oﬀers no general mechanism for computing over encrypted state: fully homomorphic encryption (FHE) remains orders of magnitude too slow for interactive use, secure multi-party computation (MPC) incurs heavy communication, and Solana’s native confidential-transfer extension hides only token amounts and sup-
 ports no programmable logic. We present Encifher, a confidentiality coprocessor for Solana that brings general, programmable computation over encrypted state to a high-throughput chain. Encifher adopts the ciphertext-handle and symbolic-execution interface of confidential-computing coprocessors (e.g., Zama’s fhEVM), but resolves it inside a Trusted Execution Environment (TEE) rather than with a fully homomorphic evaluator: on-chain Solana programs manipulate only 128-bit handles to ciphertexts, while an oﬀ-chain coprocessor running inside a hardware enclave fetches the corresponding ciphertexts from a public data availability layer, decrypts and computes on plaintext within the enclave, re-encrypts, and commits attested, Merkle-anchored results back on chain. A key observation is that Solana’s account model and parallel (Sealevel) scheduler turn the transaction’s declared read/write set into the dependency graph of the confidential computation, yielding parallel, correctly-ordered execution of encrypted operations without a bespoke scheduler. To avoid the single-point-of-failure of an enclave holding a master decryption key, Encifher distributes trust across a threshold-decryption committee and verifies enclave attestation on chain. Encifher is deployed in production, powering confidential payments, swaps, and a cross-chain bridge. In production, a confidential swap settles in a single Solana transaction costing 157,000 compute units; the AES-256-GCM symmetric-encryption layer runs at over a million operations per second and threshold decryption completes in single-digit to tens of milliseconds (near-plaintext speed, against the many-orders-of-magnitude overhead of FHE), and Encifher has served over 5,000 users and 50,000 confidential operations. We are explicit about the cost of this design point: Encifher reduces the trust base to TEE integrity, honest threshold key management, and the cloud attestation root, rather
 than to cryptographic hardness alone.
 ]]></content:encoded>
-<pubDate>Thu, 23 Jul 2026 07:30:23 +0000</pubDate>
 <pubDate>Thu, 23 Jul 2026 07:30:23 +0000</pubDate>
 </item>
 <item>
@@ -44,7 +41,6 @@ than to cryptographic hardness alone.
 <link>https://eprint.iacr.org/2026/1503</link>
 <guid>https://eprint.iacr.org/2026/1503</guid>
 <content:encoded><![CDATA[
-
 Sender untraceability hides the account spent by a cryptocurrency transfer among a set of candidates, its masking set. What a transfer does to that set separates two designs: classical schemes retain the whole set and append a nullifier marking the spent account, so the ledger grows with every transfer; constant-state schemes instead consume and replace the entire set. We ask how this choice affects synchronization.
 
 We formalize the two designs as the linear and constant untraceable asset transfer objects (LUAT and CUAT) and locate them in the consensus hierarchy. In LUAT, transfers from distinct accounts commute. Its consensus number is 2, compared with 1 for standard asset transfer, independently of the masking-set size and of the untraceability notion, and LUAT is starvation-free. Partitioning the accounts into fixed masking sets lets exhausted sets be garbage-collected without increasing that number.
@@ -52,17 +48,14 @@ We formalize the two designs as the linear and constant untraceable asset transf
 In CUAT, a transfer consumes and replaces every account of its masking set, so two transfers whose sets intersect cannot both take effect. We formalize this with the conflict graph on masking sets, whose edges join sets sharing an account. Under weak untraceability, which protects a transaction in isolation, the consensus number is unbounded already for one-round protocols. Under strong untraceability, which protects against an observer of the complete history, untraceability holds on a history exactly when any two accounts sharing a masking set occur in the same number of the masking sets in it. This uniform incidence bounds the conflict graph, and matching constructions attain it, so the consensus number is determined exactly and grows quadratically in the masking-set size. Finally, CUAT is not starvation-free. The two objects therefore pay for the same privacy differently: LUAT in storage, CUAT in synchronization and fairness.
 ]]></content:encoded>
 <pubDate>Thu, 23 Jul 2026 05:38:51 +0000</pubDate>
-<pubDate>Thu, 23 Jul 2026 05:38:51 +0000</pubDate>
 </item>
 <item>
 <title>Efficient Privacy-Preserving LSTM Inference on Encrypted Sequential Data</title>
 <link>https://eprint.iacr.org/2026/1502</link>
 <guid>https://eprint.iacr.org/2026/1502</guid>
 <content:encoded><![CDATA[
-
 Recent advances in fully homomorphic encryption (FHE) have enabled privacy-preserving machine learning directly over encrypted data. As a representative recurrent architecture, the long short-term memory (LSTM) network is widely used for modeling sequential dependencies, yet existing FHE-based LSTM inference schemes still suffer from high latency and limited scalability. In this paper, we present an efficient privacy-preserving LSTM inference protocol on encrypted sequential data based on FHE. We insert a lightweight normalization module before nonlinear activations to bound the hidden states, thereby enabling accurate low-degree polynomial approximations of the Sigmoid, Tanh, and inverse square-root functions via a hybrid Remez and least-squares strategy. We implement the proposed protocol using the Lattigo library, incorporating ciphertext packing optimization, rotation minimization, and SIMD-based parallelization. Experiments show that on standard text classification benchmarks, our encrypted LSTM achieves competitive accuracy compared with plaintext models and consistently outperforms the state-of-the-art FHE-based method, achieving up to a 4.7x speedup.
 ]]></content:encoded>
-<pubDate>Thu, 23 Jul 2026 05:10:37 +0000</pubDate>
 <pubDate>Thu, 23 Jul 2026 05:10:37 +0000</pubDate>
 </item>
 <item>
@@ -70,13 +63,10 @@ Recent advances in fully homomorphic encryption (FHE) have enabled privacy-prese
 <link>https://eprint.iacr.org/2026/1495</link>
 <guid>https://eprint.iacr.org/2026/1495</guid>
 <content:encoded><![CDATA[
-
 Outsourcing computations to cloud providers raises significant data privacy concerns, making Privacy-Preserving Computation via Fully Homomorphic Encryption (FHE) increasingly vital. However, adapting data sorting routines to the FHE domain introduces severe performance bottlenecks. This survey systematizes the state-of-the-art in FHE-based sorting algorithms. A novel complexity metric, FHE-Effort, is introduced to accurately evaluate homomorphic circuit efficiency. Eighteen algorithms are benchmarked across three major FHE schemes using a unified codebase. The analysis concludes that TFHE is currently the most efficient scheme for sorting applications, and sorting networks like Odd-Even Merge and Bitonic Sort offer the optimal algorithmic architectures.
 ]]></content:encoded>
 <pubDate>Tue, 21 Jul 2026 16:50:51 +0000</pubDate>
-<pubDate>Tue, 21 Jul 2026 16:50:51 +0000</pubDate>
 </item>
-
 <item>
 <title>Privacy-Preserving Counterfactual Explanations for Federated AI</title>
 <link>https://eprint.iacr.org/2026/1488</link>
@@ -14051,81 +14041,6 @@ In addition, we give new constructions which are based on weaker assumptions, co
 Finally, we evaluate the trade-offs of the different constructions.
 ]]></content:encoded>
 <pubDate>Tue, 11 Jul 2023 10:50:30 +0000</pubDate>
-</item>
-<item>
-<title>REED: Chiplet-Based  Accelerator for Fully Homomorphic Encryption</title>
-<link>https://eprint.iacr.org/2023/1190</link>
-<guid>https://eprint.iacr.org/2023/1190</guid>
-<content:encoded><![CDATA[
-<div> 关键词: 全同态加密（FHE）、ASIC加速器、多芯片模块化、REED、性能提升
-
-总结:<br />
-本文提出了一种名为REED的创新性多芯片模块化全同态加密（FHE）加速器，旨在解决现有单片式（monolithic）ASIC FHE加速器所面临的挑战，如不灵活性、低良率和高昂制造成本。REED采用了可扩展的芯片设计方法、有效的负载分布框架、定制化的跨芯片通信策略以及优化的管道数论变换和自同构设计以提升性能。实验结果显示，基于7纳米技术的REED 2.5D微处理器面积为96.7mm²，平均功率消耗为49.4W，相比于24核双倍英特尔X5690 CPU，其运行速度提高了约2991倍，性能提升了1.9倍，并且相较于最先进的ASIC FHE加速器，开发成本降低了50%。此外，文中还首次展示了对加密深度神经网络（DNN）训练的基准测试。总体而言，REED架构设计为加速FHE提供了极具实效性的解决方案，显著推进了FHE在现实世界应用中的实用性和部署可行性。 <div>
-Fully Homomorphic Encryption (FHE) enables privacy-preserving computation and has many applications. However, its practical implementation faces massive computation and memory overheads. To address this bottleneck, several Application-Specific Integrated Circuit (ASIC) FHE accelerators have been proposed. All these prior works put every component needed for FHE onto one chip (monolithic), hence offering high performance. However, they encounter common challenges associated with large-scale chip design, such as inflexibility, low yield, and high  manufacturing costs. In this paper, we present the first-of-its-kind multi-chiplet-based FHE accelerator ‘REED’ for overcoming the limitations of prior monolithic designs. To utilize the advantages of multi-chiplet structures while matching the performance of larger monolithic systems, we propose and implement several novel strategies in the context of FHE. These include a scalable chiplet design approach, an effective framework for workload distribution, a custom inter-chiplet communication strategy, and advanced pipelined Number Theoretic Transform and automorphism design to enhance performance.
-
-Our instruction-set and power simulations experiments with a prelayout netlist indicate that REED 2.5D microprocessor consumes 96.7mm2 chip area, 49.4 W average power in 7nm technology. It could achieve a remarkable speedup of up to 2,991× compared to a CPU (24-core 2×Intel X5690) and offer 1.9× better performance, along with a 50% reduction in development costs when compared to state-of-the-art ASIC FHE accelerators. Furthermore, our work presents the first instance of benchmarking an encrypted deep neural network (DNN) training. Overall, the REED architecture design offers a highly effective solution for accelerating FHE, thereby significantly  advancing the practicality and deployability of FHE in real-world applications.
-]]></content:encoded>
-<pubDate>Fri, 04 Aug 2023 05:21:11 +0000</pubDate>
-</item>
-<item>
-<title>BlindPerm: Efficient MEV Mitigation with an Encrypted Mempool and Permutation</title>
-<link>https://eprint.iacr.org/2023/1061</link>
-<guid>https://eprint.iacr.org/2023/1061</guid>
-<content:encoded><![CDATA[
-<div> 关键词: 最大可提取价值(MEV)、随机化置换、交易排序、权益证明(PoS)委员会共识、盲化置换(BlindPerm)
-
-总结:
-针对最大可提取价值(MEV)带来的负面影响，本文提出了利用随机化置换对已提交区块内的交易顺序进行混淆的技术方案。现有基于加密mempool的方法对于防止区块生产者的攻击并不充分，而可以通过结合置换技术实现多层保护的扩展。文章重点关注PoS委员会共识机制，并介绍了名为BlindPerm的框架，该框架通过在加密mempool基础上添加置换功能并提出一系列优化措施。其中，我们设计了一个协议，使得这一增强功能几乎无需额外开销，可通过借用现有的加密mempool实现。此外，还探讨了如何将此防御技术扩展到工作量证明(PoW)最长链共识中。最后，通过对历史以太坊数据运行模拟实验，展示了我们的解决方案在防范套利和夹心攻击两种主要类型的MEV提取方面的有效性。 <div>
-To mitigate the negative effects of the maximal extractable value (MEV), we propose techniques that utilize randomized permutation to shuffle the order of transactions in a committed block before execution. We argue that existing approaches based on encrypted mempools cannot provide sufficient mitigation, particularly against block producer, and can be extended by permutation-based techniques to provide multi-layer protection. With a focus on PoS committee-based consensus we then introduce BlindPerm, a framework enhancing an encrypted mempool with permutation and present various optimizations. Notably, we propose a protocol where this enhancement comes at essentially no overheads by piggybacking on the encrypted mempool. Further, we demonstrate how to extend our mitigation technique to support PoW longest-chain consensus. Finally, we illustrate the effectiveness of our solutions on arbitrage and sandwich attacks as the two main types of MEV extraction through running simulations using historical Ethereum data.
-]]></content:encoded>
-<pubDate>Fri, 07 Jul 2023 05:47:52 +0000</pubDate>
-</item>
-<item>
-<title>On the Privacy of Sublinear-Communication Jaccard Index Estimation via Min-hash Sketching</title>
-<link>https://eprint.iacr.org/2023/1523</link>
-<guid>https://eprint.iacr.org/2023/1523</guid>
-<content:encoded><![CDATA[
-<div> 关键词：min-hash sketch、differential privacy (DP)、distributional differential privacy (DDP)、random oracle模型、两方计算协议
-
-总结:<br />
-本文研究了min-hash草图在保护输入数据隐私方面的效果。首先，在集中式设置中，当hash函数由min-hash功能选择且对参与者未知的情况下，证明min-hash输出满足标准的差分隐私（DP）定义，无需额外噪声。这进而导出了基于全同态加密（FHE）的低通信量、半诚实型两方计算协议。为了提高效率，文章考虑在随机预言机模型下实现，参与者共同采样公开前缀以进行随机预言机的域分离，并在其输入集上局部评估生成的hash函数。然而，在这种公共hash函数场景下，min-hash输出不再满足DP。因此，文章转向探讨Bassily等人在FOCS 2013提出的分布式差分隐私（DDP）。若诚实方的集合具有足够高的最小熵，则min-hash功能的输出可以实现DDP，同样无需添加噪声。这导致了一个在随机预言机模型下的更高效半诚实两方计算协议，双方首先本地哈希其输入集，然后执行两方计算进行比较。通过证明这些协议分别满足DP和DDP，本文正式确认并界定了关于min-hash协议能够保护其输入隐私的民间观点。 <div>
-The min-hash sketch is a well-known technique for low-communication approximation of the Jaccard index between two input sets.  Moreover, there is a folklore belief that min-hash sketch based protocols protect the privacy of the inputs.  In this paper, we investigate this folklore to quantify the privacy of the min-hash sketch.
-
-We begin our investigation by considering the privacy of min-hash in a centralized setting where the hash functions are chosen by the min-hash functionality and are unknown to the participants.  We show that in this case the min-hash output satisfies the standard definition of differential privacy (DP) without any additional noise.  This immediately yields a privacy-preserving sublinear-communication semi-honest 2-PC protocol based on FHE where the hash function is evaluated homomorphically.
-
-To improve the efficiency of this protocol, we next consider an implementation in the random oracle model. Here, the protocol participants jointly sample public prefixes for domain separation of the random oracle, and locally evaluate the resulting hash functions on their input sets.  Unfortunately, we show that in this public hash function setting, the min-hash output is no longer DP.  We therefore consider the notion of distributional differential privacy (DDP) introduced by Bassily et al.(FOCS 2013). We show that if the honest party's set has sufficiently high min-entropy then the output of the min-hash functionality achieves DDP, again without any added noise. This yields a more efficient semi-honest two-party protocol in the random oracle model, where parties first locally hash their input sets and then perform a 2PC for comparison.
-    
-By proving that our protocols satisfy DP and DDP respectively, our results formally confirm and qualify the folklore belief that min-hash based protocols protect the privacy of their inputs.
-]]></content:encoded>
-<pubDate>Fri, 06 Oct 2023 10:02:12 +0000</pubDate>
-</item>
-<item>
-<title>Trustless Bridges via Random Sampling Light Clients</title>
-<link>https://eprint.iacr.org/2025/057</link>
-<guid>https://eprint.iacr.org/2025/057</guid>
-<content:encoded><![CDATA[
-<div> 关键词: 区块链、互操作性、去中心化、随机采样、Byzantine Fault Tolerance (BFT)
-
-总结:
-本文提出了一种名为Bridge Protocol的去中心化、高效的区块链互操作性解决方案，该方案依赖于相连的两个链的拜占庭容错（BFT）机制，不需要额外的信任假设。其中，消息交换中介者（即中继器）为无权限和去中心化的，消除了单点故障风险。文章引入了随机采样这一创新技术，使得基于PoS的区块链的轻客户端能更高效地追踪历史记录，减少了所需的签名验证次数。随机数通过以太坊的RANDAO等手段在链上生成。从加密经济学角度分析了桥接协议的安全性，并提供了确定安全性参数的框架，包括处理并发问题和原始设计中的随机性偏差。虽然此协议可应用于多种PoS链，但文中通过实例展示了在Polkadot与Ethereum之间建立桥梁（目前已部署）的可行性，并讨论了一些实际安全挑战。此外，还评估了在以太坊智能合约中实现的基于链上轻客户端验证器的效率（ Gas成本），相比于SNARK基方法，即使在大的验证者集合规模（高达$10^6$）下，其签名验证Gas成本也要低一个数量级。 <div>
-The increasing number of blockchain projects introduced annually has led to a pressing need for secure and efficient interoperability solutions. Currently, the lack of such solutions forces end-users to rely on centralized intermediaries, contradicting the core principle of decentralization and trust minimization in blockchain technology. In this paper, we propose a decentralized and efficient interoperability solution (aka Bridge Protocol) that operates without additional trust assumptions, relying solely on the Byzantine Fault Tolerance (BFT) of the two chains being connected. In particular, relayers (actors that exchange messages between networks) are permissionless and decentralized, hence eliminating any single point of failure. We introduce Random Sampling, a novel technique for on-chain light clients to efficiently follow the history of PoS blockchains by reducing the signature verifications required. Here, the randomness is drawn on-chain, for example, using Ethereum's RANDAO. We analyze the security of the bridge from a crypto- economic perspective and provide a framework to derive the security parameters. This includes handling subtle concurrency issues and randomness bias in strawman designs. While the protocol is applicable to various PoS chains, we demonstrate its feasibility by instantiating a bridge between Polkadot and Ethereum (currently deployed), and discuss some practical security challenges. We also evaluate the efficiency (gas costs) of an on-chain light-client verifier implemented as a smart contract on ethereum against SNARK-based approaches. Even for large validator set sizes (up to $10^6$), the signature verification gas costs of our light-client verifier are a magnitude lower.
-]]></content:encoded>
-<pubDate>Tue, 14 Jan 2025 11:06:33 +0000</pubDate>
-</item>
-<item>
-<title>Hash-Based Multi-Signatures for Post-Quantum Ethereum</title>
-<link>https://eprint.iacr.org/2025/055</link>
-<guid>https://eprint.iacr.org/2025/055</guid>
-<content:encoded><![CDATA[
-<div> 关键词：量子计算机、以太坊、非交互式多签名、BLS签名、哈希基础签名方案
-
-总结:<br />
-随着量子计算机带来的威胁，以太坊等系统需要转向抵抗量子攻击的加密原语。文章关注的是非交互式多签名方案，该方案在以太坊权益证明共识中使用了BLS签名。为了提供后量子时代的替代方案，文章引入了一种基于哈希的签名方案家族，作为对BLS签名的补充。研究内容包括利用（哈希基础）简洁论证方法聚合签名，并专注于实现底层签名方案，其中提出了XMSS签名方案的变体。作者建立了一个新颖且统一的框架来分析这些方案，旨在最小化安全性损失并优化参数选择。本文关键特点在于避免在安全性证明中使用随机预言机，而是为底层哈希函数定义明确的标准模型要求。这解决了将哈希函数同时视为随机预言机和聚合明确电路的悖论，并为密码分析人员提供了评估哈希函数安全性时清晰的目标。此外，文章还提供了关于哈希函数实用实例及具体参数设置的建议，并支持已知和新提出的关于标准模型属性的启发式边界。 <div>
-With the threat posed by quantum computers on the horizon, systems like Ethereum must transition to cryptographic primitives resistant to quantum attacks. One of the most critical of these primitives is the non-interactive multi-signature scheme used in Ethereum's proof-of-stake consensus, currently implemented with BLS signatures. This primitive enables validators to independently sign blocks, with their signatures then publicly aggregated into a compact aggregate signature.
-
-In this work, we introduce a family of hash-based signature schemes as post-quantum alternatives to BLS. We consider the folklore method of aggregating signatures via (hash-based) succinct arguments, and our work is focused on instantiating the underlying signature scheme. The proposed schemes are variants of the XMSS signature scheme, analyzed within a novel and unified framework. While being generic, this framework is designed to minimize security loss, facilitating efficient parameter selection. A key feature of our work is the avoidance of random oracles in the security proof. Instead, we define explicit standard model requirements for the underlying hash functions. This eliminates the paradox of simultaneously treating hash functions as random oracles and as explicit circuits for aggregation. Furthermore, this provides cryptanalysts with clearly defined targets for evaluating the security of hash functions. Finally, we provide recommendations for practical instantiations of hash functions and concrete parameter settings, supported by known and novel heuristic bounds on the standard model properties.
-]]></content:encoded>
-<pubDate>Tue, 14 Jan 2025 09:35:50 +0000</pubDate>
 </item>
 </channel>
 </rss>
