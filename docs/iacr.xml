@@ -4,6 +4,50 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+<item>
+<title>Beyond Blockchain Ballots: UC-Secure Layer-2 Voting and Governance</title>
+<link>https://eprint.iacr.org/2026/1521</link>
+<guid>https://eprint.iacr.org/2026/1521</guid>
+<content:encoded><![CDATA[
+
+Maintaining a decentralized system requires a collective governance mechanism that allows participants to agree on changes to the system. In particular, the governance mechanism should offer a voting functionality for casting, collecting, and tallying votes in a confidential yet verifiable manner. Scaling this functionality for millions of participants in a cost-effective manner is a critical requirement for permissionless blockchains that remains unmet.
+
+We put forward a "layer-2" approach to meet this requirement in a setting where a permissionless blockchain acts as the fallback "layer-1" mechanism. Specifically, our approach to scalability realizes the protocol in a layer-2 fashion: the bulk of the protocol is executed off-chain, but secured on the blockchain with a minimal footprint.
+
+We prove our protocol secure in the Universal Composability (UC) framework. First, we formalize a governance ideal functionality $\mathcal{F}_{\mathsf{L2Gov}}$. Our definition offers high levels of confidentiality and verifiability. Moreover, in the case of misbehavior, it allows faults to be attributed so that appropriate action (such as the slashing of on-chain funds) can be taken. Second, we demonstrate that our protocol UC-realizes the $\mathcal{F}_{\mathsf{L2Gov}}$ functionality based on a blockchain, an off-chain bulletin board, a distributed homomorphic encryption functionality ($\mathcal{F}_{\mathsf{DHE}}$), and other standard hybrids.
+
+To the best of our knowledge, this work presents the first layer-2 blockchain voting protocol with a rigorous security analysis. We also point out some challenges that arise when applying the UC framework to layer-2 protocols.
+]]></content:encoded>
+<pubDate>Fri, 24 Jul 2026 13:27:41 +0000</pubDate>
+<pubDate>Fri, 24 Jul 2026 13:27:41 +0000</pubDate>
+</item>
+<item>
+<title>ConvertInput-Free Vector Homomorphic Secret Sharing and Its Applications</title>
+<link>https://eprint.iacr.org/2026/1517</link>
+<guid>https://eprint.iacr.org/2026/1517</guid>
+<content:encoded><![CDATA[
+
+This work presents ConvertInput-Free Vector Homomorphic Secret Sharing (Vector-HSS), a novel HSS primitive based on the Decisional Composite Residuosity (DCR) assumption. Our construction enables efficient high-dimensional vector computations while avoiding the costly $\texttt{ConvertInput}$ operation. As a unified framework, Vector-HSS can be used as a building block for Private Information Retrieval (PIR), Secure Multi-Party Computation (MPC), Privacy-Preserving Machine Learning (PPML), etc.
+The key idea behind Vector-HSS is to introduce a vector-centric computation paradigm. Unlike traditional approaches, this design allows the server to perform natural and efficient vector computations without the $\texttt{ConvertInput}$ operation while keeping client-side overhead comparable to that of state-of-the-art solutions. To further improve efficiency, we develop a batching mechanism based on the Chinese Remainder Theorem (CRT) that enables parallel computation across multiple vectors. Building on these techniques, we further design a suite of protocol modules to securely support Euclidean/cosine distance computation, comparison, and matrix-vector multiplication in practical applications. Experiments show that our scheme achieves $280\times$ and $70\times$ speedups over prior HSS schemes (EUROCRYPT 2021 and S&amp;P 2026, respectively) for batched inner product evaluation. When applied to privacy-preserving image retrieval, our method achieves sub-second retrieval time, outperforming state-of-the-art solutions under similar security requirements.
+]]></content:encoded>
+<pubDate>Fri, 24 Jul 2026 08:32:59 +0000</pubDate>
+<pubDate>Fri, 24 Jul 2026 08:32:59 +0000</pubDate>
+</item>
+<item>
+<title>Distributed Vector Commitments and Their Applications</title>
+<link>https://eprint.iacr.org/2026/1514</link>
+<guid>https://eprint.iacr.org/2026/1514</guid>
+<content:encoded><![CDATA[
+
+Vector commitment (VC) schemes enable a prover to commit to a vector and later open any position with a short proof. However, existing VC schemes are designed for centralized settings, and cannot work in decentralized systems, where the input vector is distributed across multiple machines. Similarly, traditional VC schemes cannot leverage distributed parallel computation across multiple machines for acceleration.
+
+To tackle this issue, we introduce a new notion—distributed VC (DVC), which allows multiple machines, each holding only a subvector of the input vector, to collectively commit to the entire vector and generate position proofs in a distributed manner. To the best of our knowledge, there is no prior work on DVCs and no existing work can trivially derive an efficient DVC scheme. The key challenge is that both commitments and proofs depend on the entire vector, while no single machine holds the complete vector in distributed settings.
+
+We propose the first DVC scheme, HLE-DVC, which leverages $M$ machines to process the distributed vector $\mathbf{v}$ of length $N$ in parallel, with each machine holding a subvector of length $\frac{N}{M}$. HLE-DVC achieves compact proof size-$\text{O}(\log M)$ and allows each machine to generate all its position proofs in a single communication round, with communication cost $\text{O}(\log M)$ and computation cost $\text{O}(\frac{N \log N}{M})$. Moreover, HLE-DVC supports batch proving, proof aggregation, and efficient updates. We conduct the experiments and open-source the code. Using 256 machines to generate all proofs for a committed vector of length $2^{30}$ takes 17,515 seconds. This achieves a $256\times$ parallel speedup over HLE-DVC on a single machine, and is $142\times$ faster than Hyperproofs (a famous single machine VC scheme). The communication cost per machine is 0.768 KB.
+]]></content:encoded>
+<pubDate>Fri, 24 Jul 2026 05:47:34 +0000</pubDate>
+<pubDate>Fri, 24 Jul 2026 05:47:34 +0000</pubDate>
+</item>
 
 <item>
 <title>ZKPoSP: Post-Quantum Zero-Knowledge Proofs for Hierarchical Deterministic Wallets</title>
