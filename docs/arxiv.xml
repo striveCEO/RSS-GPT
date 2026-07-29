@@ -4,6 +4,223 @@
 <title>cs updates on arXiv.org</title>
 <link>http://rss.arxiv.org/rss/cs</link>
 
+<item>
+<title>Decentralized Granular Access Control for Agentic AI Systems in Critical Infrastructure</title>
+<link>https://arxiv.org/abs/2607.22611</link>
+<guid>https://arxiv.org/abs/2607.22611</guid>
+<content:encoded><![CDATA[
+
+arXiv:2607.22611v1 Announce Type: new 
+Abstract: The deployment of autonomous AI agents in production infrastructure introduces fundamental security challenges that traditional role-based access control (RBAC) models cannot address. Unlike deterministic automation, AI agents exhibit stochastic behavior, making conventional trust models insufficient for governing their access to critical systems. This paper presents a decentralized, multi-layered access control architecture designed specifically for agentic AI systems operating in critical cloud infrastructure. Our framework introduces four key innovations: (1) a compound identity model that binds agent actions to delegated human authority, (2) a hierarchical permission system spanning five granularity levels from global platform access to per-parameter constraints, (3) a decentralized policy ownership model where tool teams independently govern their authorization boundaries, and (4) progressive trust escalation with safety interlocks that prevent autonomous agents from executing high-risk operations. We ground our design in the OWASP Top 10 for LLM Applications (2025) threat taxonomy and demonstrate how each architectural decision mitigates specific attack vectors. Deployed in production at a major cloud provider managing network infrastructure across hundreds of datacenters, the system enforces granular access control for 20+ specialized AI agents and 60+ deterministic playbooks processing thousands of operations daily while maintaining zero unauthorized write operations over eight months of production deployment. We present empirical data on access pattern distributions, denial rates, and the effectiveness of layered authorization in preventing privilege escalation by non-deterministic actors.
+]]></content:encoded>
+<pubDate>Tue, 28 Jul 2026 00:00:00 -0400</pubDate>
+<pubDate>Tue, 28 Jul 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Share No More Than the Request Requires: Federated Disclosure for Perspective-Aware AI</title>
+<link>https://arxiv.org/abs/2607.22953</link>
+<guid>https://arxiv.org/abs/2607.22953</guid>
+<content:encoded><![CDATA[
+
+arXiv:2607.22953v1 Announce Type: new 
+Abstract: Modern AI systems bring societal risks such as mass surveillance, extreme concentrations of power, and loss of user autonomy---calling into question a model where third-parties collect and control massive amounts of user data. Users require a sovereign system to securely own, govern, and disclose their context while remaining compliant across regulated domains with strict provenance, interpretability, and policy adherence. Perspective-aware AI approaches this by transforming a user's aggregated personal data into a structured identity model called a \emph{Chronicle}: a temporal knowledge graph that represents and grows with the user. Chronicles support the secure disclosure of context across federated networks. A Chronicle holder may expose a queryable, authorized view that a third-party agent may consult without centralizing anyone's data. This paper explores the problem of minimum-necessary disclosure across domain boundaries: when a requester's agent queries a Chronicle, how can the system constrain its response to release only what the requester's relationship, stated purpose, and specific task require? We propose \textbf{Provenance Preserving Chronicles} (PPC), a federated protocol that compiles each holder's Chronicle into a compact \emph{authorized evidence subgraph} governed by one rule: \emph{share no more than the request requires}. Holders keep local sovereignty; an access controller projects relationship-aware views over domain-expert ontologies; and a two-phase flow returns provenance-linked text first, releasing raw artifacts only after explicit holder approval. We frame the problem, map gaps in blockchain, P2P, and holder-sovereign designs, define the core constructs, and sketch the protocol with an explicit threat model.
+]]></content:encoded>
+<pubDate>Tue, 28 Jul 2026 00:00:00 -0400</pubDate>
+<pubDate>Tue, 28 Jul 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Towards LLM-assisted High-Quality Property Generation for Solidity Smart Contracts</title>
+<link>https://arxiv.org/abs/2607.23308</link>
+<guid>https://arxiv.org/abs/2607.23308</guid>
+<content:encoded><![CDATA[
+
+arXiv:2607.23308v1 Announce Type: new 
+Abstract: The immutable nature of smart contracts makes it challenging to fix and patch bugs once they are deployed to a blockchain. This implies that security vulnerabilities may be exposed to possible exploitation for a longer period, necessitating comprehensive pre-deployment testing. Property-based testing combined with fuzzing has proven itself as a promising technique for uncovering vulnerabilities. Traditionally, system properties are written by human experts, which is time-consuming and consequently expensive.With the recent advancement in Large Language Models (LLMs) and their ability to 'understand' natural language and code semantics, it may be possible to generate effective properties. This study, leverages state-of-the-art LLMs to generate high-quality properties for Soliditybased smart contracts. We measure the quality of the generated properties using mutation testing. Our results show that LLMs have the potential to generate high-quality properties that are close to those written by human experts. We extensively evaluate LLMs using various prompting techniques (e.g., zero shot, few shot, and prompt chaining). Overall, we find that Gemini Pro 1.5, when combined with prompt chaining, achieves the highest average mutation score of 25.99% among all studied configurations, closely approaching the human written benchmark of 31.75%. However, our per contract analysis reveals notable variance, particularly for the LibBit contract, where Gemini Pro 1.5 under prompt chaining achieves a mutation score of 74.34%, which is on par with human written properties (74.83%). This highlights that while average performance is informative, individual contract level results demonstrate that LLMs can, in some cases, match expert level property generation.
+]]></content:encoded>
+<pubDate>Tue, 28 Jul 2026 00:00:00 -0400</pubDate>
+<pubDate>Tue, 28 Jul 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>ZKP Security Tools and Verification: Coverage, Effectiveness, Adoption, and Challenges</title>
+<link>https://arxiv.org/abs/2607.23752</link>
+<guid>https://arxiv.org/abs/2607.23752</guid>
+<content:encoded><![CDATA[
+
+arXiv:2607.23752v1 Announce Type: new 
+Abstract: Zero-knowledge proofs (ZKPs) have become a core technology for privacy and verifiable computing. They are used to secure blockchains that handle billions of dollars and identity applications dealing with sensitive personal data. However, ZKP systems are complex, and subtle implementation errors can completely break their guarantees, letting attackers forge money or false proofs of identity. Researchers and practitioners have therefore developed a growing set of bug detection and formal verification methods to secure these systems. Yet their real-world effectiveness and adoption remain unclear. In this paper, we aim to shed light on the state of ZKP security tooling. We first systematize the landscape of these tools and observe that most target Circom, leaving newer DSLs and zkVMs with limited support. We then evaluate six tools across 70 real-world vulnerabilities and find that while the tools detect 45.7% of bugs on isolated targets, their effectiveness drops to 19.6% on full codebases, with important vulnerability classes left unaddressed. We also present the first systematic analysis of formal verification efforts, revealing that current work focuses primarily on constraint correctness and identifying key gaps and risks. Finally, we survey 48 practitioners, showing that development and security remain human-led, LLMs are widely used, and practitioners prioritize tools with clearer guarantees and lower integration effort. Overall, our results highlight the need for better integration of security tooling with the development and auditing process, and we provide actionable insights for researchers and practitioners.
+]]></content:encoded>
+<pubDate>Tue, 28 Jul 2026 00:00:00 -0400</pubDate>
+<pubDate>Tue, 28 Jul 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Bitcoin Mempool Linearization</title>
+<link>https://arxiv.org/abs/2607.23787</link>
+<guid>https://arxiv.org/abs/2607.23787</guid>
+<content:encoded><![CDATA[
+
+arXiv:2607.23787v1 Announce Type: new 
+Abstract: In the Bitcoin system, transactions arrive continuously at miners' mempools and await inclusion in future blocks. Every non-coinbase transaction must spend one or more unspent outputs created by previous transactions, inducing dependency constraints among transactions in the mempool. At the same time, miners are economically incentivized to prioritize transactions with higher fee rates, measured as transaction fee per unit size. This paper formulates the mempool linearization problem: given a set of transactions with associated fees, sizes, and dependency relationships, compute a dependency-respecting transaction ordering that maximizes fee-rate efficiency while supporting efficient updates as the mempool evolves dynamically. The problem is characterized through a partition of transactions into disjoint dependency-respecting subsets ordered by decreasing aggregate fee rate, together with an equivalent LP formulation. Motivated by structural properties of basic feasible solutions in the simplex method, a new algorithm called spanning forest linearization (SFL) is developed. Operating directly on the transaction dependency graph, SFL iteratively merges and splits chunks of transactions to refine a global ordering, and is guaranteed to terminate at an optimal solution. Evaluation on both synthetic and real-world Bitcoin mempool data shows that SFL consistently computes optimal linearizations with substantially lower runtime than competing approaches, including a method based on the parametric preflow algorithm of Gallo, Grigoriadis, and Tarjan. These results indicate that SFL provides a practical and scalable framework for transaction prioritization by decentralized miners in large and rapidly evolving mempools. SFL has also been incorporated into the Bitcoin Core codebase for transaction cluster linearization.
+]]></content:encoded>
+<pubDate>Tue, 28 Jul 2026 00:00:00 -0400</pubDate>
+<pubDate>Tue, 28 Jul 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>GNN-based Multi-Agent Control of Traffic Shockwaves in Sparse Vehicular Ad-hoc Networks</title>
+<link>https://arxiv.org/abs/2607.23792</link>
+<guid>https://arxiv.org/abs/2607.23792</guid>
+<content:encoded><![CDATA[
+
+arXiv:2607.23792v1 Announce Type: new 
+Abstract: Traffic shockwaves are stop-and-go waves that propagate upstream through the streams of vehicles and are one of the major causes of traffic congestion, fuel inefficiency, and increased accident rates in modern transportation systems. Although Connected and Autonomous Vehicles (CAVs) offer a promising opportunity to mitigate such shockwaves, most existing control strategies rely on global traffic state information, making them impractical for early-stage deployment of Vehicular Ad-hoc Networks (VANETs). In this paper, we propose a decentralized Multi-Agent Reinforcement Learning (MARL) framework that integrates a Graph Neural Network (GNN) to enhance the control architecture of connected and autonomous vehicles. The proposed approach enables vehicles to learn cooperative control policies using locally available information and interaction with neighboring vehicles. The effectiveness of the proposed scheme is evaluated using a scalable simulation environment under realistic highway traffic conditions. Simulation results show that the proposed GNN-based MARL framework can reduce the propagation of traffic shockwaves by up to 80\%, even when only 10\% of the vehicles are connected.
+]]></content:encoded>
+<pubDate>Tue, 28 Jul 2026 00:00:00 -0400</pubDate>
+<pubDate>Tue, 28 Jul 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Bridging the Epistemic Gap in the Invisible Internet: Extended Mathematical Modeling and Empirical Characterization of I2P Topology</title>
+<link>https://arxiv.org/abs/2607.23825</link>
+<guid>https://arxiv.org/abs/2607.23825</guid>
+<content:encoded><![CDATA[
+
+arXiv:2607.23825v1 Announce Type: new 
+Abstract: The Invisible Internet Project (I2P) is a decentralized, peer-to-peer network underpinning secure and adversarial communications with major implications for cybersecurity and national security. Its global topology emerges from thousands of independent peer-selection decisions, producing a hub-dominated, complex structure that resists external observation. Prior models based on protocol documentation failed to capture real-world behavior. We close this gap with an Extended Mathematical Model (EMM) derived from production code and validated on a six-router, geographically distributed testbed over thirty days. Results reveal limited router visibility (~25% of nodes), relativistic tier allocations, strong Fast-tier tunnel preference, and overrepresented High Capacity-tier exploratory tunnels. The model accurately predicts emergent topological asymmetries and defines the adversarial resources required to compromise privacy, providing a principled foundation for cyber deterrence and secure decentralized network design.
+]]></content:encoded>
+<pubDate>Tue, 28 Jul 2026 00:00:00 -0400</pubDate>
+<pubDate>Tue, 28 Jul 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>There Will Be Spam: Characterizing State-Invariant Transactions and Speculative MEV</title>
+<link>https://arxiv.org/abs/2607.24172</link>
+<guid>https://arxiv.org/abs/2607.24172</guid>
+<content:encoded><![CDATA[
+
+arXiv:2607.24172v1 Announce Type: new 
+Abstract: Blockchains rely on transparency and immutability to ensure trust, but these guarantees come at the cost of an ever-growing ledger that increasingly threatens decentralization by making it more expensive to store and maintain the full transaction history. In this work, we introduce state-invariant transactions, defined as transactions whose inclusion or removal does not affect the resulting blockchain state beyond transaction fees. We argue that these transactions constitute a form of on-chain spam because they consume execution, bandwidth, storage, and blockspace without contributing to the final ledger state. We present the first large-scale measurement of state-invariant transactions across Ethereum, Optimism, and Base, identifying nearly 1.4 billion such transactions. While only 2.6% of Ethereum transactions are state-invariant, they account for 24% of transactions on Optimism and 37% on Base, representing a significant source of unnecessary resource consumption on Layer-2 blockchains. We show that speculative Maximal Extractable Value (MEV) is the dominant source of state-invariant transactions on Optimism and Base, accounting for 57% and 68%, respectively, but is not the only source as previously assumed. Moreover, despite its popularity, speculative MEV is not the most profitable strategy once the costs of state-invariant transactions are considered. Beyond MEV, we identify substantial malicious activity, with address poisoning campaigns accounting for 53% of non-reverted state-invariant transactions on Ethereum. Our findings suggest that mitigating state-invariant transactions could substantially reduce blockchain resource consumption and transaction costs while limiting phishing campaigns and other forms of blockchain abuse.
+]]></content:encoded>
+<pubDate>Tue, 28 Jul 2026 00:00:00 -0400</pubDate>
+<pubDate>Tue, 28 Jul 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Quality-Adaptive Multi-UAV 3D Reconstruction with Sparse Workload Redistribution</title>
+<link>https://arxiv.org/abs/2607.24233</link>
+<guid>https://arxiv.org/abs/2607.24233</guid>
+<content:encoded><![CDATA[
+
+arXiv:2607.24233v1 Announce Type: new 
+Abstract: 3D reconstruction of unknown environments is a key application in robotics but is severely limited by the computational and energy capabilities of current aerial platforms. Deploying multiple UAVs and providing efficient and scalable path planning strategies are common approaches, but effective online coordination among UAVs remains a significant challenge. To address this problem, we propose a quality-adaptive decentralized decision-making strategy to build a 3D map with user-defined degrees of fidelity. The approach integrates a quality-oriented criterion based on TSDF confidence into view generation and information gain estimation to produce viewpoints consistent with the desired fidelity target. Additionally, we employ two levels of coordination: a penalty factor in the viewpoint evaluation to encourage local dispersion among the UAVs and a global imbalance correction mechanism. The latter, based on regularized clustering and optimal task assignment, is only triggered when an unbalanced configuration relative to high-information regions is detected. Simulation results demonstrate that the proposed method improves path efficiency compared to state-of-the-art multi-UAV exploration approaches, while also achieving higher-fidelity reconstructions in terms of coverage and accuracy. We make our code publicly available to the community.
+]]></content:encoded>
+<pubDate>Tue, 28 Jul 2026 00:00:00 -0400</pubDate>
+<pubDate>Tue, 28 Jul 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Domain-Decomposition Neural Surrogates for Scalable Decentralized Ensemble Kalman Filter Based Parameter Identification in High-Dimensional Stochastic PDEs</title>
+<link>https://arxiv.org/abs/2607.24305</link>
+<guid>https://arxiv.org/abs/2607.24305</guid>
+<content:encoded><![CDATA[
+
+arXiv:2607.24305v1 Announce Type: new 
+Abstract: Ensemble Kalman filters (EnKF) provide an efficient framework for parameter identification of physics based laws from spatially distributed measurements. Their forecast models require a large number of samples to accurately represent uncertainties, leading to high computational costs. A NN-based surrogate model is introduced to replace the sample-based forecast model. The proposed NN surrogate maps spatial coordinates and physics-based parameters to the forecasted observation. Such maps require a large number of parameters for high-dimensional spatial domains. To overcome this limitation, a augmented Lagrange multiplier domain decomposition method (DDM) is developed, where local NN models are optimized independently before global communication and coupling. This reduces the number of NN parameters while improving local approximation accuracy. Furthermore, a distributed and decentralized ensemble Kalman filter approach based on DDM-NN surrogate model is investigated, where the parameter identification problem is decomposed into local subproblems. Each local estimator updates the material parameters using locally available information, while communication between neighboring subdomains enables the reconstruction of a consistent global estimate to reduce the computational cost. The proposed method is evaluated on a three-dimensional material parameter identification problem and compared with an EnKF and a MCMC reference solution. The results show that the proposed DDM NN-based KF captures the posterior parameter distribution and approaches the solutions obtained with both EnKF and MCMC. While MCMC provides the most accurate representation of the posterior distribution, the proposed approach achieves comparable parameter estimates with reduced computational requirements for the forecast model.
+]]></content:encoded>
+<pubDate>Tue, 28 Jul 2026 00:00:00 -0400</pubDate>
+<pubDate>Tue, 28 Jul 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Near-Tight Theoretical Bounds for Incentive Compatibility in Bitcoin Mining</title>
+<link>https://arxiv.org/abs/2607.24415</link>
+<guid>https://arxiv.org/abs/2607.24415</guid>
+<content:encoded><![CDATA[
+
+arXiv:2607.24415v1 Announce Type: new 
+Abstract: When is honest Bitcoin mining rational? This question is central to the incentive design of proof-of-work blockchains. Sapirshtein et al. computationally derived near-tight lower and upper bounds on the incentive-compatibility threshold using a Markov Decision Process. Kiayias et al.'s Blockchain Mining Games instead derived theoretical lower and upper bounds. However, this theoretical approach has two limitations: its model restricts miners to a narrow action space and assumes idealized tie behavior, and its lower and upper bounds are far from tight.
+  We resolve both limitations. We develop a more realistic model with a broader miner action space and asymmetric tie-breaking parameters $\gamma^-$ and $\gamma^+$. We then propose an algorithm that computes lower and upper bounds on the incentive-compatibility threshold with a maximum error of $9.98006\times10^{-4}$.
+]]></content:encoded>
+<pubDate>Tue, 28 Jul 2026 00:00:00 -0400</pubDate>
+<pubDate>Tue, 28 Jul 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Multi-Path Routing in Decentralized Exchange Networks: Convex Allocation and an Improving-Path Certificate</title>
+<link>https://arxiv.org/abs/2607.22540</link>
+<guid>https://arxiv.org/abs/2607.22540</guid>
+<content:encoded><![CDATA[
+
+arXiv:2607.22540v1 Announce Type: cross 
+Abstract: We present a graph-theoretic and convex optimization framework for multi-path routing in decentralized exchange networks, together with its implementation and empirical evaluation on Ethereum mainnet. The framework models the market as a directed token multigraph whose arcs carry AMM exchange functions. Routing is decomposed into two implemented layers: candidate path generation via gas-aware marginal k-shortest-path enumeration, where edge scores embed expected execution cost directly into graph traversal with an explicit pool-simple constraint tracked during path construction, and continuous flow allocation over the selected candidates solved as a concave maximization over a simplex with a per-pool price-impact cap. Under standard concavity and monotonicity assumptions, the KKT conditions imply marginal-output equalization across active paths. The central technical contribution is an improving-path certificate: after solving the allocation on k=20 candidate paths, the KKT multiplier is used as a threshold to determine via a single shortest-path query whether any omitted pool-simple path could improve the current solution; in our implementation the certificate confirms sufficiency in the majority of epochs. Execution is protected by an on-chain slippage tolerance enforced at the smart-contract level. We evaluate the implemented engine against four production DEX aggregators on repeated WETH-USDT quote observations across six trade sizes on Ethereum mainnet: median shortfall is below 5 bps across all sizes and top-3 quote rank exceeds 57% of epochs.
+]]></content:encoded>
+<pubDate>Tue, 28 Jul 2026 00:00:00 -0400</pubDate>
+<pubDate>Tue, 28 Jul 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Distributed Convolutional Rank Regression over Decentralized Networks</title>
+<link>https://arxiv.org/abs/2607.23639</link>
+<guid>https://arxiv.org/abs/2607.23639</guid>
+<content:encoded><![CDATA[
+
+arXiv:2607.23639v2 Announce Type: cross 
+Abstract: This paper studies convolution rank regression (CRR) over decentralized distributed learning networks. We propose a novel decentralized CRR framework, in which estimators are obtained by solving consensus-constrained optimization with kernel-smoothed rank loss. The developed estimation scheme relies solely on local node data and information shared by neighboring nodes, thereby achieving privacy preservation and high communication efficiency. For heterogeneous network settings, we establish finite-sample error bounds for the decentralized CRR estimator and derive exact support recovery guarantees for the sparse decentralized CRR Lasso estimator. To facilitate numerical implementation, we adopt a generalized consensus ADMM to efficiently solve local subproblems across all network nodes. We verify the favorable performance of our developed approach via extensive numerical simulations and real-data experiments.
+]]></content:encoded>
+<pubDate>Tue, 28 Jul 2026 00:00:00 -0400</pubDate>
+<pubDate>Tue, 28 Jul 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Decentralized Causal Discovery using Judo Calculus</title>
+<link>https://arxiv.org/abs/2510.23942</link>
+<guid>https://arxiv.org/abs/2510.23942</guid>
+<content:encoded><![CDATA[
+
+arXiv:2510.23942v2 Announce Type: replace 
+Abstract: We describe a theory and implementation of an intuitionistic decentralized framework for causal discovery using judo calculus, which is formally defined as j-stable causal inference using j-do-calculus in a topos of sheaves. In real-world applications -- from biology to medicine and social science -- causal effects depend on regime (age, country, dose, genotype, or lab protocol). Our proposed judo calculus formalizes this context dependence formally as local truth: a causal claim is proven true on a cover of regimes, not everywhere at once. The Lawvere-Tierney modal operator j chooses which regimes are relevant; j-stability means the claim holds constructively and consistently across that family. We describe an algorithmic and implementation framework for judo calculus, combining it with standard score-based, constraint-based, and gradient-based causal discovery methods. We describe experimental results on a range of domains, from synthetic to real-world datasets from biology and economics. Our experimental results show the computational efficiency gained by the decentralized nature of sheaf-theoretic causal discovery, as well as improved performance over classical causal discovery methods.
+]]></content:encoded>
+<pubDate>Tue, 28 Jul 2026 00:00:00 -0400</pubDate>
+<pubDate>Tue, 28 Jul 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Why Ethereum Needs Fairness Mechanisms that Do Not Depend on Participants' Altruism</title>
+<link>https://arxiv.org/abs/2603.05666</link>
+<guid>https://arxiv.org/abs/2603.05666</guid>
+<content:encoded><![CDATA[
+
+arXiv:2603.05666v2 Announce Type: replace 
+Abstract: Ethereum's ideal of censorship resistance, together with related fairness properties, is undermined in practice, motivating fairness mechanisms that aim to restore these properties. Several of these mechanisms hand control over block contents to a committee of proposers under a 1-of-n honest assumption: at least one committee member complies with the mechanism even when deviating would increase personal revenue. We refer to such proposers as altruistic. Yet prior work shows that roughly 91 percent of blocks are constructed by centralized block-building services that demonstrably take user-adverse actions for financial gain; the responsible proposers sign these blocks blindly, without any means of intervention. A common reading of this figure is that 9 percent of proposers forgo these gains and act altruistically. Our empirical analysis of the full year 2025 shows that this share is far smaller: at most 1.55 percent of proposers can plausibly be regarded as altruistic, whereas the remaining 98.45 percent of proposers exhibit observable non-altruistic behavior. We interpret 1.55 percent as an upper bound on the prevalence of altruistic proposers. These results imply that committee-based fairness mechanisms that rely on altruistic members would require substantially larger committees than currently proposed. This raises concerns about their practical viability and motivates mechanisms in which fair behavior is the rational choice.
+]]></content:encoded>
+<pubDate>Tue, 28 Jul 2026 00:00:00 -0400</pubDate>
+<pubDate>Tue, 28 Jul 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>DeReCo: Decoupling Representation and Coordination Learning for Object-Adaptive Decentralized Multi-Robot Cooperative Transport</title>
+<link>https://arxiv.org/abs/2603.08111</link>
+<guid>https://arxiv.org/abs/2603.08111</guid>
+<content:encoded><![CDATA[
+
+arXiv:2603.08111v2 Announce Type: replace 
+Abstract: Generalizing decentralized multi-robot cooperative transport across objects with diverse shapes and physical properties remains a fundamental challenge. Under decentralized execution, two key challenges arise: object-dependent representation learning under partial observability and coordination learning in multi-agent reinforcement learning (MARL) under non-stationarity. A typical approach jointly optimizes object-dependent representations and coordinated policies in an end-to-end manner while randomizing object shapes and physical properties during training. However, this joint optimization tightly couples representation and coordination learning, introducing bidirectional interference: inaccurate representations under partial observability destabilize coordination learning, while non-stationarity in MARL further degrades representation learning, resulting in sample-inefficient training. To address this structural coupling, we propose DeReCo, a novel MARL framework that decouples representation and coordination learning for object-adaptive multi-robot cooperative transport, improving sample efficiency and generalization across objects and transport scenarios. DeReCo adopts a three-stage training strategy: (1) centralized coordination learning with privileged object information, (2) reconstruction of object-dependent representations from local observations, and (3) progressive removal of privileged information for decentralized execution. This decoupling mitigates interference between representation and coordination learning and enables stable and sample-efficient training. Experimental results show that DeReCo outperforms baselines in simulation on three training objects, generalizes to six unseen objects with varying masses and friction coefficients, and achieves superior performance on two unseen objects in real-robot experiments.
+]]></content:encoded>
+<pubDate>Tue, 28 Jul 2026 00:00:00 -0400</pubDate>
+<pubDate>Tue, 28 Jul 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>The Hitchhiker's Guide to Agentic AI: From Foundations to Systems</title>
+<link>https://arxiv.org/abs/2606.24937</link>
+<guid>https://arxiv.org/abs/2606.24937</guid>
+<content:encoded><![CDATA[
+
+arXiv:2606.24937v2 Announce Type: replace 
+Abstract: The Hitchhiker's Guide to Agentic AI is a comprehensive practitioner's reference for building autonomous AI systems. The book covers the full stack from first principles to production deployment, organized around a central thesis: building great agentic systems requires understanding every layer of the pipeline, not just one. The book opens with the LLM substrate -- transformer architecture, GPU systems, training and fine-tuning (SFT, LoRA, MoE), model compression, and inference optimization -- treated as essential foundations rather than the primary focus. It then develops the alignment and reasoning layer: reinforcement learning from human feedback (RLHF), PPO, DPO and its variants, GRPO, reward modeling, and RL for large reasoning models including chain-of-thought and test-time scaling. The second half is devoted to agentic AI proper. Topics include agentic training and trajectory-based RL, retrieval-augmented generation (RAG and Agentic RAG), memory systems (in-context, external, episodic, and semantic), agent harness design and context management, loop engineering (inference-time RL, generate-verify-retry optimization, and adaptive budget control), and a taxonomy of agent design patterns. Inter-agent coordination is covered in depth: the Model Context Protocol (MCP), agent skills and tool use, the Agent-to-Agent (A2A) communication protocol, and multi-agent architectures spanning centralized, decentralized, and hierarchical topologies. The book concludes with agent development frameworks, agentic UI design, evaluation methodology for agentic tasks, and production deployment. Each chapter pairs rigorous theoretical foundations with implementation guidance, code examples, and references to the primary literature.
+]]></content:encoded>
+<pubDate>Tue, 28 Jul 2026 00:00:00 -0400</pubDate>
+<pubDate>Tue, 28 Jul 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Fair Combinatorial Auctions: Endogenous Best Execution in Blockchain Trade-Intent Markets</title>
+<link>https://arxiv.org/abs/2408.12225</link>
+<guid>https://arxiv.org/abs/2408.12225</guid>
+<content:encoded><![CDATA[
+
+arXiv:2408.12225v4 Announce Type: replace-cross 
+Abstract: Trade-intent auctions intermediate around USD~9~billion in monthly trading volume. In these auctions, specialized intermediaries called solvers compete for the right to execute orders across fragmented blockchain-based financial markets. These auctions are combinatorial because executing multiple trade intents jointly generates additional efficiencies. However, there is no best-execution benchmark to determine how to share those efficiencies: the best possible execution of a trade is solvers' private information and must be elicited. We study theoretically the two main mechanisms: batch auctions, in which a group of trades is auctioned off jointly, and independent trade-by-trade auctions. Batch auctions return more total value to traders, but their outcome may be unfair, in the sense of leaving one trader worse off than under independent auctions. We propose a fair combinatorial auction: solvers bid on individual trades and on batches of trades, but a batched bid is filtered out if any trader earns less than an execution benchmark constructed from the bids on individual trades and a counterfactual mechanism. Whether fairness guarantees arise in equilibrium depends on the counterfactual mechanism: independent first-price auctions generate such guarantees; independent second-price auctions do not. These fairness guarantees come at a cost: a lower total value returned to traders.
+]]></content:encoded>
+<pubDate>Tue, 28 Jul 2026 00:00:00 -0400</pubDate>
+<pubDate>Tue, 28 Jul 2026 00:00:00 -0400</pubDate>
+</item>
 
 <item>
 <title>StajChain: A Hyperledger Fabric-Based Multi-Party Internship Agreement System</title>
