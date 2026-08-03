@@ -4,6 +4,195 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+<item>
+<title>Order Auctions with Private Position Preferences</title>
+<link>https://eprint.iacr.org/2026/1580</link>
+<guid>https://eprint.iacr.org/2026/1580</guid>
+<content:encoded><![CDATA[
+
+We study auctions where two positions are sold to unit-demand bidders with private heterogeneous order preferences: some are specialists who value only the first position, while others are generalists indifferent between the two. First, we consider a first-price rule which allocates the first and second items to the highest and second-highest bidders, respectively. We show that no strategy profile ex-post implements the efficient allocation at every type profile, irrespective of payments, and provide a distribution-free equilibrium welfare guarantee of 1/2. To augment this result, we prove that for deterministic one-round auctions and discrete bids, the efficient allocation requires each bidder to communicate at least one bit more than its bid's binary representation. We next ask what the same bit accomplishes in winner-pays-bid formats where bidders can also specify specific item preferences. In particular, we show that this strengthens our distribution-free equilibrium welfare guarantee to 1-1/e. Finally, we discuss the applicability to priority service and blockchain transaction ordering.
+]]></content:encoded>
+<pubDate>Sun, 02 Aug 2026 18:55:48 +0000</pubDate>
+<pubDate>Sun, 02 Aug 2026 18:55:48 +0000</pubDate>
+</item>
+<item>
+<title>Anchor-DKG: Distributed Key Generation with Repeating Parties</title>
+<link>https://eprint.iacr.org/2026/1570</link>
+<guid>https://eprint.iacr.org/2026/1570</guid>
+<content:encoded><![CDATA[
+
+A party may participate in multiple threshold cryptosystems. For example, it may serve on multiple overlapping threshold committees in a proof-of-stake blockchain or a distributed oracle network, or act as a client of multiple cryptocurrency wallet services built on threshold cryptography. With conventional distributed key generation (DKG), each threshold system independently generates its key shares, imposing significant key-management overhead on such a repeating party. In contrast, modern key-management practice favors deriving all cryptographic material deterministically from a single master key, raising a fundamental question: Can DKG be reconciled with key derivation while preserving security and compatibility with legacy threshold systems?
+
+We present Anchor-DKG, a new DKG protocol that allows up to $t^{\mathsf{rec}}$ (the reconstruction threshold) parties to deterministically fix their secret key shares while retaining standard security guarantees. Anchor-DKG supports concurrent executions with overlapping participants across multiple DKG instances and remains fully compatible with legacy threshold schemes, including ECDSA, BLS, Schnorr, and ElGamal.
+
+At the core of Anchor DKG lies a new technique: fixed-point distributed polynomial sampling (FpDpS). FpDpS allows parties to jointly sample a random $(t^{\mathsf{rec}}-1)$-degree polynomial $f$ such that $f(i) = s_i$ at designated points $i$, where each $s_i$ can be a private input, e.g., a key derived from a master secret. The final secret key remains $f(0)$, ensuring compatibility with existing discrete-log-based threshold systems. We provide an efficient construction of Anchor DKG under standard cryptographic assumptions, which, compared to  classical constructions such as Gennaro et al. (J.Cryptol. 2007), only incurs one more point-to-point round and marginal computation. Experimental results show that, for a network size of $n=128$, our protocol incurs a per-party computation cost of $1.59$ s, compared to $1.36$ s for GJKR.
+]]></content:encoded>
+<pubDate>Fri, 31 Jul 2026 06:07:11 +0000</pubDate>
+<pubDate>Fri, 31 Jul 2026 06:07:11 +0000</pubDate>
+</item>
+<item>
+<title>Privacy-Preserving Inclusion Lists</title>
+<link>https://eprint.iacr.org/2026/1582</link>
+<guid>https://eprint.iacr.org/2026/1582</guid>
+<content:encoded><![CDATA[
+
+Blockchains aim to provide open access and censorship resistance, but centralization of block production in blockchains like Ethereum undermines these goals. Inclusion List (IL) protocols mitigate this by requiring block proposers to include transactions selected by an IL committee to enforce the inclusion of transactions that appear to have been censored. However, protecting the confidentiality of individual committee members’ contributions is essential to prevent retaliation and ensure robust censorship resistance.
+
+We propose a lightweight, privacy-preserving inclusion list protocol that allows committees to collectively construct transaction lists while hiding individual contributions and ensuring plausible deniability. Our approach builds on multiparty computation (MPC) techniques to achieve strong privacy without relying on heavyweight cryptography or anonymous broadcast channels. 
+
+We implement two variants of our protocol design: an optimistic version providing malicious security with abort (latency $\sim 4.0$s) for speed, and a robust variant (latency $\sim 124.7$s) for guaranteed output delivery in the presence of a Byzantine threshold of $t < n/3$ malicious parties.
+]]></content:encoded>
+<pubDate>Mon, 03 Aug 2026 03:42:49 +0000</pubDate>
+<pubDate>Mon, 03 Aug 2026 03:42:49 +0000</pubDate>
+</item>
+<item>
+<title>SONIC: Concurrent Oblivious RAM &amp; Data Structures for Low-Latency and High-Throughput</title>
+<link>https://eprint.iacr.org/2026/1577</link>
+<guid>https://eprint.iacr.org/2026/1577</guid>
+<content:encoded><![CDATA[
+
+Relying solely on encryption for privacy-preserving computations is prone to leakage-abuse/access-pattern attacks. TEEs, while cost-effective, are also vulnerable to side-channel attacks. Oblivious primitives, such as oblivious memory (ORAM) and data structures (ODS), are effective building blocks to mitigate these risks by concealing memory access patterns and side-channel information. Applications range from private contact discovery (Signal) to anonymous key transparency, encrypted email search, encrypted/oblivious databases, anonymous communication (Sparta/SP'25), private federated learning, LLM privacy (Compass/OSDI'25), and broader confidential computing efforts.
+
+Tree-based ORAMs (EnigMap (USENIX'23), GraphOS (PVLDB'23), Oblix (SP'18)) offer low latency but limited parallelism.
+Partition-based solutions like Snoopy (SOSP'21) shard data across subORAMs (which build oblivious hashtables on incoming requests, then linearly scan them), achieving high throughput by trading off latency, theoretically enabling linear scalability.
+In practice, Snoopy’s performance hinges on how quickly each subORAM can build the oblivious hashtable and complete its linear scan before exceeding latency targets, constraining server utilization and throughput. While supporting a TB-scale dataset with Snoopy is theoretically feasible, we estimate it would require 1000+ servers.
+
+In this work, we reconcile the fractured landscape between low-latency and high-throughput ORAM designs.
+We introduce SONIC: the first parallel/concurrent doubly-oblivious tree-based ORAM for TEEs.
+SONIC achieves 156K-3.3M req/s with a single server, tackling the core challenges of all tree-ORAM constructions: overcoming the sequential eviction bottleneck, enabling efficient batch evictions, and providing lock-free access/reshuffle/stash operations.
+SONIC achieves throughput 29-104$\times$ higher than EnigMap, and 158-560$\times$ higher than GraphOS, with lower latency.
+In the distributed, high-throughput setting, our SONIC-powered OMAP PMChain can replace Snoopy's subORAM, supporting higher throughput and $64\times$ larger datasets using the same hardware (reducing Snoopy's server requirements).
+]]></content:encoded>
+<pubDate>Sun, 02 Aug 2026 05:29:47 +0000</pubDate>
+<pubDate>Sun, 02 Aug 2026 05:29:47 +0000</pubDate>
+</item>
+<item>
+<title>Privacy-Preserving Multi-Signatures: Achieving Transcript-Aware Privacy</title>
+<link>https://eprint.iacr.org/2026/1574</link>
+<guid>https://eprint.iacr.org/2026/1574</guid>
+<content:encoded><![CDATA[
+
+Multi-signatures with key aggregation provide compact signatures verifiable under a single aggregated public key, but protect signer privacy only when public keys are used in a one-time manner. To address this limitation, recent privacy-preserving constructions provide stronger privacy guarantees under public-key reuse. However, they only guarantee privacy in the signature-only setting, where adversaries observe only the final aggregated public key and signature. In practical deployments, multi-signature protocols may be executed over public channels, where externally visible signing transcripts are exposed. These transcripts may link signing messages to public keys, thereby leaking signer identities and undermining existing privacy guarantees. In this paper, we formalize this gap by introducing transcript-aware privacy, a new framework that captures signer privacy in the presence of transcript exposure. Within this framework, we identify the strongest achievable privacy notion, in which signer identities remain hidden while the size of the signer set may be revealed. Our formulation departs from prior signature-only privacy models by explicitly modeling adversarial access to signing transcripts and allowing only inherent leakage such as the signer-set size. We present a new construction based on the MuSig2-H scheme of Tessaro and Zhu (EUROCRYPT'23). Our scheme achieves UNF-3 unforgeability in the AGM+ROM under the DL assumption and preserves full privacy in the signature-only setting. In the transcript-aware setting, it achieves weak set privacy in the ROM under the DDH assumption. In addition, we provide a concrete realization of the key-aggregation proof sharing procedure over public channels, eliminating the need for secure channels and improving practical deployability.
+]]></content:encoded>
+<pubDate>Fri, 31 Jul 2026 13:16:52 +0000</pubDate>
+<pubDate>Fri, 31 Jul 2026 13:16:52 +0000</pubDate>
+</item>
+<item>
+<title>On the Security of Rotational (Non-)linearity in Sbox</title>
+<link>https://eprint.iacr.org/2026/1566</link>
+<guid>https://eprint.iacr.org/2026/1566</guid>
+<content:encoded><![CDATA[
+
+Recently, zero-knowledge proof protocols have gained much popularity due to the adoption in blockchain applications, e.g., zero-knowledge virtual machines. However, using the current standardized hash functions inside the generation of zero-knowledge proofs would incur much overhead in proof size, as well as prover and verifier’s runtime. In the past few years, various circuit-friendly hash functions has been proposed. Skyscraper-v2 is one example of such hash functions applying the split-and-lookup approach for better performance. In this paper, we expand the linear approximation definitions by extending it with circular shifts embedded in the approximation. Specifically, we consider the rotation of bits at both the input and output sides. We demonstrate it with Skyscraper-v2 Sbox. It allows us to better capture the recurring sequence in nonlinear Skyscraper-v2 SBox.
+]]></content:encoded>
+<pubDate>Thu, 30 Jul 2026 17:35:00 +0000</pubDate>
+<pubDate>Thu, 30 Jul 2026 17:35:00 +0000</pubDate>
+</item>
+<item>
+<title>Verifiable Outsourced BTE with Silent Setup: Achieving Constant-Rate Batched Delegation</title>
+<link>https://eprint.iacr.org/2026/1558</link>
+<guid>https://eprint.iacr.org/2026/1558</guid>
+<content:encoded><![CDATA[
+
+Batched threshold encryption (BTE) is a novel public-key paradigm in which, once a batch of $B$ ciphertexts is designated, a decrypter evaluates them using decryption key shares generated by decryption committee nodes via threshold reconstruction. To mitigate Miner Extractable Value (MEV) attacks in fully decentralized environments like blockchains, it is essential to guarantee mempool privacy while supporting a silent setup that allows decentralized key generation among decryption nodes. Furthermore, to efficiently process large batches of ciphertexts, an outsourcing mechanism that delegates heavy decryption computations to a cloud server is indispensable.
+
+In this paper, we observe that naively adding decryption outsourcing to a threshold batched identity-based encryption with silent setup (TBIBE-SS) scheme of Gong et al.~(EUROCRYPT 2026) causes the outsourcing communication overhead to scale undesirably with the number of decryption nodes. To overcome this limitation, we introduce a partial re-randomization technique--replacing conventional full re-randomization--and incorporate a handle-based oracle query mechanism into the security model. Based on these techniques, we propose a communication-efficient outsourced TBIBE-SS (O-TBIBE-SS) scheme and formally prove its security. We then combine our O-TBIBE-SS scheme with additional cryptographic primitives to construct a verifiable outsourced BTE-SS (VOBTE-SS) scheme, which supports both delegated decryption and verifiability of outsourced computation, proving its security under an augmented threat model. Our VOBTE-SS scheme represents the first construction to achieve efficient batched decryption outsourcing in terms of both communication and computation overhead within decentralized environments.
+]]></content:encoded>
+<pubDate>Thu, 30 Jul 2026 06:01:15 +0000</pubDate>
+<pubDate>Thu, 30 Jul 2026 06:01:15 +0000</pubDate>
+</item>
+<item>
+<title>Certified in Theory, Broken in Practice: Assumption Gaps in Cryptographic Model Certification</title>
+<link>https://eprint.iacr.org/2026/1557</link>
+<guid>https://eprint.iacr.org/2026/1557</guid>
+<content:encoded><![CDATA[
+
+Privacy-preserving machine learning auditing protocols allow auditors to assess models for properties such as accuracy or fairness, without revealing their internals or training data. This makes them especially attractive for auditing models deployed in sensitive domains such as healthcare or finance. For these protocols to be meaningful in real-world audit settings, though, their guarantees must reflect how the model will behave once deployed, rather than merely certifying its behavior during an audit. Existing security definitions often miss this mark: most certify model behavior only on a fixed audit dataset, without ensuring that the same guarantees generalize to other datasets drawn from the same distribution. As we show, this gap allows a model provider to attack many cryptographic model certification (CMC) schemes built on secure zero knowledge proofs (ZKP) by carefully engineering training data, resulting in models that exhibit benign behavior during an audit, but pathological behavior in practice. For example, we empirically demonstrate that an attacker can certify that a model achieves over 99% accuracy on an audit dataset, but less than 30% accuracy on fresh samples from the same
+distribution.
+
+To address this gap, we formalize rigorous cryptographic security notions tailored to CMC frameworks, introduce a generic protocol template, and prove that it satisfies these requirements. Our results thus offer both cautionary evidence about existing approaches and constructive guidance for designing secure, privacy-preserving ML auditing protocols.
+]]></content:encoded>
+<pubDate>Wed, 29 Jul 2026 23:00:12 +0000</pubDate>
+<pubDate>Wed, 29 Jul 2026 23:00:12 +0000</pubDate>
+</item>
+<item>
+<title>BORG: Extendable Distributed Vector Commitments from Reconfigurable Erasure Codes</title>
+<link>https://eprint.iacr.org/2026/1552</link>
+<guid>https://eprint.iacr.org/2026/1552</guid>
+<content:encoded><![CDATA[
+
+Updatable vector commitments let users store and authenticate values contained within an evolving data vector. Existing work on updatable vector commitments studies how clients can store only the values and authentication proofs relevant to them, and can refresh stale opening proofs, with the help of an online maintainer that keeps the current vector and proof state. This work studies the complementary problem: how to decentralize the maintainer, in order to distribute the cost and availability requirements.
+
+We formalize this problem as extendable distributed vector commitments (EDVC). A public control plane, such as consensus or a trusted party, determines batches of updates and extensions of stored vector. Maintainers accept and apply a batch only after validating it against the current authenticated state. The resulting state is stored across many maintainer nodes, each of which holds a publicly assigned coded data fragment and updates it non-interactively. A stale client can obtain the current state, and a fresh authenticated opening, from the current maintainers (without replaying the updates history).
+
+We construct the first EDVC protocol, called Borg, from two components: a sparse vector commitment, and a coded storage layer that can be updated by linear operations. This construction applies when all active positions lie within a known growing prefix of the vector. We then construct a coded storage layer with the operations needed for this setting, including single-position openings, aligned range openings, public updates, adding new nodes, repairing failed nodes, and moving storage responsibilities between nodes. This is then used to flexibly distribute the data alongside a sparse Merkle tree for authentication.
+
+Our construction is particularly simple when the maintained data is an append-only public log (e.g., a blockchain’s block archive, or certificate transparency logs). In this setting, distributed updates to the data and its authentication structure can be made just by broadcasting the new log entries, with no coordination across maintainer nodes. We empirically evaluate maintainers’ cost for various workflows, showing that nodes can process hundreds of thousands of updates per second. We also show that node addition, repair of lost local state, and changes to the proof-serving threshold can all be supported efficiently.
+]]></content:encoded>
+<pubDate>Wed, 29 Jul 2026 15:08:58 +0000</pubDate>
+<pubDate>Wed, 29 Jul 2026 15:08:58 +0000</pubDate>
+</item>
+<item>
+<title>Silent Distributed Cryptography for DNFs and Threshold Policies from Lattices</title>
+<link>https://eprint.iacr.org/2026/1547</link>
+<guid>https://eprint.iacr.org/2026/1547</guid>
+<content:encoded><![CDATA[
+
+We study two central problems in threshold cryptography from lattices: (1)~threshold encryption with silent setup for general thresholds $t \geq 2$, where no post-quantum constructions were previously known, and (2)~threshold fully homomorphic encryption (TFHE) with sublinear parameters, an open problem since the work of Boneh~et~al.\ (CRYPTO~2018).
+
+We introduce \emph{$(\alpha,\beta)$-Scaled Linear Secret Sharing Schemes} (LSSS), a relaxation of standard LSSS in which each authorized set~$S$ reconstructs a scaled version of the secret, $\gamma_S \cdot k$, where both the reconstruction coefficients and the set-dependent scaling factor~$\gamma_S$ are bounded over the integers. Unlike prior approaches based on bit decomposition, this preserves the uniform distribution of unauthorized shares. Building on this, we obtain:
+\begin{itemize}
+\item \textbf{Distributed monotone-policy encryption with silent setup.} We provide the first post-quantum construction supporting: (i) DNF formulas with fully compact parameters, and  (ii) threshold policies with ciphertexts growing as $\tau^6 \cdot \mathsf{poly}(\lambda, \log N)$, where $\tau = \min(t^2,N{-}t)$. Our constructions are proven secure under the decomposed LWE assumption in the random oracle model. If we additionally rely on a common reference string, then the ciphertext size for our threshold policy scheme can be reduced to $\tau^2 \cdot \mathsf{poly}(\lambda, \log N)$ under the Succinct LWE assumption.
+\item \textbf{Decentralized TFHE with silent setup.} We provide the first \emph{decentralized} TFHE, for DNFs and threshold policies, from the decomposed LWE assumption. Our construction supports homomorphic evaluation of arbitrary circuits, one-round distributed decryption, and silent setup. This was left as an open problem by Boneh~et~al.\ (CRYPTO~2018) and, prior to this work, we did not have any non-trivial construction for decentralized TFHE from any assumption.
+\item \textbf{Sublinear centralized TFHE from LWE.} We also extend our techniques to \emph{centralized} TFHE. We provide a TFHE scheme under the standard LWE assumption, where all parameters are simultaneously sublinear in $N$ for any threshold $t$ as long as $\min(t^2, N{-}t) = o(N)$. This breaks the $\omega(N)$ barrier that has persisted in the TFHE literature since 2018.
+\end{itemize}
+]]></content:encoded>
+<pubDate>Wed, 29 Jul 2026 04:09:08 +0000</pubDate>
+<pubDate>Wed, 29 Jul 2026 04:09:08 +0000</pubDate>
+</item>
+<item>
+<title>SoK: Confidential Transformer Inference and Retrieval-Augmented Generation</title>
+<link>https://eprint.iacr.org/2026/1544</link>
+<guid>https://eprint.iacr.org/2026/1544</guid>
+<content:encoded><![CDATA[
+
+Running Transformer inference and retrieval-augmented generation (RAG) over confidential data forces a choice: either expose prompts and documents to a cloud operator, or keep the data on-premises, which confines the deployment to weaker self-hosted models. Existing defenses span five mechanism families: secure computation (MPC and FHE), trusted execution environments (TEEs), static obfuscation, differential privacy, and hybrid TEE-and-obfuscation splits. No prior systematization compares them on a common footing of mechanism, threat model, and deployment cost, and none covers the RAG retrieval layer.  
+We organize the field by deployment readiness: the likelihood a scheme is adopted in practice, scored on performance, utility, and threat-model fit. The scoring spans inference and RAG retrieval, both dense and graph. We find that no family dominates: each attains at most two of the three criteria, and which one it sacrifices is fixed by its security basis, so the deployable choice is set by the constraint an application can least afford to relax. Even trusted hardware is no exception, since every surveyed scheme ignores the side channels to which it is most exposed. We further surface hidden deployment costs, such as client reliance and a custom serving path, identify private graph-RAG as the least-served setting, and find that no design yet keeps a pipeline confidential from query to answer.
+]]></content:encoded>
+<pubDate>Tue, 28 Jul 2026 15:47:45 +0000</pubDate>
+<pubDate>Tue, 28 Jul 2026 15:47:45 +0000</pubDate>
+</item>
+<item>
+<title>Efficient Private Filtering and Aggregation for Weighted Set Intersection via Oblivious Encrypted Weight Transfer</title>
+<link>https://eprint.iacr.org/2026/1543</link>
+<guid>https://eprint.iacr.org/2026/1543</guid>
+<content:encoded><![CDATA[
+
+Private Set Intersection (PSI) enables parties to compute the intersection of their input item sets while preserving privacy. In many real-world applications, however, each item is accompanied by a sensitive weight, and the ability to privately compute over such weights is crucial. Existing research in this direction is fragmented and driven by application-specific goals, with representative examples including PI-Sum (computing the sum of weights over the intersection), inner-product Private Join and Compute (computing the inner product of weight vectors over the intersection), and Item with Maximum Weight Sum (identifying the intersection item with the maximum combined weight).
+
+In this work, we propose a unified framework for private computation on weighted set intersection. We formalize \textit{Private Filtering and Aggregation for Weighted Set Intersection} (PFA-WSI) as an ideal functionality parameterized by a joint scoring function $f$ and a predicate $P$, supporting two output modes: (i) \emph{predicate-filtered output}, which reveals a predicate-selected subset of intersection items, and (ii) \emph{aggregated output}, which reveals only aggregate statistics over matched items. By instantiating $f$ and $P$ appropriately, PFA-WSI captures deployed and studied tasks such as PI-Sum, inner-product PJC, and IMWS, and also accommodates richer metrics arising in practice, such as $L_1$- and $L_2$-type distance statistics on matched item weights.
+
+To realize PFA-WSI efficiently, we introduce a novel core building block, Oblivious Encrypted Weight Transfer (OEWT), which enables a receiver to obtain encryptions of the sender's weights for intersection items and random-looking ciphertexts otherwise. Building on OEWT and additively homomorphic encryption, we present modular protocol constructions for different instantiations of $f$ and for both output modes. We prove simulation-based security in the semi-honest model and provide detailed communication and computation analyses. Our experiments show that our constructions scale to million-sized sets with practical performance that matches or surpasses the state-of-the-art.
+]]></content:encoded>
+<pubDate>Tue, 28 Jul 2026 15:23:49 +0000</pubDate>
+<pubDate>Tue, 28 Jul 2026 15:23:49 +0000</pubDate>
+</item>
+<item>
+<title>Lattice-Based Shuffle Arguments using Subset Checking</title>
+<link>https://eprint.iacr.org/2026/1540</link>
+<guid>https://eprint.iacr.org/2026/1540</guid>
+<content:encoded><![CDATA[
+
+Shuffle arguments are a fundamental building block in mix-nets and related privacy-preserving systems, where they are used to prove that a set of ciphertexts or commitments is a permutation and rerandomization of another set without changing the underlying messages. Existing communication-efficient shuffle arguments rely on classical assumptions, whereas known lattice-based constructions are still significantly less efficient.
+In this paper, we present a lattice-based shuffle argument with short proofs by using the subset-checking approach of Abdolmaleki et al. (SCN 2024) in the lattice setting.
+Our main construction proves correct shuffles of Ajtai commitments and is built on the ABDLOP commitments and lattice-based zero-knowledge framework of Lyubashevsky et al. (Crypto 2022).
+The protocol is secure under the Module-SIS and Module-LWE assumptions in the random oracle model. A key technical ingredient is a rerandomization method for the derived commitment key, which restores the distributional properties needed for soundness even when the input commitments may depend on the prover.
+We further extend our approach to obtain shuffle arguments for ciphertexts and public keys, yielding applications to lattice-based mix-nets and single secret leader election.
+Finally, we implement our construction and compare it with prior lattice-based shuffle protocols, obtaining substantial improvements in communication, proving time, and verification time.
+]]></content:encoded>
+<pubDate>Tue, 28 Jul 2026 02:57:12 +0000</pubDate>
+<pubDate>Tue, 28 Jul 2026 02:57:12 +0000</pubDate>
+</item>
 
 <item>
 <title>Privacy Preserving Opinion Aggregation</title>
