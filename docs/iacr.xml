@@ -4,17 +4,16 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+
 <item>
 <title>Z-SCAPE: Zero-Knowledge Self-Custodial Credential Operation for Privacy-Preserving Asset Protection under Entropy-Source Failure</title>
 <link>https://eprint.iacr.org/2026/1621</link>
 <guid>https://eprint.iacr.org/2026/1621</guid>
 <content:encoded><![CDATA[
-
 Motivated by the 2026 COLDCARD incident, this paper studies cryptographic asset recovery after self-custodial seed-generation failures. Self-custodial hardware wallets depend on secure entropy sources for seed generation. If an RNG implementation or design failure reduces seed entropy, an adversary may reconstruct wallet signing keys through offline search. Such weaknesses may also be discovered long after wallet creation, placing existing self-custodial assets at risk. To prevent large-scale exploitation after such a failure is identified, a hardware manufacturer or security response team may perform a protective sweep of affected assets into a protected recovery treasury. Asset redistribution then creates a fundamental authentication problem: once the signing key can be reconstructed by both the legitimate owner and an adversary, possession of that key no longer uniquely identifies the legitimate controller.
 
 We propose Z-SCAPE, a zero-knowledge recovery-credential protocol for privacy-preserving asset recovery after seed-generation failures and protective sweeps. Before compromise, the user commits to a recovery credential consisting of a 256-bit recovery secret $r$ generated from an entropy source intended to be independent of the transaction-signing seed, and an RNG-independent personal record $P$. After an incident, the prover proves knowledge of $(P,r)$ in zero knowledge for the pre-bound wallet identifier $W$, while binding the proof to the incident-specific protected-asset reference, a fresh verifier nonce, an expiry value, and a fresh recovery destination. The verifier derives the protected-asset reference from authenticated protective-transfer records rather than accepting an arbitrary asset set from the claimant. The protocol enables recovery claims without revealing $P$, $r$, or the compromised wallet private keys, while preventing replay, destination substitution, and cross-wallet protected-asset substitution. Z-SCAPE provides concrete integration mechanisms for Bitcoin and Ethereum and enables only assets recorded as protectively transferred from the proved wallet to be returned to the fresh destination bound to an accepted recovery proof.
 ]]></content:encoded>
-<pubDate>Wed, 05 Aug 2026 17:47:06 +0000</pubDate>
 <pubDate>Wed, 05 Aug 2026 17:47:06 +0000</pubDate>
 </item>
 <item>
@@ -22,11 +21,9 @@ We propose Z-SCAPE, a zero-knowledge recovery-credential protocol for privacy-pr
 <link>https://eprint.iacr.org/2024/1746</link>
 <guid>https://eprint.iacr.org/2024/1746</guid>
 <content:encoded><![CDATA[
-
 Offline payments present an opportunity for central bank digital currency to address the lack of digital financial inclusion plaguing existing digital payment solutions. However, the design of secure offline payments is a complex undertaking; for example, the lack of connectivity during the payments renders double spending attacks trivial. While the identification of double spenders and penal sanctions may curb attacks by individuals, they may not be sufficient against concerted efforts by states or well-funded institutions. It is hence important to also rely on preventive measures that reduce the scale of such attacks. An example of such a measure is secure elements. These however are limited in compute and storage, making the design of solutions that offer comparable privacy guarantees to those of physical cash challenging.
 We address this with a protocol that offloads most of the payment computation to the user’s mobile device and restricts the computation on the secure element to deleting spent tokens, and generating a signature with a computation equivalent to that of ECDSA. We claim that the use of mobile devices or enhanced smart card-based devices are required for secure consumer-to-consumer payments. To further harden the protocol, we enable the efficient identification of double spenders on the off-chance an attacker successfully double spends. Finally, we prove its security in the ideal/real world paradigm, and evaluate its performance to demonstrate its practicality.
 ]]></content:encoded>
-<pubDate>Fri, 25 Oct 2024 11:44:06 +0000</pubDate>
 <pubDate>Fri, 25 Oct 2024 11:44:06 +0000</pubDate>
 </item>
 <item>
@@ -34,10 +31,8 @@ We address this with a protocol that offloads most of the payment computation to
 <link>https://eprint.iacr.org/2026/1618</link>
 <guid>https://eprint.iacr.org/2026/1618</guid>
 <content:encoded><![CDATA[
-
 Anonymity infrastructures such as mix networks, anonymous storage, and privacy-preserving replication rely on public re-randomization: any party holding only public information can transform a ciphertext into a fresh-looking encryption of the same plaintext, hiding the linkage between the two. Classical ElGamal-based solutions are broken by quantum adversaries, while existing lattice-based alternatives carry very large ciphertexts with unanalyzed noise growth, rely on heavyweight homomorphic-encryption stacks with approximate (rounded) decryption, or lack a precise analysis of how many re-randomizations are safe. We address this gap with a practical Ring Learning with Errors (Ring-LWE) public-key encryption scheme supporting public re-randomization without ciphertext growth. Our construction is Lyubashevsky–Peikert–Regev / Fan–Vercauteren (LPR/BFV)-style encryption over $R=\mathbb{Z}[x]/(x^n+1)$ with $n=4096$, engineered around a two-limb Chinese Remainder Theorem (CRT) modulus $q=t\cdot q_2$ with 32-bit primes. Embedding plaintext as $\Delta M = q_2 M$ makes the message vanish modulo $q_2$, so the $q_2$-limb carries only the decryption noise, enabling exact message recovery without rounding. We prove correctness with explicit decryption-failure bounds that remain valid under repeated re-randomization, via an aggregation lemma showing that arbitrarily many re-randomizations affect decryption only through a single aggregated randomness triple. We also prove that two-limb ciphertexts are pseudorandom (indistinguishable from uniform, IND\$) under Decision Ring-LWE over the combined modulus $q=tq_2$; security against chosen-plaintext attack (IND-CPA) and re-randomization unlinkability follow. A constant-time Rust implementation encrypts in 0.80 ms, re-randomizes in 0.51 ms, and decrypts in 0.21 ms per 64 KiB ciphertext carrying 15.5 KiB of payload on a fixed-frequency 3.8 GHz CPU—on par with a modulus-matched Microsoft SEAL baseline—and passes timing-leakage tests. Empirical noise simulations validate the analysis.
 ]]></content:encoded>
-<pubDate>Wed, 05 Aug 2026 14:52:51 +0000</pubDate>
 <pubDate>Wed, 05 Aug 2026 14:52:51 +0000</pubDate>
 </item>
 <item>
@@ -45,7 +40,6 @@ Anonymity infrastructures such as mix networks, anonymous storage, and privacy-p
 <link>https://eprint.iacr.org/2026/1617</link>
 <guid>https://eprint.iacr.org/2026/1617</guid>
 <content:encoded><![CDATA[
-
 Anonymous communication systems aim to hide which user sent which message.
 Existing designs span efficient mixnets that rely on at least one honest mix
 server and decentralized protocols such as Dining Cryptographers networks
@@ -71,19 +65,16 @@ and computation, while preserving the modular structure of VSM and its
 unconditional individual verifiability.
 ]]></content:encoded>
 <pubDate>Wed, 05 Aug 2026 14:19:13 +0000</pubDate>
-<pubDate>Wed, 05 Aug 2026 14:19:13 +0000</pubDate>
 </item>
 <item>
 <title>KORD: Breaking the Key-Generation Bottleneck in Dealerless Function Secret Sharing via Protocol–Hardware Co-Design</title>
 <link>https://eprint.iacr.org/2026/1615</link>
 <guid>https://eprint.iacr.org/2026/1615</guid>
 <content:encoded><![CDATA[
-
 Function secret sharing (FSS) has become a core primitive in privacy‑preserving computation. However, each FSS invocation requires a fresh pair of function keys, typically produced by a trusted dealer—a dependency that expands the system's trust boundary and hinders practical deployment. Existing dealerless protocols eliminate this dependency, but incur substantial communication and a number of interaction rounds that grows linearly with the input bit‑width, making key generation a major bottleneck.
 
 This paper presents KORD, a protocol–hardware co‑design that dramatically reduces the cost of dealerless FSS key generation. At its core is a pair of chips that establish a common root of trust through mutual attestation and, within it, reconstruct FSS keys—eliminating the need for a dealer. This root of trust further forms a security boundary within which KORD restructures the generation protocol, collapsing the interaction of prior dealerless protocols into a single round, independent of GGM depth. A cross‑key scheduling scheme then interleaves independent GGM‑tree traversals, sustaining high computational throughput. KORD reduces key‑generation communication per operation by $7{,}633$–$70{,}274\times$ over the state‑of‑the‑art distributed FSS protocol. On a ZCU102 FPGA, cross‑key interleaving lifts AES lane utilization from $8.3\%$ to a board‑measured $99.0\%$, for $11.60$ million $32$-bit DPF keys per second at $187.5\,\text{MHz}$ on a $21.5\,\text{K}$ LUT engine ($12.38\,\text{M}$ at the separately validated $200\,\text{MHz}$ operating point). On private ResNet‑18 inference, key generation's share of end‑to‑end time falls to $10.1\%$, from $82.6\%$ under a trusted dealer and over $96\%$ under the dealerless baseline.
 ]]></content:encoded>
-<pubDate>Wed, 05 Aug 2026 11:53:02 +0000</pubDate>
 <pubDate>Wed, 05 Aug 2026 11:53:02 +0000</pubDate>
 </item>
 <item>
@@ -91,12 +82,10 @@ This paper presents KORD, a protocol–hardware co‑design that dramatically re
 <link>https://eprint.iacr.org/2026/1613</link>
 <guid>https://eprint.iacr.org/2026/1613</guid>
 <content:encoded><![CDATA[
-
 Distributed Oblivious RAM (DORAM) is a promising building block for privacy-preserving cloud databases and outsourced storage systems. However, existing two-server designs often rely on slow linear scans or heavy cryptographic primitives, making them struggle to balance efficiency and bandwidth, and thus hindering their practical deployment. 
 
 We present DuetORAM, a two-server DORAM that achieves constant-round access with $O(\log N)$ communication while avoiding these computational bottlenecks. Our key idea is a replicated-to-shared block encoding that allows servers to keep identical ciphertexts for efficient PIR-based retrieval, while locally interpreting them as secret shares to enable oblivious eviction via a lightweight shuffle. We further design a secret-shared shuffle with an offline-online decomposition that shifts most bandwidth-intensive work to a preprocessing phase, significantly reducing online communication. We implement a prototype of DuetORAM and evaluate it under diverse network conditions. Our results show that DuetORAM outperforms both the state-of-the-art two-server scheme DUORAM (reducing retrieval latency by up to 170$\times$ in LAN settings), and three-server design S$^3$ORAM (reducing retrieval latency by 1.7$\times$ in LAN and accelerating eviction by 7$\times$ in LAN and 5$\times$ in WAN, respectively).
 ]]></content:encoded>
-<pubDate>Wed, 05 Aug 2026 09:48:40 +0000</pubDate>
 <pubDate>Wed, 05 Aug 2026 09:48:40 +0000</pubDate>
 </item>
 <item>
@@ -104,7 +93,6 @@ We present DuetORAM, a two-server DORAM that achieves constant-round access with
 <link>https://eprint.iacr.org/2026/1611</link>
 <guid>https://eprint.iacr.org/2026/1611</guid>
 <content:encoded><![CDATA[
-
 Secure and anonymous messaging has many compelling use-cases and is becoming increasingly 
 popular. In this paper, we consider it in the context of 
 delay-and-disruption-prone networks, which are characterized by 
@@ -132,19 +120,16 @@ a functional PIB^3 prototype which demonstrates practicality of the entire conce
 to assess its performance empirically.
 ]]></content:encoded>
 <pubDate>Wed, 05 Aug 2026 00:28:06 +0000</pubDate>
-<pubDate>Wed, 05 Aug 2026 00:28:06 +0000</pubDate>
 </item>
 <item>
 <title>Efficient Large-Integer Arithmetic for FHE</title>
 <link>https://eprint.iacr.org/2026/1608</link>
 <guid>https://eprint.iacr.org/2026/1608</guid>
 <content:encoded><![CDATA[
-
 Fully Homomorphic Encryption (FHE) has emerged as one of the key technologies for privacy-preserving computation, enabling arbitrary computation directly on encrypted data. Vectorized FHE schemes, such as Brakerski/Fan--Vercauteren (BFV), Brakerski--Gentry--Vaikuntanathan (BGV), and Cheon--Kim--Kim--Song (CKKS), are typically used in applications dealing with large datasets, for example, confidential database queries and private ML inference. These FHE schemes are based on the computational hardness of Ring Learning with Errors (RLWE) and share a common algebraic foundation: arithmetic over high-dimensional polynomial rings with coefficient moduli spanning hundreds or thousands of bits, far exceeding the native arithmetic capabilities of modern processors.
 
 This article surveys the evolution of large-integer arithmetic in RLWE-based FHE libraries, with a focus on the Residue Number System (RNS) techniques used in practically all modern implementations. We give a formal treatment of the two fundamental RNS building blocks --- basis extension and scaling --- that require information about the magnitude of a large value and are therefore incompatible with a purely residue-wise view of arithmetic. We contrast the two principal algorithmic approaches to these operations: the integer-only approach of Bajard, Eynard, Hasan, and Zucca (BEHZ), which tolerates approximation overflows and corrects them with auxiliary redundant moduli, and the floating-point approach of Halevi, Polyakov, and Shoup (HPS). We then show how these primitives compose into the higher-level RNS procedures used across all vectorized RLWE schemes and review how their adoption reshaped the architecture and performance of libraries such as HElib, SEAL, PALISADE/OpenFHE, HEAAN, and Lattigo. We give particular attention to the scaling error inherent in the original Full RNS variant of CKKS, and to the more recent techniques --- reduced-error scaling, composite scaling, and grafting --- that eliminate it or restore flexible, high-precision rescaling from within the residue representation.  We also cover GPU-accelerated implementations and close by discussing a renewed, and so far exploratory, interest in positional (non-RNS) representations, raising the question of how such approaches might compare with the Full RNS variants that dominate FHE implementations today.
 ]]></content:encoded>
-<pubDate>Tue, 04 Aug 2026 19:58:50 +0000</pubDate>
 <pubDate>Tue, 04 Aug 2026 19:58:50 +0000</pubDate>
 </item>
 <item>
@@ -152,10 +137,8 @@ This article surveys the evolution of large-integer arithmetic in RLWE-based FHE
 <link>https://eprint.iacr.org/2026/1606</link>
 <guid>https://eprint.iacr.org/2026/1606</guid>
 <content:encoded><![CDATA[
-
 This work presents a private instant messaging protocol that leverages the public log layer of blockchains as the message transport layer, while the cryptographic state is kept only by client applications. Thanks to the properties of public ledgers, this approach achieves strong censorship resistance, while also revealing the economic and cryptographic limits of on-chain messaging. Notably, given the transparency of public ledgers, and since reading and writing operations are in most cases outsourced to third-party providers that may be curious, a well-known concern is direct metadata leakage. We address this both at first contact and during the conversation: for first contact, we propose two alternative discovery mechanisms, one based on long-term key encapsulation with trial decryption, the other on a private signaling service backed by trusted hardware. For the ongoing conversation, we show that topic rotation, driven by the off-chain cryptographic state, suffices to prevent topic and conversation linkability. As our main contribution, we provide an in-depth analysis of Verbeth's metadata leakage under different adversarial assumptions for both phases.
 ]]></content:encoded>
-<pubDate>Tue, 04 Aug 2026 16:20:04 +0000</pubDate>
 <pubDate>Tue, 04 Aug 2026 16:20:04 +0000</pubDate>
 </item>
 <item>
@@ -163,12 +146,10 @@ This work presents a private instant messaging protocol that leverages the publi
 <link>https://eprint.iacr.org/2026/1604</link>
 <guid>https://eprint.iacr.org/2026/1604</guid>
 <content:encoded><![CDATA[
-
 Field trace evaluation has emerged as a powerful tool in fully homomorphic encryption, with broad applications ranging from bootstrapping algorithms to privacy-preserving protocols. Recent advances have significantly reduced its noise growth by combining tower-based evaluation strategies with rescaling operations. However, existing analyses rely on uniform noise bounds that fail to capture the actual noise behavior across different coefficients, leading to substantial gaps between theoretical estimates and empirical observations.
 
 In this work, we present a refined algebraic analysis of trace evaluation over power-of-two cyclotomics that uncovers structured cancellation effects among noise coefficients induced by subsequent linear operators, in particular the trace mappings of subextensions. We show that, except for the constant term, the variance of each output noise coefficient depends on the 2-adic valuation of its index, yielding bounds that improve upon prior uniform estimates by a factor of $O(\log n)$ both for non-constant coefficients and after a subsequent plaintext-ciphertext multiplication, where $n$ is the ring degree. We further extend our analysis to two typical algorithmic applications of trace evaluation. For ciphertext packing, we derive a non-recursive formulation that admits a cleaner structure and slightly tighter noise estimates. For coefficient extraction, our coefficient-wise analysis improves upon prior uniform variance bounds by factors ranging from $\Theta(n)$ to $\Theta(n^2)$ for non-constant coefficients and by a factor of $O(n)$ after post-multiplication. Experimental results confirm that the observed noise variances follow the coefficient-wise pattern predicted by our analysis and demonstrate pronounced improvements over existing estimates, providing effective guidance for parameter selection and system configuration in practice.
 ]]></content:encoded>
-<pubDate>Tue, 04 Aug 2026 14:34:53 +0000</pubDate>
 <pubDate>Tue, 04 Aug 2026 14:34:53 +0000</pubDate>
 </item>
 <item>
@@ -176,10 +157,8 @@ In this work, we present a refined algebraic analysis of trace evaluation over p
 <link>https://eprint.iacr.org/2026/1596</link>
 <guid>https://eprint.iacr.org/2026/1596</guid>
 <content:encoded><![CDATA[
-
 Payment Channel Hub (PCH) improves blockchain scalability by enabling off-chain transactions via an untrusted intermediary known as the tumbler. However, existing PCHs either fail to guarantee the unlinkability privacy or rely on inefficient non-interactive zero-knowledge (NIZK) proofs. Recently, Ge et al. proposed Accio, a privacy-preserving PCH that eliminates the need for NIZK proofs. Nevertheless, Accio only supports unidirectional channels which results in high on-chain costs and routing inefficiencies. In this paper, we present Baker, the first bidirectional payment channel hub that operates without NIZK proofs and guarantees unlinkability. Unlike prior PCH solutions that maintain channel balance using a single state, Baker introduces a novel design in which each non-tumbler user maintains two separate pockets to record the channel balance. To ensure payment atomicity, Baker further designs a novel cryptographic primitive named Aggregatable Adaptor Signature (AAS) to enable atomic signature exchanges and signature aggregation. We implement Baker and empirically demonstrate its advantages over state-of-the-art protocols. Compared to BlindHub, which relies on NIZK proofs for privacy, Baker reduces off-chain communication overhead to 0.0036%. Moreover, the off-chain computation overhead of Baker is 7% of that of BlindHub and 40% of TBPChannel. Relative to Accio, Baker incurs only 80% of its on-chain cost and enjoys a 25% higher average transaction success rate.
 ]]></content:encoded>
-<pubDate>Tue, 04 Aug 2026 03:09:09 +0000</pubDate>
 <pubDate>Tue, 04 Aug 2026 03:09:09 +0000</pubDate>
 </item>
 <item>
@@ -187,7 +166,6 @@ Payment Channel Hub (PCH) improves blockchain scalability by enabling off-chain 
 <link>https://eprint.iacr.org/2026/1590</link>
 <guid>https://eprint.iacr.org/2026/1590</guid>
 <content:encoded><![CDATA[
-
 Oblivious Key-Value Stores (OKVS) (Garimella et al., CRYPTO 2021), once encoded, provide indistinguishability over keys and random values. This is an important property in many secure computation applications, such as private set intersection and multi-key searchable encryption. We introduce an Updatable Oblivious Key-Value Store with access control (UOKVS), a dynamic extension of OKVS that supports insertions over time. We provide meaningful security in the presence of updates by equipping UOKVS with fine-grained access control. As a building block in UOKVS, we provide the first analysis of oblivious insertions for Cuckoo hashing, which may be of independent interest.
 
 We show the application of UOKVS to multi-key searchable encryption where a data owner wishes to share parts of a multimap with multiple clients. We construct an oblivious multimap with insertions from UOKVS and private information retrieval (PIR).  
@@ -196,9 +174,7 @@ Unlike prior multi-key searchable encryption schemes, our construction supports 
 We implement our multi-key searchable encryption construction on a dataset containing up to 24 million entries using the Enron email dataset. For keywords matching 100 documents on a WAN, query processing completes in $0.6$ seconds using FrodoPIR as the underlying PIR protocol. By comparison, the scheme of Wang and Papadopoulos (Cloud Computing 2023) achieves a query time of $0.6$ seconds and also incurs data replication and leaks access patterns. Our construction reduces leakage, maintains performance, and only requires a $3.1$x storage overhead.
 ]]></content:encoded>
 <pubDate>Mon, 03 Aug 2026 19:45:46 +0000</pubDate>
-<pubDate>Mon, 03 Aug 2026 19:45:46 +0000</pubDate>
 </item>
-
 <item>
 <title>Beyond Incentive Compatibility: Rational Harm-Proof Transaction Fee Mechanisms</title>
 <link>https://eprint.iacr.org/2025/2247</link>
@@ -13941,181 +13917,6 @@ This paper formalizes the security implications using a novel indistinguishabili
 Our proposed attack effectively deconstructs encrypted network packet traces to reveal the sizes of underlying LLM-generated tokens and whether the tokens were generated with or without certain server-side optimizations. Our attack can accurately predict private attributes in real-world privacy-sensitive LLM applications in medicine and finance with $71$--$92\%$ accuracy on an open-source vLLM service and $50$--$90\%$ accuracy on the commercial ChatGPT service. Finally, we show that solutions that hide these side channels to different degrees expose a tradeoff between security and performance --- specifically, interactivity and network bandwidth overheads.
 ]]></content:encoded>
 <pubDate>Tue, 04 Feb 2025 15:27:58 +0000</pubDate>
-</item>
-<item>
-<title>Learning from Functionality Outputs: Private Join and Compute in the Real World</title>
-<link>https://eprint.iacr.org/2025/162</link>
-<guid>https://eprint.iacr.org/2025/162</guid>
-<content:encoded><![CDATA[
-<div> 关键词: Private Join and Compute (PJC), 两方协议, 隐私风险, 攻击, 安全模型
-
-总结:
-Private Join and Compute (PJC)是由Google提出的一种两方协议，用于包括广告转化在内的多种场景，并扩展了其部署的私人集合交集求和(PSI-SUM)协议。然而，PJC的功能输出通常并未在MPC文献的安全模型中考虑，但可能存在实际的隐私风险，对PJC等协议的潜在部署产生了关注。本文分析了与PJC功能输出相关的风险，假设一方参与者作为攻击者，描述了四种能够破坏另一方输入隐私、恢复交集中键值对成员资格及其关联值的实战攻击。这些攻击揭示了部署过程中与隐私威胁相关的问题，并强调应将功能输出纳入MPC安全模型的一部分。 <div>
-Private Join and Compute (PJC) is a two-party protocol recently proposed by Google for various use-cases, including ad conversion (Asiacrypt 2021) and which generalizes their deployed private set intersection sum (PSI-SUM) protocol (EuroS&amp;P 2020).
-
-PJC allows two parties, each holding a key-value database, to privately evaluate the inner product of the values whose keys lie in the intersection. While the functionality output is not typically considered in the security model of the MPC literature, it may pose real-world privacy risks, thus raising concerns about the potential deployment of protocols like PJC. 
-
-In this work, we analyze the risks associated with the PJC functionality output. We consider an adversary that is a participating party of PJC and describe four practical attacks that break the other party's input privacy, and which are able to recover both membership of keys in the intersection and their associated values.  Our attacks consider the privacy threats associated with deployment and highlight the need to include the functionality output as part of the MPC security model.
-]]></content:encoded>
-<pubDate>Mon, 03 Feb 2025 16:02:28 +0000</pubDate>
-</item>
-<item>
-<title>HELP: Everlasting Privacy through Server-Aided Randomness</title>
-<link>https://eprint.iacr.org/2025/140</link>
-<guid>https://eprint.iacr.org/2025/140</guid>
-<content:encoded><![CDATA[
-<div> 关键词: 永恒隐私、Store-Now-Decrypt-Later问题、Hypervisor EverLasting Privacy (HELP)、Dodis和Yeo、Universal Composability框架
-
-总结:
-本文关注永恒隐私（Everlasting Privacy）及其在解决Store-Now-Decrypt-Later（SNDL）问题中的应用。作者重新审视了Dodis和Yeo提出的Hypervisor EverLasting Privacy (HELP)模型，并提出了一种新型架构，该架构通过半可信服务器网络生成共享随机数，降低了存储和分布大型共享密钥的需求。尽管Dodis和Yeo的方法在理论上有效，但在实践中效率较低。为此，文章对HELP架构进行了抽象和泛化，并构建了几种具体高效的实现方案，这些方案基于诸如哈希和消息认证等基本加密操作。此外，文章证明了一个强大的组合定理，表明其永恒隐私架构可以使用在Universal Composability (UC)框架下计算上安全的消息传输方法，这是关于永恒隐私的第一个积极组合结果，之前已知永恒隐私存在许多“非组合”结果。 <div>
-Everlasting (EL) privacy offers an attractive solution to the Store-Now-Decrypt-Later (SNDL) problem, where future increases in the attacker's capability could break systems which are believed to be secure today. Instead of requiring full information-theoretic security, everlasting privacy allows computationally-secure transmissions of ephemeral secrets, which are only "effective" for a limited periods of time, after which their compromise is provably useless for the SNDL attacker.
-
-In this work we revisit such everlasting privacy model of Dodis and Yeo (ITC'21), which we call Hypervisor EverLasting Privacy (HELP). HELP is a novel architecture for generating shared randomness using a network of semi-trusted servers (or "hypervisors"), trading the need to store/distribute large shared secrets with the assumptions that it is hard to: (a) simultaneously compromise too many publicly accessible ad-hoc servers; and (b) break a computationally-secure encryption scheme very quickly. While Dodis and Yeo presented good HELP solutions in the asymptotic sense, their solutions were concretely expensive and used heavy tools (like large finite fields or gigantic Toeplitz matrices). 
-
-We abstract and generalize the HELP architecture to allow for more efficient instantiations, and construct several concretely efficient HELP solutions. Our solutions use elementary cryptographic operations, such as hashing and message authentication. We also prove a very strong composition theorem showing that our EL architecture can use any message transmission method which is computationally-secure in the Universal Composability (UC) framework. This is the first positive composition result for everlasting privacy, which was otherwise known to suffer from many "non-composition" results (Müller-Quade and Unruh; J of Cryptology'10).
-]]></content:encoded>
-<pubDate>Wed, 29 Jan 2025 01:59:45 +0000</pubDate>
-</item>
-<item>
-<title>Efficient Oblivious Sorting and Shuffling for Hardware Enclaves</title>
-<link>https://eprint.iacr.org/2023/1258</link>
-<guid>https://eprint.iacr.org/2023/1258</guid>
-<content:encoded><![CDATA[
-<div> 关键词: Oblivious算法、隐私保护、flexway o-sort、硬件安全隔离、性能提升
-
-总结:
-这篇论文提出了一种新的 Oblivious 排序算法——flexway o-sort，该算法具有渐进最优性、实际效率高以及适合在如Intel SGX等硬件安全隔离环境中实现的特点。对于输入数据量为12GB的中等到大规模场景，当数据完全适应硬件隔离区时，flexway o-sort 相比已知的 Oblivious 排序算法能带来1.32至28.8倍的性能提升；而在数据超出硬件隔离区的情况，这一优势可达到4.1至208倍。此外，论文还实现了基于 Oblivious 排序的应用，包括直方图计算、数据库连接和ORAM数据结构初始化。这些应用在处理8GB至32GB的数据集时，相比于传统的位onic排序，在数据适应硬件隔离区的情况下速度提升了1.44至2.3倍，而当数据不适应硬件隔离区时，则提高了4.9至5.5倍的速度。 <div>
-Oblivious algorithms are being deployed at large scale in real world to enable privacy-preserving applications such as Signal's private contact discovery. Oblivious sorting is a fundamental building block in the design of oblivious algorithms for numerous computation tasks. Unfortunately, there is still a theory-practice gap for oblivious sort. The commonly implemented bitonic sorting algorithm is not asymptotically optimal, whereas known asymptotically optimal algorithms suffer from large constants.
-In this paper, we construct a new oblivious sorting algorithm called flexway o-sort, which is asymptotically optimal, concretely efficient, and suitable for implementation in hardware enclaves such as Intel SGX. For moderately large inputs of $12$ GB, our flexway o-sort algorithm outperforms known oblivious sorting algorithms by $1.32\times$ to $28.8\times$ when the data fits within the hardware enclave, and by $4.1\times$ to $208\times$ when the data does not fit within the hardware enclave. We also implemented various applications of oblivious sorting, including histogram, database join, and initialization of an ORAM data structure. For these applications and data sets from 8GB to 32GB, we achieve $1.44 \sim 2.3\times$ speedup over bitonic sort when the data fits within the enclave, and $4.9 \sim 5.5\times$ speedup when the data does not fit within the enclave.
-]]></content:encoded>
-<pubDate>Sun, 20 Aug 2023 22:45:36 +0000</pubDate>
-</item>
-<item>
-<title>Path Privacy and Handovers: Preventing Insider Traceability Attacks During Secure Handovers</title>
-<link>https://eprint.iacr.org/2025/139</link>
-<guid>https://eprint.iacr.org/2025/139</guid>
-<content:encoded><![CDATA[
-<div> 关键词: 5G, 物联网(IoT), 安全手over, 路径隐私, 密码学形式化
-
-总结:
-随着5G和物联网技术的发展，安全通信从集中式同质化转变为异构移动设备在网络间不断切换的新格局。本文首次提出了安全手over的密码学正式化方案，强调了设备在不同网络间安全连接转移的重要性。文章中，我们引入了一个新的安全性属性——路径隐私，这是针对手over过程的一种此前未被探索的特性。此外，我们还制定了安全手over的语法，并确定了适用于安全手over方案的安全属性。最后，我们提出了一种通用的手over方案，该方案综合了我们的新颖路径隐私概念与其他现有手over方案所具有的安全属性，从而证明了我们框架的稳健性和灵活性。 <div>
-The rise of 5G and IoT has shifted secure communication from centralized and homogeneous to a landscape of heterogeneous mobile devices constantly travelling between myriad networks. In such environments, it is desirable for devices to securely extend their connection from one network to another, often referred to as a handover. In this work we introduce the first cryptographic formalisation of secure handover schemes. We leverage our formalisation to propose path privacy, a novel security property for handovers that has hitherto remained unexplored. We further develop a syntax for secure handovers, and identify security properties appropriate for secure handover schemes. Finally, we introduce a generic handover scheme that captures all the strong notions of security we have identified, combining our novel path privacy concept with other security properties characteristic to existing handover schemes, demonstrating the robustness and versatility of our framework.
-]]></content:encoded>
-<pubDate>Tue, 28 Jan 2025 22:45:51 +0000</pubDate>
-</item>
-<item>
-<title>Naysayer proofs</title>
-<link>https://eprint.iacr.org/2023/1472</link>
-<guid>https://eprint.iacr.org/2023/1472</guid>
-<content:encoded><![CDATA[
-<div> 关键词：naysayer证明、零知识证明、NP语言、常量大小、常量时间
-
-总结:
-本文提出了“naysayer证明”的概念，指出在许多（零知识）证明系统中，验证者通过naysayer确认一个错误的证明无效比检查一个真实的证明有效要高效得多。文章展示了每一个NP语言都可以拥有常量大小和常量时间的naysayer证明。此外，文中还给出了针对FRI多项式承诺、后量子安全数字签名以及可验证洗牌等几个示例证明系统的实际构造。naysayer证明为资源受限的验证器，如智能合约，提供了一种新的乐观验证模式的可能性。 <div>
-This work introduces the notion of naysayer proofs. We observe that in numerous (zero-knowledge) proof systems, it is significantly more efficient for the verifier to be convinced by a so-called naysayer that a false proof is invalid than it is to check that a genuine proof is valid. We show that every NP language has constant-size and constant-time naysayer proofs. We also show practical constructions for several example proof systems, including FRI polynomial commitments, post-quantum secure digital signatures, and verifiable shuffles. Naysayer proofs enable an interesting new optimistic verification mode potentially suitable for resource-constrained verifiers, such as smart contracts.
-]]></content:encoded>
-<pubDate>Mon, 25 Sep 2023 14:24:01 +0000</pubDate>
-</item>
-<item>
-<title>Intmax2: A ZK-rollup with Minimal Onchain Data and Computation Costs Featuring Decentralized Aggregators</title>
-<link>https://eprint.iacr.org/2023/1082</link>
-<guid>https://eprint.iacr.org/2023/1082</guid>
-<content:encoded><![CDATA[
-<div> 关键词: Intmax2、区块链扩容、零知识汇总(ZK-rollup)、客户端、安全性证明<br /><br />总结:
-Intmax2是一个名为Intmax2的区块链扩容解决方案，它是一种基于零知识汇总（ZK-rollup）协议的方案，具有无状态和无需许可的区块生成特点。该方案独特之处在于将大部分数据处理和计算成本转移至客户端，而非对区块生产者或底层Layer 1区块链施加繁重要求。区块生产者的任务仅限于定期生成交易集合的承诺，向每个发送者分发包含证明，并收集及聚合发送者的签名。这种设计实现了无权限和无状态的区块生成，并随用户数量增加而高度可扩展。此外，该协议的主要安全属性已由Nethermind形式验证团队使用Lean定理证明器进行了正式验证。 <div>
-We present a blockchain scaling solution called Intmax2, which is a Zero-Knowledge rollup (ZK-rollup) protocol with stateless and permissionless block production, while minimizing the usage of data and computation on the underlying blockchain. Our architecture distinctly diverges from existing ZK-rollups since essentially all of the data and computational costs are shifted to the client-side as opposed to imposing heavy requirements on the block producers or the underlying Layer 1 blockchain. The only job for block producers is to periodically generate a commitment to a set of transactions, distribute inclusion proofs to each sender, and collect and aggregate signatures by the senders. This design allows permissionless and stateless block production, and is highly scalable with the number of users. We give a proof of the main security property of the protocol, which has been formally verified by the Nethermind Formal Verification Team in the Lean theorem prover.
-]]></content:encoded>
-<pubDate>Tue, 11 Jul 2023 15:34:58 +0000</pubDate>
-</item>
-<item>
-<title>Distributional Private Information Retrieval</title>
-<link>https://eprint.iacr.org/2025/132</link>
-<guid>https://eprint.iacr.org/2025/132</guid>
-<content:encoded><![CDATA[
-<div> 关键词：Private Information Retrieval（私有信息检索），Distributional Private Information Retrieval（分布式私有信息检索），经典PIR，流行度分布，CrowdSurf
-
-总结:
-
-我们提出了分布式私有信息检索（Distributional PIR）这一新型PIR方案，它在处理数据库记录流行度严重偏斜的情况下，能够比经典PIR实现更快的运行速度，同时保持与经典PIR相同的加密隐私保护。分布式PIR的成功概率保证针对的是分布内的查询，而对分布外的查询成功率较低。文章构建了一个利用经典PIR协议作为黑盒的分布式PIR方案，并证明了对于一大类分布式PIR方案的服务器运行时间下限。在两个实际流行度分布的数据集上，相比于现有技术，我们的分布式PIR构造方法将计算成本降低了5至77倍。最后，我们构建了一个名为CrowdSurf的端到端系统，用于私人获取推文，并显示分布式PIR将端到端服务器成本减少了8倍。 <div>
-A private-information-retrieval (PIR) scheme lets a client fetch a record from a remote database without revealing which record it fetched. Classic PIR schemes treat all database records the same but, in practice, some database records are much more popular (i.e., commonly fetched) than others. We introduce distributional private information retrieval, a new type of PIR that can run faster than classic PIR–both asymptotically and concretely–when the popularity distribution is heavily skewed. Distributional PIR provides exactly the same cryptographic privacy as classic PIR. The speedup comes from a relaxed form of correctness: distributional PIR guarantees that in-distribution queries succeed with good probability, while out-of-distribution queries succeed with lower probability.
-
-We construct a distributional-PIR scheme that makes black-box use of classic PIR protocols, and prove a lower bound on the server-runtime of a large class of distributional-PIR schemes. On two real-world popularity distributions, our distributional-PIR construction reduces compute costs by $5$-$77\times$ compared to existing techniques. Finally, we build CrowdSurf, an end-to-end system for privately fetching tweets, and show that distributional-PIR reduces the end-to-end server cost by $8\times$.
-]]></content:encoded>
-<pubDate>Tue, 28 Jan 2025 03:04:53 +0000</pubDate>
-</item>
-<item>
-<title>Always by Your Side: Constructing Traceable Anonymous Credentials with Hardware-Binding</title>
-<link>https://eprint.iacr.org/2025/126</link>
-<guid>https://eprint.iacr.org/2025/126</guid>
-<content:encoded><![CDATA[
-<div> 关键词: Decentralized Identity, Anonymous Credential, Traceability, Public Key Encryption, Equality Test
-
-总结:
-本文关注去中心化身份（DID）和匿名凭证（AC）技术及其可追溯性的发展，指出现有方案中引入受信任的监管方可能存在用户隐私风险。为解决这一问题，文章提出了一种基于公共密钥加密与等式测试的监管文本方法，用于每个认证记录，确保方案具备可验证性、不可陷害性和轮次隔离安全性。该方案的优势在于其等式测试能力并不依赖于公钥，而是取决于认证的轮次标识符。文章进一步实现了一个基于智能卡和BBS+签名的可追踪、硬件绑定的AC方案，并进行了性能分析。相较于其他可追踪AC方案，作者展示了其在追溯任务以及安全地外包方面的优势。 <div>
-With the development of decentralized identity (DID), anonymous credential (AC) technology, as well as its traceability, is receiving more and more attention. Most works introduce a trusted party (regulator) that holds a decryption key or backdoor to directly deanonymize the user identity of anonymous authentication. While some cryptographic primitives can help regulators handle complex tracing tasks among large amounts of user profiles (stored by the issuer) and authentication records (stored by the service provider), additional security primitives are still needed to ensure the privacy of other users. Besides, hardware-binding anonymous credential (hbAC) systems have been proposed to prevent credential sharing or address platform resource constraints, the traceability of hbAC has yet to be discussed.
-
-In this paper, we introduce a public key encryption with equality test as a regulatory text for each authentication record to address the above-mentioned challenges. The security of this feature is guaranteed by the verifiability, non-frameability, and round isolation of the proposed scheme. We compared the asymptotic complexity of our scheme with other traceable AC schemes and shows our scheme has advantages in tracing tasks as well as securely outsourcing them. The key feature of our scheme is that the ability of equality test of regulatory texts is independent of the public key, but rather depends on the round identifier of the authentication. We instantiate a traceable, hardware-binding AC scheme based on smart cards and BBS+ signature and give the performance analysis of it.
-]]></content:encoded>
-<pubDate>Mon, 27 Jan 2025 04:35:31 +0000</pubDate>
-</item>
-<item>
-<title>Summation-based Private Segmented Membership Test from Threshold-Fully Homomorphic Encryption</title>
-<link>https://eprint.iacr.org/2024/753</link>
-<guid>https://eprint.iacr.org/2024/753</guid>
-<content:encoded><![CDATA[
-<div> 关键词: Private Segmented Membership Test (PSMT)，Private Set Intersection (PSI)，Multi-Party PSI (MPSI)，Private Membership Test (PMT)，Oblivious RAM (ORAM)
-
-总结:
-该文章引入了一种名为Private Segmented Membership Test (PSMT)的新颖原始数据隐私保护技术。针对存在大量数据持有者的情况下，客户端希望检查其持有的数据元素是否存在于加密状态下的多个集合中的场景，现有的PSI、MPSI、PMT和ORAM方案在隐私保护或效率上存在问题。文章提出一种基于阈值近似算术同态加密的基本协议来构建PSMT，并成功避免了泄露持有交集元素的数据持有者信息以及产生大量误报的情况，同时确保了IND-CPA^D安全级别。相较于现有最佳方法，新方案在支持大量数据持有者方面具有更好的可扩展性，通过使用基于求和的同态成员资格检查而非基于乘积的方法，以及解决各种技术挑战的新颖思路，实现在实验中能有效处理多达4096个数据持有者的情况（相比于此前大约100个）。实验结果显示，对于1024个数据持有者和大小为2^25的集合，结果聚合可以在92.5秒内完成，并且随着发送者数量增加，其开销增长缓慢。此外，文中还将PSMT协议与其他领先的PSI和MPSI协议进行了对比，并讨论了其在隐私模型改进和更大规模参与方方面的优越性。 <div>
-In many real-world scenarios, there are cases where a client wishes to check if a data element they hold is included in a set segmented across a large number of data holders. To protect user privacy, the client's query and the data holders' sets should remain encrypted throughout the whole process. Prior work on Private Set Intersection (PSI), Multi-Party PSI (MPSI), Private Membership Test (PMT), and Oblivious RAM (ORAM) falls short in this scenario in many ways. They either require data holders to possess the sets in plaintext, incur prohibitively high latency for aggregating results from a large number of data holders, leak the information about the party holding the intersection element, or induce a high false positive. 
-
-This paper introduces the primitive of a Private Segmented Membership Test (PSMT). We give a basic construction of a protocol to solve PSMT using a threshold variant of approximate-arithmetic homomorphic encryption and show how to overcome existing challenges to construct a PSMT protocol without leaking information about the party holding the intersection element or false positives for a large number of data holders ensuring IND-CPA^D security. Our novel approach is superior to existing state-of-the-art approaches in scalability with regard to the number of supported data holders. This is enabled by a novel summation-based homomorphic membership check rather than a product-based one, as well as various novel ideas addressing technical challenges. Our PSMT protocol supports many more parties (up to 4096 in experiments) compared to prior related work that supports only around 100 parties efficiently. Our experimental evaluation shows that our method's aggregation of results from data holders can run in 92.5s for 1024 data holders and a set size of 2^25, and our method's overhead increases very slowly with the increasing number of senders. We also compare our PSMT protocol to other state-of-the-art PSI and MPSI protocols and discuss our improvements in usability with a better privacy model and a larger number of parties.
-]]></content:encoded>
-<pubDate>Thu, 16 May 2024 18:35:58 +0000</pubDate>
-</item>
-<item>
-<title>A Privacy Model for Classical &amp; Learned Bloom Filters</title>
-<link>https://eprint.iacr.org/2025/125</link>
-<guid>https://eprint.iacr.org/2025/125</guid>
-<content:encoded><![CDATA[
-<div> 关键词: Classical Bloom Filter, Learned Bloom Filter, Probabilistic Data Structure, Differential Privacy, Privacy Attacks/Defenses
-
-总结:
-本文探讨了Bloom Filter在处理敏感输入数据并确保隐私安全方面的应用。提出了一个更强的基于差分隐私的Bloom Filter模型。文章中，设计并构建了满足$(\epsilon, 0)$-差分隐私的Classical Bloom Filter和Learned Bloom Filter。这是首次在严格模型下对Learned Bloom Filter的隐私问题进行分析和解决，从而填补了该领域的研究空白。<br /><br /> <div>
-The Classical Bloom Filter (CBF) is a class of Probabilistic Data Structures (PDS) for handling Approximate Query Membership (AMQ). The Learned Bloom Filter (LBF) is a recently proposed class of PDS that combines the Classical Bloom Filter with a Learning Model while preserving the Bloom Filter's one-sided error guarantees. Bloom Filters have been used in settings where inputs are sensitive and need to be private in the presence of an adversary with access to the Bloom Filter through an API or in the presence of an adversary who has access to the internal state of the Bloom Filter. Prior work has investigated the privacy of the Classical Bloom Filter providing attacks and defenses under various privacy definitions. In this work, we formulate a stronger differential privacy-based model for the Bloom Filter. We propose constructions of the Classical and Learned Bloom Filter that satisfy $(\epsilon, 0)$-differential privacy. This is also the first work that analyses and addresses the privacy of the Learned Bloom Filter under any rigorous model, which is an open problem.
-]]></content:encoded>
-<pubDate>Mon, 27 Jan 2025 00:12:40 +0000</pubDate>
-</item>
-<item>
-<title>Efficient 2PC for Constant Round Secure Equality Testing and Comparison</title>
-<link>https://eprint.iacr.org/2024/949</link>
-<guid>https://eprint.iacr.org/2024/949</guid>
-<content:encoded><![CDATA[
-<div> 关键词: 安全等值测试、安全比较、两方计算、在线/离线范式、通信成本
-
-总结:
-本文提出了新的常数轮两方计算（2PC）协议，用于安全等值测试和比较。这些协议基于在线/离线范式设计，针对32位输入，其等值测试协议的在线通信成本低至76比特（ABY的1%），而安全比较协议的成本为384比特（ABY的5%）。实验结果显示：(1) 对于32位等值测试，相较于Guo等人（EUROCRYPT 2023）的方案，我们的方案速度快了9倍，比采用半门优化的加密封装电路（CRYPTO 2015）快了15倍；(2) 在32位的安全比较中，我们的方案比Guo等人（EUROCRYPT 2023）快3倍，同时比Rathee等人（CCS 2020）以及采用半门优化的加密封装电路快6倍。 <div>
-Secure equality testing and comparison are two important primitives widely used in many secure computation scenarios, such as  privacy-preserving machine learning,  private set intersection, and secure data mining, etc. This work proposes new constant-round two-party computation (2PC) protocols for secure equality testing and comparison. 
-Our protocols are designed in the online/offline paradigm. 
-For 32-bit inputs, the online communication cost of our equality testing protocol and secure comparison protocol are as low as 76 bits (1\% of ABY) and 384 bits (5\% of ABY) , respectively.  
-Our benchmarks show that (i) for 32-bit equality testing, our scheme performs $9 \times$ faster than the Guo \emph{et al.} (EUROCRYPT 2023) and $15 \times$ of the garbled circuit (GC) with the half-gate optimization (CRYPTO 2015). (ii) for 32-bit secure comparison, our scheme performs  $3 \times$ faster than Guo \emph{et al.} (EUROCRYPT 2023), $6 \times$ faster than both Rathee \emph{et al.} (CCS 2020) and GC with the half-gate optimization.
-]]></content:encoded>
-<pubDate>Thu, 13 Jun 2024 06:22:37 +0000</pubDate>
-</item>
-<item>
-<title>One-shot Signatures and Applications to Hybrid Quantum/Classical Authentication</title>
-<link>https://eprint.iacr.org/2020/107</link>
-<guid>https://eprint.iacr.org/2020/107</guid>
-<content:encoded><![CDATA[
-<div> 关键词：one-shot signatures、量子无克隆定理、经典oracle、indistinguishability obfuscation、混合量子/古典密码学任务
-
-<br /><br />总结:
-本文提出了“一次签名”(one-shot signatures)的概念，这是一种利用量子无克隆定理实现的签名方案，其特点是私钥只能用于签署一条消息后即自我销毁。文章表明，在经典预言机的帮助下可以构造这样的签名方案，并通过已知的不可区分混淆方案进行启发式模糊化处理。此外，文章展示了这种一次性签名在混合量子/古典密码学任务中的广泛应用，包括一次性签名令牌、基于经典通信的量子货币、无需区块链的去中心化加密货币、具有不可复制私钥的签名方案、非交互式的可证明最小熵等。因此，作者将一次签名定位为新型量子密码协议的重要构建模块。 <div>
-We define the notion of one-shot signatures, which are signatures where any secret key can be used to sign only a single message, and then self-destructs. While such signatures are of course impossible classically, we construct one-shot signatures using quantum no-cloning. In particular, we show that such signatures exist relative to a classical oracle, which we can then heuristically obfuscate using known indistinguishability obfuscation schemes.
-
-We show that one-shot signatures have numerous applications for hybrid quantum/classical cryptographic tasks, where all communication is required to be classical, but local quantum operations are allowed. Applications include one-time signature tokens, quantum money with classical communication, decentralized blockchain-less cryptocurrency, signature schemes with unclonable secret keys, non-interactive certifiable min-entropy, and more. We thus position one-shot signatures as a powerful new building block for novel quantum cryptographic protocols.
-]]></content:encoded>
-<pubDate>Tue, 04 Feb 2020 16:18:02 +0000</pubDate>
 </item>
 </channel>
 </rss>
