@@ -5,11 +5,130 @@
 <link>http://rss.arxiv.org/rss/cs</link>
 
 <item>
+<title>The Trust-Free Aggregation Layer of the Unicity Infrastructure</title>
+<link>https://arxiv.org/abs/2608.05316</link>
+<guid>https://arxiv.org/abs/2608.05316</guid>
+<content:encoded><![CDATA[
+<div> 区块链, 双花攻击, 零信任, 聚合层, RSMT结构
+
+<br><br>总结:
+1. Unicity是一种新型区块链基础设施，支持用户执行链下点对点代币交易，同时防止代币双花问题。
+2. 其核心组件是聚合层，负责存储代币已花费状态，并为用户提供无双重花费的紧凑加密证明，且无需牺牲信任。
+3. 聚合层作为Layer 2服务，维护仅追加的键值存储，并定期通过共识层（传统区块链）认证其状态，同时提供仅追加一致性证明。
+4. 采用Radix Sparse Merkle Trees（RSMTs）生成每轮存储的加密摘要，以及特殊类型的认证路径，确保下一轮摘要仅通过添加新键值对得到。
+5. 证明验证代码基于Plonky3 STARK工具包的AIR电路实现，无需可信设置，在单台消费级CPU上达到每秒10,000次插入和毫秒级验证时间。 <div>
+arXiv:2608.05316v1 Announce Type: new 
+Abstract: Unicity is a novel blockchain infrastructure for enabling users to execute off-chain peer-to-peer token transactions while preventing parallel states of tokens (double-spending) with minimal blockchain complexity and storage. A key component of the infrastructure is the Aggregation Layer responsible for storing information about the spent states of tokens and providing compact cryptographic proofs of no double-spending for the users without making any compromises in trust. Aggregation Layer is a layer 2 style service that holds an append-only key-value repository that periodically certifies its state using a traditional blockchain that we call the Consensus Layer. Every time while certifying a changed state the Aggregation Layer provides a cryptographic proof to the Consensus Layer about the append-only consistency of the key-value store. We use the Radix Sparse Merkle Trees (RSMTs) to create the cryptographic digest r_i of the store in every round i and authentication paths of special type in order to prove that the next digest r_{i+1} was obtained while only adding some key-value pairs (k,v) to the repository. The proof verification code is implemented as an Algebraic Intermediate Representation (AIR) circuit on top of the Plonky3 STARK toolkit. Our implementation uses no trusted setup, achieves throughput of 10,000 insertions per second and and millisecond range verification time on a single consumer-class CPU.
+]]></content:encoded>
+<pubDate>Fri, 07 Aug 2026 00:00:00 -0400</pubDate>
+<pubDate>Fri, 07 Aug 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Multi-Agent Reinforcement Learning for Online Traffic Scheduling in Time-Sensitive Application</title>
+<link>https://arxiv.org/abs/2608.05346</link>
+<guid>https://arxiv.org/abs/2608.05346</guid>
+<content:encoded><![CDATA[
+<div> 5个关键词: 时间敏感网络, 多智能体强化学习, 移动边缘计算, 扩展现实, HAPPO算法
+
+<br><br>总结:
+1. 时间敏感网络(TSN)被集成到移动边缘计算(MEC)中，以支持扩展现实(XR)等低延迟应用。
+2. 现有TSN调度方案依赖静态优化或基于固定流量模式的集中学习，在动态环境效果有限。
+3. MEC中存在多个并发的XR流量流，其特性会随时间演变，导致复杂队列依赖无法被现有调度器捕捉。
+4. 本文提出多智能体强化学习(MARL)框架，将每个TSN队列建模为自主智能体，并使用HAPPO算法联合优化队列服务交付。
+5. 仿真结果显示，该方法平均帧等待时间降低26.8%，最坏情况延迟降低约16.8%，在动态XR驱动的MEC场景中有效。 <div>
+arXiv:2608.05346v1 Announce Type: new 
+Abstract: Time-sensitive networking (TSN) is increasingly integrated into mobile edge computing (MEC) to support applications with stringent latency requirements, such as extended reality (XR). However, existing TSN scheduling solutions predominantly rely on static optimization techniques or centralized learning models that are based on fixed traffic patterns, limiting their effectiveness in dynamic environments. In practice, MEC environments often host multiple co-located XR traffic flows whose characteristics evolve over time, creating complex inter-queue dependencies that current schedulers fail to capture. Addressing these challenges requires adaptive, decentralized scheduling mechanisms capable of coordinating multiple TSN queues under varying traffic conditions. To this end, this paper proposes a multi-agent reinforcement learning (MARL) framework for TSN scheduling, where each TSN queue is modeled as an autonomous agent. The Heterogeneous-Agent Proximal Policy Optimization (HAPPO) algorithm is employed to explicitly model inter-agent dependencies and jointly optimize service delivery across queues. The simulation results demonstrate that the proposed approach reduces average frame waiting times by up to 26.8% and worst-case delays by approximately 16.8%, highlighting its effectiveness in dynamic XR-driven MEC scenarios.
+]]></content:encoded>
+<pubDate>Fri, 07 Aug 2026 00:00:00 -0400</pubDate>
+<pubDate>Fri, 07 Aug 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>ChainClaw: A Layered Agent Framework for Reliable On-Chain Execution</title>
+<link>https://arxiv.org/abs/2608.05790</link>
+<guid>https://arxiv.org/abs/2608.05790</guid>
+<content:encoded><![CDATA[
+<div> 区块链,AI代理,执行安全,智能合约,事件驱动<br><br>总结:<br>通用大语言模型代理在工具增强任务中表现优异，但在区块链环境中存在反应性、不可逆性和可观察性三大缺陷。为此，提出ChainClaw框架，基于OpenClaw构建，采用分层架构：事件驱动编排层、仿真安全智能层和链上监控运行时层，由跨层记忆子系统统一。该框架通过事件摄取与仿真反馈解决反应性；通过预执行安全流水线（交易仿真与动作防护）解决不可逆性；通过链上读取适配器和交易监控解决可观察性。在涵盖七任务四类五维度的基准测试中，ChainClaw在安全性和任务完成度上始终优于基线方法。 <div>
+arXiv:2608.05790v1 Announce Type: new 
+Abstract: General-purpose large language model agents have achieved strong performance on tool-augmented tasks, yet they rely on assumptions break down in blockchain environments. On-chain execution is stateful, adversarial, and economically irreversible, exposing three fundamental gaps: Reactivity, Irreversibility, and Observability. We propose ChainClaw, a blockchain-native agent framework built on OpenClaw, that addresses all three gaps through a layered architecture comprising an event-driven orchestration layer, a simulation-based safety intelligence layer, and an on-chain monitoring runtime layer, unified by a cross-layer memory subsystem. ChainClaw closes the Reactivity gap via event ingestion and simulation feedback, the Irreversibility gap via a pre-execution safety pipeline with transaction simulation and action guard, and the Observability gap via an on-chain read adapter and transaction monitor. We evaluate ChainClaw on a purpose-built benchmark covering seven tasks across four categories and five dimensions. ChainClaw consistently outperforms representative baselines on both safety and task completion.
+]]></content:encoded>
+<pubDate>Fri, 07 Aug 2026 00:00:00 -0400</pubDate>
+<pubDate>Fri, 07 Aug 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Decentralized Affine Transformation for Scalable and Safe Multi-Agent Aerial Coordination</title>
+<link>https://arxiv.org/abs/2509.10791</link>
+<guid>https://arxiv.org/abs/2509.10791</guid>
+<content:encoded><![CDATA[
+
+arXiv:2509.10791v2 Announce Type: replace 
+Abstract: This paper presents an experimental evaluation of decentralized affine transformation (AT) in multi-agent systems using teams of mini-quadcopters. The AT framework enables an agent team to safely navigate constrained environments with narrow passages while allowing aggressive changes in inter-agent distances, which are formally characterized through the decomposition of the AT transformation matrix. We focus on two-dimensional AT, formulated as a decentralized leader--follower problem. In this formulation, three leader quadcopters are positioned at the vertices of a triangle, while all follower quadcopters remain within the triangle. The leaders know the desired trajectories prescribed by the AT, whereas the followers do not. Instead, the followers infer their trajectories through local communication governed by fixed communication weights determined by the team's initial spatial configuration. Experimental results provide evidence consistent with the theoretically predicted convergence of decentralized AT and demonstrate its capability to safely guide multi-agent teams through constrained environments with narrow passages.
+]]></content:encoded>
+<pubDate>Fri, 07 Aug 2026 00:00:00 -0400</pubDate>
+<pubDate>Fri, 07 Aug 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Decentralized No-Regret Frequency-Time Scheduling for FMCW Radar Interference Avoidance</title>
+<link>https://arxiv.org/abs/2512.24619</link>
+<guid>https://arxiv.org/abs/2512.24619</guid>
+<content:encoded><![CDATA[
+<div> 关键词：FMCW雷达，干扰规避，博弈论，无遗憾跳跃，时间频率自适应
+
+<br><br>总结：
+1. 汽车FMCW雷达在现代ADAS和自动驾驶系统中不可或缺，但其密度增加导致相互干扰风险加剧。
+2. 现有缓解技术（如接收端抑制、主动波形设计、协同调度）存在可扩展性有限、依赖侧信道通信或降低距离-多普勒分辨率等问题。
+3. 本文提出统一的时间-频率博弈框架，将干扰规避建模为重复反协调博弈，各雷达通过遗憾最小化动态自主更新频率子带和线性调频时间偏移的混合策略。
+4. 所提时间-频率无遗憾跳跃算法可实现外部和交换遗憾趋零，经验博弈收敛到ε-粗相关均衡或相关均衡。
+5. 理论分析揭示了时间适应如何正则化频率选择并增强对异步干扰的鲁棒性，数值实验证明该方法在信干噪比、碰撞率和距离-多普勒质量上显著优于随机跳跃和纳什基准方案。 <div>
+arXiv:2512.24619v2 Announce Type: replace 
+Abstract: Automotive FMCW radars are indispensable to modern ADAS and autonomous-driving systems, but their increasing density has intensified the risk of mutual interference. Existing mitigation techniques, including reactive receiver-side suppression, proactive waveform design, and cooperative scheduling, often face limitations in scalability, reliance on side-channel communication, or degradation of range-Doppler resolution. Building on our earlier work on decentralized Frequency-Domain No-Regret hopping, this paper introduces a unified time-frequency game-theoretic framework that enables radars to adapt across both spectral and temporal resources. We formulate the interference-avoidance problem as a repeated anti-coordination game, in which each radar autonomously updates a mixed strategy over frequency subbands and chirp-level time offsets using regret-minimization dynamics. We show that the proposed Time-Frequency No-Regret Hopping algorithm achieves vanishing external and swap regret, and that the induced empirical play converges to an $\varepsilon$-coarse correlated equilibrium or a correlated equilibrium. Theoretical analysis provides regret bounds in the joint domain, revealing how temporal adaptation implicitly regularizes frequency selection and enhances robustness against asynchronous interference. Numerical experiments with multi-radar scenarios demonstrate substantial improvements in SINR, collision rate, and range-Doppler quality compared with time-frequency random hopping and centralized Nash-based benchmarks.
+]]></content:encoded>
+<pubDate>Fri, 07 Aug 2026 00:00:00 -0400</pubDate>
+<pubDate>Fri, 07 Aug 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Trust-Based Incentive Mechanisms in Semi-Decentralized Federated Learning Systems</title>
+<link>https://arxiv.org/abs/2602.08290</link>
+<guid>https://arxiv.org/abs/2602.08290</guid>
+<content:encoded><![CDATA[
+<div> 联邦学习，信任机制，激励机制，区块链，智能合约<br><br>总结:<br>本文提出了一种基于信任的激励机制，用于联邦学习系统。该机制通过动态评估数据质量、模型准确率、一致性和贡献频率等因素计算信任分数，以奖励诚实参与并惩罚不可靠或恶意行为。高信任节点获得更多参与机会，低信任节点则受到惩罚。同时，文章探索了融合区块链和智能合约来自动化信任评估与激励分配，确保透明性和去中心化。此理论框架旨在构建更健壮、公平和透明的联邦学习生态系统，降低不可信参与者带来的风险。 <div>
+arXiv:2602.08290v2 Announce Type: replace 
+Abstract: In federated learning (FL), decentralized model training allows multi-ple participants to collaboratively improve a shared machine learning model without exchanging raw data. However, ensuring the integrity and reliability of the system is challenging due to the presence of potentially malicious or faulty nodes that can degrade the model's performance. This paper proposes a novel trust-based incentive mechanism designed to evaluate and reward the quality of contributions in FL systems. By dynamically assessing trust scores based on fac-tors such as data quality, model accuracy, consistency, and contribution fre-quency, the system encourages honest participation and penalizes unreliable or malicious behavior. These trust scores form the basis of an incentive mechanism that rewards high-trust nodes with greater participation opportunities and penal-ties for low-trust participants. We further explore the integration of blockchain technology and smart contracts to automate the trust evaluation and incentive distribution processes, ensuring transparency and decentralization. Our proposed theoretical framework aims to create a more robust, fair, and transparent FL eco-system, reducing the risks posed by untrustworthy participants.
+]]></content:encoded>
+<pubDate>Fri, 07 Aug 2026 00:00:00 -0400</pubDate>
+<pubDate>Fri, 07 Aug 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Switching-Reference Voltage Control for Distribution Systems with AI-Training Data Centers</title>
+<link>https://arxiv.org/abs/2603.15588</link>
+<guid>https://arxiv.org/abs/2603.15588</guid>
+<content:encoded><![CDATA[
+<div> 关键词：电压控制，AI训练，负载波动，分布式控制，切换参考<br><br>总结: 本文提出一种面向数据中心大规模AI训练负载的分散式电压切换参考控制方法。AI训练工作负载呈现出快速、周期性的功率波动，导致配电系统电压偏差。现有控制方法将其视为一般扰动，控制效率低且易超限。该方法利用负载在两种不同运行阶段交替的结构特点，通过随负载阶段同步切换各节点电压参考，抵消相移，维持电压稳定，同时大幅降低控制代价。控制器从本地电压测量推断参考，无需总线实时通信，并证明了在死区和饱和条件下的收敛性。基于实际AI训练功率数据的案例研究表明，与传统下垂控制相比，该方法几乎完全消除了电压违规，控制代价降低约一个数量级。进一步实验证实，该方法在多数据中心和内部负载平滑场景下依然有效。 <div>
+arXiv:2603.15588v3 Announce Type: replace 
+Abstract: Large-scale AI training workloads in data centers exhibit rapid and periodic power swings that can induce voltage deviations in power distribution systems. Existing voltage controllers treat these swings as a generic disturbance, leading to high control effort but still large voltage violations. However, such emerging loads are not random: they alternate between two distinct operating phases. This paper exploits this structure with a decentralized switching-reference voltage control framework. By switching each voltage reference in step with the workload phases, the controller cancels the phase-induced voltage shift, holding the voltage within limits with low control effort. Because real-time communication between buses is not always available, the controller is designed to infer the reference from local voltage measurements. This paper further proves convergence under deadband and saturation. In case studies on real AI training power traces, the switching reference suppresses voltage violations, sometimes eliminating them entirely, while reducing the control effort by approximately an order of magnitude compared with conventional droop control. Further experiments confirm that it remains effective with multiple data centers and internal load smoothing.
+]]></content:encoded>
+<pubDate>Fri, 07 Aug 2026 00:00:00 -0400</pubDate>
+<pubDate>Fri, 07 Aug 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Communication-Aware Multi-Agent Reinforcement Learning for Decentralized Cooperative UAV Deployment</title>
+<link>https://arxiv.org/abs/2603.16141</link>
+<guid>https://arxiv.org/abs/2603.16141</guid>
+<content:encoded><![CDATA[
+<div> 5个关键词：无人机蜂群，部分可观测，分散执行，图神经网络，协作部署
+
+总结:<br><br>本文提出一种基于图的多智能体强化学习框架，用于解决部分可观测和间歇连接下自主无人机蜂群的协作部署问题。该框架采用集中训练分散执行（CTDE）模式，训练时使用集中批评家和全局状态，执行时每个无人机基于局部观察和邻居消息执行共享策略。邻居关系由信噪比阈值连通图决定，并通过智能体-实体注意力模块和邻居自注意力机制处理局部状态和受限通信下消息。在DroneConnect协作中继部署任务中，该方法相比MAPPO在受限通信和部分可观测下目标覆盖提升约12%，且与全节点可观测的离线MILP上界相比竞争力强。 <div>
+arXiv:2603.16141v2 Announce Type: replace 
+Abstract: Autonomous Unmanned Aerial Vehicle (UAV) swarms are increasingly used as rapidly deployable aerial relays and sensing platforms, yet practical deployments must operate under partial observability and intermittent peer-to-peer connectivity. We present a graph-based multi-agent reinforcement learning framework trained under centralized training with decentralized execution (CTDE): a centralized critic and global state are available only during training, while each UAV executes a shared policy using local observations and messages from nearby neighbors. Under restricted communication, neighbor relations are induced by an SNR-threshold connectivity graph. Our architecture encodes local agent state and nearby entities with an agent-entity attention module and aggregates inter-UAV messages with neighbor self-attention over a signal-quality-limited communication graph defined by a channel model. We evaluate the framework on a cooperative relay-deployment task, DroneConnect. Experimental results show that the proposed method achieves an approximately 12% increase in target coverage over MAPPO under restricted communication and partial observability, while remaining competitive with a mixed-integer linear programming (MILP)-based offline upper bound with full node observability.
+]]></content:encoded>
+<pubDate>Fri, 07 Aug 2026 00:00:00 -0400</pubDate>
+<pubDate>Fri, 07 Aug 2026 00:00:00 -0400</pubDate>
+</item>
+
+<item>
 <title>Joint UAV Flight and Opportunistic Routing under Reinforcement Learning for Delay-Tolerant Networks</title>
 <link>https://arxiv.org/abs/2608.04590</link>
 <guid>https://arxiv.org/abs/2608.04590</guid>
 <content:encoded><![CDATA[
-
 arXiv:2608.04590v1 Announce Type: new 
 Abstract: The growing deployment of delay-tolerant networks (DTNs) has made store-carry-forward (SCF) communication indispensable under sparse connectivity.
   However, intermittent contacts, finite buffers, and limited message time-to-live (TTL) often give rise to sparse delivery and congestion, leading to substantial end-to-end performance degradation.
@@ -19,18 +138,15 @@ Abstract: The growing deployment of delay-tolerant networks (DTNs) has made stor
   Simulation results over four traffic modes demonstrate effective gains over PRoPHET and MaxProp, while retaining contact-limited decentralized execution.
 ]]></content:encoded>
 <pubDate>Thu, 06 Aug 2026 00:00:00 -0400</pubDate>
-<pubDate>Thu, 06 Aug 2026 00:00:00 -0400</pubDate>
 </item>
 <item>
 <title>Blockchain Empowered Trustworthy Agent Networks: Foundations, Taxonomy, and Future Directions</title>
 <link>https://arxiv.org/abs/2608.04626</link>
 <guid>https://arxiv.org/abs/2608.04626</guid>
 <content:encoded><![CDATA[
-
 arXiv:2608.04626v1 Announce Type: new 
 Abstract: AI agents are evolving from isolated task executors into networked autonomous entities that can communicate, delegate tasks, invoke tools, access external knowledge, and participate in cross-platform service and economic workflows. This evolution gives rise to open agent networks, where heterogeneous agents owned by different stakeholders interact without naturally shared infrastructures for identity, authorization, auditability, reputation, or settlement. This survey and tutorial article reviews the literature over the period 1980--2026 on the evolution from classical multi-agent systems to open agent networks, with a particular focus on LLM-based autonomous agents, agent interoperability protocols, Internet-of-Agents infrastructures, and blockchain-enabled trust mechanisms. We first review this evolution and show how the trust boundary expands from individual execution to cross-agent, cross-platform, and cross-organizational interaction. We then identify a network-level trust crisis that cannot be fully addressed by single-agent safety mechanisms or closed multi-agent coordination techniques, and develop a five-dimensional taxonomy covering entity and capability trust, authorization and delegation trust, information and provenance trust, coordination and group-robustness trust, and accountability and settlement trust. Based on this taxonomy, we examine how blockchain can provide shared identity, verifiable authorization, tamper-evident provenance, auditable collaboration, incentive alignment, and value settlement for trustworthy agent networks. We further synthesize the mapping between agent-network risks, trust requirements, and blockchain-enabled mechanisms, and clarify the role of blockchain as a shared trust layer rather than a replacement for agent security, semantic verification, privacy protection, or robust reasoning.
 ]]></content:encoded>
-<pubDate>Thu, 06 Aug 2026 00:00:00 -0400</pubDate>
 <pubDate>Thu, 06 Aug 2026 00:00:00 -0400</pubDate>
 </item>
 <item>
@@ -38,11 +154,9 @@ Abstract: AI agents are evolving from isolated task executors into networked aut
 <link>https://arxiv.org/abs/2608.04791</link>
 <guid>https://arxiv.org/abs/2608.04791</guid>
 <content:encoded><![CDATA[
-
 arXiv:2608.04791v1 Announce Type: new 
 Abstract: Federated learning (FL) enables collaborative training of deep learning models across decentralized image archives without requiring data centralization. This paradigm is particularly relevant in remote sensing (RS), where legal regulations, privacy concerns, and bandwidth constraints restrict data sharing. However, the presence of training data heterogeneity across clients (known as non-IID data) can impede convergence and limit the generalization capability of the aggregated global model. To mitigate the adverse effects of training data heterogeneity, vision-language models (VLMs) can be leveraged in FL due to their transferable representations, which have demonstrated robustness under distribution shifts. However, their large parameter size may substantially increase communication overhead and local computational complexity in federated settings. Therefore, it is crucial to select an appropriate VLM adaptation strategy that balances the generalization ability with the communication and computational constraints. To address this issue, in this paper, we present the first comparative study of VLM adaptation strategies for FL in the context of RS image classification. We investigate full fine-tuning, encoder-specific fine-tuning, prompt learning, and low-rank adaptation (LoRA) tuning, and analyze them with respect to three criteria: 1) generalization capability under non-IID data, 2) communication overhead, and 3) local computational complexity. Experiments on BigEarthNet-S2, EuroSAT, RESISC45, and ImageNet reveal distinct trade-offs between task specialization, cross-domain generalization, and efficiency. Based on our findings, we derive a guideline for the selection of an appropriate VLM adaptation strategy in FL for RS image classification under different operational constraints. The code of this work is publicly available at https://git.tu-berlin.de/rsim/FL-RS-VLM.
 ]]></content:encoded>
-<pubDate>Thu, 06 Aug 2026 00:00:00 -0400</pubDate>
 <pubDate>Thu, 06 Aug 2026 00:00:00 -0400</pubDate>
 </item>
 <item>
@@ -50,11 +164,9 @@ Abstract: Federated learning (FL) enables collaborative training of deep learnin
 <link>https://arxiv.org/abs/2608.04957</link>
 <guid>https://arxiv.org/abs/2608.04957</guid>
 <content:encoded><![CDATA[
-
 arXiv:2608.04957v1 Announce Type: new 
 Abstract: Digital services increasingly rely on claims that a person, device, or asset was in a specific place at a specific time. Today, those claims often depend on self-reported location data, which is easy to falsify and difficult to verify after the fact. Proof-of-Location (PoL) systems address this gap by turning presence claims into evidence that an independent verifier can later inspect. This paper builds upon recent theoretical work on decentralized PoL architectures and demonstrates how they can move from emulation to a physical prototype built with low-cost hardware. We implement a witnessing zone in which fixed nearby devices measure a prover's presence, exchange claims over a local mesh, and record them in a tamper-evident ledger. Building the prototype required adapting the abstract protocol to physical constraints through witness-initiated ranging, cross-witness consistency checks, and freshness binding against replay. Our controlled indoor evaluation shows that the system can produce accurate, low-latency proof objects while detecting simulated replay and malicious-ranging attacks. The result is a reusable experimental baseline for next-generation digital trust infrastructure, that exposes the remaining calibration, verifier-independence, radio-integrity, and scaling requirements for decentralized location evidence, where physical presence claims can be independently checked under real radio, networking, and timing conditions.
 ]]></content:encoded>
-<pubDate>Thu, 06 Aug 2026 00:00:00 -0400</pubDate>
 <pubDate>Thu, 06 Aug 2026 00:00:00 -0400</pubDate>
 </item>
 <item>
@@ -62,13 +174,11 @@ Abstract: Digital services increasingly rely on claims that a person, device, or
 <link>https://arxiv.org/abs/2608.05011</link>
 <guid>https://arxiv.org/abs/2608.05011</guid>
 <content:encoded><![CDATA[
-
 arXiv:2608.05011v1 Announce Type: new 
 Abstract: Centralization in maximal extractable value (MEV) markets is a significant concern for blockchain systems, as persistent concentration of economic power can weaken competition, reduce openness, and undermine the decentralization goals of permissionless protocols. While much of the existing analysis has focused on builders, validators, and block-building markets, this paper studies centralization from the perspective of searcher competition. We develop a heterogeneous model in which searchers differ in opportunity coverage and execution efficiency, and we analyze how auction design affects fairness, decentralization, and security among searchers competing for the same MEV opportunity.
   To evaluate searcher competition, we introduce two metrics: a Shapley-weighted Jain fairness index, which measures whether rewards are proportional to searchers' marginal contributions, and an expected-reward Herfindahl-Hirschman Index (HHI), which measures concentration in long-run searcher rewards. Using these metrics, we first analyze the standard first-price, winner-take-all auction as a benchmark. Our analysis shows that, under searcher heterogeneity, first-price competition can reward rank dominance rather than marginal contribution, leading to concentrated rewards and weaker contribution-adjusted fairness.
   Motivated by these limitations, we propose an entry-filtered Shapley-capped auction mechanism that distributes searcher rewards more fairly and broadly among admitted high-quality submissions. Designing such a mechanism in a permissionless blockchain environment is challenging: searchers may create Sybil identities by submitting copied or degraded versions of the same execution strategy, and validators may collude with searchers to increase joint payoff. We address these concerns through Bayesian security constraints for copied-code Sybil deviations and validator-searcher coalition deviations.
 ]]></content:encoded>
-<pubDate>Thu, 06 Aug 2026 00:00:00 -0400</pubDate>
 <pubDate>Thu, 06 Aug 2026 00:00:00 -0400</pubDate>
 </item>
 <item>
@@ -76,11 +186,9 @@ Abstract: Centralization in maximal extractable value (MEV) markets is a signifi
 <link>https://arxiv.org/abs/2508.13661</link>
 <guid>https://arxiv.org/abs/2508.13661</guid>
 <content:encoded><![CDATA[
-
 arXiv:2508.13661v4 Announce Type: replace 
 Abstract: Centralized Training with Decentralized Execution (CTDE) is the dominant paradigm in multi-agent reinforcement learning (MARL), enabling agents to act independently at test time while leveraging additional information during training. However, the most prominent methods within CTDE, based on value decomposition, are limited in learning efficiency and final performance by partial observability in both training and execution. To overcome this limitation, in this work, we propose the framework of tutoring: In training, the agents share information in their latent space to develop well-informed policies that achieve strong performance. Then, to recover decentralized execution, these policies concurrently adjust to anticipate lack of communication, and they are distilled into counterparts that rely solely on local observations. We demonstrate the effectiveness of our approach on Hallway, which, to the best of our knowledge, has not been solved before without test-time communication, SMAC under settings more difficult than the standard ones, and SMACv2.
 ]]></content:encoded>
-<pubDate>Thu, 06 Aug 2026 00:00:00 -0400</pubDate>
 <pubDate>Thu, 06 Aug 2026 00:00:00 -0400</pubDate>
 </item>
 <item>
@@ -88,14 +196,11 @@ Abstract: Centralized Training with Decentralized Execution (CTDE) is the domina
 <link>https://arxiv.org/abs/2508.16440</link>
 <guid>https://arxiv.org/abs/2508.16440</guid>
 <content:encoded><![CDATA[
-
 arXiv:2508.16440v2 Announce Type: replace 
 Abstract: Urban Air Mobility (UAM) envisions the widespread use of small aerial vehicles to transform transportation in dense urban environments. However, UAM faces critical operational challenges, particularly the balance between minimizing noise exposure and maintaining safe separation in low-altitude urban airspace, two potentially conflicting objectives that are often addressed separately. We propose a reinforcement learning (RL)-based air traffic management system that integrates both noise and safety considerations within a unified, decentralized framework. Under this scalable air traffic coordination solution, agents operate in a structured, multi-layered airspace and learn altitude adjustment policies to jointly manage noise impact and separation constraints. The system demonstrates strong performance across both objectives and reveals tradeoffs among separation, noise exposure, and energy efficiency under high traffic density. Among the three objectives, safe separation is accorded the highest priority, whereas the relative significance of noise and energy varies by location and is contingent upon financial and public policy considerations. The findings highlight the potential of RL and multi-objective coordination strategies in enhancing the safety, quietness, and efficiency of UAM operations.
 ]]></content:encoded>
 <pubDate>Thu, 06 Aug 2026 00:00:00 -0400</pubDate>
-<pubDate>Thu, 06 Aug 2026 00:00:00 -0400</pubDate>
 </item>
-
 <item>
 <title>DeRP: An Algorithm for Self-Assembly of Power-Delivery Networks using Recursive Branching in Information-Limited Environments</title>
 <link>https://arxiv.org/abs/2608.02904</link>
@@ -10220,78 +10325,6 @@ Abstract: Peer-to-peer energy trading among electric vehicles (EVs) has been inc
 <content:encoded><![CDATA[
 arXiv:2603.26758v1 Announce Type: new 
 Abstract: Distributed systems in which concurrent proposals are mutually exclusive face a fundamental stability constraint under network delay. In open systems where global state progression is event-driven rather than round-driven, propagation delay creates a conflict window within which overlapping proposals may generate competing branches. This paper derives a density-delay law for such exclusive state progression processes. Under independent proposal arrivals and bounded propagation delay, overlap is approximated by a Poisson model and fork depth is represented by a birth-death process. The analysis shows that maintaining bounded fork depth as the number of participants grows requires the density-delay product $\lambda \Delta$ to remain $O(1)$, implying that aggregate proposal intensity must stay bounded and yielding an inverse-scaling law $g(N)=O(1/N)$ at the unit level. Simulation experiments across varying network sizes and propagation delays align with a common density-delay curve, supporting the predicted scaling behavior. The result provides a compact law for stable event-driven state progression in open distributed systems and offers a scaling-based interpretation of Bitcoin-style difficulty adjustment as a decentralized way to regulate effective event density.
-]]></content:encoded>
-<pubDate>Tue, 31 Mar 2026 00:00:00 -0400</pubDate>
-</item>
-<item>
-<title>Privacy-Preserving Iris Recognition: Performance Challenges and Outlook</title>
-<link>https://arxiv.org/abs/2603.26890</link>
-<guid>https://arxiv.org/abs/2603.26890</guid>
-<content:encoded><![CDATA[
-arXiv:2603.26890v1 Announce Type: new 
-Abstract: Iris-based biometric identification is increasingly recognized for its significant accuracy and long-term stability compared to other biometric modalities such as fingerprints or facial features. However, all biometric modalities are highly sensitive data that raise serious privacy and security concerns, particularly in decentralized and untrusted environments. While Fully Homomorphic Encryption (FHE) has emerged as a promising solution for protecting sensitive data during computation, existing privacy-preserving iris recognition systems face significant performance limitations that hinder their practical deployment. This paper investigates the performance challenges of the current landscape of privacy-preserving iris recognition systems using FHE. Based on these insights, we outline a scalable privacy-preserving framework that aligns with all the requirements specified in the ISO/IEC 24745 standard. Leveraging the Open Iris library, our approach starts with robust iris segmentation, followed by normalization and feature extraction using Gabor filters to generate iris codes. We then apply binary masking to filter out unreliable regions and perform matching using Hamming distance on encrypted iris codes. The accuracy and performance of our proposed privacy-preserving framework is evaluated on the CASIA-Iris-Thousand dataset. Results show that our privacy-preserving framework yields very similar accuracy to the cleartext equivalent, but a much higher computational overhead with respect to pairwise iris template comparisons, of $\sim 120\,000 \times$. This points towards the need for the deployment of two-level schemes in the context of scalable $1-N$ template comparisons.
-]]></content:encoded>
-<pubDate>Tue, 31 Mar 2026 00:00:00 -0400</pubDate>
-</item>
-<item>
-<title>HFIPay: Privacy-Preserving, Cross-Chain Cryptocurrency Payments to Human-Friendly Identifiers</title>
-<link>https://arxiv.org/abs/2603.26970</link>
-<guid>https://arxiv.org/abs/2603.26970</guid>
-<content:encoded><![CDATA[
-arXiv:2603.26970v1 Announce Type: new 
-Abstract: Sending cryptocurrency to an email address or phone number should be as simple as a bank transfer, yet naive schemes that map identifiers directly to blockchain addresses expose the recipient's balances and transaction history to anyone who knows the identifier.
-  HFIPay separates private routing, sender-side quote verification, and on-chain claim authorization. A relay resolves the human-friendly identifier off-chain and commits only a per-intent blinded binding rho_i plus the quoted payment tuple; the chain sees neither the identifier nor a reusable recipient tag. In a verified-quote deployment, the relay returns a sender-verifiable off-chain proof linking rho_i to an attested binding-key commitment, so the relay cannot substitute a different recipient before funding. To claim, the recipient proves in zero knowledge -- via ZK-ACE -- that the funded intent's blinded binding matches a handle derived from the same deterministic identity, authorizing release of the quoted asset and amount to a chosen destination.
-  We formalize two privacy goals: enumeration resistance and pre-claim unlinkability, and distinguish a baseline deployment (relay trusted for binding correctness) from the verified-quote deployment (binding is sender-verifiable without a public registry). When composed with an NVM runtime, the same mechanism extends to cross-chain settlement. The result is a relay-assisted but non-custodial architecture: relays are privacy and availability dependencies, but cannot redirect funds.
-]]></content:encoded>
-<pubDate>Tue, 31 Mar 2026 00:00:00 -0400</pubDate>
-</item>
-<item>
-<title>Proprioceptive feedback paradigm for safe and resilient motion control</title>
-<link>https://arxiv.org/abs/2603.27051</link>
-<guid>https://arxiv.org/abs/2603.27051</guid>
-<content:encoded><![CDATA[
-arXiv:2603.27051v1 Announce Type: new 
-Abstract: Proprioception is a human sense that provides feedback from muscles and joints about body position and motion. This key capability keeps us upright, moving, and responding quickly to slips or stumbles. In this paper we discuss a proprioception-like feature (machine proprioceptive feedback - MPF) for motion control systems. An unexpected response of one actuator, or one agent in a multi-agent system, is compensated by other actuators/agents through fast feedback loops that react only to the unexpected portion. The paper appropriates the predictor-corrector mechanism of decentralized, multi-agent controllers as "proprioceptive feedback" for centrally controlled ones. It analyzes a nature and degree of impairment that can be managed and offer two options, full- MPF and split-MPF, with different wiring architectures as well as different stability and safety properties. Multi-vehicle interchange lane-swap traffic simulations confirm the analytical results.
-]]></content:encoded>
-<pubDate>Tue, 31 Mar 2026 00:00:00 -0400</pubDate>
-</item>
-<item>
-<title>MediHive: A Decentralized Agent Collective for Medical Reasoning</title>
-<link>https://arxiv.org/abs/2603.27150</link>
-<guid>https://arxiv.org/abs/2603.27150</guid>
-<content:encoded><![CDATA[
-arXiv:2603.27150v1 Announce Type: new 
-Abstract: Large language models (LLMs) have revolutionized medical reasoning tasks, yet single-agent systems often falter on complex, interdisciplinary problems requiring robust handling of uncertainty and conflicting evidence. Multi-agent systems (MAS) leveraging LLMs enable collaborative intelligence, but prevailing centralized architectures suffer from scalability bottlenecks, single points of failure, and role confusion in resource-constrained environments. Decentralized MAS (D-MAS) promise enhanced autonomy and resilience via peer-to-peer interactions, but their application to high-stakes healthcare domains remains underexplored. We introduce MediHive, a novel decentralized multi-agent framework for medical question answering that integrates a shared memory pool with iterative fusion mechanisms. MediHive deploys LLM-based agents that autonomously self-assign specialized roles, conduct initial analyses, detect divergences through conditional evidence-based debates, and locally fuse peer insights over multiple rounds to achieve consensus. Empirically, MediHive outperforms single-LLM and centralized baselines on MedQA and PubMedQA datasets, attaining accuracies of 84.3% and 78.4%, respectively. Our work advances scalable, fault-tolerant D-MAS for medical AI, addressing key limitations of centralized designs while demonstrating superior performance in reasoning-intensive tasks.
-]]></content:encoded>
-<pubDate>Tue, 31 Mar 2026 00:00:00 -0400</pubDate>
-</item>
-<item>
-<title>Multi-AUV Ad-hoc Networks-Based Multi-Target Tracking Based on Scene-Adaptive Embodied Intelligence</title>
-<link>https://arxiv.org/abs/2603.27194</link>
-<guid>https://arxiv.org/abs/2603.27194</guid>
-<content:encoded><![CDATA[
-arXiv:2603.27194v1 Announce Type: new 
-Abstract: With the rapid advancement of underwater net-working and multi-agent coordination technologies, autonomous underwater vehicle (AUV) ad-hoc networks have emerged as a pivotal framework for executing complex maritime missions, such as multi-target tracking. However, traditional data-centricarchitectures struggle to maintain operational consistency under highly dynamic topological fluctuations and severely constrained acoustic communication bandwidth. This article proposes a scene-adaptive embodied intelligence (EI) architecture for multi-AUV ad-hoc networks, which re-envisions AUVs as embodied entities by integrating perception, decision-making, and physical execution into a unified cognitive loop. To materialize the functional interaction between these layers, we define a beacon-based communication and control model that treats the communication link as a dynamic constraint-aware channel, effectively bridging the gap between high-level policy inference and decentralized physical actuation. Specifically, the proposed architecture employs a three-layer functional framework and introduces a Scene-Adaptive MARL (SA-MARL) algorithm featuring a dual-path critic mechanism. By integrating a scene critic network and a general critic network through a weight-based dynamic fusion process, SA-MARL effectively decouples specialized tracking tasks from global safety constraints, facilitating autonomous policy evolution. Evaluation results demonstrate that the proposedscheme significantly accelerates policy convergence and achieves superior tracking accuracy compared to mainstream MARL approaches, maintaining robust performance even under intense environmental interference and fluid topological shifts.
-]]></content:encoded>
-<pubDate>Tue, 31 Mar 2026 00:00:00 -0400</pubDate>
-</item>
-<item>
-<title>AI Civilization and the Transformation of Work</title>
-<link>https://arxiv.org/abs/2603.27497</link>
-<guid>https://arxiv.org/abs/2603.27497</guid>
-<content:encoded><![CDATA[
-arXiv:2603.27497v1 Announce Type: new 
-Abstract: The emergence of artificial intelligence and robotics is catalyzing a profound transformation in the nature of human labor, fueling a contentious debate about the future of employment. While prominent studies predict substantial job displacement due to automation, historical precedents from past technological revolutions suggest that innovation tends to expand, rather than shrink, the scope of economic activity and employment in the long run. This paper advances the thesis that the transition to an AI-civilization will fundamentally restructure the mechanisms of employment creation. We argue for a paradigm shift from a centralized model, where a limited number of organizations create jobs for the mass to a decentralized ecosystem where individuals are empowered to generate their own employment opportunities. This shift is enabled by AI-driven productivity augmentation, which dramatically lowers the barriers to creating economic value. Drawing on an analysis of economic history, contemporary data on labor market dynamics, and the growth of digital platforms, this paper posits that human-AI co-evolution will significantly increase individual productivity and open new frontiers of economic activity. We explore the implications of this structural transformation for education and workforce development, concluding that the focus must shift from rote knowledge accumulation to cultivating skills in human AI collaboration, creative problem-solving, and the design of novel economic domains. This paper contributes to the literature by offering a forward-looking framework that emphasizes the decentralizing potential of AI on labor markets, moving beyond the traditional displacement-versus-creation dichotomy.
-]]></content:encoded>
-<pubDate>Tue, 31 Mar 2026 00:00:00 -0400</pubDate>
-</item>
-<item>
-<title>Decentralized MARL for Coarse Correlated Equilibrium in Aggregative Markov Games</title>
-<link>https://arxiv.org/abs/2603.27575</link>
-<guid>https://arxiv.org/abs/2603.27575</guid>
-<content:encoded><![CDATA[
-arXiv:2603.27575v1 Announce Type: new 
-Abstract: This paper studies the problem of decentralized learning of Coarse Correlated Equilibrium (CCE) in aggregative Markov games (AMGs), where each agent's instantaneous reward depends only on its own action and an aggregate quantity. Existing CCE learning algorithms for general Markov games are not designed to leverage the aggregative structure, and research on decentralized CCE learning for AMGs remains limited. We propose an adaptive stage-based V-learning algorithm that exploits the aggregative structure under a fully decentralized information setting. Based on the two-timescale idea, the algorithm partitions learning into stages and adjusts stage lengths based on the variability of aggregate signals, while using no-regret updates within each stage. We prove the algorithm achieves an epsilon-approximate CCE in O(S Amax T5 / epsilon2) episodes, avoiding the curse of multiagents which commonly arises in MARL. Numerical results verify the theoretical findings, and the decentralized, model-free design enables easy extension to large-scale multi-agent scenarios.
 ]]></content:encoded>
 <pubDate>Tue, 31 Mar 2026 00:00:00 -0400</pubDate>
 </item>
