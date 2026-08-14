@@ -4,12 +4,13 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+
 <item>
 <title>SoK: Encrypted Mempools Through the MEV Lens</title>
 <link>https://eprint.iacr.org/2026/1643</link>
 <guid>https://eprint.iacr.org/2026/1643</guid>
 <content:encoded><![CDATA[
-<div> MEV, 审查，加密mempool，阈值加密，定序<br><br>总结:文章探讨加密mempool对以太坊MEV和审查问题的应对。首先，公开展示的mempool加剧MEV和审查威胁，并蔓延至L2。加密mempool通过隐藏交易内容直至最终定序来应对。其次，系统梳理阈值加密mempool的演进，从Shutter、Ferveo到最新研究，解决通讯开销、隐私缺失等瓶颈。再次，归纳四个设计方向：批量解密降低延迟、静默设置简化密钥生成、无纪元加密消除位置依赖、无冲突编码防止审查。同时，梳理以太坊活跃的部署讨论（如EIP-8105和LUCID）。最后，指出所有方案的关键局限：盲目定序和二元解密抑制了有害MEV，但也破坏了同区块拍卖机制，影响用户价值和网络地理去中心化。 <div>
+<div> MEV, 审查，加密mempool，阈值加密，定序<br /><br />总结:文章探讨加密mempool对以太坊MEV和审查问题的应对。首先，公开展示的mempool加剧MEV和审查威胁，并蔓延至L2。加密mempool通过隐藏交易内容直至最终定序来应对。其次，系统梳理阈值加密mempool的演进，从Shutter、Ferveo到最新研究，解决通讯开销、隐私缺失等瓶颈。再次，归纳四个设计方向：批量解密降低延迟、静默设置简化密钥生成、无纪元加密消除位置依赖、无冲突编码防止审查。同时，梳理以太坊活跃的部署讨论（如EIP-8105和LUCID）。最后，指出所有方案的关键局限：盲目定序和二元解密抑制了有害MEV，但也破坏了同区块拍卖机制，影响用户价值和网络地理去中心化。 <div>
 MEV and censorship, fuelled by public mempool visibility, remain existential threats to Ethereum and have recently started to spread to its layer-two ecosystem. Encrypted mempools promise to conceal transaction content until ordering is final. While this sounds appealing, their viability rests on cryptographic, economic, and deployment trade-offs.
 
 This paper systematises the evolution of threshold-encrypted mempools, from early schemes such as Shutter and Ferveo to the most recent research, and analyses how successive iterations have resolved bottlenecks like committee communication overhead, lack of pending transaction privacy, and position-dependent encryption. We highlight a convergence along four design axes, namely batched decryption to mitigate latency, silent setup to eliminate the complexity of distributed key generation, epochless encryption to remove position dependency, and collision-free encoding to prevent slot-collision censorship. We further survey the active Ethereum deployment debate, including EIP-8105 and the LUCID headliner submission, and map the requirements raised there onto the cryptographic corpus.
@@ -17,9 +18,7 @@ This paper systematises the evolution of threshold-encrypted mempools, from earl
 We conclude by exposing a critical limitation common to all current proposals: blind ordering and binary decryption together suppress not only the toxic part of MEV that motivated encrypted mempools, but also the same-block auction mechanisms that return value to users and sustain geographic decentralisation of the network.
 ]]></content:encoded>
 <pubDate>Sun, 09 Aug 2026 20:42:19 +0000</pubDate>
-<pubDate>Sun, 09 Aug 2026 20:42:19 +0000</pubDate>
 </item>
-
 <item>
 <title>LUNA+: More Succinct Post-Quantum ZK-SNARKs from Computational Privacy</title>
 <link>https://eprint.iacr.org/2026/1639</link>
@@ -13885,22 +13884,6 @@ We then continue to explore the potential of using K-out-of-N proofs to enhance 
 Finally, we identify and patch a linkability flaw in ZGSX23's signature. We benchmark our scheme against this patched one to show that our scheme achieves a boost in scalability, marking a promising step forward.
 ]]></content:encoded>
 <pubDate>Sat, 08 Feb 2025 22:06:24 +0000</pubDate>
-</item>
-<item>
-<title>NodeChain: Cheap Data Integrity Without Consensus</title>
-<link>https://eprint.iacr.org/2025/184</link>
-<guid>https://eprint.iacr.org/2025/184</guid>
-<content:encoded><![CDATA[
-<div> 关键词：区块链、去中心化应用、约束设备、数据结构、安全性证明<br /><br />总结:
-我们提出了一种新的基于区块链的数据结构，该结构放弃了复制要求，同时保持了区块链的追加唯一性特性，使其适合在存储受限的设备网络中维护数据完整性。由于我们的目标应用并不需要共识机制（例如，安全存储货船集装箱中的传感器数据），因此我们没有提供这一功能。我们通过多方面证实了这种方法的实际潜力：(i) 我们在通用组合(UC)环境中形式化地证明了协议的安全性；(ii) 提供了一个小规模的概念验证实现；(iii) 对大规模部署进行了性能模拟，显示与传统区块链相比，存储需求减少了超过1000倍；(iv) 并进行了一项鲁棒性模拟，预测了网络阻塞攻击对实际运行的影响。 <div>
-Blockchains enable decentralised applications that withstand Byzantine failures and do not need a central authority. Unfortunately, their massive replication requirements preclude their use on constrained devices.
-
-We propose a novel blockchain-based data structure which forgoes replication without affecting the append-only nature of blockchains, making it suitable for maintaining data integrity over networks of storage-constrained devices. Our solution does not provide consensus, which is not required by our motivating application, namely securely storing sensor data of containers in cargo ships.
-
-We elucidate the practical promise of our technique by following a multi-faceted approach: We (i) formally prove the security of our protocol in the
-Universal Composition (UC) setting, as well as (ii) provide a small-scale proof-of-concept implementation, (iii) a performance simulation for large-scale deployments which showcases a reduction in storage of more than $1000$x compared to traditional blockchains, and (iv) a resilience simulation that predicts the practical effects of network jamming attacks.
-]]></content:encoded>
-<pubDate>Fri, 07 Feb 2025 18:46:07 +0000</pubDate>
 </item>
 </channel>
 </rss>
