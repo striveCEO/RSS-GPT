@@ -4,6 +4,57 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+<item>
+<title>BinarySpartan: Spartan over binary fields</title>
+<link>https://eprint.iacr.org/2026/1656</link>
+<guid>https://eprint.iacr.org/2026/1656</guid>
+<content:encoded><![CDATA[
+
+Spartan is a SNARK for R1CS that can be instantiated with any multi-
+linear polynomial commitment scheme. We instantiate Spartan over a binary field, using Ligerito as the commitment scheme along with the ring-switching technique of Diamond and Posen; we refer to the instantiation as BinarySpartan. It is transparent, so it requires no trusted setup, and it provides polylogarithmic-sized proofs. Its security rests on a hash function, so it is plausibly post-quantum. We apply only well-known optimizations to Spartan and sum-check: the SIMD R1CS of Phalanx; the next multilinear extension of SuperSpartan; sum-check optimizations from Gruen, from Dao and Thaler, and from Bagad, Dao, Domb, and Thaler; and the byte lookup tables used by Binius64 for evaluating bit-valued linear maps.
+
+Thus, BinarySpartan is not a new proof system but rather a natural instantiation of Spartan over binary fields; we implement and evaluate it end to end. On a MacBook Pro M4 Max (using only its 12 performance cores, and without GPU/Metal acceleration), BinarySpartan proves BLAKE3 at 410,000 hashes/second and SHA-256 at 219,000 hashes/second, including witness generation. These clear the 200,000 hashes/second rate proposed as sufficient for a post-quantum Ethereum transition, as well as the roughly 30,000–180,000 hashes/second a possible post-quantum Bitcoin transition would require. We also evaluate BinarySpartan on the Ethereum Foundation’s client-side proving benchmark, where it proves a single SHA-256 of a 2 KiB message in 6.2 ms, making it the fastest scheme in the benchmark suite.
+]]></content:encoded>
+<pubDate>Tue, 11 Aug 2026 05:37:44 +0000</pubDate>
+<pubDate>Tue, 11 Aug 2026 05:37:44 +0000</pubDate>
+</item>
+<item>
+<title>Lattice-Based Rate-Limited Tokens in the Random Oracle Model</title>
+<link>https://eprint.iacr.org/2026/1649</link>
+<guid>https://eprint.iacr.org/2026/1649</guid>
+<content:encoded><![CDATA[
+<div> 关键词: 匿名凭证，限速令牌，格基构造，弱伪随机函数，部分绑定承诺
+
+<br><br>总结:
+1. 匿名凭证允许用户以匿名且不可关联的方式证明授权，限速令牌限制用户在特定上下文中使用凭证的次数，平衡隐私与授权访问。
+2. 过去二十年已有基于数字签名、伪随机函数（PRF）和非交互式零知识证明的通用架构，但高效的后量子安全格基实例化是悬而未决的问题。
+3. 本文提出首个限速令牌的格基构造，解决格基构件的实用挑战，利用随机预言模型中弱PRF替代标准PRF以支持高效零知识证明，并扩展安全性至密钥同态PRF。
+4. 独立贡献是首次实现格基部分绑定承诺，支持简洁析取证明，并开发CNF证明批量技术，实现对数大小的格基环签名。
+5. 首次指出匿名计数令牌可直接从匿名限速令牌导出，且通信复杂度与所需令牌数量无关。 <div>
+An anonymous credential allows a user to prove that she is authorized in an anonymous and unlinkable fashion.  A rate-limited token is an anonymous credential that can only be used a limited number of times in any particular context; this means that even though we do not know which users are gaining access to a resource, there is a limit to how many resources one user may consume.  Such tokens are becoming an increasingly attractive way to balance privacy with authorized access. Although a general architecture for how to obtain rate-limited tokens from digital signatures, pseudorandom functions (PRFs), and non-interactive zero-knowledge proofs (NIZKs) has been known for over twenty years, efficiently instantiating it with post-quantum-secure signatures and proofs has, until now, remained an open problem.  
+
+In this work, we present the first lattice-based construction of rate-limited tokens and tackle the practical challenges associated with using lattice-based building blocks in this setting. A central difficulty lies in the absence of lattice-based PRFs that support efficient NIZK proofs of correct evaluation. We show that, in the random oracle model, a weak PRF—where adversaries are restricted to querying random inputs—suffices. We further present a weak PRF construction that both admits efficient NIZK proofs and remains secure—even when adversaries have partial control over the randomness—and extend this guarantee more generally to key-homomorphic PRFs.
+
+Another contribution, which is of independent interest, is the first lattice-based construction of partially binding commitments, a primitive introduced by Goel et al. (Eurocrypt 2022) that was previously known only under discrete-log assumptions. We give a practical construction that enables succinct disjunctive proofs via a variant of the self-stacking compiler of Goel et al. Along the way, we develop a new technique for batching CNF proofs of $\Sigma$-protocols, which allows one to efficiently prove that a value is the output of a PRF on one of a set of inputs. As a direct application, this yields logarithmic-size lattice-based ring signatures based on Fiat–Shamir-with-Aborts $\Sigma$-protocols (Lyubashevsky, Eurocrypt 2012).
+
+Finally, we observe for the first time that the anonymous counting tokens of Benhamouda, Raykova, and Seth (Asiacrypt 2023) can be obtained from anonymous rate-limited tokens. This yields a construction whose communication complexity is independent of the number of tokens that need to be issued.
+]]></content:encoded>
+<pubDate>Mon, 10 Aug 2026 14:05:03 +0000</pubDate>
+<pubDate>Mon, 10 Aug 2026 14:05:03 +0000</pubDate>
+</item>
+<item>
+<title>Track me if you can: Ephemeral coin tracing</title>
+<link>https://eprint.iacr.org/2026/1645</link>
+<guid>https://eprint.iacr.org/2026/1645</guid>
+<content:encoded><![CDATA[
+<div> 可追踪性 隐私保护 中央银行数字货币 货币追踪 加密技术<br><br>总结:隐私保护支付系统在监管环境中应用受限，因担心被用于非法活动。监管机构通过追踪来打击金融犯罪，但现有追踪方案给予当局无限能力，可导致整个账本去匿名化。我们提出临时硬币追踪（ECT），其追踪能力受构造限制，包括同时追踪用户数和追踪跳数。当局发行追踪标签，每跳后退化，达到预定跳数后标签无法区分。追踪期内限制绝对，无人能超越预算追踪。ECT定义了安全和隐私保证，提供基于指数ElGamal和Damgård-Jurik加密的两种构造。 <div>
+Privacy-preserving payment systems are well understood, yet their adoption in regulated settings, such as central bank digital currencies (CBDCs), institutional stablecoins, and other compliant payment infrastructures, has been limited by concerns over their potential misuse for illicit activities. Regulators counter financial crime with a toolbox of complementary measures to identify, trace, and stop criminal actors. Tracing is one key tool: acting on outside evidence that a user is implicated in a crime such as money laundering, law enforcement follows the suspect's funds through the ledger to uncover laundering routes and accomplices. The tracing schemes proposed in the literature, however, grant authorities unbounded capabilities: once initiated, tracing propagates through the transaction graph or persists across all future transactions of a user, and may eventually deanonymize the entire ledger. Only the goodwill of the authority, or the honesty of a committee, keeps surveillance targeted and temporary.
+
+We introduce ephemeral coin tracing (ECT), a primitive whose tracing capacity is bounded by construction, both in the number of simultaneously traced users and in the number of hops each trace survives. The authority issues tracing tags that degrade at each hop; after a protocol-defined number of hops, a tag collapses into a value indistinguishable from that of an untagged coin. Within a tracing period the bound is absolute: no authority, however motivated, can follow a tag past its budget. We formalize ECT, define its security and privacy guarantees, and give two constructions, one over exponential ElGamal and one over Damgård-Jurik encryption.
+]]></content:encoded>
+<pubDate>Mon, 10 Aug 2026 08:18:10 +0000</pubDate>
+<pubDate>Mon, 10 Aug 2026 08:18:10 +0000</pubDate>
+</item>
 
 <item>
 <title>SoK: Encrypted Mempools Through the MEV Lens</title>
