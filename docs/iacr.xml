@@ -4,12 +4,13 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+
 <item>
 <title>Aegon: Self-Auditable Key Transparency</title>
 <link>https://eprint.iacr.org/2026/1681</link>
 <guid>https://eprint.iacr.org/2026/1681</guid>
 <content:encoded><![CDATA[
-<div> 关键透明度, 公开密钥, 可扩展性, Aegon, 审计证明<br><br>总结:  
+<div> 关键透明度, 公开密钥, 可扩展性, Aegon, 审计证明<br /><br />总结:  
 文章介绍了一种名为Aegon的密钥透明度方案，旨在提升全球规模加密消息服务的效率和可扩展性。现有方案（如WhatsApp和iMessage）依赖第三方审计器检测恶意密钥，且不支持轻量用户高效审计，也无法扩展到数十亿用户和低延迟。Aegon基于IronDict设计，避免每次轮次按完整字典规模工作，服务器计算仅依赖当前更新数，轮次延迟低于一分钟（比IronDict减少500倍）。它采用分片字典设计，将全局参数缩减为分片大小，支持水平扩展，并通过证明缓存控制存储增长。生产级Rust实现支持40亿条记录，在每秒1250次更新下生成低于30KB的常量审计证明，证明时间低于65毫秒，相比WhatsApp的AKD，审计证明大小减少8万倍，验证时间减少370倍，同时提供更强隐私保障。 <div>
 Key transparency enables a centralized encrypted messaging provider to publicly commit to the public keys it distributes, allowing clients to detect potentially malicious keys.  Recent deployments by WhatsApp and iMessage demonstrate the promise of this approach, but they rely on third-party global auditors to detect misbehavior by the key server.  No existing system supports auditing efficiently enough to be done by lightweight end users while also providing scalability to billions of users and short epoch latency.
 
@@ -17,7 +18,6 @@ We present $\mathsf{Aegon}$, a key transparency scheme designed for global-scale
 
 We provide a production-grade Rust implementation of $\mathsf{Aegon}$ and demonstrate practical scalability to a dictionary with $4$ billion entries, comparing it against the public codebase of WhatsApp Key Transparency ($\mathsf{AKD}$). At the throughput of $1{,}250$ updates per second, $\mathsf{Aegon}$ produces constant-size auditor proofs of under $30$ KB, verifiable in under $65$ ms and independent of the number of updates per epoch or of the directory fill. At a fully-populated $2^{32}$-entry directory, this is roughly an $80{,}000\times$ reduction in audit proof size and a $370\times$ reduction in verify time relative to $\mathsf{AKD}$. All other server and client operations remain highly efficient and comparable to $\mathsf{AKD}$, while $\mathsf{Aegon}$ achieves stronger privacy guarantees.
 ]]></content:encoded>
-<pubDate>Thu, 13 Aug 2026 19:22:37 +0000</pubDate>
 <pubDate>Thu, 13 Aug 2026 19:22:37 +0000</pubDate>
 </item>
 <item>
@@ -27,7 +27,7 @@ We provide a production-grade Rust implementation of $\mathsf{Aegon}$ and demons
 <content:encoded><![CDATA[
 <div> Poseidon, GSR, 子空间限制, 区分攻击, 插值攻击
 
-<br><br>总结:
+<br /><br />总结:
 1. 针对Poseidon哈希函数提出通用S盒跳过工具GSR，能吸收初始全轮和部分轮次而不增加多项式系统度数。
 2. 通过限制满足解的输入输出约束子空间，独立于轮常数和MDS矩阵选择，将复杂多项式系统转化为低度理想参数。
 3. 利用该工具构建对Poseidon的概率1区分攻击，覆盖t-2k+1轮。
@@ -38,7 +38,6 @@ Poseidon [Grassi, Khovratovich, Rechberger, Roy, and Schofnegger; USENIX'21] is 
 We show how to use the gadget to construct a probability 1 distinguisher over $t-2k+1$ rounds of Poseidon. We then show how this distinguisher can be used as a basis for interpolation-based attacks. We go on to present experimental solutions to the CICO-1 problem over 28 out of 31 rounds and CICO-2 problem over 25 out of 31 rounds in the setting set by the Ethereum Poseidon initiative (i.e., using the KoalaBear field with $t=24$ and $\alpha=3$). Crucially, since the subspace restriction approach is tuned only by $t$ and $k$, our results apply to the Poseidon structure regardless of the choice of round constants, MDS matrix, S-box exponent $\alpha$, or field size $p$.
 ]]></content:encoded>
 <pubDate>Sat, 15 Aug 2026 02:00:31 +0000</pubDate>
-<pubDate>Sat, 15 Aug 2026 02:00:31 +0000</pubDate>
 </item>
 <item>
 <title>Non-Interactive Translation of Winternitz Signatures to Lamport Signatures via Secret Sharing</title>
@@ -47,7 +46,7 @@ We show how to use the gadget to construct a probability 1 distinguisher over $t
 <content:encoded><![CDATA[
 <div> 关键词: BitVM2, Garbled Circuits, WOTS, Lamport签名, 翻译器
 
-<br><br>总结:
+<br /><br />总结:
 1. BitVM2实现了比特币上的任意程序执行，首次为第二层网络提供轻客户端桥梁，将信任要求降至单个诚实参与者。
 2. BitVM3和BABE将争议计算移至链下乱码电路(GC)，将链上争议成本降低约三个数量级，BABE进一步削减了BitVM3的存储和设置成本。
 3. BitVM2使用紧凑的WOTS签名提交数据，而BitVM3和BABE因需在链上揭示GC输入标签，被迫使用更庞大的Lamport签名，同时充当GC标签和比特币可验证承诺。
@@ -56,7 +55,6 @@ We show how to use the gadget to construct a probability 1 distinguisher over $t
 6. 将该翻译器应用于BABE，将链上脚本大小减少超过3倍，使争议交易符合比特币的标准限制。 <div>
 BitVM2 brought arbitrary program execution to Bitcoin, yielding the first light-client-based bridge to its second layers and reducing the trust required at setup to a single honest participant. Its successors, BitVM3 and BABE, move the disputed computation off-chain into Garbled Circuits (GCs), cutting worst-case on-chain dispute costs by roughly three orders of magnitude and so opening participation beyond well-capitalized operators; BABE in turn cuts the off-chain storage and setup costs of BitVM3's garbled circuits by a comparable factor. What still reaches the chain, however, is bulkier than it need be. BitVM2 commits its data with compact Winternitz one-time signatures (WOTS), whereas BitVM3 and BABE must reveal GC input labels on-chain and so fall back on far bulkier Lamport signatures, which play two roles at once: GC input labels and Bitcoin-verifiable commitments. WOTS cannot simply be substituted, because its hash chains are monotonic---an evaluator holding one state's preimage can hash forward and obtain several active labels on a single input wire, destroying the circuit's privacy. Recovering BitVM2's compactness therefore calls for a practical GC whose input labels are WOTS signatures---a construction that has remained out of reach. We close this gap with a non-interactive \emph{WOTS-to-Lamport translation gadget}: the garbler commits on-chain using compact WOTS chains, and the evaluator expands them off-chain into exactly the orthogonal Lamport labels the GC consumes, learning nothing about the mutually exclusive ones. A naive translation table that enumerated messages would be exponentially large. Two symmetries bring it down to quadratic: reconstruction from a Shamir sharing depends only on \emph{how many} shares are held and not on \emph{which}, which collapses the exponentially many messages onto the single checksum weight WOTS already computes; and monotonicity, the very property that made WOTS unusable, orders an evaluator's access by inclusion. We model the gadget as a garbling scheme and prove it adaptively private. Applied to BABE, it restores WOTS-scale commitments to a GC-based protocol, cutting total on-chain script size by more than $3\times$ and bringing dispute transactions within Bitcoin's standardness limit.
 ]]></content:encoded>
-<pubDate>Thu, 13 Aug 2026 23:48:05 +0000</pubDate>
 <pubDate>Thu, 13 Aug 2026 23:48:05 +0000</pubDate>
 </item>
 <item>
@@ -73,10 +71,9 @@ BitVM2 brought arbitrary program execution to Bitcoin, yielding the first light-
 4. 本文提出MinMandate框架，在用户批准任务范围内实现自适应商户选择，并生成每次调用的新支付视图，避免跨商户标识符。
 5. 实验表明，在50%商户不可用时，MinMandate平均提升任务成功率32.7个百分点，而稳定标识符模型导致攻击者任务恢复成功率达27.4个百分点，凸显隐私成本。
 
-<br><br>总结: <div>
+<br /><br />总结: <div>
 Autonomous agents are increasingly used to plan and execute paid workflows on behalf of users. Existing agentic-payment frameworks support this delegation through merchant-admission authorization credentials but require the user to specify merchants before execution. However, complex paid workflows often span multiple services and merchants, and agents may choose among them based on intermediate results. This creates two limitations: (1) requiring the user to choose each merchant in advance either limits the agent's adaptability or forces the user back into the loop; and (2) reusing a stable identifier across merchants lets observers link separate paid calls and infer the user's broader intent. To address these limitations, we introduce MinMandate, which grants adaptive merchant selection within user-approved task bounds and derives fresh per-call payment views without introducing a stable cross-merchant identifier. Extensive experiments on AgentDojo tasks demonstrate that, when 50% of merchants are unavailable, MinMandate improves task success by 32.7 percentage points on average across four tested planners compared with an AP2 baseline that preauthorizes one merchant per service class. Reintroducing a reusable public payment-layer handle in the Stable Handle ablation raises attacker task-recovery success by 27.4 percentage points on average, isolating the privacy cost of a stable join handle. The code is available at https://github.com/Zora-G/minmandate.
 ]]></content:encoded>
-<pubDate>Thu, 13 Aug 2026 08:30:10 +0000</pubDate>
 <pubDate>Thu, 13 Aug 2026 08:30:10 +0000</pubDate>
 </item>
 <item>
@@ -84,12 +81,11 @@ Autonomous agents are increasingly used to plan and execute paid workflows on be
 <link>https://eprint.iacr.org/2026/1669</link>
 <guid>https://eprint.iacr.org/2026/1669</guid>
 <content:encoded><![CDATA[
-<div> 量子差分隐私，汉明距离，信息论隐私，量子通信协议，诚实模型<br><br>总结:<br>1. 本文提出了基于信息论隐私的量子协议，用于双方输出相同估计的汉明距离计算，针对输入长度n，经典信息论协议在纯差分隐私下需要Ω(√n)误差，在强近似差分隐私下需要Ω(√n/log n)误差，而计算安全协议可实现O(1)误差。<br>2. 在Klauck的诚实、非抢占、消息保留模型中，量子协议使用O(n)通信量，在纯ε量子差分隐私下实现期望误差≤2/sinh ε+γ（γ>0）。<br>3. 对于近似(ε,δ)量子差分隐私，通过精确有限循环hockey-stick计算得到更小误差，且对δ=o(1/n)保持O(1)与Ω(√n/log n)的分离。<br>4. 主要构造采用受保护的相干往返和等格拉姆刚性原理，防止诚实方保留输入依赖的互补信息。<br>5. 该模型与弱规定信道隐私（已有经典实现）及完全保留鲁棒安全（仍受测量中断攻击）分离，表明非正交量子信息保留是隐私资源，但恶意设置下的分离仍为开放问题。 <div>
+<div> 量子差分隐私，汉明距离，信息论隐私，量子通信协议，诚实模型<br /><br />总结:<br />1. 本文提出了基于信息论隐私的量子协议，用于双方输出相同估计的汉明距离计算，针对输入长度n，经典信息论协议在纯差分隐私下需要Ω(√n)误差，在强近似差分隐私下需要Ω(√n/log n)误差，而计算安全协议可实现O(1)误差。<br />2. 在Klauck的诚实、非抢占、消息保留模型中，量子协议使用O(n)通信量，在纯ε量子差分隐私下实现期望误差≤2/sinh ε+γ（γ>0）。<br />3. 对于近似(ε,δ)量子差分隐私，通过精确有限循环hockey-stick计算得到更小误差，且对δ=o(1/n)保持O(1)与Ω(√n/log n)的分离。<br />4. 主要构造采用受保护的相干往返和等格拉姆刚性原理，防止诚实方保留输入依赖的互补信息。<br />5. 该模型与弱规定信道隐私（已有经典实现）及完全保留鲁棒安全（仍受测量中断攻击）分离，表明非正交量子信息保留是隐私资源，但恶意设置下的分离仍为开放问题。 <div>
 We introduce information-theoretically private quantum protocols for two-party Hamming distance when both parties must output the same estimate. Classically, for input length $n$, information-theoretic protocols require $\Omega(\sqrt{n})$ error under pure differential privacy and $\Omega(\sqrt{n}/\log n)$ error under strong approximate differential privacy, whereas computational security permits $O(1)$ error. In Klauck's honest, nonpreemptive, message-preserving model, we give an $O(n)$-communication quantum protocol with pure $\varepsilon$ quantum differential privacy (QDP) and expected error at most $\frac{2}{\sinh \varepsilon}+\gamma,$ for every $\gamma>0$. For approximate $(\varepsilon, \delta)$ QDP, an exact finite-cycle hockey-stick calculation yields strictly smaller error, while preserving the $O(1)$-versus-$\Omega(\sqrt{n}/\log n)$ separation for $\delta=o(1/n)$. Thus, quantum communication achieves $O(1)$ information-theoretic error, matching the accuracy available classically only under computational assumptions.
 
 The main construction uses a guarded coherent round trip and an equal-Gram rigidity principle that prevents an honest player from retaining input-dependent complementary information. We also separate this model from weaker prescribed-channel privacy, which already admits an exact classical realization, and from fully retention-robust security, against which measurement-and-abort attacks remain possible. Therefore, we identify preservation of non-orthogonal quantum messages as a resource for privacy, but leave open whether a separation exists in the malicious setting.
 ]]></content:encoded>
-<pubDate>Wed, 12 Aug 2026 20:09:57 +0000</pubDate>
 <pubDate>Wed, 12 Aug 2026 20:09:57 +0000</pubDate>
 </item>
 <item>
@@ -97,12 +93,11 @@ The main construction uses a guarded coherent round trip and an equal-Gram rigid
 <link>https://eprint.iacr.org/2026/1666</link>
 <guid>https://eprint.iacr.org/2026/1666</guid>
 <content:encoded><![CDATA[
-<div> 关键词: 区块链, 交易费用, Gasless, RLN, Layer-2<br><br>总结: 1. 区块链网络依赖交易费用解决资源分配和防止垃圾信息，但Gas机制导致低费用时防垃圾效果差、用户体验不佳、隐私泄露和运营商收入不稳等问题。2. 本文提出基于速率限制零知识证明（RLN）和非转让声誉代币（Karma）的Gasless排序器准入协议架构。3. 用户在每个周期内享有免Gas交易配额，超限交易需通过付费通道处理。4. RLN通过零知识证明实现匿名性，对违规者则通过声誉惩罚暴露身份。5. 通过参数化成本模型分析垃圾攻击经济学，并以部署该设计的Status Network（SN）L2为例进行了验证。 <div>
+<div> 关键词: 区块链, 交易费用, Gasless, RLN, Layer-2<br /><br />总结: 1. 区块链网络依赖交易费用解决资源分配和防止垃圾信息，但Gas机制导致低费用时防垃圾效果差、用户体验不佳、隐私泄露和运营商收入不稳等问题。2. 本文提出基于速率限制零知识证明（RLN）和非转让声誉代币（Karma）的Gasless排序器准入协议架构。3. 用户在每个周期内享有免Gas交易配额，超限交易需通过付费通道处理。4. RLN通过零知识证明实现匿名性，对违规者则通过声誉惩罚暴露身份。5. 通过参数化成本模型分析垃圾攻击经济学，并以部署该设计的Status Network（SN）L2为例进行了验证。 <div>
 Blockchain networks rely on transaction fees for resource allocation and spam prevention. Ethereum's gas mechanism and its adoption by Layer-2 rollups serve this dual purpose, but gas-based fee markets produce unintended consequences: ineffective spam deterrence at low fee levels, poor user experience, privacy leakage, and revenue instability for rollup operators.
 We present an idealized protocol architecture for gasless sequencer admission in Ethereum Layer-2 rollups based on Rate-Limiting Nullifiers (RLN) and a non-transferable reputation token (Karma). Users transact within a per-epoch gasless quota. Transactions beyond that quota use a gas-paid overflow path. RLN enforces the quota via zero-knowledge membership proofs, preserving pseudonymity for users within quota against on-chain observers while exposing violators through reputation slashing.
 We present the architecture and transaction flow, analyze spam-attack economics through a parameterized cost comparison on a flat per-identity quota model (labeled flat-$N$, an analysis model for the spam stress test), and describe Status Network (SN), a deployed Ethereum L2 that implements this design.
 ]]></content:encoded>
-<pubDate>Wed, 12 Aug 2026 13:31:02 +0000</pubDate>
 <pubDate>Wed, 12 Aug 2026 13:31:02 +0000</pubDate>
 </item>
 <item>
@@ -112,7 +107,7 @@ We present the architecture and transaction flow, analyze spam-attack economics 
 <content:encoded><![CDATA[
 <div> 后量子迁移 签名聚合 BLS哈希签名 以太坊共识 瞬时量子安全
 
-<br><br>总结:
+<br /><br />总结:
 1. 后量子迁移候选方案相比前量子方案带来额外成本，尤其是签名方面，并丧失了BLS等方案的同态性和直接签名聚合等特性。
 2. 提出一种方法论，允许前量子原语在量子计算机出现后仍安全使用，前提是签名伪造只需在有限生命周期内被阻止（瞬时量子安全）。
 3. 核心思想是将短暂的前量子密钥与长期后量子身份绑定，每个生命周期窗口更新一次，使得伪造仅对该窗口有效，且密钥暴露不泄露长期秘密。
@@ -130,21 +125,18 @@ Security holds as long as a standard pairing-based variant of the computational 
 We also provide a formal model and security analysis for the construction, and, of independent interest, a new analysis of BLS where the secret key is sampled similarly to the Dodis-Yampolskiy VRF (IACR PKC 2005) and the adversary is given a related group element as leakage.
 ]]></content:encoded>
 <pubDate>Tue, 11 Aug 2026 19:32:08 +0000</pubDate>
-<pubDate>Tue, 11 Aug 2026 19:32:08 +0000</pubDate>
 </item>
 <item>
 <title>Efficient Transaction Traceability for Auditable Privacy-Preserving Ledgers</title>
 <link>https://eprint.iacr.org/2026/1659</link>
 <guid>https://eprint.iacr.org/2026/1659</guid>
 <content:encoded><![CDATA[
-<div> 隐私保护，分布式账本，交易追踪，匿名凭证，安全验证<br><br>总结：本文提出一种高效的交易追踪框架，解决了现有隐私保护分布式账本中并行交易限制、高计算开销和审计权限过宽的问题。框架通过伪随机函数和匿名凭证实现黑盒构造，并给出两种具体实例：基于哈希PRF与zk-SNARK的方案，以及基于代数PRF与Sigma协议的方案。实验证明，该框架仅增加几毫秒开销即可实现实用追踪功能，同时确保系统隐私安全。 <div>
+<div> 隐私保护，分布式账本，交易追踪，匿名凭证，安全验证<br /><br />总结：本文提出一种高效的交易追踪框架，解决了现有隐私保护分布式账本中并行交易限制、高计算开销和审计权限过宽的问题。框架通过伪随机函数和匿名凭证实现黑盒构造，并给出两种具体实例：基于哈希PRF与zk-SNARK的方案，以及基于代数PRF与Sigma协议的方案。实验证明，该框架仅增加几毫秒开销即可实现实用追踪功能，同时确保系统隐私安全。 <div>
 Privacy-preserving distributed ledgers enable transaction processing systems in which users can submit transactions without revealing their identities or transaction details. Regulated and institutional settings impose additional requirements: authorized parties must be able to efficiently trace transactions to their originators without compromising overall system privacy. Existing approaches suffer from important limitations, including restricted parallel transaction formation, high computational overhead, and overly broad auditor access to user secrets.
 We present a framework for efficient tracing that eliminates concurrency issues while limiting auditor access. We formalize our security requirements via an ideal functionality and propose a black-box construction based on pseudorandom functions and anonymous credentials, with two concrete instantiations: one using hash-based PRFs and zk-SNARKs, and another using algebraic PRFs and Sigma protocols. Our experimental evaluation demonstrates practicality, incurring only a few milliseconds of overhead for the added tracing capabilities.
 ]]></content:encoded>
 <pubDate>Tue, 11 Aug 2026 15:54:32 +0000</pubDate>
-<pubDate>Tue, 11 Aug 2026 15:54:32 +0000</pubDate>
 </item>
-
 <item>
 <title>BinarySpartan: Spartan over binary fields</title>
 <link>https://eprint.iacr.org/2026/1656</link>
@@ -13901,132 +13893,6 @@ We introduce $k$-$\textit{linkable ring signatures}$ ($k$-LRS) as a primitive fo
     We provide two constructions of $k$-LRS: one is from the DDH, and the other is from SIS (hence post-quantum). Finally, we show how $k$-LRS can be applied to a broad range of voting rules, including $\textit{score voting}$, $\textit{multi-voting}$, and $\textit{Borda}$. Our protocols are non-interactive voting—each voter just posts a message on a bulletin board—which highlights the potential of $k$-LRS in blockchain-governance scenarios.
 ]]></content:encoded>
 <pubDate>Sun, 16 Feb 2025 05:14:11 +0000</pubDate>
-</item>
-<item>
-<title>IBE-IBE: Intent-Based Execution through Identity-Based Encryption and Auctions</title>
-<link>https://eprint.iacr.org/2025/241</link>
-<guid>https://eprint.iacr.org/2025/241</guid>
-<content:encoded><![CDATA[
-<div> 关键词: 分布式、无领导节点、密封投标拍卖、动态定价、区块链网络、多党计算(MPC)、身份基加密(IBE)、公平性、去中心化、价格发现透明度、安全性、竞争、意图保密、全同态加密(FHE)、可信执行环境(TEE)、 frontrunning风险、中央集权化、快速结算、去中心金融(DeFi)
-
-<br /><br />总结:
-
-本文提出了一种基于区块链网络的分布式、无领导节点的密封投标拍卖模型，用于动态定价意图。该模型利用多党计算(MPC)和身份基加密(IBE)来提升定价效率并确保公平与去中心化。通过解决当前集中式或静态定价机制的脆弱性，我们的方法促进了透明、安全且具有竞争力的价格发现过程。同时，我们通过多党计算(MPC)、全同态加密(FHE)和可信执行环境(TEE)进一步增强了意图信息的机密性，有效降低了frontrunning风险和中央集权化的隐患，保持了去中心金融(DeFi)中至关重要的快速结算时间。 <div>
-This paper introduces a decentralized and leaderless sealed bid auction model for dynamic pricing of intents across blockchain networks. We leverage Multi-Party Computation (MPC) and Identity-Based Encryption (IBE) to improve pricing while ensuring fairness and decentralization. By addressing the vulnerabilities of current centralized or static pricing mechanisms, our approach fosters transparent, secure, and competitive price discovery. We further enhance the confidentiality of intents through Multi-Party Computation (MPC), Fully Homomorphic Encryption (FHE), and Trusted Execution Environments (TEE). Our novel methodology mitigates the risks of frontrunning and centralization while preserving the rapid settlement times essential to decentralized finance (DeFi).
-]]></content:encoded>
-<pubDate>Sat, 15 Feb 2025 22:52:28 +0000</pubDate>
-</item>
-<item>
-<title>DART: Decentralized, Anonymous, and Regulation-friendly Tokenization</title>
-<link>https://eprint.iacr.org/2025/239</link>
-<guid>https://eprint.iacr.org/2025/239</guid>
-<content:encoded><![CDATA[
-<div> 关键词: DART、匿名支付系统、多资产类型、非交互式支付、可逆性机制
-
-总结:
-DART是一个全新的完全匿名、基于账户的支付系统，它兼顾了现实世界的多种考量因素，包括监管合规性，并实现了常量级别的交易大小。该系统支持多种资产类型，允许用户发行链上资产，如代币化的现实世界资产。通过隐藏资产类型、交易金额、余额以及发送者和接收者的身份信息，DART确保了交易的机密性和匿名性，并保证了交易间的不可链接性。同时，系统提供了一种针对特定资产的审计机制，使得发行人可以为他们发行的资产指定特定的审计员，同时保护审计员的身份隐私，以实现资产类型隐私。只有指定的审计员才能解密与其关联资产相关的交易，并且用户能在交易中有效地证明（隐藏的）资产类型与（隐藏的）指定审计员之间的关联。
-
-DART还支持非交互式支付，即使接收方离线，在线的发送方也能提交交易，同时还结合了一个接收方确认机制，体现了现实中接收方需确认或否认接收到的交易这一合规要求。据我们所知，这是无许可环境中首个此类方案。为了应对各种可能情况，DART还包括了一个可逆性机制，使发送方可以在接收方未确认的情况下从待处理交易中取回资金。此外，它还提供了保护隐私的资产余额证明机制。
-
-DART系统在支持并发的入站和出站交易的同时保持了完全匿名性，解决了许多基于账户的匿名系统中存在的常见问题。DART还展示了如何高效地支持多方交易，即在一个交易中向多个接收方付款。我们在通用组合(UC)设置下给出了完整的正式模型以及一个UC协议实现。 <div>
-We introduce DART, a fully anonymous, account-based payment system designed to address a comprehensive set of real-world considerations, including regulatory compliance, while achieving constant transaction size. DART supports multiple asset types, enabling users to issue on-chain assets such as tokenized real-world assets. It ensures confidentiality and anonymity by concealing asset types, transaction amounts, balances, and the identities of both senders and receivers, while guaranteeing unlinkability between transactions. Our design provides a mechanism for asset-specific auditing. Issuers can designate asset-specific auditors for the assets they issue, with the system preserving the privacy of the auditor’s identity to achieve asset type privacy. Only the designated auditor is authorized to decrypt transactions related to their associated asset, and users efficiently prove the association between the (hidden) asset type and the (hidden) designated auditor in their transactions. 
-
-DART supports non-interactive payments, allowing an online sender to submit a transaction even when the receiver is offline, while still incorporating a receiver affirmation mechanism that captures the real-world compliance consideration where the receiver must confirm (or deny) an incoming transaction. To the best of our knowledge, this is the first scheme of this kind in the permissionless setting. To accommodate all eventualities, DART also incorporates a reversibility mechanism, enabling senders to reclaim funds from pending transactions if the receiver’s affirmation is not yet provided. Finally, it offers a privacy-preserving proof of balance (per asset type) mechanism. 
-
-Our system achieves full anonymity while supporting concurrent incoming and outgoing transactions, resolving a common issue that plagues many account-based anonymous systems. We further demonstrate how our system supports multi-party transactions, allowing payment to multiple receivers in one transaction efficiently. We provide a full formal model in the Universal Composition (UC) setting, as well as a UC protocol realization.
-]]></content:encoded>
-<pubDate>Sat, 15 Feb 2025 14:46:13 +0000</pubDate>
-</item>
-<item>
-<title>The Quantum Decoherence Model: Everlasting Composable Secure Computation and More</title>
-<link>https://eprint.iacr.org/2025/220</link>
-<guid>https://eprint.iacr.org/2025/220</guid>
-<content:encoded><![CDATA[
-<div> 关键词：量子密码学、量子退相干模型（QDM）、通用可组合性框架、非交互式承诺方案、永远安全
-
-总结:
-文章提出了一个新的安全模型——量子退相干模型（QDM），该模型描述了在协议运行期间和结束后一段时间内受到计算限制的对手，但在协议终止很久之后变得计算上无限制，但只能记住有限数量的先前状态的量子位。在此基础上，文章提供了一个带有量子随机预言机的增强版通用可组合性框架，并构建了一个针对恶意发送者具有无条件和统计安全性，以及对恶意接收者具有永远安全性的非交互式承诺方案。此方案可以推广到实现具有永远安全性的多方安全计算。此外，文章的核心技术还可以应用于更广泛的问题，如生成在QDM下具有永远安全性的公开密钥加密和OT，以及在量子退相干设置下的压缩不可行加密，并表明使用后量子IND-CPA安全的公钥加密无需依赖随机预言机即可实现这一概念。这一切都基于一个新颖而简洁的强大反熵不确定性原理。 <div>
-Quantum cryptography allows to achieve security goals which are unobtainable using classical cryptography alone: it offers the promise of everlasting privacy. Thatis, an adversary trying to attack a protocol must succeed during the run of the protocol.
-After the protocol has terminated, security holds unconditionally.
-In this work, we initiate the study of a new model which we call the quantum decoherence model (QDM). In a nutshell, this model captures adversaries that are computationally bounded during the run of a protocol (and some time after), but become computationally unbounded long after the protocol terminates. Importantly, once the adversary becomes computationally unbounded, he can only remember a bounded number of qubits from before the computational bound was lifted.
-We provide a variant of the Universal Composability framework which captures the new notion of quantum decoherence and augment it with quantum random oracles. As our main contribution, we construct a non-interactive commitment scheme achieving unconditional and statistical security against malicious senders and everlasting security against malicious receivers under our new security notion. Such commitments imply general secure multiparty computation with everlasting security.
-Finally, we show that our core technique can be applied to a broader spectrum of problems. We show that it gives rise to everlasting public key encryption and OT in the QDM. Finally, we also consider the weaker notion of incompressible encryption in the setting of quantum decoherence, and show that post-quantum IND-CPA secure public
-key encryption is sufficient to realize this notion without resorting to random oracles.
-At the technical core of our constructions is a new, conceptually simple yet powerful reverse entropic uncertainty relation.
-]]></content:encoded>
-<pubDate>Thu, 13 Feb 2025 13:08:09 +0000</pubDate>
-</item>
-<item>
-<title>Slot a la carte: Centralization Issues in Ethereum's Proof-of-Stake Protocol</title>
-<link>https://eprint.iacr.org/2025/219</link>
-<guid>https://eprint.iacr.org/2025/219</guid>
-<content:encoded><![CDATA[
-<div> 关键词：Ethereum、proof-of-stake (PoS)、distributed randomness beacons (DRBs)、RANDAO、manipulation
-
-总结:
-
-本文研究发现，以太坊当前的权益证明（PoS）共识机制对去中心化构成重大威胁。文章重点关注分布式随机数生成器（DRBs）在领导者选择中的可操纵性问题，特别是以太坊所使用的RANDAO DRB在现有形式下存在严重漏洞。研究指出，在有丰厚收益的槽位被预见的情况下，质押实体可能会临时合谋控制超过33%的验证者，从而使得他们能够以高达99.5%的成功率执行一系列RANDAO操纵攻击，锁定目标槽位。该方法的有效性源于其对于可能攻击行为模型的深入探索，包括通过在敌人自己的槽位中隐瞒区块或通过分叉他人的提议区块来错过主链上的区块。文章认为，虽然PoS有可能为区块链的未来发展铺平道路，但以太坊目前的DRB实现必须替换为更安全的机制。 <div>
-In this paper, we demonstrate that Ethereum's current proof-of-stake (PoS) consensus mechanism poses a significant threat to decentralisation. Our research focuses on the manipulability of distributed randomness beacons (DRBs) in leader selection. Specifically, we show that RANDAO - Ethereum's DRB - is seriously vulnerable to manipulations in its current form.  For example, if a lucrative slot is foreseen, there is a risk that staking entities may temporarily collude to control $33\%$ of the validators, enabling them to execute a series of RANDAO manipulation attacks that secure the target slot with a $99.5\%$ success rate. The effectiveness of our method stems from the fact that we work with a significantly richer model of the possible attacks compared to previous works. Our manipulative strategies work by missing blocks from the canonical chain - either by withholding blocks in the adversary's own slots or by forking out blocks proposed by others. We argue that while PoS can pave the path in the future for blockchains, Ethereum's current DRB implementation has to be replaced with a more secure mechanism.
-]]></content:encoded>
-<pubDate>Thu, 13 Feb 2025 12:29:05 +0000</pubDate>
-</item>
-<item>
-<title>Practical Circuit Privacy/Sanitization for TFHE</title>
-<link>https://eprint.iacr.org/2025/216</link>
-<guid>https://eprint.iacr.org/2025/216</guid>
-<content:encoded><![CDATA[
-<div> 关键词: 完全同态加密 (FHE), 两方计算 (2PC), 清理算法, TFHE, 实践性
-
-总结:
-本文介绍了针对TFHE（全同态加密）的一种新型清理算法，该算法解决了服务器输入隐私和电路隐私保护的问题。传统清理算法存在效率低下问题，需要多次引导或大量随机评估。新提出的算法仅对原始TFHE引导过程添加了两个轻量级的随机化步骤，无需改动核心算法，实现了单次引导和最小化的随机化清理，从而更接近实际应用。通过实证评估，新方法在一个TFHE密文清理上耗时35.88 ms，相比原版TFHE引导仅慢了3.4%（即1.18 ms）。相较于先前的工作，新方法在速度上有4.82到209.03倍的提升，显著提高了清理算法的效率和实用性。 <div>
-Fully homomorphic encryption (FHE) enables the computation of arbitrary circuits over encrypted data. A widespread application of FHE is a simple two-party computation (2PC) protocol, where the server evaluates a circuit over the client's encrypted data and its private inputs. However, while the security of FHE guarantees that the client's data is protected from the server, there is no inherent support for the privacy of the server's input and the circuit.
-
-One effective solution to this problem is an additional algorithm for FHE called sanitization, introduced by Ducas and Stehlé (Eurocrypt 2016). Roughly speaking, a sanitization algorithm removes any meaningful information contained in the ciphertext, including previous evaluations of circuits. Following their definition, several constructions for sanitization have been proposed, particularly for TFHE. However, all of these methods were impractical, requiring several bootstrappings or an excessive amount of randomized evaluations.
-
-In this work, we construct a novel sanitization algorithm for TFHE that overcomes these issues. Our method only adds two lightweight randomization steps to the original TFHE bootstrapping, without any modifications to the core algorithms. As a result, our algorithm achieves sanitization with a single bootstrapping and minimal randomization, bringing sanitization closer to practicality.
-
-To empirically evaluate the efficiency of our method, we provide concrete benchmark results based on our proof-of-concept implementation. Our algorithm sanitizes a single TFHE ciphertext in 35.88 ms, which is only 3.4% (1.18 ms) slower than the original TFHE bootstrapping with the same parameters. When directly compared to previous works, our method achieves a speedup by a factor of 4.82 to 209.03.
-]]></content:encoded>
-<pubDate>Wed, 12 Feb 2025 10:47:11 +0000</pubDate>
-</item>
-<item>
-<title>Prior-Based Label Differential Privacy via Secure Two-Party Computation</title>
-<link>https://eprint.iacr.org/2025/211</link>
-<guid>https://eprint.iacr.org/2025/211</guid>
-<content:encoded><![CDATA[
-<div> 关键词: 差分隐私(DP), 局部差分隐私(LDP), 标签差分隐私, 安全两方计算(2PC), 数据集(MNIST, CIFAR-10)
-
-总结:
-本文关注了在基于先验的局部差分隐私机制中存在的一种敏感先验信息泄露的隐私问题。为了解决这一挑战，同时保持训练模型的效率和准确性，文章提出了一种利用安全两方计算(2PC)协议的新方法来实施此类LDP机制，以避免先验信息泄漏。作者已在标准数据集MNIST和CIFAR-10上实现了该方案并进行了端到端测试。实验结果显示，采用2PC带来的安全性增强几乎无需额外成本：对于CIFAR-10，在强差分隐私参数下，使用2PC导致的运行时间开销仅增加了约3.9%，而相对于不安全（非2PC）方法，精度下降仅为0.4%。 <div>
-Differential privacy (DP) is a fundamental technique used in machine learning (ML) training for protecting the privacy of sensitive individual user data. In the past few years, a new approach for combining prior-based Local Differential Privacy (LDP) mechanisms with a relaxed DP criterion, known as Label DP, has shown great promise in increasing the utility of the final trained model without compromising on the DP privacy budget. In this work, we identify a crucial privacy gap in the current implementations of these prior-based LDP mechanisms, namely the leakage of sensitive priors. We address the challenge of implementing such LDP mechanisms without leaking any information about the priors while preserving the efficiency and accuracy of the current insecure implementations. To that end, we design simple and efficient secure two-party computation (2PC) protocols for addressing this challenge, implement them, and perform end-to-end testing on standard datasets such as MNIST, CIFAR-10. Our empirical results indicate that the added security benefit essentially comes almost for free in the sense that the gap between the current insecure implementations and our proposed secure version, in terms of run-time overhead and accuracy degradation, is minimal. E.g., for CIFAR-10, with strong DP privacy parameter, the additional runtime due to 2PC is $\approx 3.9\%$ over WAN with $0.4\%$ decrease in accuracy over an insecure (non-2PC) approach.
-]]></content:encoded>
-<pubDate>Wed, 12 Feb 2025 03:10:03 +0000</pubDate>
-</item>
-<item>
-<title>NovaTEE: Private Clearing and Settlement on Trusted Execution Hardware</title>
-<link>https://eprint.iacr.org/2025/209</link>
-<guid>https://eprint.iacr.org/2025/209</guid>
-<content:encoded><![CDATA[
-<div> 关键词: NovaTEE、私有多边结算网络、可信执行环境(TEEs)、阈值密码学、资本效率
-
-总结:
-NovaTEE是一种创新的私有多边结算网络，旨在解决传统金融市场和加密货币交易中的关键效率问题。它利用可信执行环境(TEEs)和阈值密码学技术，实现多方之间的安全、私密和高效结算。该系统采用分布式密钥生成模型和新颖的清算机制，通过多边净额结算优化资本效率，并保持强大的隐私保护和合规性能力。通过结合TEE提供的安全性与零知识证明、稀疏默克尔树等高级加密协议，NovaTEE解决方案能实现在保护敏感交易信息的同时，进行跨平台和跨链的有效结算，显著降低市场参与者的资本要求、优化交易成本，并为机构级清算基础设施提供支持，而无需牺牲安全性和隐私性。其体系结构确保无单一实体完全掌握交易详情，同时通过分布式备份网络保持可审计性，为此类系统的机构采纳提供了切实可行的解决方案。 <div>
-NovaTEE is a novel private multilateral settlement network designed to address critical inefficiencies in both traditional financial markets and cryptocurrency trading. The current clearing landscape suffers from fragmented capital allocation, restrictive prime brokerage relationships, and prolonged settlement timeframes in traditional finance, while cryptocurrency markets face challenges with over-collateralization, siloed lending pools, and security risks from centralized exchanges.
-
-We introduce a settlement system that leverages Trusted Execution Environments (TEEs) and threshold cryptography to enable secure, private, and efficient settlement of obligations between multiple parties. The system utilizes a distributed key generation model and novel clearing mechanisms to optimize capital efficiency through multilateral netting, while maintaining strong privacy guarantees and regulatory compliance capabilities. By combining TEE-based security with advanced cryptographic protocols, including zero-knowledge proofs and sparse Merkle trees for data verification, our solution enables efficient cross-venue and cross-chain settlement while protecting sensitive trading information. This approach significantly reduces capital requirements for market participants, optimizes transaction costs, and provides institutional-grade clearing infrastructure without compromising on security or privacy. The system's architecture ensures that no single party has complete access to transaction details while maintaining auditability through a distributed backup network, offering a practical solution for institutional adoption of on-chain settlement.
-]]></content:encoded>
-<pubDate>Tue, 11 Feb 2025 21:29:13 +0000</pubDate>
-</item>
-<item>
-<title>Addressing Scalability Issues of Blockchains with Hypergraph Payment Networks</title>
-<link>https://eprint.iacr.org/2025/205</link>
-<guid>https://eprint.iacr.org/2025/205</guid>
-<content:encoded><![CDATA[
-<div> 关键词: 支付通道、Layer-2解决方案、交易成功率、交易费用、超边<br /><br />总结:
-为了解决传统区块链上链交易数量过多和交易吞吐量不足的问题，支付通道成为Layer-2解决方案中的理想候选。本文提出在支付通道中引入柔韧性并构建具有多端点的超边，以此扩展支付网络图。通过对比比特币闪电网络和其他先进方案，研究发现基于超边的实现不仅能提高交易成功率，而且能将网络成本降低超过50%，相比闪电网络具有显著优势。 <div>
-Payment channels are auspicious candidates in layer-2 solutions to reduce the number of on-chain transactions on traditional blockchains and increase transaction throughput. To construct payment channels, peers lock funds on 2-of-2 multisig addresses and open channels between one another to transact via instant peer-to-peer transactions. Transactions between peers without a direct channel are made possible by routing the payment over a series of adjacent channels. In certain cases, this can lead to relatively low transaction success rates and high transaction fees. In this work, we introduce pliability to constructing payment channels and graft edges with more than two endpoints into the payment graph. We refer to these constructions as hyperedges. We present hyperedge-based topologies to form hypergraphs and compare them to Bitcoin's Lightning network and other state-of-the-art solutions. The results demonstrate that hyperedge-based implementations can both increase transaction success rate, in addition to decreasing the network cost by more than 50% compared to that of the Lightning Network.
-]]></content:encoded>
-<pubDate>Tue, 11 Feb 2025 14:02:52 +0000</pubDate>
 </item>
 </channel>
 </rss>
