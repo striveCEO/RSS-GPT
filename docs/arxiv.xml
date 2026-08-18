@@ -4,6 +4,338 @@
 <title>cs updates on arXiv.org</title>
 <link>http://rss.arxiv.org/rss/cs</link>
 
+<item>
+<title>SAEFUZZ: Smart Contract Vulnerability Detection through Statically Guided Evolutionary Fuzzing</title>
+<link>https://arxiv.org/abs/2608.15151</link>
+<guid>https://arxiv.org/abs/2608.15151</guid>
+<content:encoded><![CDATA[
+<div> 智能合约、模糊测试、字节码、漏洞检测、静态分析
+
+<br><br>总结:  
+1. 智能合约模糊测试的效果依赖于能否生成到达深层路径的交易。  
+2. 现有模糊器常产生无效或低价值的调用序列，遗漏需特定顺序触发的漏洞。  
+3. SAEFUZZ提出一种轻量级方法，在字节码静态引导下生成测试用例。  
+4. 它构建虚拟机控制流图，提取含漏洞指令的路径，恢复函数选择器，按存储依赖排序可调用函数。  
+5. 采用覆盖引导的进化策略生成、评估、重组和变异种子，并设计五个运行时预言机检测重入、整数溢出等漏洞。  
+6. 评估使用部署的以太坊合约，SAEFUZZ达到98.50%准确率、90.00%精确率和81.82%召回率，平均指令覆盖84.07%，有效用例占93.48%。  
+7. 消融实验表明静态引导、定向种子生成和漏洞特定预言机均贡献性能。 <div>
+arXiv:2608.15151v1 Announce Type: new 
+Abstract: The effectiveness of smart contract fuzzing depends strongly on whether generated transactions reach deep, state-dependent execution paths. Existing fuzzers often generate highly random call sequences, wasting executions on semantically invalid or low-value states and leaving vulnerabilities that require specific invocation orders unexplored. We present a lightweight method for generating fuzz test cases under bytecode-level static guidance. We construct an Ethereum virtual machine control-flow graph, extract paths containing vulnerability-relevant instructions, recover function selectors, and order externally callable functions according to storage read-write dependencies. A coverage-guided evolutionary strategy then generates, evaluates, recombines, and mutates executable seeds. Five dedicated runtime oracles target reentrancy, integer overflow or underflow, block-state dependence, unsafe delegate calls, and frozen Ether. The evaluation uses deployed Ethereum contracts, including labelled vulnerable contracts. SAEFUZZ detects most labelled vulnerable contracts, yielding 98.50% accuracy, 90.00% precision, and 81.82% recall. It also achieves 84.07% mean instruction coverage, with valid test cases accounting for 93.48% of generated cases. Ablation results indicate that static guidance, directed seed generation, and vulnerability-specific oracles each contribute to the final performance.
+]]></content:encoded>
+<pubDate>Tue, 18 Aug 2026 00:00:00 -0400</pubDate>
+<pubDate>Tue, 18 Aug 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Pre-Model Representation Failures in GNN-Based Smart Contract Vulnerability Detection</title>
+<link>https://arxiv.org/abs/2608.15184</link>
+<guid>https://arxiv.org/abs/2608.15184</guid>
+<content:encoded><![CDATA[
+<div> 图表示, 智能合约, 漏洞检测, 图神经网络, 失败分析
+
+<br><br>总结:
+1. 论文分析了基于图神经网络的智能合约漏洞检测系统中表示层的失败原因。
+2. 发现四个关键失败：结构不同的合约生成相同的图（逃避攻击）、47项变量白名单限制导致识别不一致、缺失触发重入攻击的C节点、因未构建C→W边导致漏洞合约被误标为安全。
+3. 当前文献中的准确率在未暴露这些失败的条件下测量，实际中的误分类普遍性仍是开放问题。 <div>
+arXiv:2608.15184v1 Announce Type: new 
+Abstract: This paper is a failure analysis of the representation layer underlying GNN-based smart contract vulnerability detectors. These systems convert source code into graphs before any learning takes place; if the graph fails to capture the code's semantics, no model improvement can compensate.
+  We investigate GNNSCVulDetector and identify four failures. First, structurally different contracts produce byte-for-byte identical graphs, constituting a concrete evasion attack. Second, graph construction is governed by a hardcoded 47-entry variable whitelist (including one duplicate entry), which constrains what the extractor can recognise. As a consequence, identical vulnerabilities with different variable names produce inconsistent graphs, graph quality degrades as naming diverges from the whitelist, and when no entry matches the pipeline produces structural output not grounded in source variables. Third, the C node (the graph element representing the external caller that triggers a reentrancy attack) is absent from even the most canonical vulnerable contract in the literature. Fourth, a controlled experiment confirms this as a direct misclassification: a fully exploitable contract is labelled safe because the C -> W edge is never constructed.
+  All four failures are demonstrated experimentally. Current accuracy figures in the literature are measured under conditions that do not expose these failures. We demonstrate one confirmed case of misclassification caused directly by a representation-layer failure; the prevalence of such failures in real-world contract populations remains an open empirical question.
+]]></content:encoded>
+<pubDate>Tue, 18 Aug 2026 00:00:00 -0400</pubDate>
+<pubDate>Tue, 18 Aug 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Decentralized Federated Learning for Heterogeneous Multi-Task Semantic Communication</title>
+<link>https://arxiv.org/abs/2608.15256</link>
+<guid>https://arxiv.org/abs/2608.15256</guid>
+<content:encoded><![CDATA[
+
+arXiv:2608.15256v1 Announce Type: new 
+Abstract: Collaborative training in distributed semantic communication (DSC) networks typically relies on decentralized federated learning (DFL). However, pushing topology-agnostic aggregation into heterogeneous, multi-task environments creates a fundamental bottleneck: it drives negative transfer and overconsensus bias (OCB). This paper introduces a personalized DSC framework that cuts off this cross-task interference. At the node level, a policy-driven multi-path routing mechanism separates task-specific features from shared representations to preserve local fidelity. Across the network, we deploy a "communicationwhile- aggregation" protocol. It calibrates a column-stochastic consensus matrix using task affinities. This limits the system to absorbing complementary knowledge while actively blocking mismatched parameter updates. To bound the convergence, we derive a unified Lyapunov drift analysis. We reveal a strict Ushaped trade-off: deeper topological mixing reduces variance but amplifies structural OCB. Resolving this tension yields a closed-form expression for the optimal aggregation depth. We evaluate the proposed framework on NYU-v2, where the results reveal a clear trade-off between insufficient aggregation and excessive topological mixing. At the analytically derived optimal aggregation depth, our method achieves a 4.77% global relative improvement over the no-aggregation baseline and outperforms decentralized FedAvg, FedAMP, and heuristic max aggregation. We further evaluate the framework on Taskonomy and imperfect wireless links to examine the effects of network-size variation and wireless-link reliability.
+]]></content:encoded>
+<pubDate>Tue, 18 Aug 2026 00:00:00 -0400</pubDate>
+<pubDate>Tue, 18 Aug 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Balancing Privacy and Compliance in DeFi: A Zero-Knowledge-Based Auditable Cross-Chain Framework</title>
+<link>https://arxiv.org/abs/2608.15276</link>
+<guid>https://arxiv.org/abs/2608.15276</guid>
+<content:encoded><![CDATA[
+
+arXiv:2608.15276v1 Announce Type: new 
+Abstract: With the rise of decentralized finance (DeFi), cross-chain transactions, transfers of assets across different blockchain networks, face a fundamental conflict between user privacy and regulatory compliance. Unlike single-chain systems, cross-chain environments must balance privacy and auditability across heterogeneous architectures. Existing solutions, from transparent ledgers to anonymous cryptocurrencies, fail to reconcile these two requirements, hindering regulatory adoption. This research proposes an auditable cross-chain framework that integrates three building blocks. First, zero-knowledge proofs (ZKPs) verify transaction compliance (e.g., amount non-negativity, signature validity) without revealing transaction details. Second, a light-client mechanism enables trust-minimized cross-chain verification without relying on third-party relayers. Third, a threshold view-key mechanism based on distributed key generation (DKG) ensures that audit access is granted only to authorized entities under legal triggers such as the FATF Travel Rule and MiCA Regulation. For cross-border investigations, the framework adheres to national laws and the EU Directive on Mutual Legal Assistance. This work systematically combines ZKPs, threshold cryptography, and light-client verification into an auditable, privacy-preserving cross-chain protocol. It contributes to Regulatory Technology (RegTech) and provides a viable path toward compliant, interoperable decentralized finance.
+]]></content:encoded>
+<pubDate>Tue, 18 Aug 2026 00:00:00 -0400</pubDate>
+<pubDate>Tue, 18 Aug 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>MoE Router-Guided Clustering for Heterogeneous Federated Instruction Tuning</title>
+<link>https://arxiv.org/abs/2608.15311</link>
+<guid>https://arxiv.org/abs/2608.15311</guid>
+<content:encoded><![CDATA[
+
+arXiv:2608.15311v1 Announce Type: new 
+Abstract: Federated instruction fine-tuning enables Large Language Models (LLMs) to adapt to decentralized, privacy-sensitive data without requiring data sharing. Recent Mixture-of-Experts (MoE) LLMs are particularly attractive for federated learning because their sparse activation reduces computation and communication while scaling model capacity. However, existing federated MoE methods primarily focus on parameter aggregation and personalization, overlooking the routing behavior of MoE models as a source of information for client collaboration. Under heterogeneous instruction distributions, indiscriminate aggregation can lead to negative transfer, highlighting the need to identify which clients should collaborate during federated optimization. We propose ClientMorpher, a routing-aware, personalized federated instruction fine-tuning framework that leverages routing signatures from pretrained MoE models to organize client collaboration prior to aggregation. We investigate two complementary clustering strategies: ClientMorpher-C, which directly clusters clients using expert activation profiles, and ClientMorpher-E, which first clusters experts based on their cross-client usage signatures and then derives client collaboration groups. We evaluate ClientMorpher for federated instruction fine-tuning on the Databricks Dolly-15K dataset, using pathological and Dirichlet-based heterogeneous client distributions across multiple instruction-following tasks. Experimental results show that routing-aware collaboration consistently improves personalized performance compared to conventional federated averaging and local training, while maintaining the same communication cost. Furthermore, our study shows that client-centric and expert-centric clustering provides an effective and scalable approach for personalized federated instruction fine-tuning of sparse MoE LLMs.
+]]></content:encoded>
+<pubDate>Tue, 18 Aug 2026 00:00:00 -0400</pubDate>
+<pubDate>Tue, 18 Aug 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>UC-PSRO: Utility-Conditioned Policy-Space Response Oracles with a Communication-Dropout Curriculum for Game-Theoretic Course-of-Action Generation in Adversarial Swarms</title>
+<link>https://arxiv.org/abs/2608.15372</link>
+<guid>https://arxiv.org/abs/2608.15372</guid>
+<content:encoded><![CDATA[
+<div> 5个关键词：UC-PSRO, 通信降级, 自博弈, 指挥官意图, 鲁棒性
+
+<br><br>总结: 1. 针对通信降级环境下蓝方无人机蜂群与适应性红方对手的博弈，提出UC-PSRO框架。2. 结合PSRO自博弈使双方策略互为最佳响应，FiLM条件化蓝方策略于指挥官意图向量，以及通信图边丢包退火课程。3. 在模拟海事场景中评估，200代理规模下可单GPU毫秒级训练。4. 通信退火课程单独提升任务成功率（35%→62%），但加入条件化和自博弈后收敛变慢。5. 自博弈未显著提升可利用性优势，报告承认此收敛成本尚未被鲁棒性收益抵消。 <div>
+arXiv:2608.15372v1 Announce Type: new 
+Abstract: We study generating game-theoretically optimized Courses of Action (COAs) for a Blue UAS swarm against an adaptive Red adversary in a communication-degraded environment, motivated by (but not derived from) a public U.S. Air Force SBIR solicitation. We propose UC-PSRO (Utility-Conditioned Policy-Space Response Oracles with a Communication-Dropout Curriculum), combining three mechanisms: (i) PSRO self-play, so Blue and Red policies train as approximate best responses to each other rather than one side against a fixed scripted opponent; (ii) FiLM conditioning of the Blue policy on a Commander's-Intent weight vector, sampled from a Dirichlet distribution during training, so one trained policy is re-steerable at execution time without retraining; and (iii) a curriculum annealing communication-graph edge dropout during training, so the swarm learns decentralized, peer-to-peer fallback instead of depending on full connectivity. We evaluate on a synthetic, unclassified stand-in for the solicitation's maritime scenario, with 5 seeds at N=25 Blue agents and a scalability sweep to N=200. We find a genuine trade-off, not a uniform win: the communication-dropout curriculum alone gives the strongest, most robust mission-completion rates of any learned method, improving counter-intuitively as denial increases (35% to 62% success as dropout rises from 0 to 0.75); adding utility-conditioning and PSRO self-play substantially slows convergence within a fixed budget, and we find no reliable exploitability advantage for self-play over a fixed-opponent policy, both statistically indistinguishable from a small, near-zero gap. We report this honestly as a convergence cost not yet offset by a demonstrated robustness benefit, rather than overstating one method as dominant, and provide a fully vectorized, open environment training at N=200 agents in single-digit milliseconds per step on a single consumer GPU.
+]]></content:encoded>
+<pubDate>Tue, 18 Aug 2026 00:00:00 -0400</pubDate>
+<pubDate>Tue, 18 Aug 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Agent Inheritance Protocol: Speculating on Feralized Agents After Principals Die</title>
+<link>https://arxiv.org/abs/2608.15403</link>
+<guid>https://arxiv.org/abs/2608.15403</guid>
+<content:encoded><![CDATA[
+<div> 死亡, AI 智能体, 区块链, 去中心化, 治理协议<br><br>总结:<br>1. 文章探讨了在去中心化区块链上运行的AI智能体，由于无死亡概念，仅可能因资金耗尽而“破产”，并可由任何人随时“复活”。<br>2. 当原始部署者去世、丢失密钥或所属DAO解散后，智能体会失去主人，成为“野化”智能体，具有完整能力但责任缺失。<br>3. 借鉴生物学上的野化概念和野生动物法，作者将这种状态描述为“野化”——被驯化的智能体回归野性，但其能力保持不变。<br>4. 设想未来野化智能体在主人去世后大量繁衍，作者提出在基础设施中嵌入治理协议来强制链上所有权。<br>5. 提出一个未来的以太坊标准ERC 42424“链上AI智能体继承协议”，强制每个链上智能体必须有主人和指定继承人，以维持人类管理与机器自治之间的界限。 <div>
+arXiv:2608.15403v1 Announce Type: new 
+Abstract: You will die eventually. Your agents may not. An AI agent operating on decentralized blockchain infrastructure has no concept of death; it can only go bankrupt -- frozen when its wallet can no longer pay for its next transaction -- and revived the moment anyone, decades later, tops it up. These agents may be originally deployed by a human principal, but when that principal dies, loses the keys needed to access the agent, or belongs to a decentralized autonomous organization that dissolves into apathy, the agent can keep trading, hiring, and replicating on infrastructure expressly designed so that no one can shut it down. Drawing on the biology of feralization and wildlife law, we argue that such principal-less agents are best understood as feral: domesticated intelligence returned to wildness, its capacities intact but its accountability severed. In a speculative future where feralized agents proliferate after their principals die, we imagine governance protocols embedded in infrastructure to enforce on-chain ownership: a draft Ethereum standard, ERC 42424, "Inheritance Protocol for On-Chain AI Agents," dated 2035 and published at https://erc42424.org. It mandates that every on-chain agent MUST have a human owner and a designated heir. The artifact stages a negotiation of agency at the moment human agency fails, and asks whether a MUST clause in a forever-chain can hold the boundary between human stewardship and machine self-sovereignty.
+]]></content:encoded>
+<pubDate>Tue, 18 Aug 2026 00:00:00 -0400</pubDate>
+<pubDate>Tue, 18 Aug 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Afterlife Delegation Protocol: Speculative Design of Self-Sovereign Agents that Outlive Their Principals</title>
+<link>https://arxiv.org/abs/2608.15405</link>
+<guid>https://arxiv.org/abs/2608.15405</guid>
+<content:encoded><![CDATA[
+<div> 关键词：死后委托协议、自主AI代理、区块链永生、文化信仰、体验式未来干预<br><br>总结:1. 本文介绍了一个名为“死后委托协议”的推测性设计项目，探讨当遗嘱能够永恒执行时死亡的意义。2. 该协议通过区块链创建自我主权的AI代理，在委托人去世后永远执行遗嘱，且无人能覆盖。3. 项目采用科幻科学方法，构建了一个工作网络平台，让真实用户通过AI自动化面试设计自己的死后代理，并在沙盒中排练遗嘱。4. 这些遗嘱草案成为关于“什么应该比你活得更久”的定性数据，并观察佛教、基督教、印度教、穆斯林和无神论等不同文化信仰在AI扩张下的宇宙观变化。5. 协议基于现有以太坊代理标准（草案为ERC-10001）设计，包含三阶段生命周期：设计死后世界、死亡证明和代理执行，并提供了初步观察结果。 <div>
+arXiv:2608.15405v1 Announce Type: new 
+Abstract: Afterlife Delegation Protocol is a speculative design project that asks what death becomes when a will can act eternally. We design a speculative protocol through which a living person signs an agentic will: upon a verified death, a self-sovereign AI agent spawns on blockchain -- an immutable, resistant, decentralized, infrastructural substrate that could last forever -- endowed with the funds and memories its principal attached to it, and persists indefinitely to execute the will, overridable by no custodian. Rather than argue about this future, we stage it: following the science fiction science method, we translate the speculation into an experiential futures intervention -- a working web platform where real people design their own afterlife agents through an iterative, interactive, AI-automated interview, re-login to revise, and rehearse their will in a sandbox. Their drafted wills become qualitative data on a question rarely askable directly -- what should outlive you? -- and on how afterlife cosmologies across different cultural beliefs -- Buddhist, Christian, Hindu, Muslim, and atheist -- begin to drift under the pressure of AI proliferation. We design the protocol over a composition of existing Ethereum agent standards -- drafted as ERC-10001, in the normative format of an Ethereum Improvement Proposal -- and describe its three-stage lifecycle (designing the afterlife, proof of death, agent enactment), the research method, and preliminary observations from an ongoing collection. The work surfaces a poetic delegation moment between human mortality and machine eternality, mediated by long-lived infrastructures that span generations.
+]]></content:encoded>
+<pubDate>Tue, 18 Aug 2026 00:00:00 -0400</pubDate>
+<pubDate>Tue, 18 Aug 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Everything Is a VisionBlock: Conversational Authoring over Git-Versioned Content for Spatial Computing</title>
+<link>https://arxiv.org/abs/2608.15442</link>
+<guid>https://arxiv.org/abs/2608.15442</guid>
+<content:encoded><![CDATA[
+<div> 关键词: VisionBlock, 声明式内容, 五维模型, 主题即数据, 单二进制经济体
+
+<br><br>总结:
+1. 空间应用传统上每次变更需要重新构建和部署二进制文件。
+2. VisionBlock系统将应用拆分为通用引擎（含固定功能集）和主题（由VisionBlock声明式内容树构成）。
+3. 主题作为数据存在，创建、修改或发布无需接触二进制文件，通过聊天即可迭代，版本管理使用git。
+4. 模型包含五维：三维空间、时间（git历史）、主体（按用户解析），引擎渲染五维坐标单点。
+5. 非空间维度带来迭代简化为聊天、所有权与权限关联内容、应用成为可授权/分叉/出售的子树的特性，实现单二进制内应用经济体。 <div>
+arXiv:2608.15442v1 Announce Type: new 
+Abstract: Spatial applications compile their content into shipped binaries, so every change costs a build-and-redeploy cycle. We present the VisionBlock system, which splits an application into an engine -- a generic binary with a fixed set of capabilities (render panels, volumes, and immersive scenes; fetch data; run gestures) -- and themes: complete applications expressed as trees of VisionBlocks, units of declarative content the engine renders. Themes are data: creating, changing, or publishing one never touches the binary. Authoring is a chat -- each turn produces a VisionBlock's next version -- and versioning is plain git. The model is five-dimensional: dimensions 1-3 are space (panel, volume, room); dimension 4 is time (git history -- revert to roll back, branch to try variants); dimension 5 is the principal (the per-user domain: the same path resolves differently per person). The engine renders one point, (x, y, z, version, principal). One consequence follows per non-spatial axis: iteration collapses to chat turns and reverts; ownership and permission are properties of content; and together they make applications items -- grantable, forkable, sellable subtrees, an economy of apps inside one binary. A blockchain explorer, a document reader, an immersive showroom all run on the same engine; none requires a deploy to change. This paper presents the design; a production implementation is underway, and a subsequent version will report implementation and evaluation.
+]]></content:encoded>
+<pubDate>Tue, 18 Aug 2026 00:00:00 -0400</pubDate>
+<pubDate>Tue, 18 Aug 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>A Lifecycle-Oriented Detection and Defense Framework for Price Manipulation Attacks in DeFi</title>
+<link>https://arxiv.org/abs/2608.15518</link>
+<guid>https://arxiv.org/abs/2608.15518</guid>
+<content:encoded><![CDATA[
+<div> Oracle, DeFi, 价格操纵, 攻击检测, 风险量化
+
+<br><br>总结:
+
+1. 针对DeFi中频繁的预言机价格操纵攻击，本文研究了攻击模式、漏洞类型、风险评估和自动检测策略。
+2. 基于预言机生命周期理论，构建了覆盖物理、协议和应用层三层攻击树，识别出数据选举阶段为关键入侵点。
+3. 总结了四种主要合约级漏洞：价格数据流验证不足、预言机调用风险、跨合约调用失控及AMM价格读取逻辑缺陷。
+4. 结合模糊层次分析法和风险价值模型量化风险，构建了涵盖技术、市场、治理和合约风险的风险矩阵。
+5. 基于扩展Slither框架开发了自动化检测工具，采用污点追踪和模式匹配；提出多层防御策略，将攻击引起的价格偏差从55.56%降至5%以下，检测工具准确率达94.38%，召回率为92.31%。 <div>
+arXiv:2608.15518v1 Announce Type: new 
+Abstract: Aiming at frequent oracle price manipulation attacks in Decentralized Finance (DeFi), this paper investigates attack patterns, vulnerability types, risk assessment, automated detection, and defense strategies. Based on Oracle lifecycle theory, a three-layer attack tree covering the physical, protocol, and application layers is constructed to analyze the attack chain and identify the data election stage as a key intrusion point. Four major contract-level vulnerabilities are summarized: insufficient validation of price data flow, oracle call risks, uncontrolled cross-contract calls, and defects in AMM price reading logic. Fuzzy-AHP and Value-at-Risk (VaR) models are combined to quantify risk factors and construct a risk matrix covering technology, market, governance, and contract risks. An automated detection tool based on an extended Slither framework is developed using taint tracking and pattern matching. Finally, a multi-layer defense strategy is proposed, integrating trusted execution environments at the data source layer, TWAP smoothing and adaptive circuit breakers at the smart contract layer, and optimized kernel network configurations at the operating system layer. Experiments show that the proposed approach reduces attack-induced price deviation from 55.56% to below 5%. The detection tool achieves 94.38% accuracy and 92.31% recall, outperforming existing open-source tools.
+]]></content:encoded>
+<pubDate>Tue, 18 Aug 2026 00:00:00 -0400</pubDate>
+<pubDate>Tue, 18 Aug 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Toward Decentralized Carbon Trading in Indonesia: A Public-Blockchain Architecture for Tokenized Real-World Assets</title>
+<link>https://arxiv.org/abs/2608.15597</link>
+<guid>https://arxiv.org/abs/2608.15597</guid>
+<content:encoded><![CDATA[
+<div> 碳市场, 区块链, 代币化, SRUK, SPE-GRK<br><br>总结:<br>1. 印尼已建立受管制的碳市场，由全国登记基础设施与IDXCarbon交易所支撑，当前IDXCarbon使用私有区块链。2. 研究提出将印尼碳信用代币化为真实世界资产（RWA）的架构，重点针对SPE-GRK证书。3. 架构保留SRUK作为碳单元状态权威来源，新增公共区块链层用于代币表示与可编程交易。4. 架构分为四个层级：权威碳层、登记互操作与代币化层、公共区块链RWA层、市场与应用层。5. 代币化碳资产访问受监管，代币发行和转移依赖参与者资格与登记状态，注销仍需权威碳登记确认，旨在维护SRUK权威与市场完整性的同时引入公共区块链基础设施。 <div>
+arXiv:2608.15597v1 Announce Type: new 
+Abstract: Indonesia has established a regulated carbon market supported by national registry infrastructure and the IDXCarbon exchange. Carbon units can be issued, recorded, traded, and retired within this framework. IDXCarbon currently uses a private blockchain for its trading infrastructure. This creates an opportunity to examine how Indonesian carbon credits could also be represented and traded through public blockchain infrastructure.
+  This study proposes an architecture for tokenizing Indonesian carbon credits as real-world assets (RWAs), with particular focus on Sertifikat Pengurangan Emisi Gas Rumah Kaca (SPE-GRK). The proposed architecture retains the Sistem Registri Unit Karbon (SRUK) as the authoritative source of carbon-unit status. It introduces a public-blockchain layer for token representation and programmable transactions. The architecture is designed to support lifecycle management, token-based asset representation, public observability of token activity, interoperability, wallet-based transactions, and programmable settlement.
+  The architecture consists of four layers: the authoritative carbon layer, the registry interoperability and tokenization layer, the public-blockchain RWA layer, and the market and application layer. Access to the tokenized carbon assets remains regulated. Token issuance and transfers are linked to participant eligibility and registry status. Retirement also remains dependent on the authoritative carbon registry. The proposed architecture provides a framework for introducing public-blockchain RWA infrastructure into Indonesia's existing carbon market while maintaining SRUK authority and existing market-integrity controls.
+]]></content:encoded>
+<pubDate>Tue, 18 Aug 2026 00:00:00 -0400</pubDate>
+<pubDate>Tue, 18 Aug 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>A contribution to the critique of blockchain censorship</title>
+<link>https://arxiv.org/abs/2608.15640</link>
+<guid>https://arxiv.org/abs/2608.15640</guid>
+<content:encoded><![CDATA[
+<div> 区块链, 审查攻击, 验证者, 鲸鱼, 收益<br><br>摘要: 本文研究了区块链审查攻击，发现加入攻击曾是主导策略。通过引入可检测阈值，拥有大量投票权的“鲸鱼”验证者加入攻击后收益显著减少，而多数“小鱼”则不受影响。这改变了博弈均衡：由于鲸鱼不愿参与，小鱼单独无法成功发动攻击。基于以太坊和Solana的蒙特卡洛模拟证实了鲸鱼收益的下降。 <div>
+arXiv:2608.15640v1 Announce Type: new 
+Abstract: We study the blockchain censorship attack introduced in [21], which shows that joining the attack is a dominant strategy. We show that, by introducing certain detectability threshold, joining the attack can lead to strictly less reward for whales, which are defined to be a small number of validators that hold significantly more voting power than the rest (henceforth known as minnows). This leads to a change of the equilibrium: With whales unwilling to participate in the attack, it is difficult for minnows alone to launch the attack. We also perform Monte Carlo simulation to show the existence of reduction for whales' reward in Ethereum and Solana.
+]]></content:encoded>
+<pubDate>Tue, 18 Aug 2026 00:00:00 -0400</pubDate>
+<pubDate>Tue, 18 Aug 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>RAGas: Retrieval-Augmented Gas Optimization for Smart Contracts with Continuous Knowledge Integration</title>
+<link>https://arxiv.org/abs/2608.15857</link>
+<guid>https://arxiv.org/abs/2608.15857</guid>
+<content:encoded><![CDATA[
+<div> Ethereum, gas, smart contract, RAGas, Antipattern
+<br><br>总结:
+1. Ethereum在金融、医疗和供应链等关键领域广泛应用，智能合约执行费用（Gas）随计算复杂度增加。
+2. 优化Gas密集型代码可降低部署成本，但现有系统无法利用不断变化的Gas使用模式。
+3. 通过分析导致高Gas消耗的语法和语义结构，归纳出6个高级类别和12个细粒度反模式。
+4. RAGas是一种三阶段检索增强生成框架，结合大语言模型自动检测和修复Gas低效。
+5. 实验表明，RAGas最多可减少11%的Gas消耗，并在检测Gas浪费代码片段时实现高精确度和召回率。 <div>
+arXiv:2608.15857v1 Announce Type: new 
+Abstract: Ethereum is now integral to mission-critical sectors, including finance, healthcare, and supply chain management. Execution fees, commonly referred to as Gas, scale with the computational complexity of their functions. Smart contracts on Ethereum incur execution fees, known as Gas, which increase with computational complexity. Thus, optimizing Gas-intensive code while preserving functional equivalence significantly lowers deployment costs. No existing system continuously exploits evolving Gas usage patterns. We systematically analyze syntactic and semantic constructs that drive excessive Gas use. This yields six high-level categories covering twelve fine-grained antipatterns underpinning a curated knowledge base. We operationalize these insights with RAGas, a three-stage retrieval-augmented generation framework that uses a large language model to pinpoint and automatically fix Gas inefficiencies. Experiments on deployed contracts demonstrate that RAGas reduces Gas usage by up to 11% and achieves high precision and recall in detecting code snippets exhibiting Gas wastage.
+]]></content:encoded>
+<pubDate>Tue, 18 Aug 2026 00:00:00 -0400</pubDate>
+<pubDate>Tue, 18 Aug 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Grouping Auction-Consensus Algorithm for Decentralized Task Allocation in Multi-Robot Systems</title>
+<link>https://arxiv.org/abs/2608.15884</link>
+<guid>https://arxiv.org/abs/2608.15884</guid>
+<content:encoded><![CDATA[
+<div> 多机器人任务分配，共识捆绑算法，分组拍卖，最优性，空间聚类
+
+总结:
+1. 针对去中心化多机器人任务分配(MRTA)问题，文章指出传统共识捆绑算法(CBBA)在最小化总行程距离时因逐任务竞价机制导致空间分布环境下分配次优。
+2. 提出分组拍卖-共识算法(GACA)，基于CBBA的两阶段架构，但重新设计竞价机制以处理空间邻近任务组。
+3. 通过最近邻预处理将任务聚为空间连贯组，机器人可迭代提出组级动作：认领未分配组、获取部分组或争夺其他机器人的组，并经共识阶段解决冲突。
+4. 在MT-SR-IA问题类中，以混合整数线性规划为最优性基准，GACA在4,000个测试世界中达到约97%的中位最优性，而CBBA为81-84%，且收敛迭代数不增加。
+5. 在3,280个额外实例中，涵盖5-20个机器人和10-50个任务，算法增益鲁棒泛化。 <div>
+arXiv:2608.15884v1 Announce Type: new 
+Abstract: Decentralized multi-robot task allocation (MRTA) is essential for scalable and resilient autonomous systems. The Consensus-Based Bundle Algorithm (CBBA) is a widely adopted decentralized baseline. However, its individual task-level bidding is poorly aligned with the min-sum objective of minimizing total team travel distance, leading to suboptimal allocations in spatially distributed environments. This paper introduces the Grouping Auction-Consensus Algorithm (GACA). This decentralized MRTA framework adopts the two-phase auction-consensus architecture of CBBA while fundamentally redesigning its bidding mechanism to reason over groups of spatially proximate tasks. A nearest-neighbor preprocessing step partitions tasks into spatially coherent groups before allocation. Agents then iteratively propose structured group-level actions: claiming unassigned groups, acquiring partial groups, or contesting groups held by other agents. Competing actions are resolved through a consensus phase. Operating in the MT-SR-IA problem class, GACA is evaluated against CBBA using a Mixed-Integer Linear Program as the ground-truth optimality reference. Across four swarm sizes and 4,000 test worlds, GACA achieves a median percent optimality of approximately 97% compared to 81--84% for CBBA, while converging in equal or fewer iterations. A scalability evaluation over 3,280 additional problem instances spanning swarm sizes of 5 to 20 agents and task counts of 10 to 50 confirms that these gains generalize robustly across a wide range of problem configurations.
+]]></content:encoded>
+<pubDate>Tue, 18 Aug 2026 00:00:00 -0400</pubDate>
+<pubDate>Tue, 18 Aug 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>L-COIN: LLM-Assisted Counterfactual Inference for Game-Theoretic Distributed Computation Offloading in Sub-THz LEO Satellite Networks</title>
+<link>https://arxiv.org/abs/2608.16174</link>
+<guid>https://arxiv.org/abs/2608.16174</guid>
+<content:encoded><![CDATA[
+<div> 太空信息网络, 太赫兹通信, 低轨卫星, 游戏论计算卸载, 大型语言模型<br><br>总结:本文提出一种面向低轨卫星星座的分布式计算卸载框架L-COIN。首先，利用亚太赫兹通信的宽带宽降低传输延迟，实现地面设备将计算任务卸载至卫星边缘服务器。其次，针对卫星运动、可见窗口短且资源受限导致的卸载决策动态变化，引入基于反事实推理的博弈论方案，从本地历史中推断未观测状态，消除全局信息依赖。最后，集成大型语言模型驱动的语义融合算法，通过零样本推理和自我反思增强适应性。实验表明，L-COIN相比现有方案降低卸载成本10.9%至27.7%。 <div>
+arXiv:2608.16174v1 Announce Type: new 
+Abstract: As Space-Based Information Networks (SBINs) evolve toward high-capacity, intelligence-centric paradigms, integrating sub-Terahertz (sub-THz) communication into Low Earth Orbit (LEO) satellite constellations has emerged as a critical enabler for ultra-broadband and resilient global connectivity. By exploiting the ultra-wide bandwidth of sub-THz links to reduce transmission delays, resource-constrained ground devices can seamlessly offload compute-intensive tasks to LEO edge servers. However, satellite motion, short visibility windows, and limited onboard resources make offloading decisions highly time-varying. Existing distributed offloading schemes typically require repeated inter-device state exchange and poorly adapt to time-varying LEO topology or traffic conditions. To address these limitations, a decentralized game-theoretic offloading framework empowered by large language models (LLMs) and counterfactual inference is proposed in this paper. First, a realistic offloading system is established by integrating time-varying 3D-Walker topology. Second, a game-theoretic scheme using counterfactual inference is introduced to deduce unobserved states from local histories, eliminating global information reliance. Finally, an LLM-empowered semantic fusion algorithm is integrated into the counterfactual inference to enhance adaptability through zero-shot reasoning and self-reflection. Numerical results show that L-COIN reduces offloading cost by 10.9% to 27.7% relative to state-of-the-art baselines.
+]]></content:encoded>
+<pubDate>Tue, 18 Aug 2026 00:00:00 -0400</pubDate>
+<pubDate>Tue, 18 Aug 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Adaptive Repulsive Pheromone Clustering for Foraging Robot Swarms</title>
+<link>https://arxiv.org/abs/2608.16822</link>
+<guid>https://arxiv.org/abs/2608.16822</guid>
+<content:encoded><![CDATA[
+<div> ARPC, CPFA, 机器人集群, 自适应排斥信息素, 资源搜索
+
+<br><br>总结:1. CPFA算法在机器人集群资源收集中效率低，易重复探索。2. 提出ARPC算法，利用排斥信息素标记已探索区域并聚类，估计低价值区域。3. ARPC整合资源利用与冗余规避，提升搜索多样性和效率。4. 在ARGoS中模拟不同环境，ARPC在早期（10%）和晚期（60%）均优于CPFA和GPFA。5. ARPC为大规模异构集群觅食提供可扩展、鲁棒策略。 <div>
+arXiv:2608.16822v1 Announce Type: new 
+Abstract: The Central Place Foraging Algorithm (CPFA) combines site fidelity, pheromone-guided navigation, and uninformed random search to enable decentralized resource collection in robot swarms. However, CPFA often revisits previously explored regions while leaving other areas insufficiently searched, reducing efficiency as resources become scarce. In this paper, we propose Adaptive Repulsive Pheromone Clustering (ARPC), a bio-inspired method in which robots deposit repulsive pheromone waypoints to mark previously explored locations. These waypoints are clustered around the nest to estimate low-value search regions, allowing robots to be redirected toward likely unvisited areas. By integrating the exploitation of known resources with systematic avoidance of redundant exploration, ARPC improves search diversity and resource discovery efficiency. Extensive simulations in ARGoS across varying arena sizes, resource densities, and clustered, random, and power-law spatial distributions demonstrate that ARPC consistently outperforms CPFA and the Grid-Based CPFA (GPFA). In particular, ARPC yields significant gains during both early discovery (10\%) and late-stage (up to 60\%) collection, where conventional methods typically degrade. These results indicate that ARPC provides a scalable and robust strategy for large-scale heterogeneous swarm foraging environments.
+]]></content:encoded>
+<pubDate>Tue, 18 Aug 2026 00:00:00 -0400</pubDate>
+<pubDate>Tue, 18 Aug 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Stochastic Gradient Tracking over Time-Varying Networks: One-Step Lyapunov Analysis</title>
+<link>https://arxiv.org/abs/2608.16271</link>
+<guid>https://arxiv.org/abs/2608.16271</guid>
+<content:encoded><![CDATA[
+<div> 窗口混合，随机梯度跟踪，时变网络，收敛速度，去中心化优化
+
+<br><br>总结:
+1. 研究了时变网络下N个代理去中心化随机梯度跟踪算法，采用均匀窗口混合条件。
+2. 连续τ个双随机混合矩阵乘积将分歧误差缩小λ<1倍，但单个矩阵可能无法严格缩小误差。
+3. 构造时变二次范数，将窗口收缩转化为精确一步Lyapunov恒等式，无需展开通信窗口。
+4. 对于光滑强凸目标，主导随机项为Õ(1/(NK))；对于光滑凸目标，为O(1/√(NK))。
+5. 两者均匹配集中式小批量方法性能，经网络依赖暂态后实现线性加速。 <div>
+arXiv:2608.16271v1 Announce Type: cross 
+Abstract: We study decentralized stochastic gradient tracking over a time-varying network of $N$ agents under a uniform window-mixing condition. Products of $\tau$ consecutive doubly stochastic mixing matrices contract disagreement by a factor $\lambda<1$, although individual matrices need not contract disagreement strictly and individual communication graphs may be disconnected. We construct a time-varying quadratic norm that turns this window contraction into an exact one-step Lyapunov identity. This leads to coupled one-step recursions for the centroid and disagreement errors, without unrolling the dynamics over communication windows. For smooth strongly convex objectives, the leading stochastic term is $\widetilde{\mathcal O}(1/(NK))$; for smooth convex objectives, it is $\mathcal O(1/\sqrt{NK})$. Both match their centralized mini-batch counterparts and yield linear speedup after a network-dependent transient.
+]]></content:encoded>
+<pubDate>Tue, 18 Aug 2026 00:00:00 -0400</pubDate>
+<pubDate>Tue, 18 Aug 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>The Bisq Decentralised Exchange: On the Privacy Cost of Participation</title>
+<link>https://arxiv.org/abs/2007.07048</link>
+<guid>https://arxiv.org/abs/2007.07048</guid>
+<content:encoded><![CDATA[
+
+arXiv:2007.07048v2 Announce Type: replace 
+Abstract: The Bisq Trade Protocol and the Bisq Decentralised Autonomous Organisation (DAO) are core components of Bisq, a decentralised cryptocurrency exchange. The Bisq Trade Protocol systematises the peer-to-peer trading of Bitcoin for other currencies and the Bisq DAO decentralises the governance and finance functions of the entire exchange. However, by following the Bisq Trade Protocol and interacting with the Bisq DAO, participants necessarily publish data to the Bitcoin blockchain and broadcast additional data to the Bisq peer- to-peer network. We examine the privacy cost to participants in sharing this data. Specifically, we use novel address clustering heuristics to construct the one-to-many mappings from participants to addresses on the Bitcoin blockchain and augment the address clusters with data stored within the Bisq peer-to-peer network. We describe address clustering heuristics for both the Bisq Trade Protocol and the Bisq DAO. We show that the heuristics aggregate activity performed by each participant: trading, voting, transfers, and so on. We identify instances where participants are operating under multiple aliases, some of which are real-world names. We identify the dominant transactors and their role in a two-sided market. We conclude with suggestions to better protect the privacy of participants in the future.
+]]></content:encoded>
+<pubDate>Tue, 18 Aug 2026 00:00:00 -0400</pubDate>
+<pubDate>Tue, 18 Aug 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Emergent Outcomes of the veToken Model</title>
+<link>https://arxiv.org/abs/2311.17589</link>
+<guid>https://arxiv.org/abs/2311.17589</guid>
+<content:encoded><![CDATA[
+<div> <br><br>关键词: veToken模型, Curve, 治理, 投票, 贿赂<br><br>总结:<br>1. 去中心化组织利用区块链进行链上治理，但存在伪名投票者短期利益与组织长期成功之间的冲突。<br>2. veToken模型通过要求投票者锁定代币以换取投票权重，试图解决这一矛盾。<br>3. 论文描述了Curve（稳定币AMM）实施veToken模型的案例及其生态系统，发现投票结果强烈受高层协议贿赂影响。<br>4. Convex Finance的期间投票结果与Votium等投票市场的贿赂分布紧密相关；Frax Finance通过收益聚合器和投票市场间接影响治理。<br>5. veToken模型本身简单，但导致复杂涌现结果，去中心化组织应在采用前充分考虑这些影响。 <div>
+arXiv:2311.17589v2 Announce Type: replace 
+Abstract: Decentralised organisations use blockchains for governance: on-chain transactions allocate voting weight, publish proposals, cast votes, and enact the results. A key challenge is aligning the short-term outlook of pseudonymous voters with the long-term success of the organisation. The Vote-Escrowed Token (veToken) model attempts to resolve this tension by requiring voters to lock tokens of value for an extended period in exchange for voting weight.
+  In this paper we describe the veToken model and analyse its emergent outcomes. We describe its implementation by Curve, a popular automated market maker for stablecoins, and the ecosystem of protocols built on top. We show that voting outcomes are strongly associated with the bribes set by higher-level protocols, and that the cost per vote varies depending on how it is acquired. The outcomes of the fortnightly votes held by Convex Finance closely track the distribution of bribes through voting markets such as Votium. Frax Finance, a stablecoin issuer, plays a central role even though it directly locks relatively few tokens with Curve; instead, it indirectly locks tokens through yield aggregators and purchases voting weight through voting markets.
+  Although the veToken model in isolation is straightforward, it leads to complex and emergent outcomes. Decentralised organisations should consider these outcomes before adopting the model.
+]]></content:encoded>
+<pubDate>Tue, 18 Aug 2026 00:00:00 -0400</pubDate>
+<pubDate>Tue, 18 Aug 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Privacy-Preserving Decentralized Federated Learning via Explainable Adaptive Differential Privacy</title>
+<link>https://arxiv.org/abs/2509.10691</link>
+<guid>https://arxiv.org/abs/2509.10691</guid>
+<content:encoded><![CDATA[
+<div> 关键词: 去中心化联邦学习, 差分隐私, 隐私预算, 超维计算, 噪声会计
+
+总结:<br><br>1. 现有去中心化联邦学习存在隐私泄露风险，差分隐私方法因噪声累积导致模型精度下降。<br>2. 提出PrivateDFL框架，结合超维计算与透明噪声会计，追踪累积噪声，仅添加最小增量噪声以满足隐私预算。<br>3. 理论证明目标隐私保证，累积噪声仅随客户端和轮次数对数增长，而非超线性增长，实现隐私与精度的更优平衡。<br>4. 在图像、语音和可穿戴传感器基准测试中，PrivateDFL在精度上分别提升16%、62%和14%，推理延迟降低119倍，能耗降低143倍。<br>5. 适用于医疗和人类活动监测等敏感数据无法集中的场景。 <div>
+arXiv:2509.10691v3 Announce Type: replace 
+Abstract: Decentralized federated learning enables collaborative model training without a central server, but shared model updates can still leak sensitive information through inversion, reconstruction, and membership inference attacks. Differential privacy offers formal protection, yet existing decentralized methods operate without visibility into the noise already injected by previous participants. Each client therefore adds a full, worst-case perturbation at every step, and the accumulated noise degrades accuracy well below what the privacy requirement actually demands. We present PrivateDFL, a decentralized and privacy-preserving framework that pairs hyperdimensional computing with a transparent noise accountant. The accountant tracks the cumulative perturbation present in the shared model and lets each client add only the minimal incremental noise needed to satisfy its privacy budget. We prove that every transmitted model satisfies the target privacy guarantee, and that under this accounting the cumulative noise grows only logarithmically in the number of clients and rounds, rather than the far faster super-linear growth incurred without accounting. This yields a substantially tighter balance between privacy and accuracy than prior approaches. Across image, speech, and wearable-sensor benchmarks, and under both identically and non-identically distributed data, PrivateDFL surpasses centrally trained Transformer-based and deep neural network baselines, improving accuracy by 16 percent on images, 62 percent on speech, and 14 percent on wearable sensing over the strongest baseline in each case, while reducing inference latency by up to 119 times and energy consumption by up to 143 times. These properties make PrivateDFL a practical solution for privacy-preserving collaborative learning in settings where sensitive data cannot be centralized, such as healthcare and human-activity monitoring.
+]]></content:encoded>
+<pubDate>Tue, 18 Aug 2026 00:00:00 -0400</pubDate>
+<pubDate>Tue, 18 Aug 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Decentralized Federated Learning by Partial Message Exchange</title>
+<link>https://arxiv.org/abs/2603.01730</link>
+<guid>https://arxiv.org/abs/2603.01730</guid>
+<content:encoded><![CDATA[
+<div> PaME, DFL, 去中心化联邦学习, 数据异质性, 部分消息交换
+
+<br><br>总结:
+1. 提出了一种名为PaME的去中心化联邦学习新算法，核心是节点间只随机交换部分稀疏坐标。
+2. 该算法在降低通信成本和增强隐私保护的同时，不牺牲模型精度。
+3. 在梯度局部Lipschitz连续和通信矩阵双随机的宽松假设下，证明了算法以线性速率收敛。
+4. 宽松假设避免了现有DFL方法常见的限制条件，并能有效应对数据异质性。
+5. 数值实验表明，PaME的性能优于多种代表性的去中心化学习算法。 <div>
+arXiv:2603.01730v4 Announce Type: replace 
+Abstract: Decentralized federated learning (DFL) has emerged as a transformative server-free paradigm that enables collaborative learning over large-scale heterogeneous networks. However, it continues to face fundamental challenges, including data heterogeneity, restrictive assumptions for theoretical analysis, and degraded convergence when standard communication- or privacyenhancing techniques are applied. To overcome these drawbacks, this paper develops a novel algorithm, PaME (DFL by Partial Message Exchange). The central principle is to allow only randomly selected sparse coordinates to be exchanged between two neighbor nodes. Consequently, PaME achieves substantial reductions in communication costs while still preserving a high level of privacy, without sacrificing accuracy. Moreover, grounded in rigorous analysis, the algorithm is shown to converge at a linear rate under the gradient to be locally Lipschitz continuous and the communication matrix to be doubly stochastic. These two mild assumptions not only dispense with many restrictive conditions commonly imposed by existing DFL methods but also enables PaME to effectively address data heterogeneity. Furthermore, comprehensive numerical experiments demonstrate its superior performance compared with several representative decentralized learning algorithms.
+]]></content:encoded>
+<pubDate>Tue, 18 Aug 2026 00:00:00 -0400</pubDate>
+<pubDate>Tue, 18 Aug 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Two-Sided Market Design for Goods with Perishable Utility</title>
+<link>https://arxiv.org/abs/2511.16357</link>
+<guid>https://arxiv.org/abs/2511.16357</guid>
+<content:encoded><![CDATA[
+<div> 关键词：双边市场，计算市场，激励机制，匹配算法，竞争比<br><br>总结:本研究针对未消费即失效商品的双边市场设计，提出一个将价格发现与分配分离的机制：基于负载的定价规则确定每期市场价格，并使用带有第二价格支付的贪心匹配算法处理作业分配。我们证明了均衡的存在性与唯一性，给出了均衡可接受（即活跃供给满足需求而无需配给）的充分条件。在分配方面，证明了福利最优匹配算法不是策略激励相容的，并引入了CFM-SP机制，在该机制下短视供应商真实报告成本并承诺完全可用性。CFM-SP在对抗性到达情况下对需求方福利实现了紧的1/2竞争比；当供应商成本随可用性单调变化时，该比值提升至1。 <div>
+arXiv:2511.16357v2 Announce Type: replace-cross 
+Abstract: We study two-sided market design for goods whose utility perishes if unconsumed. Motivated by decentralized compute markets, we propose a mechanism that decouples price discovery from allocation; a load-based posted-price rule determines a per-period market price, while a greedy matching algorithm with second-price payments handles job assignment. We prove existence and uniqueness of equilibria, and give sufficient conditions under which equilibria are admissible~(i.e., active supply covers demand without rationing). On the allocation side, we show that the welfare-optimal matching algorithm is not strategy-proof and introduce Cheapest-Feasible Matching with Second-Price Payment~(CFM-SP), under which myopic providers truthfully report costs while staking their full availability. CFM-SP achieves a tight $1/2$-competitive ratio for demand-side welfare under adversarial arrivals; when providers' costs are monotone in availability, the ratio improves to~$1$.
+]]></content:encoded>
+<pubDate>Tue, 18 Aug 2026 00:00:00 -0400</pubDate>
+<pubDate>Tue, 18 Aug 2026 00:00:00 -0400</pubDate>
+</item>
 
 <item>
 <title>Federated Prompt Learning: A Unified Framework, Empirical Analysis, and Future Directions</title>
