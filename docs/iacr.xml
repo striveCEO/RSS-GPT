@@ -4,12 +4,12 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+
 <item>
 <title>Auditable Continuous Group Key Agreement</title>
 <link>https://eprint.iacr.org/2026/1710</link>
 <guid>https://eprint.iacr.org/2026/1710</guid>
 <content:encoded><![CDATA[
-
 Continuous group key agreement (CGKA), the cryptographic core of Messaging Layer Security (MLS, RFC 9420), provides key management for large end-to-end encrypted group chats. It refreshes the group's keys as members join and leave, but offers no way for a designated auditor to recover past epoch keys, and no way to check that such recovery remains possible. Regulated deployments in finance, healthcare, and government therefore resort to plaintext server logging, abandoning end-to-end encryption entirely. Simply adding a key escrow admits a silent escrow failure: the group accepts an epoch whose escrow holds unrecoverable material, with no visible anomaly until a later audit.
 
 Addressing this, we introduce auditable CGKA (Au-CGKA), an MLS-shaped protocol in which every admitted epoch carries a proof. The proof binds that epoch's key material to a well-defined secret recoverable by a threshold auditor committee. Every member checks that binding against the epoch secret it derives and refuses the commit if the two disagree, so auditability guarantees that the secret of every epoch an honest member accepts is threshold-recoverable. We give a post-quantum protocol, Π_A, realizing this property with STARK proofs. The committer escrows the epoch secret to an auditor committee, and the escrow ciphertext is a STARK-friendly encryption of Shamir shares. Its well-formedness is proven in-circuit at MLS commit time.
@@ -17,9 +17,7 @@ Addressing this, we introduce auditable CGKA (Au-CGKA), an MLS-shaped protocol i
 We prototype Au-CGKA in Rust with the proofs on a zero-knowledge, post-quantum custom multi-stage STARK. On an Apple M5 Pro, an auditability proof takes 1.38 s with proof-size 15.31 MB and verifies in 0.17 s, at every group size; the relation it proves is independent of the group size. The proof is checked at admission and then discarded, so it costs bandwidth on the commit and nothing in storage; the only persistent overhead is the fixed-size escrow. Adaptive post-quantum security holds in the secure-erasure model with straight-line reductions in the quantum random-oracle model, and carries to the implemented backend under a stated assumption; privacy and escrow soundness follow as game-based guarantees.
 ]]></content:encoded>
 <pubDate>Mon, 17 Aug 2026 04:52:04 +0000</pubDate>
-<pubDate>Mon, 17 Aug 2026 04:52:04 +0000</pubDate>
 </item>
-
 <item>
 <title>Aegon: Self-Auditable Key Transparency</title>
 <link>https://eprint.iacr.org/2026/1681</link>
@@ -13886,28 +13884,6 @@ In crowd-sourced data aggregation over the Internet, participants share their da
 In this work, we introduce two protocols, dubbed Masquerade and zk-Masquerade, for computing private statistics, such as sum, average, and histograms, without revealing anything about participants' data. We propose a tailored multiplicative commitment scheme to ensure the integrity of data aggregations and publish all the participants' commitments on a ledger to provide public verifiability. zk-Masquerade detects malicious participants who attempt to poison the aggregation results by adopting two zero-knowledge proof protocols that ensure the validity of shared data points before being aggregated and enable a broad range of numerical and categorical studies. In our experiments, we use homomorphic ciphertexts and commitments for a variable number of participants and evaluate the runtime and the communication cost of our protocols.
 ]]></content:encoded>
 <pubDate>Tue, 12 Oct 2021 06:24:19 +0000</pubDate>
-</item>
-<item>
-<title>K-Linkable Ring Signatures and Applications in Generalized Voting</title>
-<link>https://eprint.iacr.org/2025/243</link>
-<guid>https://eprint.iacr.org/2025/243</guid>
-<content:encoded><![CDATA[
-<div> 关键词：Linkable Ring Signatures (LRS)，$k$-Linkable Ring Signatures ($k$-LRS)，投票隐私，匿名性，集体$k$-链接性
-
-总结:
-
-本文提出了$k$-可链接环签名($k$-LRS)这一新型密码学原语，用于在多样化的投票场景中同时实现匿名性和隐私保护。传统的可链接环签名(LRS)适用于防止重复投票的多数制选举，但在排名投票等更复杂的规则下，会暴露选民个体的投票偏好。$k$-LRS具有$k$级匿名性和$k$级链接性特点：用户最多可以匿名签署$k$次，使得即使是无限制的对手也无法关联其签名（$k$级匿名性）；若任何签名人签超过$k$次，则其所有签名将被公开链接（个体$k$-链接性），并且任何$c$个签名人无法生成多于$k\cdot c$个未链接的签名（集体$k$-链接性）。文章提供了基于DDH和SIS（因此是后量子安全的）两种$k$-LRS构造方法，并展示了如何将其应用于包括得分投票、多轮投票和博尔达计数等多种投票规则中。提出的协议为非交互式投票，即每个选民只需在公告板上发布一条消息，这突显了$k$-LRS在区块链治理等场景中的应用潜力。 <div>
-$\textit{Linkable ring signatures}$ (LRS) allow a user to sign anonymously on behalf of a ring, while maintaining linkability—two signatures from the same signer are publicly identified, i.e., linked. This linkability makes LRS suitable to prevent double-voting in classical, $\textit{plurality}$ voting protocols—each voter casts one vote and the candidate with the most votes wins the election. 
-
-    Several voting scenarios rely on (generalized) rules rather than plurality. For example, in $\textit{ranked voting}$, voters submit a ranking of the candidates, and the outcome is a function of these rankings. Such generalized voting rules are common in social choice theory, and have recently found their way into blockchain governance, e.g., for prioritizing (voting on) proposed (candidate)  projects. However, unlike plurality voting, using LRS for voters to sign their votes (rankings) does not guarantee vote privacy as one can observe the rankings of each individual voter, which, depending on the scoring rule, is more information than what the outcome of the election offers. 
-
-We introduce $k$-$\textit{linkable ring signatures}$ ($k$-LRS) as a primitive for simultaneously achieving anonymity and privacy in generalized voting. A $k$-LRS scheme has the following properties: 
-   ($k$-)$\textit{Anonymity}$: a user can sign anonymously (on behalf of the ring) up to $k$ times, so that even an unbounded adversary cannot link his signatures.
-   ($k$-)$\textit{Linkability}$: If any signer signs more than $k$ times, all his signatures are publicly linked $\textit{(individual $k$-linkability)}$; and, any set of $c$ signers cannot generate more than $k\cdot c$ unlinked signatures $\textit{(collective $k$-linkability)}$.
-
-    We provide two constructions of $k$-LRS: one is from the DDH, and the other is from SIS (hence post-quantum). Finally, we show how $k$-LRS can be applied to a broad range of voting rules, including $\textit{score voting}$, $\textit{multi-voting}$, and $\textit{Borda}$. Our protocols are non-interactive voting—each voter just posts a message on a bulletin board—which highlights the potential of $k$-LRS in blockchain-governance scenarios.
-]]></content:encoded>
-<pubDate>Sun, 16 Feb 2025 05:14:11 +0000</pubDate>
 </item>
 </channel>
 </rss>
