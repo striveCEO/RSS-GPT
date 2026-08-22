@@ -5,14 +5,67 @@
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
 <item>
+<title>Enforcing Winner-Only Disclosure: Verifiable Tally Hiding for Weighted DAO Governance</title>
+<link>https://eprint.iacr.org/2026/1773</link>
+<guid>https://eprint.iacr.org/2026/1773</guid>
+<content:encoded><![CDATA[
+
+Token-weighted voting is widely used in DAO governance, but public voting weights together with weighted tallies can reveal identifiable voters' choices. Publishing only the final outcome reduces this disclosure, yet an output policy alone does not prevent a privileged participant from reconstructing the exact weighted tally during computation.
+
+We present a verifiable winner-only tally-hiding construction for weighted binary voting. Registered weights are bound to credentials in zero-knowledge ballots, while weighted contributions remain encrypted through aggregation and comparison against a public threshold. The blockchain adjudicates ballots, an off-chain backend performs the encrypted computation, and exact ciphertext and transcript bindings allow any public verifier to check that the published outcome corresponds to the accepted ballots. The only tally-derived plaintext output is the outcome bit.
+
+The construction is parameterized by electorate size and contribution width; our prototype and formal transcript-privacy result deliberately study a bounded eight-voter, eight-bit instance with 134 encrypted gates and an actual three-of-five final release. For honest execution by all five trustees, we prove passive-public-observer backend transcript privacy from the accepted ciphertexts and outcome alone. Privacy against malicious sub-threshold trustees remains open.
+]]></content:encoded>
+<pubDate>Sat, 22 Aug 2026 07:28:36 +0000</pubDate>
+<pubDate>Sat, 22 Aug 2026 07:28:36 +0000</pubDate>
+</item>
+<item>
+<title>Rank Measures and Exponential Lower Bounds for Multilinear Secret Sharing</title>
+<link>https://eprint.iacr.org/2026/1769</link>
+<guid>https://eprint.iacr.org/2026/1769</guid>
+<content:encoded><![CDATA[
+
+A multilinear secret-sharing scheme shares a vector secret and can therefore amortize share size over the secret dimension.  This amortization can invalidate lower bounds proved for one-dimensional linear schemes, and the best previous explicit lower bound for multilinear schemes was quasipolynomial, $n^{\Omega(\log n)}$.  We prove that the Razborov--G\'al rank measure survives amortization: the normalized size of a multi-target monotone span program is at least the rank measure of the function it computes.  Combined with the rank witnesses of Pitassi and Robere, this gives an explicit family of access structures for which every perfect multilinear scheme over every finite field has average and maximum information ratio $2^{\Omega(n)}$.  The worst-case multilinear
+information ratio is therefore $2^{\Theta(n)}$, answering a question of Beimel. We further extend the bound to schemes whose sharing algorithm is arbitrary and whose reconstruction is affine-linear, under pairwise statistical privacy below one; combined with the degree-reduction theorem of Beimel, Othman, and Peter, this yields exponential normalized lower bounds for every fixed reconstruction degree whenever the secret dimension is $2^{o(n)}$.
+]]></content:encoded>
+<pubDate>Fri, 21 Aug 2026 19:55:40 +0000</pubDate>
+<pubDate>Fri, 21 Aug 2026 19:55:40 +0000</pubDate>
+</item>
+<item>
+<title>L-BAS: A Lattice-Based Blind Adaptor Signature Scheme</title>
+<link>https://eprint.iacr.org/2026/1752</link>
+<guid>https://eprint.iacr.org/2026/1752</guid>
+<content:encoded><![CDATA[
+
+Lattice-based blind signatures have attracted significant attention in recent years due to the rapid growth of digital currencies, the increasing demand for privacy-preserving digital interactions, and the ongoing transition toward quantum-resistant cryptographic primitives. While blind signatures provide anonymity guarantees, achieving fairness without compromising privacy to a third party remains a challenging problem. Blind adaptor signatures (BAS) address this limitation by enriching blind signatures with conditional-execution functionality, enabling fair exchange while preserving user anonymity. In particular, a BAS scheme allows a user to engage in an atomic swap with a verifier using an adapted blind signature obtained from a signer, thereby maintaining privacy against the signer while ensuring fairness between the user and the verifier.
+In this work, we observe that the ABDLOP commit-and-prove framework (CRYPTO 2022) exhibits a dichotomic structure that can be leveraged to realize adaptor functionality. Building on this, we propose a lattice-based blind adaptor signature (L-BAS) scheme that simultaneously achieves fairness along with the privacy guarantees of blind signing. Compared with the underlying lattice-based blind signature scheme, our construction incurs only a modest overhead, increasing the signature size by approximately 5.2 KB while largely preserving the efficiency of the original system. We formally analyze the security of the proposed construction and prove that it satisfies extractability, unique extractability, computational pre-verification soundness, one-more unforgeability, and blindness under standard lattice-based assumptions. Our results demonstrate that fairness can be incorporated into lattice-based blind signatures with minimal performance degradation, making the proposed scheme a practical candidate for privacy-preserving and quantum-resistant fair exchange applications.
+]]></content:encoded>
+<pubDate>Thu, 20 Aug 2026 18:55:44 +0000</pubDate>
+<pubDate>Thu, 20 Aug 2026 18:55:44 +0000</pubDate>
+</item>
+<item>
+<title>Threshold Lattice-Based Zero-Knowledge Proofs</title>
+<link>https://eprint.iacr.org/2026/1750</link>
+<guid>https://eprint.iacr.org/2026/1750</guid>
+<content:encoded><![CDATA[
+
+Lattice-based zero-knowledge proofs are now efficient enough for practical use, but in all known constructions a single prover holds the entire witness and is therefore a single point of failure. Thresholdizing them is understood only for three-round $\Sigma$-protocols, which certify shortness only $\textit{approximately}$. The $\textit{exact}$ statements needed by applications such as anonymous credentials require more rounds and rely on rejection sampling, and neither property survives thresholdization.
+
+We construct the first lattice-based threshold zero-knowledge proof systems for exact relations. The witness is Shamir-shared among $\mathtt{n}$ parties, any $\mathtt{t}$ of them can jointly produce a proof, and the proof has the same form as a single-prover proof, only a factor $\sqrt{\mathtt{t}}$ larger, with verification unchanged. We thresholdize the product proof of Attema, Lyubashevsky, and Seiler (CRYPTO 2020) and the exact proof of Esgin, Nguyen, and Seiler (ASIACRYPT 2020), making both rejection-free using Hint-MLWE and evaluating them over threshold homomorphic encryption. We define threshold commit-and-prove protocols with the corresponding zero-knowledge and simulation-extractability notions, and prove our constructions secure against passive adversaries that statically corrupt at most $\mathtt{t}-1$ parties.
+
+Of independent interest, we show that the Fiat--Shamir transforms of both proof systems are simulation-extractable in the random oracle model, and that MLWE remains hard when secrets are drawn from the subring fixed by a ring automorphism.
+]]></content:encoded>
+<pubDate>Thu, 20 Aug 2026 17:07:52 +0000</pubDate>
+<pubDate>Thu, 20 Aug 2026 17:07:52 +0000</pubDate>
+</item>
+
+<item>
 <title>A Unified Framework for Contract-Validated Benchmarking of Zero-Knowledge Proving Systems</title>
 <link>https://eprint.iacr.org/2026/1729</link>
 <guid>https://eprint.iacr.org/2026/1729</guid>
 <content:encoded><![CDATA[
-
 Zero-knowledge proofs are an operational infrastructure for rollups, private payments, verifiable execution, and zkVM applications. We treat them as succinct proofs of validity whose privacy properties depend on the system and the mode of use. Published benchmarks often compare different workloads, proof modes, and hardware paths, which makes their results hard to interpret. This work presents a unified host-agent framework for benchmarking heterogeneous proving systems under a common execution and reporting method. Each prover runs in an isolated containerized agent and is selected through a scheme-adapter layer. The agent reports canonical JSON artifacts linked to a hashed run manifest and workload-specific semantic contracts. The host checks the public semantic fields and the agent's verification flag to ensure backends are compared on the same declared public claim, even when their circuits, traces, or guest pipelines differ. We evaluate circuit-based, transparent, GPU-accelerated, folding, and zkVM systems: Groth16, ICICLE, Halo2, Plonky3, Winterfell, Nova, RISC Zero with CUDA and Groth16 wrapping, and SP1 with and without AVX. The suite uses six primary workloads with comparable semantics, together with secondary hash workloads that expose specialization. No prover family dominates all deployment criteria. At 8 CPU cores, Plonky3 and Winterfell have the smallest across-case proving-time and RAM figures. Groth16 and ICICLE produce sub-kilobyte proofs. Winterfell has the lowest host verification time. zkVM systems trade larger proofs and higher memory for programmability. On the Merkle-path micro-benchmark, pairing artifacts remain sub-kilobyte, whereas wrapping a zkVM receipt yields a Groth16-sized artifact at a high proving cost. GPU acceleration helps most after fixed setup costs are amortized. The main contribution is methodological: validate the statement being proved, disclose the security profile, and report resource limits in addition to proving time.
 ]]></content:encoded>
-<pubDate>Tue, 18 Aug 2026 19:59:11 +0000</pubDate>
 <pubDate>Tue, 18 Aug 2026 19:59:11 +0000</pubDate>
 </item>
 <item>
@@ -20,10 +73,8 @@ Zero-knowledge proofs are an operational infrastructure for rollups, private pay
 <link>https://eprint.iacr.org/2026/1728</link>
 <guid>https://eprint.iacr.org/2026/1728</guid>
 <content:encoded><![CDATA[
-
 Decentralized lending protocols encode credit markets as smart contracts whose design choices affect gas cost, capital efficiency, liquidation behavior, and risk allocation. We compare Aave V3, SparkLend, Compound III, and Morpho Blue in matched Ethereum fork tests with wstETH collateral, USDC debt, and one fixed chain state. The tests measure call-path gas, annualized rates, thirty-day debt growth, maximum borrow capacity, and liquidation outcomes. It is important to note that the observed orderings for gas costs and rates are specific to this test artifact and could change under different collateral assets or utilization regimes. Within this setting, Morpho Blue has the lowest measured interaction call-path gas and highest borrow capacity, while shifting risk selection to isolated permissionless markets. Furthermore, Morpho Blue's evaluation uses a deployed market for rate measurements but a constructed market for liquidation testing. Aave V3 and SparkLend provide broader pooled-market abstractions with higher measured call-path gas. Compound III simplifies borrowing around one base asset per market; its low-gas absorb step is offset by a separate buy collateral liquidation path. We provide a Foundry-based Ethereum-fork test suite for reproducing these measurements and comparing lending-design trade-offs.
 ]]></content:encoded>
-<pubDate>Tue, 18 Aug 2026 19:26:01 +0000</pubDate>
 <pubDate>Tue, 18 Aug 2026 19:26:01 +0000</pubDate>
 </item>
 <item>
@@ -31,10 +82,8 @@ Decentralized lending protocols encode credit markets as smart contracts whose d
 <link>https://eprint.iacr.org/2026/1725</link>
 <guid>https://eprint.iacr.org/2026/1725</guid>
 <content:encoded><![CDATA[
-
 Several decentralized applications and blockchains, such as blockchain-based voting systems or Proof-of-Social-Capital, require a strict one-account-per-person policy, yet public identity records often expose sensitive attributes or enable offline attribution. This work presents a Proof-of-Uniqueness blockchain-based registry that composes an issuer-signed verifiable credential, two zero-knowledge proofs, a threshold verifiable oblivious pseudorandom function (vOPRF), and a smart contract. The first proof authorizes a blinded evaluation of an issuer's certified canonical identifier, and the second validates the OPRF transcript and binds the resulting global nullifier to a wallet. The design further binds issuer authorization, credential status, validity bounds, canonical encoding, and replay state. Its person-level guarantee is conditional on a stable injective identifier within a coordinated issuance namespace and a stable, valid OPRF key. Confidentiality holds against public observers and against fewer than the OPRF threshold of nodes, but not against an issuer that actively probes its own identifiers. Our prototype couples Noir and UltraPlonk circuits, three local threshold OPRF nodes, and a Solidity contract. For one fixed-schema credential input, it derives a single wallet-bound deterministic nullifier, verifies a real 2,144-byte proof on-chain, and rejects a repeated nullifier with $O(1)$ lookups. One real enrollment consumes 615k gas, and proof construction takes about 65 seconds on one desktop software thread.
 ]]></content:encoded>
-<pubDate>Tue, 18 Aug 2026 17:29:03 +0000</pubDate>
 <pubDate>Tue, 18 Aug 2026 17:29:03 +0000</pubDate>
 </item>
 <item>
@@ -42,13 +91,10 @@ Several decentralized applications and blockchains, such as blockchain-based vot
 <link>https://eprint.iacr.org/2026/1723</link>
 <guid>https://eprint.iacr.org/2026/1723</guid>
 <content:encoded><![CDATA[
-
 While decentralized identity management systems strive for autonomy, most still rely on centralized mechanisms (e.g., phone numbers or government-issued IDs) to achieve Sybil resistance and prevent fake identity attacks. This article proposes an identity management architecture that ensures robust Sybil resistance and is fully decentralized, unlike the systems currently in widespread use. The proposed solution synergizes facial biometric verification with anti-Sybil social graph analysis. By leveraging blockchain technology, zero-knowledge proofs, and trusted execution environments, the system ensures the uniqueness, anonymity, and privacy of registered users without relying on centralized authorities. The operation of the proposed system was demonstrated through simulations of a network of 100 entities across three social graph models and through a proof-of-concept implementation that utilizes fast Plonky2 zero-knowledge proofs. To our knowledge, this is the first work that proposes a Sybil-resistant identity system without sacrificing decentralization and privacy, while not relying on any centralized credential issuers.
 ]]></content:encoded>
 <pubDate>Tue, 18 Aug 2026 16:51:42 +0000</pubDate>
-<pubDate>Tue, 18 Aug 2026 16:51:42 +0000</pubDate>
 </item>
-
 <item>
 <title>Auditable Continuous Group Key Agreement</title>
 <link>https://eprint.iacr.org/2026/1710</link>
@@ -13875,59 +13921,6 @@ In this work, we investigate white-box watermarking for digital signatures secur
 Additionally, we explore the concept of universal copy protection for signatures. We define universal copy protection as a mechanism that transforms any quantumly secure signature scheme into a copy-protected variant without altering the verification key or verification algorithm. This approach is preferable to developing specific copy-protected signature schemes, as it allows existing schemes to be secured without modifying their published verification keys. We demonstrate that universal copy protection for all quantum secure signatures is impossible by leveraging our white-box watermarking signatures secure against quantum adversaries.
 ]]></content:encoded>
 <pubDate>Tue, 18 Feb 2025 05:01:32 +0000</pubDate>
-</item>
-<item>
-<title>HasteBoots: Proving FHE Bootstrapping in Seconds</title>
-<link>https://eprint.iacr.org/2025/261</link>
-<guid>https://eprint.iacr.org/2025/261</guid>
-<content:encoded><![CDATA[
-<div> 关键词：Fully Homomorphic Encryption (FHE)，验证完整性，bootstrapping，HasteBoots，zkVM，SNARKs，证明生成时间，效率提升，可扩展性，隐私保护计算。
-
-<br /><br />总结: 本文提出了一个名为HasteBoots的新颖方案，用于解决全同态加密（FHE）中计算完整性的验证问题，特别是针对FHE中最耗时的操作——引导（bootstrapping）。现有的方法如基于zkVM的解决方案和通用SNARKs在证明生成时间上存在效率低下问题，可能需要数小时至数天。通过定制化的多项式交互式Oracle证明和优化的多项式承诺方案，HasteBoots实现了对FHE引导操作在几秒内完成证明生成，显著优于现有技术。这表明了实现可扩展且高效的可验证FHE的可能性，为实践中的隐私保护计算铺平道路。 <div>
-Fully Homomorphic Encryption (FHE) enables computations on encrypted data, ensuring privacy for outsourced computation. However, verifying the integrity of FHE computations remains a significant challenge, especially for bootstrapping, the most computationally intensive operation in FHE. Prior approaches, including zkVM-based solutions and general-purpose SNARKs, suffer from inefficiencies, with proof generation times ranging from several hours to days. In this work, we propose HasteBoots, a succinct argument tailored for FHE operations. By designing customized polynomial interactive oracle proofs and optimized polynomial commitment schemes, HasteBoots achieves proof generation in a few seconds for FHE bootstrapping, significantly outperforming existing methods. Our approach demonstrates the potential for scalable and efficient verifiable FHE, paving the way for practical, privacy-preserving computations.
-]]></content:encoded>
-<pubDate>Tue, 18 Feb 2025 02:20:55 +0000</pubDate>
-</item>
-<item>
-<title>TFHE Gets Real: an Efficient and Flexible Homomorphic Floating-Point Arithmetic</title>
-<link>https://eprint.iacr.org/2025/257</link>
-<guid>https://eprint.iacr.org/2025/257</guid>
-<content:encoded><![CDATA[
-<div> 关键词: 浮点数运算、全同态加密(FHE)、TFHE、精度、计算速度
-
-总结:
-本文关注于在全同态加密（FHE）领域中实现浮点数运算是如何至关重要的，特别是在保护机器学习中的用户隐私方面。文章以TFHE为例，开发了新的同态算子，旨在构建精确且可适应的同态浮点运算。尽管面临如小消息空间和计算过程中缺乏信息等挑战，研究者仍成功为常见的浮点数精度（例如32位和64位）确定了参数，并实现了较高的计算速度：在多线程环境下，32位浮点数加法可在2.5秒内完成，乘法大约需要1秒。这些实测结果表明，提出的方案具有高效性和实用性，显著超越了先前的工作，从而在理论上与实际应用之间架起了一座桥梁，使FHE在现实场景中的运用变得更加可行。 <div>
-Floating-point arithmetic plays a central role in computer science and is used in various domains where precision and computational scale are essential. One notable application is in machine learning, where Fully Homomorphic Encryption (FHE) can play a crucial role in safeguarding user privacy. In this paper, we focus on TFHE and develop novel homomorphic operators designed to enable the construction of precise and adaptable homomorphic floating-point operations. Integrating floating-point arithmetic within the context of FHE is particularly challenging due to constraints such as small message space and the lack of information during computation. Despite these challenges, we were able to determine parameters for common precisions (e.g., 32-bit, 64-bit) and achieve remarkable computational speeds, with 32-bit floating-point additions completing in 2.5 seconds and multiplications in approximately 1 second in a multi-threaded environment. These metrics provide empirical evidence of the efficiency and practicality of our proposed methods, which significantly outperform previous efforts. Our results demonstrate a significant advancement in the practical application of FHE, making it more viable for real-world scenarios and bridging the gap between theoretical encryption techniques and practical usability.
-]]></content:encoded>
-<pubDate>Mon, 17 Feb 2025 14:59:27 +0000</pubDate>
-</item>
-<item>
-<title>Inaccessible Entropy for Watermarking Generative Agents</title>
-<link>https://eprint.iacr.org/2025/256</link>
-<guid>https://eprint.iacr.org/2025/256</guid>
-<content:encoded><![CDATA[
-<div> 关键词：语言模型、生成式代理、不可伪造水印、无失真、公开验证
-
-总结:
-本文提出了一种针对语言模型和生成式代理的无失真、不可伪造水印构造方法。该水印方案确保了水印无法被对手有效伪造或在不显著降低模型输出质量的情况下移除。水印输出保持无失真，即水印算法不会明显改变模型输出的质量，而且没有公共检测密钥的攻击者无法有效区分是否添加了水印的输出。水印方案的核心在于将消息与可公开验证的数字签名嵌入到生成的模型输出中。在检测阶段，任何拥有公钥的授权实体都可以提取并验证这些信息。文章证明，基于标准密码学假设——单向函数的存在，可以构建这样的无失真、不可伪造水印方案。该框架依赖于分析基于单向函数的计算熵概念的水印方案的不可访问熵。 <div>
-In this work, we construct distortion-free and unforgeable watermarks for language models and generative agents. The watermarked output cannot be forged by a adversary nor removed by the adversary without significantly degrading model output quality. That is, the watermarked output is distortion-free: the watermarking algorithm does not noticeably change the quality of the model output and without the public detection key, no efficient adversary can distinguish output that is watermarked from outputs which are not. The core of the watermarking schemes involve embedding a message and publicly-verifiable digital signature in the generated model output. The message and signature can be extracted during the detection phase and verified by any authorized entity that has a public key. We show that, assuming the standard cryptographic assumption of one-way functions, we can construct distortion-free and unforgeable watermark schemes. Our framework relies on analyzing the inaccessible entropy of the watermarking schemes based on computational entropy notions derived from the existence of one-way functions.
-]]></content:encoded>
-<pubDate>Mon, 17 Feb 2025 13:09:06 +0000</pubDate>
-</item>
-<item>
-<title>Masquerade: Verifiable Multi-Party Aggregation with Secure Multiplicative Commitments</title>
-<link>https://eprint.iacr.org/2021/1370</link>
-<guid>https://eprint.iacr.org/2021/1370</guid>
-<content:encoded><![CDATA[
-<div> 关键词: 众包数据聚合、隐私保护、公共审计、可验证性、分布式账本
-
-总结:
-本文提出两种名为Masquerade和zk-Masquerade的协议，用于计算私有统计数据（如求和、平均值和直方图）的同时，不泄露参与者的原始数据。为确保数据聚合的完整性，文中设计了一种定制化的乘法承诺方案，并将所有参与者的承诺发布到分布式账本上，以实现公众可验证性。针对恶意参与者可能尝试破坏聚合结果的问题，zk-Masquerade采用两种零知识证明协议，确保共享数据点的有效性并在聚合前进行验证，从而支持广泛的数量和类别研究。实验中，使用了同态加密和承诺对不同数量的参与者进行了评估，并分析了协议运行时间和通信成本。 <div>
-In crowd-sourced data aggregation over the Internet, participants share their data points with curators. However, a lack of strong privacy guarantees may discourage participation, which motivates the need for privacy-preserving aggregation protocols. Moreover, existing solutions remain limited with respect to public auditing without revealing the participants' data. In realistic applications, however, there is an increasing need for public verifiability (i.e., verifying the protocol correctness) while preserving the privacy of the participants' inputs, since the participants do not always trust the data curators. At the same time, while publicly distributed ledgers may provide public auditing, these schemes are not designed to protect sensitive information.
-
-In this work, we introduce two protocols, dubbed Masquerade and zk-Masquerade, for computing private statistics, such as sum, average, and histograms, without revealing anything about participants' data. We propose a tailored multiplicative commitment scheme to ensure the integrity of data aggregations and publish all the participants' commitments on a ledger to provide public verifiability. zk-Masquerade detects malicious participants who attempt to poison the aggregation results by adopting two zero-knowledge proof protocols that ensure the validity of shared data points before being aggregated and enable a broad range of numerical and categorical studies. In our experiments, we use homomorphic ciphertexts and commitments for a variable number of participants and evaluate the runtime and the communication cost of our protocols.
-]]></content:encoded>
-<pubDate>Tue, 12 Oct 2021 06:24:19 +0000</pubDate>
 </item>
 </channel>
 </rss>
