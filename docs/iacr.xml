@@ -4,6 +4,50 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+<item>
+<title>A Unified Framework for Contract-Validated Benchmarking of Zero-Knowledge Proving Systems</title>
+<link>https://eprint.iacr.org/2026/1729</link>
+<guid>https://eprint.iacr.org/2026/1729</guid>
+<content:encoded><![CDATA[
+
+Zero-knowledge proofs are an operational infrastructure for rollups, private payments, verifiable execution, and zkVM applications. We treat them as succinct proofs of validity whose privacy properties depend on the system and the mode of use. Published benchmarks often compare different workloads, proof modes, and hardware paths, which makes their results hard to interpret. This work presents a unified host-agent framework for benchmarking heterogeneous proving systems under a common execution and reporting method. Each prover runs in an isolated containerized agent and is selected through a scheme-adapter layer. The agent reports canonical JSON artifacts linked to a hashed run manifest and workload-specific semantic contracts. The host checks the public semantic fields and the agent's verification flag to ensure backends are compared on the same declared public claim, even when their circuits, traces, or guest pipelines differ. We evaluate circuit-based, transparent, GPU-accelerated, folding, and zkVM systems: Groth16, ICICLE, Halo2, Plonky3, Winterfell, Nova, RISC Zero with CUDA and Groth16 wrapping, and SP1 with and without AVX. The suite uses six primary workloads with comparable semantics, together with secondary hash workloads that expose specialization. No prover family dominates all deployment criteria. At 8 CPU cores, Plonky3 and Winterfell have the smallest across-case proving-time and RAM figures. Groth16 and ICICLE produce sub-kilobyte proofs. Winterfell has the lowest host verification time. zkVM systems trade larger proofs and higher memory for programmability. On the Merkle-path micro-benchmark, pairing artifacts remain sub-kilobyte, whereas wrapping a zkVM receipt yields a Groth16-sized artifact at a high proving cost. GPU acceleration helps most after fixed setup costs are amortized. The main contribution is methodological: validate the statement being proved, disclose the security profile, and report resource limits in addition to proving time.
+]]></content:encoded>
+<pubDate>Tue, 18 Aug 2026 19:59:11 +0000</pubDate>
+<pubDate>Tue, 18 Aug 2026 19:59:11 +0000</pubDate>
+</item>
+<item>
+<title>A Controlled Case Study of Design Trade-offs in DeFi Lending Protocols</title>
+<link>https://eprint.iacr.org/2026/1728</link>
+<guid>https://eprint.iacr.org/2026/1728</guid>
+<content:encoded><![CDATA[
+
+Decentralized lending protocols encode credit markets as smart contracts whose design choices affect gas cost, capital efficiency, liquidation behavior, and risk allocation. We compare Aave V3, SparkLend, Compound III, and Morpho Blue in matched Ethereum fork tests with wstETH collateral, USDC debt, and one fixed chain state. The tests measure call-path gas, annualized rates, thirty-day debt growth, maximum borrow capacity, and liquidation outcomes. It is important to note that the observed orderings for gas costs and rates are specific to this test artifact and could change under different collateral assets or utilization regimes. Within this setting, Morpho Blue has the lowest measured interaction call-path gas and highest borrow capacity, while shifting risk selection to isolated permissionless markets. Furthermore, Morpho Blue's evaluation uses a deployed market for rate measurements but a constructed market for liquidation testing. Aave V3 and SparkLend provide broader pooled-market abstractions with higher measured call-path gas. Compound III simplifies borrowing around one base asset per market; its low-gas absorb step is offset by a separate buy collateral liquidation path. We provide a Foundry-based Ethereum-fork test suite for reproducing these measurements and comparing lending-design trade-offs.
+]]></content:encoded>
+<pubDate>Tue, 18 Aug 2026 19:26:01 +0000</pubDate>
+<pubDate>Tue, 18 Aug 2026 19:26:01 +0000</pubDate>
+</item>
+<item>
+<title>Proof-of-Uniqueness: Sybil-Resistant Privacy-Preserving Decentralized Identity through Threshold-OPRF and zk-SNARK Registry</title>
+<link>https://eprint.iacr.org/2026/1725</link>
+<guid>https://eprint.iacr.org/2026/1725</guid>
+<content:encoded><![CDATA[
+
+Several decentralized applications and blockchains, such as blockchain-based voting systems or Proof-of-Social-Capital, require a strict one-account-per-person policy, yet public identity records often expose sensitive attributes or enable offline attribution. This work presents a Proof-of-Uniqueness blockchain-based registry that composes an issuer-signed verifiable credential, two zero-knowledge proofs, a threshold verifiable oblivious pseudorandom function (vOPRF), and a smart contract. The first proof authorizes a blinded evaluation of an issuer's certified canonical identifier, and the second validates the OPRF transcript and binds the resulting global nullifier to a wallet. The design further binds issuer authorization, credential status, validity bounds, canonical encoding, and replay state. Its person-level guarantee is conditional on a stable injective identifier within a coordinated issuance namespace and a stable, valid OPRF key. Confidentiality holds against public observers and against fewer than the OPRF threshold of nodes, but not against an issuer that actively probes its own identifiers. Our prototype couples Noir and UltraPlonk circuits, three local threshold OPRF nodes, and a Solidity contract. For one fixed-schema credential input, it derives a single wallet-bound deterministic nullifier, verifies a real 2,144-byte proof on-chain, and rejects a repeated nullifier with $O(1)$ lookups. One real enrollment consumes 615k gas, and proof construction takes about 65 seconds on one desktop software thread.
+]]></content:encoded>
+<pubDate>Tue, 18 Aug 2026 17:29:03 +0000</pubDate>
+<pubDate>Tue, 18 Aug 2026 17:29:03 +0000</pubDate>
+</item>
+<item>
+<title>De-SyRIS: A Decentralized Sybil-Resistant Identity System without a Trusted Credential Issuer</title>
+<link>https://eprint.iacr.org/2026/1723</link>
+<guid>https://eprint.iacr.org/2026/1723</guid>
+<content:encoded><![CDATA[
+
+While decentralized identity management systems strive for autonomy, most still rely on centralized mechanisms (e.g., phone numbers or government-issued IDs) to achieve Sybil resistance and prevent fake identity attacks. This article proposes an identity management architecture that ensures robust Sybil resistance and is fully decentralized, unlike the systems currently in widespread use. The proposed solution synergizes facial biometric verification with anti-Sybil social graph analysis. By leveraging blockchain technology, zero-knowledge proofs, and trusted execution environments, the system ensures the uniqueness, anonymity, and privacy of registered users without relying on centralized authorities. The operation of the proposed system was demonstrated through simulations of a network of 100 entities across three social graph models and through a proof-of-concept implementation that utilizes fast Plonky2 zero-knowledge proofs. To our knowledge, this is the first work that proposes a Sybil-resistant identity system without sacrificing decentralization and privacy, while not relying on any centralized credential issuers.
+]]></content:encoded>
+<pubDate>Tue, 18 Aug 2026 16:51:42 +0000</pubDate>
+<pubDate>Tue, 18 Aug 2026 16:51:42 +0000</pubDate>
+</item>
 
 <item>
 <title>Auditable Continuous Group Key Agreement</title>
