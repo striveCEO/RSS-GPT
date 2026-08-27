@@ -5,17 +5,29 @@
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
 <item>
+<title>Secure Auctions in the Presence of Rational Adversaries</title>
+<link>https://eprint.iacr.org/2022/1541</link>
+<guid>https://eprint.iacr.org/2022/1541</guid>
+<content:encoded><![CDATA[
+
+Sealed bid auctions are used to allocate a resource among a set of interested parties. Traditionally, auctions need the presence of a trusted auctioneer to whom the bidders provide their private bid values. Existence of such a trusted party is not an assumption easily realized in practice. Generic secure computation protocols can be used to remove a trusted party. However, generic techniques result in inefficient protocols, and typically do not provide fairness - that is, a corrupt party can learn the output and abort the protocol thereby preventing other parties from learning the output. 
+At CRYPTO 2009, Miltersen, Nielsen and Triandopoulos [MNT09], introduced the problem of building auctions that are secure against rational bidders. Such parties are modeled as self-interested agents who care more about maximizing their utility than about learning information about bids of other agents. To realize this, they put forth a novel notion of information utility and introduce a game-theoretic framework that helps analyse protocols while taking into account both  information utility as well as  monetary utility. Unfortunately, their construction makes use a of generic MPC protocol and, consequently, the authors do not analyze the concrete efficiency of their protocol. 
+In this work, we construct the first concretely efficient and provably secure protocol for First Price Auctions in the rational setting. Our protocol guarantees privacy and fairness. Inspired by [MNT09], we put forth a solution concept that we call Privacy Enhanced Computational Weakly Dominant Strategy Equilibrium that captures parties' privacy and monetary concerns in the game theoretic context, and show that our protocol realizes this. We believe this notion to be of independent interest.
+Our protocol is crafted specifically for the use case of auctions, is simple, using off-the-shelf cryptographic components. Executing our auction protocol on commodity hardware with 10 bidders, with bids of length 10, our protocol runs to completion in 0.141s and has total communication of 30KB.
+]]></content:encoded>
+<pubDate>Mon, 07 Nov 2022 13:10:02 +0000</pubDate>
+<pubDate>Mon, 07 Nov 2022 13:10:02 +0000</pubDate>
+</item>
+
+<item>
 <title>On the BUFF Security of ECDSA with Key Recovery</title>
 <link>https://eprint.iacr.org/2024/2018</link>
 <guid>https://eprint.iacr.org/2024/2018</guid>
 <content:encoded><![CDATA[
-
 In the usual syntax of digital signatures, the verification algorithm takes a verification key in addition to a signature and a message, whereas in ECDSA with key recovery, which is used in Ethereum,  no verification key is input to the verification algorithm. Instead, a verification key is recovered from a signature and a message. In this paper, we explore BUFF security of ECDSA with key recovery (KR-ECDSA), where BUFF stands for Beyond UnForgeability Features (Cremers et al., IEEE S&amp;P 2021).  As a result, we show that KR-ECDSA provides BUFF security, except weak non-resignability (wNR). It is particularly noteworthy that the KR-ECDSA verification algorithm takes an Ethereum address addr as input. This address is defined as the rightmost 160 bits of the Keccak-256 hash of the corresponding ECDSA verification key. Crucially, the algorithm verifies that the hash of the recovered verification key matches addr. Our security analysis shows that the procedure of checking whether the hash value of the recovered verification key is equal to the address is mandatory to provide BUFF security. We also discuss whether wNR is mandatory in Ethereum or not. To clarify which part is mandatory to provide BUFF security in KR-ECDSA, we show that the original ECDSA does not provide any BUFF security. As a by-product of the analysis, we show that one of our BUFF attacks also works against Aumayr et al.'s ECDSA-based adaptor signature scheme (ASIACRYPT 2021) and Qin et al.'s blind adaptor signature scheme (IEEE S&amp;P 2023), which is based on Aumayr et al.'s scheme. We emphasize that the attack is positioned outside of their security models.
 ]]></content:encoded>
 <pubDate>Fri, 13 Dec 2024 05:56:52 +0000</pubDate>
-<pubDate>Fri, 13 Dec 2024 05:56:52 +0000</pubDate>
 </item>
-
 <item>
 <title>Worst-Case Lattice Sampler with Truncated Gadgets and Applications</title>
 <link>https://eprint.iacr.org/2024/1952</link>
@@ -13849,29 +13861,6 @@ In this work, we investigate malleable SNARKs, a generalization of this concept 
 Technically, our malleable SNARK construction relies on recursive proofs, but with a twist: in order to support the strong indistinguishability properties of mauled and fresh SNARK proofs, we need to allow an unbounded recursion depth. To still allow for a reasonable notion of extractability in this setting (and in particular to guarantee that extraction eventually finishes with a “proper” witness that does not refer to a previous SNARK proof), we rely on a new and generic computational primitive called adversarial one-way function (AOWF) that may be of independent interest. We give an AOWF candidate and prove it secure in the random oracle model.
 ]]></content:encoded>
 <pubDate>Thu, 20 Feb 2025 21:24:29 +0000</pubDate>
-</item>
-<item>
-<title>Practical Zero-Trust Threshold Signatures in Large-Scale Dynamic Asynchronous Networks</title>
-<link>https://eprint.iacr.org/2025/297</link>
-<guid>https://eprint.iacr.org/2025/297</guid>
-<content:encoded><![CDATA[
-<div> 关键词: 压力签名, 权限不清除区块链, ECDSA, EdDSA/Schnorr, 安全性<br /><br />总结:
-
-我们提出了在客户端和权限不清除分散式区块链之间分布压力签名过程的新协议，针对ECDSA和EdDSA/Schnorr签名进行了设计。现有的由可信托管人使用的阈值访问架构存在蜜罐问题，资产持有量越大，被攻破的动机越强。我们的实现克服了几个挑战：1）适应异步可靠的广播通信通道，并具有可识别中止、公共可验证性和保证输出交付的特点；2）设计了一个流体协议，支持每轮通信中的后决定动态多数参与签署；3）提供了网络再配置协议，复杂度独立于系统中的客户端数量，并有效支持基于权重的阈值访问结构。此外，协议优化了与客户端交互的过程，去除了零知识证明，并实现了非交互式客户端预签，降低了通信开销并提高了应对高需求时段流量峰值的能力。我们的协议具备UC安全性，并提出了一种新颖的安全假设——稍微增强的ECDSA不可伪造性，为支持并行执行预签操作的阈值ECDSA提供了对256位椭圆曲线的具体安全保证。该协议不仅用于加密货币钱包的安全，还展示了如何应用于跨链场景，如去中心化桥接、未来交易和钱包转移，旨在提高多区块链环境下的安全性、可扩展性和灵活性，尤其对于去中心化金融（DeFi）生态系统具有重要意义。 <div>
-Threshold signatures have become a critical tool in cryptocurrency systems, offering enhanced security by distributing the signing process among multiple signers. In this work, we distribute this process between a client and a permissionless decentralized blockchain, and present novel protocols for ECDSA and EdDSA/Schnorr signatures in this setting. Typical threshold access architectures used by trusted custodians suffer from the honeypot problem, wherein the more assets the custodian holds, the greater the incentive of compromising it.
-
-Implementing threshold signatures over permissionless blockchains poses a few challenges.
-First, existing networks typically work over an asynchronous reliable broadcast communication channel. Accordingly, our protocol is implemented over such a channel. As a result, it also benefits from identifiable abort, public verifiability, and guaranteed output delivery, and the client benefits from censorship resistance of blockchain systems.
-Second, upon signing each block, the participating quorum may dynamically change and is post-determined.
-Therefore, we design a fluid protocol, that supports a post-determined dynamic quorum in each communication round, thereby complying with existing broadcast channel implementations. Third, in permissionless networks, parties may join, leave, and change their stake. Therefore, we offer protocols for network reconfiguration, with complexity independent of the number of clients in the system, and our protocol efficiently supports a weighted threshold access structure for the network. Specifically, the complexity of distributed key generation and presign only depends on the number of parties and not on the overall weight, and the amortized cost of sign only depends on the individual weight.
-
-Furthermore, our protocol introduces key improvements, including the removal of zero-knowledge proofs towards the client, and presigns with a non-interactive client. For Schnorr, the presigns are client-independent, and can be collected by the blockchain in a common pool, available for all clients in the system. These optimizations reduce communication overhead and improve the system's ability to handle traffic spikes during high-demand periods.
-
-Our protocol is UC-secure, and is therefore natively designed for multiple clients to use the system in parallel. Notably, we propose a novel assumption, Slightly-Enhanced ECDSA Unforgeability, offering concrete security for 256-bit elliptic curves for threshold ECDSA with support for parallel execution of presigns.
-
-In addition to securing cryptocurrency wallets, we demonstrate how our protocol enables various cross-chain applications, such as decentralized bridges, future transactions, andwallet transfer. Our system is designed for interoperability across multiple blockchains, enhancing security, scalability, and flexibility for decentralized finance (DeFi) ecosystems.
-]]></content:encoded>
-<pubDate>Thu, 20 Feb 2025 08:21:42 +0000</pubDate>
 </item>
 </channel>
 </rss>
