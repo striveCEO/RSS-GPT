@@ -5,20 +5,80 @@
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
 <item>
+<title>Fast Post-Quantum Ring Signature from Power Residue PRFs with QROM Security</title>
+<link>https://eprint.iacr.org/2025/1841</link>
+<guid>https://eprint.iacr.org/2025/1841</guid>
+<content:encoded><![CDATA[
+
+Ring signatures enable a user to sign anonymously on behalf of a group, providing a fundamental building block for privacy-preserving applications such as anonymous credentials and private transactions. Existing post-quantum constructions, however, face a persistent tension between efficiency and rigorous quantum security: practical schemes are typically analysed only in the classical random oracle model (ROM), whereas schemes with proofs in the quantum random oracle model (QROM) either incur multi-megabyte signatures, lack implementations, or rely on reductions too loose to support concrete parameter selection. 
+
+We present PegaRing, the first post-quantum ring signature to combine practical performance with concretely parameterised security in QROM. At the 128-bit security level and a ring size of 1024, PegaRing produces 28KB signatures, reducing signature size by a factor of 88 relative to the smallest prior concretely parameterised QROM-secure construction. Our implementation signs in 4.325 ms and verifies in 3.074 ms. Compared with the state-of-the-art VOLE-in-the-head ring signature, which is proven secure only in classical ROM, PegaRing reduces signing and verification latency by factors of 2.65 and 3.80, respectively, while providing security in QROM. Finally, when using the first message-dependent Fiat-Shamir challenge as the boundary between offline and online computation, PegaRing's online signing phase takes 0.018 ms, compared with 7.611 ms for VOLE-in-the-head construction, achieving a reduction of more than 400 times. These results substantially narrow the gap between rigorous quantum security and practical performance for post-quantum ring signatures and make QROM-secure anonymous authentication feasible for various anonymity sets.
+]]></content:encoded>
+<pubDate>Mon, 06 Oct 2025 05:33:53 +0000</pubDate>
+<pubDate>Mon, 06 Oct 2025 05:33:53 +0000</pubDate>
+</item>
+<item>
+<title>Practical Silent Threshold Signatures and Silent Threshold Encryption for Dynamic Committees</title>
+<link>https://eprint.iacr.org/2026/1820</link>
+<guid>https://eprint.iacr.org/2026/1820</guid>
+<content:encoded><![CDATA[
+
+Silent threshold signatures (STS) and encryption (STE) enable threshold cryptography without interactive distributed key generation, allowing a group of $N$ parties to non-interactively generate a joint public signature verification key or an encryption key. However, modern distributed systems (such as Ethereum) rely on small, dynamically changing committees of size $n \ll N$ for efficiency, and existing silent threshold schemes either fail to support this dynamic setting or suffer from severe scalability issues. The only known STS construction for dynamic committees, Dyna-hinTS, requires an aggregation time of $O(N\log N)$ per epoch, tightly coupling the cost to the global system size rather than the small active committee. Furthermore, no STE scheme for dynamic committees has been proposed yet.
+In this work, we present practical silent threshold signature and encryption schemes for dynamic committees, bringing the aggregation cost down to strictly depend only on the committee size $n$. For signatures, we redesign the Dyna-hinTS framework by replacing its Plonk-style SNARKs with linear pairing checks and a new polynomial commitment for representing the committee, yielding an aggregation time of $O(n\log^2n)$. We also introduce the first silent threshold encryption scheme for dynamic committees with matching efficiency. We further significantly optimize the silent setup phase common to prior STS and STE schemes, reducing each party’s one-time setup (i.e., generating the setup data, referred to as a "hint") cost from $O(N^2)$ to $O(N)$.
+We implement our schemes in Rust, and the results demonstrate practicality at scale. For a system parameterized with $N = 2^{20}$ and $n = 2^{10}$, the per-party hint generation takes 197 seconds, and signature aggregation takes 0.153 seconds, achieving a $>1900\times$ improvement over Dyna-hinTS. At the same time, our aggregated signature size, verification key size, and verification time remain constant.
+]]></content:encoded>
+<pubDate>Thu, 27 Aug 2026 15:40:10 +0000</pubDate>
+<pubDate>Thu, 27 Aug 2026 15:40:10 +0000</pubDate>
+</item>
+<item>
+<title>ATLAS: Automated Approximation of Transformers for Efficient Homomorphic Inference in One Hour</title>
+<link>https://eprint.iacr.org/2026/1817</link>
+<guid>https://eprint.iacr.org/2026/1817</guid>
+<content:encoded><![CDATA[
+
+Fully homomorphic encryption (FHE) lets a server run inference on encrypted data with strong privacy guarantees, but running a Transformer under FHE is expensive. Its non-linear operations, such as softmax, normalization, and activation, must be replaced with polynomial approximations that the CKKS scheme supports, and the depth of these approximations dominates inference cost. Existing FHE Transformers use hand-tuned approximation settings, such as iteration count and polynomial degree, applied uniformly across layers, models, and tasks. Hand-tuning is slow and error-prone. Even a single uniform setting has about $10^7$ choices, and manual search cannot exploit layer-wise variation. 
+AutoFHE, the only automated method with multi-objective search, targets ReLU-only CNNs and needs full fine-tuning per candidate, which is too costly for Transformers. Per-layer settings also push the search space to about $10^{85}$ for BERT and ViT and $10^{228}$ for LLaMA3, beyond both manual and fine-tuning-based search. We present ATLAS, a training-free framework that automates this search by treating each layer's approximation setting as a multi-objective optimization over latency and accuracy. The problem is hard: the decision space is large (96 or 256 variables), each configuration takes 70 to 1,000 seconds to evaluate even in cleartext, and 85 to 90 percent of configurations are invalid. ATLAS handles this with a two-stage optimization strategy and a surrogate model, completing the search in about one hour. Compared to an iterative softmax baseline, ATLAS cuts multiplicative depth and end-to-end latency by about 35 percent with little accuracy loss, and works across encoder-only, decoder-only, and vision Transformers, complementing parallel work on packing and matrix multiplication.
+]]></content:encoded>
+<pubDate>Thu, 27 Aug 2026 09:24:11 +0000</pubDate>
+<pubDate>Thu, 27 Aug 2026 09:24:11 +0000</pubDate>
+</item>
+<item>
+<title>Communication-Efficient Private Join and Compute over Distributed Input Sets</title>
+<link>https://eprint.iacr.org/2026/1812</link>
+<guid>https://eprint.iacr.org/2026/1812</guid>
+<content:encoded><![CDATA[
+
+Private Join and Compute (PJC) enables two parties to compute aggregates over matching records from their private datasets. In this work, we focus on the inner-product variant of PJC, which computes the inner product over matching records from their private datasets. It has important applications such as privacy-preserving ad conversion measurement. However, existing PJC protocols assume each party holds the entire dataset, which is often unrealistic in practice, where relevant datasets are distributed across multiple data owners. No existing PJC protocols directly support distributed input sets across multiple clients, while straightforward generic approaches introduce substantial overhead.
+
+We propose an efficient approximate PJC protocol for distributed input sets while keeping the communication sublinear in the input size. Our protocol works in the semi-honest setting and uses two non-colluding servers that learn nothing beyond the final approximation. The core technical contribution is a novel adaptation of the G\"odel Prize-winning AMS sketch redesigned for efficient evaluation under fully homomorphic encryption. Concretely, we show a new structured randomness that can be homomorphically generated from short seeds using just 3 levels of multiplication while maintaining the best plaintext accuracy bound. Based on our optimized implementation, clients can insert each input element into an encrypted sketch in 30 ms, which has a size of 250 KB, independent of input size. The servers can recover the final output within seconds, orders of magnitude faster than the generic method.
+]]></content:encoded>
+<pubDate>Thu, 27 Aug 2026 02:09:41 +0000</pubDate>
+<pubDate>Thu, 27 Aug 2026 02:09:41 +0000</pubDate>
+</item>
+<item>
+<title>Security Analysis on a Secure Medical Data Sharing System in Digital Twin Environments</title>
+<link>https://eprint.iacr.org/2026/1801</link>
+<guid>https://eprint.iacr.org/2026/1801</guid>
+<content:encoded><![CDATA[
+
+Gao et al. (IEEE Internet of Things Journal, 2025) proposed a medical data sharing system for digital twin environments using identity-based encryption (IBE), public-key encryption with keyword search (PEKS), and blockchain technologies. In this short note, we show that Gao et al.'s system allows unauthorized users to access other patients' medical data. We further show that the search server can obtain information about the queried keywords from the trapdoors (search queries). In addition, we analyze the procedure used to retrieve, from the blockchain, the IPFS (InterPlanetary File System) addresses storing encrypted medical data and encrypted keywords. Since these addresses are derived from labels that can be computed solely from public information and keywords, and because the keywords themselves are provided to the search server, we demonstrate that searchable encryption is unnecessary in the first place. Based on our security analysis, we argue that the proposed system requires a fundamental redesign.
+]]></content:encoded>
+<pubDate>Wed, 26 Aug 2026 05:35:51 +0000</pubDate>
+<pubDate>Wed, 26 Aug 2026 05:35:51 +0000</pubDate>
+</item>
+
+<item>
 <title>Secure Auctions in the Presence of Rational Adversaries</title>
 <link>https://eprint.iacr.org/2022/1541</link>
 <guid>https://eprint.iacr.org/2022/1541</guid>
 <content:encoded><![CDATA[
-
 Sealed bid auctions are used to allocate a resource among a set of interested parties. Traditionally, auctions need the presence of a trusted auctioneer to whom the bidders provide their private bid values. Existence of such a trusted party is not an assumption easily realized in practice. Generic secure computation protocols can be used to remove a trusted party. However, generic techniques result in inefficient protocols, and typically do not provide fairness - that is, a corrupt party can learn the output and abort the protocol thereby preventing other parties from learning the output. 
 At CRYPTO 2009, Miltersen, Nielsen and Triandopoulos [MNT09], introduced the problem of building auctions that are secure against rational bidders. Such parties are modeled as self-interested agents who care more about maximizing their utility than about learning information about bids of other agents. To realize this, they put forth a novel notion of information utility and introduce a game-theoretic framework that helps analyse protocols while taking into account both  information utility as well as  monetary utility. Unfortunately, their construction makes use a of generic MPC protocol and, consequently, the authors do not analyze the concrete efficiency of their protocol. 
 In this work, we construct the first concretely efficient and provably secure protocol for First Price Auctions in the rational setting. Our protocol guarantees privacy and fairness. Inspired by [MNT09], we put forth a solution concept that we call Privacy Enhanced Computational Weakly Dominant Strategy Equilibrium that captures parties' privacy and monetary concerns in the game theoretic context, and show that our protocol realizes this. We believe this notion to be of independent interest.
 Our protocol is crafted specifically for the use case of auctions, is simple, using off-the-shelf cryptographic components. Executing our auction protocol on commodity hardware with 10 bidders, with bids of length 10, our protocol runs to completion in 0.141s and has total communication of 30KB.
 ]]></content:encoded>
 <pubDate>Mon, 07 Nov 2022 13:10:02 +0000</pubDate>
-<pubDate>Mon, 07 Nov 2022 13:10:02 +0000</pubDate>
 </item>
-
 <item>
 <title>On the BUFF Security of ECDSA with Key Recovery</title>
 <link>https://eprint.iacr.org/2024/2018</link>
@@ -13844,23 +13904,6 @@ As cloud computing continues to gain widespread adoption, safeguarding the confi
 To address this limitation, we present HELM, a framework for privacy-preserving data processing using homomorphic encryption. HELM automatically transforms arbitrary programs expressed in a Hardware Description Language (HDL), such as Verilog, into equivalent homomorphic circuits, which can then be efficiently evaluated using encrypted inputs. HELM features two modes of encrypted evaluation: a) a gate mode that consists of standard Boolean gates, and b) a lookup table mode which significantly reduces the size of the circuit by combining multiple gates into lookup tables. Finally, HELM introduces a scheduler that enables embarrassingly parallel processing in the encrypted domain. We evaluate HELM with the ISCAS'85 and ISCAS'89 benchmark suites as well as real-world applications such as AES and image filtering. Our results outperform prior works by up to $65\times$.
 ]]></content:encoded>
 <pubDate>Fri, 15 Sep 2023 04:57:50 +0000</pubDate>
-</item>
-<item>
-<title>Malleable SNARKs and Their Applications</title>
-<link>https://eprint.iacr.org/2025/311</link>
-<guid>https://eprint.iacr.org/2025/311</guid>
-<content:encoded><![CDATA[
-<div> 关键词：SNARKs、malleable SNARKs、recursive SNARKs、adversarial one-way function (AOWF)、post-quantum cryptography
-
-总结:
-本文研究了可塑性SNARKs（malleable SNARKs），这是递归SNARK概念的一种推广，允许修改SNARK证明以展示相关陈述，并保持篡改后的证明与新鲜产生的证明无法区分。文章提出了针对通用语言和关系的可塑性SNARK实例化方法，并给出了几个应用案例，包括首个后量子RCCA安全的重随机化和更新加密方案、一种通用的反向防火墙构造以及一种不可链接的（即计算隐藏的）目标可塑性全同态加密方案。技术上，该可塑性SNARK构造依赖于递归证明，但为实现强大篡改后的不可辨识性，需要允许无限递归深度。为了在这种情况下仍能保证合理的可提取性（特别是确保最终能提取到不引用先前SNARK证明的“正确”见证），文章引入了一种名为对抗性单向函数（AOWF）的新颖且通用的计算原语，并提供了一个AOWF候选方案及其在随机预言模型下的安全性证明。 <div>
-Succinct non-interactive arguments of knowledge (SNARKs) are variants of non-interactive zero-knowledge proofs (NIZKs) in which complex statements can be proven in a compact way. SNARKs have had tremendous impact in several areas of cryptography, including verifiable computing, blockchains, and anonymous communication. A recurring concept in many applications is the concept of recursive SNARKs, in which a proof references a previous proof to show an evolved statement.
-
-In this work, we investigate malleable SNARKs, a generalization of this concept of recursion. An adaptation of the existing concept of malleable NIZKs, malleable SNARKs allow to modify SNARK proofs to show related statements, but such that such mauled proofs are indistinguishable from “properly generated” fresh proofs of the related statement. We show how to instantiate malleable SNARKs for universal languages and relations, and give a number of applications: the first post-quantum RCCA-secure rerandomizable and updatable encryption schemes, a generic construction of reverse firewalls, and an unlinkable (i.e., computation-hiding) targeted malleable homomorphic encryption scheme.
-
-Technically, our malleable SNARK construction relies on recursive proofs, but with a twist: in order to support the strong indistinguishability properties of mauled and fresh SNARK proofs, we need to allow an unbounded recursion depth. To still allow for a reasonable notion of extractability in this setting (and in particular to guarantee that extraction eventually finishes with a “proper” witness that does not refer to a previous SNARK proof), we rely on a new and generic computational primitive called adversarial one-way function (AOWF) that may be of independent interest. We give an AOWF candidate and prove it secure in the random oracle model.
-]]></content:encoded>
-<pubDate>Thu, 20 Feb 2025 21:24:29 +0000</pubDate>
 </item>
 </channel>
 </rss>
