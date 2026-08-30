@@ -4,6 +4,73 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+<item>
+<title>AVXPoS: Reducing Consensus Verification Cost in the Ethereum Proof-of-Stake Client</title>
+<link>https://eprint.iacr.org/2026/1827</link>
+<guid>https://eprint.iacr.org/2026/1827</guid>
+<content:encoded><![CDATA[
+
+Ethereum Proof-of-Stake (PoS) clients must verify large volumes of
+Boneh--Lynn--Shacham (BLS) signatures for attestations, sync-committee messages,
+and other consensus-critical objects within fixed slot deadlines. This recurring
+cost competes with state transition, fork choice, and message propagation for
+client CPU time, so reducing it increases the verification headroom available
+under bursty load. Prior cryptographic-engineering work has shown that SIMD can
+substantially accelerate BLS verification kernels, but these gains do not
+automatically survive client software boundaries, runtime scheduling, and
+irregular verification ranges.
+
+We present AVXPoS, a client-aware batching framework for BLS verification in
+the Prysm Ethereum PoS client. AVXPoS treats batched verification as a
+client-level systems problem: it preserves Prysm's verification semantics while
+reorganizing protocol-shaped requests into native batched states that expose
+SIMD parallelism across API, worker, and native-backend boundaries. We
+instantiate AVXPoS with an AVX-512 backend for BLS12-381, combining Go-side
+range formation with C-side width-adaptive dispatch. On a resource-constrained
+two-core Intel host, AVXPoS gains $1.44$--$2.10\times$ over Prysm's production
+\texttt{blst} backend at selected small batch sizes that bracket the
+post-aggregation $p50/p95/p99$ batch-size quantiles of an all-subnets
+steady-state mainnet stress trace,
+and reaches up to $3.18\times$ in controlled capacity sweeps. On a 16-core AMD
+host, a production checkpoint-backfill
+verifier at Ethereum's 128-block request cap improves by $1.81\times$.
+Cross-platform results indicate that the relative speedup depends in part on
+Prysm's worker budget, because worker partitioning determines how much SIMD
+parallelism remains within each native range.
+]]></content:encoded>
+<pubDate>Fri, 28 Aug 2026 15:14:10 +0000</pubDate>
+<pubDate>Fri, 28 Aug 2026 15:14:10 +0000</pubDate>
+</item>
+<item>
+<title>Threshold Encryption with Internally Motivated Corruptions</title>
+<link>https://eprint.iacr.org/2026/1826</link>
+<guid>https://eprint.iacr.org/2026/1826</guid>
+<content:encoded><![CDATA[
+
+In recent years, threshold encryption has gained a lot of interest, particularly due to its potential use in encrypted mempools in blockchains. 
+Standard security models allow the adversary to corrupt parties either statically (i.e., fixed at the onset of the game) or adaptively (i.e., via an oracle one-by-one, depending on keys and ciphertexts).
+
+In this work, we observe that neither of these models captures the case in which a party decides to become corrupted based on secret information. For instance, in an encrypted mempool application with randomly rotating committees, an adversary may set up a smart contract that pays parties who reveal their decryption share, and parties decide whether to claim it based on, say, whether they are on the next committee. Such corruptions are not fixed in advance, but they are also not chosen solely by an external adversary based on public information.
+
+We initiate the formal study of such internally motivated corruptions and partial decryptions. We introduce a security framework in which each party's corruption behavior may depend on its local secret state. That is, on a corruption, the adversary can submit a motivation function and all parties for which this motivation function outputs $1$ (on their secret information) are corrupted. A similar internally motivated behavior is allowed for releasing partial decryptions. 
+We then study threshold encryption under this stronger notion of security. In particular, we show:
+    - Negative Results: We show that for certain classes of motivation functions and number of queries, no threshold encryption scheme can satisfy security. We also show a concrete practical attack with internally motivated corruptions against a scheme that has been proven secure with standard corruptions.
+    - Positive Results: We give two efficient classes of constructions from the (Bilinear) Diffie-Hellman assumptions. The first is secure when partial decryptions on the challenge ciphertext are internally motivated. The second additionally allows internally motivated corruptions.
+]]></content:encoded>
+<pubDate>Fri, 28 Aug 2026 15:04:44 +0000</pubDate>
+<pubDate>Fri, 28 Aug 2026 15:04:44 +0000</pubDate>
+</item>
+<item>
+<title>Comparing Privacy-Preserving Revocation for the EUDI Wallet</title>
+<link>https://eprint.iacr.org/2026/1824</link>
+<guid>https://eprint.iacr.org/2026/1824</guid>
+<content:encoded><![CDATA[
+
+The European Digital Identity Wallet has integrated anonymous credentials into its technical specifications, and singles out four constructions for privacy-preserving revocation, drawn from two  families: positive dynamic accumulators and signed-pairs. The two families are described in the literature in substantially different terms, and no common basis for comparing them exists, which currently prevents informed and quantitative decision making. In this work, we give a unified treatment of both families, showing that signed-pairs, despite their very different presentation, can be expressed in the standard accumulator syntax. We use this to define a single revocation mechanism that any of the four constructions instantiates, which in turn allows us to compare the resulting mechanisms both at the protocol level and empirically. We measure the performance of all four across the full credential lifecycle, on server-class hardware for the Status Manager and on a smartphone for the Holder and Verifier, with parameters taken from a live national eID scheme. No construction dominates in every aspect, and we make the resulting trade-offs explicit, showing which construction suits which deployment, and identify promising avenues for further improvement at the protocol level.
+]]></content:encoded>
+<pubDate>Fri, 28 Aug 2026 09:53:36 +0000</pubDate>
+<pubDate>Fri, 28 Aug 2026 09:53:36 +0000</pubDate>
+</item>
 
 <item>
 <title>Fast Post-Quantum Ring Signature from Power Residue PRFs with QROM Security</title>
