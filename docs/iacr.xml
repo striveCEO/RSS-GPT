@@ -4,6 +4,41 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+<item>
+<title>Delegatable Anonymous Credentials from Legacy Credentials using Recursive zk-SNARKs</title>
+<link>https://eprint.iacr.org/2026/1855</link>
+<guid>https://eprint.iacr.org/2026/1855</guid>
+<content:encoded><![CDATA[
+<div> 可委托匿名凭证、遗留凭证、零知识证明、JWT、Plonky2
+<br><br>总结:
+1.数字身份系统隐私较弱，遗留凭证与匿名凭证难兼容。
+2.已有零知识改造不支持委托，传统DAC难部署。
+3.本文提出首个基于遗留凭证的可委托匿名凭证，无需改发行端。
+4.支持受限派生、全链匿名、恒定大小、完全不可链接和选择性披露。
+5.JWT+ECDSA+Plonky2实例化，64属性时委托1.2秒、验证3.3毫秒。 <div>
+Digital identity systems are becoming increasingly prevalent, driven by regulatory efforts such as the European Digital Identity (EUDI) Wallet. Yet these systems usually do not achieve strong privacy guarantees as offered by anonymous credentials, since they rely on standardized curves and widespread signature schemes like ECDSA that are incompatible with pairing-based primitives underpinning most anonymous credential constructions. Recent work bridges this gap by retrofitting such legacy credentials with anonymous-credential properties via zero-knowledge proofs, requiring no issuer-side modifications. However, none of these constructions supports delegation: the ability for users to pass on a restricted credential derived from their own to another party, while all parties along the delegation chain maintain full anonymity. Delegatable anonymous credentials (DACs) provide exactly these guarantees, but are likewise incompatible with existing deployments.
+
+We present the first DAC scheme built directly on top of legacy credentials. Our construction requires no issuance infrastructure changes, and yields constant-size credentials independent of delegation depth, with full unlinkability along the chain and selective attribute disclosure at every level. We instantiate it for credentials based on JSON Web Tokens (JWTs) signed with ECDSA using Plonky2 as the recursive proving backend, contributing a secure in-circuit JWT parser that closes vulnerabilities in prior work and a Plonky2 extension for cyclic recursion with per-step zero-knowledge. At 64 attributes, delegation takes 1.2 s and verification only 3.3 ms, with a constant proof size across all delegation levels
+]]></content:encoded>
+<pubDate>Tue, 01 Sep 2026 15:33:54 +0000</pubDate>
+<pubDate>Tue, 01 Sep 2026 15:33:54 +0000</pubDate>
+</item>
+<item>
+<title>Private and Verifiable Outsourcing of Open-Weight LLM Inference</title>
+<link>https://eprint.iacr.org/2026/1849</link>
+<guid>https://eprint.iacr.org/2026/1849</guid>
+<content:encoded><![CDATA[
+<div> 开源权重模型,本地推理,隐私计算,可验证,高效协议
+<br><br>总结: 1. 大模型本地运行资源高，小设备只能用小模型，造成隐私与能力取舍。2. 提出协议让客户端将开源权重LLM推理私密外包给两个不共谋服务器。3. 两服务器均无法获知查询，客户端可凭模型方随权重公开的信息验证结果。4. 较SIGMA快约11至14倍，服务器无额外开销。5. 可支持更大模型，如Llama2-70B仅需179MB本地存储。 <div>
+Open-weight models allow clients to run LLMs locally, thus keeping their data private from untrusted  providers. However, running large models requires massive hardware and storage resources (especially challenging on resource-constrained devices like smartphones), limiting local execution to smaller models. This leaves clients with a frustrating compromise: settle for a less-capable model that can be run locally, or sacrifice privacy by sending queries to an external server.
+
+We present an efficient protocol that allows a client to privately and verifiably outsource LLM inference of an open-weight model to a pair of malicious (but non-colluding) servers. Privacy implies that neither server learns anything about the client's queries. At the same time, the client can verify the claimed result using information posted by the model owner along with the model weights. 
+
+Compared to prior state-of-the-art for private LLM inference (SIGMA, PETS' 24) -- which does not provide verifiability -- our protocol is $\approx$11--14$\times$ faster while imposing no overhead at the servers (beyond the cost of  inference in the original model). Our protocol also scales to larger models not supported by prior work: for example, with our protocol a client can run the Llama 2-70B model using just 179~MB of local storage (instead of the 140~GB required to run the model locally).
+]]></content:encoded>
+<pubDate>Mon, 31 Aug 2026 22:07:24 +0000</pubDate>
+<pubDate>Mon, 31 Aug 2026 22:07:24 +0000</pubDate>
+</item>
 
 <item>
 <title>Covert Federated Learning under Regulation based on Threshold Anamorphic Encryption</title>
