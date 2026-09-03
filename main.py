@@ -269,13 +269,13 @@ def output(sec, language):
             elif OPENAI_API_KEY:
                 token_length = len(cleaned_article)
                 try:
-                    entry.summary = gpt_summary(cleaned_article,model="deepseek-v4-flash", language=language)
+                    entry.summary = gpt_summary(cleaned_article,model="Qwen/Qwen3.8-Flash-Next", language=language)
                     with open(log_file, 'a') as f:
                         f.write(f"Token length: {token_length}\n")
                         f.write(f"Summarized using openrouter-free\n")
                 except:
                     try:
-                        entry.summary = gpt_summary(cleaned_article,model="deepseek-v4-flash", language=language)
+                        entry.summary = gpt_summary(cleaned_article,model="Qwen/Qwen3.8-Flash-Next", language=language)
                         with open(log_file, 'a') as f:
                             f.write(f"Token length: {token_length}\n")
                             f.write(f"Summarized using openrouter-free\n")
@@ -314,8 +314,8 @@ max_entries = 1000
 OPENAI_API_KEY = os.environ.get('OPENAI_API_KEY')
 U_NAME = os.environ.get('U_NAME')
 OPENAI_PROXY = os.environ.get('OPENAI_PROXY')
-#更改为免费模型
-OPENAI_BASE_URL = os.environ.get('OPENAI_BASE_URL', 'https://model.inferx.net/endpoints/v1')
+#更改为momdelscope免费模型
+OPENAI_BASE_URL = os.environ.get('OPENAI_BASE_URL', 'https://api-inference.modelscope.cn/v1')
 deployment_url = f'https://{U_NAME}.github.io/RSS-GPT/'
 BASE =get_cfg('cfg', 'BASE')
 keyword_length = int(get_cfg('cfg', 'keyword_length'))
