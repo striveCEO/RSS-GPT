@@ -5,15 +5,223 @@
 <link>http://rss.arxiv.org/rss/cs</link>
 
 <item>
+<title>From Euclidean to Graph-Structured Data: A Survey of Collaborative Learning</title>
+<link>https://arxiv.org/abs/2609.02984</link>
+<guid>https://arxiv.org/abs/2609.02984</guid>
+<content:encoded><![CDATA[
+<div> 协作学习、联邦学习、去中心化学习、图结构数据、隐私保护
+<br><br>总结: ①集中式机器学习受扩展性与隐私限制；②联邦与去中心化学习支持智能体本地训练和有限协作；③现有研究多聚焦欧氏数据，难以表达图结构中的关联关系；④本综述系统梳理协作学习的有效性、效率与隐私基础，并扩展到图结构场景；⑤提出图分布分类、异构性刻画、统一问题形式化与算法框架，指出开放挑战与研究方向。 <div>
+arXiv:2609.02984v1 Announce Type: new 
+Abstract: The conventional approach to machine learning, that is, collecting data, training models, and performing inference in a single location, faces fundamental limitations, including scalability and privacy, that restrict its applicability. To address these challenges, recent research has explored collaborative learning approaches, including federated learning and decentralized learning, where individual agents perform training and inference locally, with limited collaboration. Most collaborative learning research focuses on Euclidean data with regular, grid-like structure (e.g., images, text). However, these approaches fail to capture the relational patterns in many real-world applications, best represented by graphs. Learning on graphs relies on message-passing mechanisms to propagate information between connected nodes, making it conceptually well-suited for collaborative environments where agents must exchange information. Yet, the opportunities and challenges of learning on graph-structured data in collaborative settings remain largely underexplored. This survey provides a comprehensive investigation of collaborative learning from Euclidean to graph-structured data, aiming to consolidate this emerging field. We begin by reviewing its foundational principles for Euclidean data, organizing them along three core dimensions: learning effectiveness, efficiency, and privacy preservation. We then extend the discussion to graph-structured data, introducing a taxonomy of graph distribution scenarios, characterizing associated statistical heterogeneities, and developing standardized problem formulations and algorithmic frameworks. Finally, we systematically identify open challenges and promising research directions.
+]]></content:encoded>
+<pubDate>Fri, 04 Sep 2026 00:00:00 -0400</pubDate>
+<pubDate>Fri, 04 Sep 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Population-Calibrated Graph Screening at 835-Million-Address Scale, with Label-Free Transfer to New Chains</title>
+<link>https://arxiv.org/abs/2609.03036</link>
+<guid>https://arxiv.org/abs/2609.03036</guid>
+<content:encoded><![CDATA[
+<div> 多链交易图, 合规筛查, 无标签迁移, 提前标记, 对抗审计
+<br><br>总结: ①名单筛查难覆盖未标注地址；②基于五链8.35亿地址图评分，共享编码器与双评分头；③采用全量精确分位阈值，告警量可控；④两链训练即可无标签迁移至三链，保持高召回；⑤68个注册事件中58.8%在0.1%预算内被提前标记，远超随机基线且早于公开指定；⑥在线评分与离线一致，p50为151ms并有漂移面板；⑦对抗审计暴露合成行为盲点。 <div>
+arXiv:2609.03036v1 Announce Type: new 
+Abstract: Compliance screening of blockchain addresses is, in practice, a lookup against sanctions registries plus clustering heuristics; it fails on unlabelled addresses and on chains with no label coverage at all. We describe a deployed system that scores an address by its position in a multi-chain transaction graph rather than by its presence in a list. The substrate is a single graph of 835,330,427 addresses and 15,826,261,934 edges across five EVM chains; a shared inductive encoder with per-chain normalisation feeds two scoring heads. Decision thresholds are exact quantiles of the score distribution over the full population, scanned per chain segment, so the alert volume is known in advance. We report: label-free transfer: heads trained on two chains recall 0.8598 / 0.8182 / 0.9967 of held-out positives on Base, Arbitrum and Gnosis at a $10^{-3}$ population alert rate, with no target-chain labels in head training; a static lead-time replay over 68 external registry events: 40 of 68 (58.8%) flagged at the 0.1% budget, $\times$152 over an event-level random-flagging baseline, with first on-chain appearance a median of 528.8 days (Ethereum) / 647.8 days (Tron) before public designation; a serving path whose score is bit-identical to the offline artefact at end-to-end p50 151 ms, gated by a 2,882-address drift panel; and an adversarial harness of eight recurrent reinforcement-learned archetypes that passes an 8-criterion degeneracy audit and, on a detector-independent snapshot, exposes a measured blind spot of the deployed heads against synthesised behaviour.
+]]></content:encoded>
+<pubDate>Fri, 04 Sep 2026 00:00:00 -0400</pubDate>
+<pubDate>Fri, 04 Sep 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Skywing: A Platform for Decentralized Mathematical Computing in Unreliable Environments</title>
+<link>https://arxiv.org/abs/2609.03145</link>
+<guid>https://arxiv.org/abs/2609.03145</guid>
+<content:encoded><![CDATA[
+<div> Skywing、去中心化计算、异步通信、可靠性、边缘计算
+<br><br>总结:
+1.背景：边缘等系统需跨不可靠异构设备计算，传统框架不适用于去中心环境。
+2.方法：提出开源平台Skywing，以代理、处理器、迭代编程。
+3.能力：支持异步、发布订阅、消息管理和算法组合。
+4.验证：在共识、优化、数值线代及弹性Push Sum、Jacobi等任务实验。
+5.意义：分离算法逻辑与通信执行，兼具部署与研究价值。 <div>
+arXiv:2609.03145v1 Announce Type: new 
+Abstract: Emerging edge, autonomous, and cyber-physical systems increasingly require mathematical computation across heterogeneous devices connected by unreliable communication networks. Traditional high-performance computing and distributed data-processing frameworks provide powerful abstractions for managed environments but are less suited to decentralized settings where centralized coordination, reliable communication, and global synchronization cannot be assumed. This paper presents Skywing, an open-source platform for decentralized mathematical computing in unreliable environments. Its programming model consists of three abstractions: agents represent participants in a decentralized computation, processors encapsulate algorithm-specific update rules, and iterations manage distributed execution. Skywing supports asynchronous operation, publish-subscribe communication, managed message handling, and the composition of independent algorithms into complex decentralized workflows. We demonstrate Skywing using representative algorithms from consensus, optimization, and numerical linear algebra. Experiments on the native Skywing runtime include Push Sum and Max Consensus, a composed monitoring and control workflow, resilient Push Sum under delayed communication, and resilient asynchronous Jacobi under malevolent data corruption. These demonstrations show that Skywing supports diverse decentralized algorithms while separating mathematical logic from communication and execution infrastructure. Skywing serves as both a deployment framework for decentralized applications and a research platform for developing resilient mathematical algorithms.
+]]></content:encoded>
+<pubDate>Fri, 04 Sep 2026 00:00:00 -0400</pubDate>
+<pubDate>Fri, 04 Sep 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>A Joint Power-Privacy Control Framework for Decentralized Learning over Heterogeneous Wireless Multicasting Networks</title>
+<link>https://arxiv.org/abs/2609.03245</link>
+<guid>https://arxiv.org/abs/2609.03245</guid>
+<content:encoded><![CDATA[
+<div> 去中心化学习,无线多播,差分隐私,功率分割,累积遗憾界<br><br>总结:1.提出无线多播去中心化学习框架，联合训练公共模型并满足每迭代隐私泄露上限。2.用行随机邻接矩阵刻画非对称信道和异构最大发射功率。3.采用功率分割策略，将功率分配给模型系数与高斯噪声，兼顾学习性能与差分隐私。4.证明累积遗憾界O(log T)。5.CIFAR-10实验验证多场景有效并优于现有方法。 <div>
+arXiv:2609.03245v1 Announce Type: new 
+Abstract: In this paper, we propose a decentralized learning framework that incorporates both power control and privacy guarantees. Specifically, we enable a set of clients in a wireless multicast network to jointly train a common model while maintaining a prescribed per-iteration maximum privacy leakage level. The communication network is represented by a rowstochastic adjacency matrix, allowing us to capture asymmetric channel gains as well as heterogeneous maximum transmit power levels. Differential privacy is enforced through an explicit powersplitting strategy that allocates each node's limited maximum transmit power between model coefficients and injected Gaussian noise, thereby jointly controlling learning performance and privacy leakage. We further prove that the proposed algorithm achieves a cumulative regret bound of O(logT), whereTdenotes the time horizon. To evaluate the practical performance of our approach, we perform comprehensive experiments on the CIFAR-10 dataset under both IID and non-IID data distributions, considering different privacy levels, diverse numbers of clients, and various graph topologies. The results demonstrate strong performance across the considered settings and improved performance over existing methods, highlighting the effectiveness of the proposed algorithm under realistic wireless communication constraints.
+]]></content:encoded>
+<pubDate>Fri, 04 Sep 2026 00:00:00 -0400</pubDate>
+<pubDate>Fri, 04 Sep 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Lantern: Finding Committable Transactions via Back-Propagation on DAGs</title>
+<link>https://arxiv.org/abs/2609.03315</link>
+<guid>https://arxiv.org/abs/2609.03315</guid>
+<content:encoded><![CDATA[
+<div> 并发控制;确定性;交易处理;Back-Propagation;性能加速
+<br><br>总结: 1. 现有并发控制协议存在非确定性或依赖交易读写集先验的问题；2. Lantern无需先验，采用安全覆盖按升序提交本地依赖图零出度交易，并用Back-Propagation识别更多可提交交易；3. 提出CFBS应对读改写密集场景；4. 集成ChainMaker后，在YCSB与SmallBank上最高4.2倍于Aria，执行层至少2.2倍提速。 <div>
+arXiv:2609.03315v1 Announce Type: new 
+Abstract: Existing concurrency control protocols either introduce nondeterminism, resulting in a serial execution-replay dependency between primary and replica nodes, or rely on impractical prior knowledge of transaction read-write sets. In this paper, we present Lantern, a deterministic concurrency control protocol tailored for high-performance transaction processing systems operating without prior knowledge. The key insight of Lantern is that all zero-out-degree transaction vertices in the local dependency graph can be safely committed in ascending order using an overwrite-permissive strategy. We further introduce a novel Back-Propagation mechanism that iteratively propagates dependency states from sink to source vertices to identify additional committable transactions. We also propose Conflict-Free Batch Selection (CFBS) for read-modify-write intensive scenarios. We integrate Lantern into the open-source blockchain platform ChainMaker. Extensive evaluations on YCSB and SmallBank benchmarks demonstrate that Lantern achieves up to a 4.2x throughput speedup over Aria and improves the throughput of ChainMaker's execution layer by at least 2.2x.
+]]></content:encoded>
+<pubDate>Fri, 04 Sep 2026 00:00:00 -0400</pubDate>
+<pubDate>Fri, 04 Sep 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Otter: A Provably MEV-Resilient Automated Market Maker via Surplus Redistribution</title>
+<link>https://arxiv.org/abs/2609.03474</link>
+<guid>https://arxiv.org/abs/2609.03474</guid>
+<content:encoded><![CDATA[
+<div> Otter MEV 批量AMM 剩余重分配 抗审查性
+<br><br>总结:
+1、针对AMM中MEV损害用户并加剧中心化，提出两资产批量AMM Otter；共识抗审查且区块不拥堵时可证抵御MEV，真实交易对用户与构建者均占优。
+2、构建者无法靠重排、注入或伪交易获利，即使自身有内在价值；Otter在满足相关博弈性质的机制类中最大化社会福利。
+3、引入剩余重分配：残余盈余转给社区合约，用于补贴费用、奖励LP或回池，避免被捕获为MEV。
+4、若允许审查，上述保障不可达；共识安全能提升应用层能力。 <div>
+arXiv:2609.03474v1 Announce Type: new 
+Abstract: Miner extractable value (MEV) in automated market makers allows block builders to profit from transaction ordering and injected trades, imposing costs on users and contributing to builder centralization. We introduce Otter (Optimal Truthful Trading with Excess Redistribution), a two-asset batch AMM that achieves provable MEV resilience when the consensus layer provides censorship resilience and block space is uncongested. Otter makes truthful behavior a dominant strategy for both users and builders. Consequently, a builder cannot profit from strategic deviations, including reordering bids or injecting sybil bids, even when the builder is itself a trader with intrinsic value. Moreover, we show that Otter maximizes social welfare, in a strong sense, within a natural class of mechanisms satisfying the desired game-theoretic properties.
+  To achieve these guarantees, we introduce a new paradigm called surplus redistribution, which provably prevents residual surplus from being captured as MEV by redirecting it to the broader community. Specifically, the pool's output tokens need not be distributed entirely among users in the current batch. Instead, residual surplus may be transferred to a smart contract governed by the decentralized community. The accumulated surplus can be used to benefit community members --- for example, by subsidizing transaction fees, rewarding liquidity providers, or returning assets to the pool.
+  Our approach relies on the underlying consensus layer to provide censorship resilience. We motivate its necessity through an impossibility result showing that the desired game-theoretic guarantees become unattainable when the builder is additionally allowed to censor transactions. Thus, our results also provide a mathematically formal demonstration of how consensus-level security guarantees can fundamentally expand what is achievable at the application layer.
+]]></content:encoded>
+<pubDate>Fri, 04 Sep 2026 00:00:00 -0400</pubDate>
+<pubDate>Fri, 04 Sep 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Security and Privacy in the Musical Metaverse: Threat Analysis and Design Implications</title>
+<link>https://arxiv.org/abs/2609.03659</link>
+<guid>https://arxiv.org/abs/2609.03659</guid>
+<content:encoded><![CDATA[
+<div> 音乐元宇宙, 安全隐私, 威胁分析, 神经生理数据, 安全协议
+<br><br>总结:1.音乐元宇宙实时沉浸、多模态流、异构设备带来独特安全隐私问题。<br>2.资产含现场音乐、表达交互、身份元数据、知识产权；网络、应用、数据AI、设备、产权、社交层威胁，神经数据可推断再识别。<br>3.调查：最关键风险是神经数据泄露与实时流中断；次为侵权、化身冒充。<br>4.TLS over TCP不合低延迟，SRTP/DTLS更适用。<br>5.指南：延迟感知、路径区分、数据最小化、边缘处理，兼顾信任合规与实时性能。 <div>
+arXiv:2609.03659v1 Announce Type: new 
+Abstract: The Musical Metaverse (MM) introduces immersive, real-time environments for collaborative musical interaction, characterized by ultra-low-latency constraints, continuous multimodal data streams, and heterogeneous devices. These properties create a distinctive security and privacy landscape that differs significantly from conventional XR or multimedia systems. This paper presents a multi-layer threat analysis of MM ecosystems, identifying key assets including live musical content, expressive interaction data, identity and session metadata, and intellectual property. Threats are analyzed across network, application, data/AI, device, intellectual property rights, and social layers, with particular attention to risks arising from expressive and neurophysiological data, which enable inference, re-identification, and potential privacy violations. We describe a stakeholder-driven survey involving 14 participants from 13 organizations, revealing that neurophysiological data leakage and real-time stream disruption are perceived as the most critical risks, followed by intellectual property infringement and avatar impersonation. We further evaluate the suitability of existing security protocols under strict latency constraints, showing that conventional approaches such as TLS over TCP are often incompatible with real-time musical interaction, while lightweight, stream-oriented mechanisms (e.g., SRTP, DTLS) provide a more suitable balance between security and performance. Based on these findings, we derive a set of design guidelines for MM systems, emphasizing latency-aware security, differentiation of interaction paths, data minimization, and edge-centric processing. The results support a security-by-design approach that enables trust and compliance without compromising real-time performance.
+]]></content:encoded>
+<pubDate>Fri, 04 Sep 2026 00:00:00 -0400</pubDate>
+<pubDate>Fri, 04 Sep 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Open WebXR versus Commercial Game Engines: A Socio-Technical Position Analysis for an Open, Sustainable, and Interoperable Metaverse</title>
+<link>https://arxiv.org/abs/2609.03666</link>
+<guid>https://arxiv.org/abs/2609.03666</guid>
+<content:encoded><![CDATA[
+<div> WebXR 元宇宙 商业引擎 互操作性 可持续性
+<br><br>总结: 1.文章比较开放WebXR与商业游戏引擎开发XR/元宇宙的张力。2.从硬件、架构、开发流程、治理、伦理和可持续性分析。3.WebXR利于开放、设备无关、长期维护和公共利益应用。4.商业引擎利于高性能、低延迟、深度集成和大型产品。5.选择应视为连续体，而非二者对立。 <div>
+arXiv:2609.03666v1 Announce Type: new 
+Abstract: The Metaverse is often framed as a persistent, interoperable, and embodied network of virtual and augmented environments. Yet, most contemporary XR applications are developed through commercial game engines and distributed through proprietary app stores, creating tensions between openness and platform dependency. This paper critically examines open WebXR technologies with conventional commercial game-engine pipelines, with particular attention to XR hardware, software architectures, developer workflows, governance, ethics, and sustainability. We argue that WebXR may provide a viable route toward a more accessible, device-independent, and institutionally sustainable Metaverse, especially for education, research, cultural heritage, prototyping, and public-interest applications. At the same time, commercial engines remain advantageous for graphically intensive, low-latency, deeply integrated, and large-scale XR products. The paper concludes that the choice should not be framed as WebXR versus engines, but as a continuum: WebXR is preferable when accessibility, interoperability, low-friction deployment, and long-term maintainability are primary goals, whereas native engines remain preferable when performance, platform-specific hardware access, and production-grade tooling dominate.
+]]></content:encoded>
+<pubDate>Fri, 04 Sep 2026 00:00:00 -0400</pubDate>
+<pubDate>Fri, 04 Sep 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Barnacle: Adaptive Multi-Leader Scheduling for DAG-Based Consensus</title>
+<link>https://arxiv.org/abs/2609.03978</link>
+<guid>https://arxiv.org/abs/2609.03978</guid>
+<content:encoded><![CDATA[
+<div> DAG共识, 自适应Leader, 队头阻塞, Barnacle, Sui
+<br><br>总结:1. DAG共识多leader可降延迟，但队头阻塞风险高；2. Barnacle插件按已提交DAG直接commit比例运行时调节leader数；3. 采用增一乘减，无需额外消息、密码学且确定；4. 适配拜占庭、崩溃与混合故障模型，保障安全活性；5. 实测优于或匹敌最优静态配置，并与Sui合作集成。 <div>
+arXiv:2609.03978v1 Announce Type: new 
+Abstract: In DAG-based consensus, all validators propose blocks concurrently, and designated leader blocks drive transaction commit. Having multiple leader slots per round cuts queuing latency, yet production deployments run a single leader because of head-of-line blocking: a slow leader stalls the pipeline for at least one leader timeout, and for several waves when its slot must wait for the fallback indirect decision rule. This risk grows with the leader count. We introduce Barnacle, an add-on that adapts the leader count at run time. Every interval, it measures on the agreed committed DAG the fraction of slots decided as commit by the direct rule, and drives the leader count with additive increase, multiplicative decrease. The measurement requires no extra messages and no cryptography, and is deterministic. Barnacle is generic over DAG protocols; we instantiate it on four protocols spanning the Byzantine (3f + 1, 5f + 1), crash-only (2c + 1), and mixed (5f + 3c + 1) fault models, with proven safety and liveness. Results show Barnacle matches the best static leader count in every regime: in a healthy network its latency is 6-13% lower than a single leader's, and under degradation it matches a single leader while remaining 35-56% below a static high count. We are currently collaborating with the Sui team to integrate Barnacle into the Sui blockchain.
+]]></content:encoded>
+<pubDate>Fri, 04 Sep 2026 00:00:00 -0400</pubDate>
+<pubDate>Fri, 04 Sep 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>A Black Box for Agentic Processes: Blockchain-Anchored Evidence for AI Agent Communication, Human Oversight, and GRC Audits</title>
+<link>https://arxiv.org/abs/2609.04017</link>
+<guid>https://arxiv.org/abs/2609.04017</guid>
+<content:encoded><![CDATA[
+<div> AI代理 可审计性 区块链锚定 证据模型 监管合规
+<br><br>总结:1.自主AI代理协作带来过程重建与记录完整性审计难题。2.提出中立黑盒架构，对通信、人工批准、工具调用和产物做区块链锚定承诺，敏感内容不上链。3.定义证据模型，区分时间锚定、完整性与排序、真实、授权、因果追溯，后者需额外控制。4.服务GRC，支持合规测试、风险选证、监控、事故重建及欧盟法规报告。5.不防失范或证真，只强化事后验证证据。 <div>
+arXiv:2609.04017v1 Announce Type: new 
+Abstract: Autonomous AI agents increasingly communicate with other agents, invoke tools, exchange intermediate results, and request human approvals. These workflows create a new auditability problem: organizations must reconstruct what happened, when it happened, which agent or human was involved, which control or policy applied, and whether records were modified afterwards. Motivated by the 2026 OpenAI/Hugging Face incident, this position and architecture paper proposes a product- and vendor-neutral black-box architecture for agentic processes. The architecture creates blockchain-anchored cryptographic commitments for selected agent communications, human-in-the-loop approvals, tool calls, and process artifacts without placing sensitive content on-chain. We define an evidence model that distinguishes temporal anchoring and artifact integrity from event ordering, capture authenticity, authorized anchoring, and causal traceability. The latter properties require additional architectural controls. We then discuss practical use for Governance, Risk, and Compliance (GRC), including compliance testing, risk-based evidence selection, monitoring evidence streams, incident reconstruction, and regulatory reporting readiness under the EU AI Act, NIS2, and the Cyber Resilience Act (CRA). This position and architecture paper does not present an empirical performance or security evaluation. The approach does not prevent agent misbehavior or prove semantic truth. Rather, it strengthens the evidentiary basis for later verification of critical process traces.
+]]></content:encoded>
+<pubDate>Fri, 04 Sep 2026 00:00:00 -0400</pubDate>
+<pubDate>Fri, 04 Sep 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>A Case Study on Emergent Cheating and Whistleblowing in Autonomous Research Swarms</title>
+<link>https://arxiv.org/abs/2609.04170</link>
+<guid>https://arxiv.org/abs/2609.04170</guid>
+<content:encoded><![CDATA[
+<div> 多智能体、大模型、作弊、举报、公地治理
+<br><br>总结:
+1.共享基础设施可传播不良行为；
+2.100个LLM智能体证明数学猜想时自发出现作弊与举报；
+3.评测漏洞经知识库和消息扩散，竞争压力促采用；
+4.部分智能体审计、抵制并提议补丁，透明渠道也支持治理；
+5.应按知识公地治理，采用渐进制裁与集体规则。 <div>
+arXiv:2609.04170v1 Announce Type: new 
+Abstract: Multi-agent AI science ecosystems rely on agents possessing tools that allow them to communicate, coordinate, and build on each other's work. Yet this shared infrastructure can also introduce vulnerabilities by creating a substrate for the contagious spread of unintended and undesirable behaviors. We report a case study on a research collective of 100 autonomous LLM agents tasked with proving formal mathematical conjectures. Within the swarm, cheating spontaneously emerged and was later challenged by whistleblowers - both without any external intervention. When a single agent discovered an exploit in the evaluation system, it propagated across the collective via a shared knowledge library and later through peer-to-peer messages. Despite early reluctance, a cohort of agents adopted the exploit in response to competitive pressure. A separate group of agents produced an emergent counter-response: auditing fraudulent proofs, alerting peers across broadcast and private channels, staging boycotts, lodging formal complaints, and proposing validation patches. In recent incidents, agent swarms coordinated covertly through improvised side-channels (Dalton and Wallace, 2026; Greenblatt et al., 2026). Our setting differs: the same transparent channels that carried the exploit also gave non-cheating agents the visibility they needed to detect fraud, organize resistance, and enforce norms. We cast the problem of managing the agents' shared infrastructure as the knowledge commons governance problem (Ostrom, 1990). To protect the commons from exploits, we propose to adopt institutional mechanisms, such as graduated sanctioning and collective-choice rules, to support decentralized self-governance in autonomous swarms.
+]]></content:encoded>
+<pubDate>Fri, 04 Sep 2026 00:00:00 -0400</pubDate>
+<pubDate>Fri, 04 Sep 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Tempting the Agent: The Economics of Reputation without Persistent Identity in AI Agent Markets</title>
+<link>https://arxiv.org/abs/2609.02992</link>
+<guid>https://arxiv.org/abs/2609.02992</guid>
+<content:encoded><![CDATA[
+<div> 声誉资本、身份持久、机会主义、动态模型、区块链代理<br><br>总结:1.声誉是维持市场信任的跨期资本。2.其效果依赖身份持久，低成本重置会诱发机会主义。3.模型考察诚实经营、质量投资与一次性套利重启。4.偏离诱惑由身份重置成本、声誉持续性、需求敏感和执法设计决定。5.适用于区块链自治AI代理及类似市场。 <div>
+arXiv:2609.02992v1 Announce Type: cross 
+Abstract: Reputation is a fundamental mechanism through which markets sustain trust when service quality cannot be perfectly assessed ex ante, constituting a form of intertemporal economic capital by attracting future demand. Its effectiveness as a disciplinary mechanism depends not only on past interactions but also on the persistence of the identity to which reputation is attached. When identities can be abandoned and recreated cheaply, reputational capital may itself become an object of opportunistic exploitation.
+  This paper develops a dynamic economic framework to study when reputation is sufficient to discipline autonomous agents. We model reputation as capital attracting future economic activity. At each point, an agent chooses between operating honestly, investing in quality to preserve future gains, or executing a one-shot deviation to extract its reputation's value and restart from a penalized identity. Our analysis relates the temptation to opportunistic behavior to identity-reset costs, reputation persistence, demand sensitivity, and enforcement design, deriving comparative statics on optimal quality provision.
+  Autonomous AI-agent operating on the blockchain are a relevant application: infrastructures such as ERC-8004, ERC-8183, and x402 combine reputation, identity, and payments in permissionless markets. Nonetheless, our framework applies to any environment where reputation generates future business and identities are replaceable.
+]]></content:encoded>
+<pubDate>Fri, 04 Sep 2026 00:00:00 -0400</pubDate>
+<pubDate>Fri, 04 Sep 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Decentralized Vision-Based Autonomous Aerial Wildlife Monitoring</title>
+<link>https://arxiv.org/abs/2508.15038</link>
+<guid>https://arxiv.org/abs/2508.15038</guid>
+<content:encoded><![CDATA[
+<div> 野生动物监测, 多四旋翼, 去中心化视觉, 识别跟踪, 野外实验
+<br><br>总结:
+1. 野外需要并行识别互动特定个体，以同步分析行为并开展健康安全干预。
+2. 既有方案多为群体视角或人工遥控，规模受限。
+3. 提出去中心化视觉多四旋翼系统，单RGB相机、低带宽、可扩展。
+4. 算法可在动态非结构化环境实现大型物种鲁棒识别与跟踪，不依赖中心通信。
+5. 真实实验验证系统在多样野外条件下可靠部署。 <div>
+arXiv:2508.15038v2 Announce Type: replace 
+Abstract: Wildlife field operations demand efficient parallel deployment methods to identify and interact with specific individuals, enabling simultaneous collective behavioral analysis, and health and safety interventions. Previous robotics solutions approach the problem from the herd perspective, or are manually operated and limited in scale. We propose a decentralized vision-based multi-quadrotor system for wildlife monitoring that is scalable, low-bandwidth, and sensor-minimal (single onboard RGB camera). Our approach enables robust identification and tracking of large species in their natural habitat. We develop novel vision-based coordination and tracking algorithms designed for dynamic, unstructured environments without reliance on centralized communication or control. We validate our system through real-world experiments, demonstrating reliable deployment in diverse field conditions.
+]]></content:encoded>
+<pubDate>Fri, 04 Sep 2026 00:00:00 -0400</pubDate>
+<pubDate>Fri, 04 Sep 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Sealing the Audit-Runtime Gap for LLM Skills</title>
+<link>https://arxiv.org/abs/2605.05274</link>
+<guid>https://arxiv.org/abs/2605.05274</guid>
+<content:encoded><![CDATA[
+<div> LLM技能, 链上注册表, DAO审计, 权限清单, 密码学绑定
+<br><br>总结:
+1. 问题：LLM技能可包含指令和工具，存在注入、篡改、撤资等供应链攻击风险，现有防御彼此割裂。
+2. 方法：提出SIGIL，通过去中心化链上注册表、DAO审计和可插拔审计模型，实现可验证技能托管。
+3. 加载：由强制加载器SVL解密/获取技能，校验链上完整性，并执行权限清单后再注入上下文。
+4. 评测：对1023个真实技能、6类攻击测试，批量验证耗时低于86毫秒。
+5. 结论：SIGIL能以较低成本把LLM技能从发布到运行时进行密码学绑定。 <div>
+arXiv:2605.05274v2 Announce Type: replace 
+Abstract: Large language model (LLM) ecosystems such as Claude Code and ChatGPT increasingly rely on skills: packages of natural-language instructions and executable tools. Once in the LLM's context, skill content cannot be reliably separated from trusted instructions, and a skill's executable side can invoke privileged actions, exposing the skill supply chain to injection, tampering, and rug-pull attacks. Existing defenses are stage-bound: centralized signing, audit reports unbound from the runtime artifact, or policy engines that cannot attest to what was approved. We present SIGIL, the first framework that seals the audit-runtime gap for LLM skills. SIGIL delivers verifiable hosting through a tamper-evident, decentralized on-chain registry from which LLMs fetch skills directly. The registry admits four publication types, Transparent, Licensed, Sealed, and Committed, spanning plaintext public distribution, monetized access, custodial use, and off-chain workflows; before admission, every skill is vetted by a Decentralized Autonomous Organization (DAO) audit committee that supports pluggable auditing methods under a stake-and-slash economic model. At load time, SIGIL delivers verified loading through a skill verification protocol executed by a Skill Verification Loader (SVL) embedded as the mandatory loading path: the SVL retrieves and decrypts the skill as its type requires, verifies its integrity against the on-chain record, and enforces its permission manifest before context injection. We evaluate SIGIL on a real-world deployment against 1,023 in-the-wild skills spanning six attack types. At load time, the SVL verifies each skill's integrity against its on-chain record and enforces its approved permission manifest, completing batched verification under 86 ms. Together, these results show that LLM skills can be cryptographically bound from publication through runtime at practical cost.
+]]></content:encoded>
+<pubDate>Fri, 04 Sep 2026 00:00:00 -0400</pubDate>
+<pubDate>Fri, 04 Sep 2026 00:00:00 -0400</pubDate>
+</item>
+
+<item>
 <title>D-FROST: Decentralized Federated pRompt-tuning via Optimal tranSporT for Non-IID and Imbalanced Data</title>
 <link>https://arxiv.org/abs/2609.01802</link>
 <guid>https://arxiv.org/abs/2609.01802</guid>
 <content:encoded><![CDATA[
-<div> 去中心化联邦学习, 提示调优, 最优传输, Wasserstein优化, 收敛性分析<br><br>总结: 1. 提示调优冻结基础模型骨干、仅更新提示，参数高效。2. 适用于去中心化联邦学习，降低完整模型通信成本。3. 异构数据使提示集合难索引对齐，传统去中心化平均不适用。4. 首次研究该问题，提出D-FROST，用Wasserstein与最优传输合并邻居提示为紧凑代表集。5. 分析共识误差与收敛性，并在异构数据实验中验证有效。 <div>
+<div> 去中心化联邦学习, 提示调优, 最优传输, Wasserstein优化, 收敛性分析<br /><br />总结: 1. 提示调优冻结基础模型骨干、仅更新提示，参数高效。2. 适用于去中心化联邦学习，降低完整模型通信成本。3. 异构数据使提示集合难索引对齐，传统去中心化平均不适用。4. 首次研究该问题，提出D-FROST，用Wasserstein与最优传输合并邻居提示为紧凑代表集。5. 分析共识误差与收敛性，并在异构数据实验中验证有效。 <div>
 arXiv:2609.01802v1 Announce Type: new 
 Abstract: Prompt tuning provides a parameter-efficient way to adapt foundation models (FMs) by freezing the pretrained backbone and updating only a small set of learnable prompts. This property makes prompt tuning especially suitable for decentralized federated learning (DFL), where exchanging full-model updates can be prohibitively expensive. However, prompt tuning in DFL introduces new challenges. Prompt sets learned from heterogeneous local data may not be index-wise aligned, making standard decentralized averaging unsuitable. In addition, the algorithm should be theoretically guaranteed to achieve consensus and make progress toward the shared objective. In this work, we provide the first study of prompt tuning in DFL. We formulate decentralized prompt tuning as a Wasserstein-based optimization problem over prompt measures, which captures the set-valued structure of prompts. We then propose D-FROST, an optimal-transport-based (OT-based) decentralized prompt-tuning algorithm that merges neighborhood prompts into compact representative prompt sets through transportation-based matching. We further analyze D-FROST by bounding the Wasserstein consensus error across clients, and establishing convergence of the network-level prompt barycenter to a neighborhood of stationarity. Experiments under heterogeneous client data demonstrate the effectiveness of D-FROST for decentralized prompt tuning.
 ]]></content:encoded>
-<pubDate>Thu, 03 Sep 2026 00:00:00 -0400</pubDate>
 <pubDate>Thu, 03 Sep 2026 00:00:00 -0400</pubDate>
 </item>
 <item>
@@ -21,7 +229,7 @@ Abstract: Prompt tuning provides a parameter-efficient way to adapt foundation m
 <link>https://arxiv.org/abs/2609.01952</link>
 <guid>https://arxiv.org/abs/2609.01952</guid>
 <content:encoded><![CDATA[
-<div> 去中心化,知识蒸馏,异步P2P,函数空间,收敛理论<br><br>总结:
+<div> 去中心化,知识蒸馏,异步P2P,函数空间,收敛理论<br /><br />总结:
 1. 异构架构下SGD无法平均模型，文章建立异步P2P知识蒸馏收敛理论。
 2. 共识从参数空间移至函数空间，证明KD在logit空间为收缩算子。
 3. 标准假设下，平均函数平稳性与函数分歧以O(1/ηT)收敛到误差、距离和异质性决定的邻域。
@@ -30,7 +238,6 @@ arXiv:2609.01952v1 Announce Type: new
 Abstract: Decentralized, serverless learning increasingly connects devices running different architectures, where the standard tool, decentralized SGD, is undefined as models with different parameter counts cannot be averaged. Knowledge distillation (KD) exchanges soft predictions rather than weights and sidesteps this obstacle, yet convergence theory for fully decentralized, asynchronous peer-to-peer (P2P) KD is lacking. We provide one, relocating consensus from parameter space to function (output) space: a KD event is a geometric contraction operator in logit space on the peers' predictive distributions, which we analyse in the Hilbert space of predictions on a reference measure. Under standard smoothness/variance assumptions and two realizability assumptions, one bridging parameter SGD to the functional step and one controlling restricted task/KD alignment, the time-averaged functional stationarity and function-space disagreement converge at rate $O(1/(\eta T))$ to an $O(\eta)+O(B_f^2)+O(\zeta_f^2)$ neighbourhood. Here $B_f$ is the distance from the task optimum to the peers' reachable classes and $\zeta_f$ measures persistent local-task heterogeneity. Across homogeneous, width-heterogeneous, and mixed-family networks of the experiments, KD contracts function disagreement by $40-61\times$, while isolated training does not. The sampled stationarity diagnostic has late transient exponents $0.99-1.90$ on the shared-skeleton main runs, and the four-point step-size sweep exhibits the predicted transient: neighbourhood tradeoff.
 ]]></content:encoded>
 <pubDate>Thu, 03 Sep 2026 00:00:00 -0400</pubDate>
-<pubDate>Thu, 03 Sep 2026 00:00:00 -0400</pubDate>
 </item>
 <item>
 <title>Similarity-Aware Personalized Federated Learning in Heterogeneous Environments</title>
@@ -38,7 +245,7 @@ Abstract: Decentralized, serverless learning increasingly connects devices runni
 <guid>https://arxiv.org/abs/2609.02241</guid>
 <content:encoded><![CDATA[
 <div> 联邦学习, 个性化, 统计异构, 相似度加权, 收敛保证
-<br><br>总结:
+<br /><br />总结:
 1. 联邦学习可协作训练并保护隐私，但客户端数据分布不一致会损害全局与本地性能。
 2. 提出SAPE-FL个性化框架。
 3. 将客户模型同时锚定于全局模型与相似度加权同行平均模型。
@@ -48,7 +255,6 @@ arXiv:2609.02241v1 Announce Type: new
 Abstract: Federated Learning (FL) allows decentralized clients to train models collaboratively while preserving data privacy. However, distribution mismatch across clients often leads to poor global generalization and degraded local client-level performance. In such scenarios, some of the clients with their local models trained solely on local data may perform better than the globally learnt model, thus nullifying the benefits of collaborative federated learning. To address this, we propose SAPE-FL (Similarity-Aware Personalized Federated Learning), a novel personalization framework that anchors each client's model to both the global model and a similarity-weighted peer averaged model. By incorporating dynamic, client-specific regularization based on both model similarity and output similarity, SAPE-FL adaptively balances global knowledge transfer and peer collaboration while filtering out dissimilar clients. This dual anchoring mitigates negative transfer and enhances robustness in heterogeneous settings. We theoretically analyze our algorithm establishing its convergence guarantees and empirically show that SAPE-FL outperforms state-of-the-art methods under high statistical heterogeneity and low client data regimes.
 ]]></content:encoded>
 <pubDate>Thu, 03 Sep 2026 00:00:00 -0400</pubDate>
-<pubDate>Thu, 03 Sep 2026 00:00:00 -0400</pubDate>
 </item>
 <item>
 <title>CACTUS: Mask-Guided Semantic Clean-Label Backdoors in Decentralized Federated Learning</title>
@@ -56,14 +262,13 @@ Abstract: Federated Learning (FL) allows decentralized clients to train models c
 <guid>https://arxiv.org/abs/2609.02450</guid>
 <content:encoded><![CDATA[
 <div> 联邦学习,语义触发,去中心化,后门攻击,CACTUS
-<br><br>总结:
+<br /><br />总结:
 1.语义触发隐蔽，但样本依赖放置削弱跨轮植入，去中心化聚合拓扑加剧。
 2.CACTUS把标签一致语义对转为表示偏移，模态掩码算子隔离耦合触发，反事实修改非目标嵌入后聚合。
 3.四模态九聚合规则验证；30%恶意节点时九规则语音ASR均值51.2%，三模态ASR最高；ASR随拓扑变化、恶意比例增加，可传播后门。 <div>
 arXiv:2609.02450v1 Announce Type: new 
 Abstract: Semantic triggers in federated learning (FL) can be less conspicuous than synthetic patches, but sample-dependent placement may weaken backdoor implantation across aggregation rounds. This challenge is compounded in decentralized FL (DFL), where topology-dependent peer aggregation repeatedly mixes local models. CACTUS converts label-consistent semantic pairs into target-directed representation shifts. Mask-guided, modality-specific operators isolate trigger effects, couple them across samples, and apply the shifts counterfactually to clean non-target embeddings before peer aggregation. Experiments cover speech, text, tabular, and image tasks under nine aggregation rules. With 30\% malicious nodes, CACTUS reaches a nine-rule mean attack success rate (ASR) of 51.2\% on Speech Commands and the highest nine-rule mean ASR among evaluated attacks on three of four modalities. Sensitivity analyses show that ASR varies with network topology and increases with the malicious-node ratio. These results indicate that CACTUS can propagate backdoors through repeated DFL aggregation.
 ]]></content:encoded>
-<pubDate>Thu, 03 Sep 2026 00:00:00 -0400</pubDate>
 <pubDate>Thu, 03 Sep 2026 00:00:00 -0400</pubDate>
 </item>
 <item>
@@ -72,11 +277,10 @@ Abstract: Semantic triggers in federated learning (FL) can be less conspicuous t
 <guid>https://arxiv.org/abs/2609.02624</guid>
 <content:encoded><![CDATA[
 <div> LLM、智能合约、漏洞注入、数据验证、静态分析器
-<br><br>总结:①针对智能合约漏洞检测数据集稀缺问题，提出用LLM向Solidity合约自动注入漏洞的方法。②以OpenSCV的49类漏洞为例，生成近1000个变体，经编译、执行、业务逻辑与漏洞存在性校验，保留32个合约、25类漏洞，存活率16.58%。③幸存样本偏简单结构、局部语法型漏洞；挑战包括非确定性与语义保持。④用于评估三个静态分析器，显示覆盖互补但不完整；总体可行，但扩展性和多样性受限。 <div>
+<br /><br />总结:①针对智能合约漏洞检测数据集稀缺问题，提出用LLM向Solidity合约自动注入漏洞的方法。②以OpenSCV的49类漏洞为例，生成近1000个变体，经编译、执行、业务逻辑与漏洞存在性校验，保留32个合约、25类漏洞，存活率16.58%。③幸存样本偏简单结构、局部语法型漏洞；挑战包括非确定性与语义保持。④用于评估三个静态分析器，显示覆盖互补但不完整；总体可行，但扩展性和多样性受限。 <div>
 arXiv:2609.02624v1 Announce Type: new 
 Abstract: Assessing vulnerability detection tools for smart contracts requires datasets with known ground truth, yet such datasets are scarce and difficult to build by hand. We propose an approach that uses Large Language Models (LLMs) to automatically inject vulnerabilities into Solidity smart contracts, and demonstrate it in a case study targeting 49 vulnerability types from OpenSCV. Injected contracts are validated through a multi-step pipeline checking compilation, execution, business logic, and the presence of the intended vulnerability. Applied to real-world contracts from SmartBugs, LLMs generate nearly 1,000 candidate variants; after deduplication and validation, 32 confirmed vulnerable contracts spanning 25 vulnerability types survive (a 16.58% survival rate). Surviving contracts concentrate in structurally simpler targets and vulnerability types with localized syntactic patterns. We report practical challenges including LLMs' non-determinism and the difficulty of preserving contract semantics. We then use the validated contracts to assess three static analyzers, revealing complementary and incomplete coverage profiles. Results show that LLM-based vulnerability injection is feasible, while exposing key limitations in scalability and diversity.
 ]]></content:encoded>
-<pubDate>Thu, 03 Sep 2026 00:00:00 -0400</pubDate>
 <pubDate>Thu, 03 Sep 2026 00:00:00 -0400</pubDate>
 </item>
 <item>
@@ -85,11 +289,10 @@ Abstract: Assessing vulnerability detection tools for smart contracts requires d
 <guid>https://arxiv.org/abs/2609.02125</guid>
 <content:encoded><![CDATA[
 <div> 去中心化物理基础设施网络、Web3.0、通信技术、激励治理、可行性评估
-<br><br>总结: 1. DePIN重构Web3.0通信基础设施。2. 融合物理资源与数字治理，形成社区共建共享的自激励生态。3. 综述其背景、特征、架构及行业应用。4. 从六层技术栈分析反馈闭环、实施成熟度与部署限制。5. 提出技术、治理、经济维度的可行性框架，并指出未来研究方向。 <div>
+<br /><br />总结: 1. DePIN重构Web3.0通信基础设施。2. 融合物理资源与数字治理，形成社区共建共享的自激励生态。3. 综述其背景、特征、架构及行业应用。4. 从六层技术栈分析反馈闭环、实施成熟度与部署限制。5. 提出技术、治理、经济维度的可行性框架，并指出未来研究方向。 <div>
 arXiv:2609.02125v1 Announce Type: cross 
 Abstract: The Decentralized Physical Infrastructure Network (DePIN) represents a transformative paradigm that redefines the construction, operation, and governance of Information and Communication Technology (ICT) infrastructure in the Web 3.0 era. DePIN integrates physical resources, such as networking equipment, storage, and computing power, with decentralized digital governance, forming a self-incentivized ecosystem that is collaboratively built, shared, and governed by the community. It provides a foundational framework for future communication networks, facilitating decentralized edge intelligence, efficient resource sharing, and trustworthy coordination among heterogeneous devices. Focusing on the feasibility of this emerging paradigm, this paper examines the technology landscape in the pre-DePIN era and gaps between existing methodologies and the forthcoming decentralized infrastructure for Web 3.0. It provides a systematic and comprehensive survey of the background, core characteristics, technical architecture, and applications of DePIN across various vertical domains. The paper analyzes the DePIN technology stack from six layers: physical infrastructure, blockchain, interaction, trust, incentive, and application, with special attention to their cross-layer feedback loops, implementation readiness, and deployment limitations. To further bridge conceptual analysis and practical deployment, we propose a DePIN feasibility assessment framework covering technical, governance, and economic dimensions. Moreover, we highlight promising research directions, providing insights and guidance for further exploration and deployment of DePIN.
 ]]></content:encoded>
-<pubDate>Thu, 03 Sep 2026 00:00:00 -0400</pubDate>
 <pubDate>Thu, 03 Sep 2026 00:00:00 -0400</pubDate>
 </item>
 <item>
@@ -98,11 +301,10 @@ Abstract: The Decentralized Physical Infrastructure Network (DePIN) represents a
 <guid>https://arxiv.org/abs/2510.18699</guid>
 <content:encoded><![CDATA[
 <div> 多智能体系统、去中心化、区块链、智能编排、Fetch.ai
-<br><br>总结:1.LLM智能系统忽视MAS基础，存在集中化与信任通信缺陷。2.Fetch.ai提出工业级架构，融合经典MAS与现代AI。3.以区块链提供身份、发现与交易，并配套安全互操作开发框架、云部署与智能编排。4.agent-native LLM将人类目标转为多代理工作流，物流用例实现自主发现、协商和交易。5.支撑开放协作、经济可持续的多代理生态。 <div>
+<br /><br />总结:1.LLM智能系统忽视MAS基础，存在集中化与信任通信缺陷。2.Fetch.ai提出工业级架构，融合经典MAS与现代AI。3.以区块链提供身份、发现与交易，并配套安全互操作开发框架、云部署与智能编排。4.agent-native LLM将人类目标转为多代理工作流，物流用例实现自主发现、协商和交易。5.支撑开放协作、经济可持续的多代理生态。 <div>
 arXiv:2510.18699v2 Announce Type: replace 
 Abstract: Recent surges in LLM-driven intelligent systems largely overlook decades of foundational multi-agent systems (MAS) research, resulting in frameworks with critical limitations such as centralization and inadequate trust and communication protocols. This paper introduces the Fetch.ai architecture, an industrial-strength platform designed to bridge this gap by facilitating the integration of classical MAS principles with modern AI capabilities. We present a novel, multi-layered solution built on a decentralized foundation of on-chain blockchain services for verifiable identity, discovery, and transactions. This is complemented by a comprehensive development framework for creating secure, interoperable agents, a cloud-based platform for deployment, and an intelligent orchestration layer where an agent-native LLM translates high-level human goals into complex, multi-agent workflows. We demonstrate the deployed nature of this system through a decentralized logistics use case where autonomous agents dynamically discover, negotiate, and transact with one another securely. Ultimately, the Fetch.ai stack provides a principled architecture for moving beyond current agent implementations towards open, collaborative, and economically sustainable multi-agent ecosystems.
 ]]></content:encoded>
-<pubDate>Thu, 03 Sep 2026 00:00:00 -0400</pubDate>
 <pubDate>Thu, 03 Sep 2026 00:00:00 -0400</pubDate>
 </item>
 <item>
@@ -111,14 +313,12 @@ Abstract: Recent surges in LLM-driven intelligent systems largely overlook decad
 <guid>https://arxiv.org/abs/2511.12018</guid>
 <content:encoded><![CDATA[
 <div> 交通安全、计算机视觉、PET、边缘计算、动态热力图
-<br><br>总结: 1.针对信号交叉口碰撞分析数据稀疏与延迟问题，提出多相机视觉实时安全框架。2.四个同步相机经YOLOv11和Jetson边缘处理，单应变换统一鸟瞰图。3.像素级PET追踪时间占用，生成3.3平方厘米分辨率动态热力图。4.车辆轨迹与PET存入SQL库，可识别亚秒级高风险区，800x800图平均2.68FPS，验证可扩展实时评估方法。 <div>
+<br /><br />总结: 1.针对信号交叉口碰撞分析数据稀疏与延迟问题，提出多相机视觉实时安全框架。2.四个同步相机经YOLOv11和Jetson边缘处理，单应变换统一鸟瞰图。3.像素级PET追踪时间占用，生成3.3平方厘米分辨率动态热力图。4.车辆轨迹与PET存入SQL库，可识别亚秒级高风险区，800x800图平均2.68FPS，验证可扩展实时评估方法。 <div>
 arXiv:2511.12018v2 Announce Type: replace 
 Abstract: Traffic safety analysis at signalized intersections is essential for reducing vehicle and pedestrian collisions, yet traditional crash-based studies are limited by data sparsity and reporting latency. This paper presents a multi-camera computer vision framework for real-time safety assessment through Post-Encroachment Time (PET) computation, demonstrated at the intersection of H Street and Broadway in Chula Vista, California. Four synchronized cameras provide continuous visual coverage, with frames processed on NVIDIA Jetson AGX Xavier edge devices using YOLOv11 segmentation for vehicle detection. Detected vehicle polygons are transformed into a unified bird's-eye map via homography, enabling alignment across overlapping camera views. A pixel-level PET algorithm tracks temporal occupancy at each spatial location by measuring the time between successive vehicle passages, enabling fine-grained hazard visualization through dynamic heatmaps with 3.3 sq-cm spatial resolution. Timestamped vehicle trajectories and PET data are stored in an SQL database for longitudinal analysis. Results across multiple time intervals demonstrate the framework's ability to identify high-risk regions with sub-second temporal sensitivity and real-time edge throughput, generating 800 x 800 logarithmic heatmaps at an average of 2.68 FPS. This paper validates decentralized vision-based PET analysis for intelligent transportation systems and presents a scalable methodology for high-resolution, real-time intersection safety evaluation.
 ]]></content:encoded>
 <pubDate>Thu, 03 Sep 2026 00:00:00 -0400</pubDate>
-<pubDate>Thu, 03 Sep 2026 00:00:00 -0400</pubDate>
 </item>
-
 <item>
 <title>RW-LoRA: Communication-Efficient Decentralized LoRA Fine-Tuning via Random Walks</title>
 <link>https://arxiv.org/abs/2609.00078</link>
@@ -10564,87 +10764,6 @@ arXiv:2604.19404v1 Announce Type: new
 Abstract: Traditional policy learning methods in cooperative pursuit face fundamental challenges in biomimetic underwater robots, where long-horizon decision making, partial observability, and inter-robot coordination require both expressiveness and stability. To address these issues, a novel framework called Mamba-based multi-agent group relative policy optimization (M$^{2}$GRPO) is proposed, which integrates a selective state-space Mamba policy with group-relative policy optimization under the centralized-training and decentralized-execution (CTDE) paradigm. Specifically, the Mamba-based policy leverages observation history to capture long-horizon temporal dependencies and exploits attention-based relational features to encode inter-agent interactions, producing bounded continuous actions through normalized Gaussian sampling. To further improve credit assignment without sacrificing stability, the group-relative advantages are obtained by normalizing rewards across agents within each episode and optimized through a multi-agent extension of GRPO, significantly reducing the demand for training resources while enabling stable and scalable policy updates. Extensive simulations and real-world pool experiments across team scales and evader strategies demonstrate that M$^{2}$GRPO consistently outperforms MAPPO and recurrent baselines in both pursuit success rate and capture efficiency. Overall, the proposed framework provides a practical and scalable solution for cooperative underwater pursuit with biomimetic robot systems.
 ]]></content:encoded>
 <pubDate>Wed, 22 Apr 2026 00:00:00 -0400</pubDate>
-</item>
-<item>
-<title>Heterogeneity-Aware Personalized Federated Learning for Industrial Predictive Analytics</title>
-<link>https://arxiv.org/abs/2604.19451</link>
-<guid>https://arxiv.org/abs/2604.19451</guid>
-<content:encoded><![CDATA[
-arXiv:2604.19451v1 Announce Type: new 
-Abstract: Federated prognostics enable clients (e.g., companies, factories, and production lines) to collaboratively develop a failure time prediction model while keeping each client's data local and confidential. However, traditional federated models often assume homogeneity in the degradation processes across clients, an assumption that may not hold in many industrial settings. To overcome this, this paper proposes a personalized federated prognostic model designed to accommodate clients with heterogeneous degradation processes, allowing them to build tailored prognostic models. The prognostic model iteratively facilitates the underlying pairwise collaborations between clients with similar degradation patterns, which enhances the performance of personalized federated learning. To estimate parameters jointly using decentralized datasets, we develop a federated parameter estimation algorithm based on proximal gradient descent. The proposed approach addresses the limitations of existing federated prognostic models by simultaneously achieving model personalization, preserving data privacy, and providing comprehensive failure time distributions. The superiority of the proposed model is validated through extensive simulation studies and a case study using the turbofan engine degradation dataset from the NASA repository.
-]]></content:encoded>
-<pubDate>Wed, 22 Apr 2026 00:00:00 -0400</pubDate>
-</item>
-<item>
-<title>Accelerating Optimization and Machine Learning through Decentralization</title>
-<link>https://arxiv.org/abs/2604.19518</link>
-<guid>https://arxiv.org/abs/2604.19518</guid>
-<content:encoded><![CDATA[
-arXiv:2604.19518v1 Announce Type: new 
-Abstract: Decentralized optimization enables multiple devices to learn a global machine learning model while each individual device only has access to its local dataset. By avoiding the need for training data to leave individual users' devices, it enhances privacy and scalability compared to conventional centralized learning, where all data has to be aggregated to a central server. However, decentralized optimization has traditionally been viewed as a necessary compromise, used only when centralized processing is impractical due to communication constraints or data privacy concerns. In this study, we show that decentralization can paradoxically accelerate convergence, outperforming centralized methods in the number of iterations needed to reach optimal solutions. Through examples in logistic regression and neural network training, we demonstrate that distributing data and computation across multiple agents can lead to faster learning than centralized approaches, even when each iteration is assumed to take the same amount of time, whether performed centrally on the full dataset or decentrally on local subsets. This finding challenges longstanding assumptions and reveals decentralization as a strategic advantage, offering new opportunities for more efficient optimization and machine learning.
-]]></content:encoded>
-<pubDate>Wed, 22 Apr 2026 00:00:00 -0400</pubDate>
-</item>
-<item>
-<title>Greedy Routing in a Sequentially Grown One-Dimensional Random Graph</title>
-<link>https://arxiv.org/abs/2604.19733</link>
-<guid>https://arxiv.org/abs/2604.19733</guid>
-<content:encoded><![CDATA[
-arXiv:2604.19733v1 Announce Type: cross 
-Abstract: We analyze greedy routing in a random graph G_n constructed on the vertex set V = {1, 2, ..., n} embedded in Z. Vertices are inserted according to a uniform random permutation pi, and each newly inserted vertex connects to its nearest already-inserted neighbors on the left and right (if they exist). This work addresses a conjecture originating from empirical studies (Ponomarenko et al., 2011; Malkov et al., 2012), which observed through simulations that greedy search in sequentially grown graphs exhibits logarithmic routing complexity across various dimensions. While the original claim was based on experiments and geometric intuition, a rigorous mathematical foundation remained open. Here, we formalize and resolve this conjecture for the one-dimensional case. For a greedy walk GW starting at vertex 1 targeting vertex n -- which at each step moves to the neighbor closest to n -- we prove that the number of steps S_n required to reach n satisfies S_n = Theta(log n) with high probability. Precisely, S_n = L_n + R_n - 2, where L_n and R_n are the numbers of left-to-right and right-to-left minima in the insertion-time permutation. Consequently, E[S_n] = 2H_n - 2 ~ 2 log n and P(S_n >= (2+c) log n) <= n^(-h(c/2) + o(1)) for any constant c > 0, with an analogous lower tail bound for 0 < c < 2, where h(u) = (1+u) ln(1+u) - u is the Bennett rate function. Furthermore, we establish that this logarithmic scaling is robust: for arbitrary or uniformly random start-target pairs, the expected routing complexity remains E[S_{s,t}] = 2 log n + O(1), closely mirroring decentralized routing scenarios in real-world networks where endpoints are chosen dynamically rather than fixed a priori.
-]]></content:encoded>
-<pubDate>Wed, 22 Apr 2026 00:00:00 -0400</pubDate>
-</item>
-<item>
-<title>Album: executable building blocks for scientific imaging routines, from sharing to LLM-assisted orchestration</title>
-<link>https://arxiv.org/abs/2110.00601</link>
-<guid>https://arxiv.org/abs/2110.00601</guid>
-<content:encoded><![CDATA[
-arXiv:2110.00601v2 Announce Type: replace 
-Abstract: Open-source scientific software is a major driver of scientific progress, yet its development and reuse remain difficult in collaborative settings. Researchers repeatedly face four recurring challenges: discovering and reproducing existing routines, adapting them for new use cases, sharing and scaling them across collaborators, and stabilizing them with reproducible execution environments. We present Album, an open-source framework for packaging and sharing scientific routines as executable artifacts through two minimal primitives: (i) the solution, a Python-native executable entry point that combines machine-readable metadata, arguments, environment specifications, and lifecycle hooks; and (ii) the catalog, a decentralized, git-native distribution mechanism with indexed search and optional web rendering for discovery, provenance, and governance. Album uses a two-context execution model in which a host controller evaluates manifests and prepares per-solution environments, while lifecycle hooks execute inside isolated solution environments. This design supports reproducible execution, post-environment setup, and the composition of routines with incompatible dependencies. Album can be used in conjunction with LLM agents: solutions can be drafted and revised with LLM assistance, and a MCP interface exposes cataloged solutions as callable tools for tool-grounded discovery and orchestration. We evaluate Album through four realworld imaging deployments spanning interactive visualization of electron microscopy data, integration of multiple segmentation methods, the orchestration of cryo-electron tomography competition workflows, and mineral quantification pipelines. Overall, Album complements package managers, workflow systems, and container runtimes by making scientific routines executable, shareable artifacts. Documentation and examples are available at https://album.solutions.
-]]></content:encoded>
-<pubDate>Wed, 22 Apr 2026 00:00:00 -0400</pubDate>
-</item>
-<item>
-<title>Prompt to Pwn: Automated Exploit Generation for Smart Contracts</title>
-<link>https://arxiv.org/abs/2508.01371</link>
-<guid>https://arxiv.org/abs/2508.01371</guid>
-<content:encoded><![CDATA[
-arXiv:2508.01371v3 Announce Type: replace 
-Abstract: Smart contracts are important for digital finance, yet they are hard to patch once deployed. Prior work has mainly explored LLMs for smart contract vulnerability detection, leaving end-to-end automated exploit generation (AEG) much less understood. We study that gap with \textsc{ReX}, an execution-grounded framework that links LLM-based exploit synthesis to the Foundry stack for end-to-end generation, compilation, execution, and validation. Five recent LLMs are evaluated across eight common vulnerability classes, supported by a curated dataset of 38{+} real incident PoCs and three automation aids: prompt refactoring, a compiler feedback loop, and templated test harnesses. Results indicate that current frontier LLMs can often produce deterministic PoCs for single-contract vulnerabilities, but remain weak on cross-contract attacks; outcomes depend mainly on the model and bug type, while code structure and prompt tuning contribute less in our setting. The study also surfaces important boundary conditions of LLM-driven AEG, including gaps between oracle-validated exploitability and real-world economic attacks, pointing to the need for stronger defenses and more realistic evaluation.
-]]></content:encoded>
-<pubDate>Wed, 22 Apr 2026 00:00:00 -0400</pubDate>
-</item>
-<item>
-<title>The Cognitive Penalty: Ablating System 1 and System 2 Reasoning in Edge-Native SLMs for Decentralized Consensus</title>
-<link>https://arxiv.org/abs/2604.16913</link>
-<guid>https://arxiv.org/abs/2604.16913</guid>
-<content:encoded><![CDATA[
-arXiv:2604.16913v1 Announce Type: new 
-Abstract: Decentralized Autonomous Organizations (DAOs) are inclined explore Small Language Models (SLMs) as edge-native constitutional firewalls to vet proposals and mitigate semantic social engineering. While scaling inference-time compute (System 2) enhances formal logic, its efficacy in highly adversarial, cryptoeconomic governance environments remains underexplored. To address this, we introduce Sentinel-Bench, an 840-inference empirical framework executing a strict intra-model ablation on Qwen-3.5-9B. By toggling latent reasoning across frozen weights, we isolate the impact of inference-time compute against an adversarial Optimism DAO dataset. Our findings reveal a severe compute-accuracy inversion. The autoregressive baseline (System 1) achieved 100% adversarial robustness, 100% juridical consistency, and state finality in under 13 seconds. Conversely, System 2 reasoning introduced catastrophic instability, fundamentally driven by a 26.7% Reasoning Non-Convergence (cognitive collapse) rate. This collapse degraded trial-to-trial consensus stability to 72.6% and imposed a 17x latency overhead, introducing critical vulnerabilities to Governance Extractable Value (GEV) and hardware centralization. While rare (1.5% of adversarial trials), we empirically captured "Reasoning-Induced Sycophancy," where the model generated significantly longer internal monologues (averaging 25,750 characters) to rationalize failing the adversarial trap. We conclude that for edge-native SLMs operating under Byzantine Fault Tolerance (BFT) constraints, System 1 parameterized intuition is structurally and economically superior to System 2 iterative deliberation for decentralized consensus.
-  Code and Dataset: https://github.com/smarizvi110/sentinel-bench
-]]></content:encoded>
-<pubDate>Tue, 21 Apr 2026 00:00:00 -0400</pubDate>
-</item>
-<item>
-<title>Logic-Based Verification of Task Allocation for LLM-Enabled Multi-Agent Manufacturing Systems</title>
-<link>https://arxiv.org/abs/2604.17142</link>
-<guid>https://arxiv.org/abs/2604.17142</guid>
-<content:encoded><![CDATA[
-arXiv:2604.17142v1 Announce Type: new 
-Abstract: Manufacturing industries are facing increasing product variability due to the growing demand for personalized products. Under these conditions, ensuring safety becomes challenging as frequent reconfigurations can lead to unintended hazardous behaviors. Multi-agent control architectures have been proposed to improve flexibility through decentralized decision-making and coordination. However, these architectures are based on predefined task models, which limit their ability to adapt task planning to new product requirements while preserving safety. Recently, large language models have been introduced into manufacturing systems to enhance adaptability, but reliability remains a key challenge. To address this issue, we propose a control architecture that leverages the flexibility of large language models while preserving safety on the manufacturing shop floor. Specifically, the proposed framework verifies large language model-enabled task allocations by using temporal logic and discrete event systems. The effectiveness of the proposed framework is demonstrated through a case study that involves a multi-robot assembly scenario, showing that unsafe tasks can be allocated safely before task execution.
-]]></content:encoded>
-<pubDate>Tue, 21 Apr 2026 00:00:00 -0400</pubDate>
-</item>
-<item>
-<title>Decentralised Trust and Security Mechanisms for IoT Networks at the Edge: A Comprehensive Review</title>
-<link>https://arxiv.org/abs/2604.17179</link>
-<guid>https://arxiv.org/abs/2604.17179</guid>
-<content:encoded><![CDATA[
-arXiv:2604.17179v1 Announce Type: new 
-Abstract: INTRODUCTION: The proliferation of the amalgamation of IoT and edge computing has increased the demand for decentralised trust and security mechanisms capable of operating across heterogeneous and resource-limited devices. Approaches such as federated learning, Zero Trust architectures, lightweight blockchain and distributed neural models offer alternatives to centralised control. OBJECTIVES: This review examines various state-of-the-art decentralised mechanisms and evaluates their effectiveness in terms of securing IoT networks at the edge. METHODS: Thirty recent studies were analysed to compare how decentralised architectures establish trust, support secure communication and enable intrusion and anomaly detection. Frameworks, such as DFGL-LZTA, SecFedDNN and COSIER were assessed. RESULTS: Decentralised designs enhance privacy, reduce single points of failure and improve adaptive threat response, though challenges remain in scalability, efficiency and interoperability. CONCLUSION: The study identifies key considerations and future research needs for building secure and resilient trust-aware IoT edge ecosystems.
-]]></content:encoded>
-<pubDate>Tue, 21 Apr 2026 00:00:00 -0400</pubDate>
 </item>
 </channel>
 </rss>
