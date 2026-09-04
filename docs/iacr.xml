@@ -5,12 +5,53 @@
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
 <item>
+<title>Anonymous Attribute-Based Signcryption: Definitions, Constructions, and Applications</title>
+<link>https://eprint.iacr.org/2026/1861</link>
+<guid>https://eprint.iacr.org/2026/1861</guid>
+<content:encoded><![CDATA[
+<div> 匿名属性基签密,密文匿名性,后量子格密码,统一框架,匹配加密
+<br><br>总结:
+1.提出A²BSC，扩展属性基签密，要求密文匿名，不泄露属性或策略。
+2.建立统一框架，覆盖密钥策略、密文策略、双策略及层级双策略变体。
+3.基于LWE/SIS假设，在标准模型构造一般策略格方案，实现后量子安全，并得到CP与双策略实例。
+4.应用于ME/AME，给出任意策略抗无界共谋构造，并原生实现CCA安全。 <div>
+We put forward a generalization of attribute-based signcryption, called anonymous attribute-based signcryption (A$^2$BSC). Beyond message confidentiality and ciphertext unforgeability, 
+A$^2$BSC further requires \textit{ciphertext anonymity}: no information about the signcryptor's attributes or ciphertext-related attributes/policies is leaked, regardless of the decryption outcome.
+
+Specifically, we begin by establishing the syntax and security notions for A$^2$BSC within a \textit{unified} framework, which encompasses various variants (key-policy, ciphertext-policy, dual-policy, and a hierarchical dual-policy variant called Special A$^2$BSC). Then, we construct a Special A$^2$BSC scheme for \textit{general policies} (modeled as bounded-depth Boolean circuits) from the succinct learning with errors and the basis-augmented short integer solution assumptions in the standard model, hence achieving post-quantum security. This naturally yields lattice-based instantiations of both ciphertext-policy and dual-policy A$^2$BSC.
+
+Beyond its independent interest, we also show the expressiveness and generality of our A$^2$BSC by exploring its application to matchmaking encryption (ME) and arranged matchmaking encryption (AME) proposed by Ateniese et al. (Crypto '19). As a byproduct, we give generic constructions of both ME and AME for \textit{arbitrary policies} against unbounded collusions, and strengthen the CPA-privacy of (A)ME to achieve CCA security. The latter is achieved for free in our construction, as A$^2$BSC natively provides CCA security.
+Overall, our new solution adds to the diversity of methods for building the advanced primitive (A)ME.
+]]></content:encoded>
+<pubDate>Wed, 02 Sep 2026 08:26:54 +0000</pubDate>
+<pubDate>Wed, 02 Sep 2026 08:26:54 +0000</pubDate>
+</item>
+<item>
+<title>(Im)possibility of Asynchronous MPC with Honest Majority over Blockchains</title>
+<link>https://eprint.iacr.org/2026/1860</link>
+<guid>https://eprint.iacr.org/2026/1860</guid>
+<content:encoded><![CDATA[
+<div> 异步多方计算、区块链混合模型、可验证秘密共享、容错界、门限密码
+<br><br>总结:1.研究区块链混合模型下AVSS与AMPC，考察能否改善n>3t韧性界。2.无可信设置或Minicrypt设置下AMPC对n≤3t不可能；但AVSS在2t<n≤3t可分离实现。3.公钥可信设置下构造n>2t的AMPC，链上通信不依赖电路规模，并提出高效子集共识原语。 <div>
+This work studies asynchronous verifiable secret sharing (AVSS) and asynchronous multi-party computation (AMPC) in the blockchain-hybrid model, where parties have black-box access to an ideal (asynchronous) blockchain functionality providing only persistence and eventual liveness. Motivated by the practical deployment of MPC in blockchain applications such as privacy-preserving payments and threshold wallets, we investigate whether blockchain access can improve the classical resilience bound of $n > 3t$, where $n$ is the total number of parties, and $t$ is the number of parties that can be compromised by an adversary. In particular, in the blockchain-hybrid model, we provide a comprehensive set of lower and upper bounds across three cryptographic settings: (i) no trusted setup, (ii) trusted setup with Minicrypt assumptions, (iii) trusted setup with public-key assumptions.
+
+1. We show that without a trusted setup, or under Minicrypt assumptions, even with a setup, the classical resilience bound for AMPC is inherent: AMPC is impossible for $n \leq 3t$, even against weaker fail-stop or omission adversaries.
+ 
+2. We establish separations between AVSS and AMPC in the intermediate regime $2t < n \leq 3t$: against a fail-stop adversary, unlike AMPC, AVSS is possible for $n>2t$ without any setup. Moreover, against a Byzantine adversary, again unlike AMPC, AVSS is possible for $n>2t$ under Minicrypt assumptions with a setup.
+
+3. In contrast, under public-key assumptions with trusted setup, we construct an AMPC protocol tolerating Byzantine adversaries whenever $n>2t$. Our protocol leverages threshold homomorphic encryption, threshold signatures, commitments, and zero-knowledge proofs to minimize on-chain communication, achieving blockchain communication complexity independent of the circuit size. In the process, we define an efficient agreement on a common subset primitive for large messages in the blockchain-hybrid model, which can be of independent interest for secure distributed computing systems.
+]]></content:encoded>
+<pubDate>Wed, 02 Sep 2026 05:37:23 +0000</pubDate>
+<pubDate>Wed, 02 Sep 2026 05:37:23 +0000</pubDate>
+</item>
+
+<item>
 <title>Delegatable Anonymous Credentials from Legacy Credentials using Recursive zk-SNARKs</title>
 <link>https://eprint.iacr.org/2026/1855</link>
 <guid>https://eprint.iacr.org/2026/1855</guid>
 <content:encoded><![CDATA[
 <div> 可委托匿名凭证、遗留凭证、零知识证明、JWT、Plonky2
-<br><br>总结:
+<br /><br />总结:
 1.数字身份系统隐私较弱，遗留凭证与匿名凭证难兼容。
 2.已有零知识改造不支持委托，传统DAC难部署。
 3.本文提出首个基于遗留凭证的可委托匿名凭证，无需改发行端。
@@ -21,7 +62,6 @@ Digital identity systems are becoming increasingly prevalent, driven by regulato
 We present the first DAC scheme built directly on top of legacy credentials. Our construction requires no issuance infrastructure changes, and yields constant-size credentials independent of delegation depth, with full unlinkability along the chain and selective attribute disclosure at every level. We instantiate it for credentials based on JSON Web Tokens (JWTs) signed with ECDSA using Plonky2 as the recursive proving backend, contributing a secure in-circuit JWT parser that closes vulnerabilities in prior work and a Plonky2 extension for cyclic recursion with per-step zero-knowledge. At 64 attributes, delegation takes 1.2 s and verification only 3.3 ms, with a constant proof size across all delegation levels
 ]]></content:encoded>
 <pubDate>Tue, 01 Sep 2026 15:33:54 +0000</pubDate>
-<pubDate>Tue, 01 Sep 2026 15:33:54 +0000</pubDate>
 </item>
 <item>
 <title>Private and Verifiable Outsourcing of Open-Weight LLM Inference</title>
@@ -29,7 +69,7 @@ We present the first DAC scheme built directly on top of legacy credentials. Our
 <guid>https://eprint.iacr.org/2026/1849</guid>
 <content:encoded><![CDATA[
 <div> 开源权重模型,本地推理,隐私计算,可验证,高效协议
-<br><br>总结: 1. 大模型本地运行资源高，小设备只能用小模型，造成隐私与能力取舍。2. 提出协议让客户端将开源权重LLM推理私密外包给两个不共谋服务器。3. 两服务器均无法获知查询，客户端可凭模型方随权重公开的信息验证结果。4. 较SIGMA快约11至14倍，服务器无额外开销。5. 可支持更大模型，如Llama2-70B仅需179MB本地存储。 <div>
+<br /><br />总结: 1. 大模型本地运行资源高，小设备只能用小模型，造成隐私与能力取舍。2. 提出协议让客户端将开源权重LLM推理私密外包给两个不共谋服务器。3. 两服务器均无法获知查询，客户端可凭模型方随权重公开的信息验证结果。4. 较SIGMA快约11至14倍，服务器无额外开销。5. 可支持更大模型，如Llama2-70B仅需179MB本地存储。 <div>
 Open-weight models allow clients to run LLMs locally, thus keeping their data private from untrusted  providers. However, running large models requires massive hardware and storage resources (especially challenging on resource-constrained devices like smartphones), limiting local execution to smaller models. This leaves clients with a frustrating compromise: settle for a less-capable model that can be run locally, or sacrifice privacy by sending queries to an external server.
 
 We present an efficient protocol that allows a client to privately and verifiably outsource LLM inference of an open-weight model to a pair of malicious (but non-colluding) servers. Privacy implies that neither server learns anything about the client's queries. At the same time, the client can verify the claimed result using information posted by the model owner along with the model weights. 
@@ -37,9 +77,7 @@ We present an efficient protocol that allows a client to privately and verifiabl
 Compared to prior state-of-the-art for private LLM inference (SIGMA, PETS' 24) -- which does not provide verifiability -- our protocol is $\approx$11--14$\times$ faster while imposing no overhead at the servers (beyond the cost of  inference in the original model). Our protocol also scales to larger models not supported by prior work: for example, with our protocol a client can run the Llama 2-70B model using just 179~MB of local storage (instead of the 140~GB required to run the model locally).
 ]]></content:encoded>
 <pubDate>Mon, 31 Aug 2026 22:07:24 +0000</pubDate>
-<pubDate>Mon, 31 Aug 2026 22:07:24 +0000</pubDate>
 </item>
-
 <item>
 <title>Covert Federated Learning under Regulation based on Threshold Anamorphic Encryption</title>
 <link>https://eprint.iacr.org/2026/1846</link>
@@ -13839,32 +13877,6 @@ With the growing emphasis on data privacy, secure multi-party computation has ga
 In this paper, we propose Helix, a scalable framework for maliciously secure PPML in the honest majority setting, aiming to enhance both the scalability and practicality of maliciously secure protocols. In particular, we report a privacy leakage issue in LXY24 during prefix OR operations and introduce a round-optimized alternative based on a single-round vectorized three-layer multiplication protocol. Additionally, by exploiting reusability properties within the computation process, we propose lightweight compression protocols that substantially improve the efficiency of multiplication verification. We also develop a batch check protocol to reduce the computational complexity of revealing operations in the malicious setting. For 63-party neural network inference, compared to the semi-honest LXY24, Helix is only 1.9$\times$ (1.1$\times$) slower in the online phase and 1.2$\times$ (1.1$\times$) slower in preprocessing under LAN (WAN) in the best case.
 ]]></content:encoded>
 <pubDate>Tue, 25 Feb 2025 01:34:53 +0000</pubDate>
-</item>
-<item>
-<title>Publicly Verifiable Threshold Proxy Re-encryption and Its Application in Data Rights Confirmation</title>
-<link>https://eprint.iacr.org/2025/345</link>
-<guid>https://eprint.iacr.org/2025/345</guid>
-<content:encoded><![CDATA[
-<div> 关键词: Proxy Re-Encryption, PVTPRE, Public Verifiability, Data Rights Confirmation, Blockchain
-
-总结:
-本文提出了一个新的代理重加密方案——公开可验证阈值代理重加密(PVTPRE)，该方案填补了在大数据时代对数据拥有者诚实性考虑的空白。PVTPRE通过创新地应用稍作修改的公开可验证秘密分享(PVSS)方案，将重加密密钥分布式地分配给多个代理，实现数据拥有者的非交互式公开可验证性。同时，通过执行PVSS重构算法，确保了数据用户解密的正确性和代理重加密的公共可验证性。文章进一步证明PVTPRE满足IND-CPA安全性标准。此外，基于PVTPRE和区块链技术，文中提出了一种隐私保护的数据权利确认框架，为数据所有权和使用提供明确原则，并利用区块链作为数据银行和智能合约引擎，提供可靠存储与验证服务。据作者所知，这是首次系统研究兼顾隐私保护与公开可验证性的数据权利确认机制，旨在保护数据权利并确保透明度。最后，文章进行了全面的实验以证实PVTPRE的正确性、可行性和有效性，并显示其在许多方面优于其他代理重加密方案。 <div>
-Proxy re-encryption (PRE) has been regarded as an effective cryptographic primitive in data sharing systems with distributed proxies. However, no literature considers the honesty of data owners, which is critical in the age of big data. In this paper, we fill the gap by introducing a new proxy re-encryption scheme, called publicly verifiable threshold PRE (PVTPRE). Briefly speaking, we innovatively apply a slightly modified publicly verifiable secret sharing (PVSS) scheme to distribute the re-encryption keys to multiple proxies. Consequently, we achieve publicly verifiability of data owners non-interactively. Then, the correctness of data users in decryption and public verifiability of proxies in re-encryption are guaranteed seamlessly through execution of the PVSS reconstruction algorithms. We further prove that PVTPRE satisfies IND-CPA security. Besides, we put forward a privacy-preserving data rights confirmation framework by providing clear principles for data ownership and usage, based on the PVTPRE scheme and blockchain. Blockchain plays the role of data bank and smart contract engine, providing reliable storage and verification for all framework. To our knowledge, we are the first to systematically investigate data rights confirmation considering privacy as well as public verifiability, addressing the growing need for robust mechanisms to protect data rights and ensure transparency. Finally, we conduct comprehensive experiments to illustrate the correctness, feasibility and effectiveness. The experimental results show that our PVTPRE outperforms other PREs in many aspects.
-]]></content:encoded>
-<pubDate>Tue, 25 Feb 2025 00:21:38 +0000</pubDate>
-</item>
-<item>
-<title>Publicly Verifiable Generalized Secret Sharing and Its Application in Building Decentralized Exchange</title>
-<link>https://eprint.iacr.org/2025/344</link>
-<guid>https://eprint.iacr.org/2025/344</guid>
-<content:encoded><![CDATA[
-<div> 关键词: Generalized Secret Sharing (GSS), Publicly Verifiable Generalized Secret Sharing (PVGSS), Non-Interactive Zero-Knowledge (NIZK), Decentralized Exchange (DEX), Fairness
-
-<br /><br />总结:
-本文提出了公开可验证广义秘密共享（PVGSS）方案，旨在提升分布式计算中GSS机制的适用性，尤其是在区块链等透明系统中的应用。首先介绍了基于Shamir秘密共享和线性秘密共享方案两种GSS构造方法。接着，将GSS与非交互式零知识证明（NIZK）相结合构建了PVGSS方案。进一步地，利用PVGSS方案设计了一个去中心化交易所（DEX），用户可以在其中公平地进行ERC-20代币交换，而被动观察者通过提供仲裁服务获取利润。DEX的关键特性“公平性”由PVGSS方案支持的复杂访问结构保障。文章还对PVGSS方案的性能以及DEX中用户的经济成本进行了全面评估，结果表明该方法在现实世界应用中具有可行性和实用性。 <div>
-Generalized secret sharing (GSS), which can offer more flexibility by accommodating diverse access structures and conditions, has been under-explored in distributed computing over the past decades. To address the gaps, we propose the publicly verifiable generalized secret sharing (PVGSS) scheme, enhancing the applicability of GSS in transparent systems. Public verifiability is a crucial property to gain trustworthiness for decentralized systems like blockchain.  We begin by introducing two GSS constructions, one based on Shamir's secret sharing and the other on the linear secret sharing scheme (LSSS). Next, we present PVGSS schemes that combine GSS with non-interactive zero-knowledge (NIZK) proofs.  Further, we construct a decentralized exchange (DEX) based on PVGSS scheme, where any users can participate in exchanges and engage in arbitrage. Specifically, users can fairly swap ERC-20 tokens with passive watchers, who earn profits by providing arbitration services. The critical property of "fairness" required by the DEX is ensured through a sophisticated access structure, supported by the PVGSS scheme. We provide a comprehensive evaluation on the performance of the PVGSS schemes and the monetary costs for users in the DEX. The results demonstrate the feasibility and practicality of this approach in real-world applications.
-]]></content:encoded>
-<pubDate>Mon, 24 Feb 2025 23:42:56 +0000</pubDate>
 </item>
 </channel>
 </rss>

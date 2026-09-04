@@ -4,6 +4,120 @@
 <title>cs updates on arXiv.org</title>
 <link>http://rss.arxiv.org/rss/cs</link>
 
+<item>
+<title>D-FROST: Decentralized Federated pRompt-tuning via Optimal tranSporT for Non-IID and Imbalanced Data</title>
+<link>https://arxiv.org/abs/2609.01802</link>
+<guid>https://arxiv.org/abs/2609.01802</guid>
+<content:encoded><![CDATA[
+<div> 去中心化联邦学习, 提示调优, 最优传输, Wasserstein优化, 收敛性分析<br><br>总结: 1. 提示调优冻结基础模型骨干、仅更新提示，参数高效。2. 适用于去中心化联邦学习，降低完整模型通信成本。3. 异构数据使提示集合难索引对齐，传统去中心化平均不适用。4. 首次研究该问题，提出D-FROST，用Wasserstein与最优传输合并邻居提示为紧凑代表集。5. 分析共识误差与收敛性，并在异构数据实验中验证有效。 <div>
+arXiv:2609.01802v1 Announce Type: new 
+Abstract: Prompt tuning provides a parameter-efficient way to adapt foundation models (FMs) by freezing the pretrained backbone and updating only a small set of learnable prompts. This property makes prompt tuning especially suitable for decentralized federated learning (DFL), where exchanging full-model updates can be prohibitively expensive. However, prompt tuning in DFL introduces new challenges. Prompt sets learned from heterogeneous local data may not be index-wise aligned, making standard decentralized averaging unsuitable. In addition, the algorithm should be theoretically guaranteed to achieve consensus and make progress toward the shared objective. In this work, we provide the first study of prompt tuning in DFL. We formulate decentralized prompt tuning as a Wasserstein-based optimization problem over prompt measures, which captures the set-valued structure of prompts. We then propose D-FROST, an optimal-transport-based (OT-based) decentralized prompt-tuning algorithm that merges neighborhood prompts into compact representative prompt sets through transportation-based matching. We further analyze D-FROST by bounding the Wasserstein consensus error across clients, and establishing convergence of the network-level prompt barycenter to a neighborhood of stationarity. Experiments under heterogeneous client data demonstrate the effectiveness of D-FROST for decentralized prompt tuning.
+]]></content:encoded>
+<pubDate>Thu, 03 Sep 2026 00:00:00 -0400</pubDate>
+<pubDate>Thu, 03 Sep 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Convergence Theory of Knowledge Distillation in Asynchronous P2P Gossip Learning Network</title>
+<link>https://arxiv.org/abs/2609.01952</link>
+<guid>https://arxiv.org/abs/2609.01952</guid>
+<content:encoded><![CDATA[
+<div> 去中心化,知识蒸馏,异步P2P,函数空间,收敛理论<br><br>总结:
+1. 异构架构下SGD无法平均模型，文章建立异步P2P知识蒸馏收敛理论。
+2. 共识从参数空间移至函数空间，证明KD在logit空间为收缩算子。
+3. 标准假设下，平均函数平稳性与函数分歧以O(1/ηT)收敛到误差、距离和异质性决定的邻域。
+4. 跨异构网络实验显示KD使分歧收缩40-61倍，孤立训练无此效果，并验证步长-邻域权衡。 <div>
+arXiv:2609.01952v1 Announce Type: new 
+Abstract: Decentralized, serverless learning increasingly connects devices running different architectures, where the standard tool, decentralized SGD, is undefined as models with different parameter counts cannot be averaged. Knowledge distillation (KD) exchanges soft predictions rather than weights and sidesteps this obstacle, yet convergence theory for fully decentralized, asynchronous peer-to-peer (P2P) KD is lacking. We provide one, relocating consensus from parameter space to function (output) space: a KD event is a geometric contraction operator in logit space on the peers' predictive distributions, which we analyse in the Hilbert space of predictions on a reference measure. Under standard smoothness/variance assumptions and two realizability assumptions, one bridging parameter SGD to the functional step and one controlling restricted task/KD alignment, the time-averaged functional stationarity and function-space disagreement converge at rate $O(1/(\eta T))$ to an $O(\eta)+O(B_f^2)+O(\zeta_f^2)$ neighbourhood. Here $B_f$ is the distance from the task optimum to the peers' reachable classes and $\zeta_f$ measures persistent local-task heterogeneity. Across homogeneous, width-heterogeneous, and mixed-family networks of the experiments, KD contracts function disagreement by $40-61\times$, while isolated training does not. The sampled stationarity diagnostic has late transient exponents $0.99-1.90$ on the shared-skeleton main runs, and the four-point step-size sweep exhibits the predicted transient: neighbourhood tradeoff.
+]]></content:encoded>
+<pubDate>Thu, 03 Sep 2026 00:00:00 -0400</pubDate>
+<pubDate>Thu, 03 Sep 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Similarity-Aware Personalized Federated Learning in Heterogeneous Environments</title>
+<link>https://arxiv.org/abs/2609.02241</link>
+<guid>https://arxiv.org/abs/2609.02241</guid>
+<content:encoded><![CDATA[
+<div> 联邦学习, 个性化, 统计异构, 相似度加权, 收敛保证
+<br><br>总结:
+1. 联邦学习可协作训练并保护隐私，但客户端数据分布不一致会损害全局与本地性能。
+2. 提出SAPE-FL个性化框架。
+3. 将客户模型同时锚定于全局模型与相似度加权同行平均模型。
+4. 依据模型与输出相似度设置动态客户端正则化，过滤不相似客户。
+5. 证明收敛性，并在高统计异质性和低数据场景优于现有方法。 <div>
+arXiv:2609.02241v1 Announce Type: new 
+Abstract: Federated Learning (FL) allows decentralized clients to train models collaboratively while preserving data privacy. However, distribution mismatch across clients often leads to poor global generalization and degraded local client-level performance. In such scenarios, some of the clients with their local models trained solely on local data may perform better than the globally learnt model, thus nullifying the benefits of collaborative federated learning. To address this, we propose SAPE-FL (Similarity-Aware Personalized Federated Learning), a novel personalization framework that anchors each client's model to both the global model and a similarity-weighted peer averaged model. By incorporating dynamic, client-specific regularization based on both model similarity and output similarity, SAPE-FL adaptively balances global knowledge transfer and peer collaboration while filtering out dissimilar clients. This dual anchoring mitigates negative transfer and enhances robustness in heterogeneous settings. We theoretically analyze our algorithm establishing its convergence guarantees and empirically show that SAPE-FL outperforms state-of-the-art methods under high statistical heterogeneity and low client data regimes.
+]]></content:encoded>
+<pubDate>Thu, 03 Sep 2026 00:00:00 -0400</pubDate>
+<pubDate>Thu, 03 Sep 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>CACTUS: Mask-Guided Semantic Clean-Label Backdoors in Decentralized Federated Learning</title>
+<link>https://arxiv.org/abs/2609.02450</link>
+<guid>https://arxiv.org/abs/2609.02450</guid>
+<content:encoded><![CDATA[
+<div> 联邦学习,语义触发,去中心化,后门攻击,CACTUS
+<br><br>总结:
+1.语义触发隐蔽，但样本依赖放置削弱跨轮植入，去中心化聚合拓扑加剧。
+2.CACTUS把标签一致语义对转为表示偏移，模态掩码算子隔离耦合触发，反事实修改非目标嵌入后聚合。
+3.四模态九聚合规则验证；30%恶意节点时九规则语音ASR均值51.2%，三模态ASR最高；ASR随拓扑变化、恶意比例增加，可传播后门。 <div>
+arXiv:2609.02450v1 Announce Type: new 
+Abstract: Semantic triggers in federated learning (FL) can be less conspicuous than synthetic patches, but sample-dependent placement may weaken backdoor implantation across aggregation rounds. This challenge is compounded in decentralized FL (DFL), where topology-dependent peer aggregation repeatedly mixes local models. CACTUS converts label-consistent semantic pairs into target-directed representation shifts. Mask-guided, modality-specific operators isolate trigger effects, couple them across samples, and apply the shifts counterfactually to clean non-target embeddings before peer aggregation. Experiments cover speech, text, tabular, and image tasks under nine aggregation rules. With 30\% malicious nodes, CACTUS reaches a nine-rule mean attack success rate (ASR) of 51.2\% on Speech Commands and the highest nine-rule mean ASR among evaluated attacks on three of four modalities. Sensitivity analyses show that ASR varies with network topology and increases with the malicious-node ratio. These results indicate that CACTUS can propagate backdoors through repeated DFL aggregation.
+]]></content:encoded>
+<pubDate>Thu, 03 Sep 2026 00:00:00 -0400</pubDate>
+<pubDate>Thu, 03 Sep 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Automated Vulnerability Injection in Smart Contracts Using Large Language Models</title>
+<link>https://arxiv.org/abs/2609.02624</link>
+<guid>https://arxiv.org/abs/2609.02624</guid>
+<content:encoded><![CDATA[
+<div> LLM、智能合约、漏洞注入、数据验证、静态分析器
+<br><br>总结:①针对智能合约漏洞检测数据集稀缺问题，提出用LLM向Solidity合约自动注入漏洞的方法。②以OpenSCV的49类漏洞为例，生成近1000个变体，经编译、执行、业务逻辑与漏洞存在性校验，保留32个合约、25类漏洞，存活率16.58%。③幸存样本偏简单结构、局部语法型漏洞；挑战包括非确定性与语义保持。④用于评估三个静态分析器，显示覆盖互补但不完整；总体可行，但扩展性和多样性受限。 <div>
+arXiv:2609.02624v1 Announce Type: new 
+Abstract: Assessing vulnerability detection tools for smart contracts requires datasets with known ground truth, yet such datasets are scarce and difficult to build by hand. We propose an approach that uses Large Language Models (LLMs) to automatically inject vulnerabilities into Solidity smart contracts, and demonstrate it in a case study targeting 49 vulnerability types from OpenSCV. Injected contracts are validated through a multi-step pipeline checking compilation, execution, business logic, and the presence of the intended vulnerability. Applied to real-world contracts from SmartBugs, LLMs generate nearly 1,000 candidate variants; after deduplication and validation, 32 confirmed vulnerable contracts spanning 25 vulnerability types survive (a 16.58% survival rate). Surviving contracts concentrate in structurally simpler targets and vulnerability types with localized syntactic patterns. We report practical challenges including LLMs' non-determinism and the difficulty of preserving contract semantics. We then use the validated contracts to assess three static analyzers, revealing complementary and incomplete coverage profiles. Results show that LLM-based vulnerability injection is feasible, while exposing key limitations in scalability and diversity.
+]]></content:encoded>
+<pubDate>Thu, 03 Sep 2026 00:00:00 -0400</pubDate>
+<pubDate>Thu, 03 Sep 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>A Survey of Decentralized Physical Infrastructure Network,Research Directions, and Open Challenges</title>
+<link>https://arxiv.org/abs/2609.02125</link>
+<guid>https://arxiv.org/abs/2609.02125</guid>
+<content:encoded><![CDATA[
+<div> 去中心化物理基础设施网络、Web3.0、通信技术、激励治理、可行性评估
+<br><br>总结: 1. DePIN重构Web3.0通信基础设施。2. 融合物理资源与数字治理，形成社区共建共享的自激励生态。3. 综述其背景、特征、架构及行业应用。4. 从六层技术栈分析反馈闭环、实施成熟度与部署限制。5. 提出技术、治理、经济维度的可行性框架，并指出未来研究方向。 <div>
+arXiv:2609.02125v1 Announce Type: cross 
+Abstract: The Decentralized Physical Infrastructure Network (DePIN) represents a transformative paradigm that redefines the construction, operation, and governance of Information and Communication Technology (ICT) infrastructure in the Web 3.0 era. DePIN integrates physical resources, such as networking equipment, storage, and computing power, with decentralized digital governance, forming a self-incentivized ecosystem that is collaboratively built, shared, and governed by the community. It provides a foundational framework for future communication networks, facilitating decentralized edge intelligence, efficient resource sharing, and trustworthy coordination among heterogeneous devices. Focusing on the feasibility of this emerging paradigm, this paper examines the technology landscape in the pre-DePIN era and gaps between existing methodologies and the forthcoming decentralized infrastructure for Web 3.0. It provides a systematic and comprehensive survey of the background, core characteristics, technical architecture, and applications of DePIN across various vertical domains. The paper analyzes the DePIN technology stack from six layers: physical infrastructure, blockchain, interaction, trust, incentive, and application, with special attention to their cross-layer feedback loops, implementation readiness, and deployment limitations. To further bridge conceptual analysis and practical deployment, we propose a DePIN feasibility assessment framework covering technical, governance, and economic dimensions. Moreover, we highlight promising research directions, providing insights and guidance for further exploration and deployment of DePIN.
+]]></content:encoded>
+<pubDate>Thu, 03 Sep 2026 00:00:00 -0400</pubDate>
+<pubDate>Thu, 03 Sep 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Fetch.ai: An Architecture for Modern Multi-Agent Systems</title>
+<link>https://arxiv.org/abs/2510.18699</link>
+<guid>https://arxiv.org/abs/2510.18699</guid>
+<content:encoded><![CDATA[
+<div> 多智能体系统、去中心化、区块链、智能编排、Fetch.ai
+<br><br>总结:1.LLM智能系统忽视MAS基础，存在集中化与信任通信缺陷。2.Fetch.ai提出工业级架构，融合经典MAS与现代AI。3.以区块链提供身份、发现与交易，并配套安全互操作开发框架、云部署与智能编排。4.agent-native LLM将人类目标转为多代理工作流，物流用例实现自主发现、协商和交易。5.支撑开放协作、经济可持续的多代理生态。 <div>
+arXiv:2510.18699v2 Announce Type: replace 
+Abstract: Recent surges in LLM-driven intelligent systems largely overlook decades of foundational multi-agent systems (MAS) research, resulting in frameworks with critical limitations such as centralization and inadequate trust and communication protocols. This paper introduces the Fetch.ai architecture, an industrial-strength platform designed to bridge this gap by facilitating the integration of classical MAS principles with modern AI capabilities. We present a novel, multi-layered solution built on a decentralized foundation of on-chain blockchain services for verifiable identity, discovery, and transactions. This is complemented by a comprehensive development framework for creating secure, interoperable agents, a cloud-based platform for deployment, and an intelligent orchestration layer where an agent-native LLM translates high-level human goals into complex, multi-agent workflows. We demonstrate the deployed nature of this system through a decentralized logistics use case where autonomous agents dynamically discover, negotiate, and transact with one another securely. Ultimately, the Fetch.ai stack provides a principled architecture for moving beyond current agent implementations towards open, collaborative, and economically sustainable multi-agent ecosystems.
+]]></content:encoded>
+<pubDate>Thu, 03 Sep 2026 00:00:00 -0400</pubDate>
+<pubDate>Thu, 03 Sep 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Enhancing Road Safety Through Multi-Camera Image Segmentation with Post-Encroachment Time Analysis</title>
+<link>https://arxiv.org/abs/2511.12018</link>
+<guid>https://arxiv.org/abs/2511.12018</guid>
+<content:encoded><![CDATA[
+<div> 交通安全、计算机视觉、PET、边缘计算、动态热力图
+<br><br>总结: 1.针对信号交叉口碰撞分析数据稀疏与延迟问题，提出多相机视觉实时安全框架。2.四个同步相机经YOLOv11和Jetson边缘处理，单应变换统一鸟瞰图。3.像素级PET追踪时间占用，生成3.3平方厘米分辨率动态热力图。4.车辆轨迹与PET存入SQL库，可识别亚秒级高风险区，800x800图平均2.68FPS，验证可扩展实时评估方法。 <div>
+arXiv:2511.12018v2 Announce Type: replace 
+Abstract: Traffic safety analysis at signalized intersections is essential for reducing vehicle and pedestrian collisions, yet traditional crash-based studies are limited by data sparsity and reporting latency. This paper presents a multi-camera computer vision framework for real-time safety assessment through Post-Encroachment Time (PET) computation, demonstrated at the intersection of H Street and Broadway in Chula Vista, California. Four synchronized cameras provide continuous visual coverage, with frames processed on NVIDIA Jetson AGX Xavier edge devices using YOLOv11 segmentation for vehicle detection. Detected vehicle polygons are transformed into a unified bird's-eye map via homography, enabling alignment across overlapping camera views. A pixel-level PET algorithm tracks temporal occupancy at each spatial location by measuring the time between successive vehicle passages, enabling fine-grained hazard visualization through dynamic heatmaps with 3.3 sq-cm spatial resolution. Timestamped vehicle trajectories and PET data are stored in an SQL database for longitudinal analysis. Results across multiple time intervals demonstrate the framework's ability to identify high-risk regions with sub-second temporal sensitivity and real-time edge throughput, generating 800 x 800 logarithmic heatmaps at an average of 2.68 FPS. This paper validates decentralized vision-based PET analysis for intelligent transportation systems and presents a scalable methodology for high-resolution, real-time intersection safety evaluation.
+]]></content:encoded>
+<pubDate>Thu, 03 Sep 2026 00:00:00 -0400</pubDate>
+<pubDate>Thu, 03 Sep 2026 00:00:00 -0400</pubDate>
+</item>
 
 <item>
 <title>RW-LoRA: Communication-Efficient Decentralized LoRA Fine-Tuning via Random Walks</title>
