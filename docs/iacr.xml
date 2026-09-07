@@ -5,17 +5,139 @@
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
 <item>
+<title>On Compressing Linearly Shared Correlations</title>
+<link>https://eprint.iacr.org/2026/255</link>
+<guid>https://eprint.iacr.org/2026/255</guid>
+<content:encoded><![CDATA[
+<div> 相关随机性压缩 线性输出关联 伪随机相关函数 同态秘密分享 阈值共享
+<br><br>总结:1.推进相关随机性压缩，超越加性共享，覆盖线性输出关联与随机置换。2.提出无需iO的PCF/PCG构造，采用HSS、LPN/MQ等新假设与技术。3.给出三方伪随机置换PCF，可高效实例化，用于匿名广播与领导者选举。4.构造阈值共享PCG，支持NC1与部分常数度关联，依赖LPN和MQ假设。 <div>
+Compressing correlated randomness is a key component of secure computation protocols in the silent preprocessing model and has received significant attention in recent years. Most existing constructions target additive correlations, where the parties receive additive shares of a relation. Beyond additive correlations, much less is known: more general linear correlations can be compressed using pseudorandom secret sharing, generic constructions for richer linear-output correlations can be obtained by combining LWE-based multiparty HSS with share conversion, in regimes where the share-conversion overhead is efficient, and general correlations can be compressed using indistinguishability obfuscation.
+
+In this work, we advance the study of compression for useful forms of correlated randomness beyond additive output sharing (concretely,  linear-output correlations, together with a constrained variant capturing random permutations), without resorting to $iO$, introducing new techniques, new feasibility results, and relying on more diverse assumptions. We provide several constructions for pseudorandom correlation generators and functions using direct HSS- and LPN/MQ-based techniques. Concretely, we focus on two types of correlations in this work.
+
+First, we introduce pseudorandom permutation functions, where each party obtains a portion of a pseudorandom permutation $\pi$ over the set $\set{1,\dots, n}$, such that a single party learns nothing about the full permutation beyond its own output. We give a three-party construction of a pseudorandom correlation function (PCF) for permutations from homomorphic secret sharing satisfying a special share programmability property. This construction can be instantiated from a variety of standard assumptions and can even be concretely efficient (generating pseudorandom permutations in a fraction of a second). 
+We describe two applications of pseudorandom permutation functions: one in anonymous broadcast and the other in single secret leader election.
+
+Second, we introduce pseudorandom correlation generators for classical correlations (such as Beaver triples) where additive secret sharing is replaced with threshold secret sharing. We obtain pseudorandom correlation functions for degree-$1$ Shamir shares of $\mathsf{NC}^1$ correlations from a variety of standard assumptions. We also introduce two new PCG constructions for threshold-shared constant-degree correlations in the regimes where either the privacy threshold $t$ or $n-t$ is a constant. These constructions rely on the conjunction of the LPN and MQ assumptions.
+]]></content:encoded>
+<pubDate>Fri, 13 Feb 2026 16:07:54 +0000</pubDate>
+<pubDate>Fri, 13 Feb 2026 16:07:54 +0000</pubDate>
+</item>
+<item>
+<title>A General Approach to Adaptor Signatures</title>
+<link>https://eprint.iacr.org/2026/1889</link>
+<guid>https://eprint.iacr.org/2026/1889</guid>
+<content:encoded><![CDATA[
+<div> 适配器签名、公平交换、原子交换、NP关系、同态加密
+<br><br>总结:1.适配器签名支持公平交换、原子交换与条件支付；2.既有方案受限于特定NP关系和签名方案；3.新框架支持任意NP语言及广泛签名，兼容现有区块链；4.两类编译器借助二次同态加密、隐藏信道与电路私有全同态加密，涵盖Schnorr、ECDSA、BLS等；5.实现语句真值隐私，协议完成前买方不知语句真假。 <div>
+Adaptor signatures have emerged as a powerful contract-minimal mechanism for fair exchange on blockchains, enabling efficient and privacy-preserving atomic swaps and conditional payments. However, existing adaptor schemes are limited to narrow classes of NP relations (e.g., discrete logarithm secrets) and specific signature schemes, limiting their scope both in terms of constructions and applications.
+This work addresses this gap by presenting a new framework that supports arbitrary NP relations and a broad range of signature schemes, significantly extending the reach of adaptor signatures beyond prior works and broadening the design space for adaptor signature constructions. Our framework also yields adaptor signatures that are compatible with today's blockchain systems. More specifically, we devise two general compilers for adaptor signatures. First, we show how to efficiently lift adaptor signatures from structured languages (such as discrete log relations) to general NP languages with the help of degree-$2$ homomorphic encryption, resulting in adaptors for standard signature schemes and general NP languages. Secondly, we develop a compiler that transforms any signature scheme with a subliminal channel into an adaptor signature scheme for general NP languages using circuit-private fully homomorphic encryption. Signatures with subliminal channels enable the encoding of witnesses in the signing randomness, and include randomness-recoverable schemes like Schnorr, ECDSA, CL, BBS, as well as salted versions of deterministic signatures schemes like BLS and RSA. Both constructions achieve a novel property called statement truth privacy, which guarantees that a buyer learns nothing about the underlying statement, not even its truth, unless the protocol successfully completes.
+]]></content:encoded>
+<pubDate>Fri, 04 Sep 2026 14:08:21 +0000</pubDate>
+<pubDate>Fri, 04 Sep 2026 14:08:21 +0000</pubDate>
+</item>
+<item>
+<title>VERA: VERifiable Microarchitectural Monitoring for Adversarially Robust Edge AI</title>
+<link>https://eprint.iacr.org/2026/1887</link>
+<guid>https://eprint.iacr.org/2026/1887</guid>
+<content:encoded><![CDATA[
+<div> 边缘计算 对抗输入 硬件性能计数器 零知识范围证明 隐私保护检测
+<br><br>总结:
+1. 边缘模型需防范对抗输入，但现有黑盒检测难让远程所有者隐私验证。
+2. VERA用HPC捕捉推理微架构异常。
+3. 以ZKRP证明HPC值处于校准良性范围，不披露数据。
+4. 避免通用zk-SNARK开销，可交互或经Fiat-Shamir转为非交互。
+5. MNIST与CIFAR-10实验显示毫秒级验证、批量摊销，提供首个隐私保护密码证据框架。 <div>
+As machine learning increasingly moves to edge devices, model owners must trust predictions produced on devices and inputs outside their direct control. This trust is challenged by adversarial inputs, where carefully crafted perturbations can induce incorrect predictions. Existing black-box defenses can detect such inputs using microarchitectural signals, but provide no privacy-preserving mechanism for a remote model owner to verify the detection outcome.
+
+In this work, we introduce VERA, a framework for verifiable and privacy-preserving adversarial detection at the edge. VERA combines lightweight Hardware Performance Counter (HPC) monitoring with Zero-Knowledge Range Proofs (ZKRPs). Adversarial perturbations can alter internal activation patterns and consequently the microarchitectural behavior of inference, which can be captured through HPC measurements. Rather than revealing these potentially sensitive measurements, VERA allows an edge device to prove that a committed HPC value lies within a calibrated benign range without disclosing the value itself. This avoids the overhead of general-purpose zk-SNARKs and enables lightweight verification on resource-constrained devices.
+
+We formalize VERA as a black-box framework that can combine an HPC-based adversarial detector with an interactive ZKRP, which can also be made non-interactive using the Fiat--Shamir transform. We evaluate VERA against multiple adversarial attacks on MNIST and CIFAR-10. Our results show millisecond-scale verification overhead, with proof-generation costs amortizable across batches of inferences. To the best of our knowledge, VERA is the first framework to provide privacy-preserving cryptographic evidence that an edge inference exhibits microarchitectural behavior within a calibrated benign regime.
+]]></content:encoded>
+<pubDate>Fri, 04 Sep 2026 10:06:04 +0000</pubDate>
+<pubDate>Fri, 04 Sep 2026 10:06:04 +0000</pubDate>
+</item>
+<item>
+<title>Compact Lattice-Based NIZK Arguments for Set Membership and Ring Signatures without RO</title>
+<link>https://eprint.iacr.org/2026/1885</link>
+<guid>https://eprint.iacr.org/2026/1885</guid>
+<content:encoded><![CDATA[
+<div> 零知识证明、集合成员、标准模型、格密码、环签名
+<br><br>总结:
+1. 提出首个标准模型紧凑格NIZK集合成员证明，后量子且证明规模对数。
+2. 核心技术为多模数陷阱门Σ协议，以原生模数处理关系，兼容格累加器。
+3. 构造O(log R)·Ō(λ²)格环签名，统计匿名，基于Module-LWE/SIS。
+4. 提供广义Merkle累加器与消息绑定技术，去除一次性签名开销。 <div>
+Zero-knowledge proofs of set membership underpin privacy-preserving constructions such as ring signatures and anonymous credentials. Existing succinct constructions rely mainly on the Fiat--Shamir transform in the Random Oracle Model (ROM), while standard-model non-interactive proofs from post-quantum assumptions remain either generic and inefficient or asymptotically compact yet concretely impractical. A key obstacle is that existing lattice-based zero-knowledge systems operate over a single ambient modulus, forcing heterogeneous components to be homogenized, inflating parameters and weakening reductions.
+
+We introduce the first \emph{compact lattice-based NIZK arguments for set membership in the standard model} with proof size logarithmic in the set cardinality. Our construction matches the logarithmic proof size of accumulator-based ROM constructions while achieving post-quantum security without random oracles. The main technical ingredient is a new trapdoor $\Sigma$-protocol supporting linear relations modulo multiple heterogeneous moduli, allowing such relations to be handled at their native moduli without homogenization. This yields a modular approach to compact proofs compatible with lattice accumulators.
+
+As an application, we construct lattice-based ring signatures of size $O(\log R)\cdot \widetilde{O}(\lambda^{2})$ bits, improving the dependence on the security parameter $\lambda$ quadratically over the plain-model construction of Chatterjee et al. (CRYPTO~2021) while retaining optimal logarithmic dependence on the ring size $R$. Our construction is in the CRS model, which partly enables this improvement. The scheme achieves statistical anonymity and unforgeability under standard Module-LWE and Module-SIS assumptions.
+
+We also develop two additional tools of independent interest: (i) a generalized Merkle-tree accumulator over module lattices with base-$B$ decomposition, enabling finer efficiency--assumption trade-offs; and (ii) a message-binding technique that removes the need for costly lattice one-time signatures in standard-model ring signatures.
+]]></content:encoded>
+<pubDate>Thu, 03 Sep 2026 23:47:38 +0000</pubDate>
+<pubDate>Thu, 03 Sep 2026 23:47:38 +0000</pubDate>
+</item>
+<item>
+<title>Private Quantised Neural Network Inference</title>
+<link>https://eprint.iacr.org/2026/1880</link>
+<guid>https://eprint.iacr.org/2026/1880</guid>
+<content:encoded><![CDATA[
+<div> 隐私推理、安全多方计算、神经网络量化、Sharemind、VGG16
+<br><br>总结:
+1. 神经网络模型推理存在用户查询结果与模型参数泄露风险；2. 提出在Sharemind MPC框架下的隐私推理协议；3. 采用PyTorch张量级8bit量化，提高效率并兼容模型；4. 扩展常量轮数整数卷积、矩阵乘和重量化协议，并优化秘密共享位宽；5. 用于VGG16图像分类，在局域网中约24.3秒/图。 <div>
+Neural networks based machine learning models are used in many classification problems yet privacy issues in model usage are mostly unresolved. When a model owner provides their model to other parties for inference, either the model owner has to share the parameters of the model or the model user must share their query and result with the model owner. Depending on the usage scenario, the user’s query or query result could contain sensitive information that the model provider should not see. And on the other hand, the model parameters themselves could be a valuable business secret or leak private training data. In such cases, neural network inference must be performed in a privacy preserving manner, for example, using secure multi-party computation (MPC).
+
+We propose protocols for the private inference of neural networks and evaluate them within the Sharemind MPC secure computation framework. Our protocols are based on the per-tensor quantisation scheme in PyTorch which maps floating point model parameters to 8-bit integer values. Quantisation improves the efficiency of our protocols and our protocols are interoperable with models trained using PyTorch. We extend constant round integer convolution and matrix multiplication protocols for quantised model weights, propose constant round protocols for re-quantising values and analyse the optimal secret share bit width for efficient re-quantisation. The resulting protocols are used to evaluate the VGG16 image classification network with an amortised throughput of 24.3 s per image classification in a LAN setting.
+]]></content:encoded>
+<pubDate>Thu, 03 Sep 2026 11:53:33 +0000</pubDate>
+<pubDate>Thu, 03 Sep 2026 11:53:33 +0000</pubDate>
+</item>
+<item>
+<title>On the Round Complexity of Early Stopping</title>
+<link>https://eprint.iacr.org/2026/1878</link>
+<guid>https://eprint.iacr.org/2026/1878</guid>
+<content:encoded><![CDATA[
+<div> 密码学、esBA、早期停止、轮复杂度、区块链
+<br><br>总结:1.密码学常循“理论先提出，技术成熟后复兴实践”的路径；2.esBA依赖实际故障数的早期停止正呈类似趋势，虽未实用但因区块链等价值受关注；3.文献对“仅发送即终止”的末轮是否计轮不一致，影响紧界；4.提出区分收发轮与仅发送轮的细粒度计数；5.借此暴露缺口并给出新结果。 <div>
+A common pipeline of cryptographic research is: a theory paper asks an interesting question which triggers a line of works; then the problem remains dormant until technology catches up and makes the problem potentially relevant for practice; this triggers a renewed interest which at times pushes the originally theoretical ideas to practice. Several highly influential ideas have followed this pipeline: e.g., the original work on Oblivious RAMs by Goldreich and Ostrovsky [STOC'87\&90],  polynomial commitments by Kate, Zaverucha, and Goldberg [ASIACRYPT'10], and many others. A problem that shows early signs of this pattern is early-stopping Byzantine Agreement (esBA): esBA protocols whose round complexity depends on the number $f$ of {\em actually} faulty parties rather than on (an upper bound on) the number $t$ of {\em potentially} faulty parties. Although it is fair to say that esBA protocols are not (yet) within the practical realm, their potential to improve large scale distributed systems like blockchain ledgers has fueled a number of recent novel results pushing the envelope in esBA feasibility (e.g., Loss and Nielsen [EUROCRYPT'24] and Elsheimy, Loss, and Papamanthou [ASIACRYPT'24]).
+
+    The original starting point of this work has been to advance on the above feasibility questions. But as is common for problems following this trajectory, renewed interest often comes with observations about issues in the assumed definitions and models. Interestingly, our investigation revealed an issue with how the existing literature has been computing the round complexity of such protocols, which yields (previously unobserved) inconsistencies in the  literature of esBA and more generally of synchronous protocols. In a nutshell, the inconsistencies stem from the fact that the last round of several esBA protocols has parties terminating as soon as they send a message to other parties, i.e., they don't need to wait to receive messages sent to them in that round. So, should we count this as an extra round or not? As we observe, different works give different answers to this question, and the answer one adopts affects the claimed tightness of the corresponding bounds.
+
+    Building on the above observation, our work proposes a fine-grained manner of counting synchronous rounds that is both intuitive and resolves these inconsistencies. In a nutshell, our counting distinguishes between rounds in which parties might both send and receive messages, and rounds in which parties only need to send messages. Examining the existing literature through the lens of this round-counting methodology exposes gaps and new open questions in the relevant literature. We resolve these gaps and extend the landscape by several new results.
+]]></content:encoded>
+<pubDate>Thu, 03 Sep 2026 08:40:12 +0000</pubDate>
+<pubDate>Thu, 03 Sep 2026 08:40:12 +0000</pubDate>
+</item>
+<item>
+<title>Otter: A Provably MEV-Resilient Automated Market Maker via Surplus Redistribution</title>
+<link>https://eprint.iacr.org/2026/1877</link>
+<guid>https://eprint.iacr.org/2026/1877</guid>
+<content:encoded><![CDATA[
+<div> MEV, Otter, 批次AMM, 盈余再分配, 真实交易
+<br><br>总结:1.针对AMM的MEV与中心化；2.Otter作为两资产批次AMM，在共识抗审查且区块不拥挤时，让用户与builder真实交易成占优策略；3.防重排、注入sybil等获利，即使builder是交易者；4.用盈余再分配将剩余转给社区并补贴费用、奖励LP或降滑点；5.机制可最大化社会福利；证明共识抗审查必要，其安全可扩展应用层；并刻画兼容费用结构。 <div>
+Miner extractable value (MEV) in automated market makers allows block builders to profit from transaction ordering and injected trades, imposing costs on users and contributing to builder centralization. We introduce Otter (Optimal Truthful Trading with Excess Redistribution), a two-asset batch AMM that achieves provable MEV resilience when the consensus layer provides censorship resilience and block space is uncongested. In particular, Otter makes truthful behavior a dominant strategy for both users and builders. Consequently, a builder cannot profit from strategic deviations, including reordering bids or injecting sybil bids. These guarantees continue to hold even when the builder is itself a trader with intrinsic value. Moreover, we show that our mechanism maximizes social welfare, in a strong sense, within a natural class of mechanisms satisfying the desired game-theoretic properties.
+
+To achieve these guarantees, we introduce a new paradigm called surplus redistribution, which provably prevents residual surplus from being captured as MEV by redirecting it to the broader community. Specifically, the pool's output tokens need not be distributed entirely among the users in the current batch. Instead, any residual surplus may be transferred, for example, to a smart contract governed by the decentralized community. The accumulated surplus can subsequently be used to benefit community members in ways that preserve the mechanism's game-theoretic guarantees --- for example, by subsidizing traders' transaction fees, rewarding liquidity providers, or returning assets to the pool to reduce price impact and slippage for future traders.
+
+Our approach relies on the underlying consensus layer to provide censorship resilience. We motivate the necessity of this assumption through an impossibility result showing that the desired game-theoretic guarantees become unattainable when the builder is additionally allowed to censor transactions. Thus, our results also provide a mathematically formal demonstration of how consensus-level security guarantees can fundamentally expand what is achievable at the application (i.e., smart-contract) layer. Finally, we establish additional results characterizing the builder fee structures compatible with our desired incentive guarantees.
+]]></content:encoded>
+<pubDate>Thu, 03 Sep 2026 05:01:23 +0000</pubDate>
+<pubDate>Thu, 03 Sep 2026 05:01:23 +0000</pubDate>
+</item>
+
+<item>
 <title>Collusion-Resistant Constrained PRFs for Compute-&amp;-Compare Predicates from LWE</title>
 <link>https://eprint.iacr.org/2026/1874</link>
 <guid>https://eprint.iacr.org/2026/1874</guid>
 <content:encoded><![CDATA[
 <div> CPRF、LWE、抗共谋、两方PE/FE、功能纯化
-<br><br>总结:<br>1. 基于标准LWE设计首批抗共谋约束PRF，支持比较计算与带谓词范围两类非平凡表达约束。<br>2. 比较计算版可增强满足约束隐私，且具备几乎密钥同态。<br>3. 此前除前缀固定外无后量子抗共谋CPRF，表达谓词需混淆或多线性映射。<br>4. 应用得到对称两方PE/FE，突破仅内积谓词。<br>5. 提出功能纯化框架，系统消除清零攻击。 <div>
+<br /><br />总结:<br />1. 基于标准LWE设计首批抗共谋约束PRF，支持比较计算与带谓词范围两类非平凡表达约束。<br />2. 比较计算版可增强满足约束隐私，且具备几乎密钥同态。<br />3. 此前除前缀固定外无后量子抗共谋CPRF，表达谓词需混淆或多线性映射。<br />4. 应用得到对称两方PE/FE，突破仅内积谓词。<br />5. 提出功能纯化框架，系统消除清零攻击。 <div>
 We design the first collusion-resistant constrained PRFs (CPRFs) for a non-trivial and expressive class of constraints from standard LWE. The two predicate classes for which we design CPRFs are: compute-&-compare and predicated range constraints. We improve our CPRF for compute-&-compare predicates to also satisfy collusion-resistant constraint privacy. An additional feature of our CPRFs is that they also satisfy (almost-)key-homomorphic property. Prior to this work, we did not have any post-quantum collusion-resistant CPRF beyond prefixfixing constraints, and collusion-resistant CPRFs for expressive predicates relied on either code obfuscation or multilinear maps.
 
 As an immediate application, we obtain a two-sided predicate encryption (PE) and functional encryption (FE) for the compute-&-compare class in the symmetric-key setting. Prior to this work, we did not have any post-quantum construction for 2-sided PE/FE beyond inner product predicates. An important contribution of this work is to introduce a new framework of purifying functionality. The main motivation behind our new framework is to systematically eliminate zeroizing attacks, which have been a highly successful cryptanalysis paradigm for breaking various candidates for advanced cryptographic objects.
 ]]></content:encoded>
-<pubDate>Wed, 02 Sep 2026 22:43:08 +0000</pubDate>
 <pubDate>Wed, 02 Sep 2026 22:43:08 +0000</pubDate>
 </item>
 <item>
@@ -24,14 +146,13 @@ As an immediate application, we obtain a two-sided predicate encryption (PE) and
 <guid>https://eprint.iacr.org/2026/1872</guid>
 <content:encoded><![CDATA[
 <div> DNS隐私，单服务器PIR，RLWE，通信成本，私有查询
-<br><br>总结: 1.DNS设计重可靠与扩展，缺乏隐私，查询处理时仍可明文观察。2.提出单服务器PIR私有DNS查询，保护各服务器。3.设计优化DNS的新PIR协议，改进RLWE矩阵向量乘法，无需NTT友好模数、单密钥切换且低噪声。4.20亿条目库约80KB通信、服务器计算不足5秒，通信成本优于既有PIR。5.端到端解析小场景亚秒、查.com约264KB不足5秒，适合选择性隐私浏览。 <div>
+<br /><br />总结: 1.DNS设计重可靠与扩展，缺乏隐私，查询处理时仍可明文观察。2.提出单服务器PIR私有DNS查询，保护各服务器。3.设计优化DNS的新PIR协议，改进RLWE矩阵向量乘法，无需NTT友好模数、单密钥切换且低噪声。4.20亿条目库约80KB通信、服务器计算不足5秒，通信成本优于既有PIR。5.端到端解析小场景亚秒、查.com约264KB不足5秒，适合选择性隐私浏览。 <div>
 The Domain Name System (DNS) was conceived with reliability, speed, and scalability in mind, with limited consideration for privacy. Different solutions have been proposed to make DNS more privacy preserving, mostly focusing on confidentiality in transit and networking approaches to achieve unlinkability. However, DNS queries are still observable in plaintext during processing.
 
 In this work, we investigate how to achieve privacy against all involved servers through private DNS lookups via single-server private information retrieval (PIR). For this, we design a new PIR protocol that is optimized for the DNS setting. In addition to using ideas from NTTlessPIR (Li et al., CRYPTO 2024), we design a new algorithm to efficiently perform RLWE-based matrix-vector multiplication. As opposed to previous methods, it does not require NTT-friendly plaintext moduli, uses only a single key-switching key, and causes significantly lower noise growth.
 
 For a single database of 2 billion entries (the estimated number of domains in the world), our protocol allows clients to perform PIR queries with about 80KB of communication, and less than 5 seconds of server computation time. This outperforms all previous PIR schemes in terms of communication cost, at only slightly increased runtime. Additionally, our end-to-end evaluation of iterative DNS resolution across three nameservers shows sub-second lookups in smaller settings and under 5 seconds with 264KB communication for querying .com domains, which can be practical when used selectively for privacy-sensitive web browsing activities.
 ]]></content:encoded>
-<pubDate>Wed, 02 Sep 2026 17:54:49 +0000</pubDate>
 <pubDate>Wed, 02 Sep 2026 17:54:49 +0000</pubDate>
 </item>
 <item>
@@ -40,7 +161,7 @@ For a single database of 2 billion entries (the estimated number of domains in t
 <guid>https://eprint.iacr.org/2026/1871</guid>
 <content:encoded><![CDATA[
 <div> 云计算，同态加密，零知识证明，隐私计算，可验证外包
-<br><br>总结:
+<br /><br />总结:
 1. 云计算便于数据存储和外包计算，但用户担忧数据机密性。
 2. 传统密码学保护静态或传输数据，无法处理加密数据；同态加密可处理，但恶意云可能篡改结果。
 3. PEEV框架支持无密码学基础开发者编写加密程序、外包计算并验证正确性。
@@ -48,9 +169,7 @@ For a single database of 2 billion entries (the estimated number of domains in t
 Cloud computing has been a prominent technology that allows users to store their data and outsource intensive computations. However, users of cloud services are also concerned about protecting the confidentiality of their data against attacks that can leak sensitive information. Although traditional cryptography can be used to protect static data or data being transmitted over a network, it does not support processing of encrypted data. Homomorphic encryption can be used to allow processing directly on encrypted data, but a dishonest cloud provider can alter the computations performed, thus violating the integrity of the results. To overcome these issues, we propose PEEV (Parse, Encrypt, Execute, Verify), a framework that allows a developer with no background in cryptography to write programs operating on encrypted data, outsource computations to a remote server, and verify the correctness of the computations. The proposed framework relies on homomorphic encryption techniques as well as zero-knowledge proofs to achieve verifiable privacy-preserving computation. It supports practical deployments with low performance overheads and allows developers to express their encrypted programs in a high-level language, abstracting away the complexities of encryption and verification.
 ]]></content:encoded>
 <pubDate>Wed, 02 Sep 2026 17:37:18 +0000</pubDate>
-<pubDate>Wed, 02 Sep 2026 17:37:18 +0000</pubDate>
 </item>
-
 <item>
 <title>Anonymous Attribute-Based Signcryption: Definitions, Constructions, and Applications</title>
 <link>https://eprint.iacr.org/2026/1861</link>
@@ -13853,47 +13972,6 @@ Oblivious Transfer (OT) is a fundamental cryptographic primitive introduced near
 Secure two-party comparison, known as Yao's millionaires' problem, has been a fundamental challenge in privacy-preserving computation. It enables two parties to compare their inputs without revealing the exact values of those inputs or relying on any trusted third party. One elegant approach to secure computation is based on homomorphic encryption. Recently, building on this approach, Carlton et al. (CT-RSA 2018) and Bourse et al. (CT-RSA 2020) presented novel solutions for the problem of secure integer comparison. These protocols have demonstrated significantly improved performance compared to the well-known and frequently used DGK protocol (ACISP 2007 and Int. J. Appl. Cryptogr. 1(4),323–324, 2009). In this paper, we introduce a class of higher residuosity attacks, which can be regarded as an extension of the classical quadratic residuosity attack on the decisional Diffie-Hellman problem. We demonstrate that the small RSA subgroup decision problems, upon which both the CEK and BST protocols are based, are not difficult to solve when the prime base $p_0$ is small (e.g., \( p_0 < 100 \)). Under these conditions, the protocols achieve optimal overall performance. Furthermore, we offer recommendations for precluding such attacks, including one approach that does not adversely affect performance. We hope that these attacks can be applied to analyze other number-theoretic hardness assumptions.
 ]]></content:encoded>
 <pubDate>Wed, 26 Feb 2025 11:42:03 +0000</pubDate>
-</item>
-<item>
-<title>Traitor Tracing in Multi-sender Setting ($\textsf{TMCFE}$: Traceable Multi-client Functional Encryption)</title>
-<link>https://eprint.iacr.org/2025/364</link>
-<guid>https://eprint.iacr.org/2025/364</guid>
-<content:encoded><![CDATA[
-<div> 关键词：traitor tracing、functional encryption、multi-client functional encryption、traceable multi-client functional encryption、lattice-based security
-
-总结:<br />
-本文提出了一个新的密码学原语——可追踪多客户端功能加密（$\textsf{TMCFE}$），旨在解决多发送者环境下隐私保护联合计算中的背叛追溯问题。传统背叛追溯技术仅限于单一发送者场景，而本文概念性地将这一框架扩展到多发送者加密中，允许追踪来自接收者和发送者的秘密信息泄露源头。从技术层面，文章基于近期提出的强可承认性概念构建了一个通用编译器，该编译器能将具有弱可承认性的多客户端功能加密方案转化为具有强可承认性的方案，克服了现有挑战并可能在功能性加密领域具有广泛应用价值。此外，文中还提供了一种针对内积功能的基于晶格的安全实现$\textsf{TMCFE}$方案，该方案在标准假设下具备后量子安全性。 <div>
-Traitor tracing is a traditional cryptographic primitive designed for scenarios with multiple legitimate receivers. When the plaintext - that is, the output of decryption - is leaked and more than one legitimate receiver exists, it becomes imperative to identify the source of the leakage, a need that has motivated the development of traitor tracing techniques. Recent advances in standard encryption have enabled decryption outcomes to be defined in a fine-grained manner through the introduction of Functional Encryption (FE). Constructing FE schemes is intriguing, and achieving the tracing property adds an additional layer of complexity. Traitor tracing techniques have been actively developed for more than three decades, yet they have always remained within the same framework - a single sender responsible for encrypting all the data.
-
-However, fine-grained decryption is particularly useful when data originates from multiple sources, allowing for joint computation on personal data. This leads to the concept of multi-client functional encryption (MCFE), where multiple concurrent senders independently encrypt their data while agreeing on the decryption of a specific function (e.g., a statistical measure) computed on the aggregated data, without revealing any additional information. In the era of cloud computing and big data, privacy-preserving joint computation is crucial, and tracing the source of any breach by dishonest participants becomes essential. Thus, in this paper we take the first step toward addressing the tracing problem in the general context of joint computation with multiple senders. Our contributions are twofold:
-  - $\textbf{Conceptually:}$ We propose the first tracing model in the context of multi-sender encryption, namely $\textit{Traceable Multi-Client Functional Encryption}$ ($\textsf{TMCFE}$), which allows a pirate to extract secret information from both receivers and senders. Our model supports strong and naturally admissible decoders, removing artificial restrictions on the pirate decoder and thus addressing the shortcomings of existing traceable functional encryption schemes designed for the single-sender setting.
-  - $\textbf{Technically:}$ To achieve our conceptual objective, we build upon the recently introduced notion of strong admissibility for MCFE. Our main technical contribution is a generic compiler that transforms a large class of MCFE schemes with weak admissibility into schemes with strong admissibility. This compiler not only helps overcome existing challenges but may also be of general interest within the functional encryption domain. Finally, we present a concrete lattice-based scheme $\textsf{TMCFE}$ for inner-product functionalities that achieves post-quantum security under standard assumptions.
-]]></content:encoded>
-<pubDate>Wed, 26 Feb 2025 10:11:10 +0000</pubDate>
-</item>
-<item>
-<title>Identity-based Matchmaking Encryption with Stronger Security and Instantiation on Lattices</title>
-<link>https://eprint.iacr.org/2022/1718</link>
-<guid>https://eprint.iacr.org/2022/1718</guid>
-<content:encoded><![CDATA[
-<div> 关键词:身份基匹配加密(IB-ME), 匿名性, 认证安全性, 量子攻击, 环境适应性<br /><br />总结:
-本文针对现有的身份基匹配加密(IB-ME)方案在对抗量子攻击和可能存在的潜在威胁方面的不足，提出了更强的安全定义——考虑了新的攻击方式以适应现实世界场景。文中首先提出了一种基于两层匿名层级身份基加密(HIBE)和身份基签名(IBS)的IB-ME通用构建方法。此外，为了提升基于格的IB-ME效率，文章还改进了一个基于格的IBS，缩短其签名长度，从而减少了最终IB-ME密文的大小。通过将改进后的IBS与任何具备匿名性和适应性安全性的二级基于格的HIBE相结合，最终实现了首个直接实现IB-ME的基于格的构造方案。 <div>
-An identity-based matchmaking encryption (IB-ME) scheme proposed at JOC 2021 supports anonymous but authenticated communications in a way that communication parties can both specify the senders or receivers on the fly. IB-ME is easy to be used in several network applications requiring privacy-preserving for its efficient implementation and special syntax. In the literature, IB-ME schemes are built from the variants of Diffie-Hellman assumption and all fail to retain security for quantum attackers. Despite the rigorous security proofs in previous security models, the existing schemes are still possibly vulnerable to some potential neglected attacks. Aiming at the above problems, we provide a stronger security definition of authenticity considering new attacks to fit real-world scenarios and then propose a generic construction of IB-ME satisfying the new model. Inspired by the prior IB-ME construction of Chen et al., the proposed scheme is constructed by combining 2-level anonymous hierarchical IBE (HIBE) and identity-based signature (IBS) schemes. In order to upgrade lattice-based IB-ME with better efficiency, we additionally improve a lattice IBS, as an independent technical contribution, to shorten its signature and thus reduce the final IB-ME ciphertext size. By combining the improved IBS and any 2-level adaptively-secure lattice-based HIBE with anonymity, we finally obtain the first lattice-based construction that implements IB-ME directly.
-]]></content:encoded>
-<pubDate>Mon, 12 Dec 2022 08:03:11 +0000</pubDate>
-</item>
-<item>
-<title>OCash: Fully Anonymous Payments between Blockchain Light Clients</title>
-<link>https://eprint.iacr.org/2024/246</link>
-<guid>https://eprint.iacr.org/2024/246</guid>
-<content:encoded><![CDATA[
-<div> 关键词: 区块链、匿名支付系统、轻客户端、全节点、UC模型
-
-总结:
-本文研究了一种基于区块链的轻客户端之间的可验证匿名支付系统。该系统中，轻客户端通过全节点与区块链交互，而全节点可以看到轻客户端的读写操作。文章旨在实现即使在面对能观察到数据元素移动情况的全节点情况下，也能保障轻客户端进行匿名支付并维持隐私的目标。作者在UC模型下对问题进行了形式化定义，并提出了一种可证明安全的解决方案。他们展示了一种树ORAM的变体可以实现即使对手能够追踪其自身数据元素在树中的移动也能够保持无感知性。利用这一特性，文章实现了在区块链上的支付混淆以保证匿名性，同时允许轻客户端在不知道当前区块链状态的情况下知道其支付可能存在的几个位置。相较于现有工作，本文首次同时提供了强匿名性保证、可证明的安全性和针对全节点的匿名性。此外，文中还做出了一些独立贡献，包括定义并构建了适用于匿名支付系统的匿名币友好加密方案，以及定义和构造了高效的可压缩随机性信标，这种信标能够在规定时间间隔内生成不可预测的值，并能将其所有发布的值存储在一个简短的摘要中。 <div>
-We study blockchain-based provably anonymous payment systems between light clients. Such clients interact with the blockchain through full nodes, which can see what the light clients read and write. The goal of our work is to enable light clients to perform anonymous payments, while maintaining privacy even against the full nodes through which they interact with the blockchain. We formalize the problem in the UC model and present a provably secure solution. We show that a variation of tree ORAM gives obliviousness even when an adversary can follow how its own data elements move in the tree. We use this for anonymity via shuffling of payments on the blockchain, while at the same time allowing the light client to know a few positions among which to find its payment without knowing the current state of the blockchain. In comparison to existing works, we are the first ones that simultaneously provide strong anonymity guarantees, provable security, and anonymity with respect to full nodes. Along the way, we make several contributions that may be of independent interest. We define and construct anonymous-coin friendly encryption schemes and show how they can be used within anonymous payment systems. We define and construct efficient compressible randomness beacons, which produce unpredictable values in regular intervals and allow for storing all published values in a short digest.
-]]></content:encoded>
-<pubDate>Thu, 15 Feb 2024 14:42:02 +0000</pubDate>
 </item>
 </channel>
 </rss>
