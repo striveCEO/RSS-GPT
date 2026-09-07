@@ -4,6 +4,52 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+<item>
+<title>Collusion-Resistant Constrained PRFs for Compute-&amp;-Compare Predicates from LWE</title>
+<link>https://eprint.iacr.org/2026/1874</link>
+<guid>https://eprint.iacr.org/2026/1874</guid>
+<content:encoded><![CDATA[
+<div> CPRF、LWE、抗共谋、两方PE/FE、功能纯化
+<br><br>总结:<br>1. 基于标准LWE设计首批抗共谋约束PRF，支持比较计算与带谓词范围两类非平凡表达约束。<br>2. 比较计算版可增强满足约束隐私，且具备几乎密钥同态。<br>3. 此前除前缀固定外无后量子抗共谋CPRF，表达谓词需混淆或多线性映射。<br>4. 应用得到对称两方PE/FE，突破仅内积谓词。<br>5. 提出功能纯化框架，系统消除清零攻击。 <div>
+We design the first collusion-resistant constrained PRFs (CPRFs) for a non-trivial and expressive class of constraints from standard LWE. The two predicate classes for which we design CPRFs are: compute-&-compare and predicated range constraints. We improve our CPRF for compute-&-compare predicates to also satisfy collusion-resistant constraint privacy. An additional feature of our CPRFs is that they also satisfy (almost-)key-homomorphic property. Prior to this work, we did not have any post-quantum collusion-resistant CPRF beyond prefixfixing constraints, and collusion-resistant CPRFs for expressive predicates relied on either code obfuscation or multilinear maps.
+
+As an immediate application, we obtain a two-sided predicate encryption (PE) and functional encryption (FE) for the compute-&-compare class in the symmetric-key setting. Prior to this work, we did not have any post-quantum construction for 2-sided PE/FE beyond inner product predicates. An important contribution of this work is to introduce a new framework of purifying functionality. The main motivation behind our new framework is to systematically eliminate zeroizing attacks, which have been a highly successful cryptanalysis paradigm for breaking various candidates for advanced cryptographic objects.
+]]></content:encoded>
+<pubDate>Wed, 02 Sep 2026 22:43:08 +0000</pubDate>
+<pubDate>Wed, 02 Sep 2026 22:43:08 +0000</pubDate>
+</item>
+<item>
+<title>DNSPIR: Private Information Retrieval Optimized for Privacy-Preserving DNS Lookups</title>
+<link>https://eprint.iacr.org/2026/1872</link>
+<guid>https://eprint.iacr.org/2026/1872</guid>
+<content:encoded><![CDATA[
+<div> DNS隐私，单服务器PIR，RLWE，通信成本，私有查询
+<br><br>总结: 1.DNS设计重可靠与扩展，缺乏隐私，查询处理时仍可明文观察。2.提出单服务器PIR私有DNS查询，保护各服务器。3.设计优化DNS的新PIR协议，改进RLWE矩阵向量乘法，无需NTT友好模数、单密钥切换且低噪声。4.20亿条目库约80KB通信、服务器计算不足5秒，通信成本优于既有PIR。5.端到端解析小场景亚秒、查.com约264KB不足5秒，适合选择性隐私浏览。 <div>
+The Domain Name System (DNS) was conceived with reliability, speed, and scalability in mind, with limited consideration for privacy. Different solutions have been proposed to make DNS more privacy preserving, mostly focusing on confidentiality in transit and networking approaches to achieve unlinkability. However, DNS queries are still observable in plaintext during processing.
+
+In this work, we investigate how to achieve privacy against all involved servers through private DNS lookups via single-server private information retrieval (PIR). For this, we design a new PIR protocol that is optimized for the DNS setting. In addition to using ideas from NTTlessPIR (Li et al., CRYPTO 2024), we design a new algorithm to efficiently perform RLWE-based matrix-vector multiplication. As opposed to previous methods, it does not require NTT-friendly plaintext moduli, uses only a single key-switching key, and causes significantly lower noise growth.
+
+For a single database of 2 billion entries (the estimated number of domains in the world), our protocol allows clients to perform PIR queries with about 80KB of communication, and less than 5 seconds of server computation time. This outperforms all previous PIR schemes in terms of communication cost, at only slightly increased runtime. Additionally, our end-to-end evaluation of iterative DNS resolution across three nameservers shows sub-second lookups in smaller settings and under 5 seconds with 264KB communication for querying .com domains, which can be practical when used selectively for privacy-sensitive web browsing activities.
+]]></content:encoded>
+<pubDate>Wed, 02 Sep 2026 17:54:49 +0000</pubDate>
+<pubDate>Wed, 02 Sep 2026 17:54:49 +0000</pubDate>
+</item>
+<item>
+<title>PEEV: Parse Encrypt Execute Verify - A Verifiable FHE Framework</title>
+<link>https://eprint.iacr.org/2026/1871</link>
+<guid>https://eprint.iacr.org/2026/1871</guid>
+<content:encoded><![CDATA[
+<div> 云计算，同态加密，零知识证明，隐私计算，可验证外包
+<br><br>总结:
+1. 云计算便于数据存储和外包计算，但用户担忧数据机密性。
+2. 传统密码学保护静态或传输数据，无法处理加密数据；同态加密可处理，但恶意云可能篡改结果。
+3. PEEV框架支持无密码学基础开发者编写加密程序、外包计算并验证正确性。
+4. 它结合同态加密与零知识证明，实现低开销、可验证的隐私计算，并用高级语言抽象复杂性。 <div>
+Cloud computing has been a prominent technology that allows users to store their data and outsource intensive computations. However, users of cloud services are also concerned about protecting the confidentiality of their data against attacks that can leak sensitive information. Although traditional cryptography can be used to protect static data or data being transmitted over a network, it does not support processing of encrypted data. Homomorphic encryption can be used to allow processing directly on encrypted data, but a dishonest cloud provider can alter the computations performed, thus violating the integrity of the results. To overcome these issues, we propose PEEV (Parse, Encrypt, Execute, Verify), a framework that allows a developer with no background in cryptography to write programs operating on encrypted data, outsource computations to a remote server, and verify the correctness of the computations. The proposed framework relies on homomorphic encryption techniques as well as zero-knowledge proofs to achieve verifiable privacy-preserving computation. It supports practical deployments with low performance overheads and allows developers to express their encrypted programs in a high-level language, abstracting away the complexities of encryption and verification.
+]]></content:encoded>
+<pubDate>Wed, 02 Sep 2026 17:37:18 +0000</pubDate>
+<pubDate>Wed, 02 Sep 2026 17:37:18 +0000</pubDate>
+</item>
 
 <item>
 <title>Anonymous Attribute-Based Signcryption: Definitions, Constructions, and Applications</title>
