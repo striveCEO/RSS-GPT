@@ -5,12 +5,35 @@
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
 <item>
+<title>Logstar: Efficient Linear* Time Secure Merge</title>
+<link>https://eprint.iacr.org/2024/159</link>
+<guid>https://eprint.iacr.org/2024/159</guid>
+<content:encoded><![CDATA[
+<div> 安全合并,秘密共享,有序列表,通信带宽,轮次优化
+<br><br>总结:
+1.安全合并：两有序列表→有序秘密共享列表，用于SQL连接等。
+2.Logstar带宽优化：O(nlog*n)、O(logn)轮；Median轮次优化：O(nlog^1.71n)通信、O(loglogn)轮。
+3.SquareRootMerge/CubeRootMerge支持不等长，O(n)，O(logn)或O(1)轮。
+4.两方实测优于Batcher/通用排序，n=2^20降在线通信或轮次。 <div>
+Secure merge considers the problem of combining two sorted lists into a single sorted secret-shared list. Merge is a fundamental building block for many real-world applications. For example, secure merge can implement a large number of SQL-like database joins, which are essential for almost any data processing task such as privacy-preserving fraud detection, ad conversion rates, data deduplication, and many more.
+
+We present two constructions with a communication bandwidth and rounds tradeoff. Logstar, our bandwidth-optimized construction, takes inspiration from Falk and Ostrovsky (ITC, 2021) and runs in  $O(n\log^*n)$ time and communication with $O(\log n)$ rounds. In particular, for all conceivable $n$, the $\log^*n$ factor will be equal to the constant $2$, and therefore we achieve a near-linear running time. Median, our rounds-optimized construction, builds on the classic parallel medians-based insecure merge approach of Valiant (SIAM J. Comput., 1975), later explored in the secure setting by Blunk et al. (ITC, 2025), and requires $O(n \log^c n)$, $c \approx 1.71$, communication with $O(\log \log n)$ rounds. 
+
+We introduce two additional constructions that merge input lists of different sizes. SquareRootMerge merges lists of sizes $n^{\frac{1}{2}}$ and $n$ and runs in $O(n)$ time and communication with $O(\log n)$ rounds. CubeRootMerge is closely inspired by Blunk et al.'s (ITC, 2025) construction and merges lists of sizes $n^{\frac{1}{3}}$ and $n$. It runs in $O(n)$ time and communication with $O(1)$ rounds.
+
+We optimize our constructions for concrete efficiency. Despite extensive research, efficient secure merge still relies on Batcher's merging network or generic sorting, with $O(n\log n)$ circuit size and $O(\log n)$ depth. Ours are the first constructions to lower their concrete costs through better asymptotics and small constants. Two-party implementations of all four protocols show that, for $n=2^{20}$ 32-bit elements per list, Logstar reduces online communication by $2.09\times$ versus Batcher and $3.69\times$ versus shuffled quicksort. Median reduces Batcher's online rounds by $19.0\%$, using $2.03\times$ its online communication. For unequal inputs, SquareRootMerge and CubeRootMerge reduce Batcher's online communication by $3.34\times$ and $4.69\times$, respectively.
+]]></content:encoded>
+<pubDate>Sat, 03 Feb 2024 01:07:24 +0000</pubDate>
+<pubDate>Sat, 03 Feb 2024 01:07:24 +0000</pubDate>
+</item>
+
+<item>
 <title>Decentralized Multi-Authority Functional Encryption with Malicious Authorities from Standard Assumptions</title>
 <link>https://eprint.iacr.org/2025/412</link>
 <guid>https://eprint.iacr.org/2025/412</guid>
 <content:encoded><![CDATA[
 <div> 去中心化MAFE、最简假设、合谋抵抗、SXDH/LWE、同步构造
-<br><br>总结:
+<br /><br />总结:
 1.为P/Poly电路在最简假设下构造去中心化MAFE：有界合谋用公钥加密，完全抗合谋用功能加密。
 2.在SXDH/LWE假设下，若C(n,k)为多项式，可容忍腐蚀k个授权，覆盖常数或对数级参数。
 3.超过O(logλ)且参数非平凡紧凑时蕴含不可区分混淆，方案在宽参数区间本质最优。
@@ -22,9 +45,7 @@ Under the additional assumption of SXDH or LWE, our constructions remain secure 
 Along the way, we introduce two abstractions, MAFE with $\textit{synchronous setup}$ and $\textit{synchronous key generation} $ that provide a path to constructing multi-authority encryption schemes from their centralized counterparts, and may be useful for designing other multi-authority encryption systems.
 ]]></content:encoded>
 <pubDate>Tue, 04 Mar 2025 14:22:01 +0000</pubDate>
-<pubDate>Tue, 04 Mar 2025 14:22:01 +0000</pubDate>
 </item>
-
 <item>
 <title>A Tight Analysis of GHOST Consistency</title>
 <link>https://eprint.iacr.org/2024/1830</link>
@@ -13850,23 +13871,6 @@ can make our framework appealing when a garbled circuit is used as a functional 
 Presenting a novel use of encryption, not for hiding a secret, but for marking letters.  Given a 2n letters plaintext, the transmitter encrypts the first n letters with  key K1 to generate corresponding n cipherletters, and encrypts the second n letters with key K2 to generate n corresponding cipherletters. The transmitter sends the 2n cipherletters along with the keys, K1 and K2  The recipient (and any interceptor) will readily decrypt the 2n cipherletters to the original plaintext.  This makes the above procedure equivalent to sending out the plaintext.  So why bother?  When decrypting the 2n cipherletters one will make a note of how the letters that were encrypted with K1 are mixed with the letters encrypted with K2 while keeping the original order of the letters encrypted with each key. There are 2^n possible mixings. Which means that the choice of mixing order can deliver a secret message, S,  comprising n bits. So while on the surface a given plaintext is sent out from transmitter to recipient, this plaintext hides a secret.  Imagine a text messaging platform that uses this protocol. An adversary will not know which plain innocent message harbors a secret message.  This allows residents of cyberspace to communicate secrets without exposing the fact that they communicated a secret. Expect a big impact on the level of cyberspace privacy.
 ]]></content:encoded>
 <pubDate>Fri, 07 Mar 2025 03:08:44 +0000</pubDate>
-</item>
-<item>
-<title>The 2Hash OPRF Framework and Efficient Post-Quantum Instantiations</title>
-<link>https://eprint.iacr.org/2024/450</link>
-<guid>https://eprint.iacr.org/2024/450</guid>
-<content:encoded><![CDATA[
-<div> 关键词：Oblivious Pseudo-Random Function (OPRF)，量子安全，多党计算，Legendre符号，AES加密
-
-总结:<br />
-本文提出了一种基于后量子多党计算构建Oblivious Pseudo-Random Function (OPRF)的框架。该框架关注一类被称为“2Hash PRFs”的构造，它们将函数评估置于两个哈希操作之间。核心是一个编译器，能从任何具有抗键碰撞和一更多不可预测性的函数生成OPRF。文章通过使用Legendre符号和AES加密提供了满足要求的此类函数实例，并设计了一个针对Legendre基函数的安全评估协议，该协议结合了盲转移(OT)和零知识证明(ZKP)。当使用基于晶格的OT和ZKPs实现时，文中提出的量子安全OPRF能在0.57秒内完成，通信量少于1MB。 <div>
-An Oblivious Pseudo-Random Function (OPRF) is a two-party protocol for jointly evaluating a Pseudo-Random Function (PRF), where a user has an input x and a server has an input k. At the end of the protocol, the user learns the evaluation of the PRF using key k at the value x, while the server learns nothing about the user's input or output. 
-
-OPRFs are a prime tool for building secure authentication and key exchange from passwords, private set intersection, private information retrieval, and many other privacy-preserving systems. While classical OPRFs run as fast as a TLS Handshake, current *quantum-safe* OPRF candidates are still practically inefficient. 
-
-In this paper, we propose a framework for constructing OPRFs from post-quantum multi-party computation. The framework captures a family of so-called "2Hash PRFs", which sandwich a function evaluation in between two hashes. The core of our framework is a compiler that yields an OPRF from a secure evaluation of any function that is key-collision resistant and one-more unpredictable. We instantiate this compiler by providing such functions built from Legendre symbols, and from AES encryption. We then give a case-tailored protocol for securely evaluating our Legendre-based function, built from oblivious transfer (OT) and zero-knowledge proofs (ZKP). Instantiated with lattice-based OT and ZKPs, we obtain a quantum-safe OPRF that completes in 0.57 seconds, with less than 1MB of communication.
-]]></content:encoded>
-<pubDate>Fri, 15 Mar 2024 15:52:21 +0000</pubDate>
 </item>
 </channel>
 </rss>
