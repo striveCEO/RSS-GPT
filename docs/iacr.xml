@@ -5,17 +5,122 @@
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
 <item>
+<title>From Specs to Apps: Verifying and Monitoring Models of Signal and WhatsApp</title>
+<link>https://eprint.iacr.org/2026/1979</link>
+<guid>https://eprint.iacr.org/2026/1979</guid>
+<content:encoded><![CDATA[
+<div> Signal协议, SpecMon, 形式化模型, Tamarin, WhatsApp<br><br>总结:
+1.弥合Signal规范与运行时实现差距。
+2.用SpecMon插桩WhatsApp Web、Signal Desktop，采集网络/密码交互，建兼容Tamarin的多集重写模型（首见WhatsApp Web，最详Signal）。
+3.可信事件提取、符号抽象下验证符合模型，核心认证与保密成立，发现libsignal与WhatsApp分支差异。
+4.方法可复现，约3人周，低开销，可检测注入故障。 <div>
+The Signal protocol is a prominent messaging protocol that se-
+cures communication for billions of users. It powers WhatsApp,
+the most widely used messaging application worldwide, and the
+Signal app, popular among privacy-conscious users. Extensive re-
+search in the computational and Dolev-Yao settings provides strong
+formal security guarantees for the protocol itself. However, a gap
+remains between the guarantees of the protocol specification and
+the implementation’s actual behavior at runtime.
+
+In this work, we bridge this gap by applying SpecMon, a recently
+proposed runtime monitor, to check whether observed executions
+conform to formal protocol models. To this end, we instrument two
+applications (WhatsApp Web and Signal Desktop) to capture their
+interactions with the network and the cryptographic components.
+Using this instrumentation, we develop two multiset-rewrite models
+that are compatible with Tamarin, thus enabling verification. We
+derive the first model of WhatsApp Web’s implementation of the
+Signal protocol and the most detailed model to date of Signal’s
+original protocol. Monitoring establishes that observed executions
+conform to these models, relative to the trusted event extraction
+and the symbolic abstraction. For the core components of the Signal
+protocol, we verify authentication and secrecy properties. Finally,
+monitoring reveals previously undocumented differences between
+the original libsignal library and WhatsApp’s fork.
+
+We evaluate our methodology and demonstrate its reproducibil-
+ity. Developing the WhatsApp Web model, instrumenting the app,
+adding fuzzing, and running the experiments took three person-
+weeks. We also demonstrate efficient monitoring of real-world
+applications and detection of deliberately injected security faults,
+with low overhead in our measured setting.
+]]></content:encoded>
+<pubDate>Fri, 11 Sep 2026 11:52:32 +0000</pubDate>
+<pubDate>Fri, 11 Sep 2026 11:52:32 +0000</pubDate>
+</item>
+<item>
+<title>Oblivious Signaling</title>
+<link>https://eprint.iacr.org/2026/1975</link>
+<guid>https://eprint.iacr.org/2026/1975</guid>
+<content:encoded><![CDATA[
+<div> 匿名消息、全同态加密、接收者隐私、固定收件箱、数字邮资
+<br><br>总结: 1.匿名消息服务需在隐藏收件人的同时传递密文；2.OMR借助FHE让不可信服务器代为检索；3.提出Oblivious Signaling，将成本从检索转向发送，服务器对固定加密收件箱做统一同态更新；4.接收者只需获取并解密自身收件箱，检查不受全局流量影响；5.给出FHE构造、隐私证明与数字邮资权衡：投递贵、检查便宜，适合频繁检查且消息零星，并可抑制垃圾。 <div>
+An anonymous messaging service has to solve a basic routing problem: a server must deliver an encrypted message to its recipient without learning who the recipient is. Broadcasting all ciphertexts hides the destination but forces every recipient to constantly scan for new messages. Oblivious Message Retrieval (OMR; CRYPTO~'22) tackles this by using fully homomorphic encryption (FHE) to let an untrusted server perform message retrieval on a recipient's behalf without learning which messages are pertinent.
+
+
+We introduce Oblivious Signaling, which shifts this cost from retrieval to sending. The server maintains a fixed-size encrypted inbox for each recipient. When a sender submits a message, the server applies the same homomorphic update to every inbox: the intended inbox absorbs the message, and the rest remain unchanged at the plaintext level. The update is uniform, can be parallelized across inboxes, and ties the delivery cost strictly to the size of the anonymity set rather than global traffic. Recipients retrieve by fetching and decrypting their inbox, so checking for new messages is independent of the global traffic.
+
+We formalize receiver privacy against an untrusted server, even when it colludes with other users, give a concrete construction based on fully homomorphic encryption, and analyze the resulting "digital postage'' trade-off: delivery is expensive, but checking is cheap. Our prototype identifies practical regimes in which this cost-model shift is preferable to scan-based retrieval, even with highly optimized OMR implementations. This cost model is well-suited to settings where recipients check frequently, and messages arrive sporadically, and it naturally discourages high-volume spam.
+]]></content:encoded>
+<pubDate>Fri, 11 Sep 2026 02:14:00 +0000</pubDate>
+<pubDate>Fri, 11 Sep 2026 02:14:00 +0000</pubDate>
+</item>
+<item>
+<title>Azkaban: A Zero-Knowledge Abstract Analysis for Neural Networks</title>
+<link>https://eprint.iacr.org/2026/1967</link>
+<guid>https://eprint.iacr.org/2026/1967</guid>
+<content:encoded><![CDATA[
+<div> 零知识证明,DNN认证,抽象解释,可证性,有限域
+<br><br>总结: 1.DNN敏感应用需证明鲁棒性与公平性。2.现有ZK认证因定点和舍入误差不可靠。3.AZKABAN提出端到端可靠的抽象解释系统。4.设计安全有限域区间、内积、除法算子，防止非线性激活泄露隐私。5.支持前馈与卷积网络，公平证明提速百倍，扩展更大模型，并首次提供ZK鲁棒认证。 <div>
+Deep neural networks (DNNs) are increasingly used in sensitive applications, where certifying properties such as adversarial robustness and fairness is crucial. Several recent works propose DNN certification systems using zero-knowledge proofs (ZKPs)— cryptographic primitives that allow verifying certificates while maintaining confidentiality of the model. While certification algorithms typically treat the DNN as a function over reals, naively translating these algorithms into finite-precision implementations can result in unsound certification due to rounding errors. In ZKPs, this unsoundness is amplified due to a larger precision loss from fixed-point arithmetic emulated using finite fields. In this work, we highlight an overlooked gap in the soundness of prior protocols. We propose AZKABAN, a system for zero-knowledge abstract interpretation-based analysis with end-to-end soundness. We introduce operators for sound interval analysis over finite-fields, including efficient ZKP-amenable algorithms for inner-products and division, while preventing privacy leaks due to non-linear activations. We implement our system which is comprehensive in terms of supporting both feed-forward and convolutional neural networks. AZKABAN improves over the state-of-the-art ZK individual fairness certification protocol by up to two orders of magnitude in end-to-end proof time. Further, it scales to much larger models than those considered in the state-of-the-art. AZKABAN also provides, to our knowledge, the first solution for ZK robustness certification.
+]]></content:encoded>
+<pubDate>Thu, 10 Sep 2026 15:25:47 +0000</pubDate>
+<pubDate>Thu, 10 Sep 2026 15:25:47 +0000</pubDate>
+</item>
+<item>
+<title>Design and Analysis of Isogeny-Based Strong Designated Verifier Signature</title>
+<link>https://eprint.iacr.org/2026/1966</link>
+<guid>https://eprint.iacr.org/2026/1966</guid>
+<content:encoded><![CDATA[
+<div> 后量子签名 指定验证者签名 CSIDH 身份隐私 签名攻击
+<br><br>总结:
+1. 背景：后量子强指定验证者签名需兼顾认证、签名者隐私、模拟与效率。
+2. 问题：CSI-SDVS响应设计z_i=b_i-s_i泄露签名者身份。
+3. 攻击：通过PSI实验可重建随机性并识别真实签名者，3万次执行主实验与η=1、2、4、8均100%成功。
+4. 改进：提出基于同源的新签名，证明正确性、不可转移性、隐私与随机预言下强不可伪造性。
+5. 效率：η=1时签名113字节，大于49字节，签名者密钥尺寸不变。 <div>
+Strong designated-verifier signatures provide authentication while restricting verification to a chosen verifier and protecting the signer from transferable evidence. Designing such signatures in the post-quantum setting is challenging because authentication, signer privacy, simulation, and efficiency must be achieved simultaneously. Recently, Renan proposed CSI-SDVS, a compact post-quantum strong designated-verifier signature scheme built from CSIDH-style commutative isogeny class-group actions. We show that its response design, $z_i=b_i-s_i$, breaks privacy of the signer's identity: because the PSI experiment reveals both candidate signer secret keys, an adversary can reconstruct the signing randomness and identify the actual signer with overwhelming probability. We validate the attack over 30,000 executions, obtaining 100\% signer identification in the main 128-bit experiment and for $\eta\in \{1,2,4,8\}$. In the following, we propose an isogeny-based strong designated verifier signature. We prove correctness, non-transferability, signer privacy, and strong unforgeability under Gap Parallelization in the random-oracle model. For $\eta=1$, the redesigned signature is 113 bytes compared with 49 bytes in CSI-SDVS, while signer key sizes remain unchanged.
+]]></content:encoded>
+<pubDate>Thu, 10 Sep 2026 15:01:44 +0000</pubDate>
+<pubDate>Thu, 10 Sep 2026 15:01:44 +0000</pubDate>
+</item>
+<item>
+<title>Three-Round Weak Non-Malleable Zero-Knowledge Argument</title>
+<link>https://eprint.iacr.org/2026/1964</link>
+<guid>https://eprint.iacr.org/2026/1964</guid>
+<content:encoded><![CDATA[
+<div> 非可延展零知识、中间人攻击、标准假设、三回合、弱非可延展
+<br><br>总结:①已知弱非可延展零知识论证在明文模型至少需四回合；②本文首次在标准假设下给出三回合构造；③满足弱零知识与ε非可延展，允许中间人与独立实验间多项式倒数概率差；④依赖两消息不经意传输、延迟输入WI论证、非交互承诺、电路隐私全同态加密。 <div>
+Non-malleable zero-knowledge argument(NMZK) is a strong notion of zero-knowledge argument that ensures security against man-in-the-middle(MIM) attacks. While three-round constructions exist for various weak zero-knowledge arguments under standard assumptions, all known (weak) NMZK protocols in the plain model have required at least four rounds.
+
+In this work, we construct the \emph{first three-round weak non-malleable zero-knowledge argument} under standard cryptographic assumptions. Our protocol satisfies weak zero-knowledge and $\epsilon$-non-malleability, where the latter allows an $\epsilon$ probability gap between the MIM experiment and the stand-alone experiment for any polynomial inverse $\epsilon$. Our construction relies only on well-established primitives, such as the existence of two-message oblivious transfer protocols and delayed-input WI arguments, non-interactive commitments, and circuit-privacy fully homomorphic encryptions.
+]]></content:encoded>
+<pubDate>Thu, 10 Sep 2026 12:14:17 +0000</pubDate>
+<pubDate>Thu, 10 Sep 2026 12:14:17 +0000</pubDate>
+</item>
+
+<item>
 <title>VAHANA: Hardware-Aware Noise Addition Against Gradient Inversion Attacks</title>
 <link>https://eprint.iacr.org/2026/1936</link>
 <guid>https://eprint.iacr.org/2026/1936</guid>
 <content:encoded><![CDATA[
 <div> 联邦学习 梯度反演 隐私保护 近似电路 硬件加速
-<br><br>总结: 1.联邦学习共享梯度易被反演攻击泄露隐私；2.传统梯度混淆依赖高斯采样与浮点乘法，不适配边缘设备；3.近似电路在能耗、面积、延迟上有优势，但尚未用于隐私保护联邦学习；4.VAHANA用近似电路和4比特均匀随机数直接加噪，无需高斯采样或浮点乘法；5.在RISC-V软硬协同实现，FPGA评测内存降34%、延迟最高降28.1倍，并在三个数据集上抵御攻击。 <div>
+<br /><br />总结: 1.联邦学习共享梯度易被反演攻击泄露隐私；2.传统梯度混淆依赖高斯采样与浮点乘法，不适配边缘设备；3.近似电路在能耗、面积、延迟上有优势，但尚未用于隐私保护联邦学习；4.VAHANA用近似电路和4比特均匀随机数直接加噪，无需高斯采样或浮点乘法；5.在RISC-V软硬协同实现，FPGA评测内存降34%、延迟最高降28.1倍，并在三个数据集上抵御攻击。 <div>
 Federated learning (FL) enables clients to collaboratively train a global model by sharing gradient updates instead of raw data. However, recent studies show that these shared gradients can be exploited to reconstruct private training data through gradient inversion attacks, posing a serious threat to client privacy. A common defense strategy is gradient obfuscation, which perturbs gradients before transmission; however, it relies on costly hardware components, such as Gaussian samplers and floating-point (FP) multipliers, making it unsuitable for resource-constrained edge devices. Approximate circuits—extensively studied in computer architecture and VLSI for their energy, area, and latency benefits—offer a promising defense. Yet despite its success in machine learning accelerators, it remains underexplored for privacy-preserving FL.
 
 This work introduces variational approximate hardware-aware noise addition (VAHANA), a hardware-efficient method that integrates stochastic perturbations directly into the computation using approximate circuits and only $4$ bits of uniform randomness, eliminating the need for Gaussian sampling or FP multiplication. We integrate VAHANA into the open-source RISC-V CV32E40P softcore using a hardware–software co-design approach, implementing custom instruction extensions that accelerate privacy-preserving operations with improved execution efficiency in both time and area. Evaluation on  Kintex-$7$ FPGA shows that VAHANA reduces memory footprint by $34$$\%$ and reduces latency by up to $28.1$$\times$, while maintaining resilience against gradient inversion attacks on Medical MNIST, CIFAR-10, and CIFAR-100 datasets.
 ]]></content:encoded>
-<pubDate>Tue, 08 Sep 2026 20:15:57 +0000</pubDate>
 <pubDate>Tue, 08 Sep 2026 20:15:57 +0000</pubDate>
 </item>
 <item>
@@ -24,7 +129,7 @@ This work introduces variational approximate hardware-aware noise addition (VAHA
 <guid>https://eprint.iacr.org/2026/1933</guid>
 <content:encoded><![CDATA[
 <div> 反洗钱 资金来源 隐私支付 受限监管 可追溯性
-<br><br>总结: 1.反洗钱要求判断资金前向来源。2.公开链可图谱遍历，隐私系统销毁/新建硬币且隐藏信息，无法溯源。3.方案给监管受限能力：有界反向溯源、冻结非法来源资金、披露后重建明文溯源图。4.适用于Zerocash、Tornado等同类模型。5.其余接收者、金额、后续关联及未披露硬币仍保密。 <div>
+<br /><br />总结: 1.反洗钱要求判断资金前向来源。2.公开链可图谱遍历，隐私系统销毁/新建硬币且隐藏信息，无法溯源。3.方案给监管受限能力：有界反向溯源、冻结非法来源资金、披露后重建明文溯源图。4.适用于Zerocash、Tornado等同类模型。5.其余接收者、金额、后续关联及未披露硬币仍保密。 <div>
 Anti-money laundering and counter-terrorist financing (AML/CFT) rules require payment service providers to assess incoming funds' provenance: for a target account, which earlier transfers contributed to it, how closely, and through which intermediaries?
 On transparent ledgers such as Bitcoin or Ethereum, this reduces to a graph traversal over the public transaction history.
 In private payment systems such as Zerocash or Tornado Cash Nova coins are burnt and created at each payment, while the sender, receiver, and amount are hidden.
@@ -37,7 +142,6 @@ The capability is backward provenance within a bounded neighbourhood of a transf
 Everything outside that capability remains hidden from the supervisor and from every other party: receivers, amounts, the link from an output to its later spend, and the provenance of any coin that has not been disclosed.
 ]]></content:encoded>
 <pubDate>Tue, 08 Sep 2026 17:22:33 +0000</pubDate>
-<pubDate>Tue, 08 Sep 2026 17:22:33 +0000</pubDate>
 </item>
 <item>
 <title>SoK: Zero-Knowledge Friendly Hash Functions over Prime Fields</title>
@@ -45,14 +149,13 @@ Everything outside that capability remains hidden from the supervisor and from e
 <guid>https://eprint.iacr.org/2026/1931</guid>
 <content:encoded><![CDATA[
 <div> 零知识证明,ZK友好哈希,代数结构,约束系统,开源实现
-<br><br>总结: 1.传统哈希在ZK电路中约束复杂、效率低；2.系统综述ZK友好哈希的设计范式与操作模式；3.整合代数密码分析，评估已知攻击并估算安全轮数；4.比较R1CS、AIR、PLONK下的理论约束/门数与实测性能；5.提供SageMath、Rust、电路内实现与图形库等开源工具。 <div>
+<br /><br />总结: 1.传统哈希在ZK电路中约束复杂、效率低；2.系统综述ZK友好哈希的设计范式与操作模式；3.整合代数密码分析，评估已知攻击并估算安全轮数；4.比较R1CS、AIR、PLONK下的理论约束/门数与实测性能；5.提供SageMath、Rust、电路内实现与图形库等开源工具。 <div>
 Zero-Knowledge (ZK) proof systems have become a cornerstone of privacy-preserving technologies and blockchain scalability. However, traditional hash functions are often inefficient within ZK protocols due to their high constraint complexity in arithmetic circuits. While various ZK-friendly hash functions have been proposed to address this bottleneck, their diverse algebraic structures and varying security margins make it difficult for practitioners to select the optimal primitive. 
 
 We conduct a systematic survey of ZK-friendly hash functions, covering both algorithmic design paradigms and modes of operation. We consolidate the relevant algebraic cryptanalysis techniques and review the third-party cryptanalysis of each design. For parameter sets broken by the best known attacks, we estimate the minimum number of rounds needed to withstand them - not as new recommendations, but to bring all constructions to a comparable level. On this basis, we analyze each construction across different arithmetization styles (R1CS, AIR, PLONK), both theoretically, by deriving the underlying constraint or gate counts, and empirically, through extensive benchmarks.
 
 This paper comes with a fully open-source implementation suite comprising a SageMath/Python reference framework, native Rust implementations, in-circuit implementations, and a reusable TikZ figure library.
 ]]></content:encoded>
-<pubDate>Tue, 08 Sep 2026 15:08:11 +0000</pubDate>
 <pubDate>Tue, 08 Sep 2026 15:08:11 +0000</pubDate>
 </item>
 <item>
@@ -61,7 +164,7 @@ This paper comes with a fully open-source implementation suite comprising a Sage
 <guid>https://eprint.iacr.org/2026/1925</guid>
 <content:encoded><![CDATA[
 <div> 格密码 量子威胁 区块链 可复现评估 签名参数
-<br><br>总结:1.NIST为应对量子攻击标准化格基签名并要求迁移；2.本文做教学级可复现研究，考察轻量格认证与签名；3.提出对称LWE交易矩阵派生与无环公钥格签名；4.给出参数工作流并验证，探索消息派生矩阵；5.开源基准报告完整延迟分布与最坏拒绝采样；无形式安全证明。 <div>
+<br /><br />总结:1.NIST为应对量子攻击标准化格基签名并要求迁移；2.本文做教学级可复现研究，考察轻量格认证与签名；3.提出对称LWE交易矩阵派生与无环公钥格签名；4.给出参数工作流并验证，探索消息派生矩阵；5.开源基准报告完整延迟分布与最坏拒绝采样；无形式安全证明。 <div>
 Quantum computers threaten the classical public-key primitives (RSA, ECDSA) used by most blockchains today; NIST has therefore standardized
   lattice-based signatures (ML-DSA, FIPS 204; and FN-DSA, a FALCON-based scheme being finalized as FIPS 206) and mandated a transition of the
   underlying cryptosystems. This report describes a reproducible, teaching-level study of the design space of lightweight lattice-based
@@ -75,9 +178,7 @@ Quantum computers threaten the classical public-key primitives (RSA, ECDSA) used
   public. We do not claim formal security proofs; formal analysis and module/ring-structured instantiations are left to future work.
 ]]></content:encoded>
 <pubDate>Tue, 08 Sep 2026 12:57:16 +0000</pubDate>
-<pubDate>Tue, 08 Sep 2026 12:57:16 +0000</pubDate>
 </item>
-
 <item>
 <title>Logstar: Efficient Linear* Time Secure Merge</title>
 <link>https://eprint.iacr.org/2024/159</link>
@@ -13857,79 +13958,6 @@ We implement our two COP generation protocols and conduct comprehensive evaluati
  We further facilitate the state-of-the-art (SOTA) PSU protocols with our optimized COP, achieving over 25% reduction in communication cost and 35% decrease in execution time. This shows that our COP optimizations bring significant improvements for real-world MPC primitives.
 ]]></content:encoded>
 <pubDate>Mon, 10 Mar 2025 09:25:29 +0000</pubDate>
-</item>
-<item>
-<title>Ciphertext-Ciphertext Matrix Multiplication: Fast for Large Matrices</title>
-<link>https://eprint.iacr.org/2025/448</link>
-<guid>https://eprint.iacr.org/2025/448</guid>
-<content:encoded><![CDATA[
-<div> 关键词：隐私保护机器学习、加密矩阵乘法、大规模、快速算法、密钥大小优化
-
-总结:
-为了解决隐私保护机器学习中大型加密矩阵乘法（CC-MM）的关键挑战，本文提出了一种新的算法。该算法结合了明文矩阵乘法（PP-MM）和加密矩阵转置算法（C-MT），其中我们设计了一个计算成本较低的快速C-MT算法。通过利用高性能BLAS库优化PP-MM，实现了大规模CC-MM并显著提升了性能。此外，我们还提出了轻量级算法，将CC-MM所需的密钥大小从1960 MB降低到1.57 MB，同时保持了相当的效率。
-
-实验结果显示，对于单线程实现，C-MT算法能在$0.76$秒内完成对一个$2\ 048 \times 2\ 048$的加密矩阵进行转置；而我们的CC-MM算法可在$85.2$秒内完成两个$4\ 096 \times 4\ 096$加密矩阵的乘法操作。相较于Jiang-Kim-Lauter-Song在CCS'18会议上提出的最先进的CC-MM方法，我们的算法在处理大规模矩阵时表现出超过$800$倍的性能提升。 <div>
-Matrix multiplication of two encrypted matrices (CC-MM) is a key challenge for privacy-preserving machine learning applications. As modern machine learning models focus on scalability, fast CC-MM on large datasets is increasingly in demand.
-
-In this work, we present a CC-MM algorithm for large matrices. The algorithm consists of plaintext matrix multiplications (PP-MM) and ciphertext matrix transpose algorithms (C-MT). We propose a fast C-MT algorithm, which is computationally inexpensive compared to PP-MM. By leveraging high-performance BLAS libraries to optimize PP-MM, we implement large-scale CC-MM with substantial performance improvements. Furthermore, we propose lightweight algorithms, significantly reducing the key size from $1\ 960$ MB to $1.57$ MB for CC-MM with comparable efficiency.
-
-In a single-thread implementation, the C-MT algorithm takes $0.76$ seconds to transpose a $2\ 048\times 2\ 048$ encrypted matrix. The CC-MM algorithm requires $85.2$ seconds to multiply two $4\ 096\times 4\ 096$ encrypted matrices. For large matrices, our algorithm outperforms the state-of-the-art CC-MM method from Jiang-Kim-Lauter-Song [CCS'18] by a factor of over $800$.
-]]></content:encoded>
-<pubDate>Mon, 10 Mar 2025 07:30:23 +0000</pubDate>
-</item>
-<item>
-<title>Disincentivize Collusion in Verifiable Secret Sharing</title>
-<link>https://eprint.iacr.org/2025/446</link>
-<guid>https://eprint.iacr.org/2025/446</guid>
-<content:encoded><![CDATA[
-<div> 关键词: 可验证秘密共享(VSS), 隐私针对性合谋, 冗余机制, 跟踪可访问结构(TAS), 斯蒂尼系统
-
-总结:
-
-本文研究了在可验证秘密共享(VSS)场景中，如何设计和分析阻止持有份额的理性与恶意党派进行隐私针对性合谋的机制。首先，文章提出了两种防止合谋的冗余机制，特别是在希望实现公平性（即非合谋者不受损失）的同时，允许在最佳恶意故障容忍度下恢复秘密的情况下，定义并设计了适用于TAS的专用威慑机制。其次，文中估算了最优TAS的大小，利用斯蒂尼系统构造了它们，并使用部分斯蒂尼系统构建了高度鲁棒的TAS，还为各种参数范围提供了接近最优TAS的高效秘密分享方案。最后，作者展示了TAS中的可追踪性与离散数学中的组合对象如（部分）斯蒂尼系统、受限交集的均匀子集以及适当的二进制码之间的联系，并指出访问结构的鲁棒性等价于超图的最小顶点覆盖问题。文章认为这些密码学、博弈论和离散数学之间的连接具有更广泛的研究价值。 <div>
-In verifiable secret sharing (VSS), a dealer shares a secret input among several parties, ensuring each share is verifiable. Motivated by its applications in the blockchain space, we focus on a VSS where parties holding shares are not allowed to reconstruct the dealer's secret (even partially) on their own terms, which we address as privacy-targeted collusion if attempted. 
-
-    In this context, our work investigates mechanisms deterring such collusion in VSS among rational and malicious parties. For this problem, we make both algorithmic and combinatorial contributions:
-    1. We provide two collusion-deterrent mechanisms to discourage parties from colluding and recovering the dealer's secret. Notably, when it is desired to achieve fairness---where non-colluding parties are not at a loss---while allowing for the best achievable malicious fault tolerance, we define ``trackable access structures'' (TAS) and design a deterrence mechanism tailored for VSS on these structures. 
-    2. We estimate the size of the optimal TAS, construct them from Steiner systems, provide highly robust TAS using partial Steiner systems, and present efficient secret sharing schemes for the latter close-to-optimal TAS for various parameter regimes.
-    3. We demonstrate that trackability in access structures is connected to combinatorial objects like (partial) Steiner systems, uniform subsets with restricted intersections, and appropriate binary codes. The robustness of access structures is equivalent to the minimum vertex cover of hypergraphs. 
-
-    We believe these connections between cryptography, game theory, and discrete mathematics will be of broader interest.
-]]></content:encoded>
-<pubDate>Sun, 09 Mar 2025 00:20:38 +0000</pubDate>
-</item>
-<item>
-<title>Homomorphic Signature-based Witness Encryption and Applications</title>
-<link>https://eprint.iacr.org/2025/443</link>
-<guid>https://eprint.iacr.org/2025/443</guid>
-<content:encoded><![CDATA[
-<div> 关键词: 实际应用、签名基础见证加密（SWE）、未来加密、同态SWE（HSWE）、隐私保护
-
-总结:
-本文提出了同态签名基础见证加密（HSWE）的概念，以提升定时释放加密方案的实用性。HSWE能够在保持时间释放功能的同时，提高效率并促进部署。文章指出构建HSWE需要依赖于一对加密和签名方案，其中签名的独特性是在加密方案基于单向注入函数时所必需的。接着，文中利用BLS、RSA和Rabin签名技术构建了三种不同的HSWE方案，并展示如何实现一种隐私保护的变体，该变体只允许提取同态聚合的结果，同时保持各个明文的机密性。 <div>
-Practical signature-based witness encryption (SWE) schemes recently emerged as a viable alternative to instantiate timed-release cryptography in the honest majority setting. In particular, assuming threshold trust in a set of parties that release signatures at a specified time, one can ``encrypt to the future'' using an SWE scheme. Applications of SWE schemes include voting, auctions, distributed randomness beacons, and more. However, the lack of homomorphism in existing SWE schemes reduces efficiency and hinders deployment. In this work, we introduce the notion of homomorphic SWE (HSWE) to improve the practicality of timed-release encryption schemes. We show one can build HSWE using a pair of encryption and signature schemes where the uniqueness of the signature is required when the encryption scheme relies on injective one-way functions. We then build three HSWE schemes in various settings using BLS, RSA, and Rabin signatures and show how to achieve a privacy-preserving variant that only allows extracting the homomorphically aggregated result while keeping the individual plaintexts confidential
-]]></content:encoded>
-<pubDate>Fri, 07 Mar 2025 17:27:02 +0000</pubDate>
-</item>
-<item>
-<title>A Unified Framework for Succinct Garbling from Homomorphic Secret Sharing</title>
-<link>https://eprint.iacr.org/2025/442</link>
-<guid>https://eprint.iacr.org/2025/442</guid>
-<content:encoded><![CDATA[
-<div> 关键词: 密码学、简洁加密方案、Yao's 加密电路构造、同态秘密分享、布尔电路
-
-总结:
-本文提出了一种新的简洁加密方案框架，该框架利用轻量级的同态秘密分享技术替代了以往大多数构造中的繁重机制。具体来说，该框架在复合阶或素数阶群以及基于晶格的基础上，实现了布尔电路每门电路只需1比特的（平均）加密大小。同时，这一思想被扩展到分层电路和算术电路中，将每门电路的成本降低至1比特以下，并消除了模p计算通常具有的Ω(λ)-因子开销。这些构建还包括了消除对循环安全要求的“分级”变体，但会在加密大小上增加与深度相关的项。
-
-本研究显著拓展了Liu等人（Eurocrypt 2025）关于基于晶格的简洁加密方案的技术，并为实现实用化的简洁加密开辟了新途径。对于拥有几百万门电路的中等规模电路，我们的加密电路可以比Yao风格的加密电路小两个数量级。虽然我们的加密和解密算法速度较慢，但仍具备实际可行性，这与依赖昂贵工具如iO或FHE和ABE非黑盒组合的先前完全简洁加密方案不同。这种权衡使得当加密电路作为功能密文被广播或存储在多个位置（例如区块链上）时，我们的框架可能会更具吸引力，因为在这种情况下，通信和存储成本可能主导总体开销。 <div>
-A major challenge in cryptography is the construction of succinct garbling schemes that have asymptotically smaller size than Yao’s garbled circuit construction. We present a new framework for succinct garbling that replaces the heavy machinery of most previous constructions by lighter-weight homomorphic secret sharing techniques.
-
-Concretely, we achieve 1-bit-per-gate (amortized) garbling size for Boolean circuits under circular variants of standard assumptions in composite-order or prime-order groups, as well as a lattice-based instantiation. We further extend these ideas to layered circuits, improving the per-gate cost below 1 bit, and to arithmetic circuits, eliminating the typical Ω(λ)-factor overhead for garbling mod-p computations. Our constructions also feature “leveled” variants that remove circular-security requirements at the cost of adding a depth-dependent term to the garbling size.
-
-Our framework significantly extends a recent technique of Liu, Wang, Yang, and Yu (Eurocrypt 2025) for lattice-based succinct garbling, and opens new avenues toward practical succinct garbling. For moderately large circuits with a few million gates, our garbled circuits can be two orders of magnitude smaller than Yao-style garbling. While our garbling and evaluation algorithms are much slower, they are still practically feasible, unlike previous fully succinct garbling schemes that rely on expensive tools such as iO or a non-black-box combination of FHE and ABE. This trade-off
-can make our framework appealing when a garbled circuit is used as a functional ciphertext that is broadcast or stored in multiple locations (e.g., on a blockchain), in which case communication and storage may dominate computational cost.
-]]></content:encoded>
-<pubDate>Fri, 07 Mar 2025 17:14:00 +0000</pubDate>
 </item>
 </channel>
 </rss>
