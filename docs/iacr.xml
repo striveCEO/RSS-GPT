@@ -5,11 +5,115 @@
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
 <item>
+<title>Going Faster: Privacy-Preserving Shortest paths from Start to End (Extended Version)</title>
+<link>https://eprint.iacr.org/2025/1794</link>
+<guid>https://eprint.iacr.org/2025/1794</guid>
+<content:encoded><![CDATA[
+<div> 最短路径，安全多方计算，秘密共享，前驱跟踪，去复用
+<br><br>总结:1.现有隐私最短路径SMPC多只算长度，本文提出两协议输出秘密共享路径；2.第一协议计算前驱、跟踪并重排填充，第二协议优化跟踪并用图变换替代重排；3.跟踪快23倍、图变换快数量级，第二协议因大图前驱计算主导而快5%-49%；4.新去复用协议在快慢网络均优于已有，具独立价值。 <div>
+Finding shortest paths in graphs is a fundamental combinatorial optimization problem with numerous applications, e.g., in graph centrality measures, computational biology, and business process analysis. To address privacy constraints in such applications, Secure Multi-Party Computation (SMPC) protocols can compute the lengths of shortest paths on secret-shared graphs. Many such protocols have been proposed in the past, but they only compute the lengths of the shortest paths and not the paths themselves.
+
+In this paper, we close this gap by proposing two SMPC protocols that output secret-shared shortest paths. The first composes sub-protocols to calculate predecessors, to follow them, and to reorder wrongly positioned padding. Our second protocol optimizes the predecessor-following by decomposing it into sub-functionalities and proposing new sub-protocols for each. Further, the padding-reorder is replaced by a graph transformation.
+
+We evaluate our protocols across multiple network and security settings. Our optimized predecessor-following is up to 23 times faster than prior art, and our graph transformation is orders of magnitude faster than the padding-reorder. Overall, our second protocol is 5% to 49% faster than the first protocol due to the predecessor-calculation dominating the runtime on large graphs.
+
+Finally, we introduce a novel demultiplex protocol that, in fast networks, outperforms prior protocols on vector sizes up to 500, and on all evaluated vector sizes in slow networks. Due to the ubiquity of demultiplexes, this protocol is of independent interest.
+]]></content:encoded>
+<pubDate>Wed, 01 Oct 2025 09:22:15 +0000</pubDate>
+<pubDate>Wed, 01 Oct 2025 09:22:15 +0000</pubDate>
+</item>
+<item>
+<title>Data-strophy: When Your Integrity Goes Wild, So Does Your Data!</title>
+<link>https://eprint.iacr.org/2026/1994</link>
+<guid>https://eprint.iacr.org/2026/1994</guid>
+<content:encoded><![CDATA[
+<div> Proton Docs/Sheets,端到端安全,协作编辑,完整性攻击,形式化分析
+<br><br>总结:1. 研究对象为Proton Docs/Sheets，其支持实时协作并宣称端到端安全。2. 研究分析其加密设计与协作协议。3. 发现三种完整性攻击：历史改写、上下文操纵、审查，且可逃避检测。4. 前两种攻击在服务器诚实情况下即可发起，第三种由受损服务器实施。5. 研究提出缓解方法，强调协作系统需形式化安全分析。 <div>
+Proton is a popular security and privacy service provider with a large user base spanning both organizations and individuals. Proton Docs/Sheets support real-time collaborative document editing while claiming to provide end-to-end security.
+
+We analyze the cryptographic design and the collaborative editing protocol of Proton Docs/Sheets inspecting the open-source Web client and webpage code. We demonstrate three distinct ``integrity'' attacks against Proton Docs/Sheets that can cause history rewriting, context manipulation, and censorship, all of which can, in fact, evade detection. The first two can be launched even when the Proton server acts honestly, and the third is mounted by a corrupted Proton server. We also present the corresponding mitigation methods. Our attacks highlight the subtleties of end-to-end security in collaborative settings involving multiple users and constant updates. This state of affairs naturally calls for systematic formal treatment (i.e., design and/or analysis) of the security of such systems.
+]]></content:encoded>
+<pubDate>Sat, 12 Sep 2026 14:58:55 +0000</pubDate>
+<pubDate>Sat, 12 Sep 2026 14:58:55 +0000</pubDate>
+</item>
+<item>
+<title>SoK: Private Transformer Inference Across Systems, Models, and Cryptography</title>
+<link>https://eprint.iacr.org/2026/2005</link>
+<guid>https://eprint.iacr.org/2026/2005</guid>
+<content:encoded><![CDATA[
+<div> 私有推理 Transformer 加密隐私 跨层协同设计 开放问题
+<br><br>总结: 1.私有推理可无信任硬件保护查询与权重，但Transformer含大矩阵、非线性与自回归瓶颈，且既有综述掩盖适用与组合边界。2.系统梳理58个2022-2026加密私有Transformer框架。3.按系统、模型、密码学三层分析。4.发现跨后端约束：优化受阶段依赖限制，数据依赖操作须隐藏或约束执行结构。5.针对仅输出基线，识别四类安全关切与恶意安全设计组合边界。6.经验校准、分布依赖和额外训练限制泛化比较。7.提出12个开放问题与16项展望。 <div>
+Private inference can protect user queries and model weights without trusted hardware or statistical privacy relaxations, but transformers combine large secret matrix multiplications, costly nonlinearities, and sequential autoregressive execution. Prior surveys organize the literature mainly by cryptographic backend, deployment setting, or supported operation, obscuring when techniques remain applicable or composable across execution phases, model adaptations, or security boundaries.
+
+We systematize 58 cryptographic private transformer frameworks (2022--2026) across three interacting levels: systems (execution and optimization), models (cryptography--machine learning co-design and adaptation), and cryptography (secure realization of transformer operations). This analysis reveals two recurring cross-backend applicability constraints: optimizations do not transfer unchanged across execution phases when they require values not yet available, while data-dependent pruning, cache management, routing, and sparsity require private execution structure to be hidden, constrained, predicted, or disclosed. Against an output-only reference baseline, we identify four classes of security concerns affecting 5 frameworks and synthesize composition boundaries in maliciously secure designs. We find that 16 frameworks rely on empirically calibrated or distribution-specific mechanisms and 21 require additional training, limiting generalization and cross-framework comparability. We distill these findings into 12 open problems and 16 outlooks spanning protocol efficiency, cross-level co-design, dynamic execution, security, evaluation, and scalability.
+]]></content:encoded>
+<pubDate>Sun, 13 Sep 2026 18:07:00 +0000</pubDate>
+<pubDate>Sun, 13 Sep 2026 18:07:00 +0000</pubDate>
+</item>
+<item>
+<title>Fair Distributed Exchange via Threshold Adaptor Signatures</title>
+<link>https://eprint.iacr.org/2025/388</link>
+<guid>https://eprint.iacr.org/2025/388</guid>
+<content:encoded><![CDATA[
+<div> 适配器签名、无脚本协议、公平交换、阈值适配器签名、认证见证加密
+<br><br>总结: 1.适配器签名支持比特币等无脚本协议，按NP声明锁币并向揭示见证者付款，广泛用于支付通道等。2.现有公平性仅适用于双方，不适用委员会式买方或见证持有方。3.本文形式化组间公平交换：买方组持密钥份额，卖方组持见证份额。4.协议保证组间及组内公平，抵御恶意内部人和信息泄露。5.提出阈值适配器签名与认证见证加密，并高效实例化。 <div>
+Adaptor signatures enable scriptless protocols on blockchains such as Bitcoin by allowing a buyer to lock a coin based on an NP statement and release payment to any party that reveals the corresponding witness. They underlie a broad class of layer-2 protocols, including payment channels, cross-chain swaps, and coin-mixing services, which today secure billions of dollars in locked value.  Fairness for existing adaptor-signature constructions, however, is inherently two-party, so does not apply to deployments in which the buyer or witness holder is operated by a committee. 
+
+In this work, we formalize and solve the fair exchange problem in that setting. We consider a buyer group holding shares of a signing key controlling a coin, and a seller group holding shares of a secret witness. 
+The goal is to guarantee fairness both between groups (ensuring that each group obtains its asset if and only if the other does), as well as within groups (ensuring that all honest buyers learn the witness and all honest sellers receive payment), even in the presence of malicious insiders and/or partial information leakage. 
+
+We present efficient protocols achieving these guarantees under standard cryptographic assumptions on scriptless blockchains with timelocks. 
+Our construction introduces two new primitives of independent interest, threshold adaptor signatures and certified witness encryption, which we define, analyze, and instantiate efficiently.
+]]></content:encoded>
+<pubDate>Fri, 28 Feb 2025 21:49:09 +0000</pubDate>
+<pubDate>Fri, 28 Feb 2025 21:49:09 +0000</pubDate>
+</item>
+<item>
+<title>The Price of Time: Deterrence as the Third Pillar of Payment Channel Security</title>
+<link>https://eprint.iacr.org/2026/2001</link>
+<guid>https://eprint.iacr.org/2026/2001</guid>
+<content:encoded><![CDATA[
+<div> 支付通道，威慑，占用定价，时间责任，路径隐私
+<br><br>总结:1.补安全/活性，提出“威慑”：损害有可证价格。2.持有成本刻共享态占用；时间责任必具，线性最紧；区分期限预收费与持留罚债券。3.威慑、仅罚金诚实、零中间锁存、路径隐私四目标三不可兼得，余可构，洋葱吞费实例。4.单通道仅罚定价可单方执行当且仅当脚本暴露时间，释早期比特币限制。5.比特币融合债券无需新假设，抗阻塞提八阶、准时诚实支付零净成本；多跳证转发三难，含路径长度O(1/n)侧信道。 <div>
+Safety and liveness are the two classical pillars of payment channel
+security. Both price attacks that merely occupy channel resources,
+such as jamming, at zero. We propose a third pillar,
+deterrence: harm carries a provable price. We give its theory
+for occupied shared-state resources. Within a holding-cost framework,
+we characterize occupation pricing for lock-resolve channels.
+Time-dependence in the occupier's liability is necessary for any
+deterrence: today's time-independent pricing admits unbounded
+griefing, with damage-to-cost ratios above 10^7. Linear
+time-proportional liability achieves the tight rate. Its two faces,
+deadline-proportional upfront fees and hold-proportional penalty
+bonds, differ exactly in what they charge honest traffic. Our main
+theorem maps the landscape of four desiderata: deterrence against
+colluding sinks, penalty-only honesty, zero intermediary lockup, and
+path privacy. Three of them are jointly unachievable, and every
+remaining combination is achieved by a matching construction;
+onion-message fee-swallowing gives a second enforcement instance.
+Single-channel enforcement is characterized exactly: penalty-only
+pricing is unilaterally enforceable if and only if scripts expose
+time. The proof is a three-case exhaustion, and it explains why
+pre-BIP65 Bitcoin could not support trustless occupation pricing.
+Our flagship fused-bond construction runs on Bitcoin today, with no
+covenants, oracles, or miner assumptions; it improves slot-jamming
+deterrence by eight orders of magnitude at zero net cost to punctual
+honest payments. For multi-hop payments we prove the forwarding
+trilemma, settling a 2020 conjecture of the Lightning engineering
+community, and we quantify the price of privacy, including a new
+O(1/n) extreme-value side channel on the sender's path length.
+]]></content:encoded>
+<pubDate>Sun, 13 Sep 2026 15:08:48 +0000</pubDate>
+<pubDate>Sun, 13 Sep 2026 15:08:48 +0000</pubDate>
+</item>
+
+<item>
 <title>From Specs to Apps: Verifying and Monitoring Models of Signal and WhatsApp</title>
 <link>https://eprint.iacr.org/2026/1979</link>
 <guid>https://eprint.iacr.org/2026/1979</guid>
 <content:encoded><![CDATA[
-<div> Signal协议, SpecMon, 形式化模型, Tamarin, WhatsApp<br><br>总结:
+<div> Signal协议, SpecMon, 形式化模型, Tamarin, WhatsApp<br /><br />总结:
 1.弥合Signal规范与运行时实现差距。
 2.用SpecMon插桩WhatsApp Web、Signal Desktop，采集网络/密码交互，建兼容Tamarin的多集重写模型（首见WhatsApp Web，最详Signal）。
 3.可信事件提取、符号抽象下验证符合模型，核心认证与保密成立，发现libsignal与WhatsApp分支差异。
@@ -47,7 +151,6 @@ applications and detection of deliberately injected security faults,
 with low overhead in our measured setting.
 ]]></content:encoded>
 <pubDate>Fri, 11 Sep 2026 11:52:32 +0000</pubDate>
-<pubDate>Fri, 11 Sep 2026 11:52:32 +0000</pubDate>
 </item>
 <item>
 <title>Oblivious Signaling</title>
@@ -55,7 +158,7 @@ with low overhead in our measured setting.
 <guid>https://eprint.iacr.org/2026/1975</guid>
 <content:encoded><![CDATA[
 <div> 匿名消息、全同态加密、接收者隐私、固定收件箱、数字邮资
-<br><br>总结: 1.匿名消息服务需在隐藏收件人的同时传递密文；2.OMR借助FHE让不可信服务器代为检索；3.提出Oblivious Signaling，将成本从检索转向发送，服务器对固定加密收件箱做统一同态更新；4.接收者只需获取并解密自身收件箱，检查不受全局流量影响；5.给出FHE构造、隐私证明与数字邮资权衡：投递贵、检查便宜，适合频繁检查且消息零星，并可抑制垃圾。 <div>
+<br /><br />总结: 1.匿名消息服务需在隐藏收件人的同时传递密文；2.OMR借助FHE让不可信服务器代为检索；3.提出Oblivious Signaling，将成本从检索转向发送，服务器对固定加密收件箱做统一同态更新；4.接收者只需获取并解密自身收件箱，检查不受全局流量影响；5.给出FHE构造、隐私证明与数字邮资权衡：投递贵、检查便宜，适合频繁检查且消息零星，并可抑制垃圾。 <div>
 An anonymous messaging service has to solve a basic routing problem: a server must deliver an encrypted message to its recipient without learning who the recipient is. Broadcasting all ciphertexts hides the destination but forces every recipient to constantly scan for new messages. Oblivious Message Retrieval (OMR; CRYPTO~'22) tackles this by using fully homomorphic encryption (FHE) to let an untrusted server perform message retrieval on a recipient's behalf without learning which messages are pertinent.
 
 
@@ -64,7 +167,6 @@ We introduce Oblivious Signaling, which shifts this cost from retrieval to sendi
 We formalize receiver privacy against an untrusted server, even when it colludes with other users, give a concrete construction based on fully homomorphic encryption, and analyze the resulting "digital postage'' trade-off: delivery is expensive, but checking is cheap. Our prototype identifies practical regimes in which this cost-model shift is preferable to scan-based retrieval, even with highly optimized OMR implementations. This cost model is well-suited to settings where recipients check frequently, and messages arrive sporadically, and it naturally discourages high-volume spam.
 ]]></content:encoded>
 <pubDate>Fri, 11 Sep 2026 02:14:00 +0000</pubDate>
-<pubDate>Fri, 11 Sep 2026 02:14:00 +0000</pubDate>
 </item>
 <item>
 <title>Azkaban: A Zero-Knowledge Abstract Analysis for Neural Networks</title>
@@ -72,10 +174,9 @@ We formalize receiver privacy against an untrusted server, even when it colludes
 <guid>https://eprint.iacr.org/2026/1967</guid>
 <content:encoded><![CDATA[
 <div> 零知识证明,DNN认证,抽象解释,可证性,有限域
-<br><br>总结: 1.DNN敏感应用需证明鲁棒性与公平性。2.现有ZK认证因定点和舍入误差不可靠。3.AZKABAN提出端到端可靠的抽象解释系统。4.设计安全有限域区间、内积、除法算子，防止非线性激活泄露隐私。5.支持前馈与卷积网络，公平证明提速百倍，扩展更大模型，并首次提供ZK鲁棒认证。 <div>
+<br /><br />总结: 1.DNN敏感应用需证明鲁棒性与公平性。2.现有ZK认证因定点和舍入误差不可靠。3.AZKABAN提出端到端可靠的抽象解释系统。4.设计安全有限域区间、内积、除法算子，防止非线性激活泄露隐私。5.支持前馈与卷积网络，公平证明提速百倍，扩展更大模型，并首次提供ZK鲁棒认证。 <div>
 Deep neural networks (DNNs) are increasingly used in sensitive applications, where certifying properties such as adversarial robustness and fairness is crucial. Several recent works propose DNN certification systems using zero-knowledge proofs (ZKPs)— cryptographic primitives that allow verifying certificates while maintaining confidentiality of the model. While certification algorithms typically treat the DNN as a function over reals, naively translating these algorithms into finite-precision implementations can result in unsound certification due to rounding errors. In ZKPs, this unsoundness is amplified due to a larger precision loss from fixed-point arithmetic emulated using finite fields. In this work, we highlight an overlooked gap in the soundness of prior protocols. We propose AZKABAN, a system for zero-knowledge abstract interpretation-based analysis with end-to-end soundness. We introduce operators for sound interval analysis over finite-fields, including efficient ZKP-amenable algorithms for inner-products and division, while preventing privacy leaks due to non-linear activations. We implement our system which is comprehensive in terms of supporting both feed-forward and convolutional neural networks. AZKABAN improves over the state-of-the-art ZK individual fairness certification protocol by up to two orders of magnitude in end-to-end proof time. Further, it scales to much larger models than those considered in the state-of-the-art. AZKABAN also provides, to our knowledge, the first solution for ZK robustness certification.
 ]]></content:encoded>
-<pubDate>Thu, 10 Sep 2026 15:25:47 +0000</pubDate>
 <pubDate>Thu, 10 Sep 2026 15:25:47 +0000</pubDate>
 </item>
 <item>
@@ -84,7 +185,7 @@ Deep neural networks (DNNs) are increasingly used in sensitive applications, whe
 <guid>https://eprint.iacr.org/2026/1966</guid>
 <content:encoded><![CDATA[
 <div> 后量子签名 指定验证者签名 CSIDH 身份隐私 签名攻击
-<br><br>总结:
+<br /><br />总结:
 1. 背景：后量子强指定验证者签名需兼顾认证、签名者隐私、模拟与效率。
 2. 问题：CSI-SDVS响应设计z_i=b_i-s_i泄露签名者身份。
 3. 攻击：通过PSI实验可重建随机性并识别真实签名者，3万次执行主实验与η=1、2、4、8均100%成功。
@@ -93,7 +194,6 @@ Deep neural networks (DNNs) are increasingly used in sensitive applications, whe
 Strong designated-verifier signatures provide authentication while restricting verification to a chosen verifier and protecting the signer from transferable evidence. Designing such signatures in the post-quantum setting is challenging because authentication, signer privacy, simulation, and efficiency must be achieved simultaneously. Recently, Renan proposed CSI-SDVS, a compact post-quantum strong designated-verifier signature scheme built from CSIDH-style commutative isogeny class-group actions. We show that its response design, $z_i=b_i-s_i$, breaks privacy of the signer's identity: because the PSI experiment reveals both candidate signer secret keys, an adversary can reconstruct the signing randomness and identify the actual signer with overwhelming probability. We validate the attack over 30,000 executions, obtaining 100\% signer identification in the main 128-bit experiment and for $\eta\in \{1,2,4,8\}$. In the following, we propose an isogeny-based strong designated verifier signature. We prove correctness, non-transferability, signer privacy, and strong unforgeability under Gap Parallelization in the random-oracle model. For $\eta=1$, the redesigned signature is 113 bytes compared with 49 bytes in CSI-SDVS, while signer key sizes remain unchanged.
 ]]></content:encoded>
 <pubDate>Thu, 10 Sep 2026 15:01:44 +0000</pubDate>
-<pubDate>Thu, 10 Sep 2026 15:01:44 +0000</pubDate>
 </item>
 <item>
 <title>Three-Round Weak Non-Malleable Zero-Knowledge Argument</title>
@@ -101,15 +201,13 @@ Strong designated-verifier signatures provide authentication while restricting v
 <guid>https://eprint.iacr.org/2026/1964</guid>
 <content:encoded><![CDATA[
 <div> 非可延展零知识、中间人攻击、标准假设、三回合、弱非可延展
-<br><br>总结:①已知弱非可延展零知识论证在明文模型至少需四回合；②本文首次在标准假设下给出三回合构造；③满足弱零知识与ε非可延展，允许中间人与独立实验间多项式倒数概率差；④依赖两消息不经意传输、延迟输入WI论证、非交互承诺、电路隐私全同态加密。 <div>
+<br /><br />总结:①已知弱非可延展零知识论证在明文模型至少需四回合；②本文首次在标准假设下给出三回合构造；③满足弱零知识与ε非可延展，允许中间人与独立实验间多项式倒数概率差；④依赖两消息不经意传输、延迟输入WI论证、非交互承诺、电路隐私全同态加密。 <div>
 Non-malleable zero-knowledge argument(NMZK) is a strong notion of zero-knowledge argument that ensures security against man-in-the-middle(MIM) attacks. While three-round constructions exist for various weak zero-knowledge arguments under standard assumptions, all known (weak) NMZK protocols in the plain model have required at least four rounds.
 
 In this work, we construct the \emph{first three-round weak non-malleable zero-knowledge argument} under standard cryptographic assumptions. Our protocol satisfies weak zero-knowledge and $\epsilon$-non-malleability, where the latter allows an $\epsilon$ probability gap between the MIM experiment and the stand-alone experiment for any polynomial inverse $\epsilon$. Our construction relies only on well-established primitives, such as the existence of two-message oblivious transfer protocols and delayed-input WI arguments, non-interactive commitments, and circuit-privacy fully homomorphic encryptions.
 ]]></content:encoded>
 <pubDate>Thu, 10 Sep 2026 12:14:17 +0000</pubDate>
-<pubDate>Thu, 10 Sep 2026 12:14:17 +0000</pubDate>
 </item>
-
 <item>
 <title>VAHANA: Hardware-Aware Noise Addition Against Gradient Inversion Attacks</title>
 <link>https://eprint.iacr.org/2026/1936</link>
@@ -13870,94 +13968,6 @@ In this paper, we propose a novel \emph{any-out-of-many proof}, a logarithmic-si
 Based on our proposed proof scheme, we further construct a compact RingCT protocol for privacy cryptocurrencies, which can provide a logarithmic-sized communication complexity for transactions with multiple inputs. More importantly, as the only known RingCT protocol instantiated from the partial knowledge proofs, our protocol can achieve the highest anonymity level compared with other approaches like Omniring [LRR+19]. For other applications, such as multiple ring signatures, our protocol can also be applied with some modifications. We believe our techniques are also applicable in other privacy-preserving scenarios, such as multiple ring signatures and coin-mixing in the blockchain.
 ]]></content:encoded>
 <pubDate>Sun, 24 Oct 2021 07:27:47 +0000</pubDate>
-</item>
-<item>
-<title>Token meets Wallet: Formalizing Privacy and Revocation for FIDO2</title>
-<link>https://eprint.iacr.org/2022/084</link>
-<guid>https://eprint.iacr.org/2022/084</guid>
-<content:encoded><![CDATA[
-<div> 关键词：FIDO2标准、WebAuthn组件、安全模型、隐私保护、全局密钥撤销
-
-总结:<br />
-本文针对FIDO2标准中的WebAuthn组件进行了安全性重新审视。首先，改进了Barbosa等人提出的模型，以涵盖使用密钥派生或密钥封装的认证令牌。其次，提出了FIDO2中WebAuthn组件的第一个正式隐私定义，并证明如果选用适当的底层构建模块，则该组件在常见FIDO2令牌实现中可保证用户隐私。最后，解决了FIDO2全局密钥撤销问题，为此引入并分析了一种基于广泛应用于加密货币钱包的BIP32标准的简单撤销程序，该程序能够与现有的FIDO2服务器高效实施。 <div>
-The FIDO2 standard is a widely-used class of challenge-response type protocols that allows to authenticate to an online service using a hardware token.  
-Barbosa et al. (CRYPTO `21) provided the first formal security model and analysis for the FIDO2 standard.
-However, their model has two shortcomings: (1) It does not include privacy, one of the key features claimed by FIDO2. (2) It only covers tokens that store {all secret keys locally}.
-In contrast, due to limited memory, most existing FIDO2 tokens either derive all secret keys from a common seed or store keys on the server (the latter approach is also known as {key wrapping}).
-
-In this paper, we revisit the security of the WebAuthn component of FIDO2 as implemented in practice. Our contributions are as follows.
-(1) We adapt the model of Barbosa et al. so as to capture authentication tokens using key derivation or key wrapping.
-(2) We provide the {first formal definition of privacy for the WebAuthn component of FIDO2}. We then prove the privacy of this component in common FIDO2 token implementations if the underlying building blocks are chosen appropriately.
-(3) We address the unsolved problem of {global key revocation} in FIDO2. 
-To this end, we introduce and analyze a simple revocation procedure that builds on the popular BIP32 standard used in cryptocurrency wallets and can efficiently be implemented with existing FIDO2 servers.
-]]></content:encoded>
-<pubDate>Sun, 23 Jan 2022 13:01:17 +0000</pubDate>
-</item>
-<item>
-<title>Multi-Party Computation in Corporate Data Processing: Legal and Technical Insights</title>
-<link>https://eprint.iacr.org/2025/463</link>
-<guid>https://eprint.iacr.org/2025/463</guid>
-<content:encoded><![CDATA[
-<div> 关键词: 多方计算(MPC), 欧盟通用数据保护条例(GDPR), 法律分析, 技术实现, 隐私保护
-
-总结:
-本文研究了多方计算（MPC）在企业数据处理环境中的应用及其在欧洲联盟通用数据保护条例（GDPR）下的法律和技术影响。文章通过结合密码学和法律分析的专业知识，探讨了MPC作为匿名化方法在GDPR下适用性的关键问题，重点关注分布式控制等架构要求以有效降低重新识别风险。法律评估得到两个独立评估的支持。文章系统性地回答了关键监管问题，强调对于意图采用MPC的同时确保遵守隐私法的组织来说，结构化的法律评估至关重要。此外，为了补充这一理论分析，文章还利用Carbyne Stack——一个基于云原生的、用于可扩展MPC应用的开源平台，以及其后端集成的MP-SPDZ框架，实现了隐私保护的数据分析，并对不同安全模型下的SQL查询进行了基准测试，以评估其可扩展性和效率。 <div>
-This paper examines the deployment of Multi-Party Computation (MPC) in corporate data processing environments, focusing on its legal and technical implications under the European Union’s General Data Protection Regulation (GDPR). By combining expertise in cryptography and legal analysis, we address critical questions necessary for assessing the suitability of MPC for real-world applications. Our legal evaluation explores the conditions under which MPC qualifies as an anonymizing approach under GDPR, emphasizing the architectural requirements, such as the distribution of control among compute parties, to minimize re-identification risks effectively. The assertions put forth in the legal opinion are validated by two distinct assessments conducted independently.
-
-We systematically answer key regulatory questions, demonstrating that a structured legal assessment is indispensable for organizations aiming to adopt MPC while ensuring compliance with privacy laws. In addition, we complement this analysis with a practical implementation of privacy-preserving analytics using Carbyne Stack, a cloud-native open-source platform for scalable MPC applications, which integrates the MP-SPDZ framework as its backend. We benchmark SQL queries under various security models to evaluate scalability and efficiency.
-]]></content:encoded>
-<pubDate>Wed, 12 Mar 2025 08:19:28 +0000</pubDate>
-</item>
-<item>
-<title>Achieving Data Reconstruction Hardness and Efficient Computation in Multiparty Minimax Training</title>
-<link>https://eprint.iacr.org/2025/460</link>
-<guid>https://eprint.iacr.org/2025/460</guid>
-<content:encoded><![CDATA[
-<div> 关键词：生成模型、联邦学习、数据重建、多 party 计算、生成对抗网络<br /><br />总结: 本文关注在保持训练成本可管理的同时，提高基于生成对抗网络（GAN）训练过程中数据重构的难度。研究了两种使用公共生成器和多方计算（MPC）鉴别器的训练协议：协议1（P1）采用完全私有的鉴别器，而协议2（P2）仅对前三层鉴别器进行隐私保护。我们证明了对于P1和P2，只要鉴别器的前两层是私有的，公共生成器就不能恢复真实的训练数据；并通过ReLU网络存在的已知近似难度结果，证明了至少有三层私有层的鉴别器不能通过多项式时间复杂度的算法来重构真实数据。实验结果显示，与完全MPC训练相比，P1能够将训练时间减少2倍，而P2则能进一步将其减少到4至16倍。 <div>
-Generative models have achieved remarkable success in a wide range of applications. Training such models using proprietary data from multiple parties has been studied in the realm of federated learning. Yet recent studies showed that reconstruction of authentic training data can be achieved in such settings. 
-On the other hand, multiparty computation (MPC) guarantees standard data privacy, yet scales poorly for training generative models. 
-In this paper, we focus on improving reconstruction hardness during Generative Adversarial Network (GAN) training while keeping the training cost tractable. To this end, we explore two training protocols that use a public generator and an MPC discriminator: Protocol 1 (P1) uses a fully private discriminator, while Protocol 2 (P2) privatizes the first three discriminator layers. We prove reconstruction hardness for P1 and P2 by showing that (1) a public generator does not allow recovery of authentic training data, as long as the first two layers of the discriminator are private; and through an existing approximation hardness result on ReLU networks, (2) a discriminator with at least three private layers does not allow authentic data reconstruction with algorithms polynomial in network depth and size. We show empirically that compared with fully MPC training, P1 reduces the training time by $2\times$ and P2 further by $4-16\times$.
-]]></content:encoded>
-<pubDate>Tue, 11 Mar 2025 22:39:40 +0000</pubDate>
-</item>
-<item>
-<title>Revisiting the Security and Privacy of FIDO2</title>
-<link>https://eprint.iacr.org/2025/459</link>
-<guid>https://eprint.iacr.org/2025/459</guid>
-<content:encoded><![CDATA[
-<div> 关键词: FIDO2、隐私安全分析、信任设置假设、安全模型、隐私保证
-
-总结:<br />
-本文重新审视了广泛应用于网络无密码认证标准FIDO2的隐私与安全性分析。文中指出了以往工作的局限性，包括不切实际的信任设置假设、针对当前实战攻击的安全模型不足以及未全面分析FIDO2的整体隐私保障。为填补这些空白，文章提出了修订后的隐私和身份验证安全模型，并采用新模型对FIDO2进行模块化分析，重点关注其组件协议WebAuthn和CTAP2，明确了它们的确切安全保障。特别地，本研究首次确立了FIDO2整体的隐私保护承诺。此外，还提出了一些小修改建议，以帮助FIDO2能够达到更强大的隐私和认证定义要求，并抵抗已知和新型攻击。 <div>
-We revisit the privacy and security analyses of FIDO2, a widely deployed standard for passwordless authentication on the Web. 
-We discuss previous works 
-and conclude that each of them has at least one of the following limitations:
-(i) impractical trusted setup assumptions, 
-(ii) security models that are inadequate in light of state of the art of practical attacks,
-(iii) not analyzing FIDO2 as a whole, especially for its privacy guarantees.
-Our work addresses these gaps and proposes revised security models for privacy and authentication. Equipped with our new models, we analyze FIDO2 modularly and focus on its component protocols, WebAuthn and CTAP2, clarifying their exact security guarantees. 
-In particular, our results, for the first time, establish privacy guarantees for FIDO2 as a whole.
-Furthermore, we suggest minor modifications that can help FIDO2 provably meet stronger privacy and authentication definitions and withstand known and novel attacks.
-]]></content:encoded>
-<pubDate>Tue, 11 Mar 2025 21:09:06 +0000</pubDate>
-</item>
-<item>
-<title>Concretely Efficient Correlated Oblivious Permutation</title>
-<link>https://eprint.iacr.org/2025/449</link>
-<guid>https://eprint.iacr.org/2025/449</guid>
-<content:encoded><![CDATA[
-<div> 关键词： Oblivious Permutation (OP)，Correlated Oblivious Permutation (COP)，secure multi-party computation (MPC)，communication cost，execution time。
-
-总结:<br />
-本文针对 Oblivious Permutation (OP) 中的性能瓶颈问题进行了研究。OP 是许多重要 MPC 应用的基础，但其高复杂度限制了其实效性。Chase 等人在 Asiacrypt'20 提出了离线-在线 OP 模型，利用可预计算资源“Share Translation”降低在线成本。然而，生成 Share Translation 的高额离线成本仍是待优化领域。本文重新定义了该预计算资源为新的密码学原语——Correlated Oblivious Permutation (COP) 并对其两种生成方案（网络和矩阵方案）进行了深入分析与优化。对于网络方案，改进减少了构建交换机的通信/计算成本并降低了网络中的交换机数量；对矩阵方案，则降低了小规模 COP 生成的通信成本及大规模 COP 生成的通过内外分解的成本。作者实现了这两种 COP 生成协议并进行了全面评估，结果显示，使用 128 位输入数据为例，网络方案和矩阵方案分别比基线协议快达 1.7 倍和 1.6 倍。进一步地，将优化后的 COP 应用于最先进的 PSU 协议中，实现了超过 25% 的通信成本减少和 35% 的执行时间下降，证明了 COP 优化对于现实世界 MPC 原语的重大改进意义。 <div>
-Oblivious permutation (OP) enables two parties, a sender with a private data vector $x$ and a receiver with a private permutation π, to securely obtain the shares of π(x). OP has been used to construct many important MPC primitives and applications such as secret shuffle, oblivious sorting, private set operations, secure database analysis, and privacy-preserving machine learning. Due to its high complexity, OP has become a performance bottleneck in several practical applications, and many efforts have been devoted to enhancing its concrete efficiency. Chase et al. (Asiacrypt'20) proposed an offline-online OP paradigm leveraging a pre-computable resource termed Share Translation. While this paradigm significantly reduces online costs, the substantial offline cost of generating Share Translation remains an area for further investigation.
-
-In this work, we redefine the pre-computable resource as a cryptographic primitive known as Correlated Oblivious Permutation (COP) and conduct in-depth analyses and optimizations of the two COP generation solutions: network-based solution and matrix-based solution. The optimizations for the network-based solution halve the communication/computation cost of constructing a switch (the basic unit of the permutation network) and reduce the number of switches in the permutation network. The optimizations for the matrix-based solution halve the communication cost of small-size COP generation and reduce the cost of large-size COP generation with in-outside permutation decomposition.
-
-We implement our two COP generation protocols and conduct comprehensive evaluations. Taking commonly used 128-bit input data as an example, our network-based and matrix-based solutions are up to 1.7x and 1.6x faster than baseline protocols, respectively. 
- We further facilitate the state-of-the-art (SOTA) PSU protocols with our optimized COP, achieving over 25% reduction in communication cost and 35% decrease in execution time. This shows that our COP optimizations bring significant improvements for real-world MPC primitives.
-]]></content:encoded>
-<pubDate>Mon, 10 Mar 2025 09:25:29 +0000</pubDate>
 </item>
 </channel>
 </rss>
