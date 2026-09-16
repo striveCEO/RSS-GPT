@@ -4,13 +4,14 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+
 <item>
 <title>High-throughput Verifiable Distributed OPRF from Gold PRF</title>
 <link>https://eprint.iacr.org/2026/1953</link>
 <guid>https://eprint.iacr.org/2026/1953</guid>
 <content:encoded><![CDATA[
 <div> OPRF 后量子 分布式 复制秘密分享 可验证
-<br><br>总结: 1.基于复制秘密分享扩展Gold OPRF为阈值，提出高吞吐后量子可验证dOPRF，抵御恶意服务器与客户端。2.离线用加法编码或dealer+ZK批量分享alpha^e，成本独立于e。3.在线常数轮融合安全乘法与DZKP，并加可验证输入，降通信计算上传。4.通信优于Legendre dOPRF，可实践至(9,4)。 <div>
+<br /><br />总结: 1.基于复制秘密分享扩展Gold OPRF为阈值，提出高吞吐后量子可验证dOPRF，抵御恶意服务器与客户端。2.离线用加法编码或dealer+ZK批量分享alpha^e，成本独立于e。3.在线常数轮融合安全乘法与DZKP，并加可验证输入，降通信计算上传。4.通信优于Legendre dOPRF，可实践至(9,4)。 <div>
 An oblivious pseudorandom function (OPRF) is a two-party protocol that enables a client to obtain $F_k(x)$ on an input $x$ without learning the server-held key $k$, while the server learns nothing about $x$. OPRF is a fundamental building block in a wide range of privacy-preserving applications, including password-authenticated key exchange (PAKE), private set intersection (PSI), and distributed function secret sharing. In this work, we present the first concrete, high-throughput, post-quantum secure, verifiable distributed OPRF (dOPRF) tolerating $t < n/2$ malicious servers and a malicious client over replicated secret sharing, extending the recently introduced Gold OPRF of Yang et al. (IEEE S&amp;P 2025) to a threshold setting.
 
 We adopt an offline-online paradigm and introduce new protocol designs for both phases. (i) In the offline phase, we develop efficient protocols for batched generation of replicated secret sharing of $\alpha^e$ whose cost is independent of $e$. We present two complementary approaches, each designed for different parameter regimes: the first leverages a degenerate additive encoding under which exponentiation commutes with secret sharing; the second employs $t+1$ designated dealers that prove dual-share consistency via non-interactive zero-knowledge proofs, instantiated using both VOLE-in-the-Head and Ligero, yielding post-quantum security based solely on collision-resistant hashing. (ii) In the online phase, we propose a constant-round protocol that tightly integrates secure multiplication-and-opening with distributed zero-knowledge proof (DZKP) verification, reducing communication in every setting we evaluate and computation in all but the largest batched setting, compared to naively using the standard DZKP framework. (iii) We give a verifiable input protocol that enforces a possibly-malicious client providing well-formed inputs; its well-formedness check is absorbed into a hash exchange the online protocol already performs, and it lowers the client's upload from a full replicated share to one field element per server per input.
@@ -18,9 +19,7 @@ We adopt an offline-online paradigm and introduce new protocol designs for both 
 Our end-to-end benchmarks show that the construction substantially outperforms the state-of-the-art Legendre-PRF dOPRF of Kaluđerović et al. (ESORICS 2025) in terms of communication across all evaluated settings, and remains practical up to $(n,t)=(9,4)$, a regime where prior approaches become bandwidth- or memory-prohibitive.
 ]]></content:encoded>
 <pubDate>Wed, 09 Sep 2026 15:16:27 +0000</pubDate>
-<pubDate>Wed, 09 Sep 2026 15:16:27 +0000</pubDate>
 </item>
-
 <item>
 <title>Going Faster: Privacy-Preserving Shortest paths from Start to End (Extended Version)</title>
 <link>https://eprint.iacr.org/2025/1794</link>
@@ -13893,21 +13892,6 @@ Private Information Retrieval (PIR) permits clients to query data entries from a
 In this paper, we propose Pirex, a new two-server OO-PIR with semi-honest security that offers minimal client inbound bandwidth and storage cost while retaining the sublinear processing efficiency. The Pirex design is simple with most operations are naturally low-cost and streamlined (e.g., XOR, PRF, modular arithmetic). We have fully implemented Pirex and evaluated its real-world performance using commodity hardware. Our results showed that Pirex outperforms existing OO-PIR schemes by at least two orders of magnitude. With a 1 TB database, Pirex takes 55ms to retrieve a 4 KB entry, compared with 9-30s by state-of-the-art. For practical databases with billions of 4 KB entries, Pirex only takes 16 KB of inbound bandwidth, which is up to three orders of magnitude more efficient.
 ]]></content:encoded>
 <pubDate>Fri, 10 May 2024 02:53:56 +0000</pubDate>
-</item>
-<item>
-<title>Adaptively Secure Threshold Blind BLS Signatures and Threshold Oblivious PRF</title>
-<link>https://eprint.iacr.org/2025/483</link>
-<guid>https://eprint.iacr.org/2025/483</guid>
-<content:encoded><![CDATA[
-<div> 关键词: 原始文本、首次、阈值盲签名方案、阈值Oblivious PRF (OPRF)、适应性安全性
-
-总结:
-我们首次提出了在适应性对手存在下仍能保持安全性的阈值盲签名方案和阈值Oblivious PRF (OPRF)方案。这些方案允许对手在整个协议生命周期中自适应地选择要腐败的参与者。与仅针对静态对手提供安全性的先前解决方案相比，我们的方案仅增加了少量计算开销，并保持了最小的通信轮数复杂度。我们的阈值盲签名方案基于标准的BLS签名，而阈值OPRF则采用高效的“2HashDH”OPRF。这两个方案都在代数群模型(AGM)中证明了其适应性安全性。此外，我们的适应性安全阈值方案同样具备实用性和与其基础的单服务器BLS盲签名以及2HashDH OPRF相同的效率，可以用于为依赖于盲签名（如匿名凭证和电子现金系统）或Oblivious PRF（如OPAQUE密码认证和Privacy Pass匿名认证方案等）的系统增添加密容错能力和去中心化的信任机制。 <div>
-We show the first threshold blind signature scheme and threshold Oblivious PRF (OPRF) scheme which remain secure in the presence of an adaptive adversary, who can adaptively decide which parties to corrupt throughout the lifetime of the scheme.  Moreover, our adaptively secure schemes preserve the minimal round complexity and add only a small computational overhead over prior solutions that offered security only for a much less realistic static adversary, who must choose the subset of corrupted parties before initializing the protocol.
-
-Our threshold blind signature scheme computes standard BLS signatures while our threshold OPRF computes a very efficient "2HashDH" OPRF [JKK14].  We prove adaptive security of both schemes in the Algebraic Group Model (AGM).  Our adaptively secure threshold schemes are as practical as the underlying standard single-server BLS blind signature and 2HashDH OPRF, and they can be used to add cryptographic fault-tolerance and decentralize trust in any system that relies on blind signatures, like anonymous credentials and e-cash, or on OPRF, like the OPAQUE password authentication and the Privacy Pass anonymous authentication scheme, among many others.
-]]></content:encoded>
-<pubDate>Fri, 14 Mar 2025 00:02:29 +0000</pubDate>
 </item>
 </channel>
 </rss>
