@@ -5,12 +5,107 @@
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
 <item>
+<title>Lemur+: Compact Post-Quantum Synchronized Multi-Signatures and Multi-Hop Aggregation</title>
+<link>https://eprint.iacr.org/2026/2054</link>
+<guid>https://eprint.iacr.org/2026/2054</guid>
+<content:encoded><![CDATA[
+<div> 后量子签名,同步多重签名,同态向量承诺,区块链共识,LaBRADOR
+<br><br>总结:
+1.提出Lemur+，基于Module LWE/SIS的后量子同步多重签名，支持非交互聚合，面向区块链共识。
+2.百万签名者、42年密钥下签名约56KB，较Lemur降8.8倍；2^13签名者聚合7.75s、验证0.29s。
+3.核心为HVC-SOP，可结合KOTS抗rogue-key，并以LaBRADOR实例化，具独立意义。
+4.扩展多跳聚合，适用于分布式网络树。 <div>
+In this work, we introduce Lemur+, a compact post-quantum synchronized multi-signature scheme based on standard lattice assumptions (namely, Module LWE and Module SIS). Lemur+ builds on Lemur (CCS 2026) and targets large-scale, long-term distributed applications such as blockchain consensus while supporting non-interactive aggregation. Lemur+ maintains an almost constant signature size of about 56 KB even for one million signers and a 42-year key lifetime, compared to 491 KB in Lemur, yielding about $8.8\times$ reduction in communication/storage. Our end-to-end implementation demonstrates practical runtime performance: 7.75 s for signature aggregation and 0.29 s for verification with $2^{13}$ signers. These are roughly within $2\times$ of the corresponding Lemur runtimes. 
+
+The key to Lemur+ is our proposed Homomorphic Vector Commitment with Succinct Opening Proof (HVC-SOP), a new primitive that augments standard HVC with succinct opening proofs. We show that HVC-SOP can be generically combined with key-homomorphic one-time signatures (KOTS) to construct non-interactive synchronized multi-signatures, and prove the security of the resulting construction against rogue-key attacks. We then instantiate HVC-SOP using the lattice-based LaBRADOR proof system (CRYPTO 2023), yielding Lemur+. Finally, we extend Lemur+ to support multi-hop aggregation, allowing signatures to be recursively aggregated across distributed network trees. Beyond Lemur+, our HVC-SOP may be broadly applicable and of independent interest.
+]]></content:encoded>
+<pubDate>Wed, 16 Sep 2026 00:59:56 +0000</pubDate>
+<pubDate>Wed, 16 Sep 2026 00:59:56 +0000</pubDate>
+</item>
+<item>
+<title>Weighted Batch Threshold Encryption with Efficient DKG</title>
+<link>https://eprint.iacr.org/2026/2053</link>
+<guid>https://eprint.iacr.org/2026/2053</guid>
+<content:encoded><![CDATA[
+<div> 加权门限加密 批量门限加密 加密内存池 虚拟构造 分布式密钥生成
+<br><br>总结:1.背景：批量门限加密可解密选中批次并保护其余密文，适合区块链加密内存池；PoS按权益加权。2.问题：朴素加权使通信量随权重增长，已有方案依赖批次标签或索引。3.贡献：提出首个无需标签/索引且通信与权重无关的加权方案。4.方法：虚拟化BTX与部分分式构造，每方每批只传一个群元素；证明正确、鲁棒、安全并设计专用DKG。5.实现：展示区块链参数下实际性能。 <div>
+Batch threshold encryption allows a committee to decrypt a selected batch of ciphertexts using one short pre-decryption key per party, while ciphertexts outside the batch remain private. This makes batch threshold encryption attractive for building encrypted mempools for blockchains, where validators reveal transactions selected for a block while pending transactions remain private. However, in proof-of-stake systems like Solana or Ethereum, authorization depends on each validator's stake, which motivates a weighted version of batch threshold encryption. Naive approaches to weighting existing batch threshold encryption schemes lead to communication costs proportional to the weight assigned to each party. Existing schemes that avoid this cost either associate every ciphertext with a batch label or an encryption-time index.
+
+We present the first weighted batch threshold encryption schemes that require neither batch/epoch labels nor encryption-time ciphertext indices, while keeping each party's communication independent of its weight. We obtain two constructions by virtualizing prior schemes: the BTX construction of Agarwal et al. and the partial-fraction construction of Boneh et al. In both schemes' decryption procedures, each party communicates a single group element for an entire batch, regardless of its assigned weight. We prove correctness, robustness, and security under weighted variants of the original schemes' assumptions, and analyze the assumptions in generic bilinear groups. For the BTX-based construction, we also give a specialized distributed key generation protocol that avoids the general purpose MPC-based setup required by the previous state-of-the-art schemes. Finally, we implement our schemes to demonstrate their practical performance at parameter sizes relevant to blockchains.
+]]></content:encoded>
+<pubDate>Tue, 15 Sep 2026 21:02:08 +0000</pubDate>
+<pubDate>Tue, 15 Sep 2026 21:02:08 +0000</pubDate>
+</item>
+<item>
+<title>ROSETTA: Efficient and Accurate Privacy-Preserving LLM Decoding via Hybrid CKKS/TFHE Evaluation</title>
+<link>https://eprint.iacr.org/2026/2047</link>
+<guid>https://eprint.iacr.org/2026/2047</guid>
+<content:encoded><![CDATA[
+<div> 生成式大语言模型 私有推理 全同态加密 非线性运算 ROSETTA<br><br>总结: 1.生成式LLM多采用自回归解码，部署带来隐私风险。2.FHE私有推理的主要瓶颈是非线性运算开销大。3.提出ROSETTA混合CKKS/TFHE框架，按非线性负载自适应分工。4.设计TFHE分段查找表协议与算子选择机制，自动分配运算。5.相较CacheMir，Softmax最高加速4.8倍，端到端加速1.5至2.1倍。 <div>
+Generative large language models (LLMs) have achieved state-of-the-art performance on many real-world tasks such as code generation and question answering. These models predominantly rely on an autoregressive decoding strategy that generates output tokens sequentially. However, their pervasive deployment raises serious privacy concerns, motivating private inference frameworks based on fully homomorphic encryption (FHE). A major limitation of existing FHE frameworks is their inefficiency in evaluating nonlinear operations, which incur substantial overhead and dominate the decode stage.
+
+In this paper, we propose ROSETTA, a hybrid CKKS/TFHE framework that overcomes this limitation. We first observe that nonlinear operations in the decode stage exhibit heterogeneous workload patterns, which can be handled effectively via a hybrid approach. We then realize this with two key contributions: 1) an adaptive segmented lookup-table protocol based on TFHE that enables efficient and accurate evaluation of nonlinear operations; and 2) a scheme-aware operator-selection framework that automatically assigns each nonlinear operator to CKKS or TFHE to minimize end-to-end decoding latency. We demonstrate that ROSETTA achieves up to 4.8x Softmax speedup and 1.5--2.1x end-to-end speedup over the SOTA framework CacheMir.
+]]></content:encoded>
+<pubDate>Tue, 15 Sep 2026 13:29:14 +0000</pubDate>
+<pubDate>Tue, 15 Sep 2026 13:29:14 +0000</pubDate>
+</item>
+<item>
+<title>Failure Is Not Silent: Attacks on Blind Signatures</title>
+<link>https://eprint.iacr.org/2026/2043</link>
+<guid>https://eprint.iacr.org/2026/2043</guid>
+<content:encoded><![CDATA[
+<div> 盲签名，OPRF，请求隐私，中止预言，同态加密
+<br><br>总结:
+1.本文证伪若干盲签名与OPRF的盲性/请求隐私声明。
+2.攻击让恶意签名者以用户验证是否中止，构成隐藏消息的一比特预言。
+3.该问题在标准安全游戏中成立，源于证明误用加密/承诺隐藏。
+4.影响同态加密类方案及去随机化等案例；公开可验签推导可避免。
+5.缓解需公开可验评估或ZK，特定场景可用RUMBL与随机预言转换。 <div>
+Blind signatures and OPRFs are widely used to build anonymous tokens and privacy-preserving protocols. This paper shows that several prior claims of blindness and request-privacy for such primitives are false under the standard security definitions. In particular, we give explicit malicious-signer/evaluator adversaries showing that the theorems claimed for several existing constructions, including the blind ECDSA scheme of Qin et al. and the verifiable Dark Matter OPRF, do not hold.
+
+The attacks exploit a simple but previously overlooked channel: a malicious signer can craft its response so that the honest user's final verification aborts if and only if the user's hidden message satisfies a chosen predicate. The abort/no-abort outcome, therefore, becomes a one-bit testing oracle on the hidden message. Importantly, this is not a failure of the standard blindness definition: our attacks win the standard blindness/request-privacy games. Rather, the flaw is that prior proofs implicitly used encryption hiding or commitment hiding in settings where the adversary also learns an input-dependent abort event.
+
+Our main attack applies to a general pattern of homomorphic-encryption-based blind signatures and OPRFs, in which the user encrypts its input, then decrypts and verifies the signer's homomorphic response. We also present two additional case studies, based on derandomization and selective use of signer components, which illustrate the same proof pitfall in other constructions. We identify a positive design criterion: schemes with publicly checkable signature derivation, in the sense of Fischlin-Schröder, do not leak extra information through such selective aborts. Finally, we discuss mitigations. Generic protection requires publicly verifiable honest evaluation, e.g., via zero-knowledge proofs. For random-token use cases of some HE-based blind signatures, we give a partial mitigation based on random unknown-message blindness RUMBL and a random-oracle transformation to standard blindness.
+]]></content:encoded>
+<pubDate>Tue, 15 Sep 2026 09:31:52 +0000</pubDate>
+<pubDate>Tue, 15 Sep 2026 09:31:52 +0000</pubDate>
+</item>
+<item>
+<title>Seven Bindings: A Machine-Checked Map of the Assumptions Behind Lightning's BOLT 12</title>
+<link>https://eprint.iacr.org/2026/2038</link>
+<guid>https://eprint.iacr.org/2026/2038</guid>
+<content:encoded><![CDATA[
+<div> BOLT 12, offers, onion messages, blinded paths, Payer Proofs<br><br>总结:1.BOLT12为Lightning最大新增，规范多次变动且Payer Proofs无分析。2.首次形式化其全生命周期，基于指定提交用22个ProVerif模型验证。3.隐私完整性依赖七项绑定，并逐行检查假设移除后果。4.接收方匿名与支付收款不可链接成立；攻击均落在规范已依赖的带外假设。5.盲密钥链免费认证接收方传输，付款方交付绑定仅靠实现纪律。6.支付收据隐藏精确披露边界，文末给出六条测试建议。 <div>
+Lightning's BOLT 12 (offers, onion messages, blinded paths) is the largest addition to the Lightning protocol suite, and it is rolling out now. The specification changed three times in 2026, the community is actively debating its privacy posture, and its newest mechanism, Payer Proofs, landed in July 2026 without any analysis. We give the offer family its first formal treatment, covering the full lifecycle from request to receipt, pinned to specification commits e20a924/1528972 and machine-checked in twenty-two ProVerif models that each converge within seconds. The results read as a map rather than a checklist: the family's privacy and integrity rest on seven bindings, removable assumptions whose removal consequences we check row by row. Receiver anonymity and payer-payee unlinkability hold under unbounded sessions and corrupted path nodes, and every protocol-level attack we exhibit lands on an assumption the specification already leans on out-of-band. The map's structure is itself the finding. The blinding key chain, designed for unlinkability, authenticates recipient-side transit for free, while the payer side's delivery binding rests on implementation discipline alone. The newest part of the specification, its payment receipts, turns out to hide a precise disclosure boundary. We close with six testable recommendations for the BOLTs repository.
+]]></content:encoded>
+<pubDate>Tue, 15 Sep 2026 05:13:53 +0000</pubDate>
+<pubDate>Tue, 15 Sep 2026 05:13:53 +0000</pubDate>
+</item>
+<item>
+<title>Silent Payments, Formally: Security, Scanning Costs, and Blind Collaborative Payments</title>
+<link>https://eprint.iacr.org/2026/2037</link>
+<guid>https://eprint.iacr.org/2026/2037</guid>
+<content:encoded><![CDATA[
+<div> BIP-352, 静默支付, 安全证明, 扫描攻击, 协作支付
+<br><br>总结:
+1. 静默支付可静态地址收新输出，但缺安全证明，暴露扫描、锁资、漏付问题。
+2. 论文在DDH下证明接收方与协作方不可关联，含标签系统链接攻击及修复。
+3. 扫描成本：K_max令二次变线性，合规扫描需Ω(N+KM)，新扫描快39倍，全块攻击低至0.0015BTC。
+4. 协作交易组装者可识别输出、错秘密可烧资；提出盲协作支付。
+5. 委托扫描无安全默认，或知道太多或可隐藏支付；配12项基准。 <div>
+Silent payments (BIP-352) let Bitcoin users publish one static address and receive at fresh, unlinkable outputs. The protocol already ships in major wallets, yet its own specification concedes it has no formal security proof—and 2026 brought a worst-case scanning attack, a funds-locking hardware-wallet disclosure, and an omitted-payment bug. We supply the missing analysis. Receiver and co-transactor unlinkability are proved under DDH, with the label system as a corollary that includes an executable linking attack and its fix. We then quantify what scanning costs and what an attacker can buy with it. The community's K_max cap turns quadratic attack amplification into linear; every compliant scanner needs Ω(N+KM) work; our set-probing scanner meets this bound and runs 39× faster in our measurements; and a year of fee data prices a full-block attack as low as 0.0015 BTC. For collaborative transactions we show what the specification's warning was about (the transaction assembler can always identify the recipient's output, and malformed partial secrets burn payer funds, the failure class disclosed in August 2026), and we construct the variant the warning called for: blind collaborative payments with information-theoretic payer privacy. Delegation, finally, offers no safe default: scanning servers either learn too much or can hide payments. A twelve-experiment benchmark suite accompanies the paper.
+]]></content:encoded>
+<pubDate>Tue, 15 Sep 2026 04:50:42 +0000</pubDate>
+<pubDate>Tue, 15 Sep 2026 04:50:42 +0000</pubDate>
+</item>
+
+<item>
 <title>It's Not Just a Phase: Understanding Function Dependence in MPC Preprocessing</title>
 <link>https://eprint.iacr.org/2026/2029</link>
 <guid>https://eprint.iacr.org/2026/2029</guid>
 <content:encoded><![CDATA[
 <div> 安全多方计算、隐私保护、预处理、函数依赖、实际需求
-<br><br>总结:
+<br /><br />总结:
 1. MPC是隐私保护应用的关键技术。
 2. 为降低输入后的延迟，高效协议常采用预处理。
 3. 函数依赖预处理利用待计算函数的额外知识提升性能。
@@ -19,22 +114,19 @@
 Secure multiparty computation (MPC) is a key enabling technology for privacy-preserving applications. To achieve low latency after inputs are provided, many efficient protocols utilize preprocessing, and the landscape of preprocessing approaches is growing and diverse. Some recent works use variants of function-dependent preprocessing, leveraging additional knowledge on the function to be computed for even better performance. While the existing literature primarily focuses on performance, it is mostly overlooked that there exist different kinds of function dependence and what practical implications they have. We systematize the different flavors of function dependence, relating them to practical requirements beyond efficiency.
 ]]></content:encoded>
 <pubDate>Mon, 14 Sep 2026 15:57:22 +0000</pubDate>
-<pubDate>Mon, 14 Sep 2026 15:57:22 +0000</pubDate>
 </item>
 <item>
 <title>Client-Efficient Online-Offline Private Information Retrieval</title>
 <link>https://eprint.iacr.org/2024/719</link>
 <guid>https://eprint.iacr.org/2024/719</guid>
 <content:encoded><![CDATA[
-<div> 私有信息检索,在线离线PIR,带宽与存储开销,两服务器半诚实,Pirex性能<br><br>总结: 1.传统PIR保护隐私但计算带宽高。2.OO-PIR预计算加速在线访问。3.先进方案仍高客户端带宽存储。4.Pirex两服务器半诚实OO-PIR，低入站带宽存储、亚线性效率、操作简洁。5.实测比现有快至少百倍，1TB取4KB仅55ms，十亿条目入站16KB。 <div>
+<div> 私有信息检索,在线离线PIR,带宽与存储开销,两服务器半诚实,Pirex性能<br /><br />总结: 1.传统PIR保护隐私但计算带宽高。2.OO-PIR预计算加速在线访问。3.先进方案仍高客户端带宽存储。4.Pirex两服务器半诚实OO-PIR，低入站带宽存储、亚线性效率、操作简洁。5.实测比现有快至少百倍，1TB取4KB仅55ms，十亿条目入站16KB。 <div>
 Private Information Retrieval (PIR) permits clients to query data entries from a public database hosted on untrusted servers while preserving client privacy. Traditional PIR models suffer from high computation and/or bandwidth overhead due to linear database processing for privacy. Recently, Online-Offline PIR (OO-PIR) has been proposed to improve PIR practicality by precomputing query-independent materials to accelerate online access. While state-of-the-art OO-PIR schemes (e.g., S&amp;P’24, CRYPTO’23) successfully reduce online processing cost to sublinear levels, they still impose substantial bandwidth and storage burdens on the client, especially when operating on large databases.
 
 In this paper, we propose Pirex, a new two-server OO-PIR with semi-honest security that offers minimal client inbound bandwidth and storage cost while retaining the sublinear processing efficiency. The Pirex design is simple with most operations are naturally low-cost and streamlined (e.g., XOR, PRF, modular arithmetic). We have fully implemented Pirex and evaluated its real-world performance using commodity hardware. Our results showed that Pirex outperforms existing OO-PIR schemes by at least two orders of magnitude. With a 1 TB database, Pirex takes 55ms to retrieve a 4 KB entry, compared with 9-30s by state-of-the-art. For practical databases with billions of 4 KB entries, Pirex only takes 16 KB of inbound bandwidth, which is up to three orders of magnitude more efficient.
 ]]></content:encoded>
 <pubDate>Fri, 10 May 2024 02:53:56 +0000</pubDate>
-<pubDate>Fri, 10 May 2024 02:53:56 +0000</pubDate>
 </item>
-
 <item>
 <title>A Practical and Fully Distributed E-Voting Protocol for the Swiss Context</title>
 <link>https://eprint.iacr.org/2025/1625</link>
@@ -13893,36 +13985,6 @@ $\texttt{webSPDZ}$: Our work brings one of the most performant and versatile gen
 We believe that webSPDZ brings forth many interesting and practically relevant use cases. Thus, webSPDZ pushes the boundaries of practical MPC: making MPC more usable and enabling it for a broader community.
 ]]></content:encoded>
 <pubDate>Fri, 14 Mar 2025 07:30:45 +0000</pubDate>
-</item>
-<item>
-<title>On One-Shot Signatures, Quantum vs Classical Binding, and Obfuscating Permutations</title>
-<link>https://eprint.iacr.org/2025/486</link>
-<guid>https://eprint.iacr.org/2025/486</guid>
-<content:encoded><![CDATA[
-<div> 关键词: One-shot signatures (OSS), 量子签名钥匙, 不可克隆原理, 可区分性混淆(iO), LWE假设
-
-总结:
-本文首次提出了基于标准模型的一次性签名方案(OSS)，该方案的安全性依赖于亚指数级的不可区分性混淆(iO)和LWE假设。这同时也解决了长达十年的一个开放问题，即首次在标准模型下实现了区分古典绑定与坍缩绑定的后量子承诺/哈希的分离。在此过程中，文章还给出了第一个无条件安全的经典oracle模型下的OSS构造。为了实现标准模型的构造，作者们提出了一种名为可交换伪随机置换(permutable PRPs)的概念，并展示了它们如何用于将涉及随机置换的oracle证明转化为基于混淆的证明。具体来说，混淆可交换PRP可以得到一个全域的带有陷阱门的一次性单向函数，这也解决了另一个使用(iO)和一次函数构建此类对象长达十年的问题。 <div>
-One-shot signatures (OSS) were defined by Amos, Georgiou, Kiayias, and Zhandry (STOC'20). These allow for signing exactly one message, after which the signing key self-destructs, preventing a second message from ever being signed. While such an object is impossible classically, Amos et al observe that OSS may be possible using quantum signing keys by leveraging the no-cloning principle. OSS has since become an important conceptual tool with many applications in decentralized settings and for quantum cryptography with classical communication. OSS are also closely related to separations between classical-binding and collapse-binding for post-quantum hashing and commitments. Unfortunately, the only known OSS construction due to Amos et al. was only justified in a classical oracle model, and moreover their justification was ultimately found to contain a fatal bug. Thus, the existence of OSS, even in a classical idealized model, has remained open. 
-
-We give the first standard-model OSS, with provable security assuming (sub-exponential) indistinguishability obfuscation (iO) and LWE. This also gives the first standard-model separation between classical and collapse-binding post-quantum commitments/hashing, solving a decade-old open problem. Along the way, we also give the first construction with unconditional security relative to a classical oracle. To achieve our standard-model construction, we develop a notion of permutable pseudorandom permutations (permutable PRPs), and show how they are useful for translating oracle proofs involving random permutations into obfuscation-based proofs. In particular, obfuscating permutable PRPs gives a trapdoor one-way permutation that is $\textit{full-domain}$, solving another decade-old-problem of constructing this object from (sub-exponential) iO and one-way functions.
-]]></content:encoded>
-<pubDate>Fri, 14 Mar 2025 06:49:30 +0000</pubDate>
-</item>
-<item>
-<title>Non-Interactive Zero-Knowledge Proofs with Certified Deletion</title>
-<link>https://eprint.iacr.org/2024/1848</link>
-<guid>https://eprint.iacr.org/2024/1848</guid>
-<content:encoded><![CDATA[
-<div> 关键词：非交互式零知识证明，认证删除，量子，学习与错误问题，可撤销匿名凭证
-
-总结:
-本文提出了具有认证删除功能的非交互式零知识（NIZK）证明的概念。该概念允许NIZK证明的接收者在删除证明后获得一个证明删除行为的古典证书。文中给出了两个基于标准密码学假设的候选构造方案，第一个方案依赖于经典的NIZK证明和量子抗性的一次函数，但需要证明者和验证者都运行量子算法。随后，作者提出了一种扩展方案，允许证明者为经典设备，这个方案基于学习与错误问题，并要求证明者和验证者之间进行一次实例独立的交互式设置。此外，这些成果在可撤销的知识签名和可撤销匿名凭证的应用上也有所体现，文中对这两个应用进行了定义并构建了相应的方案。<br /><br /> <div>
-We introduce the notion of non-interactive zero-knowledge (NIZK) proofs with certified deletion. Our notion enables the recipient of a (quantum) NIZK proof to delete the proof and obtain a (classical) certificate proving such deletion. We define this notion and propose two candidate constructions from standard cryptographic assumptions. Our first construction is based on classical NIZK proofs and quantum-hard one-way functions but needs both the prover and verifier to run quantum algorithms. We then present an extension that allows the prover to be classical; this is based on the learning with errors problem and requires an instance-independent interactive setup between the prover and verifier. 
-
-Our results have applications to revocable signatures of knowledge and revocable anonymous credentials, which we also define and construct.
-]]></content:encoded>
-<pubDate>Mon, 11 Nov 2024 00:05:19 +0000</pubDate>
 </item>
 </channel>
 </rss>
