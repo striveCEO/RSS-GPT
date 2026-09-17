@@ -5,12 +5,43 @@
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
 <item>
+<title>It's Not Just a Phase: Understanding Function Dependence in MPC Preprocessing</title>
+<link>https://eprint.iacr.org/2026/2029</link>
+<guid>https://eprint.iacr.org/2026/2029</guid>
+<content:encoded><![CDATA[
+<div> 安全多方计算、隐私保护、预处理、函数依赖、实际需求
+<br><br>总结:
+1. MPC是隐私保护应用的关键技术。
+2. 为降低输入后的延迟，高效协议常采用预处理。
+3. 函数依赖预处理利用待计算函数的额外知识提升性能。
+4. 现有研究多重性能，少区分函数依赖类型及实践影响。
+5. 本文系统化函数依赖并关联效率外的实际需求。 <div>
+Secure multiparty computation (MPC) is a key enabling technology for privacy-preserving applications. To achieve low latency after inputs are provided, many efficient protocols utilize preprocessing, and the landscape of preprocessing approaches is growing and diverse. Some recent works use variants of function-dependent preprocessing, leveraging additional knowledge on the function to be computed for even better performance. While the existing literature primarily focuses on performance, it is mostly overlooked that there exist different kinds of function dependence and what practical implications they have. We systematize the different flavors of function dependence, relating them to practical requirements beyond efficiency.
+]]></content:encoded>
+<pubDate>Mon, 14 Sep 2026 15:57:22 +0000</pubDate>
+<pubDate>Mon, 14 Sep 2026 15:57:22 +0000</pubDate>
+</item>
+<item>
+<title>Client-Efficient Online-Offline Private Information Retrieval</title>
+<link>https://eprint.iacr.org/2024/719</link>
+<guid>https://eprint.iacr.org/2024/719</guid>
+<content:encoded><![CDATA[
+<div> 私有信息检索,在线离线PIR,带宽与存储开销,两服务器半诚实,Pirex性能<br><br>总结: 1.传统PIR保护隐私但计算带宽高。2.OO-PIR预计算加速在线访问。3.先进方案仍高客户端带宽存储。4.Pirex两服务器半诚实OO-PIR，低入站带宽存储、亚线性效率、操作简洁。5.实测比现有快至少百倍，1TB取4KB仅55ms，十亿条目入站16KB。 <div>
+Private Information Retrieval (PIR) permits clients to query data entries from a public database hosted on untrusted servers while preserving client privacy. Traditional PIR models suffer from high computation and/or bandwidth overhead due to linear database processing for privacy. Recently, Online-Offline PIR (OO-PIR) has been proposed to improve PIR practicality by precomputing query-independent materials to accelerate online access. While state-of-the-art OO-PIR schemes (e.g., S&amp;P’24, CRYPTO’23) successfully reduce online processing cost to sublinear levels, they still impose substantial bandwidth and storage burdens on the client, especially when operating on large databases.
+
+In this paper, we propose Pirex, a new two-server OO-PIR with semi-honest security that offers minimal client inbound bandwidth and storage cost while retaining the sublinear processing efficiency. The Pirex design is simple with most operations are naturally low-cost and streamlined (e.g., XOR, PRF, modular arithmetic). We have fully implemented Pirex and evaluated its real-world performance using commodity hardware. Our results showed that Pirex outperforms existing OO-PIR schemes by at least two orders of magnitude. With a 1 TB database, Pirex takes 55ms to retrieve a 4 KB entry, compared with 9-30s by state-of-the-art. For practical databases with billions of 4 KB entries, Pirex only takes 16 KB of inbound bandwidth, which is up to three orders of magnitude more efficient.
+]]></content:encoded>
+<pubDate>Fri, 10 May 2024 02:53:56 +0000</pubDate>
+<pubDate>Fri, 10 May 2024 02:53:56 +0000</pubDate>
+</item>
+
+<item>
 <title>A Practical and Fully Distributed E-Voting Protocol for the Swiss Context</title>
 <link>https://eprint.iacr.org/2025/1625</link>
 <guid>https://eprint.iacr.org/2025/1625</guid>
 <content:encoded><![CDATA[
 <div> 网络投票 投票隐私 可验证性 返回码 分布式信任
-<br><br>总结:
+<br /><br />总结:
 1.网络投票需保障保密与可验证，瑞士等系统强调“按意愿投票”，抵御恶意设备。2.返回码方案可在单设备被篡改时核验选票，但需安全生成码。3.瑞士现系统依赖单一可信离线设置机构。4.新非对称协议允许多方创建投票材料、分发信任，且一方投票期可离线；设置与计票为线性，仅要求用户输入一次高熵字符串。5.已实现并证明投票隐私与可验证性；短码猜测攻击下，显著改变结果仍极难。 <div>
 Internet voting aims at guaranteeing both vote secrecy and verifiability. Advanced deployed systems, such as in Estonia or Switzerland, put a strong emphasis on cast-as-intended: even when a voter uses a corrupt device, they should be able to check that their intended vote is included in the tally. One approach relies on return codes, written on a voting card. This enables cast-as-intended even when the voter uses a single device that may be corrupted. While convenient for voters, this requires to generate the codes in a secure manner. This approach is deployed in Switzerland but the current system requires a single trusted setup authority: an offline component that is assumed to correctly generate the voting data.
 
@@ -19,9 +50,7 @@ We propose a novel protocol that allows to distribute the trust during the setup
 We provide an implementation of our protocol, demonstrating its practicability. Moreover, we formally prove vote privacy and verifiability. Our analysis takes into account the presence of short codes that an attacker can guess with non-negligible probability and reveals that making a significant change to the result remains exponentially hard.
 ]]></content:encoded>
 <pubDate>Tue, 09 Sep 2025 14:42:49 +0000</pubDate>
-<pubDate>Tue, 09 Sep 2025 14:42:49 +0000</pubDate>
 </item>
-
 <item>
 <title>High-throughput Verifiable Distributed OPRF from Gold PRF</title>
 <link>https://eprint.iacr.org/2026/1953</link>
@@ -13894,21 +13923,6 @@ We introduce the notion of non-interactive zero-knowledge (NIZK) proofs with cer
 Our results have applications to revocable signatures of knowledge and revocable anonymous credentials, which we also define and construct.
 ]]></content:encoded>
 <pubDate>Mon, 11 Nov 2024 00:05:19 +0000</pubDate>
-</item>
-<item>
-<title>Client-Efficient Online-Offline Private Information Retrieval</title>
-<link>https://eprint.iacr.org/2024/719</link>
-<guid>https://eprint.iacr.org/2024/719</guid>
-<content:encoded><![CDATA[
-<div> 关键词: Private Information Retrieval (PIR), Online-Offline PIR (OO-PIR), Pirex, Client inbound bandwidth, Storage cost
-
-总结:<br />
-本文提出了一种名为Pirex的新颖两服务器在线离线私人信息检索(PIR)方案，该方案具有半诚实安全性。Pirex显著降低了客户端的带宽和存储成本，同时保持了亚线性处理效率。与现有的OO-PIR方案相比，Pirex的设计更为简洁，主要操作自然低成本且高效（如XOR、PRF和模数运算）。已经完全实现了Pirex并使用商用硬件对其进行了实际性能评估。结果显示，Pirex比现有方案至少快两个数量级。例如，在面对1TB数据库查询4KB条目时，Pirex仅需55毫秒，而最先进的方案需要9到30秒。对于含有数十亿个4KB条目的实际数据库，Pirex只需16KB的进站带宽，效率提高了三个数量级。 <div>
-Private Information Retrieval (PIR) permits clients to query data entries from a public database hosted on untrusted servers while preserving client privacy. Traditional PIR models suffer from high computation and/or bandwidth overhead due to linear database processing for privacy. Recently, Online-Offline PIR (OO-PIR) has been proposed to improve PIR practicality by precomputing query-independent materials to accelerate online access. While state-of-the-art OO-PIR schemes (e.g., S&amp;P’24, CRYPTO’23) successfully reduce online processing cost to sublinear levels, they still impose substantial bandwidth and storage burdens on the client, especially when operating on large databases.
-
-In this paper, we propose Pirex, a new two-server OO-PIR with semi-honest security that offers minimal client inbound bandwidth and storage cost while retaining the sublinear processing efficiency. The Pirex design is simple with most operations are naturally low-cost and streamlined (e.g., XOR, PRF, modular arithmetic). We have fully implemented Pirex and evaluated its real-world performance using commodity hardware. Our results showed that Pirex outperforms existing OO-PIR schemes by at least two orders of magnitude. With a 1 TB database, Pirex takes 55ms to retrieve a 4 KB entry, compared with 9-30s by state-of-the-art. For practical databases with billions of 4 KB entries, Pirex only takes 16 KB of inbound bandwidth, which is up to three orders of magnitude more efficient.
-]]></content:encoded>
-<pubDate>Fri, 10 May 2024 02:53:56 +0000</pubDate>
 </item>
 </channel>
 </rss>
