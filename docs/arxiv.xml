@@ -4,6 +4,178 @@
 <title>cs updates on arXiv.org</title>
 <link>http://rss.arxiv.org/rss/cs</link>
 
+<item>
+<title>CC-OPI: Online Distributed Task Allocation for UAV Swarms under Communication Constraints</title>
+<link>https://arxiv.org/abs/2609.19208</link>
+<guid>https://arxiv.org/abs/2609.19208</guid>
+<content:encoded><![CDATA[
+<div> 无人机集群 通信受限 在线重规划 去中心化容错 任务分配
+<br><br>总结:
+1. 短通信使灾后无人机集群形成临时信息孤岛，传统先分配后执行失效。
+2. 提出CC-OPI，以事件驱动方式交错任务协商与物理执行，仅在事件时重规划。
+3. 采用空间局部性与截止时间紧迫度指标，并用非抢占状态锁保护执行中动作。
+4. 借助版本化状态同步与全局时间应急池实现去中心化容错。
+5. 证明有限时间终止；250米通信下完成率约0.80，弱连接仍稳健，代价是更多通信与冗余飞行。 <div>
+arXiv:2609.19208v1 Announce Type: new 
+Abstract: In multi-robot missions such as post-disaster search and rescue, a short communication range fragments a swarm of Unmanned Aerial Vehicles (UAVs) into transient information islands. Under such intermittent connectivity, the prevailing "allocate-then-execute" paradigm--which requires global consensus before any physical movement--breaks down. This paper proposes the Communication-Constrained Online Performance Impact (CC-OPI) algorithm, an event-driven method that interleaves task negotiation with physical execution. CC-OPI replans only at discrete physical and topological events and integrates two further elements. The first is a pair of cost-evaluation metrics adapted to dynamic topologies--one with a spatial locality penalty that promotes regionalized operation, the other with a deadline-aware urgency term--complemented by a non-preemptive state lock that shields each UAV's ongoing action. The second is a decentralized fault-tolerance layer that pairs version-based state synchronization with a global-time-driven emergency pool. We establish that CC-OPI terminates in finite time, free of stale-completion deadlock and of unbounded reassignment within the mission horizon. In simulations at a 250 m communication radius, CC-OPI sustains a task completion rate of about 0.80: it leads a matched online execution of the unmodified Performance Impact (PI) and Consensus-Based Bundle Algorithm (CBBA) rules by about seven percentage points, exceeds the naively transferred static baselines by roughly 20 points, and remains within several points of PI and CBBA under full connectivity. Within the tested settings, CC-OPI degrades gracefully as connectivity weakens and absorbs packet loss, terrain occlusion, and runtime task arrival. The price is more messages and some redundant travel--a deliberate trade-off of efficiency for robustness.
+]]></content:encoded>
+<pubDate>Fri, 18 Sep 2026 00:00:00 -0400</pubDate>
+<pubDate>Fri, 18 Sep 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Data-Driven Compositional Safety Verification of Interconnected Monotone Systems</title>
+<link>https://arxiv.org/abs/2609.19396</link>
+<guid>https://arxiv.org/abs/2609.19396</guid>
+<content:encoded><![CDATA[
+<div> 形式安全验证, 单调系统, 数据驱动, 区间屏障证书, 互联系统
+<br><br>总结:
+1.提出样本高效组合式数据驱动形式安全验证方法，不需局部显式模型。2.利用单调性，仅以边界样本在局部去中心化学习单调神经区间屏障证书。3.在全局层面，按互联结构组合局部证书并以全局条件证明整体安全。4.在结构假设下，将全局安全条件转化为可扩展形式并并入损失，在局部训练时保证整体安全。5.实验表明方法有效且可扩展。 <div>
+arXiv:2609.19396v1 Announce Type: new 
+Abstract: This paper introduces a sample-efficient compositional method for formal safety verification of interconnected monotone systems without requiring explicit models of the local subsystems. Existing data-driven approaches either lack formal safety guarantees or rely on dense Lipschitz-based discretizations of the state space to provide such guarantees, which leads to significant computational overhead and limits scalability. In contrast, we leverage the monotonicity of local subsystems to construct tractable local interval-barrier certificates using only boundary evaluations of each subsystem in a decentralized manner, together with a global condition that guarantees the safety of the overall interconnected system. At the local level, our framework learns interval-barrier certificates using monotone neural networks from boundary samples induced by partitions of the local state and internal-input spaces. At the global level, it composes these local neural interval-barrier certificates using the interconnection structure to certify the safety of the overall system. Furthermore, under appropriate structural assumptions, we reformulate the global safety condition into a scalable form that can be directly incorporated into the neural network loss. This enables the enforcement of overall system safety during local training. The experimental results demonstrate the effectiveness and scalability of the proposed method.
+]]></content:encoded>
+<pubDate>Fri, 18 Sep 2026 00:00:00 -0400</pubDate>
+<pubDate>Fri, 18 Sep 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Agentic AI Networking for Heterogeneous Unmanned Aerial Systems in Low-Altitude Wireless Networks</title>
+<link>https://arxiv.org/abs/2609.19538</link>
+<guid>https://arxiv.org/abs/2609.19538</guid>
+<content:encoded><![CDATA[
+<div> 低空无线网络、异构无人机、大语言模型、多智能体强化学习、动态博弈
+<br><br>总结:1.低空无线网络支撑异构无人机在共享三维空域并发服务；2.移动性、连接性与共享资源强耦合，服务需求动态变化形成非合作博弈；3.传统优化与学习方法依赖预设目标，难以自主适应；4.提出LLM-MARL双环架构：外环LLM解析意图并重构目标与资源优先级，内环执行参数条件化MARL；5.物流监控案例表明可协调共存且无需重训，并展望可扩展可信自适应代理化LAWN。 <div>
+arXiv:2609.19538v1 Announce Type: new 
+Abstract: Low-altitude wireless networks (LAWNs) are emerging as a key infrastructure for heterogeneous unmanned aerial systems that support concurrent services within a shared three-dimensional airspace. Their coexistence creates strong coupling among mobility, connectivity, and shared network resources, while heterogeneous services impose distinct and time-varying requirements. These interactions naturally form a dynamic non-cooperative game in which both operating conditions and coordination objectives evolve over time. Conventional optimization and learning-based controllers typically rely on predefined objectives, limiting their ability to adapt autonomously to changing service requirements and resource priorities. To address this challenge, we propose a hierarchical hybrid large language model (LLM)- multi-agent reinforcement learning (MARL) architecture organized as a dual-loop structure. Specifically, an outer adaptation loop employs LLM-assisted game orchestration to interpret service requirements and operator intent, and reconfigure objectives and resource priorities, while an inner loop executes decentralized, parameter-conditioned MARL policies under the configured game. A logistics-monitoring case study illustrates how the proposed framework facilitates coordinated coexistence among heterogeneous services, adapting to evolving operating conditions without retraining the underlying MARL policies. Finally, we discuss key challenges and research directions toward scalable, trustworthy, and adaptive agentic LAWNs.
+]]></content:encoded>
+<pubDate>Fri, 18 Sep 2026 00:00:00 -0400</pubDate>
+<pubDate>Fri, 18 Sep 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>HEROIC: Heterogeneous Evidential Reasoning for Open-Vocabulary Identification and Cross-Robot Collaboration</title>
+<link>https://arxiv.org/abs/2609.19803</link>
+<guid>https://arxiv.org/abs/2609.19803</guid>
+<content:encoded><![CDATA[
+<div> 多智能体 空地异构 HEROIC 自然语言协调 开放词汇搜索
+<br><br>总结:
+1. 空地异构机器人适合开放世界搜索，但空中与地面平台各有失效模式。2. 现有语言任务团队角色固定或仅靠标签，无法判断资产何时失效。3. HEROIC采用去中心化自然语言协调，依据传感器特性和检测尺度律初分角色、设定高度与扫间距。4. 高度低于安全线时空中转为支援；双方维护证据信念并需近距离验证。5. 实验达84%成功率，较基线更高且快2至4倍。 <div>
+arXiv:2609.19803v1 Announce Type: new 
+Abstract: Multi-agent heterogeneous air-ground robot teams are attractive for open world search, with applications for reconnaissance, urban search and rescue missions (USAR), disaster response and recovery, and hazardous environments. These two platforms have different failure modes: aerial robots cover ground quickly but cannot resolve small or occluded targets from altitude, while ground robots can identify objects-of-interest, such as people or hazardous objects, at close range but cover less area. Existing language-tasked teams either have roles fixed prior, or have a language model assign them from hand-written capability tags, so the team is unable to know when within a mission an asset is no longer useful. We present HEROIC, a decentralized heterogeneous multi-agent open-vocabulary search coordination framework that requires agents to communicate in natural language only. HEROIC's initial agent role assignment is derived from sensor properties and a scale law to determine whether targets can be detected with a high confidence. From the mission's natural language prompt alone, this law assigns aerial flight altitudes and sweep spacing. When this calculated height falls below the altitude for safe flight, aerial agents re-task themselves from searcher to aerial triage, escort, and route guide for ground agents. Both robots maintain an evidential belief over the search area (bearing rays for positive evidence, a log-odds posterior for negative evidence) and gate any arrival on close-range verification. In full-stack experiments, HEROIC reaches the target 84% of the time across all 6 scenes, compares to 35-54% for vision-language frontier baselines, frontier-based search, lawnmower, and random-walk running the same perception, all while being 2-4x sooner to arrive at the target.
+]]></content:encoded>
+<pubDate>Fri, 18 Sep 2026 00:00:00 -0400</pubDate>
+<pubDate>Fri, 18 Sep 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Co-VLA: Consensus-based Federated Training for Vision-Language-Action Models</title>
+<link>https://arxiv.org/abs/2609.19923</link>
+<guid>https://arxiv.org/abs/2609.19923</guid>
+<content:encoded><![CDATA[
+<div> 视觉语言动作模型 联邦学习 共识优化 参数高效微调 异质数据<br><br>总结:1.VLAs随模型与数据规模扩大提升通用机器人学习性能，但机器人数据分散于任务、机器人与地点，集中成本高。2.联邦学习可训练分散数据，却需处理客户端数据分布异质性。3.提出Co-VLA，用ADMM共识优化进行联邦VLA训练，支持全模型与固定/自适应秩参数高效微调。4.客户端无需共享数据即可协作训练共享模型，实验性能接近集中式训练。 <div>
+arXiv:2609.19923v1 Announce Type: new 
+Abstract: Vision-language-action models (VLAs) have emerged as a promising paradigm for general-purpose robot learning, with performance improving as models and datasets scale. Scaling robot data collection, however, remains challenging because data are naturally distributed across robots, tasks, and locations, making centralization costly or impractical. Federated learning offers a way to train on decentralized robot data, but applying it to VLAs requires accounting for heterogeneous robot client data distributions. We present Co-VLA, which applies consensus optimization using the Alternating Direction Method of Multipliers~(ADMM) to federated VLA training. We show that the same algorithm supports both full-model training and parameter-efficient fine-tuning with both fixed-rank and rank-adaptive adapters. The name Co-VLA reflects both consensus and collaboration: clients with different local robot datasets collaboratively train a shared model without sharing their data. Our experiments demonstrate that Co-VLA achieves performance comparable to centralized training in both full-model training and parameter-efficient fine-tuning settings.
+]]></content:encoded>
+<pubDate>Fri, 18 Sep 2026 00:00:00 -0400</pubDate>
+<pubDate>Fri, 18 Sep 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>XIR: A Framework for Interoperability across Cross-Chain Protocols Based on a Verifiable Intermediate Representation</title>
+<link>https://arxiv.org/abs/2609.20010</link>
+<guid>https://arxiv.org/abs/2609.20010</guid>
+<content:encoded><![CDATA[
+<div> 跨链协议、点对点连接、XIR、可验证中间表示、可达性
+<br><br>总结:
+①文章分析点对点跨链协议连接限制可达性与配置成本。②基于约2500万笔交易，统计六协议、286链、11935条直接连接，可达14.64%，全连需81510配置。③提出XIR，以可验证中间表示绑定消息与跨协议投递记录。④实现Hyperlane与LayerZero原型并测试。⑤理论分析表明可省去67018项配置，达84.88%，可达性升至96.86%。 <div>
+arXiv:2609.20010v1 Announce Type: new 
+Abstract: Cross-chain protocols enable applications to exchange messages across blockchains. Under point-to-point configurations, communication depends on a direct connection between the source and destination blockchains, limiting blockchain reachability and requiring additional configurations to connect more blockchains. To quantify this problem, this paper analyzes approximately 25 million mainnet cross-chain transaction events collected from six protocols (Axelar, CCIP, Hyperlane, LayerZero, Relay, and Wormhole) between January and October 2025. The resulting graph covers 286 active blockchains and 11,935 directly connected ordered blockchain pairs. These connections provide a direct reachability of 14.64%, while full direct connectivity would require 81,510 point-to-point configurations. We present XIR, a framework for interoperability across cross-chain protocols based on a verifiable intermediate representation. This representation binds an application message to an ordered record of authenticated cross-chain protocol deliveries, preserving message identity and verification history across protocol boundaries. XIR Gateways and XIR Adapters use this representation to compose existing connections into same-protocol and cross-protocol multi-hop paths. We implement an XIR prototype integrating Hyperlane and LayerZero and evaluate it in local and public-testnet environments. Theoretical analysis and evaluation show that, with correctly configured cross-chain protocol connections, XIR avoids 67,018 additional point-to-point configurations, equivalent to 84.88% of the total required by a point-to-point configuration baseline serving the same reachable pairs, and increases reachability from 14.64% to 96.86% of all ordered blockchain pairs.
+]]></content:encoded>
+<pubDate>Fri, 18 Sep 2026 00:00:00 -0400</pubDate>
+<pubDate>Fri, 18 Sep 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Application-Integrated Slicing towards 6G: The Musical Metaverse Use Case</title>
+<link>https://arxiv.org/abs/2609.20163</link>
+<guid>https://arxiv.org/abs/2609.20163</guid>
+<content:encoded><![CDATA[
+<div> 沉浸式应用,5G网络切片,应用集成切片,编排框架,云边网络
+<br><br>总结:
+1. 新兴沉浸式应用需支持异构用户的通信与计算需求。2. 现有5G切片与编排多服务中心且解耦，难以联合考虑应用语义、共享资源和端到端差异。3. 提出应用集成切片，统一应用与网络编排，支持单一逻辑切片内多用户差异化KPI。4. 音乐元宇宙云边实验显示可降低资源成本与QoS违规率。 <div>
+arXiv:2609.20163v1 Announce Type: new 
+Abstract: Emerging immersive applications are expected to support heterogeneous groups of users with fundamentally different communication and computation requirements. Using the Musical Metaverse (MM) as a representative example, we show how such applications expose limitations of current 5G network slicing and orchestration frameworks, which remain largely service-centric and operate through decoupled application and network management mechanisms. While existing Quality of Service (QoS) and slicing techniques provide traffic differentiation, they cannot jointly account for application semantics, shared resources, and differentiated end-to-end requirements across multiple user classes within the same service instance. To address these limitations, we introduce application-integrated slicing, a framework that unifies application and network orchestration within a common end-to-end service model and enables differentiated KPI targets for multiple user classes within a single logical slice. Using a MM reference scenario deployed over cloud-edge network, we show that application-integrated slicing reduces both resource provisioning cost and QoS violation rates compared with conventional decoupled approaches.
+]]></content:encoded>
+<pubDate>Fri, 18 Sep 2026 00:00:00 -0400</pubDate>
+<pubDate>Fri, 18 Sep 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>The Price of Decentralization, Paid Twice: A Latency Floor and a Minimal Subsidy from a Geographic Decentralization Invariant</title>
+<link>https://arxiv.org/abs/2609.20322</link>
+<guid>https://arxiv.org/abs/2609.20322</guid>
+<content:encoded><![CDATA[
+<div> 延迟感知 验证者选择 拜占庭容错 地理去中心化 激励补贴
+<br><br>总结:
+1.延迟奖励促验证者共置，破坏BFT地理独立性。
+2.在(rho,gamma)去中心化下，若beta>gamma，quorum提交延迟至少rho；平面最小rho√(beta/gamma)。
+3.几何下界与激励耦合：中心化是对称破缺，维持去中心化需Theta(c*rho/sqrt(gamma))补贴。
+4.数值与Solana实测：验证者Nakamoto19，地理Nakamoto1—2。 <div>
+arXiv:2609.20322v1 Announce Type: new 
+Abstract: Latency-aware validator selection---rewarding validators for low network latency through voting weight, leadership, or fast-quorum membership---is known to push validators to co-locate, eroding the geographic fault-independence that Byzantine fault tolerance assumes. We give this tension a sharp, protocol-agnostic form. Calling a stake configuration (rho,gamma)-decentralized if no radius-rho region holds more than a gamma fraction of stake, we prove that for quorum threshold beta>gamma every proposer's beta-quorum commit latency is at least rho---independent of the protocol---and in the plane the minimum is exactly rho*sqrt(beta/gamma). Our main result couples this geometric floor to an incentive one: in a location-choice game with the true quorum-latency reward, centralization arises as a supercritical O(2)-symmetry-breaking bifurcation, and sustaining a decentralization target costs an anti-concentration subsidy of magnitude Theta(c*rho/sqrt(gamma))---decentralization is paid twice, in latency and in incentives, in a constant ratio. We verify every claim numerically and on measured geography: a 719-validator Solana census on a RIPE-Atlas latency matrix has validator Nakamoto coefficient 19 but geographic Nakamoto 1--2. We are explicit about scope: the floor is elementary; the contribution is the latency--subsidy coupling.
+]]></content:encoded>
+<pubDate>Fri, 18 Sep 2026 00:00:00 -0400</pubDate>
+<pubDate>Fri, 18 Sep 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Spotlights: Discovering Improvement Opportunities in Software Repositories</title>
+<link>https://arxiv.org/abs/2609.20446</link>
+<guid>https://arxiv.org/abs/2609.20446</guid>
+<content:encoded><![CDATA[
+<div> 优化机会发现 代码仓库 Spotlights 智能体评审 运行时证据
+<br><br>总结:1.提出优化机会发现，输入仓库、工程目标与可选运行时证据，定位候选区域并解释、提议改动；2.Spotlights通过逻辑映射、智能体评审和研究链接执行；3.多场景评测：找回7/9专家目标，70%候选达标，73.6%复现一致，发现降10.6%运行时且保质量改动；4.确立为可评估步骤。 <div>
+arXiv:2609.20446v1 Announce Type: new 
+Abstract: Coding agents and evolutionary code-search systems can improve implementations once a target and evaluation criterion have been specified. Applying these methods to an existing software repository raises an earlier question: which implementation choices are worth investigating for a high-level engineering objective? We introduce \emph{optimization-opportunity discovery}, the repository-level task of identifying candidate source regions, explaining how they relate to the objective, and proposing possible changes. The task takes as input a repository, an engineering objective, and optional runtime evidence such as offline telemetry observations or profiles. It does not require the user to specify a defect, bottleneck, or code location. We present \emph{Spotlights}, a system that performs this task through logical repository mapping, successive agent reviews, and optional research linking candidates to relevant techniques. We evaluate Spotlights across model serving, document retrieval, blockchain ordering, and document processing. Across three cases, it recovers seven of nine expert-selected targets. In the reliability study, 70\% of the top ten candidates meet the stated correctness and severity thresholds. Across five repeated retrieval runs, 73.6\% of candidate occurrences have a matching source region in all five runs. Spotlights also rediscovers the target of a withheld retrieval optimization and connects it to a relevant tiling technique. In an implementation study, a discovered change reduces end-to-end page-processing runtime by 10.6\% while preserving measured output quality. These results establish optimization-opportunity discovery as a distinct and empirically evaluable step between a broad engineering objective and subsequent implementation and validation.
+]]></content:encoded>
+<pubDate>Fri, 18 Sep 2026 00:00:00 -0400</pubDate>
+<pubDate>Fri, 18 Sep 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>An Interpretable Approach to Money Laundering Detection in Transaction Graphs using Pass-Through Templates</title>
+<link>https://arxiv.org/abs/2609.20737</link>
+<guid>https://arxiv.org/abs/2609.20737</guid>
+<content:encoded><![CDATA[
+<div> 洗钱,交易图谱,分层,匹配算法,以太坊<br><br>总结: 1.洗钱分层常通过中间实体快速转手资金以隐匿来源；2.文章将交易建模为有向多重图，并定义“通行模板”识别分层模式；3.模板检测被转化为最大基数、最大权重匹配，采用Edmonds Blossom算法求最优解；4.以太坊案例发现283个实例，链成密集网络，转移数亿美元稳定币；5.其中6个地址被美国财政部制裁，显示与犯罪组织关联。 <div>
+arXiv:2609.20737v1 Announce Type: new 
+Abstract: Layering is a key stage of the money laundering process in which assets are moved through intermediate entities to obscure their origin. We model this movement as a transaction graph, a labeled directed multigraph where nodes represent entities, such as individuals or organizations, and edges represent transactions between them. This work addresses the detection of layering patterns in transaction graphs. We define pass-through templates, a class of transaction graphs whose structure is indicative of a specific layering pattern in which entities receive funds and rapidly forward them. We formulate detecting instances of these templates within a larger transaction graph as a maximum-cardinality, maximum-weight matching problem. The resulting method uses Edmonds' blossom algorithm, which provably finds an optimal solution to this problem. Here we present a case study on publicly available Ethereum transaction data. We identify 283 pass-through template instances, chained through shared address nodes into a densely interconnected network that moves hundreds of millions of dollars in stablecoin value. We find that six addresses in the identified network are sanctioned by the U.S. Department of the Treasury for associations with criminal organizations, providing evidence of ties between the network and sanctioned criminal entities.
+]]></content:encoded>
+<pubDate>Fri, 18 Sep 2026 00:00:00 -0400</pubDate>
+<pubDate>Fri, 18 Sep 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Robust Information Design with Heterogeneous Beliefs in Bayesian Congestion Games</title>
+<link>https://arxiv.org/abs/2604.10831</link>
+<guid>https://arxiv.org/abs/2604.10831</guid>
+<content:encoded><![CDATA[
+<div> 信息设计, 贝叶斯拥塞博弈, 鲁棒信息设计, 信念异质性, 性能权衡
+<br><br>总结: 1.研究并行网络、仿射时延拥塞博弈中，规划者如何在不完整信息下通过信号设计影响分散用户决策。2.考虑用户对推荐信念与设计者不同带来的鲁棒信息设计问题。3.要求在名义先验邻域内统一满足服从性。4.刻画政策层面鲁棒半径，并识别鲁棒服从域非空的条件。5.分析鲁棒性与性能的权衡，最优成本随鲁棒要求单调增加。 <div>
+arXiv:2604.10831v2 Announce Type: replace 
+Abstract: In many engineered systems, agents make decisions under incomplete information, creating opportunities for a planner to influence decentralized behavior through signaling. We study how such signaling can be designed in parallel-network, affine latency congestion games when users may not interpret recommendations using the same beliefs assumed by the planner. To do so, we consider Bayesian congestion games with private recommendations and formulate a robust information design problem in which obedience must hold uniformly over a neighborhood of a nominal prior. This addresses the previously uncharacterized issue of whether obedience itself remains reliable under belief heterogeneity, rather than only under the single prior used at the design stage. We characterize policy-level robustness radii, identify regimes in which the robust obedience region remains nonempty, and analyze the resulting robustness--performance tradeoff through a robust value function whose optimal cost is monotone in the robustness requirement and whose local sensitivity is governed by the active obedience constraints.
+]]></content:encoded>
+<pubDate>Fri, 18 Sep 2026 00:00:00 -0400</pubDate>
+<pubDate>Fri, 18 Sep 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>MAGRPO: Accelerated MARL Training for Fluid Antenna-Assisted Wireless Network Optimization</title>
+<link>https://arxiv.org/abs/2604.17379</link>
+<guid>https://arxiv.org/abs/2604.17379</guid>
+<content:encoded><![CDATA[
+<div> 流体天线，多小区，联合优化，多智能体强化学习，MAGRPO
+<br><br>总结:
+1. 流体天线通过重定位天线元素改善无线链路。  
+2. 多小区联合优化天线位置、波束成形和发射功率，问题非凸且需分散执行。  
+3. 提出MAGRPO，基于Dec-POMDP和集中训练、分散执行。  
+4. 用组轨迹相对优势替代中心化critic与GAE，计算量降低约一半。  
+5. 仿真显示联合优化显著提升和速率，并减少训练时间。 <div>
+arXiv:2604.17379v3 Announce Type: replace 
+Abstract: Fluid antenna systems (FASs) improve wireless links by repositioning antenna elements to exploit favorable spatial channel variations. Jointly optimizing fluid antenna (FA) positions, beamforming, and transmit power in a multi-cell network is challenging because the problem is non-convex and each base station has only local information during decentralized execution. However, the representative multi-agent reinforcement learning (MARL) algorithms, namely the on-policy multi-agent proximal policy optimization (MAPPO) and the off-policy multi-agent twin delayed deep deterministic policy gradient (MATD3), suffer from excessively long training times. To address this challenge, we formulate the problem as a decentralized partially observable Markov decision process (Dec-POMDP) and propose multi-agent group relative policy optimization (MAGRPO) under centralized training with decentralized execution. MAGRPO constructs relative advantages from groups of joint trajectories, thereby eliminating the centralized critic and generalized advantage estimation used by MAPPO; under parameter sharing, this critic-free design reduces the per-step computational complexity by approximately half. Simulations show that joint FA optimization provides several-fold sum-rate gains over fixed-position configurations. Across the evaluated antenna settings, MAGRPO achieves test sum rates higher than those of MATD3 and comparable to or slightly higher than those of MAPPO. Meanwhile, it reduces the training time by 20%-23% compared with MAPPO and by about 35% compared with MATD3.
+]]></content:encoded>
+<pubDate>Fri, 18 Sep 2026 00:00:00 -0400</pubDate>
+<pubDate>Fri, 18 Sep 2026 00:00:00 -0400</pubDate>
+</item>
 
 <item>
 <title>Decentralized Optimal Equilibrium Learning Over Dynamic Networks</title>

@@ -4,13 +4,14 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+
 <item>
 <title>Lemur+: Compact Post-Quantum Synchronized Multi-Signatures and Multi-Hop Aggregation</title>
 <link>https://eprint.iacr.org/2026/2054</link>
 <guid>https://eprint.iacr.org/2026/2054</guid>
 <content:encoded><![CDATA[
 <div> 后量子签名,同步多重签名,同态向量承诺,区块链共识,LaBRADOR
-<br><br>总结:
+<br /><br />总结:
 1.提出Lemur+，基于Module LWE/SIS的后量子同步多重签名，支持非交互聚合，面向区块链共识。
 2.百万签名者、42年密钥下签名约56KB，较Lemur降8.8倍；2^13签名者聚合7.75s、验证0.29s。
 3.核心为HVC-SOP，可结合KOTS抗rogue-key，并以LaBRADOR实例化，具独立意义。
@@ -20,7 +21,6 @@ In this work, we introduce Lemur+, a compact post-quantum synchronized multi-sig
 The key to Lemur+ is our proposed Homomorphic Vector Commitment with Succinct Opening Proof (HVC-SOP), a new primitive that augments standard HVC with succinct opening proofs. We show that HVC-SOP can be generically combined with key-homomorphic one-time signatures (KOTS) to construct non-interactive synchronized multi-signatures, and prove the security of the resulting construction against rogue-key attacks. We then instantiate HVC-SOP using the lattice-based LaBRADOR proof system (CRYPTO 2023), yielding Lemur+. Finally, we extend Lemur+ to support multi-hop aggregation, allowing signatures to be recursively aggregated across distributed network trees. Beyond Lemur+, our HVC-SOP may be broadly applicable and of independent interest.
 ]]></content:encoded>
 <pubDate>Wed, 16 Sep 2026 00:59:56 +0000</pubDate>
-<pubDate>Wed, 16 Sep 2026 00:59:56 +0000</pubDate>
 </item>
 <item>
 <title>Weighted Batch Threshold Encryption with Efficient DKG</title>
@@ -28,12 +28,11 @@ The key to Lemur+ is our proposed Homomorphic Vector Commitment with Succinct Op
 <guid>https://eprint.iacr.org/2026/2053</guid>
 <content:encoded><![CDATA[
 <div> 加权门限加密 批量门限加密 加密内存池 虚拟构造 分布式密钥生成
-<br><br>总结:1.背景：批量门限加密可解密选中批次并保护其余密文，适合区块链加密内存池；PoS按权益加权。2.问题：朴素加权使通信量随权重增长，已有方案依赖批次标签或索引。3.贡献：提出首个无需标签/索引且通信与权重无关的加权方案。4.方法：虚拟化BTX与部分分式构造，每方每批只传一个群元素；证明正确、鲁棒、安全并设计专用DKG。5.实现：展示区块链参数下实际性能。 <div>
+<br /><br />总结:1.背景：批量门限加密可解密选中批次并保护其余密文，适合区块链加密内存池；PoS按权益加权。2.问题：朴素加权使通信量随权重增长，已有方案依赖批次标签或索引。3.贡献：提出首个无需标签/索引且通信与权重无关的加权方案。4.方法：虚拟化BTX与部分分式构造，每方每批只传一个群元素；证明正确、鲁棒、安全并设计专用DKG。5.实现：展示区块链参数下实际性能。 <div>
 Batch threshold encryption allows a committee to decrypt a selected batch of ciphertexts using one short pre-decryption key per party, while ciphertexts outside the batch remain private. This makes batch threshold encryption attractive for building encrypted mempools for blockchains, where validators reveal transactions selected for a block while pending transactions remain private. However, in proof-of-stake systems like Solana or Ethereum, authorization depends on each validator's stake, which motivates a weighted version of batch threshold encryption. Naive approaches to weighting existing batch threshold encryption schemes lead to communication costs proportional to the weight assigned to each party. Existing schemes that avoid this cost either associate every ciphertext with a batch label or an encryption-time index.
 
 We present the first weighted batch threshold encryption schemes that require neither batch/epoch labels nor encryption-time ciphertext indices, while keeping each party's communication independent of its weight. We obtain two constructions by virtualizing prior schemes: the BTX construction of Agarwal et al. and the partial-fraction construction of Boneh et al. In both schemes' decryption procedures, each party communicates a single group element for an entire batch, regardless of its assigned weight. We prove correctness, robustness, and security under weighted variants of the original schemes' assumptions, and analyze the assumptions in generic bilinear groups. For the BTX-based construction, we also give a specialized distributed key generation protocol that avoids the general purpose MPC-based setup required by the previous state-of-the-art schemes. Finally, we implement our schemes to demonstrate their practical performance at parameter sizes relevant to blockchains.
 ]]></content:encoded>
-<pubDate>Tue, 15 Sep 2026 21:02:08 +0000</pubDate>
 <pubDate>Tue, 15 Sep 2026 21:02:08 +0000</pubDate>
 </item>
 <item>
@@ -41,12 +40,11 @@ We present the first weighted batch threshold encryption schemes that require ne
 <link>https://eprint.iacr.org/2026/2047</link>
 <guid>https://eprint.iacr.org/2026/2047</guid>
 <content:encoded><![CDATA[
-<div> 生成式大语言模型 私有推理 全同态加密 非线性运算 ROSETTA<br><br>总结: 1.生成式LLM多采用自回归解码，部署带来隐私风险。2.FHE私有推理的主要瓶颈是非线性运算开销大。3.提出ROSETTA混合CKKS/TFHE框架，按非线性负载自适应分工。4.设计TFHE分段查找表协议与算子选择机制，自动分配运算。5.相较CacheMir，Softmax最高加速4.8倍，端到端加速1.5至2.1倍。 <div>
+<div> 生成式大语言模型 私有推理 全同态加密 非线性运算 ROSETTA<br /><br />总结: 1.生成式LLM多采用自回归解码，部署带来隐私风险。2.FHE私有推理的主要瓶颈是非线性运算开销大。3.提出ROSETTA混合CKKS/TFHE框架，按非线性负载自适应分工。4.设计TFHE分段查找表协议与算子选择机制，自动分配运算。5.相较CacheMir，Softmax最高加速4.8倍，端到端加速1.5至2.1倍。 <div>
 Generative large language models (LLMs) have achieved state-of-the-art performance on many real-world tasks such as code generation and question answering. These models predominantly rely on an autoregressive decoding strategy that generates output tokens sequentially. However, their pervasive deployment raises serious privacy concerns, motivating private inference frameworks based on fully homomorphic encryption (FHE). A major limitation of existing FHE frameworks is their inefficiency in evaluating nonlinear operations, which incur substantial overhead and dominate the decode stage.
 
 In this paper, we propose ROSETTA, a hybrid CKKS/TFHE framework that overcomes this limitation. We first observe that nonlinear operations in the decode stage exhibit heterogeneous workload patterns, which can be handled effectively via a hybrid approach. We then realize this with two key contributions: 1) an adaptive segmented lookup-table protocol based on TFHE that enables efficient and accurate evaluation of nonlinear operations; and 2) a scheme-aware operator-selection framework that automatically assigns each nonlinear operator to CKKS or TFHE to minimize end-to-end decoding latency. We demonstrate that ROSETTA achieves up to 4.8x Softmax speedup and 1.5--2.1x end-to-end speedup over the SOTA framework CacheMir.
 ]]></content:encoded>
-<pubDate>Tue, 15 Sep 2026 13:29:14 +0000</pubDate>
 <pubDate>Tue, 15 Sep 2026 13:29:14 +0000</pubDate>
 </item>
 <item>
@@ -55,7 +53,7 @@ In this paper, we propose ROSETTA, a hybrid CKKS/TFHE framework that overcomes t
 <guid>https://eprint.iacr.org/2026/2043</guid>
 <content:encoded><![CDATA[
 <div> 盲签名，OPRF，请求隐私，中止预言，同态加密
-<br><br>总结:
+<br /><br />总结:
 1.本文证伪若干盲签名与OPRF的盲性/请求隐私声明。
 2.攻击让恶意签名者以用户验证是否中止，构成隐藏消息的一比特预言。
 3.该问题在标准安全游戏中成立，源于证明误用加密/承诺隐藏。
@@ -68,17 +66,15 @@ The attacks exploit a simple but previously overlooked channel: a malicious sign
 Our main attack applies to a general pattern of homomorphic-encryption-based blind signatures and OPRFs, in which the user encrypts its input, then decrypts and verifies the signer's homomorphic response. We also present two additional case studies, based on derandomization and selective use of signer components, which illustrate the same proof pitfall in other constructions. We identify a positive design criterion: schemes with publicly checkable signature derivation, in the sense of Fischlin-Schröder, do not leak extra information through such selective aborts. Finally, we discuss mitigations. Generic protection requires publicly verifiable honest evaluation, e.g., via zero-knowledge proofs. For random-token use cases of some HE-based blind signatures, we give a partial mitigation based on random unknown-message blindness RUMBL and a random-oracle transformation to standard blindness.
 ]]></content:encoded>
 <pubDate>Tue, 15 Sep 2026 09:31:52 +0000</pubDate>
-<pubDate>Tue, 15 Sep 2026 09:31:52 +0000</pubDate>
 </item>
 <item>
 <title>Seven Bindings: A Machine-Checked Map of the Assumptions Behind Lightning's BOLT 12</title>
 <link>https://eprint.iacr.org/2026/2038</link>
 <guid>https://eprint.iacr.org/2026/2038</guid>
 <content:encoded><![CDATA[
-<div> BOLT 12, offers, onion messages, blinded paths, Payer Proofs<br><br>总结:1.BOLT12为Lightning最大新增，规范多次变动且Payer Proofs无分析。2.首次形式化其全生命周期，基于指定提交用22个ProVerif模型验证。3.隐私完整性依赖七项绑定，并逐行检查假设移除后果。4.接收方匿名与支付收款不可链接成立；攻击均落在规范已依赖的带外假设。5.盲密钥链免费认证接收方传输，付款方交付绑定仅靠实现纪律。6.支付收据隐藏精确披露边界，文末给出六条测试建议。 <div>
+<div> BOLT 12, offers, onion messages, blinded paths, Payer Proofs<br /><br />总结:1.BOLT12为Lightning最大新增，规范多次变动且Payer Proofs无分析。2.首次形式化其全生命周期，基于指定提交用22个ProVerif模型验证。3.隐私完整性依赖七项绑定，并逐行检查假设移除后果。4.接收方匿名与支付收款不可链接成立；攻击均落在规范已依赖的带外假设。5.盲密钥链免费认证接收方传输，付款方交付绑定仅靠实现纪律。6.支付收据隐藏精确披露边界，文末给出六条测试建议。 <div>
 Lightning's BOLT 12 (offers, onion messages, blinded paths) is the largest addition to the Lightning protocol suite, and it is rolling out now. The specification changed three times in 2026, the community is actively debating its privacy posture, and its newest mechanism, Payer Proofs, landed in July 2026 without any analysis. We give the offer family its first formal treatment, covering the full lifecycle from request to receipt, pinned to specification commits e20a924/1528972 and machine-checked in twenty-two ProVerif models that each converge within seconds. The results read as a map rather than a checklist: the family's privacy and integrity rest on seven bindings, removable assumptions whose removal consequences we check row by row. Receiver anonymity and payer-payee unlinkability hold under unbounded sessions and corrupted path nodes, and every protocol-level attack we exhibit lands on an assumption the specification already leans on out-of-band. The map's structure is itself the finding. The blinding key chain, designed for unlinkability, authenticates recipient-side transit for free, while the payer side's delivery binding rests on implementation discipline alone. The newest part of the specification, its payment receipts, turns out to hide a precise disclosure boundary. We close with six testable recommendations for the BOLTs repository.
 ]]></content:encoded>
-<pubDate>Tue, 15 Sep 2026 05:13:53 +0000</pubDate>
 <pubDate>Tue, 15 Sep 2026 05:13:53 +0000</pubDate>
 </item>
 <item>
@@ -87,7 +83,7 @@ Lightning's BOLT 12 (offers, onion messages, blinded paths) is the largest addit
 <guid>https://eprint.iacr.org/2026/2037</guid>
 <content:encoded><![CDATA[
 <div> BIP-352, 静默支付, 安全证明, 扫描攻击, 协作支付
-<br><br>总结:
+<br /><br />总结:
 1. 静默支付可静态地址收新输出，但缺安全证明，暴露扫描、锁资、漏付问题。
 2. 论文在DDH下证明接收方与协作方不可关联，含标签系统链接攻击及修复。
 3. 扫描成本：K_max令二次变线性，合规扫描需Ω(N+KM)，新扫描快39倍，全块攻击低至0.0015BTC。
@@ -96,9 +92,7 @@ Lightning's BOLT 12 (offers, onion messages, blinded paths) is the largest addit
 Silent payments (BIP-352) let Bitcoin users publish one static address and receive at fresh, unlinkable outputs. The protocol already ships in major wallets, yet its own specification concedes it has no formal security proof—and 2026 brought a worst-case scanning attack, a funds-locking hardware-wallet disclosure, and an omitted-payment bug. We supply the missing analysis. Receiver and co-transactor unlinkability are proved under DDH, with the label system as a corollary that includes an executable linking attack and its fix. We then quantify what scanning costs and what an attacker can buy with it. The community's K_max cap turns quadratic attack amplification into linear; every compliant scanner needs Ω(N+KM) work; our set-probing scanner meets this bound and runs 39× faster in our measurements; and a year of fee data prices a full-block attack as low as 0.0015 BTC. For collaborative transactions we show what the specification's warning was about (the transaction assembler can always identify the recipient's output, and malformed partial secrets burn payer funds, the failure class disclosed in August 2026), and we construct the variant the warning called for: blind collaborative payments with information-theoretic payer privacy. Delegation, finally, offers no safe default: scanning servers either learn too much or can hide payments. A twelve-experiment benchmark suite accompanies the paper.
 ]]></content:encoded>
 <pubDate>Tue, 15 Sep 2026 04:50:42 +0000</pubDate>
-<pubDate>Tue, 15 Sep 2026 04:50:42 +0000</pubDate>
 </item>
-
 <item>
 <title>It's Not Just a Phase: Understanding Function Dependence in MPC Preprocessing</title>
 <link>https://eprint.iacr.org/2026/2029</link>
@@ -13884,107 +13878,6 @@ This paper introduces VeriSSO, a novel SSO protocol based on verifiable credenti
 Federated Learning (FL) has recently emerged as one of the leading paradigms for collaborative machine learning, serving as a tool for model computation without a need to expose one’s privately stored data. However, despite its advantages, FL systems face severe challenges within its own security solutions that address both privacy and robustness of models. This paper focuses on vulnerabilities within the domain of FL security with emphasis on model-robustness. Identifying critical gaps in current defences, particularly against adaptive adversaries which modify their attack strategies after being disconnected and rejoin systems to continue attacks. To our knowledge, other surveys in this domain do not cover the concept of adaptive adversaries, this along with the significance of their impact serves as the main motivation for this work. Our contributions are fivefold: (1) we present a comprehensive overview of FL systems, presenting a complete summary of its fundamental building blocks, (2) an extensive overview of existing vulnerabilities that target FL systems in general, (3) highlight baseline attack vectors as well as state-of-the-art approaches to development of attack methods and defence mechanisms, (4) introduces a novel baseline method of attack leveraging reconnecting malicious clients, and (5) identifies future research directions to address and counter adaptive attacks. We demonstrate through experimental results that existing baseline secure aggregation rules used in other works for comparison such as Krum and Trimmed Mean are insufficient against those attacks. Further, works improving upon those algorithms do not address this concern either. Our findings serve as a basis for redefining FL security paradigms in the direction of adaptive adversaries.
 ]]></content:encoded>
 <pubDate>Tue, 18 Mar 2025 15:44:42 +0000</pubDate>
-</item>
-<item>
-<title>Capitalized Bitcoin Fork for National Strategic Reserve</title>
-<link>https://eprint.iacr.org/2025/505</link>
-<guid>https://eprint.iacr.org/2025/505</guid>
-<content:encoded><![CDATA[
-<div> 关键词：比特币、零成本、国家控股、比特币分叉、战略储备比特币（SRBTC）
-
-总结:
-该文提出了一种策略，使一个国家能够在不对纳税人造成任何成本的情况下获得比特币的多数股权。这个策略是通过政府赞助的比特币分叉实现的，新创建的分叉币种称为战略储备比特币（SRBTC），其创世区块将大量新的代币分配给国家财政部，数量为当前比特币（BTC）总量的多倍。原版BTC和SRBTC在分叉链上继续保持1:1等价关系。国家只需要承诺接受SRBTC作为法定货币，如税收支付。
-
-文章通过三个竞争性游戏来证明这一提议的合理性：
-1. 第一场游戏显示，如果投资者只有BTC和SRBTC两种选择，那么已持有BTC财富比例达到某一阈值θ的投资者会将新增资金投入原始链，而BTC财富占比低于θ的投资者则会选择投资SRBTC。
-2. 第二场游戏表明，如果有第三个投资选择——正在贬值（经通胀调整）的现金，那么BTC持有量低于阈值θ的投资者将倾向于投资SRBTC，但前提是在未来允许挖掘的新SRBTC数量足够大（与1/d成线性增长关系）。
-3. 第三场游戏证明了当比特币的分叉版本和一个不认可原版BTC价值的比特币复制品同时存在时，即使两者都由一个或多个国家同等支持，投资者也会更偏好于比特币的分叉版本。 <div>
-We describe a strategy for a nation to acquire majority stake in Bitcoin with zero cost to the taxpayers of the nation. We propose a bitcoin fork sponsored by the the government of the nation, and backed by the full faith of treasury of the nation, such that the genesis block of this fork attributes fixed large amount of new kinds of tokens called strategic-reserve-bitcoin tokens (SRBTC) to the nation's treasury, which is some  multiple (greater than one) of the amount of all Bitcoin tokens (BTC) currently set in the Bitcoin protocol. The BTC tokens continue to be treated 1:1 as SRBTC tokens in the forked chain. The only capital that the nation puts up is its explicit guarantee that the SRBTC tokens of the fork will be accepted as legal tender, such as payment of tax to the treasury.
-
-We suggest that this is a better approach than starting a new blockchain that mimics Bitcoin, as it will be  partially fair to the current holders of Bitcoin, which in turn would make it competitive in the space of other such possible forks by other powerful nations. Moreover, such a proof-of-work blockchain  retains its egalitarian and democratic nature, which competitively deters the said nation from any dilutions in the future. 
-
-To justify our proposal we setup three competitive games, and show strategies for different players that are in Nash equilibrium and which throw further light on these claims. In particular, 
-
-1. The first game shows that if the only two alternatives for investors is to invest in BTC or SRBTC, then individuals who have a certain fraction $\theta$ of their wealth already invested in BTC, will invest new money in the original chain, whereas the individuals whose current wealth invested in BTC is less than the $\theta$ fraction will invest new money in SRBTC.
-2. The second game shows that if there is a third alternative for investment, which is cash that is losing value (inflation-adjusted) by a percentage $d$, then the investors who had less than $\theta$ fraction of wealth in Bitcoin, will invest in SRBTC only if the dilution of SRBTC is large enough (as an increasing (linear) function of $1/d$). Here by dilution we mean the new SRBTC tokens that are allowed to be eventually mined in the fork.
-3.  The third game shows that investors would prefer a fork of Bitcoin over a replica of Bitcoin that doesn't value original BTC, when both are available and even if both are backed similarly by one or more nations.
-]]></content:encoded>
-<pubDate>Mon, 17 Mar 2025 19:12:17 +0000</pubDate>
-</item>
-<item>
-<title>Sanitization of FHE Ciphertexts</title>
-<link>https://eprint.iacr.org/2016/164</link>
-<guid>https://eprint.iacr.org/2016/164</guid>
-<content:encoded><![CDATA[
-<div> 关键词：fully homomorphic encryption (FHE)，Somewhat Homomorphic Encryption (SHE)，bootstrapping，ciphertext sanitization，circuit privacy
-
-总结：
-文章介绍了关于全同态加密（FHE）的一种新方法。FHE方案定义中支持同态解密，现有的所有FHE构造都是通过从某种程度上可同态加密（SHE）方案利用bootstrapping技术构建的。文章提出一种算法，利用公钥提供的重随机化操作对密文进行净化，使其分布变得规范，不再依赖于导致该密文生成的电路，从而在诚实但好奇模型下实现了电路隐私。这种方法与基于噪声淹没的先前方法不同，不会显著降低底层FHE的安全性和效率权衡。这项技术可以应用于目前为止提出的全部基于格的FHE方案，而不实质性地影响其具体的参数设置。<br /><br /> <div>
-By definition, fully homomorphic encryption (FHE) schemes
-support homomorphic decryption, and all known FHE constructions are bootstrapped from a Somewhat Homomorphic Encryption (SHE) scheme via this technique. Additionally, when a public key is provided, ciphertexts are also re-randomizable, e.g., by adding to them fresh encryptions of 0. From those two operations we devise an algorithm to sanitize a ciphertext, by making its distribution canonical. In particular, the distribution of the ciphertext does not depend on the circuit that led to it via homomorphic evaluation, thus providing circuit privacy in the honest-but-curious model. Unlike the previous approach based on noise flooding, our approach does not degrade much the security/efficiency trade-off of the underlying FHE. The technique can be applied to all lattice-based FHE proposed so far, without substantially affecting their concrete parameters.
-]]></content:encoded>
-<pubDate>Fri, 19 Feb 2016 20:16:36 +0000</pubDate>
-</item>
-<item>
-<title>Endorser Peer Anonymization in Hyperledger Fabric for Consortium of Organizations</title>
-<link>https://eprint.iacr.org/2025/492</link>
-<guid>https://eprint.iacr.org/2025/492</guid>
-<content:encoded><![CDATA[
-<div> 关键词: Hyperledger Fabric、隐私保护、背书系统、阈值环签名、Pedersen承诺
-
-总结:<br />
-本文针对Hyperledger Fabric区块链平台中的交易流程中存在endorser签名和背书策略暴露导致的安全隐患问题，提出了一种隐私保护的背书系统。该系统通过采用范围关联的阈值环签名方案匿名化背书者，并利用Pedersen承诺和非交互式知识证明来保护背书策略的安全性。同时，通过使用非交互式共根证明方法，实现了计算效率的提升。文章进行了必要的安全性分析，证明了所提方案能够确保匿名性和不可链接性属性。通过对现有框架进行比较分析，显示提出的方案提供了更高级别的安全性和优化的效率。 <div>
-Hyperledger Fabric is a unique permissioned platform for implementing blockchain in a consortium. It has a distinct transaction flow of execute-order-validate. During the execution phase, a pre-determined set of endorsing peers execute a transaction and sign the transaction response. This process is termed endorsement. In the validation phase, peers validate the transaction with reference to an endorsement policy. The identity of the endorsing organizations is obtainable to all the nodes in the network through the endorser signature and endorsement policy. Knowing this has led to serious vulnerabilities in the blockchain network.
-In this paper, we propose a privacy-preserving endorsement system which conceals both endorser signature and endorsement policy. Endorser is anonymized by replacing the signature scheme with a scoped-linkable threshold ring signature scheme. Endorsement policy is secured using Pedersen commitments and non-interactive proof of knowledge of integer vector. We also achieve efficiency in the computation by employing non-interactive proof of co-prime roots. We provide the necessary security analysis to prove that the proposed work guarantees anonymity and unlinkability properties. A comparative analysis of our work with an existing framework is provided which shows that the proposed scheme offers higher level of security and it is optimal in terms of efficiency.
-]]></content:encoded>
-<pubDate>Sat, 15 Mar 2025 13:18:58 +0000</pubDate>
-</item>
-<item>
-<title>Blind Brother: Attribute-Based Selective Video Encryption</title>
-<link>https://eprint.iacr.org/2025/491</link>
-<guid>https://eprint.iacr.org/2025/491</guid>
-<content:encoded><![CDATA[
-<div> 关键词: 选择性视频加密(SVE), 细粒度访问控制, ABSVE协议, 区域感兴趣(ROI), 密文策略属性基加密(CP-ABE)
-
-总结:<br />
-针对现有选择性视频加密方案存在的粗粒度加密和单一访问级别的局限性，本文提出了一个基于细粒度访问控制的选择性视频加密方案——ABSVE及其应用协议\protocol。该方案通过使用独特的对称密钥加密不同的区域感兴趣(ROI)，并利用CP-ABE方案将这些密钥与特定访问策略绑定，从而实现单个加密视频流的多级访问权限。此外，文章还为ABSVE提供了正式的语法和安全性定义，填补了先前工作中对此类方案严格安全性分析的空白。最后，本文在Kvazaar HEVC编码器上实现了该协议并进行了评估，结果显示，提出的方案在增强安全性和隐私保护的同时，还能实现对视频内容的可控访问，并且效率接近未加密压缩的情况。 <div>
-The emergence of video streams as a primary medium for communication and the demand for high-quality video sharing over the internet have given rise to several security and privacy issues, such as unauthorized access and data breaches. To address these limitations, various Selective Video Encryption (SVE) schemes have been proposed, which encrypt specific portions of a video while leaving others unencrypted. The SVE approach balances security and usability, granting unauthorized users access to certain parts while encrypting sensitive content. However, existing SVE schemes adopt an all-or-nothing coarse-grain encryption approach, where a user with a decryption key can access all the contents of a given video stream. This paper proposes and designs a fine-grained access control-based selective video encryption scheme, ABSVE, and a use-case protocol called \protocol. Our scheme encrypts different identified Regions of Interest (ROI) with a unique symmetric key and applies a Ciphertext Policy Attribute Based Encryption (CP-ABE) scheme to tie these keys to specific access policies. This method provides multiple access levels for a single encrypted video stream. Crucially, we provide a formal syntax and security definitions for ABSVE, allowing for rigorous security analysis of this and similar schemes --  which is absent in prior works. Finally, we provide an implementation and evaluation of our protocol in the Kvazaar HEVC encoder. Overall, our constructions enhance security and privacy while allowing controlled access to video content and achieve comparable efficiency to compression without encryption.
-]]></content:encoded>
-<pubDate>Sat, 15 Mar 2025 13:13:35 +0000</pubDate>
-</item>
-<item>
-<title>PREAMBLE: Private and Efficient Aggregation of Block Sparse Vectors and Applications</title>
-<link>https://eprint.iacr.org/2025/490</link>
-<guid>https://eprint.iacr.org/2025/490</guid>
-<content:encoded><![CDATA[
-<div> 关键词：secure aggregation、two-server system、Prio、block-sparse vectors、PREAMBLE
-
-总结:<br />
-本文关注的是在两服务器系统中高维度向量的安全聚合问题，如Prio系统中用于隐私联邦学习的梯度聚合。现有的方法需要随着维度的增长而增加通信量，从而限制了能有效处理的向量维度。为此，文章提出了PREAMBLE——一种针对块稀疏欧几里得向量的新型分布式点函数扩展，它实现了对块稀疏向量的高效通信和计算聚合。进一步地，PREAMBLE可以与随机采样及采样结果下的隐私增强相结合，实现向量聚合的渐近最优隐私-效用权衡，同时只需很小的通信成本。结合最近在数值隐私会计领域的进展，相比于应用于Prio的高斯机制，本方法在噪声方差上的开销可忽略不计。 <div>
-We revisit the problem of secure aggregation of high-dimensional vectors in a two-server system such as Prio. These systems are typically used to aggregate vectors such as gradients in private federated learning, where the aggregate itself is protected via noise addition to ensure differential privacy. Existing approaches require communication scaling with the dimensionality, and thus limit the dimensionality of vectors one can efficiently process in this setup.
-
-We propose PREAMBLE: Private Efficient Aggregation Mechanism for  Block-sparse Euclidean Vectors. PREAMBLE is a novel extension of distributed point functions that enables communication- and computation-efficient aggregation of block-sparse vectors, which are sparse vectors where the non-zero entries occur in a small number of clusters of consecutive coordinates. We then show that PREAMBLE can be combined with random sampling and privacy amplification by sampling results, to allow asymptotically optimal privacy-utility trade-offs for vector aggregation, at a fraction of the communication cost. When coupled with recent advances in numerical privacy accounting, our approach incurs a negligible overhead in noise variance, compared to the Gaussian mechanism used with Prio.
-]]></content:encoded>
-<pubDate>Fri, 14 Mar 2025 22:02:42 +0000</pubDate>
-</item>
-<item>
-<title>webSPDZ: Versatile MPC on the Web</title>
-<link>https://eprint.iacr.org/2025/487</link>
-<guid>https://eprint.iacr.org/2025/487</guid>
-<content:encoded><![CDATA[
-<div> 关键词：多党计算、可用性、浏览器基础、webSPDZ、MP-SPDZ
-
-总结:
-随着多党计算（MPC）在如医疗、金融和机器学习等领域解决隐私与安全问题日益实用化，其用户体验成为一大关注点。为提升MPC的易用性，可构建基于浏览器的MPC引擎，例如JIFF和MPyC的网络版本。文章提出将性能强大、通用性强的MPC引擎MP-SPDZ引入网络环境，创建名为webSPDZ的新引擎。通过使用Emscripten将MP-SPDZ的C++后端编译为WebAssembly并升级浏览器通信（使用WebRTC或WebSocket）。webSPDZ支持≥40种不同安全模型的MPC协议，相较于现有的MPyC-Web和JIFF等网络版MPC引擎，在端到端实验中表现出更优性能。因此，webSPDZ不仅提升了MPC的易用性，还将其实用范围扩展至更广泛的用户群体，推动了MPC实践应用的边界。 <div>
-Multi-party computation (MPC) has become increasingly practical in the last two decades, solving privacy and security issues in various domains, such as healthcare, finance, and machine learning. One big caveat is that MPC sometimes lacks usability since the knowledge barrier for regular users can be high. Users have to deal with, e.g., various CLI tools, private networks, and sometimes even must install many dependencies, which are often hardware-dependent.
-
-A solution to improve the usability of MPC is to build browser-based MPC engines where each party runs within a browser window. Two examples of such an MPC web engine are JIFF and the web variant of MPyC. Both support an honest majority with passive corruptions.
-
-$\texttt{webSPDZ}$: Our work brings one of the most performant and versatile general-purpose MPC engines, MP-SPDZ, to the web. MP-SPDZ supports ≥40 MPC protocols with different security models, enabling many security models on the web. To port MP-SPDZ to the web, we use Emscripten to compile MP-SPDZ’s C++ BackEnd to WebAssembly and upgrade the party communication for the browser (WebRTC or WebSockets). We call the new MPC web engine webSPDZ. As with the native versions of the mentioned MPC web engines, MPyC-Web and JIFF, webSPDZ outperforms them in our end-to-end experiments.
-
-We believe that webSPDZ brings forth many interesting and practically relevant use cases. Thus, webSPDZ pushes the boundaries of practical MPC: making MPC more usable and enabling it for a broader community.
-]]></content:encoded>
-<pubDate>Fri, 14 Mar 2025 07:30:45 +0000</pubDate>
 </item>
 </channel>
 </rss>
