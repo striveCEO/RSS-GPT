@@ -5,11 +5,35 @@
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
 <item>
+<title>Revisiting ML Training under Fully Homomorphic Encryption: Convergence Guarantees, Differential Privacy, and Efficient Algorithms</title>
+<link>https://eprint.iacr.org/2026/2073</link>
+<guid>https://eprint.iacr.org/2026/2073</guid>
+<content:encoded><![CDATA[
+<div> 全同态加密,差分隐私,收敛分析,多项式近似,加密训练<br><br>总结: 1.首次给出FHE下机器学习训练的理论收敛分析；2.提出适配加密计算的差分隐私训练算法；3.较标准DP-GD提升计算效率且保持相当效用；4.证明基于激活与损失多项式近似的近似梯度下降可收敛；5.无需昂贵逐样本梯度裁剪即可保护隐私并支持可扩展学习；6.提供数据无关超参与多项式近似策略，提升敏感数据隐私安全训练可行性。 <div>
+We present the first theoretical convergence analysis of machine learning training under fully homomorphic encryption (FHE), combined with a differentially private (DP) training algorithm tailored to encrypted computation. Our approach improves computational efficiency over standard differentially private gradient descent (DP-GD) while achieving comparable utility. In particular, we prove convergence of approximate gradient descent using polynomial approximations of activation and loss functions, which are required for FHE compatibility. To preserve privacy in downstream tasks, we integrate differential privacy without relying on costly per-sample gradient clipping, enabling scalable encrypted learning. We also provide data-independent hyperparameter selection and theoretically grounded strategies for polynomial approximation which can be of independent interest. Together, these contributions advance the feasibility of efficient, private, and secure machine learning on sensitive data.
+]]></content:encoded>
+<pubDate>Thu, 17 Sep 2026 17:50:10 +0000</pubDate>
+<pubDate>Thu, 17 Sep 2026 17:50:10 +0000</pubDate>
+</item>
+<item>
+<title>DelegProof: A Machine-Checked Security Analysis of EIP-7702 Delegation</title>
+<link>https://eprint.iacr.org/2026/2060</link>
+<guid>https://eprint.iacr.org/2026/2060</guid>
+<content:encoded><![CDATA[
+<div> EIP-7702,DelegProof,Tamarin,ERC-4337,形式化验证
+<br><br>总结:1.Pectra后7702上线，允许EOA委托，63%委托涉恶、损失236万美元；2.缺乏形式化描述且建议缓解未经机验；3.DelegProof首次符号分析7702与4337入口点，复现四类攻击、发现十种模式并验证安全不变量；4.证明禁chainId-0、账户绑定初始化门、命名空间存储分别消除重放、恢复授权、阻断混淆，模型已开源。 <div>
+EIP-7702, live on Ethereum since the Pectra upgrade, lets externally owned accounts delegate their execution to arbitrary contract code with a single signature. The consequences are measurable: 63% of observed delegations point to malicious contracts, with $2.36M in confirmed losses, and ecosystem guidance already warns about cross-chain replay and front-run initialization. What is missing is a formal account of the problem: the 7702 delegation lifecycle has no formal treatment, and none of the recommended mitigations has been machine-verified. We present DelegProof, to our knowledge the first symbolic formal analysis of EIP-7702 authorization semantics composed with the ERC-4337 EntryPoint pipeline. Our Tamarin models are calibrated by reproducing four documented attack classes, and yield ten machine-checked attack patterns—among them the silent failure of the advertised temporary-delegation bundle, storage confusion across re-delegation, and an ERC-1271 substitution attack that reaches into the signature checks of relying contracts—together with the security invariants that do hold. Formalizing the recommended mitigations shows that banning chainId-0 authorizations eliminates cross-chain replay, that an account-bound initialization gate restores init authorization while an unbound gate is provably still bypassable, and that namespaced storage slots make the storage-confusion class structurally inexpressible. All models and proofs are available at https://anonymous.4open.science/r/delegproof-artifact-F7FE/.
+]]></content:encoded>
+<pubDate>Wed, 16 Sep 2026 12:15:56 +0000</pubDate>
+<pubDate>Wed, 16 Sep 2026 12:15:56 +0000</pubDate>
+</item>
+
+<item>
 <title>On Aborts in Differential Privacy</title>
 <link>https://eprint.iacr.org/2026/2059</link>
 <guid>https://eprint.iacr.org/2026/2059</guid>
 <content:encoded><![CDATA[
-<div> 差分隐私、多方协议、协议中止、理想执行、公平性<br><br>总结:①研究多方DP中敌手借协议中止破坏保证及诚实方输出的DP性质。②提出理想中止模型，按泄露数据库、随机性、输出等信息界定影响，适用于MPC等方法。③MPC理想执行显示，带公平性比安全可中止给诚实方更强DP保证，单独输出功能类似。④部分公平与完全公平DP保证相近，且可用于不诚实多数和两方场景，增强两方计算DP。 <div>
+<div> 差分隐私、多方协议、协议中止、理想执行、公平性<br /><br />总结:①研究多方DP中敌手借协议中止破坏保证及诚实方输出的DP性质。②提出理想中止模型，按泄露数据库、随机性、输出等信息界定影响，适用于MPC等方法。③MPC理想执行显示，带公平性比安全可中止给诚实方更强DP保证，单独输出功能类似。④部分公平与完全公平DP保证相近，且可用于不诚实多数和两方场景，增强两方计算DP。 <div>
 There is a growing literature on differential privacy (DP) in multiparty protocols, enabling use in distributed settings and reduced trust assumptions. A largely overlooked aspect of such protocols is the extent to which an adversary can undermine the DP guarantees by making the protocol abort. Another is the DP properties of the honest parties' outputs. We initiate the study of both these issues.
 
         First, we propose an idealized model of aborts, where an aborter is leaked some information about a DP mechanism execution and then chooses whether or not to let an independent malicious analyst learn the mechanism output. We bound the effects of aborts according to what information (the database, randomness, output, or any combination of these) is leaked. These bounds are not only applicable to multiparty DP via general-purpose multiparty computation (MPC) but may also be used in the analysis of other methods to certify DP properties of a protocol. 
@@ -19,9 +43,7 @@ There is a growing literature on differential privacy (DP) in multiparty protoco
         Finally, we analyze multiparty protocols with respect to the way in which they realize the respective ideal functionalities. We show that partially fair and fully fair protocols have very similar DP guarantees. Since partial fairness, as opposed to full fairness, can be achieved in dishonest-majority settings, and in particular the two-party setting, this opens up for enhanced DP guarantees in two-party computation.
 ]]></content:encoded>
 <pubDate>Wed, 16 Sep 2026 08:02:49 +0000</pubDate>
-<pubDate>Wed, 16 Sep 2026 08:02:49 +0000</pubDate>
 </item>
-
 <item>
 <title>Lemur+: Compact Post-Quantum Synchronized Multi-Signatures and Multi-Hop Aggregation</title>
 <link>https://eprint.iacr.org/2026/2054</link>
@@ -13882,19 +13904,6 @@ Single Sign-On (SSO) is a popular authentication mechanism enabling users to acc
 This paper introduces VeriSSO, a novel SSO protocol based on verifiable credentials (VC) that supports RP authentication while preserving privacy and avoiding single points of failure. VeriSSO employs an independent authentication server committee to manage RP and user authentication, binding RP authentication with credential-based anonymous user authentication. This approach ensures user unlinkability while supporting RP authentication and allows RPs to continue using their existing verification routines with identity tokens as in the ACF workflow. VeriSSO's design also supports lawful de-anonymization, ensuring user accountability for misbehavior during anonymity. Experimental evaluations of VeriSSO demonstrate its efficiency and practicality, with authentication processes completed within 100 milliseconds.
 ]]></content:encoded>
 <pubDate>Wed, 19 Mar 2025 01:32:26 +0000</pubDate>
-</item>
-<item>
-<title>Adaptive Adversaries in Byzantine-Robust Federated Learning: A survey.</title>
-<link>https://eprint.iacr.org/2025/510</link>
-<guid>https://eprint.iacr.org/2025/510</guid>
-<content:encoded><![CDATA[
-<div> 关键词：Federated Learning、安全、模型鲁棒性、自适应攻击、防御机制
-
-<br /><br />总结:
-本文关注了联邦学习（Federated Learning，FL）的安全领域，特别是针对模型鲁棒性的脆弱性。文章首先全面概述了FL系统的基本构成和现有漏洞；接着，详细介绍了针对FL系统的各类攻击向量以及现有的攻击方法与防御机制。文章提出了一个利用重新连接的恶意客户端进行攻击的新颖基线方法，并指出目前针对自适应敌手的防御措施存在显著不足，如常用的Krum和Trimmed Mean等安全聚合规则无法有效抵御这类攻击。此外，改进这些算法的工作也未解决这一问题。最后，文章指出了对抗自适应攻击的未来研究方向，并强调了其对于重新定义FL安全范式的重要性。 <div>
-Federated Learning (FL) has recently emerged as one of the leading paradigms for collaborative machine learning, serving as a tool for model computation without a need to expose one’s privately stored data. However, despite its advantages, FL systems face severe challenges within its own security solutions that address both privacy and robustness of models. This paper focuses on vulnerabilities within the domain of FL security with emphasis on model-robustness. Identifying critical gaps in current defences, particularly against adaptive adversaries which modify their attack strategies after being disconnected and rejoin systems to continue attacks. To our knowledge, other surveys in this domain do not cover the concept of adaptive adversaries, this along with the significance of their impact serves as the main motivation for this work. Our contributions are fivefold: (1) we present a comprehensive overview of FL systems, presenting a complete summary of its fundamental building blocks, (2) an extensive overview of existing vulnerabilities that target FL systems in general, (3) highlight baseline attack vectors as well as state-of-the-art approaches to development of attack methods and defence mechanisms, (4) introduces a novel baseline method of attack leveraging reconnecting malicious clients, and (5) identifies future research directions to address and counter adaptive attacks. We demonstrate through experimental results that existing baseline secure aggregation rules used in other works for comparison such as Krum and Trimmed Mean are insufficient against those attacks. Further, works improving upon those algorithms do not address this concern either. Our findings serve as a basis for redefining FL security paradigms in the direction of adaptive adversaries.
-]]></content:encoded>
-<pubDate>Tue, 18 Mar 2025 15:44:42 +0000</pubDate>
 </item>
 </channel>
 </rss>
