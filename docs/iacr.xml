@@ -5,14 +5,47 @@
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
 <item>
+<title>Practical Group Signatures from Tag-Based NTRU Sampler</title>
+<link>https://eprint.iacr.org/2026/2077</link>
+<guid>https://eprint.iacr.org/2026/2077</guid>
+<content:encoded><![CDATA[
+<div> 隐私增强,格密码,群签名,NTRU,紧凑高效
+<br><br>总结:1.后量子迁移转向隐私增强原语。2.现有格群签名多计算重或密钥大。3.提出新格群签名，密钥与签名紧凑且全程序运行高效。4.核心是基于标签的gadget采样器，兼容NTRU并继承其陷阱门与紧凑优势。5.该采样器可用于匿名凭证等。6.提出两个NTRU与ISIS混合假设支撑安全，且严格更难。 <div>
+The post-quantum migration for key agreements and signatures being well underway, the focus naturally shifts to other properties and primitives that still lack efficient solutions. One such area is that of privacy-enhanced primitives, with a growing number of post-quantum constructions. Among the most fundamental are group signatures, which represent an important milestone of anonymity and accountability towards more involved designs. However, despite recent progress, most compact lattice constructions are either computationally intensive or suffer large key materials, or both. 
+In this paper, we introduce a new lattice group signature scheme that reaches compact signatures and keys, while being runtime-efficient in all its procedures. Our key element is a new tag-based gadget sampler that properly interfaces with NTRU, then benefiting from the desirable properties of such trapdoor frameworks for advanced constructions while leveraging the compactness of NTRU. Although applied to group signatures, our sampler may be of independent interest and used for more expressive privacy-driven primitives like anonymous credentials. We also introduce two assumptions, which can be seen as hybrid versions of NTRU and ISIS, that independently underly the security of our group signature. Despite their similarities with the recently introduced NTRU-ISIS$_f$ assumption, they appear strictly harder and even admit reductions from R-ISIS in some parameter settings.
+]]></content:encoded>
+<pubDate>Fri, 18 Sep 2026 07:23:51 +0000</pubDate>
+<pubDate>Fri, 18 Sep 2026 07:23:51 +0000</pubDate>
+</item>
+<item>
+<title>Revisiting Malicious Private Aggregation: Formalization, Weaknesses, and Enhancements</title>
+<link>https://eprint.iacr.org/2026/2074</link>
+<guid>https://eprint.iacr.org/2026/2074</guid>
+<content:encoded><![CDATA[
+<div> 隐私聚合、非共谋服务器、恶意服务器、形式化定义、分片聚合
+<br><br>总结:
+1. 私有聚合可在不泄露个体输入下聚合敏感数据，用于联邦学习、频繁项和匿名系统。
+2. 方案常假设两个非共谋服务器，即使其一恶意也应保证隐私，但许多方案因缺少形式化而失效。
+3. 本文定义多种私有聚合理想功能与分片-聚合范式，识别既有安全缺陷或欠规范。
+4. 提出模块化修正与细节补全，使已有方案安全实现功能，并支持不可靠网络。 <div>
+Private aggregation schemes enable aggregation of sensitive data across clients without leaking any individual client's input. Their applications include privacy-preserving federated learning, private heavy hitters, and anonymous systems.
+
+Many private aggregation schemes assume two non-colluding servers and aim to guarantee privacy even when one server is malicious, i.e., the malicious server learns an aggregation result that includes all honest client inputs. However, many private aggregation schemes in the literature fail to achieve privacy, which we believe is in large part due to a lack of formalism for the nuanced variations of privacy guarantees.
+
+In this work, we present ideal functionalities for several variants of private aggregation. We also formalize a common paradigm underlying most prior private aggregation schemes. The formal treatment helps us identify security flaws or underspecifications in existing private aggregation schemes. We then present modular modifications or fill in critical details to help prior schemes in the share-aggregate paradigm securely realize the private aggregation functionalities we formally define, including in settings where clients may have unreliable networks.
+]]></content:encoded>
+<pubDate>Thu, 17 Sep 2026 17:50:11 +0000</pubDate>
+<pubDate>Thu, 17 Sep 2026 17:50:11 +0000</pubDate>
+</item>
+
+<item>
 <title>Revisiting ML Training under Fully Homomorphic Encryption: Convergence Guarantees, Differential Privacy, and Efficient Algorithms</title>
 <link>https://eprint.iacr.org/2026/2073</link>
 <guid>https://eprint.iacr.org/2026/2073</guid>
 <content:encoded><![CDATA[
-<div> 全同态加密,差分隐私,收敛分析,多项式近似,加密训练<br><br>总结: 1.首次给出FHE下机器学习训练的理论收敛分析；2.提出适配加密计算的差分隐私训练算法；3.较标准DP-GD提升计算效率且保持相当效用；4.证明基于激活与损失多项式近似的近似梯度下降可收敛；5.无需昂贵逐样本梯度裁剪即可保护隐私并支持可扩展学习；6.提供数据无关超参与多项式近似策略，提升敏感数据隐私安全训练可行性。 <div>
+<div> 全同态加密,差分隐私,收敛分析,多项式近似,加密训练<br /><br />总结: 1.首次给出FHE下机器学习训练的理论收敛分析；2.提出适配加密计算的差分隐私训练算法；3.较标准DP-GD提升计算效率且保持相当效用；4.证明基于激活与损失多项式近似的近似梯度下降可收敛；5.无需昂贵逐样本梯度裁剪即可保护隐私并支持可扩展学习；6.提供数据无关超参与多项式近似策略，提升敏感数据隐私安全训练可行性。 <div>
 We present the first theoretical convergence analysis of machine learning training under fully homomorphic encryption (FHE), combined with a differentially private (DP) training algorithm tailored to encrypted computation. Our approach improves computational efficiency over standard differentially private gradient descent (DP-GD) while achieving comparable utility. In particular, we prove convergence of approximate gradient descent using polynomial approximations of activation and loss functions, which are required for FHE compatibility. To preserve privacy in downstream tasks, we integrate differential privacy without relying on costly per-sample gradient clipping, enabling scalable encrypted learning. We also provide data-independent hyperparameter selection and theoretically grounded strategies for polynomial approximation which can be of independent interest. Together, these contributions advance the feasibility of efficient, private, and secure machine learning on sensitive data.
 ]]></content:encoded>
-<pubDate>Thu, 17 Sep 2026 17:50:10 +0000</pubDate>
 <pubDate>Thu, 17 Sep 2026 17:50:10 +0000</pubDate>
 </item>
 <item>
@@ -21,13 +54,11 @@ We present the first theoretical convergence analysis of machine learning traini
 <guid>https://eprint.iacr.org/2026/2060</guid>
 <content:encoded><![CDATA[
 <div> EIP-7702,DelegProof,Tamarin,ERC-4337,形式化验证
-<br><br>总结:1.Pectra后7702上线，允许EOA委托，63%委托涉恶、损失236万美元；2.缺乏形式化描述且建议缓解未经机验；3.DelegProof首次符号分析7702与4337入口点，复现四类攻击、发现十种模式并验证安全不变量；4.证明禁chainId-0、账户绑定初始化门、命名空间存储分别消除重放、恢复授权、阻断混淆，模型已开源。 <div>
+<br /><br />总结:1.Pectra后7702上线，允许EOA委托，63%委托涉恶、损失236万美元；2.缺乏形式化描述且建议缓解未经机验；3.DelegProof首次符号分析7702与4337入口点，复现四类攻击、发现十种模式并验证安全不变量；4.证明禁chainId-0、账户绑定初始化门、命名空间存储分别消除重放、恢复授权、阻断混淆，模型已开源。 <div>
 EIP-7702, live on Ethereum since the Pectra upgrade, lets externally owned accounts delegate their execution to arbitrary contract code with a single signature. The consequences are measurable: 63% of observed delegations point to malicious contracts, with $2.36M in confirmed losses, and ecosystem guidance already warns about cross-chain replay and front-run initialization. What is missing is a formal account of the problem: the 7702 delegation lifecycle has no formal treatment, and none of the recommended mitigations has been machine-verified. We present DelegProof, to our knowledge the first symbolic formal analysis of EIP-7702 authorization semantics composed with the ERC-4337 EntryPoint pipeline. Our Tamarin models are calibrated by reproducing four documented attack classes, and yield ten machine-checked attack patterns—among them the silent failure of the advertised temporary-delegation bundle, storage confusion across re-delegation, and an ERC-1271 substitution attack that reaches into the signature checks of relying contracts—together with the security invariants that do hold. Formalizing the recommended mitigations shows that banning chainId-0 authorizations eliminates cross-chain replay, that an account-bound initialization gate restores init authorization while an unbound gate is provably still bypassable, and that namespaced storage slots make the storage-confusion class structurally inexpressible. All models and proofs are available at https://anonymous.4open.science/r/delegproof-artifact-F7FE/.
 ]]></content:encoded>
 <pubDate>Wed, 16 Sep 2026 12:15:56 +0000</pubDate>
-<pubDate>Wed, 16 Sep 2026 12:15:56 +0000</pubDate>
 </item>
-
 <item>
 <title>On Aborts in Differential Privacy</title>
 <link>https://eprint.iacr.org/2026/2059</link>
@@ -13873,37 +13904,6 @@ In this paper, we introduce a novel compressed $\Sigma$-protocol model that effe
 To demonstrate the above statements, we provide a brief review of several existing protocols that can be instantiated using our model to demonstrate the versatility of our construction. We also present use cases where our generalized model enhances applications traditionally considered ``less compact'', such as binary proofs [BCC+15] and $k$-out-of-$n$ proofs [ACF21]. In conclusion, our new model offers a more efficient and expressive alternative to the current use of $\Sigma$-protocols, paving the way for broader applicability and optimization in cryptographic applications.
 ]]></content:encoded>
 <pubDate>Wed, 19 Mar 2025 11:22:55 +0000</pubDate>
-</item>
-<item>
-<title>Server-Aided Anonymous Credentials</title>
-<link>https://eprint.iacr.org/2025/513</link>
-<guid>https://eprint.iacr.org/2025/513</guid>
-<content:encoded><![CDATA[
-<div> 关键词：server-aided anonymous credentials (SAACs)，elliptic curves，formal security definitions，proofs，BBS#，keyed-verification ACs (KVACs)，oblivious issuance protocols，statistical anonymity，unforgeability，Gap q-SDH，computational anonymity，DDH。
-
-总结:<br />
-本文提出了服务器辅助匿名凭证（SAACs）的概念，并阐述了其在基于配对无关椭圆曲线的轻量级“公共可验证和多用途”AC实现中的重要性。文章指出，BBS#这一欧盟数字身份钱包候选方案大致符合SAAC模型，但缺乏正式的安全定义和证明。为了解决这一问题，本文提供了SAACs的严格安全定义，并展示了如何从KVACs以及特殊类型的零知识证明无意识发行协议实现SAACs。文中给出了两个构造实例：一个在Gap q-SDH假设下实现了统计匿名性和不可伪造性；另一个在DDH假设下实现了计算匿名性和不可伪造性。 <div>
-This paper formalizes the notion of server-aided anonymous credentials (SAACs), a new model for anonymous credentials (ACs) where, in the process of showing a credential, the holder is helped by additional auxiliary information generated in an earlier (anonymous) interaction with the issuer. This model enables lightweight instantiations of 'publicly verifiable and multi-use' ACs from pairing-free elliptic curves, which is important for compliance with existing national standards. A recent candidate for the EU Digital Identity Wallet, BBS#, roughly adheres to the SAAC model we have developed; however, it lacks formal security definitions and proofs.
-
-In this paper, we provide rigorous definitions of security for SAACs, and show how to realize SAACs from the weaker notion of keyed-verification ACs (KVACs) and special types of oblivious issuance protocols for zero-knowledge proofs. We instantiate this paradigm to obtain two constructions: one achieves statistical anonymity with unforgeability under the Gap $q$-SDH assumption, and the other achieves computational anonymity and unforgeability under the DDH assumption.
-]]></content:encoded>
-<pubDate>Wed, 19 Mar 2025 08:49:06 +0000</pubDate>
-</item>
-<item>
-<title>VeriSSO: A Privacy-Preserving Legacy-Compatible Single Sign-On Protocol Using Verifiable Credentials</title>
-<link>https://eprint.iacr.org/2025/511</link>
-<guid>https://eprint.iacr.org/2025/511</guid>
-<content:encoded><![CDATA[
-<div> 关键词：Single Sign-On (SSO), 隐私挑战, Verifiable Credentials (VC), VeriSSO, 安全性与效率
-
-总结:
-<br />
-本文提出了一个名为VeriSSO的新型单点登录（SSO）协议，旨在解决传统SSO机制中的隐私问题和单点故障风险。VeriSSO利用可验证凭证（VC）技术，通过一个独立的身份验证服务器委员会来管理服务提供商（RP）和用户认证，实现了用户匿名认证与RP认证的同时进行，保持了用户unlinkability并支持RP使用现有的授权代码流（ACF）验证流程。此外，VeriSSO设计还支持合法的去匿名化，以确保在用户匿名状态下仍能追究其不当行为的责任。实验结果显示，VeriSSO具有高效性和实用性，完成身份验证过程只需约100毫秒。 <div>
-Single Sign-On (SSO) is a popular authentication mechanism enabling users to access multiple web services with a single set of credentials. Despite its convenience, SSO faces outstanding privacy challenges. The Identity Provider (IdP) represents a single point of failure and can track users across different Relying Parties (RPs). Multiple colluding RPs may track users through common identity attributes. In response, anonymous credential-based SSO solutions have emerged to offer privacy-preserving authentication without revealing unnecessary user information. However, these solutions face two key challenges: supporting RP authentication without compromising user unlinkability and maintaining compatibility with the predominant Authorization Code Flow (ACF).
-
-This paper introduces VeriSSO, a novel SSO protocol based on verifiable credentials (VC) that supports RP authentication while preserving privacy and avoiding single points of failure. VeriSSO employs an independent authentication server committee to manage RP and user authentication, binding RP authentication with credential-based anonymous user authentication. This approach ensures user unlinkability while supporting RP authentication and allows RPs to continue using their existing verification routines with identity tokens as in the ACF workflow. VeriSSO's design also supports lawful de-anonymization, ensuring user accountability for misbehavior during anonymity. Experimental evaluations of VeriSSO demonstrate its efficiency and practicality, with authentication processes completed within 100 milliseconds.
-]]></content:encoded>
-<pubDate>Wed, 19 Mar 2025 01:32:26 +0000</pubDate>
 </item>
 </channel>
 </rss>
