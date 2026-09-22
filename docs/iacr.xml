@@ -4,6 +4,149 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+<item>
+<title>Cryptanalysis of a Polynomial-Based Redactable Blockchain</title>
+<link>https://eprint.iacr.org/2026/2129</link>
+<guid>https://eprint.iacr.org/2026/2129</guid>
+<content:encoded><![CDATA[
+<div> 可编辑区块链, 多元多项式, 完整性条件, 私有求值点, 线性系统
+<br><br>总结:
+1. 分析基于多元多项式方程的可编辑区块链构造。
+2. 其公共完整性条件泄露代数结构，可高效恢复私有求值点。
+3. 未授权编辑问题因此化简为有限域一元求根并解线性系统。
+4. 另讨论基于线性化的替代攻击。 <div>
+We analyze a recently published construction of redactable blockchains
+based on multivariate polynomial equations. We show that its public
+integrity conditions reveal sufficient algebraic structure to recover
+the relevant private evaluation points efficiently.
+As a consequence, 
+the blockchain unauthorized redaction problem reduces to
+univariate root finding over a finite field followed by solving a
+linear system.
+We also discuss
+an alternative attack based on linearization.
+]]></content:encoded>
+<pubDate>Sun, 20 Sep 2026 20:12:38 +0000</pubDate>
+<pubDate>Sun, 20 Sep 2026 20:12:38 +0000</pubDate>
+</item>
+<item>
+<title>I Prove, Therefore I Am: Spatiotemporal Multi-Party Computation</title>
+<link>https://eprint.iacr.org/2026/2118</link>
+<guid>https://eprint.iacr.org/2026/2118</guid>
+<content:encoded><![CDATA[
+<div> 时空MPC、时空知识、模拟安全、UC安全、后量子
+<br><br>总结:
+1. 提出时空MPC：让互不信任方计算依赖位置、时间、轨迹等物理事实的输入，同时隐藏并验证时空信息一致性。
+2. 定义“时空知识论证”，以完成验证协议来证明物理存在，并在模拟安全框架中设计抽取器。
+3. 构建UC安全承诺-证明协议，分别抗无共享纠缠与有共享纠缠的量子攻击者。
+4. 由半诚实后量子MPC得到通用时空MPC，并扩展至量子输入与经典时空信息场景。 <div>
+Secure multiparty computation (MPC) enables mutually distrustful parties to compute on private digital inputs. We initiate the study of $\mathbf{spatiotemporal}$ $\mathbf{MPC}$, extending this paradigm to functionalities whose inputs additionally depend on physical facts such as the parties' locations, times, or trajectories. Such protocols must simultaneously hide spatiotemporal information and ensure its physical consistency: a malicious party should not be able to make the functionality operate on a spatiotemporal input inconsistent with its actual physical state.
+
+The main conceptual challenge is to formulate extraction of spatiotemporal information within the simulation-based security framework. We introduce $\mathbf{arguments}$ $\mathbf{of}$ $\mathbf{spatiotemporal}$ $\mathbf{knowledge}$, following the principle "I prove, therefore I am:" rather than defining physical presence directly through a mathematical relation, we define it operationally through the ability to complete a sound spatiotemporal verification protocol. Accordingly, an extractor recovers a spatiotemporal point from a successful prover and certifies its physical validity by using the extracted prover to succeed in an auxiliary spatiotemporal verification protocol. Building on this notion, we define universally composable (UC) security for spatiotemporal MPC, capturing privacy, physical consistency, and composability.
+
+We provide constructions achieving this new MPC notion. We first construct UC-secure commit-and-prove protocols for spatiotemporal knowledge: in the CRS model under LWE against quantum provers without pre-shared entanglement, and in the QROM against quantum provers with unbounded pre-shared entanglement. Using these protocols, we obtain general-purpose UC-secure spatiotemporal MPC from semi-honest post-quantum MPC. We also extend our framework to UC-secure spatiotemporal multiparty quantum computation over private quantum inputs and classical spatiotemporal information.
+]]></content:encoded>
+<pubDate>Sun, 20 Sep 2026 01:58:13 +0000</pubDate>
+<pubDate>Sun, 20 Sep 2026 01:58:13 +0000</pubDate>
+</item>
+<item>
+<title>How to instantiate Fiat-Shamir Provably and Practically?</title>
+<link>https://eprint.iacr.org/2026/2114</link>
+<guid>https://eprint.iacr.org/2026/2114</guid>
+<content:encoded><![CDATA[
+<div> Fiat-Shamir, VRF, NIZK, 无信任设置, 递归证明<br><br>总结:1.提出用外部可验证随机函数替代Fiat-Shamir哈希的新变体；2.只要VRF密钥对证明者隐藏且无串通，即可保证可靠性，公开可验证使VRF除密钥生成外无需被信任；3.可用区块链VRF服务，并支持分布式VRF，放宽串度假设，分布式密钥生成可消除初始设置信任；4.验证步骤本地完成、无需访问VRF，适合递归证明与增量可验证计算，突破随机预言模型不可能性；5.通过GKR协议实现展示实用价值。 <div>
+We propose a new variant of the Fiat–Shamir transformation where the Fiat-Shamir hash is instantiated by an external verifiable random function (VRF) service. We prove that soundness holds as long as the VRF secret key remains hidden from the prover, i.e., assuming no collusion between the prover and the VRF evaluator. Crucially, due to the public verifiability of VRF outputs, the VRF computation itself need not be trusted beyond the key-generation phase. This yields the first NIZK compiler in a non-idealized model that is both practical and provably sound.   
+
+Our transformation can be instantiated using extensively deployed blockchain-based VRF services. Moreover, it naturally supports distributed VRF services, allowing the no-collusion assumption to be relaxed: soundness holds even if the prover colludes with up to a threshold number of evaluators. In this setting, distributed key generation for the VRF further eliminates trust in the setup. 
+
+A distinctive feature of our approach is that the verification step is local and does not require accessing the VRF. This is particularly advantageous for recursive proof systems such as incrementally verifiable computation, where the verification circuit must be embedded within the circuit for which a proof needs to be generated. This enables construction of the first provable and practical recursive proof -- bypassing well-known impossibilities in the random oracle model.
+
+We demonstrate the real-world utility of our framework with an implementation for the GKR protocol.
+]]></content:encoded>
+<pubDate>Sat, 19 Sep 2026 17:34:10 +0000</pubDate>
+<pubDate>Sat, 19 Sep 2026 17:34:10 +0000</pubDate>
+</item>
+<item>
+<title>Forkcipher-Based Committing Security from Explicit Collision Security Assumptions</title>
+<link>https://eprint.iacr.org/2026/2110</link>
+<guid>https://eprint.iacr.org/2026/2110</guid>
+<content:encoded><![CDATA[
+<div> 承诺加密，分叉密码，抗碰撞性，伪随机函数，认证加密
+<br><br>总结: 1.现多缺上下文承诺，通用法依赖理想原语；2.用分叉密码fCR/zmCR构造承诺AE，分析ForkSkinny等碰撞；3.经FCPRF/FixM得固定长抗碰撞PRF，引入nonce安全构造FHashN；4.AEaH-2K结合安全AE与可变长PRF，标准模型达CMT-4；5.FCTR-CMT用单分叉密码实现AEAD，凭FCPRF/FixM获n或n/2强度。 <div>
+Context-committing security binds an authenticated encryption (AE) ciphertext uniquely to its encryption context. Many conventional AE schemes lack this guarantee, while most generic committing transforms rely on idealized primitives.
+
+We develop committing AE from explicit forkcipher collision-resistance properties: $\mathsf{fCR}$ and zero-message collision resistance ($\mathsf{zmCR}$). For an $n$-to-$2n$-bit forkcipher, we establish matching query complexities of order $2^{n/2}$ and $2^n$, respectively. MILP- and SAT-based differential and reduced-round collision analyses of $\textsf{ForkSkinny-128-384}$ support the corresponding generic security levels for the full-round primitive. We also analyze collisions in ButterKnife and ZIP-AES.
+
+We lift $\mathsf{fCR}$ and $\mathsf{zmCR}$ through FCPRF and FixM to fixed-length collision-resistant PRFs. We introduce nonce-based PRF security to capture the nonce-respecting pseudorandomness needed by our constructions, and construct FHashN, proving its variable-input-length collision resistance, pseudorandomness, and nonce-based pseudorandomness.
+
+We present AEaH-2K, a two-key variant of AEaH combining secure AE with a variable-input-length collision-resistant PRF. Including the AE key in the commitment input gives confidentiality, authenticity, and CMT-4 security in the standard model. We also construct $\textsf{FCTR-CMT}$, an AEAD mode using a single forkcipher, and prove nonce-respecting privacy, authenticity, and CMT-4 security. With FHashN based on FCPRF, $\textsf{FCTR-CMT}$ achieves $n$-bit confidentiality and $n/2$-bit authenticity and CMT-4 security; with FixM, all 3 reach $n$ bits. All construction proofs reduce to explicit pseudorandomness and collision-resistance assumptions.
+]]></content:encoded>
+<pubDate>Sat, 19 Sep 2026 12:25:14 +0000</pubDate>
+<pubDate>Sat, 19 Sep 2026 12:25:14 +0000</pubDate>
+</item>
+<item>
+<title>Actively Secure PPML with Soft-Boundary Overflow Detection</title>
+<link>https://eprint.iacr.org/2026/2105</link>
+<guid>https://eprint.iacr.org/2026/2105</guid>
+<content:encoded><![CDATA[
+<div> 隐私保护机器学习, 算术溢出检测, 软边界检测, 环上计算, 主动安全
+<br><br>总结:1.有限环上的PPML存在算术溢出风险，传统检测依赖非线性函数，开销较大。2.提出软边界检测，将边界验证转为分区区间上的概率函数，成本接近线性计算。3.该方法可高效检测溢出，并扩展到恶意对手场景，避免为主动安全扩大环空间。4.实验表明其兼顾强安全与高效率，为鲁棒且主动安全的PPML提供实用方案。 <div>
+MPC-based privacy-preserving machine learning (PPML) typically operates over finite rings rather than floating-point arithmetic, making arithmetic overflow an inherent risk. Existing overflow-detection techniques generally require the evaluation of nonlinear functions, resulting in substantial computation and communication overhead. We propose Soft Boundary Detection, which reduces boundary verification to probabilistic functions over partitioned intervals, with a cost comparable to that of linear computation. Building on this abstraction, we develop an efficient mechanism for detecting arithmetic overflow in PPML workloads. Moreover, we show that Soft Boundary Detection naturally extends to the malicious-adversary setting. In ring-based computation, it further avoids the need to choose a ring space substantially larger than the actual data range to ensure soundness against malicious behavior. Our framework provides two key benefits: (1) highly efficient arithmetic overflow detection, and (2) active security without requiring ring extension or enlarging the underlying ring space. Experimental results demonstrate that our approach substantially strengthens security while retaining high efficiency, providing a practical solution for robust and actively secure PPML.
+]]></content:encoded>
+<pubDate>Sat, 19 Sep 2026 02:41:57 +0000</pubDate>
+<pubDate>Sat, 19 Sep 2026 02:41:57 +0000</pubDate>
+</item>
+<item>
+<title>Scalable Small ECDLP Solver via Windowed-Batch Inversion for Additively Homomorphic Encryption</title>
+<link>https://eprint.iacr.org/2026/2102</link>
+<guid>https://eprint.iacr.org/2026/2102</guid>
+<content:encoded><![CDATA[
+<div> 椭圆曲线离散对数, 同态加密, BSGS, 椭圆曲线点乘, 解密优化
+<br><br>总结:1.针对EC/Twisted ElGamal同态解密的小范围ECDLP，FastECDLP巨步表内存过大，64位不可行。2.提出Jacobian迭代、窗口批逆和Co-Z双步，消除T2表并将内存降至O(W)。3.M1 Pro与Intel实测，54/58位较FastECDLP快至2.3倍；63/64位分别53/105秒完成。4.另有批逆链和Co-Z加法优化。 <div>
+Decryption in EC-ElGamal and Twisted ElGamal based Additively Homomorphic Encryption (AHE) requires solving a small exponential Elliptic Curve Discrete Logarithm Problem (ECDLP) that recovers a bounded plaintext scalar $m$ from $m \cdot G$. This recovery step is the performance-critical path in various applications, such as electronic voting systems (e-Voting), private federated learning, and privacy-preserving blockchain confidential payment systems including Zether (EC-ElGamal), Solana Token-2022 Confidential Transfers (Twisted ElGamal), and the forthcoming XRPL XLS-96 standard (EC-ElGamal). The state-of-the-art FastECDLP (Tang et al., 2023) employs the baby-step giant-step algorithm (BSGS) to solve ECDLP in $\ell$-bit range by utilizing a baby-step table $T_1'$ of $2^{\ell_1 - 1}$ affine points and achieves fast decryption by precomputing a giant-step table $T_2'$ of all $2^{\ell_2 - 1}$ affine points where $\ell_1 + \ell_2 = \ell$. Even with the signed-range halving of Tang et al., the giant-step table for secp256k1 requires 5.91 GB for a 58-bit search space and exponentially increases to 378 GB for a 64-bit search space. Thus, as noted by Tang et al., a 64-bit range remains impractical on a typical workstation due to the memory requirements. We present three algorithmic contributions that together eliminate $T_2'$ and enable practical 64-bit decryption. (i) A Jacobian coordinate loop advances the giant-step point iteratively in Jacobian coordinates, removing the need to precompute the giant steps in affine coordinates. (ii) Windowed batch inversion batch-inverts a window of a small $W$ accumulated $Z$-coordinates at once, reducing the per-thread working memory required for the giant-step computation from $O(2^{\ell_2})$ (the size of $T_2'$ in FastECDLP) to $O(W)$ regardless of bit size. (iii) Co-Z arithmetic computes two giant steps simultaneously by maintaining a shared $Z$-coordinate, reducing the field multiplication cost per step. We validate our solver on two machines, a laptop-class Apple M1 Pro and a desktop-class Intel Core Ultra 9 285K, with consistent results across both. On the Intel machine, our complete solver outperforms a faithful re-implementation of FastECDLP at 54-bit and 58-bit ($\ell_1 = 31$, up to $2.3\times$ faster) without storing the giant-step table $T_2'$. At 63-bit and 64-bit, Tang et al.'s giant-step table $T_2'$ requires 189 GB and 378 GB respectively, making their approach infeasible on typical desktop or laptop computers. So far, our solver is the only feasible approach, completing full 63-bit and 64-bit decryption in 53 sec and 105 sec, directly overcoming the memory limitation identified by Tang et al. We also discuss two additional arithmetic optimizations, an inversion-chaining scheme and a co-Z Jacobian addition, that reduce the per-step arithmetic cost.
+]]></content:encoded>
+<pubDate>Fri, 18 Sep 2026 21:26:34 +0000</pubDate>
+<pubDate>Fri, 18 Sep 2026 21:26:34 +0000</pubDate>
+</item>
+<item>
+<title>Garbling Groth16 with Native Group Operations</title>
+<link>https://eprint.iacr.org/2026/2100</link>
+<guid>https://eprint.iacr.org/2026/2100</guid>
+<content:encoded><![CDATA[
+<div> Groth16 椭圆曲线 部分混淆 条件披露 项目化编码
+<br><br>总结:
+1. 针对Groth16布尔混淆体积巨大，提出基于原生椭圆曲线群运算的混淆方案。
+2. 用于比特币桥验证，构造项目化部分混淆：证明无效时释放秘密，有效时隐藏秘密，证明仍公开。
+3. 用重密钥组件处理评估者提供配对参数，建立组合定理，将群编码转按位项目化编码并扩展到二次扩张域。
+4. 程序大小为O(λ²)位，在DDH与随机预言下证明隐私；BN254实现2.4MiB，较48GB提升逾四量级。 <div>
+The Groth16 verification equation has a compact algebraic description, yet garbling its Boolean implementation can require tens of gigabytes. We show how to garble this computation using native elliptic-curve group operations.  Motivated by proof verification in trust-minimized Bitcoin bridges, we construct a projective partial garbling scheme for conditional disclosure on invalid Groth16 proofs. For a fixed verification key and public statement, evaluation reveals a garbler-held secret when the supplied proof is invalid and hides the secret when it is valid. The proof itself remains public.
+
+The main technical challenge is handling a pairing whose two arguments are supplied by the evaluator. We introduce a rekeying gadget that resolves this using a single private scalar multiplication. Building on Argo MAC (Eagen and Lai, 2026), BABE (Garg et al., 2026), and Duty-Free Bits (Khambhati et al., 2026), we prove a composition theorem for partial garbling across input representations and apply it to transform group encodings into bitwise projective encodings. This requires extending the projectivization technique of Duty-Free Bits to quadratic extension fields. The resulting garbled program has size $O(\lambda^2)$ bits, where $\lambda$ is the computational security parameter. We prove privacy under the decisional Diffie-Hellman assumption, in the random oracle model.
+
+Our BN254 implementation produces a 2.4 MiB garbled program, including projectivization, compared with the 48 GB reported for Boolean garbling of Groth16. Thus, we improve over prior state of the art in Groth16 garbling by over four orders of magnitude.
+]]></content:encoded>
+<pubDate>Fri, 18 Sep 2026 21:08:39 +0000</pubDate>
+<pubDate>Fri, 18 Sep 2026 21:08:39 +0000</pubDate>
+</item>
+<item>
+<title>Batched and Weighted Threshold Encryption with Silent Setup</title>
+<link>https://eprint.iacr.org/2026/2087</link>
+<guid>https://eprint.iacr.org/2026/2087</guid>
+<content:encoded><![CDATA[
+<div> 批量门限加密，静默设置，批与索引无关，加权门限，短密文
+<br><br>总结:
+1. BTE可由委员会联合解密大批密文中的子集，其余密文保持隐私，适用于区块链加密内存池防MEV。
+2. 现有方案存在依赖昂贵DKG、批次标签、非冲突索引或不支持加权门限等不足。
+3. 本文方案实现静默设置、批与索引无关，并支持加权门限策略。
+4. 其基于素数阶双线性配对群，在通用群模型下可证安全，密文额外仅需2个群元素。 <div>
+Batched Threshold Encryption (BTE) enables a committee of parties to jointly decrypt any subset of ciphertexts from a large set, while all other ciphertexts remain private. BTE has applications in blockchains, particularly in designing encrypted mempools, where transactions are encrypted until included into a block to prevent maximal extractable value (MEV) attacks. 
+Existing BTE constructions, however, encounter one of the following usability downsides: (a) reliance on expensive distributed key generation (DKG) protocols, (b) dependency on a batch label during ciphertext generation, (c) ciphertexts that are only decryptable if they are encoded with respect to a non-conflicting index in the batch, or (d) no support for weighted threshold policies.
+
+In this work, we present a BTE scheme that simultaneously addresses all of the above issues. It has a silent setup (key generation does not require interaction between parties), is batch and index independent, and supports weighted threshold policies. Our construction is based on prime-order groups with bilinear pairings with security proof in the Generic Group Model. Our ciphertext size is also the shortest among existing silent batched threshold encryption schemes with only $2$ group elements in addition to the message length.
+]]></content:encoded>
+<pubDate>Fri, 18 Sep 2026 12:11:16 +0000</pubDate>
+<pubDate>Fri, 18 Sep 2026 12:11:16 +0000</pubDate>
+</item>
 
 <item>
 <title>Practical Group Signatures from Tag-Based NTRU Sampler</title>
