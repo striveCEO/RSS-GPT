@@ -5,12 +5,52 @@
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
 <item>
+<title>Amplifying Randomized Encodings &amp; Applications</title>
+<link>https://eprint.iacr.org/2025/778</link>
+<guid>https://eprint.iacr.org/2025/778</guid>
+<content:encoded><![CDATA[
+<div> 随机化编码 单侧 隐私放大 NISZK 单向函数
+<br><br>总结:1.证明经典与量子单侧随机化编码可实现隐私和正确性放大；2.得出NISZK具有强零知识放大；3.完美单侧编码的最坏难度蕴含OWF，量子版蕴含OWSG；4.去掉误差后，SZK最坏难度足以推出OWF；5.弱且不完美iO在PH不塌缩到第三层时蕴含OWF；6.方法是用扩展有损归约等价刻画随机化编码。 <div>
+A randomized encoding for a promise problem is a randomized reduction whose outcome distribution on input $x$ can be simulated within some distance $d$, called privacy, using only one bit of information about $x$: whether it is a YES or NO instance. The encoding is one-sided if this property holds only for YES instances. Our main contribution is showing that (classical and quantum) one-sided randomized encodings have privacy and correctness amplification: any problem with a randomized encoding with privacy $1-1/poly(n)$ and error $1/2-1/poly(n)$, also has an encoding with negligible privacy and error. We then use this result to obtain the following statements:
+
+ - We show that NISZK, the class of problems that have a non-interactive (statistical) zero-knowledge proof,  has strong zero-knowledge amplification, i.e., every problem with a non-interactive zero-knowledge proof with zero-knowledge error $1-1/poly(n)$, also has a non-interactive zero-knowledge proof with negligible zero-knowledge error. This solves a problem open since the work of Goldreich, Sahai, and Vadhan (CRYPTO '99).
+
+- The worst-case hardness of a problem that has a perfect (i.e., zero error) one-sided encoding implies one-way functions (OWFs). And if the encoding is quantum, it implies one-way state generators (OWSGs). We then conclude that by removing the error from one-sided randomized encodings, the worst-case hardness of the complexity class SZK becomes sufficient for the existence of OWFs. 
+
+- Weak and imperfect indistinguishability obfuscation (iO) implies OWFs assuming that the Polynomial Hierarchy does not collapse to its third level. Here, weakness means that the computational distance between the obfuscated circuit and the original circuit is $1-1/poly(n)$, and imperfectness means that the error is $1/2-1/poly(n)$.
+
+To achieve this privacy and correctness amplification, we study randomized encodings through the lens of lossy reductions (Ball et al. ITCS 2020).  In particular, we introduce an extended and flexible notion of lossy reductions, and show that it is equivalent to randomized encodings. This equivalence serves as the base of our main results and might be of independent interest.
+]]></content:encoded>
+<pubDate>Wed, 30 Apr 2025 16:08:33 +0000</pubDate>
+<pubDate>Wed, 30 Apr 2025 16:08:33 +0000</pubDate>
+</item>
+<item>
+<title>Practical Adaptor Signatures for NP from Online/Offline NIZK</title>
+<link>https://eprint.iacr.org/2026/2155</link>
+<guid>https://eprint.iacr.org/2026/2155</guid>
+<content:encoded><![CDATA[
+<div> Adaptor签名、在线/离线NIZK、NP关系、隐私保护、后量子签名
+<br><br>总结: 1. 现有Adaptor签名支持关系受限、见证隐私不足或开销较大。2. 本文提出面向任意NP关系的实用框架，核心是新原语在线/离线NIZK。3. 知道离线阶段随机性即可从在线部分提取见证。4. 给出见证隐藏和实例隐藏两类构造，并引入更强的前向安全隐私。5. 基于VOLE与FAEST实现AES-128，签名11.6kB，较前沿小约60%，整体速度提升一个数量级。 <div>
+Adaptor signatures enable conditional payments on blockchain networks: a pre-signature is bound to a public instance $Y$ and can be completed into a valid signature by any party knowing a witness $y$ with $\mathcal{R}(Y,y)=1$, while the pre-signature and full signature together allow the signer to extract $y$.
+Existing constructions only support specific algebraically-structured relations, lose witness privacy, or have significant overhead both in signature size and computation.
+
+We present a practical adaptor signature framework for arbitrary NP relations, built from a new primitive we call Online/Offline NIZK whose proof is separated into online and offline parts.  The key property is that the witness can be extracted from the online part knowing the randomness used in the offline part.
+We give two generic constructions: a basic scheme achieving witness hiding, and an instance-hiding scheme achieving a new, stronger forward-secure privacy notion we introduce.
+
+We instantiate our framework for the AES-128 relation using the VOLE-in-the-Head paradigm and the FAEST post-quantum signature scheme.
+The resulting complete signature is $11.6$ kB, roughly $60\%$ smaller than the state-of-the-art adaptor signature for NP (Ciampi et al., CT-RSA '25), and our implementation is an order of magnitude faster in overall signature generation, verification, and extraction.
+]]></content:encoded>
+<pubDate>Tue, 22 Sep 2026 08:26:12 +0000</pubDate>
+<pubDate>Tue, 22 Sep 2026 08:26:12 +0000</pubDate>
+</item>
+
+<item>
 <title>Cryptanalysis of a Polynomial-Based Redactable Blockchain</title>
 <link>https://eprint.iacr.org/2026/2129</link>
 <guid>https://eprint.iacr.org/2026/2129</guid>
 <content:encoded><![CDATA[
 <div> 可编辑区块链, 多元多项式, 完整性条件, 私有求值点, 线性系统
-<br><br>总结:
+<br /><br />总结:
 1. 分析基于多元多项式方程的可编辑区块链构造。
 2. 其公共完整性条件泄露代数结构，可高效恢复私有求值点。
 3. 未授权编辑问题因此化简为有限域一元求根并解线性系统。
@@ -27,7 +67,6 @@ We also discuss
 an alternative attack based on linearization.
 ]]></content:encoded>
 <pubDate>Sun, 20 Sep 2026 20:12:38 +0000</pubDate>
-<pubDate>Sun, 20 Sep 2026 20:12:38 +0000</pubDate>
 </item>
 <item>
 <title>I Prove, Therefore I Am: Spatiotemporal Multi-Party Computation</title>
@@ -35,7 +74,7 @@ an alternative attack based on linearization.
 <guid>https://eprint.iacr.org/2026/2118</guid>
 <content:encoded><![CDATA[
 <div> 时空MPC、时空知识、模拟安全、UC安全、后量子
-<br><br>总结:
+<br /><br />总结:
 1. 提出时空MPC：让互不信任方计算依赖位置、时间、轨迹等物理事实的输入，同时隐藏并验证时空信息一致性。
 2. 定义“时空知识论证”，以完成验证协议来证明物理存在，并在模拟安全框架中设计抽取器。
 3. 构建UC安全承诺-证明协议，分别抗无共享纠缠与有共享纠缠的量子攻击者。
@@ -47,14 +86,13 @@ The main conceptual challenge is to formulate extraction of spatiotemporal infor
 We provide constructions achieving this new MPC notion. We first construct UC-secure commit-and-prove protocols for spatiotemporal knowledge: in the CRS model under LWE against quantum provers without pre-shared entanglement, and in the QROM against quantum provers with unbounded pre-shared entanglement. Using these protocols, we obtain general-purpose UC-secure spatiotemporal MPC from semi-honest post-quantum MPC. We also extend our framework to UC-secure spatiotemporal multiparty quantum computation over private quantum inputs and classical spatiotemporal information.
 ]]></content:encoded>
 <pubDate>Sun, 20 Sep 2026 01:58:13 +0000</pubDate>
-<pubDate>Sun, 20 Sep 2026 01:58:13 +0000</pubDate>
 </item>
 <item>
 <title>How to instantiate Fiat-Shamir Provably and Practically?</title>
 <link>https://eprint.iacr.org/2026/2114</link>
 <guid>https://eprint.iacr.org/2026/2114</guid>
 <content:encoded><![CDATA[
-<div> Fiat-Shamir, VRF, NIZK, 无信任设置, 递归证明<br><br>总结:1.提出用外部可验证随机函数替代Fiat-Shamir哈希的新变体；2.只要VRF密钥对证明者隐藏且无串通，即可保证可靠性，公开可验证使VRF除密钥生成外无需被信任；3.可用区块链VRF服务，并支持分布式VRF，放宽串度假设，分布式密钥生成可消除初始设置信任；4.验证步骤本地完成、无需访问VRF，适合递归证明与增量可验证计算，突破随机预言模型不可能性；5.通过GKR协议实现展示实用价值。 <div>
+<div> Fiat-Shamir, VRF, NIZK, 无信任设置, 递归证明<br /><br />总结:1.提出用外部可验证随机函数替代Fiat-Shamir哈希的新变体；2.只要VRF密钥对证明者隐藏且无串通，即可保证可靠性，公开可验证使VRF除密钥生成外无需被信任；3.可用区块链VRF服务，并支持分布式VRF，放宽串度假设，分布式密钥生成可消除初始设置信任；4.验证步骤本地完成、无需访问VRF，适合递归证明与增量可验证计算，突破随机预言模型不可能性；5.通过GKR协议实现展示实用价值。 <div>
 We propose a new variant of the Fiat–Shamir transformation where the Fiat-Shamir hash is instantiated by an external verifiable random function (VRF) service. We prove that soundness holds as long as the VRF secret key remains hidden from the prover, i.e., assuming no collusion between the prover and the VRF evaluator. Crucially, due to the public verifiability of VRF outputs, the VRF computation itself need not be trusted beyond the key-generation phase. This yields the first NIZK compiler in a non-idealized model that is both practical and provably sound.   
 
 Our transformation can be instantiated using extensively deployed blockchain-based VRF services. Moreover, it naturally supports distributed VRF services, allowing the no-collusion assumption to be relaxed: soundness holds even if the prover colludes with up to a threshold number of evaluators. In this setting, distributed key generation for the VRF further eliminates trust in the setup. 
@@ -64,7 +102,6 @@ A distinctive feature of our approach is that the verification step is local and
 We demonstrate the real-world utility of our framework with an implementation for the GKR protocol.
 ]]></content:encoded>
 <pubDate>Sat, 19 Sep 2026 17:34:10 +0000</pubDate>
-<pubDate>Sat, 19 Sep 2026 17:34:10 +0000</pubDate>
 </item>
 <item>
 <title>Forkcipher-Based Committing Security from Explicit Collision Security Assumptions</title>
@@ -72,7 +109,7 @@ We demonstrate the real-world utility of our framework with an implementation fo
 <guid>https://eprint.iacr.org/2026/2110</guid>
 <content:encoded><![CDATA[
 <div> 承诺加密，分叉密码，抗碰撞性，伪随机函数，认证加密
-<br><br>总结: 1.现多缺上下文承诺，通用法依赖理想原语；2.用分叉密码fCR/zmCR构造承诺AE，分析ForkSkinny等碰撞；3.经FCPRF/FixM得固定长抗碰撞PRF，引入nonce安全构造FHashN；4.AEaH-2K结合安全AE与可变长PRF，标准模型达CMT-4；5.FCTR-CMT用单分叉密码实现AEAD，凭FCPRF/FixM获n或n/2强度。 <div>
+<br /><br />总结: 1.现多缺上下文承诺，通用法依赖理想原语；2.用分叉密码fCR/zmCR构造承诺AE，分析ForkSkinny等碰撞；3.经FCPRF/FixM得固定长抗碰撞PRF，引入nonce安全构造FHashN；4.AEaH-2K结合安全AE与可变长PRF，标准模型达CMT-4；5.FCTR-CMT用单分叉密码实现AEAD，凭FCPRF/FixM获n或n/2强度。 <div>
 Context-committing security binds an authenticated encryption (AE) ciphertext uniquely to its encryption context. Many conventional AE schemes lack this guarantee, while most generic committing transforms rely on idealized primitives.
 
 We develop committing AE from explicit forkcipher collision-resistance properties: $\mathsf{fCR}$ and zero-message collision resistance ($\mathsf{zmCR}$). For an $n$-to-$2n$-bit forkcipher, we establish matching query complexities of order $2^{n/2}$ and $2^n$, respectively. MILP- and SAT-based differential and reduced-round collision analyses of $\textsf{ForkSkinny-128-384}$ support the corresponding generic security levels for the full-round primitive. We also analyze collisions in ButterKnife and ZIP-AES.
@@ -82,7 +119,6 @@ We lift $\mathsf{fCR}$ and $\mathsf{zmCR}$ through FCPRF and FixM to fixed-lengt
 We present AEaH-2K, a two-key variant of AEaH combining secure AE with a variable-input-length collision-resistant PRF. Including the AE key in the commitment input gives confidentiality, authenticity, and CMT-4 security in the standard model. We also construct $\textsf{FCTR-CMT}$, an AEAD mode using a single forkcipher, and prove nonce-respecting privacy, authenticity, and CMT-4 security. With FHashN based on FCPRF, $\textsf{FCTR-CMT}$ achieves $n$-bit confidentiality and $n/2$-bit authenticity and CMT-4 security; with FixM, all 3 reach $n$ bits. All construction proofs reduce to explicit pseudorandomness and collision-resistance assumptions.
 ]]></content:encoded>
 <pubDate>Sat, 19 Sep 2026 12:25:14 +0000</pubDate>
-<pubDate>Sat, 19 Sep 2026 12:25:14 +0000</pubDate>
 </item>
 <item>
 <title>Actively Secure PPML with Soft-Boundary Overflow Detection</title>
@@ -90,10 +126,9 @@ We present AEaH-2K, a two-key variant of AEaH combining secure AE with a variabl
 <guid>https://eprint.iacr.org/2026/2105</guid>
 <content:encoded><![CDATA[
 <div> 隐私保护机器学习, 算术溢出检测, 软边界检测, 环上计算, 主动安全
-<br><br>总结:1.有限环上的PPML存在算术溢出风险，传统检测依赖非线性函数，开销较大。2.提出软边界检测，将边界验证转为分区区间上的概率函数，成本接近线性计算。3.该方法可高效检测溢出，并扩展到恶意对手场景，避免为主动安全扩大环空间。4.实验表明其兼顾强安全与高效率，为鲁棒且主动安全的PPML提供实用方案。 <div>
+<br /><br />总结:1.有限环上的PPML存在算术溢出风险，传统检测依赖非线性函数，开销较大。2.提出软边界检测，将边界验证转为分区区间上的概率函数，成本接近线性计算。3.该方法可高效检测溢出，并扩展到恶意对手场景，避免为主动安全扩大环空间。4.实验表明其兼顾强安全与高效率，为鲁棒且主动安全的PPML提供实用方案。 <div>
 MPC-based privacy-preserving machine learning (PPML) typically operates over finite rings rather than floating-point arithmetic, making arithmetic overflow an inherent risk. Existing overflow-detection techniques generally require the evaluation of nonlinear functions, resulting in substantial computation and communication overhead. We propose Soft Boundary Detection, which reduces boundary verification to probabilistic functions over partitioned intervals, with a cost comparable to that of linear computation. Building on this abstraction, we develop an efficient mechanism for detecting arithmetic overflow in PPML workloads. Moreover, we show that Soft Boundary Detection naturally extends to the malicious-adversary setting. In ring-based computation, it further avoids the need to choose a ring space substantially larger than the actual data range to ensure soundness against malicious behavior. Our framework provides two key benefits: (1) highly efficient arithmetic overflow detection, and (2) active security without requiring ring extension or enlarging the underlying ring space. Experimental results demonstrate that our approach substantially strengthens security while retaining high efficiency, providing a practical solution for robust and actively secure PPML.
 ]]></content:encoded>
-<pubDate>Sat, 19 Sep 2026 02:41:57 +0000</pubDate>
 <pubDate>Sat, 19 Sep 2026 02:41:57 +0000</pubDate>
 </item>
 <item>
@@ -102,10 +137,9 @@ MPC-based privacy-preserving machine learning (PPML) typically operates over fin
 <guid>https://eprint.iacr.org/2026/2102</guid>
 <content:encoded><![CDATA[
 <div> 椭圆曲线离散对数, 同态加密, BSGS, 椭圆曲线点乘, 解密优化
-<br><br>总结:1.针对EC/Twisted ElGamal同态解密的小范围ECDLP，FastECDLP巨步表内存过大，64位不可行。2.提出Jacobian迭代、窗口批逆和Co-Z双步，消除T2表并将内存降至O(W)。3.M1 Pro与Intel实测，54/58位较FastECDLP快至2.3倍；63/64位分别53/105秒完成。4.另有批逆链和Co-Z加法优化。 <div>
+<br /><br />总结:1.针对EC/Twisted ElGamal同态解密的小范围ECDLP，FastECDLP巨步表内存过大，64位不可行。2.提出Jacobian迭代、窗口批逆和Co-Z双步，消除T2表并将内存降至O(W)。3.M1 Pro与Intel实测，54/58位较FastECDLP快至2.3倍；63/64位分别53/105秒完成。4.另有批逆链和Co-Z加法优化。 <div>
 Decryption in EC-ElGamal and Twisted ElGamal based Additively Homomorphic Encryption (AHE) requires solving a small exponential Elliptic Curve Discrete Logarithm Problem (ECDLP) that recovers a bounded plaintext scalar $m$ from $m \cdot G$. This recovery step is the performance-critical path in various applications, such as electronic voting systems (e-Voting), private federated learning, and privacy-preserving blockchain confidential payment systems including Zether (EC-ElGamal), Solana Token-2022 Confidential Transfers (Twisted ElGamal), and the forthcoming XRPL XLS-96 standard (EC-ElGamal). The state-of-the-art FastECDLP (Tang et al., 2023) employs the baby-step giant-step algorithm (BSGS) to solve ECDLP in $\ell$-bit range by utilizing a baby-step table $T_1'$ of $2^{\ell_1 - 1}$ affine points and achieves fast decryption by precomputing a giant-step table $T_2'$ of all $2^{\ell_2 - 1}$ affine points where $\ell_1 + \ell_2 = \ell$. Even with the signed-range halving of Tang et al., the giant-step table for secp256k1 requires 5.91 GB for a 58-bit search space and exponentially increases to 378 GB for a 64-bit search space. Thus, as noted by Tang et al., a 64-bit range remains impractical on a typical workstation due to the memory requirements. We present three algorithmic contributions that together eliminate $T_2'$ and enable practical 64-bit decryption. (i) A Jacobian coordinate loop advances the giant-step point iteratively in Jacobian coordinates, removing the need to precompute the giant steps in affine coordinates. (ii) Windowed batch inversion batch-inverts a window of a small $W$ accumulated $Z$-coordinates at once, reducing the per-thread working memory required for the giant-step computation from $O(2^{\ell_2})$ (the size of $T_2'$ in FastECDLP) to $O(W)$ regardless of bit size. (iii) Co-Z arithmetic computes two giant steps simultaneously by maintaining a shared $Z$-coordinate, reducing the field multiplication cost per step. We validate our solver on two machines, a laptop-class Apple M1 Pro and a desktop-class Intel Core Ultra 9 285K, with consistent results across both. On the Intel machine, our complete solver outperforms a faithful re-implementation of FastECDLP at 54-bit and 58-bit ($\ell_1 = 31$, up to $2.3\times$ faster) without storing the giant-step table $T_2'$. At 63-bit and 64-bit, Tang et al.'s giant-step table $T_2'$ requires 189 GB and 378 GB respectively, making their approach infeasible on typical desktop or laptop computers. So far, our solver is the only feasible approach, completing full 63-bit and 64-bit decryption in 53 sec and 105 sec, directly overcoming the memory limitation identified by Tang et al. We also discuss two additional arithmetic optimizations, an inversion-chaining scheme and a co-Z Jacobian addition, that reduce the per-step arithmetic cost.
 ]]></content:encoded>
-<pubDate>Fri, 18 Sep 2026 21:26:34 +0000</pubDate>
 <pubDate>Fri, 18 Sep 2026 21:26:34 +0000</pubDate>
 </item>
 <item>
@@ -114,7 +148,7 @@ Decryption in EC-ElGamal and Twisted ElGamal based Additively Homomorphic Encryp
 <guid>https://eprint.iacr.org/2026/2100</guid>
 <content:encoded><![CDATA[
 <div> Groth16 椭圆曲线 部分混淆 条件披露 项目化编码
-<br><br>总结:
+<br /><br />总结:
 1. 针对Groth16布尔混淆体积巨大，提出基于原生椭圆曲线群运算的混淆方案。
 2. 用于比特币桥验证，构造项目化部分混淆：证明无效时释放秘密，有效时隐藏秘密，证明仍公开。
 3. 用重密钥组件处理评估者提供配对参数，建立组合定理，将群编码转按位项目化编码并扩展到二次扩张域。
@@ -126,7 +160,6 @@ The main technical challenge is handling a pairing whose two arguments are suppl
 Our BN254 implementation produces a 2.4 MiB garbled program, including projectivization, compared with the 48 GB reported for Boolean garbling of Groth16. Thus, we improve over prior state of the art in Groth16 garbling by over four orders of magnitude.
 ]]></content:encoded>
 <pubDate>Fri, 18 Sep 2026 21:08:39 +0000</pubDate>
-<pubDate>Fri, 18 Sep 2026 21:08:39 +0000</pubDate>
 </item>
 <item>
 <title>Batched and Weighted Threshold Encryption with Silent Setup</title>
@@ -134,7 +167,7 @@ Our BN254 implementation produces a 2.4 MiB garbled program, including projectiv
 <guid>https://eprint.iacr.org/2026/2087</guid>
 <content:encoded><![CDATA[
 <div> 批量门限加密，静默设置，批与索引无关，加权门限，短密文
-<br><br>总结:
+<br /><br />总结:
 1. BTE可由委员会联合解密大批密文中的子集，其余密文保持隐私，适用于区块链加密内存池防MEV。
 2. 现有方案存在依赖昂贵DKG、批次标签、非冲突索引或不支持加权门限等不足。
 3. 本文方案实现静默设置、批与索引无关，并支持加权门限策略。
@@ -145,9 +178,7 @@ Existing BTE constructions, however, encounter one of the following usability do
 In this work, we present a BTE scheme that simultaneously addresses all of the above issues. It has a silent setup (key generation does not require interaction between parties), is batch and index independent, and supports weighted threshold policies. Our construction is based on prime-order groups with bilinear pairings with security proof in the Generic Group Model. Our ciphertext size is also the shortest among existing silent batched threshold encryption schemes with only $2$ group elements in addition to the message length.
 ]]></content:encoded>
 <pubDate>Fri, 18 Sep 2026 12:11:16 +0000</pubDate>
-<pubDate>Fri, 18 Sep 2026 12:11:16 +0000</pubDate>
 </item>
-
 <item>
 <title>Practical Group Signatures from Tag-Based NTRU Sampler</title>
 <link>https://eprint.iacr.org/2026/2077</link>
@@ -13900,119 +13931,6 @@ Furthermore, we assess the challenges and limitations associated with leveraging
 Our thorough review sheds light on the opportunities and potential risks of tasks on LLM4BS, providing valuable insights for researchers, practitioners, and policymakers alike.
 ]]></content:encoded>
 <pubDate>Thu, 21 Mar 2024 09:22:49 +0000</pubDate>
-</item>
-<item>
-<title>Force: Highly Efficient Four-Party Privacy-Preserving Machine Learning on GPU</title>
-<link>https://eprint.iacr.org/2023/493</link>
-<guid>https://eprint.iacr.org/2023/493</guid>
-<content:encoded><![CDATA[
-<div> 关键词: 多方计算、效率提升、三党计算、四党计算、隐私保护机器学习<br /><br />总结:
-本文提出了一种名为Force的高效四党计算(4PC)系统，用于实现隐私保护机器学习(PPML)。研究发现，通过引入新的共享类型X-share以及在半诚实多数设置下的MPC协议，Force能够使每个参与方享有最少的本地计算量、最小的显存消耗和最低的数据交换。相较于现有的最优GPU基半诚实安全系统（如Piranha、SecureML、Falcon、FantasticFour、CryptGPU和CrypTen），实验结果显示，Force能够在保持安全性的同时，将PPML性能提高2到38倍，从而证实了资源线性增长可以带来超过线性的性能提升。 <div>
-Tremendous efforts have been made to improve the efficiency of secure Multi-Party Computation (MPC), which allows n ≥ 2 parties to jointly evaluate a target function without leaking their own private inputs. It has been confirmed by previous research that Three-Party Computation (3PC) and outsourcing computations to GPUs can lead to huge performance improvement of MPC in computationally intensive tasks such as Privacy-Preserving Machine Learning (PPML). A natural question to ask is whether super-linear performance gain is possible for a linear increase in resources. In this paper, we give an affirmative answer to this question. We propose Force, an extremely efficient Four-Party Computation (4PC) system for PPML. To the best of our knowledge, each party in Force enjoys the least number of local computations, smallest graphic memory consumption and lowest data exchanges between parties. This is achieved by introducing a new sharing type X-share along with MPC protocols in privacy-preserving training and inference that are semi-honest secure in the honest-majority setting. By comparing the results with state-of-the-art research, we showcase that Force is sound and extremely efficient, as it can improve the PPML performance by a factor of 2 to 38 compared with other latest GPU-based semi-honest secure systems, such as Piranha (including SecureML, Falcon, FantasticFour), CryptGPU and CrypTen.
-]]></content:encoded>
-<pubDate>Tue, 04 Apr 2023 19:37:15 +0000</pubDate>
-</item>
-<item>
-<title>VeRange: Verification-efficient Zero-knowledge Range Arguments with Transparent Setup for Blockchain Applications and More</title>
-<link>https://eprint.iacr.org/2025/528</link>
-<guid>https://eprint.iacr.org/2025/528</guid>
-<content:encoded><![CDATA[
-<div> 关键词: Zero-knowledge range arguments, 透明设置, 区块链, 计算开销, VeRange
-
-总结:
-本文介绍了VeRange，这是一种新的零知识范围论证方案，应用于离散对数环境中。VeRange优化了验证效率，仅需$c\sqrt{N/\log N}$次群指数运算进行验证，其中$N$为表示范围的位数，$c$是一个小常数，使其在区块链部署中具有高度的实用性和较低的Gas成本。此外，VeRange还具备聚合性，允许证明者在一个论证中同时证明$T$个范围论证，只需$O(\sqrt{TN/\log(TN)})+T$次群指数运算进行验证。论文将VeRange实现在以太坊上并测量了其实际Gas成本，结果显示VeRange在实践中拥有基于离散对数范围论证中的最快验证运行时间和最低Gas成本。<br /><br /> <div>
-Zero-knowledge range arguments are a fundamental cryptographic primitive that allows a prover to convince a verifier of the knowledge of a secret value lying within a predefined range. They have been utilized in diverse applications, such as confidential transactions, proofs of solvency and anonymous credentials. Range arguments with a transparent setup dispense with any trusted setup to eliminate security backdoor and enhance transparency. They are increasingly deployed in diverse decentralized applications on blockchains. One of the major concerns of practical deployment of range arguments on blockchains is the incurred gas cost and high computational overhead associated with blockchain miners. Hence, it is crucial to optimize the verification efficiency in range arguments to alleviate the deployment cost on blockchains and other decentralized platforms. In this paper, we present VeRange with several new zero-knowledge range arguments in the discrete logarithm setting, requiring only $c \sqrt{N/\log N}$ group exponentiations for verification, where $N$ is the number of bits to represent a range and $c$ is a small constant, making them concretely efficient for blockchain deployment with a very low gas cost. Furthermore, VeRange is aggregable, allowing a prover to simultaneously prove $T$ range arguments in a single argument, requiring only $O(\sqrt{TN/\log (TN)}) + T$ group exponentiations for verification. We deployed {\tt VeRange} on Ethereum and measured the empirical gas cost, achieving the fastest verification runtime and the lowest gas cost among the discrete-logarithm-based range arguments in practice.
-]]></content:encoded>
-<pubDate>Fri, 21 Mar 2025 02:03:24 +0000</pubDate>
-</item>
-<item>
-<title>SoK: Fully-homomorphic encryption in smart contracts</title>
-<link>https://eprint.iacr.org/2025/527</link>
-<guid>https://eprint.iacr.org/2025/527</guid>
-<content:encoded><![CDATA[
-<div> 关键词: 区块链技术、智能合约、隐私挑战、全同态加密(FHE)、隐私增强技术(PET)
-
-<br /><br />总结:
-本文探讨了区块链技术和智能合约如何通过实现去中心化和无信任价值交换而带来革命性变化，但同时也指出了其透明度和不可变性带来的显著隐私问题。特别是在智能合约为所有网络参与者公开合同细节的情况下，可能导致敏感信息泄露。为解决这一问题，文章强调了在智能合约中引入隐私保护机制的重要性。作者提出了只有装备了隐私机制的智能合约才能实现的高级经济学应用场景，并具体分析了全同态加密（FHE）作为隐私增强技术（PET）在公共区块链上的智能合约中的应用潜力，能够实现在保持自动化、去中心化和安全性的同时保护敏感信息。接着，文章对现有的FHE解决方案进行了全面梳理，并结合所考虑的应用场景进行评估，同时识别出了开放性问题，并对未来的研究方向提出建议，以进一步提升区块链智能合约中的隐私保护水平。 <div>
-Blockchain technology and smart contracts have revolutionized digital transactions by enabling trustless and decentralized exchanges of value. However, the inherent transparency and immutability of blockchains pose significant privacy challenges. On-chain data, while pseudonymous, is publicly visible and permanently recorded, potentially leading to the inadvertent disclosure of sensitive information. This issue is particularly pronounced in smart contract applications, where contract details are accessible to all network participants, risking the exposure of identities and transactional details.
-
-To address these privacy concerns, there is a pressing need for privacy-preserving mechanisms in smart contracts. To showcase this need even further, in our paper we bring forward advanced use-cases in economics which only smart contracts equipped with privacy mechanisms can realize, and show how  fully-homomorphic encryption (FHE) as a privacy enhancing technology (PET) in smart contracts, operating on a public blockchain, can make possible the implementation of these use-cases. Furthermore, we perform a comprehensive systematization of FHE-based approaches in smart contracts, examining their potential to maintain the confidentiality of sensitive information while retaining the benefits of smart contracts, such as automation, decentralization, and security. After we evaluate these existing FHE solutions in the context of the use-cases we consider, we  identify open problems, and suggest future research directions to enhance privacy in blockchain smart contracts.
-]]></content:encoded>
-<pubDate>Fri, 21 Mar 2025 01:27:39 +0000</pubDate>
-</item>
-<item>
-<title>Mitigating MEV via Multiparty Delay Encryption</title>
-<link>https://eprint.iacr.org/2023/1612</link>
-<guid>https://eprint.iacr.org/2023/1612</guid>
-<content:encoded><![CDATA[
-<div> 关键词：Ethereum、最大可提取价值(MEV)、交易审查、多方延迟加密(MDE)、时间锁谜题
-
-<br /><br />总结:
-
-本文针对以太坊网络中存在的最大可提取价值(MEV)问题以及交易审查现象，提出了一个创新的 mempool 加密方案。该方案通过分离交易包含和执行过程，并在执行前保持交易加密，旨在缓解 MEV 和审查问题。文章中定义了多方延迟加密(MDE)的概念，并基于时间锁谜题构建了一个实用的MDE方案。此方法在可扩展性（交易解密方面）、效率（最小化通信和存储开销）和安全性（仅需最小的信任假设）方面表现出色。为了证明MDE方案的有效性，研究者已在本地以太坊测试网上实现了该方案，并证明了其在每个以太坊槽位只有一个诚实的见证聚合器的情况下仍能确保安全。 <div>
-Ethereum is a decentralized and permissionless network offering several attractive features. However, block proposers in Ethereum can exploit the order of transactions to extract value. This phenomenon, known as $maximal$ $extractable$ $value$ (MEV), not only disrupts the optimal functioning of different protocols but also undermines the stability of the underlying consensus mechanism. Furthermore, current block production architecture allows transaction censorship that compromises credible neutrality, a fundamental principle of Ethereum’s design philosophy.
-In this work, we present a novel $mempool$ $encryption$ scheme to alleviate the censorship and MEV problem by separating transaction inclusion and execution, keeping transactions encrypted before execution. We formulate the notion of $multiparty$ $delay$ $encryption$ (MDE) and construct a practical MDE scheme based on time-lock puzzles. Our method excels in scalability (in terms of transaction decryption), efficiency (minimizing communication and storage overhead), and security (with minimal trust assumptions). 
-To demonstrate the effectiveness of our MDE scheme, we have implemented it on a local Ethereum testnet and prove its security under the presence of only one honest attestation aggregator per Ethereum slot.
-]]></content:encoded>
-<pubDate>Tue, 17 Oct 2023 22:38:35 +0000</pubDate>
-</item>
-<item>
-<title>Revisiting attacker's knowledge in inference attacks against Searchable Symmetric Encryption</title>
-<link>https://eprint.iacr.org/2023/1883</link>
-<guid>https://eprint.iacr.org/2023/1883</guid>
-<content:encoded><![CDATA[
-<div> 关键词: 加密搜索方案、安全漏洞、泄漏滥用攻击、数据相似性、统计工具
-
-总结:
-本文针对加密搜索方案中的安全问题以及数据相似性的模糊假设进行了研究。首先，文章提出了基于统计估计器的数学模型，用于分析攻击者知识和相似性的概念。其次，开发了统计工具来量化相似性对攻击准确性的影响。作者将这些工具应用于三个现有的攻击场景中，探究相似性是否为影响攻击准确性的唯一因素。接着，文章指出限制最大索引尺寸可以增加攻击者满足“类似数据”假设的难度，并提出一种统计方法，用于根据给定攻击和数据集估算合适的最大索引尺寸。具体到对Enron数据集的最佳已知攻击而言，通过设置最大索引尺寸为200，可保证（以高概率）攻击的准确性低于5%。 <div>
-Encrypted search schemes have been proposed to address growing privacy concerns. However, several leakage-abuse attacks have highlighted some security vulnerabilities. Recent attacks assumed an attacker's knowledge containing data "similar" to the indexed data. However, this vague assumption is barely discussed in literature: how likely is it for an attacker to obtain a "similar enough" data?
-
-Our paper provides novel statistical tools usable on any attack in this setting to analyze its sensitivity to data similarity. First, we introduce a mathematical model based on statistical estimators to analytically understand the attackers' knowledge and the notion of similarity. Second, we conceive statistical tools to model the influence of the similarity on the attack accuracy. We apply our tools on three existing attacks to answer questions such as: is similarity the only factor influencing accuracy of a given attack? Third, we show that the enforcement of a maximum index size can make the ``similar-data'' assumption harder to satisfy. In particular, we propose a statistical method to estimate an appropriate maximum size for a given attack and dataset. For the best known attack on the Enron dataset, a maximum index size of 200 guarantees (with high probability) the attack accuracy to be below 5%.
-]]></content:encoded>
-<pubDate>Thu, 07 Dec 2023 10:15:59 +0000</pubDate>
-</item>
-<item>
-<title>AI Agents in Cryptoland: Practical Attacks and No Silver Bullet</title>
-<link>https://eprint.iacr.org/2025/526</link>
-<guid>https://eprint.iacr.org/2025/526</guid>
-<content:encoded><![CDATA[
-<div> 关键词: AI代理、Web3生态系统、安全风险、上下文操纵、防御措施
-
-<br /><br />总结:
-本文探讨了AI代理与区块链金融生态系统的整合所带来的安全隐患，尤其是在遭遇现实世界中的对抗性威胁时。提出了“上下文操纵”这一全面攻击向量的概念，它利用未受保护的输入通道、内存模块和外部数据源等上下文表面进行攻击。通过实证分析用于自动化的Web3操作的去中心化AI代理框架ElizaOS，展示了恶意指令如何注入到提示或历史交互记录中，导致意外的资产转移和协议违规，可能造成严重的经济损失。研究发现，基于提示的防御措施并不充分，因为恶意输入可破坏代理存储的上下文，进而引发跨交互和平台的级联漏洞。因此，文章强调了迫切需要开发既安全又具备财务责任意识的AI代理。 <div>
-The integration of AI agents with Web3 ecosystems harnesses their complementary potential for autonomy and openness, yet also introduces underexplored security risks, as these agents dynamically interact with financial protocols and immutable smart contracts. This paper investigates the vulnerabilities of AI agents within blockchain-based financial ecosystems when exposed to adversarial threats in real-world scenarios. We introduce the concept of context manipulation -- a comprehensive attack vector that exploits unprotected context surfaces, including input channels, memory modules, and external data feeds. Through empirical analysis of ElizaOS, a decentralized AI agent framework for automated Web3 operations, we demonstrate how adversaries can manipulate context by injecting malicious instructions into prompts or historical interaction records, leading to unintended asset transfers and protocol violations which could be financially devastating.  Our findings indicate that prompt-based defenses are insufficient, as malicious inputs can corrupt an agent's stored context, creating cascading vulnerabilities across interactions and platforms. This research highlights the urgent need to develop AI agents that are both secure and fiduciarily responsible.
-]]></content:encoded>
-<pubDate>Thu, 20 Mar 2025 15:55:10 +0000</pubDate>
-</item>
-<item>
-<title>Ring Referral: Efficient Publicly Verifiable Ad hoc Credential Scheme with Issuer and Strong User Anonymity for Decentralized Identity and More</title>
-<link>https://eprint.iacr.org/2025/524</link>
-<guid>https://eprint.iacr.org/2025/524</guid>
-<content:encoded><![CDATA[
-<div> 关键词：环签名、第三方签署、用户匿名性、透明设置、多消息验证效率
-
-总结:<br />
-本文提出了一种环引荐方案，该方案允许用户公开证明自己知道由一组临时授权发行者之一对私密消息签署的有效签名，同时不泄露签署的发行者身份。环引荐是对传统环签名称的自然扩展，支持用户从第三方签署者获取签名。此方案适用于多种应用场景，如隐藏证书的去中心化身份、增强隐私的联合认证、匿名背书和隐私保护的推荐营销。与先前的发行者隐藏凭证方案相比，环引荐方案具备更多独特特性：(1) 对临时环内的签名进行公共可验证性；(2) 在发行者和验证者合谋追踪用户的情况下提供强大的用户匿名性；(3) 采用透明设置；(4) 消息隐藏；(5) 实现了高效的多消息对数级验证效率；(6) 支持需要多个共同签署发行者的阈值方案。最后，文中实现了环引荐方案并进行了广泛的实证评估。 <div>
-In this paper, we present a ring referral scheme, by which a user can publicly prove her knowledge of a valid signature for a private message that is signed by one of an ad hoc set of authorized issuers, without revealing the signing issuer. Ring referral is a natural extension to traditional ring signature by allowing a prover to obtain a signature from a third-party signer. Our scheme is useful for diverse applications, such as certificate-hiding decentralized identity, privacy-enhancing federated authentication, anonymous endorsement and privacy -preserving referral marketing. In contrast with prior issuer-hiding credential schemes, our ring referral scheme supports more distinguishing features, such as (1) public verifiability over an ad hoc ring, (2) strong user anonymity against collusion among the issuers and verifier to track a user, (3) transparent setup,  (4) message hiding, (5) efficient multi-message logarithmic verifiability, (6) threshold scheme for requiring multiple co-signing issuers. Finally, we implemented our ring referral scheme with extensive empirical evaluation
-]]></content:encoded>
-<pubDate>Thu, 20 Mar 2025 06:10:58 +0000</pubDate>
-</item>
-<item>
-<title>New Techniques for Analyzing Fully Secure Protocols: A Case Study of Solitary Output Secure Computation</title>
-<link>https://eprint.iacr.org/2025/522</link>
-<guid>https://eprint.iacr.org/2025/522</guid>
-<content:encoded><![CDATA[
-<div> 关键词: 孤立输出安全计算、完全安全性、函数计算、三党计算、特殊轮协议
-
-<br /><br />总结:
-本文关注的是孤立输出安全计算的研究，这是一种允许互不信任的各方在保证特定一方获取输出的同时，计算其输入的功能性方法。该领域的研究要求满足正确性、隐私性、输入独立性和确保输出交付等全面的安全属性。Halevi等人在[TCC 2019]中对该领域进行了初步而深入的研究，但未完全描述可以实现完全安全计算的功能集合。Alon等人在[EUROCRYPT 2024]中探讨了三党场景下，其中输出接收方无输入的全部布尔功能的完全安全计算，并发现它与公平性的概念存在潜在关联。文章继续这一研究方向，着眼于所有党派均持有私有输入的三党孤立输出布尔功能集。主要贡献在于定义并分析了一类“特殊轮”协议家族，这扩展了先前提出的协议集合。通过这些技术，我们能识别哪些特殊轮协议能够安全地计算给定功能（如果存在）。值得注意的是，这项分析还可应用于存在公平性问题的两党设置。因此，作者认为，这些技术可能对其他场景的理解和应用产生积极影响，加深我们对于不同设置之间联系的认识。 <div>
-Solitary output secure computation allows a set of mutually distrustful parties to compute a function of their inputs such that only a designated party obtains the output. Such computations should satisfy various security properties such as correctness, privacy, independence of inputs, and even guaranteed output delivery. We are interested in full security, which captures all of these properties. Solitary output secure computation has been the study of many papers in recent years, as it captures many real-world scenarios.
-
-A systematic study of fully secure solitary output computation was initiated by Halevi et al. [TCC 2019]. They showed several positive and negative results, however, they did not characterize what functions can be computed with full security. Alon et al. [EUROCRYPT 2024] considered the special, yet important case, of three parties with Boolean output, where the output-receiving party has no input. They completely characterized the set of such functionalities that can be computed with full security. Interestingly, they also showed a possible connection with the seemingly unrelated notion of fairness, where either all parties obtain the output or none of them do.
-
-We continue this line of investigation and study the set of three-party solitary output Boolean functionalities where all parties hold private inputs. Our main contribution is defining and analyzing a family of ``special-round'' protocols, which generalizes the set of previously proposed protocols. Our techniques allow us to identify which special-round protocols securely compute a given functionality (if such exists). Interestingly, our analysis can also be applied in the two-party setting (where fairness is an issue). Thus, we believe that our techniques may prove useful in additional settings and deepen our understanding of the connections between the various settings.
-]]></content:encoded>
-<pubDate>Wed, 19 Mar 2025 21:21:35 +0000</pubDate>
 </item>
 </channel>
 </rss>
