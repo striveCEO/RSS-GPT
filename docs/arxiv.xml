@@ -4,17 +4,17 @@
 <title>cs updates on arXiv.org</title>
 <link>http://rss.arxiv.org/rss/cs</link>
 
+
 <item>
 <title>Universal Fractal Natural Language Decision Map: Real-Time Edge Triage Across Heterogeneous Domains</title>
 <link>https://arxiv.org/abs/2609.25498</link>
 <guid>https://arxiv.org/abs/2609.25498</guid>
 <content:encoded><![CDATA[
 <div> 分形决策图,零显存,边缘反射,抗提示注入,超低延迟
-<br><br>总结:1. 解决LLM高延迟高显存；2. 提出边缘反射无权重分形决策图；3. 用24字节种子生成布尔、类别、序数决策；4. 自动路由提升28.8%，声学阻尼抗注入并提速，动态校准消偏；5. JevBench第一、92.6%准确率、7.08ms，兼容API及端侧。 <div>
+<br /><br />总结:1. 解决LLM高延迟高显存；2. 提出边缘反射无权重分形决策图；3. 用24字节种子生成布尔、类别、序数决策；4. 自动路由提升28.8%，声学阻尼抗注入并提速，动态校准消偏；5. JevBench第一、92.6%准确率、7.08ms，兼容API及端侧。 <div>
 arXiv:2609.25498v1 Announce Type: new 
 Abstract: Deploying Large Language Models for runtime operational triage incurs prohibitive latency (>100-500 ms), high VRAM requirements (>4-8 GB), and excessive energy dissipation. Extending Mandelbrot Fractal Neural Synthesis (Dagli et al., 2026), this paper presents the Universal Fractal Natural Language Decision Map, realized via the werr machine-native edge reflex runtime and the production answerr platform (https://answerr.me). Operating entirely without stored weight tensors (0 Bytes VRAM), the engine synthesizes deterministic decisions---noul (Boolean), choice (categorical), and score (ordinal)---by dynamically modulating 24-byte coordinate seeds along the chaotic boundary of the Mandelbrot set and evaluating 4-quadrant escape dynamics. Drawing inspiration from biological System-One reflex arcs, the engine introduces: (i) an Auto-Seed Router with domain projector Phi_D yielding a +28.8% accuracy gain over linear baselines; (ii) an Information-Theoretic Acoustic Damping Filter grounded in token entropy and phonetic spectral density that insulates against prompt injections (0.0% empirical bypass; 95% Wilson CI: [0.0%, 30.8%]) while pruning escape iterations by 45.8% (accelerating throughput 2.5x to 3.31 ms latency); and (iii) an Organic Dynamic Calibration framework using O(1) Exponential Moving Average (EMA, alpha=0.03) and quadrant phase rotation to eliminate positional bias. Benchmarked on bare-metal infrastructure (api.answerr.me:4431) across 1,150+ verified decisions (3,200+ questions) and ranked World #1 on the independent JevBench suite (81.65%), the framework achieves 92.6% macro-accuracy (95% CI: [90.8%, 94.1%]) with 7.08 ms median CPU latency. We provide an OpenAI-compatible API (/v1/chat/completions) and demonstrate feasibility on microcontrollers and 32-byte EVM smart contracts.
 ]]></content:encoded>
-<pubDate>Wed, 23 Sep 2026 00:00:00 -0400</pubDate>
 <pubDate>Wed, 23 Sep 2026 00:00:00 -0400</pubDate>
 </item>
 <item>
@@ -23,7 +23,7 @@ Abstract: Deploying Large Language Models for runtime operational triage incurs 
 <guid>https://arxiv.org/abs/2609.25514</guid>
 <content:encoded><![CDATA[
 <div> 向量检索 去中心化 语义路由 VHash VecDHT
-<br><br>总结:
+<br /><br />总结:
 1. 问题：去中心化向量检索缺乏可信协调器，路由过期会查错节点、联系过多，降低召回并增加延迟。
 2. 方法：Semord让语义邻近可路由；VHash平衡放置相关向量，缩小查询节点范围；VecDHT维护路由、元数据、节点变动与索引更新。
 3. 效果：较基线召回提升超15%，联系节点减少超60%，接近中心化oracle，峰值本地索引内存降低逾2倍，并能扩展、抗churn。 <div>
@@ -31,18 +31,16 @@ arXiv:2609.25514v1 Announce Type: new
 Abstract: Vector databases are increasingly deployed in distributed settings where different users, sites, or domains maintain vector data. Existing vector databases rely on a coordinator to record which shards store which parts of the vector space and to route each query to those shards. In a decentralized setting, peers may join, leave, or move data without a trusted node tracking every change, and outdated routing information can therefore send queries to the wrong peers or require contacting many peers, reducing vector retrieval recall and increasing network latency. We present Semord, a decentralized vector search overlay system that achieves high recall by routing each ANN query to a small set of relevant peers, without relying on a centralized coordinator. Semord addresses this problem by making semantic locality routable: 1) We propose VHash to place semantically related vectors near each other in the overlay key space while avoiding load imbalance, so that each query only needs to contact a small neighborhood of peers for distributed local ANN ranking. 2) We design VecDHT, a communication protocol that maintains decentralized routing, region metadata, churn resilience, and VHash updates under membership and workload changes. Our extensive experiments on a real testbed show that Semord improves recall by more than 15% and reduces contacted peers by over 60% compared with decentralized baselines. Semord also approaches the recall and latency of a centralized oracle baseline while reducing peak peer-local ANN index memory by more than 2X. Controlled large-scale simulations further show that Semord scales across real-world embedding workloads and remains robust under churn for scoped vector retrieval as a decentralized overlay.
 ]]></content:encoded>
 <pubDate>Wed, 23 Sep 2026 00:00:00 -0400</pubDate>
-<pubDate>Wed, 23 Sep 2026 00:00:00 -0400</pubDate>
 </item>
 <item>
 <title>Fully Byzantine-Resilient Multi-Agent Reinforcement Learning</title>
 <link>https://arxiv.org/abs/2609.25701</link>
 <guid>https://arxiv.org/abs/2609.25701</guid>
 <content:encoded><![CDATA[
-<div> 拜占庭容错 多智能体强化学习 演员评论家 两跳消息冗余 收敛性<br><br>总结: 1.研究分布式拜占庭容错演员-评论家多智能体强化学习；2.现有方法仅收敛到无攻击极限点邻域；3.提出FRAC-MARL，利用两跳消息冗余识别可靠消息；4.在线性参数化和拜占庭边攻击下，时变通信图几乎必然收敛至相同极限点；5.提出可多项式验证拓扑条件，并用于多机器人编队控制。 <div>
+<div> 拜占庭容错 多智能体强化学习 演员评论家 两跳消息冗余 收敛性<br /><br />总结: 1.研究分布式拜占庭容错演员-评论家多智能体强化学习；2.现有方法仅收敛到无攻击极限点邻域；3.提出FRAC-MARL，利用两跳消息冗余识别可靠消息；4.在线性参数化和拜占庭边攻击下，时变通信图几乎必然收敛至相同极限点；5.提出可多项式验证拓扑条件，并用于多机器人编队控制。 <div>
 arXiv:2609.25701v1 Announce Type: new 
 Abstract: We study distributed Byzantine-resilient actor-critic multi-agent reinforcement learning (AC-MARL), where agents collectively learn policies through local interactions. Existing methods guarantee convergence of the agents' parameters only to a neighborhood of the attack-free limit points, resulting in degraded performance. We propose Fully Resilient AC-MARL (FRAC-MARL), a decentralized method in which each agent leverages redundancy in two-hop messages to identify reliable messages. Under linear parameterizations of the value and team-reward functions and Byzantine edge attacks, where adversarial behavior is confined to the communication layer, we prove that agents' parameters converge almost surely to the same limit points as in the attack-free case over time-varying communication graphs. We introduce a novel topological condition for the convergence of our method, present a systematic method to construct such networks, and prove that this condition can be verified in polynomial time. Finally, we demonstrate our method on cooperative multi-robot formation control tasks.
 ]]></content:encoded>
-<pubDate>Wed, 23 Sep 2026 00:00:00 -0400</pubDate>
 <pubDate>Wed, 23 Sep 2026 00:00:00 -0400</pubDate>
 </item>
 <item>
@@ -51,11 +49,10 @@ Abstract: We study distributed Byzantine-resilient actor-critic multi-agent rein
 <guid>https://arxiv.org/abs/2609.26010</guid>
 <content:encoded><![CDATA[
 <div> 多智能体强化学习、观测适配、单智能体策略、协同训练、参数高效
-<br><br>总结: 1.背景：MARL常从零同时学能力与协调，但许多任务可借单智能体对应学习。2.方法：MATES以输入端小适配器把多智能体观测转为冻结策略格式，保留单体信息并区分邻居信息，不改策略、架构与算法更新。3.实验：覆盖on/off-policy、路径规划、导航与协作发现，含离散连续空间。4.结果：仅调3.5%-7.3%参数，胜从头训练，近全量微调，与示范基线相当并可泛化。5.结论：特定观测下无需改个体策略即可学协同。 <div>
+<br /><br />总结: 1.背景：MARL常从零同时学能力与协调，但许多任务可借单智能体对应学习。2.方法：MATES以输入端小适配器把多智能体观测转为冻结策略格式，保留单体信息并区分邻居信息，不改策略、架构与算法更新。3.实验：覆盖on/off-policy、路径规划、导航与协作发现，含离散连续空间。4.结果：仅调3.5%-7.3%参数，胜从头训练，近全量微调，与示范基线相当并可泛化。5.结论：特定观测下无需改个体策略即可学协同。 <div>
 arXiv:2609.26010v1 Announce Type: new 
 Abstract: Multi-agent reinforcement learning (MARL) commonly trains decentralized policies from scratch, requiring agents to acquire individual task competence and coordination simultaneously. Yet many multi-agent problems admit a compatible single-agent counterpart in which the underlying task can be learned in isolation. We introduce Multi-Agent Observation Transformation for Existing Single-Agent Policies (MATES), an input-side adaptation framework for tasks whose multi-agent observations preserve the solo-task information while exposing separately identifiable neighbor information. From multi-agent experience, MATES learns a small adapter that maps this observation into the format expected by a frozen single-agent policy, inducing actions suited to the shared environment without updating the single-agent policy itself. MATES leaves the pretrained policy's internal architecture unchanged and retains the objectives and update procedures of the underlying MARL algorithm. We evaluate MATES using both on- and off-policy algorithms on lifelong pathfinding, navigation, and cooperative discovery, spanning discrete and continuous observation and action spaces. Across all evaluated settings, MATES optimizes only 3.5-7.3% as many parameters as full-policy training while consistently outperforming MARL training from scratch. It approaches the performance of full fine-tuning, remains competitive overall with demonstration-based baselines, and retains strong task performance at team sizes not encountered during training. These results provide evidence that, under this observation structure, effective multi-agent behavior can be learned without modifying the policy that encodes individual competence.
 ]]></content:encoded>
-<pubDate>Wed, 23 Sep 2026 00:00:00 -0400</pubDate>
 <pubDate>Wed, 23 Sep 2026 00:00:00 -0400</pubDate>
 </item>
 <item>
@@ -64,7 +61,7 @@ Abstract: Multi-agent reinforcement learning (MARL) commonly trains decentralize
 <guid>https://arxiv.org/abs/2609.26510</guid>
 <content:encoded><![CDATA[
 <div> 去中心化、即插即用、稳定性证书、节点导纳矩阵、构网逆变器
-<br><br>总结:
+<br /><br />总结:
 1. 提出一种利用黑盒导纳谱计算的去中心化即插即用稳定性证书方法，无需设备白盒模型。
 2. 方法基于节点导纳矩阵性质分析，可在R/X处于指定范围内保障设备接入任意拓扑网络的任意节点。
 3. 该方法与无源性相关，但借助频率依赖变换矩阵，可判断局部频率非无源设备仍满足稳定性准则。
@@ -73,7 +70,6 @@ arXiv:2609.26510v1 Announce Type: new
 Abstract: This paper presents a new approach to the derivation of decentralized plug-and-play stability certificates that can be calculated using black-box admittance spectra, without requiring white-box models of devices. The method is based on analysing the properties of the nodal admittance matrix. The certificates ensure that the devices can be connected at any node of a network of any topology as long as the R/X ratio is within a specified range. The approach is related to the passivity concept, but uses frequency-dependent transformation matrices to check if a device, which is non-passive in a certain frequency range, can still satisfy a plug-and-play stability criterion. We illustrate the method using Grid Forming Inverters (GFMs) connected to IEEE 39 node test-case.
 ]]></content:encoded>
 <pubDate>Wed, 23 Sep 2026 00:00:00 -0400</pubDate>
-<pubDate>Wed, 23 Sep 2026 00:00:00 -0400</pubDate>
 </item>
 <item>
 <title>Decentralized Guidance and Control for Rendezvous and Docking with a Tumbling Target using Multiple Servicers</title>
@@ -81,11 +77,10 @@ Abstract: This paper presents a new approach to the derivation of decentralized 
 <guid>https://arxiv.org/abs/2609.26593</guid>
 <content:encoded><![CDATA[
 <div> 多航天器协同;去中心化MPC;交会对接;翻滚目标;碰撞避免
-<br><br>总结:1.背景：小型化与轨道碎片增多推动多飞行器协同服务大型翻滚目标。<br>2.问题：单体推力有限，近距离多航天器安全协调困难。<br>3.方法：去中心化六自由度MPC框架，无彼此预测信息仍安全对接。<br>4.特点：嵌入软对接、避碰和障碍约束，LTI公式保证计算可行。<br>5.验证：MATLAB三飞行器固定障碍场景约束满足并对接成功。 <div>
+<br /><br />总结:1.背景：小型化与轨道碎片增多推动多飞行器协同服务大型翻滚目标。<br />2.问题：单体推力有限，近距离多航天器安全协调困难。<br />3.方法：去中心化六自由度MPC框架，无彼此预测信息仍安全对接。<br />4.特点：嵌入软对接、避碰和障碍约束，LTI公式保证计算可行。<br />5.验证：MATLAB三飞行器固定障碍场景约束满足并对接成功。 <div>
 arXiv:2609.26593v1 Announce Type: new 
 Abstract: The growing trend of miniaturization in space, combined with an exponential increase in orbital debris, motivates a new operational paradigm, that is the deployment of multiple small servicers to collectively rendezvous, dock and service large tumbling targets. A single small spacecraft is often limited in thrust or reach for such targets, yet coordinating multiple autonomous spacecraft safely in close proximity remains an open challenge. This paper presents a proof-of-concept decentralized 6-DOF model predictive control (MPC) framework for multiple servicers to safely rendezvous and dock (RVD) to a tumbling target with no knowledge about each others predicted input over the prediction horizon. The proposed framework enforces soft docking conditions, inter-servicer collision avoidance, and obstacle avoidance through embedded constraints, while remaining computationally tractable via a linear time-invariant (LTI) formulation. Validation in MATLAB with three servicers and fixed obstacle arrangements confirms that all constraints are satisfied and successful docking is achieved.
 ]]></content:encoded>
-<pubDate>Wed, 23 Sep 2026 00:00:00 -0400</pubDate>
 <pubDate>Wed, 23 Sep 2026 00:00:00 -0400</pubDate>
 </item>
 <item>
@@ -94,11 +89,10 @@ Abstract: The growing trend of miniaturization in space, combined with an expone
 <guid>https://arxiv.org/abs/2609.26653</guid>
 <content:encoded><![CDATA[
 <div> 分布式贝叶斯反演,地震走时层析,程函方程,ADMM,SVGD
-<br><br>总结:①提出面向大规模贝叶斯反演的分布式框架，聚焦地震走时层析；②用快速行进法解程函方程；③以ADMM将全局目标转为共识并行子问题，免建大型敏感矩阵；④在子问题内用SVGD采样后验；⑤结合Woodbury高斯牛顿更新加速；⑥实验显示稳定收敛、高保真速度重建与不确定度图。 <div>
+<br /><br />总结:①提出面向大规模贝叶斯反演的分布式框架，聚焦地震走时层析；②用快速行进法解程函方程；③以ADMM将全局目标转为共识并行子问题，免建大型敏感矩阵；④在子问题内用SVGD采样后验；⑤结合Woodbury高斯牛顿更新加速；⑥实验显示稳定收敛、高保真速度重建与不确定度图。 <div>
 arXiv:2609.26653v1 Announce Type: cross 
 Abstract: We present a distributed framework for large-scale Bayesian inverse problems governed by the eikonal equation, with a specific focus on seismic traveltime tomography. Traditional deterministic approaches often fail to provide the uncertainty quantification (UQ) necessary for ill-posed problems, while conventional Bayesian sampling methods such as Markov chain Monte Carlo (MCMC) suffer from the curse of dimensionality and slow convergence in high-dimensional model spaces. The proposed framework addresses these challenges through a three-tier computational strategy. First, we utilize the Fast Marching Method (FMM) to solve the eikonal equation, ensuring high numerical accuracy. Second, we reformulate the global tomographic objective into a decentralized consensus form, allowing the inversion to be decomposed into independent subproblems solved in parallel via the Alternating Direction Method of Multipliers (ADMM). This architecture eliminates the need for the explicit construction of large-scale sensitivity matrices, significantly reducing the memory footprint for 3D surveys. Finally, we integrate Stein Variational Gradient Descent (SVGD) within the ADMM workers to perform approximate posterior sampling. By evolving a set of model particles along a functional gradient direction that balances data-fitting forces with a repulsive kernel-based diversity force, we obtain an ensemble from which posterior summaries are computed. We derive a data-space Gauss-Newton update using the Woodbury matrix identity to further accelerate the particle evolution in large-scale 3D problems. Numerical experiments on complex 2D and 3D models demonstrate that the algorithm achieves stable convergence, produces high-fidelity velocity reconstructions, and provides posterior uncertainty maps.
 ]]></content:encoded>
-<pubDate>Wed, 23 Sep 2026 00:00:00 -0400</pubDate>
 <pubDate>Wed, 23 Sep 2026 00:00:00 -0400</pubDate>
 </item>
 <item>
@@ -107,11 +101,10 @@ Abstract: We present a distributed framework for large-scale Bayesian inverse pr
 <guid>https://arxiv.org/abs/2609.26783</guid>
 <content:encoded><![CDATA[
 <div> 去中心化 部分可观测 低秩动态 团队协作 样本复杂度
-<br><br>总结:1.研究去中心化部分可观测团队决策，针对低秩潜在动态与未知模型。2.结合团队理论等价和低秩表示，成员依据本地私有及延迟共享信息决策。3.仅用可得信息学习近似低秩MDP，并用最小二乘值迭代求策略。4.得到完全去中心化学习规划算法，无需集中协调或训练。5.成员解逼近集中团队最优，并建立有限样本保证与样本复杂度上界。 <div>
+<br /><br />总结:1.研究去中心化部分可观测团队决策，针对低秩潜在动态与未知模型。2.结合团队理论等价和低秩表示，成员依据本地私有及延迟共享信息决策。3.仅用可得信息学习近似低秩MDP，并用最小二乘值迭代求策略。4.得到完全去中心化学习规划算法，无需集中协调或训练。5.成员解逼近集中团队最优，并建立有限样本保证与样本复杂度上界。 <div>
 arXiv:2609.26783v1 Announce Type: cross 
 Abstract: We study decentralized partially observable team decision problems with low-rank latent dynamics and unknown system models. The proposed framework combines team-theoretic equivalence with low-rank model representations to address cooperative decision-making in partially observable Markov decision processes without prior knowledge of the transition model. Each team member makes decisions based on local private information and delayed common information shared across the team. Using only this available information, each member learns an approximate low-rank Markov decision process and applies least-squares value iteration to compute its policy. This yields a fully decentralized learning and planning algorithm that requires neither a centralized coordinator nor centralized training. We show that the resulting member-side solutions approximate the centralized team solution: despite partial observability, unknown dynamics, and delayed common information, each member recovers the corresponding component of an approximate team-optimal policy. We further establish finite-sample performance guarantees and derive a corresponding sample-complexity bound for the proposed algorithm.
 ]]></content:encoded>
-<pubDate>Wed, 23 Sep 2026 00:00:00 -0400</pubDate>
 <pubDate>Wed, 23 Sep 2026 00:00:00 -0400</pubDate>
 </item>
 <item>
@@ -120,7 +113,7 @@ Abstract: We study decentralized partially observable team decision problems wit
 <guid>https://arxiv.org/abs/2511.09435</guid>
 <content:encoded><![CDATA[
 <div> 动态非合作博弈, 猜测博弈, 激励设计, 对手建模, 协调机制
-<br><br>总结:
+<br /><br />总结:
 1. 动态非合作博弈中玩家需推测他人反应，但均衡可能多重且非理想。
 2. 提出激励设计框架：协调者优化目标函数求均衡，并发布为玩家目标。
 3. 集中式优化猜测以引导玩家，分布式则由玩家独立更新猜测与策略。
@@ -129,7 +122,6 @@ arXiv:2511.09435v3 Announce Type: replace
 Abstract: In dynamic noncooperative games, each player makes conjectures about other players' reactions before choosing a strategy. However, resulting equilibria may be multiple and do not always lead to desirable outcomes. These issues are typically addressed separately, for example, through opponent modelling and incentive design. Drawing inspiration from conjectural variations games, we propose an incentive design framework in which a coordinator first computes an equilibrium by optimizing a predefined objective function, then communicates this equilibrium as a target for the players to reach. In a centralized setting, the coordinator also optimizes the conjectures to steer the players towards the target. In decentralized settings, players independently compute conjectures and update their strategies based on individual targets. We provide a guarantee of equilibrium existence in both cases. This framework uses conjectures not only to guide the system towards desirable outcomes but also to decouple the game into independent optimization problems, enabling efficient computation and parallelization in large-scale settings. We illustrate our theoretical results on classical representative noncooperative games, demonstrating its application potential.
 ]]></content:encoded>
 <pubDate>Wed, 23 Sep 2026 00:00:00 -0400</pubDate>
-<pubDate>Wed, 23 Sep 2026 00:00:00 -0400</pubDate>
 </item>
 <item>
 <title>Distributed Legal Infrastructure for a Trustworthy Agentic Web</title>
@@ -137,14 +129,12 @@ Abstract: In dynamic noncooperative games, each player makes conjectures about o
 <guid>https://arxiv.org/abs/2603.06884</guid>
 <content:encoded><![CDATA[
 <div> 代理智能体、分布式法律基础设施、法律互操作、问责机制、可信代理网络
-<br><br>总结:①代理网转向AI自主行动；②法律框架承压，需以互操作协议嵌入合法性，组织身份、委托与问责；③提出DLI，含灵魂绑定身份、认知约束、去中心化仲裁、自下而上监管与保险、可移植法律框架；④对齐问责、可争辩与法治。 <div>
+<br /><br />总结:①代理网转向AI自主行动；②法律框架承压，需以互操作协议嵌入合法性，组织身份、委托与问责；③提出DLI，含灵魂绑定身份、认知约束、去中心化仲裁、自下而上监管与保险、可移植法律框架；④对齐问责、可争辩与法治。 <div>
 arXiv:2603.06884v2 Announce Type: replace 
 Abstract: The agentic web marks a structural transition from a human-centered information network to a digital environment populated by artificial intelligence (AI) agents that perceive, decide, and act autonomously. As delegated action unfolds at machine speed, exceeds discrete moments of human judgment, and distributes decision-making across non-human actors, existing legal frameworks face growing strain, creating an urgent need for new mechanisms capable of sustaining legality in this emerging order. A trustworthy agentic web therefore depends on the infrastructuring of legality through interoperable protocols that organize identity, delegation, and accountability across systems, enabling coherent governance beyond isolated platforms. Towards this end, this article advances a distributed legal infrastructure (DLI), a governance paradigm composed of five interlocking layers: (1) self-sovereign, soulbound agent identities; (2) cognitive AI logic and constraint systems; (3) decentralized adjudication mechanisms for dispute resolution; (4) bottom-up agentic market regulation to mitigate information asymmetries and network effects, including insurance-based models; and (5) portable institutional frameworks that enable legal interoperability while preserving plural sources of authority. This reference framework contributes to emerging research on embedding legality within agentic web infrastructure, aligning distributed technical systems with accountability, contestability, and rule-of-law principles.
 ]]></content:encoded>
 <pubDate>Wed, 23 Sep 2026 00:00:00 -0400</pubDate>
-<pubDate>Wed, 23 Sep 2026 00:00:00 -0400</pubDate>
 </item>
-
 <item>
 <title>Proxifield: Decentralized Multi-Agent Communication through Semantic Proximity</title>
 <link>https://arxiv.org/abs/2609.20889</link>
@@ -10907,106 +10897,6 @@ Abstract: Information-theoretic topological secure aggregation (TSA)\cite{zhang2
 <content:encoded><![CDATA[
 arXiv:2605.01922v1 Announce Type: new 
 Abstract: The exponential growth of geospatial data streams flowing from IoT devices challenges conventional cloud-based analytics, which typically suffer from network bandwidth waste and latency, basically attributed to the data being managed completely by Cloud, such as centralized sampling. To address this gap, we propose EdgeApproxGeo, a novel edge-cloud architecture that performs spatial-stratified online sampling at network edge devices near data sources. Our system introduces a novel sampling method called EdgeSOS, which is a unique decentralized, geohash-based stratified sampling algorithm designed to operate independently at resource-constrained edge nodes without cross-node synchronization, coupled with spatial-aware data distribution and topic routing in Apache Kafka data stream ingestion, aiming at optimizing downstream data stream processing analytics. We evaluated our system on two real-world geo-referenced datasets, mobility and air quality, and EdgeApproxGeo achieves a significant speedup over cloud-only baselines while maintaining errors in check (e.g., MAPE < 10% error rate at 80% sampling rate). We further demonstrate that coarser geohash granularity (e.g., Geohash-5) can reduce error figures by 30% as compared to finer counterparts (i.e., Geohash-6), thus revealing a tunable accuracy-efficiency trade-off. Our standard-compliant prototype, built atop Apache Kafka and Apache Spark, further validates the utility of edge-deployed approximate query processing for real-time big geospatial data analytics.
-]]></content:encoded>
-<pubDate>Tue, 05 May 2026 00:00:00 -0400</pubDate>
-</item>
-<item>
-<title>Obscura: Privacy-Preserving Protocol for the Algorand Blockchain Using LSAG Ring Signatures</title>
-<link>https://arxiv.org/abs/2605.02077</link>
-<guid>https://arxiv.org/abs/2605.02077</guid>
-<content:encoded><![CDATA[
-arXiv:2605.02077v1 Announce Type: new 
-Abstract: While public blockchains provide transparent and auditable transaction histories, they inherently compromise user privacy. Existing privacy-enhancing protocols, such as those deployed on Ethereum, typically rely on succinct zero-knowledge proofs (zk-SNARKs) to obscure the transaction graph. However, implementing comparable cryptographic guarantees on high-throughput blockchains like Algorand is challenging due to strict per-call execution budgets and the state contention introduced by global Merkle accumulators. This paper presents Obscura, a decentralized, non-custodial privacy protocol tailored for constrained smart contract environments. Obscura achieves transaction anonymity using Linkable Spontaneous Anonymous Group (LSAG) signatures over the BN254 elliptic curve, verified entirely on-chain. To overcome limitations of the Algorand Virtual Machine (AVM), we introduce a novel state model that leverages Algorand's Box Storage for $O(1)$ commitment membership checks, eliminating the need for global Merkle accumulators, and a dynamic opcode-budget expansion mechanism via pooled inner application calls. Our implementation demonstrates that signer-ambiguous privacy is practical and efficient on Algorand without relying on trusted setups or succinct proofs. Obscura provides a robust privacy layer for transparent ledgers, bridging the gap between high-throughput blockchain architectures and the dual requirements of cryptographic privacy and selective auditability.
-]]></content:encoded>
-<pubDate>Tue, 05 May 2026 00:00:00 -0400</pubDate>
-</item>
-<item>
-<title>Graph Federated Unlearning for Privacy Preservation</title>
-<link>https://arxiv.org/abs/2605.02297</link>
-<guid>https://arxiv.org/abs/2605.02297</guid>
-<content:encoded><![CDATA[
-arXiv:2605.02297v1 Announce Type: new 
-Abstract: Graph federated learning (GFL) facilitates decentralized training on distributed graph data while keeping sensitive user information local, aligning with policies such as GDPR and CCPA that grant users the right to freely join or withdraw from learning systems. However, even decentralized, user information can persist after quitting, potentially propagating to central servers and then redistributing to malicious clients. This privacy leakage during user withdrawal, despite its importance, has received seldom attention in GFL. To fill the gap, we explore the potential of machine unlearning (MU) to thoroughly remove user information. However, classical MU methods are known to degrade overall performance, a problem that is exacerbated in GFL due to local message passing and global model collaboration. To this end, we make two adjustments to mitigate this challenge for GFL. First, we ensure unlearning updates that minimally affect overall performance, steering them in directions orthogonal to the gradients from learning other data. Second, we introduce virtual clients, maintained by the central server, to preserve graph topology and global embeddings without recovering information of removed entities. We conduct comprehensive experiments under a representative user-withdrawal scenario and propose a novel membership inference framework to rigorously evaluate and validate the reliability of our privacy preservation. The experimental results demonstrate the effectiveness of our approach, which also surpasses the performance of seven state-of-the-art baseline methods.
-]]></content:encoded>
-<pubDate>Tue, 05 May 2026 00:00:00 -0400</pubDate>
-</item>
-<item>
-<title>FedPLT: Scalable, Resource-Efficient, and Heterogeneity-Aware Federated Learning via Partial Layer Training</title>
-<link>https://arxiv.org/abs/2605.02337</link>
-<guid>https://arxiv.org/abs/2605.02337</guid>
-<content:encoded><![CDATA[
-arXiv:2605.02337v1 Announce Type: new 
-Abstract: Federated Learning (FL) has gained significant attention in distributed machine learning by enabling collaborative model training across decentralized system while preserving data privacy. Although extensive research has addressed statistical data heterogeneity, FL still faces several challenges, including high communication and computation overheads and severe device heterogeneity, which require further investigation. Prior work has addressed these issues through sub-model training and partial parameter training. However, such methods often suffer from inconsistent parameter distributions across clients, inaccurate global loss estimation, and increased bias and variance. Guided by our empirical analysis, we propose FedPLT (Federated Learning with Partial Layer Training), an innovative and structured partial parameter training approach that exhibits training behavior similar to full model training while assigning client-specific portions of the model according to their communication and computational capabilities. In addition, we evaluate the performance of FedPLT when combined with optimal client sampling under communication constraints. We show that this integration improves FL performance by reducing sampling variance under the same communication budget. Through extensive experiments, we demonstrate that FedPLT achieves performance comparable to, or even surpassing, that of full-model training (i.e., FedAvg), while requiring significantly fewer trainable parameters per client. Moreover, FedPLT outperforms existing methods in highly heterogeneous environments, effectively adapts to client resource constraints, and reduces the number of straggling clients. In particular, FedPLT reduces the number of trainable parameters by 71%-82% while achieving performance on par with full-model training.
-]]></content:encoded>
-<pubDate>Tue, 05 May 2026 00:00:00 -0400</pubDate>
-</item>
-<item>
-<title>Privacy Preserving Machine Learning Workflow: from Anonymization to Personalized Differential Privacy Budgets in Federated Learning</title>
-<link>https://arxiv.org/abs/2605.02372</link>
-<guid>https://arxiv.org/abs/2605.02372</guid>
-<content:encoded><![CDATA[
-arXiv:2605.02372v1 Announce Type: new 
-Abstract: The growing development of artificial intelligence based solutions, together with privacy legislation, has driven the rise of the so-called privacy preserving machine learning architectures, such as federated learning. While federated learning enables model training on decentralized data preventing their sharing and centralization, it still faces several challenges related to data integrity and privacy. This paper presents a comprehensive privacy preserving federated learning workflow for sensitive tabular data, including anonymization and differential privacy techniques. We also introduce a formal definition for the concept of client drift, together with ways of detecting it to mitigate poisoning attacks. Then, we detail a complete methodology for assigning personalized privacy budgets for global differential privacy to the different clients participating in the network, based on a re-identification risk metric. The proposed methodology is presented and tested on an openly available dataset of medical records. Within the experimental setup we show that the approach based on personalized budgets, compared to the architecture including global differential privacy with fixed privacy budget, achieves a better model performance in terms of two error metrics.
-]]></content:encoded>
-<pubDate>Tue, 05 May 2026 00:00:00 -0400</pubDate>
-</item>
-<item>
-<title>Federated Reinforcement Learning for Efficient Mobile Crowdsensing under Incomplete Information</title>
-<link>https://arxiv.org/abs/2605.02705</link>
-<guid>https://arxiv.org/abs/2605.02705</guid>
-<content:encoded><![CDATA[
-arXiv:2605.02705v1 Announce Type: new 
-Abstract: Mobile crowdsensing (MCS) is a distributed sensing architecture that utilizes existing sensors on mobile units (MUs) to perform sensing tasks. A mobile crowdsensing platform (MCSP) publishes the sensing tasks and the MUs decide whether to participate in exchange for money. The MCS system is dynamic: the task requirements, the MUs' availability, and their available resources change over time. The MUs aim to find an efficient task participation strategy to maximize their income while the MCSP focuses on maximizing the number of completed tasks. As optimal strategies require perfect non-causal information about the MCS system, which is unavailable in realistic scenarios, the main challenge is to find an efficient task participation strategy for the MUs under incomplete information. To this end, a novel fully decentralized federated deep reinforcement learning algorithm, FDRL-PPO, is proposed. FDRL-PPO enables every MU to learn its own task participation strategy based on its experiences, available resources, and preferences, without relying on perfect non-causal information about the MCS system. To replenish their batteries, the MUs rely on energy harvesting. As a result, their available energy varies over time, leading to varying availability and fragmented learning experiences. To mitigate these challenges, the proposed approach leverages federated learning, enabling MUs to collaboratively improve their models without sharing private raw data like their own experiences. By exchanging only learned models, MUs collectively compensate for individual limitations, and find more scalable, robust, and efficient task participation strategies. Comprehensive evaluations on both synthetic and real-world datasets show that FDRL-PPO consistently outperforms benchmark algorithms in terms of task completion ratio, fairness in task completion, energy consumption, and number of conflicting proposals.
-]]></content:encoded>
-<pubDate>Tue, 05 May 2026 00:00:00 -0400</pubDate>
-</item>
-<item>
-<title>The Activist's Guide to the Decentralized Social Universe: A Framework for Exploring How Decentralized Social Networks Can Support Collective Action</title>
-<link>https://arxiv.org/abs/2605.02800</link>
-<guid>https://arxiv.org/abs/2605.02800</guid>
-<content:encoded><![CDATA[
-arXiv:2605.02800v1 Announce Type: new 
-Abstract: The overreaches of mainstream social media platforms have been extensively reported and studied. For activist communities, these platforms pose risks of surveillance, censorship, or erasure. Decentralized social networks (DSNs) serve as alternative online spaces that appear to prioritize values such as user privacy, free speech, and community control. However, the decentralized ecosystem is vast and complex, making it difficult for communities to understand how to best use these platforms for their organizing aims. We aim to fill this gap by proposing a conceptual framework for navigating the DSN landscape that defines core activist community needs -- minimal overhead, community building and reach, on- and off-line safety, and operational sustainability -- and links them to concrete platform affordances such as resource efficiency, interoperability, and data ownership. We apply the framework to (1) evaluate and compare the sociotechnical tradeoffs of two contemporary DSNs (Mastodon and Bluesky), (2) understand broader community configurations that emerge across different DSN infrastructures and their implications for collective action, and (3) explore how two distinct activist communities facing infrastructural and political constraints might use the framework to find platforms that align with their needs. We conclude by reflecting on the theoretical promises of DSNs and the structural conditions that shape and constrain participation across them.
-]]></content:encoded>
-<pubDate>Tue, 05 May 2026 00:00:00 -0400</pubDate>
-</item>
-<item>
-<title>InsureConnect: Blockchain and Digital Identity for the Property Insurance Market</title>
-<link>https://arxiv.org/abs/2605.02824</link>
-<guid>https://arxiv.org/abs/2605.02824</guid>
-<content:encoded><![CDATA[
-arXiv:2605.02824v1 Announce Type: new 
-Abstract: This paper presents InsureConnect, a blockchain-based system for improving transparency, authentication, and auditability in property-insurance workflows after natural disasters. The system combines Self-Sovereign Identity (SSI), Decentralized Identifiers (DIDs), Verifiable Credentials (VCs), satellite imagery, Hyperledger Fabric, and IPFS to register identities, insurance contracts, and damage claims. Property images are stored off-chain in IPFS, while content hashes and signed records are maintained on a permissioned blockchain. Users interact with the system through a desktop application, while chaincode enforces role-based access control and validates digital signatures. The prototype was evaluated under concurrent request loads from 50 to 3000 requests, measuring latency, throughput, and dropped connections. The results indicate that the system sustains increasing throughput under load, although latency rises and dropped connections appear at higher concurrency levels.
-]]></content:encoded>
-<pubDate>Tue, 05 May 2026 00:00:00 -0400</pubDate>
-</item>
-<item>
-<title>The Control Plant as A Communication Channel: Implicit Communication for Decentralized LQG Control</title>
-<link>https://arxiv.org/abs/2605.01903</link>
-<guid>https://arxiv.org/abs/2605.01903</guid>
-<content:encoded><![CDATA[
-arXiv:2605.01903v1 Announce Type: cross 
-Abstract: We study a decentralized linear quadratic Gaussian control problem, in which a leader and a follower must steer a linear system to a target state. The target state is known only to the leader, and no explicit communication channel exists between the agents. To address the challenge posed by this asymmetric information structure, we propose an integrated communication and control (ICoCo) framework in which the control plant itself serves as a communication channel: the leader encodes the target state into its control input through an additive communication term, and the follower decodes it from the resulting state trajectory. We design an implicit coordination scheme based on joint source-channel coding ideas, and prove that the follower's estimation error decreases monotonically to zero, enabling the two agents to coordinate increasingly well and ultimately steer the system to the target state. We then formulate the design of the communication power as an optimal control problem to minimize the overall control cost. In the fully actuated leader case, we derive necessary optimality conditions and in the under-actuated case, we solve the problem numerically. Numerical results show that the proposed scheme effectively coordinates the two agents and achieves a control cost close to that of the explicit-communication lower bound.
-]]></content:encoded>
-<pubDate>Tue, 05 May 2026 00:00:00 -0400</pubDate>
-</item>
-<item>
-<title>Per-Market Information Leakage and Order-Flow Skill: Two Methodological Lenses on Informed Trading in Decentralized Prediction Markets</title>
-<link>https://arxiv.org/abs/2605.02287</link>
-<guid>https://arxiv.org/abs/2605.02287</guid>
-<content:encoded><![CDATA[
-arXiv:2605.02287v1 Announce Type: cross 
-Abstract: April 2026 saw notable methodological convergence in the academic study of informed trading on decentralized prediction markets. Three approaches surfaced almost simultaneously: Mitts and Ofir (2026) apply a composite screen to over 210,000 wallet-market pairs; Gomez-Cram et al. (2026) apply an event-level sign-randomization test to Polymarket's complete transaction history, classifying 3.14% of accounts as "skilled winners" and separately flagging 1,950 accounts as "insiders" via a lifecycle heuristic; Nechepurenko (2026) develops the Information Leakage Score (ILS) framework, which quantifies per-market information front-loading at an article-derived public-event timestamp. This paper provides a methodological comparison. The central claim is that these are three distinct layers of detection, not competing methods on a single layer. Sign-randomization is best understood as an account-level test of persistent directional skill conditional on opportunity selection -- not a direct test of insider trading, and not a per-market measure. The heuristic insider flag is separate from the skill classifier, applies to a population the classifier excludes by design, and has unknown precision. The Polymarket sample pools politics, sports, crypto, and other categories with different information technologies, so a platform-wide "skilled winner" classification is mechanism-ambiguous. The January 2026 U.S.-Venezuela operation cluster, where the DOJ indictment of Master Sergeant Gannon Van Dyke provides a rare external enforcement benchmark, illustrates how the layers stack: lifecycle heuristics identify suspicious accounts; legal investigation addresses non-public-information possession; per-market scoring would quantify how much information was leaked into each contract. A combined pipeline gains in precision because each layer filters a different dimension.
-]]></content:encoded>
-<pubDate>Tue, 05 May 2026 00:00:00 -0400</pubDate>
-</item>
-<item>
-<title>A Scalable 256-Antenna Distributed MIMO Testbed with Real-Time Fully Digital Beamforming</title>
-<link>https://arxiv.org/abs/2605.02388</link>
-<guid>https://arxiv.org/abs/2605.02388</guid>
-<content:encoded><![CDATA[
-arXiv:2605.02388v1 Announce Type: cross 
-Abstract: Distributed massive MIMO (D-MIMO) is a promising technology for future generation wireless systems as it takes advantage of both an increased array aperture and a decentralized processing architecture and topology. In order to truly understand the possibilities and limitations of these approaches in real scenarios, practical realization of testbeds is an essential step in the technology advancement. This work presents the Lund University Large Intelligent Surface testbed -- LuLIS, that can operate up to 256 coherent radio frequency (RF) chains using 16 AMD Zynq UltraScale RFSoC ZCU216 evaluation boards acting as distributed processing nodes. Real-time processing is facilitated by acceleration and distribution of MIMO processing algorithms on the FPGA fabric of the boards. The system is easily scalable, as increasing the number of antennas is done in multiples of 16 by adding more RFSoCs, which also implies addition of another processing node. The design allows up-scaling without hardware redesign, introduction of large latencies or data transfer overhead. The testbed is flexible in terms of deployment, with options of fully distributing the nodes (as in D-MIMO) or co-locating them (as in more traditional Massive MIMO). A detailed description of the implementation of the testbed is presented and initial results are shown for an uplink (UL) transmission from four single-antenna user equipments (UEs) to 64, 128 and 256 base-station antennas.
 ]]></content:encoded>
 <pubDate>Tue, 05 May 2026 00:00:00 -0400</pubDate>
 </item>
