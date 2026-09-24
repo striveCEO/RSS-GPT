@@ -4,6 +4,288 @@
 <title>cs updates on arXiv.org</title>
 <link>http://rss.arxiv.org/rss/cs</link>
 
+<item>
+<title>FedCoT-VQA: A Federated Learning and Unlearning Framework for Chain-of-Thought Planners in VideoQA</title>
+<link>https://arxiv.org/abs/2609.26814</link>
+<guid>https://arxiv.org/abs/2609.26814</guid>
+<content:encoded><![CDATA[
+<div> 视频问答,链式思维,联邦学习,模型遗忘,残差适配
+<br><br>总结:1）CoT规划器可高效引导VideoQA，仅适配轻量规划器适合联邦学习；2）去中心化需兼顾异质客户训练与客户删除请求；3）提出FedCoT-VQA，含规划器分区、服务端聚合与残差遗忘模块；4）评估训练/遗忘效用、遗忘质量与效率，结果显示训练增益达4.45%，遗忘后反事实差距仅7.38%。 <div>
+arXiv:2609.26814v1 Announce Type: new 
+Abstract: Chain-of-Thought (CoT) planners have emerged as an effective design for VideoQA, where a lightweight planner first generates intermediate reasoning steps to guide temporal evidence selection before answer prediction. This modularity makes CoT-based VideoQA attractive for federated learning, since only the planner side needs collaborative adaptation while the heavy vision-language backbone can remain fixed. However, in decentralized settings, the planner must not only be trained efficiently across heterogeneous clients but also support later client deletion requests. This is challenging because deleted-client influence is reflected both in model parameters and the planner's reasoning-trace behavior. We present FedCoT-VQA, a federated learning and unlearning framework for CoT planners in VideoQA. FedCoT-VQA consists of three modules: planner-side partitioning (PSP), which exposes a compact shared-residual adaptation space for efficient federated training; server-side aggregation (SSA), which aggregates planner-side updates while maintaining a deletion-ready contribution log; and a residual unlearning module (RUM), which approximates the retained-only counterfactual planner through retained-client replay and selective residual correction, without full retraining. We evaluate FedCoT-VQA in terms of federated training utility, federated unlearning utility, forgetting quality, and efficiency. Results show that compared to current federated approaches, FedCoT-VQA preserves strong federated training utility, improving grounding quality by up to 4.45%. After unlearning, it retains high accuracy and achieves a counterfactual gap of only 7.38%.
+]]></content:encoded>
+<pubDate>Thu, 24 Sep 2026 00:00:00 -0400</pubDate>
+<pubDate>Thu, 24 Sep 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Solidity Meets LLMs: A Transformer-Based Approach to Smart Contract Vulnerability Detection</title>
+<link>https://arxiv.org/abs/2609.27091</link>
+<guid>https://arxiv.org/abs/2609.27091</guid>
+<content:encoded><![CDATA[
+<div> 智能合约, 漏洞检测, Solidity, 大语言模型, 微调
+<br><br>总结:
+1. 以太坊等区块链普及，使智能合约更复杂且金融价值更高，易成网络攻击目标。
+2. 本文提出基于Transformer的Solidity代码片段漏洞检测方法。
+3. 利用预训练大语言模型构建流程，建立标注“易受攻击/安全”的基准数据集。
+4. 微调BERT类模型以捕捉Solidity语法与语义模式，F1达92%，提升合约安全。 <div>
+arXiv:2609.27091v1 Announce Type: new 
+Abstract: The growing adoption of blockchain technologies, particularly the Ethereum platform, has amplified the critical role of smart contracts in decentralized applications. However, the increasing complexity and financial value of these contracts make them prime targets for cyber attacks. In this work, we present a transformer-based approach for the detection of vulnerabilities in smart contract fragments written in Solidity. Leveraging the representational power of pre-trained Large Language Models (LLMs), we construct a robust pipeline that includes the definition of a ground truth dataset, labeling code fragments as vulnerable or safe. We then fine-tune a BERT-based architecture on this dataset, enabling the model to capture the syntactic and semantic patterns specific to Solidity code. Our fine-tuned model demonstrates strong performance, achieving an F1 score of 92%, and highlighting the effectiveness of LLM adaptation in enhancing smart contract security through deep contextual understanding.
+]]></content:encoded>
+<pubDate>Thu, 24 Sep 2026 00:00:00 -0400</pubDate>
+<pubDate>Thu, 24 Sep 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>When Clients Are Orchestrated: Strategic Gradient Manipulation to Defeat Federated Learning Servers with Efficient Defense</title>
+<link>https://arxiv.org/abs/2609.27124</link>
+<guid>https://arxiv.org/abs/2609.27124</guid>
+<content:encoded><![CDATA[
+<div> 联邦学习 动态自适应攻击 Fed-ADR 梯度检测 模型恢复
+<br><br>总结: 1. 联邦学习防御多假设静态或独立攻击。2. Fed-ADR用恶意服务器协调客户端实时改梯度，绕过防御并破坏或操控模型。3. 基于历史更新估计真实梯度，无额外开销识别恶意客户端。4. 原位恢复无需重启训练，快速恢复性能。5. 实验：攻击将准确率从90%降至10%；检测恢复数轮内回到90%，开销降20倍。 <div>
+arXiv:2609.27124v1 Announce Type: new 
+Abstract: Federated Learning enables decentralized model training by exchanging model updates--rather than raw data--with a central parameter server (PS). While most of the existing defenses primarily assume static or independently acting adversaries, we reveal a new class of dynamically adaptive attacks that systematically bypass such protections. We propose Fed-ADR, a holistic attack framework in which a malicious orchestrator server (OS) dynamically coordinates a heterogeneous set of adversarial clients, including both targeted and untargeted attackers. Through real-time coordination by the OS, malicious clients strategically adapt their gradient updates to evade defenses deployed by the PS, while either severely degrading global model performance or steering training toward adversarial objectives.To mitigate this threat, we offer a detection mechanism that estimates each client's true gradient from historical updates, enabling real-time detection of coordinated malicious behavior without additional overhead. We further introduce an in-situ recovery mechanism that restores global model performance without restarting training, preserving convergence and minimizing recovery time. Comprehensive experiments on MNIST, Fashion-MNIST, and CIFAR-10 benchmark datasets demonstrate that Fed-ADR's attack scheme can reduce global accuracy from over 90% to below 10%, bypassing several state-of-the-art defenses. When our detection and recovery modules are employed, they identify malicious clients and restore accuracy to over 90% within a few rounds, at a substantially lower cost than retraining from scratch--achieving a reduction of at least 20x in computational overhead.
+]]></content:encoded>
+<pubDate>Thu, 24 Sep 2026 00:00:00 -0400</pubDate>
+<pubDate>Thu, 24 Sep 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>ZO-COSMO: Index-Free One-Hop Mixing for Decentralized Zeroth-Order Optimization</title>
+<link>https://arxiv.org/abs/2609.27199</link>
+<guid>https://arxiv.org/abs/2609.27199</guid>
+<content:encoded><![CDATA[
+<div> 去中心化零阶学习、稀疏通信、ZO-COSMO、匹配共识、LoRA微调
+<br><br>总结: 1.提出去中心化零阶学习稀疏通信的一跳兼容条件与ZO-COSMO，用双查询估计和q值平均保持掩码共识。2.全局支持多邻居混合，匹配更新只需链路对一致。3.证明匹配类核心与动量收缩、收敛，用矩恒等式解释误差重分配、异质性抵消。4.实验含曲率、噪声、动量、64智能体、8个QwenLoRA节点。5.同预算较Rand-k升3.65，边局部升3.42/2.53，动量升3.92，控制变量验证编码调度。 <div>
+arXiv:2609.27199v1 Announce Type: new 
+Abstract: Sparse communication in decentralized zeroth-order learning requires compatible peer-state coordinates. We characterize this one-hop condition and develop \textsf{ZO-COSMO}, coupling two-query estimation with average-preserving masked consensus using $q$ values per active link. Global supports serve all-neighbor mixing; matching updates require agreement only within each pair. We derive a sharp contraction-per-scalar bound within the matching class and convergence guarantees for the core and sparse-momentum updates. At fixed matching, exact moment identities characterize how shared directions preserve gradient-heterogeneity cancellation and redistribute estimation error and disagreement. Mechanism experiments cover unequal curvatures, noise, and sparse momentum. Further tests span $64$ synthetic agents and eight logical Qwen LoRA workers. At matched payload budgets, Qwen2-7B QNLI gains $3.65$ accuracy points over explicit-index Rand-$k$; edge-local updates gain $3.42$ and $2.53$ points over all-neighbor mixing on eight-worker complete and ring graphs. A matched-first-step ablation gives a $3.92$-point momentum benefit. Seed-aware and same-matching controls distinguish encoding, scheduling, and query correlation.
+]]></content:encoded>
+<pubDate>Thu, 24 Sep 2026 00:00:00 -0400</pubDate>
+<pubDate>Thu, 24 Sep 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>EVAGE: Autonomous MEV Generation and Adaptation via Multi-Agent Harness</title>
+<link>https://arxiv.org/abs/2609.27424</link>
+<guid>https://arxiv.org/abs/2609.27424</guid>
+<content:encoded><![CDATA[
+<div> MEV、多智能体、EVAGE、策略适配、离线代码
+<br><br>总结: 1.提出首个全自主多智能体框架EVAGE，端到端生成与适配MEV策略。2.支持新变体发现、跨协议适配、L1/L2移植。3.离线生成优化bot代码，避免实时延迟。4.编排器协调子代理闭环修复，消除人工干预。5.在Ethereum等链验证，发现5种新变体，利润提升1.02至15.97倍，适配11策略，成本低于60美元。 <div>
+arXiv:2609.27424v1 Announce Type: new 
+Abstract: Maximal Extractable Value (MEV) has evolved into a major economic force in blockchain ecosystems, yet its capture is dominated by experienced teams, and both strategy design and implementation rely on manual expert work that scales poorly across heterogeneous protocols and chains. We present EVAGE, the first fully autonomous multi-agent framework for end-to-end MEV strategy generation and adaptation. Equipped with three specialized operation modes, it automatically discovers novel MEV variants, adapts execution logic across disparate protocols, and ports strategies between chains, including Layer-1 and Layer-2 networks. To avoid inference latency on the critical MEV execution path, EVAGE generates and refines MEV bot code offline rather than making real-time decisions directly. Under the coordination of an orchestrator agent, three specialized subagents collectively implement and repair the full MEV bot workflow via closed-loop diagnostics, eliminating human intervention while producing validated and deterministic Proof-of-Concept implementations. We evaluate EVAGE on over 1.5M blocks from each of Ethereum, Base, and BNB Smart Chain (BSC). On Ethereum, EVAGE uncovers five novel MEV strategy variants, yielding a profit increase of 1.02$\times$ to 15.97$\times$. It also successfully adapts 11 MEV strategies from CPMM to both CLMM and Balancer V2 and ports strategies from Ethereum to Base and BSC, all with less than 60 dollars in LLM token costs.
+]]></content:encoded>
+<pubDate>Thu, 24 Sep 2026 00:00:00 -0400</pubDate>
+<pubDate>Thu, 24 Sep 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Private Decentralized Optimization with Noise Reduction and Bias Correction</title>
+<link>https://arxiv.org/abs/2609.27658</link>
+<guid>https://arxiv.org/abs/2609.27658</guid>
+<content:encoded><![CDATA[
+<div> 私有去中心化学习 递归优化 隐私噪声 异构数据 Exact Diffusion
+<br><br>总结: 1.问题：私有去中心化学习受采样噪声、隐私噪声与异构数据偏差影响；2.方法：PRDO以递归估计和同批梯度差分降低误差，用Exact Diffusion校正偏差；3.理论：给出非凸收敛界，不要求均匀异质界，并证明递归梯度差分可严格降低查询灵敏度；4.实验：准确率优于基线。 <div>
+arXiv:2609.27658v1 Announce Type: new 
+Abstract: Private decentralized learning is affected by sampling noise, privacy noise, and decentralized bias under heterogeneous data. We propose Private Recursive Decentralized Optimization (PRDO). PRDO uses recursive estimation with same-batch gradient differences to reduce estimation errors caused by sampling and privacy noise, while its Exact Diffusion component corrects decentralized bias arising from data heterogeneity. Our analysis establishes a nonconvex convergence bound without assuming uniformly bounded data heterogeneity across nodes. It further gives a sufficient condition under which recursive gradient differences yield strictly lower query sensitivity than private Exact Diffusion, together with an example that rigorously satisfies this condition. Experiments show improved accuracy over the evaluated baselines.
+]]></content:encoded>
+<pubDate>Thu, 24 Sep 2026 00:00:00 -0400</pubDate>
+<pubDate>Thu, 24 Sep 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Evolutionary Stability Does Not Guarantee Learning Accessibility: A Multi-Agent Reinforcement Learning Perspective on Cooperation Emergence</title>
+<link>https://arxiv.org/abs/2609.27664</link>
+<guid>https://arxiv.org/abs/2609.27664</guid>
+<content:encoded><![CDATA[
+<div> 合作涌现，演化稳定性，学习可达性，复制者动力学，多智能体学习
+<br><br>总结: 1.研究多智能体合作涌现，强调演化稳定未必等于有限样本学习可达。2.以共享单车治理为背景，分析政府、平台、用户三主体博弈，推导复制者动力学并计算演化合作盆地。3.比较ε-IQL、缩放Boltzmann、SA-EA BQL学习盆地。4.演化盆地体积1.00；学习盆地分别为0.88、0.00、0.00，说明多样性和值分离仍可能失败。5.提出比较人口稳定与学习可达性的框架。 <div>
+arXiv:2609.27664v1 Announce Type: new 
+Abstract: Cooperation emergence is a central problem in multi-agent systems because decentralized agents must coordinate while adapting to the changing behavior of others. Evolutionary game theory identifies strategically stable outcomes, but stability under a population adjustment dynamic need not imply that finite-sample learning agents can reach the same outcome through local reward feedback.
+  We study this distinction in a transparent three-agent governance-motivated game involving a government, a platform firm, and users. We derive replicator dynamics for the fixed stage-game incentives, evaluate the cooperative evolutionary basin on a symmetric initial-condition grid, and compare it with learning-basin estimates for three decentralized value-based learners. The learning analysis uses independent Q-learning with $\varepsilon$-greedy action selection, scaled Boltzmann exploration, and SA--EA BQL under the same payoff environment and outcome criterion.
+  The evolutionary basin has volume $V_E=1.00$ on the sampled grid. The empirical learning basin is $0.88$ for $\varepsilon$-IQL and $0.00$ for both scaled Boltzmann and SA--EA BQL. Diagnostic traces show that broader action diversity and nonzero value separation can coexist with failure to sustain the cooperative joint action in this fixed configuration.
+  These results indicate that evolutionary stability and learning accessibility are distinct properties of a coupled game--learning system. The shared-bike setting is a motivating application; the broader contribution is a framework for comparing population-level stability with the finite-sample accessibility of cooperation under specified multi-agent learning dynamics.
+]]></content:encoded>
+<pubDate>Thu, 24 Sep 2026 00:00:00 -0400</pubDate>
+<pubDate>Thu, 24 Sep 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Holonic Graceful Transitions Across Centralized, Decentralized, Distributed, and Local Control in DER-rich Cyber-Power Distribution System</title>
+<link>https://arxiv.org/abs/2609.27759</link>
+<guid>https://arxiv.org/abs/2609.27759</guid>
+<content:encoded><![CDATA[
+<div> 分布式能源 自适应协调 边缘自治 全息协调 硬件在环
+<br><br>总结: 1.DER高渗透需自适应协调并保持扰动下韧性；2.现有静态架构难适应通信退化与空间异构；3.提出服务无关边缘自治holonic框架，支持集中至本地多模式切换；4.通过保留状态、重构拓扑与平滑过渡维持连续性；5.HIL与VoltVAR验证显示局部自适应、降流量、抗攻击。 <div>
+arXiv:2609.27759v1 Announce Type: new 
+Abstract: The increasing penetration of distributed energy resources (DERs) in distribution system necessitates adaptive coordination frameworks. These frameworks must remain optimal during normal operation and resilient under cyber physical disturbances. Existing coordinated control approaches are typically deployed as static architectures with limited ability to adapt when communication degrades, local instability emerges, and operating conditions become spatially heterogeneous. This work addresses the gap by proposing a DER service-independent edge autonomous holonic adaptive coordination framework. In this framework, each DER controller executes its own control actions and transitions among centralized, distributed, decentralized, and local autonomous coordination modes without always relying on static coordination commands from the grid operator. The framework preserves coordination continuity across modes by retaining local controller states while reconfiguring only the coordination topology, information exchange pattern, and fallback action associated with the active DER service. Graceful transitions are enabled through dwell timers, rate limiting, and safety overrides to prevent dynamic instability during mode changes. Volt VAR control is used as a representative distribution automation application to validate the proposed architecture in a cyber-physical Hardware-in-the-loop (HIL) testbed. The proposed approach is evaluated under diverse cyber-physical event-based scenarios, showing region-confined adaptation under localized disturbance, reduced coordination traffic during coordination switching, and node-confined mitigation under cyber attack through edge anomaly detection and neighbor-corroborated impact estimation.
+]]></content:encoded>
+<pubDate>Thu, 24 Sep 2026 00:00:00 -0400</pubDate>
+<pubDate>Thu, 24 Sep 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>MixGuard: Towards Detecting and Understanding Mixer Laundering on Ethereum</title>
+<link>https://arxiv.org/abs/2609.27807</link>
+<guid>https://arxiv.org/abs/2609.27807</guid>
+<content:encoded><![CDATA[
+<div> 混币器, 以太坊, 洗钱检测, Tornado Cash, Railgun
+<br><br>总结: 1.填补混币器洗钱研究空白，构建首个案例数据集MixLaunder；2.覆盖2020-2025年27案、9300笔交易、约11亿美元资金流；3.提炼五种策略，揭示行为与资金流互补及跨爆发弱连接；4.指出现有筛查和去匿名化启发式的覆盖不足；5.提出MixGuard，以三视角表示学习与两阶段分组实现高精度检测和案例分组，优于基线。 <div>
+arXiv:2609.27807v1 Announce Type: new 
+Abstract: Mixers protect privacy by concealing deposit--withdrawal links, but are also abused to launder illicit funds. Existing anti-money laundering studies do not specifically target mixer laundering, while mixer research focuses on deanonymization rather than identifying laundering-related transactions. Public reports remain fragmented, leaving no public case-level dataset for systematic measurement and detection. To fill this void, this paper presents the first comprehensive study of mixer laundering on Ethereum. We first construct \textsc{MixLaunder}, the first public case-level dataset of mixer laundering. It covers 27 cases involving Tornado Cash and Railgun from 2020 to 2025 and labels 9,300 laundering-related transactions with case identities and observable upstream and downstream fund flows, including deposits totaling approximately \$1.1 billion. By comparing these transactions with background mixer usage, we identify five common strategies, showing that laundering evidence spans complementary behavioral and fund-flow contexts, while same-case activity is locally tight but weakly connected across bursts. Our analysis further reveals coverage gaps in mixer-side risk screening and representative deanonymization heuristics. Guided by these findings, we develop \textsc{MixGuard}, which combines tri-view representation learning with two-stage grouping for transaction-level detection and case-aware grouping. Under strict case-level holdout evaluation, \textsc{MixGuard} outperforms representative baselines, achieving 97.89\% detection precision and 98.73\% group purity, while its top ten groups cover 95.09\% of each case's transactions on average.
+]]></content:encoded>
+<pubDate>Thu, 24 Sep 2026 00:00:00 -0400</pubDate>
+<pubDate>Thu, 24 Sep 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Shedding Light on Complex Bitcoin Mixer Transactions: 67-Fold Reduction in Unclassified Cases</title>
+<link>https://arxiv.org/abs/2609.27933</link>
+<guid>https://arxiv.org/abs/2609.27933</guid>
+<content:encoded><![CDATA[
+<div> 比特币,UTXO,共享发送混合器,交易解缠,启发式算法
+<br><br>总结:
+1.比特币UTXO使资金流可公开分析，用户常用共享发送混合器混淆交易。
+2.解缠SSM是NP完全问题，现有算法因超时漏分类1.4%交易。
+3.提出抢先分组、可连孤点、歧义配对、背包回退四种启发式解决超时案例。
+4.优化流程后分类98.5%超时案例，整体未分类率降至0.021%。
+5.开源实现与全链评估证明可提升资金流分析与结构洞察。 <div>
+arXiv:2609.27933v1 Announce Type: new 
+Abstract: Bitcoin's Unspent Transaction Output (UTXO) model enables public analysis of fund flows, but users often merge transactions into Shared Send Mixers (SSMs) to obscure these flows. Untangling SSMs to recover original subtransactions is an NP-complete problem. While a practical untangling algorithm exists, it fails to classify 1.4% of SSM transactions due to computational time limits. This paper introduces four novel heuristics that exploit structural weaknesses in real-world SSM transactions to resolve these timeout cases: preemptive grouping, connectable singleton, ambiguous pairing, and knapsack fallback. We provide theoretical proofs validating each heuristic and integrate them into an optimized pipeline. Applied to timeout transactions, our approach classifies 98.5% of previously unresolved cases, reducing the overall unclassified transaction rate from 1.4% to 0.021% of all SSM transactions. Our open-source implementation and comprehensive evaluation on the complete Bitcoin blockchain demonstrate that the heuristics effectively untangle previously intractable transactions, enabling more accurate flow analysis and deeper structural insights into cryptocurrency transaction patterns.
+]]></content:encoded>
+<pubDate>Thu, 24 Sep 2026 00:00:00 -0400</pubDate>
+<pubDate>Thu, 24 Sep 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Quality over Quantity: Semi-Supervised Detection of Illicit Bitcoin Flows via Feature Engineering</title>
+<link>https://arxiv.org/abs/2609.27936</link>
+<guid>https://arxiv.org/abs/2609.27936</guid>
+<content:encoded><![CDATA[
+<div> 半监督学习,数据质量,共享发送混币器,特征工程,非法交易检测
+<br><br>总结:1.非法交易检测受类别不平衡、混淆和标签稀缺限制。2.提出用于SSM比特币非法流检测的SSL框架，基于1.63亿交易。3.实证表明SSL成功依赖数据质量而非数量，高保真特征达F1 0.84。4.OTC等启发式虽多但引入噪声。5.区块链取证应优先智能特征工程。 <div>
+arXiv:2609.27936v1 Announce Type: new 
+Abstract: Detecting illicit cryptocurrency transactions is hampered by extreme class imbalance, adversarial obfuscation, and a scarcity of reliable labels. While semi-supervised learning (SSL) offers a promising solution by leveraging unlabeled data, we show that its success is not guaranteed by data volume alone but is contingent on data quality. We introduce an SSL framework for detecting illicit Bitcoin flows in Shared Send Mixers (SSM) transactions, built on a comprehensive historical dataset comprising 163 million transactions. Our main conclusion is that the success of SSL depends on data quality rather than volume: high-fidelity features such as KeyLinker address clustering and Shared Send Untangling (SSU) complexity metrics achieve an F1 score of 0.84 on unlabeled data. Finally, we empirically show that common heuristics like One-Time Change (OTC), though abundant, introduce noise, while strategic reliance on higher-fidelity features like KeyLinker is essential. Our work establishes that in blockchain forensics, the path to better performance lies in smarter feature engineering for data quality, not just larger datasets.
+]]></content:encoded>
+<pubDate>Thu, 24 Sep 2026 00:00:00 -0400</pubDate>
+<pubDate>Thu, 24 Sep 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Trade-Size-Aware Dynamic Fees for Impermanent Loss Mitigation in AMMs</title>
+<link>https://arxiv.org/abs/2609.27937</link>
+<guid>https://arxiv.org/abs/2609.27937</guid>
+<content:encoded><![CDATA[
+<div> 自动做市商, 无常损失, 动态手续费, 流动性提供者, 绩效评估<br><br>总结: ①AMM中LP因套利再平衡承受无常损失，现有动态费反应滞后。②提出耦合做市商架构，以二级不变量联动流动性状态与交易成本。③设计ILT费用：对超出LP盈利区域的大套利提费补偿损失，小交易保留基础费。④用performance profiles统一评估，并模拟4种市场、3类代币对。⑤波动市场收益提升6-24%，平静市场最高119%，普通用户保持，知情套利降3-10%，60-75%场景优于基准。 <div>
+arXiv:2609.27937v1 Announce Type: new 
+Abstract: Automated Market Makers enable decentralized trading but systematically expose liquidity providers to impermanent loss through arbitrage-driven rebalancing. While dynamic fee mechanisms offer a promising mitigation strategy, existing approaches remain largely reactive, adjusting costs based on historical signals rather than explicitly linking them to the structural risk imposed by individual trades. To address this limitation, we propose a novel fee formation framework built on three core innovations. First, we introduce a coupled market maker architecture in which fee dynamics are governed by a secondary invariant, allowing liquidity state and transaction costs to evolve jointly. Second, we develop an impermanent-loss trimming fee model that adaptively increases transaction costs for trades exceeding the liquidity providers' profitable region, effectively offsetting losses from large arbitrage executions while preserving baseline fees for smaller transactions. Third, we establish a unified evaluation methodology using performance profiles to systematically compare fee algorithms across diverse market conditions. By extending a heterogeneous trader model to derive optimal arbitrage strategies under state-dependent fees, we conduct extensive simulations on historical data spanning four distinct market regimes and three token pair categories. Our results demonstrate that the proposed fee enhancements improve liquidity provider yields by 6--24% in volatile markets and up to 119% in calm regimes, while maintaining uninformed user participation and reducing informed arbitrage profitability by 3--10%. Performance profile analysis confirms that ILT-enhanced algorithms dominate baseline counterparts across 60--75% of test scenarios.
+]]></content:encoded>
+<pubDate>Thu, 24 Sep 2026 00:00:00 -0400</pubDate>
+<pubDate>Thu, 24 Sep 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Exact Average Consensus under Noisy Communication Links: A Decentralized Gradient Perspective</title>
+<link>https://arxiv.org/abs/2609.28082</link>
+<guid>https://arxiv.org/abs/2609.28082</guid>
+<content:encoded><![CDATA[
+<div> 平均一致性 鞅差扰动 去中心化梯度下降 状态锚定 精确收敛
+<br><br>总结: 1.研究持续链路级扰动下的分布式平均一致性，扰动建模为鞅差序列。2.传统随机逼近线性迭代仅收敛到无偏但非零方差的随机变量。3.提出基于去中心化梯度下降的锚定机制，以衰减项拉回初始状态，抵消扰动累积。4.证明在标准可求和条件下几乎必然实现精确平均一致性。5.给出相关方法统一框架及可解释设计原则。 <div>
+arXiv:2609.28082v1 Announce Type: new 
+Abstract: We study the distributed average consensus problem under persistent link-level disturbances modeled as a martingale difference sequence with uniformly bounded conditional second moments. Under such disturbances, the standard stochastic-approximation-based linear iteration with diminishing stepsizes drives the network to consensus on an unbiased random variable with non-vanishing variance instead of the exact initial average. To understand and resolve this limitation, we develop an anchoring-based mechanism derived from a decentralized gradient descent formulation and study the effect of incorporating a decaying anchoring term that continuously pulls each agent state toward its initial value. This perspective provides an intuitive interpretation of how state anchoring counteracts disturbance accumulation. Under standard summability conditions, we prove that the resulting algorithm achieves exact average consensus almost surely. Furthermore, this decentralized gradient perspective offers a unifying framework for several related methods and an interpretable design principle for exact average consensus under persistent disturbances.
+]]></content:encoded>
+<pubDate>Thu, 24 Sep 2026 00:00:00 -0400</pubDate>
+<pubDate>Thu, 24 Sep 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>No Place to Hide: An Analysis on Protected Order Flow Sandwich Attacks</title>
+<link>https://arxiv.org/abs/2609.28115</link>
+<guid>https://arxiv.org/abs/2609.28115</guid>
+<content:encoded><![CDATA[
+<div> MEV 三明治攻击 受保护订单流 区块链安全 纵向测量
+<br><br>总结:1.首次对六链进行三年测量，研究受保护交易流中的三明治攻击。2.检测到Solana约2800万、Tron和以太坊数万等攻击，重排区块又暴露2875名受害者。3.攻击通常不紧贴受害者，链下少数主体集中发动。4.漏洞涉及验证者、拍卖、排序、RPC缺陷与可预测行为。5.现有防护弱于预期，需端到端防御。 <div>
+arXiv:2609.28115v1 Announce Type: new 
+Abstract: Front-running has long plagued Ethereum's public mempool, earning it the nickname of a "dark forest", where predators lurk for profitable transactions. In response, Ethereum and other blockchain ecosystems increasingly rely on private RPCs and native protections to shield transactions from adversaries, which we refer to as protected order flow. Yet the effectiveness of these mechanisms in preventing front-running, and what trust assumptions they entail, remain poorly understood.
+  In this work, we conduct the first longitudinal, three-year measurement study of sandwich attacks against protected order flow across six blockchains: Ethereum, Solana, Tron, Base, Arbitrum, and Monad. We introduce detection heuristics that capture wide attacks, both within and across blocks, and filter on bot behavior to distinguish sandwiches from legitimate trading activity. We identify 28.0 million sandwich attacks on Solana, 38,567 on Tron, 30,607 on Ethereum, and 1,889 on Base against transactions intended to be protected from front-running. Reorged blocks expose a further 2,875 Ethereum victims. Unlike conventional public-mempool sandwiches, these attacks rarely occur tightly around their victims and, outside Solana, are carried out by a small number of entities.
+  Our analysis uncovers exposures at every layer: validator- and application-level exposure on Solana, order-flow auctions and reorged blocks on Ethereum, first-come-first-served ordering that fails to prevent latency-based front-running on Tron, and both an RPC bug that exposes pending transactions and predictable victim behavior on Base. These findings show that existing front-running protections can provide substantially weaker guarantees than users expect, highlighting the need for stronger end-to-end defenses against sandwich attacks.
+]]></content:encoded>
+<pubDate>Thu, 24 Sep 2026 00:00:00 -0400</pubDate>
+<pubDate>Thu, 24 Sep 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Dynamic, Decentralized Spatial Code Reuse for OCDMA LiDAR in Robot Swarms</title>
+<link>https://arxiv.org/abs/2609.28172</link>
+<guid>https://arxiv.org/abs/2609.28172</guid>
+<content:encoded><![CDATA[
+<div> 激光雷达, 机器人集群, 测距码冲突, 干扰邻域图, 去中心化协议
+<br><br>总结: 1.问题：LiDAR集群测距码冲突，静态需N码，反应式缺协调。2.方法：去中心化协议按信标干扰邻域图动态重分配码。3.理论：恒密度下仅需O(logN/loglogN)，优于Θ(N)。4.仿真：含移动、检测误差与反应重分配，优势约2倍增至12倍。5.对比：同码预算下复用更高、碰撞风险低30%—40%，证明协调缩差距。 <div>
+arXiv:2609.28172v1 Announce Type: new 
+Abstract: Robots in a LiDAR-equipped swarm mutually interfere when their optical ranging codes collide. Existing mitigations either assign codes statically -- requiring $L=N$ distinguishable codes for $N$ robots -- or react to detected interference without a scalable, coordinated assignment rule beneath them; prior work explicitly identifies the code-assignment scaling problem as unsolved. We propose a decentralized protocol in which robots dynamically reassign spatial reuse codes based on a live, beacon-maintained interference-neighborhood graph, and prove that the number of codes required grows as $O(\log N/\log\log N)$ under constant robot density -- an unbounded improvement over the $\Theta(N)$ growth of static assignment. We validate this result under conditions substantially beyond the idealized proof -- robot mobility, imperfect beacon-based detection, and reactive reassignment -- via Monte Carlo simulation (30 seeds per condition, 95% confidence intervals): the advantage over static assignment widens from roughly $2\times$ at 15 robots to $12\times$ at 120. Against a structurally faithful, fairly constructed model of an existing coordination-free approach, our protocol achieves both substantially greater code-reuse efficiency and 30--40% lower collision risk under an identical, constrained code budget, demonstrating that coordination -- not merely reactivity -- is what closes the scaling gap.
+]]></content:encoded>
+<pubDate>Thu, 24 Sep 2026 00:00:00 -0400</pubDate>
+<pubDate>Thu, 24 Sep 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Controlling Collectives of AI Agents in Reasoning Space with Spatial Transformers</title>
+<link>https://arxiv.org/abs/2609.28247</link>
+<guid>https://arxiv.org/abs/2609.28247</guid>
+<content:encoded><![CDATA[
+<div> 多机器人系统，大型语言模型，反馈控制，分布式架构，机器人蜂群
+<br><br>总结:<br>①LLM适合机器人规划，但多机规模扩大易失效。<br>②提出COMPASS：可扩展、去中心化多机架构。<br>③每机用空间变换器聚合多跳消息，生成反馈标记。<br>④结构化多样命令可抵消偏差，且随规模保持。<br>⑤优于集中LLM和纯语言通信，形成一致编队、准确执行意图。<br>⑥推理反馈与学习标记组合最佳，原始状态入语言通道会破坏凝聚。<br>⑦可零样本泛化，指挥规模达训练16倍、最多1024台机器人。 <div>
+arXiv:2609.28247v1 Announce Type: new 
+Abstract: Large Language Models (LLMs) introduce an exciting new paradigm for planning and navigation in robotics, but fail on even simple multi-robot tasks as team sizes grow. We propose COMPASS, a scalable, decentralized multi-robot architecture for controlling large collectives of agentic robots with reasoning space feedback control. Feedback is generated locally on each robot by a spatial transformer which aggregates multi-hop messages across the fleet into a learned feedback token. Our experiments find that collectives of language models demonstrate performance gains from structured diversity of the input command, which can cancel biases; an advantage that is held across scale. Compared against a centralized frontier LLM policy and a language-only communication ablation, we find that the coupled design of COMPASS decisively produces cohesive flocking formations that accurately fly the commanded intent. We show that reasoning feedback works best when composed with a compact learned token. Our ablations show that hand engineered feedback with raw state appearing in the language channel obliterates cohesion. COMPASS generalizes zero-shot to unseen instructions of ambiguous meaning while commanding flocks up to 16 times its training scale, flying up to 1024 robots under natural language commands.
+]]></content:encoded>
+<pubDate>Thu, 24 Sep 2026 00:00:00 -0400</pubDate>
+<pubDate>Thu, 24 Sep 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Physalia: Redistribution-Resistant Content Protection for Decentralized Storage</title>
+<link>https://arxiv.org/abs/2609.28277</link>
+<guid>https://arxiv.org/abs/2609.28277</guid>
+<content:encoded><![CDATA[
+<div> 去中心化存储、访问控制、Physalia、秘密共享、鲁棒性变换
+<br><br>总结: 1. 传统方法依赖上传前加密和共享密钥，密钥泄露会大幅降低盗版门槛；2. Physalia将数据本身秘密共享到多个服务器，使泄露需传输完整数据，从而提高重分发带宽；3. 提出基于临时密钥签名的鲁棒性变换，使计算秘密共享方案能抵御损坏分片，仅增加常数级元数据，并在Walrus系统上完成端到端安全评估。 <div>
+arXiv:2609.28277v1 Announce Type: new 
+Abstract: In decentralized storage systems, access control is often implemented by encrypting the data before upload and sharing the decryption key with authorized parties. A leaked key, however, makes the data publicly accessible, which lowers the barrier to content piracy below that of traditional systems, where piracy requires redistributing the full data.
+  We present Physalia, an end-to-end access-control system for decentralized storage that secret-shares the data itself, instead of just the key, across multiple servers. Leaking the data then requires transmitting it in full: We formalize this intuition and introduce the redistribution bandwidth an adversary must pay to leak protected content and show that Physalia raises it to the size of the data.
+  Sharing across untrusted servers requires robustness against corrupted shares. We develop a robustness transform that turns any computational secret sharing scheme into a robust one and which is of independent interest. In contrast to existing schemes that rely on error correction, it uses signatures with ephemeral keys and adds only constant-size metadata per share. We show that this transform is secure and evaluate Physalia end-to-end on the Walrus decentralized storage system with an on-chain access policy.
+]]></content:encoded>
+<pubDate>Thu, 24 Sep 2026 00:00:00 -0400</pubDate>
+<pubDate>Thu, 24 Sep 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>A Scalable Multi-Robot Framework for Decentralized and Asynchronous Perception-Action-Communication Loops</title>
+<link>https://arxiv.org/abs/2309.10164</link>
+<guid>https://arxiv.org/abs/2309.10164</guid>
+<content:encoded><![CDATA[
+<div> 去中心化、多机器人、感知-动作-通信、图神经网络、可扩展
+
+<br><br>总结:1. 开发面向户外大规模协作的去中心化PAC系统；2. 用GNN逐跳扩散信息，使局部感知通信实现全局协作；3. 感知、通信、聚合与动作以不同频率异步运行并经缓冲传递；4. 以可扩展ROS2节点构建；5. 经20架真实四旋翼和100架仿真验证，具备可扩展、弹性与可重复性。 <div>
+arXiv:2309.10164v3 Announce Type: replace 
+Abstract: We develop a decentralized Perception-Action-Communication (PAC) system for multi-robot teams that enables them to collaborate in large scale, outdoor environments. Our system natively supports deployments at any scale by leveraging a graph neural network (GNN) to diffuse information hop-by-hop across the fleet's network. This achieves global collaboration from individual robots limited to local sensing and communication. Fully asynchronous, the core modules of PAC: perception, inter-robot communication, message aggregation and action are clocked at different frequencies with information flowing between them through buffers. We implement the PAC system as a series of highly extensible ROS2 nodes to serve as the foundational infrastructure for deployable swarm systems. PAC is validated in the real world with outdoor experiments with up to N=20 quadrotor robots and in simulations based on real-world data with up to N=100. These validations show that our system upholds crucial properties for field-deployable robot collectives: scalability, resiliency and repeatability.
+]]></content:encoded>
+<pubDate>Thu, 24 Sep 2026 00:00:00 -0400</pubDate>
+<pubDate>Thu, 24 Sep 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>SilentLedger: Privacy-Preserving Auditing for Blockchains with Complete Non-Interactivity</title>
+<link>https://arxiv.org/abs/2509.08722</link>
+<guid>https://arxiv.org/abs/2509.08722</guid>
+<content:encoded><![CDATA[
+<div> 隐私保护区块链, 交易审计, 非交互性, 匿名证书, SilentLedger
+<br><br>总结:
+1. 隐私保护区块链需兼顾交易保密与可审计。
+2. 现有方案常牺牲审计与交易独立性，增加交互，影响可用性、扩展性。
+3. 审计者充当验证或记录节点会威胁安全与可靠性。
+4. SilentLedger通过可续期匿名证书和可追踪交易实现完全非交互。
+5. 用户无需交互即可交易，审计者仅凭链上数据审计，并有形式安全证明与性能优势。 <div>
+arXiv:2509.08722v2 Announce Type: replace 
+Abstract: Privacy-preserving blockchain systems are essential for protecting transaction data, yet they must also provide auditability that enables auditors to recover participant identities and transaction amounts when warranted. Existing designs often compromise the independence of auditing and transactions, introducing extra interactions that undermine usability and scalability. Moreover, many auditable solutions depend on auditors serving as validators or recording nodes, which introduces risks to both data security and system reliability.
+  To overcome these challenges, we propose SilentLedger, a privacy-preserving transaction system with auditing and complete non-interactivity. To support public verification of authorization, we introduce a renewable anonymous certificate scheme with formal semantics and a rigorous security model. SilentLedger further employs traceable transaction mechanisms constructed from established cryptographic primitives, enabling users to transact without interaction while allowing auditors to audit solely from on-chain data. We formally prove security properties including authenticity, anonymity, confidentiality, and soundness, provide a concrete instantiation, and evaluate performance under a standard 2-2 transaction model. Our implementation and benchmarks demonstrate that SilentLedger achieves superior performance compared with state-of-the-art solutions.
+]]></content:encoded>
+<pubDate>Thu, 24 Sep 2026 00:00:00 -0400</pubDate>
+<pubDate>Thu, 24 Sep 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Optimization without Future Compromises? Decentralized Coordination via Collective and Reinforcement Learning</title>
+<link>https://arxiv.org/abs/2509.18088</link>
+<guid>https://arxiv.org/abs/2509.18088</guid>
+<content:encoded><![CDATA[
+<div> 分层强化学习,多智能体协调,长期资源分配,去中心化,战略指导
+<br><br>总结: 1.多智能体系统需长期协调决策，但去中心化观测有限。2.直接MARL在大规模协调中决策空间大、训练低效。3.HRCL高层学习战略，限制备选并平衡整体与个体目标。4.底层在指导下高效协调，评估短期权衡的长期影响。5.实验显示收敛更快，系统总成本和个体成本分别降35.53%、27.05%，并提升能源自管理与无人机群感知效率。 <div>
+arXiv:2509.18088v2 Announce Type: replace 
+Abstract: Efficient resource allocation in multi-agent systems requires autonomous agents to coordinate their decisions while balancing system-wide objectives with individual costs. This becomes increasingly challenging over long time horizons, where decisions that improve the current allocation may compromise future resource allocation, while decentralized agents have limited observations of the overall system. Multi-agent reinforcement learning (MARL) can learn such long-term dependencies via local observations, but directly applying it to large-scale coordination leads to rapidly growing decision spaces and inefficient training. To this end, we propose Hierarchical Reinforcement and Collective Learning (HRCL), a hierarchical framework that uses MARL to guide, rather than replace, decentralized multi-agent coordination. At the high level, MARL learns strategies that restrict the alternatives considered during coordination and guide agents in balancing system-wide and individual objectives. At the low level, agents perform efficient decentralized coordination under this strategic guidance. This separation reduces the learning space and allows short-term coordination trade-offs to be evaluated according to their long-term effects. Experiments on a synthetic benchmark show that HRCL converges substantially faster than standalone MARL and reduces system-wide and individual costs by 35.53% and 27.05%, respectively. Evaluations on energy self-management and drone swarm sensing further show improved resource allocation, power-peak regulation, and sensing efficiency. These results show that learning strategic guidance for an existing coordination process can retain scalable decentralized coordination without letting short-term decisions compromise future resource allocation.
+]]></content:encoded>
+<pubDate>Thu, 24 Sep 2026 00:00:00 -0400</pubDate>
+<pubDate>Thu, 24 Sep 2026 00:00:00 -0400</pubDate>
+</item>
 
 <item>
 <title>Universal Fractal Natural Language Decision Map: Real-Time Edge Triage Across Heterogeneous Domains</title>
