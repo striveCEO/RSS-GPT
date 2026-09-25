@@ -4,6 +4,157 @@
 <title>cs updates on arXiv.org</title>
 <link>http://rss.arxiv.org/rss/cs</link>
 
+<item>
+<title>zkSAS: Practical Zero-Knowledge Proofs for Verifiable Spectrum Access Management</title>
+<link>https://arxiv.org/abs/2609.28699</link>
+<guid>https://arxiv.org/abs/2609.28699</guid>
+<content:encoded><![CDATA[
+<div> 零知识证明 频谱接入系统 动态频谱共享 隐私保护 可验证性
+<br><br>总结: 1. 现有集中式SAS分配逻辑不透明且难以独立验证；2. 区块链SAS虽可验证，但存在隐私风险和高链上计算开销；3. 提出zkSAS零知识证明系统，适配CBRS和区块链SAS；4. 通过约束有效性与移动列表有效性证明，确保合规且不泄露用户数据；5. 评估显示证明生成随用户规模增长，但验证轻量且恒定，支持可扩展安全频谱共享。 <div>
+arXiv:2609.28699v1 Announce Type: new 
+Abstract: Dynamic Spectrum Access (DSA) through the Spectrum Access Systems (SAS) elevates spectral efficiency, yet existing centralized models face allocation logic opaqueness and a lack of independent verifiability. While blockchain-based SAS architectures offer transparency and verifiability by default, they introduce critical privacy risks and prohibitive on-chain computational overhead. We introduce zkSAS, a practical zero-knowledge proof (ZKP) system designed to address the verifiability and privacy gaps in SAS deployments, with direct applicability to both the existing CBRS SAS model and blockchain-based SAS models. The system features a suite of ZKP circuits, encompassing proofs of allocation constraint validity and proofs of move list validity to verify that channel assignments and move list-based incumbent protection measures, respectively, adhere to regulatory constraints without exposing sensitive user data. Comprehensive evaluation of our prototype in both centralized and blockchain-based settings indicates that while proof generation scales with spectrum user population, verification remains lightweight and constant-time. We envision that zkSAS offers a scalable and practical path to secure, verifiable dynamic spectrum sharing.
+]]></content:encoded>
+<pubDate>Fri, 25 Sep 2026 00:00:00 -0400</pubDate>
+<pubDate>Fri, 25 Sep 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Blockchain-Enabled Artificial Intelligence and AI Agents for Secure Data Sharing and Cybersecurity Applications</title>
+<link>https://arxiv.org/abs/2609.28843</link>
+<guid>https://arxiv.org/abs/2609.28843</guid>
+<content:encoded><![CDATA[
+<div> 区块链,人工智能,安全,多智能体,溯源
+<br><br>总结:
+1.融合：区块链与AI形成可信基础设施，支撑数据共享、模型完整与自主决策。
+2.综合：对抗学习、云异常检测、多智能体LLM修复与AI全生命周期安全。
+3.失效点：数据/模型完整性、监控可靠性、自动修复可信度。
+4.方案：以不可篡改、共识和溯源建立信任，提出分层架构。
+5.挑战：扩展性、隐私透明、自主代理治理。 <div>
+arXiv:2609.28843v1 Announce Type: new 
+Abstract: Blockchain and artificial intelligence (AI) are converging into a single infrastructural layer for securing data sharing, model integrity, and autonomous decision-making across distributed systems. This paper presents a meta-synthesis that draws together four constituent studies covering adversarial machine learning, AI-powered anomaly detection in cloud environments, automated vulnerability patching by multi-agent large language model (LLM) pipelines, and the broader landscape of securing AI systems across their lifecycle and situates their findings within the emerging literature on blockchain-enabled AI and autonomous AI agents. Each constituent study addresses a distinct point of failure in modern AI-driven security operations: the integrity of training data and model behavior, the reliability of real-time monitoring, and the trustworthiness of automated code remediation. We argue that blockchain's properties of immutability, decentralized consensus, and verifiable provenance directly address a gap common to all three: the difficulty of establishing trust in data, models, and autonomous agents that operate without a central authority. Building on real-world research on blockchain-secured data sharing, federated learning, and multi-agent coordination, we propose a layered reference architecture that couples adversarially hardened models, blockchain-anchored data provenance, AI-driven anomaly detection, and smart-contract-governed multi-agent remediation. We conclude by identifying open problems in scalability, privacy-transparency trade-offs, and the governance of autonomous agents that must be resolved before such integrated systems can be trusted in production-critical environments.
+]]></content:encoded>
+<pubDate>Fri, 25 Sep 2026 00:00:00 -0400</pubDate>
+<pubDate>Fri, 25 Sep 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>MeshHeal: Two-Timescale Self-Healing for Gray Failures in Decentralized LLM Agent Networks</title>
+<link>https://arxiv.org/abs/2609.29015</link>
+<guid>https://arxiv.org/abs/2609.29015</guid>
+<content:encoded><![CDATA[
+<div> 去中心化, 多智能体, 灰度故障, 自愈框架, 模型支持评测
+<br><br>总结:
+1. 去中心化LLM多智能体有灰度故障：响应正常但质量下降。
+2. MeshHeal以能力匹配评审双尺度自愈：快尺度将可疑输出升级委员会审查并修正。
+3. 慢尺度识别持续退化，隔离受损智能体，恢复后重入路由。
+4. 引入模型支持评测，降低隐藏路由错误。
+5. 在BBH等任务精度0.839、51k tokens，优于基线并处理退化恢复。 <div>
+arXiv:2609.29015v1 Announce Type: new 
+Abstract: Decentralized LLM-based multi-agent systems coordinate through local interactions, but an agent can remain responsive while its task-solving quality persistently degrades. Such gray failures require protecting current tasks before sufficient evidence exists to alter future routing, while still allowing recovered agents to rejoin. We introduce MeshHeal, a fully decentralized self-healing framework that couples ability-matched peer review across two timescales. At the fast timescale, an adaptive hierarchy escalates uncertain or low-scoring outputs from repeated single-reviewer evaluation to committee deliberation and, when needed, correction before use. At the slow timescale, a task- and ability-conditioned peer-relative detector aggregates scores to distinguish persistent degradation from ordinary output variation, trigger mandatory committee review, and eventually exclude degraded agents from ordinary routing; recovery probes provide fresh evidence for reintegration. To faithfully evaluate routing, we introduce Model-Backed MAS Evaluation, which ties ability assignments to execution models, since prompt-based ability assignments alone can leave routing errors hidden. Across BBH, MATH, and MMLU-Pro, MeshHeal achieves 0.839 degraded-phase accuracy using 51k total model tokens per task, versus the strongest baseline Symphony's 0.807 accuracy using 115k per task. Under staggered degradation and recovery, MeshHeal isolates degraded agents, keeps them excluded from ordinary task execution until recovery, and returns them to normal routing.
+]]></content:encoded>
+<pubDate>Fri, 25 Sep 2026 00:00:00 -0400</pubDate>
+<pubDate>Fri, 25 Sep 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Security Limits of Mining Before Validation in Nakamoto Consensus</title>
+<link>https://arxiv.org/abs/2609.29222</link>
+<guid>https://arxiv.org/abs/2609.29222</guid>
+<content:encoded><![CDATA[
+<div> 先挖后验 验证延迟 共识安全 算力阈值 无效分支攻击
+<br><br>总结: ①先挖后验可抢领先，但无效块会拖累基于它的诚实工作。②以有限网络延迟和固定验证时长建模，给出诚实链高概率稳定的算力阈值。③构造攻击诱导诚实链转入无效分支；敌人在验证期内平均出块超一，即可移除固定深度目标块。④结合私有挖矿得到完全去中心化下的匹配界，说明验证延迟额外削弱安全。 <div>
+arXiv:2609.29222v1 Announce Type: new 
+Abstract: Mining before validation allows miners to extend a newly received block before completing its validity checks, giving them a head start in the race for the next block reward. This head start, however, comes with a security risk: rejecting one invalid block also discards the honest work built on it, an effect missed when validation is treated as instantaneous. We quantify this risk in a model of Nakamoto consensus with bounded network delay and a validation-time bound independent of processing load. We establish an explicit threshold on adversarial mining power below which honest miners' fully validated chains continue to grow and agree on a stable history with high probability over any fixed observation period. We also construct an attack that repeatedly draws honest mining onto invalid branches. When the adversary produces more than one block on average during the allowed validation time, the attack can eventually remove a target block at any fixed initial confirmation depth. Combined with ordinary private mining, this attack yields a matching asymptotic bound in the fully decentralized regime, where each honest miner has negligible mining power. The results show how validation latency limits the security of mining before validation, beyond the constraint imposed by network delay.
+]]></content:encoded>
+<pubDate>Fri, 25 Sep 2026 00:00:00 -0400</pubDate>
+<pubDate>Fri, 25 Sep 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Beyond Centralized Policy Decision Points: Decentralized Sticky Policy Authorization through Evidence Quorums</title>
+<link>https://arxiv.org/abs/2609.29308</link>
+<guid>https://arxiv.org/abs/2609.29308</guid>
+<content:encoded><![CDATA[
+<div> 去中心化授权 粘滞策略 证据仲裁 多数激活 安全评估
+<br><br>总结:1、SPEAR-Q以PAN本地证据和严格多数仲裁实现去中心化授权；2、策略须PAN多数激活；3、评估9000请求无失败，负载下延迟升、吞吐饱和，证据等待、本地处理与凭证验证为主成本；4、少数被攻陷不能放行，可达PAN不足多数则fail-closed；5、集成粘滞策略、证据、激活与仲裁，不依赖中心PDP。 <div>
+arXiv:2609.29308v1 Announce Type: new 
+Abstract: Sticky policies remain attached to protected data so that access restrictions can persist across systems, yet request-time authorization often still depends on a centralized Trusted Authority or Policy Decision Point (PDP). This paper presents SPEAR-Q, a decentralized framework in which independent Policy Authority Nodes (PANs) evaluate the active sticky policy using local context, consent, and risk information and generate signed authorization evidence. A strict-majority Evidence quorum determines the global Permit or Deny decision, while a committed policy becomes active only after the required PAN majority applies it. SPEAR-Q was deployed across physically separated hosts in the Airbus Cyber Security Simulation Platform and evaluated using a healthcare workload derived from MIMIC-IV. Across 9,000 performance requests, all requests completed without execution failure or timeout. Latency increased and throughput saturated as cluster size and concurrency grew, with PAN evidence waiting and PAN-local processing dominating under load and credential validation forming the main PAN-side cost. Policy-activation experiments confirmed majority-based activation. Quorum experiments showed that correctly signed false-Permit evidence from fewer compromised PANs than the required quorum could not produce a global Permit or resource release, while authorization remained fail-closed when reachable PANs fell below the required quorum. Compared with prior approaches that decentralize policy management, credential authority, or threshold-based release separately, SPEAR-Q integrates persistent sticky policy enforcement, independent request-time evidence, majority-based policy activation, and explicit quorum-bounded authorization within one decentralized framework. Under the evaluated conditions, SPEAR-Q supports decentralized sticky-policy authorization without relying on a centralized decision authority.
+]]></content:encoded>
+<pubDate>Fri, 25 Sep 2026 00:00:00 -0400</pubDate>
+<pubDate>Fri, 25 Sep 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>SPADE-DFL: Communication-Efficient Decentralized Federated Learning via Derivative-Free Linearized ADMM</title>
+<link>https://arxiv.org/abs/2609.29446</link>
+<guid>https://arxiv.org/abs/2609.29446</guid>
+<content:encoded><![CDATA[
+<div> SPADE-DFL、无导数、去中心化、差分隐私、通信效率
+<br><br>总结:
+1.提出SPADE-DFL原始对偶法，允许局部更新随预算增长、控制分歧并降通信。
+2.非私有光滑非凸下，以Θ(T^2/3)通信达到O(T^-1/3)稳定与一致性界。
+3.私有训练隔离数据增量与图校正，每客户端每轮一个保护状态生成消息。
+4.证明客户端级差分隐私并量化误差，分类实验准确率高于现有方法。 <div>
+arXiv:2609.29446v1 Announce Type: new 
+Abstract: Reducing communication in derivative-free decentralized learning requires controlling the disagreement accumulated over multiple local updates. This paper develops SPADE-DFL, a primal--dual method that allows the number of local function-value updates between neighbor exchanges to grow with the computation budget while preserving the nonprivate convergence order. For smooth nonconvex objectives under uniform query-moment bounds, the prescribed nonprivate schedule achieves a time-averaged stationarity and consensus bound of $\mathcal{O}(T^{-1/3})$ using only $\Theta(T^{2/3})$ communication rounds, where $T$ is the number of local updates per client. For private training, the accumulated data-dependent increment is isolated from the graph correction, allowing one protected state per client and round to generate all outgoing messages. We prove client-level differential privacy for the full interactive transcript and quantify the resulting optimization error over a finite horizon. Experiments on four classification tasks show that SPADE-DFL achieves higher mean test accuracy than existing decentralized learning methods.
+]]></content:encoded>
+<pubDate>Fri, 25 Sep 2026 00:00:00 -0400</pubDate>
+<pubDate>Fri, 25 Sep 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Demystifying Agent Skills for Smart Contract Auditing: Design, Effectiveness, Behavioral Impact</title>
+<link>https://arxiv.org/abs/2609.29454</link>
+<guid>https://arxiv.org/abs/2609.29454</guid>
+<content:encoded><![CDATA[
+<div> LLM智能体,可复用技能,智能合约审计,漏洞检测,EVMBench
+<br><br>总结:
+1. 研究可复用技能如何增强LLM智能体，收集83个智能合约审计技能，在EVMBench上评测7种智能体—模型配置。
+2. 技能多轻量但设计异构，漏洞覆盖广而不均衡，涉及结构、工作流和工具依赖。
+3. 效果主要取决于模型；Codex/GPT-5.5增益最大，检测分增22.8%、奖励捕获增43.2%。
+4. 技能触发是关键瓶颈；触发后保留六阶段审计流程，但加载与行为影响不同。
+5. 发布语料和工件。 <div>
+arXiv:2609.29454v1 Announce Type: new 
+Abstract: LLM agents, notably Claude Code and OpenAI Codex, are emerging as versatile tools beyond coding agents only. These agents can be enhanced with skills---reusable artifacts that package domain knowledge, workflows, and tool-use instructions. To date, however, little is known about how such skills are designed or how they affect agent effectiveness and behavior in practice. In this paper, we investigate these questions in smart contract security auditing, a domain in which agents have shown substantial promise. We systematically collect 83 smart contract audit skills from the wild and evaluate them on EVMBench across seven agent--model configurations. Our study examines three dimensions: (i) the design characteristics of audit skills, including their structure, knowledge representations, workflows, and tool dependencies; (ii) their effectiveness in improving vulnerability detection; and (iii) their influence on agent execution trajectories. We find that audit skills are mostly lightweight but heterogeneous in design, covering a broad yet imbalanced range of vulnerability types. Their effectiveness is determined primarily by the model rather than the agent harness: Codex/GPT-5.5 achieves the largest gains, improving detection score by 22.8% and captured award by 43.2%. We further find that skill triggering is a key bottleneck. When triggered, skills preserve a shared six-stage audit workflow while exhibiting distinct loading patterns and differential effects on agent behavior across configurations. We release our skill corpus and artifacts to support future research.
+]]></content:encoded>
+<pubDate>Fri, 25 Sep 2026 00:00:00 -0400</pubDate>
+<pubDate>Fri, 25 Sep 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Energy-Aware Two-Sided Learning for Dynamic Matching Games in Mobile Crowdsensing</title>
+<link>https://arxiv.org/abs/2609.29880</link>
+<guid>https://arxiv.org/abs/2609.29880</guid>
+<content:encoded><![CDATA[
+<div> 移动众包感知, 感知即服务, 双边匹配, 能量约束, 去中心化学
+
+<br><br>总结:1.背景：移动众包感知支撑下一代网络感知即服务；2.挑战：缺少用户感知质量与努力先验，且受电池能量限制；3.方法：将用户与平台交互建模为不完全信息动态双边匹配游戏；4.方案：提出ETSL去中心化轻量学习框架，用户学习任务提议，平台学习质量并分配任务；5.结果：提升双方收益与整体能效。 <div>
+arXiv:2609.29880v1 Announce Type: new 
+Abstract: Mobile crowdsensing (MCS) is a promising enabler of Sensing-as-a-Service (SaaS) for next generation networks (NGNs), where sensing, communication, and computing are jointly considered as on-demand services. In MCS, mobile units (MUs) collect and deliver sensing data to data requesters (DRs) via a mobile crowdsensing platform (MCSP) in exchange for monetary incentives. After sensing tasks are announced, MUs strategically select tasks to maximize their long-term utility while accounting for energy and time costs, whereas the MCSP assigns tasks to maximize its own service revenue and data quality. A fundamental challenge arises from the lack of prior knowledge of MUs' sensing qualities and task efforts, as well as the energy limitations of battery-powered devices, which directly impacts service availability and reliability in SaaS for NGNs. To address these challenges, we formulate the interaction between MUs and the MCSP as a dynamic two-sided matching game under incomplete information, explicitly incorporating energy constraints. We propose Energy-aware Two-Sided Learning (ETSL), a fully decentralized and lightweight learning framework in which MUs locally learn task proposal strategies, while the MCSP learns the data quality of participating MUs to devise task assignment strategy. ETSL jointly enables MUs' energy-aware task proposals and MCSP's adaptive task assignment, considering their individual preferences to maximize their net revenues. Simulation results demonstrate that ETSL significantly improves MU and MCSP profits and overall energy efficiency, highlighting its effectiveness as a scalable and sustainable SaaS solution for NGN.
+]]></content:encoded>
+<pubDate>Fri, 25 Sep 2026 00:00:00 -0400</pubDate>
+<pubDate>Fri, 25 Sep 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Graph-Based Inference and Topology-Aware Multi-Agent Reinforcement Learning for Large-Scale Railway Network Management</title>
+<link>https://arxiv.org/abs/2609.30150</link>
+<guid>https://arxiv.org/abs/2609.30150</guid>
+<content:encoded><![CDATA[
+<div> 强化学习、图神经网络、多智能体、零样本迁移、铁路维护
+<br><br>总结:
+1.问题：设施维护存在长周期、空间劣化相关和规模经济，集中/分散方法难扩展。2.建模：用层次贝叶斯与图GP核从瑞士铁路数据构建真实环境。3.算法：拓扑感知MARL结合GNN与图Transformer优化网络策略。4.创新：小网训练零样本迁移至大网无需重训。5.结果：优于启发式和标准MARL，减少训练时间。 <div>
+arXiv:2609.30150v1 Announce Type: new 
+Abstract: Modern infrastructure asset management constitutes a complex sequential decision-making problem, characterized by long planning horizons and system-level interactions, such as spatial deterioration correlations and economies of scale. While deep reinforcement learning has shown promise in optimizing maintenance policies, scaling to real-world networks remains challenging. Centralized approaches become computationally intractable in large-scale systems, whereas decentralized approaches often fail to capture essential coordination mechanisms. To address these challenges, we propose a graph-based framework that integrates accurate environment modeling with scalable decision support. First, we employ a hierarchical Bayesian model leveraging a Gaussian Process on Graph kernel to infer a realistic, spatially correlated networked environment of railway maintenance planning from real-world data provided by the Swiss Federal Railways. Second, we introduce a topology-aware Multi-Agent Reinforcement Learning (MARL) framework by integrating graph neural networks and graph Transformers to optimize network-level policies. A central contribution of this work is the demonstration of scalability through zero-shot transfer learning: graph-based agents, trained only on small network portions, are successfully deployed in a zero-shot manner on large-scale unseen networks without any retraining. Numerical results indicate that the proposed method significantly outperforms optimized heuristics and standard MARL baselines, reducing computational training time while maintaining superior performance on large-scale networks.
+]]></content:encoded>
+<pubDate>Fri, 25 Sep 2026 00:00:00 -0400</pubDate>
+<pubDate>Fri, 25 Sep 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>SPARQL-LLM: Real-Time SPARQL Query Generation from Natural Language Questions</title>
+<link>https://arxiv.org/abs/2512.14277</link>
+<guid>https://arxiv.org/abs/2512.14277</guid>
+<content:encoded><![CDATA[
+<div> SPARQL、大语言模型、自然语言查询、知识图谱、开源系统
+<br><br>总结:1.背景：现有LLM生成SPARQL重准确率轻成本。2.方案：SPARQL-LLM开源且与三元组库无关，基于轻量元数据，含索引、提示构建、查询生成执行。3.评估：多语言挑战及3个生信知识图谱。4.结果：F1最高提升59%，适配英西德，可生成复杂查询，快27倍，成本≤0.01美元每题。5.应用：已开源并部署于去中心化知识图谱。 <div>
+arXiv:2512.14277v2 Announce Type: replace 
+Abstract: The advent of large language models is contributing to the emergence of novel approaches that promise to better tackle the challenge of generating structured queries, such as SPARQL queries, from natural language. However, these new approaches mostly focus on response accuracy while ignoring other evaluation criteria, such as runtime and cost to generate SPARQL queries. Consequently, they are often not production-ready or easy to deploy over real-world knowledge graphs with good accuracy. To mitigate these issues, in this paper, we describe and systematically evaluate SPARQL-LLM, an open-source and triplestore-agnostic approach, powered by lightweight metadata, that generates SPARQL queries from natural language text. First, we describe its architecture, which consists of dedicated components for metadata indexing, prompt building, and query generation and execution. Then, we evaluate it based on a state-of-the-art challenge with multilingual questions, and a collection of questions from three of the most prevalent knowledge graphs within the field of bioinformatics. Our results demonstrate a substantial improvement of up to 59% in F1 score over the second-best system participating in the challenge, adaptability to high-resource languages such as English, Spanish, and German, as well as ability to form complex bioinformatics queries. Furthermore, our results show that our system is up to 27x faster than the second-best system participating in the challenge, while costing a maximum of $0.01 per question, making it suitable for real-time, low-cost text-to-SPARQL applications. SPARQL-LLM is publicly released as an open-source project at https://github.com/sib-swiss/sparql-llm and is currently deployed over real-world decentralized knowledge graphs at https://www.expasy.org/chat.
+]]></content:encoded>
+<pubDate>Fri, 25 Sep 2026 00:00:00 -0400</pubDate>
+<pubDate>Fri, 25 Sep 2026 00:00:00 -0400</pubDate>
+</item>
 
 <item>
 <title>FedCoT-VQA: A Federated Learning and Unlearning Framework for Chain-of-Thought Planners in VideoQA</title>
