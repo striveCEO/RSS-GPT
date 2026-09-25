@@ -4,6 +4,47 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+<item>
+<title>A unified toolkit for advanced arithmetic in FHE</title>
+<link>https://eprint.iacr.org/2026/450</link>
+<guid>https://eprint.iacr.org/2026/450</guid>
+<content:encoded><![CDATA[
+<div> CKKS、同态加密、整数运算、非线性函数、GPU
+<br><br>总结:1.扩展离散CKKS，支持实数、布尔与64/128位大整数运算。
+2.实现算术、比较、移位、平方根、商等非线性功能。
+3.核心是非迭代二进制分解，可提取x或g(x)各位并加速LUT。
+4.适用于智能合约、逻辑门及神经网络输出的整数计算。
+5.相比Gao与Zheng，无需特殊编码或昂贵转换，但吞吐较低。
+6.GPU证明多数操作延迟与吞吐优于TFHE-rs。 <div>
+We suggest an extension of discrete--CKKS that enables advanced computations over real, Boolean and large integers (e.g., 64/128-bit), including standard arithmetic operations, comparison, shift, bit length, quotient, square root, and other non linear functions based on binary representation. The flexibility of our approach lies in the synergy between the integer and the real arithmetic layers. At the core of our approach  lies indeed a novel non-iterative binary decomposition technique extracting the $i$-th bit of $x$ by evaluating an approximation of $\lfloor x/2^i \rfloor \bmod 2$, very efficient when $x$ has at most 8 bits.
+
+We show how such procedure can decompose not only a value $x$, but also a more general $g(x)$ at no additional cost by generalizing the evaluation to $\lfloor g(x)/2^i \rfloor$, enabling fast LUT evaluation over integers. Interestingly, the output of our LUTs can be arbitrarily large at the cost of requiring redundant slots: this unlocks the computation of large seeds for Newton--Raphson algorithms, enabling for the first time the practical evaluation of (exact) non linear functions over large integers such as square root and quotient within the discrete--CKKS family of schemes.
+
+By supporting computations over different domains, our framework is usable in various applications: smart contracts naturally fit our framework, as it efficiently supports both arbitrary logical gates and operations over large integers. It also allows integer computations on the output class of a real-valued neural network, such as metadata lookup. 
+
+Compared to the state-of-the-art by Gao and Zheng (CRYPTO '26), our solution does not require ad-hoc encoding or expensive integer to Boolean conversions, making it more suitable when some non arithmetic structure is involved. %has lower latency on all standard integer operations  (additions, multiplications, comparisons and logical shifts), and we additionally support nonlinear integer operations. 
+Our current limitation lies in the throughput, which is lower. 
+We additionally provide an open source proof of concept for GPU, showing that our work has better latency and throughput than TFHE-rs on most arithmetic and non-arithmetic operations.
+]]></content:encoded>
+<pubDate>Wed, 04 Mar 2026 15:10:16 +0000</pubDate>
+<pubDate>Wed, 04 Mar 2026 15:10:16 +0000</pubDate>
+</item>
+<item>
+<title>Write-Public Oblivious RAM and Its Applications</title>
+<link>https://eprint.iacr.org/2026/2163</link>
+<guid>https://eprint.iacr.org/2026/2163</guid>
+<content:encoded><![CDATA[
+<div> ORAM、写公开ORAM、Path ORAM、TEE、区块链RPC
+<br><br>总结:1.ORAM可隐藏访问，但带宽和往返开销较高；2.提出wpORAM，隐藏读操作但不隐藏写更新；3.相比Path ORAM，写带宽与往返优化logN，读成本相近但实践略慢；4.结合TEE可实现动态PIR；5.用于私有区块链RPC，同步提速3-4倍，读约慢23%。 <div>
+Oblivious RAM (ORAM) protocols enable a resource-constrained client to outsource data to an untrusted server, and access this data without revealing what is being accessed. While ORAM protocols are almost optimal, concretely efficient ORAM protocols incur sub-optimal bandwidth overhead and require multiple roundtrips of communication between the client and the server.
+
+In this work, we introduce write-public ORAM: a relaxed variant of ORAM that hides what data is being read, but not what data is being updated on the server. We present wpORAM, a write-public ORAM that modifies Path ORAM to achieve a log N-factor improvement in bandwidth and roundtrips over Path ORAM during writes. The asymptotic cost of reads in wpORAM remains the same as Path ORAM, with a slight slowdown in practice. wpORAM, when used with a Trusted Execution Environment (TEE), can implement a dynamic Private Information Retrieval scheme that efficiently updates data stored in a public database.
+
+We use wpORAM to implement a private blockchain RPC server that enables blockchain clients to query RPC nodes without revealing their queries to the server operator. Our evaluation shows that, while syncing with the latest blockchain state, our RPC node achieves a 3-4x speedup over Path ORAM. Our RPC node can serve reads with a slowdown of approximately 23% compared to Path ORAM.
+]]></content:encoded>
+<pubDate>Tue, 22 Sep 2026 18:41:48 +0000</pubDate>
+<pubDate>Tue, 22 Sep 2026 18:41:48 +0000</pubDate>
+</item>
 
 <item>
 <title>Amplifying Randomized Encodings &amp; Applications</title>
