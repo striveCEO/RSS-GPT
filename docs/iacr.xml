@@ -4,6 +4,54 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+<item>
+<title>SPRUCE: Scalable Multiparty Private Set Union in Constant Rounds</title>
+<link>https://eprint.iacr.org/2026/2188</link>
+<guid>https://eprint.iacr.org/2026/2188</guid>
+<content:encoded><![CDATA[
+<div> 多方私有集合并集，隐私保护，常数轮数，免洗牌，不平衡输入
+<br><br>总结:
+1. MPSU让互不信任方在不泄露额外信息下获知私有集合并集，可用于风险评估与隐私记录匹配。
+2. 现有先进协议通常需按序洗牌加密值，以隐藏各方输入来源。
+3. 新半诚实协议免除洗牌，任意参与方数量均常数轮，并提升并行性、信息论在线阶段与不平衡输入支持，避免填充。
+4. 评估显示：不平衡输入下显著优于PULSE与DZBC25；平衡输入下多数较PULSE快一个数量级，并在100ms延迟WAN下优于DZBC25。 <div>
+Multiparty private set union (MPSU) enables a group of mutually distrusting parties, each holding a private set, to learn the union of their sets without revealing additional information. MPSU is a fundamental primitive with applications to privacy-preserving tasks such as cyber-risk assessment and private record matching.
+
+State-of-the-art MPSU protocols require parties to sequentially shuffle encrypted values in order to hide which party contributed which inputs to the final result. We introduce a new paradigm for semi-honest MPSU that eliminates the need for such shuffling. This allows the protocol to run in constant rounds regardless of how many parties are involved.  The resulting protocol also benefits from improved parallelism, an information-theoretic online phase, and native support for unbalanced input sizes, a situation most prior works must handle by padding inputs to hide individual input sizes. 
+
+We implement and evaluate our protocol across a range of party counts, input sizes, and network conditions. In the unbalanced setting, where parties hold unequal-sized inputs, our protocol significantly outperforms the state-of-the-art schemes PULSE (CCS ’25) and DZBC25 (USENIX Security ’25). In the balanced setting, it achieves an order-of-magnitude improvement over PULSE in most settings and outperforms DZBC25 in WAN deployments with 100ms latency.
+]]></content:encoded>
+<pubDate>Wed, 23 Sep 2026 16:47:49 +0000</pubDate>
+<pubDate>Wed, 23 Sep 2026 16:47:49 +0000</pubDate>
+</item>
+<item>
+<title>Lexicure: Efficient, Encrypted Lexical Search</title>
+<link>https://eprint.iacr.org/2026/2182</link>
+<guid>https://eprint.iacr.org/2026/2182</guid>
+<content:encoded><![CDATA[
+<div> 加密词法搜索,隐私保护,Lexicure,BM25,EMVP
+<br><br>总结:1.云端加密词法搜索可避免第三方获知查询与结果；2.现有无泄漏方案客户端存储或通信开销过大；3.Lexicure将搜索转为EMVP，平均保留超95%明文BM25精度；4.通信减少2.6-9.9倍，客户端存储不足1KB；5.新原语支持高次函数计算，以更大服务器换取更低带宽；6.证明无泄漏加密搜索具备实用性。 <div>
+Lexical search retrieves documents containing query keywords that require exact matches, such as rare terms, entity names or codewords. Search is increasingly hosted in the cloud, which places both the corpus and every query on infrastructure the data owner does not control. Encrypted lexical search addresses this concern by ensuring no third party, including the cloud provider, learns which queries are issued or which documents are retrieved. The key binding constraints are all on the client — accuracy, memory, computation, and communication — since cloud capacity is elastic. Existing approaches that guarantee full privacy without caveats require prohibitively high client-side persistent storage or communication.
+
+We present Lexicure, a protocol for encrypted lexical search that reduces the search to arithmetic operations favorable to cryptographic primitives, such as encrypted matrix–vector products (EMVP). Across sixteen diverse datasets, Lexicure retains over $95\%$ of plaintext BM25 accuracy on average. Lexicure sets a new baseline for leakage-free lexical search, requiring  2.6-9.9$\times$ less communication than alternative approaches and less than 1KB of client-side storage. A major challenge is that secure lexical search is inherently bandwidth-bound. We additionally describe an approach for compressing the communication further in exchange for a larger server. To do so, we introduce a new cryptographic primitive that modifies EMVP to securely compute quadratic and higher-degree functions, more efficiently than a direct reduction.
+
+Lexicure demonstrates that leakage-free encrypted search with practical performance is achievable and opens new avenues for secure information retrieval systems.
+]]></content:encoded>
+<pubDate>Wed, 23 Sep 2026 14:43:27 +0000</pubDate>
+<pubDate>Wed, 23 Sep 2026 14:43:27 +0000</pubDate>
+</item>
+<item>
+<title>Budgeted Threshold Signatures: Protocol-Native Spending Limits with Zero On-Chain Footprint</title>
+<link>https://eprint.iacr.org/2026/2176</link>
+<guid>https://eprint.iacr.org/2026/2176</guid>
+<content:encoded><![CDATA[
+<div> 花费限额 门限签名 协议原生 MPC BTS
+<br><br>总结: 1. 现有限额在协议外，泄漏预算状态、绑定单链、增加旁路；代理支付激增。2. 提出协议原生每周期预算，由签名者秘密共享并在会话内执行，链上验证不变。3. 被动MPC门控可被确定性绕过；线性门控组合必然超支且可逃避审计。4. 构造BTS门限Schnorr，定义诚实多数预算健全性。5. 认证门拦截攻击，成本5轮和3.4—3.7倍乘法；批量摊薄近每笔一往返。 <div>
+Spending limits are the workhorse of custody policy, yet in every deployed threshold-signing stack they live outside the signing protocol—in centralized policy engines, on-chain covenants, or hardware co-signers—where they leak budget state, bind to a single chain, or add a trusted bypass surface. The workload is compounding: agent payments passed one hundred million transfers on a single chain in under a year. We initiate the study of protocol-native spending limits: per-epoch budgets secret-shared among the signers and enforced inside the signing session, with unchanged on-chain verification. We first show that the natural approach fails: gating a threshold signature with a passively secure MPC comparison admits a deterministic bypass. For the class of linear gatein-combination protocols we prove that every member signs over-budget transactions with probability one, disguised against any transcript auditor up to the statistical masking bound. We then construct BTS, a budgeted threshold Schnorr scheme with a formal budget-soundness definition for honest-majority configurations. The gap is closed with an authenticated gate: in implementation, every attack attempt is caught before a signature is produced, at a measured cost of 3.4–3.7× multiplications and five extra rounds. Batched over k=20 payments, enforcement amortizes to about one network round trip per payment in our WANmodeled prototype.
+]]></content:encoded>
+<pubDate>Wed, 23 Sep 2026 10:52:06 +0000</pubDate>
+<pubDate>Wed, 23 Sep 2026 10:52:06 +0000</pubDate>
+</item>
 
 <item>
 <title>A unified toolkit for advanced arithmetic in FHE</title>
