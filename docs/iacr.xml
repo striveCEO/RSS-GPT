@@ -4,13 +4,14 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+
 <item>
 <title>SPRUCE: Scalable Multiparty Private Set Union in Constant Rounds</title>
 <link>https://eprint.iacr.org/2026/2188</link>
 <guid>https://eprint.iacr.org/2026/2188</guid>
 <content:encoded><![CDATA[
 <div> 多方私有集合并集，隐私保护，常数轮数，免洗牌，不平衡输入
-<br><br>总结:
+<br /><br />总结:
 1. MPSU让互不信任方在不泄露额外信息下获知私有集合并集，可用于风险评估与隐私记录匹配。
 2. 现有先进协议通常需按序洗牌加密值，以隐藏各方输入来源。
 3. 新半诚实协议免除洗牌，任意参与方数量均常数轮，并提升并行性、信息论在线阶段与不平衡输入支持，避免填充。
@@ -22,7 +23,6 @@ State-of-the-art MPSU protocols require parties to sequentially shuffle encrypte
 We implement and evaluate our protocol across a range of party counts, input sizes, and network conditions. In the unbalanced setting, where parties hold unequal-sized inputs, our protocol significantly outperforms the state-of-the-art schemes PULSE (CCS ’25) and DZBC25 (USENIX Security ’25). In the balanced setting, it achieves an order-of-magnitude improvement over PULSE in most settings and outperforms DZBC25 in WAN deployments with 100ms latency.
 ]]></content:encoded>
 <pubDate>Wed, 23 Sep 2026 16:47:49 +0000</pubDate>
-<pubDate>Wed, 23 Sep 2026 16:47:49 +0000</pubDate>
 </item>
 <item>
 <title>Lexicure: Efficient, Encrypted Lexical Search</title>
@@ -30,14 +30,13 @@ We implement and evaluate our protocol across a range of party counts, input siz
 <guid>https://eprint.iacr.org/2026/2182</guid>
 <content:encoded><![CDATA[
 <div> 加密词法搜索,隐私保护,Lexicure,BM25,EMVP
-<br><br>总结:1.云端加密词法搜索可避免第三方获知查询与结果；2.现有无泄漏方案客户端存储或通信开销过大；3.Lexicure将搜索转为EMVP，平均保留超95%明文BM25精度；4.通信减少2.6-9.9倍，客户端存储不足1KB；5.新原语支持高次函数计算，以更大服务器换取更低带宽；6.证明无泄漏加密搜索具备实用性。 <div>
+<br /><br />总结:1.云端加密词法搜索可避免第三方获知查询与结果；2.现有无泄漏方案客户端存储或通信开销过大；3.Lexicure将搜索转为EMVP，平均保留超95%明文BM25精度；4.通信减少2.6-9.9倍，客户端存储不足1KB；5.新原语支持高次函数计算，以更大服务器换取更低带宽；6.证明无泄漏加密搜索具备实用性。 <div>
 Lexical search retrieves documents containing query keywords that require exact matches, such as rare terms, entity names or codewords. Search is increasingly hosted in the cloud, which places both the corpus and every query on infrastructure the data owner does not control. Encrypted lexical search addresses this concern by ensuring no third party, including the cloud provider, learns which queries are issued or which documents are retrieved. The key binding constraints are all on the client — accuracy, memory, computation, and communication — since cloud capacity is elastic. Existing approaches that guarantee full privacy without caveats require prohibitively high client-side persistent storage or communication.
 
 We present Lexicure, a protocol for encrypted lexical search that reduces the search to arithmetic operations favorable to cryptographic primitives, such as encrypted matrix–vector products (EMVP). Across sixteen diverse datasets, Lexicure retains over $95\%$ of plaintext BM25 accuracy on average. Lexicure sets a new baseline for leakage-free lexical search, requiring  2.6-9.9$\times$ less communication than alternative approaches and less than 1KB of client-side storage. A major challenge is that secure lexical search is inherently bandwidth-bound. We additionally describe an approach for compressing the communication further in exchange for a larger server. To do so, we introduce a new cryptographic primitive that modifies EMVP to securely compute quadratic and higher-degree functions, more efficiently than a direct reduction.
 
 Lexicure demonstrates that leakage-free encrypted search with practical performance is achievable and opens new avenues for secure information retrieval systems.
 ]]></content:encoded>
-<pubDate>Wed, 23 Sep 2026 14:43:27 +0000</pubDate>
 <pubDate>Wed, 23 Sep 2026 14:43:27 +0000</pubDate>
 </item>
 <item>
@@ -46,13 +45,11 @@ Lexicure demonstrates that leakage-free encrypted search with practical performa
 <guid>https://eprint.iacr.org/2026/2176</guid>
 <content:encoded><![CDATA[
 <div> 花费限额 门限签名 协议原生 MPC BTS
-<br><br>总结: 1. 现有限额在协议外，泄漏预算状态、绑定单链、增加旁路；代理支付激增。2. 提出协议原生每周期预算，由签名者秘密共享并在会话内执行，链上验证不变。3. 被动MPC门控可被确定性绕过；线性门控组合必然超支且可逃避审计。4. 构造BTS门限Schnorr，定义诚实多数预算健全性。5. 认证门拦截攻击，成本5轮和3.4—3.7倍乘法；批量摊薄近每笔一往返。 <div>
+<br /><br />总结: 1. 现有限额在协议外，泄漏预算状态、绑定单链、增加旁路；代理支付激增。2. 提出协议原生每周期预算，由签名者秘密共享并在会话内执行，链上验证不变。3. 被动MPC门控可被确定性绕过；线性门控组合必然超支且可逃避审计。4. 构造BTS门限Schnorr，定义诚实多数预算健全性。5. 认证门拦截攻击，成本5轮和3.4—3.7倍乘法；批量摊薄近每笔一往返。 <div>
 Spending limits are the workhorse of custody policy, yet in every deployed threshold-signing stack they live outside the signing protocol—in centralized policy engines, on-chain covenants, or hardware co-signers—where they leak budget state, bind to a single chain, or add a trusted bypass surface. The workload is compounding: agent payments passed one hundred million transfers on a single chain in under a year. We initiate the study of protocol-native spending limits: per-epoch budgets secret-shared among the signers and enforced inside the signing session, with unchanged on-chain verification. We first show that the natural approach fails: gating a threshold signature with a passively secure MPC comparison admits a deterministic bypass. For the class of linear gatein-combination protocols we prove that every member signs over-budget transactions with probability one, disguised against any transcript auditor up to the statistical masking bound. We then construct BTS, a budgeted threshold Schnorr scheme with a formal budget-soundness definition for honest-majority configurations. The gap is closed with an authenticated gate: in implementation, every attack attempt is caught before a signature is produced, at a measured cost of 3.4–3.7× multiplications and five extra rounds. Batched over k=20 payments, enforcement amortizes to about one network round trip per payment in our WANmodeled prototype.
 ]]></content:encoded>
 <pubDate>Wed, 23 Sep 2026 10:52:06 +0000</pubDate>
-<pubDate>Wed, 23 Sep 2026 10:52:06 +0000</pubDate>
 </item>
-
 <item>
 <title>A unified toolkit for advanced arithmetic in FHE</title>
 <link>https://eprint.iacr.org/2026/450</link>
@@ -13909,46 +13906,6 @@ Zinnia 是一款针对零知识证明（ZKP）设计的高实用性、高表达�
 Zero-knowledge proofs (ZKPs) are cryptographic protocols that enable a prover to convince a verifier of a statement's truth without revealing any details beyond its validity. Typically, the statement is encoded as an arithmetic circuit, and allows the prover to demonstrate that the circuit evaluates to true without revealing its inputs. Despite their potential to enhance privacy and security, ZKPs are difficult to write and optimize, limiting their adoption in machine learning and data science. To address these challenges, we introduce Zinnia, a zero-knowledge programming framework with high utility, expressiveness and efficiency for tensor-oriented computation. Zinnia provides a high-level programming language that enables developers to easily write ZKP programs, and it employs a novel symbolic execution-inspired approach to extracting semantics from these programs to generate arithmetic circuits. Zinnia supports tensor-oriented computations and provides a rich set of programming constructs, optimizations, and a powerful static type system for expressing and optimizing complex logic. We evaluate Zinnia across 25 real-world programming tasks and a user study, comparing it to existing solutions, including DSLs and zkVMs (Halo2, SP1, and RISC0). Our results demonstrate that Zinnia outperforms these baselines in utility, expressiveness, and efficiency, with a statistically significant reduction in development time, $2-3\times$ shorter code length, 19.3% smaller circuit size, and up to $245\times$ faster proving time compared to zkVMs, paving the way for practical ZKP applications in various domains.
 ]]></content:encoded>
 <pubDate>Sat, 29 Mar 2025 12:06:05 +0000</pubDate>
-</item>
-<item>
-<title>Solving Data Availability Limitations in Client-Side Validation with UTxO Binding</title>
-<link>https://eprint.iacr.org/2025/569</link>
-<guid>https://eprint.iacr.org/2025/569</guid>
-<content:encoded><![CDATA[
-<div> 关键词: 发行代币、比特币、客户端验证（CSV）、UTxO绑定、辅助区块链
-
-总结:
-文章提出了一个针对在比特币上发行代币问题的新框架——UTxO绑定。鉴于比特币原生功能有限以及存储挑战，当前采用的客户端验证（CSV）方法虽然实现了部分扩展但存在数据丢失和恶意数据扣留的风险。UTxO绑定方案创新性地将比特币的UTxO与辅助区块链上的UTxO安全绑定，利用后者提供数据存储和可编程性的同时，确保防止双重花费。文章通过形式化证明了该方案的安全性，并以Nervos CKB作为辅助区块链实现了这一设计。 <div>
-Issuing tokens on Bitcoin remains a highly sought-after goal, driven by its market dominance and robust security. However, Bitcoin's limited on-chain storage and functionality pose significant challenges. Among the various approaches to token issuance on Bitcoin, client-side validation (CSV) has emerged as a prominent solution. CSV delegates data storage and functionalities beyond Bitcoin’s native capabilities to off-chain clients, while leveraging the blockchain to validate tokens and prevent double-spending. Nevertheless, these protocols require participants to maintain token ownership and transactional data, rendering them vulnerable to data loss and malicious data withholding. In this paper, we propose UTxO binding, a novel framework that achieves both robust data availability and enhanced functionality compared to existing CSV designs. This approach securely binds a Bitcoin UTxO, which prevents double-spending, to a UTxO on an auxiliary blockchain, providing data storage and programmability. We formally prove its security and implement our design using Nervos CKB as the auxiliary blockchain.
-]]></content:encoded>
-<pubDate>Fri, 28 Mar 2025 13:05:29 +0000</pubDate>
-</item>
-<item>
-<title>An Efficient SNARK for Field-Programmable and RAM Circuits</title>
-<link>https://eprint.iacr.org/2024/507</link>
-<guid>https://eprint.iacr.org/2024/507</guid>
-<content:encoded><![CDATA[
-<div> 关键词: SNARK、效率、隐私、预处理、可验证计算
-
-总结:
-本文提出了一个新的具有常量证明大小的SNARK方案，旨在解决频繁变换计算目标情况下，SNARK预处理数据重生产带来的挑战。该方案结合了Groth16协议的高效性（但不具备新问题的普适性）和PlonK协议的普适性（但预处理数据维度较大）。新SNARK在保持高效性和普适性的同时，显著降低了预处理数据的维度。此外，它还能无缝应用于可验证机器计算，所需的证明尺寸比其他相关工作小约四到十倍。 <div>
-The advancement of succinct non-interactive argument of knowledge (SNARK) with constant proof size has significantly enhanced the efficiency and privacy of verifiable computation. Verifiable computation finds applications in distributed computing networks, particularly in scenarios where nodes cannot be generally trusted, such as blockchains. However, fully harnessing the efficiency of SNARK becomes challenging when the computing targets in the network change frequently, as the SNARK verification can involve some untrusted preprocess of the target, which is expected to be reproduced by other nodes. This problem can be addressed with two approaches: One relieves the reproduction overhead by reducing the dimensionality of preprocessing data; The other utilizes verifiable machine computation, which eliminates the dependency on preprocess at the cost of increased overhead to SNARK proving and verification. In this paper, we propose a new SNARK with constant proof size applicable to both approaches. The proposed SNARK combines the efficiency of Groth16 protocol, albeit lacking universality for new problems, and the universality of PlonK protocol, albeit with significantly larger preprocessing data dimensions. Consequently, we demonstrate that our proposed SNARK maintains the efficiency and the universality while significantly reducing the dimensionality of preprocessing data. Furthermore, our SNARK can be seamlessly applied to the verifiable machine computation, requiring a proof size smaller about four to ten times than other related works.
-]]></content:encoded>
-<pubDate>Sat, 30 Mar 2024 08:49:24 +0000</pubDate>
-</item>
-<item>
-<title>ThreatLens: LLM-guided Threat Modeling and Test Plan Generation for Hardware Security Verification</title>
-<link>https://eprint.iacr.org/2025/561</link>
-<guid>https://eprint.iacr.org/2025/561</guid>
-<content:encoded><![CDATA[
-<div> 关键词: 威胁建模，测试计划生成，硬件安全验证，ThreatLens，LLM
-
-总结:
-<br />
-针对当前硬件安全验证过程中依赖人工威胁建模和测试计划生成的问题，该文提出了一个基于LLM驱动的多Agent框架——ThreatLens。ThreatLens利用检索增强生成（RAG）技术提取相关安全知识，运用LLM进行威胁评估，并结合用户交互反馈以确保生成实际可行的测试计划。通过自动化这些流程，该框架降低了手动验证工作量，提高了覆盖面，并确保了安全验证方法的结构化和适应性。在NEORV32 SoC上的评估结果显示，ThreatLens能够通过结构化的测试计划实现硬件安全验证的自动化，并在现实场景中验证了其有效性。 <div>
-Current hardware security verification processes predominantly rely on manual threat modeling and test plan generation, which are labor-intensive, error-prone, and struggle to scale with increasing design complexity and evolving attack methodologies. To address these challenges, we propose ThreatLens, an LLM-driven multi-agent framework that automates security threat modeling and test plan generation for hardware security verification. ThreatLens integrates retrieval-augmented generation (RAG) to extract relevant security knowledge, LLM-powered reasoning for threat assessment, and interactive user feedback to ensure the generation of practical test plans. By automating these processes, the framework reduces the manual verification effort, enhances coverage, and ensures a structured, adaptable approach to security verification. We evaluated our framework on the NEORV32 SoC, demonstrating its capability to automate security verification through structured test plans and validating its effectiveness in real-world scenarios.
-]]></content:encoded>
-<pubDate>Wed, 26 Mar 2025 21:25:06 +0000</pubDate>
 </item>
 </channel>
 </rss>
