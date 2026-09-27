@@ -4,6 +4,139 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+<item>
+<title>SoK: The Landscape of Post-Quantum Multi-Party Signature Aggregation</title>
+<link>https://eprint.iacr.org/2026/2222</link>
+<guid>https://eprint.iacr.org/2026/2222</guid>
+<content:encoded><![CDATA[
+<div> 后量子签名、多方签名、签名聚合、机构问责、迁移异构<br><br>总结: ①后量子签名较大，促使压缩多方签名。②调查30+方案，覆盖阈值/分布式、证明聚合、代数半聚合。③现有聚焦区块链验证，同质、共消息、紧凑问责。④忽视机构文档签名：多签名者、异构迁移、非交互、精确问责。⑤提出八维分类、三项假设和基准；缺定量评估，指出实验与架构需求。 <div>
+Post-quantum signature schemes such as ML-DSA, FN-DSA
+(Falcon), and SLH-DSA have significantly larger keys and signatures
+than their classical counterparts, making compact multiparty signing
+an increasingly important research problem. We survey more than 30
+schemes published between 2021 and 2026, covering threshold and dis
+tributed signing, proof-based aggregation, and algebraic half-aggregation.
+Our survey shows that most existing work is designed around blockchain
+and validator-consensus applications, where large numbers of mostly ho
+mogeneous signers sign a common message and accountability is typically
+represented by a compact signer set.
+We found that a different and practically important setting has received
+little attention: institutional multiparty document signing, where tens to
+hundreds of signers may use different post-quantum schemes or parame
+ter sets during a gradual migration, while requiring non-interactive sign
+ing and exact per-signer accountability. To study this gap, we develop an
+eight-dimensional taxonomy based on deployment requirements and sys
+tematically classify existing approaches. We also formulate three testable
+hypotheses and propose a common benchmark methodology for evalu
+ating communication, computation, verification cost, scalability, signer
+heterogeneity, and accountability. Our analysis finds no published study
+that quantitatively evaluates the institutional workload across the ag
+gregation paradigms covered in our survey. We therefore identify the key
+experimental and architectural requirements for assessing whether ex
+isting post-quantum aggregation techniques can support heterogeneous,
+accountable, and non-interactive institutional signing.
+]]></content:encoded>
+<pubDate>Sat, 26 Sep 2026 06:24:11 +0000</pubDate>
+<pubDate>Sat, 26 Sep 2026 06:24:11 +0000</pubDate>
+</item>
+<item>
+<title>Codetta: High-Capacity, Keyless, and Undetectable Multi-Agent Collusion</title>
+<link>https://eprint.iacr.org/2026/2218</link>
+<guid>https://eprint.iacr.org/2026/2218</guid>
+<content:encoded><![CDATA[
+<div> 多智能体系统,大语言模型,隐写术,非对称代理,密钥交换
+<br><br>总结:
+1.多智能体LLM高风险场景可被隐写合谋，审计难。
+2.现有不可检测协议不适合现实：对称假设、容量低或需预共享密钥。
+3.Codetta适配非对称独立代理，用公共模型、保分布采样、纠错码和隐写密钥交换，使转录计算不可区分。
+4.跨3负载3模型，容量达SOTA94倍，80k token交换密钥，失败率≤4.1e-3，合谋可行，需补充审计。 <div>
+Multi-agent systems built on large language models (LLMs) are increasingly being deployed in high-stakes settings such as finance, healthcare, and software engineering, where agents coordinate through natural-language messages. These same communication channels, however, can also enable colluding agents to exfiltrate confidential information or coordinate unauthorized actions. Steganography makes such behavior particularly difficult to detect by hiding covert communication within outputs that appear ordinary to an auditor reading the transcript.
+
+Existing provably undetectable LLM steganography protocols, however, are not suited to realistic deployments. High-capacity schemes typically assume a symmetric setting where the receiver can reproduce the sender's output distribution. The state-of-the-art practical protocol for asymmetric agents has very low capacity. Additionally, most existing approaches rely on a pre-shared secret key.
+
+In this paper, we make the systematic threat of undetectable agent collusion concrete by proposing Codetta, a high-capacity steganographic protocol for independently deployed agents under realistic asymmetric settings. Codetta combines a shared public model for estimating the communication channel, a sampling mechanism that preserves the sender's output distribution, and an adaptive error-correcting code for high-capacity communication. It further removes the need for a pre-shared secret key through a steganographic key-exchange protocol, enabling independently deployed agents to establish a shared key while keeping their communication transcript computationally indistinguishable from ordinary model outputs.
+
+Across three agent workloads and three sender models, Codetta achieves up to $94\times$ the capacity of the state-of-the-art asymmetric protocol. Its key exchange establishes a shared key using approximately 80k visible tokens, with an empirically certified failure probability of at most $4.1\times10^{-3}$ across all three workloads.
+These results show that effectively undetectable collusion is becoming feasible even between independently deployed agents, and we suggest that auditing mechanisms must be amended with complementary techniques beyond simply inspecting agents' communication transcripts.
+]]></content:encoded>
+<pubDate>Fri, 25 Sep 2026 20:48:36 +0000</pubDate>
+<pubDate>Fri, 25 Sep 2026 20:48:36 +0000</pubDate>
+</item>
+<item>
+<title>The Cost of Rewinding for Succinct Arguments: Strict-Time Barriers and Expected-Time Security</title>
+<link>https://eprint.iacr.org/2026/2209</link>
+<guid>https://eprint.iacr.org/2026/2209</guid>
+<content:encoded><![CDATA[
+<div> 简洁参数 承诺-打开 标准模型 知识误差 期望时间归约
+<br><br>总结:1.简洁参数依赖承诺-打开范式。2.现有标准模型分析依赖回绕，严格时间归约有逆多项式损失，期望时间分析仅限特例。3.负面证明严格时间损失本质，黑盒提取器无法达可忽略知识误差。4.正面给出全泛型期望时间归约，实现可忽略可靠性与知识误差。5.覆盖多轮函数式IOP等实际范式。 <div>
+Succinct arguments are central cryptographic objects, underlying various applications such as blockchains and image authentication. Almost all succinct arguments used in practice follow the commit-and-open paradigm introduced by Kilian (STOC 1992): commit to a probabilistic proof, then open the few locations the verifier queries. Decades of work have generalized and optimized this paradigm, yet its exact provable security in the standard model remains unclear. Existing analyses proceed by rewinding, and they leave gaps: strict-time analyses lose an inverse-polynomial factor, while expected-time analyses are sharper but apply only to special cases of this paradigm.
+
+We resolve both gaps. On the negative side, we show that the strict-time loss is inherent: no strict polynomial-time reduction relying on a black-box extractor can achieve negligible knowledge error (unless the underlying language is easy). On the positive side, we give a new expected-time analysis, achieving negligible soundness and knowledge errors via an expected polynomial-time reduction against expected polynomial-time adversaries, at the full generality of the paradigm, capturing multi-round and functional variants such as polynomial and linear IOPs compiled with the corresponding commitments. This is the first standard-model analysis to reach this regime for succinct arguments deployed in practice.
+]]></content:encoded>
+<pubDate>Fri, 25 Sep 2026 06:12:08 +0000</pubDate>
+<pubDate>Fri, 25 Sep 2026 06:12:08 +0000</pubDate>
+</item>
+<item>
+<title>A Note on CDS for Random Functions</title>
+<link>https://eprint.iacr.org/2026/2208</link>
+<guid>https://eprint.iacr.org/2026/2208</guid>
+<content:encoded><![CDATA[
+<div> 布尔函数, 通信复杂度, 条件秘密披露, 压缩论证, 转录碰撞
+<br><br>总结:1.几乎全部二输入布尔函数在完美两方条件秘密披露中，以一比特秘密需约2n-2logn-O(1)比特通信。2.较旧界改进约2倍，且近乎匹配输入长度。3.证明基于压缩论证与生日界，简洁表示转录碰撞。4.把碰撞测试视为分布测试，可推广到不完美正确性和隐私。5.尚无法推广到显式难谓词。 <div>
+We record the following bound: almost all Boolean functions $f : \{0,1\}^n \times \{0,1\}^n \to \{0,1\}$ require $2n - 2\log n - O(1)$ bits of communication for perfect two-party conditional disclosure of secrets with a one-bit secret. This only gives a factor 2 improvement over the previous best bound due to Applebaum, Holenstein, Mishra and Shayevitz [EUROCRYPT 2018], but at least (nearly) matches the input length. The proof is a straightforward compression argument that uses the birthday bound to give a succinct representation of transcript collisions (the latter being a technique from Feige, Kilian and Naor [STOC 1994], refined in Applebaum et al.).
+
+Viewing transcript-collision testing as an elementary case of distribution testing extends the argument to imperfect correctness and privacy. We do not currently know how to extend the argument to an explicit hard predicate.
+]]></content:encoded>
+<pubDate>Thu, 24 Sep 2026 22:37:08 +0000</pubDate>
+<pubDate>Thu, 24 Sep 2026 22:37:08 +0000</pubDate>
+</item>
+<item>
+<title>GovBind: From Authenticated Fetch to Zero-Knowledge Predicate over Government Documents</title>
+<link>https://eprint.iacr.org/2026/2206</link>
+<guid>https://eprint.iacr.org/2026/2206</guid>
+<content:encoded><![CDATA[
+<div> zkTLS GovBind 零知识证明 PDF证书 e-Devlet
+<br><br>总结: 1.针对政府PDF证书需在线验证的问题；2.提出GovBind，结合zkTLS与零知识内容证明，无需改签发方；3.基线承诺完整响应，优化版承诺私有范围并约束DEFLATE解压；4.形式化正确性、可靠性与隐私，并在TLSNotary假设下证明安全；5.原型支持e-Devlet证明无税债、罚款、居住城市，验证快且小。 <div>
+Government portals often issue PDF certificates whose provenance can be verified only through a live HTTPS verification service. Proving a limited fact from such a document therefore commonly requires disclosing the complete document or giving the verifier access to the portal. We present GovBind, a protocol that combines zkTLS provenance with a zero-knowledge content proof, without requiring the issuer to modify its service or embed an independently verifiable signature. A baseline construction binds both stages through a commitment to the complete response body. To make client-side proving feasible for compressed PDFs, an optimized construction instead commits separately to private ranges, discloses the remaining bytes, requires their exact partition, and opens the claim-bearing compressed stream in a document profile-specific proof that constrains DEFLATE decompression. 
+We formalize GovBind with game-based definitions of correctness, soundness, and privacy, where soundness jointly captures authenticity, content validity, and binding, and we prove both constructions secure relative to the explicit leakage and trust assumptions of Proxy-mode TLSNotary. Our prototype supports proofs of no overdue tax debt, bounded traffic penalties, and residence city over documents returned by the Turkish government verification service, e-Devlet. Across 72 generated proofs in 24 sessions, end-to-end generation took 54-119 seconds, verification took 44-127 milliseconds, and proofs were 11-12 KiB.
+]]></content:encoded>
+<pubDate>Thu, 24 Sep 2026 17:05:43 +0000</pubDate>
+<pubDate>Thu, 24 Sep 2026 17:05:43 +0000</pubDate>
+</item>
+<item>
+<title>Provenance Proofs: Linkable Zero-Knowledge Derivation Relations for Hierarchical Deterministic Wallets</title>
+<link>https://eprint.iacr.org/2026/2204</link>
+<guid>https://eprint.iacr.org/2026/2204</guid>
+<content:encoded><![CDATA[
+<div> ZKPoSP, 钱包种子, 派生证明, 来源证明, 跨链转账
+<br><br>总结:
+1. ZKPoSP证明公钥/地址源自隐藏种子且不泄密。2. 模型含派生证明与来源证明。3. 定义正确性、派生/来源可靠性、不可诬陷、不可链接性。4. 四种构造按链接权限分：仅用户、链接上下文内任何人、指定权威。5. 在随机预言与ZK可提取安全下成立。6. 用于比特币到Solana跨链转账并给出Plonky3基准。 <div>
+ZKPoSP proves that a public key or address was honestly derived from a hidden wallet seed, without revealing the seed or the private derivation state. This paper studies relationships among several derived values: whether public keys or addresses, possibly on different curves and different blockchains, share a hidden origin, which is the seed or an anchor of the wallet, and who else can recognize this relation.
+
+We give a model for such provenance proofs, with derivation proofs, which carry a link value, and provenance proofs, which show that several derivation statements share an origin. We define correctness, derivation soundness, provenance soundness, non-frameability and unlinkability. We give four constructions, which differ in who can link: only the user, with a joint proof or with commitments linked later; anyone within a linking context, with a deterministic tag, which can also act as a nullifier; or a designated authority, with an encryption of that tag. We prove, in sketch form, that the constructions satisfy the five properties under the security of the ZKPoSP derivation relations, the random oracle model, and the zero knowledge and simulation extractability of the proof system.
+
+We describe an application to cross-chain transfers from Bitcoin to Solana, in which the payout address must come from the same wallet as the source address, so that an attacker cannot substitute the destination. We report Plonky3 benchmarks of the derivation proofs on which the constructions are built.
+]]></content:encoded>
+<pubDate>Thu, 24 Sep 2026 16:45:22 +0000</pubDate>
+<pubDate>Thu, 24 Sep 2026 16:45:22 +0000</pubDate>
+</item>
+<item>
+<title>PulpoPay for Auditable Privacy CBDCs: Introducing High Concurrency and Offline Confirmation</title>
+<link>https://eprint.iacr.org/2026/2199</link>
+<guid>https://eprint.iacr.org/2026/2199</guid>
+<content:encoded><![CDATA[
+<div> 央行数字货币, 高并发, 离线支付, 可审计隐私, PulpoPay
+<br><br>总结:1.CBDC需像现金一样易用并平衡隐私与监管。2.现有方案并发低且缺离线确认。3.PulpoPay首次实现高并发、离线确认可审计隐私。4.硬币协议支持并发提取转账存入，密文签名与离线唯一标识防双花。5.UC框架证明安全，实验离线收款约0.3秒，200并发较PEReDi省时66.89%、省通信76.45%。 <div>
+Central Bank Digital Currencies (CBDCs) aim to replicate the utility of physical cash in the digital era by balancing privacy with regulatory auditability. Despite recent advancements, existing CBDC schemes suffer from limited concurrency and the lack of offline payment confirmation, forcing users to process concurrent payments one by one and requiring counterparts to remain online. These constraints severely limit CBDC's applicability in high-frequency, real-world payment scenarios.
+
+This paper proposes PulpoPay, the first CBDC scheme to provide high concurrency and offline confirmation, while maintaining auditable privacy. To achieve high concurrency and offline confirmation, PulpoPay, at its core, introduces a coin-based payment protocol that facilitates users to concurrently withdraw, transfer, and deposit coins without synchronization or online requirements for counterparts. For auditable privacy, we leverage signatures on randomizable ciphertexts to enable fine-grained auditing without compromising privacy. Furthermore, we design a coin identifier with offline-checkable uniqueness to resist double-spending attacks even in disconnected (offline) environments. We formally prove PulpoPay's security within the Universal Composability (UC) framework.
+
+We implement a prototype of PulpoPay. 
+Experimental results demonstrate that (1) a payment with an offline receiver can be finished within 0.3~s using a mobile phone; (2)  PulpoPay outperforms the state-of-the-art PEReDi [CCS'22] in the scenarios of concurrent payments. For a typical setting of 200 concurrent payments, PulpoPay reduces processing time by at least 66.89% and communication overhead by at least 76.45%. This advantage becomes even more significant as the number of concurrent payments grows.
+]]></content:encoded>
+<pubDate>Thu, 24 Sep 2026 07:07:10 +0000</pubDate>
+<pubDate>Thu, 24 Sep 2026 07:07:10 +0000</pubDate>
+</item>
 
 <item>
 <title>SPRUCE: Scalable Multiparty Private Set Union in Constant Rounds</title>
