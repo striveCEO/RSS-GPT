@@ -4,6 +4,148 @@
 <title>cs updates on arXiv.org</title>
 <link>http://rss.arxiv.org/rss/cs</link>
 
+<item>
+<title>Too Late to Slash: Coordinating a Risk-Free Equivocation Attack</title>
+<link>https://arxiv.org/abs/2609.30509</link>
+<guid>https://arxiv.org/abs/2609.30509</guid>
+<content:encoded><![CDATA[
+<div> 权益证明、惩罚机制、协调协议、纳什均衡、经济安全
+<br><br>总结:
+①传统观点认为惩罚机制可阻止验证者串谋出块，保障PoS安全。②作者构造无风险协调协议，证明理性验证者发起串谋即使不知参与人数也构成事后纳什均衡。③因此惩罚本身不能保证与质押价值相称的经济安全。④算法惩罚依赖攻击者可控的共识，不同于有外部执法的抵押。⑤呼吁对惩罚进行正式安全分析。 <div>
+arXiv:2609.30509v1 Announce Type: new 
+Abstract: Slashing is commonly argued to secure proof-of-stake blockchains by confiscating the stake of misbehaving validators. The usual justification is that, without slashing, validators can solicit an equivocation attack by signing conflicting blocks: if enough others join, the attack succeeds; otherwise, the attempt incurs no loss. Slashing is intended to make such attempts costly and thereby guarantee the security of applications whose economic value is comparable to the bonded stake. This rationale, however, rests on heuristic arguments rather than a formal game-theoretic guarantee.
+  We challenge this rationale by constructing a risk-free coordination protocol for rational validators under algorithmic slashing. We show that the prescribed strategy profile, in which rational validators solicit other validators to equivocate, constitutes an ex post Nash equilibrium, even when validators do not know in advance how many others will participate. The equilibrium holds for any gain $\epsilon>0$ from successful equivocation, however small relative to the bonded stake. Thus, slashing alone does not guarantee economic security proportional to the value of bonded stake.
+  Our results expose a fundamental limitation of algorithmic slashing. Whereas conventional collateral arrangements in many real-world scenarios can rely on external enforcement, for example through courts, algorithmic slashing depends on the same consensus process that the attackers control. These findings call for a formal analysis of slashing's security, rather than overly simplistic arguments drawn from financial systems with independent enforcement.
+]]></content:encoded>
+<pubDate>Mon, 28 Sep 2026 00:00:00 -0400</pubDate>
+<pubDate>Mon, 28 Sep 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Reinforcement Learning of Communication in a Mesh of Small Language Models</title>
+<link>https://arxiv.org/abs/2609.30578</link>
+<guid>https://arxiv.org/abs/2609.30578</guid>
+<content:encoded><![CDATA[
+<div> TalkMesh 多智能体 置信度 通信共识 鲁棒性<br><br>总结:1.针对投票饱和，提出去中心化TalkMesh，学习小模型何时说什么。<br>2.agent以置信评分，最高者广播提示，低置信者修订并择优。<br>3.gossip共识近似置信加权投票。<br>4.GRPO按修订正确性变化训练话术。<br>5.三模型六输出达32票，自一致精度显著升至约0.7。<br>6.抗投毒，重评分保0.507。<br>7.推理、具身、交通有效。 <div>
+arXiv:2609.30578v1 Announce Type: new 
+Abstract: Language models gain accuracy from more compute at test time, but majority voting over independent samples saturates: as samples grow, the vote converges to the model's most frequent answer. Communication can add what sampling cannot: an agent that solves a problem can pass the key step to the others. We present TalkMesh, a decentralized mesh of small language model agents that learns when and what to communicate. Each agent samples a proposal and scores it with a trained confidence head. The most confident agent broadcasts a hint; agents below a confidence threshold revise, keeping each revision that outscores its proposal. Gossip consensus approximates the vote weighted by confidence without a coordinator. A talk policy, trained with group relative policy optimization on the change in correctness after revision, writes hints and revisions. With three agents, which together generate at most six outputs, the mesh reaches the accuracy of majority voting over 32 samples with each of three models. Trained with at most 8 agents and evaluated with 32, it raises accuracy from 0.568 under self-consistency to 0.705 (Qwen3.5-0.8B, GSM8K) and from 0.492 to 0.722 (SmolLM3-3B, MATH-500). When 4 of 8 agents collude on a wrong answer with fabricated confidence and poisoned hints, majority vote accuracy falls to 0.000 (Qwen3.5-0.8B, GSM8K). A defended mesh, whose agents rescore solutions with their own confidence heads, retains 0.507. Across reasoning, embodied coordination, and traffic signal control, messages improve a decision when the acting agent cannot observe the information it requires and another agent can send it.
+]]></content:encoded>
+<pubDate>Mon, 28 Sep 2026 00:00:00 -0400</pubDate>
+<pubDate>Mon, 28 Sep 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Decentralized Gain Learning for Voltage Control via Local Trajectory Convolution</title>
+<link>https://arxiv.org/abs/2609.30602</link>
+<guid>https://arxiv.org/abs/2609.30602</guid>
+<content:encoded><![CDATA[
+<div> Volt/VAR控制 去中心化增益优化 自伴随结构 电压偏差轨迹 梯度自卷积
+<br><br>总结: ①配电网波动要求快速电压调节；②局部Volt/VAR控制无通信但增益优化需模型或集中信息；③利用闭环自伴随结构，可用节点电压偏差自卷积恢复系统梯度分量；④据此实现去中心化增益更新；⑤仿真证明仅靠本地数据即可随工况调节。 <div>
+arXiv:2609.30602v1 Announce Type: new 
+Abstract: Fast and spatially heterogeneous fluctuations from distributed energy resources call for voltage regulation that is both fast and responsive to changing operating conditions. Local linear Volt/VAR control offers the advantage of promptly regulating voltages without real-time communication, but its performance depends critically on the choice of control gains. Optimizing these gains for a system-level objective, however, typically requires an accurate network model or centralized communication. In this work, we uncover a structural property that enables such optimization using only local measurements. Specifically, by exploiting the self-adjoint structure of the closed-loop voltage dynamics, we show that each component of the system-level objective gradient can be exactly recovered from a self-convolution of the corresponding bus's voltage deviation trajectory. Building on this result, we develop a simple decentralized gain optimization method in which each bus updates its control gain using only its local data trajectory. Simulation results demonstrate that the proposed approach effectively updates the Volt/VAR control gains in response to changing operating conditions while requiring only local information.
+]]></content:encoded>
+<pubDate>Mon, 28 Sep 2026 00:00:00 -0400</pubDate>
+<pubDate>Mon, 28 Sep 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Werracle: Sub-Cent Intra-Block AI Reflex Oracles and Flash-Loan Circuit Breakers for EVM Smart Contracts</title>
+<link>https://arxiv.org/abs/2609.30719</link>
+<guid>https://arxiv.org/abs/2609.30719</guid>
+<content:encoded><![CDATA[
+<div> 链上AI ZK-ML 零存储 Mandelbrot DeFi
+<br><br>总结: 1.链上AI权重存储耗gas。2.ZK-ML延迟高、验证贵，难应对DeFi单块攻击。3.Werracle单个bytes32零存储，借Mandelbrot生成决策超平面。4.纯Solidity定点算16点网格仅21438gas、亚毫秒。5.Uniswap v4调LP费，1000测试全过，遥测关，上线。 <div>
+arXiv:2609.30719v1 Announce Type: new 
+Abstract: Contemporary on-chain artificial intelligence (AI) encounters an intractable Von Neumann memory and latency wall. Storing static floating-point neural weight matrices inside Ethereum Virtual Machine (EVM) storage costs millions of gas, rendering direct on-chain inference impossible. While Zero-Knowledge Machine Learning (ZK-ML) offloads matrix tensor multiplications to off-chain provers, it introduces fatal constraints: 10 to 300 seconds of SNARK proving latency and 250,000 to 500,000 gas per proof verification. Because decentralized finance (DeFi) exploits - such as uncollateralized flash-loan attacks, predatory sandwich MEV, and toxic loss-versus-rebalancing (LVR) flow - occur atomically inside a single block, ZK-ML oracles cannot react in time. Here, we present Werracle, a production-grade, zero-storage on-chain AI decision oracle fitting inside a single 32-byte EVM storage slot (bytes32). Leveraging foundational procedural Mandelbrot escape dynamics (z_{n+1} = z_n^2 + c) established by Dagli et al. (arXiv:2609.25498), Werracle derives continuous non-linear decision hyperplanes from a 24-byte coordinate triplet Theta = (c_x, c_y, zoom). Implemented in pure Solidity bytecode using fixed-point Q16.16 arithmetic (WerrMath.sol), Werracle evaluates a 16-point Pareto micro-grid in only 21,438 gas (under 0.0005 USD on Layer-2 rollups like Base and Arbitrum) with sub-millisecond execution latency. We demonstrate real-world DeFi efficacy via WerracleFeeHook.sol, a Uniswap v4 dynamic swap fee governor that measures orderbook turbulence on-the-fly and atomically adjusts liquidity provider fees between 0.05% and 0.50%. The protocol is formally verified against a 1,000-test cryptographically sealed deterministic verification suite (100.0% pass rate) with telemetry permanently disabled, operating live on a dedicated EVM devnet sandbox (Chain ID 4242).
+]]></content:encoded>
+<pubDate>Mon, 28 Sep 2026 00:00:00 -0400</pubDate>
+<pubDate>Mon, 28 Sep 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Crypto-bound identity-verified capability tokens for coordinating distributed AI agents: A proposal</title>
+<link>https://arxiv.org/abs/2609.30824</link>
+<guid>https://arxiv.org/abs/2609.30824</guid>
+<content:encoded><![CDATA[
+<div> 关键词：自主智能体、提示注入、去中心化身份、能力授权、令牌验证
+<br><br>总结: 1. 高能力语言模型推动完全自主交易智能体发展，带来自适应任务编排与受限自主决策收益。2. 智能体易受提示注入攻击，可能破坏软性护栏并泄露凭据。3. 若不控制风险，会损害信任并阻断应用；安全框架需去中心化以扩展。4. 基于OAuth智能体授权、W3C DID与VC，提出能力型安全和去中心化智能体身份框架。5. 令牌与智能体、签发方身份及范围密码学绑定，服务验证委派链仅范围缩减；模型外安全模块可强制执行边界。 <div>
+arXiv:2609.30824v1 Announce Type: new 
+Abstract: The prospect of fully autonomous transactional agents did not appear on the horizon until the advent of high capability language models. With such models, the operational benefits of adaptive task orchestration and independent (but constrained) decision making are tantalizing for enterprises and individuals alike. However, each such agent carries with it a serious attack surface in the form of prompt injection which can compromise any soft "guard rails" that may have been placed in context. The consequences of these attacks include credential ex-filtration which, if left unmitigated, renders the whole category of such agents unusable due to breach of trust. Furthermore, expecting a growth of autonomous agents, a security framework for them would require a form of decentralization to scale. Drawing on the proposed OAuth Agent Authorization Profile and the W3C DID and VC standards, we propose a framework based on the principles of capability based security with decentralized agent identity whereby agents access services based on tokens that are cryptographically bound to the agent's and issuer's identities and specify their scope. Services can validate that the delegation chain only involves scope attenuation before acting on any given token. We show that such a layer that lives outside the language model's context window in a secure module can enable agents to act within enforceable security boundaries.
+]]></content:encoded>
+<pubDate>Mon, 28 Sep 2026 00:00:00 -0400</pubDate>
+<pubDate>Mon, 28 Sep 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Resource-Optimized and Energy-Aware Agentic AI Framework Anchored on Blockchain for Secure Software Supply Chains</title>
+<link>https://arxiv.org/abs/2609.31282</link>
+<guid>https://arxiv.org/abs/2609.31282</guid>
+<content:encoded><![CDATA[
+<div> 区块链,智能体,软件供应链,安全证明,大语言模型
+<br><br>总结:
+1.提出基于区块链的智能体安全框架，保护完整SDLC与AI代理。
+2.编排源码、依赖/SBOM、CI、产物、运行时五类LLM安全代理。
+3.代理生成签名证明并经智能合约上链，含注册、不可篡改日志与发布策略。
+4.联盟CA保障通信认证与防篡改。
+5.用例展示链上锚定证明，触发可验证部署允许/阻断；提供去中心化完整性、透明溯源、持续保障与可扩展架构。 <div>
+arXiv:2609.31282v1 Announce Type: new 
+Abstract: This paper proposes a blockchain-backed agentic security framework designed to safeguard the complete software development lifecycle (SDLC) while also securing the agentic AI components responsible for monitoring it. The framework coordinates a set of specialised security agents, covering source integrity, dependency and SBOM analysis, CI configura tion auditing, artifact verification, and runtime policy evaluation, each supported by a large language model (LLM) that interprets artefacts, reasons over tool outputs, and produces structured security reports. To ensure agent trustworthiness, every agent generates a cryptographically signed attestation that is recorded in a permissioned blockchain via smart contracts, including an agent registry, an immutable attestation log, and an enforceable release-policy module. Communication among agents and with blockchain nodes is secured using a consortium-operated certificate authority, ensuring authenticated and tamper-resistant interactions. A detailed use-case and sequence flow demonstrate how a source code security agent performs analysis, anchors its attestation on-chain, and triggers a verifiable allow/block deployment decision. The proposed framework of fers decentralised integrity transparent provenance, uninterrupted security assurance and a generalisable architecture to incorporate the agentic AI into the modern software supply chain security.
+]]></content:encoded>
+<pubDate>Mon, 28 Sep 2026 00:00:00 -0400</pubDate>
+<pubDate>Mon, 28 Sep 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Verifiable Randomness for Blockchain-Based Lottery Systems</title>
+<link>https://arxiv.org/abs/2609.31485</link>
+<guid>https://arxiv.org/abs/2609.31485</guid>
+<content:encoded><![CDATA[
+<div> 链上随机性，提交-揭示，最后揭示者攻击，Polygon，可验证
+<br><br>总结:
+1. 彩票等高风险去中心化应用亟需安全、透明、可验证的链上随机源。
+2. 论文综述既有链上随机方案及其不足。
+3. 提出基于commit-and-reveal的新平台，重点防御最后揭示者攻击。
+4. 对比既有方案并评估熵特性。
+5. 采用Web前端与Polygon 2.0智能合约，在Amoy测试网低成本实现原型。 <div>
+arXiv:2609.31485v1 Announce Type: new 
+Abstract: As lotteries and other high-stakes decentralized applications increasingly depend on unpredictable randomness for their operations, the lack of a secure and transparent on-chain random number generator that is verifiable by all participants remains a critical open problem. Various approaches to blockchain-based random number generation have emerged over the years, each with their own strengths and limitations, and have consistently been superseded as blockchain technology evolved. This paper surveys existing approaches to on-chain randomness and proposes a new platform that builds upon the well-known commit-and-reveal scheme while directly addressing its principal vulnerability, the last revealer attack, in which the final participant can withhold their reveal in order to bias or abort the output upon seeing an unfavorable result. We further compare this solution with prior approaches and evaluate its entropy properties. The proposed architecture combines a web-based front-end with a Solidity smart contract deployed on the Polygon 2.0 blockchain. Implemented and tested on the Amoy testnet, the prototype is low-cost and simple to deploy, providing a practical, accessible proof-of-concept for verifiable on-chain randomness.
+]]></content:encoded>
+<pubDate>Mon, 28 Sep 2026 00:00:00 -0400</pubDate>
+<pubDate>Mon, 28 Sep 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Peer Review as Structured Commentary: Immutable Identity, Public Dialogue, and Reproducible Scholarship</title>
+<link>https://arxiv.org/abs/2506.22497</link>
+<guid>https://arxiv.org/abs/2506.22497</guid>
+<content:encoded><![CDATA[
+<div> 同行评审、公开评论、区块链、人工智能、学术声誉
+<br><br>总结:1. 文章将同行评审重构为结构化公开评论。2. 传统评审受匿名、延迟和把关限制。3. 提出透明、身份关联、可复现的评价框架。4. 利用区块链保留审计轨迹，借助AI迭代综合。5. 激励贡献、记录认知演化、形成可追溯声誉，使学术知识成为动态过程。 <div>
+arXiv:2506.22497v2 Announce Type: replace 
+Abstract: This paper reconceptualises peer review as structured public commentary. Traditional academic validation is hindered by anonymity, latency, and gatekeeping. We propose a transparent, identity-linked, and reproducible system of scholarly evaluation anchored in open commentary. Leveraging blockchain for immutable audit trails and AI for iterative synthesis, we design a framework that incentivises intellectual contribution, captures epistemic evolution, and enables traceable reputational dynamics. This model empowers fields from computational science to the humanities, reframing academic knowledge as a living process rather than a static credential.
+]]></content:encoded>
+<pubDate>Mon, 28 Sep 2026 00:00:00 -0400</pubDate>
+<pubDate>Mon, 28 Sep 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>AntiFLipper: A Secure and Efficient Defense Against Label-Flipping Attacks in Federated Learning</title>
+<link>https://arxiv.org/abs/2509.22873</link>
+<guid>https://arxiv.org/abs/2509.22873</guid>
+<content:encoded><![CDATA[
+<div> 联邦学习, 标签翻转攻击, AntiFLipper, 客户端检测, 计算效率
+<br><br>总结:①问题：联邦学习可保护数据隐私，但易受恶意客户端标签翻转攻击，毒化全局模型。②方法：提出AntiFLipper，针对多类标签翻转攻击设计防御。③创新：采用客户端检测策略，降低中心服务器聚合负担。④结果：在多个数据集和不同分布下，精度接近先进防御，同时服务器端计算资源更少。⑤意义：兼顾模型安全与运行效率，适合资源受限的联邦学习部署。 <div>
+arXiv:2509.22873v3 Announce Type: replace 
+Abstract: Federated learning (FL) enables privacy-preserving model training by keeping data decentralized. However, it remains vulnerable to label-flipping attacks, where malicious clients manipulate labels to poison the global model. Despite their simplicity, these attacks can severely degrade model performance, and defending against them remains challenging. We introduce AntiFLipper, a novel and computationally efficient defense against multi-class label-flipping attacks in FL. Unlike existing methods that ensure security at the cost of high computational overhead, AntiFLipper employs a novel client-side detection strategy, significantly reducing the central server's burden during aggregation. Comprehensive empirical evaluations across multiple datasets under different distributions demonstrate that AntiFLipper achieves accuracy comparable to state-of-the-art defenses while requiring substantially fewer computational resources in server side. By balancing security and efficiency, AntiFLipper addresses a critical gap in existing defenses, making it particularly suitable for resource-constrained FL deployments where both model integrity and operational efficiency are essential.
+]]></content:encoded>
+<pubDate>Mon, 28 Sep 2026 00:00:00 -0400</pubDate>
+<pubDate>Mon, 28 Sep 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Unlocking the Forecasting Economy: A Suite of Datasets for the Full Lifecycle of Prediction Market: [Experiments \&amp; Analysis]</title>
+<link>https://arxiv.org/abs/2604.20421</link>
+<guid>https://arxiv.org/abs/2604.20421</guid>
+<content:encoded><![CDATA[
+<div> 预测市场,全生命周期,去中心化平台,数据整合,预言机
+<br><br>总结: ①预测市场以价格反映集体信念，去中心化平台经历六阶段但数据碎片化。②本文构建首个全生命周期持续同步数据集套件。③统一整合市场元数据、逐笔交易与预言机事件，采用标识解析、链上恢复和增量更新。④数据覆盖2020年10月至今，含329万市场、19亿订单、2100万预言机事件。⑤数据集可复现可扩展，服务体育、经济与链上风险分析，并提供网站、可视化和LLM探索工具。 <div>
+arXiv:2604.20421v2 Announce Type: replace 
+Abstract: Prediction markets are markets for trading claims on universal future events (e.g., presidential elections). Fueled by a meteoric surge with over \$50 billion trading volume, they have emerged as a promising forecasting mechanism, where their prices provide continuously updated signals of collective beliefs. In decentralized platforms (e.g., Polymarket), the prediction market lifecycle include six stages: market creation, token registration, trading, oracle interaction, dispute, and final settlement. However, comprehensively tracking this complete pipeline remains a major challenge, as the underlying data are severely fragmented across heterogeneous on-chain smart contracts and off-chain sources. To fill this critical gap, we present the first continuously synchronized dataset suite for the full-lifecycle of decentralized prediction markets. To achieve large-scale cross-source integration, incomplete linkage, and continuous synchronization, we build a unified relational data system that integrates three canonical layers: i) market metadata, ii) fill-level trading records, iii) oracle-resolution events, through identifier resolution, on-chain recovery, and incremental updates. The resulting dataset spans from October 2020 to update-to-date and comprise more than 3.29 million market records, over 1.90 billion order execution records, and nearly 21 million oracle events. We describe the data model, collection pipeline, and consistency mechanisms that make the datasets reproducible and extensible. We further demonstrate its utility for multiple communities through NBA outcome calibration for sport traders, CPI expectation reconstruction for economists, and oracle-risk analysis for blockchain researchers. A public website with dataset access, interactive visualizations, and lightweight LLM-assisted exploration tools are publicly available at https://www.polymonitor.club.
+]]></content:encoded>
+<pubDate>Mon, 28 Sep 2026 00:00:00 -0400</pubDate>
+<pubDate>Mon, 28 Sep 2026 00:00:00 -0400</pubDate>
+</item>
 
 <item>
 <title>zkSAS: Practical Zero-Knowledge Proofs for Verifiable Spectrum Access Management</title>
