@@ -4,6 +4,196 @@
 <title>cs updates on arXiv.org</title>
 <link>http://rss.arxiv.org/rss/cs</link>
 
+<item>
+<title>Beyond Incentive Compatibility: Rational Harm-Proof Transaction Fee Mechanisms</title>
+<link>https://arxiv.org/abs/2609.32005</link>
+<guid>https://arxiv.org/abs/2609.32005</guid>
+<content:encoded><![CDATA[
+<div> 交易费机制 区块空间 激励相容 理性伤害免疫 MPC
+<br><br>总结: 1.提出RHP，排除不降低自身收益却伤害诚实参与者的无成本偏离。2.有限容量下刻画RHP与UIC、MIC兼容的TFM。3.普通模型四难：正矿工收益、UIC、MIC及联盟RHP不可兼得，任意三者可。4.MPC模型构造随机机制，获正收益并满足对至多k用户的矿工-用户联盟RHP，且随机必要。5.IC与RHP互不蕴含。 <div>
+arXiv:2609.32005v1 Announce Type: new 
+Abstract: Transaction fee mechanisms (TFMs) allocate scarce block space in blockchains. Prior work focuses on incentive compatibility (IC): honest behavior maximizes the payoff of each strategic player. We introduce rational-harm proofness (RHP), which rules out deviations that harm honest participants without reducing the deviator's utility relative to honest behavior. IC alone does not exclude such costless harm: in a second-price auction, a losing bidder can raise the winner's payment without changing its own payoff.
+  For finite block capacity k, we characterize TFMs satisfying RHP alongside user incentive compatibility (UIC) and miner incentive compatibility (MIC). In the plain model, where a single miner implements the auction, we prove a tight tetrilemma: no TFM simultaneously achieves positive miner revenue, UIC, MIC, and RHP against miner-user coalitions, while any three are jointly achievable. In the MPC-assisted model, where a committee of miners implements the auction using multi-party computation, we construct a randomized TFM with positive miner revenue satisfying UIC, MIC, and RHP against users, miners, and miner-user coalitions containing at most k users. Randomness is necessary to confirm transactions under congestion: any deterministic TFM satisfying UIC and user RHP in this model confirms no transactions when the number of submitted bids exceeds k.
+  Finally, IC and RHP are incomparable for every strategic role in both models: mechanisms can satisfy either property without satisfying the other. These results extend transaction fee mechanism design beyond incentives to protection against costless harm.
+]]></content:encoded>
+<pubDate>Tue, 29 Sep 2026 00:00:00 -0400</pubDate>
+<pubDate>Tue, 29 Sep 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Compact Shielded CSV: Post-Quantum, Private, Lightweight Client-Side Validation Blockchain</title>
+<link>https://arxiv.org/abs/2609.32015</link>
+<guid>https://arxiv.org/abs/2609.32015</guid>
+<content:encoded><![CDATA[
+<div> 后量子、隐私支付、客户端验证、链上最小化、Degriefer
+
+<br><br>总结:
+1. 提出Compact Shielded CSV：面向后量子P2P支付的隐私客户端侧验证区块链。
+2. 它将大型密码对象链下化，最小化链上足迹，避免抗量子升级带来的额外开销。
+3. 单输入交易仅占3个哈希：nullifier、degriefer与交易承诺。
+4. 新机制degriefer用哈希承诺实现所有权与防双花，无需链上签名。
+5. 有望支撑私密、可扩展的后量子数字支付。 <div>
+arXiv:2609.32015v1 Announce Type: new 
+Abstract: We propose Compact Shielded CSV, a private client-side validation blockchain for peer-to-peer payments designed for the postquantum era. Upgrading existing blockchains to quantum-resistant cryptography substantially increases on-chain overhead. By keeping all large cryptographic artifacts off-chain, Compact Shielded CSV keeps a minimal on-chain footprint independent of the size of the underlying cryptographic proofs and signatures. For a single input transaction, the onchain footprint is just 3 hashes (3x32 bytes): a nullifier, a degriefer, and a commitment to the transaction. We introduce the degriefer - a novel mechanism that enforces ownership and prevents double-spending using only hash commitments, eliminating the need for on-chain signatures entirely. These properties make Compact Shielded CSV a promising foundation for private, scalable, post-quantum digital payments.
+]]></content:encoded>
+<pubDate>Tue, 29 Sep 2026 00:00:00 -0400</pubDate>
+<pubDate>Tue, 29 Sep 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Decentralized Master-Mind: Joint Action Refinement through Iterative Intent Denoising in Multi-Agent Pathfinding</title>
+<link>https://arxiv.org/abs/2609.32019</link>
+<guid>https://arxiv.org/abs/2609.32019</guid>
+<content:encoded><![CDATA[
+<div> 去中心化MAPF,多智能体协同,动作采样,意图精化,MICPO强化学习
+<br><br>总结: 1.问题：局部观测下需无碰撞达目标，独立采样易组合不兼容联合动作。2.方法：DMM用多轮离散意图精化替代一次性采样，经通信耦合选择。3.训练：专家模仿预训练，并用无critic的MICPO强化优化。4.结果：1600任务解1598，成功率更高、成本近强基线。5.扩展：可支持百万级智能体并保持去中心化执行。 <div>
+arXiv:2609.32019v1 Announce Type: new 
+Abstract: Decentralized multi-agent path finding (MAPF) with communication requires agents to reach individual goals without collisions under partial observability. Learnable policies trained on expert data provide an effective approach to this problem. However, when several coordinated joint actions are valid in the same context, independently sampling from per-agent distributions can recombine locally valid choices into incompatible joint actions. This failure can arise from the final sampling mechanism even when the per-agent action distributions are learned correctly. DMM (Decentralized Master-Mind) addresses this by replacing one-shot action sampling with discrete, iterative refinement of action intents across communication rounds, inspired by denoising in diffusion models. Agents initialize random action intents and refine them through local communication, coupling their choices before commitment. DMM is pretrained with imitation learning on expert MAPF solutions and further optimized with MICPO, a critic-free group-relative reinforcement-learning method designed for multi-agent, multi-round action refinement. DMM generally achieves higher success rates and lower solution costs than the evaluated learnable baselines. On 1,600 MovingAI tasks, DMM fine-tuned with MICPO solves 1,598, the highest coverage among the evaluated methods, while achieving solution costs close to those of the strongest baselines. DMM also scales to over one million simultaneously acting agents in obstacle-rich environments. These results show that round-level intent refinement can improve joint-action coordination while preserving decentralized execution.
+]]></content:encoded>
+<pubDate>Tue, 29 Sep 2026 00:00:00 -0400</pubDate>
+<pubDate>Tue, 29 Sep 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Residual Denoising Enables Sample-Efficient Multi-Agent Coordination on Demand</title>
+<link>https://arxiv.org/abs/2609.32129</link>
+<guid>https://arxiv.org/abs/2609.32129</guid>
+<content:encoded><![CDATA[
+<div> 关键词：预训练机器人策略, 扩散策略, 多智能体协调, 自蒸馏, 技能保持<br><br>总结: 1.研究如何以少量协作数据，将预训练单智能体扩散策略适配到多智能体任务。2.提出ALTER，通过协调头预测残差去噪器，在需要时把单智能体行为转为协同行为。3.执行过程完全分散，各机器人仅依赖自身视觉观测，无需显式通信。4.采用基础策略生成的自蒸馏数据，保留单智能体技能。5.仿真与硬件实验表明，ALTER在协调成功率和源技能保持上均优于基线。 <div>
+arXiv:2609.32129v1 Announce Type: new 
+Abstract: Pretrained robot policies offer strong manipulation skills but are typically limited to single-agent settings, where a robot acts in isolation. In this work, we study how to adapt pretrained single-agent diffusion policies to multi-agent settings using minimal collaborative data, co-optimizing for two key objectives: high coordination performance and single-agent skill retention. To this end, we introduce ALTER, an adaptation method for coordination on demand: the adapted policy coordinates with other robots when deployed in a team while remaining capable of acting independently when operating alone. Execution is decentralized: each robot acts only on its own visual observations, without explicit inter-agent communication. Our method trains a coordination head that predicts a residual denoiser to transform single-agent behavior into coordinated multi-agent behavior when necessary while also preserving single-agent capabilities. To preserve single-agent capabilities, we augment a small number of collaborative demonstrations with self-distilled data generated by the base policy during training of the residual denoiser. In simulation,ALTER achieves higher coordination success over our baselines while retaining much higher source-skill retention. In our hardware experiments, we find similar trends where ALTER better co-optimizes for coordination success and single-agent skill retention than the baselines
+]]></content:encoded>
+<pubDate>Tue, 29 Sep 2026 00:00:00 -0400</pubDate>
+<pubDate>Tue, 29 Sep 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Neural Decentralized Conditions for Power System Stability Analysis</title>
+<link>https://arxiv.org/abs/2609.32219</link>
+<guid>https://arxiv.org/abs/2609.32219</guid>
+<content:encoded><![CDATA[
+<div> 电力系统、去中心化稳定条件、神经网络、定制损失函数、保守性
+<br><br>总结:
+1. 提出建立电力系统去中心化稳定条件新方法。
+2. 基于现有解析DSC结构与特性，用神经网络表达DSC。
+3. 设计定制损失函数迭代训练，确保有效性并降低保守性。
+4. 数值结果表明神经DSC更少保守，且大尺度训练可泛化。 <div>
+arXiv:2609.32219v1 Announce Type: new 
+Abstract: This letter proposes a novel method to establish decentralized stability conditions (DSCs) of power systems. This method formulates DSCs with meticulously crafted neural networks, based on the insight into the structure and properties of the existing analytically derived DSCs. A tailored loss function is further devised to iteratively train the neural networks, ensuring validity and reducing conservatism of the DSCs. Numerical results demonstrate that the resultant neural DSCs are less conservative than the conventional analytical DSCs, and become generalizable if a relatively large-scale system is used for training.
+]]></content:encoded>
+<pubDate>Tue, 29 Sep 2026 00:00:00 -0400</pubDate>
+<pubDate>Tue, 29 Sep 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Improving LLM Collaboration via Multi-Agent Preference Learning</title>
+<link>https://arxiv.org/abs/2609.32827</link>
+<guid>https://arxiv.org/abs/2609.32827</guid>
+<content:encoded><![CDATA[
+<div> 多智能体强化学习, 偏好学习, 大语言模型, MAPL, 协作质量
+<br><br>总结:
+1.MARL在LLM协作中可靠奖励难构建。2.偏好学习用比较反馈，多智能体扩展不足。3.提出MAPL框架，覆盖去中心化与中心化协作。4.MAPL比较当前与各方案迭代优化，并以MARLHF、MADPO实现。5.实验提升协作质量与效率，接近固定奖励MARL；MARLHF多任务优于MADPO，但受数据与模型影响。 <div>
+arXiv:2609.32827v1 Announce Type: new 
+Abstract: Several works have explored multi-agent reinforcement learning (MARL) in LLM collaboration. However, constructing reliable rewards is difficult in practice, as complete and accurate metrics are often unavailable and hard to aggregate. Preference learning provides an alternative by learning from comparative human or AI feedback. Yet, its extension to multi-agent systems remains underexplored. To address this gap, we formulate preference-based multi-agent systems (MAS) from decentralized and centralized collaboration perspectives. We also introduce a general multi-agent preference learning framework (MAPL) to solve these problems. MAPL allows iterative updates by comparing the current solution with decentralized or centralized solutions generated by various agents. We instantiate MAPL using MARL from human feedback (MARLHF) with a learned reward model and multi-agent direct preference optimization (MADPO). Experiments on collaborative writing, coding, tool use, and travel planning show that MAPL can improve collaboration quality and efficiency while approaching the performance of MARL with fixed, well-defined rewards. Within MAPL, MARLHF generally outperforms MADPO on most tasks but remains sensitive to data coverage, agent and comparator models, and the underlying MARL algorithms.
+]]></content:encoded>
+<pubDate>Tue, 29 Sep 2026 00:00:00 -0400</pubDate>
+<pubDate>Tue, 29 Sep 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Communication-Aware Heterogeneous Graph Learning for Decentralized Multi-Human Multi-Robot Task Allocation</title>
+<link>https://arxiv.org/abs/2609.32935</link>
+<guid>https://arxiv.org/abs/2609.32935</guid>
+<content:encoded><![CDATA[
+<div> 通信感知 异质图 多智能体强化学习 任务分配 人机协作<br><br>总结:
+1. MH-MR团队需在有限人机通信与稀缺人类支持间动态分配任务。
+2. CommHG用通信感知异质图建模人机任务交互，并按信息可得性与时效更新。
+3. 机器人学习何时查询操作员、何时与同伴共享信息。
+4. 通过合作多智能体强化学习联合优化任务分配与通信，兼顾信息收益和约束。
+5. 新基准含异构人机、动态任务与受限链路；实验最多16机器人、6人类、112任务，规模扩大时提升及时加权完成率并优于基线。 <div>
+arXiv:2609.32935v1 Announce Type: new 
+Abstract: Multi-human multi-robot (MH-MR) teams combine robotic autonomy with human expertise, but effective task allocation requires coordinating scarce, dynamically available human support with distributed robot execution. Limited robot-robot and human-robot communication further complicates this coupling by delaying information exchange and supervisory intervention. We introduce CommHG, a communication-aware heterogeneous graph learning framework for decentralized MH-MR task allocation. CommHG represents coupled human-robot-task interactions through local graphs conditioned on information availability and age. Learned communication actions enable robots to decide when and which operator to query, and when to share information with peers. Allocation and communication are jointly optimized through cooperative multi-agent reinforcement learning, allowing the team to acquire useful information while managing limited communication and supervisory resources. We also introduce a benchmark integrating heterogeneous humans and robots, dynamic tasks and operational states, and constrained robot-robot and bidirectional human-robot links. Experiments across heterogeneous teams with up to 16 robots, 6 humans, and 112 tasks show that CommHG improves timely weighted mission completion as coordination scale increases, outperforming the strongest baseline in the Large scenario.
+]]></content:encoded>
+<pubDate>Tue, 29 Sep 2026 00:00:00 -0400</pubDate>
+<pubDate>Tue, 29 Sep 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Simple and Fast Signature-Free Blockchain Consensus</title>
+<link>https://arxiv.org/abs/2609.32985</link>
+<guid>https://arxiv.org/abs/2609.32985</guid>
+<content:encoded><![CDATA[
+<div> 关键词：无签名共识,区块链,最终同步,提交延迟,Generic Simplex
+<br><br>总结:
+1.提出两个简单无签名区块链共识协议，避免后量子签名成本。
+2.适用于最终同步，好情况提交延迟最优：f3为三消息延迟，f5为二消息延迟。
+3.具备乐观响应性，无推测时块时间仅二消息延迟，每视图通信O(n^2)。
+4.实例化Generic Simplex，基于视图一致新抽象；并统一Simplex、Minimmit及新同步无签名协议。 <div>
+arXiv:2609.32985v1 Announce Type: new 
+Abstract: Signature-free protocols avoid the cost of post-quantum signatures. We present two simple signature-free blockchain consensus protocols for eventual synchrony with optimal good-case commit latency (three message delays for \(f3\) and two for \(f5\)), optimistic responsiveness, a block time of only two message delays without speculation, and \(O(n^2)\) communication per view. They instantiate Generic Simplex, a blockchain consensus construction parameterized by a new abstraction called view agreement. The same construction also captures Simplex, Minimmit, and a new synchronous signature-free protocol with optimal good-case commit latency of two message delays for \(f<n/4\).
+]]></content:encoded>
+<pubDate>Tue, 29 Sep 2026 00:00:00 -0400</pubDate>
+<pubDate>Tue, 29 Sep 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>Zero-Storage Procedural Neural Synthesis via Boundary Dynamics: Formal Verification in Lean 4 and Bare-Metal Gauntlet Validation</title>
+<link>https://arxiv.org/abs/2609.33066</link>
+<guid>https://arxiv.org/abs/2609.33066</guid>
+<content:encoded><![CDATA[
+<div> WERR、Mandelbrot、Lean4、定点模数、零VRAM
+<br><br>总结:1.传统神经推理受VRAM内存墙限制，难在EVM执行；连续递归验证通常不可判定。2.WERR/OED用Mandelbrot边界24字节种子生成非线性边界。3.投影Z/9Z与Q16.16，Lean4证10定理(无未证)：理想闭包、有界停机、无溢出、敏感性与EVM气限。4.CPU实测10万决策6.49秒、零VRAM、提速15倍；离群门抑制攻击并保留89.6%正常信号。 <div>
+arXiv:2609.33066v1 Announce Type: new 
+Abstract: Contemporary neural inference architectures rely on dense floating-point weight matrices stored in high-bandwidth memory (VRAM), incurring severe memory-wall bottlenecks and preventing native execution inside deterministic virtual machines like the Ethereum Virtual Machine (EVM). Verifying termination and arithmetic invariants for recursive dynamical systems over continuous domains is generally undecidable in the Blum-Shub-Smale model. Here, we present the formal verification and bare-metal empirical validation of WERR (Waves & Errors) and Phase III Orbital Error Dynamics (OED), a non-tensor decision paradigm that procedurally synthesizes non-linear decision boundaries on demand from a 24-byte coordinate seed $\Theta = (c_x, c_y, \text{zoom})$ along the boundary of the Mandelbrot set ($\partial\mathcal{M}$). By projecting the recurrence $z_{n+1} = z_n^2 + c$ onto the modular residue ring $\mathbb{Z}/9\mathbb{Z}$ and the fixed-point domain $\mathbb{Q}_{16.16}$, we establish ten machine-verified theorems in Lean 4 (v4.34.1) with Mathlib4 and zero unproven conjectures (sorry): proving $\mathcal{I}_3 = \{0,3,6\} \subset \mathbb{Z}/9\mathbb{Z}$ ideal closure, universal fuel-bounded halting ($\le 9$ and $\le 12$ steps), absence of $\mathbb{Q}_{16.16}$ square overflow below $2^{63}-1$, non-constant boundary escape sensitivity, and a parametric EVM gas bound ($\le 22,557 \le 24,000$ gas). Evaluated on a 40-core Dual Intel Xeon server, the vectorized 36-iteration CPU kernel processes 100,000 decisions in 6.49 s (15,397 decisions/s, 0 Bytes VRAM, 15.15x speedup), while a sigmoidal outlier gate suppresses 100.00% of adversarial spikes while preserving 89.60% of clean baseline signals.
+]]></content:encoded>
+<pubDate>Tue, 29 Sep 2026 00:00:00 -0400</pubDate>
+<pubDate>Tue, 29 Sep 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>MA-JEPA: Joint-Embedding World Models for Multi-Agent Reinforcement Learning</title>
+<link>https://arxiv.org/abs/2609.33563</link>
+<guid>https://arxiv.org/abs/2609.33563</guid>
+<content:encoded><![CDATA[
+<div> MA-JEPA,世界模型,多智能体强化学习,JEPA,SMAC
+<br><br>总结: 1.世界模型依赖能支持未来控制的表征，本文研究JEPA能否为多智能体强化学习提供学习信号。2.提出MA-JEPA随机世界模型，用目标表征预测替代观测重建，支持集中训练、分散执行。3.训练分类隐状态与因果Transformer，利用后验及动作条件动态预测；仅训练阶段用联合预测器预测各智能体下一局部观测嵌入。4.实验显示其在SMAC表现强劲，8个地图中4个匹配或超过最强对比胜率。 <div>
+arXiv:2609.33563v1 Announce Type: new 
+Abstract: World models improve sample efficiency by training policies on imagined trajectories, but their usefulness depends on learning representations that capture the information needed for future control. We study whether self-supervised joint-embedding prediction (JEPA) can provide this learning signal for multi-agent reinforcement learning. We introduce MA-JEPA, a stochastic world model that replaces observation reconstruction with prediction of target representations, enabling model-based multi-agent reinforcement learning with centralized training and decentralized execution. A categorical latent state and a causal Transformer are trained with posterior and action-conditioned dynamics prediction objectives and are then used for actor-critic learning from latent imagination. A training-only joint predictor conditions on all agents' local states and actions to predict each agent's next local observation embedding. These predictions are passed through the same local posterior used during real interaction with a centralized critic that is used only for value learning, with execution remaining decentralized. Our experiments show that this architecture performs strongly on SMAC, matching or exceeding the strongest reported comparator mean win rate on four of eight evaluated maps.
+]]></content:encoded>
+<pubDate>Tue, 29 Sep 2026 00:00:00 -0400</pubDate>
+<pubDate>Tue, 29 Sep 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>DEALS: Decentralized Expertise-Aware Load Serving for Multi-Agent LLM Systems</title>
+<link>https://arxiv.org/abs/2609.33768</link>
+<guid>https://arxiv.org/abs/2609.33768</guid>
+<content:encoded><![CDATA[
+<div> 多智能体系统,任务路由,去中心化,自组织,负载调度
+<br><br>总结:1.针对LLM多智能体处理复杂异构任务，现有集中式或固定协调扩展性差，去中心化方法计算开销大。2.提出低复杂度DEALS框架，智能体维护本地队列，按积压量与成功率决定本地处理或转发邻居。3.执行器在智能体内和之间并发处理独立任务，部分解决任务可被其他智能体恢复。4.实验显示DEALS提升准确率与吞吐量，并自组织平衡专长与负载。 <div>
+arXiv:2609.33768v1 Announce Type: new 
+Abstract: Multi-agent systems (MAS) have recently emerged as an effective approach for coordinating large language model (LLM)-based agents to solve complex tasks through structured interactions. In practice, MASs often handle a stream of heterogeneous and complex tasks, requiring agents to decompose each task and then self-organize and self-evolve to adapt to incoming tasks while sharing execution resources. However, most early approaches to MASs rely on centralized controllers or fixed coordination patterns, which can limit scalability or adaptability. In contrast, existing decentralized and dynamic MASs often require training dedicated routers or invoking LLMs for agent selection, resulting in substantial computational costs and coordination overhead. To address these challenges and enable efficient task-level self-organization and self-evolution for task- and workload-level collaboration, we propose Decentralized Expertise-Aware Load Serving (DEALS), a decentralized and low-complexity framework that enables agents to self-organize and dynamically route concurrent tasks for processing. Specifically, each agent maintains local queues of incoming tasks, and its router decides whether to process a task locally or forward it to a neighbor based on differences in backlog and success rate. Meanwhile, executors process independent tasks concurrently within and across agents, and partially solved tasks can be resumed by other agents. Experiments show that DEALS not only improves performance along multiple dimensions (e.g., answer accuracy and task throughput) in both homogeneous and heterogeneous agent pools, but also balances agent expertise and workload in a self-organized manner, enabling effective decentralized coordination.
+]]></content:encoded>
+<pubDate>Tue, 29 Sep 2026 00:00:00 -0400</pubDate>
+<pubDate>Tue, 29 Sep 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>ICMAPE: In-Context Multiagent Pure Exploration</title>
+<link>https://arxiv.org/abs/2609.33986</link>
+<guid>https://arxiv.org/abs/2609.33986</guid>
+<content:encoded><![CDATA[
+<div> 主动序列假设检验，多智能体，纯探索，贝叶斯学习，推理置信度
+<br><br>总结:
+1.填补多智能体主动序列测试方法缺口。2.提出ICMAPE，将固定置信识别转为推理置信奖励，用标准强化学习做去中心化纯探索。3.联合学习集中式后验网络与局部策略，达到目标置信即停止采集。4.在合成和真实监测任务上探索步数更少且精度达标。 <div>
+arXiv:2609.33986v1 Announce Type: new 
+Abstract: In some multi-agent systems, the quantity to be optimized is not an externally specified reward but the information acquired about unknown properties of the environment as done in active sequential hypothesis testing (ASHT) problems. However, the ASHT literature tends to focus on finite single-agent problems with well-specified models, while there is currently a gap for practical multi-agent methods that can perform active sequential testing. We fill this gap with ICMAPE, a Bayesian learning-based framework for decentralized multi-agent pure-exploration driven by inference objectives. ICMAPE converts the fixed-confidence identification objective into a reward derived from inference confidence, so that standard reinforcement learning machinery can be applied to decentralized pure exploration. It jointly learns a centralized neural inference network that estimates a posterior distribution over hypotheses from global trajectory data, and decentralized policies that select actions from local observation histories and learn when to stop collecting data once the target confidence is reached. On two synthetic benchmarks and a Maryland nitrate concentration monitoring task based on real-world data, ICMAPE-TD3 achieves target accuracy with fewer exploration steps.
+]]></content:encoded>
+<pubDate>Tue, 29 Sep 2026 00:00:00 -0400</pubDate>
+<pubDate>Tue, 29 Sep 2026 00:00:00 -0400</pubDate>
+</item>
+<item>
+<title>From Preference to Reciprocity: Decentralized Matching with Empirically Grounded LLM-agent Based Modeling</title>
+<link>https://arxiv.org/abs/2609.34679</link>
+<guid>https://arxiv.org/abs/2609.34679</guid>
+<content:encoded><![CDATA[
+<div> 双部匹配 LLM代理 上下文赌博机 分散匹配 婚姻市场
+<br><br>总结: 1.提出LLM与赌博机结合的去中心化动态双部匹配，突破完整偏好与集中假设；2.模拟中国婚姻市场，LLM代理评估候选并学习互惠接受，分离喜好与对方意愿；3.验证偏好接近经验模型；4.50×50实验中Bandit-UCB福利更高、性别差距更小、阻塞对更少；5.模型具解释性，前期搜索无单边优势，支持不完整信息匹配研究。 <div>
+arXiv:2609.34679v1 Announce Type: new 
+Abstract: Bipartite matching is a fundamental problem in game theory and market design. Classical approaches such as Gale--Shapley assume complete preferences and centralized computation, whereas many real-world matching processes are decentralized, asynchronous, and shaped by sequential interaction under limited information. We propose a dynamic bipartite matching framework that combines large language model (LLM) agents with contextual bandits. In a simulated Chinese marriage market, economically grounded LLM agents evaluate locally encountered candidates, while agent-specific Logistic-UCB models learn reciprocal acceptance from realized proposal outcomes. The mechanism therefore separates two decisions---\emph{whom do I like?} and \emph{who is likely to like me back?}---without requiring ex ante market-wide preference rankings. We first validate LLM-induced mate preferences against the empirical conditional-logit reference across multiple LLM backbones. In the $50\times50$ matching experiment, Bandit-UCB achieves the highest mean mutual welfare (56.01 versus 54.87 for Gale--Shapley), a smaller gender rank gap than the classical baselines, and the fewest blocking pairs among the LLM-ABM policies. Learned acceptance models show economically interpretable gender-differentiated associations, while counterfactual setups reveal no systematic unilateral advantage from prior search knowledge. Overall, these results support the advantages of decentralized matching with LLM-based behavioral modeling and online learning under incomplete information for economic simulation and computational social science research.
+]]></content:encoded>
+<pubDate>Tue, 29 Sep 2026 00:00:00 -0400</pubDate>
+<pubDate>Tue, 29 Sep 2026 00:00:00 -0400</pubDate>
+</item>
 
 <item>
 <title>Too Late to Slash: Coordinating a Risk-Free Equivocation Attack</title>
