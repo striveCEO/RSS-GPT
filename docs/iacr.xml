@@ -4,6 +4,87 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+<item>
+<title>Slashable Secrecy for Witness Encryption over Ethereum Finality</title>
+<link>https://eprint.iacr.org/2026/2273</link>
+<guid>https://eprint.iacr.org/2026/2273</guid>
+<content:encoded><![CDATA[
+<div> 见证加密,私有分叉,可罚没秘密,以太坊质押,Witness KEM
+<br><br>总结:①针对见证加密中验证者可用私有分叉提前取密问题，提出可罚没秘密方案。②利用以太坊原生罚没规则，无需密钥托管或额外抵押。③构造基于Witness KEM，并在提取接口下证明安全性。④主网归档状态证据权重底线超3.5%，约144万ETH。⑤实验确认无需WE解密；限制是KEM未实现且证据须合格纳入。 <div>
+Witness encryption over blockchain state aims to release a secret on a ledger condition without a key custodian. Validators with enough stake to construct a valid fork witness can obtain the secret although the condition never holds on the canonical chain. They finalize a private fork that satisfies the condition, and keeping the fork hidden withholds the conflicting votes that slashing needs. We propose slashable secrecy to address this gap with Ethereum’s native slashing rules, without an additional key-custody committee or separate collateral. In executions where the condition never holds on the finalized canonical chain through completion, an information advantage yields evidence of those votes against keys the adversary controlled, or a solution to a designated hard problem. We give a construction from a witness KEM and prove slashable secrecy conditionally on its extraction interface. We bound the implicated historical stake under changing validator weights. For an archived Ethereum mainnet state, the historical evidence-weight floor exceeds 3.5 percent of its active stake, about 1.44 million ETH, under stated budget and coverage assumptions. Experiments on a synthetic Ethereum network confirm native processing of the evidence, without WE decryption. Two limitations remain. A witness KEM satisfying the full relation and extraction interface remains uninstantiated. Enforcement requires that the evidence is available, converted to native form and included while its signers remain eligible.
+]]></content:encoded>
+<pubDate>Wed, 30 Sep 2026 02:10:49 +0000</pubDate>
+<pubDate>Wed, 30 Sep 2026 02:10:49 +0000</pubDate>
+</item>
+<item>
+<title>Chinese NGCC Algorithms: The First Week of AI Cryptanalysis</title>
+<link>https://eprint.iacr.org/2026/2266</link>
+<guid>https://eprint.iacr.org/2026/2266</guid>
+<content:encoded><![CDATA[
+<div> NGCC 商用密码 AI攻防 安全漏洞 哈希函数
+<br><br>总结: 1. 2026年NGCC公布119项候选，含签名、密钥封装、密钥交换与哈希。2. 首周披露191项发现，78项严重，包括伪造、密钥恢复与碰撞。3. 团队通过智能体工作流验证并公开110项问题。4. AI辅助攻击从实现层面延伸到设计级密钥恢复。5. 基准测试显示占位哈希耗时，可能影响最终公钥性能。 <div>
+On September 20, 2026, the Chinese Institute of Commercial Cryptography Standards published the 119 first-round candidates of its Next-generation Commercial Cryptographic Algorithms (NGCC) program: 34 signature schemes, 41 key encapsulation mechanisms, 9 key exchange protocols, and 35 hash functions. The program follows the template of the open NIST competitions for AES, SHA-3, and post-quantum cryptography. It opened just after cryptographers' ``Lee Sedol moment'' in the summer of 2026, when AI analysis overtook humans in analyzing the HAWK signature scheme. During the first 7 days of the NGCC competition, according to our harvested sources, 191 active findings were published for 89 candidates, 78 of them rated Critical: universal forgeries, signing-key recovery, trivial hash collisions, broken implicit rejection, and seeds too short for the claimed security level. Our independent evaluation effort discovered, verified, and disclosed 110 of those issues (47 Critical) using the agentic workflow described in this work; outside researchers, some AI-assisted, found the rest. Early AI-assisted findings mostly concerned implementations; by the end of the week, reproduced AI-assisted attacks also included new design-level key recovery. We describe the workflow, review loop, classification ruleset, and observed failure modes. As part of the evaluation, we also benchmarked all algorithm candidates and found that NGCC hash selection may significantly affect final public-key performance, as candidate implementations spend a large share of their cycles on ``placeholder'' hashes.
+]]></content:encoded>
+<pubDate>Tue, 29 Sep 2026 18:59:24 +0000</pubDate>
+<pubDate>Tue, 29 Sep 2026 18:59:24 +0000</pubDate>
+</item>
+<item>
+<title>The Illusion of Payload Blindness: Why MEV Mitigations Fail in Practice</title>
+<link>https://eprint.iacr.org/2026/2265</link>
+<guid>https://eprint.iacr.org/2026/2265</guid>
+<content:encoded><![CDATA[
+<div> 最大可提取价值、提议者-构建者分离、交易盲化、部署激励、网络活性
+
+<br><br>总结: 1.PBS把交易排序权变成拍卖，主流缓解依赖加密内存池、置换和区块延迟来隐藏或扰乱交易。2.若攻击者完全失明，加密加置换可消除内容相关攻击，但区块延迟反而增加提取。3.真实部署下，未加密信封暴露发送者、可选加密遭构建者弃用、密钥轮换引发拥塞、抑制MEV造成生产者收入损失，成本由部署方承担。4.结论：无MEV链的瓶颈是活性与激励，而非密码学。 <div>
+In public blockchains, the ability to order visible transactions allows block producers to extract value from users, a problem known as Maximal Extractable Value (MEV). Proposer-Builder Separation has turned that right into a formalized auction, and the leading protocol-level mitigations answer it with payload blindness: encrypted mempools, verifiable permutations, and block delay hide or scramble transactions before the order is fixed. Every such mitigation carries a security argument that assumes an adversary who learns nothing before the order commits. Deployed systems face a different adversary, and this paper measures the cost of that difference. We evaluate the three families of mitigations against a single adversary hierarchy, using closed-form analysis and simulations calibrated to Ethereum. Against a fully blind adversary, the outcome follows from the definitions: encryption with a permutation removes the attack classes that depend on transaction content, and block delay increases extraction rather than reducing it. Once that idealization is dropped, deployment problems dominate. The unencrypted envelope identifies the sender, so past behavior restores a usable guess at hidden content. Optional encryption gives builders a reason to starve the transactions it protects, and voluntary adoption then collapses. Key rotation turns a cryptographic parameter into a source of queueing congestion. Suppressing extraction, finally, removes far more producer revenue than it returns to users in lower fees, so the cost of every mitigation falls on the party that controls its deployment. The binding obstacles to MEV-free blockchains are therefore liveness and deployment incentives rather than cryptography.
+]]></content:encoded>
+<pubDate>Tue, 29 Sep 2026 15:02:28 +0000</pubDate>
+<pubDate>Tue, 29 Sep 2026 15:02:28 +0000</pubDate>
+</item>
+<item>
+<title>PQMZ: Formally Verified Falcon-PKR for Post-Quantum Cryptographic Migration in Zcash</title>
+<link>https://eprint.iacr.org/2026/2260</link>
+<guid>https://eprint.iacr.org/2026/2260</guid>
+<content:encoded><![CDATA[
+<div> 后量子密码, Falcon-PKR, 公钥恢复, EasyCrypt, 区块链迁移
+<br><br>总结: 1.迁移PQC须分析签名表示/验证变化。2.Falcon-PKR以摘要重建公钥，公钥+签名约减15%，但新增重建密钥安全面。3.EasyCrypt/ROM验证EUF-CMA归约与诚实签名正确性，安全依赖标准Falcon和公钥哈希抗碰撞。4.实现Falcon-512/1024并比ECDSA等PQ，显验存权衡。5.扩展SECUER-MPC ceremony，覆盖签名与仪式层。 <div>
+Migrating blockchain systems to Post-Quantum Cryptography (PQC) requires not only replacing classical primitives, but also analysing transformations that change how signatures are represented and verified. We study Falcon-PKR, a public-key-recovery variant of Falcon, motivated by Zcash-like transparent transaction workflows. Falcon-PKR replaces explicit storage of the full Falcon public key with a compact stored digest and reconstructs a candidate public key from the signature during verification. In our construction, this reduces the combined representation size of public key and signature by approximately 15%, but it also introduces a distinct security case in which verification depends on a reconstructed key derived from adversarially supplied signature data.
+
+We address this with a machine-checked EasyCrypt formalisation in the Random Oracle Model (ROM). We mechanically verify an EUF-CMA reduction showing that the security of Falcon-PKR is bounded by the security of standard Falcon together with collision resistance of a domain-separated public-key hash. The analysis therefore treats both assumptions explicitly and does not claim a proof of Falcon itself. We also machine-check correctness for honest signing under an abstract Falcon signing interface. We implement Falcon-PKR for Falcon-512 and Falcon-1024 in Python and C, and evaluate runtime and size against ECDSA and selected Post-Quantum (PQ) alternatives, exposing explicit verification and storage trade-offs. As a complementary case study, we implement and analyse an extended SECUER-based Multi-Party Computation (MPC) ceremony architecture. Together, the two case studies address both transaction-signature and ceremony-infrastructure layers of PQ blockchain migration.
+]]></content:encoded>
+<pubDate>Tue, 29 Sep 2026 10:38:32 +0000</pubDate>
+<pubDate>Tue, 29 Sep 2026 10:38:32 +0000</pubDate>
+</item>
+<item>
+<title>Error Propagation-Aware Scale Design for Efficient Homomorphic Encryption-Based LLM Inference</title>
+<link>https://eprint.iacr.org/2026/2242</link>
+<guid>https://eprint.iacr.org/2026/2242</guid>
+<content:encoded><![CDATA[
+<div> 同态加密, CKKS, LLM推理, 误差传播, 自举优化
+<br><br>总结:1.CKKS支持隐私保护LLM推理，但乘法消耗模数且自举昂贵。2.分析各同态操作误差及在Transformer中的传播。3.量化局部误差对最终推理误差贡献，确定所需精度。4.按操作分配scale和模数层级，避免过度保守精度。5.在模数链内增加计算，减少自举，提升效率；对比基线显著降低模数消耗与自举次数。 <div>
+Homomorphic encryption (HE) enables privacy-preserving inference by allowing neural networks to operate directly on encrypted data, but its computational cost remains a major obstacle to deploying large language models in practice. In particular, CKKS-based inference consumes ciphertext modulus through homomorphic multiplications and requires costly bootstrapping when the available modulus is exhausted. In this work, we propose an error-propagation-aware scale design for efficient CKKS-based privacy-preserving LLM inference. We characterize the numerical errors introduced by individual homomorphic operations and analyze how they propagate through subsequent Transformer computations. Based on this analysis, we quantify the contribution of each local error to the final inference error and determine the precision required for individual operations. We then allocate operation-wise scales and modulus levels accordingly, avoiding unnecessarily conservative precision while maintaining the target inference accuracy. As a result, more computation can be performed within a given modulus chain, reducing the frequency of costly bootstrapping operations and improving overall inference efficiency. Compared with THOR, our method reduces modulus consumption by 30.0% and the number of bootstrapping operations by 83.6% for the standard Transformer. For the HE-friendly Transformer, our method reduces modulus consumption by 33.6% and the number of bootstrapping operations by 80% compared with PowerFormer.
+]]></content:encoded>
+<pubDate>Mon, 28 Sep 2026 05:26:24 +0000</pubDate>
+<pubDate>Mon, 28 Sep 2026 05:26:24 +0000</pubDate>
+</item>
+<item>
+<title>Improved Cryptanalysis of Local PRGs</title>
+<link>https://eprint.iacr.org/2026/2240</link>
+<guid>https://eprint.iacr.org/2026/2240</guid>
+<content:encoded><![CDATA[
+<div> 种子恢复攻击，局部PRG，XorMaj，GFS，FGP
+<br><br>总结:1、提出两类XorMaj局部PRG种子恢复攻击。2、GFS猜测过滤高偏噪声方程，优于GAS且短输出尤著，n=256时约2^68.78。3、FGP过滤并用动态规划加速BP，优于GADec，约2^52.66。4、FGP以小开销破坏ZKP见证不可区分性与QuietOT接收方隐私。 <div>
+We present two seed-recovery attacks on a family of local PRGs, which map an $n$-bit random seed to an $m$-bit pseudorandom string by applying $\XorMaj$ predicates.
+
+For PRGs with large locality, we extend the Group-and-Solve (GAS, Eurocrypt 26) framework to Guess-Filter-Solve (GFS).  GFS first guesses that a set of seed bits are all $1$s and then filters for outputs whose inputs to $\Maj$ contain a sufficiently large subset of the guessed bits. Then high-bias noisy equations can be collected for the correct guess and solved by specific solvers. Compared with GAS, GFS collects substantially more noisy equations with high bias and hence outperforms GAS significantly, especially when the output is short. For example, for the challenge parameter $n=256$ and $m=2^{16}$ (STOC 16), the complexity for GFS is $2^{68.78}$ while it is $2^{157.91}$ for GAS. In addition, the asymptotic complexity of GFS is $2^{0.15n+o(n)}$.
+
+Independently, inspired by the Guess-and-Decode (GADec, TIT 22), we propose the Filter-Guess-Propagate (FGP) attack. Compared with GADec, FGP introduces two speed-up techniques at each iteration of Belief Propagation (BP): a filter scheme to reduce the number of equations and a dynamic-programming technique to update the log-likelihood ratios of variables efficiently.  Together, these improvements enable FGP to perform fast BP and outperform GADec significantly.  For $\XorMaj_{10,64}$ with $n=256$ and $m=2^{40}$ (Eurocrypt 24), the total complexity of FGP is $2^{52.66}$, whereas even a single BP iteration of GADec costs $2^{106.42}$.
+
+FGP is further applied to a ZKP protocol from Eurocrypt~25 and QuietOT from Asiacrypt~24, with only a small computational overhead. For the ZKP protocol, FGP leads to an attack on witness indistinguishability, while for QuietOT, it similarly yields an attack on OT receiver privacy.
+]]></content:encoded>
+<pubDate>Mon, 28 Sep 2026 02:47:59 +0000</pubDate>
+<pubDate>Mon, 28 Sep 2026 02:47:59 +0000</pubDate>
+</item>
 
 <item>
 <title>On the (In)security of Approximate Computation Protocols from CKKS</title>
