@@ -4,18 +4,18 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+
 <item>
 <title>Verifiable Computation for Approximate Homomorphic Encryption Schemes</title>
 <link>https://eprint.iacr.org/2025/286</link>
 <guid>https://eprint.iacr.org/2025/286</guid>
 <content:encoded><![CDATA[
 <div> 同态加密、可验证计算、CKKS、RingLWE、多项式承诺
-<br><br>总结:1. 证明同态加密密文计算的有效性，保障外包数据隐私与完整性。2. 针对RingLWE尤其CKKS近似算术，在R_q中无模拟开销处理密文算术及模数切换、密钥切换、缩放。3. 构建R_q上算术与范围检查的简洁论证，采用新PIOP和多线性多项式承诺。4. 实现验证：相较现有RNS方案，小电路性能相当，并能高效扩展至大电路。 <div>
+<br /><br />总结:1. 证明同态加密密文计算的有效性，保障外包数据隐私与完整性。2. 针对RingLWE尤其CKKS近似算术，在R_q中无模拟开销处理密文算术及模数切换、密钥切换、缩放。3. 构建R_q上算术与范围检查的简洁论证，采用新PIOP和多线性多项式承诺。4. 实现验证：相较现有RNS方案，小电路性能相当，并能高效扩展至大电路。 <div>
 We address the problem of proving the validity of computation on ciphertexts of homomorphic encryption (HE) schemes, a feature that enables outsourcing of data and computation while ensuring both data privacy and integrity.
 We propose a new solution that handles computations in RingLWE-based schemes, particularly the CKKS scheme for approximate arithmetic. Our approach efficiently handles ciphertext arithmetic in the polynomial ring $R_q$ without emulation overhead and manages ciphertexts maintenance operations, such as modulus switching, key switching, and rescaling, with small cost.
 Our main result is a succinct argument that efficiently handles arithmetic computations and range checks over the ring $R_q$. To build this argument system, we construct new polynomial interactive oracle proofs (PIOPs) and multilinear polynomial commitments supporting polynomials over $R_q$, unlike prior work which focused on finite fields. We validate the concrete complexity of our approach through implementation and experimentation. Compared to the current state-of-the-art on verifiable HE for RNS schemes, we present similar performance for small circuits while being able to efficiently scale to larger ones, which was a major challenge for previous constructions as it requires verifying procedures such as relinearization.
 ]]></content:encoded>
-<pubDate>Wed, 19 Feb 2025 09:36:05 +0000</pubDate>
 <pubDate>Wed, 19 Feb 2025 09:36:05 +0000</pubDate>
 </item>
 <item>
@@ -24,13 +24,11 @@ Our main result is a succinct argument that efficiently handles arithmetic compu
 <guid>https://eprint.iacr.org/2024/1583</guid>
 <content:encoded><![CDATA[
 <div> 不经意传输, 无配对, k-out-of-n, 离线加密, 标准安全
-<br><br>总结: 1.本文提出三种高效的两轮、无配对、k-out-of-n 不经意传输协议。2.协议通信量最小：接收者发送k条消息，发送者回复n+k条消息。3.支持自适应，并允许发送者离线加密n条消息，适用于一发送者多接收者场景。4.在CDH与RSA假设下给出标准安全证明，不依赖随机预言模型。5.整体兼顾高效通信与隐私保护。 <div>
+<br /><br />总结: 1.本文提出三种高效的两轮、无配对、k-out-of-n 不经意传输协议。2.协议通信量最小：接收者发送k条消息，发送者回复n+k条消息。3.支持自适应，并允许发送者离线加密n条消息，适用于一发送者多接收者场景。4.在CDH与RSA假设下给出标准安全证明，不依赖随机预言模型。5.整体兼顾高效通信与隐私保护。 <div>
 Oblivious Transfer (OT) is one of the fundamental building blocks in cryptography that enables various privacy-preserving applications. Constructing efficient OT schemes has been an active research area. This paper presents three efficient two-round pairing-free k-out-of-n oblivious transfer protocols with standard security. Our constructions follow the minimal communication pattern: the receiver sends k messages to the sender, who responds with n+k messages, achieving the lowest data transmission among pairing-free k-out-of-n OT schemes. Furthermore, our protocols support adaptivity and enable the sender to encrypt the n messages offline, independent of the receiver’s variables, offering significant performance advantages in one-sender-multiple-receiver scenarios. We provide security proofs under the Computational Diffie-Hellman (CDH) and RSA assumptions, without relying on the Random Oracle Model. Our protocols combine minimal communication rounds, adaptivity, offline encryption capability, and provable security, making them well-suited for privacy-preserving applications requiring efficient oblivious transfer.
 ]]></content:encoded>
 <pubDate>Mon, 07 Oct 2024 14:01:27 +0000</pubDate>
-<pubDate>Mon, 07 Oct 2024 14:01:27 +0000</pubDate>
 </item>
-
 <item>
 <title>Slashable Secrecy for Witness Encryption over Ethereum Finality</title>
 <link>https://eprint.iacr.org/2026/2273</link>
@@ -13898,40 +13896,6 @@ Our payable KPIR achieves the same online cost as baseline, while the setup is a
 Set reconciliation is a fundamental task in distributed systems, particularly in blockchain networks, where it enables the synchronization of transaction pools among peers and facilitates block dissemination. Existing traditional set reconciliation schemes are either statistical, providing success probability as a function of the communication overhead and the size of the symmetric difference, or require parametrization and estimation of the size of the symmetric difference, which can be prone to error. In this paper, we present CertainSync, a novel reconciliation framework that, to the best of our knowledge, is the first to guarantee successful set reconciliation without any parametrization or estimators in use. The framework is rateless and adapts to the unknown symmetric difference size. The set reconciliation is guaranteed to be completed successfully whenever the communication overhead reaches a lower bound derived from the symmetric difference size and the universe size. Our framework is based on recent constructions of Invertible Bloom Lookup Tables (IBLTs) ensuring successful element listing as long as the number of elements is bounded. We provide a theoretical analysis to prove the certainty in the set reconciliation for multiple constructions. The approach is also validated by simulations, showing the ability to synchronize sets with efficient communication costs while maintaining reconciliation guarantees compared to other baseline schemes for set reconciliation. To further improve communication overhead for large universes as blockchain networks, CertainSync is extended with a universe reduction technique to minimize communication overhead. We compare and validate the extended framework UniverseReduceSync against the basic CertainSync framework through simulations using real blockchain transaction hash data from the Ethereum blockchain network. The results illustrate a trade-off between improved communication costs and maintaining reconciliation guarantees without relying on parametrization or estimators, offering a comprehensive solution for set reconciliation in diverse scenarios.
 ]]></content:encoded>
 <pubDate>Sun, 06 Apr 2025 20:17:58 +0000</pubDate>
-</item>
-<item>
-<title>Need for zkSpeed: Accelerating HyperPlonk for Zero-Knowledge Proofs</title>
-<link>https://eprint.iacr.org/2025/620</link>
-<guid>https://eprint.iacr.org/2025/620</guid>
-<content:encoded><![CDATA[
-<div> 关键词：零知识证明 (ZKPs)，隐私保护，可验证计算，GPU加速，ASIC加速，zkSpeed，HyperPlonk，可信设置，证明大小，验证成本，共识系统，SumCheck，多标量乘法 (MSMs)，芯片架构，带宽，性能提升。
-
-<br /><br />总结：
-本文介绍了针对零知识证明（ZKPs）技术的一种新型加速器——zkSpeed，该技术正在逐步成为隐私保护和可验证计算领域的关键工具。现有的ZKP协议加速方案存在需要每次应用都建立可信设置或产生较大证明规模、增加验证成本等问题。文章提出的新加速器zkSpeed专注于加速HyperPlonk这一支持一次性、通用设置以及为公共验证和基于共识系统的典型ZKP应用生成小规模证明的先进ZKP协议。文中设计了一个采用366.46 mm²面积和2TB/s带宽的全芯片架构，实现了对整个证明生成过程的加速，相比CPU基线实现了平均801倍的速度提升。 <div>
-(Preprint) Zero-Knowledge Proofs (ZKPs) are rapidly gaining importance in privacy-preserving and verifiable computing. ZKPs enable a proving party to prove the truth of a statement to a verifying party without revealing anything else. ZKPs have applications in blockchain technologies, verifiable machine learning, and electronic voting, but have yet to see widespread adoption due to the computational complexity of the proving process.Recent works have accelerated the key primitives of state-of-the-art ZKP protocols on GPU and ASIC. However, the protocols accelerated thus far face one of two challenges: they either require a trusted setup for each application, or they generate larger proof sizes with higher verification costs, limiting their applicability in scenarios with numerous verifiers or strict verification time constraints. This work presents an accelerator, zkSpeed, for HyperPlonk, a state-of-the-art ZKP protocol that supports both one-time, universal setup and small proof sizes for typical ZKP applications in publicly verifiable, consensus-based systems. We accelerate the entire protocol, including two major primitives: SumCheck and Multi-scalar Multiplications (MSMs). We develop a full-chip architecture using 366.46 mm$^2$ and 2 TB/s of bandwidth to accelerate the entire proof generation process, achieving geometric mean speedups of 801$\times$ over CPU baselines.
-]]></content:encoded>
-<pubDate>Fri, 04 Apr 2025 23:56:21 +0000</pubDate>
-</item>
-<item>
-<title>Making BBS Anonymous Credentials eIDAS 2.0 Compliant</title>
-<link>https://eprint.iacr.org/2025/619</link>
-<guid>https://eprint.iacr.org/2025/619</guid>
-<content:encoded><![CDATA[
-<div> 关键词: eIDAS 2.0、BBS#、匿名凭证系统、数字身份钱包、隐私保护
-
-总结:
-本文提出了一个名为BBS#的数字身份钱包解决方案，旨在助力实现eIDAS 2.0的目标，为欧洲公民提供高安全性和隐私保护的个人数字身份钱包。BBS#是在BBS和BBS+基础上进行改进的版本，去除了对双线性映射和配对友好曲线的依赖，转而采用传统椭圆曲线上的已知数字签名方案（如ECDSA或ECSchnorr）。这一方案无需改变现有硬件或其所支持的算法，且已在随机预言机模型下被证明安全，同时保持了BBS系系统的不可伪造性以及匿名性等安全属性。
-
-通过在不同智能手机的安全执行环境中实施BBS#，实验证明可以实现高效（约70毫秒在Android StrongBox上）、安全且达到最高等级认证要求的eIDAS 2.0交易，同时为所有欧洲身份证钱包用户提供最优级别的隐私保护。 <div>
-eIDAS 2.0 (electronic IDentification, Authentication and trust Services) is a very ambitious regulation aimed at equipping European citizens with a personal digital identity wallet (EU Digital Identity Wallet) on a mobile phone that not only needs to achieve a high level of security, but also needs to be available as soon as possible for a large number of citizens and respect their privacy (as per GDPR - General Data Protection Regulation).  
-
-In this paper, we introduce the foundations of a digital identity wallet solution that could help move closer to this objective by leveraging the proven anonymous credentials system BBS (Eurocrypt 2023), also known as BBS+, but modifying it to avoid the limitations that have hindered its widespread adoption, especially in certified infrastructures requiring trusted hardware implementation.  
-In particular, the solution we propose, which we call BBS#, does not rely, contrary to BBS/BBS +, on bilinear maps and pairing-friendly curves (which are not supported by existing hardware) and only depends on the hardware implementation of well-known digital signature schemes such as ECDSA (ISO/IEC 14888-3) or ECSDSA (also known as ECSchnorr, ISO/IEC 14888-3) using classical elliptic curves. More precisely, BBS# can be rolled out without requiring any change in existing hardware or the algorithms that hardware supports. 
-BBS# , which is proven secure in the random oracle model, retains the well-known security property (unforgeability of the credentials under the (gap) q-SDH assumption) and anonymity properties (multi-show full unlinkability and statistical anonymity of presentation proofs) of BBS/BBS+. 
-
-By implementing BBS# on several smartphones using different secure execution environments, we show that it is possible to achieve eIDAS 2.0 transactions which are not only efficient (around 70 ms on Android StrongBox), secure and certifiable at the highest level but also provide strong (optimal) privacy protection for all European ID Wallet users.
-]]></content:encoded>
-<pubDate>Fri, 04 Apr 2025 17:44:46 +0000</pubDate>
 </item>
 </channel>
 </rss>
