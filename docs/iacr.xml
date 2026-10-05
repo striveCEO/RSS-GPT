@@ -5,12 +5,31 @@
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
 <item>
+<title>Ziren: Succinct Arguments for MIPS32 Execution</title>
+<link>https://eprint.iacr.org/2026/2330</link>
+<guid>https://eprint.iacr.org/2026/2330</guid>
+<content:encoded><![CDATA[
+<div> Ziren zkVM MIPS32 递归证明 形式化验证<br><br>总结:<br>1. Ziren为生产级MIPS32 zkVM，证明77条整数指令并已证以太坊区块。<br>2. CPU-less架构：指令入芯片行，lookup、zerocheck、jagged sumcheck、WHIR批证及递归验证树。<br>3. 单卡7.3MHz、四卡24MHz。<br>4. 每阶段>100位交互可靠，块级150证明约93.5位组合安全。<br>5. 端到端有条件：依赖知识soundness、extractor兼容、递归约束、SHA-256确定性与104个Lean定理。 <div>
+A succinct argument for machine execution convinces a verifier that a program compiled for a real instruction set ran correctly, with a proof far shorter than the execution and a check far cheaper than replaying it. We
+  present Ziren, a production zkVM for MIPS32: it proves 77 user-mode integer instructions of MIPS32r2 and has proved Ethereum mainnet blocks end to end in production.
+
+  Ziren is a CPU-less chip architecture: each executed instruction is one row of its opcode's chip. Each shard is proved by one lookup argument for all of its buses and one zerocheck for all of its constraints, and the claims on its tens of thousands of columns of differing heights are reduced by a jagged sumcheck to a single evaluation, opened by one batched WHIR proof. A recursion tree composes the shard proofs under an enumerated allowlist of verifying keys, and the determinism of 57 of the core machine's 62 chips (all but three preprocessed tables and two SHA-256 control chips) is extracted mechanically, as Lean 4 theorems, from the same constraint description the prover evaluates.
+
+  On a configuration that precedes four later changes, proving throughput reaches up to 7.3 MHz on one NVIDIA RTX 5090 and scales horizontally across GPUs, reaching 24 MHz on four.
+
+  Each proof stage of the analysed schedule has more than 100 bits of interactive soundness, and 93.5 bits of composite security over a block's tree of about 150 proofs. The end-to-end statement is conditional: it assumes round-by-round knowledge soundness of every node, compatibility of the composed extractors, that the recursion programs, which are not extracted, enforce the compose relation, and a property of the cross-shard digest to which we assign no value; identifying the trace with an execution also needs determinism of the two SHA-256 control chips and real-row exhaustiveness. All 104 extracted determinism theorems are proved in Lean 4: a propagation analysis derives every output column, and the derivation is replayed as step lemmas over gadget theorems proved once.
+]]></content:encoded>
+<pubDate>Sun, 04 Oct 2026 05:50:21 +0000</pubDate>
+<pubDate>Sun, 04 Oct 2026 05:50:21 +0000</pubDate>
+</item>
+
+<item>
 <title>Can AI Oversight Be Zero Knowledge?</title>
 <link>https://eprint.iacr.org/2026/2299</link>
 <guid>https://eprint.iacr.org/2026/2299</guid>
 <content:encoded><![CDATA[
 <div> 零知识证明 交互式论证 预言机辅助 AI输出验证 隐私保护
-<br><br>总结: 1.AI用机密数据生成输出，须验正确又不泄露。2.既有交互证明/辩论依赖快验证与假设。3.本文问多项式验证者能否零知识。4.随机预言模型下一般不可能，即便双方时间远长于计算，辩论也不行。5.若预言机对答案签名，则仅需抗碰撞哈希，证明者与验证者可高效零知识验证，不靠诚实对手或计算稳健性。 <div>
+<br /><br />总结: 1.AI用机密数据生成输出，须验正确又不泄露。2.既有交互证明/辩论依赖快验证与假设。3.本文问多项式验证者能否零知识。4.随机预言模型下一般不可能，即便双方时间远长于计算，辩论也不行。5.若预言机对答案签名，则仅需抗碰撞哈希，证明者与验证者可高效零知识验证，不靠诚实对手或计算稳健性。 <div>
 AI systems increasingly produce outputs from confidential data, such as a fitness-for-duty assessment from medical records or the predicted properties of a drug candidate from its secret structure. It is important to verify that such outputs are correct without revealing the underlying data. A recent line of work studies verification of AI outputs via interactive proofs and debate for oracle-aided computation, where correctness may depend on an oracle such as human judgment, a physical experiment, or the web. These works focus on verification by a verifier that runs much faster than the computation. However, such efficient verification is impossible for general oracle-aided computation, and these works therefore rely on additional assumptions. We focus instead on privacy: allowing the verifier to run in time polynomial in the computation, we ask whether interactive arguments for oracle-aided computation can be zero knowledge, so that the verifier learns nothing about the confidential data beyond the correctness of the output.
 
 We prove that, in general, they cannot. In the random oracle model, there are no zero-knowledge proofs for all oracle-aided computations, even if both the prover and the verifier are allowed to run much longer than the computation itself. The impossibility extends to debate, a canonical model for scalable oversight.
@@ -18,14 +37,13 @@ We prove that, in general, they cannot. In the random oracle model, there are no
 On the positive side, we show that if the oracle attaches a cryptographic signature to each of its answers, then every oracle-aided computation can be verified in zero knowledge with an efficient prover and verifier, assuming only collision-resistant hash functions. Beyond privacy, this also gives an alternative approach to scalable oversight that relies neither on an honest opponent, as in debate, nor on the robustness of the computation, as in prior single-prover protocols.
 ]]></content:encoded>
 <pubDate>Thu, 01 Oct 2026 16:49:59 +0000</pubDate>
-<pubDate>Thu, 01 Oct 2026 16:49:59 +0000</pubDate>
 </item>
 <item>
 <title>Pseudorandom Correlation Generators for Matrix Triples</title>
 <link>https://eprint.iacr.org/2026/2298</link>
 <guid>https://eprint.iacr.org/2026/2298</guid>
 <content:encoded><![CDATA[
-<div> 伪随机相关生成器 矩阵三元组 安全计算 QASD假设 Weyl-Pauli扭代数<br><br>总结:
+<div> 伪随机相关生成器 矩阵三元组 安全计算 QASD假设 Weyl-Pauli扭代数<br /><br />总结:
 1. 安全计算常需矩阵三元组(A,B,A·B)，旧PCG种子随维数线性增长、扩展慢。
 2. 新PCG一基于QASD，N个三元组种子为poly(λ,log n,log N)，每三元组Θ(n^3log(n^3N))次域运算，去除线性依赖。
 3. 新PCG二基于Weyl-Pauli扭代及扭QASD，种子同前，成本仅比明文略大。
@@ -39,7 +57,6 @@ We introduce new pseudorandom correlation generators (PCGs) for matrix triples: 
 We complement our results with an in-depth study of our new twisted QASD assumption and demonstrate the benefits of our PCGs in concrete applications such as privacy-preserving machine learning and threshold MAYO.
 ]]></content:encoded>
 <pubDate>Thu, 01 Oct 2026 16:31:24 +0000</pubDate>
-<pubDate>Thu, 01 Oct 2026 16:31:24 +0000</pubDate>
 </item>
 <item>
 <title>Context-Blind Device-Bound Anonymous Credentials from Signatures and Proofs</title>
@@ -47,7 +64,7 @@ We complement our results with an in-depth study of our new twisted QASD assumpt
 <guid>https://eprint.iacr.org/2026/2295</guid>
 <content:encoded><![CDATA[
 <div> 匿名凭证,安全元件,设备绑定,上下文盲,可能后量子
-<br><br>总结:1.针对匿名凭证可转移性，要求凭证绑定安全元件，且每次展示需新元件参与而不泄露上下文。2.构造依赖位置绑定承诺、签名、盲签名和NIZK，证明正确、抗合谋不可链接及元件无关。3.用CAPSS、Merkle承诺和Aurora实例化。4.在16属性场景，未优化原型证明214.65KB，用户13.18秒，验证1.37秒。5.这是首个完全由可能后量子组件构成的相关具体构造与评估。 <div>
+<br /><br />总结:1.针对匿名凭证可转移性，要求凭证绑定安全元件，且每次展示需新元件参与而不泄露上下文。2.构造依赖位置绑定承诺、签名、盲签名和NIZK，证明正确、抗合谋不可链接及元件无关。3.用CAPSS、Merkle承诺和Aurora实例化。4.在16属性场景，未优化原型证明214.65KB，用户13.18秒，验证1.37秒。5.这是首个完全由可能后量子组件构成的相关具体构造与评估。 <div>
 Anonymous credentials enable privacy preserving authentication, but their transferability motivates binding each credential to a key protected by a secure element (SE). Such binding should preserve privacy even when the SE is remote or corrupted: every presentation must require fresh SE participation without revealing its context to the SE (Friedrichs et al., EC'26). Existing so called context-blind device-bound constructions rely on classical assumptions, whereas existing plausibly post-quantum anonymous credentials do not provide this functionality.
 
 We give a modular construction of context blind device-bound anonymous credentials from a position-binding vector commitment, a signature scheme, a round-optimal blind signature, and a non-interactive zero-knowledge argument. We prove correctness, one-more unforgeability, unlinkability against a colluding issuer, verifier, and fully corrupted SE, and SE-obliviousness. We instantiate the construction with the CAPSS framework (Feneuil and Rivain, TCHES'26), Griffin/Jive Merkle commitments, and an Aurora-based proof of the complete presentation relation. 
@@ -57,7 +74,6 @@ We benchmark this concrete instantiation in one representative setting with 16 a
 To the best of our knowledge, this is the first concrete construction and evaluation of context-blind device-bound anonymous credentials assembled entirely from plausibly post-quantum components.
 ]]></content:encoded>
 <pubDate>Thu, 01 Oct 2026 12:56:00 +0000</pubDate>
-<pubDate>Thu, 01 Oct 2026 12:56:00 +0000</pubDate>
 </item>
 <item>
 <title>Deniable Secret Sharing: Towards Practical Faking</title>
@@ -65,7 +81,7 @@ To the best of our knowledge, this is the first concrete construction and evalua
 <guid>https://eprint.iacr.org/2026/2294</guid>
 <content:encoded><![CDATA[
 <div> 可否认秘密共享、伪造函数、隐私保护、消息复杂度、访问结构
-<br><br>总结: 1.DSS可让股东生成外观真实但不泄露秘密的伪造份额。2.本文研究协作伪造中的隐私保护与消息复杂度。3.信息论最强DSS必须交换非零消息，且消息量可能很大；同时给出多数情形匹配下界的构造。4.线性SS中，某些非授权集伪造时会获知秘密。5.计算模型给出两种无需额外交互的构造，兼顾隐蔽与隐私，分别依赖PRG或VBB，适用于一般访问结构。 <div>
+<br /><br />总结: 1.DSS可让股东生成外观真实但不泄露秘密的伪造份额。2.本文研究协作伪造中的隐私保护与消息复杂度。3.信息论最强DSS必须交换非零消息，且消息量可能很大；同时给出多数情形匹配下界的构造。4.线性SS中，某些非授权集伪造时会获知秘密。5.计算模型给出两种无需额外交互的构造，兼顾隐蔽与隐私，分别依赖PRG或VBB，适用于一般访问结构。 <div>
 Deniable secret sharing (DSS; Canetti et al, TCC 2025) is designed for a scenario where an adversary is able to bribe or coerce all shareholders to divulge their shares of a secret. A deniable secret sharing scheme is equipped with a faking function that enables shareholders to produce fake shares that look like real shares, but do not actually reveal any additional information about the secret.
 
 Existing DSS constructions require the fakers to jointly compute on their shares, without considering how this computation might be realized. In this paper, we investigate two crucial properties of such computations: the extent to which the fakers themselves learn information about the secret (privacy against fakers), and the number of messages they need to exchange (message complexity). Message complexity can be seen as a measure of faking conspicuousness, if the adversary is able to observe network traffic.
@@ -77,14 +93,13 @@ Moving to the computational setting, we describe two constructions which require
 All of our lower bounds and constructions consider general access structures.
 ]]></content:encoded>
 <pubDate>Thu, 01 Oct 2026 11:30:49 +0000</pubDate>
-<pubDate>Thu, 01 Oct 2026 11:30:49 +0000</pubDate>
 </item>
 <item>
 <title>Evidence on Demand: Selectively Disclosable Watermarks for Generative AI</title>
 <link>https://eprint.iacr.org/2026/2291</link>
 <guid>https://eprint.iacr.org/2026/2291</guid>
 <content:encoded><![CDATA[
-<div> 密码学水印 生成式AI 可选择披露 令牌验证 安全性质<br><br>总结:
+<div> 密码学水印 生成式AI 可选择披露 令牌验证 安全性质<br /><br />总结:
 1.提出可选择披露的生成式AI密码学水印方法。
 2.默认仅模型所有者可检测，并向单个输出发放短令牌。
 3.第三方凭令牌验证该输出，其他输出对令牌持有者仍不可检测。
@@ -100,7 +115,6 @@ We then propose our construction based on prior work (Lin, Shahabi, and Song, CR
 Our construction is broadly applicable to autoregressive generative AI models, including LLMs.
 ]]></content:encoded>
 <pubDate>Thu, 01 Oct 2026 08:51:41 +0000</pubDate>
-<pubDate>Thu, 01 Oct 2026 08:51:41 +0000</pubDate>
 </item>
 <item>
 <title>Jambon: Asynchronous Universally Composable Threshold FHE with Low Communication</title>
@@ -108,7 +122,7 @@ Our construction is broadly applicable to autoregressive generative AI models, i
 <guid>https://eprint.iacr.org/2026/2290</guid>
 <content:encoded><![CDATA[
 <div> 阈值全同态加密 门限解密 DKG 确定性舍入 UC安全
-<br><br>总结:1.重审DKG与门限解密组合的正确性和模拟安全。2.提出Jambon，对部分解密确定性舍入，缩小解密响应模数。3.分别考虑初始化与解密误差，证明BFV精确恢复并扩展至CKKS。4.在随机预言模型下证明UC强门限隐私安全。5.对256、512、1024方，响应较KLL+26强安全构造至少小60%。 <div>
+<br /><br />总结:1.重审DKG与门限解密组合的正确性和模拟安全。2.提出Jambon，对部分解密确定性舍入，缩小解密响应模数。3.分别考虑初始化与解密误差，证明BFV精确恢复并扩展至CKKS。4.在随机预言模型下证明UC强门限隐私安全。5.对256、512、1024方，响应较KLL+26强安全构造至少小60%。 <div>
 Threshold fully homomorphic encryption distributes decryption authority among multiple parties, but achieving strong security can significantly increase the required ciphertext modulus and the size of each decryption response. Existing parameter analyses typically focus on threshold decryption alone. In particular, the recent work of Kim et al. (KLL$^+$26) analyzes correctness and strong simulation security of partial decryption without covering distributed key generation (DKG). When the parties generate the keys themselves, the DKG and partial-decryption protocols must satisfy their respective correctness and security requirements.
 
 We revisit correctness and simulation-security requirements for threshold decryption when it is composed with DKG.
@@ -119,7 +133,6 @@ We prove exact recovery for BFV and extend the approach to CKKS under an additio
 Under the stated temporary-HE assumptions and resource hybrids, we establish universally composable security with strong threshold privacy against static malicious corruption in the random-oracle model. We prove security for the DKG and its composition with verifiable partial decryption. Under the stated algebraic and statistical parameters, Jambon's numerical decryption responses are at least $60\%$ smaller than the native responses of the updated KLL$^+$26 strong-security construction at every threshold considered for $256$, $512$, and $1024$ parties. This comparison uses the specified sufficient bounds and excludes proof and setup traffic.
 ]]></content:encoded>
 <pubDate>Thu, 01 Oct 2026 08:45:58 +0000</pubDate>
-<pubDate>Thu, 01 Oct 2026 08:45:58 +0000</pubDate>
 </item>
 <item>
 <title>Bandwidth Fee Mechanisms for Certified Transaction Dissemination</title>
@@ -127,7 +140,7 @@ Under the stated temporary-HE assumptions and resource hybrids, we establish uni
 <guid>https://eprint.iacr.org/2026/2285</guid>
 <content:encoded><![CDATA[
 <div> 带宽费用机制 交易传播 激励相容 验证者合谋 价格更新
-<br><br>总结:
+<br /><br />总结:
 1. BFM为共识前阈值认证交易传播定价，建模为用户与验证者双边拍卖。
 2. 非平凡BFM无法防两验证者合谋，也不能同时满足用户、验证者及单验证者加用户联盟激励相容。
 3. 仅考虑单边偏离时，贪心路由定价机制对个体用户和验证者激励相容。
@@ -141,9 +154,7 @@ In this work, we focus on settings where transactions must be certified/attested
 \end{itemize}
 ]]></content:encoded>
 <pubDate>Wed, 30 Sep 2026 20:15:26 +0000</pubDate>
-<pubDate>Wed, 30 Sep 2026 20:15:26 +0000</pubDate>
 </item>
-
 <item>
 <title>DAVINCI: A Decentralized Cryptographic Voting Protocol</title>
 <link>https://eprint.iacr.org/2026/2282</link>
@@ -13914,135 +13925,6 @@ The increased popularity of large language models (LLMs) raises serious privacy 
 We propose Fission, a privacy-preserving framework that improves latency while providing strong privacy guarantees. Fission utilizes an MPC network for linear computations, while nonlinearities are computed on a separate evaluator network that receives shuffled values in the clear and returns nonlinear functions evaluated at these values back to the MPC network. As a result, each evaluator only gets access to parts of the shuffled data, while the model weights remain private. We evaluate fission on a wide set of LLMs and compare it against prior works. Fission results in up to eight times faster inference and eight times reduced bandwidth compared to prior works while retaining high accuracy. Finally, we construct an attack on obfuscation techniques from related works that show significant information leakage, and we demonstrate how Fission enhances privacy.
 ]]></content:encoded>
 <pubDate>Wed, 09 Apr 2025 19:07:20 +0000</pubDate>
-</item>
-<item>
-<title>Anamorphic Voting: Ballot Freedom Against Dishonest Authorities</title>
-<link>https://eprint.iacr.org/2025/647</link>
-<guid>https://eprint.iacr.org/2025/647</guid>
-<content:encoded><![CDATA[
-<div> 关键词: 电子投票、解密密钥、投票隐私、共谋环境、幻影投票、加密技术
-
-总结:
-文章提出了“幻影投票”这一概念，用于解决电子投票系统在完全不诚实环境下，所有计票机构可能合谋破坏选民投票隐私的问题。幻影投票允许选民在投出看似常规的选票的同时，能够向审计员真实传达其投票意向。文章进一步展示了新的加密技术，证明了若干现有的投票方案可以支持幻影投票的实现。<br /><br /> <div>
-Electronic voting schemes typically ensure ballot privacy by
-assuming that the decryption key is distributed among tallying authorities, preventing any single authority from decrypting a voter’s ballot.
-However, this assumption may fail in a fully dishonest environment where
-all tallying authorities collude to break ballot privacy.
-In this work, we introduce the notion of anamorphic voting, which enables voters to convey their true voting intention to an auditor while
-casting an (apparently) regular ballot. We present new cryptographic
-techniques demonstrating that several existing voting schemes can support anamorphic voting.
-]]></content:encoded>
-<pubDate>Wed, 09 Apr 2025 08:10:06 +0000</pubDate>
-</item>
-<item>
-<title>GIGA Protocol: Unlocking Trustless Parallel Computation in Blockchains</title>
-<link>https://eprint.iacr.org/2025/645</link>
-<guid>https://eprint.iacr.org/2025/645</guid>
-<content:encoded><![CDATA[
-<div> 关键词: 区块链、可扩展性、SNARK协议、并行执行、交易复杂性
-
-总结:
-本文提出了一种名为GIGA的基于SNARK协议的区块链解决方案，旨在解决现代去中心化区块链系统的可扩展性问题。GIGA协议通过将交易组织成非冲突批处理并在多个分布式实体间信任lessly地并行执行和证明，实现了并发处理非冲突操作，同时保持安全性和状态一致性。通过递归聚合批量证明为单个简洁证明，该协议消除了网络中的冗余重执行，显著提升了区块链吞吐量，不影响去中心化特性。
-
-在相同的系统假设下（例如共识、网络和虚拟机架构），当大多数交易作用于状态的不同部分时，与采用顺序执行模型的流行区块链架构相比，GIGA协议的吞吐量提升可达一万倍以上，相较于使用节点内部并行化方案的区块链架构，也有超过五百倍的性能提升。此外，该协议还支持更高的交易计算复杂性，从而解锁了传统区块链架构上因计算能力有限而无法实现的各种应用场景。
-
-另外，文章还提出了一个奖励机制，以确保证明网络的经济可持续性，动态适应计算需求并基于成本效率和可靠性激励竞争。 <div>
-The scalability of modern decentralized blockchain systems is constrained by the requirement that the participating nodes execute the entire chains transactions without the ability to delegate the verification workload across multiple actors trustlessly. This is further limited by the need for sequential transaction execution and repeated block validation, where each node must re-execute all transactions before accepting blocks, also leading to delayed broadcasting in many architectures.
-
-Consequently, throughput is limited by the capacity of individual nodes, significantly preventing scalability.
-
-In this paper, we introduce GIGA, a SNARK-based protocol that enables trustless parallel execution of transactions, processing non-conflicting operations concurrently, while preserving security guarantees and state consistency. The protocol organizes transactions into non-conflicting batches which are executed and proven in parallel, distributing execution across multiple decentralized entities. These batch proofs are recursively aggregated into a single succinct proof that validates the entire block.
-
-As a result, the protocol both distributes the execution workload and removes redundant re-execution from the network, significantly improving blockchain throughput while not affecting decentralization.
-
-Performance estimates demonstrate that, under the same system assumptions (e.g., consensus, networking, and virtual machine architecture) and under high degrees of transaction parallelism (i.e., when most transactions operate on disjoint parts of the state), our protocol may achieve over a 10000x throughput improvement compared to popular blockchain architectures that use sequential execution models, and over a 500x improvement compared to blockchain architectures employing intra-node parallelization schemes. 
-
-Furthermore, our protocol enables a significant increase in transaction computational complexity, unlocking a wide range of use cases that were previously unfeasible on traditional blockchain architectures due to the limited on-chain computational capacity.
-
-Additionally, we propose a reward mechanism that ensures the economic sustainability of the proving network, dynamically adjusting to computational demand while fostering competition among provers based on cost-efficiency and reliability.
-]]></content:encoded>
-<pubDate>Tue, 08 Apr 2025 17:18:19 +0000</pubDate>
-</item>
-<item>
-<title>Scalable Non-Fungible Tokens on Bitcoin</title>
-<link>https://eprint.iacr.org/2025/641</link>
-<guid>https://eprint.iacr.org/2025/641</guid>
-<content:encoded><![CDATA[
-<div> 关键词: NFT、Bitcoin、桥接式铸造、二级共识系统、OP_RETURN<br /><br />总结:
-该文提出了一种协议，用于扩展比特币上的非同质化代币（NFT）的创建、管理和交易。该协议借鉴了其他区块链上使用的无桥接铸造模式，通过利用比特币链上的数据处理所有与代币所有权相关的事宜，包括交易，并结合了一个二级共识系统来实现铸造和可选的元数据修改。为尽可能减小其在比特币主链上的占用空间，该协议使用OP_RETURN机制记录所有权信息，而相关的NFT操作则存储在LAOS区块链上。所有的数据均永久保存在链上，并不依赖于桥梁或第三方运营商。 <div>
-This paper presents a protocol for scaling the creation, management, and trading of non-fungible tokens (NFTs) on Bitcoin by extending bridgeless minting patterns previously used on other blockchains. The protocol leverages on-chain Bitcoin data to handle all aspects of token ownership, including trading, while integrating a secondary consensus system for minting and optionally modifying token metadata. To minimize its on-chain footprint, the protocol utilizes the OP_RETURN mechanism for ownership records, while complementary NFT-related actions are stored on the LAOS blockchain. All data remains permanently on-chain, with no reliance on bridges or third-party operators.
-]]></content:encoded>
-<pubDate>Tue, 08 Apr 2025 11:00:04 +0000</pubDate>
-</item>
-<item>
-<title>A Study of Blockchain Consensus Protocols</title>
-<link>https://eprint.iacr.org/2025/637</link>
-<guid>https://eprint.iacr.org/2025/637</guid>
-<content:encoded><![CDATA[
-<div> 关键词: 比特币、共识机制、POW、Proof of Stake、区块链应用
-
-总结:
-
-本文介绍了自比特币开创第一代加密货币并采用工作量证明(POW)共识机制以来，为了解决能源消耗大和碳足迹重的问题，出现了一系列创新如空间证明(Proof of Space)、权益证明(POS)等不同的共识机制。随着区块链技术应用场景和类型的扩展，比如物联网(IoT)区块链和互操作性解决方案，对各种优化的共识机制产生了需求，例如拜占庭容错(BFT)算法。文章着重梳理了现有的区块链共识理论成果，整理了设计挑战、权衡以及研究领域，并以互操作性解决方案的案例为例展示了区块链设计空间的多样性和灵活性，旨在为研究人员提供一个全面的专题概述及深入研究每个细节的相关链接资源。 <div>
-When Nakamoto invented Bitcoin, the first generation of cryptocurrencies followed it in applying POW (Proof of Work) consensus mechanism; due to its excessive energy consumption and heavy carbon footprints, new innovations evolved like Proof of Space, POS (Proof of Stake), and a lot more with many variants for each. Furthermore, the emergence of more blockchain applications and kinds beyond just cryptocurrencies needed more consensus mechanisms that is optimized to fit requirements of each application or blockchain kind; examples range from IoT (Internet of Things) blockchains for sustainability applications that often use variants of BFT (Byzantine Fault Tolerance) algorithm, and consensus needed to relay transactions and/or assets between different blockchains in interoperability solutions. Previous studies concentrated on surveying and/or proposing different blockchain consensus rules, on a specific consensus issue like attacks, randomization, or on deriving theoretical results. Starting from discussing most important theoretical results, this paper tries to gather and organize all significant existing material about consensus in the blockchain world explaining design challenges, tradeoffs and research areas. We realize that the topic could fit for a complete textbook, so we summarize the basic concepts and support with tables and appendices. Then we highlight some case examples from interoperability solutions to show how flexible and wide the design space is to fit both general and special purpose systems. The aim is to provide researchers with a comprehensive overview of the topic, along with the links to go deeper into every detail.
-]]></content:encoded>
-<pubDate>Tue, 08 Apr 2025 07:30:27 +0000</pubDate>
-</item>
-<item>
-<title>Towards Scalable YOSO MPC via Packed Secret-Sharing</title>
-<link>https://eprint.iacr.org/2025/635</link>
-<guid>https://eprint.iacr.org/2025/635</guid>
-<content:encoded><![CDATA[
-<div> 关键词: YOSO模型、分布式设置、安全多方计算、通信复杂度、fail-stop敌人
-
-总结:
-本文介绍了YOSO（You Only Speak Once）模型在实现分布式环境如区块链中的强大安全保障方面的应用。针对安全多方计算（MPC）这一核心问题，文章提出首个随参与方数量增加而提高效率（以通信复杂度衡量）的YOSO MPC协议。该协议中，对于$t<\frac{1}{2}$的诚实多数委员会成员，只需略微增加委员会规模，即可显著减少在线通信量。此外，文章还特别考虑了fail-stop类型的敌人（即可能因DoS攻击或软硬件错误而意外失败的诚实参与者），与先前的工作相比，这种情况下协议具有更好的可扩展性。在此前的研究中，这类敌人被视为完全恶意的参与者。 <div>
-The YOSO (You Only Speak Once) model, introduced by Gentry et al. (CRYPTO 2021), helps to achieve strong security guarantees in cryptographic protocols for  distributed settings, like blockchains, with large number of parties. YOSO protocols typically employ smaller anonymous committees to execute individual rounds of the protocol instead of having all parties execute the entire protocol. After completing their tasks, parties encrypt protocol messages for the next anonymous committee and erase their internal state before publishing ciphertexts, thereby enhancing security in dynamically changing environments.
-
-In this work, we consider the problem of secure multi-party computation (MPC), a fundamental problem in cryptography and distributed computing. We assume honest majority among the committee members, and work in the online-offline, i.e., preprocessing, setting.
-   In this context, we present the first YOSO MPC protocol where efficiency---measured as communication complexity---improves as the number of parties increases. Specifically, for $0<\epsilon<1/2$ and an adversary corrupting $t<n(\frac{1}{2}-\epsilon)$ out of $n$ parties, our MPC protocol exhibits enhanced scalability as $n$ increases, where the online phase communication becomes independent of $n$.
-   Prior YOSO MPC protocols considered $t$ as large as $(n-1)/2$, but a significant hurdle persisted in obtaining YOSO MPC with communication that does not scale linearly with the number of committee members, a challenge that is exagerbated when the committee size was large per YOSO's requirements.
-   We show that, by considering a small ``gap'' of $\epsilon>0$, the sizes of the committees are only marginally increased, while online communication is significantly reduced.
-
-
-Furthermore, we explicitly consider fail-stop adversaries, i.e., honest participants who may inadvertently fail due to reasons such as denial of service or software/hardware errors. In prior YOSO work, these adversaries were grouped with fully malicious parties. Adding explicit support for them allows us to achieve even better scalability.
-]]></content:encoded>
-<pubDate>Tue, 08 Apr 2025 05:25:39 +0000</pubDate>
-</item>
-<item>
-<title>Dyna-hinTS: Silent Threshold Signatures for Dynamic Committees</title>
-<link>https://eprint.iacr.org/2025/631</link>
-<guid>https://eprint.iacr.org/2025/631</guid>
-<content:encoded><![CDATA[
-<div> 关键词：silent threshold signatures (STS), committee-based silent threshold signature (c-STS), hinTS, Dyna-hinTS, Ethereum Altair, Dfinity
-
-总结:
-本文提出了一个新的密码学概念——委员会型沉默阈值签名(c-STS)方案，旨在适应像Ethereum Altair和Dfinity这样的系统，其中只有指定的委员会被授权在特定时间段进行签名。现有的STS方案无法直接应用于委员会设置，因为其仅验证签名者的数量，而不能确认他们所属的委员会。针对这一问题，文章提出了首个c-STS方案——Dyna-hinTS，它是hinTS的升级版，实现了对委员会设置的支持。在一组1024个签名人（其中682个签名人可能被篡改）中，与hinTS相比，Dyna-hinTS在由80个签名人组成的委员会中能够在0.35秒内生成聚合签名，性能提高了4.9倍，但代价是签名验证时间比hinTS增加了4%。此外，Dyna-hinTS还支持一般的访问结构、加权签名，并改进了现有的多宇宙阈值签名技术。 <div>
-The works of Garg et al. [S&amp;P'24] (aka hinTS) and Das et al. [CCS'23] introduced the notion of silent threshold signatures (STS) - where a set of signers silently perform local computation to generate a public verification key. To sign a message, any set of $t$ signers sign the message non-interactively and these are aggregated into a constant-sized signature. This paradigm avoids performing expensive Distributed Key Generation procedure for each set of signers while keeping the public verification key constant-sized. 
-
-In this work, we propose the notion of committee-based silent threshold signature (c-STS) scheme. In a c-STS scheme, a set of signers initially perform a one-time setup to generate the verification key, and then a subset of signers are randomly chosen for an epoch to perform the threshold signing while the other signers are not authorized to sign during that epoch. This captures existing systems like Ethereum Altair and Dfinity where only a specific committee is authorized to sign in a designated epoch. The existing STS schemes cannot be extended to the committee setting because the signature verification only attests to the number of signing parties, not which committee they belong to.
-
-So, we upgrade hinTS to the committee setting by proposing Dyna-hinTS. It is the $first$ c-STS scheme and it requires a one-time silent setup and generates a one-time public verification key that does not vary with the committee. Assuming a set of 1024 signers (with corrupt 682 signers), hinTS generates an aggregated signature in 1.7s whereas Dyna-hinTS generates it in $0.35$s within a committee of $80$ signers. This yields a $4.9\times$ improvement over hinTS for signature generation at the cost of increasing signature verification time by $4\%$ over hinTS. Dyna-hinTS supports general access structure, weighted signatures and improves existing multiverse threshold signatures.
-]]></content:encoded>
-<pubDate>Mon, 07 Apr 2025 15:27:03 +0000</pubDate>
-</item>
-<item>
-<title>Charge Your Clients: Payable Secure Computation and Its Applications</title>
-<link>https://eprint.iacr.org/2025/630</link>
-<guid>https://eprint.iacr.org/2025/630</guid>
-<content:encoded><![CDATA[
-<div> 关键词：数据市场、隐私保护、恶意客户端行为、安全计算、付费协议
-
-总结:
-针对当前数据市场存在的客户隐私保护不力和易受恶意客户端行为影响的问题，本文提出了“付费安全计算”这一新型安全计算范式，旨在保护客户查询隐私的同时，使服务器能够安全获取定价信息，并防范恶意客户端的行为。为具体应用，文章设计了适用于关键词私有信息检索（KPIR）和私有集合交集（PSI）两种场景的定制化付费协议。实验结果显示，相较于不支持定价功能的基线协议，提出的付费协议并未引入过多开销。付费KPIR协议在线成本与基线相同，但设置时间慢约1.3-1.6倍；付费PSI协议则需要大约2倍的通信成本，运行时间根据网络环境不同，比基线协议慢1.5-3.2倍。 <div>
-The online realm has witnessed a surge in the buying and selling of data, prompting the emergence of dedicated data marketplaces. These platforms cater to servers (sellers), enabling them to set prices for access to their data, and clients (buyers), who can subsequently purchase these data, thereby streamlining and facilitating such transactions. However, the current data market is primarily confronted with the following issues. Firstly, they fail to protect client privacy, presupposing that clients submit their queries in plaintext. Secondly, these models are susceptible to being impacted by malicious client behavior, for example, enabling clients to potentially engage in arbitrage activities.
-
-To address the aforementioned issues, we propose payable secure computation, a novel secure computation paradigm specifically designed for data pricing scenarios. It grants the server the ability to securely procure essential pricing information while protecting the privacy of client queries. Additionally, it fortifies the server's privacy against potential malicious client activities. As specific applications, we have devised customized payable protocols for two distinct secure computation scenarios: Keyword Private Information Retrieval (KPIR) and Private Set Intersection (PSI). 
-
-We implement our two payable protocols and compare them with the state-of-the-art related protocols that do not support pricing as a baseline. Since our payable protocols are more powerful in the data pricing setting, the experiment results show that they do not introduce much overhead over the baseline protocols. 
-Our payable KPIR achieves the same online cost as baseline, while the setup is about $1.3-1.6\times$ slower than it. Our payable PSI needs about $2\times$ more communication cost than that of baseline protocol, while the runtime is $1.5-3.2\times$ slower than it depending on the network setting.
-]]></content:encoded>
-<pubDate>Mon, 07 Apr 2025 13:45:34 +0000</pubDate>
 </item>
 </channel>
 </rss>
