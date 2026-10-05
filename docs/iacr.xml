@@ -4,6 +4,145 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+<item>
+<title>Can AI Oversight Be Zero Knowledge?</title>
+<link>https://eprint.iacr.org/2026/2299</link>
+<guid>https://eprint.iacr.org/2026/2299</guid>
+<content:encoded><![CDATA[
+<div> 零知识证明 交互式论证 预言机辅助 AI输出验证 隐私保护
+<br><br>总结: 1.AI用机密数据生成输出，须验正确又不泄露。2.既有交互证明/辩论依赖快验证与假设。3.本文问多项式验证者能否零知识。4.随机预言模型下一般不可能，即便双方时间远长于计算，辩论也不行。5.若预言机对答案签名，则仅需抗碰撞哈希，证明者与验证者可高效零知识验证，不靠诚实对手或计算稳健性。 <div>
+AI systems increasingly produce outputs from confidential data, such as a fitness-for-duty assessment from medical records or the predicted properties of a drug candidate from its secret structure. It is important to verify that such outputs are correct without revealing the underlying data. A recent line of work studies verification of AI outputs via interactive proofs and debate for oracle-aided computation, where correctness may depend on an oracle such as human judgment, a physical experiment, or the web. These works focus on verification by a verifier that runs much faster than the computation. However, such efficient verification is impossible for general oracle-aided computation, and these works therefore rely on additional assumptions. We focus instead on privacy: allowing the verifier to run in time polynomial in the computation, we ask whether interactive arguments for oracle-aided computation can be zero knowledge, so that the verifier learns nothing about the confidential data beyond the correctness of the output.
+
+We prove that, in general, they cannot. In the random oracle model, there are no zero-knowledge proofs for all oracle-aided computations, even if both the prover and the verifier are allowed to run much longer than the computation itself. The impossibility extends to debate, a canonical model for scalable oversight.
+
+On the positive side, we show that if the oracle attaches a cryptographic signature to each of its answers, then every oracle-aided computation can be verified in zero knowledge with an efficient prover and verifier, assuming only collision-resistant hash functions. Beyond privacy, this also gives an alternative approach to scalable oversight that relies neither on an honest opponent, as in debate, nor on the robustness of the computation, as in prior single-prover protocols.
+]]></content:encoded>
+<pubDate>Thu, 01 Oct 2026 16:49:59 +0000</pubDate>
+<pubDate>Thu, 01 Oct 2026 16:49:59 +0000</pubDate>
+</item>
+<item>
+<title>Pseudorandom Correlation Generators for Matrix Triples</title>
+<link>https://eprint.iacr.org/2026/2298</link>
+<guid>https://eprint.iacr.org/2026/2298</guid>
+<content:encoded><![CDATA[
+<div> 伪随机相关生成器 矩阵三元组 安全计算 QASD假设 Weyl-Pauli扭代数<br><br>总结:
+1. 安全计算常需矩阵三元组(A,B,A·B)，旧PCG种子随维数线性增长、扩展慢。
+2. 新PCG一基于QASD，N个三元组种子为poly(λ,log n,log N)，每三元组Θ(n^3log(n^3N))次域运算，去除线性依赖。
+3. 新PCG二基于Weyl-Pauli扭代及扭QASD，种子同前，成本仅比明文略大。
+4. 验证假设并用于PPML和阈值MAYO。 <div>
+We introduce new pseudorandom correlation generators (PCGs) for matrix triples: shares of triples $(A,B,A\cdot B)$ where $A,B$ are random matrices over $\mathbb{F}^{n\times n}$ for a field $\mathbb{F}$ and an integer $n$. Matrix triples are consumed in a wide variety of secure computation protocols that involve matrix arithmetic, which occurs commonly in settings such as privacy-preserving machine-learning and statistics, threshold cryptography, secure linear algebra, and more. Previous PCGs for matrix triples are inefficient: their seed grows at least linearly in the matrix dimension, and their expansion is slow. In this work, we introduce two new PCGs with improved performances:
+
+1. Our first construction, inspired by the recent work of (Gentry and Lee, Crypto 2026) on FHE for matrix arithmetic, relies on the quasi-abelian syndrome decoding (QASD) assumption introduced in (Bombar et al., Crypto 2023), an assumption which has since received a significant amount of attention. Our PCG generates $N$ matrix triples over $\mathbb{F}^{n\times n}$ from a seed of size $poly(\lambda,\log n,\log N)$ using $\Theta(n^3\log(n^3N))$ field operations per triple, removing the linear dependency on $n$ from the seed compared to previous works.
+
+2. Our second construction is more mathematically involved, and builds upon an elegant and surprising connection with the Weyl-Pauli twisted algebra, a mathematical structure originally studied in (Weyl, Zeitschrift für Physik, 1927) in the context of quantum kinematics. Our PCG relies on a new variant of the QASD assumption over the Weyl-Pauli twisted group algebra and exhibits impressive performances: it has the same seed size as our first construction and generates $N$ matrix triples at a cost only a small constant time larger than the cost of computing $N$ matrix triples in the clear.
+
+We complement our results with an in-depth study of our new twisted QASD assumption and demonstrate the benefits of our PCGs in concrete applications such as privacy-preserving machine learning and threshold MAYO.
+]]></content:encoded>
+<pubDate>Thu, 01 Oct 2026 16:31:24 +0000</pubDate>
+<pubDate>Thu, 01 Oct 2026 16:31:24 +0000</pubDate>
+</item>
+<item>
+<title>Context-Blind Device-Bound Anonymous Credentials from Signatures and Proofs</title>
+<link>https://eprint.iacr.org/2026/2295</link>
+<guid>https://eprint.iacr.org/2026/2295</guid>
+<content:encoded><![CDATA[
+<div> 匿名凭证,安全元件,设备绑定,上下文盲,可能后量子
+<br><br>总结:1.针对匿名凭证可转移性，要求凭证绑定安全元件，且每次展示需新元件参与而不泄露上下文。2.构造依赖位置绑定承诺、签名、盲签名和NIZK，证明正确、抗合谋不可链接及元件无关。3.用CAPSS、Merkle承诺和Aurora实例化。4.在16属性场景，未优化原型证明214.65KB，用户13.18秒，验证1.37秒。5.这是首个完全由可能后量子组件构成的相关具体构造与评估。 <div>
+Anonymous credentials enable privacy preserving authentication, but their transferability motivates binding each credential to a key protected by a secure element (SE). Such binding should preserve privacy even when the SE is remote or corrupted: every presentation must require fresh SE participation without revealing its context to the SE (Friedrichs et al., EC'26). Existing so called context-blind device-bound constructions rely on classical assumptions, whereas existing plausibly post-quantum anonymous credentials do not provide this functionality.
+
+We give a modular construction of context blind device-bound anonymous credentials from a position-binding vector commitment, a signature scheme, a round-optimal blind signature, and a non-interactive zero-knowledge argument. We prove correctness, one-more unforgeability, unlinkability against a colluding issuer, verifier, and fully corrupted SE, and SE-obliviousness. We instantiate the construction with the CAPSS framework (Feneuil and Rivain, TCHES'26), Griffin/Jive Merkle commitments, and an Aurora-based proof of the complete presentation relation. 
+
+We benchmark this concrete instantiation in one representative setting with 16 attributes and four disclosed attributes. Our non optimized prototype produces a $214.65$ KB presentation proof and requires $13.18$ s for the user and $1.37$ s for verification on our benchmark platform. We complement this benchmark with published results to explore the proof-size/proving-time trade-offs offered by alternative transparent plausibly post-quantum proof systems for relations of comparable size.  
+
+To the best of our knowledge, this is the first concrete construction and evaluation of context-blind device-bound anonymous credentials assembled entirely from plausibly post-quantum components.
+]]></content:encoded>
+<pubDate>Thu, 01 Oct 2026 12:56:00 +0000</pubDate>
+<pubDate>Thu, 01 Oct 2026 12:56:00 +0000</pubDate>
+</item>
+<item>
+<title>Deniable Secret Sharing: Towards Practical Faking</title>
+<link>https://eprint.iacr.org/2026/2294</link>
+<guid>https://eprint.iacr.org/2026/2294</guid>
+<content:encoded><![CDATA[
+<div> 可否认秘密共享、伪造函数、隐私保护、消息复杂度、访问结构
+<br><br>总结: 1.DSS可让股东生成外观真实但不泄露秘密的伪造份额。2.本文研究协作伪造中的隐私保护与消息复杂度。3.信息论最强DSS必须交换非零消息，且消息量可能很大；同时给出多数情形匹配下界的构造。4.线性SS中，某些非授权集伪造时会获知秘密。5.计算模型给出两种无需额外交互的构造，兼顾隐蔽与隐私，分别依赖PRG或VBB，适用于一般访问结构。 <div>
+Deniable secret sharing (DSS; Canetti et al, TCC 2025) is designed for a scenario where an adversary is able to bribe or coerce all shareholders to divulge their shares of a secret. A deniable secret sharing scheme is equipped with a faking function that enables shareholders to produce fake shares that look like real shares, but do not actually reveal any additional information about the secret.
+
+Existing DSS constructions require the fakers to jointly compute on their shares, without considering how this computation might be realized. In this paper, we investigate two crucial properties of such computations: the extent to which the fakers themselves learn information about the secret (privacy against fakers), and the number of messages they need to exchange (message complexity). Message complexity can be seen as a measure of faking conspicuousness, if the adversary is able to observe network traffic.
+
+We prove that to obtain the strongest notion of DSS, any information-theoretic construction requires the fakers to exchange a non-zero number of messages, which could be large (depending on the access structure). We describe a general construction that matches this lower bound in many cases, e.g. for threshold access structures. Furthermore, for linear secret sharing schemes, we prove that certain unqualified sets must learn the secret as a result of faking.
+
+Moving to the computational setting, we describe two constructions which require no interaction beyond the knowledge of who the fakers are. This implies that both inconspicuousness and privacy against fakers are achieved. The first construction requires the share size to be exponential in the number of shareholders, but assumes only a PRG. The second construction has small shares, but assumes virtual black-box obfuscation. We see the latter construction as a stepping stone for a future iO-based instantiation.
+
+All of our lower bounds and constructions consider general access structures.
+]]></content:encoded>
+<pubDate>Thu, 01 Oct 2026 11:30:49 +0000</pubDate>
+<pubDate>Thu, 01 Oct 2026 11:30:49 +0000</pubDate>
+</item>
+<item>
+<title>Evidence on Demand: Selectively Disclosable Watermarks for Generative AI</title>
+<link>https://eprint.iacr.org/2026/2291</link>
+<guid>https://eprint.iacr.org/2026/2291</guid>
+<content:encoded><![CDATA[
+<div> 密码学水印 生成式AI 可选择披露 令牌验证 安全性质<br><br>总结:
+1.提出可选择披露的生成式AI密码学水印方法。
+2.默认仅模型所有者可检测，并向单个输出发放短令牌。
+3.第三方凭令牌验证该输出，其他输出对令牌持有者仍不可检测。
+4.形式化未披露数据不可检测与披露可靠性，连同鲁棒性、不可伪造性均获证明。
+5.基于既有构造，适用于LLM等自回归模型。 <div>
+Cryptographic watermarking for generative AI equips a generative model with a hidden mark that identifies its outputs as machine-generated, without affecting output quality.
+This study proposes a new cryptographic watermarking method with selective disclosability.
+Under this scheme, detection is restricted by default to the model owner, who can selectively issue a short token for any single output.
+This token enables any third party to verify that the specific output is watermarked, while guaranteeing that all other outputs remain undetectable, even to the token holder.
+This scheme is particularly useful in scenarios where a provider must certify a single controversial output without compromising the privacy of other outputs.
+In addition to two existing security properties, namely robustness and unforgeability, we formalize two security properties, undetectability of undisclosed data and disclosure soundness, to achieve our goal.
+We then propose our construction based on prior work (Lin, Shahabi, and Song, CRYPTO 2026) and prove it satisfies the four security notions.
+Our construction is broadly applicable to autoregressive generative AI models, including LLMs.
+]]></content:encoded>
+<pubDate>Thu, 01 Oct 2026 08:51:41 +0000</pubDate>
+<pubDate>Thu, 01 Oct 2026 08:51:41 +0000</pubDate>
+</item>
+<item>
+<title>Jambon: Asynchronous Universally Composable Threshold FHE with Low Communication</title>
+<link>https://eprint.iacr.org/2026/2290</link>
+<guid>https://eprint.iacr.org/2026/2290</guid>
+<content:encoded><![CDATA[
+<div> 阈值全同态加密 门限解密 DKG 确定性舍入 UC安全
+<br><br>总结:1.重审DKG与门限解密组合的正确性和模拟安全。2.提出Jambon，对部分解密确定性舍入，缩小解密响应模数。3.分别考虑初始化与解密误差，证明BFV精确恢复并扩展至CKKS。4.在随机预言模型下证明UC强门限隐私安全。5.对256、512、1024方，响应较KLL+26强安全构造至少小60%。 <div>
+Threshold fully homomorphic encryption distributes decryption authority among multiple parties, but achieving strong security can significantly increase the required ciphertext modulus and the size of each decryption response. Existing parameter analyses typically focus on threshold decryption alone. In particular, the recent work of Kim et al. (KLL$^+$26) analyzes correctness and strong simulation security of partial decryption without covering distributed key generation (DKG). When the parties generate the keys themselves, the DKG and partial-decryption protocols must satisfy their respective correctness and security requirements.
+
+We revisit correctness and simulation-security requirements for threshold decryption when it is composed with DKG.
+We then introduce Jambon, which applies deterministic rounding to partial decryptions to further reduce the modulus used for decryption responses.
+The composed security bound accounts separately for setup and decryption errors.
+We prove exact recovery for BFV and extend the approach to CKKS under an additional condition.
+
+Under the stated temporary-HE assumptions and resource hybrids, we establish universally composable security with strong threshold privacy against static malicious corruption in the random-oracle model. We prove security for the DKG and its composition with verifiable partial decryption. Under the stated algebraic and statistical parameters, Jambon's numerical decryption responses are at least $60\%$ smaller than the native responses of the updated KLL$^+$26 strong-security construction at every threshold considered for $256$, $512$, and $1024$ parties. This comparison uses the specified sufficient bounds and excludes proof and setup traffic.
+]]></content:encoded>
+<pubDate>Thu, 01 Oct 2026 08:45:58 +0000</pubDate>
+<pubDate>Thu, 01 Oct 2026 08:45:58 +0000</pubDate>
+</item>
+<item>
+<title>Bandwidth Fee Mechanisms for Certified Transaction Dissemination</title>
+<link>https://eprint.iacr.org/2026/2285</link>
+<guid>https://eprint.iacr.org/2026/2285</guid>
+<content:encoded><![CDATA[
+<div> 带宽费用机制 交易传播 激励相容 验证者合谋 价格更新
+<br><br>总结:
+1. BFM为共识前阈值认证交易传播定价，建模为用户与验证者双边拍卖。
+2. 非平凡BFM无法防两验证者合谋，也不能同时满足用户、验证者及单验证者加用户联盟激励相容。
+3. 仅考虑单边偏离时，贪心路由定价机制对个体用户和验证者激励相容。
+4. 提出EIP-1559式价格更新，大市场中价格稳定于唯一不动点附近。 <div>
+We study bandwidth fee mechanisms (BFMs) for pricing threshold certified transaction dissemination before consensus. BFMs are analogous to transaction fee mechanisms (TFMs) introduced by Roughgarden (2021), except that they price blockchain communication rather than computation. Separately pricing this bandwidth is especially relevant when transaction dissemination is separated from consensus and execution. We model BFMs as a two-sided procurement auction between users who submit transactions and validators who receive and forward them. Any validator may be assigned as the source of a transaction and forward it to a threshold of attesters. The model accounts for the source validator's receipt of the user submitted transaction and the subsequent transfers between validators. It abstracts away unrestricted multi-hop gossip and network topology.
+
+In this work, we focus on settings where transactions must be certified/attested by a threshold of network nodes before consensus, and we develop the following results.
+- We characterize the limits of myopic incentive compatibility for BFMs: No non-trivial transcript-based BFM can prevent profitable collusion between two validators, and no non-trivial BFM can simultaneously satisfy incentive compatibility for individual user, individual validator, and coalition of one validator and one user.
+- In contrast, once we restrict attention to unilateral deviations, we present a greedy-route posted-price mechanism that is incentive compatible for every individual user and validator.
+\item We study how the bandwidth price should evolve across blocks. Assuming validators execute honestly, we propose an EIP-1559-style price-update rule and show that its fluid approximation has a unique fixed point, which is locally stable for small enough step sizes. In large markets, prices that start near this point stay near it with high probability over any fixed time horizon.
+\end{itemize}
+]]></content:encoded>
+<pubDate>Wed, 30 Sep 2026 20:15:26 +0000</pubDate>
+<pubDate>Wed, 30 Sep 2026 20:15:26 +0000</pubDate>
+</item>
 
 <item>
 <title>DAVINCI: A Decentralized Cryptographic Voting Protocol</title>
