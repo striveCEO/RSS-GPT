@@ -5,12 +5,77 @@
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
 <item>
+<title>Hide Now, Trace Later: Retrospective Attribution in Issuer-Hiding Credentials</title>
+<link>https://eprint.iacr.org/2026/2396</link>
+<guid>https://eprint.iacr.org/2026/2396</guid>
+<content:encoded><![CDATA[
+<div> 属性凭证,发行者隐藏,隐私认证,发行人检查,追溯归责
+<br><br>总结:1.属性凭证可保护未披露属性，但验证会暴露发行者；隐藏发行者又使被攻破发行者难以追责。2.提出发行人检查机制，检查机构释放密钥后，验证者可本地识别特定发行者在指定时间段的出示。3.该机制不影响其他发行者和更早时间段，并形式化语法与安全要求，给出通用构造。4.具体基于配对、随机化结构保持签名、Schnorr证明和匿名IBE实现，成本分析显示现实参数下可行。 <div>
+Attribute-based credentials (ABCs) enable privacy-preserving authentication by allowing users to prove statements about certified attributes without revealing unnecessary information. However, while ABCs hide undisclosed attributes, the credential verification process inherently reveals the issuer's identity, which can leak contextual information such as a user's nationality or residency. Issuer-hiding ABCs address this by concealing the issuer during verification, but introduce a critical accountability problem: if an issuer is compromised or acts maliciously, previously accepted presentations originating from that issuer cannot be singled out without significant privacy violation and high burden on the central authority performing the inspection.
+
+We propose an issuer-inspection mechanism that enables retrospective attribution while preserving privacy. An inspection authority can release keys allowing verifiers to locally identify presentations originating from a specific compromised issuer and a defined time period, without affecting other issuers or earlier time periods. Concretely, we formalize the syntax and security requirements of issuer inspection and provide a generic construction from standard cryptographic building blocks; we further present a concrete pairing-based instantiation using Groth's randomizable structure-preserving signatures, Schnorr-style proofs and an adaptation of Gentry's anonymous identity-based encryption. Our analysis of computational and communication costs indicates that the proposed functionality remains practical for realistic parameter choices.
+]]></content:encoded>
+<pubDate>Wed, 07 Oct 2026 13:03:45 +0000</pubDate>
+<pubDate>Wed, 07 Oct 2026 13:03:45 +0000</pubDate>
+</item>
+<item>
+<title>Post-Quantum Dropout-Resilient Verifiable Secure Aggregation for Federated Learning</title>
+<link>https://eprint.iacr.org/2026/2394</link>
+<guid>https://eprint.iacr.org/2026/2394</guid>
+<content:encoded><![CDATA[
+<div> 联邦学习, 后量子安全, 安全聚合, 可验证, 掉线容错
+<br><br>总结: 1.现有方案难兼顾后量子、掉线容错、防恶意服务器与有限合谋；2.PQ-DVSA保护客户端更新模型与聚合权重；3.掉线后可重建活跃集合掩码，并允许客户端验证服务器聚合结果；4.学习效果接近精确加权聚合，较SWAS加密提交耗时最多降96%。 <div>
+Secure weighted aggregation is essential for privacy
+preserving federated learning, yet existing schemes do not
+simultaneously provide post-quantum security, resilience to client
+dropouts, verifiability against malicious servers, and resistance
+to bounded collusion between the server and clients. This paper
+presents PQ-DVSA, a verifiable secure aggregation scheme that
+provides post-quantum security and resilience to client dropouts.
+PQ-DVSA protects both clients’ updated local models and
+aggregation weights, enables reconstruction of the aggregate mask
+for the active set after client dropouts, and allows clients to
+verify the server’s aggregation result under bounded collusion.
+Experimental results show that PQ-DVSA achieves learning
+performance comparable to exact weighted aggregation and
+reduces the runtime for encrypted submission at each client
+by up to 96% compared with SWAS, the closest existing scheme
+to PQ-DVSA.
+]]></content:encoded>
+<pubDate>Wed, 07 Oct 2026 09:57:59 +0000</pubDate>
+<pubDate>Wed, 07 Oct 2026 09:57:59 +0000</pubDate>
+</item>
+<item>
+<title>Fair and Efficient Helper-Aided MPC with Cheater Identification</title>
+<link>https://eprint.iacr.org/2026/2392</link>
+<guid>https://eprint.iacr.org/2026/2392</guid>
+<content:encoded><![CDATA[
+<div> 安全多方计算 助手辅助 可识别公平 同步异步 性能加速
+<br><br>总结:
+1. 不诚实多数MPC通信高且仅可中止，攻击者可获结果后中止重跑。
+2. 助手辅助MPC用半诚实非共谋助手，支持n-1恶意方场景。
+3. 现有公平协议仍允许无罚则中止并全员拿不到输出。
+4. 本文提出可识别公平协议：全体拿输出，或中止后无人拿且可识别共同作弊者。
+5. 同步Alhena与异步Wasat在线提速4-12.5倍与2.5-5倍，Wasat预处理约3倍，且不受主动作恶影响。 <div>
+Secure multi-party computation (MPC) enables privacy-preserving tasks such as auctions and voting. In practice, more than half of the parties may collude, making security against a dishonest majority desirable. Unfortunately, dishonest-majority MPC suffers from high communication and can achieve only abort security. For instance, in an auction, an adversary may abort after learning the outcome and rerun the protocol with a higher bid.
+
+Helper-aided MPC mitigates these limitations by introducing a semi-honest, non-colluding helper, a model that naturally fits settings with a central governing or coordinating entity and provides strong guarantees even when up to $n-1$ parties are malicious. The model assumes that the adversary can either semi-honestly corrupt the helper or maliciously corrupt up to $n-1$ parties (excluding the helper). While existing helper-aided protocols are fair i.e. either all parties receive the output or none do; they still allow the adversary to abort without any penalty and deny output to all parties. This behavior is undesirable in practice, as parties may incur the cost of computation without receiving the output.
+
+In this work, we design efficient helper-aided MPC protocols that achieve identifiable fairness: either all parties obtain the output, or—if an abort occurs—no party receives the output, and the honest parties identify at least one common cheater.
+
+We propose two protocols, $\mathsf{Alhena}$ for synchronous networks and $\mathsf{Wasat}$ for asynchronous networks which provide the stronger guarantee of identifiable fairness compared to the state-of-the-art fair protocols $\mathsf{Asterisk}$ (Kamarkar et al. IEEE S&amp;P 2024) and $\mathsf{Castor}$ (Kamarkar et al. IEEE S&amp;P 2026) in the respective network settings. Our experiments show that, in the online phase, $\mathsf{Alhena}$ and $\mathsf{Wasat}$ achieves speedups of $4-12.5\times$ and $2.5-5\times$ over $\mathsf{Asterisk}$ and $\mathsf{Castor}$ respectively. Furthermore, in the preprocessing phase, $\mathsf{Wasat}$ exhibits speedup of $\approx 3\times$  over $\mathsf{Castor}$. Notably, our protocols are designed in such a way that the online performance remains unaffected by active misbehaviour.
+]]></content:encoded>
+<pubDate>Wed, 07 Oct 2026 09:28:44 +0000</pubDate>
+<pubDate>Wed, 07 Oct 2026 09:28:44 +0000</pubDate>
+</item>
+
+<item>
 <title>AsyncLS: an iUC Framework for Wallet-Based Asynchronous Ledger Services</title>
 <link>https://eprint.iacr.org/2026/2378</link>
 <guid>https://eprint.iacr.org/2026/2378</guid>
 <content:encoded><![CDATA[
 <div> 异步账本服务 iUC框架 钱包授权 协议实现 应用集成
-<br><br>总结:1.在iUC框架定义AsyncLS，以钱包暴露账本应用状态机，含注册、读取、认证提交和状态查询，绑定授权与检查点，确认记录首个合格交易结果。2.构造由钱包、中继、适配、重放实现的协议，分离服务与实现证明可信及本地实现。3.用于ORDI支付和参数化执行层，区分账本协议与应用效果，依赖授权、设置、时钟、认证等假设。 <div>
+<br /><br />总结:1.在iUC框架定义AsyncLS，以钱包暴露账本应用状态机，含注册、读取、认证提交和状态查询，绑定授权与检查点，确认记录首个合格交易结果。2.构造由钱包、中继、适配、重放实现的协议，分离服务与实现证明可信及本地实现。3.用于ORDI支付和参数化执行层，区分账本协议与应用效果，依赖授权、设置、时钟、认证等假设。 <div>
 We define an asynchronous ledger service ($\mathsf{AsyncLS}$) in the IITM-based universal composability (iUC) framework. The wallet-based service exposes a general state machine for a decentralized ledger-based application through registration, reads of committed application state, authenticated submission, and status queries with immutable final results. Each logical request binds the user's authorization to a finalized checkpoint and the applicable execution context. A confirmed outcome identifies the first eligible transaction and records application success or rejection. Strict expiry requires complete processing beyond the eligible height window with no recorded outcome, and certifies that the request has no application effect.
 
 We construct a protocol $\mathbf{\Pi}_{\mathsf{AsyncLS}}$ that realizes the ideal service using four components: Wallet, Relay, Adapter, and Replay. The proof separates the service construction from the implementations of Relay and Adapter while preserving ledger, clock, authentication, and setup interactions. We prove realization for the trusted and local implementations under their respective execution and trust assumptions.
@@ -18,9 +83,7 @@ We construct a protocol $\mathbf{\Pi}_{\mathsf{AsyncLS}}$ that realizes the idea
 We use the service to construct an ORDI interactive payment and a parameterized execution layer above transaction ordering. These examples distinguish the ledger interaction protocol from the application state and effects exposed by the service. Each use requires the stated authorization, setup, ledger, clock, authentication, and ledger-effect assumptions.
 ]]></content:encoded>
 <pubDate>Tue, 06 Oct 2026 10:20:53 +0000</pubDate>
-<pubDate>Tue, 06 Oct 2026 10:20:53 +0000</pubDate>
 </item>
-
 <item>
 <title>StOMR: Stateful Oblivious Message Retrieval</title>
 <link>https://eprint.iacr.org/2026/2369</link>
@@ -13917,21 +13980,6 @@ The ciphertexts in our scheme are smaller by approximately a factor of
 zero-knowledge proofs are smaller by a factor of 4X and 2X.
 ]]></content:encoded>
 <pubDate>Thu, 10 Apr 2025 09:35:21 +0000</pubDate>
-</item>
-<item>
-<title>Unbounded Multi-Hop Proxy Re-Encryption with HRA Security: An LWE-Based Optimization</title>
-<link>https://eprint.iacr.org/2025/656</link>
-<guid>https://eprint.iacr.org/2025/656</guid>
-<content:encoded><![CDATA[
-<div> 关键词: Proxy Re-Encryption, 多跳, 线性代数基, 适应性HRA安全, 高效率
-
-<br /><br />总结:
-本文提出了一种基于线性代数基的、具有适应性HRA安全级别的新型无界多跳Proxy Re-Encryption（PRE）方案。与此前Zhao等人提出的仅支持选择性CPA安全的无界多跳PRE方案相比，我们的方案提供更强的安全性。我们优化了基于FHEW-like盲旋转的重加密过程，解决了将Fuchsbauer等人框架应用于FHEW-like方案时，噪声泛滥技术与该框架之间的不兼容问题，从而降低了公钥的存储需求并提高了效率。此外，我们的优化无界多跳PRE方案还可以修改为无界同态PRE方案，允许对新鲜、重新加密和评估过的密文进行任意的同态计算，更加适用于实际应用场景。 <div>
-Proxy re-encryption (PRE) schemes enable a semi-honest proxy to transform a ciphertext of one user $i$ to another user $j$ while preserving the privacy of the underlying message. Multi-hop PRE schemes allow a legal ciphertext to undergo multiple transformations, but for lattice-based multi-hop PREs, the number of transformations is typically bounded due to the increase of error terms. Recently, Zhao et al. (Esorics 2024) introduced a lattice-based unbounded multi-hop (homomorphic) PRE scheme that supports an unbounded number of hops. Nevertheless, their scheme only achieves the selective CPA security. In contrast, Fuchsbauer et al. (PKC 2019) proposed a generic framework for constructing HRA-secure unbounded multi-hop PRE schemes from FHE. Despite this, when instantiated with state-of-the-art FHEW-like schemes, the overall key size and efficiency remain unsatisfactory. 
-
-In this paper, we present a lattice-based unbounded multi-hop PRE scheme with the stronger adaptive HRA security (i.e. security against honest re-encryption attacks), which is more suitable for practical applications. Our scheme features an optimized re-encryption process based on the FHEW-like blind rotation, which resolves the incompatibility between the noise flooding technique and Fuchsbauer et al. 's framework when instantiated with FHEW-like schemes. This results in reduced storage requirements for public keys and offers higher efficiency. Moreover, our optimized unbounded multi-hop PRE scheme can be modified to an unbounded homomorphic PRE, a scheme allowing for arbitrary homomorphic computations over fresh, re-encrypted, and evaluated ciphertexts.
-]]></content:encoded>
-<pubDate>Thu, 10 Apr 2025 07:14:20 +0000</pubDate>
 </item>
 </channel>
 </rss>
