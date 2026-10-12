@@ -4,6 +4,82 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+<item>
+<title>Witness-Succinct UC-Secure SNARKs with Weaker Trust Assumptions</title>
+<link>https://eprint.iacr.org/2026/2434</link>
+<guid>https://eprint.iacr.org/2026/2434</guid>
+<content:encoded><![CDATA[
+
+Zero-knowledge Succinct Non-Interactive Arguments of Knowledge (zkSNARKs) are foundational cryptographic primitives enabling privacy-preserving and verifiable computation. However, most existing zkSNARK constructions rely on strong trust assumptions—typically a fully trusted setup—which undermines their applicability in adversarial or decentralized environments. Although transparent zkSNARKs remove this assumption, they typically do not satisfy strong composability guarantees such as Universal Composability (UC).
+
+In this work, we present the first framework for constructing UC-secure zkSNARKs under weaker trust assumptions, based on a new primitive called Key-Updatable Polynomial Commitments (KU-pCom). This primitive enables publicly verifiable commitment-key updates, requiring only one honest update rather than a fully trusted setup. Our compiler transforms any Simulation-Extractable zkSNARK into a UC-secure variant by composing it with a KU-pCom scheme. We instantiate our framework in two settings: (1) using the structured, trusted setup of the KZG commitment scheme, and (2) an instantiation based on the lattice-based commitment scheme of Hwang et al. (Crypto 2024). We implement both instantiations and provide an end-to-end benchmark of UC-secure zkSNARKs with succinctness. Compared to prior UC-secure NIZKs that sacrifice succinctness (e.g., Abdolmaleki et al., CSF 2024), our work demonstrates that UC security, succinctness, and practical efficiency can be simultaneously achieved, establishing a new foundation for succinct, composable proof systems under weaker trust assumptions.
+]]></content:encoded>
+<pubDate>Sat, 10 Oct 2026 00:30:59 +0000</pubDate>
+<pubDate>Sat, 10 Oct 2026 00:30:59 +0000</pubDate>
+</item>
+<item>
+<title>Lattice Bingo: Asynchrony and One-Shot Adaptivity in Verifiable Secret Sharing via Erasure Code Commitments</title>
+<link>https://eprint.iacr.org/2026/2432</link>
+<guid>https://eprint.iacr.org/2026/2432</guid>
+<content:encoded><![CDATA[
+
+Asynchronous verifiable secret sharing (AVSS) allows a dealer to distribute a secret among parties while preserving privacy and consistent reconstruction, despite Byzantine faults and arbitrary message delays. It is a fundamental building block for Byzantine agreement, distributed key generation, and secure multiparty computation. Packed AVSS protocols share many secrets together to reduce communication per secret. The best known AVSS protocols achieve quadratic communication while sharing linearly many secrets. In particular, Bingo (Abraham et al., CRYPTO 2023) shares a batch of $\Theta(k)$ secrets among $k$ parties using $O(\lambda k^2)$ words of communication, while also achieving adaptive security, but relies on assumptions that are not post-quantum secure. Known post-quantum alternatives have higher worst-case communication for comparable batch sizes or require substantially larger batches to achieve linear amortized communication.
+
+We present Lattice Bingo, a lattice-based packed AVSS protocol with quadratic communication and linear packing. For every constant $\epsilon>0$, it shares $\Theta(k)$ secrets among $k\geq(3+\epsilon)f$ parties, tolerates $f$ Byzantine parties, and uses $O(k^2\operatorname{poly}(\lambda))$ words of communication. It additionally achieves one-shot adaptive secrecy: the adversary may adaptively choose its corruption and reconstruction requests based on the public transcript observed so far, but must submit these requests together in a single batch.
+
+Our main technical contribution is a commitment scheme for two-dimensional linear codes based on the PowerBASIS assumption. We combine PowerBASIS commitments with the linear code based secret sharing of Applebaum, Nir, and Pinkas, replacing the Reed–Solomon encoding and KZG commitments used in Bingo. Our commitment supports proof interpolation, enabling parties to recover missing shares and their opening proofs. It additionally achieves a notion that we call one-shot simulation hiding. Together, these properties allow us to adapt Bingo’s framework to obtain Lattice Bingo with the same efficiency and one-shot adaptive security.
+]]></content:encoded>
+<pubDate>Fri, 09 Oct 2026 21:47:08 +0000</pubDate>
+<pubDate>Fri, 09 Oct 2026 21:47:08 +0000</pubDate>
+</item>
+<item>
+<title>Magnetar: High-speed post-quantum RV64 zkVM from standard hashes</title>
+<link>https://eprint.iacr.org/2026/2423</link>
+<guid>https://eprint.iacr.org/2026/2423</guid>
+<content:encoded><![CDATA[
+
+We describe the design, implementation, and experimental evaluation of Magnetar, a transparent proof system for RV64I program executions (i.e., a zkVM). Magnetar is the first zkVM to simultaneously satisfy the following three properties:
+
+1. General-purpose proving. Magnetar proves programs compiled to the general-purpose RV64I ISA. An implementation of the Ethereum Virtual Machine (EVM) written in Rust or Go can therefore run inside Magnetar, yielding a zkEVM for proving executions of existing EVM smart contracts.
+
+2. Hash-based, post-quantum security. Magnetar’s cryptographic security is rooted in standard hash functions (e.g., SHA-256 or SHA-3).
+
+3. Efficient recursion. Magnetar’s verification work is dominated by evaluating standard hash functions. Magnetar’s proof engine, BinarySpartan, is well-suited for such bit-oriented computations, so verifying a proof is itself an efficient proving workload.
+
+Unlike prior general-purpose zkVMs, Magnetar does not rely on circuit-friendly algebraic hash functions such as Poseidon or Poseidon2, elliptic-curve or lattice assumptions, or a conjectured Reed–Solomon proximity gap. Even prior zkVMs commonly described as hash-based rely on elliptic-curve or lattice assumptions in their core proving machinery, provide only about 100 bits of security, or rest on conjectured soundness; some do more than one of these.
+
+Finally, we implement Magnetar in Rust and experimentally evaluate it. We find that, at 120 bits of provable security and with 12 performance cores on an M4 Max MacBook Pro, Magnetar proves 222-cycle executions at 6.5–7.7 million cycles per second, with proofs of about 600 KiB that verify in 10–12 ms. Across 15 application workloads, Magnetar’s proving throughput is 22–57× that of SP1 Hypercube, a hash-and-more-based zkVM; 10–33× that of Jolt-Dory, a curve-based zkVM; and 5–18× that of Jolt-Akita, a lattice-based zkVM, with geometric-mean speedups of about 35×, 16×, and 8.5×, respectively. Magnetar’s proofs are about 4.6× smaller than SP1 Hypercube’s; Jolt’s proofs are under 100 KiB, but they rely on elliptic-curve or lattice assumptions.
+]]></content:encoded>
+<pubDate>Fri, 09 Oct 2026 00:37:27 +0000</pubDate>
+<pubDate>Fri, 09 Oct 2026 00:37:27 +0000</pubDate>
+</item>
+<item>
+<title>Verifiable Computation on Encrypted Data from Homomorphic Encryption over Random Encodings</title>
+<link>https://eprint.iacr.org/2026/2422</link>
+<guid>https://eprint.iacr.org/2026/2422</guid>
+<content:encoded><![CDATA[
+
+Verifiable Computation on Encrypted Data (vCOED) enables clients to outsource computation while providing both privacy and integrity. A promising vCOED paradigm is blind proofs, which use homomorphic encryption (HE) to evaluate verifiable computation (VC) proofs on encrypted data. Despite their efficiency, blind proofs do not provide strong client privacy: a malicious server can exploit reaction attacks to learn information about the client's inputs, intermediate values or final outputs.
+
+Our work addresses this limitation by introducing Homomorphic Encryption over Random Encodings (HERE). We formalize a new security notion, indistinguishability under chosen-plaintext attacks in the presence of an equality oracle over encodings (IND-CPA-E). We prove that combining IND-CPA-E-secure HERE schemes with blind proofs that verify computation over the encodings yields vCOED protocols with strong client privacy. We then instantiate a HERE scheme for functions of bounded degree $d$, using Shamir secret sharing at $(d+1)$ evaluation points under $(d+1)$ distinct HE keys. Finally, we demonstrate the concrete efficiency of our approach through an application to matrix-vector multiplication (MVM), a linear computation corresponding to $d=1$. The proof overhead (i.e. the ratio of the vCOED prover runtime to the homomorphic MVM runtime) in our combined vCOED protocol is as low as $2\times$, as demonstrated in our prototype implementation.
+]]></content:encoded>
+<pubDate>Fri, 09 Oct 2026 00:28:55 +0000</pubDate>
+<pubDate>Fri, 09 Oct 2026 00:28:55 +0000</pubDate>
+</item>
+<item>
+<title>Efficient Unbiasable Verifiable Random Functions via (Non-)Black-Box Reductions</title>
+<link>https://eprint.iacr.org/2026/2421</link>
+<guid>https://eprint.iacr.org/2026/2421</guid>
+<content:encoded><![CDATA[
+
+We present conceptually simple and practically efficient constructions of a verifiable random function (VRF) that fulfills strong notions of unbiasability recently introduced by Giunta and Stewart (Eurocrypt 2024). Unbiasability is a crucial property for many applications of VRFs such as leader election in proof-of-stake blockchains. The only previous constructions provide heuristic security in the random oracle model or rely on the decisional Diffie–Hellman assumption with preprocessing which incurs significant overhead. In contrast, our compiler turns any VRF into an unbiasable VRF in the standard model (without any setup) using only symmetric-key primitives; and thus only with negligible computational overhead.
+Underlying our approach, we provide a generic black-box reduction for unbiasability of VRFs that incurs subexponential loss. Additionally, under a mild (verifiable) requirement on the underlying VRF we also show a novel non-black-box reduction that incurs only polynomial loss.
+This non-black-box technique allows us to replace the folklore "VUF-then-Hash" heuristic with a provably secure "Hash-then-VRF" construction at virtually no cost.
+In particular, if the underlying VRF hashes its input, our transformation requires only a single evaluation of a hardcore function, e.g. parity of the input (plus a PRF evaluation for full security).
+]]></content:encoded>
+<pubDate>Thu, 08 Oct 2026 20:09:56 +0000</pubDate>
+<pubDate>Thu, 08 Oct 2026 20:09:56 +0000</pubDate>
+</item>
 
 <item>
 <title>Hide Now, Trace Later: Retrospective Attribution in Issuer-Hiding Credentials</title>
