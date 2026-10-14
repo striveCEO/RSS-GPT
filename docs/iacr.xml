@@ -4,6 +4,154 @@
 <title>Cryptology ePrint Archive</title>
 <link>https://eprint.iacr.org/rss/rss.xml</link>
 
+<item>
+<title>edaBits in the Exponent (edaBitE) and Issuer-Hiding Blind Signatures from ML-DSA and VOLE-in-the-Head</title>
+<link>https://eprint.iacr.org/2026/2473</link>
+<guid>https://eprint.iacr.org/2026/2473</guid>
+<content:encoded><![CDATA[
+
+Blind signatures let a user obtain a signature by interacting with an issuer that controls the signing key, while the issuer never sees the message. They form the basis of anonymous credentials, which are the centerpiece of privacy-preserving digital identification to be deployed widely in the coming years. Existing plausibly quantum-secure blind signatures rely on bespoke cryptographic constructions, instead of standardized ones. This is dissatisfying from a cryptographic perspective, and also leads to practical issues: secret signing keys are often stored in secure elements, in which case only signature algorithms supported by certified secure elements can be the basis for deployed protocols.
+
+We give the first blind signature whose issuer runs a NIST-standardized post-quantum signature scheme unmodified. Issuance is just an ML-DSA signature on a commitment, and the blind signature is a zero-knowledge proof of knowledge, using the VOLE-in-the-head zero-knowledge proof system, of the ML-DSA signature. Security reduces to the EUF-CMA security of ML-DSA and to the proof system, with no new assumptions.
+A blind signature is about $1$ MB and takes under a second to produce and half a second to verify. Issuer-hiding and selective disclosure of signed attributes can easily be added on top for a few tens of kilobytes, at a proof size essentially independent of how many issuers the list names.
+
+Underlying the construction is edaBitE, a novel batch consistency check between binary and prime-field commitments. In a non-interactive proof, the existing edaBits checks it replaces would be the single largest item in the blind signature. We believe that edaBitE is of independent interest.
+]]></content:encoded>
+<pubDate>Wed, 14 Oct 2026 10:31:45 +0000</pubDate>
+<pubDate>Wed, 14 Oct 2026 10:31:45 +0000</pubDate>
+</item>
+<item>
+<title>Compute, but Verify: Efficient Multiparty Computation over Authenticated Inputs</title>
+<link>https://eprint.iacr.org/2022/1648</link>
+<guid>https://eprint.iacr.org/2022/1648</guid>
+<content:encoded><![CDATA[
+
+Traditional notions of secure multiparty computation (MPC) allow mutually distrusting parties to jointly compute a function over their private inputs, but typically do not specify how these inputs are chosen. Motivated by real-world applications where corrupt inputs could adversely impact privacy and operational legitimacy, we consider a notion of authenticated MPC where the inputs are authenticated, e.g., signed using a digital signature by some certification authority. We propose a generic and efficient compiler that transforms any linear secret sharing based honest-majority MPC protocol into one with input authentication.
+
+Our compiler incurs significantly lower computational costs and competitive communication overheads when compared to the best existing solutions, while entirely avoiding the (potentially expensive) protocol-specific techniques and pre-processing requirements that are inherent to these solutions. For $n$-party honest majority MPC protocols with abort security where each party has $\ell$ inputs, our compiler incurs $O(n\log \ell)$ communication overall and a computational overhead of $O(\ell)$ group exponentiations per party (the corresponding overheads for the most efficient existing solution are $O(n^2)$ and $O(\ell n)$). Finally, for a corruption threshold $t<n/3$, our compiler preserves the stronger identifiable abort security of the underlying MPC protocol. No existing solution for authenticated MPC achieves this regardless of the corruption threshold.
+
+Along the way, we make several technical contributions that are of independent interest. This includes the notion of distributed proofs of knowledge and concrete realizations of the same for several relations of interest, such as proving knowledge of many popularly used digital signature schemes, and proving knowledge of opening of a Pedersen commitment.
+]]></content:encoded>
+<pubDate>Mon, 28 Nov 2022 06:38:29 +0000</pubDate>
+<pubDate>Mon, 28 Nov 2022 06:38:29 +0000</pubDate>
+</item>
+<item>
+<title>Nowhere Man: Device Binding for Post-Quantum Anonymous Credentials</title>
+<link>https://eprint.iacr.org/2026/2472</link>
+<guid>https://eprint.iacr.org/2026/2472</guid>
+<content:encoded><![CDATA[
+
+Anonymous credentials are seeing widespread deployment. Notably, the European Commission plans to roll out age-verification solutions based on anonymous credentials by the end of 2026. Similarly, Google open-sourced Longfellow, a zero-knowledge proof system that lifts the standardized mobile Driver License framework into a full-fledged anonymous credentials, and is currently being integrated with Google Wallet.
+
+Any secure deployment of anonymous credentials must address two major challenges: 1) provide guarantees against credential sharing, and 2) support proof-of-personhood. The standard approach adopted by the industry to address both is device binding, which is mandatory for mDL and was only recently formalized for anonymous credentials by Friedrichs et al. (Eurocrypt '26). Simply put, the idea is to have the user's phone Secure Element sign a fresh challenge from the verifier, and to prove knowledge of this signature in zero-knowledge at each credential presentation.
+
+To date, all existing approaches, including Vega (S&amp;P '26), have only
+considered non-post-quantum solutions based on legacy signature schemes. Crucial for near-term deployments and adoption is to work with standardized post-quantum signature schemes, such as ML-DSA,
+which were not designed for privacy. Because of this, solutions based on general non-interactive zero-knowledge proof systems (e.g., Longfellow) appear to be needed. This genericity, however, requires proving complex statements, significantly impacting proving time.
+
+In this work, we present a modular device binding protocol tailored to work with ML-DSA. We avoid the pitfalls of the generic approach by leveraging the structure of ML-DSA resulting in an efficient solution, but retaining the security underlying the post-quantum standard. Our most efficient variants additionally rely on a weak-MLWR assumption for unlinkability, which can be removed at the cost of lower efficiency. While tailored for ML-DSA and requiring no modification to the FIPS~204 signing interface, our solution is modular enough to be integrated with different anonymous credential schemes, allowing real-world solutions to pick the most efficient building blocks. To demonstrate the feasibility of our solution, we provide a proof-of-concept implementation.
+]]></content:encoded>
+<pubDate>Wed, 14 Oct 2026 09:26:32 +0000</pubDate>
+<pubDate>Wed, 14 Oct 2026 09:26:32 +0000</pubDate>
+</item>
+<item>
+<title>FlatMerkle: Logarithmic-Space Inclusion Proofs over a Single Linear Hash Stream</title>
+<link>https://eprint.iacr.org/2026/2468</link>
+<guid>https://eprint.iacr.org/2026/2468</guid>
+<content:encoded><![CDATA[
+
+Merkle trees are the standard way to obtain logarithmic-size, logarithmic-time
+inclusion proofs over a large dataset, but they require a tree-shaped hash
+structure distinct from the ordinary, linear (Merkle--Damg\aa rd) hashing that
+most deployed systems -- including Bitcoin's own transaction and witness
+hashing -- actually perform. We present FlatMerkle, a construction that
+achieves the same asymptotic guarantees, $O(\log N)$ proof size and
+$O(\log N)$ verification time, over a single ordinary linear hash stream, by
+periodically re-injecting the hash function's own past internal states
+(``checkpoints'') back into the stream as ordinary message content. The
+result is a flat byte sequence whose digest is a single, unmodified
+invocation of the underlying hash function -- syntactically an ordinary
+digest of an ordinary byte string, not a distinguishable commitment format
+-- while still supporting compact inclusion proofs for any element, and
+compact proofs that a published file is malformed, so that an honest party
+can always answer a malicious committer in logarithmic space. We give the recursive
+construction, a closed-form formula locating any element in the structured
+stream, worked examples with illustrations, a security reduction to free-start
+collision resistance of the hash function's compression step, an optimal
+element-size analysis for both a flexible toy primitive and real SHA-256,
+a batched multi-element proof construction, a measured construction-speed
+comparison against Merkle trees, a concrete application to committing data
+inside a Bitcoin transaction annex (BIP-341), a design sketch using that
+application as a data-availability layer for an optimistic Bitcoin rollup,
+a from-scratch gas-cost comparison, on Ethereum, Rootstock, and Arbitrum,
+of an in-contract FlatMerkle commitment against an in-contract Merkle
+tree, tracing the three chains' differing verdicts to specific protocol
+design choices rather than to anything intrinsic to either construction,
+and a comparison against the closest prior art we are aware of,
+authenticated append-only skip lists.
+]]></content:encoded>
+<pubDate>Wed, 14 Oct 2026 03:48:48 +0000</pubDate>
+<pubDate>Wed, 14 Oct 2026 03:48:48 +0000</pubDate>
+</item>
+<item>
+<title>DPF-SGD: Byzantine-Robust Differentially Private Federated SGD with Exact Optimality Guarantees</title>
+<link>https://eprint.iacr.org/2026/2467</link>
+<guid>https://eprint.iacr.org/2026/2467</guid>
+<content:encoded><![CDATA[
+
+Federated optimization enables collaborative learning over decentralized data but is accompanied by significant privacy risks due to the exchange of model updates. While differential privacy (DP) provides formal protection, optimization accuracy is often degraded, and robustness becomes particularly limited in the presence of Byzantine agents. A Byzantine-robust, differentially private federated SGD algorithm, DPF-SGD, is proposed, in which private step sizes are integrated with a DP noise–decay schedule to regulate gradient updates. To further enhance robustness, a privacy-preserving comparative elimination (PPCE) filter is developed to suppress Byzantine contributions during aggregation while preserving privacy guarantees. Almost sure convergence to the global optimum under ϵ-differential privacy is established, despite persistent noise and adversarial behavior. Experiments on synthetic and MNIST datasets demonstrate oneto two-order-of-magnitude reductions in final optimization error relative to DP baselines.
+]]></content:encoded>
+<pubDate>Wed, 14 Oct 2026 02:39:08 +0000</pubDate>
+<pubDate>Wed, 14 Oct 2026 02:39:08 +0000</pubDate>
+</item>
+<item>
+<title>Trustless Bitcoin Vaults</title>
+<link>https://eprint.iacr.org/2026/2466</link>
+<guid>https://eprint.iacr.org/2026/2466</guid>
+<content:encoded><![CDATA[
+
+Bitcoin (BTC) is the largest crypto asset, yet the Bitcoin blockchain offers few applications in which BTC can be used. A standard approach to make BTC useful is bridging: BTC is deposited on the Bitcoin chain and a wrapped asset is minted on a chain such as Ethereum, where it can be used in smart contract applications. Unfortunately, all Bitcoin bridges to date require trust assumptions on a centralized party or a committee running the bridge to enable withdrawals of the deposited BTC, including state-of-the-art BitVM bridges. 
+
+In this paper, we observe that while bridges are application-agnostic, most BTC holders are interested in collateral-based applications, where BTC is deposited as collateral, and only the depositor or a set of known counterparties can withdraw the asset. For this class of applications, we propose a primitive, Trustless Bitcoin Vaults, that guarantees that the BTC depositor or the counterparties can withdraw the deposited BTC following only the logic of the application smart contract without trusting any third party. We present a protocol that achieves the security guarantees of this primitive and instantitate it for a lending application where the deposited BTC is used as collateral to borrow against a set of liquidators on the Aave v4 smart contracts on Ethereum. Our mainnet experiments show that at the current Bitcoin price and fee rate, a deposit costs about \$0.7 in fees while a withdrawal costs at most \$7.7. Our construction is built on recent advances in efficient proof verification for Bitcoin.
+]]></content:encoded>
+<pubDate>Wed, 14 Oct 2026 00:16:23 +0000</pubDate>
+<pubDate>Wed, 14 Oct 2026 00:16:23 +0000</pubDate>
+</item>
+<item>
+<title>A Graph-Based Analysis of Comparability, Scale, and Attribution in Private Transformer Inference</title>
+<link>https://eprint.iacr.org/2026/2464</link>
+<guid>https://eprint.iacr.org/2026/2464</guid>
+<content:encoded><![CDATA[
+
+Rising privacy concerns around large language models have accelerated research in private Transformer inference (PTI). Synthesizing the empirical claims in this line of research, however, is hindered by multi-dimensional cryptographic progress and inconsistent evaluation contracts. In this work, we systematize the field by constructing an empirical graph of 62 PTI systems, mapping system attributes to node features and evaluation compatibility to edges. A three-tiered analysis of this graph illuminates the state of private inference. Node-level attribution shows that cryptographic progress drives performance gains across most systems, yet always co-occurs with other factors (model fidelity, hardware, cost accounting). Edge-level auditing shows that only 1 of 1891 candidate system pairs is directly comparable under shared assumptions. Finally, graph-level analysis shows that the scaling frontier of private inference has plateaued at 13B parameters and projects the cost of deploying current PTI techniques on production-scale Transformers. Overall, this graph-based framework equips the community to evaluate PTI claims transparently and channel technical speedups into deployment-scale private inference.
+]]></content:encoded>
+<pubDate>Tue, 13 Oct 2026 22:48:58 +0000</pubDate>
+<pubDate>Tue, 13 Oct 2026 22:48:58 +0000</pubDate>
+</item>
+<item>
+<title>On Secure Sorting and Its Application to Privacy-Preserving Graph Pattern Matching</title>
+<link>https://eprint.iacr.org/2026/2457</link>
+<guid>https://eprint.iacr.org/2026/2457</guid>
+<content:encoded><![CDATA[
+
+Sorting in secure computation has been studied almost as long as there have been implementations of multi-party computation (Wang et al., AsiaCCS'10). More recent advances include completely secure implementations (revealing nothing other than the list size) that have used Quicksort (Araki et al., CCS'21) and radix sort (Asharov et al., CCS'22). For the first time, we extensively compare the two variants across a range of parameters and for both honest- and dishonest-majority computation.  We then apply secure sorting to improve sparse matrix multiplication without oblivious RAM based on recent work by Damie et al. (CODASPY'26). Our main contribution here is to produce an output in the same format as the inputs to the multiplication. This is needed for repeated multiplication of graph adjacency matrices, which we use to find cycles in graphs. Such cycles have been associated with money laundering, and this also applies to another graph pattern dubbed scatter-gather, which we can detect with the same approach. Our work therefore can be applied to privacy-preserving anti-money laundering detection.
+]]></content:encoded>
+<pubDate>Tue, 13 Oct 2026 01:32:34 +0000</pubDate>
+<pubDate>Tue, 13 Oct 2026 01:32:34 +0000</pubDate>
+</item>
+<item>
+<title>Censorship Resistance in Credential Systems and Application to the EUDI Wallet</title>
+<link>https://eprint.iacr.org/2026/2438</link>
+<guid>https://eprint.iacr.org/2026/2438</guid>
+<content:encoded><![CDATA[
+
+Privacy-preserving credential systems typically focus on data protection during the presentation phase, overlooking potential privacy threats during issuance. A malicious issuer could use the non-minimal information it obtains to deny issuance selectively. Such a denial, going beyond the eligibility policy, is a form of censorship.
+In this work, we revisit the security of anonymous credential systems to protect users from malicious issuers during credential issuance. We first highlight the limitations of existing definitions and introduce a security model capturing censorship resistance. Next, we present a round-optimal (i.e., one message per party) construction built from blind signatures and specifically tailored for selective disclosure in the presentation phase. Finally, we present CRACS, an instantiation of our construction, deployable within the European Digital Identity Wallet (EUDIW) framework. CRACS improves on the current reference implementation of the EUDIW, maintaining selective disclosure and yielding unlinkability between presentation and issuance sessions in addition to censorship resistance.
+Unlike prior work, CRACS confines advanced cryptography to issuance, leaving secure elements, the standardized credential formats, signature schemes, and presentation mechanisms untouched. It can therefore be deployed incrementally alongside current EUDIW implementations, issuer by issuer and user by user, with no change for verifiers.
+]]></content:encoded>
+<pubDate>Sat, 10 Oct 2026 13:24:36 +0000</pubDate>
+<pubDate>Sat, 10 Oct 2026 13:24:36 +0000</pubDate>
+</item>
 
 <item>
 <title>Witness-Succinct UC-Secure SNARKs with Weaker Trust Assumptions</title>
